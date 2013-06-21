@@ -1,0 +1,51 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ramda Tests</title>
+  <link rel="stylesheet" href="../lib/test/mocha.css" />
+  <script>function require(str) {return this[str.substring(str.lastIndexOf("/") +1)];}</script>
+</head>
+<body>
+  <h1>Tests for ramda</h1>
+  <div id="mocha"></div>
+  <script src="../lib/test/jquery.js"></script>
+  <script src="../lib/test/expect.js"></script>
+  <script src="../lib/test/mocha.js"></script>
+  <script src="../lib/test/util.js"></script>
+  <script src="../lib/test/assert.js"></script>
+  <script src="../ramda.js"></script>
+  <script>ramda.installTo(this);</script>
+  <script>mocha.setup('bdd')</script>
+  <script src="test.core.js"></script>
+  <script src="test.fold.js"></script>
+  <script src="test.unfold.js"></script>
+  <script src="test.map.js"></script>
+  <script src="test.reverse.js"></script>
+  <script src="test.allany.js"></script>
+  <script src="test.booleans.js"></script>
+  <script src="test.math.js"></script>
+  <script src="test.range.js"></script>
+  <script src="test.filter.js"></script>
+  <script src="test.partial.js"></script>
+  <script src="test.objectBasics.js"></script>
+  <script src="test.containsuniq.js"></script>
+  <script src="test.product.js"></script>
+  <script src="test.zip.js"></script>
+  <script src="test.flatten.js"></script>
+  <script src="test.find.js"></script>
+  <script src="test.tapeq.js"></script>
+  <script src="test.maybe.js"></script>
+  <script src="test.compose.js"></script>
+  <script src="test.identity.js"></script>
+  <script src="test.wrap.js"></script>
+  <script src="test.keysvals.js"></script>
+  <script src="test.functionBasics.js"></script>
+  <script src="test.expose.js"></script>
+  <script src="test.list.js"></script>
+  <script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+  </script>
+</body>
+</html>

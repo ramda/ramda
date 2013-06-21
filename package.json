@@ -1,0 +1,19 @@
+{
+  "author": "CrossEye <scott@sauyet.com> (scott.sauyet.com)",
+  "contributors": [
+    { "name": "buzzdecafe", "email": "m_hur@yahoo.com"}
+  ],
+  "name": "eweda",
+  "description": "A practical functional library for Javascript programmers.",
+  "version": "0.0.1",
+  "homepage": "https://www.github.com/CrossEye/eweda",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CrossEye/eweda.git"
+  },
+  "main": "eweda.js",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
