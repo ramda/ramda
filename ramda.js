@@ -437,7 +437,15 @@
         //     xProdWith(f, [1, 2], ['a', 'b'])
         //     //    => [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
         var xprodWith = E.xprodWith = _(function(fn, a, b) {
-            return (isEmpty(a) || isEmpty(b)) ? EMPTY : foldl1(merge, map(function(z) {return map(_(fn)(z), b);}, a));
+            if (isEmpty(a) || isEmpty(b)) {return EMPTY;}
+            var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            while (++i < ilen) {
+                j = -1;
+                while (++j < jlen) {
+                    result.push(fn(a[i], b[j]));
+                }
+            }
+            return result;
         });
 
         // Creates a new list out of the two supplied by yielding the pair of each possible pair in the lists.
@@ -445,10 +453,22 @@
         //
         //     xProd([1, 2], ['a', 'b'])
         //     //    => [[1, 'a'], [1, 'b')], [2, 'a'], [2, 'b']];
-        E.xprod = xprodWith(prepend);
+        E.xprod = _(function(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
+            if (isEmpty(a) || isEmpty(b)) {return EMPTY;}
+            var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            while (++i < ilen) {
+                j = -1;
+                while (++j < jlen) {
+                    result.push([a[i], b[j]]);
+                }
+            }
+            return result;
+        });
 
         // Returns a new list with the same elements as the original list, just in the reverse order.
-        var reverse = E.reverse = foldl(flip(prepend), EMPTY);
+        var reverse = E.reverse = function(list) {
+            return clone(list || []).reverse();
+        };
 
         // // Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
         // For example, 
@@ -456,7 +476,12 @@
         //     range(1, 5) // => [1, 2, 3, 4]
         //     range(50, 53) // => [50, 51, 52]
         var range = E.range = _(function(from, to) {
-            return from >= to ? EMPTY : prepend(from, range(from + 1, to));
+            if (from >= to) {return EMPTY;}
+            var idx, result = new Array(to - from);
+            for (idx = 0; from < to; idx++, from++) {
+                result[idx] = from;
+            }
+            return result;
         });
 
 
