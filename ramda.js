@@ -560,20 +560,15 @@
 
         // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
-        var keys = E.keys = (function() {
-          if (typeof Object.keys === "function") {
-            return function(obj) { return Object.keys(obj); };
-          }
-          return function(obj) {
-            var prop, ks = [];
-            for (prop in obj) {
-              if (obj.hasOwnProperty(prop)) {
-                ks.push(prop);
-              }
+        var keys = E.keys = function(obj) {
+          var prop, ks = [];
+          for (prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+              ks.push(prop);
             }
-            return ks;
-          };
-        }());
+          }
+          return ks;
+        };
 
         // Returns a list of all the enumerable own properties of the supplied object.
         E.values = function(obj) {
