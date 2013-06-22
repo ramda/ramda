@@ -485,38 +485,25 @@
         });
 
 
-        var indexOfIt = function(obj, list, acc) {
-           return isEmpty(list) ? -1 : 
-             head(list) === obj ? acc + 1 : indexOfIt(obj, tail(list), acc + 1);
-        };
-
         // Returns the first zero-indexed position of an object in a flat list
         E.indexOf = _(function(obj, list) {
-            return indexOfIt(obj, list, -1);
+            return list.indexOf(obj);
         });
-
-        var lastIndexOfIt = function(obj, list, currPos, lastPos) {
-            if(isEmpty(list)) {
-                return lastPos;
-            } 
-            if (head(list) === obj) {
-                lastPos = currPos;
-            }
-            return lastIndexOfIt(obj, tail(list), currPos + 1, lastPos);
-        };
 
         // Returns the last zero-indexed position of an object in a flat list
         E.lastIndexOf = _(function(obj, list) {
-            return lastIndexOfIt(obj, list, 0, -1);
+            return list.lastIndexOf(obj);
         });
 
         // join
         E.join = _(function(sep, list) {
-            return foldl(function(acc, el) { return (acc !== "") ? acc + sep + el : el; }, "", list);
+            return list.join(sep);
         });
 
         E.splice = _(function(start, len, list) {
-            return merge(take(start, list), skip(start + len, list));
+            var ls = list.slice(0);
+            ls.splice(start, len);
+            return ls;
         });
         
        
@@ -571,19 +558,32 @@
             };
         };
 
-        // A functional version of `Object.keys`, returning a list containing the names of all the enumerable own
+        // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
-        var keys = E.keys = function(obj) {
-            var results = EMPTY;
-            for (var name in obj) {if (obj.hasOwnProperty(name)) {
-                results = prepend(name, results);
-            }}
-            return reverse(results);
-        };
+        var keys = E.keys = (function() {
+          if (typeof Object.keys === "function") {
+            return function(obj) { return Object.keys(obj); };
+          }
+          return function(obj) {
+            var prop, ks = [];
+            for (prop in obj) {
+              if (obj.hasOwnProperty(prop)) {
+                ks.push(prop);
+              }
+            }
+            return ks;
+          };
+        }());
 
         // Returns a list of all the enumerable own properties of the supplied object.
         E.values = function(obj) {
-            return map(props(obj), keys(obj));
+          var prop, vs = [];
+          for (prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+              vs.push(obj[prop]);
+            }
+          }
+          return vs;
         };
 
         var partialCopy = function(test, obj) {
@@ -725,3 +725,5 @@
         return E;
     }());
 }));
+
+
