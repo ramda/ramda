@@ -3,16 +3,16 @@
   "contributors": [
     { "name": "buzzdecafe", "email": "m_hur@yahoo.com"}
   ],
-  "name": "eweda",
+  "name": "ramda",
   "description": "A practical functional library for Javascript programmers.",
   "version": "0.0.1",
-  "homepage": "https://www.github.com/CrossEye/eweda",
+  "homepage": "https://www.github.com/CrossEye/ramda",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/CrossEye/eweda.git"
+    "url": "git://github.com/CrossEye/ramda.git"
   },
-  "main": "eweda.js",
+  "main": "ramda.js",
   "scripts": {},
   "dependencies": {},
   "devDependencies": {}
