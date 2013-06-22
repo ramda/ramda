@@ -495,11 +495,14 @@
             return list.lastIndexOf(obj);
         });
 
-        // join
+        // Returns the elements of the list as a string joined by a separator.
         E.join = _(function(sep, list) {
             return list.join(sep);
         });
 
+        // ramda.splice has a different contract than Array.splice. Array.splice mutates its array
+        // and returns the removed elements. ramda.splice does not mutate the passed in list (well,
+        // it makes a shallow copy), and returns a new list with the specified elements removed. 
         E.splice = _(function(start, len, list) {
             var ls = list.slice(0);
             ls.splice(start, len);
@@ -522,7 +525,7 @@
             }
             return x;
         });
-        aliasFor("tap").is("K"); // TODO: are we sure?
+        aliasFor("tap").is("K"); // TODO: are we sure? Not necessary, but convenient, IMHO.
 
         // Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
         // non-coercing equality for primitives.
@@ -713,9 +716,6 @@
 
         // A function that always returns `true`.
         E.alwaysTrue = identity(true);
-
-        // Concatenates together all the elements of a list.
-        //E.join = foldl(add, '');
 
         return E;
     }());
