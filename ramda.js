@@ -54,7 +54,7 @@
         };
 
         // Local version of partial application.
-        var _ = function(fn) {
+        var _ = E.curry = function(fn) {
             var arity = fn.length;
             var f = function(args) {
                 return function () {

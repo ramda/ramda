@@ -1,8 +1,8 @@
 var assert = require("assert");
-var lib = require("./../ramda");
+var Lib = require("./../ramda");
 
 describe('lPartial', function() {
-    var lPartial = lib.lPartial;
+    var lPartial = Lib.lPartial;
     var disc = function(a, b, c) { // note disc(3, 7, 4) => 1
         return b * b - 4 * a * c;
     };
@@ -15,7 +15,7 @@ describe('lPartial', function() {
     });
 
     it('should be aliased by `applyLeft`', function() {
-        assert.strictEqual(lib.applyLeft, lPartial);
+        assert.strictEqual(Lib.applyLeft, lPartial);
     });
 
     // TODO: what would this take?
@@ -28,7 +28,7 @@ describe('lPartial', function() {
 });
 
 describe('rPartial', function() {
-    var rPartial = lib.rPartial;
+    var rPartial = Lib.rPartial;
     var disc = function(a, b, c) { // note disc(3, 7, 4) => 1
         return b * b - 4 * a * c;
     };
@@ -41,7 +41,7 @@ describe('rPartial', function() {
     });
 
     it('should be aliased by `applyRight`', function() {
-        assert.strictEqual(lib.applyRight, rPartial);
+        assert.strictEqual(Lib.applyRight, rPartial);
     });
 
     // TODO: what would this take?
@@ -50,5 +50,33 @@ describe('rPartial', function() {
         assert.equal(f.length, 2);
         var g = rPartial(disc, 7, 4);
         assert.equal(g.length, 1);
+    });
+});
+
+describe('curry', function() {
+    var curry = Lib.curry;
+
+    it('should curry a single value', function() {
+        var f = curry(function(a, b, c, d) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
+        var g = f(12);
+        assert.equal(g(3, 6, 2), 15);
+    });
+
+    it('should curry multiple values', function() {
+        var f = curry(function(a, b, c, d) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
+        var g = f(12, 3);
+        assert.equal(g(6, 2), 15);
+        var h = f(12, 3, 6);
+        assert.equal(h(2), 15);
+    });
+
+    it('should allow further currying of a curried function', function() {
+        var f = curry(function(a, b, c, d) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
+        var g = f(12);
+        assert.equal(g(3, 6, 2), 15);
+        var h = g(3);
+        assert.equal(h(6, 2), 15);
+        var i = g(3, 6);
+        assert.equal(i(2), 15);
     });
 });

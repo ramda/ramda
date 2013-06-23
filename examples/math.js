@@ -216,3 +216,7 @@ var maxOver = function(fn, list) {return foldl1(fn, list); };
 
 var min = foldl(Math.max, Number.POSITIVE_INFINITY);
 var minOver = function(fn, list) {return foldl1(fn, list); };
+
+var split = curry(function(chr, str) {
+   return str.split(chr);
+});
