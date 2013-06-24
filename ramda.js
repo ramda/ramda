@@ -56,10 +56,21 @@
 //              }
 //          };
 
+            function mkArgStr(n) {                
+              var arr = [];
+              var i = 0;
+              while(i < n) {
+                arr[i] = "arg" + i;
+                i++;
+              }
+              return arr.join(", ");
+            }
+            
             var makeN = function(n) {
+                var fnArgs = mkArgStr(n);
                 var body = [
-                    "    return function(" + new Array(n + 1).join("1").split("").map(function(d, i) {return "arg" + i;}).join(", ") + ") {",
-                    "        return func.apply(this, arguments)",
+                    "    return function(" + fnArgs + ") {",
+                    "        return func.apply(this, [" + fnArgs + "])",
                     "    }"
                 ].join("\n");
                 return new Function("func", body);
