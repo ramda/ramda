@@ -74,11 +74,10 @@
             var method = obj[name];
             return method && _(nAry(method.length + 1, function() {
                 if(arguments.length) {
-                    var target = arguments[arguments.length - 1];
+                    var target = Array.prototype.pop.call(arguments);
                     var targetMethod = target[name];
-                    var args = slice(arguments, 0, arguments.length - 1);
                     if (targetMethod == method) {
-                        return targetMethod.apply(target, args);
+                        return targetMethod.apply(target, arguments);
                     }
                 }
                 return undef;
