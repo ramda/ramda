@@ -39,7 +39,7 @@ The Name
 --------
 
 Ok, so we like sheep.  That's all.  It's a short name, not already taken.  It could as easily have been `eweda`, but
-then we wouldn't be forced to say " _eweda lamb!_ ", and no one wants that  For non-English speakers, lambs are baby
+then we would be forced to say _eweda lamb!_, and no one wants that  For non-English speakers, lambs are baby
 sheep, ewes are female sheep, and rams are male sheep.  So perhaps ramda is a grown-up lambda... but probably not.
 
 

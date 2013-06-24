@@ -46,6 +46,45 @@
         var toString = bind(Function.prototype.call, Object.prototype.toString);
         var isArray = function(val) {return toString(val) === "[object Array]";};
 
+        var nAry = (function() {
+            var cache = {};
+
+//          e.g.
+//          cache[2] = function(func) {
+//              return function(arg0, arg1) {
+//                  return func.apply(this, arguments);
+//              }
+//          };
+
+            var makeN = function(n) {
+                var body = [
+                    "    return function(" + new Array(n + 1).join("1").split("").map(function(d, i) {return "arg" + i;}).join(", ") + ") {",
+                    "        return func.apply(this, arguments)",
+                    "    }"
+                ].join("\n");
+                return new Function("func", body);
+            };
+
+            return function(n, fn) {
+                return (cache[n] || (cache[n] = makeN(n)))(fn);
+            };
+        }());
+
+        var invoker = R.invoker = function(name, obj) {
+            var method = obj[name];
+            return method && _(nAry(method.length + 1, function() {
+                if(arguments.length) {
+                    var target = arguments[arguments.length - 1];
+                    var targetMethod = target[name];
+                    var args = slice(arguments, 0, arguments.length - 1);
+                    if (targetMethod == method) {
+                        return targetMethod.apply(target, args);
+                    }
+                }
+                return undef;
+            }));
+        };
+
         // Fills out an array to the specified length
         var expand = function(a, len) {
             var arr = a ? isArray(a) ? a : slice(a) : [];
@@ -142,14 +181,16 @@
         aliasFor("append").is("push");
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
-        var merge = R.merge = _(function(list1, list2) {
-            if (isEmpty(list1)) {
-                return clone(list2);
-            } else {
-                return list1.concat(list2);
-            }
-        });
-        aliasFor("merge").is("concat");
+//        var merge = R.merge = _(function(list1, list2) {
+//            if (isEmpty(list1)) {
+//                return clone(list2);
+//            } else {
+//                return list1.concat(list2);
+//            }
+//        });
+//        aliasFor("merge").is("concat");
+        var concat = R.concat = invoker("concat", Array.prototype);
+        aliasFor("concat").is("merge");
 
 
         // Function functions :-)
@@ -702,6 +743,23 @@
 
         // Multiplies together all the elements of a list.
         R.product = foldl(multiply, 1);
+
+
+
+        // String Functions
+        // ----------------
+        //
+        // Much of the String.prototype API exposed as simple functions.
+
+        // A substring of a String, `substring(2, 5, "abcdefghijklm"); //=> "cde"`
+        var substring = R.substring = invoker("substring", String.prototype);
+
+        // The trailing substring of a String starting with character `n`: `substringFrom(8, "abcdefghijklm"); //=> "ijklm"`
+        var substringFrom = R.substringFrom = function(n, str) {return substring(n, undef, str);};
+
+        // The leading substring of a String ending before character `n`: `substringTo(8, "abcdefghijklm"); //=> "abcdefgh"`
+        var substringTo = R.substringTo = substring(0);
+
 
 
         // Miscellaneous Functions
