@@ -181,16 +181,14 @@
         aliasFor("append").is("push");
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
-//        var merge = R.merge = _(function(list1, list2) {
-//            if (isEmpty(list1)) {
-//                return clone(list2);
-//            } else {
-//                return list1.concat(list2);
-//            }
-//        });
-//        aliasFor("merge").is("concat");
-        var concat = R.concat = invoker("concat", Array.prototype);
-        aliasFor("concat").is("merge");
+        var merge = R.merge = _(function(list1, list2) {
+            if (isEmpty(list1)) {
+                return clone(list2);
+            } else {
+                return list1.concat(list2);
+            }
+        });
+        aliasFor("merge").is("concat");
 
 
         // Function functions :-)
@@ -751,13 +749,19 @@
         //
         // Much of the String.prototype API exposed as simple functions.
 
-        // A substring of a String, `substring(2, 5, "abcdefghijklm"); //=> "cde"`
+        // A substring of a String:
+        //
+        //     substring(2, 5, "abcdefghijklm"); //=> "cde"
         var substring = R.substring = invoker("substring", String.prototype);
 
-        // The trailing substring of a String starting with character `n`: `substringFrom(8, "abcdefghijklm"); //=> "ijklm"`
-        var substringFrom = R.substringFrom = function(n, str) {return substring(n, undef, str);};
+        // The trailing substring of a String starting with the nth character:
+        //
+        //     substringFrom(8, "abcdefghijklm"); //=> "ijklm"
+        var substringFrom = R.substringFrom = flip(substring)(undef);
 
-        // The leading substring of a String ending before character `n`: `substringTo(8, "abcdefghijklm"); //=> "abcdefgh"`
+        // The leading substring of a String ending before the nth character:
+        //
+        //     substringTo(8, "abcdefghijklm"); //=> "abcdefgh"
         var substringTo = R.substringTo = substring(0);
 
 
