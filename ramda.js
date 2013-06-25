@@ -787,6 +787,10 @@
         //     // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
         R.charCodeAt = invoker("charCodeAt", String.prototype);
 
+        // Tests a regular expression agains a String
+        //
+        //     match(/([a-z]a)/g, "bananas"); //=> ["ba", "na", "na"]
+        R.match = invoker("match", String.prototype);
 
 
         // Miscellaneous Functions

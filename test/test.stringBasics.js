@@ -67,3 +67,19 @@ describe('charCodeAt', function() {
         assert.equal(at8('abcdefghijklm'), 105);
     });
 });
+
+describe('match', function() {
+    var match = Lib.match;
+    var re = /[A-Z]\d\d\-[a-zA-Z]+/;
+
+    it('should determine whether a string matches a regex', function() {
+        assert.equal(match(re, 'B17-afn').length, 1);
+        assert.equal(match(re, 'B1-afn'), undefined);
+    });
+
+    it('should be automatically curried', function() {
+        var format = match(re);
+        assert.equal(format('B17-afn').length, 1);
+        assert.equal(format('B1-afn'), undefined);
+    });
+});
