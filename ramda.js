@@ -42,7 +42,15 @@
             };
         };
         // Standard Array and Object methods implemented as pure functions
-        var slice = bind(Function.prototype.call, Array.prototype.slice);
+        var slice = function(args, from, to) {
+          var i, arr = [];
+          from = from || 0;
+          to = to || args.length;
+          for (i = from; i < to; i++) {
+            arr[arr.length] = args[i];
+          }
+          return arr;
+        };
         var toString = bind(Function.prototype.call, Object.prototype.toString);
         var isArray = function(val) {return toString(val) === "[object Array]";};
 
