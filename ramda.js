@@ -46,62 +46,6 @@
         var toString = bind(Function.prototype.call, Object.prototype.toString);
         var isArray = function(val) {return toString(val) === "[object Array]";};
 
-        var nAry = (function() {
-            var cache = {};
-
-//          e.g.
-//          cache[2] = function(func) {
-//              return function(arg0, arg1) {
-//                  return func.apply(this, arguments);
-//              }
-//          };
-
-            function mkArgStr(n) {                
-              var arr = [];
-              var i = 0;
-              while(i < n) {
-                arr[i] = "arg" + i;
-                i++;
-              }
-              return arr.join(", ");
-            }
-            
-            var makeN = function(n) {
-                var fnArgs = mkArgStr(n);
-                var body = [
-                    "    return function(" + fnArgs + ") {",
-                    "        return func.apply(this, [" + fnArgs + "])",
-                    "    }"
-                ].join("\n");
-                return new Function("func", body);
-            };
-
-            return function(n, fn) {
-                return (cache[n] || (cache[n] = makeN(n)))(fn);
-            };
-        }());
-
-        var invoker = R.invoker = function(name, obj) {
-            var method = obj[name];
-            return method && _(nAry(method.length + 1, function() {
-                if(arguments.length) {
-                    var target = Array.prototype.pop.call(arguments);
-                    var targetMethod = target[name];
-                    if (targetMethod == method) {
-                        return targetMethod.apply(target, arguments);
-                    }
-                }
-                return undef;
-            }));
-        };
-
-        // Fills out an array to the specified length
-        var expand = function(a, len) {
-            var arr = a ? isArray(a) ? a : slice(a) : [];
-            while(arr.length < len) {arr[arr.length] = undef;}
-            return arr;
-        };
-
         // Returns a curried version of the supplied function.  For example:
         //
         //      var discriminant = function(a, b, c) {
@@ -125,6 +69,64 @@
             };
 
             return f([]);
+        };
+
+        // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
+        // specifically takes exactly `n` parameters.
+        var nAry = R.nAry = (function() {
+            var cache = {};
+
+            var mkArgStr = function(n) {
+                var arr = [], i = -1;
+                while(++i < n) {
+                    arr[i] = "arg" + i;
+                }
+                return arr.join(", ");
+            };
+            
+//          e.g.
+//          cache[2] = function(func) {
+//              return function(arg0, arg1) {
+//                  return func.call(this, arg0, arg1);
+//              }
+//          };
+
+            var makeN = function(n) {
+                var fnArgs = mkArgStr(n);
+                var body = [
+                    "    return function(" + fnArgs + ") {",
+                    "        return func.call(this, " + fnArgs + ")",
+                    "    }"
+                ].join("\n");
+                return new Function("func", body);
+            };
+
+            return function(n, fn) {
+                return (cache[n] || (cache[n] = makeN(n)))(fn);
+            };
+        }());
+
+        // Turns a named method of an object (or object prototype) into a function that can be called directly.
+        // The object becomes the last parameter to the function, and the function is automatically curried.
+        var invoker = R.invoker = function(name, obj) {
+            var method = obj[name];
+            return method && _(nAry(method.length + 1, function() {
+                if(arguments.length) {
+                    var target = Array.prototype.pop.call(arguments);
+                    var targetMethod = target[name];
+                    if (targetMethod == method) {
+                        return targetMethod.apply(target, arguments);
+                    }
+                }
+                return undef;
+            }));
+        };
+
+        // Fills out an array to the specified length
+        var expand = function(a, len) {
+            var arr = a ? isArray(a) ? a : slice(a) : [];
+            while(arr.length < len) {arr[arr.length] = undef;}
+            return arr;
         };
 
         // Internal version of `forEach`.  Possibly to be exposed later.
@@ -767,12 +769,23 @@
         // The trailing substring of a String starting with the nth character:
         //
         //     substringFrom(8, "abcdefghijklm"); //=> "ijklm"
-        var substringFrom = R.substringFrom = flip(substring)(undef);
+        R.substringFrom = flip(substring)(undef);
 
         // The leading substring of a String ending before the nth character:
         //
         //     substringTo(8, "abcdefghijklm"); //=> "abcdefgh"
-        var substringTo = R.substringTo = substring(0);
+        R.substringTo = substring(0);
+
+        // The character at the nth position in a String:
+        //
+        //     charAt(8, "abcdefghijklm"); //=> "i"
+        R.charAt = invoker("charAt", String.prototype);
+
+        // The ascii code of the character at the nth position in a String:
+        //
+        //     charCodeAt(8, "abcdefghijklm"); //=> 105
+        //     // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
+        R.charCodeAt = invoker("charCodeAt", String.prototype);
 
 
 

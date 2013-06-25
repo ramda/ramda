@@ -41,3 +41,29 @@ describe('substringTo', function() {
         assert.equal(through8('abcdefghijklm'), 'abcdefgh');
     });
 });
+
+describe('charAt', function() {
+    var charAt = Lib.charAt;
+
+    it('should return the character at the nth position of a string', function() {
+        assert.equal(charAt(8, 'abcdefghijklm'), 'i');
+    });
+
+    it('should be automatically curried', function() {
+        var at8 = charAt(8);
+        assert.equal(at8('abcdefghijklm'), 'i');
+    });
+});
+
+describe('charCodeAt', function() {
+    var charCodeAt = Lib.charCodeAt;
+
+    it('should return the ascii character at the nth position of a string', function() {
+        assert.equal(charCodeAt(8, 'abcdefghijklm'), 105);  // 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105
+    });
+
+    it('should be automatically curried', function() {
+        var at8 = charCodeAt(8);
+        assert.equal(at8('abcdefghijklm'), 105);
+    });
+});
