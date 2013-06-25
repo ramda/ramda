@@ -77,9 +77,9 @@
             var cache = {};
 
             var mkArgStr = function(n) {
-                var arr = [], i = -1;
-                while(++i < n) {
-                    arr[i] = "arg" + i;
+                var arr = new Array(n);
+                while(--n > -1) {
+                  arr[n] = "arg" + n;
                 }
                 return arr.join(", ");
             };
