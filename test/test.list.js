@@ -38,4 +38,24 @@ describe("splice", function() {
   });
 });
 
+describe("nth", function() {
+  it("returns the object ar position n of the list", function() {
+    var list = ["x", 1, {a:1, b:2}, [4,5,6], true];
+    assert.equal(Lib.nth(4, list), true);
+    assert.equal(Lib.nth(0, list), "x");
+    assert.deepEqual(Lib.nth(3, list), [4,5,6]);
+  });
+
+  it("returns null if n is out of the list's range", function() {
+    var list = [1,2,3];
+    assert.equal(Lib.nth(4, list), null);
+  });
+
+  it("is automatically curried", function() {
+    var list = [3,4,5,6,7,8];
+    var get3rd = Lib.nth(2);
+    assert.equal(get3rd(list), 5);
+  });
+});
+
 

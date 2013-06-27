@@ -590,7 +590,11 @@
             ls.splice(start, len);
             return ls;
         });
-        
+      
+        // Returns the nth element of a list (zero-indexed)
+        R.nth = _(function(n, list) {
+          return (typeof list[n] === "undefined") ? null : list[n];
+        });
        
         
         // Object Functions
