@@ -132,14 +132,14 @@
 
         // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
         // calling each supplied handler on the arguments, followed by all unmatched arguments.
-        var useWith = R.useWith = _(function(fn /*, handlers */) {
-            var handlers = slice(arguments, 1);
+        var useWith = R.useWith = _(function(fn /*, tranformers */) {
+            var tranformers = slice(arguments, 1);
             return function() {
                 var args = [], idx = -1;
-                while (++idx < handlers.length) {
-                    args.push(handlers[idx](arguments[idx]))
+                while (++idx < tranformers.length) {
+                    args.push(tranformers[idx](arguments[idx]))
                 }
-                return fn.apply(this, args.concat(slice(arguments, handlers.length)));
+                return fn.apply(this, args.concat(slice(arguments, tranformers.length)));
             };
         });
 
@@ -843,10 +843,9 @@
         //         {name: 'Abby', age: 7, hair: 'blond', grade: 2},
         //         {name: 'Fred', age: 12, hair: 'brown', grade: 7}
         //     ];
-        //     select(['name', 'grade'], kids);
+        //     project(['name', 'grade'], kids);
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
-        R.select = useWith(map, pick);
-        aliasFor("select").is("project");
+        R.project = useWith(map, pick);  // TODO: alias with `select`?
 
         // All the functional goodness, wrapped in a nice little package, just for you!
         return R;

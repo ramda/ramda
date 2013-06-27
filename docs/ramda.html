@@ -309,14 +309,14 @@ calling each supplied handler on the arguments, followed by all unmatched argume
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> useWith = R.useWith = _(<span class="keyword">function</span>(fn <span class="comment">/*, handlers */</span>) {
-            <span class="keyword">var</span> handlers = slice(arguments, <span class="number">1</span>);
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> useWith = R.useWith = _(<span class="keyword">function</span>(fn <span class="comment">/*, tranformers */</span>) {
+            <span class="keyword">var</span> tranformers = slice(arguments, <span class="number">1</span>);
             <span class="keyword">return</span> <span class="keyword">function</span>() {
                 <span class="keyword">var</span> args = [], idx = -<span class="number">1</span>;
-                <span class="keyword">while</span> (++idx &lt; handlers.length) {
-                    args.push(handlers[idx](arguments[idx]))
+                <span class="keyword">while</span> (++idx &lt; tranformers.length) {
+                    args.push(tranformers[idx](arguments[idx]))
                 }
-                <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, args.concat(slice(arguments, handlers.length)));
+                <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, args.concat(slice(arguments, tranformers.length)));
             };
         });</pre></div></div>
             
@@ -2098,13 +2098,12 @@ it will be as though the eweda functions are global functions.</p>
     {name: &#39;Abby&#39;, age: 7, hair: &#39;blond&#39;, grade: 2},
     {name: &#39;Fred&#39;, age: 12, hair: &#39;brown&#39;, grade: 7}
 ];
-select([&#39;name&#39;, &#39;grade&#39;], kids);
+project([&#39;name&#39;, &#39;grade&#39;], kids);
 //=&gt; [{name: &#39;Abby&#39;, grade: 2}, {name: &#39;Fred&#39;, grade: 7}]</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.select = useWith(map, pick);
-        aliasFor(<span class="string">"select"</span>).is(<span class="string">"project"</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.project = useWith(map, pick);  <span class="comment">// TODO: alias with `select`?</span></pre></div></div>
             
         </li>
         
