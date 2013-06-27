@@ -131,10 +131,15 @@
         };
 
         // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
-        // calling `firstArgHandler` on the first original parameter combined with the remaining original parameters.
-        var using = R.using = _(function(firstArgHandler, fn) {
-            return function(first) {
-                return fn.apply(this, [firstArgHandler(first)].concat([].slice.call(arguments, 1)));
+        // calling each supplied handler on the arguments, followed by all unmatched arguments.
+        var useWith = R.useWith = _(function(fn /*, handlers */) {
+            var handlers = slice(arguments, 1);
+            return function() {
+                var args = [], idx = -1;
+                while (++idx < handlers.length) {
+                    args.push(handlers[idx](arguments[idx]))
+                }
+                return fn.apply(this, args.concat(slice(arguments, handlers.length)));
             };
         });
 
@@ -840,7 +845,7 @@
         //     ];
         //     select(['name', 'grade'], kids);
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
-        R.select = using(pick, map);
+        R.select = useWith(map, pick);
         aliasFor("select").is("project");
 
         // All the functional goodness, wrapped in a nice little package, just for you!

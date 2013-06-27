@@ -305,13 +305,18 @@ The object becomes the last parameter to the function, and the function is autom
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Creates a new function that calls the function <code>fn</code> with parameters consisting of  the result of the
-calling <code>firstArgHandler</code> on the first original parameter combined with the remaining original parameters.</p>
+calling each supplied handler on the arguments, followed by all unmatched arguments.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> using = R.using = _(<span class="keyword">function</span>(firstArgHandler, fn) {
-            <span class="keyword">return</span> <span class="keyword">function</span>(first) {
-                <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, [firstArgHandler(first)].concat([].slice.call(arguments, <span class="number">1</span>)));
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> useWith = R.useWith = _(<span class="keyword">function</span>(fn <span class="comment">/*, handlers */</span>) {
+            <span class="keyword">var</span> handlers = slice(arguments, <span class="number">1</span>);
+            <span class="keyword">return</span> <span class="keyword">function</span>() {
+                <span class="keyword">var</span> args = [], idx = -<span class="number">1</span>;
+                <span class="keyword">while</span> (++idx &lt; handlers.length) {
+                    args.push(handlers[idx](arguments[idx]))
+                }
+                <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, args.concat(slice(arguments, handlers.length)));
             };
         });</pre></div></div>
             
@@ -2098,7 +2103,7 @@ select([&#39;name&#39;, &#39;grade&#39;], kids);
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.select = using(pick, map);
+            <div class="content"><div class='highlight'><pre>        R.select = useWith(map, pick);
         aliasFor(<span class="string">"select"</span>).is(<span class="string">"project"</span>);</pre></div></div>
             
         </li>
