@@ -833,10 +833,17 @@
         R.alwaysTrue = identity(true);
 
         // Reasonable analog to SQL `select` statement.
+        //
+        //     var kids = [
+        //         {name: 'Abby', age: 7, hair: 'blond', grade: 2},
+        //         {name: 'Fred', age: 12, hair: 'brown', grade: 7}
+        //     ];
+        //     select(['name', 'grade'], kids);
+        //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         R.select = using(pick, map);
         aliasFor("select").is("project");
 
-
+        // All the functional goodness, wrapped in a nice little package, just for you!
         return R;
     }());
 }));
