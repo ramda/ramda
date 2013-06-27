@@ -130,6 +130,15 @@
             }));
         };
 
+        // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
+        // calling `firstArgHandler` on the first original parameter combined with the remaining original parameters.
+        var using = R.using = _(function(firstArgHandler, fn) {
+            return function(first) {
+                return fn.apply(this, [firstArgHandler(first)].concat([].slice.call(arguments, 1)));
+            };
+        });
+
+
         // Fills out an array to the specified length
         var expand = function(a, len) {
             var arr = a ? isArray(a) ? a : slice(a) : [];
@@ -659,7 +668,7 @@
         };
 
         // Returns a partial copy of an object containing only the keys specified.
-        R.pick = _(function(names, obj) {
+        var pick = R.pick = _(function(names, obj) {
             return partialCopy(function(key) {return contains(key, names);}, obj);
         });
 
@@ -822,6 +831,11 @@
 
         // A function that always returns `true`.
         R.alwaysTrue = identity(true);
+
+        // Reasonable analog to SQL `select` statement.
+        R.select = using(pick, map);
+        aliasFor("select").is("project");
+
 
         return R;
     }());

@@ -31,7 +31,6 @@
 https://github.com/CrossEye/eweda
 (c) 2013 Scott Sauyet and Michael Hurley
 Eweda may be freely distributed under the MIT license.</code></pre>
-<h2>Ramda</h2>
 
             </div>
             
@@ -41,13 +40,13 @@ Eweda may be freely distributed under the MIT license.</code></pre>
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>A practical functional library for Javascript programmers.  This is a collection of tools to make it easier to
+              <h2>Ramda</h2>
+<p>A practical functional library for Javascript programmers.  This is a collection of tools to make it easier to
 use Javascript as a functional programming language.  (The name is just a silly play on <code>lambda</code>, even though we&#39;re
 not actually involved in lambda expressions.)</p>
-<h2>Basic Setup</h2>
 
             </div>
             
@@ -57,15 +56,17 @@ not actually involved in lambda expressions.)</p>
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Uses a technique from the <a href="https://github.com/umdjs/umd/blob/master/returnExports.js">Universal Module Definition</a> to wrap this up for use in Node.js or in the browser,
+              <h2>Basic Setup</h2>
+<p>Uses a technique from the <a href="https://github.com/umdjs/umd/blob/master/returnExports.js">Universal Module Definition</a> to wrap this up for use in Node.js or in the browser,
 with or without an AMD-style loader.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>(<span class="function"><span class="keyword">function</span> <span class="params">(root, factory)</span> {</span><span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) {module.exports = factory(root);} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) {define(factory);} <span class="keyword">else</span> {root.ramda = factory(root);}}(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> <span class="params">(global)</span> {</span>
+            <div class="content"><div class='highlight'><pre>
+(<span class="function"><span class="keyword">function</span> <span class="params">(root, factory)</span> {</span><span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) {module.exports = factory(root);} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) {define(factory);} <span class="keyword">else</span> {root.ramda = factory(root);}}(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> <span class="params">(global)</span> {</span>
 
     <span class="keyword">return</span>  (<span class="keyword">function</span>() {</pre></div></div>
             
@@ -82,7 +83,8 @@ with or without an AMD-style loader.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> R = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+        <span class="keyword">var</span> R = {};</pre></div></div>
             
         </li>
         
@@ -97,6 +99,9 @@ with or without an AMD-style loader.</p>
 
             </div>
             
+            <div class="content"><div class='highlight'><pre>
+        <span class="keyword">var</span> undef = (<span class="keyword">function</span>(){})(), EMPTY;</pre></div></div>
+            
         </li>
         
         
@@ -105,20 +110,6 @@ with or without an AMD-style loader.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> undef = (<span class="keyword">function</span>(){})(), EMPTY;</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-7">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Makes a public alias for one of the public functions:</p>
 
@@ -132,11 +123,11 @@ with or without an AMD-style loader.</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Partial replacement for native <code>bind</code>.</p>
 
@@ -152,28 +143,36 @@ with or without an AMD-style loader.</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Standard Array and Object methods implemented as pure functions</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> slice = bind(Function.prototype.call, Array.prototype.slice);
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> slice = <span class="keyword">function</span>(args, from, to) {
+          <span class="keyword">var</span> i, arr = [];
+          from = from || <span class="number">0</span>;
+          to = to || args.length;
+          <span class="keyword">for</span> (i = from; i &lt; to; i++) {
+            arr[arr.length] = args[i];
+          }
+          <span class="keyword">return</span> arr;
+        };
         <span class="keyword">var</span> toString = bind(Function.prototype.call, Object.prototype.toString);
         <span class="keyword">var</span> isArray = <span class="keyword">function</span>(val) {<span class="keyword">return</span> toString(val) === <span class="string">"[object Array]"</span>;};</pre></div></div>
             
         </li>
         
         
-        <li id="section-10">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Returns a curried version of the supplied function.  For example:</p>
 <pre><code> var discriminant = function(a, b, c) {
@@ -204,11 +203,11 @@ with or without an AMD-style loader.</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Wraps a function that may be nullary, or may take fewer than or more than <code>n</code> parameters, in a function that
 specifically takes exactly <code>n</code> parameters.</p>
@@ -229,11 +228,11 @@ specifically takes exactly <code>n</code> parameters.</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <pre><code>     e.g.
      cache[2] = function(func) {
@@ -244,7 +243,8 @@ specifically takes exactly <code>n</code> parameters.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> makeN = <span class="keyword">function</span>(n) {
+            <div class="content"><div class='highlight'><pre>
+            <span class="keyword">var</span> makeN = <span class="keyword">function</span>(n) {
                 <span class="keyword">var</span> fnArgs = mkArgStr(n);
                 <span class="keyword">var</span> body = [
                     <span class="string">"    return function("</span> + fnArgs + <span class="string">") {"</span>,
@@ -262,11 +262,11 @@ specifically takes exactly <code>n</code> parameters.</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>Turns a named method of an object (or object prototype) into a function that can be called directly.
 The object becomes the last parameter to the function, and the function is automatically curried.</p>
@@ -286,6 +286,26 @@ The object becomes the last parameter to the function, and the function is autom
                 <span class="keyword">return</span> undef;
             }));
         };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Creates a new function that calls the function <code>fn</code> with parameters consisting of  the result of the
+calling <code>firstArgHandler</code> on the first original parameter combined with the remaining original parameters.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> using = R.using = _(<span class="keyword">function</span>(firstArgHandler, fn) {
+            <span class="keyword">return</span> <span class="keyword">function</span>(first) {
+                <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, [firstArgHandler(first)].concat([].slice.call(arguments, <span class="number">1</span>)));
+            };
+        });</pre></div></div>
             
         </li>
         
@@ -528,6 +548,7 @@ The object becomes the last parameter to the function, and the function is autom
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <h2>Function functions :-)</h2>
+<p>These functions make new functions out of old ones.</p>
 
             </div>
             
@@ -540,8 +561,7 @@ The object becomes the last parameter to the function, and the function is autom
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>These functions make new functions out of old ones.</p>
-<p>Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
+              <p>Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
 of each one to the next one, starting with whatever arguments were passed to the initial invocation.
 Note that if <code>var h = compose(f, g)</code>, <code>h(x)</code> calls <code>g(x)</code> first, passing the result of that to <code>f()</code>.</p>
 
@@ -714,6 +734,15 @@ either before the internal function is called or with its results.</p>
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <h2>List Functions</h2>
+<p>These functions operate on logical lists, here plain arrays.  Almost all of these are curried, and the list
+parameter comes last, so you can create a new function by supplying the preceding arguments, leaving the
+list parameter off.  For instance:</p>
+<pre><code>// skip third parameter
+var checkAllPredicates = reduce(andFn, alwaysTrue);
+// ... given suitable definitions of odd, lt20, gt5
+var test = checkAllPredicates([odd, lt20, gt5]);
+// test(7) =&gt; true, test(9) =&gt; true, test(10) =&gt; false,
+// test(3) =&gt; false, test(21) =&gt; false,</code></pre>
 
             </div>
             
@@ -726,16 +755,7 @@ either before the internal function is called or with its results.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
-              <p>These functions operate on logical lists, here plain arrays.  Almost all of these are curried, and the list
-parameter comes last, so you can create a new function by supplying the preceding arguments, leaving the
-list parameter off.  For instance:</p>
-<pre><code>// skip third parameter
-var checkAllPredicates = reduce(andFn, alwaysTrue);
-// ... given suitable definitions of odd, lt20, gt5
-var test = checkAllPredicates([odd, lt20, gt5]);
-// test(7) =&gt; true, test(9) =&gt; true, test(10) =&gt; false,
-// test(3) =&gt; false, test(21) =&gt; false,</code></pre>
-<p>Returns a single item, by successively calling the function with the current element and the the next
+              <p>Returns a single item, by successively calling the function with the current element and the the next
 element of the list, passing the result to the next call.  We start with the <code>acc</code> parameter to get
 things going.  The function supplied should accept this running value and the latest element of the list,
 and return an updated value.</p>
@@ -829,7 +849,8 @@ consisting of the current value and the seed to be used for the next value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> unfoldr = R.unfoldr = _(<span class="keyword">function</span>(fn, seed) {
+            <div class="content"><div class='highlight'><pre>
+        <span class="keyword">var</span> unfoldr = R.unfoldr = _(<span class="keyword">function</span>(fn, seed) {
             <span class="keyword">var</span> pair = fn(seed), result = [];
             <span class="keyword">while</span> (pair &amp;&amp; pair.length) {
                 result.push(pair[<span class="number">0</span>]);
@@ -1368,6 +1389,9 @@ it makes a shallow copy), and returns a new list with the specified elements rem
                 <a class="pilcrow" href="#section-68">&#182;</a>
               </div>
               <h2>Object Functions</h2>
+<p>These functions operate on plain Javascript object, adding simple functions to test properties on these
+objects.  Many of these are of most use in conjunction with the list functions, operating on lists of
+objects.</p>
 
             </div>
             
@@ -1380,10 +1404,7 @@ it makes a shallow copy), and returns a new list with the specified elements rem
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-69">&#182;</a>
               </div>
-              <p>These functions operate on plain Javascript object, adding simple functions to test properties on these
-objects.  Many of these are of most use in conjunction with the list functions, operating on lists of
-objects.</p>
-<p>Runs the given function with the supplied object, then returns the object.</p>
+              <p>Runs the given function with the supplied object, then returns the object.</p>
 
             </div>
             
@@ -1567,7 +1588,7 @@ properties of the supplied object.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.pick = _(<span class="keyword">function</span>(names, obj) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> pick = R.pick = _(<span class="keyword">function</span>(names, obj) {
             <span class="keyword">return</span> partialCopy(<span class="keyword">function</span>(key) {<span class="keyword">return</span> contains(key, names);}, obj);
         });</pre></div></div>
             
@@ -1598,6 +1619,8 @@ properties of the supplied object.</p>
                 <a class="pilcrow" href="#section-80">&#182;</a>
               </div>
               <h2>Logic Functions</h2>
+<p>These functions are very simple wrappers around the built-in logical operators, useful in building up
+more complex functional forms.</p>
 
             </div>
             
@@ -1610,9 +1633,7 @@ properties of the supplied object.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-81">&#182;</a>
               </div>
-              <p>These functions are very simple wrappers around the built-in logical operators, useful in building up
-more complex functional forms.</p>
-<p>A function wrapping the boolean <code>&amp;&amp;</code> operator.  Note that unlike the underlying operator, though, it
+              <p>A function wrapping the boolean <code>&amp;&amp;</code> operator.  Note that unlike the underlying operator, though, it
 aways returns <code>true</code> or <code>false</code>.</p>
 
             </div>
@@ -1723,6 +1744,7 @@ underlying function would return a false-y value, and <code>false</code> when it
                 <a class="pilcrow" href="#section-87">&#182;</a>
               </div>
               <h2>Arithmetic Functions</h2>
+<p>These functions wrap up the certain core arithmetic operators</p>
 
             </div>
             
@@ -1735,8 +1757,7 @@ underlying function would return a false-y value, and <code>false</code> when it
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-88">&#182;</a>
               </div>
-              <p>These functions wrap up the certain core arithmetic operators</p>
-<p>Adds two numbers.  Automatic curried:</p>
+              <p>Adds two numbers.  Automatic curried:</p>
 <pre><code>var add7 = add(7);
 add7(10); // =&gt; 17</code></pre>
 
@@ -1871,6 +1892,7 @@ half(42); // =&gt; 21</code></pre>
                 <a class="pilcrow" href="#section-96">&#182;</a>
               </div>
               <h2>String Functions</h2>
+<p>Much of the String.prototype API exposed as simple functions.</p>
 
             </div>
             
@@ -1883,8 +1905,7 @@ half(42); // =&gt; 21</code></pre>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-97">&#182;</a>
               </div>
-              <p>Much of the String.prototype API exposed as simple functions.</p>
-<p>A substring of a String:</p>
+              <p>A substring of a String:</p>
 <pre><code>substring(2, 5, &quot;abcdefghijklm&quot;); //=&gt; &quot;cde&quot;</code></pre>
 
             </div>
@@ -1982,6 +2003,7 @@ half(42); // =&gt; 21</code></pre>
                 <a class="pilcrow" href="#section-103">&#182;</a>
               </div>
               <h2>Miscellaneous Functions</h2>
+<p>A few functions in need of a good home.</p>
 
             </div>
             
@@ -1994,8 +2016,7 @@ half(42); // =&gt; 21</code></pre>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-104">&#182;</a>
               </div>
-              <p>A few functions in need of a good home.</p>
-<p>Expose the functions from eweda as properties on another object.  If this object is the global object, then
+              <p>Expose the functions from eweda as properties on another object.  If this object is the global object, then
 it will be as though the eweda functions are global functions.</p>
 
             </div>
@@ -2049,7 +2070,24 @@ it will be as though the eweda functions are global functions.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.alwaysTrue = identity(<span class="literal">true</span>);
+            <div class="content"><div class='highlight'><pre>        R.alwaysTrue = identity(<span class="literal">true</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-108">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-108">&#182;</a>
+              </div>
+              <p>Reasonable analog to SQL <code>select</code> statement.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.select = using(pick, map);
+        aliasFor(<span class="string">"select"</span>).is(<span class="string">"project"</span>);
+
 
         <span class="keyword">return</span> R;
     }());
