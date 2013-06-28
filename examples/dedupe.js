@@ -15,14 +15,13 @@ var imperativeDedupe1 = function(arr) {
     var i,
         len=arr.length,
         out=[],
-        obj={};
+        cache={},
+        item;
 
     for (i=0;i<len;i++) {
-        obj[arr[i]]=0;
-    }
-    for (i in obj) {
-        if (obj.hasOwnProperty(i)) {
-            out.push(i);
+        item = arr[i];
+        if (!(item in cache)) {
+            out.push(cache[item] = item);
         }
     }
     return out;
@@ -40,18 +39,17 @@ var fpDedupe1 = foldl(function(acc, curr) {
         acc = append(curr, acc);
     }
     return acc;
-}, EMPTY);
+}, []);
 
 /*
 The functional code is a bit tighter and more readable, at the cost of some
-calls to external functions (`contains` and `append`). The imperative code has a
-problem: You pass in an array of numbers, but you get back an array of strings:
+calls to external functions (`contains` and `append`). 
 */
 
-imperativeDedupe1([1, 2, 3, 4, 2, 3, 4, 1, 2, 3]); // ["1", "2", "3", "4"]
+imperativeDedupe1([1, 2, 3, 4, 2, 3, 4, 1, 2, 3]); // [1, 2, 3, 4]
 
 /*
-The functional version doesn't suffer from this problem:
+The functional version works too:
 */
 
 fpDedupe1([1, 2, 3, 4, 2, 3, 4, 1, 2, 3]); // [1, 2, 3, 4]
