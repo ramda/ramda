@@ -55,11 +55,10 @@ The functional version works too:
 fpDedupe1([1, 2, 3, 4, 2, 3, 4, 1, 2, 3]); // [1, 2, 3, 4]
 
 /*
-But the bigger problem for _both_ imperative and functional versions is
+But the big problem for _both_ imperative and functional versions is
 that this deduping algorithm is naive and inflexible. The functions will fail on
 complex objects: In the imperative case, we can't use an object as an object
-property; and in the functional case, `contains`
-is testing on strict equality (===).
+property; and in the functional case, `contains` is testing on strict equality (===).
 
 Suppose we have an array of objects like this:
 */
@@ -90,7 +89,7 @@ fpDedupe1(objs); // returns a shallow copy of the original array
 
 /*
 We can do better: Consider this generic dedupe function `fpDedupe2` that takes
-a function and an array and returns a deduped array.It doesn't care what the
+a function and an array and returns a deduped array. It doesn't care what the
 array contains, doesn't check for types. It leaves the responsibility for
 knowing the structure of the passed-in array to the caller.  All the caller has
 to do is supply a predicate that describes object equality, and `fpDedupe2` does
