@@ -1,7 +1,7 @@
 //     ramda.js 0.0.1
 //     https://github.com/CrossEye/eweda
 //     (c) 2013 Scott Sauyet and Michael Hurley
-//     Eweda may be freely distributed under the MIT license.
+//     Ramda may be freely distributed under the MIT license.
 
 // Ramda
 // -----
