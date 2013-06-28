@@ -1,7 +1,17 @@
 /*
-  purge an array of objects of its duplicates
+Why Ramda? Why Functional Programming?
+
+Functional programming can make complex code more abstract, simpler, and less
+verbose.
+
+For example, conside the not uncommon problem of purging an array of objects of
+its duplicates.
+
+Consider the function `imperativeDedupe1`, written in imperative style.
+`imperativeDedupe1` takes an array, pushes its elements into an object indexed by
+the object value, then pushes back to an array, thereby eliminating duplicates.
 */
-function dedupe(arr) {
+var imperativeDedupe1 = function(arr) {
     var i,
         len=arr.length,
         out=[],
@@ -17,37 +27,78 @@ function dedupe(arr) {
     }
     return out;
 }
-var deduped = dedupe(someArray);
+
 /*
-Sure, that works ok.
-Here it is eweda style:
+Here's a possible implementation of that in functional style, `fpDedupe1`.
+`fpDedupe1` works a little differently. It takes the head of the list,
+then looks to see if that object exists in the tail of the list. If not,
+then push the head of the list onto the accumulator, and recur on the tail of
+the list.
 */
-dedupe = foldl(function(acc, curr) {
+var fpDedupe1 = foldl(function(acc, curr) {
     if (!contains(curr, acc)) {
         acc = append(curr, acc);
     }
     return acc;
 }, EMPTY);
-var deduped = dedupe(someArray);
 
 /*
-we made the code tighter and more readable. But this is a naive deduper.
-What if we have an array of complex objects? We can't use those as object indices.
-We don't want to test for object identity, we want to purge objects that have some
-properties in common.
-
-The iterative dedupe function is only useful for primitive objects. To make it handle
-arrays of arbitrary complex objects could start turning nasty.
+The functional code is a bit tighter and more readable, at the cost of some
+calls to external functions (`contains` and `append`). The imperative code has a
+problem: You pass in an array of numbers, but you get back an array of strings:
 */
+
+imperativeDedupe1([1, 2, 3, 4, 2, 3, 4, 1, 2, 3]); // ["1", "2", "3", "4"]
 
 /*
-We can do better--here is a generic dedupe function that takes
-a function and an array and returns a deduped array.It doesn't care
-what the array contains, doesn't check for types. It leaves the responsibility for knowing
-the structure of the passed in array to the caller.  All the caller has to do is supply
- a predicate that describes object equality, and dedupeF does the rest.
+The functional version doesn't suffer from this problem:
 */
-function dedupeF(pred, list) {
+
+fpDedupe1([1, 2, 3, 4, 2, 3, 4, 1, 2, 3]); // [1, 2, 3, 4]
+
+/*
+But the bigger problem for _both_ imperative and functional versions is
+that this deduping algorithm is naive and inflexible. The functions will fail on
+complex objects: In the imperative case, we can't use an object as an object
+property; and in the functional case, `contains`
+is testing on strict equality (===).
+
+Suppose we have an array of objects like this:
+*/
+var objs = [
+    {a: 0, b: 0},
+    {a: 0, b: 1},
+    {a: 1, b: 0},
+    {a: 1, b: 1},
+    {a: 1, b: 0},
+    {a: 1, b: 1}
+];
+
+/*
+We want our deduper function to return this:
+
+ [
+    {a: 0, b: 0},
+    {a: 0, b: 1},
+    {a: 1, b: 0},
+    {a: 1, b: 1}
+ ]
+
+... but neither of the above functions will do that for us.
+*/
+
+imperativeDedupe1(objs); // ["[object Object]"]  (ouch)
+fpDedupe1(objs); // returns a shallow copy of the original array
+
+/*
+We can do better: Consider this generic dedupe function `fpDedupe2` that takes
+a function and an array and returns a deduped array.It doesn't care what the
+array contains, doesn't check for types. It leaves the responsibility for
+knowing the structure of the passed-in array to the caller.  All the caller has
+to do is supply a predicate that describes object equality, and `fpDedupe2` does
+the rest.
+*/
+var fpDedupe2 = function(pred, list) {
     function reducer(acc, curr) {
         if (!some(function(accElem) { return pred(accElem, curr); }, acc)) {
             acc = append(curr, acc);
@@ -56,17 +107,55 @@ function dedupeF(pred, list) {
     }
     return foldl(reducer, [], list);
 }
-deduped = dedupeF(function(a, b) { return a === b; }, someArray);
 
-/*  This is adapted from actual code i saw in production. yikes!
- For demonstration, let's say that if the x and z.a properties are the same, we
- want to purge that object from the array.
+/*
+To purge the array `objs`, we want to remove any objects from the array where
+objX.a === objY.a and objX.b === objY.b. That is a simple function to write:
+
+function(x, y) { return x.a === y.a && x.b === y.b; }
+
+So we pass that function as our predicate to `fpDedupe2` and we should get the
+results we want:
+*/
+fpDedupe2(function(x, y) { return x.a === y.a && x.b === y.b; }, objs); // success--try it
+
+/*
+I find that code to be clear and concise: We will apply the passed-in predicate
+to our list (`objs`). The predicate describes how we will determine object
+equality.
+
+The imperative code might look as nasty as this:
+*/
+var imperativeDedupe2 = function(arr) {
+    var i,
+        len=arr.length,
+        out=[arr[0]],
+        matched = true;
+
+    for (i = 0; i < len; i++) {
+        for (var j = 0; j < out.length; j++) {
+            if (arr[i].a === out[j].a && arr[i].b === out[j].b) {
+                var matched = true;
+            }
+        }
+        if (!matched) {
+            out.push(arr[i]);
+        }
+        matched = false;
+    }
+    return out;
+}
+
+/*
+This works, but is still inflexible; the function `imperativeDedupe2` depends
+on knowing the structure of the objects in the array.
+
+Let's try a more complex example to compare imperative and FP approaches. In
+the next example, if the x and z.a properties are the same, we want to purge
+that object from the array.
 */
 
-
-
-
-var objs = [
+var objs2 = [
     {x: 1, y: 2, z: {a: 100, b: 200}},
     {x: 2, y: 4, z: {a: 200, b: 400}},
     {x: 1, y: 2, z: {a: 111, b: 200}},
@@ -79,14 +168,16 @@ var objs = [
     {x: 2, y: 4, z: {a: 222, b: 400}}
 ];
 
- /* iterative style. */
-function dedupe(arr) {
+/*
+imperativeDedupe3 is a possible approach to this problem using imperative style:
+*/
+imperativeDedupe3 = function(arr) {
     var i,
         len=arr.length,
         out=[],
         obj={};
     for (i = 0; i < len; i++) {
-        obj[arr[i].x + ":" + arr[i].z.a] = arr[i]; // getting nasty..... and what if a.x or a.z.a doesn't toString as expected?
+        obj[arr[i].x + ":" + arr[i].z.a] = arr[i];
     }
     for (i in obj) {
         if (obj.hasOwnProperty(i)) {
@@ -95,10 +186,21 @@ function dedupe(arr) {
     }
     return out;
 }
-var deduped = dedupe(objs);
 
-/* eweda (functional) style */
-var deduped = dedupeF(function(a, b) { return a.x === b.x && a.z.a === b.z.a; }, objs);
+imperativeDedupe3(objs2);
+/*
+Once again, the function `imperativeDedupe3` depends on knowledge of the
+internals of the objects in the passed-in array. it also relies on toString
+behaving consistently.
 
-/* gangnam style */
-console.log("heeeeeeeeeeeey, sexy lady");
+On the other hand, with FP, we don't need to write a new function; we can
+reuse `fpDedupe2`. `fpDedupe2` does not have any knowledge about the array of
+objects passed into it; all the relevant knowledge is also passed in via the
+predicate:
+*/
+fpDedupe2(function(a, b) { return a.x === b.x && a.z.a === b.z.a; }, objs2);
+
+/*
+See???
+*/
+
