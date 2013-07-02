@@ -1,5 +1,5 @@
 //     ramda.js 0.0.1
-//     https://github.com/CrossEye/eweda
+//     https://github.com/CrossEye/ramda
 //     (c) 2013 Scott Sauyet and Michael Hurley
 //     Ramda may be freely distributed under the MIT license.
 
@@ -41,7 +41,7 @@
                 return fn.apply(context || this, args.concat(Array.prototype.slice.call(arguments)));
             };
         };
-        // Standard Array and Object methods implemented as pure functions
+        // `slice` implemented iteratively for performance
         var slice = function(args, from, to) {
           var i, arr = [];
           from = from || 0;
@@ -160,12 +160,7 @@
 
         // Shallow copy of an array.
         var clone = function(list) {
-            var length = list.length;
-            var c = new Array(length);
-            for (var i = 0; i < length; ++i) {
-              c[i] = list[i];
-            }
-            return c;
+            return list.concat();
         };
 
         // Internal function used to simplify some calculations
