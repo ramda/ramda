@@ -1,23 +1,23 @@
 var assert = require('assert');
 var Lib = require('./../ramda');
 
-describe('identitity', function() {
-    var identity = Lib.identity;
+describe('always', function() {
+    var always = Lib.always;
     it('should return a function that returns the object initially supplied', function() {
-        var theMeaning = identity(42);
+        var theMeaning = always(42);
         assert.equal(theMeaning(), 42);
         assert.equal(theMeaning(10), 42);
         assert.equal(theMeaning(false), 42);
     });
 
     it('should work with various types', function() {
-        assert.equal(identity(false)(), false);
-        assert.equal(identity('abc')(), 'abc');
-        assert.deepEqual(identity({a: 1, b: 2})(), {a: 1, b: 2});
+        assert.equal(always(false)(), false);
+        assert.equal(always('abc')(), 'abc');
+        assert.deepEqual(always({a: 1, b: 2})(), {a: 1, b: 2});
         var obj = {a: 1, b: 2};
-        assert.strictEqual(identity(obj)(), obj);
+        assert.strictEqual(always(obj)(), obj);
         var now = new Date(1776, 6, 4);
-        assert.deepEqual(identity(now)(), new Date(1776, 6, 4));
+        assert.deepEqual(always(now)(), new Date(1776, 6, 4));
     });
 });
 

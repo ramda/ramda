@@ -628,7 +628,7 @@
         };
 
         // Returns a function that always returns the given value.
-        var identity = R.identity = function(val) {
+        var always = R.always = function(val) {
             return function() {return val;};
         };
 
@@ -828,13 +828,13 @@
         };
 
         // A function that always returns `0`.
-        R.alwaysZero = identity(0);
+        R.alwaysZero = always(0);
 
         // A function that always returns `false`.
-        R.alwaysFalse = identity(false);
+        R.alwaysFalse = always(false);
 
         // A function that always returns `true`.
-        R.alwaysTrue = identity(true);
+        R.alwaysTrue = always(true);
 
         // Reasonable analog to SQL `select` statement.
         //
