@@ -163,10 +163,6 @@
             return list.concat();
         };
 
-        // Internal function used to simplify some calculations
-        var addOne = function(n) {return n + 1;};
-
-
         // Core Functions
         // --------------
         //
@@ -180,21 +176,21 @@
 
         // Returns a new list with the new element at the front and the existing elements following
         var prepend = R.prepend = function(el, arr) {return [el].concat(arr);};
-        aliasFor("prepend").is("cons"); // TODO: really?
+        aliasFor("prepend").is("cons");
 
         //  Returns the first element of a list
         var head = R.head = function(arr) {
             arr = arr || EMPTY;
             return (arr.length) ? arr[0] : EMPTY; // TODO: shouldn't head(EMPTY) return null?
         };
-        aliasFor("head").is("car");  // TODO: really? sure! positively?
+        aliasFor("head").is("car"); 
 
         // Returns the rest of the list after the first element.
         var tail = R.tail = function(arr) {
             arr = arr || EMPTY;
             return (arr.length > 1) ? arr.slice(1) : EMPTY;
         };
-        aliasFor("tail").is("cdr");  // TODO: really? absolutely! without doubt?
+        aliasFor("tail").is("cdr");
 
         //   Boolean function which is `true` for non-list, `false` for a list.
         var isAtom = R.isAtom = function(x) {
@@ -418,7 +414,9 @@
 
         // Returns a new list containing the first `n` elements of the given list.
         var take = R.take = _(function(n, list) {
-            return takeWhile((function() {var count = 0; return function(x) {return count++ < n;};}()), list);
+            var ls = clone(list);
+            ls.length = n;
+            return ls;
         });
 
         // Returns a new list containing the elements of the given list starting with the first one where the function
@@ -439,7 +437,7 @@
 
         // Returns a new list containing all **but** the first `n` elements of the given list.
         var skip = R.skip = _(function(n, list) {
-            return skipUntil((function() {var count = 0; return function(x) {return count++ >= n;};}()), list);
+            return list.slice(n);
         });
         aliasFor('skip').is('drop');
 
@@ -456,21 +454,33 @@
 
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
         var all = R.all = _(function (fn, list) {
-            return (isEmpty(list)) ? true : fn(head(list)) && all(fn, tail(list));
+            var i = -1;
+            while(++i < list.length) {
+                if (fn(list[i]) === false) {
+                    return false;
+                }
+            }
+            return true;
         });
         aliasFor("all").is("every");
 
 
         // Returns `true` if any elements of the list match the predicate, `false` if none do.
         var any = R.any = _(function(fn, list) {
-            return (isEmpty(list)) ? false : fn(head(list)) || any(fn, tail(list));
+            var i = -1;
+            while (++i < list.length) {
+                if (fn(list[i])) {
+                    return true;
+                }
+            }
+            return false;
         });
         aliasFor("any").is("some");
 
         // Returns `true` if the list contains the sought element, `false` if it does not.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
         var contains = R.contains = _(function(a, list) {
-            return (isEmpty(list)) ? false : head(list) === a || contains(a, tail(list));
+            return list.indexOf(a) > -1;
         });
 
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
