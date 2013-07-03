@@ -220,3 +220,11 @@ var minOver = function(fn, list) {return foldl1(fn, list); };
 var split = curry(function(chr, str) {
    return str.split(chr);
 });
+
+var digits = function(number) {
+	return ('' + number).split('');
+};
+
+var eq = curry(function(a, b) {
+	return a === b;
+});
