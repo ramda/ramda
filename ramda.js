@@ -483,6 +483,17 @@
             return list.indexOf(a) > -1;
         });
 
+        // Like `contains`, but you pass in a predicate that defines equality.
+        R.containsWith = _(function(fn, a, list) {
+            var i = -1, len = list.length;
+            while (++i < len) {
+                if (fn(list[i], a)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
         var uniq = R.uniq = function(list) {
