@@ -506,8 +506,14 @@
         //
         //     zipWith(f, [1, 2, 3], ['a', 'b', 'c'])
         //     //    => [f(1, 'a'), f(2, 'b'), f(3, 'c')];
+        //
+        // Note that the output list will only be as long as the length os the first list passed in.
         var zipWith = R.zipWith = _(function(fn, a, b) {
-            return (isEmpty(a) || isEmpty(b)) ? EMPTY : prepend(fn(head(a), head(b)), zipWith(fn, tail(a), tail(b)));
+            var rv = [], i = -1, len = a.length;
+            while(++i < len) {
+                rv[i] = fn(a[i], b[i]);
+            }
+            return rv;
         });
 
         // Creates a new list out of the two supplied by yielding the pair of each equally-positioned pair in the
@@ -515,8 +521,13 @@
         //
         //     zip([1, 2, 3], ['a', 'b', 'c'])
         //     //    => [[1, 'a'], [2, 'b'], [3, 'c']];
-        var zip = R.zip = zipWith(prepend);
-
+        var zip = R.zip =  _(function(a, b) { // = zipWith(prepend);
+            var rv = [], i = -1, len = a.length;
+            while (++i < len) {
+                rv[i] = [a[i], b[i]];
+            }
+            return rv;
+        });
 
         // Creates a new list out of the two supplied by applying the function to each possible pair in the lists.
         //  For example,
