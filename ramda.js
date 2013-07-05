@@ -445,7 +445,7 @@
         var find = R.find = _(function(fn, list) {
             var idx = -1, len = list.length
             while (++idx < len) {
-                if(fn(list[idx])) {
+                if (fn(list[idx])) {
                     return list[idx];
                 }
             }
@@ -455,8 +455,8 @@
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
         var all = R.all = _(function (fn, list) {
             var i = -1;
-            while(++i < list.length) {
-                if (fn(list[i]) === false) {
+            while (++i < list.length) {
+                if (!fn(list[i])) {
                     return false;
                 }
             }
