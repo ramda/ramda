@@ -823,6 +823,16 @@
         //     match(/([a-z]a)/g, "bananas"); //=> ["ba", "na", "na"]
         R.match = invoker("match", String.prototype);
 
+        // Finds the index of a substring in a string, returning -1 if it's not present
+        //
+        //     strIndexOf('c', 'abcdefg) //=> 2
+        R.strIndexOf = invoker("indexOf", String.prototype);
+
+        // Finds the last index of a substring in a string, returning -1 if it's not present
+        //
+        //     strIndexOf('a', 'banana split') //=> 2
+        R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
+
 
         // Miscellaneous Functions
         // -----------------------

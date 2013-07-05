@@ -83,3 +83,38 @@ describe('match', function() {
         assert.equal(format('B1-afn'), undefined);
     });
 });
+
+describe('strIndexOf', function() {
+    var strIndexOf = Lib.strIndexOf;
+
+    it('should find the index of a substring inside a string', function() {
+        assert.equal(strIndexOf('c', 'abcdefg'), 2);
+    });
+
+    it('should return -1 if the value is not found', function() {
+        assert.equal(strIndexOf('x', 'abcdefg'), -1);
+    });
+
+    it('should be automatically curried', function() {
+        var findD = strIndexOf('d');
+        assert.equal(findD('abcdefg'), 3);
+    });
+});
+
+describe('strLastIndexOf', function() {
+    var strLastIndexOf = Lib.strLastIndexOf;
+
+    it('should find the index of a substring inside a string', function() {
+        assert.equal(strLastIndexOf('a', 'bananas'), 5);
+    });
+
+    it('should return -1 if the value is not found', function() {
+        assert.equal(strLastIndexOf('x', 'abcdefg'), -1);
+    });
+
+    it('should be automatically curried', function() {
+        var findA = strLastIndexOf('a');
+        assert.equal(findA('banana split'), 5);
+    });
+});
+
