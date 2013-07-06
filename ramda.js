@@ -497,9 +497,14 @@
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
         //     // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         var flatten = R.flatten = function(list) {
-            var h = head(list), t = tail(list);
-            return isEmpty(list) ? EMPTY : (isAtom(h)) ? prepend(h, flatten(t)) : merge(flatten(h), flatten(t));
+            var idx = -1, len = list ? list.length : 0, result = [], push = result.push, val;
+            while (++idx < len) {
+                val = list[idx];
+                push.apply(result, isArray(val) ? flatten(val) : [val]);
+            }
+            return result;
         };
+
 
         // Creates a new list out of the two supplied by applying the function to each equally-positioned pair in the
         // lists.  For example,
