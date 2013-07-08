@@ -180,7 +180,7 @@
         // Returns the rest of the list after the first element.
         var tail = R.tail = function(arr) {
             arr = arr || EMPTY;
-            return (arr.length > 1) ? arr.slice(1) : EMPTY;
+            return (arr.length > 1) ? slice(arr, 1) : EMPTY;
         };
         aliasFor("tail").is("cdr");
 
@@ -429,7 +429,7 @@
 
         // Returns a new list containing all **but** the first `n` elements of the given list.
         var skip = R.skip = _(function(n, list) {
-            return list.slice(n);
+            return slice(list, n);
         });
         aliasFor('skip').is('drop');
 
@@ -599,7 +599,7 @@
         // and returns the removed elements. ramda.splice does not mutate the passed in list (well,
         // it makes a shallow copy), and returns a new list with the specified elements removed. 
         R.splice = _(function(start, len, list) {
-            var ls = list.slice(0);
+            var ls = slice(list, 0);
             ls.splice(start, len);
             return ls;
         });
