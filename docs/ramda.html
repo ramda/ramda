@@ -468,7 +468,7 @@ calling each supplied handler on the arguments, followed by all unmatched argume
             
             <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> tail = R.tail = <span class="keyword">function</span>(arr) {
             arr = arr || EMPTY;
-            <span class="keyword">return</span> (arr.length &gt; <span class="number">1</span>) ? arr.slice(<span class="number">1</span>) : EMPTY;
+            <span class="keyword">return</span> (arr.length &gt; <span class="number">1</span>) ? slice(arr, <span class="number">1</span>) : EMPTY;
         };
         aliasFor(<span class="string">"tail"</span>).is(<span class="string">"cdr"</span>);</pre></div></div>
             
@@ -1049,7 +1049,7 @@ supplied returns <code>false</code> when passed the element.</p>
             <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> find = R.find = _(<span class="keyword">function</span>(fn, list) {
             <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list.length
             <span class="keyword">while</span> (++idx &lt; len) {
-                <span class="keyword">if</span>(fn(list[idx])) {
+                <span class="keyword">if</span> (fn(list[idx])) {
                     <span class="keyword">return</span> list[idx];
                 }
             }
@@ -1071,8 +1071,8 @@ supplied returns <code>false</code> when passed the element.</p>
             
             <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> all = R.all = _(<span class="function"><span class="keyword">function</span> <span class="params">(fn, list)</span> {</span>
             <span class="keyword">var</span> i = -<span class="number">1</span>;
-            <span class="keyword">while</span>(++i &lt; list.length) {
-                <span class="keyword">if</span> (fn(list[i]) === <span class="literal">false</span>) {
+            <span class="keyword">while</span> (++i &lt; list.length) {
+                <span class="keyword">if</span> (!fn(list[i])) {
                     <span class="keyword">return</span> <span class="literal">false</span>;
                 }
             }
@@ -1171,8 +1171,12 @@ meaning reference equality for objects and non-coercing equality for primitives.
             </div>
             
             <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> flatten = R.flatten = <span class="keyword">function</span>(list) {
-            <span class="keyword">var</span> h = head(list), t = tail(list);
-            <span class="keyword">return</span> isEmpty(list) ? EMPTY : (isAtom(h)) ? prepend(h, flatten(t)) : merge(flatten(h), flatten(t));
+            <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list ? list.length : <span class="number">0</span>, result = [], push = result.push, val;
+            <span class="keyword">while</span> (++idx &lt; len) {
+                val = list[idx];
+                push.apply(result, isArray(val) ? flatten(val) : [val]);
+            }
+            <span class="keyword">return</span> result;
         };</pre></div></div>
             
         </li>
@@ -1188,11 +1192,16 @@ meaning reference equality for objects and non-coercing equality for primitives.
 lists.  For example,</p>
 <pre><code>zipWith(f, [1, 2, 3], [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
 //    =&gt; [f(1, &#39;a&#39;), f(2, &#39;b&#39;), f(3, &#39;c&#39;)];</code></pre>
+<p>Note that the output list will only be as long as the length os the first list passed in.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> zipWith = R.zipWith = _(<span class="keyword">function</span>(fn, a, b) {
-            <span class="keyword">return</span> (isEmpty(a) || isEmpty(b)) ? EMPTY : prepend(fn(head(a), head(b)), zipWith(fn, tail(a), tail(b)));
+            <span class="keyword">var</span> rv = [], i = -<span class="number">1</span>, len = a.length;
+            <span class="keyword">while</span>(++i &lt; len) {
+                rv[i] = fn(a[i], b[i]);
+            }
+            <span class="keyword">return</span> rv;
         });</pre></div></div>
             
         </li>
@@ -1211,7 +1220,13 @@ lists.  For example,</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> zip = R.zip = zipWith(prepend);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> zip = R.zip =  _(<span class="keyword">function</span>(a, b) { <span class="comment">// = zipWith(prepend);</span>
+            <span class="keyword">var</span> rv = [], i = -<span class="number">1</span>, len = a.length;
+            <span class="keyword">while</span> (++i &lt; len) {
+                rv[i] = [a[i], b[i]];
+            }
+            <span class="keyword">return</span> rv;
+        });</pre></div></div>
             
         </li>
         
@@ -2020,12 +2035,15 @@ half(42); // =&gt; 21</code></pre>
         <li id="section-104">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-104">&#182;</a>
               </div>
-              <h2>Miscellaneous Functions</h2>
+              <p>Finds the index of a substring in a string, returning -1 if it&#39;s not present</p>
+<pre><code>strIndexOf(&#39;c&#39;, &#39;abcdefg) //=&gt; 2</code></pre>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.strIndexOf = invoker(<span class="string">"indexOf"</span>, String.prototype);</pre></div></div>
             
         </li>
         
@@ -2035,6 +2053,35 @@ half(42); // =&gt; 21</code></pre>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-105">&#182;</a>
+              </div>
+              <p>Finds the last index of a substring in a string, returning -1 if it&#39;s not present</p>
+<pre><code>strIndexOf(&#39;a&#39;, &#39;banana split&#39;) //=&gt; 2</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.strLastIndexOf = invoker(<span class="string">"lastIndexOf"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-106">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-106">&#182;</a>
+              </div>
+              <h2>Miscellaneous Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-107">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-107">&#182;</a>
               </div>
               <p>A few functions in need of a good home.</p>
 <p>Expose the functions from eweda as properties on another object.  If this object is the global object, then
@@ -2051,11 +2098,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-106">
+        <li id="section-108">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-106">&#182;</a>
+                <a class="pilcrow" href="#section-108">&#182;</a>
               </div>
               <p>A function that always returns <code>0</code>.</p>
 
@@ -2066,11 +2113,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-107">
+        <li id="section-109">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-107">&#182;</a>
+                <a class="pilcrow" href="#section-109">&#182;</a>
               </div>
               <p>A function that always returns <code>false</code>.</p>
 
@@ -2081,11 +2128,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-108">
+        <li id="section-110">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-108">&#182;</a>
+                <a class="pilcrow" href="#section-110">&#182;</a>
               </div>
               <p>A function that always returns <code>true</code>.</p>
 
@@ -2096,11 +2143,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-109">
+        <li id="section-111">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-109">&#182;</a>
+                <a class="pilcrow" href="#section-111">&#182;</a>
               </div>
               <p>Reasonable analog to SQL <code>select</code> statement.</p>
 <pre><code>var kids = [
@@ -2117,11 +2164,11 @@ project([&#39;name&#39;, &#39;grade&#39;], kids);
         </li>
         
         
-        <li id="section-110">
+        <li id="section-112">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-110">&#182;</a>
+                <a class="pilcrow" href="#section-112">&#182;</a>
               </div>
               <p>All the functional goodness, wrapped in a nice little package, just for you!</p>
 
