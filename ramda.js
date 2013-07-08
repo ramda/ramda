@@ -180,7 +180,7 @@
         // Returns the rest of the list after the first element.
         var tail = R.tail = function(arr) {
             arr = arr || EMPTY;
-            return (arr.length > 1) ? arr.slice(1) : EMPTY;
+            return (arr.length > 1) ? slice(arr, 1) : EMPTY;
         };
         aliasFor("tail").is("cdr");
 
