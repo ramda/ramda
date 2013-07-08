@@ -34,13 +34,6 @@
             var fn = function(newName) {R[newName] = R[oldName]; return fn;};
             return (fn.is = fn.are = fn.and = fn);
         };
-        // Partial replacement for native `bind`.
-        var bind = function(fn, context) {
-            var args = Array.prototype.slice.call(arguments, 2);
-            return function() {
-                return fn.apply(context || this, args.concat(Array.prototype.slice.call(arguments)));
-            };
-        };
         // `slice` implemented iteratively for performance
         var slice = function(args, from, to) {
           var i, arr = [];
@@ -51,8 +44,7 @@
           }
           return arr;
         };
-        var toString = bind(Function.prototype.call, Object.prototype.toString);
-        var isArray = function(val) {return toString(val) === "[object Array]";};
+        var isArray = function(val) {return Object.prototype.toString.call(val) === "[object Array]";};
 
         // Returns a curried version of the supplied function.  For example:
         //
