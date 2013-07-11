@@ -170,24 +170,52 @@
 
         // support for infinite lists 
 	
-	function G(seed, current, step) {
-           this["0"] = current(seed);
-	   this.tail = function() {
+        function G(seed, current, step) {
+            this["0"] = current(seed);
+            this.tail = function() {
                return new G(step(seed), current, step);
             };
         }
         G.prototype.length = Infinity;
         // `map` implementation for generators.
         G.prototype.map = function(fn, gen) {
-	    // TODO: remove dep on Object.create
-	    var g = Object.create(G.prototype);
+            // TODO: remove dep on Object.create
+            var g = Object.create(G.prototype);
             g["0"] = fn(gen[0]);
             g.tail = function() { return this.map(fn, gen.tail()); };
-	    return g;
+            return g;
+        };
+
+         // `filter` implementation for generators.
+        G.prototype.filter = function(fn, gen) {
+            var head = gen[0];
+            while (!fn(head)) {
+                gen = gen.tail();
+                head = gen[0];
+            }
+            var g = Object.create(G.prototype);
+            g["0"] = head;
+            g.tail = function() { return this.filter(fn, gen.tail()); };
+            return g;
+        };
+
+        G.prototype.take = function(n) {
+            var take = function(ctr, g, ret) {
+                return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g[0], ret))
+            };
+            return trampoline(take, n, this, []);
+        };
+
+        // `skip` implementation for generators.
+        G.prototype.skip = function(n) {
+            var skip = function(ctr, g) {
+                return (ctr <= 0) ? g : skip(ctr - 1, g.tail());
+            }
+            return trampoline(skip, n, this);
         };
 
         var generator = R.generator = function(seed, current, step) {
-	    return new G(seed, current, step);
+            return new G(seed, current, step);
         };
 
         //   Prototypical (or only) empty list
@@ -412,24 +440,10 @@
         var size = R.size = function(arr) {return arr.length;};
 
 
-         // `filter` implementation for generators.
-        var genFilter = function(fn, gen) {
-            var head = gen[0];
-            while (!fn(head)) {
-                gen = gen.tail();
-                head = gen[0];
-            }
-            return {
-                "0": head,
-                tail: function() {return genFilter(fn, gen.tail());},
-                length: Infinity
-            };
-        };
-
         // Returns a new list containing only those items that match a given predicate function.
         var filter = R.filter = _(function(fn, list) {
             if (list && list.length === Infinity) {
-                return genFilter(fn, list);
+                return list.filter(fn, list);
             }
             var idx = -1, len = list.length, result = [];
             while (++idx < len) {
@@ -460,18 +474,10 @@
             return result;
         });
 
-        // `take` implementation for generators.
-        var genTake = function(n, gen) {
-            var take = function(ctr, g, ret) {
-                return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g[0], ret))
-            };
-            return trampoline(take, n, gen, []);
-        };
-
         // Returns a new list containing the first `n` elements of the given list.
         var take = R.take = _(function(n, list) {
             if (list && list.length === Infinity) {
-                return genTake(n, list);
+                return list.take(n);
             }
             var ls = clone(list);
             ls.length = n;
@@ -494,15 +500,10 @@
             return result;
         });
 
-        // `skip` implementation for generators.
-        var genSkip = function(n, gen) {
-            return (n <= 0) ? gen : genSkip(n - 1, gen.tail());
-        };
-
         // Returns a new list containing all **but** the first `n` elements of the given list.
         var skip = R.skip = _(function(n, list) {
             if (list && list.length === Infinity) {
-                return genSkip(n, list);
+                return list.skip(n);
             }
             return slice(list, n);
         });
