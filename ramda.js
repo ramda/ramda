@@ -155,15 +155,6 @@
             return list.concat();
         };
 
-        // trampolining to support recursion in Generators
-        var trampoline = function(fn) {
-            var result = fn.apply(this, tail(arguments));
-            while (typeof result === "function") {
-                result = result();
-            }
-            return result;
-        };
-
         // Core Functions
         // --------------
         //
@@ -176,6 +167,15 @@
                return new G(step(seed), current, step);
             };
         }
+        // trampolining to support recursion in Generators
+        G.trampoline = function(fn) {
+            var result = fn.apply(this, tail(arguments));
+            while (typeof result === "function") {
+                result = result();
+            }
+            return result;
+        };
+
         G.prototype.length = Infinity;
         // `map` implementation for generators.
         G.prototype.map = function(fn, gen) {
@@ -203,7 +203,7 @@
             var take = function(ctr, g, ret) {
                 return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g[0], ret))
             };
-            return trampoline(take, n, this, []);
+            return G.trampoline(take, n, this, []);
         };
 
         // `skip` implementation for generators.
@@ -211,7 +211,7 @@
             var skip = function(ctr, g) {
                 return (ctr <= 0) ? g : skip(ctr - 1, g.tail());
             }
-            return trampoline(skip, n, this);
+            return G.trampoline(skip, n, this);
         };
 
         var generator = R.generator = function(seed, current, step) {
