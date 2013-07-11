@@ -168,16 +168,26 @@
         // --------------
         //
 
-
         // support for infinite lists 
-        var generator = R.generator = function(seed, current, step) {
-            return {
-                "0": current(seed),
-                tail: function() {
-                    return generator(step(seed), current, step);
-                },
-                length: Infinity
+	
+	function G(seed, current, step) {
+           this["0"] = current(seed);
+	   this.tail = function() {
+               return new G(step(seed), current, step);
             };
+        }
+        G.prototype.length = Infinity;
+        // `map` implementation for generators.
+        G.prototype.map = function(fn, gen) {
+	    // TODO: remove dep on Object.create
+	    var g = Object.create(G.prototype);
+            g["0"] = fn(gen[0]);
+            g.tail = function() { return this.map(fn, gen.tail()); };
+	    return g;
+        };
+
+        var generator = R.generator = function(seed, current, step) {
+	    return new G(seed, current, step);
         };
 
         //   Prototypical (or only) empty list
@@ -385,19 +395,11 @@
             return result;
         });
 
-        // `map` implementation for generators.
-        var genMap = function(fn, gen) {
-            return {
-                "0": fn(gen[0]),
-                tail: function() {return genMap(fn, gen.tail());},
-                length: Infinity
-            };
-        };
 
         // Returns a new list constructed by applying the function to every element of the list supplied.
         var map = R.map = _(function(fn, list) {
             if (list && list.length === Infinity) {
-                return genMap(fn, list);
+                return list.map(fn, list);
             }
             var idx = -1, len = list.length, result = new Array(len);
             while (++idx < len) {
