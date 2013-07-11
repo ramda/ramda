@@ -155,10 +155,30 @@
             return list.concat();
         };
 
+        // trampolining to support recursion in Generators
+        var trampoline = function(fn) {
+            var result = fn.apply(this, tail(arguments));
+            while (typeof result === "function") {
+                result = result();
+            }
+            return result;
+        };
+
         // Core Functions
         // --------------
         //
 
+
+        // support for infinite lists 
+        R.generator = function(seed, current, step) {
+            return {
+                "0": current(seed),
+                tail: function() {
+                    return generator(step(seed), current, step);
+                },
+                length: Infinity
+            };
+        };
 
         //   Prototypical (or only) empty list
         EMPTY = [];
@@ -178,8 +198,13 @@
         aliasFor("head").is("car"); 
 
         // Returns the rest of the list after the first element.
+        // If the passed-in list is a Generator, it will return the 
+        // next iteration of the Generator.
         var tail = R.tail = function(arr) {
             arr = arr || EMPTY;
+            if (arr.length === Infinity) {
+                return arr.tail();
+            }
             return (arr.length > 1) ? slice(arr, 1) : EMPTY;
         };
         aliasFor("tail").is("cdr");
