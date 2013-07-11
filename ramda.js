@@ -170,7 +170,7 @@
 
 
         // support for infinite lists 
-        R.generator = function(seed, current, step) {
+        var generator = R.generator = function(seed, current, step) {
             return {
                 "0": current(seed),
                 tail: function() {
@@ -385,8 +385,20 @@
             return result;
         });
 
+        // `map` implementation for generators.
+        var genMap = function(fn, gen) {
+            return {
+                "0": fn(gen[0]),
+                tail: function() {return genMap(fn, gen.tail());},
+                length: Infinity
+            };
+        };
+
         // Returns a new list constructed by applying the function to every element of the list supplied.
         var map = R.map = _(function(fn, list) {
+            if (list && list.length === Infinity) {
+                return genMap(fn, list);
+            }
             var idx = -1, len = list.length, result = new Array(len);
             while (++idx < len) {
                 result[idx] = fn(list[idx]);
@@ -397,9 +409,26 @@
         // Reports the number of elements in the list
         var size = R.size = function(arr) {return arr.length;};
 
+
+         // `filter` implementation for generators.
+        var genFilter = function(fn, gen) {
+            var head = gen[0];
+            while (!fn(head)) {
+                gen = gen.tail();
+                head = gen[0];
+            }
+            return {
+                "0": head,
+                tail: function() {return genFilter(fn, gen.tail());},
+                length: Infinity
+            };
+        };
+
         // Returns a new list containing only those items that match a given predicate function.
         var filter = R.filter = _(function(fn, list) {
-            //return foldr(function(x, acc) { return (fn(x)) ? prepend(x, acc) : acc; }, EMPTY, list);
+            if (list && list.length === Infinity) {
+                return genFilter(fn, list);
+            }
             var idx = -1, len = list.length, result = [];
             while (++idx < len) {
                 if (fn(list[idx])) {
@@ -429,8 +458,19 @@
             return result;
         });
 
+        // `take` implementation for generators.
+        var genTake = function(n, gen) {
+            var take = function(ctr, g, ret) {
+                return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g[0], ret))
+            };
+            return trampoline(take, n, gen, []);
+        };
+
         // Returns a new list containing the first `n` elements of the given list.
         var take = R.take = _(function(n, list) {
+            if (list && list.length === Infinity) {
+                return genTake(n, list);
+            }
             var ls = clone(list);
             ls.length = n;
             return ls;
@@ -452,8 +492,16 @@
             return result;
         });
 
+        // `skip` implementation for generators.
+        var genSkip = function(n, gen) {
+            return (n <= 0) ? gen : genSkip(n - 1, gen.tail());
+        };
+
         // Returns a new list containing all **but** the first `n` elements of the given list.
         var skip = R.skip = _(function(n, list) {
+            if (list && list.length === Infinity) {
+                return genSkip(n, list);
+            }
             return slice(list, n);
         });
         aliasFor('skip').is('drop');
