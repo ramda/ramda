@@ -46,15 +46,6 @@
         };
         var isArray = function(val) {return Object.prototype.toString.call(val) === "[object Array]";};
 
-        // partial shim for Object.create
-        var create = (function() {
-            var F = function() {};
-            return function(src) {
-                F.prototype = src;
-                return new F();
-            };
-        }());
-
         // Returns a curried version of the supplied function.  For example:
         //
         //      var discriminant = function(a, b, c) {
@@ -252,6 +243,15 @@
         // be an infinite list.
 
         R.generator = (function() {
+            // partial shim for Object.create
+            var create = (function() {
+                var F = function() {};
+                return function(src) {
+                    F.prototype = src;
+                    return new F();
+                };
+            }());
+
             // Trampolining to support recursion in Generators
             var trampoline = function(fn) {
                 var result = fn.apply(this, tail(arguments));
@@ -276,13 +276,16 @@
                  // `take` implementation for generators.
                  take: function(n) {
                      var take = function(ctr, g, ret) {
-                         return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g[0], ret))
+                         return (ctr == 0) ? ret : take(ctr - 1, g.tail(), ret.concat([g[0]]))
                      };
                      return trampoline(take, n, this, []);
                  },
                  // `skip` implementation for generators.
                  skip: function(n) {
-                     return (n <= 0) ? this : skip(n - 1, this.tail());
+		     var skip = function(ctr, g) {
+		         return (ctr <= 0) ? g : skip(ctr - 1, g.tail());
+		     }
+		     return trampoline(skip, n, this);
                  },
                  // `map` implementation for generators.
                  map: function(fn, gen) {
