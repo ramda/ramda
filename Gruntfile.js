@@ -2,13 +2,21 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    mkdir: {
+      all: {
+        options: {
+          create: ['dist']
+        }
+      }
+    },
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
       },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['dist/<%= pkg.name %>.js']
+          'dist/<%= pkg.name %>.min.js': ['<%= pkg.name %>.js']
         }
       }
     },
@@ -36,9 +44,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-mkdir');
 
   grunt.registerTask('test', ['jshint', 'mocha']);
-  grunt.registerTask('min', ['jshint', 'jasmine', 'uglify']);
+  grunt.registerTask('min', ['test', 'mkdir', 'uglify']);
 };
 
 
