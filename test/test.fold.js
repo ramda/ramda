@@ -44,7 +44,7 @@ describe('foldl1', function() {
     });
 
     it('should throw an error with an empty array', function() {
-        assert.throws(function() {foldl1(add, [])}, Error);
+        assert.throws(function() { foldl1(add, []); }, Error);
     });
 
     it('should be automatically curried', function() {
@@ -105,7 +105,7 @@ describe('foldr1', function() {
     });
 
     it('should throw an error with an empty array', function() {
-        assert.throws(function() {foldr1(avg, [])}, Error);
+        assert.throws(function() { foldr1(avg, []); }, Error);
     });
 
     it('should be automatically curried', function() {

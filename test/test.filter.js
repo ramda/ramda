@@ -3,7 +3,7 @@ var Lib = require("./../ramda");
 
 describe('filter', function() {
     var filter = Lib.filter;
-    var even = function(x) {return !(x % 2);};
+    var even = function(x) {return x % 2 === 0;};
 
     it('should reduce an array to those matching a filter', function() {
         assert.deepEqual(filter(even, [1, 2, 3, 4, 5]), [2, 4]);
@@ -17,7 +17,7 @@ describe('filter', function() {
 
 describe('reject', function() {
     var reject = Lib.reject;
-    var even = function(x) {return !(x % 2);};
+    var even = function(x) {return x % 2 === 0;};
 
     it('should reduce an array to those not matching a filter', function() {
         assert.deepEqual(reject(even, [1, 2, 3, 4, 5]), [1, 3, 5]);

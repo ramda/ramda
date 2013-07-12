@@ -62,7 +62,7 @@ describe('orFn', function() {
     var orFn = Lib.orFn;
 
     it('should combine two boolean-returning functions into one', function() {
-        var even = function(x) {return !(x % 2);};
+        var even = function(x) {return x % 2 === 0;};
         var gt10 = function(x) {return x > 10;};
         var f = orFn(even, gt10);
         assert.equal(f(8), true);
@@ -92,7 +92,7 @@ describe('andFn', function() {
     var andFn = Lib.andFn;
 
     it('should combine two boolean-returning functions into one', function() {
-        var even = function(x) {return !(x % 2);};
+        var even = function(x) {return x % 2 === 0;};
         var gt10 = function(x) {return x > 10;};
         var f = andFn(even, gt10);
         assert.equal(f(8), false);
@@ -122,7 +122,7 @@ describe('notFn', function() {
     var notFn = Lib.notFn;
 
     it('should create boolean-returning function that reverses another', function() {
-        var even = function(x) {return !(x %2 );};
+        var even = function(x) {return x % 2 === 0;};
         var f = notFn(even);
         assert.equal(f(8), false);
         assert.equal(f(13), true);

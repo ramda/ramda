@@ -129,7 +129,7 @@
             return function() {
                 var args = [], idx = -1;
                 while (++idx < tranformers.length) {
-                    args.push(tranformers[idx](arguments[idx]))
+                    args.push(tranformers[idx](arguments[idx]));
                 }
                 return fn.apply(this, args.concat(slice(arguments, tranformers.length)));
             };
@@ -276,16 +276,16 @@
                  // `take` implementation for generators.
                  take: function(n) {
                      var take = function(ctr, g, ret) {
-                         return (ctr == 0) ? ret : take(ctr - 1, g.tail(), ret.concat([g[0]]))
+                         return (ctr === 0) ? ret : take(ctr - 1, g.tail(), ret.concat([g[0]]));
                      };
                      return trampoline(take, n, this, []);
                  },
                  // `skip` implementation for generators.
                  skip: function(n) {
-		     var skip = function(ctr, g) {
-		         return (ctr <= 0) ? g : skip(ctr - 1, g.tail());
-		     }
-		     return trampoline(skip, n, this);
+                     var skip = function(ctr, g) {
+                         return (ctr <= 0) ? g : skip(ctr - 1, g.tail());
+                     };
+                     return trampoline(skip, n, this);
                  },
                  // `map` implementation for generators.
                  map: function(fn, gen) {
@@ -327,7 +327,7 @@
             var fns = slice(arguments);
             return function() {
                 return foldr(function(fn, args) {return [fn.apply(this, args)];}, slice(arguments), fns)[0];
-            }
+            };
         };
         aliasFor("compose").is("fog"); // TODO: really?
 
@@ -385,7 +385,7 @@
                 if (called) {return result;}
                 called = true;
                 return (result = fn.apply(this, arguments));
-            }
+            };
         };
 
         // Wrap a function inside another to allow you to make adjustments to the parameters or do other processing
@@ -555,7 +555,7 @@
 
         // Returns the first element of the list which matches the predicate, or `false` if no element matches.
         var find = R.find = _(function(fn, list) {
-            var idx = -1, len = list.length
+            var idx = -1, len = list.length;
             while (++idx < len) {
                 if (fn(list[idx])) {
                     return list[idx];

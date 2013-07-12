@@ -60,7 +60,7 @@ describe('map for a generator', function() {
 
 describe('filter for a generator', function() {
     var generator = Lib.generator, take = Lib.take, filter = Lib.filter;
-    var even = function(n) {return !(n % 2);};
+    var even = function(n) {return n % 2 === 0;};
 
     var fibonacci = generator(
         [0, 1],
