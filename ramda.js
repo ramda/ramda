@@ -46,6 +46,15 @@
         };
         var isArray = function(val) {return Object.prototype.toString.call(val) === "[object Array]";};
 
+        // partial shim for Object.create
+        var create = (function() {
+            var F = function() {};
+            return function(src) {
+                F.prototype = src;
+                return new F();
+            };
+        }());
+
         // Returns a curried version of the supplied function.  For example:
         //
         //      var discriminant = function(a, b, c) {
@@ -155,68 +164,10 @@
             return list.concat();
         };
 
+
         // Core Functions
         // --------------
         //
-
-        // support for infinite lists 
-	
-        function G(seed, current, step) {
-            this["0"] = current(seed);
-            this.tail = function() {
-               return new G(step(seed), current, step);
-            };
-        }
-        // trampolining to support recursion in Generators
-        G.trampoline = function(fn) {
-            var result = fn.apply(this, tail(arguments));
-            while (typeof result === "function") {
-                result = result();
-            }
-            return result;
-        };
-
-        G.prototype.length = Infinity;
-        // `map` implementation for generators.
-        G.prototype.map = function(fn, gen) {
-            // TODO: remove dep on Object.create
-            var g = Object.create(G.prototype);
-            g["0"] = fn(gen[0]);
-            g.tail = function() { return this.map(fn, gen.tail()); };
-            return g;
-        };
-
-         // `filter` implementation for generators.
-        G.prototype.filter = function(fn, gen) {
-            var head = gen[0];
-            while (!fn(head)) {
-                gen = gen.tail();
-                head = gen[0];
-            }
-            var g = Object.create(G.prototype);
-            g["0"] = head;
-            g.tail = function() { return this.filter(fn, gen.tail()); };
-            return g;
-        };
-
-        G.prototype.take = function(n) {
-            var take = function(ctr, g, ret) {
-                return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g[0], ret))
-            };
-            return G.trampoline(take, n, this, []);
-        };
-
-        // `skip` implementation for generators.
-        G.prototype.skip = function(n) {
-            var skip = function(ctr, g) {
-                return (ctr <= 0) ? g : skip(ctr - 1, g.tail());
-            }
-            return G.trampoline(skip, n, this);
-        };
-
-        var generator = R.generator = function(seed, current, step) {
-            return new G(seed, current, step);
-        };
 
         //   Prototypical (or only) empty list
         EMPTY = [];
@@ -269,6 +220,96 @@
             }
         });
         aliasFor("merge").is("concat");
+
+		// Generators
+        // ----------
+		//
+
+        // Support for infinite lists, using an initial seed, a function that calculates the head from the seed and
+        // a function that creates a new seed from the current seed.  Generator objects have this structure:
+        //
+        //     {
+        //        "0": someValue,
+        //        tail: someFunction() {},
+        //        length: Infinity
+        //     }
+        //
+        // Generator objects also have such functions as `take`, `skip`, `map`, and `filter`, but the equivalent
+        // functions from Ramda will work with them as well.
+        //
+        // ### Example ###
+        //
+        //     var fibonacci = generator(
+        //         [0, 1],
+        //         function(pair) {return pair[0];},
+        //         function(pair) {return [pair[1], pair[0] + pair[1]];}
+        //     );
+        //     var even = function(n) {return (n % 2) === 0;};
+        //
+        //     take(5, filter(even, fibonacci)) //=> [0, 2, 8, 34, 144]
+        //
+        // Note that the `take(5)` call is necessary to get a finite list out of this.  Otherwise, this would still
+        // be an infinite list.
+
+        R.generator = (function() {
+            // Trampolining to support recursion in Generators
+            var trampoline = function(fn) {
+                var result = fn.apply(this, tail(arguments));
+                while (typeof result === "function") {
+                    result = result();
+                }
+                return result;
+            };
+            // Internal Generator constructor
+            var  G = function(seed, current, step) {
+                this["0"] = current(seed);
+       	        this.tail = function() {
+                    return new G(step(seed), current, step);
+                };
+            };
+            // Generators can be used with OO techniques as well as our standard functional calls.  These are the
+            // implementations of those methods and other properties.
+            G.prototype = {
+                 constructor: G,
+                 // All generators are infinite.
+                 length: Infinity,
+                 // `take` implementation for generators.
+                 take: function(n) {
+                     var take = function(ctr, g, ret) {
+                         return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g[0], ret))
+                     };
+                     return trampoline(take, n, this, []);
+                 },
+                 // `skip` implementation for generators.
+                 skip: function(n) {
+                     return (n <= 0) ? this : skip(n - 1, this.tail());
+                 },
+                 // `map` implementation for generators.
+                 map: function(fn, gen) {
+                     var g = create(G.prototype);
+                     g[0] = fn(gen[0]);
+                     g.tail = function() { return this.map(fn, gen.tail()); };
+                     return g;
+                 },
+                 // `filter` implementation for generators.
+                 filter: function(fn) {
+                     var gen = this, head = gen[0];
+                     while (!fn(head)) {
+                         gen = gen.tail();
+                         head = gen[0];
+                     }
+                     var g = create(G.prototype);
+                     g[0] = head;
+                     g.tail = function() {return filter(fn, gen.tail());};
+                     return g;
+                 }
+            };
+
+            // The actual public `generator` function.
+            return function(seed, current, step) {
+                return new G(seed, current, step);
+            };
+        }());
 
 
         // Function functions :-)
@@ -443,7 +484,7 @@
         // Returns a new list containing only those items that match a given predicate function.
         var filter = R.filter = _(function(fn, list) {
             if (list && list.length === Infinity) {
-                return list.filter(fn, list);
+                return list.filter(fn);
             }
             var idx = -1, len = list.length, result = [];
             while (++idx < len) {
@@ -954,5 +995,3 @@
         return R;
     }());
 }));
-
-
