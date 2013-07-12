@@ -92,7 +92,7 @@
                 }
                 return arr.join(", ");
             };
-            
+
 //          e.g.
 //          cache[2] = function(func) {
 //              return function(arg0, arg1) {
@@ -221,9 +221,9 @@
         });
         aliasFor("merge").is("concat");
 
-		// Generators
+        // Generators
         // ----------
-		//
+        //
 
         // Support for infinite lists, using an initial seed, a function that calculates the head from the seed and
         // a function that creates a new seed from the current seed.  Generator objects have this structure:
@@ -263,7 +263,7 @@
             // Internal Generator constructor
             var  G = function(seed, current, step) {
                 this["0"] = current(seed);
-       	        this.tail = function() {
+                this.tail = function() {
                     return new G(step(seed), current, step);
                 };
             };
@@ -720,13 +720,13 @@
             ls.splice(start, len);
             return ls;
         });
-      
+
         // Returns the nth element of a list (zero-indexed)
         R.nth = _(function(n, list) {
           return (typeof list[n] === "undefined") ? null : list[n];
         });
-       
-        
+
+
         // Object Functions
         // ----------------
         //
