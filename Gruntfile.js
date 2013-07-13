@@ -2,14 +2,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    mkdir: {
-      all: {
-        options: {
-          create: ['dist']
-        }
-      }
-    },
-
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
@@ -34,20 +26,28 @@ module.exports = function(grunt) {
         // options here to override JSHint defaults
         evil: true,
         globals: {
-          console: true,
-          module: true
+        }
+      }
+    },
+
+    docco: {
+      doc: {
+        src: ['<%= pkg.name %>.js'],
+        options: {
+          output: 'docs/'
         }
       }
     }
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha');
-  grunt.loadNpmTasks('grunt-mkdir');
+  grunt.loadNpmTasks('grunt-docco');
 
   grunt.registerTask('test', ['jshint', 'mocha']);
-  grunt.registerTask('min', ['test', 'mkdir', 'uglify']);
+  grunt.registerTask('min', ['test', 'docco:doc', 'uglify']);
 };
 
 

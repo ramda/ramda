@@ -1,5 +1,8 @@
 docs/public
 .idea
+dist
+report
+build
 
 /JasmineAdapter-1.1.2.js
 /jasmine-1.1.0.js
