@@ -136,7 +136,7 @@
         });
 
 
-        // Fills out an array to the specified length
+        // Fills out an array to the specified length. Internal private function.
         var expand = function(a, len) {
             var arr = a ? isArray(a) ? a : slice(a) : [];
             while(arr.length < len) {arr[arr.length] = undef;}
@@ -190,8 +190,8 @@
         aliasFor("tail").is("cdr");
 
         //   Boolean function which is `true` for non-list, `false` for a list.
-        var isAtom = R.isAtom = function(x) {
-            return (x !== null) && (x !== undefined) && Object.prototype.toString.call(x) !== "[object Array]";
+        R.isAtom = function(x) {
+            return (x !== null) && (x !== undef) && Object.prototype.toString.call(x) !== "[object Array]";
         };
 
         // Returns a new list with the new element at the end of a list following all the existing ones.
@@ -203,7 +203,7 @@
         aliasFor("append").is("push");
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
-        var merge = R.merge = _(function(list1, list2) {
+        R.merge = _(function(list1, list2) {
             if (isEmpty(list1)) {
                 return clone(list2);
             } else {
@@ -333,7 +333,7 @@
 
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.
-        var pipe = R.pipe = function() { // TODO: type check of arguments?
+        R.pipe = function() { // TODO: type check of arguments?
             return compose.apply(this, slice(arguments).reverse());
         };
         aliasFor("pipe").is("sequence");
@@ -347,7 +347,7 @@
 
         // Creates a new function that acts like the supplied function except that the left-most parameters are
         // pre-filled.
-        var lPartial = R.lPartial = function (fn) {
+        R.lPartial = function (fn) {
             var args = slice(arguments, 1);
             return function() {
                 return fn.apply(this, args.concat(slice(arguments)));
@@ -357,7 +357,7 @@
 
         // Creates a new function that acts like the supplied function except that the right-most parameters are
         // pre-filled.
-        var rPartial = R.rPartial =function (fn) {
+        R.rPartial =function (fn) {
             var args = slice(arguments, 1);
             return function() {
                 return fn.apply(this, slice(arguments).concat(args));
@@ -427,7 +427,7 @@
         aliasFor("foldl").is("reduce");
 
         // Much like `foldl`/`reduce`, except that this takes as its starting value the first element in the list.
-        var foldl1 = R.foldl1 = _(function (fn, list) {
+        R.foldl1 = _(function (fn, list) {
             if (isEmpty(list)) {
                 throw new Error("foldl1 does not work on empty lists");
             }
@@ -447,7 +447,7 @@
 
 
         // Much like `foldr`/`reduceRight`, except that this takes as its starting value the last element in the list.
-        var foldr1 = R.foldr1 = _(function (fn, list) {
+        R.foldr1 = _(function (fn, list) {
             if (isEmpty(list)) {
                 throw new Error("foldr1 does not work on empty lists");
             }
@@ -455,10 +455,10 @@
             return foldr(fn, acc, newList);
         });
 
-        // Builds a list from a seed value, using a function that returns `undefined` to quit and a pair otherwise,
+        // Builds a list from a seed value, using a function that returns falsy to quit and a pair otherwise,
         // consisting of the current value and the seed to be used for the next value.
 
-        var unfoldr = R.unfoldr = _(function(fn, seed) {
+        R.unfoldr = _(function(fn, seed) {
             var pair = fn(seed), result = [];
             while (pair && pair.length) {
                 result.push(pair[0]);
@@ -481,7 +481,7 @@
         });
 
         // Reports the number of elements in the list
-        var size = R.size = function(arr) {return arr.length;};
+        R.size = function(arr) {return arr.length;};
 
 
         // Returns a new list containing only those items that match a given predicate function.
@@ -505,7 +505,7 @@
 
         // Returns a new list containing the elements of the given list up until the first one where the function
         // supplied returns `false` when passed the element.
-        var takeWhile = R.takeWhile = _(function(fn, list) {
+        R.takeWhile = _(function(fn, list) {
             var idx = -1, len = list.length, taking = true, result = [];
             while (taking) {
                 ++idx;
@@ -519,7 +519,7 @@
         });
 
         // Returns a new list containing the first `n` elements of the given list.
-        var take = R.take = _(function(n, list) {
+        R.take = _(function(n, list) {
             if (list && list.length === Infinity) {
                 return list.take(n);
             }
@@ -530,7 +530,7 @@
 
         // Returns a new list containing the elements of the given list starting with the first one where the function
         // supplied returns `false` when passed the element.
-        var skipUntil = R.skipUntil = _(function(fn, list) {
+        R.skipUntil = _(function(fn, list) {
             var idx = -1, len = list.length, taking = false, result = [];
             while (!taking) {
                 ++idx;
@@ -545,7 +545,7 @@
         });
 
         // Returns a new list containing all **but** the first `n` elements of the given list.
-        var skip = R.skip = _(function(n, list) {
+        R.skip = _(function(n, list) {
             if (list && list.length === Infinity) {
                 return list.skip(n);
             }
@@ -554,7 +554,7 @@
         aliasFor('skip').is('drop');
 
         // Returns the first element of the list which matches the predicate, or `false` if no element matches.
-        var find = R.find = _(function(fn, list) {
+        R.find = _(function(fn, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 if (fn(list[idx])) {
@@ -565,7 +565,7 @@
         });
 
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
-        var all = R.all = _(function (fn, list) {
+        R.all = _(function (fn, list) {
             var i = -1;
             while (++i < list.length) {
                 if (!fn(list[i])) {
@@ -597,7 +597,7 @@
 
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var uniq = R.uniq = function(list) {
+        R.uniq = function(list) {
             return foldr(function(x, acc) { return (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         };
 
@@ -608,7 +608,7 @@
         //
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
         //     // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-        var flatten = R.flatten = function(list) {
+        R.flatten = function(list) {
             var idx = -1, len = list ? list.length : 0, result = [], push = result.push, val;
             while (++idx < len) {
                 val = list[idx];
@@ -625,7 +625,7 @@
         //     //    => [f(1, 'a'), f(2, 'b'), f(3, 'c')];
         //
         // Note that the output list will only be as long as the length os the first list passed in.
-        var zipWith = R.zipWith = _(function(fn, a, b) {
+        R.zipWith = _(function(fn, a, b) {
             var rv = [], i = -1, len = a.length;
             while(++i < len) {
                 rv[i] = fn(a[i], b[i]);
@@ -638,7 +638,7 @@
         //
         //     zip([1, 2, 3], ['a', 'b', 'c'])
         //     //    => [[1, 'a'], [2, 'b'], [3, 'c']];
-        var zip = R.zip =  _(function(a, b) { // = zipWith(prepend);
+        R.zip =  _(function(a, b) { // = zipWith(prepend);
             var rv = [], i = -1, len = a.length;
             while (++i < len) {
                 rv[i] = [a[i], b[i]];
@@ -651,7 +651,7 @@
         //
         //     xProdWith(f, [1, 2], ['a', 'b'])
         //     //    => [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
-        var xprodWith = R.xprodWith = _(function(fn, a, b) {
+        R.xprodWith = _(function(fn, a, b) {
             if (isEmpty(a) || isEmpty(b)) {return EMPTY;}
             var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
             while (++i < ilen) {
@@ -681,7 +681,7 @@
         });
 
         // Returns a new list with the same elements as the original list, just in the reverse order.
-        var reverse = R.reverse = function(list) {
+        R.reverse = function(list) {
             return clone(list || []).reverse();
         };
 
@@ -690,7 +690,7 @@
         //
         //     range(1, 5) // => [1, 2, 3, 4]
         //     range(50, 53) // => [50, 51, 52]
-        var range = R.range = _(function(from, to) {
+        R.range = _(function(from, to) {
             if (from >= to) {return EMPTY;}
             var idx, result = new Array(to - from);
             for (idx = 0; from < to; idx++, from++) {
@@ -726,7 +726,7 @@
 
         // Returns the nth element of a list (zero-indexed)
         R.nth = _(function(n, list) {
-          return (typeof list[n] === "undefined") ? null : list[n];
+          return (list[n] === undef) ? null : list[n];
         });
 
 
@@ -738,7 +738,7 @@
         // objects.
 
         // Runs the given function with the supplied object, then returns the object.
-        var tap = R.tap = _(function(x, fn) {
+        R.tap = _(function(x, fn) {
             if (typeof fn === "function") {
                 fn(x);
             }
@@ -753,7 +753,7 @@
         });
 
         // Returns a function that when supplied an object returns the indicated property of that object, if it exists.
-        var prop = R.prop = function(p) {return function(obj) {return obj[p];};};
+        R.prop = function(p) {return function(obj) {return obj[p];};};
 
         // Returns a function that when supplied an object returns the result of running the indicated function on
         // that object, if it has such a function.
@@ -761,7 +761,7 @@
 
         // Returns a function that when supplied a property name returns that property on the indicated object, if it
         // exists.
-        var props = R.props = function(obj) {
+        R.props = function(obj) {
             return function(prop) {return obj && obj[prop];};
         };
 
@@ -828,13 +828,13 @@
 
         // A function wrapping the boolean `&&` operator.  Note that unlike the underlying operator, though, it
         // aways returns `true` or `false`.
-        var and = R.and = _(function (a, b) {
+        R.and = _(function (a, b) {
             return !!(a && b);
         });
 
         // A function wrapping the boolean `||` operator.  Note that unlike the underlying operator, though, it
         // aways returns `true` or `false`.
-        var or = R.or = _(function (a, b) {
+        R.or = _(function (a, b) {
             return !!(a || b);
         });
 
@@ -967,7 +967,7 @@
         //
         // A few functions in need of a good home.
 
-        // Expose the functions from eweda as properties on another object.  If this object is the global object, then
+        // Expose the functions from ramda as properties on another object.  If this object is the global object, then
         // it will be as though the eweda functions are global functions.
         R.installTo = function(obj) {
             each(function(key) {
