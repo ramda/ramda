@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       dist: {
         files: {
@@ -17,6 +17,17 @@ module.exports = function(grunt) {
       browser: ['test/**/*.html'],
       options: {
         run: true
+      }
+    },
+    
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'progress'
+          // reporter: 'list'
+          // reporter: 'spec'
+        },
+        src: ['test/**/*.js']
       }
     },
 
@@ -44,6 +55,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
 
   grunt.registerTask('test', ['jshint', 'mocha']);

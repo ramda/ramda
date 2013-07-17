@@ -1,7 +1,10 @@
 {
   "author": "CrossEye <scott@sauyet.com> (scott.sauyet.com)",
   "contributors": [
-    { "name": "buzzdecafe", "email": "m_hur@yahoo.com"}
+    {
+      "name": "buzzdecafe",
+      "email": "m_hur@yahoo.com"
+    }
   ],
   "name": "ramda",
   "description": "A practical functional library for Javascript programmers.",
