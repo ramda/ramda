@@ -3,8 +3,10 @@ docs/public
 dist
 report
 build
-
+node_modules
 /JasmineAdapter-1.1.2.js
 /jasmine-1.1.0.js
 
 *.swp
+
+/node_modules
