@@ -738,7 +738,7 @@
         var comparator = R.comparator = function(pred) {
             return function(a, b) {
                 return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
-            }
+            };
         };
 
         // Returns a copy of the list, sorted according to the comparator function, which should accept two values at a

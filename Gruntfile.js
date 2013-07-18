@@ -23,9 +23,9 @@ module.exports = function(grunt) {
     mochaTest: {
       test: {
         options: {
-          reporter: 'progress'
+          // reporter: 'progress'
           // reporter: 'list'
-          // reporter: 'spec'
+          reporter: 'spec'
         },
         src: ['test/**/*.js']
       }
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-docco');
 
   grunt.registerTask('test', ['jshint', 'mocha']);
-  grunt.registerTask('min', ['test', 'docco:doc', 'uglify']);
+  grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
 };
 
 
