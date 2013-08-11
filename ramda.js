@@ -95,7 +95,7 @@
                 var fnArgs = mkArgStr(n);
                 var body = [
                     "    return function(" + fnArgs + ") {",
-                    "        return func.call(this, " + fnArgs + ")",
+                    "        return func.call(this" + (fnArgs ? ", " + fnArgs : "") + ");",
                     "    }"
                 ].join("\n");
                 return new Function("func", body);
@@ -124,16 +124,17 @@
 
         // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
         // calling each supplied handler on the arguments, followed by all unmatched arguments.
-        var useWith = R.useWith = _(function(fn /*, tranformers */) {
-            var tranformers = slice(arguments, 1);
-            return function() {
+        var useWith = R.useWith = function(fn /*, transformers */) {
+            var transformers = slice(arguments, 1);
+            var tlen = transformers.length;
+            return _(nAry(tlen, function() {
                 var args = [], idx = -1;
-                while (++idx < tranformers.length) {
-                    args.push(tranformers[idx](arguments[idx]));
+                while (++idx < tlen) {
+                    args.push(transformers[idx](arguments[idx]));
                 }
-                return fn.apply(this, args.concat(slice(arguments, tranformers.length)));
-            };
-        });
+                return fn.apply(this, args.concat(slice(arguments, tlen)));
+            }));
+        };
 
 
         // Fills out an array to the specified length. Internal private function.
@@ -858,6 +859,12 @@
             return !!(a || b);
         });
 
+        // A function wrapping the boolean `^` operator.  Note that unlike the underlying operator, though, it
+        // aways returns `true` or `false`.
+        R.xor = _(function (a, b) {
+            return !!(a ^ b);
+        });
+
         // A function wrapping the boolean `!` operator.  It returns `true` if the parameter is false-y and `false` if
         // the parameter is truth-y
         R.not = function (a) {
@@ -876,6 +883,12 @@
         // value. (Note also that at least Oliver Twist can pronounce this one...)
         R.orFn = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
+        });
+
+        // A function wrapping a call to the given function in a `^` operation.  It will return `true` when the
+        // functions return logically opposite results, and `false` otherwise.
+        var xorFn = R.xorFn = _(function (f, g) {
+            return function() {return !!(f.apply(this, arguments) ^ g.apply(this, arguments)); };
         });
 
         // A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
@@ -1015,7 +1028,9 @@
         //     ];
         //     project(['name', 'grade'], kids);
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
-        R.project = useWith(map, pick);  // TODO: alias with `select`?
+        R.project = _(function(keys, table) {
+          return compose(map, pick)(keys)(table);
+        });
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
         // item in the list supplied, and `key` is the result of applying the supplied function to that item.

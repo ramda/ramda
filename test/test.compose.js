@@ -30,3 +30,18 @@ describe('pipe', function() {
     });
 });
 
+describe('useWith', function() {
+  var useWith = Lib.useWith;
+ 
+  function max() { return Math.max.apply(Math, arguments); }
+  function add1(x) { return x + 1; }
+  function mult2(x) { return x * 2; }
+  function dev3(x) { return x/3; }
+ 
+  it("takes a arbitrary number of function arguments and returns a function", function() {
+    assert.equal(typeof useWith(max), "function");
+    assert.equal(typeof useWith(max, add1), "function");
+    assert.equal(typeof useWith(max, add1, mult2, dev3), "function");
+  });
+});
+
