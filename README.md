@@ -1,7 +1,6 @@
 Project Ramda
 =============
 
-<img src="https://raw.github.com/CrossEye/ramda/master/logo/ramda_200x235.png" width="200" height="235" align="left" style="margin-right:6px;"/>
 A practical functional library for Javascript programmers.
 
 
@@ -9,6 +8,7 @@ A practical functional library for Javascript programmers.
 Goals
 -----
 
+<img src="https://raw.github.com/CrossEye/ramda/master/logo/ramda_200x235.png" width="200" height="235" align="left" style="padding-right:6px;"/>
 Using this library should feel as much like using Javascript as possible.  Of course it's functional Javascript, but
 we're not introducting lambda expressions in strings, we're not borrowing CONsed lists, we're not porting over all of
 the Clojure functions.
