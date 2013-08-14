@@ -566,7 +566,7 @@
         });
 
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
-        R.all = _(function (fn, list) {
+        var all = R.all = _(function (fn, list) {
             var i = -1;
             while (++i < list.length) {
                 if (!fn(list[i])) {
@@ -1018,7 +1018,9 @@
         //     project(['name', 'grade'], kids);
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         R.project = _(function(keys, table) {
-          return compose(map, pick)(keys)(table);
+          return compose(map, pick)(keys)(filter(function(row) {
+              return all(function(key){ return row[key] !== undef; }, keys);
+          }, table));
         });
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
