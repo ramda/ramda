@@ -859,12 +859,6 @@
             return !!(a || b);
         });
 
-        // A function wrapping the boolean `^` operator.  Note that unlike the underlying operator, though, it
-        // aways returns `true` or `false`.
-        R.xor = _(function (a, b) {
-            return !!(a ^ b);
-        });
-
         // A function wrapping the boolean `!` operator.  It returns `true` if the parameter is false-y and `false` if
         // the parameter is truth-y
         R.not = function (a) {
@@ -883,12 +877,6 @@
         // value. (Note also that at least Oliver Twist can pronounce this one...)
         R.orFn = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
-        });
-
-        // A function wrapping a call to the given function in a `^` operation.  It will return `true` when the
-        // functions return logically opposite results, and `false` otherwise.
-        var xorFn = R.xorFn = _(function (f, g) {
-            return function() {return !!(f.apply(this, arguments) ^ g.apply(this, arguments)); };
         });
 
         // A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
@@ -1010,6 +998,7 @@
 
         // A surprisingly useful function that does nothing but return the parameter supplied to it.
         R.identity = function(x) {return x;};
+        aliasFor("identity").is("I");
 
         // A function that always returns `0`.
         R.alwaysZero = always(0);

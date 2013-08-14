@@ -135,3 +135,4 @@ describe('notFn', function() {
         assert.equal(f(12, 2, 6), true);
     });
 });
+

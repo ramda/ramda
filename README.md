@@ -10,7 +10,7 @@ Goals
 -----
 
 Using this library should feel as much like using Javascript as possible.  Of course it's functional Javascript, but
-we're not introducting lambda expressions in strings, we're not borrowing CONsed lists, we're not porting over all of
+we're not introducting lambda expressions in strings, we're not borrowing consed lists, we're not porting over all of
 the Clojure functions.
 
 Our basic data structures will be normal Javascript objects, and our usual collections will be Javascript arrays.  We
@@ -24,7 +24,7 @@ as much as feasible, but will not be dogmatic about it.
 As much as we can, we would like the implementation to be both clean and elegant.  But the API is king: we will
 sacrifice a great deal of implementation elegance for even a slightly cleaner API.
 
-Unlike the developers of that silly-named _Eweda_ project, though, this one will focues also on performance, striving
+Unlike the developers of that silly-named _Eweda_ project, though, this one will focus also on performance, striving
 for a reliable and quick implementation over any notions of functional purity.
 
 
@@ -40,7 +40,7 @@ The Name
 --------
 
 Ok, so we like sheep.  That's all.  It's a short name, not already taken.  It could as easily have been `eweda`, but
-then we would be forced to say _eweda lamb!_, and no one wants that  For non-English speakers, lambs are baby
+then we would be forced to say _eweda lamb!_, and no one wants that.  For non-English speakers, lambs are baby
 sheep, ewes are female sheep, and rams are male sheep.  So perhaps ramda is a grown-up lambda... but probably not.
 
 
@@ -67,7 +67,7 @@ then, instead of having to manually call lPartial like this:
      var sum = lPartial(foldl, add, 0);
      var total = sum([1, 2, 3, 4]);
 
-we could just do this:
+with ramda, we can just do this:
 
      var sum = foldl(add, 0);
      var total = sum([1, 2, 3, 4]);
@@ -83,11 +83,13 @@ to use the most common names for these, possibly using multiple aliases for thos
 ### Core ###
 
   * isEmpty
-  * prepend
+  * isAtom
+  * curry
+  * prepend (cons)
   * append
   * merge
-  * head
-  * tail
+  * head (car)
+  * tail (cdr)
   * size
 
 ### Functions ###
@@ -100,6 +102,7 @@ to use the most common names for these, possibly using multiple aliases for thos
   * memoize
   * once
   * wrap
+  * nAry
 
 ### Lists ###
 
@@ -111,7 +114,9 @@ to use the most common names for these, possibly using multiple aliases for thos
   * filter
   * reject
   * take
+  * takeWhile
   * skip (drop)
+  * skipUntil
   * find
   * all (every)
   * any (some)
@@ -125,6 +130,20 @@ to use the most common names for these, possibly using multiple aliases for thos
   * xprodWith (i.e. cartesian product with function)
   * reverse
   * range
+  * nth
+  * indexOf
+  * lastIndexOf
+  * splice
+  * join
+  * comparator
+
+### Generators ###
+
+  * tail
+  * take
+  * skip
+  * map
+  * filter
 
 ### Objects ###
 
@@ -140,6 +159,8 @@ to use the most common names for these, possibly using multiple aliases for thos
   * maybe
   * keys
   * values
+  * pick
+  * invoker
 
 ### Logic ###
 
@@ -158,3 +179,32 @@ to use the most common names for these, possibly using multiple aliases for thos
   * divide
   * sum
   * product
+
+### Strings ###
+
+  * substring
+  * substringFrom
+  * substringTo
+  * charAt
+  * charCodeAt
+  * match
+  * strIndexOf
+  * strLastIndexOf
+
+### Data querying ###
+
+  * project
+  * keyValue
+  * sortBy
+  * countBy
+  * groupBy
+
+### Miscellaneous ###
+
+  * identity (I)
+  * installTo
+  * alwaysZero
+  * alwaysTrue
+  * alwaysFalse
+
+
