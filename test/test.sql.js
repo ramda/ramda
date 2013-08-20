@@ -18,21 +18,6 @@ describe('project', function() {
         assert.strictEqual(Lib.select, project);
     });
 
-    it('excludes objects that have undefined properties being projected', function() {
-        var project = Lib.project;
-        var kids = [
-            {name: 'Abby', age: 7, hair: 'blond'},
-            {name: 'Fred', age: 12, hair: 'brown'},
-            {name: 'Rusty', age: 17, hair: 'brown'},
-            {name: 'Uter', age: 77, disposition: 'surly'}
-        ];
-
-        var hairy = project(["name", "hair"], kids);
-        assert.deepEqual(hairy, [{name: 'Abby', hair: 'blond'}, {name: 'Fred', hair: 'brown'},{name: 'Rusty', hair: 'brown'}]);
-        var disp = project(["disposition"], kids);
-        assert.deepEqual(disp, [{disposition: 'surly'}]);
-    });
-
     it('should be automatically curried', function() {
         var myFields = project(['name', 'age']);
         assert.deepEqual(myFields(kids), [{name: 'Abby', age: 7}, {name: 'Fred', age: 12}]);

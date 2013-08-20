@@ -1017,10 +1017,9 @@
         //     ];
         //     project(['name', 'grade'], kids);
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
+        var preproj = compose(map, pick);
         R.project = _(function(keys, table) {
-          return compose(map, pick)(keys)(filter(function(row) {
-              return all(function(key){ return row[key] !== undef; }, keys);
-          }, table));
+          return preproj(keys)(table);
         });
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
