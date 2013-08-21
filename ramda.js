@@ -835,6 +835,12 @@
             return partialCopy(function(key) {return contains(key, names);}, obj);
         });
 
+        var pickAll = R.pickAll = _(function(names, obj) {
+            var copy = {};
+            each(function(name) { copy[name] = obj[name]; }, names);
+            return copy;
+        });
+
         // Returns a partial copy of an object omitting the keys specified.
         R.omit = _(function(names, obj) {
             return partialCopy(function(key) {return !contains(key, names);}, obj);
@@ -1017,7 +1023,7 @@
         //     ];
         //     project(['name', 'grade'], kids);
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
-        var preproj = compose(map, pick);
+        var preproj = compose(map, pickAll);
         R.project = _(function(keys, table) {
           return preproj(keys)(table);
         });
