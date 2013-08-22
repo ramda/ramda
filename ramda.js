@@ -204,7 +204,7 @@
         aliasFor("append").is("push");
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
-        R.merge = _(function(list1, list2) {
+        var merge = R.merge = _(function(list1, list2) {
             if (isEmpty(list1)) {
                 return clone(list2);
             } else {
@@ -598,7 +598,7 @@
 
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        R.uniq = function(list) {
+        var uniq = R.uniq = function(list) {
             return foldr(function(x, acc) { return (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         };
 
@@ -1025,8 +1025,11 @@
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         var preproj = compose(map, pickAll);
         R.project = _(function(keys, table) {
-          return preproj(keys)(table);
+            return preproj(keys)(table);
         });
+
+        // union combines two lists into a set <F9>i.e. no duplicates) composed of the elements of both lists.
+        R.union = compose(uniq, merge);
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
         // item in the list supplied, and `key` is the result of applying the supplied function to that item.

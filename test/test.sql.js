@@ -46,6 +46,32 @@ describe('project', function() {
 });
 
 
+describe('union', function() {
+    var union = Lib.union;
+    var R = [1,2,3,4];
+    var S = [3,4,5,6];
+    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    it("combines two lists into the set of all their elements", function() {
+        assert.deepEqual(union(R, S), [1,2,3,4,5,6]);
+    });
+   
+    it("does not work for non-primitives (use `unionWith`)", function() {
+        assert.equal(union(Ro, So).length, 8);
+    });
+});
+
+describe('unionWith', function() {
+    var unionWith = Lib.unionWith;
+    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    var eqA = function(r, s) { return r.a === s.a; };
+    it.skip("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
+        assert.deepEqual(unionWith(eqA, Ro, So), [{a: 1},{a: 2},{a: 3},{a: 4},{a: 5},{a: 6}]);
+    });
+   
+});
+
 (function() {
     var albums = [
         {title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'},
