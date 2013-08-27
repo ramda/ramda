@@ -68,3 +68,28 @@ describe('memoize', function() {
         assert.equal(f('Hello', 'World' , '!'), 'Hello, World!');
     });
 });
+
+describe('construct', function() {
+    var construct = Lib.construct;
+    var Rectangle = function(w, h) {this.width = w; this.height = h;};
+    Rectangle.prototype.area = function() {return this.width * this.height;};
+
+    it('should turn a constructor function into one that can be called without `new`', function() {
+        var rect = construct(Rectangle);
+        var r1 = rect(3, 4);
+        assert(r1 instanceof Rectangle);
+        assert.equal(r1.width, 3);
+        assert.equal(r1.area(), 12);
+    });
+
+    it('should return a curried function', function() {
+        var rect = construct(Rectangle);
+        var rect3 = rect(3);
+        var r1 = rect3(4);
+        assert(r1 instanceof Rectangle);
+        assert.equal(r1.width, 3);
+        assert.equal(r1.height, 4);
+        assert.equal(r1.area(), 12);
+    });
+
+});

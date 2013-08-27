@@ -397,6 +397,21 @@
             };
         };
 
+        // Wraps a constructor function inside a (curried) plain function that can be called with the same arguments
+        // and returns the same type.  Allows, for instance,
+        //
+        //     var Widget = function(config) { /* ... */ }; // Constructor
+        //     Widget.prototype = { /* ... */ }
+        //     map(construct(Widget), allConfigs); //=> list of Widgets
+        R.construct = function(fn) {
+            var f = function() {
+                var obj = new fn();
+                fn.apply(obj, arguments);
+                return obj;
+            };
+            return fn.length > 1 ? _(nAry(fn.length, f)) : f;
+        };
+
 
         // List Functions
         // --------------
