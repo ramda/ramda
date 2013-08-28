@@ -119,6 +119,7 @@ are most debated.
   * once
   * wrap
   * nAry
+  * construct
 
 ### Lists ###
 
