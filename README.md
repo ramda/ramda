@@ -169,10 +169,6 @@ are most debated.
   * prop
   * func
   * props
-  * identity (I)
-  * alwaysTrue
-  * alwaysFalse
-  * alwaysZero
   * maybe
   * keys
   * values
