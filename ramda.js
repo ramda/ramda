@@ -152,7 +152,7 @@
         });
 
         // Shallow copy of an array.
-        var clone = function(list) {
+        var clone = R.clone = function(list) {
             return list.concat();
         };
 
@@ -955,6 +955,10 @@
         // Multiplies together all the elements of a list.
         R.product = foldl(multiply, 1);
 
+        R.lt = _(function(a, b) {return a < b;});
+        R.lte = _(function(a, b) {return a <= b;});
+        R.gt = _(function(a, b) {return a > b;});
+        R.gte = _(function(a, b) {return a >= b;});
 
 
         // String Functions
