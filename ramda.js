@@ -57,45 +57,75 @@
         //
         //  Almost all exposed functions of more than one parameter already have curry applied to them.
         var _ = R.curry = function(fn) {
-            var arity = fn.length;
+            var fnArity = fn.length;
             var f = function(args) {
-                return function () {
+                return arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
                     var newArgs = (args || []).concat(slice(arguments, 0));
-                    if (newArgs.length >= arity) {
+                    if (newArgs.length >= fnArity) {
                         return fn.apply(this, newArgs);
                     }
                     else {return f(newArgs);}
-                };
+                });
             };
 
             return f([]);
         };
 
+        var mkArgStr = function(n) {
+            var arr = [], idx = -1;
+            while(++idx < n) {
+                arr[idx] = "arg" + idx;
+            }
+            return arr.join(", ");
+        };
+
         // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
-        // specifically takes exactly `n` parameters.
+        // specifically takes exactly `n` parameters.  Any extraneous parameters will not be passed on to the function
+        // supplied
         var nAry = R.nAry = (function() {
             var cache = {};
 
-            var mkArgStr = function(n) {
-                var arr = new Array(n);
-                while(--n > -1) {
-                  arr[n] = "arg" + n;
-                }
-                return arr.join(", ");
-            };
 
-//          e.g.
-//          cache[2] = function(func) {
-//              return function(arg0, arg1) {
-//                  return func.call(this, arg0, arg1);
-//              }
-//          };
+            //     For example:
+            //     cache[3] = function(func) {
+            //         return function(arg0, arg1, arg2) {
+            //             return func.call(this, arg0, arg1, arg2);
+            //         }
+            //     };
 
             var makeN = function(n) {
                 var fnArgs = mkArgStr(n);
                 var body = [
                     "    return function(" + fnArgs + ") {",
                     "        return func.call(this" + (fnArgs ? ", " + fnArgs : "") + ");",
+                    "    }"
+                ].join("\n");
+                return new Function("func", body);
+            };
+
+            return function(n, fn) {
+                return (cache[n] || (cache[n] = makeN(n)))(fn);
+            };
+        }());
+
+        // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
+        // specifically takes exactly `n` parameters.  Note, though, that all parameters supplied will in fact be
+        // passed along, in contrast with `nAry`, which only passes along the exact number specified.
+        var arity = R.arity = (function() {
+            var cache = {};
+
+            //     For example:
+            //     cache[3] = function(func) {
+            //         return function(arg0, arg1, arg2) {
+            //             return func.apply(this, arguments);
+            //         }
+            //     };
+
+            var makeN = function(n) {
+                var fnArgs = mkArgStr(n);
+                var body = [
+                    "    return function(" + fnArgs + ") {",
+                    "        return func.apply(this, arguments);",
                     "    }"
                 ].join("\n");
                 return new Function("func", body);
@@ -123,7 +153,7 @@
         };
 
         // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
-        // calling each supplied handler on the arguments, followed by all unmatched arguments.
+        // calling each supplied handler on successive arguments, followed by all unmatched arguments.
         var useWith = R.useWith = function(fn /*, transformers */) {
             var transformers = slice(arguments, 1);
             var tlen = transformers.length;

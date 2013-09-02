@@ -79,4 +79,15 @@ describe('curry', function() {
         var i = g(3, 6);
         assert.equal(i(2), 15);
     });
+
+    it('should properly report the length of the curried function', function() {
+        var f = curry(function(a, b, c, d) {return (a + b * c) / d;});
+        assert.equal(f.length, 4);
+        var g = f(12);
+        assert.equal(g.length, 3);
+        var h = g(3);
+        assert.equal(h.length, 2);
+        var i = g(3, 6);
+        assert.equal(i.length, 1);
+    });
 });
