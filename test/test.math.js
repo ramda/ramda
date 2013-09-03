@@ -96,3 +96,79 @@ describe('product', function() {
     });
 });
 
+describe('lt', function() {
+    var lt = Lib.lt;
+
+    it('should report whether one item is less than another', function() {
+        assert(lt(3, 5));
+        assert(!lt(6, 4));
+        assert(!lt(7.0, 7.0));
+        assert(lt('abc', 'xyz'));
+        assert(!lt('abcd', 'abc'));
+    });
+
+    it('should be automatically curried', function() {
+        var atLeast20 = lt(20);
+        assert(!atLeast20(10));
+        assert(!atLeast20(20));
+        assert(atLeast20(25));
+    });
+});
+
+describe('lte', function() {
+    var lte = Lib.lte;
+
+    it('should report whether one item is less than another', function() {
+        assert(lte(3, 5));
+        assert(!lte(6, 4));
+        assert(lte(7.0, 7.0));
+        assert(lte('abc', 'xyz'));
+        assert(!lte('abcd', 'abc'));
+    });
+
+    it('should be automatically curried', function() {
+        var greaterThan20 = lte(20);
+        assert(!greaterThan20(10));
+        assert(greaterThan20(20));
+        assert(greaterThan20(25));
+    });
+});
+
+describe('gt', function() {
+    var gt = Lib.gt;
+
+    it('should report whether one item is less than another', function() {
+        assert(!gt(3, 5));
+        assert(gt(6, 4));
+        assert(!gt(7.0, 7.0));
+        assert(!gt('abc', 'xyz'));
+        assert(gt('abcd', 'abc'));
+    });
+
+    it('should be automatically curried', function() {
+        var lessThan20 = gt(20);
+        assert(lessThan20(10));
+        assert(!lessThan20(20));
+        assert(!lessThan20(25));
+    });
+});
+
+describe('gte', function() {
+    var gte = Lib.gte;
+
+    it('should report whether one item is less than another', function() {
+        assert(!gte(3, 5));
+        assert(gte(6, 4));
+        assert(gte(7.0, 7.0));
+        assert(!gte('abc', 'xyz'));
+        assert(gte('abcd', 'abc'));
+    });
+
+    it('should be automatically curried', function() {
+        var upTo20 = gte(20);
+        assert(upTo20(10));
+        assert(upTo20(20));
+        assert(!upTo20(25));
+    });
+});
+

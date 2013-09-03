@@ -985,9 +985,16 @@
         // Multiplies together all the elements of a list.
         R.product = foldl(multiply, 1);
 
+        // Returns true if the first parameter is less than the second.
         R.lt = _(function(a, b) {return a < b;});
+
+        // Returns true if the first parameter is less than or equal to the second.
         R.lte = _(function(a, b) {return a <= b;});
+
+        // Returns true if the first parameter is greater than the second.
         R.gt = _(function(a, b) {return a > b;});
+
+        // Returns true if the first parameter is greater than or equal to the second.
         R.gte = _(function(a, b) {return a >= b;});
 
 

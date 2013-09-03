@@ -2263,12 +2263,7 @@ half(42); // =&gt; 21</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.product = foldl(multiply, <span class="number">1</span>);
-
-        R.lt = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &lt; b;});
-        R.lte = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &lt;= b;});
-        R.gt = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &gt; b;});
-        R.gte = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &gt;= b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.product = foldl(multiply, <span class="number">1</span>);</pre></div></div>
             
         </li>
         
@@ -2276,13 +2271,14 @@ half(42); // =&gt; 21</code></pre>
         <li id="section-111">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-111">&#182;</a>
               </div>
-              <h2>String Functions</h2>
-<p>Much of the String.prototype API exposed as simple functions.</p>
+              <p>Returns true if the first parameter is less than the second.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.lt = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &lt; b;});</pre></div></div>
             
         </li>
         
@@ -2292,6 +2288,65 @@ half(42); // =&gt; 21</code></pre>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-112">&#182;</a>
+              </div>
+              <p>Returns true if the first parameter is less than or equal to the second.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.lte = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &lt;= b;});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-113">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-113">&#182;</a>
+              </div>
+              <p>Returns true if the first parameter is greater than the second.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.gt = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &gt; b;});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-114">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-114">&#182;</a>
+              </div>
+              <p>Returns true if the first parameter is greater than or equal to the second.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.gte = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &gt;= b;});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-115">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-115">&#182;</a>
+              </div>
+              <h2>String Functions</h2>
+<p>Much of the String.prototype API exposed as simple functions.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-116">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-116">&#182;</a>
               </div>
               <p>A substring of a String:</p>
 <pre><code>substring(2, 5, &quot;abcdefghijklm&quot;); //=&gt; &quot;cde&quot;</code></pre>
@@ -2303,11 +2358,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-113">
+        <li id="section-117">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-113">&#182;</a>
+                <a class="pilcrow" href="#section-117">&#182;</a>
               </div>
               <p>The trailing substring of a String starting with the nth character:</p>
 <pre><code>substringFrom(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;ijklm&quot;</code></pre>
@@ -2319,11 +2374,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-114">
+        <li id="section-118">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-114">&#182;</a>
+                <a class="pilcrow" href="#section-118">&#182;</a>
               </div>
               <p>The leading substring of a String ending before the nth character:</p>
 <pre><code>substringTo(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;abcdefgh&quot;</code></pre>
@@ -2335,11 +2390,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-115">
+        <li id="section-119">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-115">&#182;</a>
+                <a class="pilcrow" href="#section-119">&#182;</a>
               </div>
               <p>The character at the nth position in a String:</p>
 <pre><code>charAt(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;i&quot;</code></pre>
@@ -2351,11 +2406,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-116">
+        <li id="section-120">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-116">&#182;</a>
+                <a class="pilcrow" href="#section-120">&#182;</a>
               </div>
               <p>The ascii code of the character at the nth position in a String:</p>
 <pre><code>charCodeAt(8, &quot;abcdefghijklm&quot;); //=&gt; 105
@@ -2368,11 +2423,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-117">
+        <li id="section-121">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-117">&#182;</a>
+                <a class="pilcrow" href="#section-121">&#182;</a>
               </div>
               <p>Tests a regular expression agains a String</p>
 <pre><code>match(/([a-z]a)/g, &quot;bananas&quot;); //=&gt; [&quot;ba&quot;, &quot;na&quot;, &quot;na&quot;]</code></pre>
@@ -2384,11 +2439,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-118">
+        <li id="section-122">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-118">&#182;</a>
+                <a class="pilcrow" href="#section-122">&#182;</a>
               </div>
               <p>Finds the index of a substring in a string, returning -1 if it&#39;s not present</p>
 <pre><code>strIndexOf(&#39;c&#39;, &#39;abcdefg) //=&gt; 2</code></pre>
@@ -2400,11 +2455,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-119">
+        <li id="section-123">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-119">&#182;</a>
+                <a class="pilcrow" href="#section-123">&#182;</a>
               </div>
               <p>Finds the last index of a substring in a string, returning -1 if it&#39;s not present</p>
 <pre><code>strIndexOf(&#39;a&#39;, &#39;banana split&#39;) //=&gt; 2</code></pre>
@@ -2416,11 +2471,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-120">
+        <li id="section-124">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-120">&#182;</a>
+                <a class="pilcrow" href="#section-124">&#182;</a>
               </div>
               <h2>Miscellaneous Functions</h2>
 <p>A few functions in need of a good home.</p>
@@ -2430,11 +2485,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-121">
+        <li id="section-125">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-121">&#182;</a>
+                <a class="pilcrow" href="#section-125">&#182;</a>
               </div>
               <p>Expose the functions from ramda as properties on another object.  If this object is the global object, then
 it will be as though the eweda functions are global functions.</p>
@@ -2450,11 +2505,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-122">
+        <li id="section-126">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-122">&#182;</a>
+                <a class="pilcrow" href="#section-126">&#182;</a>
               </div>
               <p>A surprisingly useful function that does nothing but return the parameter supplied to it.</p>
 
@@ -2466,11 +2521,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-123">
+        <li id="section-127">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-123">&#182;</a>
+                <a class="pilcrow" href="#section-127">&#182;</a>
               </div>
               <p>A function that always returns <code>0</code>.</p>
 
@@ -2481,11 +2536,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-124">
+        <li id="section-128">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-124">&#182;</a>
+                <a class="pilcrow" href="#section-128">&#182;</a>
               </div>
               <p>A function that always returns <code>false</code>.</p>
 
@@ -2496,11 +2551,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-125">
+        <li id="section-129">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-125">&#182;</a>
+                <a class="pilcrow" href="#section-129">&#182;</a>
               </div>
               <p>A function that always returns <code>true</code>.</p>
 
@@ -2511,11 +2566,11 @@ it will be as though the eweda functions are global functions.</p>
         </li>
         
         
-        <li id="section-126">
+        <li id="section-130">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-126">&#182;</a>
+                <a class="pilcrow" href="#section-130">&#182;</a>
               </div>
               <p>Reasonable analog to SQL <code>select</code> statement.</p>
 <pre><code>var kids = [
@@ -2535,11 +2590,11 @@ project([&#39;name&#39;, &#39;grade&#39;], kids);
         </li>
         
         
-        <li id="section-127">
+        <li id="section-131">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-127">&#182;</a>
+                <a class="pilcrow" href="#section-131">&#182;</a>
               </div>
               <p>union combines two lists into a set <F9>i.e. no duplicates) composed of the elements of both lists.</p>
 
@@ -2550,11 +2605,11 @@ project([&#39;name&#39;, &#39;grade&#39;], kids);
         </li>
         
         
-        <li id="section-128">
+        <li id="section-132">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-128">&#182;</a>
+                <a class="pilcrow" href="#section-132">&#182;</a>
               </div>
               <p>Creates a new list whose elements each have two properties: <code>val</code> is the value of the corresponding
 item in the list supplied, and <code>key</code> is the result of applying the supplied function to that item.</p>
@@ -2568,11 +2623,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-129">
+        <li id="section-133">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-129">&#182;</a>
+                <a class="pilcrow" href="#section-133">&#182;</a>
               </div>
               <p>Sort the list according to a key generated by the supplied function.</p>
 
@@ -2589,11 +2644,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-130">
+        <li id="section-134">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-130">&#182;</a>
+                <a class="pilcrow" href="#section-134">&#182;</a>
               </div>
               <p>Count the elements of a list according to how many match each value of a key generated by the supplied function.</p>
 
@@ -2609,11 +2664,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-131">
+        <li id="section-135">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-131">&#182;</a>
+                <a class="pilcrow" href="#section-135">&#182;</a>
               </div>
               <p>Groups the elements of a list by a key generated by the supplied function.</p>
 
@@ -2629,11 +2684,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-132">
+        <li id="section-136">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-132">&#182;</a>
+                <a class="pilcrow" href="#section-136">&#182;</a>
               </div>
               <p>All the functional goodness, wrapped in a nice little package, just for you!</p>
 
