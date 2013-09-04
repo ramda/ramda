@@ -18,8 +18,7 @@ describe('lPartial', function() {
         assert.strictEqual(Lib.applyLeft, lPartial);
     });
 
-    // TODO: what would this take?
-    it.skip('should correctly report the arity of the new function', function() {
+    it('should correctly report the arity of the new function', function() {
         var f = lPartial(disc, 3);
         assert.equal(f.length, 2);
         var g = lPartial(disc, 3, 7);
@@ -44,8 +43,7 @@ describe('rPartial', function() {
         assert.strictEqual(Lib.applyRight, rPartial);
     });
 
-    // TODO: what would this take?
-    it.skip('should correctly report the arity of the new function', function() {
+    it('should correctly report the arity of the new function', function() {
         var f = rPartial(disc, 4);
         assert.equal(f.length, 2);
         var g = rPartial(disc, 7, 4);

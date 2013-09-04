@@ -28,11 +28,6 @@ describe('project', function() {
         ]);
     });
 
-    it.skip('should be aliased by `select`', function() {
-        assert.deepEqual(Lib.select(['name', 'age'], kids), [{name: 'Abby', age: 7}, {name: 'Fred', age: 12}]);
-        assert.strictEqual(Lib.select, project);
-    });
-
     it('should be automatically curried', function() {
         var myFields = project(['name', 'age']);
         assert.deepEqual(myFields(kids), [
@@ -66,7 +61,7 @@ describe('unionWith', function() {
     var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
     var eqA = function(r, s) { return r.a === s.a; };
-    it.skip("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
+    it("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
         assert.deepEqual(unionWith(eqA, Ro, So), [{a: 1},{a: 2},{a: 3},{a: 4},{a: 5},{a: 6}]);
     });
    

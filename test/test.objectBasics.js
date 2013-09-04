@@ -11,7 +11,7 @@ describe('prop', function() {
         assert.equal(nm(fred), 'Fred');
     });
 
-    it.skip('should be aliased by `get`', function() { // TODO: should it?
+    it('should be aliased by `get`', function() { // TODO: should it?
         assert.equal(Lib.get('age')(fred), 23);
         assert.strictEqual(Lib.get, prop);
     });

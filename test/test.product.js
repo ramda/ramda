@@ -14,8 +14,7 @@ describe('xprod', function() {
         assert.deepEqual(something(a), [['a', 1], ['a', 2], ['b', 1], ['b', 2], ['c', 1], ['c', 2]]);
     });
 
-    // TODO:  do we need to use a function constructor version of curry to make this work?
-    it.skip('should correctly report the arity of curried versions', function() {
+    it('should correctly report the arity of curried versions', function() {
         var something = xprod(a);
         assert.equal(something.length, 1);
     });
@@ -37,8 +36,7 @@ describe('xprodWith', function() {
         assert.deepEqual(f2(b), ['1a', '1b', '1c', '2a', '2b', '2c']);
     });
 
-    // TODO:  do we need to use a function constructor version of curry to make this work?
-    it.skip('should correctly report the arity of curried versions', function() {
+    it('should correctly report the arity of curried versions', function() {
         var something = xprodWith(a);
         assert.equal(something.length, 2);
     });

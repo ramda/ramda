@@ -26,8 +26,7 @@ describe('foldl', function() {
         assert.strictEqual(Lib.reduce, foldl);
     });
 
-    // TODO:  do we need to use a function constructor version of curry to make this work?
-    it.skip('should correctly report the arity of curried versions', function() {
+    it('should correctly report the arity of curried versions', function() {
         var sum = foldl(add, 0);
         assert.equal(sum.length, 1);
     });
@@ -52,8 +51,7 @@ describe('foldl1', function() {
         assert.equal(sum([1, 2, 3, 4]), 10);
     });
 
-    // TODO:  do we need to use a function constructor version of curry to make this work?
-    it.skip('should correctly report the arity of curried versions', function() {
+    it('should correctly report the arity of curried versions', function() {
         var sum = foldl1(add);
         assert.equal(sum.length, 1);
     });
@@ -85,8 +83,7 @@ describe('foldr', function() {
         assert.strictEqual(Lib.reduceRight, foldr);
     });
 
-    // TODO:  do we need to use a function constructor version of curry to make this work?
-    it.skip('should correctly report the arity of curried versions', function() {
+    it('should correctly report the arity of curried versions', function() {
         var something = foldr(avg, 0);
         assert.equal(something.length, 1);
     });
@@ -113,9 +110,8 @@ describe('foldr1', function() {
         assert.equal(something([12, 4, 10, 6, 54]), 12);
     });
 
-    // TODO:  do we need to use a function constructor version of curry to make this work?
-    it.skip('should correctly report the arity of curried versions', function() {
-        var something = foldr1(avg, 0);
+    it('should correctly report the arity of curried versions', function() {
+        var something = foldr1(avg);
         assert.equal(something.length, 1);
     });
 });

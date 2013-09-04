@@ -16,7 +16,7 @@ describe('map', function() {
     });
 
     // TODO:  do we need to use a function constructor version of curry to make this work?
-    it.skip('should correctly report the arity of curried versions', function() {
+    it('should correctly report the arity of curried versions', function() {
         var inc = map(add1);
         assert.equal(inc.length, 1);
     });
