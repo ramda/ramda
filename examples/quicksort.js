@@ -50,7 +50,7 @@ console.log(quickSortImper([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]));
 
 
 var combine = function() {
-    return reduce(function(acc, arr) {return acc.concat(arr);}, [], [].slice.call(arguments));
+    return [].concat([].slice.call(arguments));;
 };
 
 var quickSortFunc = function(list, comparator) {
