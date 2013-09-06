@@ -154,10 +154,14 @@
 
         // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
         // calling each supplied handler on successive arguments, followed by all unmatched arguments.
+        //
+        // If there are extra _expected_ arguments that don't need to be transformed, although you can ignore
+        // them, it might be best to pass in and identity function so that the new function correctly reports arity.
+        // See for example, the definition of `project`, below.
         var useWith = R.useWith = function(fn /*, transformers */) {
             var transformers = slice(arguments, 1);
             var tlen = transformers.length;
-            return _(nAry(tlen, function() {
+            return _(arity(tlen, function() {
                 var args = [], idx = -1;
                 while (++idx < tlen) {
                     args.push(transformers[idx](arguments[idx]));
@@ -1079,7 +1083,7 @@
         };
 
         // A surprisingly useful function that does nothing but return the parameter supplied to it.
-        R.identity = function(x) {return x;};
+        var identity = R.identity = function(x) {return x;};
         aliasFor("identity").is("I");
 
         // A function that always returns `0`.
@@ -1099,10 +1103,7 @@
         //     ];
         //     project(['name', 'grade'], kids);
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
-        var preproj = compose(map, pickAll);
-        R.project = _(function(keys, table) {
-            return preproj(keys)(table);
-        });
+        R.project = useWith(map, pickAll, identity); // passing `identity` gives correct arity
 
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.
         R.union = compose(uniq, merge);
