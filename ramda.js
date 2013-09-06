@@ -355,6 +355,8 @@
         //
         // These functions make new functions out of old ones.
 
+        // --------
+
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
@@ -461,7 +463,7 @@
         //     // test(7) => true, test(9) => true, test(10) => false,
         //     // test(3) => false, test(21) => false,
 
-
+        // --------
 
         // Returns a single item, by successively calling the function with the current element and the the next
         // element of the list, passing the result to the next call.  We start with the `acc` parameter to get
@@ -826,6 +828,8 @@
         // objects.  Many of these are of most use in conjunction with the list functions, operating on lists of
         // objects.
 
+        // --------
+
         // Runs the given function with the supplied object, then returns the object.
         R.tap = _(function(x, fn) {
             if (typeof fn === "function") {
@@ -922,6 +926,8 @@
         // These functions are very simple wrappers around the built-in logical operators, useful in building up
         // more complex functional forms.
 
+        // --------
+
         // A function wrapping the boolean `&&` operator.  Note that unlike the underlying operator, though, it
         // aways returns `true` or `false`.
         R.and = _(function (a, b) {
@@ -965,6 +971,8 @@
         // --------------------
         //
         // These functions wrap up the certain core arithmetic operators
+
+        // --------
 
         // Adds two numbers.  Automatic curried:
         //
@@ -1027,6 +1035,8 @@
         //
         // Much of the String.prototype API exposed as simple functions.
 
+        // --------
+
         // A substring of a String:
         //
         //     substring(2, 5, "abcdefghijklm"); //=> "cde"
@@ -1073,6 +1083,8 @@
         // -----------------------
         //
         // A few functions in need of a good home.
+
+        // --------
 
         // Expose the functions from ramda as properties on another object.  If this object is the global object, then
         // it will be as though the eweda functions are global functions.
