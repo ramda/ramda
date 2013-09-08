@@ -34,16 +34,18 @@
             var fn = function(newName) {R[newName] = R[oldName]; return fn;};
             return (fn.is = fn.are = fn.and = fn);
         };
+
         // `slice` implemented iteratively for performance
-        var slice = function(args, from, to) {
-          var i, arr = [];
-          from = from || 0;
-          to = to || args.length;
-          for (i = from; i < to; i++) {
-            arr[arr.length] = args[i];
-          }
-          return arr;
+        var slice = function (args, from, to) {
+            var i, arr = [];
+            from = from || 0;
+            to = to || args.length;
+            for (i = from; i < to; i++) {
+                arr[arr.length] = args[i];
+            }
+            return arr;
         };
+
         var isArray = function(val) {return Object.prototype.toString.call(val) === "[object Array]";};
 
         // Returns a curried version of the supplied function.  For example:
@@ -52,8 +54,8 @@
         //          return b * b - 4 * a * c;
         //      };
         //      var f = curry(discriminant);
-        //      var g = f(3), h = f(3, 7);
-        //      g(7) ≅ h; g(7, 4) == h(4) == f(3, 7, 4) = 1;
+        //      var g = f(3), h = f(3, 7) i = g(7);
+        //      i(4) ≅ h(4) == g(7, 4) == f(3, 7, 4) == 1
         //
         //  Almost all exposed functions of more than one parameter already have curry applied to them.
         var _ = R.curry = function(fn) {
@@ -246,6 +248,12 @@
             }
         });
         aliasFor("merge").is("concat");
+
+        // A surprisingly useful function that does nothing but return the parameter supplied to it.
+        var identity = R.identity = function(x) {return x;};
+        aliasFor("identity").is("I");
+
+
 
         // Generators
         // ----------
@@ -876,25 +884,25 @@
 
         // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
-        var keys = R.keys = function(obj) {
-          var prop, ks = [];
-          for (prop in obj) {
-            if (obj.hasOwnProperty(prop)) {
-              ks.push(prop);
+        var keys = R.keys = function (obj) {
+            var prop, ks = [];
+            for (prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    ks.push(prop);
+                }
             }
-          }
-          return ks;
+            return ks;
         };
 
         // Returns a list of all the enumerable own properties of the supplied object.
-        R.values = function(obj) {
-          var prop, vs = [];
-          for (prop in obj) {
-            if (obj.hasOwnProperty(prop)) {
-              vs.push(obj[prop]);
+        R.values = function (obj) {
+            var prop, vs = [];
+            for (prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    vs.push(obj[prop]);
+                }
             }
-          }
-          return vs;
+            return vs;
         };
 
         var partialCopy = function(test, obj) {
@@ -903,11 +911,13 @@
             return copy;
         };
 
-        // Returns a partial copy of an object containing only the keys specified.
+        // Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
+        // property is ignored
         var pick = R.pick = _(function(names, obj) {
             return partialCopy(function(key) {return contains(key, names);}, obj);
         });
 
+        // Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
         var pickAll = R.pickAll = _(function(names, obj) {
             var copy = {};
             each(function(name) { copy[name] = obj[name]; }, names);
@@ -1079,33 +1089,14 @@
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
 
-        // Miscellaneous Functions
-        // -----------------------
+
+        // Data Analysis and Grouping Functions
+        // ------------------------------------
         //
-        // A few functions in need of a good home.
+        // Functions performing SQL-like actions on lists of objects.  These do not have any SQL-like optimizations
+        // performed on them, however.
 
         // --------
-
-        // Expose the functions from ramda as properties on another object.  If this object is the global object, then
-        // it will be as though the eweda functions are global functions.
-        R.installTo = function(obj) {
-            each(function(key) {
-                (obj || global)[key] = R[key];
-            })(keys(R));
-        };
-
-        // A surprisingly useful function that does nothing but return the parameter supplied to it.
-        var identity = R.identity = function(x) {return x;};
-        aliasFor("identity").is("I");
-
-        // A function that always returns `0`.
-        R.alwaysZero = always(0);
-
-        // A function that always returns `false`.
-        R.alwaysFalse = always(false);
-
-        // A function that always returns `true`.
-        R.alwaysTrue = always(true);
 
         // Reasonable analog to SQL `select` statement.
         //
@@ -1156,6 +1147,32 @@
                 return groups;
             }, {}, keyValue(fn, list));
         });
+
+
+
+        // Miscellaneous Functions
+        // -----------------------
+        //
+        // A few functions in need of a good home.
+
+        // --------
+
+        // Expose the functions from ramda as properties on another object.  If this object is the global object, then
+        // it will be as though the eweda functions are global functions.
+        R.installTo = function(obj) {
+            each(function(key) {
+                (obj || global)[key] = R[key];
+            })(keys(R));
+        };
+
+        // A function that always returns `0`.
+        R.alwaysZero = always(0);
+
+        // A function that always returns `false`.
+        R.alwaysFalse = always(false);
+
+        // A function that always returns `true`.
+        R.alwaysTrue = always(true);
 
         // All the functional goodness, wrapped in a nice little package, just for you!
         return R;
