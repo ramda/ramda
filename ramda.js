@@ -172,6 +172,26 @@
             }));
         };
 
+        // A two-step version of the `useWith` function.  This would allow us to write `project`, currently written
+        // as `useWith(map, pickAll, identity)`, as, instead, `execute(map).upon(pickAll, identity)`, which is a bit
+        // more explicit.
+        // TODO: One of these versions should be eliminated eventually.  So not worrying about the duplication for now.
+        R.execute = function(fn) {
+            return {
+                upon: function(/*transformers*/) {
+                    var transformers = slice(arguments, 0);
+                    var tlen = transformers.length;
+                    return _(arity(tlen, function() {
+                        var args = [], idx = -1;
+                        while (++idx < tlen) {
+                            args.push(transformers[idx](arguments[idx]));
+                        }
+                        return fn.apply(this, args.concat(slice(arguments, tlen)));
+                    }));
+                }
+            }
+        };
+
 
         // Fills out an array to the specified length. Internal private function.
         var expand = function(a, len) {
