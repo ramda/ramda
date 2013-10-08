@@ -173,12 +173,12 @@
         };
 
         // A two-step version of the `useWith` function.  This would allow us to write `project`, currently written
-        // as `useWith(map, pickAll, identity)`, as, instead, `execute(map).upon(pickAll, identity)`, which is a bit
+        // as `useWith(map, pickAll, identity)`, as, instead, `use(map).over(pickAll, identity)`, which is a bit
         // more explicit.
         // TODO: One of these versions should be eliminated eventually.  So not worrying about the duplication for now.
-        R.execute = function(fn) {
+        R.use = function(fn) {
             return {
-                upon: function(/*transformers*/) {
+                over: function(/*transformers*/) {
                     var transformers = slice(arguments, 0);
                     var tlen = transformers.length;
                     return _(arity(tlen, function() {

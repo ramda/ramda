@@ -32,18 +32,18 @@ describe('pipe', function() {
     });
 });
 
-describe('execute-upon', function() {
-    var use = Lib.execute;
+describe('use-over', function() {
+    var use = Lib.use;
 
     function max() { return Math.max.apply(Math, arguments); }
     function add1(x) { return x + 1; }
     function mult2(x) { return x * 2; }
     function div3(x) { return x/3; }
-    var f = execute(max).upon(add1, mult2, div3);
+    var f = use(max).over(add1, mult2, div3);
 
     it('takes a arbitrary number of function arguments and returns a function', function() {
-        assert.equal(typeof execute(max).upon(add1), 'function');
-        assert.equal(typeof execute(max).upon(add1, mult2, div3), 'function');
+        assert.equal(typeof use(max).over(add1), 'function');
+        assert.equal(typeof use(max).over(add1, mult2, div3), 'function');
     });
 
     it('passes the arguments received to their respective functions', function() {
