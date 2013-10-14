@@ -1108,6 +1108,16 @@
         //     strIndexOf('a', 'banana split') //=> 2
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
+        // The uppercase version of a string.
+        //
+        //     toUpperCase('abc') //=> 'ABC'
+        R.toUpperCase = invoker("toUpperCase", String.prototype);
+
+        // The lowercase version of a string.
+        //
+        //     toLowerCase('XYZ') //=> 'xyz'
+        R.toLowerCase = invoker("toLowerCase", String.prototype);
+
 
 
         // Data Analysis and Grouping Functions

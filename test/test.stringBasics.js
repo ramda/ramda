@@ -118,3 +118,19 @@ describe('strLastIndexOf', function() {
     });
 });
 
+describe('toUpperCase', function() {
+    var toUpperCase = Lib.toUpperCase;
+
+    it('should uppercase a string', function() {
+        assert.equal(toUpperCase('abc'), 'ABC');
+    });
+});
+
+describe('toLowerCase', function() {
+    var toLowerCase = Lib.toLowerCase;
+
+    it('should lowercase a string', function() {
+        assert.equal(toLowerCase('XYZ'), 'xyz');
+    });
+});
+
