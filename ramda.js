@@ -140,9 +140,11 @@
 
         // Turns a named method of an object (or object prototype) into a function that can be called directly.
         // The object becomes the last parameter to the function, and the function is automatically curried.
-        var invoker = R.invoker = function(name, obj) {
+        // Passing the optional `len` parameter restricts the function to the initial `len` parameters of the method.
+        var invoker = R.invoker = function(name, obj, len) {
             var method = obj[name];
-            return method && _(nAry(method.length + 1, function() {
+            var length = len === undef ? method.length : len;
+            return method && _(nAry(length + 1, function() {
                 if(arguments.length) {
                     var target = Array.prototype.pop.call(arguments);
                     var targetMethod = target[name];
@@ -1118,6 +1120,12 @@
         //     toLowerCase('XYZ') //=> 'xyz'
         R.toLowerCase = invoker("toLowerCase", String.prototype);
 
+
+        // The string split into substring at the specified token
+        //
+        //     split('.', 'a.b.c.xyz.d') //=>
+        //         ['a', 'b', 'c', 'xyz', 'd']
+        R.split = invoker("split", String.prototype, 1);
 
 
         // Data Analysis and Grouping Functions
