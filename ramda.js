@@ -140,9 +140,11 @@
 
         // Turns a named method of an object (or object prototype) into a function that can be called directly.
         // The object becomes the last parameter to the function, and the function is automatically curried.
-        var invoker = R.invoker = function(name, obj) {
+        // Passing the optional `len` parameter restricts the function to the initial `len` parameters of the method.
+        var invoker = R.invoker = function(name, obj, len) {
             var method = obj[name];
-            return method && _(nAry(method.length + 1, function() {
+            var length = len === undef ? method.length : len;
+            return method && _(nAry(length + 1, function() {
                 if(arguments.length) {
                     var target = Array.prototype.pop.call(arguments);
                     var targetMethod = target[name];
@@ -170,6 +172,26 @@
                 }
                 return fn.apply(this, args.concat(slice(arguments, tlen)));
             }));
+        };
+
+        // A two-step version of the `useWith` function.  This would allow us to write `project`, currently written
+        // as `useWith(map, pickAll, identity)`, as, instead, `use(map).over(pickAll, identity)`, which is a bit
+        // more explicit.
+        // TODO: One of these versions should be eliminated eventually.  So not worrying about the duplication for now.
+        R.use = function(fn) {
+            return {
+                over: function(/*transformers*/) {
+                    var transformers = slice(arguments, 0);
+                    var tlen = transformers.length;
+                    return _(arity(tlen, function() {
+                        var args = [], idx = -1;
+                        while (++idx < tlen) {
+                            args.push(transformers[idx](arguments[idx]));
+                        }
+                        return fn.apply(this, args.concat(slice(arguments, tlen)));
+                    }));
+                }
+            }
         };
 
 
@@ -1088,6 +1110,22 @@
         //     strIndexOf('a', 'banana split') //=> 2
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
+        // The uppercase version of a string.
+        //
+        //     toUpperCase('abc') //=> 'ABC'
+        R.toUpperCase = invoker("toUpperCase", String.prototype);
+
+        // The lowercase version of a string.
+        //
+        //     toLowerCase('XYZ') //=> 'xyz'
+        R.toLowerCase = invoker("toLowerCase", String.prototype);
+
+
+        // The string split into substring at the specified token
+        //
+        //     split('.', 'a.b.c.xyz.d') //=>
+        //         ['a', 'b', 'c', 'xyz', 'd']
+        R.split = invoker("split", String.prototype, 1);
 
 
         // Data Analysis and Grouping Functions
