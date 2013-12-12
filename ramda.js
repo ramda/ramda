@@ -1146,6 +1146,21 @@
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         R.project = useWith(map, pickAll, identity); // passing `identity` gives correct arity
 
+        // Determines whether the given property of an object has a specific value
+        // Most likely used to filter a list:
+        //
+        //     var kids = [
+        //       {name: 'Abby', age: 7, hair: 'blond'},
+        //       {name: 'Fred', age: 12, hair: 'brown'},
+        //       {name: 'Rusty', age: 10, hair: 'brown'},
+        //       {name: 'Alois', age: 15, disposition: 'surly'}
+        //     ];
+        //     filter(propEq("hair", "brown"), kids);
+        //     //=> Fred and Rusty
+        R.propEq = _(function(name, val, obj) {
+            return obj[name] === val;
+        });
+
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.
         R.union = compose(uniq, merge);
 

@@ -37,9 +37,32 @@ describe('project', function() {
             {name: 'Alois', age: 15}
         ]);
     });
-    
 });
 
+describe('propEq', function() {
+    var propEq = Lib.propEq, filter = Lib.filter;
+    var obj1 = {name: 'Abby', age: 7, hair: 'blond'};
+    var obj2 = {name: 'Fred', age: 12, hair: 'brown'};
+    var obj3 = {name: 'Rusty', age: 10, hair: 'brown'};
+    var obj4 = {name: 'Alois', age: 15, disposition: 'surly'};
+
+    it('should determine whether a particular property matches a given value for a specific object', function() {
+        assert.equal(propEq('name', 'Abby', obj1), true);
+        assert.equal(propEq('hair', 'brown', obj2), true);
+        assert.equal(propEq('hair', 'blond', obj2), false);
+    });
+
+    it('should be automatically curried', function() {
+        var kids = [obj1, obj2, obj3, obj4];
+        var hairMatch = propEq("hair");
+        assert.equal(typeof hairMatch, "function");
+        var brunette = hairMatch("brown");
+        assert.deepEqual(filter(brunette, kids), [obj2, obj3]);
+        // more likely usage:
+        assert.deepEqual(filter(propEq("hair", "brown"), kids), [obj2, obj3]);
+    });
+
+});
 
 describe('union', function() {
     var union = Lib.union;

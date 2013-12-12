@@ -31,7 +31,7 @@
 https://github.com/CrossEye/ramda
 (c) 2013 Scott Sauyet and Michael Hurley
 Ramda may be freely distributed under the MIT license.</code></pre>
-<h2>Ramda</h2>
+<h2 id="ramda">Ramda</h2>
 
             </div>
             
@@ -47,7 +47,7 @@ Ramda may be freely distributed under the MIT license.</code></pre>
               <p>A practical functional library for Javascript programmers.  This is a collection of tools to make it easier to
 use Javascript as a functional programming language.  (The name is just a silly play on <code>lambda</code>, even though we&#39;re
 not actually involved in lambda expressions.)</p>
-<h2>Basic Setup</h2>
+<h2 id="basic-setup">Basic Setup</h2>
 
             </div>
             
@@ -67,7 +67,7 @@ with or without an AMD-style loader.</p>
             
             <div class="content"><div class='highlight'><pre>(<span class="function"><span class="keyword">function</span> <span class="params">(root, factory)</span> {</span><span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) {module.exports = factory(root);} <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) {define(factory);} <span class="keyword">else</span> {root.ramda = factory(root);}}(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> <span class="params">(global)</span> {</span>
 
-    <span class="keyword">return</span>  (<span class="keyword">function</span>() {</pre></div></div>
+    <span class="keyword">return</span>  (<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span></pre></div></div>
             
         </li>
         
@@ -90,10 +90,10 @@ with or without an AMD-style loader.</p>
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <h2>Internal Functions and Properties</h2>
+              <h2 id="internal-functions-and-properties">Internal Functions and Properties</h2>
 
             </div>
             
@@ -109,7 +109,7 @@ with or without an AMD-style loader.</p>
               
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> undef = (<span class="keyword">function</span>(){})(), EMPTY;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> undef = (<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>})(), EMPTY;</pre></div></div>
             
         </li>
         
@@ -124,8 +124,8 @@ with or without an AMD-style loader.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> aliasFor = <span class="keyword">function</span>(oldName) {
-            <span class="keyword">var</span> fn = <span class="keyword">function</span>(newName) {R[newName] = R[oldName]; <span class="keyword">return</span> fn;};
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> aliasFor = <span class="function"><span class="keyword">function</span><span class="params">(oldName)</span> {</span>
+            <span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span><span class="params">(newName)</span> {</span>R[newName] = R[oldName]; <span class="keyword">return</span> fn;};
             <span class="keyword">return</span> (fn.is = fn.are = fn.and = fn);
         };</pre></div></div>
             
@@ -152,7 +152,7 @@ with or without an AMD-style loader.</p>
             <span class="keyword">return</span> arr;
         };
 
-        <span class="keyword">var</span> isArray = <span class="keyword">function</span>(val) {<span class="keyword">return</span> Object.prototype.toString.call(val) === <span class="string">"[object Array]"</span>;};</pre></div></div>
+        <span class="keyword">var</span> isArray = <span class="function"><span class="keyword">function</span><span class="params">(val)</span> {</span><span class="keyword">return</span> Object.prototype.toString.call(val) === <span class="string">"[object Array]"</span>;};</pre></div></div>
             
         </li>
         
@@ -174,9 +174,9 @@ with or without an AMD-style loader.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> _ = R.curry = <span class="keyword">function</span>(fn) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> _ = R.curry = <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
             <span class="keyword">var</span> fnArity = fn.length;
-            <span class="keyword">var</span> f = <span class="keyword">function</span>(args) {
+            <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">(args)</span> {</span>
                 <span class="keyword">return</span> arity(Math.max(fnArity - (args &amp;&amp; args.length || <span class="number">0</span>), <span class="number">0</span>), <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
                     <span class="keyword">var</span> newArgs = (args || []).concat(slice(arguments, <span class="number">0</span>));
                     <span class="keyword">if</span> (newArgs.length &gt;= fnArity) {
@@ -189,7 +189,7 @@ with or without an AMD-style loader.</p>
             <span class="keyword">return</span> f([]);
         };
 
-        <span class="keyword">var</span> mkArgStr = <span class="keyword">function</span>(n) {
+        <span class="keyword">var</span> mkArgStr = <span class="function"><span class="keyword">function</span><span class="params">(n)</span> {</span>
             <span class="keyword">var</span> arr = [], idx = -<span class="number">1</span>;
             <span class="keyword">while</span>(++idx &lt; n) {
                 arr[idx] = <span class="string">"arg"</span> + idx;
@@ -212,7 +212,7 @@ supplied</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> nAry = R.nAry = (<span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> nAry = R.nAry = (<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
             <span class="keyword">var</span> cache = {};</pre></div></div>
             
         </li>
@@ -233,7 +233,7 @@ cache[3] = function(func) {
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> makeN = <span class="keyword">function</span>(n) {
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> makeN = <span class="function"><span class="keyword">function</span><span class="params">(n)</span> {</span>
                 <span class="keyword">var</span> fnArgs = mkArgStr(n);
                 <span class="keyword">var</span> body = [
                     <span class="string">"    return function("</span> + fnArgs + <span class="string">") {"</span>,
@@ -243,7 +243,7 @@ cache[3] = function(func) {
                 <span class="keyword">return</span> <span class="keyword">new</span> Function(<span class="string">"func"</span>, body);
             };
 
-            <span class="keyword">return</span> <span class="keyword">function</span>(n, fn) {
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(n, fn)</span> {</span>
                 <span class="keyword">return</span> (cache[n] || (cache[n] = makeN(n)))(fn);
             };
         }());</pre></div></div>
@@ -263,7 +263,7 @@ passed along, in contrast with <code>nAry</code>, which only passes along the ex
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> arity = R.arity = (<span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> arity = R.arity = (<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
             <span class="keyword">var</span> cache = {};</pre></div></div>
             
         </li>
@@ -284,7 +284,7 @@ cache[3] = function(func) {
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> makeN = <span class="keyword">function</span>(n) {
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> makeN = <span class="function"><span class="keyword">function</span><span class="params">(n)</span> {</span>
                 <span class="keyword">var</span> fnArgs = mkArgStr(n);
                 <span class="keyword">var</span> body = [
                     <span class="string">"    return function("</span> + fnArgs + <span class="string">") {"</span>,
@@ -294,7 +294,7 @@ cache[3] = function(func) {
                 <span class="keyword">return</span> <span class="keyword">new</span> Function(<span class="string">"func"</span>, body);
             };
 
-            <span class="keyword">return</span> <span class="keyword">function</span>(n, fn) {
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(n, fn)</span> {</span>
                 <span class="keyword">return</span> (cache[n] || (cache[n] = makeN(n)))(fn);
             };
         }());</pre></div></div>
@@ -314,10 +314,10 @@ Passing the optional <code>len</code> parameter restricts the function to the in
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> invoker = R.invoker = <span class="keyword">function</span>(name, obj, len) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> invoker = R.invoker = <span class="function"><span class="keyword">function</span><span class="params">(name, obj, len)</span> {</span>
             <span class="keyword">var</span> method = obj[name];
             <span class="keyword">var</span> length = len === undef ? method.length : len;
-            <span class="keyword">return</span> method &amp;&amp; _(nAry(length + <span class="number">1</span>, <span class="keyword">function</span>() {
+            <span class="keyword">return</span> method &amp;&amp; _(nAry(length + <span class="number">1</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">if</span>(arguments.length) {
                     <span class="keyword">var</span> target = Array.prototype.pop.call(arguments);
                     <span class="keyword">var</span> targetMethod = target[name];
@@ -346,10 +346,10 @@ See for example, the definition of <code>project</code>, below.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> useWith = R.useWith = <span class="keyword">function</span>(fn <span class="comment">/*, transformers */</span>) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> useWith = R.useWith = <span class="function"><span class="keyword">function</span><span class="params">(fn <span class="comment">/*, transformers */</span>)</span> {</span>
             <span class="keyword">var</span> transformers = slice(arguments, <span class="number">1</span>);
             <span class="keyword">var</span> tlen = transformers.length;
-            <span class="keyword">return</span> _(arity(tlen, <span class="keyword">function</span>() {
+            <span class="keyword">return</span> _(arity(tlen, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">var</span> args = [], idx = -<span class="number">1</span>;
                 <span class="keyword">while</span> (++idx &lt; tlen) {
                     args.push(transformers[idx](arguments[idx]));
@@ -374,12 +374,12 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.use = <span class="keyword">function</span>(fn) {
+            <div class="content"><div class='highlight'><pre>        R.use = <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
             <span class="keyword">return</span> {
-                over: <span class="keyword">function</span>(<span class="comment">/*transformers*/</span>) {
+                over: <span class="function"><span class="keyword">function</span><span class="params">(<span class="comment">/*transformers*/</span>)</span> {</span>
                     <span class="keyword">var</span> transformers = slice(arguments, <span class="number">0</span>);
                     <span class="keyword">var</span> tlen = transformers.length;
-                    <span class="keyword">return</span> _(arity(tlen, <span class="keyword">function</span>() {
+                    <span class="keyword">return</span> _(arity(tlen, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                         <span class="keyword">var</span> args = [], idx = -<span class="number">1</span>;
                         <span class="keyword">while</span> (++idx &lt; tlen) {
                             args.push(transformers[idx](arguments[idx]));
@@ -403,7 +403,7 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> expand = <span class="keyword">function</span>(a, len) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> expand = <span class="function"><span class="keyword">function</span><span class="params">(a, len)</span> {</span>
             <span class="keyword">var</span> arr = a ? isArray(a) ? a : slice(a) : [];
             <span class="keyword">while</span>(arr.length &lt; len) {arr[arr.length] = undef;}
             <span class="keyword">return</span> arr;
@@ -422,7 +422,7 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> each = _(<span class="keyword">function</span>(fn, arr) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> each = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, arr)</span> {</span>
             <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = arr.length; i &lt; len; i++) {
                 fn(arr[i]);
             }
@@ -441,7 +441,7 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> clone = R.clone = <span class="keyword">function</span>(list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> clone = R.clone = <span class="function"><span class="keyword">function</span><span class="params">(list)</span> {</span>
             <span class="keyword">return</span> list.concat();
         };</pre></div></div>
             
@@ -451,10 +451,10 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
         <li id="section-20">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <h2>Core Functions</h2>
+              <h2 id="core-functions">Core Functions</h2>
 
             </div>
             
@@ -486,7 +486,7 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> isEmpty = R.isEmpty = <span class="keyword">function</span>(arr) {<span class="keyword">return</span> !arr || !arr.length;};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> isEmpty = R.isEmpty = <span class="function"><span class="keyword">function</span><span class="params">(arr)</span> {</span><span class="keyword">return</span> !arr || !arr.length;};</pre></div></div>
             
         </li>
         
@@ -501,7 +501,7 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> prepend = R.prepend = <span class="keyword">function</span>(el, arr) {<span class="keyword">return</span> [el].concat(arr);};
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> prepend = R.prepend = <span class="function"><span class="keyword">function</span><span class="params">(el, arr)</span> {</span><span class="keyword">return</span> [el].concat(arr);};
         aliasFor(<span class="string">"prepend"</span>).is(<span class="string">"cons"</span>);</pre></div></div>
             
         </li>
@@ -517,7 +517,7 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> head = R.head = <span class="keyword">function</span>(arr) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> head = R.head = <span class="function"><span class="keyword">function</span><span class="params">(arr)</span> {</span>
             arr = arr || EMPTY;
             <span class="keyword">return</span> (arr.length) ? arr[<span class="number">0</span>] : EMPTY; <span class="comment">// TODO: shouldn't head(EMPTY) return null?</span>
         };
@@ -538,7 +538,7 @@ next iteration of the Generator.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> tail = R.tail = <span class="keyword">function</span>(arr) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> tail = R.tail = <span class="function"><span class="keyword">function</span><span class="params">(arr)</span> {</span>
             arr = arr || EMPTY;
             <span class="keyword">if</span> (arr.length === <span class="literal">Infinity</span>) {
                 <span class="keyword">return</span> arr.tail();
@@ -560,7 +560,7 @@ next iteration of the Generator.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.isAtom = <span class="keyword">function</span>(x) {
+            <div class="content"><div class='highlight'><pre>        R.isAtom = <span class="function"><span class="keyword">function</span><span class="params">(x)</span> {</span>
             <span class="keyword">return</span> (x !== <span class="literal">null</span>) &amp;&amp; (x !== undef) &amp;&amp; Object.prototype.toString.call(x) !== <span class="string">"[object Array]"</span>;
         };</pre></div></div>
             
@@ -577,7 +577,7 @@ next iteration of the Generator.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.append = <span class="keyword">function</span>(el, list) {
+            <div class="content"><div class='highlight'><pre>        R.append = <span class="function"><span class="keyword">function</span><span class="params">(el, list)</span> {</span>
             <span class="keyword">var</span> newList = clone(list);
             newList.push(el);
             <span class="keyword">return</span> newList;
@@ -597,7 +597,7 @@ next iteration of the Generator.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> merge = R.merge = _(<span class="keyword">function</span>(list1, list2) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> merge = R.merge = _(<span class="function"><span class="keyword">function</span><span class="params">(list1, list2)</span> {</span>
             <span class="keyword">if</span> (isEmpty(list1)) {
                 <span class="keyword">return</span> clone(list2);
             } <span class="keyword">else</span> {
@@ -619,7 +619,7 @@ next iteration of the Generator.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> identity = R.identity = <span class="keyword">function</span>(x) {<span class="keyword">return</span> x;};
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> identity = R.identity = <span class="function"><span class="keyword">function</span><span class="params">(x)</span> {</span><span class="keyword">return</span> x;};
         aliasFor(<span class="string">"identity"</span>).is(<span class="string">"I"</span>);</pre></div></div>
             
         </li>
@@ -628,10 +628,10 @@ next iteration of the Generator.</p>
         <li id="section-30">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <h2>Generators</h2>
+              <h2 id="generators">Generators</h2>
 
             </div>
             
@@ -653,7 +653,7 @@ a function that creates a new seed from the current seed.  Generator objects hav
 }</code></pre>
 <p>Generator objects also have such functions as <code>take</code>, <code>skip</code>, <code>map</code>, and <code>filter</code>, but the equivalent
 functions from Ramda will work with them as well.</p>
-<h3>Example</h3>
+<h3 id="example">Example</h3>
 <pre><code>var fibonacci = generator(
     [0, 1],
     function(pair) {return pair[0];},
@@ -667,7 +667,7 @@ be an infinite list.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.generator = (<span class="keyword">function</span>() {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.generator = (<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span></pre></div></div>
             
         </li>
         
@@ -682,9 +682,9 @@ be an infinite list.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> create = (<span class="keyword">function</span>() {
-                <span class="keyword">var</span> F = <span class="keyword">function</span>() {};
-                <span class="keyword">return</span> <span class="keyword">function</span>(src) {
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> create = (<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+                <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>};
+                <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(src)</span> {</span>
                     F.prototype = src;
                     <span class="keyword">return</span> <span class="keyword">new</span> F();
                 };
@@ -703,7 +703,7 @@ be an infinite list.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> trampoline = <span class="keyword">function</span>(fn) {
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span> trampoline = <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
                 <span class="keyword">var</span> result = fn.apply(<span class="keyword">this</span>, tail(arguments));
                 <span class="keyword">while</span> (<span class="keyword">typeof</span> result === <span class="string">"function"</span>) {
                     result = result();
@@ -724,9 +724,9 @@ be an infinite list.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span>  G = <span class="keyword">function</span>(seed, current, step) {
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">var</span>  G = <span class="function"><span class="keyword">function</span><span class="params">(seed, current, step)</span> {</span>
                 <span class="keyword">this</span>[<span class="string">"0"</span>] = current(seed);
-                <span class="keyword">this</span>.tail = <span class="keyword">function</span>() {
+                <span class="keyword">this</span>.tail = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                     <span class="keyword">return</span> <span class="keyword">new</span> G(step(seed), current, step);
                 };
             };</pre></div></div>
@@ -776,8 +776,8 @@ implementations of those methods and other properties.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                 take: <span class="keyword">function</span>(n) {
-                     <span class="keyword">var</span> take = <span class="keyword">function</span>(ctr, g, ret) {
+            <div class="content"><div class='highlight'><pre>                 take: <span class="function"><span class="keyword">function</span><span class="params">(n)</span> {</span>
+                     <span class="keyword">var</span> take = <span class="function"><span class="keyword">function</span><span class="params">(ctr, g, ret)</span> {</span>
                          <span class="keyword">return</span> (ctr === <span class="number">0</span>) ? ret : take(ctr - <span class="number">1</span>, g.tail(), ret.concat([g[<span class="number">0</span>]]));
                      };
                      <span class="keyword">return</span> trampoline(take, n, <span class="keyword">this</span>, []);
@@ -796,8 +796,8 @@ implementations of those methods and other properties.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                 skip: <span class="keyword">function</span>(n) {
-                     <span class="keyword">var</span> skip = <span class="keyword">function</span>(ctr, g) {
+            <div class="content"><div class='highlight'><pre>                 skip: <span class="function"><span class="keyword">function</span><span class="params">(n)</span> {</span>
+                     <span class="keyword">var</span> skip = <span class="function"><span class="keyword">function</span><span class="params">(ctr, g)</span> {</span>
                          <span class="keyword">return</span> (ctr &lt;= <span class="number">0</span>) ? g : skip(ctr - <span class="number">1</span>, g.tail());
                      };
                      <span class="keyword">return</span> trampoline(skip, n, <span class="keyword">this</span>);
@@ -816,10 +816,10 @@ implementations of those methods and other properties.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                 map: <span class="keyword">function</span>(fn, gen) {
+            <div class="content"><div class='highlight'><pre>                 map: <span class="function"><span class="keyword">function</span><span class="params">(fn, gen)</span> {</span>
                      <span class="keyword">var</span> g = create(G.prototype);
                      g[<span class="number">0</span>] = fn(gen[<span class="number">0</span>]);
-                     g.tail = <span class="keyword">function</span>() { <span class="keyword">return</span> <span class="keyword">this</span>.map(fn, gen.tail()); };
+                     g.tail = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> <span class="keyword">return</span> <span class="keyword">this</span>.map(fn, gen.tail()); };
                      <span class="keyword">return</span> g;
                  },</pre></div></div>
             
@@ -836,7 +836,7 @@ implementations of those methods and other properties.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                 filter: <span class="keyword">function</span>(fn) {
+            <div class="content"><div class='highlight'><pre>                 filter: <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
                      <span class="keyword">var</span> gen = <span class="keyword">this</span>, head = gen[<span class="number">0</span>];
                      <span class="keyword">while</span> (!fn(head)) {
                          gen = gen.tail();
@@ -844,7 +844,7 @@ implementations of those methods and other properties.</p>
                      }
                      <span class="keyword">var</span> g = create(G.prototype);
                      g[<span class="number">0</span>] = head;
-                     g.tail = <span class="keyword">function</span>() {<span class="keyword">return</span> filter(fn, gen.tail());};
+                     g.tail = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> filter(fn, gen.tail());};
                      <span class="keyword">return</span> g;
                  }
             };</pre></div></div>
@@ -862,7 +862,7 @@ implementations of those methods and other properties.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="keyword">return</span> <span class="keyword">function</span>(seed, current, step) {
+            <div class="content"><div class='highlight'><pre>            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(seed, current, step)</span> {</span>
                 <span class="keyword">return</span> <span class="keyword">new</span> G(seed, current, step);
             };
         }());</pre></div></div>
@@ -873,10 +873,10 @@ implementations of those methods and other properties.</p>
         <li id="section-42">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
-              <h2>Function functions :-)</h2>
+              <h2 id="function-functions-">Function functions :-)</h2>
 
             </div>
             
@@ -909,10 +909,10 @@ Note that if <code>var h = compose(f, g)</code>, <code>h(x)</code> calls <code>g
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> compose = R.compose = <span class="keyword">function</span>() {  <span class="comment">// TODO: type check of arguments?</span>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> compose = R.compose = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>  <span class="comment">// TODO: type check of arguments?</span>
             <span class="keyword">var</span> fns = slice(arguments);
-            <span class="keyword">return</span> <span class="keyword">function</span>() {
-                <span class="keyword">return</span> foldr(<span class="keyword">function</span>(fn, args) {<span class="keyword">return</span> [fn.apply(<span class="keyword">this</span>, args)];}, slice(arguments), fns)[<span class="number">0</span>];
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+                <span class="keyword">return</span> foldr(<span class="function"><span class="keyword">function</span><span class="params">(fn, args)</span> {</span><span class="keyword">return</span> [fn.apply(<span class="keyword">this</span>, args)];}, slice(arguments), fns)[<span class="number">0</span>];
             };
         };
         aliasFor(<span class="string">"compose"</span>).is(<span class="string">"fog"</span>); <span class="comment">// TODO: really?</span></pre></div></div>
@@ -931,7 +931,7 @@ Note that if <code>var h = compose(f, g)</code>, <code>h(x)</code> calls <code>g
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.pipe = <span class="keyword">function</span>() { <span class="comment">// TODO: type check of arguments?</span>
+            <div class="content"><div class='highlight'><pre>        R.pipe = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span> <span class="comment">// TODO: type check of arguments?</span>
             <span class="keyword">return</span> compose.apply(<span class="keyword">this</span>, slice(arguments).reverse());
         };
         aliasFor(<span class="string">"pipe"</span>).is(<span class="string">"sequence"</span>);</pre></div></div>
@@ -949,8 +949,8 @@ Note that if <code>var h = compose(f, g)</code>, <code>h(x)</code> calls <code>g
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> flip = R.flip = <span class="keyword">function</span>(fn) {
-            <span class="keyword">return</span> _(<span class="keyword">function</span>(a, b) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> flip = R.flip = <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
+            <span class="keyword">return</span> _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span>
                 <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, [b, a].concat(slice(arguments, <span class="number">2</span>)));
             });
         };</pre></div></div>
@@ -971,7 +971,7 @@ pre-filled.</p>
             
             <div class="content"><div class='highlight'><pre>        R.lPartial = <span class="function"><span class="keyword">function</span> <span class="params">(fn)</span> {</span>
             <span class="keyword">var</span> args = slice(arguments, <span class="number">1</span>);
-            <span class="keyword">return</span> arity(Math.max(fn.length - args.length, <span class="number">0</span>), <span class="keyword">function</span>() {
+            <span class="keyword">return</span> arity(Math.max(fn.length - args.length, <span class="number">0</span>), <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, args.concat(slice(arguments)));
             });
         };
@@ -993,7 +993,7 @@ pre-filled.</p>
             
             <div class="content"><div class='highlight'><pre>        R.rPartial =<span class="function"><span class="keyword">function</span> <span class="params">(fn)</span> {</span>
             <span class="keyword">var</span> args = slice(arguments, <span class="number">1</span>);
-            <span class="keyword">return</span> arity(Math.max(fn.length - args.length, <span class="number">0</span>), <span class="keyword">function</span>() {
+            <span class="keyword">return</span> arity(Math.max(fn.length - args.length, <span class="number">0</span>), <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, slice(arguments).concat(args));
             });
         };
@@ -1013,10 +1013,10 @@ stored value when the same request is made.  <strong>Note</strong>: this really 
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.memoize = <span class="keyword">function</span>(fn) {
+            <div class="content"><div class='highlight'><pre>        R.memoize = <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
             <span class="keyword">var</span> cache = {};
-            <span class="keyword">return</span> <span class="keyword">function</span>() {
-                <span class="keyword">var</span> position = foldl(<span class="keyword">function</span>(cache, arg) {<span class="keyword">return</span> cache[arg] || (cache[arg] = {});}, cache,
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
+                <span class="keyword">var</span> position = foldl(<span class="function"><span class="keyword">function</span><span class="params">(cache, arg)</span> {</span><span class="keyword">return</span> cache[arg] || (cache[arg] = {});}, cache,
                         slice(arguments, <span class="number">0</span>, arguments.length - <span class="number">1</span>));
                 <span class="keyword">var</span> arg = arguments[arguments.length - <span class="number">1</span>];
                 <span class="keyword">return</span> (position[arg] || (position[arg] = fn.apply(<span class="keyword">this</span>, arguments)));
@@ -1037,9 +1037,9 @@ is called.  <strong> Note</strong>: this is not really pure; it&#39;s mostly mea
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.once = <span class="keyword">function</span>(fn) {
+            <div class="content"><div class='highlight'><pre>        R.once = <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
             <span class="keyword">var</span> called = <span class="literal">false</span>, result;
-            <span class="keyword">return</span> <span class="keyword">function</span>() {
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">if</span> (called) {<span class="keyword">return</span> result;}
                 called = <span class="literal">true</span>;
                 <span class="keyword">return</span> (result = fn.apply(<span class="keyword">this</span>, arguments));
@@ -1060,8 +1060,8 @@ either before the internal function is called or with its results.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.wrap = <span class="keyword">function</span>(fn, wrapper) {
-            <span class="keyword">return</span> <span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>        R.wrap = <span class="function"><span class="keyword">function</span><span class="params">(fn, wrapper)</span> {</span>
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">return</span> wrapper.apply(<span class="keyword">this</span>, [fn].concat(slice(arguments)));
             };
         };</pre></div></div>
@@ -1083,8 +1083,8 @@ map(construct(Widget), allConfigs); //=&gt; list of Widgets</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.construct = <span class="keyword">function</span>(fn) {
-            <span class="keyword">var</span> f = <span class="keyword">function</span>() {
+            <div class="content"><div class='highlight'><pre>        R.construct = <span class="function"><span class="keyword">function</span><span class="params">(fn)</span> {</span>
+            <span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">var</span> obj = <span class="keyword">new</span> fn();
                 fn.apply(obj, arguments);
                 <span class="keyword">return</span> obj;
@@ -1098,10 +1098,10 @@ map(construct(Widget), allConfigs); //=&gt; list of Widgets</code></pre>
         <li id="section-53">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-53">&#182;</a>
               </div>
-              <h2>List Functions</h2>
+              <h2 id="list-functions">List Functions</h2>
 
             </div>
             
@@ -1143,7 +1143,7 @@ and return an updated value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> foldl = R.foldl = _(<span class="keyword">function</span>(fn, acc, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> foldl = R.foldl = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, acc, list)</span> {</span>
             <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list.length;
             <span class="keyword">while</span>(++idx &lt; len) {
                 acc = fn(acc, list[idx]);
@@ -1185,7 +1185,7 @@ and return an updated value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> foldr = R.foldr =_(<span class="keyword">function</span>(fn, acc, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> foldr = R.foldr =_(<span class="function"><span class="keyword">function</span><span class="params">(fn, acc, list)</span> {</span>
             <span class="keyword">var</span> idx = list.length;
             <span class="keyword">while</span>(idx--) {
                 acc = fn(list[idx], acc);
@@ -1230,7 +1230,7 @@ consisting of the current value and the seed to be used for the next value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.unfoldr = _(<span class="keyword">function</span>(fn, seed) {
+            <div class="content"><div class='highlight'><pre>        R.unfoldr = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, seed)</span> {</span>
             <span class="keyword">var</span> pair = fn(seed), result = [];
             <span class="keyword">while</span> (pair &amp;&amp; pair.length) {
                 result.push(pair[<span class="number">0</span>]);
@@ -1252,7 +1252,7 @@ consisting of the current value and the seed to be used for the next value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> map = R.map = _(<span class="keyword">function</span>(fn, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> map = R.map = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">if</span> (list &amp;&amp; list.length === <span class="literal">Infinity</span>) {
                 <span class="keyword">return</span> list.map(fn, list);
             }
@@ -1276,7 +1276,7 @@ consisting of the current value and the seed to be used for the next value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.size = <span class="keyword">function</span>(arr) {<span class="keyword">return</span> arr.length;};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.size = <span class="function"><span class="keyword">function</span><span class="params">(arr)</span> {</span><span class="keyword">return</span> arr.length;};</pre></div></div>
             
         </li>
         
@@ -1291,7 +1291,7 @@ consisting of the current value and the seed to be used for the next value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> filter = R.filter = _(<span class="keyword">function</span>(fn, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> filter = R.filter = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">if</span> (list &amp;&amp; list.length === <span class="literal">Infinity</span>) {
                 <span class="keyword">return</span> list.filter(fn);
             }
@@ -1317,7 +1317,7 @@ consisting of the current value and the seed to be used for the next value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.reject = _(<span class="keyword">function</span>(fn, list) {
+            <div class="content"><div class='highlight'><pre>        R.reject = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">return</span> filter(notFn(fn), list);
         });</pre></div></div>
             
@@ -1335,7 +1335,7 @@ supplied returns <code>false</code> when passed the element.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.takeWhile = _(<span class="keyword">function</span>(fn, list) {
+            <div class="content"><div class='highlight'><pre>        R.takeWhile = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list.length, taking = <span class="literal">true</span>, result = [];
             <span class="keyword">while</span> (taking) {
                 ++idx;
@@ -1361,7 +1361,7 @@ supplied returns <code>false</code> when passed the element.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.take = _(<span class="keyword">function</span>(n, list) {
+            <div class="content"><div class='highlight'><pre>        R.take = _(<span class="function"><span class="keyword">function</span><span class="params">(n, list)</span> {</span>
             <span class="keyword">if</span> (list &amp;&amp; list.length === <span class="literal">Infinity</span>) {
                 <span class="keyword">return</span> list.take(n);
             }
@@ -1384,7 +1384,7 @@ supplied returns <code>false</code> when passed the element.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.skipUntil = _(<span class="keyword">function</span>(fn, list) {
+            <div class="content"><div class='highlight'><pre>        R.skipUntil = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list.length, taking = <span class="literal">false</span>, result = [];
             <span class="keyword">while</span> (!taking) {
                 ++idx;
@@ -1411,7 +1411,7 @@ supplied returns <code>false</code> when passed the element.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.skip = _(<span class="keyword">function</span>(n, list) {
+            <div class="content"><div class='highlight'><pre>        R.skip = _(<span class="function"><span class="keyword">function</span><span class="params">(n, list)</span> {</span>
             <span class="keyword">if</span> (list &amp;&amp; list.length === <span class="literal">Infinity</span>) {
                 <span class="keyword">return</span> list.skip(n);
             }
@@ -1432,7 +1432,7 @@ supplied returns <code>false</code> when passed the element.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.find = _(<span class="keyword">function</span>(fn, list) {
+            <div class="content"><div class='highlight'><pre>        R.find = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list.length;
             <span class="keyword">while</span> (++idx &lt; len) {
                 <span class="keyword">if</span> (fn(list[idx])) {
@@ -1479,7 +1479,7 @@ supplied returns <code>false</code> when passed the element.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> any = R.any = _(<span class="keyword">function</span>(fn, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> any = R.any = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">var</span> i = -<span class="number">1</span>;
             <span class="keyword">while</span> (++i &lt; list.length) {
                 <span class="keyword">if</span> (fn(list[i])) {
@@ -1504,7 +1504,7 @@ meaning reference equality for objects and non-coercing equality for primitives.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> contains = R.contains = _(<span class="keyword">function</span>(a, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> contains = R.contains = _(<span class="function"><span class="keyword">function</span><span class="params">(a, list)</span> {</span>
             <span class="keyword">return</span> list.indexOf(a) &gt; -<span class="number">1</span>;
         });</pre></div></div>
             
@@ -1523,7 +1523,7 @@ reference equality for objects and non-coercing equality for primitives.  Probab
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> containsWith = _(<span class="keyword">function</span>(pred, x, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> containsWith = _(<span class="function"><span class="keyword">function</span><span class="params">(pred, x, list)</span> {</span>
             <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list.length;
             <span class="keyword">while</span> (++idx &lt; len) {
                 <span class="keyword">if</span> (pred(x, list[idx])) {<span class="keyword">return</span> <span class="literal">true</span>;}
@@ -1545,8 +1545,8 @@ meaning reference equality for objects and non-coercing equality for primitives.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> uniq = R.uniq = <span class="keyword">function</span>(list) {
-            <span class="keyword">return</span> foldr(<span class="keyword">function</span>(x, acc) { <span class="keyword">return</span> (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> uniq = R.uniq = <span class="function"><span class="keyword">function</span><span class="params">(list)</span> {</span>
+            <span class="keyword">return</span> foldr(<span class="function"><span class="keyword">function</span><span class="params">(x, acc)</span> {</span> <span class="keyword">return</span> (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         };</pre></div></div>
             
         </li>
@@ -1564,8 +1564,8 @@ reference equality for objects and non-coercing equality for primitives.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> uniqWith = _(<span class="keyword">function</span>(pred, list) {
-            <span class="keyword">return</span> foldr(<span class="keyword">function</span>(x, acc) {<span class="keyword">return</span> (containsWith(pred, x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> uniqWith = _(<span class="function"><span class="keyword">function</span><span class="params">(pred, list)</span> {</span>
+            <span class="keyword">return</span> foldr(<span class="function"><span class="keyword">function</span><span class="params">(x, acc)</span> {</span><span class="keyword">return</span> (containsWith(pred, x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         });</pre></div></div>
             
         </li>
@@ -1581,7 +1581,7 @@ reference equality for objects and non-coercing equality for primitives.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> pluck = R.pluck = _(<span class="keyword">function</span>(p, list) {<span class="keyword">return</span> map(prop(p), list);});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> pluck = R.pluck = _(<span class="function"><span class="keyword">function</span><span class="params">(p, list)</span> {</span><span class="keyword">return</span> map(prop(p), list);});</pre></div></div>
             
         </li>
         
@@ -1598,7 +1598,7 @@ reference equality for objects and non-coercing equality for primitives.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> flatten = R.flatten = <span class="keyword">function</span>(list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> flatten = R.flatten = <span class="function"><span class="keyword">function</span><span class="params">(list)</span> {</span>
             <span class="keyword">var</span> idx = -<span class="number">1</span>, len = list ? list.length : <span class="number">0</span>, result = [], push = result.push, val;
             <span class="keyword">while</span> (++idx &lt; len) {
                 val = list[idx];
@@ -1624,7 +1624,7 @@ lists.  For example,</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.zipWith = _(<span class="keyword">function</span>(fn, a, b) {
+            <div class="content"><div class='highlight'><pre>        R.zipWith = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, a, b)</span> {</span>
             <span class="keyword">var</span> rv = [], i = -<span class="number">1</span>, len = a.length;
             <span class="keyword">while</span>(++i &lt; len) {
                 rv[i] = fn(a[i], b[i]);
@@ -1648,7 +1648,7 @@ lists.  For example,</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.zip =  _(<span class="keyword">function</span>(a, b) { <span class="comment">// = zipWith(prepend);</span>
+            <div class="content"><div class='highlight'><pre>        R.zip =  _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span> <span class="comment">// = zipWith(prepend);</span>
             <span class="keyword">var</span> rv = [], i = -<span class="number">1</span>, len = a.length;
             <span class="keyword">while</span> (++i &lt; len) {
                 rv[i] = [a[i], b[i]];
@@ -1672,7 +1672,7 @@ lists.  For example,</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.xprodWith = _(<span class="keyword">function</span>(fn, a, b) {
+            <div class="content"><div class='highlight'><pre>        R.xprodWith = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, a, b)</span> {</span>
             <span class="keyword">if</span> (isEmpty(a) || isEmpty(b)) {<span class="keyword">return</span> EMPTY;}
             <span class="keyword">var</span> i = -<span class="number">1</span>, ilen = a.length, j, jlen = b.length, result = []; <span class="comment">// better to push them all or to do `new Array(ilen * jlen)` and calculate indices?</span>
             <span class="keyword">while</span> (++i &lt; ilen) {
@@ -1700,7 +1700,7 @@ For example,</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.xprod = _(<span class="keyword">function</span>(a, b) { <span class="comment">// = xprodWith(prepend); (takes about 3 times as long...)</span>
+            <div class="content"><div class='highlight'><pre>        R.xprod = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span> <span class="comment">// = xprodWith(prepend); (takes about 3 times as long...)</span>
             <span class="keyword">if</span> (isEmpty(a) || isEmpty(b)) {<span class="keyword">return</span> EMPTY;}
             <span class="keyword">var</span> i = -<span class="number">1</span>, ilen = a.length, j, jlen = b.length, result = []; <span class="comment">// better to push them all or to do `new Array(ilen * jlen)` and calculate indices?</span>
             <span class="keyword">while</span> (++i &lt; ilen) {
@@ -1725,7 +1725,7 @@ For example,</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.reverse = <span class="keyword">function</span>(list) {
+            <div class="content"><div class='highlight'><pre>        R.reverse = <span class="function"><span class="keyword">function</span><span class="params">(list)</span> {</span>
             <span class="keyword">return</span> clone(list || []).reverse();
         };</pre></div></div>
             
@@ -1745,7 +1745,7 @@ range(50, 53) // =&gt; [50, 51, 52]</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.range = _(<span class="keyword">function</span>(from, to) {
+            <div class="content"><div class='highlight'><pre>        R.range = _(<span class="function"><span class="keyword">function</span><span class="params">(from, to)</span> {</span>
             <span class="keyword">if</span> (from &gt;= to) {<span class="keyword">return</span> EMPTY;}
             <span class="keyword">var</span> idx, result = <span class="keyword">new</span> Array(to - from);
             <span class="keyword">for</span> (idx = <span class="number">0</span>; from &lt; to; idx++, from++) {
@@ -1767,7 +1767,7 @@ range(50, 53) // =&gt; [50, 51, 52]</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.indexOf = _(<span class="keyword">function</span>(obj, list) {
+            <div class="content"><div class='highlight'><pre>        R.indexOf = _(<span class="function"><span class="keyword">function</span><span class="params">(obj, list)</span> {</span>
             <span class="keyword">return</span> list.indexOf(obj);
         });</pre></div></div>
             
@@ -1784,7 +1784,7 @@ range(50, 53) // =&gt; [50, 51, 52]</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.lastIndexOf = _(<span class="keyword">function</span>(obj, list) {
+            <div class="content"><div class='highlight'><pre>        R.lastIndexOf = _(<span class="function"><span class="keyword">function</span><span class="params">(obj, list)</span> {</span>
             <span class="keyword">return</span> list.lastIndexOf(obj);
         });</pre></div></div>
             
@@ -1801,7 +1801,7 @@ range(50, 53) // =&gt; [50, 51, 52]</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.join = _(<span class="keyword">function</span>(sep, list) {
+            <div class="content"><div class='highlight'><pre>        R.join = _(<span class="function"><span class="keyword">function</span><span class="params">(sep, list)</span> {</span>
             <span class="keyword">return</span> list.join(sep);
         });</pre></div></div>
             
@@ -1820,7 +1820,7 @@ it makes a shallow copy), and returns a new list with the specified elements rem
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.splice = _(<span class="keyword">function</span>(start, len, list) {
+            <div class="content"><div class='highlight'><pre>        R.splice = _(<span class="function"><span class="keyword">function</span><span class="params">(start, len, list)</span> {</span>
             <span class="keyword">var</span> ls = slice(list, <span class="number">0</span>);
             ls.splice(start, len);
             <span class="keyword">return</span> ls;
@@ -1839,7 +1839,7 @@ it makes a shallow copy), and returns a new list with the specified elements rem
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.nth = _(<span class="keyword">function</span>(n, list) {
+            <div class="content"><div class='highlight'><pre>        R.nth = _(<span class="function"><span class="keyword">function</span><span class="params">(n, list)</span> {</span>
           <span class="keyword">return</span> (list[n] === undef) ? <span class="literal">null</span> : list[n];
         });</pre></div></div>
             
@@ -1860,8 +1860,8 @@ sort(cmp, people);</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> comparator = R.comparator = <span class="keyword">function</span>(pred) {
-            <span class="keyword">return</span> <span class="keyword">function</span>(a, b) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> comparator = R.comparator = <span class="function"><span class="keyword">function</span><span class="params">(pred)</span> {</span>
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span>
                 <span class="keyword">return</span> pred(a, b) ? -<span class="number">1</span> : pred(b, a) ? <span class="number">1</span> : <span class="number">0</span>;
             };
         };</pre></div></div>
@@ -1881,7 +1881,7 @@ if they are equal.  Please note that this is a <strong>copy</strong> of the list
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> sort = R.sort = _(<span class="keyword">function</span>(comparator, list) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> sort = R.sort = _(<span class="function"><span class="keyword">function</span><span class="params">(comparator, list)</span> {</span>
             <span class="keyword">return</span> clone(list).sort(comparator);
         });</pre></div></div>
             
@@ -1891,10 +1891,10 @@ if they are equal.  Please note that this is a <strong>copy</strong> of the list
         <li id="section-90">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-90">&#182;</a>
               </div>
-              <h2>Object Functions</h2>
+              <h2 id="object-functions">Object Functions</h2>
 
             </div>
             
@@ -1927,7 +1927,7 @@ objects.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.tap = _(<span class="keyword">function</span>(x, fn) {
+            <div class="content"><div class='highlight'><pre>        R.tap = _(<span class="function"><span class="keyword">function</span><span class="params">(x, fn)</span> {</span>
             <span class="keyword">if</span> (<span class="keyword">typeof</span> fn === <span class="string">"function"</span>) {
                 fn(x);
             }
@@ -1949,7 +1949,7 @@ non-coercing equality for primitives.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.eq = _(<span class="keyword">function</span>(a, b) {
+            <div class="content"><div class='highlight'><pre>        R.eq = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span>
             <span class="keyword">return</span> a === b;
         });</pre></div></div>
             
@@ -1966,7 +1966,7 @@ non-coercing equality for primitives.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> prop = R.prop = _(<span class="keyword">function</span>(p, obj) {<span class="keyword">return</span> obj[p];});
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> prop = R.prop = _(<span class="function"><span class="keyword">function</span><span class="params">(p, obj)</span> {</span><span class="keyword">return</span> obj[p];});
         aliasFor(<span class="string">"prop"</span>).is(<span class="string">"get"</span>); <span class="comment">// TODO: are we sure?  Matches some other libs, but might want to reserve for other use.</span></pre></div></div>
             
         </li>
@@ -1983,7 +1983,7 @@ that object, if it has such a function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.func = _(<span class="keyword">function</span>(fn, obj) {<span class="keyword">return</span> obj[fn].apply(obj, slice(arguments, <span class="number">2</span>));});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.func = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, obj)</span> {</span><span class="keyword">return</span> obj[fn].apply(obj, slice(arguments, <span class="number">2</span>));});</pre></div></div>
             
         </li>
         
@@ -1999,7 +1999,7 @@ exists.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.props = _(<span class="keyword">function</span>(obj, prop) {<span class="keyword">return</span> obj &amp;&amp; obj[prop];});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.props = _(<span class="function"><span class="keyword">function</span><span class="params">(obj, prop)</span> {</span><span class="keyword">return</span> obj &amp;&amp; obj[prop];});</pre></div></div>
             
         </li>
         
@@ -2014,11 +2014,11 @@ exists.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> always = R.always = <span class="keyword">function</span>(val) {
-            <span class="keyword">return</span> <span class="keyword">function</span>() {<span class="keyword">return</span> val;};
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> always = R.always = <span class="function"><span class="keyword">function</span><span class="params">(val)</span> {</span>
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> val;};
         };
 
-        <span class="keyword">var</span> anyBlanks = any(<span class="keyword">function</span>(val) {<span class="keyword">return</span> val === <span class="literal">null</span> || val === undef;});</pre></div></div>
+        <span class="keyword">var</span> anyBlanks = any(<span class="function"><span class="keyword">function</span><span class="params">(val)</span> {</span><span class="keyword">return</span> val === <span class="literal">null</span> || val === undef;});</pre></div></div>
             
         </li>
         
@@ -2087,9 +2087,9 @@ properties of the supplied object.</p>
             <span class="keyword">return</span> vs;
         };
 
-        <span class="keyword">var</span> partialCopy = <span class="keyword">function</span>(test, obj) {
+        <span class="keyword">var</span> partialCopy = <span class="function"><span class="keyword">function</span><span class="params">(test, obj)</span> {</span>
             <span class="keyword">var</span> copy = {};
-            each(<span class="keyword">function</span>(key) {<span class="keyword">if</span> (test(key, obj)) {copy[key] = obj[key];}}, keys(obj));
+            each(<span class="function"><span class="keyword">function</span><span class="params">(key)</span> {</span><span class="keyword">if</span> (test(key, obj)) {copy[key] = obj[key];}}, keys(obj));
             <span class="keyword">return</span> copy;
         };</pre></div></div>
             
@@ -2107,8 +2107,8 @@ property is ignored</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> pick = R.pick = _(<span class="keyword">function</span>(names, obj) {
-            <span class="keyword">return</span> partialCopy(<span class="keyword">function</span>(key) {<span class="keyword">return</span> contains(key, names);}, obj);
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> pick = R.pick = _(<span class="function"><span class="keyword">function</span><span class="params">(names, obj)</span> {</span>
+            <span class="keyword">return</span> partialCopy(<span class="function"><span class="keyword">function</span><span class="params">(key)</span> {</span><span class="keyword">return</span> contains(key, names);}, obj);
         });</pre></div></div>
             
         </li>
@@ -2124,9 +2124,9 @@ property is ignored</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> pickAll = R.pickAll = _(<span class="keyword">function</span>(names, obj) {
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> pickAll = R.pickAll = _(<span class="function"><span class="keyword">function</span><span class="params">(names, obj)</span> {</span>
             <span class="keyword">var</span> copy = {};
-            each(<span class="keyword">function</span>(name) { copy[name] = obj[name]; }, names);
+            each(<span class="function"><span class="keyword">function</span><span class="params">(name)</span> {</span> copy[name] = obj[name]; }, names);
             <span class="keyword">return</span> copy;
         });</pre></div></div>
             
@@ -2143,8 +2143,8 @@ property is ignored</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.omit = _(<span class="keyword">function</span>(names, obj) {
-            <span class="keyword">return</span> partialCopy(<span class="keyword">function</span>(key) {<span class="keyword">return</span> !contains(key, names);}, obj);
+            <div class="content"><div class='highlight'><pre>        R.omit = _(<span class="function"><span class="keyword">function</span><span class="params">(names, obj)</span> {</span>
+            <span class="keyword">return</span> partialCopy(<span class="function"><span class="keyword">function</span><span class="params">(key)</span> {</span><span class="keyword">return</span> !contains(key, names);}, obj);
         });</pre></div></div>
             
         </li>
@@ -2153,10 +2153,10 @@ property is ignored</p>
         <li id="section-104">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-104">&#182;</a>
               </div>
-              <h2>Logic Functions</h2>
+              <h2 id="logic-functions">Logic Functions</h2>
 
             </div>
             
@@ -2244,8 +2244,8 @@ value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.andFn = _(<span class="keyword">function</span>(f, g) { <span class="comment">// TODO: arity?</span>
-           <span class="keyword">return</span> <span class="keyword">function</span>() {<span class="keyword">return</span> !!(f.apply(<span class="keyword">this</span>, arguments) &amp;&amp; g.apply(<span class="keyword">this</span>, arguments));};
+            <div class="content"><div class='highlight'><pre>        R.andFn = _(<span class="function"><span class="keyword">function</span><span class="params">(f, g)</span> {</span> <span class="comment">// TODO: arity?</span>
+           <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> !!(f.apply(<span class="keyword">this</span>, arguments) &amp;&amp; g.apply(<span class="keyword">this</span>, arguments));};
         });</pre></div></div>
             
         </li>
@@ -2263,8 +2263,8 @@ value. (Note also that at least Oliver Twist can pronounce this one...)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.orFn = _(<span class="keyword">function</span>(f, g) { <span class="comment">// TODO: arity?</span>
-           <span class="keyword">return</span> <span class="keyword">function</span>() {<span class="keyword">return</span> !!(f.apply(<span class="keyword">this</span>, arguments) || g.apply(<span class="keyword">this</span>, arguments));};
+            <div class="content"><div class='highlight'><pre>        R.orFn = _(<span class="function"><span class="keyword">function</span><span class="params">(f, g)</span> {</span> <span class="comment">// TODO: arity?</span>
+           <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> !!(f.apply(<span class="keyword">this</span>, arguments) || g.apply(<span class="keyword">this</span>, arguments));};
         });</pre></div></div>
             
         </li>
@@ -2282,7 +2282,7 @@ underlying function would return a false-y value, and <code>false</code> when it
             </div>
             
             <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> notFn = R.notFn = <span class="function"><span class="keyword">function</span> <span class="params">(f)</span> {</span>
-            <span class="keyword">return</span> <span class="keyword">function</span>() {<span class="keyword">return</span> !f.apply(<span class="keyword">this</span>, arguments);};
+            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> !f.apply(<span class="keyword">this</span>, arguments);};
         };</pre></div></div>
             
         </li>
@@ -2291,10 +2291,10 @@ underlying function would return a false-y value, and <code>false</code> when it
         <li id="section-112">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-112">&#182;</a>
               </div>
-              <h2>Arithmetic Functions</h2>
+              <h2 id="arithmetic-functions">Arithmetic Functions</h2>
 
             </div>
             
@@ -2327,7 +2327,7 @@ add7(10); // =&gt; 17</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> add = R.add = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a + b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> add = R.add = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a + b;});</pre></div></div>
             
         </li>
         
@@ -2344,7 +2344,7 @@ mult3(7); // =&gt; 21</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> multiply = R.multiply = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a * b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> multiply = R.multiply = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a * b;});</pre></div></div>
             
         </li>
         
@@ -2362,7 +2362,7 @@ hundredMinus(20) ; // =&gt; 80</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> subtract = R.subtract = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a - b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> subtract = R.subtract = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a - b;});</pre></div></div>
             
         </li>
         
@@ -2396,7 +2396,7 @@ version might be useful, often the curried version of <code>divideBy</code> migh
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> divide = R.divide = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a / b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> divide = R.divide = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a / b;});</pre></div></div>
             
         </li>
         
@@ -2459,7 +2459,7 @@ half(42); // =&gt; 21</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.lt = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &lt; b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.lt = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a &lt; b;});</pre></div></div>
             
         </li>
         
@@ -2474,7 +2474,7 @@ half(42); // =&gt; 21</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.lte = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &lt;= b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.lte = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a &lt;= b;});</pre></div></div>
             
         </li>
         
@@ -2489,7 +2489,7 @@ half(42); // =&gt; 21</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.gt = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &gt; b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.gt = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a &gt; b;});</pre></div></div>
             
         </li>
         
@@ -2504,7 +2504,7 @@ half(42); // =&gt; 21</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.gte = _(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a &gt;= b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.gte = _(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a &gt;= b;});</pre></div></div>
             
         </li>
         
@@ -2512,10 +2512,10 @@ half(42); // =&gt; 21</code></pre>
         <li id="section-126">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-126">&#182;</a>
               </div>
-              <h2>String Functions</h2>
+              <h2 id="string-functions">String Functions</h2>
 
             </div>
             
@@ -2717,10 +2717,10 @@ half(42); // =&gt; 21</code></pre>
         <li id="section-139">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-139">&#182;</a>
               </div>
-              <h2>Data Analysis and Grouping Functions</h2>
+              <h2 id="data-analysis-and-grouping-functions">Data Analysis and Grouping Functions</h2>
 
             </div>
             
@@ -2769,11 +2769,22 @@ project([&#39;name&#39;, &#39;grade&#39;], kids);
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-142">&#182;</a>
               </div>
-              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.</p>
+              <p>Determines whether the given property of an object has a specific value
+Most likely used to filter a list:</p>
+<pre><code>var kids = [
+  {name: &#39;Abby&#39;, age: 7, hair: &#39;blond&#39;},
+  {name: &#39;Fred&#39;, age: 12, hair: &#39;brown&#39;},
+  {name: &#39;Rusty&#39;, age: 10, hair: &#39;brown&#39;},
+  {name: &#39;Alois&#39;, age: 15, disposition: &#39;surly&#39;}
+];
+filter(propEq(&quot;hair&quot;, &quot;brown&quot;), kids);
+//=&gt; Fred and Rusty</code></pre>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.union = compose(uniq, merge);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.propEq = _(<span class="function"><span class="keyword">function</span><span class="params">(name, val, obj)</span> {</span>
+            <span class="keyword">return</span> obj[name] === val;
+        });</pre></div></div>
             
         </li>
         
@@ -2784,14 +2795,11 @@ project([&#39;name&#39;, &#39;grade&#39;], kids);
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-143">&#182;</a>
               </div>
-              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.  Duplication is
-determined according to the value returned by applying the supplied predicated to two list elements.</p>
+              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.unionWith = <span class="keyword">function</span>(pred, list1, list2) {
-            <span class="keyword">return</span> uniqWith(pred, merge(list1, list2));
-        };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.union = compose(uniq, merge);</pre></div></div>
             
         </li>
         
@@ -2802,14 +2810,14 @@ determined according to the value returned by applying the supplied predicated t
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-144">&#182;</a>
               </div>
-              <p>Creates a new list whose elements each have two properties: <code>val</code> is the value of the corresponding
-item in the list supplied, and <code>key</code> is the result of applying the supplied function to that item.</p>
+              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.  Duplication is
+determined according to the value returned by applying the supplied predicated to two list elements.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> keyValue = _(<span class="keyword">function</span>(fn, list) { <span class="comment">// TODO: Should this be made public?</span>
-            <span class="keyword">return</span> map(<span class="keyword">function</span>(item) {<span class="keyword">return</span> {key: fn(item), val: item};}, list);
-        });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.unionWith = <span class="function"><span class="keyword">function</span><span class="params">(pred, list1, list2)</span> {</span>
+            <span class="keyword">return</span> uniqWith(pred, merge(list1, list2));
+        };</pre></div></div>
             
         </li>
         
@@ -2820,16 +2828,13 @@ item in the list supplied, and <code>key</code> is the result of applying the su
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-145">&#182;</a>
               </div>
-              <p>Sorts the list according to a key generated by the supplied function.</p>
+              <p>Creates a new list whose elements each have two properties: <code>val</code> is the value of the corresponding
+item in the list supplied, and <code>key</code> is the result of applying the supplied function to that item.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.sortBy = _(<span class="keyword">function</span>(fn, list) {
-            <span class="comment">/*
-              return sort(comparator(function(a, b) {return fn(a) &lt; fn(b);}), list); // clean, but too time-inefficient
-              return pluck("val", sort(comparator(function(a, b) {return a.key &lt; b.key;}), keyValue(fn, list))); // nice, but no need to clone result of keyValue call, so...
-            */</span>
-            <span class="keyword">return</span> pluck(<span class="string">"val"</span>, keyValue(fn, list).sort(comparator(<span class="keyword">function</span>(a, b) {<span class="keyword">return</span> a.key &lt; b.key;})));
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> keyValue = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span> <span class="comment">// TODO: Should this be made public?</span>
+            <span class="keyword">return</span> map(<span class="function"><span class="keyword">function</span><span class="params">(item)</span> {</span><span class="keyword">return</span> {key: fn(item), val: item};}, list);
         });</pre></div></div>
             
         </li>
@@ -2841,15 +2846,16 @@ item in the list supplied, and <code>key</code> is the result of applying the su
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-146">&#182;</a>
               </div>
-              <p>Counts the elements of a list according to how many match each value of a key generated by the supplied function.</p>
+              <p>Sorts the list according to a key generated by the supplied function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.countBy = _(<span class="keyword">function</span>(fn, list) {
-            <span class="keyword">return</span> foldl(<span class="keyword">function</span>(counts, obj) {
-                counts[obj.key] = (counts[obj.key] || <span class="number">0</span>) + <span class="number">1</span>;
-                <span class="keyword">return</span> counts;
-            }, {}, keyValue(fn, list));
+            <div class="content"><div class='highlight'><pre>        R.sortBy = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
+            <span class="comment">/*
+              return sort(comparator(function(a, b) {return fn(a) &lt; fn(b);}), list); // clean, but too time-inefficient
+              return pluck("val", sort(comparator(function(a, b) {return a.key &lt; b.key;}), keyValue(fn, list))); // nice, but no need to clone result of keyValue call, so...
+            */</span>
+            <span class="keyword">return</span> pluck(<span class="string">"val"</span>, keyValue(fn, list).sort(comparator(<span class="function"><span class="keyword">function</span><span class="params">(a, b)</span> {</span><span class="keyword">return</span> a.key &lt; b.key;})));
         });</pre></div></div>
             
         </li>
@@ -2861,14 +2867,14 @@ item in the list supplied, and <code>key</code> is the result of applying the su
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-147">&#182;</a>
               </div>
-              <p>Groups the elements of a list by a key generated by the supplied function.</p>
+              <p>Counts the elements of a list according to how many match each value of a key generated by the supplied function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.groupBy = _(<span class="keyword">function</span>(fn, list) {
-            <span class="keyword">return</span> foldl(<span class="keyword">function</span>(groups, obj) {
-                (groups[obj.key] || (groups[obj.key] = [])).push(obj.val);
-                <span class="keyword">return</span> groups;
+            <div class="content"><div class='highlight'><pre>        R.countBy = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
+            <span class="keyword">return</span> foldl(<span class="function"><span class="keyword">function</span><span class="params">(counts, obj)</span> {</span>
+                counts[obj.key] = (counts[obj.key] || <span class="number">0</span>) + <span class="number">1</span>;
+                <span class="keyword">return</span> counts;
             }, {}, keyValue(fn, list));
         });</pre></div></div>
             
@@ -2878,12 +2884,19 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         <li id="section-148">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-148">&#182;</a>
               </div>
-              <h2>Miscellaneous Functions</h2>
+              <p>Groups the elements of a list by a key generated by the supplied function.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.groupBy = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
+            <span class="keyword">return</span> foldl(<span class="function"><span class="keyword">function</span><span class="params">(groups, obj)</span> {</span>
+                (groups[obj.key] || (groups[obj.key] = [])).push(obj.val);
+                <span class="keyword">return</span> groups;
+            }, {}, keyValue(fn, list));
+        });</pre></div></div>
             
         </li>
         
@@ -2894,8 +2907,7 @@ item in the list supplied, and <code>key</code> is the result of applying the su
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-149">&#182;</a>
               </div>
-              <p>A few functions in need of a good home.</p>
-<hr>
+              <h2 id="miscellaneous-functions">Miscellaneous Functions</h2>
 
             </div>
             
@@ -2908,16 +2920,10 @@ item in the list supplied, and <code>key</code> is the result of applying the su
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-150">&#182;</a>
               </div>
-              <p>Expose the functions from ramda as properties on another object.  If this object is the global object, then
-it will be as though the eweda functions are global functions.</p>
+              <p>A few functions in need of a good home.</p>
+<hr>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.installTo = <span class="keyword">function</span>(obj) {
-            each(<span class="keyword">function</span>(key) {
-                (obj || global)[key] = R[key];
-            })(keys(R));
-        };</pre></div></div>
             
         </li>
         
@@ -2928,11 +2934,16 @@ it will be as though the eweda functions are global functions.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-151">&#182;</a>
               </div>
-              <p>A function that always returns <code>0</code>.</p>
+              <p>Expose the functions from ramda as properties on another object.  If this object is the global object, then
+it will be as though the eweda functions are global functions.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.alwaysZero = always(<span class="number">0</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.installTo = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> {</span>
+            each(<span class="function"><span class="keyword">function</span><span class="params">(key)</span> {</span>
+                (obj || global)[key] = R[key];
+            })(keys(R));
+        };</pre></div></div>
             
         </li>
         
@@ -2943,11 +2954,11 @@ it will be as though the eweda functions are global functions.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-152">&#182;</a>
               </div>
-              <p>A function that always returns <code>false</code>.</p>
+              <p>A function that always returns <code>0</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.alwaysFalse = always(<span class="literal">false</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.alwaysZero = always(<span class="number">0</span>);</pre></div></div>
             
         </li>
         
@@ -2958,11 +2969,11 @@ it will be as though the eweda functions are global functions.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-153">&#182;</a>
               </div>
-              <p>A function that always returns <code>true</code>.</p>
+              <p>A function that always returns <code>false</code>.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.alwaysTrue = always(<span class="literal">true</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.alwaysFalse = always(<span class="literal">false</span>);</pre></div></div>
             
         </li>
         
@@ -2972,6 +2983,21 @@ it will be as though the eweda functions are global functions.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-154">&#182;</a>
+              </div>
+              <p>A function that always returns <code>true</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.alwaysTrue = always(<span class="literal">true</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-155">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-155">&#182;</a>
               </div>
               <p>All the functional goodness, wrapped in a nice little package, just for you!</p>
 
