@@ -191,7 +191,7 @@
                         return fn.apply(this, args.concat(slice(arguments, tlen)));
                     }));
                 }
-            }
+            };
         };
 
 
