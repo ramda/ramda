@@ -191,7 +191,7 @@
                         return fn.apply(this, args.concat(slice(arguments, tlen)));
                     }));
                 }
-            }
+            };
         };
 
 
@@ -411,6 +411,13 @@
                 return fn.apply(this, [b, a].concat(slice(arguments, 2)));
             });
         };
+
+//        // Returns a new function much like the supplied one except that the first argument is cycled to the end.
+//        R.cycle = function(fn) {
+//            return nAry(fn.length, function() {
+//                return fn.apply(this, slice(arguments, 1, fn.length).concat(arguments[0]));
+//            });
+//        };
 
         // Creates a new function that acts like the supplied function except that the left-most parameters are
         // pre-filled.
@@ -951,6 +958,12 @@
             return partialCopy(function(key) {return !contains(key, names);}, obj);
         });
 
+        // TODO: does this really belong?
+        R.setProp = _(function(name, val, obj) {
+            obj[name] = val;
+            return obj;
+        });
+
 
         // Logic Functions
         // ---------------
@@ -1231,3 +1244,4 @@
         return R;
     }());
 }));
+

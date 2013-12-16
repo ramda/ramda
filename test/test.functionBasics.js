@@ -17,6 +17,24 @@ describe('flip', function() {
     });
 });
 
+//describe('cycle', function() {
+//    var cycle = Lib.cycle;
+//    it('should return a function which cycles the arguments to the supplied function so that the first becomes last', function() {
+//        var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
+//        var g = cycle(f);
+//        var h = cycle(g);
+//        assert.equal(f('a', 'b', 'c'), 'a b c');
+//        assert.equal(g('a', 'b', 'c'), 'b c a');
+//        assert.equal(h('a', 'b', 'c'), 'c a b');
+//    });
+//
+//    it('should return a curried function', function() {
+//        var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
+//        var g = cycle(f)('a');
+//        assert.equal(g('b', 'c'), 'b c a');
+//    });
+//});
+
 describe('once', function() {
     var once = Lib.once;
 
