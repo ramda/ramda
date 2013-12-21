@@ -46,7 +46,7 @@ Ramda may be freely distributed under the MIT license.</code></pre>
               </div>
               <p>A practical functional library for Javascript programmers.  This is a collection of tools to make it easier to
 use Javascript as a functional programming language.  (The name is just a silly play on <code>lambda</code>, even though we&#39;re
-not actually involved in lambda expressions.)</p>
+not actually involved in the manipulation of lambda expressions.)</p>
 <h2 id="basic-setup">Basic Setup</h2>
 
             </div>
@@ -387,7 +387,7 @@ TODO: One of these versions should be eliminated eventually.  So not worrying ab
                         <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, args.concat(slice(arguments, tlen)));
                     }));
                 }
-            }
+            };
         };</pre></div></div>
             
         </li>
@@ -964,7 +964,13 @@ Note that if <code>var h = compose(f, g)</code>, <code>h(x)</code> calls <code>g
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-47">&#182;</a>
               </div>
-              <p>Creates a new function that acts like the supplied function except that the left-most parameters are
+              <pre><code>   // Returns a new function much like the supplied one except that the first argument is cycled to the end.
+   R.cycle = function(fn) {
+       return nAry(fn.length, function() {
+           return fn.apply(this, slice(arguments, 1, fn.length).concat(arguments[0]));
+       });
+   };</code></pre>
+<p>Creates a new function that acts like the supplied function except that the left-most parameters are
 pre-filled.</p>
 
             </div>
@@ -2156,9 +2162,11 @@ property is ignored</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-104">&#182;</a>
               </div>
-              <h2 id="logic-functions">Logic Functions</h2>
+              <p>Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.eqProps = _(<span class="function"><span class="keyword">function</span><span class="params">(prop, obj1, obj2)</span> {</span><span class="keyword">return</span> obj1[prop] === obj2[prop];});</pre></div></div>
             
         </li>
         
@@ -2169,9 +2177,7 @@ property is ignored</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-105">&#182;</a>
               </div>
-              <p>These functions are very simple wrappers around the built-in logical operators, useful in building up
-more complex functional forms.</p>
-<hr>
+              <h2 id="miscellaneous-functions">Miscellaneous Functions</h2>
 
             </div>
             
@@ -2183,6 +2189,113 @@ more complex functional forms.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-106">&#182;</a>
+              </div>
+              <p>A few functions in need of a good home.</p>
+<hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-107">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-107">&#182;</a>
+              </div>
+              <p>Expose the functions from ramda as properties on another object.  If this object is the global object, then
+it will be as though the eweda functions are global functions.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.installTo = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> {</span>
+            each(<span class="function"><span class="keyword">function</span><span class="params">(key)</span> {</span>
+                (obj || global)[key] = R[key];
+            })(keys(R));
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-108">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-108">&#182;</a>
+              </div>
+              <p>A function that always returns <code>0</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.alwaysZero = always(<span class="number">0</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-109">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-109">&#182;</a>
+              </div>
+              <p>A function that always returns <code>false</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> alwaysFalse = R.alwaysFalse = always(<span class="literal">false</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-110">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-110">&#182;</a>
+              </div>
+              <p>A function that always returns <code>true</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> alwaysTrue = R.alwaysTrue = always(<span class="literal">true</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-111">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-111">&#182;</a>
+              </div>
+              <h2 id="logic-functions">Logic Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-112">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-112">&#182;</a>
+              </div>
+              <p>These functions are very simple wrappers around the built-in logical operators, useful in building up
+more complex functional forms.</p>
+<hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-113">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-113">&#182;</a>
               </div>
               <p>A function wrapping the boolean <code>&amp;&amp;</code> operator.  Note that unlike the underlying operator, though, it
 aways returns <code>true</code> or <code>false</code>.</p>
@@ -2196,11 +2309,11 @@ aways returns <code>true</code> or <code>false</code>.</p>
         </li>
         
         
-        <li id="section-107">
+        <li id="section-114">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-107">&#182;</a>
+                <a class="pilcrow" href="#section-114">&#182;</a>
               </div>
               <p>A function wrapping the boolean <code>||</code> operator.  Note that unlike the underlying operator, though, it
 aways returns <code>true</code> or <code>false</code>.</p>
@@ -2214,11 +2327,11 @@ aways returns <code>true</code> or <code>false</code>.</p>
         </li>
         
         
-        <li id="section-108">
+        <li id="section-115">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-108">&#182;</a>
+                <a class="pilcrow" href="#section-115">&#182;</a>
               </div>
               <p>A function wrapping the boolean <code>!</code> operator.  It returns <code>true</code> if the parameter is false-y and <code>false</code> if
 the parameter is truth-y</p>
@@ -2232,11 +2345,11 @@ the parameter is truth-y</p>
         </li>
         
         
-        <li id="section-109">
+        <li id="section-116">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-109">&#182;</a>
+                <a class="pilcrow" href="#section-116">&#182;</a>
               </div>
               <p>A function wrapping calls to the two functions in an <code>&amp;&amp;</code> operation, returning <code>true</code> or <code>false</code>.  Note that
 this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
@@ -2244,18 +2357,18 @@ value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.andFn = _(<span class="function"><span class="keyword">function</span><span class="params">(f, g)</span> {</span> <span class="comment">// TODO: arity?</span>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> andFn = R.andFn = _(<span class="function"><span class="keyword">function</span><span class="params">(f, g)</span> {</span> <span class="comment">// TODO: arity?</span>
            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> !!(f.apply(<span class="keyword">this</span>, arguments) &amp;&amp; g.apply(<span class="keyword">this</span>, arguments));};
         });</pre></div></div>
             
         </li>
         
         
-        <li id="section-110">
+        <li id="section-117">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-110">&#182;</a>
+                <a class="pilcrow" href="#section-117">&#182;</a>
               </div>
               <p>A function wrapping calls to the two functions in an <code>||</code> operation, returning <code>true</code> or <code>false</code>.  Note that
 this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
@@ -2263,18 +2376,18 @@ value. (Note also that at least Oliver Twist can pronounce this one...)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.orFn = _(<span class="function"><span class="keyword">function</span><span class="params">(f, g)</span> {</span> <span class="comment">// TODO: arity?</span>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> orFn = R.orFn = _(<span class="function"><span class="keyword">function</span><span class="params">(f, g)</span> {</span> <span class="comment">// TODO: arity?</span>
            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span><span class="keyword">return</span> !!(f.apply(<span class="keyword">this</span>, arguments) || g.apply(<span class="keyword">this</span>, arguments));};
         });</pre></div></div>
             
         </li>
         
         
-        <li id="section-111">
+        <li id="section-118">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-111">&#182;</a>
+                <a class="pilcrow" href="#section-118">&#182;</a>
               </div>
               <p>A function wrapping a call to the given function in a <code>!</code> operation.  It will return <code>true</code> when the
 underlying function would return a false-y value, and <code>false</code> when it would return a truth-y one.</p>
@@ -2288,11 +2401,41 @@ underlying function would return a false-y value, and <code>false</code> when it
         </li>
         
         
-        <li id="section-112">
+        <li id="section-119">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-112">&#182;</a>
+                <a class="pilcrow" href="#section-119">&#182;</a>
+              </div>
+              <p>Given a list of predicates returns a new predicate that will be true exactly when all of them are.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.allPredicates = foldl(andFn, alwaysTrue);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-120">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-120">&#182;</a>
+              </div>
+              <p>Given a list of predicates returns a new predicate that will be true exactly when any one of them is.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.anyPredicates = foldl(orFn, alwaysFalse);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-121">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-121">&#182;</a>
               </div>
               <h2 id="arithmetic-functions">Arithmetic Functions</h2>
 
@@ -2301,11 +2444,11 @@ underlying function would return a false-y value, and <code>false</code> when it
         </li>
         
         
-        <li id="section-113">
+        <li id="section-122">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-113">&#182;</a>
+                <a class="pilcrow" href="#section-122">&#182;</a>
               </div>
               <p>These functions wrap up the certain core arithmetic operators</p>
 <hr>
@@ -2315,11 +2458,11 @@ underlying function would return a false-y value, and <code>false</code> when it
         </li>
         
         
-        <li id="section-114">
+        <li id="section-123">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-114">&#182;</a>
+                <a class="pilcrow" href="#section-123">&#182;</a>
               </div>
               <p>Adds two numbers.  Automatic curried:</p>
 <pre><code>var add7 = add(7);
@@ -2332,11 +2475,11 @@ add7(10); // =&gt; 17</code></pre>
         </li>
         
         
-        <li id="section-115">
+        <li id="section-124">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-115">&#182;</a>
+                <a class="pilcrow" href="#section-124">&#182;</a>
               </div>
               <p>Multiplies two numbers.  Automatically curried:</p>
 <pre><code>var mult3 = multiply(3);
@@ -2349,11 +2492,11 @@ mult3(7); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-116">
+        <li id="section-125">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-116">&#182;</a>
+                <a class="pilcrow" href="#section-125">&#182;</a>
               </div>
               <p>Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
 version might be useful, often the curried version of <code>subtractN</code> might be what&#39;s wanted.</p>
@@ -2367,11 +2510,11 @@ hundredMinus(20) ; // =&gt; 80</code></pre>
         </li>
         
         
-        <li id="section-117">
+        <li id="section-126">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-117">&#182;</a>
+                <a class="pilcrow" href="#section-126">&#182;</a>
               </div>
               <p>Reversed version of <code>subtract</code>, where first parameter is subtracted from the second.  The curried version of
 this one might me more useful than that of <code>subtract</code>.  For instance:</p>
@@ -2385,11 +2528,11 @@ decrement(10); // =&gt; 9;</code></pre>
         </li>
         
         
-        <li id="section-118">
+        <li id="section-127">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-118">&#182;</a>
+                <a class="pilcrow" href="#section-127">&#182;</a>
               </div>
               <p>Divides the first parameter by the second.  This is automatically curried, and while at times the curried
 version might be useful, often the curried version of <code>divideBy</code> might be what&#39;s wanted.</p>
@@ -2401,11 +2544,11 @@ version might be useful, often the curried version of <code>divideBy</code> migh
         </li>
         
         
-        <li id="section-119">
+        <li id="section-128">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-119">&#182;</a>
+                <a class="pilcrow" href="#section-128">&#182;</a>
               </div>
               <p>Reversed version of <code>divide</code>, where the second parameter is divided by the first.  The curried version of
 this one might be more useful than that of <code>divide</code>.  For instance:</p>
@@ -2419,11 +2562,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-120">
+        <li id="section-129">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-120">&#182;</a>
+                <a class="pilcrow" href="#section-129">&#182;</a>
               </div>
               <p>Adds together all the elements of a list.</p>
 
@@ -2434,11 +2577,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-121">
+        <li id="section-130">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-121">&#182;</a>
+                <a class="pilcrow" href="#section-130">&#182;</a>
               </div>
               <p>Multiplies together all the elements of a list.</p>
 
@@ -2449,11 +2592,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-122">
+        <li id="section-131">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-122">&#182;</a>
+                <a class="pilcrow" href="#section-131">&#182;</a>
               </div>
               <p>Returns true if the first parameter is less than the second.</p>
 
@@ -2464,11 +2607,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-123">
+        <li id="section-132">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-123">&#182;</a>
+                <a class="pilcrow" href="#section-132">&#182;</a>
               </div>
               <p>Returns true if the first parameter is less than or equal to the second.</p>
 
@@ -2479,11 +2622,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-124">
+        <li id="section-133">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-124">&#182;</a>
+                <a class="pilcrow" href="#section-133">&#182;</a>
               </div>
               <p>Returns true if the first parameter is greater than the second.</p>
 
@@ -2494,11 +2637,11 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-125">
+        <li id="section-134">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-125">&#182;</a>
+                <a class="pilcrow" href="#section-134">&#182;</a>
               </div>
               <p>Returns true if the first parameter is greater than or equal to the second.</p>
 
@@ -2509,158 +2652,17 @@ half(42); // =&gt; 21</code></pre>
         </li>
         
         
-        <li id="section-126">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-126">&#182;</a>
-              </div>
-              <h2 id="string-functions">String Functions</h2>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-127">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-127">&#182;</a>
-              </div>
-              <p>Much of the String.prototype API exposed as simple functions.</p>
-<hr>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-128">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-128">&#182;</a>
-              </div>
-              <p>A substring of a String:</p>
-<pre><code>substring(2, 5, &quot;abcdefghijklm&quot;); //=&gt; &quot;cde&quot;</code></pre>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> substring = R.substring = invoker(<span class="string">"substring"</span>, String.prototype);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-129">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-129">&#182;</a>
-              </div>
-              <p>The trailing substring of a String starting with the nth character:</p>
-<pre><code>substringFrom(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;ijklm&quot;</code></pre>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.substringFrom = flip(substring)(undef);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-130">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-130">&#182;</a>
-              </div>
-              <p>The leading substring of a String ending before the nth character:</p>
-<pre><code>substringTo(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;abcdefgh&quot;</code></pre>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.substringTo = substring(<span class="number">0</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-131">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-131">&#182;</a>
-              </div>
-              <p>The character at the nth position in a String:</p>
-<pre><code>charAt(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;i&quot;</code></pre>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.charAt = invoker(<span class="string">"charAt"</span>, String.prototype);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-132">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-132">&#182;</a>
-              </div>
-              <p>The ascii code of the character at the nth position in a String:</p>
-<pre><code>charCodeAt(8, &quot;abcdefghijklm&quot;); //=&gt; 105
-// (... &#39;a&#39; ~ 97, &#39;b&#39; ~ 98, ... &#39;i&#39; ~ 105)</code></pre>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.charCodeAt = invoker(<span class="string">"charCodeAt"</span>, String.prototype);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-133">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-133">&#182;</a>
-              </div>
-              <p>Tests a regular expression agains a String</p>
-<pre><code>match(/([a-z]a)/g, &quot;bananas&quot;); //=&gt; [&quot;ba&quot;, &quot;na&quot;, &quot;na&quot;]</code></pre>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.match = invoker(<span class="string">"match"</span>, String.prototype);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-134">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-134">&#182;</a>
-              </div>
-              <p>Finds the index of a substring in a string, returning -1 if it&#39;s not present</p>
-<pre><code>strIndexOf(&#39;c&#39;, &#39;abcdefg) //=&gt; 2</code></pre>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.strIndexOf = invoker(<span class="string">"indexOf"</span>, String.prototype);</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-135">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-135">&#182;</a>
               </div>
-              <p>Finds the last index of a substring in a string, returning -1 if it&#39;s not present</p>
-<pre><code>strIndexOf(&#39;a&#39;, &#39;banana split&#39;) //=&gt; 2</code></pre>
+              <p>Determines the largest of a list of numbers (or elements that can be cast to numbers)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.strLastIndexOf = invoker(<span class="string">"lastIndexOf"</span>, String.prototype);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.max = <span class="function"><span class="keyword">function</span><span class="params">(list)</span> {</span><span class="keyword">return</span> Math.max.apply(<span class="literal">null</span>, list);};</pre></div></div>
             
         </li>
         
@@ -2671,12 +2673,22 @@ half(42); // =&gt; 21</code></pre>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-136">&#182;</a>
               </div>
-              <p>The uppercase version of a string.</p>
-<pre><code>toUpperCase(&#39;abc&#39;) //=&gt; &#39;ABC&#39;</code></pre>
+              <p>Determines the largest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.toUpperCase = invoker(<span class="string">"toUpperCase"</span>, String.prototype);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.maxWith = _(<span class="function"><span class="keyword">function</span><span class="params">(comparator, list)</span> {</span>
+            <span class="keyword">if</span> (!isArray(list) || !list.length) {
+                <span class="keyword">return</span> undef;
+            }
+            <span class="keyword">var</span> idx = <span class="number">0</span>, max = list[idx];
+            <span class="keyword">while</span> (++idx &lt; list.length) {
+                <span class="keyword">if</span> (comparator(max, list[idx]) &lt; <span class="number">0</span>) {
+                    max = list[idx];
+                }
+            }
+            <span class="keyword">return</span> max;
+        });</pre></div></div>
             
         </li>
         
@@ -2687,12 +2699,23 @@ half(42); // =&gt; 21</code></pre>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-137">&#182;</a>
               </div>
-              <p>The lowercase version of a string.</p>
-<pre><code>toLowerCase(&#39;XYZ&#39;) //=&gt; &#39;xyz&#39;</code></pre>
+              <p>TODO: combine this with maxWith?
+Determines the smallest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.toLowerCase = invoker(<span class="string">"toLowerCase"</span>, String.prototype);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.minWith = _(<span class="function"><span class="keyword">function</span><span class="params">(comparator, list)</span> {</span>
+            <span class="keyword">if</span> (!isArray(list) || !list.length) {
+                <span class="keyword">return</span> undef;
+            }
+            <span class="keyword">var</span> idx = <span class="number">0</span>, max = list[idx];
+            <span class="keyword">while</span> (++idx &lt; list.length) {
+                <span class="keyword">if</span> (comparator(max, list[idx]) &gt; <span class="number">0</span>) {
+                    max = list[idx];
+                }
+            }
+            <span class="keyword">return</span> max;
+        });</pre></div></div>
             
         </li>
         
@@ -2703,13 +2726,11 @@ half(42); // =&gt; 21</code></pre>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-138">&#182;</a>
               </div>
-              <p>The string split into substring at the specified token</p>
-<pre><code>split(&#39;.&#39;, &#39;a.b.c.xyz.d&#39;) //=&gt;
-    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;xyz&#39;, &#39;d&#39;]</code></pre>
+              <p>Determines the smallest of a list of numbers (or elements that can be cast to numbers)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.split = invoker(<span class="string">"split"</span>, String.prototype, <span class="number">1</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.min = <span class="function"><span class="keyword">function</span><span class="params">(list)</span> {</span><span class="keyword">return</span> Math.min.apply(<span class="literal">null</span>, list);};</pre></div></div>
             
         </li>
         
@@ -2720,7 +2741,7 @@ half(42); // =&gt; 21</code></pre>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-139">&#182;</a>
               </div>
-              <h2 id="data-analysis-and-grouping-functions">Data Analysis and Grouping Functions</h2>
+              <h2 id="string-functions">String Functions</h2>
 
             </div>
             
@@ -2733,8 +2754,7 @@ half(42); // =&gt; 21</code></pre>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-140">&#182;</a>
               </div>
-              <p>Functions performing SQL-like actions on lists of objects.  These do not have any SQL-like optimizations
-performed on them, however.</p>
+              <p>Much of the String.prototype API exposed as simple functions.</p>
 <hr>
 
             </div>
@@ -2747,6 +2767,212 @@ performed on them, however.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-141">&#182;</a>
+              </div>
+              <p>A substring of a String:</p>
+<pre><code>substring(2, 5, &quot;abcdefghijklm&quot;); //=&gt; &quot;cde&quot;</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> substring = R.substring = invoker(<span class="string">"substring"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-142">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-142">&#182;</a>
+              </div>
+              <p>The trailing substring of a String starting with the nth character:</p>
+<pre><code>substringFrom(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;ijklm&quot;</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.substringFrom = flip(substring)(undef);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-143">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-143">&#182;</a>
+              </div>
+              <p>The leading substring of a String ending before the nth character:</p>
+<pre><code>substringTo(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;abcdefgh&quot;</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.substringTo = substring(<span class="number">0</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-144">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-144">&#182;</a>
+              </div>
+              <p>The character at the nth position in a String:</p>
+<pre><code>charAt(8, &quot;abcdefghijklm&quot;); //=&gt; &quot;i&quot;</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.charAt = invoker(<span class="string">"charAt"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-145">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-145">&#182;</a>
+              </div>
+              <p>The ascii code of the character at the nth position in a String:</p>
+<pre><code>charCodeAt(8, &quot;abcdefghijklm&quot;); //=&gt; 105
+// (... &#39;a&#39; ~ 97, &#39;b&#39; ~ 98, ... &#39;i&#39; ~ 105)</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.charCodeAt = invoker(<span class="string">"charCodeAt"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-146">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-146">&#182;</a>
+              </div>
+              <p>Tests a regular expression agains a String</p>
+<pre><code>match(/([a-z]a)/g, &quot;bananas&quot;); //=&gt; [&quot;ba&quot;, &quot;na&quot;, &quot;na&quot;]</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.match = invoker(<span class="string">"match"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-147">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-147">&#182;</a>
+              </div>
+              <p>Finds the index of a substring in a string, returning -1 if it&#39;s not present</p>
+<pre><code>strIndexOf(&#39;c&#39;, &#39;abcdefg) //=&gt; 2</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.strIndexOf = invoker(<span class="string">"indexOf"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-148">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-148">&#182;</a>
+              </div>
+              <p>Finds the last index of a substring in a string, returning -1 if it&#39;s not present</p>
+<pre><code>strIndexOf(&#39;a&#39;, &#39;banana split&#39;) //=&gt; 2</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.strLastIndexOf = invoker(<span class="string">"lastIndexOf"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-149">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-149">&#182;</a>
+              </div>
+              <p>The uppercase version of a string.</p>
+<pre><code>toUpperCase(&#39;abc&#39;) //=&gt; &#39;ABC&#39;</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.toUpperCase = invoker(<span class="string">"toUpperCase"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-150">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-150">&#182;</a>
+              </div>
+              <p>The lowercase version of a string.</p>
+<pre><code>toLowerCase(&#39;XYZ&#39;) //=&gt; &#39;xyz&#39;</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.toLowerCase = invoker(<span class="string">"toLowerCase"</span>, String.prototype);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-151">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-151">&#182;</a>
+              </div>
+              <p>The string split into substring at the specified token</p>
+<pre><code>split(&#39;.&#39;, &#39;a.b.c.xyz.d&#39;) //=&gt;
+    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;xyz&#39;, &#39;d&#39;]</code></pre>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.split = invoker(<span class="string">"split"</span>, String.prototype, <span class="number">1</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-152">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-152">&#182;</a>
+              </div>
+              <h2 id="data-analysis-and-grouping-functions">Data Analysis and Grouping Functions</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-153">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-153">&#182;</a>
+              </div>
+              <p>Functions performing SQL-like actions on lists of objects.  These do not have any SQL-like optimizations
+performed on them, however.</p>
+<hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-154">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-154">&#182;</a>
               </div>
               <p>Reasonable analog to SQL <code>select</code> statement.</p>
 <pre><code>var kids = [
@@ -2763,11 +2989,11 @@ project([&#39;name&#39;, &#39;grade&#39;], kids);
         </li>
         
         
-        <li id="section-142">
+        <li id="section-155">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-142">&#182;</a>
+                <a class="pilcrow" href="#section-155">&#182;</a>
               </div>
               <p>Determines whether the given property of an object has a specific value
 Most likely used to filter a list:</p>
@@ -2789,13 +3015,13 @@ filter(propEq(&quot;hair&quot;, &quot;brown&quot;), kids);
         </li>
         
         
-        <li id="section-143">
+        <li id="section-156">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-143">&#182;</a>
+                <a class="pilcrow" href="#section-156">&#182;</a>
               </div>
-              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.</p>
+              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.</p>
 
             </div>
             
@@ -2804,14 +3030,14 @@ filter(propEq(&quot;hair&quot;, &quot;brown&quot;), kids);
         </li>
         
         
-        <li id="section-144">
+        <li id="section-157">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-144">&#182;</a>
+                <a class="pilcrow" href="#section-157">&#182;</a>
               </div>
-              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.  Duplication is
-determined according to the value returned by applying the supplied predicated to two list elements.</p>
+              <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
+determined according to the value returned by applying the supplied predicate to two list elements.</p>
 
             </div>
             
@@ -2822,11 +3048,94 @@ determined according to the value returned by applying the supplied predicated t
         </li>
         
         
-        <li id="section-145">
+        <li id="section-158">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-145">&#182;</a>
+                <a class="pilcrow" href="#section-158">&#182;</a>
+              </div>
+              <p>Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.difference = <span class="function"><span class="keyword">function</span><span class="params">(first, second)</span> {</span><span class="keyword">return</span> uniq(reject(flip(contains)(second))(first));};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-159">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-159">&#182;</a>
+              </div>
+              <p>Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+Duplication is determined according to the value returned by applying the supplied predicate to two list
+elements.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.differenceWith = <span class="function"><span class="keyword">function</span><span class="params">(pred, first, second)</span> {</span>
+            <span class="keyword">return</span> uniqWith(pred)(reject(flip(containsWith(pred))(second), first));
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-160">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-160">&#182;</a>
+              </div>
+              <p>Combines two lists into a set (i.e. no duplicates) composed of those elements commone to both lists.
+TODO: Can this ugly first pass be cleaned up?</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.intersection = <span class="function"><span class="keyword">function</span><span class="params">(list1, list2)</span> {</span>
+            <span class="keyword">var</span> results = [], idx = -<span class="number">1</span>;
+            <span class="keyword">while</span> (++idx &lt; list1.length) {
+                <span class="keyword">if</span> (list2.indexOf(list1[idx]) &gt; -<span class="number">1</span>) {
+                    results[results.length] = list1[idx];
+                }
+            }
+            <span class="keyword">return</span> uniq(results);
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-161">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-161">&#182;</a>
+              </div>
+              <p>Combines two lists into a set (i.e. no duplicates) composed of those elements commone to both lists.
+Duplication is determined according to the value returned by applying the supplied predicate to two list
+elements.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        R.intersectionWith = <span class="function"><span class="keyword">function</span><span class="params">(pred, list1, list2)</span> {</span>
+            <span class="keyword">var</span> results = [], idx = -<span class="number">1</span>;
+            <span class="keyword">while</span> (++idx &lt; list1.length) {
+                <span class="keyword">if</span> (containsWith(pred, list1[idx], list2)) {
+                    results[results.length] = list1[idx];
+                }
+            }
+            <span class="keyword">return</span> uniqWith(pred, results);
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-162">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-162">&#182;</a>
               </div>
               <p>Creates a new list whose elements each have two properties: <code>val</code> is the value of the corresponding
 item in the list supplied, and <code>key</code> is the result of applying the supplied function to that item.</p>
@@ -2840,11 +3149,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-146">
+        <li id="section-163">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-146">&#182;</a>
+                <a class="pilcrow" href="#section-163">&#182;</a>
               </div>
               <p>Sorts the list according to a key generated by the supplied function.</p>
 
@@ -2861,11 +3170,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-147">
+        <li id="section-164">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-147">&#182;</a>
+                <a class="pilcrow" href="#section-164">&#182;</a>
               </div>
               <p>Counts the elements of a list according to how many match each value of a key generated by the supplied function.</p>
 
@@ -2881,11 +3190,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-148">
+        <li id="section-165">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-148">&#182;</a>
+                <a class="pilcrow" href="#section-165">&#182;</a>
               </div>
               <p>Groups the elements of a list by a key generated by the supplied function.</p>
 
@@ -2901,103 +3210,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-149">
+        <li id="section-166">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-149">&#182;</a>
-              </div>
-              <h2 id="miscellaneous-functions">Miscellaneous Functions</h2>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-150">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-150">&#182;</a>
-              </div>
-              <p>A few functions in need of a good home.</p>
-<hr>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-151">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-151">&#182;</a>
-              </div>
-              <p>Expose the functions from ramda as properties on another object.  If this object is the global object, then
-it will be as though the eweda functions are global functions.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.installTo = <span class="function"><span class="keyword">function</span><span class="params">(obj)</span> {</span>
-            each(<span class="function"><span class="keyword">function</span><span class="params">(key)</span> {</span>
-                (obj || global)[key] = R[key];
-            })(keys(R));
-        };</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-152">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-152">&#182;</a>
-              </div>
-              <p>A function that always returns <code>0</code>.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.alwaysZero = always(<span class="number">0</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-153">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-153">&#182;</a>
-              </div>
-              <p>A function that always returns <code>false</code>.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.alwaysFalse = always(<span class="literal">false</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-154">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-154">&#182;</a>
-              </div>
-              <p>A function that always returns <code>true</code>.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        R.alwaysTrue = always(<span class="literal">true</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-155">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-155">&#182;</a>
+                <a class="pilcrow" href="#section-166">&#182;</a>
               </div>
               <p>All the functional goodness, wrapped in a nice little package, just for you!</p>
 

@@ -106,3 +106,15 @@ describe('omit', function() {
         assert.deepEqual(skipAB(obj), {c: 3, d: 4, e: 5, f: 6});
     });
 });
+
+describe('eqProps', function() {
+    var eqProps = Lib.eqProps;
+    it('reports whether two objects have the same value for a given property', function() {
+        assert.equal(eqProps("name", {name: "fred", age: 10}, {name: "fred", age: 12}), true);
+        assert.equal(eqProps("name", {name: "fred", age: 10}, {name: "franny", age: 10}), false);
+    });
+    it('should be automatically curried', function() {
+        var sameName = eqProps("name");
+        assert.equal(sameName({name: "fred", age: 10}, {name: "fred", age: 12}), true);
+    });
+});

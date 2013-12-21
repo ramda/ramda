@@ -73,7 +73,7 @@ describe('union', function() {
     it("combines two lists into the set of all their elements", function() {
         assert.deepEqual(union(R, S), [1,2,3,4,5,6]);
     });
-   
+
     it("does not work for non-primitives (use `unionWith`)", function() {
         assert.equal(union(Ro, So).length, 8);
     });
@@ -87,7 +87,73 @@ describe('unionWith', function() {
     it("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
         assert.deepEqual(unionWith(eqA, Ro, So), [{a: 1},{a: 2},{a: 3},{a: 4},{a: 5},{a: 6}]);
     });
-   
+});
+
+describe('intersection', function() {
+    var intersection = Lib.intersection;
+    var R = [1,2,3,4];
+    var R2 = [1,2,3,4,1,2,3,4];
+    var S = [3,4,5,6];
+    var S2 = [3,3,4,4,5,5,6,6];
+    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    it("combines two lists into the set of common elements", function() {
+        assert.deepEqual(intersection(R, S), [3,4]);
+    });
+
+    it("does not allow duplicates in the output even if the input lists had duplicates", function() {
+        assert.deepEqual(intersection(R2, S2), [3,4]);
+    });
+
+    it("does not work for non-primitives (use `intersectionWith`)", function() {
+        assert.equal(intersection(Ro, So).length, 0);
+    });
+});
+
+describe('intersectionWith', function() {
+    var intersectionWith = Lib.intersectionWith;
+    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    var eqA = function(r, s) { return r.a === s.a; };
+    it("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
+        assert.deepEqual(intersectionWith(eqA, Ro, So), [{a: 3},{a: 4}]);
+    });
+});
+
+describe('difference', function() {
+    var difference = Lib.difference;
+    var R = [1,2,3,4];
+    var R2 = [1,2,3,4,1,2,3,4];
+    var S = [3,4,5,6];
+    var S2 = [3,3,4,4,5,5,6,6];
+    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    it("finds the set of all elements in the first list not contained in the second", function() {
+        assert.deepEqual(difference(R, S), [1,2]);
+    });
+
+    it("does not allow duplicates in the output even if the input lists had duplicates", function() {
+        assert.deepEqual(difference(R2, S2), [1,2]);
+    });
+
+    it("does not work for non-primitives (use `differenceWith`)", function() {
+        assert.equal(difference(Ro, So).length, 4);
+    });
+});
+
+describe('differenceWith', function() {
+    var differenceWith = Lib.differenceWith;
+    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var Ro2 = [{a: 1},{a: 2},{a: 3},{a: 4},{a: 1},{a: 2},{a: 3},{a: 4}];
+    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    var So2 = [{a: 3},{a: 4},{a: 5},{a: 6},{a: 3},{a: 4},{a: 5},{a: 6}];
+    var eqA = function(r, s) { return r.a === s.a; };
+    it("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
+        assert.deepEqual(differenceWith(eqA, Ro, So), [{a: 1},{a: 2}]);
+    });
+    it("does not allow duplicates in the output even if the input lists had duplicates", function() {
+        assert.deepEqual(differenceWith(eqA, Ro2, So2), [{a: 1},{a: 2}]);
+    });
 });
 
 (function() {
@@ -137,6 +203,7 @@ describe('unionWith', function() {
             assert.equal(sortedAlbums[11].title, "Timeout");
         });
     });
+
     describe('countBy', function() {
         var countBy = Lib.countBy;
 

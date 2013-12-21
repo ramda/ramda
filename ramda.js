@@ -7,7 +7,7 @@
 // -----
 // A practical functional library for Javascript programmers.  This is a collection of tools to make it easier to
 // use Javascript as a functional programming language.  (The name is just a silly play on `lambda`, even though we're
-// not actually involved in lambda expressions.)
+// not actually involved in the manipulation of lambda expressions.)
 
 // Basic Setup
 // -----------
@@ -32,7 +32,8 @@
         // Makes a public alias for one of the public functions:
         var aliasFor = function(oldName) {
             var fn = function(newName) {R[newName] = R[oldName]; return fn;};
-            return (fn.is = fn.are = fn.and = fn);
+            fn.is = fn.are = fn.and = fn;
+            return fn;
         };
 
         // `slice` implemented iteratively for performance
@@ -458,7 +459,8 @@
             return function() {
                 if (called) {return result;}
                 called = true;
-                return (result = fn.apply(this, arguments));
+                result = fn.apply(this, arguments);
+                return result;
             };
         };
 
@@ -484,6 +486,7 @@
             };
             return fn.length > 1 ? _(nAry(fn.length, f)) : f;
         };
+
 
 
         // List Functions
@@ -588,7 +591,7 @@
         });
 
         // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
-        R.reject = _(function(fn, list) {
+        var reject = R.reject = _(function(fn, list) {
             return filter(notFn(fn), list);
         });
 
@@ -958,11 +961,36 @@
             return partialCopy(function(key) {return !contains(key, names);}, obj);
         });
 
-        // TODO: does this really belong?
-        R.setProp = _(function(name, val, obj) {
-            obj[name] = val;
-            return obj;
-        });
+
+        // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
+        R.eqProps = _(function(prop, obj1, obj2) {return obj1[prop] === obj2[prop];});
+
+
+
+        // Miscellaneous Functions
+        // -----------------------
+        //
+        // A few functions in need of a good home.
+
+        // --------
+
+        // Expose the functions from ramda as properties on another object.  If this object is the global object, then
+        // it will be as though the eweda functions are global functions.
+        R.installTo = function(obj) {
+            each(function(key) {
+                (obj || global)[key] = R[key];
+            })(keys(R));
+        };
+
+        // A function that always returns `0`.
+        R.alwaysZero = always(0);
+
+        // A function that always returns `false`.
+        var alwaysFalse = R.alwaysFalse = always(false);
+
+        // A function that always returns `true`.
+        var alwaysTrue = R.alwaysTrue = always(true);
+
 
 
         // Logic Functions
@@ -994,14 +1022,14 @@
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
-        R.andFn = _(function(f, g) { // TODO: arity?
+        var andFn = R.andFn = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
         });
 
         // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
         // value. (Note also that at least Oliver Twist can pronounce this one...)
-        R.orFn = _(function(f, g) { // TODO: arity?
+        var orFn = R.orFn = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
         });
 
@@ -1010,6 +1038,13 @@
         var notFn = R.notFn = function (f) {
             return function() {return !f.apply(this, arguments);};
         };
+
+        // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
+        R.allPredicates = foldl(andFn, alwaysTrue);
+
+        // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
+        R.anyPredicates = foldl(orFn, alwaysFalse);
+
 
 
         // Arithmetic Functions
@@ -1073,6 +1108,42 @@
 
         // Returns true if the first parameter is greater than or equal to the second.
         R.gte = _(function(a, b) {return a >= b;});
+
+        // Determines the largest of a list of numbers (or elements that can be cast to numbers)
+        R.max = function(list) {return Math.max.apply(null, list);};
+
+        // Determines the largest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator
+        R.maxWith = _(function(comparator, list) {
+            if (!isArray(list) || !list.length) {
+                return undef;
+            }
+            var idx = 0, max = list[idx];
+            while (++idx < list.length) {
+                if (comparator(max, list[idx]) < 0) {
+                    max = list[idx];
+                }
+            }
+            return max;
+        });
+
+        // TODO: combine this with maxWith?
+        // Determines the smallest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator
+        R.minWith = _(function(comparator, list) {
+            if (!isArray(list) || !list.length) {
+                return undef;
+            }
+            var idx = 0, max = list[idx];
+            while (++idx < list.length) {
+                if (comparator(max, list[idx]) > 0) {
+                    max = list[idx];
+                }
+            }
+            return max;
+        });
+
+
+        // Determines the smallest of a list of numbers (or elements that can be cast to numbers)
+        R.min = function(list) {return Math.min.apply(null, list);};
 
 
         // String Functions
@@ -1174,13 +1245,48 @@
             return obj[name] === val;
         });
 
-        // Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.
+        // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
         R.union = compose(uniq, merge);
 
-        // Combines two lists into a set (i.e. no duplicates) composed of the elements of both lists.  Duplication is
-        // determined according to the value returned by applying the supplied predicated to two list elements.
+        // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
+        // determined according to the value returned by applying the supplied predicate to two list elements.
         R.unionWith = function(pred, list1, list2) {
             return uniqWith(pred, merge(list1, list2));
+        };
+
+        // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+        R.difference = function(first, second) {return uniq(reject(flip(contains)(second))(first));};
+
+        // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+        // Duplication is determined according to the value returned by applying the supplied predicate to two list
+        // elements.
+        R.differenceWith = function(pred, first, second) {
+            return uniqWith(pred)(reject(flip(containsWith(pred))(second), first));
+        };
+
+        // Combines two lists into a set (i.e. no duplicates) composed of those elements commone to both lists.
+        // TODO: Can this ugly first pass be cleaned up?
+        R.intersection = function(list1, list2) {
+            var results = [], idx = -1;
+            while (++idx < list1.length) {
+                if (list2.indexOf(list1[idx]) > -1) {
+                    results[results.length] = list1[idx];
+                }
+            }
+            return uniq(results);
+        };
+
+        // Combines two lists into a set (i.e. no duplicates) composed of those elements commone to both lists.
+        // Duplication is determined according to the value returned by applying the supplied predicate to two list
+        // elements.
+        R.intersectionWith = function(pred, list1, list2) {
+            var results = [], idx = -1;
+            while (++idx < list1.length) {
+                if (containsWith(pred, list1[idx], list2)) {
+                    results[results.length] = list1[idx];
+                }
+            }
+            return uniqWith(pred, results);
         };
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
@@ -1215,30 +1321,6 @@
         });
 
 
-
-        // Miscellaneous Functions
-        // -----------------------
-        //
-        // A few functions in need of a good home.
-
-        // --------
-
-        // Expose the functions from ramda as properties on another object.  If this object is the global object, then
-        // it will be as though the eweda functions are global functions.
-        R.installTo = function(obj) {
-            each(function(key) {
-                (obj || global)[key] = R[key];
-            })(keys(R));
-        };
-
-        // A function that always returns `0`.
-        R.alwaysZero = always(0);
-
-        // A function that always returns `false`.
-        R.alwaysFalse = always(false);
-
-        // A function that always returns `true`.
-        R.alwaysTrue = always(true);
 
         // All the functional goodness, wrapped in a nice little package, just for you!
         return R;

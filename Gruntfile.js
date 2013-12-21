@@ -32,9 +32,8 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['gruntfile.js', '*.js', 'test/**/*.js', '!jasmine*.js', '!Jasmine*.js'],
+      files: ['ramda.js'],
       options: {
-        // options here to override JSHint defaults
         evil: true,
         globals: {
         }

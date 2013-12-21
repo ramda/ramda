@@ -172,3 +172,66 @@ describe('gte', function() {
     });
 });
 
+describe('max', function() {
+    var max = Lib.max;
+
+    it('calculates the largest value of a list', function() {
+        assert.equal(max([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 9);
+        assert.equal(max([7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]), 52);
+    });
+
+    it('accepts negative numbers, decimals, and even strings', function() {
+        assert.equal(max([-6, -2, -4.3, -1.1, -5]), -1.1);
+        assert.equal(max([7, "22", 11, 34, 17, "52", 26, 13, 40, 20, "10", 5, 16, 8, 4, "2", "1"]), 52);
+    });
+});
+
+describe('min', function() {
+    var min = Lib.min;
+
+    it('calculates the largest value of a list', function() {
+        assert.equal(min([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 0);
+        assert.equal(min([7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]), 1);
+    });
+
+    it('accepts negative numbers, decimals, and even strings', function() {
+        assert.equal(min([-6, -2, -4.3, -1.1, -5]), -6);
+        assert.equal(min([7, "22", 11, 34, 17, "52", 26, 13, 40, 20, "10", 5, 16, 8, 4, "2", "1"]), 1);
+    });
+});
+
+describe('maxWith', function() {
+    var maxWith = Lib.maxWith;
+    var comparator = function(a, b) {return a.x - b.x;};
+
+    it('calculates the largest value of a list using the supplied comparator', function() {
+        assert.deepEqual(maxWith(comparator, [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
+    });
+
+    it('returns undefined for the empty list', function() {
+        assert.equal(typeof maxWith(comparator, []), "undefined");
+    });
+
+    it('is properly curried', function() {
+        var highestX = maxWith(comparator);
+        assert.deepEqual(highestX([{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
+    });
+});
+
+describe('minWith', function() {
+    var minWith = Lib.minWith;
+    var comparator = function(a, b) {return a.x - b.x;};
+
+    it('calculates the largest value of a list using the supplied comparator', function() {
+        assert.deepEqual(minWith(comparator, [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});
+    });
+
+    it('returns undefined for the empty list', function() {
+        assert.equal(typeof minWith(comparator, []), "undefined");
+    });
+
+    it('is properly curried', function() {
+        var lowestX = minWith(comparator);
+        assert.deepEqual(lowestX([{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});
+    });
+});

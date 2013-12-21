@@ -136,3 +136,45 @@ describe('notFn', function() {
     });
 });
 
+describe('allPredicates', function() {
+    var allPredicates = Lib.allPredicates;
+    var odd = function(n) {return !!(n % 2);};
+    var lt20 = function(n) {return n < 20;};
+    var gt5 = function(n) {return n > 5;};
+
+    it('should report whether all predicates are satisfied by a given value', function() {
+        var ok = allPredicates([odd, lt20, gt5]);
+        assert.equal(ok(7), true);
+        assert.equal(ok(9), true);
+        assert.equal(ok(10), false);
+        assert.equal(ok(3), false);
+        assert.equal(ok(21), false);
+    });
+
+    it.skip('does not have to be curried', function() {
+        assert.equal(allPredicates([odd, gt5], 3), false);
+        assert.equal(allPredicates([odd, gt5], 7), true);
+    });
+});
+
+describe('anyPredicates', function() {
+    var anyPredicates = Lib.anyPredicates;
+    var odd = function(n) {return !!(n % 2);};
+    var gt20 = function(n) {return n > 20;};
+    var lt5 = function(n) {return n < 5;};
+
+    it('should report whether any predicates are satisfied by a given value', function() {
+        var ok = anyPredicates([odd, gt20, lt5]);
+        assert.equal(ok(7), true);
+        assert.equal(ok(9), true);
+        assert.equal(ok(10), false);
+        assert.equal(ok(18), false);
+        assert.equal(ok(3), true);
+        assert.equal(ok(22), true);
+    });
+
+    it.skip('does not have to be curried', function() {
+        assert.equal(anyPredicates([odd, lt5], 3), true);
+        assert.equal(anyPredicates([odd, lt5], 22), false);
+    });
+});
