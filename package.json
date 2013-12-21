@@ -16,7 +16,9 @@
     "url": "git://github.com/CrossEye/ramda.git"
   },
   "main": "ramda.js",
-  "scripts": {},
+  "scripts": {
+    "test": "grunt test"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
