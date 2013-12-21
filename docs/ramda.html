@@ -126,7 +126,8 @@ with or without an AMD-style loader.</p>
             
             <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> aliasFor = <span class="function"><span class="keyword">function</span><span class="params">(oldName)</span> {</span>
             <span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span><span class="params">(newName)</span> {</span>R[newName] = R[oldName]; <span class="keyword">return</span> fn;};
-            <span class="keyword">return</span> (fn.is = fn.are = fn.and = fn);
+            fn.is = fn.are = fn.and = fn;
+            <span class="keyword">return</span> fn;
         };</pre></div></div>
             
         </li>
@@ -1048,7 +1049,8 @@ is called.  <strong> Note</strong>: this is not really pure; it&#39;s mostly mea
             <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
                 <span class="keyword">if</span> (called) {<span class="keyword">return</span> result;}
                 called = <span class="literal">true</span>;
-                <span class="keyword">return</span> (result = fn.apply(<span class="keyword">this</span>, arguments));
+                result = fn.apply(<span class="keyword">this</span>, arguments);
+                <span class="keyword">return</span> result;
             };
         };</pre></div></div>
             
@@ -1323,7 +1325,7 @@ consisting of the current value and the seed to be used for the next value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.reject = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
+            <div class="content"><div class='highlight'><pre>        <span class="keyword">var</span> reject = R.reject = _(<span class="function"><span class="keyword">function</span><span class="params">(fn, list)</span> {</span>
             <span class="keyword">return</span> filter(notFn(fn), list);
         });</pre></div></div>
             
