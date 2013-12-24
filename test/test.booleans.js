@@ -141,6 +141,7 @@ describe('allPredicates', function() {
     var odd = function(n) {return !!(n % 2);};
     var lt20 = function(n) {return n < 20;};
     var gt5 = function(n) {return n > 5;};
+    var plusEq = function(w, x, y, z) { return w + x  === y + z };
 
     it('should report whether all predicates are satisfied by a given value', function() {
         var ok = allPredicates([odd, lt20, gt5]);
@@ -151,9 +152,13 @@ describe('allPredicates', function() {
         assert.equal(ok(21), false);
     });
 
-    it.skip('does not have to be curried', function() {
+    it('does not have to be curried', function() {
         assert.equal(allPredicates([odd, gt5], 3), false);
         assert.equal(allPredicates([odd, gt5], 7), true);
+    });
+
+    it('reports its arity as the longest predicate length', function() {
+        assert.equal(allPredicates([odd, gt5, plusEq]).length, 4);
     });
 });
 
@@ -162,6 +167,7 @@ describe('anyPredicates', function() {
     var odd = function(n) {return !!(n % 2);};
     var gt20 = function(n) {return n > 20;};
     var lt5 = function(n) {return n < 5;};
+    var plusEq = function(w, x, y, z) { return w + x  === y + z };
 
     it('should report whether any predicates are satisfied by a given value', function() {
         var ok = anyPredicates([odd, gt20, lt5]);
@@ -173,8 +179,12 @@ describe('anyPredicates', function() {
         assert.equal(ok(22), true);
     });
 
-    it.skip('does not have to be curried', function() {
+    it('does not have to be curried', function() {
         assert.equal(anyPredicates([odd, lt5], 3), true);
         assert.equal(anyPredicates([odd, lt5], 22), false);
+    });
+
+    it('reports its arity as the longest predicate length', function() {
+      assert.equal(anyPredicates([odd, lt5, plusEq]).length, 4);
     });
 });

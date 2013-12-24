@@ -1039,11 +1039,38 @@
             return function() {return !f.apply(this, arguments);};
         };
 
-        // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
-        R.allPredicates = foldl(andFn, alwaysTrue);
 
-        // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
-        R.anyPredicates = foldl(orFn, alwaysFalse);
+        // TODO: is there a way to unify allPredicates and anyPredicates? they are sooooo similar
+        // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
+        R.allPredicates = function(preds /*, val1, val12, ... */) {
+            var args = slice(arguments, 1);
+            var maxArity = Math.max.apply(Math, map(function(f) { return f.length; }, preds));
+
+            var andPreds = arity(maxArity, function() {
+            var idx = -1;
+            while (++idx < preds.length) {
+                if (!preds[idx].apply(null, arguments)) { return false; }
+            }
+            return true;
+          });
+          return (isEmpty(args)) ? andPreds : andPreds.apply(null, args);
+        };
+
+
+      // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
+        R.anyPredicates = function(preds /*, val1, val12, ... */) {
+            var args = slice(arguments, 1);
+            var maxArity = Math.max.apply(Math, map(function(f) { return f.length; }, preds));
+
+            var orPreds = arity(maxArity, function() {
+                var idx = -1;
+                while (++idx < preds.length) {
+                    if (preds[idx].apply(null, arguments)) { return true; }
+                }
+                return false;
+            });
+            return (isEmpty(args)) ? orPreds : orPreds.apply(null, args);
+        };
 
 
 
