@@ -1044,7 +1044,7 @@
         // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
         R.allPredicates = function(preds /*, val1, val12, ... */) {
             var args = slice(arguments, 1);
-            var maxArity = Math.max.apply(Math, map(function(f) { return f.length; }, preds));
+            var maxArity = max(map(function(f) { return f.length; }, preds));
 
             var andPreds = arity(maxArity, function() {
             var idx = -1;
@@ -1060,7 +1060,7 @@
       // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
         R.anyPredicates = function(preds /*, val1, val12, ... */) {
             var args = slice(arguments, 1);
-            var maxArity = Math.max.apply(Math, map(function(f) { return f.length; }, preds));
+            var maxArity = max(map(function(f) { return f.length; }, preds));
 
             var orPreds = arity(maxArity, function() {
                 var idx = -1;
@@ -1137,7 +1137,7 @@
         R.gte = _(function(a, b) {return a >= b;});
 
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
-        R.max = function(list) {return Math.max.apply(null, list);};
+        var max = R.max = function(list) {return Math.max.apply(null, list);};
 
         // Determines the largest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator
         R.maxWith = _(function(comparator, list) {
@@ -1353,4 +1353,3 @@
         return R;
     }());
 }));
-
