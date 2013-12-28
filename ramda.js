@@ -1291,19 +1291,12 @@
             return uniqWith(pred)(reject(flip(containsWith(pred))(second), first));
         };
 
-        // Combines two lists into a set (i.e. no duplicates) composed of those elements commone to both lists.
-        // TODO: Can this ugly first pass be cleaned up?
+        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
         R.intersection = function(list1, list2) {
-            var results = [], idx = -1;
-            while (++idx < list1.length) {
-                if (list2.indexOf(list1[idx]) > -1) {
-                    results[results.length] = list1[idx];
-                }
-            }
-            return uniq(results);
+            return uniq(filter(flip(contains)(list1), list2));
         };
 
-        // Combines two lists into a set (i.e. no duplicates) composed of those elements commone to both lists.
+        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
         // Duplication is determined according to the value returned by applying the supplied predicate to two list
         // elements.
         R.intersectionWith = function(pred, list1, list2) {
