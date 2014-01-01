@@ -18,4 +18,7 @@ describe('find', function() {
         assert.equal(find(xGt100, a), obj2);
     });
 
+    it("returns false when no element satisfies the predicate", function() {
+        assert.equal(find(even, 'zing'), false);
+    });
 });

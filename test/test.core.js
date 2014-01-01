@@ -13,6 +13,26 @@ describe('isEmpty', function() {
     });
 });
 
+describe('isAtom', function() {
+    var isAtom = Lib.isAtom;
+    it('is false for Arrays', function() {
+        assert.equal(isAtom([]), false);
+        assert.equal(isAtom([1, 2, 3, 4]), false);
+    });
+    it('is false for undefined and null', function() {
+        assert.equal(isAtom(), false);
+        assert.equal(isAtom(null), false);
+    });
+    
+    it('is true for primitive values', function() {
+        assert.equal(isAtom(1), true);
+        assert.equal(isAtom('a'), true);
+        assert.equal(isAtom({}), true);
+        assert.equal(isAtom(true), true);
+        assert.equal(isAtom(false), true);
+    });
+});
+
 describe('prepend', function() {
     var prepend = Lib.prepend;
 
@@ -34,12 +54,19 @@ describe('merge', function() {
 
     it('adds combines the elements of the two lists', function() {
         assert.deepEqual(merge(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
+        assert.deepEqual(merge([], ['c', 'd']), ['c', 'd']);
     });
 });
 
 describe('head', function() {
     var head = Lib.head;
 
+    it('returns null for an empty list', function() {
+        assert.equal(head([]), null);
+    });
+    it('returns null for no arguments', function() {
+        assert.equal(head(), null);
+    });
     it('returns the first element of a list', function() {
         assert.equal(head(['a', 'b', 'c', 'd']), 'a');
     });
@@ -48,6 +75,12 @@ describe('head', function() {
 describe('tail', function() {
     var tail = Lib.tail;
 
+    it('returns null for an empty list', function() {
+        assert.equal(tail([]), null);
+    });
+    it('returns null for no arguments', function() {
+        assert.equal(tail(), null);
+    });
     it('returns a new list containing all the elements after the first element of a list', function() {
         assert.deepEqual(['b', 'c', 'd'], tail(['a', 'b', 'c', 'd']));
     });

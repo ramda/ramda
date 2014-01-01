@@ -233,7 +233,7 @@
         //  Returns the first element of a list
         var head = R.head = function(arr) {
             arr = arr || EMPTY;
-            return (arr.length) ? arr[0] : EMPTY; // TODO: shouldn't head(EMPTY) return null?
+            return (arr.length) ? arr[0] : null; 
         };
         aliasFor("head").is("car"); 
 
@@ -245,7 +245,7 @@
             if (arr.length === Infinity) {
                 return arr.tail();
             }
-            return (arr.length > 1) ? slice(arr, 1) : EMPTY;
+            return (arr.length > 1) ? slice(arr, 1) : null;
         };
         aliasFor("tail").is("cdr");
 
@@ -1047,13 +1047,13 @@
             var maxArity = max(map(function(f) { return f.length; }, preds));
 
             var andPreds = arity(maxArity, function() {
-            var idx = -1;
-            while (++idx < preds.length) {
-                if (!preds[idx].apply(null, arguments)) { return false; }
-            }
-            return true;
-          });
-          return (isEmpty(args)) ? andPreds : andPreds.apply(null, args);
+                var idx = -1;
+                while (++idx < preds.length) {
+                    if (!preds[idx].apply(null, arguments)) { return false; }
+                }
+                return true;
+            });
+            return (isEmpty(args)) ? andPreds : andPreds.apply(null, args);
         };
 
 
