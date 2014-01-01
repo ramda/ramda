@@ -57,6 +57,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
 
+  grunt.registerTask('coverage', 'Code coverage', function() {
+    var shell = require('child_process').exec;
+    var cmd = 'istanbul cover ./node_modules/grunt-mocha/node_modules/mocha/bin/_mocha';
+    shell(cmd, function(err, stdout, stderr) {
+      if (err) {
+        console.warn(stderr);
+      } else {
+        console.log(stdout);
+      }
+    });
+  });
   grunt.registerTask('test', ['jshint', 'mochaTest:test']);
   grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
 };
