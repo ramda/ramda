@@ -394,10 +394,9 @@
         var compose = R.compose = function() {  // TODO: type check of arguments?
             var fns = slice(arguments);
             return function() {
-                return foldr(function(fn, args) {return [fn.apply(this, args)];}, slice(arguments), fns)[0];
+                return foldr(function(args, fn) { return [fn.apply(this, args)]; }, slice(arguments), fns)[0];
             };
         };
-        aliasFor("compose").is("fog"); // TODO: really?
 
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.
@@ -530,7 +529,7 @@
         var foldr = R.foldr =_(function(fn, acc, list) {
             var idx = list.length;
             while(idx--) {
-                acc = fn(list[idx], acc);
+                acc = fn(acc, list[idx]);
             }
             return acc;
 
@@ -701,14 +700,14 @@
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
         var uniq = R.uniq = function(list) {
-            return foldr(function(x, acc) { return (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
+            return foldr(function(acc, x) { return (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         };
 
         // Returns a new list containing only one copy of each element in the original list, based upon the value
         // returned by applying the supplied predicate to two list elements.   Equality is strict here,  meaning
         // reference equality for objects and non-coercing equality for primitives.
         var uniqWith = _(function(pred, list) {
-            return foldr(function(x, acc) {return (containsWith(pred, x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
+            return foldr(function(acc, x) {return (containsWith(pred, x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         });
 
 
