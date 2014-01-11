@@ -62,7 +62,7 @@ describe('foldr', function() {
     var avg = function(a, b) {return (a + b) / 2;};
 
     it('should fold lists in the right order', function() {
-        assert.equal(foldr(function(a, b) {return a + b;}, '', ['a', 'b', 'c', 'd']), 'abcd');
+        assert.equal(foldr(function(a, b) {return a + b;}, '', ['a', 'b', 'c', 'd']), 'dcba');
     });
 
     it('should fold simple functions over arrays with the supplied accumulator', function() {
@@ -94,7 +94,7 @@ describe('foldr1', function() {
     var avg = function(a, b) {return (a + b) / 2;};
 
     it('should fold lists in the right order', function() {
-        assert.equal(foldr1(function(a, b) {return a + b;}, ['a', 'b', 'c', 'd']), 'abcd');
+        assert.equal(foldr1(function(a, b) {return a + b;}, ['a', 'b', 'c', 'd']), 'dcba');
     });
 
     it('should fold simple functions over arrays without an accumulator', function() {
