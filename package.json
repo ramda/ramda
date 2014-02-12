@@ -28,7 +28,7 @@
     "grunt-contrib-jshint": "~0.7.0",
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-mocha-test": "~0.5.0",
-    "istanbul": "~0.2.0"
+    "grunt-istanbul": "~0.2.4"
   },
   "extraDevDependencies -- if we want to use Gulp": {
     "gulp-rename": "~0.2.1",
@@ -38,6 +38,7 @@
     "gulp-clean": "~0.1.2",
     "gulp-util": "~2.2.0",
     "gulp-header": "godaddy/gulp-header",
+    "gulp-istanbul": "~0.1.0",
     "moment": "~2.5.0"
   }
 }

@@ -655,6 +655,17 @@
             return false;
         });
 
+        // Returns the last element of the list which matches the predicate, or `false` if no element matches.
+        R.findLast = _(function(fn, list) {
+            var idx = list.length;
+            while (--idx) {
+                if (fn(list[idx])) {
+                    return list[idx];
+                }
+            }
+            return false;
+        });
+
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
         var all = R.all = _(function (fn, list) {
             var i = -1;
@@ -857,7 +868,6 @@
         var sort = R.sort = _(function(comparator, list) {
             return clone(list).sort(comparator);
         });
-
 
 
         // Object Functions
