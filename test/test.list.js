@@ -39,7 +39,7 @@ describe("splice", function() {
 });
 
 describe("nth", function() {
-  it("returns the object ar position n of the list", function() {
+  it("returns the object at position n of the list", function() {
     var list = ["x", 1, {a:1, b:2}, [4,5,6], true];
     assert.equal(Lib.nth(4, list), true);
     assert.equal(Lib.nth(0, list), "x");
