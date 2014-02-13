@@ -2340,8 +2340,9 @@ property is ignored</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-117">&#182;</a>
               </div>
-              <p>Converts a spec object and a test object and returns true iof the test satisfies the spec. 
-Any property on the spec that is not a function is interpreted as an equality relation. For example:</p>
+              <p><code>where</code> takes a spec object and a test object and returns true iof the test satisfies the spec, 
+else false. Any property on the spec that is not a function is interpreted as an equality 
+relation. For example:</p>
 <pre><code><span class="hljs-keyword">var</span> spec = {x: <span class="hljs-number">2</span>};
 where(spec, {w: <span class="hljs-number">10</span>, x: <span class="hljs-number">2</span>, y: <span class="hljs-number">300</span>}); <span class="hljs-comment">// =&gt; true, x === 2</span>
 where(spec, {x: <span class="hljs-number">1</span>, y: <span class="hljs-string">'moo'</span>, z: <span class="hljs-literal">true</span>}); <span class="hljs-comment">// =&gt; false, x !== 2</span>
@@ -2350,8 +2351,12 @@ the test object’s value for the property in question, as well as the whole tes
 <pre><code><span class="hljs-keyword">var</span> spec = {x: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(val, obj)</span> {</span> <span class="hljs-keyword">return</span>  x + obj.y &gt; <span class="hljs-number">10</span>; };
 where(spec, {x: <span class="hljs-number">2</span>, y: <span class="hljs-number">7</span>}); <span class="hljs-comment">// =&gt; false</span>
 where(spec, {x: <span class="hljs-number">3</span>, y: <span class="hljs-number">8</span>}); <span class="hljs-comment">// =&gt; true</span>
-</code></pre><p><code>where</code> is well suited to declarativley expressing constraints for other functionis, e.g., <code>filter</code>.</p>
-
+</code></pre><p><code>where</code> is well suited to declarativley expressing constraints for other functions, e.g., <code>filter</code>:</p>
+<pre><code><span class="hljs-keyword">var</span> xs = [{x: <span class="hljs-number">2</span>, y: <span class="hljs-number">1</span>}, {x: <span class="hljs-number">10</span>, y: <span class="hljs-number">2</span>}, 
+          {x: <span class="hljs-number">8</span>, y: <span class="hljs-number">3</span>}, {x: <span class="hljs-number">10</span>, y: <span class="hljs-number">4</span>}];
+<span class="hljs-keyword">var</span> fxs = filter(where({x: <span class="hljs-number">10</span>}), xs); 
+<span class="hljs-comment">// fxs ==&gt; [{x: 10, y: 2}, {x: 10, y: 4}]</span>
+</code></pre>
             </div>
             
             <div class="content"><div class='highlight'><pre>        R.where = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(spec, test)</span> {</span>
