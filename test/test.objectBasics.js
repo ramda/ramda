@@ -118,3 +118,45 @@ describe('eqProps', function() {
         assert.equal(sameName({name: "fred", age: 10}, {name: "fred", age: 12}), true);
     });
 });
+
+describe('where', function() {
+    var where = Lib.where;
+    it("takes a spec and a test object and returns true if the test object satisfies the spec", function() {
+
+      var spec = {x: 1, y: 2};
+      var test1 = {x: 0, y: 200};
+      var test2 = {x: 0, y: 10};
+      var test3 = {x: 1, y: 101};
+      var test4 = {x: 1, y: 2};
+      assert.equal(where(spec, test1), false);
+      assert.equal(where(spec, test2), false);
+      assert.equal(where(spec, test3), false);
+      assert.equal(where(spec, test4), true);
+    });
+
+    it("calls any functions in the spec against the test object value for that property", function() {
+      var spec = {
+        a: function(a, obj) {return a < obj.b + obj.c;},
+        b: function(b, obj) {return b < obj.a + obj.c;},
+        c: function(c, obj) {return c < obj.a + obj.b;}
+      };
+      var test1 = {a: 3, b: 4, c: 5};
+      var test2 = {a: 6, b: 8, c: 9};
+      var test3 = {a: 2, b: 8, c: 12};
+      var test4 = {a: 3, b: 11, c: 5};
+
+      assert.equal(where(spec, test1), true);
+      assert.equal(where(spec, test2), true);
+      assert.equal(where(spec, test3), false);
+      assert.equal(where(spec, test4), false);
+    });
+
+    it("doesn't need the spec and the test object to have the same interface (the test object will have a superset of the specs properties)", function() {
+      var spec = {x: 100};
+      var test1 = {x: 20, y: 100, z: 100};
+      var test2 = {w: 1, x: 100, y: 100, z: 100};
+
+      assert.equal(where(spec, test1), false);
+      assert.equal(where(spec, test2), true);
+    });
+});
