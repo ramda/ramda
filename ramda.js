@@ -974,8 +974,9 @@
         // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
         R.eqProps = _(function(prop, obj1, obj2) {return obj1[prop] === obj2[prop];});
 
-        // Converts a spec object and a test object and returns true iof the test satisfies the spec. 
-        // Any property on the spec that is not a function is interpreted as an equality relation. For example:
+        // `where` takes a spec object and a test object and returns true iof the test satisfies the spec, 
+        // else false. Any property on the spec that is not a function is interpreted as an equality 
+        // relation. For example:
         //
         //     var spec = {x: 2};
         //     where(spec, {w: 10, x: 2, y: 300}); // => true, x === 2
@@ -988,7 +989,12 @@
         //     where(spec, {x: 2, y: 7}); // => false
         //     where(spec, {x: 3, y: 8}); // => true
         //
-        // `where` is well suited to declarativley expressing constraints for other functionis, e.g., `filter`.
+        // `where` is well suited to declarativley expressing constraints for other functions, e.g., `filter`:
+        //
+        //     var xs = [{x: 2, y: 1}, {x: 10, y: 2}, 
+        //               {x: 8, y: 3}, {x: 10, y: 4}];
+        //     var fxs = filter(where({x: 10}), xs); 
+        //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
         R.where = _(function(spec, test) {
             return all(function(key) {
