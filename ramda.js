@@ -999,7 +999,7 @@
         R.where = _(function(spec, test) {
             return all(function(key) {
                 var val = spec[key];
-                return (typeof val === 'function') ? val(test[key], test) : (test[key] === spec[key]);
+                return (typeof val === 'function') ? val(test[key], test) : (test[key] === val);
             }, keys(spec));
         });
 
