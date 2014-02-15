@@ -2348,7 +2348,7 @@ where(spec, {w: <span class="hljs-number">10</span>, x: <span class="hljs-number
 where(spec, {x: <span class="hljs-number">1</span>, y: <span class="hljs-string">'moo'</span>, z: <span class="hljs-literal">true</span>}); <span class="hljs-comment">// =&gt; false, x !== 2</span>
 </code></pre><p>If the spec has a property mapped to a function, then <code>where</code> evaluates the function, passing in 
 the test object’s value for the property in question, as well as the whole test object. For example:</p>
-<pre><code><span class="hljs-keyword">var</span> spec = {x: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(val, obj)</span> {</span> <span class="hljs-keyword">return</span>  x + obj.y &gt; <span class="hljs-number">10</span>; };
+<pre><code><span class="hljs-keyword">var</span> spec = {x: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(val, obj)</span> {</span> <span class="hljs-keyword">return</span>  val + obj.y &gt; <span class="hljs-number">10</span>; };
 where(spec, {x: <span class="hljs-number">2</span>, y: <span class="hljs-number">7</span>}); <span class="hljs-comment">// =&gt; false</span>
 where(spec, {x: <span class="hljs-number">3</span>, y: <span class="hljs-number">8</span>}); <span class="hljs-comment">// =&gt; true</span>
 </code></pre><p><code>where</code> is well suited to declarativley expressing constraints for other functions, e.g., <code>filter</code>:</p>
@@ -2362,7 +2362,7 @@ where(spec, {x: <span class="hljs-number">3</span>, y: <span class="hljs-number"
             <div class="content"><div class='highlight'><pre>        R.where = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(spec, test)</span> {</span>
             <span class="hljs-keyword">return</span> all(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(key)</span> {</span>
                 <span class="hljs-keyword">var</span> val = spec[key];
-                <span class="hljs-keyword">return</span> (<span class="hljs-keyword">typeof</span> val === <span class="hljs-string">'function'</span>) ? val(test[key], test) : (test[key] === spec[key]);
+                <span class="hljs-keyword">return</span> (<span class="hljs-keyword">typeof</span> val === <span class="hljs-string">'function'</span>) ? val(test[key], test) : (test[key] === val);
             }, keys(spec));
         });</pre></div></div>
             

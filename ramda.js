@@ -985,7 +985,7 @@
         // If the spec has a property mapped to a function, then `where` evaluates the function, passing in 
         // the test object's value for the property in question, as well as the whole test object. For example:
         //
-        //     var spec = {x: function(val, obj) { return  x + obj.y > 10; };
+        //     var spec = {x: function(val, obj) { return  val + obj.y > 10; };
         //     where(spec, {x: 2, y: 7}); // => false
         //     where(spec, {x: 3, y: 8}); // => true
         //
