@@ -655,12 +655,34 @@
             return false;
         });
 
+        // Returns the index of first element of the list which matches the predicate, or `false` if no element matches.
+        R.findIndex = _(function(fn, list) {
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                if (fn(list[idx])) {
+                    return idx;
+                }
+            }
+            return false;
+        });
+
         // Returns the last element of the list which matches the predicate, or `false` if no element matches.
         R.findLast = _(function(fn, list) {
             var idx = list.length;
             while (--idx) {
                 if (fn(list[idx])) {
                     return list[idx];
+                }
+            }
+            return false;
+        });
+
+        // Returns the index of last element of the list which matches the predicate, or `false` if no element matches.
+        R.findLastIndex = _(function(fn, list) {
+            var idx = list.length;
+            while (--idx) {
+                if (fn(list[idx])) {
+                    return idx;
                 }
             }
             return false;
