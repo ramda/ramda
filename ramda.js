@@ -576,22 +576,27 @@
 
 
         // Returns a new list containing only those items that match a given predicate function.
-        var filter = R.filter = _(function(fn, list) {
+        var internalFilter = _(function(useIdx, fn, list) {
             if (list && list.length === Infinity) {
-                return list.filter(fn);
+                return list.filter(fn); // TODO: figure out useIdx
             }
             var idx = -1, len = list.length, result = [];
             while (++idx < len) {
-                if (fn(list[idx])) {
+                if (!useIdx && fn(list[idx]) || fn(list[idx], idx, list)) {
                     result.push(list[idx]);
                 }
             }
             return result;
         });
+        var filter = R.filter = internalFilter(false);
+        filter.idx = internalFilter(true);
 
         // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
         var reject = R.reject = _(function(fn, list) {
             return filter(notFn(fn), list);
+        });
+        reject.idx = _(function(fn, list) {
+            return filter.idx(notFn(fn), list);
         });
 
         // Returns a new list containing the elements of the given list up until the first one where the function
