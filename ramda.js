@@ -976,7 +976,7 @@
 
         // Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
         // property is ignored
-        var pick = R.pick = _(function(names, obj) {
+        R.pick = _(function(names, obj) {
             return partialCopy(function(key) {return contains(key, names);}, obj);
         });
 
@@ -1045,10 +1045,10 @@
         R.alwaysZero = always(0);
 
         // A function that always returns `false`.
-        var alwaysFalse = R.alwaysFalse = always(false);
+        R.alwaysFalse = always(false);
 
         // A function that always returns `true`.
-        var alwaysTrue = R.alwaysTrue = always(true);
+        R.alwaysTrue = always(true);
 
 
 
@@ -1081,14 +1081,14 @@
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
-        var andFn = R.andFn = _(function(f, g) { // TODO: arity?
+        R.andFn = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
         });
 
         // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
         // value. (Note also that at least Oliver Twist can pronounce this one...)
-        var orFn = R.orFn = _(function(f, g) { // TODO: arity?
+        R.orFn = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
         });
 
