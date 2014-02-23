@@ -652,7 +652,7 @@
                     return list[idx];
                 }
             }
-            return false;
+            return null;
         });
 
         // Returns the index of first element of the list which matches the predicate, or `false` if no element matches.
@@ -663,7 +663,7 @@
                     return idx;
                 }
             }
-            return false;
+            return null;
         });
 
         // Returns the last element of the list which matches the predicate, or `false` if no element matches.
@@ -674,7 +674,7 @@
                     return list[idx];
                 }
             }
-            return false;
+            return null;
         });
 
         // Returns the index of last element of the list which matches the predicate, or `false` if no element matches.
@@ -685,7 +685,7 @@
                     return idx;
                 }
             }
-            return false;
+            return null;
         });
 
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
