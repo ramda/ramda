@@ -115,3 +115,23 @@ describe('foldr1', function() {
         assert.equal(something.length, 1);
     });
 });
+
+describe('foldl.idx', function() {
+    var foldl = Lib.foldl;
+    var timesIdx = function(tot, num, idx, ls) {return tot + (num * idx);};
+    var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
+
+    it('works just like normal foldl', function() {
+    });
+
+    it('passes the index as a third parameter to the predicate', function() {
+        assert.equal(foldl.idx(timesIdx, 0, [1, 2, 3, 4, 5]), 40);
+        assert.deepEqual(foldl.idx(objectify, {}, ['a', 'b', 'c', 'd', 'e']), {a: 0, b: 1, c: 2, d: 3, e: 4});
+    });
+
+    it('passes the entire list as a fourth parameter to the predicate', function() {
+    });
+
+});
+
+
