@@ -203,12 +203,24 @@
             return arr;
         };
 
-        // Internal version of `forEach`.  Possibly to be exposed later.
-        var each = _(function(fn, arr) {
-            for (var i = 0, len = arr.length; i < len; i++) {
-                fn(arr[i]);
+        // (Internal use only) The basic implementation of `each`.
+        var internalEach = _(function(useIdx, fn, list) {
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+               if (useIdx) {
+                 fn(list[idx], idx, list);
+               } else {
+                 fn(list[idx]);
+               }
             }
+            // i can't bear not to return *something*
+            return list;
         });
+
+        // Internal version of `forEach`.  Possibly to be exposed later.
+        var each = R.each = internalEach(false);
+        each.idx = internalEach(true);
+        aliasFor("each").is("forEach");
 
         // Shallow copy of an array.
         var clone = R.clone = function(list) {
