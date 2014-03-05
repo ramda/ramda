@@ -544,16 +544,23 @@
             return foldl(fn, head(list), tail(list));
         });
 
-        // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
-        var foldr = R.foldr =_(function(fn, acc, list) {
+        // (Internal use only) The basic implementation of filter.
+        var internalFoldr= _(function(useIdx, fn, acc, list) {
+            if (list && list.length === Infinity) {
+                return list.foldr(fn, acc); // TODO: figure out useIdx
+            }
             var idx = list.length;
-            while(idx--) {
-                acc = fn(acc, list[idx]);
+            while (idx--) {
+                acc = (useIdx) ? fn(acc, list[idx], idx, list) : fn(acc, list[idx]);
             }
             return acc;
-
         });
+
+        // Returns a single item, by successively calling the function with the current element and the the next
+        // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
+        var foldr = R.foldr = internalFoldr(false);
         aliasFor("foldr").is("reduceRight");
+        R.foldr.idx = internalFoldr(true);
 
 
         // Much like `foldr`/`reduceRight`, except that this takes as its starting value the last element in the list.
