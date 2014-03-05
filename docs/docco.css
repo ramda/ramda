@@ -51,17 +51,9 @@ b, strong {
   font-family: "aller-bold";
 }
 
-p {
+p, ul, ol {
   margin: 15px 0 0px;
 }
-  .annotation ul, .annotation ol {
-    margin: 25px 0;
-  }
-    .annotation ul li, .annotation ol li {
-      font-size: 14px;
-      line-height: 18px;
-      margin: 10px 0;
-    }
 
 h1, h2, h3, h4, h5, h6 {
   color: #112233;
@@ -78,7 +70,7 @@ h1 {
 
 hr {
   border: 0;
-  background: 1px #ddd;
+  background: 1px solid #ddd;
   height: 1px;
   margin: 20px 0;
 }
@@ -213,6 +205,7 @@ ul.sections > li > div {
   }
 
   ul.sections > li > div.content {
+    background: #f5f5ff;
     overflow-x:auto;
     -webkit-box-shadow: inset 0 0 5px #e5e5ee;
     box-shadow: inset 0 0 5px #e5e5ee;
@@ -313,6 +306,7 @@ ul.sections > li > div {
   ul.sections > li > div.content {
     padding: 13px;
     vertical-align: top;
+    background: #f5f5ff;
     border: none;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -382,125 +376,125 @@ pre code {
   background: #f8f8ff
 }
 
-pre .hljs-comment,
-pre .hljs-template_comment,
-pre .hljs-diff .hljs-header,
-pre .hljs-javadoc {
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .javadoc {
   color: #408080;
   font-style: italic
 }
 
-pre .hljs-keyword,
-pre .hljs-assignment,
-pre .hljs-literal,
-pre .hljs-css .hljs-rule .hljs-keyword,
-pre .hljs-winutils,
-pre .hljs-javascript .hljs-title,
-pre .hljs-lisp .hljs-title,
-pre .hljs-subst {
+pre .keyword,
+pre .assignment,
+pre .literal,
+pre .css .rule .keyword,
+pre .winutils,
+pre .javascript .title,
+pre .lisp .title,
+pre .subst {
   color: #954121;
   /*font-weight: bold*/
 }
 
-pre .hljs-number,
-pre .hljs-hexcolor {
+pre .number,
+pre .hexcolor {
   color: #40a070
 }
 
-pre .hljs-string,
-pre .hljs-tag .hljs-value,
-pre .hljs-phpdoc,
-pre .hljs-tex .hljs-formula {
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula {
   color: #219161;
 }
 
-pre .hljs-title,
-pre .hljs-id {
+pre .title,
+pre .id {
   color: #19469D;
 }
-pre .hljs-params {
+pre .params {
   color: #00F;
 }
 
-pre .hljs-javascript .hljs-title,
-pre .hljs-lisp .hljs-title,
-pre .hljs-subst {
+pre .javascript .title,
+pre .lisp .title,
+pre .subst {
   font-weight: normal
 }
 
-pre .hljs-class .hljs-title,
-pre .hljs-haskell .hljs-label,
-pre .hljs-tex .hljs-command {
+pre .class .title,
+pre .haskell .label,
+pre .tex .command {
   color: #458;
   font-weight: bold
 }
 
-pre .hljs-tag,
-pre .hljs-tag .hljs-title,
-pre .hljs-rules .hljs-property,
-pre .hljs-django .hljs-tag .hljs-keyword {
+pre .tag,
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword {
   color: #000080;
   font-weight: normal
 }
 
-pre .hljs-attribute,
-pre .hljs-variable,
-pre .hljs-instancevar,
-pre .hljs-lisp .hljs-body {
+pre .attribute,
+pre .variable,
+pre .instancevar,
+pre .lisp .body {
   color: #008080
 }
 
-pre .hljs-regexp {
+pre .regexp {
   color: #B68
 }
 
-pre .hljs-class {
+pre .class {
   color: #458;
   font-weight: bold
 }
 
-pre .hljs-symbol,
-pre .hljs-ruby .hljs-symbol .hljs-string,
-pre .hljs-ruby .hljs-symbol .hljs-keyword,
-pre .hljs-ruby .hljs-symbol .hljs-keymethods,
-pre .hljs-lisp .hljs-keyword,
-pre .hljs-tex .hljs-special,
-pre .hljs-input_number {
+pre .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .lisp .keyword,
+pre .tex .special,
+pre .input_number {
   color: #990073
 }
 
-pre .hljs-builtin,
-pre .hljs-constructor,
-pre .hljs-built_in,
-pre .hljs-lisp .hljs-title {
+pre .builtin,
+pre .constructor,
+pre .built_in,
+pre .lisp .title {
   color: #0086b3
 }
 
-pre .hljs-preprocessor,
-pre .hljs-pi,
-pre .hljs-doctype,
-pre .hljs-shebang,
-pre .hljs-cdata {
+pre .preprocessor,
+pre .pi,
+pre .doctype,
+pre .shebang,
+pre .cdata {
   color: #999;
   font-weight: bold
 }
 
-pre .hljs-deletion {
+pre .deletion {
   background: #fdd
 }
 
-pre .hljs-addition {
+pre .addition {
   background: #dfd
 }
 
-pre .hljs-diff .hljs-change {
+pre .diff .change {
   background: #0086b3
 }
 
-pre .hljs-chunk {
+pre .chunk {
   color: #aaa
 }
 
-pre .hljs-tex .hljs-formula {
+pre .tex .formula {
   opacity: 0.5;
 }

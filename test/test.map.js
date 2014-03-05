@@ -6,19 +6,44 @@ describe('map', function() {
     var times2 = function(x) {return x * 2;};
     var add1 = function(x) {return x + 1;};
 
-    it('should map simple functions over arrays', function() {
+    it('maps simple functions over arrays', function() {
         assert.deepEqual(map(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var inc = map(add1);
         assert.deepEqual(inc([1, 2, 3]), [2, 3, 4]);
     });
 
-    // TODO:  do we need to use a function constructor version of curry to make this work?
-    it('should correctly report the arity of curried versions', function() {
+    it('correctly reports the arity of curried versions', function() {
         var inc = map(add1);
         assert.equal(inc.length, 1);
     });
 
+});
+
+describe('map.idx', function() {
+    var map = Lib.map;
+    var times2 = function(x) {return x * 2;};
+    var addIdx = function(x, idx) {return x + idx;};
+    var squareEnds = function(x, idx, list) {
+        return (idx === 0 || idx === list.length - 1) ? x * x : x;
+    };
+
+    it('works just like a normal map', function() {
+        assert.deepEqual(map.idx(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
+    });
+
+    it('passes the index as a second parameter to the callback', function() {
+        assert.deepEqual(map.idx(addIdx, [8, 6, 7, 5, 3, 0, 9]), [8 + 0, 6 + 1, 7 + 2, 5 + 3, 3 + 4, 0 + 5, 9 + 6]);
+    });
+
+    it('passes the entire list as a third parameter to the callback', function() {
+        assert.deepEqual(map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
+    });
+
+    it('is automatically curried', function() {
+        var makeSquareEnds = map.idx(squareEnds);
+        assert.deepEqual(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
+    });
 });
