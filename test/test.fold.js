@@ -134,4 +134,34 @@ describe('foldl.idx', function() {
 
 });
 
+describe('foldr.idx', function() {
+    var foldr = Lib.foldr;
+
+    it('folds lists in the right order', function() {
+        assert.equal(foldr.idx(function(a, b, idx, list) {return a + idx + b;}, '', ['a', 'b', 'c', 'd']), '3d2c1b0a');
+    });
+
+    it('folds simple functions over arrays with the supplied accumulator', function() {
+        assert.deepEqual(foldr.idx(function(acc, n, i) { return acc.concat([i, n]); }, [], [12, 4, 10, 6]), [3, 6, 2, 10, 1, 4, 0, 12]);
+    });
+
+    it('returns the accumulator for an empty array', function() {
+        assert.equal(foldr.idx(function(a, n, i, ls) { return a.concat(i); }, [], []), 0);
+    });
+
+    it('should be automatically curried', function() {
+        var something = foldr.idx(function(acc, b, i) { return acc += i + b; }, 54);
+        assert.equal(something([12, 4, 10, 6]), 92);
+    });
+
+    it('should be aliased by `reduceRight`', function() {
+        assert.strictEqual(Lib.reduceRight.idx, foldr.idx);
+    });
+
+    it('should correctly report the arity of curried versions', function() {
+        var something = foldr.idx(function(acc, b, i) { return acc += i + b; }, 0);
+        assert.equal(something.length, 1);
+    });
+});
+
 
