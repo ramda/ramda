@@ -227,6 +227,9 @@
             return list.concat();
         };
 
+        R.cloneDeep = function(obj) {
+          return JSON.parse(JSON.stringify(obj));
+        };
 
         // Core Functions
         // --------------
