@@ -113,6 +113,18 @@ var primes =  (function () {
     }
 }());
 
+var isPrime = (function() {
+    var maxIndex = 1, maxPrime = nthPrime(maxIndex), cache = {};
+    cache[maxPrime] = true;
+    return function(n) {
+        while (maxPrime < n) {
+            maxPrime = nthPrime(++maxIndex);
+            cache[maxPrime] = true;
+        }
+        return !!cache[n];
+    }
+}());
+
 // brain-dead implementation of BigInteger, just like you did in grade school.
 // BigInteger represents, e.g. 152, as ['2', '5', '1'], a reversed list of String digits.  If a String representation is
 // needed, call `bigInt.join('').reverse()`.

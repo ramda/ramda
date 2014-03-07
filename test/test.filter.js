@@ -34,7 +34,7 @@ describe('filter.idx', function() {
     });
 
     it('should be automatically curried', function() {
-        var everyOtherPosition = filter(everyOther);
+        var everyOtherPosition = filter.idx(everyOther);
         assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [8, 7, 3, 9]);
     });
 });
