@@ -1070,6 +1070,12 @@
             return partialCopy(function(key) {return !contains(key, names);}, obj);
         });
 
+        // Returns a new object that mixes in the own properties of two objects.
+        R.mixin = _(function(a, b) {
+          var mixed = pickAll(R.keys(a), a);
+          each(function(key) { mixed[key] = b[key]; }, R.keys(b));
+          return mixed;
+        });
 
         // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
         R.eqProps = _(function(prop, obj1, obj2) {return obj1[prop] === obj2[prop];});
