@@ -160,3 +160,19 @@ describe('where', function() {
       assert.equal(where(spec, test2), true);
     });
 });
+
+describe('mixin', function() {
+  var mixin = Lib.mixin;
+
+  it('takes two objects, merges their own properties and returns a new object', function() {
+    var a = {w: 1, x: 2};
+    var b = {y: 3, z: 4};
+    assert.deepEqual(mixin(a, b), {w: 1, x: 2, y: 3, z: 4});
+  });
+
+  it('overrides properties in the first object with properties in the second object', function() {
+    var a = {w: 1, x: 2};
+    var b = {w: 100, y: 3, z: 4};
+    assert.deepEqual(mixin(a, b), {w: 100, x: 2, y: 3, z: 4});
+  });
+});
