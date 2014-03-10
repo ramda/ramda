@@ -75,11 +75,11 @@ describe('head', function() {
 describe('tail', function() {
     var tail = Lib.tail;
 
-    it('returns null for an empty list', function() {
-        assert.equal(tail([]), null);
+    it('returns an empty list for an empty list', function() {
+        assert.deepEqual(tail([]), []);
     });
-    it('returns null for no arguments', function() {
-        assert.equal(tail(), null);
+    it('returns an empty list for no arguments', function() {
+        assert.deepEqual(tail(), []);
     });
     it('returns a new list containing all the elements after the first element of a list', function() {
         assert.deepEqual(['b', 'c', 'd'], tail(['a', 'b', 'c', 'd']));
