@@ -208,8 +208,8 @@ describe('maxWith', function() {
         assert.deepEqual(maxWith(comparator, [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
     });
 
-    it('returns undefined for the empty list', function() {
-        assert.equal(typeof maxWith(comparator, []), "undefined");
+    it('returns null for the empty list', function() {
+        assert.equal(maxWith(comparator, []), null);
     });
 
     it('is properly curried', function() {
@@ -226,8 +226,8 @@ describe('minWith', function() {
         assert.deepEqual(minWith(comparator, [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});
     });
 
-    it('returns undefined for the empty list', function() {
-        assert.equal(typeof minWith(comparator, []), "undefined");
+    it('returns null for the empty list', function() {
+        assert.equal(minWith(comparator, []), null);
     });
 
     it('is properly curried', function() {

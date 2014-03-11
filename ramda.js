@@ -260,7 +260,7 @@
             if (arr.length === Infinity) {
                 return arr.tail();
             }
-            return (arr.length > 1) ? slice(arr, 1) : null;
+            return (arr.length > 1) ? slice(arr, 1) : [];
         };
         aliasFor("tail").is("cdr");
 
@@ -1285,7 +1285,7 @@
         // Determines the largest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator
         R.maxWith = _(function(comparator, list) {
             if (!isArray(list) || !list.length) {
-                return undef;
+                return null;
             }
             var idx = 0, max = list[idx];
             while (++idx < list.length) {
@@ -1300,7 +1300,7 @@
         // Determines the smallest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator
         R.minWith = _(function(comparator, list) {
             if (!isArray(list) || !list.length) {
-                return undef;
+                return null;
             }
             var idx = 0, max = list[idx];
             while (++idx < list.length) {
