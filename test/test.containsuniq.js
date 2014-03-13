@@ -31,3 +31,18 @@ describe('uniq', function() {
 
 });
 
+describe('isSet', function() {
+    var isSet = Lib.isSet;
+
+    it('returns true if a list is composed of unique elements', function() {
+        var arr = [1,2,3,1,2,3,1,2,3];
+        assert.equal(isSet(arr), false);
+        assert.equal(isSet([3,1,4,2,5,7,9]), true);
+    });
+
+    it('returns true for an empty array', function() {
+        assert.equal(isSet([]), true);
+    });
+
+});
+
