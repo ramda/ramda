@@ -814,6 +814,10 @@
             return foldr(function(acc, x) { return (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         };
 
+        R.isSet = function(list) {
+            return uniq(list).length === list.length;
+        };
+
         // Returns a new list containing only one copy of each element in the original list, based upon the value
         // returned by applying the supplied predicate to two list elements.   Equality is strict here,  meaning
         // reference equality for objects and non-coercing equality for primitives.
