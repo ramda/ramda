@@ -18,8 +18,8 @@ describe('find', function() {
         assert.equal(find(xGt100, a), obj2);
     });
 
-    it("returns `null` when no element satisfies the predicate", function() {
-        assert.equal(find(even, 'zing'), null);
+    it("returns `undefined` when no element satisfies the predicate", function() {
+        assert.equal(find(even, 'zing'), undefined);
     });
 });
 
@@ -40,8 +40,8 @@ describe('findIndex', function() {
         assert.equal(findIndex(xGt100, a), 10);
     });
 
-    it("returns `null` when no element satisfies the predicate", function() {
-        assert.equal(findIndex(even, 'zing'), null);
+    it("returns `undefined` when no element satisfies the predicate", function() {
+        assert.equal(findIndex(even, 'zing'), undefined);
     });
 });
 
@@ -62,8 +62,8 @@ describe('findLast', function() {
         assert.equal(findLastIndex(xGt100, a), 10);
     });
 
-    it("returns `null` when no element satisfies the predicate", function() {
-        assert.equal(findLastIndex(even, 'zing'), null);
+    it("returns `undefined` when no element satisfies the predicate", function() {
+        assert.equal(findLastIndex(even, 'zing'), undefined);
     });
 });
 

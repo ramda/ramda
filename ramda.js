@@ -248,7 +248,7 @@
         //  Returns the first element of a list
         var head = R.head = function(arr) {
             arr = arr || EMPTY;
-            return (arr.length) ? arr[0] : null; 
+            return arr[0]; 
         };
         aliasFor("head").is("car"); 
 
@@ -722,7 +722,7 @@
         });
         aliasFor('skip').is('drop');
 
-        // Returns the first element of the list which matches the predicate, or `false` if no element matches.
+        // Returns the first element of the list which matches the predicate, or `undefined` if no element matches.
         R.find = _(function(fn, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
@@ -730,10 +730,10 @@
                     return list[idx];
                 }
             }
-            return null;
+            return undef;
         });
 
-        // Returns the index of first element of the list which matches the predicate, or `false` if no element matches.
+        // Returns the index of first element of the list which matches the predicate, or `undefined` if no element matches.
         R.findIndex = _(function(fn, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
@@ -741,10 +741,10 @@
                     return idx;
                 }
             }
-            return null;
+            return undef;
         });
 
-        // Returns the last element of the list which matches the predicate, or `false` if no element matches.
+        // Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
         R.findLast = _(function(fn, list) {
             var idx = list.length;
             while (--idx) {
@@ -752,10 +752,10 @@
                     return list[idx];
                 }
             }
-            return null;
+            return undef;
         });
 
-        // Returns the index of last element of the list which matches the predicate, or `false` if no element matches.
+        // Returns the index of last element of the list which matches the predicate, or `undefined` if no element matches.
         R.findLastIndex = _(function(fn, list) {
             var idx = list.length;
             while (--idx) {
@@ -763,7 +763,7 @@
                     return idx;
                 }
             }
-            return null;
+            return undef;
         });
 
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
@@ -951,7 +951,7 @@
 
         // Returns the nth element of a list (zero-indexed)
         R.nth = _(function(n, list) {
-          return (list[n] === undef) ? null : list[n];
+          return list[n];
         });
 
         // Makes a comparator function out of a function that reports whether the first element is less than the second.
