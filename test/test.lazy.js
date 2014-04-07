@@ -72,3 +72,24 @@ describe('filter for a generator', function() {
         assert.deepEqual(take(5, filter(even, fibonacci)), [0, 2, 8, 34, 144]);
     });
 });
+
+describe('streamOf', function() {
+    var take = Lib.take, streamOf = Lib.streamOf;
+
+    it("returns a lazy list of identical values", function() {
+        assert.deepEqual(take(5, streamOf(0)), [0, 0, 0, 0, 0]);
+    });
+
+    it("can accept any value, including `null`", function() {
+        assert.deepEqual(take(3, streamOf(null)), [null, null, null]);
+    });
+
+    it("can accept any value, including `undefined`", function() {
+        assert.deepEqual(take(4, streamOf(undefined)), [undefined, undefined, undefined, undefined]);
+    });
+
+    it("can accept any value, including an arbitrary object", function() {
+        assert.deepEqual(take(2, streamOf({a: 10, b: {c: 20}})), [{a: 10, b: {c: 20}}, {a: 10, b: {c: 20}}]);
+    });
+});
+
