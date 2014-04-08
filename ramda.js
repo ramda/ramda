@@ -396,10 +396,15 @@
         }());
 
         // Returns a lazy list of identical values, probably most useful with `take` for initializing a list.
-        R.streamOf = function(value) {
+        var repeat = R.repeat = function(value) {
             var fn = always(value);
             return generator(null, fn, fn);
         };
+
+        // Returns a fixed list (of size `n`) of identical values.
+        repeat.nTimes = _(function(value, n) {
+            return take(n, repeat(value));
+        });
 
 
         // Function functions :-)
@@ -432,13 +437,6 @@
                 return fn.apply(this, [b, a].concat(slice(arguments, 2)));
             });
         };
-
-//        // Returns a new function much like the supplied one except that the first argument is cycled to the end.
-//        R.cycle = function(fn) {
-//            return nAry(fn.length, function() {
-//                return fn.apply(this, slice(arguments, 1, fn.length).concat(arguments[0]));
-//            });
-//        };
 
         // Creates a new function that acts like the supplied function except that the left-most parameters are
         // pre-filled.
@@ -694,7 +692,7 @@
         });
 
         // Returns a new list containing the first `n` elements of the given list.
-        R.take = _(function(n, list) {
+        var take = R.take = _(function(n, list) {
             if (list && list.length === Infinity) {
                 return list.take(n);
             }

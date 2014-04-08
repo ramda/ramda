@@ -73,23 +73,40 @@ describe('filter for a generator', function() {
     });
 });
 
-describe('streamOf', function() {
-    var take = Lib.take, streamOf = Lib.streamOf;
+describe('repeat', function() {
+    var take = Lib.take, repeat = Lib.repeat;
 
     it("returns a lazy list of identical values", function() {
-        assert.deepEqual(take(5, streamOf(0)), [0, 0, 0, 0, 0]);
+        assert.deepEqual(take(5, repeat(0)), [0, 0, 0, 0, 0]);
     });
 
     it("can accept any value, including `null`", function() {
-        assert.deepEqual(take(3, streamOf(null)), [null, null, null]);
+        assert.deepEqual(take(3, repeat(null)), [null, null, null]);
     });
 
     it("can accept any value, including `undefined`", function() {
-        assert.deepEqual(take(4, streamOf(undefined)), [undefined, undefined, undefined, undefined]);
+        assert.deepEqual(take(4, repeat(undefined)), [undefined, undefined, undefined, undefined]);
     });
 
     it("can accept any value, including an arbitrary object", function() {
-        assert.deepEqual(take(2, streamOf({a: 10, b: {c: 20}})), [{a: 10, b: {c: 20}}, {a: 10, b: {c: 20}}]);
+        assert.deepEqual(take(2, repeat({a: 10, b: {c: 20}})), [{a: 10, b: {c: 20}}, {a: 10, b: {c: 20}}]);
+    });
+});
+
+describe('repeat.nTimes', function() {
+    var repeat = Lib.repeat;
+
+    it("returns a lazy list of identical values", function() {
+        assert.deepEqual(repeat.nTimes(0, 5), [0, 0, 0, 0, 0]);
+    });
+
+    it("can accept any value, including `null`", function() {
+        assert.deepEqual(repeat.nTimes(null, 3), [null, null, null]);
+    });
+
+    it("is automatically curried", function() {
+        var nTrues = repeat.nTimes(true);
+        assert.deepEqual(nTrues(4), [true, true, true, true]);
     });
 });
 
