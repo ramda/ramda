@@ -1369,7 +1369,7 @@
 
         // Finds the last index of a substring in a string, returning -1 if it's not present
         //
-        //     strIndexOf('a', 'banana split') //=> 2
+        //     strLastIndexOf('a', 'banana split') //=> 5
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
         // The uppercase version of a string.
