@@ -1125,8 +1125,8 @@
 
         // --------
 
-        // Expose the functions from ramda as properties on another object.  If this object is the global object, then
-        // it will be as though the eweda functions are global functions.
+        // Expose the functions from ramda as properties on another object.  If the passed-in object is the 
+        // global object, or the passed-in object is "falsy", then the ramda functions become global functions.
         R.installTo = function(obj) {
             each(function(key) {
                 (obj || global)[key] = R[key];
