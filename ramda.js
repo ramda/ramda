@@ -5,7 +5,7 @@
 
 // Ramda
 // -----
-// A practical functional library for Javascript programmers.  This is a collection of tools to make it easier to
+// A practical functional library for Javascript programmers.  Ramda is a collection of tools to make it easier to
 // use Javascript as a functional programming language.  (The name is just a silly play on `lambda`, even though we're
 // not actually involved in the manipulation of lambda expressions.)
 
@@ -36,7 +36,7 @@
             return fn;
         };
 
-        // `slice` implemented iteratively for performance
+        // (private) `slice` implemented iteratively for performance
         var slice = function (args, from, to) {
             var i, arr = [];
             from = from || 0;
@@ -47,6 +47,7 @@
             return arr;
         };
 
+        // (private)
         var isArray = function(val) {return Object.prototype.toString.call(val) === "[object Array]";};
 
         // Returns a curried version of the supplied function.  For example:
@@ -217,16 +218,18 @@
             return list;
         });
 
-        // Internal version of `forEach`.  Possibly to be exposed later.
+        // Loop over a list for side effects. Nasty, yes, but this is a *practical* library
         var each = R.each = internalEach(false);
         each.idx = internalEach(true);
         aliasFor("each").is("forEach");
 
-        // Shallow copy of an array.
+        // Create a shallow copy of an array.
         var clone = R.clone = function(list) {
             return list.concat();
         };
 
+        // Create a shallow copy of an array.
+        // (TODO: find a more performant cloneDeep)
         R.cloneDeep = function(obj) {
           return JSON.parse(JSON.stringify(obj));
         };
@@ -279,11 +282,7 @@
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
         var merge = R.merge = _(function(list1, list2) {
-            if (isEmpty(list1)) {
-                return clone(list2);
-            } else {
-                return list1.concat(list2);
-            }
+            return (isEmpty(list1)) ? clone(list2) : list1.concat(list2);
         });
         aliasFor("merge").is("concat");
 
@@ -818,6 +817,7 @@
             return foldr(function(acc, x) { return (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
         };
 
+        // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function(list) {
             return uniq(list).length === list.length;
         };
@@ -832,7 +832,7 @@
 
         // Returns a new list by plucking the same named property off all objects in the list supplied.
         var pluck = R.pluck = _(function(p, list) {return map(prop(p), list);});
-
+        
         // Returns a list that contains a flattened version of the supplied list.  For example:
         //
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
@@ -953,7 +953,7 @@
             return ls;
         });
 
-        // Returns the nth element of a list (zero-indexed)
+        // Returns the `n`th element of a list (zero-indexed)
         R.nth = _(function(n, list) {
           return list[n];
         });
@@ -994,7 +994,7 @@
             }
             return x;
         });
-        aliasFor("tap").is("K"); // TODO: are we sure? Not necessary, but convenient, IMHO.
+        aliasFor("tap").is("K");
 
         // Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
         // non-coercing equality for primitives.
@@ -1088,8 +1088,8 @@
         // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
         R.eqProps = _(function(prop, obj1, obj2) {return obj1[prop] === obj2[prop];});
 
-        // `where` takes a spec object and a test object and returns true iof the test satisfies the spec, 
-        // else false. Any property on the spec that is not a function is interpreted as an equality 
+        // `where` takes a spec object and a test object and returns true if the test satisfies the spec. 
+        // Any property on the spec that is not a function is interpreted as an equality 
         // relation. For example:
         //
         //     var spec = {x: 2};
@@ -1208,7 +1208,7 @@
         };
 
 
-      // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
+        // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
         R.anyPredicates = function(preds /*, val1, val12, ... */) {
             var args = slice(arguments, 1);
             var maxArity = max(map(function(f) { return f.length; }, preds));
@@ -1428,29 +1428,29 @@
 
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
         // determined according to the value returned by applying the supplied predicate to two list elements.
-        R.unionWith = function(pred, list1, list2) {
+        R.unionWith = _(function(pred, list1, list2) {
             return uniqWith(pred, merge(list1, list2));
-        };
+        });
 
         // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
-        R.difference = function(first, second) {return uniq(reject(flip(contains)(second))(first));};
+        R.difference = _(function(first, second) {return uniq(reject(flip(contains)(second))(first));});
 
         // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
         // Duplication is determined according to the value returned by applying the supplied predicate to two list
         // elements.
-        R.differenceWith = function(pred, first, second) {
+        R.differenceWith = _(function(pred, first, second) {
             return uniqWith(pred)(reject(flip(containsWith(pred))(second), first));
-        };
+        });
 
         // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
-        R.intersection = function(list1, list2) {
+        R.intersection = _(function(list1, list2) {
             return uniq(filter(flip(contains)(list1), list2));
-        };
+        });
 
         // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
         // Duplication is determined according to the value returned by applying the supplied predicate to two list
         // elements.
-        R.intersectionWith = function(pred, list1, list2) {
+        R.intersectionWith = _(function(pred, list1, list2) {
             var results = [], idx = -1;
             while (++idx < list1.length) {
                 if (containsWith(pred, list1[idx], list2)) {
@@ -1458,7 +1458,7 @@
                 }
             }
             return uniqWith(pred, results);
-        };
+        });
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
         // item in the list supplied, and `key` is the result of applying the supplied function to that item.
