@@ -6,8 +6,7 @@
 // Ramda
 // -----
 // A practical functional library for Javascript programmers.  Ramda is a collection of tools to make it easier to
-// use Javascript as a functional programming language.  (The name is just a silly play on `lambda`, even though we're
-// not actually involved in the manipulation of lambda expressions.)
+// use Javascript as a functional programming language.  (The name is just a silly play on `lambda`.)
 
 // Basic Setup
 // -----------
@@ -1192,10 +1191,11 @@
 
 
         // TODO: is there a way to unify allPredicates and anyPredicates? they are sooooo similar
+
         // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
         R.allPredicates = function(preds /*, val1, val12, ... */) {
             var args = slice(arguments, 1);
-            var maxArity = max(map(function(f) { return f.length; }, preds));
+            var maxArity = max(pluck("length", preds));
 
             var andPreds = arity(maxArity, function() {
                 var idx = -1;
@@ -1211,7 +1211,7 @@
         // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
         R.anyPredicates = function(preds /*, val1, val12, ... */) {
             var args = slice(arguments, 1);
-            var maxArity = max(map(function(f) { return f.length; }, preds));
+            var maxArity = max(pluck("length", preds));
 
             var orPreds = arity(maxArity, function() {
                 var idx = -1;
@@ -1247,8 +1247,8 @@
         // Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
         // version might be useful, often the curried version of `subtractN` might be what's wanted.
         //
-        //     var hundredMinus = subtract(100);
-        //     hundredMinus(20) ; // => 80
+        //     var complementaryAngle = subtract(90);
+        //     complementaryAngle(30) ; // => 60
         var subtract = R.subtract = _(function(a, b) {return a - b;});
 
         // Reversed version of `subtract`, where first parameter is subtracted from the second.  The curried version of
@@ -1290,7 +1290,7 @@
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
         var max = R.max = function(list) {return Math.max.apply(null, list);};
 
-        // Determines the largest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator
+        // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = _(function(comparator, list) {
             if (!isArray(list) || !list.length) {
                 return null;
@@ -1305,7 +1305,8 @@
         });
 
         // TODO: combine this with maxWith?
-        // Determines the smallest of a list of numbers (or elements that can be cast to numbers) using the supplied comparator
+
+        // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.minWith = _(function(comparator, list) {
             if (!isArray(list) || !list.length) {
                 return null;
