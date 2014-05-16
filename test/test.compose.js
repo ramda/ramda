@@ -91,3 +91,12 @@ describe('useWith', function() {
 
 });
 
+describe('fork', function() {
+    var fork = Lib.fork, add = Lib.add;
+    var mult = function(a, b) {return a * b;};
+
+    it('passes the results of applying the arguments individually to two separate functions into a single one', function() {
+        assert.equal(fork(mult, add(1), add(3))(2), 15); // mult(add1(2), add3(2)) = mult(3, 5) = 3 * 15;
+    });
+});
+
