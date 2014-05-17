@@ -1269,6 +1269,9 @@
         //     half(42); // => 21
         R.divideBy = flip(divide);
 
+        // Divides the second parameter by the first and returns the remainder.
+        R.modulo = _(function(a, b) { return a % b; });
+
         // Adds together all the elements of a list.
         R.sum = foldl(add, 0);
 

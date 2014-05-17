@@ -80,6 +80,26 @@ describe('divideBy', function() {
     });
 });
 
+describe('modulo', function() {
+  var modulo = Lib.modulo;
+  it('divides the first param by the second and returns the remainder', function() {
+    assert.equal(modulo(100, 2), 0);
+    assert.equal(modulo(100, 3), 1);
+    assert.equal(modulo(100, 17), 15);
+  });
+
+  it('is automatically curried', function() {
+    var modOf120by = modulo(120);
+    assert.equal(typeof modOf120by, 'function');
+    assert.equal(modOf120by(3), 0);
+    assert.equal(modOf120by(19), 6);
+  });
+
+  it('preserves javascript-style modulo evaluation for negative numbers', function() {
+    assert.equal(modulo(-5, 4), -1);
+  });
+});
+
 describe('sum', function() {
     var sum = Lib.sum;
 
