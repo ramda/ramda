@@ -3184,7 +3184,7 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.modulo = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span> <span class="hljs-keyword">return</span> a % b; });</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> modulo = R.modulo = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span> <span class="hljs-keyword">return</span> a % b; });</pre></div></div>
             
         </li>
         
@@ -3195,11 +3195,15 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-166">&#182;</a>
               </div>
-              <p>Adds together all the elements of a list.</p>
-
+              <p>Reversed version of <code>modulo</code>, where the second parameter is divided by the first.  The curried version of
+this one might be more useful than that of <code>modulo</code>.  For instance:</p>
+<pre><code><span class="hljs-keyword">var</span> isOdd = moduloBy(<span class="hljs-number">2</span>);
+isOdd(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 0</span>
+isOdd(<span class="hljs-number">21</span>); <span class="hljs-comment">// =&gt; 1</span>
+</code></pre>
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.sum = foldl(add, <span class="hljs-number">0</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.moduloBy = flip(modulo);</pre></div></div>
             
         </li>
         
@@ -3210,11 +3214,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-167">&#182;</a>
               </div>
-              <p>Multiplies together all the elements of a list.</p>
+              <p>Adds together all the elements of a list.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.product = foldl(multiply, <span class="hljs-number">1</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.sum = foldl(add, <span class="hljs-number">0</span>);</pre></div></div>
             
         </li>
         
@@ -3225,11 +3229,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-168">&#182;</a>
               </div>
-              <p>Returns true if the first parameter is less than the second.</p>
+              <p>Multiplies together all the elements of a list.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.lt = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &lt; b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.product = foldl(multiply, <span class="hljs-number">1</span>);</pre></div></div>
             
         </li>
         
@@ -3240,11 +3244,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-169">&#182;</a>
               </div>
-              <p>Returns true if the first parameter is less than or equal to the second.</p>
+              <p>Returns true if the first parameter is less than the second.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.lte = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &lt;= b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.lt = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &lt; b;});</pre></div></div>
             
         </li>
         
@@ -3255,11 +3259,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-170">&#182;</a>
               </div>
-              <p>Returns true if the first parameter is greater than the second.</p>
+              <p>Returns true if the first parameter is less than or equal to the second.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.gt = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &gt; b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.lte = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &lt;= b;});</pre></div></div>
             
         </li>
         
@@ -3270,11 +3274,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-171">&#182;</a>
               </div>
-              <p>Returns true if the first parameter is greater than or equal to the second.</p>
+              <p>Returns true if the first parameter is greater than the second.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.gte = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &gt;= b;});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.gt = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &gt; b;});</pre></div></div>
             
         </li>
         
@@ -3285,11 +3289,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-172">&#182;</a>
               </div>
-              <p>Determines the largest of a list of numbers (or elements that can be cast to numbers)</p>
+              <p>Returns true if the first parameter is greater than or equal to the second.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> max = R.max = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(list)</span> {</span><span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-literal">null</span>, list);};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.gte = _(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(a, b)</span> {</span><span class="hljs-keyword">return</span> a &gt;= b;});</pre></div></div>
             
         </li>
         
@@ -3299,6 +3303,21 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-173">&#182;</a>
+              </div>
+              <p>Determines the largest of a list of numbers (or elements that can be cast to numbers)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> max = R.max = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(list)</span> {</span><span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-literal">null</span>, list);};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-174">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-174">&#182;</a>
               </div>
               <p>Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator</p>
 
@@ -3320,11 +3339,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-174">
+        <li id="section-175">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-174">&#182;</a>
+                <a class="pilcrow" href="#section-175">&#182;</a>
               </div>
               <p>TODO: combine this with maxWith?</p>
 
@@ -3333,11 +3352,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-175">
+        <li id="section-176">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-175">&#182;</a>
+                <a class="pilcrow" href="#section-176">&#182;</a>
               </div>
               <p>Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator</p>
 
@@ -3359,11 +3378,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-176">
+        <li id="section-177">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-176">&#182;</a>
+                <a class="pilcrow" href="#section-177">&#182;</a>
               </div>
               <p>Determines the smallest of a list of numbers (or elements that can be cast to numbers)</p>
 
@@ -3374,26 +3393,13 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-177">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-177">&#182;</a>
-              </div>
-              <h2 id="string-functions">String Functions</h2>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-178">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-178">&#182;</a>
               </div>
-              <p>Much of the String.prototype API exposed as simple functions.</p>
+              <h2 id="string-functions">String Functions</h2>
 
             </div>
             
@@ -3406,7 +3412,7 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-179">&#182;</a>
               </div>
-              <hr>
+              <p>Much of the String.prototype API exposed as simple functions.</p>
 
             </div>
             
@@ -3419,7 +3425,8 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-180">&#182;</a>
               </div>
-              
+              <hr>
+
             </div>
             
         </li>
@@ -3431,6 +3438,18 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-181">&#182;</a>
               </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-182">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-182">&#182;</a>
+              </div>
               <p>A substring of a String:</p>
 <pre><code>substring(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-string">"abcdefghijklm"</span>); <span class="hljs-comment">//=&gt; "cde"</span>
 </code></pre>
@@ -3441,11 +3460,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-182">
+        <li id="section-183">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-182">&#182;</a>
+                <a class="pilcrow" href="#section-183">&#182;</a>
               </div>
               <p>The trailing substring of a String starting with the nth character:</p>
 <pre><code>substringFrom(<span class="hljs-number">8</span>, <span class="hljs-string">"abcdefghijklm"</span>); <span class="hljs-comment">//=&gt; "ijklm"</span>
@@ -3457,11 +3476,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-183">
+        <li id="section-184">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-183">&#182;</a>
+                <a class="pilcrow" href="#section-184">&#182;</a>
               </div>
               <p>The leading substring of a String ending before the nth character:</p>
 <pre><code>substringTo(<span class="hljs-number">8</span>, <span class="hljs-string">"abcdefghijklm"</span>); <span class="hljs-comment">//=&gt; "abcdefgh"</span>
@@ -3473,11 +3492,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-184">
+        <li id="section-185">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-184">&#182;</a>
+                <a class="pilcrow" href="#section-185">&#182;</a>
               </div>
               <p>The character at the nth position in a String:</p>
 <pre><code>charAt(<span class="hljs-number">8</span>, <span class="hljs-string">"abcdefghijklm"</span>); <span class="hljs-comment">//=&gt; "i"</span>
@@ -3489,11 +3508,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-185">
+        <li id="section-186">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-185">&#182;</a>
+                <a class="pilcrow" href="#section-186">&#182;</a>
               </div>
               <p>The ascii code of the character at the nth position in a String:</p>
 <pre><code>charCodeAt(<span class="hljs-number">8</span>, <span class="hljs-string">"abcdefghijklm"</span>); <span class="hljs-comment">//=&gt; 105</span>
@@ -3506,11 +3525,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-186">
+        <li id="section-187">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-186">&#182;</a>
+                <a class="pilcrow" href="#section-187">&#182;</a>
               </div>
               <p>Tests a regular expression agains a String</p>
 <pre><code>match(<span class="hljs-regexp">/([a-z]a)/g</span>, <span class="hljs-string">"bananas"</span>); <span class="hljs-comment">//=&gt; ["ba", "na", "na"]</span>
@@ -3522,11 +3541,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-187">
+        <li id="section-188">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-187">&#182;</a>
+                <a class="pilcrow" href="#section-188">&#182;</a>
               </div>
               <p>Finds the index of a substring in a string, returning -1 if it’s not present</p>
 <pre><code>strIndexOf(<span class="hljs-string">'c'</span>, <span class="hljs-string">'abcdefg) //=&gt; 2</span>
@@ -3538,11 +3557,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-188">
+        <li id="section-189">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-188">&#182;</a>
+                <a class="pilcrow" href="#section-189">&#182;</a>
               </div>
               <p>Finds the last index of a substring in a string, returning -1 if it’s not present</p>
 <pre><code>strLastIndexOf(<span class="hljs-string">'a'</span>, <span class="hljs-string">'banana split'</span>) <span class="hljs-comment">//=&gt; 5</span>
@@ -3554,11 +3573,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-189">
+        <li id="section-190">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-189">&#182;</a>
+                <a class="pilcrow" href="#section-190">&#182;</a>
               </div>
               <p>The uppercase version of a string.</p>
 <pre><code>toUpperCase(<span class="hljs-string">'abc'</span>) <span class="hljs-comment">//=&gt; 'ABC'</span>
@@ -3570,11 +3589,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-190">
+        <li id="section-191">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-190">&#182;</a>
+                <a class="pilcrow" href="#section-191">&#182;</a>
               </div>
               <p>The lowercase version of a string.</p>
 <pre><code>toLowerCase(<span class="hljs-string">'XYZ'</span>) <span class="hljs-comment">//=&gt; 'xyz'</span>
@@ -3586,11 +3605,11 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-191">
+        <li id="section-192">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-191">&#182;</a>
+                <a class="pilcrow" href="#section-192">&#182;</a>
               </div>
               <p>The string split into substring at the specified token</p>
 <pre><code>split(<span class="hljs-string">'.'</span>, <span class="hljs-string">'a.b.c.xyz.d'</span>) <span class="hljs-comment">//=&gt;</span>
@@ -3603,27 +3622,13 @@ half(<span class="hljs-number">42</span>); <span class="hljs-comment">// =&gt; 2
         </li>
         
         
-        <li id="section-192">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-192">&#182;</a>
-              </div>
-              <h2 id="data-analysis-and-grouping-functions">Data Analysis and Grouping Functions</h2>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-193">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-193">&#182;</a>
               </div>
-              <p>Functions performing SQL-like actions on lists of objects.  These do not have any SQL-like optimizations
-performed on them, however.</p>
+              <h2 id="data-analysis-and-grouping-functions">Data Analysis and Grouping Functions</h2>
 
             </div>
             
@@ -3636,7 +3641,8 @@ performed on them, however.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-194">&#182;</a>
               </div>
-              <hr>
+              <p>Functions performing SQL-like actions on lists of objects.  These do not have any SQL-like optimizations
+performed on them, however.</p>
 
             </div>
             
@@ -3649,7 +3655,8 @@ performed on them, however.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-195">&#182;</a>
               </div>
-              
+              <hr>
+
             </div>
             
         </li>
@@ -3660,6 +3667,18 @@ performed on them, however.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-196">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-197">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-197">&#182;</a>
               </div>
               <p>Reasonable analog to SQL <code>select</code> statement.</p>
 <pre><code><span class="hljs-keyword">var</span> kids = [
@@ -3676,11 +3695,11 @@ project([<span class="hljs-string">'name'</span>, <span class="hljs-string">'gra
         </li>
         
         
-        <li id="section-197">
+        <li id="section-198">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-197">&#182;</a>
+                <a class="pilcrow" href="#section-198">&#182;</a>
               </div>
               <p>Determines whether the given property of an object has a specific value
 Most likely used to filter a list:</p>
@@ -3702,11 +3721,11 @@ filter(propEq(<span class="hljs-string">"hair"</span>, <span class="hljs-string"
         </li>
         
         
-        <li id="section-198">
+        <li id="section-199">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-198">&#182;</a>
+                <a class="pilcrow" href="#section-199">&#182;</a>
               </div>
               <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.</p>
 
@@ -3717,11 +3736,11 @@ filter(propEq(<span class="hljs-string">"hair"</span>, <span class="hljs-string"
         </li>
         
         
-        <li id="section-199">
+        <li id="section-200">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-199">&#182;</a>
+                <a class="pilcrow" href="#section-200">&#182;</a>
               </div>
               <p>Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
 determined according to the value returned by applying the supplied predicate to two list elements.</p>
@@ -3735,11 +3754,11 @@ determined according to the value returned by applying the supplied predicate to
         </li>
         
         
-        <li id="section-200">
+        <li id="section-201">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-200">&#182;</a>
+                <a class="pilcrow" href="#section-201">&#182;</a>
               </div>
               <p>Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.</p>
 
@@ -3750,11 +3769,11 @@ determined according to the value returned by applying the supplied predicate to
         </li>
         
         
-        <li id="section-201">
+        <li id="section-202">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-201">&#182;</a>
+                <a class="pilcrow" href="#section-202">&#182;</a>
               </div>
               <p>Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
 Duplication is determined according to the value returned by applying the supplied predicate to two list
@@ -3769,11 +3788,11 @@ elements.</p>
         </li>
         
         
-        <li id="section-202">
+        <li id="section-203">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-202">&#182;</a>
+                <a class="pilcrow" href="#section-203">&#182;</a>
               </div>
               <p>Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.</p>
 
@@ -3786,11 +3805,11 @@ elements.</p>
         </li>
         
         
-        <li id="section-203">
+        <li id="section-204">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-203">&#182;</a>
+                <a class="pilcrow" href="#section-204">&#182;</a>
               </div>
               <p>Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
 Duplication is determined according to the value returned by applying the supplied predicate to two list
@@ -3811,11 +3830,11 @@ elements.</p>
         </li>
         
         
-        <li id="section-204">
+        <li id="section-205">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-204">&#182;</a>
+                <a class="pilcrow" href="#section-205">&#182;</a>
               </div>
               <p>Creates a new list whose elements each have two properties: <code>val</code> is the value of the corresponding
 item in the list supplied, and <code>key</code> is the result of applying the supplied function to that item.</p>
@@ -3829,11 +3848,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-205">
+        <li id="section-206">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-205">&#182;</a>
+                <a class="pilcrow" href="#section-206">&#182;</a>
               </div>
               <p>Sorts the list according to a key generated by the supplied function.</p>
 
@@ -3850,11 +3869,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-206">
+        <li id="section-207">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-206">&#182;</a>
+                <a class="pilcrow" href="#section-207">&#182;</a>
               </div>
               <p>Counts the elements of a list according to how many match each value of a key generated by the supplied function.</p>
 
@@ -3870,11 +3889,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-207">
+        <li id="section-208">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-207">&#182;</a>
+                <a class="pilcrow" href="#section-208">&#182;</a>
               </div>
               <p>Groups the elements of a list by a key generated by the supplied function.</p>
 
@@ -3890,11 +3909,11 @@ item in the list supplied, and <code>key</code> is the result of applying the su
         </li>
         
         
-        <li id="section-208">
+        <li id="section-209">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-208">&#182;</a>
+                <a class="pilcrow" href="#section-209">&#182;</a>
               </div>
               <p>All the functional goodness, wrapped in a nice little package, just for you!</p>
 
