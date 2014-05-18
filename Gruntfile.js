@@ -56,6 +56,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
+  grunt.loadNpmTasks('grunt-push-release');
 
   grunt.registerTask('coverage', 'Code coverage', function() {
     var shell = require('child_process').exec;
