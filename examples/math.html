@@ -17,45 +17,70 @@
         }
     </script>
     <script>
-        var a = [
-            {value: "4a55eff3-1e0d-4a81-9105-3ddd7521d642", display: "Jamsheer"},
-            {value: "644838b3-604d-4899-8b78-09e4799f586f", display: "Muhammed"},
-            {value: "b6ee537a-375c-45bd-b9d4-4dd84a75041d", display: "Ravi"},
-            {value: "e97339e1-939d-47ab-974c-1b68c9cfb536", display: "Ajmal"},
-            {value: "a63a6f77-c637-454e-abf2-dfb9b543af6c", display: "Ryan"}
-        ];
+var MAX = 1000;
+var inc = add(1);
+var add2 = add(2);
+var gcd = curry(function (m, n) {return m === 0 ? n : gcd(n % m, m);});
+var coPrime = curry(function(a, b) {return gcd(a, b) === 1;});
+var notEmpty = notFn(isEmpty);
+var notEmptyHeaded = pipe(head, notEmpty);
+var numericSort = function(list) {list.sort(function(a, b) {return a - b;}); return list;};
 
-        var b = [
-            {value: "4a55eff3-1e0d-4a81-9105-3ddd7521d642", display: "Jamsheer", $$hashKey: "008"},
-            {value: "644838b3-604d-4899-8b78-09e4799f586f", display: "Muhammed", $$hashKey: "009"},
-            {value: "b6ee537a-375c-45bd-b9d4-4dd84a75041d", display: "Ravi", $$hashKey: "00A"},
-            {value: "e97339e1-939d-47ab-974c-1b68c9cfb536", display: "Ajmal", $$hashKey: "00B"}
-        ];
+var makeTriplet = curry(function(m, n, k) {
+    return [k * (m * m - n * n), k * (2 * m * n), k * (m * m + n * n)];
+});
+var squish = function(n1) {return foldl(function(acc1, n2) {return acc1.concat(foldl(function(acc2, n) {return acc2.concat(n);}, [], n2));}, [], n1)};
 
-    a = [{ value:"4a55eff3-1e0d-4a81-9105-3ddd7521d642", display:"Jamsheer"}, { value:"644838b3-604d-4899-8b78-09e4799f586f", display:"Muhammed"}, { value:"b6ee537a-375c-45bd-b9d4-4dd84a75041d", display:"Ravi"}, { value:"e97339e1-939d-47ab-974c-1b68c9cfb536", display:"Ajmal"},  { value:"a63a6f77-c637-454e-abf2-dfb9b543af6c", display:"Ryan"}]
-    b = [{ value:"4a55eff3-1e0d-4a81-9105-3ddd7521d642", display:"Jamsheer", $$hashKey:"008"}, { value:"644838b3-604d-4899-8b78-09e4799f586f", display:"Muhammed", $$hashKey:"009"}, { value:"b6ee537a-375c-45bd-b9d4-4dd84a75041d", display:"Ravi", $$hashKey:"00A"}, { value:"e97339e1-939d-47ab-974c-1b68c9cfb536", display:"Ajmal", $$hashKey:"00B"}]
 
-    var makeDiffFunc = (function() {
-        var contains = function(pred, a, list) {
-            var idx = -1, len = list.length;
-            while (++idx < len) {if (pred(a, list[idx])) {return true;}}
-            return false;
-        };
-        var complement = function(pred, a, b) {
-            return a.filter(function(elem) {return !contains(pred, elem, b);});
-        };
-        return function(pred) {
-            return function(a, b) {
-                return complement(pred, a, b).concat(complement(pred, b, a));
-            };
-        };
-    }());
+var generateTriplets = function(maxSum) {
+    var lteMax = flip(lte)(maxSum);
+    return map(numericSort, squish(takeWhile(andFn(notEmptyHeaded, pipe(head, notEmptyHeaded),  pipe(head, head, sum, lteMax)), map(function(n) {
+        return takeWhile(andFn(notEmptyHeaded, pipe(head, sum, lteMax)), map(function(m) {
+            return takeWhile(pipe(sum, lteMax), map(makeTriplet(m, n), generator(1, identity, inc)));
+        }, filter(coPrime(n), generator(n + 1, identity, add2))));
+    },  generator(1, identity, inc)))));
+};
 
-    var myDiff = makeDiffFunc(function(a, b) {
-        return a.value === b.value && a.display === b.display;
-    });
+var time1 = new Date();
 
-    var result = myDiff(a, b); //=>  {value="a63a6f77-c637-454e-abf2-dfb9b543af6c", display="Ryan"}
+var trips = generateTriplets(MAX);
+
+var results = foldl(function(acc, key) {
+    var trip = trips[key];
+    var total = sum(trip);
+    (acc[total] || (acc[total] = [])).push(trip);
+    return acc;
+}, {}, keys(trips));
+
+var answer = foldl(function(acc, key) {
+    var test = results[key];
+    return test.length > acc.triplets.length ? {key: key, triplets: sortBy(prop('0'))(test)} : acc;
+}, {key: "", triplets: []}, keys(results));
+
+var time2 = new Date();
+
+console.log(JSON.stringify(answer));
+
+console.log("Time taken: " + (time2 - time1) + " ms");
+
+MAX = 1000;
+var isInt = function(x) {return x === (x | 0);};
+var calcB = function(p, a) {return (p * p - 2 * a * p) / 2 / (p - a);};
+var secondIsInt = pipe(prop(1), isInt);
+var firstLtSecond = fork(lt, prop(0), prop(1));
+var results = head(reverse(sortBy(prop('length'), reject(pipe(prop(0), isEmpty), map(function(p) {
+    return filter(firstLtSecond, filter(secondIsInt, map(function(a) {
+        var b = calcB(p, a), c = p - a - b; return [a, b, c]
+    }, range(1, (p + 1)/3))));
+}, range(12, MAX + 1))))));
+
+var time3 = new Date();
+
+console.log(sum(head(results)));
+console.log(JSON.stringify(results));
+
+console.log("Time taken: " + (time3 - time2) + " ms");
+
     </script>
 </body>
 </html>

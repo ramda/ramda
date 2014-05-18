@@ -133,38 +133,38 @@ var bigint = function(n) {return ('' + n).split('').reverse();};
 var bi2s = function(bi) {return bi.join(",").split(",").reverse().join('');}; // need a better clone than .join(",").split(","), but I'm tired...
 
 // brain-dead BigInteger implementation of add function.
-var add = function(a, b) {
-    while (a.length < b.length) a[a.length] = 0;
-    while (a.length > b.length) b[b.length] = 0;
-    var carry = 0, total = [];
-    for (var i = 0; i < a.length; i++) {
-        var sum = a[i] + b[i] + carry;
-        if (sum >= 10) {
-            sum = sum - 10;
-            carry = 1;
-        } else {
-            carry = 0;
-        }
-        total[total.length] = sum;
-    }
-    if (carry) {
-        total[total.length] = carry;
-    }
-    return total;
-};
+//var add = function(a, b) {
+//    while (a.length < b.length) a[a.length] = 0;
+//    while (a.length > b.length) b[b.length] = 0;
+//    var carry = 0, total = [];
+//    for (var i = 0; i < a.length; i++) {
+//        var sum = a[i] + b[i] + carry;
+//        if (sum >= 10) {
+//            sum = sum - 10;
+//            carry = 1;
+//        } else {
+//            carry = 0;
+//        }
+//        total[total.length] = sum;
+//    }
+//    if (carry) {
+//        total[total.length] = carry;
+//    }
+//    return total;
+//};
 
 // brain-dead BigInteger implementation of add function.
-var mult = function(a, b) {
-    var total = [0];
-    for (var i = 0; i < a.length; i++) {
-        for (var j = 0; j < b.length; j++) {
-            var digit = a[i] * b[j];
-            digit = (digit > 9) ? [digit % 10, (digit - (digit % 10)) / 10] : [digit];
-            total = add(total, Array(i + 1).join("0").split("").map(Number).concat(Array(j + 1).join("0").split("").map(Number)).concat(digit));
-        }
-    }
-    return total;
-};
+//var mult = function(a, b) {
+//    var total = [0];
+//    for (var i = 0; i < a.length; i++) {
+//        for (var j = 0; j < b.length; j++) {
+//            var digit = a[i] * b[j];
+//            digit = (digit > 9) ? [digit % 10, (digit - (digit % 10)) / 10] : [digit];
+//            total = add(total, Array(i + 1).join("0").split("").map(Number).concat(Array(j + 1).join("0").split("").map(Number)).concat(digit));
+//        }
+//    }
+//    return total;
+//};
 
 // Greatest Common Divisor
 var gcd = function (m, n) {
