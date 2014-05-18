@@ -100,6 +100,26 @@ describe('modulo', function() {
   });
 });
 
+describe('moduloBy', function() {
+  var moduloBy = Lib.moduloBy;
+  it('divides the second param by the first and returns the remainder', function() {
+    assert.equal(moduloBy(2, 100), 0);
+    assert.equal(moduloBy(3, 100), 1);
+    assert.equal(moduloBy(17, 100), 15);
+  });
+
+  it('is automatically curried', function() {
+    var isOdd = moduloBy(2);
+    assert.equal(typeof isOdd, 'function');
+    assert.equal(isOdd(3), 1);
+    assert.equal(isOdd(198), 0);
+  });
+
+  it('preserves javascript-style modulo evaluation for negative numbers', function() {
+    assert.equal(moduloBy(4, -5), -1);
+  });
+});
+
 describe('sum', function() {
     var sum = Lib.sum;
 
