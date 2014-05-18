@@ -516,7 +516,7 @@
         //
         // TODO: should we report arity correctly?  Max arity of f1 and f2?
         // TODO: should this take arbitrary number of `f` functions?
-        R.fork = function(after, f1, f2) {
+        R.fork = function(f1, f2, after) {
             return function() {
                 return after(f1.apply(this, arguments), f2.apply(this, arguments));
             }
