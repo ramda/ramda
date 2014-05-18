@@ -1269,6 +1269,17 @@
         //     half(42); // => 21
         R.divideBy = flip(divide);
 
+        // Divides the second parameter by the first and returns the remainder.
+        var modulo = R.modulo = _(function(a, b) { return a % b; });
+
+        // Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
+        // this one might be more useful than that of `modulo`.  For instance:
+        //
+        //     var isOdd = moduloBy(2);
+        //     isOdd(42); // => 0
+        //     isOdd(21); // => 1
+        R.moduloBy = flip(modulo);
+
         // Adds together all the elements of a list.
         R.sum = foldl(add, 0);
 
