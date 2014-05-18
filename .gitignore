@@ -10,3 +10,5 @@ coverage
 *.swp
 
 /node_modules
+/examples/math.html
+/examples/math.js

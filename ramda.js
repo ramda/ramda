@@ -359,6 +359,14 @@
                      };
                      return trampoline(take, n, this, []);
                  },
+                 takeWhile: function(pred) {
+                     var results = [], current = this;
+                     while (pred(current[0])) {
+                         results.push(current[0]);
+                         current = current.tail();
+                     }
+                     return results;
+                 },
                  // `skip` implementation for generators.
                  skip: function(n) {
                      var skip = function(ctr, g) {
@@ -503,7 +511,16 @@
             return fn.length > 1 ? _(nAry(fn.length, f)) : f;
         };
 
-
+        // Runs two separate functions against a single one and then calls another
+        // function with the results of those initial calls.
+        //
+        // TODO: should we report arity correctly?  Max arity of f1 and f2?
+        // TODO: should this take arbitrary number of `f` functions?
+        R.fork = function(f1, f2, after) {
+            return function() {
+                return after(f1.apply(this, arguments), f2.apply(this, arguments));
+            }
+        };
 
         // List Functions
         // --------------
@@ -677,6 +694,9 @@
         // Returns a new list containing the elements of the given list up until the first one where the function
         // supplied returns `false` when passed the element.
         R.takeWhile = _(function(fn, list) {
+            if (list && list.length === Infinity) {
+                return list.takeWhile(fn);
+            }
             var idx = -1, len = list.length, taking = true, result = [];
             while (taking) {
                 ++idx;
@@ -920,7 +940,7 @@
         //     range(50, 53) // => [50, 51, 52]
         R.range = _(function(from, to) {
             if (from >= to) {return EMPTY;}
-            var idx, result = new Array(to - from);
+            var idx, result = new Array(Math.floor(to) - Math.ceil(from));
             for (idx = 0; from < to; idx++, from++) {
                 result[idx] = from;
             }

@@ -32,6 +32,17 @@ describe('take for a generator', function() {
     });
 });
 
+describe('takeWhile for a generator', function() {
+    var generator = Lib.generator, takeWhile = Lib.takeWhile, identity = ramda.identity;
+    var inc = function (n) {return n + 1;};
+    var pred = function(n) {return n < 5;};
+
+    var g = generator(0, identity, inc);
+    it("takes the elements of an infinite sequence while the supplied predicate is true", function() {
+        assert.deepEqual(takeWhile(pred, g), [0, 1, 2, 3, 4]);
+    });
+});
+
 describe('skip for a generator', function() {
     var generator = Lib.generator, take = Lib.take, skip = Lib.skip;
     var g;
