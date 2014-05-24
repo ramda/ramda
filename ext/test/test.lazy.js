@@ -105,20 +105,4 @@ describe('repeat', function() {
     });
 });
 
-describe('repeat.nTimes', function() {
-    var repeat = Lib.repeat;
-
-    it("returns a lazy list of identical values", function() {
-        assert.deepEqual(repeat.nTimes(0, 5), [0, 0, 0, 0, 0]);
-    });
-
-    it("can accept any value, including `null`", function() {
-        assert.deepEqual(repeat.nTimes(null, 3), [null, null, null]);
-    });
-
-    it("is automatically curried", function() {
-        var nTrues = repeat.nTimes(true);
-        assert.deepEqual(nTrues(4), [true, true, true, true]);
-    });
-});
 

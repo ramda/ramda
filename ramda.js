@@ -295,7 +295,7 @@
         aliasFor("identity").is("I");
 
         // Returns a fixed list (of size `n`) of identical values.
-        repeatN = _(function(value, n) {
+        R.repeatN = _(function(value, n) {
             var arr = [];
             var i = -1;
             while(++i < n) {
