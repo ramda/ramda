@@ -519,7 +519,7 @@
         R.fork = function(f1, f2, after) {
             return function() {
                 return after(f1.apply(this, arguments), f2.apply(this, arguments));
-            }
+            };
         };
 
         // List Functions
