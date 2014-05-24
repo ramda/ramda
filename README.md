@@ -34,6 +34,24 @@ Unlike the developers of that silly-named _Eweda_ project, though, this
 one will focus also on performance, striving for a reliable and quick 
 implementation over any notions of functional purity.
 
+Installation
+------------
+
+To use with node:
+
+    npm install ramda
+
+    var ramda = require('ramda')
+
+To use directly in the browser:
+
+     <script src="path/to/yourCopyOf/ramda.js"></script>
+ 
+or the minified version:
+
+     <script src="path/to/yourCopyOf/ramda.min.js"></script>
+
+These script tags add the variable `ramda` on the browser's global scope.
 
 
 Documentation
