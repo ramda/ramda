@@ -42,7 +42,7 @@ var lazylist = (function() {
 
   // Trampolining to support recursion in Lazy lists
   var trampoline = function(fn) {
-    var result = fn.apply(this, tail(arguments));
+    var result = fn.apply(this, this.tail());
     while (typeof result === "function") {
       result = result();
     }
@@ -52,7 +52,7 @@ var lazylist = (function() {
   var  L = function(seed, current, step) {
     this["0"] = current(seed);
     this.tail = function() {
-      return new G(step(seed), current, step);
+      return new L(step(seed), current, step);
     };
   };
 
