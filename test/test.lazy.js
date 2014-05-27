@@ -33,7 +33,7 @@ describe('take for a generator', function() {
 });
 
 describe('takeWhile for a generator', function() {
-    var generator = Lib.generator, takeWhile = Lib.takeWhile, identity = ramda.identity;
+    var generator = Lib.generator, takeWhile = Lib.takeWhile, identity = Lib.identity;
     var inc = function (n) {return n + 1;};
     var pred = function(n) {return n < 5;};
 
