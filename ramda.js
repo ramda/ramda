@@ -264,7 +264,7 @@
         // it will return object.tail().
         var tail = R.tail = function(arr) {
             arr = arr || EMPTY;
-            if (hasMethod('tail')) {
+            if (hasMethod('tail', arr)) {
                 return arr.tail();
             }
             return (arr.length > 1) ? slice(arr, 1) : [];
