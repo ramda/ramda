@@ -1,4 +1,12 @@
-(function (root, factory) {if (typeof define === 'function' && define.amd) {define(['ramda'], factory);} else if (typeof exports === 'object') {module.exports = factory(require('../ramda'));} else {root.lazylist = factory(root.ramda);}}(this, function (R) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['ramda'], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('../ramda'));
+  } else {
+    root.lazylist = factory(root.ramda);
+  }
+}(this, function (R) {
 
   // Lazy lists
   // ----------
@@ -122,7 +130,7 @@
      return lazylist(null, fn, fn);
   };
   
-  module.exports = lazylist;
+  return lazylist;
 }));
   
 
