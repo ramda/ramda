@@ -14,6 +14,7 @@
   <script src="../lib/test/util.js"></script>
   <script src="../lib/test/assert.js"></script>
   <script src="../ramda.js"></script>
+  <script src="../ext/lazylist/lazylist.js"></script>
   <script>ramda.installTo(this);</script>
   <script>mocha.setup('bdd')</script>
   <script src="test.core.js"></script>
@@ -46,6 +47,7 @@
   <script src="test.list.js"></script>
   <script src="test.stringBasics.js"></script>
   <script src="test.sql.js"></script>
+  <script src="../ext/lazylist/test/test.lazy.js"></script>
   <script>
     mocha.checkLeaks();
     mocha.globals(['jQuery']);

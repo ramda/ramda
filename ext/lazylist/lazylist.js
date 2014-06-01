@@ -50,30 +50,30 @@
   
     // Trampolining to support recursion in Lazy lists
     var trampoline = function(fn) {
-      var result = fn.apply(this, this.tail());
+      var result = fn.apply(this, R.tail(arguments));
       while (typeof result === "function") {
         result = result();
       }
       return result;
     };
     // Internal Lazy list constructor
-    var  L = function(seed, current, step) {
+    var  LZ = function(seed, current, step) {
       this["0"] = current(seed);
       this.tail = function() {
-        return new L(step(seed), current, step);
+        return new LZ(step(seed), current, step);
       };
     };
   
     // Lazy lists can be used with OO techniques as well as our standard functional calls.  These are the
     // implementations of those methods and other properties.
-    L.prototype = {
-      constructor: L,
+    LZ.prototype = {
+      constructor: LZ,
       // All lazylists are infinite.
       length: Infinity,
       // `take` implementation for lazylists.
       take: function(n) {
-        var take = function(ctr, g, ret) {
-          return (ctr === 0) ? ret : take(ctr - 1, g.tail(), ret.concat([g[0]]));
+        var take = function(ctr, lz, ret) {
+          return (ctr === 0) ? ret : take(ctr - 1, lz.tail(), ret.concat([lz[0]]));
         };
         return trampoline(take, n, this, []);
       },
@@ -87,38 +87,38 @@
       },
       // `skip` implementation for lazylists.
       skip: function(n) {
-        var skip = function(ctr, g) {
-          return (ctr <= 0) ? g : skip(ctr - 1, g.tail());
+        var skip = function(ctr, lz) {
+          return (ctr <= 0) ? lz : skip(ctr - 1, lz.tail());
         };
         return trampoline(skip, n, this);
       },
       // `map` implementation for lazylists.
       map: function(fn) {
         var ls = this;
-        var g = create(L.prototype);
-        g[0] = fn(ls[0]);
-        g.tail = function() { 
-          return fn, ls.tail().map(fn); 
+        var lz = create(LZ.prototype);
+        lz[0] = fn(ls[0]);
+        lz.tail = function() {
+          return ls.tail().map(fn);
         };
-        return g;
+        return lz;
       },
       // `filter` implementation for lazylists.
       filter: function(fn) {
         var ls = this, head = ls[0];
         while (!fn(head)) {
-          ils = ls.tail();
+          ls = ls.tail();
           head = ls[0];
         }
-        var g = create(G.prototype);
-        g[0] = head;
-        g.tail = function() {return filter(fn, ls.tail());};
-        return g;
+        var lz = create(LZ.prototype);
+        lz[0] = head;
+        lz.tail = function() {return filter(fn, ls.tail());};
+        return lz;
       }
     };
   
     // The actual public `lazylist` function.
     return function(seed, current, step) {
-      return new L(seed, current, step);
+      return new LZ(seed, current, step);
     };
   }());
   
