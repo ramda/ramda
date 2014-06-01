@@ -227,8 +227,7 @@
             return list.concat();
         };
 
-        // Create a shallow copy of an array.
-        // (TODO: find a more performant cloneDeep)
+        // Create a deep copy of an object.
         R.cloneDeep = function(obj) {
           return JSON.parse(JSON.stringify(obj));
         };
