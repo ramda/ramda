@@ -2,7 +2,7 @@
   if (typeof define === 'function' && define.amd) {
     define(['ramda'], factory);
   } else if (typeof exports === 'object') {
-    module.exports = factory(require('../ramda'));
+    module.exports = factory(require('../../ramda'));
   } else {
     root.lazylist = factory(root.ramda);
   }
@@ -111,7 +111,7 @@
         }
         var lz = create(LZ.prototype);
         lz[0] = head;
-        lz.tail = function() {return filter(fn, ls.tail());};
+        lz.tail = function() {return R.filter(fn, ls.tail());};
         return lz;
       }
     };
@@ -126,7 +126,7 @@
 
   // Returns a lazy list of identical values, probably most useful with `take` for initializing a list.
   R.repeat = function(value) {
-     var fn = always(value);
+     var fn = R.always(value);
      return lazylist(null, fn, fn);
   };
   

@@ -1,5 +1,5 @@
 var assert = require("assert");
-var Lib = require("./../../../ramda");
+var Lib = require("../../../ramda");
 var lazylist = require('../lazylist');
 
 describe('lazylist', function() {
