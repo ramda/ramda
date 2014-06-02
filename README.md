@@ -117,3 +117,10 @@ more for implementation elegance than for practical capabilities.  Ramda
 is all about giving users real-world tools.  Eweda can be seen more as 
 an academic excercise, mostly proving out what does and doesn't work, and 
 doing so as elegantly as possible.
+
+Acknowledgements
+-----------------
+
+Thanks to [J. C. Phillipps](http://www.jcphillipps.com) for the Ramda logo.
+
+
