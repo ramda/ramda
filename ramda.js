@@ -404,12 +404,11 @@
 
         // Runs two separate functions against a single one and then calls another
         // function with the results of those initial calls.
-        //
-        // TODO: should we report arity correctly?  Max arity of f1 and f2?
-        // TODO: should this take arbitrary number of `f` functions?
-        R.fork = function(f1, f2, after) {
+        R.fork = function(after) {
+            var fns = slice(arguments, 1);
             return function() {
-                return after(f1.apply(this, arguments), f2.apply(this, arguments));
+                var args = arguments;
+                return after.apply(this, map(function(fn) {return fn.apply(this, args);}, fns));
             };
         };
 
