@@ -564,7 +564,7 @@
 
         // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
         var reject = R.reject = _(function(fn, list) {
-            return filter(notFn(fn), list);
+            return filter(not(fn), list);
         });
 
         // Like `reject`, but passes additional parameters to the predicate function.  Parameters are
@@ -578,7 +578,7 @@
         //     reject.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]);
         //     //=> [8, 6, 7, 5, 3]
         reject.idx = _(function(fn, list) {
-            return filter.idx(notFn(fn), list);
+            return filter.idx(not(fn), list);
         });
 
         // Returns a new list containing the elements of the given list up until the first one where the function
@@ -1061,41 +1061,23 @@
 
         // --------
 
-        // A function wrapping the boolean `&&` operator.  Note that unlike the underlying operator, though, it
-        // aways returns `true` or `false`.
-        R.and = _(function (a, b) {
-            return !!(a && b);
-        });
-
-        // A function wrapping the boolean `||` operator.  Note that unlike the underlying operator, though, it
-        // aways returns `true` or `false`.
-        R.or = _(function (a, b) {
-            return !!(a || b);
-        });
-
-        // A function wrapping the boolean `!` operator.  It returns `true` if the parameter is false-y and `false` if
-        // the parameter is truth-y
-        R.not = function (a) {
-            return !a;
-        };
-
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
-        R.andFn = _(function(f, g) { // TODO: arity?
+        R.and = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
         });
 
         // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
         // value. (Note also that at least Oliver Twist can pronounce this one...)
-        R.orFn = _(function(f, g) { // TODO: arity?
+        R.or = _(function(f, g) { // TODO: arity?
            return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
         });
 
         // A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
         // underlying function would return a false-y value, and `false` when it would return a truth-y one.
-        var notFn = R.notFn = function (f) {
+        var not = R.not = function (f) {
             return function() {return !f.apply(this, arguments);};
         };
 
