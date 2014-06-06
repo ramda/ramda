@@ -61,14 +61,28 @@ describe('merge', function() {
 describe('head', function() {
     var head = Lib.head;
 
-    it('returns null for an empty list', function() {
-        assert.equal(head([]), null);
+    it('returns undefined for an empty list', function() {
+        assert.equal(typeof(head([])),  "undefined");
     });
-    it('returns null for no arguments', function() {
-        assert.equal(head(), null);
+    it('returns undefined for no arguments', function() {
+        assert.equal(typeof(head()), "undefined");
     });
     it('returns the first element of a list', function() {
         assert.equal(head(['a', 'b', 'c', 'd']), 'a');
+    });
+});
+
+describe('last', function() {
+    var last = Lib.last;
+
+    it('returns undefined for an empty list', function() {
+        assert.equal(typeof(last([])),  "undefined");
+    });
+    it('returns undefined for no arguments', function() {
+        assert.equal(typeof(last()), "undefined");
+    });
+    it('returns the first element of a list', function() {
+        assert.equal(last(['a', 'b', 'c', 'd']), 'd');
     });
 });
 

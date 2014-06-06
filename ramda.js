@@ -256,7 +256,13 @@
             arr = arr || EMPTY;
             return arr[0]; 
         };
-        aliasFor("head").is("car"); 
+        aliasFor("head").is("car").and("first");
+
+        //  Returns the last element of a list
+        R.last = function(arr) {
+            arr = arr || EMPTY;
+            return arr[arr.length - 1];
+        };
 
         // Returns the rest of the list after the first element.
         // If the passed-in list is not annary, but is an object with a `tail` method, 
