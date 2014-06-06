@@ -845,19 +845,13 @@
 
 
         // Returns the first zero-indexed position of an object in a flat list
-        R.indexOf = _(function(obj, list) {
-            return list.indexOf(obj);
-        });
+        R.indexOf = invoker("indexOf", Array.prototype, 1);
 
         // Returns the last zero-indexed position of an object in a flat list
-        R.lastIndexOf = _(function(obj, list) {
-            return list.lastIndexOf(obj);
-        });
+        R.lastIndexOf = invoker("lastIndexOf", Array.prototype, 1);
 
         // Returns the elements of the list as a string joined by a separator.
-        R.join = _(function(sep, list) {
-            return list.join(sep);
-        });
+        R.join = invoker("join", Array.prototype);
 
         // ramda.splice has a different contract than Array.splice. Array.splice mutates its array
         // and returns the removed elements. ramda.splice does not mutate the passed in list (well,
