@@ -38,6 +38,26 @@ describe("splice", function() {
   });
 });
 
+describe("slice", function() {
+  it("retrieves the proper sublist of a list", function() {
+    var list = [8, 6, 7, 5, 3, 0, 9];
+    assert.deepEqual(Lib.slice(2, 5, list), [7, 5, 3]);
+  });
+
+  // TODO
+  // it("retturn undefined if the paramters don't make sense", function() {
+  //   var list = [8, 6, 7, 5, 3, 0, 9];
+  //   assert.equal(typeof(Lib.slice(5, 2, list)), "undefined");
+  // });
+});
+
+describe("slice.from", function() {
+  it("retrieves the proper suffix sublist of a list starting with the desired index", function() {
+      var list = [8, 6, 7, 5, 3, 0, 9];
+      assert.deepEqual(Lib.slice.from(2, list), [7, 5, 3, 0, 9]);
+  });
+});
+
 describe("nth", function() {
   it("returns the object at position n of the list", function() {
     var list = ["x", 1, {a:1, b:2}, [4,5,6], true];

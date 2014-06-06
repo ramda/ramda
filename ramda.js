@@ -36,7 +36,7 @@
         };
 
         // (private) `slice` implemented iteratively for performance
-        var slice = function (args, from, to) {
+        var _slice = function (args, from, to) {
             var i, arr = [];
             from = from || 0;
             to = to || args.length;
@@ -63,7 +63,7 @@
             var fnArity = fn.length;
             var f = function(args) {
                 return arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
-                    var newArgs = (args || []).concat(slice(arguments, 0));
+                    var newArgs = (args || []).concat(_slice(arguments, 0));
                     if (newArgs.length >= fnArity) {
                         return fn.apply(this, newArgs);
                     }
@@ -169,14 +169,14 @@
         // them, it might be best to pass in and identity function so that the new function correctly reports arity.
         // See for example, the definition of `project`, below.
         var useWith = R.useWith = function(fn /*, transformers */) {
-            var transformers = slice(arguments, 1);
+            var transformers = _slice(arguments, 1);
             var tlen = transformers.length;
             return _(arity(tlen, function() {
                 var args = [], idx = -1;
                 while (++idx < tlen) {
                     args.push(transformers[idx](arguments[idx]));
                 }
-                return fn.apply(this, args.concat(slice(arguments, tlen)));
+                return fn.apply(this, args.concat(_slice(arguments, tlen)));
             }));
         };
 
@@ -187,14 +187,14 @@
         R.use = function(fn) {
             return {
                 over: function(/*transformers*/) {
-                    var transformers = slice(arguments, 0);
+                    var transformers = _slice(arguments, 0);
                     var tlen = transformers.length;
                     return _(arity(tlen, function() {
                         var args = [], idx = -1;
                         while (++idx < tlen) {
                             args.push(transformers[idx](arguments[idx]));
                         }
-                        return fn.apply(this, args.concat(slice(arguments, tlen)));
+                        return fn.apply(this, args.concat(_slice(arguments, tlen)));
                     }));
                 }
             };
@@ -203,7 +203,7 @@
 
         // Fills out an array to the specified length. Internal private function.
         var expand = function(a, len) {
-            var arr = a ? isArray(a) ? a : slice(a) : [];
+            var arr = a ? isArray(a) ? a : _slice(a) : [];
             while(arr.length < len) {arr[arr.length] = undef;}
             return arr;
         };
@@ -272,7 +272,7 @@
             if (hasMethod('tail', arr)) {
                 return arr.tail();
             }
-            return (arr.length > 1) ? slice(arr, 1) : [];
+            return (arr.length > 1) ? _slice(arr, 1) : [];
         };
         aliasFor("tail").is("cdr");
 
@@ -321,32 +321,32 @@
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
         var compose = R.compose = function() {  // TODO: type check of arguments?
-            var fns = slice(arguments);
+            var fns = _slice(arguments);
             return function() {
-                return foldr(function(args, fn) { return [fn.apply(this, args)]; }, slice(arguments), fns)[0];
+                return foldr(function(args, fn) { return [fn.apply(this, args)]; }, _slice(arguments), fns)[0];
             };
         };
 
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.
         R.pipe = function() { // TODO: type check of arguments?
-            return compose.apply(this, slice(arguments).reverse());
+            return compose.apply(this, _slice(arguments).reverse());
         };
         aliasFor("pipe").is("sequence");
 
         // Returns a new function much like the supplied one except that the first two arguments are inverted.
         var flip = R.flip = function(fn) {
             return _(function(a, b) {
-                return fn.apply(this, [b, a].concat(slice(arguments, 2)));
+                return fn.apply(this, [b, a].concat(_slice(arguments, 2)));
             });
         };
 
         // Creates a new function that acts like the supplied function except that the left-most parameters are
         // pre-filled.
         R.lPartial = function (fn) {
-            var args = slice(arguments, 1);
+            var args = _slice(arguments, 1);
             return arity(Math.max(fn.length - args.length, 0), function() {
-                return fn.apply(this, args.concat(slice(arguments)));
+                return fn.apply(this, args.concat(_slice(arguments)));
             });
         };
         aliasFor("lPartial").is("applyLeft");
@@ -354,9 +354,9 @@
         // Creates a new function that acts like the supplied function except that the right-most parameters are
         // pre-filled.
         R.rPartial =function (fn) {
-            var args = slice(arguments, 1);
+            var args = _slice(arguments, 1);
             return arity(Math.max(fn.length - args.length, 0), function() {
-                return fn.apply(this, slice(arguments).concat(args));
+                return fn.apply(this, _slice(arguments).concat(args));
             });
         };
         aliasFor("rPartial").is("applyRight");
@@ -367,7 +367,7 @@
             var cache = {};
             return function() {
                 var position = foldl(function(cache, arg) {return cache[arg] || (cache[arg] = {});}, cache,
-                        slice(arguments, 0, arguments.length - 1));
+                        _slice(arguments, 0, arguments.length - 1));
                 var arg = arguments[arguments.length - 1];
                 return (position[arg] || (position[arg] = fn.apply(this, arguments)));
             };
@@ -389,7 +389,7 @@
         // either before the internal function is called or with its results.
         R.wrap = function(fn, wrapper) {
             return function() {
-                return wrapper.apply(this, [fn].concat(slice(arguments)));
+                return wrapper.apply(this, [fn].concat(_slice(arguments)));
             };
         };
 
@@ -411,7 +411,7 @@
         // Runs two separate functions against a single one and then calls another
         // function with the results of those initial calls.
         R.fork = function(after) {
-            var fns = slice(arguments, 1);
+            var fns = _slice(arguments, 1);
             return function() {
                 var args = arguments;
                 return after.apply(this, map(function(fn) {return fn.apply(this, args);}, fns));
@@ -636,7 +636,7 @@
             if (hasMethod('skip', list)) {
                 return list.skip(n);
             }
-            return slice(list, n);
+            return _slice(list, n);
         });
         aliasFor('skip').is('drop');
 
@@ -853,11 +853,16 @@
         // Returns the elements of the list as a string joined by a separator.
         R.join = invoker("join", Array.prototype);
 
+        // Returns the sublist of a list starting with the first index and
+        // ending before the second one.
+        R.slice = invoker("slice", Array.prototype);
+        R.slice.from = flip(R.slice)(undef);
+
         // ramda.splice has a different contract than Array.splice. Array.splice mutates its array
         // and returns the removed elements. ramda.splice does not mutate the passed in list (well,
         // it makes a shallow copy), and returns a new list with the specified elements removed. 
         R.splice = _(function(start, len, list) {
-            var ls = slice(list, 0);
+            var ls = _slice(list, 0);
             ls.splice(start, len);
             return ls;
         });
@@ -917,7 +922,7 @@
 
         // Returns a function that when supplied an object returns the result of running the indicated function on
         // that object, if it has such a function.
-        R.func = _(function(fn, obj) {return obj[fn].apply(obj, slice(arguments, 2));});
+        R.func = _(function(fn, obj) {return obj[fn].apply(obj, _slice(arguments, 2));});
 
 
         // Returns a function that when supplied a property name returns that property on the indicated object, if it
@@ -1086,7 +1091,7 @@
 
         // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
         R.allPredicates = function(preds /*, val1, val12, ... */) {
-            var args = slice(arguments, 1);
+            var args = _slice(arguments, 1);
             var maxArity = max(pluck("length", preds));
 
             var andPreds = arity(maxArity, function() {
@@ -1102,7 +1107,7 @@
 
         // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
         R.anyPredicates = function(preds /*, val1, val12, ... */) {
-            var args = slice(arguments, 1);
+            var args = _slice(arguments, 1);
             var maxArity = max(pluck("length", preds));
 
             var orPreds = arity(maxArity, function() {
