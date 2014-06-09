@@ -537,6 +537,13 @@
 
         map.idx = internalMap(true);
 
+        // Adds a `map`-like function for objects.
+        //
+        // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
+        R.mapObj = _(function(fn, obj) {
+            return foldl(function(acc, key) {acc[key] = fn(obj[key]); return acc;}, {}, keys(obj))
+        });
+
         // Reports the number of elements in the list
         R.size = function(arr) {return arr.length;};
 

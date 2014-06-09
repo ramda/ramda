@@ -47,3 +47,13 @@ describe('map.idx', function() {
         assert.deepEqual(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
     });
 });
+
+describe('mapObj', function() {
+    var mapObj = Lib.mapObj;
+    var square = function(n) {return n * n;};
+
+    it('runs the given function over each of the object properties', function() {
+        var obj = {a: 1, b: 2, c: 3};
+        assert.deepEqual(mapObj(square, obj), {a: 1, b: 4, c: 9});
+    })
+});
