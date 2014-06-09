@@ -937,14 +937,6 @@
 
         var anyBlanks = any(function(val) {return val === null || val === undef;});
 
-        // Returns a function that will only call the indicated function if the correct number of (defined, non-null)
-        // arguments are supplied, returning `undefined` otherwise.
-        R.maybe = function (fn) {
-            return function () {
-                return (arguments.length === 0 || anyBlanks(expand(arguments, fn.length))) ? undef : fn.apply(this, arguments);
-            };
-        };
-
         // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
         var keys = R.keys = function (obj) {
