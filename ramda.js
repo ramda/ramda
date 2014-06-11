@@ -282,7 +282,7 @@
         };
 
         // Returns a new list with the new element at the end of a list following all the existing ones.
-        R.append = function(el, list) {
+        var append = R.append = function(el, list) {
             var newList = clone(list);
             newList.push(el);
             return newList;
@@ -541,7 +541,7 @@
         //
         // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
         R.mapObj = _(function(fn, obj) {
-            return foldl(function(acc, key) {acc[key] = fn(obj[key]); return acc;}, {}, keys(obj))
+            return foldl(function(acc, key) {acc[key] = fn(obj[key]); return acc;}, {}, keys(obj));
         });
 
         // Reports the number of elements in the list
@@ -898,6 +898,31 @@
             return clone(list).sort(comparator);
         });
 
+        // Splits a list into sublists stored in an object, based on the result of calling a String-returning function
+        // on each element, and grouping the results according to values returned.
+        //
+        //     var byGrade = partition(function(student) {
+        //         var score = student.score
+        //         return (score < 65) ? 'F' : (score < 70) ? 'D' :
+        //                (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
+        //     };
+        //     var students = [{name: "Abby", score: 84} /*, ... */,
+        //                     {name: 'Jack', score: 69}];
+        //     byGrade(students);
+        //     //=> {
+        //     //   "A": [{name: 'Dianne', score: 99} /*, ... */],
+        //     //   "B": [{name: "Abby", score: 84} /*, ... */]
+        //     //   /*, ... */
+        //     //   "F": [{name: 'Eddy', score: 58}]
+        //     // }
+
+        R.partition = _(function(fn, list) {
+            return foldl(function(acc, elt) {
+                var key = fn(elt);
+                acc[key] = append(elt, acc[key] || (acc[key] = []));
+                return acc;
+            }, {}, list);
+        });
 
         // Object Functions
         // ----------------

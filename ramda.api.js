@@ -1,4 +1,14 @@
-// copy(map(function(key) {return ["var " + key + " = function() {};"].concat(map(function(sub) {return "    " + key + "." + sub + " = function() {};"}, keys(ramda[key])));}, keys(ramda)).sort(function(a, b) {var x = toLowerCase(a.substring(4)), y = toLowerCase(b.substring(4)); return x < y ? -1 : x > y ? 1 : 0;}).join("\n"));
+/*
+copy(flatten(map(function (key) {
+    return ["var " + key + " = function() {};"].concat(map(function (sub) {
+        return "    " + key + "." + sub + " = function() {};"
+    }, keys(ramda[key])));
+}, keys(ramda))).sort(function (a, b) {
+    var x = toLowerCase(a.substring(4)),
+            y = toLowerCase(b.substring(4));
+    return x < y ? -1 : x > y ? 1 : 0;
+}).join("\n"));
+*/
 
 var add = function() {};
 var all = function() {};
@@ -8,7 +18,6 @@ var alwaysFalse = function() {};
 var alwaysTrue = function() {};
 var alwaysZero = function() {};
 var and = function() {};
-var andFn = function() {};
 var any = function() {};
 var anyPredicates = function() {};
 var append = function() {};
@@ -45,6 +54,7 @@ var find = function() {};
 var findIndex = function() {};
 var findLast = function() {};
 var findLastIndex = function() {};
+var first = function() {};
 var flatten = function() {};
 var flip = function() {};
 var foldl = function() {};
@@ -55,8 +65,8 @@ var foldr = function() {};
 var foldr1 = function() {};
 var forEach = function() {};
     forEach.idx = function() {};
+var fork = function() {};
 var func = function() {};
-var generator = function() {};
 var get = function() {};
 var groupBy = function() {};
 var gt = function() {};
@@ -75,30 +85,33 @@ var isSet = function() {};
 var join = function() {};
 var K = function() {};
 var keys = function() {};
+var last = function() {};
 var lastIndexOf = function() {};
+var lazylist = function() {};
 var lPartial = function() {};
 var lt = function() {};
 var lte = function() {};
 var map = function() {};
     map.idx = function() {};
+var mapObj = function() {};
 var match = function() {};
 var max = function() {};
 var maxWith = function() {};
-var maybe = function() {};
 var memoize = function() {};
 var merge = function() {};
 var min = function() {};
 var minWith = function() {};
 var mixin = function() {};
+var modulo = function() {};
+var moduloBy = function() {};
 var multiply = function() {};
 var nAry = function() {};
 var not = function() {};
-var notFn = function() {};
 var nth = function() {};
 var omit = function() {};
 var once = function() {};
 var or = function() {};
-var orFn = function() {};
+var partition = function() {};
 var pick = function() {};
 var pickAll = function() {};
 var pipe = function() {};
@@ -118,13 +131,15 @@ var reduceRight = function() {};
 var reject = function() {};
     reject.idx = function() {};
 var repeat = function() {};
-    repeat.nTimes = function() {};
+var repeatN = function() {};
 var reverse = function() {};
 var rPartial = function() {};
 var sequence = function() {};
 var size = function() {};
 var skip = function() {};
 var skipUntil = function() {};
+var slice = function() {};
+    slice.from = function() {};
 var some = function() {};
 var sort = function() {};
 var sortBy = function() {};
