@@ -623,6 +623,7 @@
         });
 
         // Returns a new list containing the first `n` elements of the given list.
+        // if `n > list.length`, take will return a list if `list.length` elements.
         var take = R.take = _(function(n, list) {
             if (hasMethod('take', list)) {
                 return list.take(n);
