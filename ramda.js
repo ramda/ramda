@@ -91,13 +91,18 @@
         // specifically takes exactly `n` parameters.  Any extraneous parameters will not be passed on to the function
         // supplied
         var nAry = R.nAry = (function() {
-            var cache = {};
+            var cache = {
+                0: function(func) {return function() {return func.call(this);}},
+                1: function(func) {return function(arg0) {return func.call(this, arg0);}},
+                2: function(func) {return function(arg0, arg1) {return func.call(this, arg0, arg1);}},
+                3: function(func) {return function(arg0, arg1, arg2) {return func.call(this, arg0, arg1, arg2);}}
+            };
 
 
             //     For example:
-            //     cache[3] = function(func) {
-            //         return function(arg0, arg1, arg2) {
-            //             return func.call(this, arg0, arg1, arg2);
+            //     cache[5] = function(func) {
+            //         return function(arg0, arg1, arg2, arg3, arg4) {
+            //             return func.call(this, arg0, arg1, arg2, arg3, arg4);
             //         }
             //     };
 
@@ -120,11 +125,16 @@
         // specifically takes exactly `n` parameters.  Note, though, that all parameters supplied will in fact be
         // passed along, in contrast with `nAry`, which only passes along the exact number specified.
         var arity = R.arity = (function() {
-            var cache = {};
+            var cache = {
+                0: function(func) {return function() {return func.apply(this, arguments);}},
+                1: function(func) {return function(arg0) {return func.apply(this, arguments);}},
+                2: function(func) {return function(arg0, arg1) {return func.apply(this, arguments);}},
+                3: function(func) {return function(arg0, arg1, arg2) {return func.apply(this, arguments);}}
+            };
 
             //     For example:
-            //     cache[3] = function(func) {
-            //         return function(arg0, arg1, arg2) {
+            //     cache[5] = function(func) {
+            //         return function(arg0, arg1, arg2, arg3, arg4) {
             //             return func.apply(this, arguments);
             //         }
             //     };
@@ -618,7 +628,7 @@
                 return list.take(n);
             }
             var ls = clone(list);
-            ls.length = n;
+            ls.length = Math.min(n, list.length);
             return ls;
         });
 
