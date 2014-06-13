@@ -736,7 +736,7 @@
         // Returns `true` if the list contains the sought element, `false` if it does not, based upon the value
         // returned by applying the supplied predicated to two list elements.  Equality is strict here, meaning
         // reference equality for objects and non-coercing equality for primitives.  Probably inefficient.
-        var containsWith = _(function(pred, x, list) {
+        var containsWith = R.containsWith = _(function(pred, x, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 if (pred(x, list[idx])) {return true;}
