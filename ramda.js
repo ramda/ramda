@@ -92,10 +92,10 @@
         // supplied
         var nAry = R.nAry = (function() {
             var cache = {
-                0: function(func) {return function() {return func.call(this);}},
-                1: function(func) {return function(arg0) {return func.call(this, arg0);}},
-                2: function(func) {return function(arg0, arg1) {return func.call(this, arg0, arg1);}},
-                3: function(func) {return function(arg0, arg1, arg2) {return func.call(this, arg0, arg1, arg2);}}
+                0: function(func) {return function() {return func.call(this);}; },
+                1: function(func) {return function(arg0) {return func.call(this, arg0);}; },
+                2: function(func) {return function(arg0, arg1) {return func.call(this, arg0, arg1);}; },
+                3: function(func) {return function(arg0, arg1, arg2) {return func.call(this, arg0, arg1, arg2);}; }
             };
 
 
@@ -126,10 +126,10 @@
         // passed along, in contrast with `nAry`, which only passes along the exact number specified.
         var arity = R.arity = (function() {
             var cache = {
-                0: function(func) {return function() {return func.apply(this, arguments);}},
-                1: function(func) {return function(arg0) {return func.apply(this, arguments);}},
-                2: function(func) {return function(arg0, arg1) {return func.apply(this, arguments);}},
-                3: function(func) {return function(arg0, arg1, arg2) {return func.apply(this, arguments);}}
+                0: function(func) {return function() {return func.apply(this, arguments);}; },
+                1: function(func) {return function(arg0) {return func.apply(this, arguments);}; },
+                2: function(func) {return function(arg0, arg1) {return func.apply(this, arguments);}; },
+                3: function(func) {return function(arg0, arg1, arg2) {return func.apply(this, arguments);}; }
             };
 
             //     For example:
@@ -1059,13 +1059,30 @@
         //     var fxs = filter(where({x: 10}), xs); 
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
-        R.where = _(function(spec, test) {
-            return all(function(key) {
-                var val = spec[key];
-                return (typeof val === 'function') ? val(test[key], test) : (test[key] === val);
-            }, keys(spec));
-        });
-
+        R.where = function(spec, test) {
+            function isFn(key) {return typeof spec[key] === 'function';}
+            var specKeys = keys(spec);
+            var fnKeys = filter(isFn, specKeys);
+            var objKeys = reject(isFn, specKeys);
+            var process = function(test) {
+                var i = -1, key;
+                while (++i < fnKeys.length) {
+                    key = fnKeys[i];
+                    if (!spec[key](test[key], test)) {
+                        return false;
+                    }
+                }
+                i = -1;
+                while (++i < objKeys.length) {
+                    key = objKeys[i];
+                    if (test[key] !== spec[key]) {
+                        return false;
+                    }
+                }
+                return true;
+            };
+            return test ? process(test) : process; // manual currying for performance
+        };
 
         // Miscellaneous Functions
         // -----------------------
