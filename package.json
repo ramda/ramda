@@ -5,11 +5,16 @@
       "name": "buzzdecafe",
       "email": "mh@buzzdecafe.com",
       "web": "http://buzzdecafe.com"
+    },
+    {
+      "name": "Scott Sauyet",
+      "email": "scott@sauyet.com",
+      "web": "http://fr.umio.us"
     }
   ],
   "name": "ramda",
   "description": "A practical functional library for Javascript programmers.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://www.github.com/CrossEye/ramda",
   "license": "MIT",
   "repository": {
@@ -28,19 +33,6 @@
     "grunt-docco": "latest",
     "grunt-contrib-jshint": "~0.7.0",
     "grunt-contrib-uglify": "~0.2.2",
-    "grunt-mocha-test": "~0.5.0",
-    "grunt-istanbul": "~0.2.4",
-    "grunt-benchmark": "~0.2.0"
-  },
-  "extraDevDependencies -- if we want to use Gulp": {
-    "gulp-rename": "~0.2.1",
-    "gulp-jshint": "~1.3.2",
-    "gulp-uglify": "~0.1.0",
-    "gulp-mocha": "~0.1.0",
-    "gulp-clean": "~0.1.2",
-    "gulp-util": "~2.2.0",
-    "gulp-header": "godaddy/gulp-header",
-    "gulp-istanbul": "~0.1.0",
-    "moment": "~2.5.0"
+    "grunt-mocha-test": "~0.5.0"
   }
 }
