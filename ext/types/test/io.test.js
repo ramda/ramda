@@ -1,9 +1,8 @@
-var mocha = require('gulp-mocha');
 var assert = require('assert');
 var types = require('./types');
-var R = require('ramda');
+var R = require('../../../ramda');
 
-var IO = require('../src/IO');
+var IO = require('../IO');
 
 describe('IO', function() {
   var f1 = function(x) { console.log("IO 1"); return "1 "; };

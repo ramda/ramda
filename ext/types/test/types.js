@@ -1,4 +1,4 @@
-var R = require('ramda');
+var R = require('../../../ramda');
 
 var I = R.identity;
 
