@@ -1060,12 +1060,12 @@
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
         R.where = function(spec, test) {
-            if (!test) { return false; }
             function isFn(key) {return typeof spec[key] === 'function';}
             var specKeys = keys(spec);
             var fnKeys = filter(isFn, specKeys);
             var objKeys = reject(isFn, specKeys);
             var process = function(test) {
+                if (!test) { return false; }
                 var i = -1, key;
                 while (++i < fnKeys.length) {
                     key = fnKeys[i];
@@ -1076,13 +1076,14 @@
                 i = -1;
                 while (++i < objKeys.length) {
                     key = objKeys[i];
+                    // if (test[key] !== spec[key]) {  // TODO: discuss Scott's objections
                     if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
                         return false;
                     }
                 }
                 return true;
             };
-            return test ? process(test) : process; // manual currying for performance
+            return (arguments.length > 1) ? process(test) : process;
         };
 
         // Miscellaneous Functions
