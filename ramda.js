@@ -1455,7 +1455,6 @@
         });
 
 
-
         // All the functional goodness, wrapped in a nice little package, just for you!
         return R;
     }());
