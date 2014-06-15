@@ -159,6 +159,28 @@ describe('where', function() {
       assert.equal(where(spec, test1), false);
       assert.equal(where(spec, test2), true);
     });
+
+    it("is false if the test object is null-ish", function() {
+      var spec = {x: 200};
+      var testN = null;
+      var testU = undefined;
+      var testF = false;
+      assert.equal(where(spec, testN), false);
+      assert.equal(where(spec, testU), false);
+      assert.equal(where(spec, testF), false);
+    });
+
+    it("matches specs that have undefined properties", function() {
+      var spec = {x: undefined};
+      var test1 = {};
+      var test2 = {x: null};
+      var test3 = {x: undefined};
+      var test4 = {x: 1};
+      assert.equal(where(spec, test1), false);
+      assert.equal(where(spec, test2), false);
+      assert.equal(where(spec, test3), true);
+      assert.equal(where(spec, test4), false);
+    });
 });
 
 describe('mixin', function() {

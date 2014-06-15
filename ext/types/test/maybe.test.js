@@ -1,9 +1,8 @@
-var mocha = require('gulp-mocha');
 var assert = require('assert');
 var types = require('./types');
-var R = require('ramda');
+var R = require('../../../ramda');
 
-var Maybe = require('../src/Maybe');
+var Maybe = require('../Maybe');
 
 describe('Maybe', function() {
   var m = Maybe(1);

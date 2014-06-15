@@ -1060,6 +1060,7 @@
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
         R.where = function(spec, test) {
+            if (!test) { return false; }
             function isFn(key) {return typeof spec[key] === 'function';}
             var specKeys = keys(spec);
             var fnKeys = filter(isFn, specKeys);
@@ -1075,7 +1076,7 @@
                 i = -1;
                 while (++i < objKeys.length) {
                     key = objKeys[i];
-                    if (test[key] !== spec[key]) {
+                    if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
                         return false;
                     }
                 }

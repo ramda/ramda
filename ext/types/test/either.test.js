@@ -1,9 +1,8 @@
-var mocha = require('gulp-mocha');
 var assert = require('assert');
 var types = require('./types');
-var R = require('ramda');
+var R = require('../../../ramda');
 
-var Either = require('../src/Either');
+var Either = require('../Either');
 
 describe('Either', function() {
   var e = Either("original left", 1);
