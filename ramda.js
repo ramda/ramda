@@ -972,6 +972,7 @@
         var prop = R.prop = _(function(p, obj) {return obj[p];});
         aliasFor("prop").is("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
+
         // Returns a function that when supplied an object returns the result of running the indicated function on
         // that object, if it has such a function.
         R.func = _(function(fn, obj) {return obj[fn].apply(obj, _slice(arguments, 2));});
@@ -1360,6 +1361,29 @@
         //     split('.', 'a.b.c.xyz.d') //=>
         //         ['a', 'b', 'c', 'xyz', 'd']
         R.split = invoker("split", String.prototype, 1);
+
+        var pathWith = R.pathWith = _(function(fn, str, obj) {
+            if (!obj) { return undef; }
+            var parts = fn(str) || [];
+            if (parts.length === 0) { return undef; }
+            var i = -1;
+            var tmpObj = obj;
+            while (++i < parts.length) {
+                if (tmpObj[parts[i]] === undef) {
+                    return undef;
+                } else {
+                    tmpObj = tmpObj[parts[i]];
+                }
+            }
+            return tmpObj;
+        });
+
+        R.path = pathWith(R.split("."));
+
+        R.pathBy = _(function(sep, str, obj) {
+            if (!obj) { return undef; }
+            return pathWith(R.split(sep), str, obj);
+        });
 
 
         // Data Analysis and Grouping Functions

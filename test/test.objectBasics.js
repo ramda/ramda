@@ -224,3 +224,100 @@ describe('mixin', function () {
         assert.deepEqual(mixin(a, b), {w: 100, x: 2, y: 3, z: 4});
     });
 });
+
+describe('pathWith', function() {
+    var pathWith = Lib.pathWith;
+    it("takes a function, a string path, and an object, and returns the value at that path or undefined.", function() {
+        var obj = {
+          a: {
+            b: {
+              c: 100, 
+              d: 200
+            }, 
+            e: {
+              f: [100, 101, 102], 
+              g: 'G'
+            }, 
+            h: 'H' 
+          }, 
+          i: 'I', 
+          j: ['J']
+        };
+        var everyThirdChar = function(str) {
+            var parts = [];
+            var i = -1;
+            while (++i < str.length) {
+                if (i % 3 === 0) {
+                    parts.push(str.charAt(i));
+                }
+            }
+            return parts;
+        };
+        var path = 'axxbyyc';
+
+        assert.equal(pathWith(everyThirdChar, 'azsbt5c', obj), 100);
+        assert.equal(pathWith(everyThirdChar, '', obj), undefined);
+        assert.equal(pathWith(everyThirdChar, 'axxeaafaa1', obj), 101);
+        assert.equal(pathWith(everyThirdChar, 'j__0', obj), 'J');
+        assert.equal(pathWith(everyThirdChar, 'j__1', obj), undefined);
+        assert.equal(pathWith(everyThirdChar, 'azsbt5c', null), undefined);
+    });
+});
+
+describe('pathBy', function() {
+    var pathBy = Lib.pathBy;
+    it("takes a string separator, string path, and an object and returns the value at the path or undefined", function() {
+        var obj = {
+          a: {
+            b: {
+              c: 100, 
+              d: 200
+            }, 
+            e: {
+              f: [100, 101, 102], 
+              g: 'G'
+            }, 
+            h: 'H' 
+          }, 
+          i: 'I', 
+          j: ['J']
+        };
+        assert.equal(pathBy('|', 'a|b|c', obj), 100);
+        assert.equal(pathBy(' ', '', obj), undefined);
+        assert.equal(pathBy(' ', 'a e f 1', obj), 101);
+        assert.equal(pathBy('_', 'j_0', obj), 'J');
+        assert.equal(pathBy('~', 'j~1', obj), undefined);
+        assert.equal(pathBy('Z', 'aZbZc', null), undefined);
+    });
+
+});
+
+describe('path', function() {
+    var path = Lib.path;
+    it("takes a dot-delimited path and an object and returns the value at the path or undefined", function() {
+        var obj = {
+          a: {
+            b: {
+              c: 100, 
+              d: 200
+            }, 
+            e: {
+              f: [100, 101, 102], 
+              g: 'G'
+            }, 
+            h: 'H' 
+          }, 
+          i: 'I', 
+          j: ['J']
+        };
+        assert.equal(path('a.b.c', obj), 100);
+        assert.equal(path('', obj), undefined);
+        assert.equal(path('a.e.f.1', obj), 101);
+        assert.equal(path('j.0', obj), 'J');
+        assert.equal(path('j.1', obj), undefined);
+        assert.equal(path('a.b.c', null), undefined);
+    });
+
+
+});
+
