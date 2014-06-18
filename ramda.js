@@ -329,8 +329,8 @@
         //Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
         //the more general compose function, which takes any number of functions.
         var compose2 = function compose2 (f, g) {
-            return function (x) {
-                return f (g (x));
+            return function () {
+                return f (g.apply (this, arguments));
             };
         };
 
