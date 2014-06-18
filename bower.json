@@ -4,7 +4,7 @@
   "version": "0.1.5",
   "homepage": "https://github.com/CrossEye/ramda",
   "authors": [
-    "(Scott Sauyet <scott@sauyet.com>)"
+    "(Scott Sauyet <scott@sauyet.com>)",
     "(buzzdecafe <mh@buzzdecafe.com>)"
   ],
   "description": "A practical functional library for Javascript programmers.",
