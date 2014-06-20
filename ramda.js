@@ -288,7 +288,7 @@
 
         //   Boolean function which is `true` for non-list, `false` for a list.
         R.isAtom = function(x) {
-            return (x !== null) && (x !== undef) && Object.prototype.toString.call(x) !== "[object Array]";
+            return (x !== null) && (x !== undef) && !isArray(x);
         };
 
         // Returns a new list with the new element at the end of a list following all the existing ones.
