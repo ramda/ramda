@@ -11,6 +11,9 @@ describe("keys", function() {
     var cobj = new C();
     it("returns an array of the given object's own keys", function() {
         assert.deepEqual(keys(obj), ['a','b','c','d','e','f']);
+        assert.deepEqual(keys({
+            hasOwnProperty: false
+        }), ['hasOwnProperty']);
     });
     it("does not include the given object's prototype properties", function() {
         assert.deepEqual(keys(cobj), ['a', 'b']);
@@ -43,6 +46,9 @@ describe("values", function() {
     var cobj = new C();
     it("returns an array of the given object's values", function() {
         assert.deepEqual(values(obj), [100,[1,2,3],{x: 200, y: 300},'D',null,undef]);
+        assert.deepEqual(values({
+            hasOwnProperty: false
+        }), [false]);
     });
     it("does not include the given object's prototype properties", function() {
         assert.deepEqual(values(cobj), [100, 200]);
