@@ -622,17 +622,11 @@
         // Returns a new list containing the elements of the given list starting with the first one where the function
         // supplied returns `false` when passed the element.
         R.skipUntil = _(function(fn, list) {
-            var idx = -1, len = list.length, taking = false, result = [];
-            while (!taking) {
-                ++idx;
-                if (idx >= len || fn(list[idx])) {
-                    taking = true;
-                }
+            var idx = -1, len = list.length, taking = false;
+            while (idx < len && !taking) {
+                taking = fn(list[++idx]);
             }
-            while (idx < len) {
-                result.push(list[idx++]);
-            }
-            return result;
+            return _slice(list, idx);
         });
 
         // Returns a new list containing all **but** the first `n` elements of the given list.
