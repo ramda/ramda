@@ -242,11 +242,6 @@
             return list.concat();
         };
 
-        // Create a deep copy of an object.
-        R.cloneDeep = function(obj) {
-          return JSON.parse(JSON.stringify(obj));
-        };
-
         // Core Functions
         // --------------
         //
@@ -473,14 +468,6 @@
         aliasFor("foldl").is("reduce");
         R.foldl.idx = internalFoldl(true);
 
-        // Much like `foldl`/`reduce`, except that this takes as its starting value the first element in the list.
-        R.foldl1 = _(function (fn, list) {
-            if (isEmpty(list)) {
-                throw new Error("foldl1 does not work on empty lists");
-            }
-            return foldl(fn, head(list), tail(list));
-        });
-
         // (Internal use only) The basic implementation of foldr.
         var internalFoldr= _(function(useIdx, fn, acc, list) {
             if (hasMethod('foldr', list)) {
@@ -498,16 +485,6 @@
         var foldr = R.foldr = internalFoldr(false);
         aliasFor("foldr").is("reduceRight");
         R.foldr.idx = internalFoldr(true);
-
-
-        // Much like `foldr`/`reduceRight`, except that this takes as its starting value the last element in the list.
-        R.foldr1 = _(function (fn, list) {
-            if (isEmpty(list)) {
-                throw new Error("foldr1 does not work on empty lists");
-            }
-            var newList = clone(list), acc = newList.pop();
-            return foldr(fn, acc, newList);
-        });
 
         // Builds a list from a seed value, using a function that returns falsy to quit and a pair otherwise,
         // consisting of the current value and the seed to be used for the next value.
