@@ -37,7 +37,7 @@
 
         // (private) `slice` implemented iteratively for performance
         var _slice = function (args, from, to) {
-            var i, arr;
+            var i, arr, length;
 
             from = from || 0;
             to = to || args.length;
