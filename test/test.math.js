@@ -241,37 +241,35 @@ describe('min', function() {
 });
 
 describe('maxWith', function() {
-    var maxWith = Lib.maxWith;
-    var comparator = function(a, b) {return a.x - b.x;};
+    var maxWith = Lib.maxWith, prop = Lib.prop;
 
     it('calculates the largest value of a list using the supplied comparator', function() {
-        assert.deepEqual(maxWith(comparator, [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
+        assert.deepEqual(maxWith(prop('x'), [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
     });
 
-    it('returns null for the empty list', function() {
-        assert.equal(maxWith(comparator, []), null);
+    it('returns undefined for the empty list', function() {
+        assert.equal(maxWith(prop('x'), []), undefined);
     });
 
     it('is properly curried', function() {
-        var highestX = maxWith(comparator);
+        var highestX = maxWith(prop('x'));
         assert.deepEqual(highestX([{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
     });
 });
 
 describe('minWith', function() {
-    var minWith = Lib.minWith;
-    var comparator = function(a, b) {return a.x - b.x;};
+    var minWith = Lib.minWith, prop = Lib.prop;
 
     it('calculates the smallest value of a list using the supplied comparator', function() {
-        assert.deepEqual(minWith(comparator, [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});
+        assert.deepEqual(minWith(prop('x'), [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});
     });
 
     it('returns null for the empty list', function() {
-        assert.equal(minWith(comparator, []), null);
+        assert.equal(typeof(minWith(prop('x'), [])), "undefined");
     });
 
     it('is properly curried', function() {
-        var lowestX = minWith(comparator);
+        var lowestX = minWith(prop('x'));
         assert.deepEqual(lowestX([{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});
     });
 });

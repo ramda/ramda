@@ -1240,33 +1240,37 @@
         var max = R.max = function(list) {return Math.max.apply(null, list);};
 
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
-        R.maxWith = _(function(comparator, list) {
+        R.maxWith = _(function(keyFn, list) {
             if (!isArray(list) || !list.length) {
-                return null;
+                return undef;
             }
-            var idx = 0, max = list[idx];
+            var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
             while (++idx < list.length) {
-                if (comparator(max, list[idx]) < 0) {
-                    max = list[idx];
+                testKey = keyFn(list[idx]);
+                if (testKey > max) {
+                    max = testKey;
+                    winner = list[idx];
                 }
             }
-            return max;
+            return winner;
         });
 
         // TODO: combine this with maxWith?
 
         // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
-        R.minWith = _(function(comparator, list) {
+        R.minWith = _(function(keyFn, list) {
             if (!isArray(list) || !list.length) {
-                return null;
+                return undef;
             }
-            var idx = 0, min = list[idx];
+            var idx = 0, winner = list[idx], min = keyFn(list[idx]), testKey;
             while (++idx < list.length) {
-                if (comparator(min, list[idx]) > 0) {
-                    min = list[idx];
+                testKey = keyFn(list[idx]);
+                if (testKey < min) {
+                    min = testKey;
+                    winner = list[idx];
                 }
             }
-            return min;
+            return winner;
         });
 
 
