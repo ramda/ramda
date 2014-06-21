@@ -37,11 +37,12 @@
 
         // (private) `slice` implemented iteratively for performance
         var _slice = function (args, from, to) {
-            var i,
-                arr = new Array (args.length);
+            var i, arr;
 
             from = from || 0;
             to = to || args.length;
+
+            args = new Array (from - to);
 
             i = from - 1;
             while (++i < to) {
