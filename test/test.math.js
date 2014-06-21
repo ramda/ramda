@@ -229,7 +229,7 @@ describe('max', function() {
 describe('min', function() {
     var min = Lib.min;
 
-    it('calculates the largest value of a list', function() {
+    it('calculates the smallest value of a list', function() {
         assert.equal(min([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 0);
         assert.equal(min([7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]), 1);
     });
@@ -262,7 +262,7 @@ describe('minWith', function() {
     var minWith = Lib.minWith;
     var comparator = function(a, b) {return a.x - b.x;};
 
-    it('calculates the largest value of a list using the supplied comparator', function() {
+    it('calculates the smallest value of a list using the supplied comparator', function() {
         assert.deepEqual(minWith(comparator, [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});
     });
 
