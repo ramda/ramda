@@ -1260,13 +1260,13 @@
             if (!isArray(list) || !list.length) {
                 return null;
             }
-            var idx = 0, max = list[idx];
+            var idx = 0, min = list[idx];
             while (++idx < list.length) {
-                if (comparator(max, list[idx]) > 0) {
-                    max = list[idx];
+                if (comparator(min, list[idx]) > 0) {
+                    min = list[idx];
                 }
             }
-            return max;
+            return min;
         });
 
 
