@@ -288,9 +288,7 @@
 
         // Returns a new list with the new element at the end of a list following all the existing ones.
         var append = R.append = function(el, list) {
-            var newList = clone(list);
-            newList.push(el);
-            return newList;
+            return list.concat([el]);
         };
         aliasFor("append").is("push");
 
