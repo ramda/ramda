@@ -42,7 +42,7 @@
             from = from || 0;
             to = to || args.length;
 
-            arr = new Array (from - to);
+            arr = new Array (to - from);
 
             i = from - 1;
             while (++i < to) {
