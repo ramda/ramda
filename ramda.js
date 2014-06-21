@@ -45,7 +45,7 @@
 
             arr = new Array (length);
 
-            i = -1
+            i = -1;
             while (++i < length) {
                 arr[i] = args[from + i];
             }
