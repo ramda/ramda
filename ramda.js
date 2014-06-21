@@ -41,12 +41,13 @@
 
             from = from || 0;
             to = to || args.length;
+            length = to - from;
 
-            arr = new Array (to - from);
+            arr = new Array (length);
 
-            i = from - 1;
-            while (++i < to) {
-                arr[i] = args[i];
+            i = -1
+            while (++i < length) {
+                arr[i] = args[from + i];
             }
             return arr;
         };
