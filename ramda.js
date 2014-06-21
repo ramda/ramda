@@ -45,7 +45,7 @@
 
             i = from - 1;
             while (++i < to) {
-                arr[arr.length] = args[i];
+                arr[i] = args[i];
             }
             return arr;
         };
