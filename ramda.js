@@ -600,16 +600,11 @@
             if (hasMethod('takeWhile', list)) {
                 return list.takeWhile(fn);
             }
-            var idx = -1, len = list.length, taking = true, result = [];
-            while (taking) {
-                ++idx;
-                if (idx < len && fn(list[idx])) {
-                    result.push(list[idx]);
-                } else {
-                    taking = false;
-                }
+            var idx = -1, len = list.length, taking = true;
+            while (taking && idx < len) {
+                taking = fn(list[++idx]);
             }
-            return result;
+            return _slice(list, 0, idx);
         });
 
         // Returns a new list containing the first `n` elements of the given list.
