@@ -776,9 +776,9 @@
         //     zipWith(f, [1, 2, 3], ['a', 'b', 'c'])
         //     //    => [f(1, 'a'), f(2, 'b'), f(3, 'c')];
         //
-        // Note that the output list will only be as long as the length os the first list passed in.
+        // Note that the output list will only be as long as the length of the shorter input list.
         R.zipWith = _(function(fn, a, b) {
-            var rv = [], i = -1, len = a.length;
+            var rv = [], i = -1, len = Math.min(a.length, b.length);
             while(++i < len) {
                 rv[i] = fn(a[i], b[i]);
             }
@@ -791,7 +791,7 @@
         //     zip([1, 2, 3], ['a', 'b', 'c'])
         //     //    => [[1, 'a'], [2, 'b'], [3, 'c']];
         R.zip =  _(function(a, b) { // = zipWith(prepend);
-            var rv = [], i = -1, len = a.length;
+            var rv = [], i = -1, len = Math.min(a.length, b.length);
             while (++i < len) {
                 rv[i] = [a[i], b[i]];
             }
