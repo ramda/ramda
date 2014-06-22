@@ -131,6 +131,13 @@ describe('skipUntil', function() {
         assert.deepEqual(skipUntil(function(x) {return x === 5;}, [1, 3, 5, 7, 9]), [5, 7, 9]);
     });
 
+    it('should start at the right arg and acknowledges undefined', function() {
+        assert.deepEqual(skipUntil(function(x) {
+            assert.ok(false);
+        }, []), []);
+        assert.deepEqual(skipUntil(function(x) {return x === void 0;}, [1, 3, void 0, 5, 7]), [void 0, 5, 7]);
+    });
+
     it('should be automatically curried', function() {
         var skipUntil7 = skipUntil(function(x) {return x === 7;});
         assert.deepEqual(skipUntil7([1, 3, 5, 7, 9]), [7, 9]);

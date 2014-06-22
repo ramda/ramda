@@ -623,7 +623,7 @@
         // supplied returns `false` when passed the element.
         R.skipUntil = _(function(fn, list) {
             var idx = -1, len = list.length;
-            while (idx < len && !fn(list[++idx])) {}
+            while (++idx < len && !fn(list[idx])) {}
             return _slice(list, idx);
         });
 
