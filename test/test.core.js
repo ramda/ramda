@@ -38,6 +38,7 @@ describe('prepend', function() {
 
     it('adds the element to the beginning of the list', function() {
         assert.deepEqual(prepend('x', ['y', 'z']), ['x', 'y', 'z']);
+        assert.deepEqual(prepend(['a', 'z'], ['x', 'y']), [['a', 'z'], 'x', 'y']);
     });
 });
 
@@ -46,6 +47,7 @@ describe('append', function() {
 
     it('adds the element to the end of the list', function() {
         assert.deepEqual(append('z', ['x', 'y']), ['x', 'y', 'z']);
+        assert.deepEqual(append(['a', 'z'], ['x', 'y']), ['x', 'y', ['a', 'z']]);
     });
 });
 
