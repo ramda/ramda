@@ -1130,40 +1130,25 @@
         };
 
 
-        // TODO: is there a way to unify allPredicates and anyPredicates? they are sooooo similar
+        // Create a predicate wrapper which will call a pick function (all/any) for each predicate
+        var predicateWrap = function(method) {
+            return function(preds /* , args */) {
+                var args = _slice(arguments, 1);
+                var iterator = function() {
+                    var args = arguments;
+                    return method(function(predicate) {
+                        return predicate.apply(null, args);
+                    }, preds);
+                };
+                return args.length ? iterator.apply(null, args) : arity(max(pluck("length", preds)), iterator);
+            };
+        };
 
         // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
-        R.allPredicates = function(preds /*, val1, val12, ... */) {
-            var args = _slice(arguments, 1);
-            var maxArity = max(pluck("length", preds));
-
-            var andPreds = arity(maxArity, function() {
-                var idx = -1;
-                while (++idx < preds.length) {
-                    if (!preds[idx].apply(null, arguments)) { return false; }
-                }
-                return true;
-            });
-            return (isEmpty(args)) ? andPreds : andPreds.apply(null, args);
-        };
-
+        R.allPredicates = predicateWrap(all);
 
         // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
-        R.anyPredicates = function(preds /*, val1, val12, ... */) {
-            var args = _slice(arguments, 1);
-            var maxArity = max(pluck("length", preds));
-
-            var orPreds = arity(maxArity, function() {
-                var idx = -1;
-                while (++idx < preds.length) {
-                    if (preds[idx].apply(null, arguments)) { return true; }
-                }
-                return false;
-            });
-            return (isEmpty(args)) ? orPreds : orPreds.apply(null, args);
-        };
-
-
+        R.anyPredicates = predicateWrap(any);
 
         // Arithmetic Functions
         // --------------------
