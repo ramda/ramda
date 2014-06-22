@@ -866,9 +866,7 @@
         // and returns the removed elements. ramda.splice does not mutate the passed in list (well,
         // it makes a shallow copy), and returns a new list with the specified elements removed. 
         R.splice = _(function(start, len, list) {
-            var ls = _slice(list, 0);
-            ls.splice(start, len);
-            return ls;
+            return _slice(list, 0, start).concat(_slice(list, start + len));
         });
 
         // Returns the `n`th element of a list (zero-indexed)
