@@ -127,6 +127,14 @@
             };
         }());
 
+        // Returns a function that only accepts a single parameter, regardless of how
+        // many the supplied one takes.
+        R.unary = function(fn) {return nAry(1, fn);};
+
+        // Returns a function that only accepts two parameters, regardless of how
+        // many the supplied one takes.
+        R.binary = function(fn) {return nAry(2, fn);};
+
         // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
         // specifically takes exactly `n` parameters.  Note, though, that all parameters supplied will in fact be
         // passed along, in contrast with `nAry`, which only passes along the exact number specified.
