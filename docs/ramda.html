@@ -311,7 +311,7 @@ many the supplied one takes.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.binary = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span> {</span><span class="hljs-keyword">return</span> nAry(<span class="hljs-number">2</span>, fn);};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> binary = R.binary = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(fn)</span> {</span><span class="hljs-keyword">return</span> nAry(<span class="hljs-number">2</span>, fn);};</pre></div></div>
             
         </li>
         
@@ -2930,7 +2930,9 @@ isOdd(<span class="hljs-number">21</span>); <span class="hljs-comment">// =&gt; 
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> max = R.max = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(list)</span> {</span><span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.max.apply(<span class="hljs-literal">null</span>, list);};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> max= R.max = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(list)</span> {</span>
+            <span class="hljs-keyword">return</span> foldl(binary(<span class="hljs-built_in">Math</span>.max), -<span class="hljs-literal">Infinity</span>, list);
+        };</pre></div></div>
             
         </li>
         
@@ -3014,7 +3016,9 @@ isOdd(<span class="hljs-number">21</span>); <span class="hljs-comment">// =&gt; 
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.min = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(list)</span> {</span><span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.min.apply(<span class="hljs-literal">null</span>, list);};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        R.min = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(list)</span> {</span>
+            <span class="hljs-keyword">return</span> foldl(binary(<span class="hljs-built_in">Math</span>.min), <span class="hljs-literal">Infinity</span>, list);
+        };</pre></div></div>
             
         </li>
         

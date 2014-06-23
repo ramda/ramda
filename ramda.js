@@ -133,7 +133,7 @@
 
         // Returns a function that only accepts two parameters, regardless of how
         // many the supplied one takes.
-        R.binary = function(fn) {return nAry(2, fn);};
+        var binary = R.binary = function(fn) {return nAry(2, fn);};
 
         // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
         // specifically takes exactly `n` parameters.  Note, though, that all parameters supplied will in fact be
@@ -1251,7 +1251,9 @@
         R.gte = _(function(a, b) {return a >= b;});
 
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
-        var max = R.max = function(list) {return Math.max.apply(null, list);};
+        var max= R.max = function(list) {
+            return foldl(binary(Math.max), -Infinity, list);
+        };
 
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = _(function(keyFn, list) {
@@ -1289,7 +1291,9 @@
 
 
         // Determines the smallest of a list of numbers (or elements that can be cast to numbers)
-        R.min = function(list) {return Math.min.apply(null, list);};
+        R.min = function(list) {
+            return foldl(binary(Math.min), Infinity, list);
+        };
 
 
         // String Functions
