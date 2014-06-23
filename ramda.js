@@ -232,23 +232,23 @@
             return arr;
         };
 
-        // (Internal use only) The basic implementation of `each`.
-        var internalEach = _(function(useIdx, fn, list) {
+        // Loop over a list for side effects. Nasty, yes, but this is a *practical* library
+        var each = R.each = _(function(fn, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
-               if (useIdx) {
-                 fn(list[idx], idx, list);
-               } else {
-                 fn(list[idx]);
-               }
+                fn(list[idx]);
             }
             // i can't bear not to return *something*
             return list;
         });
-
-        // Loop over a list for side effects. Nasty, yes, but this is a *practical* library
-        var each = R.each = internalEach(false);
-        each.idx = internalEach(true);
+        each.idx = _(function(fn, list) {
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                fn(list[idx], idx, list);
+            }
+            // i can't bear not to return *something*
+            return list;
+        });
         aliasFor("each").is("forEach");
 
         // Create a shallow copy of an array.
@@ -488,43 +488,67 @@
 
         // --------
 
-        // (Internal use only) The basic implementation of filter.
-        var internalFoldl = _(function(useIdx, fn, acc, list) {
-            if (hasMethod('foldl', list)) {
-                return list.foldl(fn, acc); // TODO: figure out useIdx
-            }
-            var idx = -1, len = list.length, result = [];
-            while (++idx < len) {
-                acc = (useIdx) ? fn(acc, list[idx], idx, list) : fn(acc, list[idx]);
-            }
-            return acc;
-        });
-
         // Returns a single item, by successively calling the function with the current element and the the next
         // element of the list, passing the result to the next call.  We start with the `acc` parameter to get
         // things going.  The function supplied should accept this running value and the latest element of the list,
         // and return an updated value.
-        var foldl = R.foldl = internalFoldl(false);
-        aliasFor("foldl").is("reduce");
-        R.foldl.idx = internalFoldl(true);
-
-        // (Internal use only) The basic implementation of foldr.
-        var internalFoldr= _(function(useIdx, fn, acc, list) {
-            if (hasMethod('foldr', list)) {
-                return list.foldr(fn, acc); // TODO: figure out useIdx
+        var foldl = R.foldl = _(function(fn, acc, list) {
+            if (hasMethod('foldl', list)) {
+                return list.foldl(fn, acc);
             }
-            var idx = list.length;
-            while (idx--) {
-                acc = (useIdx) ? fn(acc, list[idx], idx, list) : fn(acc, list[idx]);
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                acc = fn(acc, list[idx]);
+            }
+            return acc;
+        });
+        aliasFor("foldl").is("reduce");
+        // Like `foldl`, but passes additional parameters to the predicate function.  Parameters are
+        // `list item`, `index of item in list`, `entire list`.
+        //
+        // Example:
+        //
+        //     var objectify = function(acc, elem, idx, ls) {
+        //         acc[elem] = idx; return acc;};
+        //     }
+        //
+        //     map(objectify, ['a', 'b', 'c']
+        //     //=> {a: 0, 'b': 1, c: 2}
+        R.foldl.idx = _(function(fn, acc, list) {
+            if (hasMethod('foldl', list)) {
+                return list.foldl(fn, acc);
+            }
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                acc = fn(acc, list[idx], idx, list);
             }
             return acc;
         });
 
+
         // Returns a single item, by successively calling the function with the current element and the the next
         // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
-        var foldr = R.foldr = internalFoldr(false);
+        var foldr = R.foldr = _(function(fn, acc, list) {
+            if (hasMethod('foldr', list)) {
+                return list.foldr(fn, acc);
+            }
+            var idx = list.length;
+            while (idx--) {
+                acc = fn(acc, list[idx]);
+            }
+            return acc;
+        });
         aliasFor("foldr").is("reduceRight");
-        R.foldr.idx = internalFoldr(true);
+        R.foldr.idx = _(function(fn, acc, list) {
+            if (hasMethod('foldr', list)) {
+                return list.foldr(fn, acc);
+            }
+            var idx = list.length;
+            while (idx--) {
+                acc = fn(acc, list[idx], idx, list);
+            }
+            return acc;
+        });
 
         // Builds a list from a seed value, using a function that returns falsy to quit and a pair otherwise,
         // consisting of the current value and the seed to be used for the next value.
@@ -558,25 +582,17 @@
         };
 
 
-        // (Internal use only) The basic implementation of map.
-        var internalMap = _(function(useIdx, fn, list) {
+        // Returns a new list constructed by applying the function to every element of the list supplied.
+        var map = R.map = _(function(fn, list) {
             if (hasMethod('map', list)) {
                 return list.map(fn);
             }
             var idx = -1, len = list.length, result = new Array(len);
-            if (useIdx) {
-                while (++idx < len) {
-                    result[idx] = fn(list[idx], idx, list);
-                }
-            } else {
-                while (++idx < len) {
-                    result[idx] = fn(list[idx]);
-                }
+            while (++idx < len) {
+                result[idx] = fn(list[idx]);
             }
             return result;
         });
-        // Returns a new list constructed by applying the function to every element of the list supplied.
-        var map = R.map = internalMap(false);
 
         // Like `map`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -590,7 +606,16 @@
         //     map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
         //     //=> [64, 6, 7, 5, 3, 0, 81]
 
-        map.idx = internalMap(true);
+        map.idx = _(function(fn, list) {
+            if (hasMethod('map', list)) {
+                return list.map(fn);
+            }
+            var idx = -1, len = list.length, result = new Array(len);
+            while (++idx < len) {
+                result[idx] = fn(list[idx], idx, list);
+            }
+            return result;
+        });
 
         // Adds a `map`-like function for objects.
         //
@@ -612,22 +637,19 @@
         // Reports the number of elements in the list
         R.size = function(arr) {return arr.length;};
 
-        // (Internal use only) The basic implementation of filter.
-        var internalFilter = _(function(useIdx, fn, list) {
+        // Returns a new list containing only those items that match a given predicate function.
+        var filter = R.filter = _(function(fn, list) {
             if (hasMethod('filter', list)) {
-                return list.filter(fn); // TODO: figure out useIdx
+                return list.filter(fn);
             }
             var idx = -1, len = list.length, result = [];
             while (++idx < len) {
-                if (!useIdx && fn(list[idx]) || fn(list[idx], idx, list)) {
+                if (fn(list[idx])) {
                     result.push(list[idx]);
                 }
             }
             return result;
         });
-
-        // Returns a new list containing only those items that match a given predicate function.
-        var filter = R.filter = internalFilter(false);
 
         // Like `filter`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -638,7 +660,18 @@
         //         return list.length - idx <= 2;
         //     };
         //     filter.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]); //=> [0, 9]
-        filter.idx = internalFilter(true);
+        filter.idx = _(function(fn, list) {
+            if (hasMethod('filter', list)) {
+                return list.filter(fn);
+            }
+            var idx = -1, len = list.length, result = [];
+            while (++idx < len) {
+                if (fn(list[idx], idx, list)) {
+                    result.push(list[idx]);
+                }
+            }
+            return result;
+        });
 
         // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
         var reject = R.reject = function(fn, list) {
