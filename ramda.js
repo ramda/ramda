@@ -976,6 +976,8 @@
         var always = R.always = function(val) {
             return function() {return val;};
         };
+        aliasFor("always").is("constant");
+
 
         var anyBlanks = any(function(val) {return val === null || val === undef;});
 
