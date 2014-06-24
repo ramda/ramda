@@ -385,9 +385,6 @@
             }
             if (arglen < 2) {
                 return function _merge(list2) {
-                    if (arguments.length < 1) {
-                        return _merge;
-                    }
                     return (isEmpty(list1)) ? clone(list2) : list1.concat(list2);
                 };
             }
@@ -1699,19 +1696,7 @@
 
         // Returns a function that when supplied an object returns the indicated property of that object, if it exists.
         var prop = R.prop = function (p, obj) {
-            var arglen = arguments.length;
-            if (arglen < 1) {
-                return prop;
-            }
-            if (arglen < 2) {
-                return function _prop(obj) {
-                    if (arguments.length < 1) {
-                        return _prop;
-                    }
-                    return obj[p];
-                };
-            }
-            return obj[p];
+            return arguments.length < 2 ? function (obj) { return obj[p]; } :  obj[p];
         };
         aliasFor("prop").is("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
