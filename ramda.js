@@ -280,41 +280,27 @@
 
         // Loop over a list for side effects. Nasty, yes, but this is a *practical* library
         var each = R.each = function (fn, list) {
-            var f1 = function eachCurried1(list) {
+            function _each(list) {
                 var idx = -1, len = list.length;
                 while (++idx < len) {
                     fn(list[idx]);
                 }
                 // i can't bear not to return *something*
                 return list;
-            };
-            switch (arguments.length) {
-                case 0:
-                    return each;
-                case 1:
-                    return f1;
-                default:
-                    return f1(list);
             }
+            return arguments.length < 2 ? _each : _each(list);
         };
 
         each.idx = function (fn, list) {
-            var f1 = function eachIdxCurried1(list) {
+            function _eachIdx(list) {
                 var idx = -1, len = list.length;
                 while (++idx < len) {
                     fn(list[idx], idx, list);
                 }
                 // i can't bear not to return *something*
                 return list;
-            };
-            switch (arguments.length) {
-                case 0:
-                    return each;
-                case 1:
-                    return f1;
-                default:
-                    return f1(list);
             }
+            return arguments.length < 2 ? _eachIdx : _eachIdx(list);
         };
         aliasFor("each").is("forEach");
 
@@ -551,8 +537,8 @@
         // things going.  The function supplied should accept this running value and the latest element of the list,
         // and return an updated value.
         var foldl = R.foldl =  function (fn, acc, list) {
-            var f1 = function foldlCurried1(acc, list) {
-                var f2 = function foldlCurried2(list) {
+            function __foldl(acc, list) {
+                function _foldl(list) {
                     if (hasMethod('foldl', list)) {
                         return list.foldl(fn, acc);
                     }
@@ -561,19 +547,12 @@
                         acc = fn(acc, list[idx]);
                     }
                     return acc;
-                };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list);
                 }
-            };
-            switch(arguments.length) {
-                case 0: return foldl;
-                case 1: return f1;
-                case 2: return f1(acc);
-                default: return f1(acc, list);
+                return arguments.length < 2 ? _foldl : _foldl(list);
             }
+            return arguments.length < 2 ? __foldl :
+                arguments.length < 3 ? __foldl(acc) :
+                    __foldl(acc, list);
         };
         aliasFor("foldl").is("reduce");
         // Like `foldl`, but passes additional parameters to the predicate function.  Parameters are
@@ -599,18 +578,11 @@
                     }
                     return acc;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list);
-                }
+                return arguments.length < 2 ? f2 : f2(list);
             };
-            switch(arguments.length) {
-                case 0: return R.foldl.idx;
-                case 1: return f1;
-                case 2: return f1(acc);
-                default: return f1(acc, list);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(acc) :
+                    f1(acc, list);
         };
 
 
@@ -628,18 +600,11 @@
                      }
                      return acc;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list);
-                }
+                return arguments.length < 2 ? f2 : f2(list);
             };
-            switch(arguments.length) {
-                case 0: return foldr;
-                case 1: return f1;
-                case 2: return f1(acc);
-                default: return f1(acc, list);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(acc) :
+                    f1(acc, list);
         };
         aliasFor("foldr").is("reduceRight");
         R.foldr.idx = function (fn, acc, list) {
@@ -654,18 +619,11 @@
                     }
                     return acc;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list);
-                }
+                return arguments.length < 2 ? f2 : f2(list);
             };
-            switch(arguments.length) {
-                case 0: return R.foldr.idx;
-                case 1: return f1;
-                case 2: return f1(acc);
-                default: return f1(acc, list);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(acc) :
+                    f1(acc, list);
         };
 
         // Builds a list from a seed value, using a function that returns falsy to quit and a pair otherwise,
@@ -985,18 +943,11 @@
                     }
                     return false;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list);
-                }
+                return arguments.length < 2 ? f2 : f2(list);
             };
-            switch(arguments.length) {
-                case 0: return containsWith;
-                case 1: return f1;
-                case 2: return f1(x);
-                default: return f1(x, list);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(x) :
+                    f1(x, list);
         };
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
@@ -1061,18 +1012,11 @@
                     }
                     return rv;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(b);
-                }
+                return arguments.length < 2 ? f2 : f2(b);
             };
-            switch(arguments.length) {
-                case 0: return R.zipWith;
-                case 1: return f1;
-                case 2: return f1(a);
-                default: return f1(a, b);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(a) :
+                    f1(a, b);
         };
         // Creates a new list out of the two supplied by yielding the pair of each equally-positioned pair in the
         // lists.  For example,
@@ -1112,18 +1056,11 @@
                     }
                     return result;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(b);
-                }
+                return arguments.length < 2 ? f2 : f2(b);
             };
-            switch(arguments.length) {
-                case 0: return R.xprodWith;
-                case 1: return f1;
-                case 2: return f1(a);
-                default: return f1(a, b);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(a) :
+                    f1(a, b);
         };
         // Creates a new list out of the two supplied by yielding the pair of each possible pair in the lists.
         // For example,
@@ -1197,18 +1134,11 @@
                 var f2 = function spliceCurried2(list) {
                     return _slice(list, 0, start).concat(_slice(list, start + len));
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list);
-                }
+                return arguments.length < 2 ? f2 : f2(list);
             };
-            switch(arguments.length) {
-                case 0: return R.splice;
-                case 1: return f1;
-                case 2: return f1(len);
-                default: return f1(len, list);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(len) :
+                    f1(len, list);
         };
         // Returns the `n`th element of a list (zero-indexed)
         R.nth = function (n, list) {
@@ -1413,18 +1343,11 @@
                 var f2 = function eqPropsCurried2(obj2) {
                     return obj1[prop] === obj2[prop];
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(obj2);
-                }
+                return arguments.length < 2 ? f2 : f2(obj2);
             };
-            switch(arguments.length) {
-                case 0: return R.eqProps;
-                case 1: return f1;
-                case 2: return f1(obj1);
-                default: return f1(obj1, obj2);
-            }
+            return arguments.length < 2 ? f1 : 
+                arguments.length < 3 ? f1(obj1) :
+                    f1(obj1, obj2);
         };
 
 
@@ -1799,40 +1722,26 @@
                     }
                     return tmpObj;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(obj);
-                }
+                return arguments.length < 2 ? f2 : f2(obj);
             };
-            switch(arguments.length) {
-                case 0: return pathWith;
-                case 1: return f1;
-                case 2: return f1(str);
-                default: return f1(str, obj);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(str) :
+                    f1(str, obj);
         };        
 
         R.path = pathWith(R.split("."));
 
-        R.pathBy = function (sep, str, obj) {
-            var f1 = function pathByCurried1(str, obj) {
-                var f2 = function pathByCurried2(obj) {
+        R.pathOn = function (sep, str, obj) {
+            var f1 = function pathOnCurried1(str, obj) {
+                var f2 = function pathOnCurried2(obj) {
                     if (!obj) { return undef; }
-                   return pathWith(R.split(sep), str, obj);
-                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(obj);
-                }
+                    return pathWith(R.split(sep), str, obj);
+                };
+                return arguments.length < 2 ? f2 : f2(obj);
             };
-            switch(arguments.length) {
-                case 0: return pathBy;
-                case 1: return f1;
-                case 2: return f1(str);
-                default: return f1(str, obj);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(str) : 
+                    f1(str, obj);
         };
 
         // Data Analysis and Grouping Functions
@@ -1869,18 +1778,11 @@
                 var f2 = function propEqCurried2(obj) {
                     return obj[name] === val;
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(obj);
-                }
+                return arguments.length < 2 ? f2 : f2(obj);
             };
-            switch(arguments.length) {
-                case 0: return R.propEq;
-                case 1: return f1;
-                case 2: return f1(val);
-                default: return f1(val, obj);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(val) :
+                    f1(val, obj);
         };
 
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
@@ -1893,18 +1795,11 @@
                 var f2 = function unionWithCurried2(list2) {
                     return uniqWith(pred, merge(list1, list2));
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list2);
-                }
+                return arguments.length < 2 ? f2 : f2(list2);
             };
-            switch(arguments.length) {
-                case 0: return R.unionWith;
-                case 1: return f1;
-                case 2: return f1(list1);
-                default: return f1(list1, list2);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(list1) :
+                    f1(list1, list2);
         };        
 
         // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
@@ -1923,18 +1818,11 @@
                 var f2 = function differenceWithCurried2(second) {
                     return uniqWith(pred)(reject(flip(containsWith(pred))(second), first));
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(second);
-                }
+                return arguments.length < 2 ? f2 : f2(second);
             };
-            switch(arguments.length) {
-                case 0: return R.differenceWith;
-                case 1: return f1;
-                case 2: return f1(first);
-                default: return f1(first, second);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(first) :
+                    f1(first, second);
         };
 
         // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
@@ -1959,18 +1847,11 @@
                     }
                     return uniqWith(pred, results);
                 };
-                switch(arguments.length) {
-                    case 0: return f1;
-                    case 1: return f2;
-                    default: return f2(list2);
-                }
+                return arguments.length < 2 ? f2 : f2(list2);
             };
-            switch(arguments.length) {
-                case 0: return R.intersectionWith;
-                case 1: return f1;
-                case 2: return f1(list1);
-                default: return f1(list1, list2);
-            }
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(list1) :
+                    f1(list1, list2);
         };
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
