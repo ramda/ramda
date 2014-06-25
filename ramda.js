@@ -607,10 +607,11 @@
         // Example:
         //
         //     var objectify = function(acc, elem, idx, ls) {
-        //         acc[elem] = idx; return acc;};
+        //         acc[elem] = idx; 
+        //         return acc;
         //     }
         //
-        //     map(objectify, ['a', 'b', 'c']
+        //     map(objectify, ['a', 'b', 'c']);
         //     //=> {a: 0, 'b': 1, c: 2}
         R.foldl.idx = function (fn, acc, list) {
             var f1 = function foldlIdxCurried1(acc, list) {
