@@ -98,6 +98,11 @@ describe('takeWhile', function() {
         assert.deepEqual(takeWhile(function(x) {return x != 5;}, [1, 3, 5, 7, 9]), [1, 3]);
     });
 
+    it('should start at the right arg and acknowledges undefined', function() {
+        assert.deepEqual(takeWhile(function(x) { assert.ok(false); }, []), []);
+        assert.deepEqual(takeWhile(function(x) {return x !== void 0;}, [1, 3, void 0, 5, 7]), [1, 3]);
+    });
+
     it('should be automatically curried', function() {
         var takeUntil7 = takeWhile(function(x) {return x != 7;});
         assert.deepEqual(takeUntil7([1, 3, 5, 7, 9]), [1, 3, 5]);
