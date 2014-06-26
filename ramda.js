@@ -44,7 +44,7 @@
             from = from || 0;
             to = to || args.length;
             var length = to - from,
-                arr = Array(length),
+                arr = new Array(length),
                 i = -1;
 
             while (++i < length) {
@@ -59,7 +59,7 @@
             set2 = set2 || [];
             var length1 = set1.length,
                 length2 = set2.length,
-                result = Array(length1 + length2);
+                result = new Array(length1 + length2);
 
             for (var i = 0; i < length1; i++) {
                 result[i] = set1[i];
@@ -1089,6 +1089,7 @@
                 }
                 var i = -1;
                 var ilen = a.length;
+                var j;
                 var jlen = b.length;
                 var result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
                 while (++i < ilen) {
