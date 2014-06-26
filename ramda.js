@@ -41,19 +41,33 @@
 
         // (private) `slice` implemented iteratively for performance
         var _slice = function (args, from, to) {
-            var i, arr, length;
-
             from = from || 0;
             to = to || args.length;
-            length = to - from;
+            var length = to - from,
+                arr = Array(length),
+                i = -1;
 
-            arr = new Array(length);
-
-            i = -1;
             while (++i < length) {
                 arr[i] = args[from + i];
             }
             return arr;
+        };
+
+        // private concat function to merge 2 collections
+        var concat = function(set1, set2) {
+            set1 = set1 || [];
+            set2 = set2 || [];
+            var length1 = set1.length,
+                length2 = set2.length,
+                result = Array(length1 + length2);
+
+            for (var i = 0; i < length1; i++) {
+                result[i] = set1[i];
+            }
+            for (i = 0; i < length2; i++) {
+                result[i + length1] = set2[i];
+            }
+            return result;
         };
 
         // (private)
@@ -75,7 +89,7 @@
             var fnArity = fn.length;
             var f = function (args) {
                 return arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
-                    var newArgs = (args || []).concat(_slice(arguments, 0));
+                    var newArgs = concat(args, arguments);
                     if (newArgs.length >= fnArity) {
                         return fn.apply(this, newArgs);
                     }
@@ -305,8 +319,8 @@
         aliasFor("each").is("forEach");
 
         // Create a shallow copy of an array.
-        var clone = R.clone = function (list) {
-            return list.concat();
+        var clone = R.clone = function(list) {
+            return _slice(list);
         };
 
         // Core Functions
@@ -323,7 +337,7 @@
 
         // Returns a new list with the new element at the front and the existing elements following
         var prepend = R.prepend = function (el, arr) {
-            return [el].concat(arr);
+            return concat([el], arr);
         };
         aliasFor("prepend").is("cons");
 
@@ -358,16 +372,16 @@
         };
 
         // Returns a new list with the new element at the end of a list following all the existing ones.
-        var append = R.append = function (el, list) {
-            return list.concat([el]);
+        var append = R.append = function(el, list) {
+            return concat(list, [el]);
         };
         aliasFor("append").is("push");
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
         var merge = R.merge = function (list1, list2) {
              return arguments.length < 2 ? 
-               function _merge(list2) { return (isEmpty(list1)) ? clone(list2) : list1.concat(list2); } :
-               (isEmpty(list1)) ? clone(list2) : list1.concat(list2);
+               function _merge(list2) { return concat(list1, list2); } :
+               concat(list1, list2);
         };
         aliasFor("merge").is("concat");
 
@@ -438,7 +452,7 @@
         R.lPartial = function (fn) {
             var args = _slice(arguments, 1);
             return arity(Math.max(fn.length - args.length, 0), function () {
-                return fn.apply(this, args.concat(_slice(arguments)));
+                return fn.apply(this, concat(args, arguments));
             });
         };
         aliasFor("lPartial").is("applyLeft");
@@ -447,8 +461,8 @@
         // pre-filled.
         R.rPartial = function (fn) {
             var args = _slice(arguments, 1);
-            return arity(Math.max(fn.length - args.length, 0), function () {
-                return fn.apply(this, _slice(arguments).concat(args));
+            return arity(Math.max(fn.length - args.length, 0), function() {
+                return fn.apply(this, concat(arguments, args));
             });
         };
         aliasFor("rPartial").is("applyRight");
@@ -483,9 +497,9 @@
 
         // Wrap a function inside another to allow you to make adjustments to the parameters or do other processing
         // either before the internal function is called or with its results.
-        R.wrap = function (fn, wrapper) {
-            return function () {
-                return wrapper.apply(this, [fn].concat(_slice(arguments)));
+        R.wrap = function(fn, wrapper) {
+            return function() {
+                return wrapper.apply(this, concat([fn], arguments));
             };
         };
 
