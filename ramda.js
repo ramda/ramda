@@ -1288,7 +1288,7 @@
 
         // Returns a list containing the names of all the 
         // properties of the supplied object, including prototype properties.
-        var allKeys = R.allKeys = function (obj) {
+        R.keysIn = function (obj) {
             var prop, ks = [];
             for (prop in obj) {
                 ks.push(prop);
@@ -1309,7 +1309,7 @@
 
         // Returns a list of all the properties, including prototype properties, 
         // of the supplied object.
-        R.allValues = function (obj) {
+        R.valuesIn = function (obj) {
             var prop, vs = [];
             for (prop in obj) {
                 vs.push(obj[prop]);
