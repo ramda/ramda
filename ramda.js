@@ -1256,7 +1256,7 @@
         // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
         var keys = R.keys = function (obj) {
-            if (nativeKeys) return nativeKeys(obj);
+            if (nativeKeys) return nativeKeys(Object(obj));
             var prop, ks = [];
             for (prop in obj) {
                 if (hasOwnProperty.call(obj, prop)) {
