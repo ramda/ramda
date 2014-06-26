@@ -16,9 +16,9 @@
 //  [umd]: https://github.com/umdjs/umd/blob/master/returnExports.js
 
 (function (root, factory) {if (typeof exports === 'object') {module.exports = factory(root);} else if (typeof define === 'function' && define.amd) {define(factory);} else {root.ramda = factory(root);}}(this, function (global) {
-
+    
+    "use strict";
     return  (function() {
-
         // This object is what is actually returned, with all the exposed functions attached as properties.
 
         var R = {};
@@ -44,7 +44,7 @@
             from = from || 0;
             to = to || args.length;
             var length = to - from,
-                arr = Array(length),
+                arr = new Array(length),
                 i = -1;
 
             while (++i < length) {
@@ -59,7 +59,7 @@
             set2 = set2 || [];
             var length1 = set1.length,
                 length2 = set2.length,
-                result = Array(length1 + length2);
+                result = new Array(length1 + length2);
 
             for (var i = 0; i < length1; i++) {
                 result[i] = set1[i];
@@ -509,13 +509,13 @@
         //     var Widget = function(config) { /* ... */ }; // Constructor
         //     Widget.prototype = { /* ... */ }
         //     map(construct(Widget), allConfigs); //=> list of Widgets
-        R.construct = function (fn) {
+        R.construct = function (Fn) {
             var f = function () {
-                var obj = new fn();
-                fn.apply(obj, arguments);
+                var obj = new Fn();
+                Fn.apply(obj, arguments);
                 return obj;
             };
-            return fn.length > 1 ? curry(nAry(fn.length, f)) : f;
+            return Fn.length > 1 ? curry(nAry(Fn.length, f)) : f;
         };
 
         // Runs two separate functions against a single one and then calls another
@@ -1089,6 +1089,7 @@
                 }
                 var i = -1;
                 var ilen = a.length;
+                var j;
                 var jlen = b.length;
                 var result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
                 while (++i < ilen) {
@@ -1285,6 +1286,16 @@
             return ks;
         };
 
+        // Returns a list containing the names of all the 
+        // properties of the supplied object, including prototype properties.
+        var allKeys = R.allKeys = function (obj) {
+            var prop, ks = [];
+            for (prop in obj) {
+                ks.push(prop);
+            }
+            return ks;
+        };
+
         // Returns a list of all the enumerable own properties of the supplied object.
         R.values = function (obj) {
             var prop, vs = [];
@@ -1292,6 +1303,16 @@
                 if (obj.hasOwnProperty(prop)) {
                     vs.push(obj[prop]);
                 }
+            }
+            return vs;
+        };
+
+        // Returns a list of all the properties, including prototype properties, 
+        // of the supplied object.
+        R.allValues = function (obj) {
+            var prop, vs = [];
+            for (prop in obj) {
+                vs.push(obj[prop]);
             }
             return vs;
         };
