@@ -866,7 +866,7 @@
         // Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
         R.findLast = function (fn, list) {
             function _findLast(list) {
-                idx = list.length;
+                var idx = list.length;
                 while (--idx) {
                     if (fn(list[idx])) {
                         return list[idx];
@@ -1307,7 +1307,7 @@
         // Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
         var pickAll = R.pickAll = function (names, obj) {
             function _pickAll(obj) {
-                copy = {};
+                var copy = {};
                 each(function (name) {
                     copy[name] = obj[name];
                 }, names);
@@ -1329,7 +1329,7 @@
         // Returns a new object that mixes in the own properties of two objects.
         R.mixin = function (a, b) {
             function _mixin(b) {
-                mixed = pickAll(R.keys(a), a);
+                var mixed = pickAll(R.keys(a), a);
                 each(function (key) {
                     mixed[key] = b[key];
                 }, R.keys(b));
