@@ -17,24 +17,6 @@ describe('flip', function() {
     });
 });
 
-//describe('cycle', function() {
-//    var cycle = Lib.cycle;
-//    it('should return a function which cycles the arguments to the supplied function so that the first becomes last', function() {
-//        var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
-//        var g = cycle(f);
-//        var h = cycle(g);
-//        assert.equal(f('a', 'b', 'c'), 'a b c');
-//        assert.equal(g('a', 'b', 'c'), 'b c a');
-//        assert.equal(h('a', 'b', 'c'), 'c a b');
-//    });
-//
-//    it('should return a curried function', function() {
-//        var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
-//        var g = cycle(f)('a');
-//        assert.equal(g('b', 'c'), 'b c a');
-//    });
-//});
-
 describe('once', function() {
     var once = Lib.once;
 
@@ -109,5 +91,40 @@ describe('construct', function() {
         assert.equal(r1.height, 4);
         assert.equal(r1.area(), 12);
     });
+});
 
+describe('unary', function() {
+    var unary = Lib.unary;
+
+    it('should turn multiple-argument function into unary one', function() {
+        unary(function(x, y, z) {
+            assert.equal(arguments.length, 1);
+            assert.equal(typeof y, "undefined");
+            assert.equal(typeof z, "undefined");
+        })(10, 20, 30);
+    });
+
+    it('initial argument is passed through normally', function() {
+        unary(function(x, y, z) {
+            assert.equal(x, 10);
+        })(10, 20, 30);
+    });
+});
+
+describe('binary', function() {
+    var binary = Lib.binary;
+
+    it('should turn multiple-argument function into binary one', function() {
+        binary(function(x, y, z) {
+            assert.equal(arguments.length, 2);
+            assert.equal(typeof z, "undefined");
+        })(10, 20, 30);
+    });
+
+    it('initial arguments are passed through normally', function() {
+        binary(function(x, y, z) {
+            assert.equal(x, 10);
+            assert.equal(y, 20);
+        })(10, 20, 30);
+    });
 });

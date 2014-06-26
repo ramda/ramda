@@ -26,11 +26,15 @@
         // Internal Functions and Properties
         // ---------------------------------
 
-        var undef = (function(){})(), EMPTY;
+        var undef = (function () {
+        })(), EMPTY;
 
         // Makes a public alias for one of the public functions:
-        var aliasFor = function(oldName) {
-            var fn = function(newName) {R[newName] = R[oldName]; return fn;};
+        var aliasFor = function (oldName) {
+            var fn = function (newName) {
+                R[newName] = R[oldName];
+                return fn;
+            };
             fn.is = fn.are = fn.and = fn;
             return fn;
         };
@@ -39,10 +43,10 @@
         var _slice = function (args, from, to) {
             from = from || 0;
             to = to || args.length;
-
             var length = to - from,
                 arr = Array(length),
                 i = -1;
+
             while (++i < length) {
                 arr[i] = args[from + i];
             }
@@ -67,7 +71,9 @@
         };
 
         // (private)
-        var isArray = function(val) {return Object.prototype.toString.call(val) === "[object Array]";};
+        var isArray = function (val) {
+            return Object.prototype.toString.call(val) === "[object Array]";
+        };
 
         // Returns a curried version of the supplied function.  For example:
         //
@@ -79,15 +85,17 @@
         //      i(4) ≅ h(4) == g(7, 4) == f(3, 7, 4) == 1
         //
         //  Almost all exposed functions of more than one parameter already have curry applied to them.
-        var _ = R.curry = function(fn) {
+        var curry = R.curry = function (fn) {
             var fnArity = fn.length;
-            var f = function(args) {
+            var f = function (args) {
                 return arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
                     var newArgs = concat(args, arguments);
                     if (newArgs.length >= fnArity) {
                         return fn.apply(this, newArgs);
                     }
-                    else {return f(newArgs);}
+                    else {
+                        return f(newArgs);
+                    }
                 });
             };
 
@@ -95,13 +103,13 @@
         };
 
         // (private) for dynamically dispatching Ramda method to non-Array objects
-        var hasMethod = function(methodName, obj) {
-            return obj && !isArray(obj) && typeof obj[methodName] === 'function'; 
+        var hasMethod = function (methodName, obj) {
+            return obj && !isArray(obj) && typeof obj[methodName] === 'function';
         };
 
-        var mkArgStr = function(n) {
+        var mkArgStr = function (n) {
             var arr = [], idx = -1;
-            while(++idx < n) {
+            while (++idx < n) {
                 arr[idx] = "arg" + idx;
             }
             return arr.join(", ");
@@ -110,12 +118,28 @@
         // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
         // specifically takes exactly `n` parameters.  Any extraneous parameters will not be passed on to the function
         // supplied
-        var nAry = R.nAry = (function() {
+        var nAry = R.nAry = (function () {
             var cache = {
-                0: function(func) {return function() {return func.call(this);}; },
-                1: function(func) {return function(arg0) {return func.call(this, arg0);}; },
-                2: function(func) {return function(arg0, arg1) {return func.call(this, arg0, arg1);}; },
-                3: function(func) {return function(arg0, arg1, arg2) {return func.call(this, arg0, arg1, arg2);}; }
+                0: function (func) {
+                    return function () {
+                        return func.call(this);
+                    };
+                },
+                1: function (func) {
+                    return function (arg0) {
+                        return func.call(this, arg0);
+                    };
+                },
+                2: function (func) {
+                    return function (arg0, arg1) {
+                        return func.call(this, arg0, arg1);
+                    };
+                },
+                3: function (func) {
+                    return function (arg0, arg1, arg2) {
+                        return func.call(this, arg0, arg1, arg2);
+                    };
+                }
             };
 
 
@@ -126,30 +150,58 @@
             //         }
             //     };
 
-            var makeN = function(n) {
+            var makeN = function (n) {
                 var fnArgs = mkArgStr(n);
                 var body = [
-                    "    return function(" + fnArgs + ") {",
-                    "        return func.call(this" + (fnArgs ? ", " + fnArgs : "") + ");",
+                        "    return function(" + fnArgs + ") {",
+                        "        return func.call(this" + (fnArgs ? ", " + fnArgs : "") + ");",
                     "    }"
                 ].join("\n");
                 return new Function("func", body);
             };
 
-            return function(n, fn) {
+            return function (n, fn) {
                 return (cache[n] || (cache[n] = makeN(n)))(fn);
             };
         }());
 
+        // Returns a function that only accepts a single parameter, regardless of how
+        // many the supplied one takes.
+        R.unary = function (fn) {
+            return nAry(1, fn);
+        };
+
+        // Returns a function that only accepts two parameters, regardless of how
+        // many the supplied one takes.
+        var binary = R.binary = function (fn) {
+            return nAry(2, fn);
+        };
+
         // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
         // specifically takes exactly `n` parameters.  Note, though, that all parameters supplied will in fact be
         // passed along, in contrast with `nAry`, which only passes along the exact number specified.
-        var arity = R.arity = (function() {
+        var arity = R.arity = (function () {
             var cache = {
-                0: function(func) {return function() {return func.apply(this, arguments);}; },
-                1: function(func) {return function(arg0) {return func.apply(this, arguments);}; },
-                2: function(func) {return function(arg0, arg1) {return func.apply(this, arguments);}; },
-                3: function(func) {return function(arg0, arg1, arg2) {return func.apply(this, arguments);}; }
+                0: function (func) {
+                    return function () {
+                        return func.apply(this, arguments);
+                    };
+                },
+                1: function (func) {
+                    return function (arg0) {
+                        return func.apply(this, arguments);
+                    };
+                },
+                2: function (func) {
+                    return function (arg0, arg1) {
+                        return func.apply(this, arguments);
+                    };
+                },
+                3: function (func) {
+                    return function (arg0, arg1, arg2) {
+                        return func.apply(this, arguments);
+                    };
+                }
             };
 
             //     For example:
@@ -159,17 +211,17 @@
             //         }
             //     };
 
-            var makeN = function(n) {
+            var makeN = function (n) {
                 var fnArgs = mkArgStr(n);
                 var body = [
-                    "    return function(" + fnArgs + ") {",
+                        "    return function(" + fnArgs + ") {",
                     "        return func.apply(this, arguments);",
                     "    }"
                 ].join("\n");
                 return new Function("func", body);
             };
 
-            return function(n, fn) {
+            return function (n, fn) {
                 return (cache[n] || (cache[n] = makeN(n)))(fn);
             };
         }());
@@ -177,11 +229,11 @@
         // Turns a named method of an object (or object prototype) into a function that can be called directly.
         // The object becomes the last parameter to the function, and the function is automatically curried.
         // Passing the optional `len` parameter restricts the function to the initial `len` parameters of the method.
-        var invoker = R.invoker = function(name, obj, len) {
+        var invoker = R.invoker = function (name, obj, len) {
             var method = obj[name];
             var length = len === undef ? method.length : len;
-            return method && _(nAry(length + 1, function() {
-                if(arguments.length) {
+            return method && curry(nAry(length + 1, function () {
+                if (arguments.length) {
                     var target = Array.prototype.pop.call(arguments);
                     var targetMethod = target[name];
                     if (targetMethod == method) {
@@ -198,10 +250,10 @@
         // If there are extra _expected_ arguments that don't need to be transformed, although you can ignore
         // them, it might be best to pass in and identity function so that the new function correctly reports arity.
         // See for example, the definition of `project`, below.
-        var useWith = R.useWith = function(fn /*, transformers */) {
+        var useWith = R.useWith = function (fn /*, transformers */) {
             var transformers = _slice(arguments, 1);
             var tlen = transformers.length;
-            return _(arity(tlen, function() {
+            return curry(arity(tlen, function () {
                 var args = [], idx = -1;
                 while (++idx < tlen) {
                     args.push(transformers[idx](arguments[idx]));
@@ -214,12 +266,12 @@
         // as `useWith(map, pickAll, identity)`, as, instead, `use(map).over(pickAll, identity)`, which is a bit
         // more explicit.
         // TODO: One of these versions should be eliminated eventually.  So not worrying about the duplication for now.
-        R.use = function(fn) {
+        R.use = function (fn) {
             return {
-                over: function(/*transformers*/) {
+                over: function (/*transformers*/) {
                     var transformers = _slice(arguments, 0);
                     var tlen = transformers.length;
-                    return _(arity(tlen, function() {
+                    return curry(arity(tlen, function () {
                         var args = [], idx = -1;
                         while (++idx < tlen) {
                             args.push(transformers[idx](arguments[idx]));
@@ -232,34 +284,43 @@
 
 
         // Fills out an array to the specified length. Internal private function.
-        var expand = function(a, len) {
+        var expand = function (a, len) {
             var arr = a ? isArray(a) ? a : _slice(a) : [];
-            while(arr.length < len) {arr[arr.length] = undef;}
+            while (arr.length < len) {
+                arr[arr.length] = undef;
+            }
             return arr;
         };
 
-        // (Internal use only) The basic implementation of `each`.
-        var internalEach = _(function(useIdx, fn, list) {
-            var idx = -1, len = list.length;
-            while (++idx < len) {
-               if (useIdx) {
-                 fn(list[idx], idx, list);
-               } else {
-                 fn(list[idx]);
-               }
-            }
-            // i can't bear not to return *something*
-            return list;
-        });
-
         // Loop over a list for side effects. Nasty, yes, but this is a *practical* library
-        var each = R.each = internalEach(false);
-        each.idx = internalEach(true);
+        var each = R.each = function (fn, list) {
+            function _each(list) {
+                var idx = -1, len = list.length;
+                while (++idx < len) {
+                    fn(list[idx]);
+                }
+                // i can't bear not to return *something*
+                return list;
+            }
+            return arguments.length < 2 ? _each : _each(list);
+        };
+
+        each.idx = function (fn, list) {
+            function _eachIdx(list) {
+                var idx = -1, len = list.length;
+                while (++idx < len) {
+                    fn(list[idx], idx, list);
+                }
+                // i can't bear not to return *something*
+                return list;
+            }
+            return arguments.length < 2 ? _eachIdx : _eachIdx(list);
+        };
         aliasFor("each").is("forEach");
 
         // Create a shallow copy of an array.
         var clone = R.clone = function(list) {
-            return concat(list);
+            return _slice(list);
         };
 
         // Core Functions
@@ -270,21 +331,25 @@
         EMPTY = [];
 
         // Boolean function which reports whether a list is empty.
-        var isEmpty = R.isEmpty = function(arr) {return !arr || !arr.length;};
+        var isEmpty = R.isEmpty = function (arr) {
+            return !arr || !arr.length;
+        };
 
         // Returns a new list with the new element at the front and the existing elements following
-        var prepend = R.prepend = function(el, arr) {return concat([el], arr);};
+        var prepend = R.prepend = function (el, arr) {
+            return concat([el], arr);
+        };
         aliasFor("prepend").is("cons");
 
         //  Returns the first element of a list
-        var head = R.head = function(arr) {
+        var head = R.head = function (arr) {
             arr = arr || EMPTY;
-            return arr[0]; 
+            return arr[0];
         };
         aliasFor("head").is("car").and("first");
 
         //  Returns the last element of a list
-        R.last = function(arr) {
+        R.last = function (arr) {
             arr = arr || EMPTY;
             return arr[arr.length - 1];
         };
@@ -292,7 +357,7 @@
         // Returns the rest of the list after the first element.
         // If the passed-in list is not annary, but is an object with a `tail` method, 
         // it will return object.tail().
-        var tail = R.tail = function(arr) {
+        var tail = R.tail = function (arr) {
             arr = arr || EMPTY;
             if (hasMethod('tail', arr)) {
                 return arr.tail();
@@ -302,7 +367,7 @@
         aliasFor("tail").is("cdr");
 
         //   Boolean function which is `true` for non-list, `false` for a list.
-        R.isAtom = function(x) {
+        R.isAtom = function (x) {
             return (x !== null) && (x !== undef) && !isArray(x);
         };
 
@@ -313,22 +378,31 @@
         aliasFor("append").is("push");
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
-        var merge = R.merge = _(concat);
+        var merge = R.merge = function (list1, list2) {
+             return arguments.length < 2 ? 
+               function _merge(list2) { return concat(list1, list2); } :
+               concat(list1, list2);
+        };
         aliasFor("merge").is("concat");
 
         // A surprisingly useful function that does nothing but return the parameter supplied to it.
-        var identity = R.identity = function(x) {return x;};
+        var identity = R.identity = function (x) {
+            return x;
+        };
         aliasFor("identity").is("I");
 
         // Returns a fixed list (of size `n`) of identical values.
-        R.repeatN = _(function(value, n) {
-            var arr = [];
-            var i = -1;
-            while(++i < n) {
-                arr[i] = value;
+        R.repeatN = function (value, n) {
+            function _repeatN(n) {
+                var arr = new Array(n);
+                var i = -1;
+                while (++i < n) {
+                    arr[i] = value;
+                }
+                return arr;
             }
-            return arr;
-        });
+            return arguments.length < 2 ? _repeatN : _repeatN(n);
+        };
 
 
         // Function functions :-)
@@ -339,9 +413,9 @@
         // --------
         //Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
         //the more general compose function, which takes any number of functions.
-        var compose2 = function compose2 (f, g) {
+        var internalCompose = function(f, g) {
             return function () {
-                return f (g.apply (this, arguments));
+                return f(g.apply(this, arguments));
             };
         };
 
@@ -349,10 +423,10 @@
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
         var compose = R.compose = function() {  // TODO: type check of arguments?
-            var i = 0,
-                f = arguments[0];
+            var i = 0;
+            var f = arguments[0];
             while (++i < arguments.length) {
-                f = compose2 (f, arguments[i]);
+                f = internalCompose(f, arguments[i]);
             }
             return f;
         };
@@ -365,17 +439,19 @@
         aliasFor("pipe").is("sequence");
 
         // Returns a new function much like the supplied one except that the first two arguments are inverted.
-        var flip = R.flip = function(fn) {
-            return _(function(a, b) {
-                return fn.apply(this, [b, a].concat(_slice(arguments, 2)));
-            });
+        var flip = R.flip = function (fn) {
+            return function (a, b) {  
+                return arguments.length < 2 ? 
+                  function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); } :
+                  fn.apply(this, [b, a].concat(_slice(arguments, 2)));
+            };
         };
 
         // Creates a new function that acts like the supplied function except that the left-most parameters are
         // pre-filled.
         R.lPartial = function (fn) {
             var args = _slice(arguments, 1);
-            return arity(Math.max(fn.length - args.length, 0), function() {
+            return arity(Math.max(fn.length - args.length, 0), function () {
                 return fn.apply(this, concat(args, arguments));
             });
         };
@@ -383,7 +459,7 @@
 
         // Creates a new function that acts like the supplied function except that the right-most parameters are
         // pre-filled.
-        R.rPartial =function (fn) {
+        R.rPartial = function (fn) {
             var args = _slice(arguments, 1);
             return arity(Math.max(fn.length - args.length, 0), function() {
                 return fn.apply(this, concat(arguments, args));
@@ -393,11 +469,13 @@
 
         // Creates a new function that stores the results of running the supplied function and returns those
         // stored value when the same request is made.  **Note**: this really only handles string and number parameters.
-        R.memoize = function(fn) {
+        R.memoize = function (fn) {
             var cache = {};
-            return function() {
-                var position = foldl(function(cache, arg) {return cache[arg] || (cache[arg] = {});}, cache,
-                        _slice(arguments, 0, arguments.length - 1));
+            return function () {
+                var position = foldl(function (cache, arg) {
+                        return cache[arg] || (cache[arg] = {});
+                    }, cache,
+                    _slice(arguments, 0, arguments.length - 1));
                 var arg = arguments[arguments.length - 1];
                 return (position[arg] || (position[arg] = fn.apply(this, arguments)));
             };
@@ -405,10 +483,12 @@
 
         // Wraps a function up in one that will only call the internal one once, no matter how many times the outer one
         // is called.  ** Note**: this is not really pure; it's mostly meant to keep side-effects from repeating.
-        R.once = function(fn) {
+        R.once = function (fn) {
             var called = false, result;
-            return function() {
-                if (called) {return result;}
+            return function () {
+                if (called) {
+                    return result;
+                }
                 called = true;
                 result = fn.apply(this, arguments);
                 return result;
@@ -429,22 +509,24 @@
         //     var Widget = function(config) { /* ... */ }; // Constructor
         //     Widget.prototype = { /* ... */ }
         //     map(construct(Widget), allConfigs); //=> list of Widgets
-        R.construct = function(fn) {
-            var f = function() {
+        R.construct = function (fn) {
+            var f = function () {
                 var obj = new fn();
                 fn.apply(obj, arguments);
                 return obj;
             };
-            return fn.length > 1 ? _(nAry(fn.length, f)) : f;
+            return fn.length > 1 ? curry(nAry(fn.length, f)) : f;
         };
 
         // Runs two separate functions against a single one and then calls another
         // function with the results of those initial calls.
-        R.fork = function(after) {
+        R.fork = function (after) {
             var fns = _slice(arguments, 1);
-            return function() {
+            return function () {
                 var args = arguments;
-                return after.apply(this, map(function(fn) {return fn.apply(this, args);}, fns));
+                return after.apply(this, map(function (fn) {
+                    return fn.apply(this, args);
+                }, fns));
             };
         };
 
@@ -464,76 +546,132 @@
 
         // --------
 
-        // (Internal use only) The basic implementation of filter.
-        var internalFoldl = _(function(useIdx, fn, acc, list) {
-            if (hasMethod('foldl', list)) {
-                return list.foldl(fn, acc); // TODO: figure out useIdx
-            }
-            var idx = -1, len = list.length, result = [];
-            while (++idx < len) {
-                acc = (useIdx) ? fn(acc, list[idx], idx, list) : fn(acc, list[idx]);
-            }
-            return acc;
-        });
-
         // Returns a single item, by successively calling the function with the current element and the the next
         // element of the list, passing the result to the next call.  We start with the `acc` parameter to get
         // things going.  The function supplied should accept this running value and the latest element of the list,
         // and return an updated value.
-        var foldl = R.foldl = internalFoldl(false);
+        var foldl = R.foldl =  function (fn, acc, list) {
+            function __foldl(acc, list) {
+                function _foldl(list) {
+                    if (hasMethod('foldl', list)) {
+                        return list.foldl(fn, acc);
+                    }
+                    var idx = -1, len = list.length;
+                    while (++idx < len) {
+                        acc = fn(acc, list[idx]);
+                    }
+                    return acc;
+                }
+                return arguments.length < 2 ? _foldl : _foldl(list);
+            }
+            return arguments.length < 2 ? __foldl :
+                arguments.length < 3 ? __foldl(acc) :
+                    __foldl(acc, list);
+        };
         aliasFor("foldl").is("reduce");
-        R.foldl.idx = internalFoldl(true);
+        // Like `foldl`, but passes additional parameters to the predicate function.  Parameters are
+        // `list item`, `index of item in list`, `entire list`.
+        //
+        // Example:
+        //
+        //     var objectify = function(acc, elem, idx, ls) {
+        //         acc[elem] = idx; 
+        //         return acc;
+        //     }
+        //
+        //     map(objectify, ['a', 'b', 'c']);
+        //     //=> {a: 0, 'b': 1, c: 2}
+        R.foldl.idx = function (fn, acc, list) {
+            var f1 = function foldlIdxCurried1(acc, list) {
+                var f2 = function foldlIdxCurried1(list) {
+                    if (hasMethod('foldl', list)) {
+                        return list.foldl(fn, acc);
+                    }
+                    var idx = -1, len = list.length;
+                    while (++idx < len) {
+                        acc = fn(acc, list[idx], idx, list);
+                    }
+                    return acc;
+                };
+                return arguments.length < 2 ? f2 : f2(list);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(acc) :
+                    f1(acc, list);
+        };
 
-        // (Internal use only) The basic implementation of foldr.
-        var internalFoldr= _(function(useIdx, fn, acc, list) {
-            if (hasMethod('foldr', list)) {
-                return list.foldr(fn, acc); // TODO: figure out useIdx
-            }
-            var idx = list.length;
-            while (idx--) {
-                acc = (useIdx) ? fn(acc, list[idx], idx, list) : fn(acc, list[idx]);
-            }
-            return acc;
-        });
 
         // Returns a single item, by successively calling the function with the current element and the the next
         // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
-        var foldr = R.foldr = internalFoldr(false);
+        var foldr = R.foldr = function (fn, acc, list) {
+            var f1 = function foldrCurried1(acc, list) {
+                var f2 = function foldrCurried2(list) {
+                    if (hasMethod('foldr', list)) {
+                         return list.foldr(fn, acc);
+                     }
+                     var idx = list.length;
+                     while (idx--) {
+                         acc = fn(acc, list[idx]);
+                     }
+                     return acc;
+                };
+                return arguments.length < 2 ? f2 : f2(list);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(acc) :
+                    f1(acc, list);
+        };
         aliasFor("foldr").is("reduceRight");
-        R.foldr.idx = internalFoldr(true);
+        R.foldr.idx = function (fn, acc, list) {
+            var f1 = function foldrIdxCurried1(acc, list) {
+                var f2 = function foldfIdxCurried2(list) {
+                    if (hasMethod('foldr', list)) {
+                        return list.foldr(fn, acc);
+                    }
+                    var idx = list.length;
+                    while (idx--) {
+                        acc = fn(acc, list[idx], idx, list);
+                    }
+                    return acc;
+                };
+                return arguments.length < 2 ? f2 : f2(list);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(acc) :
+                    f1(acc, list);
+        };
 
         // Builds a list from a seed value, using a function that returns falsy to quit and a pair otherwise,
         // consisting of the current value and the seed to be used for the next value.
 
-        R.unfoldr = _(function(fn, seed) {
-            var pair = fn(seed), result = [];
-            while (pair && pair.length) {
-                result.push(pair[0]);
-                pair = fn(pair[1]);
-            }
-            return result;
-        });
-
-
-        // (Internal use only) The basic implementation of map.
-        var internalMap = _(function(useIdx, fn, list) {
-            if (hasMethod('map', list)) {
-                return list.map(fn);
-            }
-            var idx = -1, len = list.length, result = new Array(len);
-            if (useIdx) {
-                while (++idx < len) {
-                    result[idx] = fn(list[idx], idx, list);
+        R.unfoldr = function (fn, seed) {
+            function _unfoldr(seed) {
+                var pair = fn(seed);
+                var result = [];
+                while (pair && pair.length) {
+                    result.push(pair[0]);
+                    pair = fn(pair[1]);
                 }
-            } else {
+                return result;
+            }
+            return arguments.length < 2 ? _unfoldr : _unfoldr(seed);
+        };
+
+
+        // Returns a new list constructed by applying the function to every element of the list supplied.
+        var map = R.map = function(fn, list) {
+            var f1 = function mapCurried1(list) {
+                if (hasMethod('map', list)) {
+                    return list.map(fn);
+                }
+                var idx = -1, len = list.length, result = new Array(len);
                 while (++idx < len) {
                     result[idx] = fn(list[idx]);
                 }
-            }
-            return result;
-        });
-        // Returns a new list constructed by applying the function to every element of the list supplied.
-        var map = R.map = internalMap(false);
+                return result;
+            };
+            return arguments.length < 2 ? f1 : f1(list);
+        };
 
         // Like `map`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -547,34 +685,55 @@
         //     map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
         //     //=> [64, 6, 7, 5, 3, 0, 81]
 
-        map.idx = internalMap(true);
+        map.idx = function(fn, list) {
+            var f1 = function mapIdxCurried1(list) {
+                if (hasMethod('map', list)) {
+                    return list.map(fn);
+                }
+                var idx = -1, len = list.length, result = new Array(len);
+                while (++idx < len) {
+                    result[idx] = fn(list[idx], idx, list);
+                }
+                return result;
+            };
+            return arguments.length < 2 ? f1 : f1(list);
+        };
+
 
         // Adds a `map`-like function for objects.
         //
         // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
-        R.mapObj = _(function(fn, obj) {
-            return foldl(function(acc, key) {acc[key] = fn(obj[key]); return acc;}, {}, keys(obj));
-        });
+        R.mapObj = function (fn, obj) {
+            function _mapObj(obj) {
+                return foldl(function (acc, key) {
+                    acc[key] = fn(obj[key]);
+                    return acc;
+                }, {}, keys(obj));
+            }
+            return arguments.length < 2 ? _mapObj : _mapObj(obj);
+        };
 
         // Reports the number of elements in the list
-        R.size = function(arr) {return arr.length;};
-
-        // (Internal use only) The basic implementation of filter.
-        var internalFilter = _(function(useIdx, fn, list) {
-            if (hasMethod('filter', list)) {
-                return list.filter(fn); // TODO: figure out useIdx
-            }
-            var idx = -1, len = list.length, result = [];
-            while (++idx < len) {
-                if (!useIdx && fn(list[idx]) || fn(list[idx], idx, list)) {
-                    result.push(list[idx]);
-                }
-            }
-            return result;
-        });
+        R.size = function (arr) {
+            return arr.length;
+        };
 
         // Returns a new list containing only those items that match a given predicate function.
-        var filter = R.filter = internalFilter(false);
+        var filter = R.filter = function(fn, list) {
+            var f1 = function filterCurried1(list) {
+                if (hasMethod('filter', list)) {
+                    return list.filter(fn);
+                }
+                var idx = -1, len = list.length, result = [];
+                while (++idx < len) {
+                    if (fn(list[idx])) {
+                        result.push(list[idx]);
+                    }
+                }
+                return result;
+            };
+            return arguments.length < 2 ? f1 : f1(list);
+        };
 
         // Like `filter`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -585,12 +744,28 @@
         //         return list.length - idx <= 2;
         //     };
         //     filter.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]); //=> [0, 9]
-        filter.idx = internalFilter(true);
+        filter.idx = function(fn, list) {
+            var f1 = function filterIdxCurried1(list) {
+                if (hasMethod('filter', list)) {
+                    return list.filter(fn);
+                }
+                var idx = -1, len = list.length, result = [];
+                while (++idx < len) {
+                    if (fn(list[idx], idx, list)) {
+                        result.push(list[idx]);
+                    }
+                }
+                return result;
+            };
+            return arguments.length < 2 ? f1 : f1(list);
+        };
 
         // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
-        var reject = R.reject = _(function(fn, list) {
-            return filter(not(fn), list);
-        });
+        var reject = R.reject = function (fn, list) {
+          return arguments.length < 2 ? 
+              function (list) { return filter(not(fn), list); } :
+              filter(not(fn), list);
+        };
 
         // Like `reject`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -602,177 +777,231 @@
         //     };
         //     reject.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]);
         //     //=> [8, 6, 7, 5, 3]
-        reject.idx = _(function(fn, list) {
-            return filter.idx(not(fn), list);
-        });
+        reject.idx = function (fn, list) {
+          return arguments.length < 2 ? 
+              function (list) { return filter.idx(not(fn), list); } :
+              filter.idx(not(fn), list);
+        };
 
         // Returns a new list containing the elements of the given list up until the first one where the function
         // supplied returns `false` when passed the element.
-        R.takeWhile = _(function(fn, list) {
-            if (hasMethod('takeWhile', list)) {
-                return list.takeWhile(fn);
-            }
-            var idx = -1, len = list.length, taking = true, result = [];
-            while (taking) {
-                ++idx;
-                if (idx < len && fn(list[idx])) {
-                    result.push(list[idx]);
-                } else {
-                    taking = false;
+        R.takeWhile = function (fn, list) {
+            function _takeWhile(list) {
+                if (hasMethod('takeWhile', list)) {
+                    return list.takeWhile(fn);
                 }
+                var idx = -1, len = list.length, taking = true, result = [];
+                while (taking) {
+                    ++idx;
+                    if (idx < len && fn(list[idx])) {
+                        result.push(list[idx]);
+                    } else {
+                        taking = false;
+                    }
+                }
+                return result;
             }
-            return result;
-        });
+            return arguments.length < 2 ? _takeWhile : _takeWhile(list);
+        };
 
         // Returns a new list containing the first `n` elements of the given list.
         // if `n > list.length`, take will return a list if `list.length` elements.
-        var take = R.take = _(function(n, list) {
-            if (hasMethod('take', list)) {
-                return list.take(n);
+        var take = R.take = function (n, list) {
+            function _take(list) {
+                if (hasMethod('take', list)) {
+                    return list.take(n);
+                }
+                var ls = clone(list);
+                ls.length = Math.min(n, list.length);
+                return ls;
             }
-            var ls = clone(list);
-            ls.length = Math.min(n, list.length);
-            return ls;
-        });
+            return arguments.length < 2 ? _take : _take(list);
+        };
 
         // Returns a new list containing the elements of the given list starting with the first one where the function
         // supplied returns `false` when passed the element.
-        R.skipUntil = _(function(fn, list) {
-            var idx = -1, len = list.length, taking = false, result = [];
-            while (!taking) {
-                ++idx;
-                if (idx >= len || fn(list[idx])) {
-                    taking = true;
+        R.skipUntil = function (fn, list) {
+            function _skipUntil(list) {
+                var idx = -1, len = list.length, taking = false, result = [];
+                while (!taking) {
+                    ++idx;
+                    if (idx >= len || fn(list[idx])) {
+                        taking = true;
+                    }
                 }
+                while (idx < len) {
+                    result.push(list[idx++]);
+                }
+                return result;
             }
-            while (idx < len) {
-                result.push(list[idx++]);
-            }
-            return result;
-        });
+            return arguments.length < 2 ? _skipUntil : _skipUntil(list);
+        };
 
         // Returns a new list containing all **but** the first `n` elements of the given list.
-        R.skip = _(function(n, list) {
-            if (hasMethod('skip', list)) {
-                return list.skip(n);
-            }
-            return _slice(list, n);
-        });
+        R.skip = function (n, list) {
+            function _skip(list) { 
+                if (hasMethod('skip', list)) { return list.skip(n); }
+                return _slice(list, n); 
+            } 
+            return arguments.length < 2 ? _skip : _skip(list);
+        };
         aliasFor('skip').is('drop');
 
         // Returns the first element of the list which matches the predicate, or `undefined` if no element matches.
-        R.find = _(function(fn, list) {
-            var idx = -1, len = list.length;
-            while (++idx < len) {
-                if (fn(list[idx])) {
-                    return list[idx];
+        R.find = function (fn, list) {
+            function _find(list) {
+                var idx = -1;
+                var len = list.length;
+                while (++idx < len) {
+                    if (fn(list[idx])) {
+                        return list[idx];
+                    }
                 }
+                return undef;
             }
-            return undef;
-        });
+            return arguments.length < 2 ? _find : _find(list);
+        };
 
         // Returns the index of first element of the list which matches the predicate, or `undefined` if no element matches.
-        R.findIndex = _(function(fn, list) {
-            var idx = -1, len = list.length;
-            while (++idx < len) {
-                if (fn(list[idx])) {
-                    return idx;
+        R.findIndex = function (fn, list) {
+            function _findIndex(list) {
+                var idx = -1;
+                var len = list.length;
+                while (++idx < len) {
+                    if (fn(list[idx])) {
+                        return idx;
+                    }
                 }
+                return -1;
             }
-            return undef;
-        });
+            return arguments.length < 2 ? _findIndex : _findIndex(list);
+        };
 
         // Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
-        R.findLast = _(function(fn, list) {
-            var idx = list.length;
-            while (--idx) {
-                if (fn(list[idx])) {
-                    return list[idx];
+        R.findLast = function (fn, list) {
+            function _findLast(list) {
+                idx = list.length;
+                while (--idx) {
+                    if (fn(list[idx])) {
+                        return list[idx];
+                    }
                 }
+                return undef;
             }
-            return undef;
-        });
+            return arguments.length < 2 ? _findLast : _findLast(list);
+        };
 
         // Returns the index of last element of the list which matches the predicate, or `undefined` if no element matches.
-        R.findLastIndex = _(function(fn, list) {
-            var idx = list.length;
-            while (--idx) {
-                if (fn(list[idx])) {
-                    return idx;
+        R.findLastIndex = function (fn, list) {
+            function _findLastIndex(list) {
+                var idx = list.length;
+                while (--idx) {
+                    if (fn(list[idx])) {
+                        return idx;
+                    }
                 }
+                return -1;
             }
-            return undef;
-        });
+            return arguments.length < 2 ? _findLastIndex : _findLastIndex(list);
+        };
 
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
-        var all = R.all = _(function (fn, list) {
-            var i = -1;
-            while (++i < list.length) {
-                if (!fn(list[i])) {
-                    return false;
+        var all = R.all = function (fn, list) {
+            function _all(list) {
+                var i = -1;
+                while (++i < list.length) {
+                    if (!fn(list[i])) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
-        });
+            return arguments.length < 2 ? _all : _all(list);
+        };
         aliasFor("all").is("every");
 
 
         // Returns `true` if any elements of the list match the predicate, `false` if none do.
-        var any = R.any = _(function(fn, list) {
-            var i = -1;
-            while (++i < list.length) {
-                if (fn(list[i])) {
-                    return true;
+        var any = R.any = function (fn, list) {
+            function _any(list) {
+                var i = -1;
+                while (++i < list.length) {
+                    if (fn(list[i])) {
+                        return true;
+                    }
                 }
+                return false;
             }
-            return false;
-        });
+            return arguments.length < 2 ? _any : _any(list);
+        };
         aliasFor("any").is("some");
 
         // Returns `true` if the list contains the sought element, `false` if it does not.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var contains = R.contains = _(function(a, list) {
-            return list.indexOf(a) > -1;
-        });
+        var contains = R.contains = function (a, list) {
+             return arguments.length < 2 ? 
+                 function _contains(list) { return list.indexOf(a) > -1; } :
+                 list.indexOf(a) > -1;
+        };
 
         // Returns `true` if the list contains the sought element, `false` if it does not, based upon the value
         // returned by applying the supplied predicated to two list elements.  Equality is strict here, meaning
         // reference equality for objects and non-coercing equality for primitives.  Probably inefficient.
-        var containsWith = R.containsWith = _(function(pred, x, list) {
-            var idx = -1, len = list.length;
-            while (++idx < len) {
-                if (pred(x, list[idx])) {return true;}
-            }
-            return false;
-        });
-
+        var containsWith = R.containsWith = function (pred, x, list) {
+            var f1 = function containsWithCurried1(x, list) {
+                var f2 = function containsWithCurried2(list) {
+                    var idx = -1, len = list.length;
+                    while (++idx < len) {
+                        if (pred(x, list[idx])) {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+                return arguments.length < 2 ? f2 : f2(list);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(x) :
+                    f1(x, list);
+        };
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var uniq = R.uniq = function(list) {
-            return foldr(function(acc, x) { return (contains(x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
+        var uniq = R.uniq = function (list) {
+            return foldr(function (acc, x) {
+                return (contains(x, acc)) ? acc : prepend(x, acc);
+            }, EMPTY, list);
         };
 
         // returns `true` if all of the elements in the `list` are unique.
-        R.isSet = function(list) {
+        R.isSet = function (list) {
             return uniq(list).length === list.length;
         };
 
         // Returns a new list containing only one copy of each element in the original list, based upon the value
         // returned by applying the supplied predicate to two list elements.   Equality is strict here,  meaning
         // reference equality for objects and non-coercing equality for primitives.
-        var uniqWith = _(function(pred, list) {
-            return foldr(function(acc, x) {return (containsWith(pred, x, acc)) ? acc : prepend(x, acc); }, EMPTY, list);
-        });
+        var uniqWith = R.uniqWith = function (pred, list) {
+            function _uniqWith(list) {
+                return foldr(function (acc, x) {
+                    return (containsWith(pred, x, acc)) ? acc : prepend(x, acc);
+                }, EMPTY, list);
+            }
+            return arguments.length < 2 ? _uniqWith : _uniqWith(list);
+        };
 
 
         // Returns a new list by plucking the same named property off all objects in the list supplied.
-        var pluck = R.pluck = _(function(p, list) {return map(prop(p), list);});
-        
+        var pluck = R.pluck = function (p, list) {
+            return arguments.length < 2 ? 
+                function _pluck(list) { return map(prop(p), list); } : 
+                map(prop(p), list);
+        };
+
         // Returns a list that contains a flattened version of the supplied list.  For example:
         //
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
         //     // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-        var flatten = R.flatten = function(list) {
+        var flatten = R.flatten = function (list) {
             var idx = -1, len = list ? list.length : 0, result = [], push = result.push, val;
             while (++idx < len) {
                 val = list[idx];
@@ -788,64 +1017,93 @@
         //     zipWith(f, [1, 2, 3], ['a', 'b', 'c'])
         //     //    => [f(1, 'a'), f(2, 'b'), f(3, 'c')];
         //
-        // Note that the output list will only be as long as the length os the first list passed in.
-        R.zipWith = _(function(fn, a, b) {
-            var rv = [], i = -1, len = a.length;
-            while(++i < len) {
-                rv[i] = fn(a[i], b[i]);
-            }
-            return rv;
-        });
-
+        // Note that the output list will only be as long as the length of the shorter input list.
+        R.zipWith = function (fn, a, b) {
+            var f1 = function zipWithCurried1(a, b) {
+                var f2 = function zipWithCurried2(b) {
+                    var rv = [], i = -1, len = Math.min(a.length, b.length);
+                    while (++i < len) {
+                        rv[i] = fn(a[i], b[i]);
+                    }
+                    return rv;
+                };
+                return arguments.length < 2 ? f2 : f2(b);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(a) :
+                    f1(a, b);
+        };
         // Creates a new list out of the two supplied by yielding the pair of each equally-positioned pair in the
         // lists.  For example,
         //
         //     zip([1, 2, 3], ['a', 'b', 'c'])
         //     //    => [[1, 'a'], [2, 'b'], [3, 'c']];
-        R.zip =  _(function(a, b) { // = zipWith(prepend);
-            var rv = [], i = -1, len = a.length;
-            while (++i < len) {
-                rv[i] = [a[i], b[i]];
+        R.zip = function (a, b) { // = zipWith(prepend);
+            function _zip(b) {
+                var rv = [];
+                var i = -1;
+                var len = Math.min(a.length, b.length);
+                while (++i < len) {
+                    rv[i] = [a[i], b[i]];
+                }
+                return rv;
             }
-            return rv;
-        });
+            return arguments.length < 2 ? _zip : _zip(b);
+        };
 
         // Creates a new list out of the two supplied by applying the function to each possible pair in the lists.
         //  For example,
         //
         //     xProdWith(f, [1, 2], ['a', 'b'])
         //     //    => [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
-        R.xprodWith = _(function(fn, a, b) {
-            if (isEmpty(a) || isEmpty(b)) {return EMPTY;}
-            var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
-            while (++i < ilen) {
-                j = -1;
-                while (++j < jlen) {
-                    result.push(fn(a[i], b[j]));
-                }
-            }
-            return result;
-        });
-
+        R.xprodWith = function (fn, a, b) {
+            var f1 = function xprodWithCurried1(a, b) {
+                var f2 = function xprodWithCurried2(b) {
+                    if (isEmpty(a) || isEmpty(b)) {
+                        return EMPTY;
+                    }
+                    var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+                    while (++i < ilen) {
+                        j = -1;
+                        while (++j < jlen) {
+                            result.push(fn(a[i], b[j]));
+                        }
+                    }
+                    return result;
+                };
+                return arguments.length < 2 ? f2 : f2(b);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(a) :
+                    f1(a, b);
+        };
         // Creates a new list out of the two supplied by yielding the pair of each possible pair in the lists.
         // For example,
         //
         //     xProd([1, 2], ['a', 'b'])
         //     //    => [[1, 'a'], [1, 'b')], [2, 'a'], [2, 'b']];
-        R.xprod = _(function(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
-            if (isEmpty(a) || isEmpty(b)) {return EMPTY;}
-            var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
-            while (++i < ilen) {
-                j = -1;
-                while (++j < jlen) {
-                    result.push([a[i], b[j]]);
+        R.xprod = function (a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
+            function _xprod(b) {
+                if (isEmpty(a) || isEmpty(b)) {
+                    return EMPTY;
                 }
+                var i = -1;
+                var ilen = a.length;
+                var jlen = b.length;
+                var result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+                while (++i < ilen) {
+                    j = -1;
+                    while (++j < jlen) {
+                        result.push([a[i], b[j]]);
+                    }
+                }
+                return result;
             }
-            return result;
-        });
+            return arguments.length < 2 ? _xprod : _xprod(b);
+        };
 
         // Returns a new list with the same elements as the original list, just in the reverse order.
-        R.reverse = function(list) {
+        R.reverse = function (list) {
             return clone(list || []).reverse();
         };
 
@@ -854,14 +1112,19 @@
         //
         //     range(1, 5) // => [1, 2, 3, 4]
         //     range(50, 53) // => [50, 51, 52]
-        R.range = _(function(from, to) {
-            if (from >= to) {return EMPTY;}
-            var idx, result = new Array(Math.floor(to) - Math.ceil(from));
-            for (idx = 0; from < to; idx++, from++) {
-                result[idx] = from;
+        R.range = function (from, to) {
+            function _range(to) {
+                if (from >= to) {
+                    return EMPTY;
+                }
+                var idx, result = new Array(Math.floor(to) - Math.ceil(from));
+                for (idx = 0; from < to; idx++, from++) {
+                    result[idx] = from;
+                }
+                return result;
             }
-            return result;
-        });
+            return arguments.length < 2 ? _range : _range(to);
+        };
 
 
         // Returns the first zero-indexed position of an object in a flat list
@@ -881,14 +1144,21 @@
         // ramda.splice has a different contract than Array.splice. Array.splice mutates its array
         // and returns the removed elements. ramda.splice does not mutate the passed in list (well,
         // it makes a shallow copy), and returns a new list with the specified elements removed. 
-        R.splice = _(function(start, len, list) {
-            return _slice(list, 0, start).concat(_slice(list, start + len));
-        });
-
+        R.splice = function (start, len, list) {
+            var f1 = function spliceCurried1(len, list) {
+                var f2 = function spliceCurried2(list) {
+                    return _slice(list, 0, start).concat(_slice(list, start + len));
+                };
+                return arguments.length < 2 ? f2 : f2(list);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(len) :
+                    f1(len, list);
+        };
         // Returns the `n`th element of a list (zero-indexed)
-        R.nth = _(function(n, list) {
-          return list[n];
-        });
+        R.nth = function (n, list) {
+             return arguments.length < 2 ? function _nth(list) { return list[n]; } : list[n];
+        };
 
         // Makes a comparator function out of a function that reports whether the first element is less than the second.
         //
@@ -896,8 +1166,8 @@
         //         return a.age < b.age;
         //     };
         //     sort(cmp, people);
-        var comparator = R.comparator = function(pred) {
-            return function(a, b) {
+        var comparator = R.comparator = function (pred) {
+            return function (a, b) {
                 return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
             };
         };
@@ -905,9 +1175,11 @@
         // Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
         // time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
         // if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
-        var sort = R.sort = _(function(comparator, list) {
-            return clone(list).sort(comparator);
-        });
+        var sort = R.sort = function (comparator, list) {
+            return arguments.length < 2 ?
+                function _sort(list) { return clone(list).sort(comparator); } :
+                clone(list).sort(comparator);
+        };
 
         // Splits a list into sublists stored in an object, based on the result of calling a String-returning function
         // on each element, and grouping the results according to values returned.
@@ -927,13 +1199,17 @@
         //     //   "F": [{name: 'Eddy', score: 58}]
         //     // }
 
-        R.partition = _(function(fn, list) {
-            return foldl(function(acc, elt) {
-                var key = fn(elt);
-                acc[key] = append(elt, acc[key] || (acc[key] = []));
-                return acc;
-            }, {}, list);
-        });
+        R.partition = function (fn, list) {
+            function _partition(list) {
+                return foldl(function (acc, elt) {
+                    var key = fn(elt);
+                    acc[key] = append(elt, acc[key] || (acc[key] = []));
+                    return acc;
+                }, {}, list);
+            }
+            return arguments.length < 2 ? _partition : _partition(list);
+        };
+        aliasFor("partition").is("groupBy");
 
         // Object Functions
         // ----------------
@@ -945,41 +1221,57 @@
         // --------
 
         // Runs the given function with the supplied object, then returns the object.
-        R.tap = _(function(x, fn) {
-            if (typeof fn === "function") {
-                fn(x);
+        R.tap = function (x, fn) {
+            function _tap(fn) {
+                if (typeof fn === "function") { fn(x); }
+                return x;
             }
-            return x;
-        });
+            return arguments.length < 2 ? _tap : _tap(fn);
+        };
         aliasFor("tap").is("K");
 
         // Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
         // non-coercing equality for primitives.
-        R.eq = _(function(a, b) {
-            return a === b;
-        });
+        R.eq = function (a, b) {
+            return arguments.length < 2 ? function _eq(b) { return a === b; } : a === b;
+        };
 
         // Returns a function that when supplied an object returns the indicated property of that object, if it exists.
-        var prop = R.prop = _(function(p, obj) {return obj[p];});
+        var prop = R.prop = function (p, obj) {
+            return arguments.length < 2 ? function (obj) { return obj[p]; } :  obj[p];
+        };
         aliasFor("prop").is("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
 
         // Returns a function that when supplied an object returns the result of running the indicated function on
         // that object, if it has such a function.
-        R.func = _(function(fn, obj) {return obj[fn].apply(obj, _slice(arguments, 2));});
+        R.func = function (fn, obj) {
+            function _func(obj) {
+                return obj[fn].apply(obj, _slice(arguments, 1));
+            }
+            return arguments.length < 2 ? _func : _func(obj);
+        };
 
 
         // Returns a function that when supplied a property name returns that property on the indicated object, if it
         // exists.
-        R.props = _(function(obj, prop) {return obj && obj[prop];});
+        R.props = function (obj, prop) {
+            return arguments.length < 2 ? function _props(prop) { return obj && obj[prop]; } : obj && obj[prop];
+        };
 
 
         // Returns a function that always returns the given value.
-        var always = R.always = function(val) {
-            return function() {return val;};
+        var always = R.always = function (val) {
+            return function () {
+                return val;
+            };
         };
+        aliasFor("always").is("constant");
 
-        var anyBlanks = any(function(val) {return val === null || val === undef;});
+
+        var anyBlanks = any(function (val) {
+            return val === null || val === undef;
+        });
 
         // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
@@ -1004,39 +1296,76 @@
             return vs;
         };
 
-        var partialCopy = function(test, obj) {
+        // internal helper function
+        var partialCopy = function (test, obj) {
             var copy = {};
-            each(function(key) {if (test(key, obj)) {copy[key] = obj[key];}}, keys(obj));
+            each(function (key) {
+                if (test(key, obj)) {
+                    copy[key] = obj[key];
+                }
+            }, keys(obj));
             return copy;
         };
 
         // Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
         // property is ignored
-        R.pick = _(function(names, obj) {
-            return partialCopy(function(key) {return contains(key, names);}, obj);
-        });
+        R.pick = function (names, obj) {
+            function _pick(obj) {
+                return partialCopy(function (key) {
+                    return contains(key, names);
+                }, obj);
+            }
+            return arguments.length < 2 ? _pick : _pick(obj);
+        };
 
         // Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
-        var pickAll = R.pickAll = _(function(names, obj) {
-            var copy = {};
-            each(function(name) { copy[name] = obj[name]; }, names);
-            return copy;
-        });
+        var pickAll = R.pickAll = function (names, obj) {
+            function _pickAll(obj) {
+                copy = {};
+                each(function (name) {
+                    copy[name] = obj[name];
+                }, names);
+                return copy;
+            }
+            return arguments.length < 2 ? _pickAll : _pickAll(obj);
+        };
 
         // Returns a partial copy of an object omitting the keys specified.
-        R.omit = _(function(names, obj) {
-            return partialCopy(function(key) {return !contains(key, names);}, obj);
-        });
+        R.omit = function (names, obj) {
+            function _omit(obj) {
+                return partialCopy(function (key) {
+                    return !contains(key, names);
+                }, obj);
+            }
+            return arguments.length < 2 ? _omit : _omit(obj);
+        };
 
         // Returns a new object that mixes in the own properties of two objects.
-        R.mixin = _(function(a, b) {
-          var mixed = pickAll(R.keys(a), a);
-          each(function(key) { mixed[key] = b[key]; }, R.keys(b));
-          return mixed;
-        });
+        R.mixin = function (a, b) {
+            function _mixin(b) {
+                mixed = pickAll(R.keys(a), a);
+                each(function (key) {
+                    mixed[key] = b[key];
+                }, R.keys(b));
+                return mixed;
+            }
+            return arguments.length < 2 ? _mixin : _mixin(b);
+        };
 
         // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
-        R.eqProps = _(function(prop, obj1, obj2) {return obj1[prop] === obj2[prop];});
+        R.eqProps = function (prop, obj1, obj2) {
+            var f1 = function eqPropsCurried1(obj1, obj2) {
+                var f2 = function eqPropsCurried2(obj2) {
+                    return obj1[prop] === obj2[prop];
+                };
+                return arguments.length < 2 ? f2 : f2(obj2);
+            };
+            return arguments.length < 2 ? f1 : 
+                arguments.length < 3 ? f1(obj1) :
+                    f1(obj1, obj2);
+        };
+
+
 
         // `where` takes a spec object and a test object and returns true if the test satisfies the spec. 
         // Any property on the spec that is not a function is interpreted as an equality 
@@ -1124,16 +1453,22 @@
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
-        R.and = _(function(f, g) { // TODO: arity?
-           return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
-        });
+        R.and = function(f, g) { 
+           function _and(g) {
+               return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
+           }
+            return arguments.length < 2 ? _and : _and(g);
+        };
 
         // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
         // value. (Note also that at least Oliver Twist can pronounce this one...)
-        R.or = _(function(f, g) { // TODO: arity?
-           return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
-        });
+        R.or = function(f, g) { // TODO: arity?
+           function _or(g) {
+               return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
+           }
+            return arguments.length < 2 ? _or : _or(g);
+        };
 
         // A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
         // underlying function would return a false-y value, and `false` when it would return a truth-y one.
@@ -1142,40 +1477,28 @@
         };
 
 
-        // TODO: is there a way to unify allPredicates and anyPredicates? they are sooooo similar
+        // Create a predicate wrapper which will call a pick function (all/any) for each predicate
+        var predicateWrap = function(predPicker) {
+            return function(preds /* , args */) {
+                var predIterator = function() {
+                    var args = arguments;
+                    return predPicker(function(predicate) {
+                        return predicate.apply(null, args);
+                    }, preds);
+                };
+                return arguments.length > 1 ?
+                        // Call function imediately if given arguments
+                        predIterator.apply(null, _slice(arguments, 1)) :
+                        // Return a function which will call the predicates with the provided arguments
+                        arity(max(pluck("length", preds)), predIterator);
+            };
+        };
 
         // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
-        R.allPredicates = function(preds /*, val1, val12, ... */) {
-            var args = _slice(arguments, 1);
-            var maxArity = max(pluck("length", preds));
-
-            var andPreds = arity(maxArity, function() {
-                var idx = -1;
-                while (++idx < preds.length) {
-                    if (!preds[idx].apply(null, arguments)) { return false; }
-                }
-                return true;
-            });
-            return (isEmpty(args)) ? andPreds : andPreds.apply(null, args);
-        };
-
+        R.allPredicates = predicateWrap(all);
 
         // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
-        R.anyPredicates = function(preds /*, val1, val12, ... */) {
-            var args = _slice(arguments, 1);
-            var maxArity = max(pluck("length", preds));
-
-            var orPreds = arity(maxArity, function() {
-                var idx = -1;
-                while (++idx < preds.length) {
-                    if (preds[idx].apply(null, arguments)) { return true; }
-                }
-                return false;
-            });
-            return (isEmpty(args)) ? orPreds : orPreds.apply(null, args);
-        };
-
-
+        R.anyPredicates = predicateWrap(any);
 
         // Arithmetic Functions
         // --------------------
@@ -1188,20 +1511,26 @@
         //
         //     var add7 = add(7);
         //     add7(10); // => 17
-        var add = R.add = _(function(a, b) {return a + b;});
+        var add = R.add = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a + b; } :  a + b;
+        };
 
         // Multiplies two numbers.  Automatically curried:
         //
         //     var mult3 = multiply(3);
         //     mult3(7); // => 21
-        var multiply = R.multiply = _(function(a, b) {return a * b;});
+        var multiply = R.multiply = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a * b; } :  a * b;
+        };
 
         // Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
         // version might be useful, often the curried version of `subtractN` might be what's wanted.
         //
         //     var complementaryAngle = subtract(90);
         //     complementaryAngle(30) ; // => 60
-        var subtract = R.subtract = _(function(a, b) {return a - b;});
+        var subtract = R.subtract = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a - b; } :  a - b;
+        };
 
         // Reversed version of `subtract`, where first parameter is subtracted from the second.  The curried version of
         // this one might me more useful than that of `subtract`.  For instance:
@@ -1212,7 +1541,9 @@
 
         // Divides the first parameter by the second.  This is automatically curried, and while at times the curried
         // version might be useful, often the curried version of `divideBy` might be what's wanted.
-        var divide = R.divide = _(function(a, b) {return a / b;});
+        var divide = R.divide = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a / b; } :  a / b;
+        };
 
         // Reversed version of `divide`, where the second parameter is divided by the first.  The curried version of
         // this one might be more useful than that of `divide`.  For instance:
@@ -1222,7 +1553,9 @@
         R.divideBy = flip(divide);
 
         // Divides the second parameter by the first and returns the remainder.
-        var modulo = R.modulo = _(function(a, b) { return a % b; });
+        var modulo = R.modulo = function(a, b) { 
+            return arguments.length < 2 ? function(b) { return a % b; } :  a % b;
+        };
 
         // Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
         // this one might be more useful than that of `modulo`.  For instance:
@@ -1239,57 +1572,75 @@
         R.product = foldl(multiply, 1);
 
         // Returns true if the first parameter is less than the second.
-        R.lt = _(function(a, b) {return a < b;});
+        R.lt = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a < b; } :  a < b;
+        };
 
         // Returns true if the first parameter is less than or equal to the second.
-        R.lte = _(function(a, b) {return a <= b;});
+        R.lte = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a <= b; } :  a <= b;
+        };
 
         // Returns true if the first parameter is greater than the second.
-        R.gt = _(function(a, b) {return a > b;});
+        R.gt = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a > b; } :  a > b;
+        };
 
         // Returns true if the first parameter is greater than or equal to the second.
-        R.gte = _(function(a, b) {return a >= b;});
+        R.gte = function(a, b) {
+            return arguments.length < 2 ? function(b) { return a >= b; } :  a >= b;
+        };
 
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
-        var max = R.max = function(list) {return Math.max.apply(null, list);};
+        var max= R.max = function(list) {
+            return foldl(binary(Math.max), -Infinity, list);
+        };
 
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
-        R.maxWith = _(function(keyFn, list) {
-            if (!isArray(list) || !list.length) {
-                return undef;
-            }
-            var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
-            while (++idx < list.length) {
-                testKey = keyFn(list[idx]);
-                if (testKey > max) {
-                    max = testKey;
-                    winner = list[idx];
+        R.maxWith = function(keyFn, list) {
+            function _maxWith(list) {
+                if (!isArray(list) || !list.length) {
+                   return undef;
                 }
+                var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
+                while (++idx < list.length) {
+                    testKey = keyFn(list[idx]);
+                    if (testKey > max) {
+                        max = testKey;
+                        winner = list[idx];
+                    }
+                }
+                return winner;
             }
-            return winner;
-        });
+            return arguments.length < 2 ? _maxWith : _maxWith(list);
+        };
 
         // TODO: combine this with maxWith?
 
         // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
-        R.minWith = _(function(keyFn, list) {
-            if (!isArray(list) || !list.length) {
-                return undef;
-            }
-            var idx = 0, winner = list[idx], min = keyFn(list[idx]), testKey;
-            while (++idx < list.length) {
-                testKey = keyFn(list[idx]);
-                if (testKey < min) {
-                    min = testKey;
-                    winner = list[idx];
+        R.minWith = function(keyFn, list) {
+            function _minWith(list) {
+                if (!isArray(list) || !list.length) {
+                    return undef;
                 }
+                var idx = 0, winner = list[idx], min = keyFn(list[idx]), testKey;
+                while (++idx < list.length) {
+                    testKey = keyFn(list[idx]);
+                    if (testKey < min) {
+                        min = testKey;
+                        winner = list[idx];
+                    }
+                }
+                return winner;
             }
-            return winner;
-        });
+            return arguments.length < 2 ? _minWith : _minWith(list);
+        };
 
 
         // Determines the smallest of a list of numbers (or elements that can be cast to numbers)
-        R.min = function(list) {return Math.min.apply(null, list);};
+        R.min = function(list) {
+            return foldl(binary(Math.min), Infinity, list);
+        };
 
 
         // String Functions
@@ -1357,29 +1708,44 @@
         //         ['a', 'b', 'c', 'xyz', 'd']
         R.split = invoker("split", String.prototype, 1);
 
-        var pathWith = R.pathWith = _(function(fn, str, obj) {
-            if (!obj) { return undef; }
-            var parts = fn(str) || [];
-            if (parts.length === 0) { return undef; }
-            var i = -1;
-            var tmpObj = obj;
-            while (++i < parts.length) {
-                if (tmpObj[parts[i]] === undef) {
-                    return undef;
-                } else {
-                    tmpObj = tmpObj[parts[i]];
-                }
-            }
-            return tmpObj;
-        });
+        var pathWith = R.pathWith = function (fn, str, obj) {
+            var f1 = function pathWithCurried1(str, obj) {
+                var f2 = function pathWithCurried2(obj) {
+                    if (!obj) { return undef; }
+                    var parts = fn(str) || [];
+                    if (parts.length === 0) { return undef; }
+                    var i = -1;
+                    var tmpObj = obj;
+                    while (++i < parts.length) {
+                        if (tmpObj[parts[i]] === undef) {
+                            return undef;
+                        } else {
+                            tmpObj = tmpObj[parts[i]];
+                        }
+                    }
+                    return tmpObj;
+                };
+                return arguments.length < 2 ? f2 : f2(obj);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(str) :
+                    f1(str, obj);
+        };        
 
         R.path = pathWith(R.split("."));
 
-        R.pathBy = _(function(sep, str, obj) {
-            if (!obj) { return undef; }
-            return pathWith(R.split(sep), str, obj);
-        });
-
+        R.pathOn = function (sep, str, obj) {
+            var f1 = function pathOnCurried1(str, obj) {
+                var f2 = function pathOnCurried2(obj) {
+                    if (!obj) { return undef; }
+                    return pathWith(R.split(sep), str, obj);
+                };
+                return arguments.length < 2 ? f2 : f2(obj);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(str) : 
+                    f1(str, obj);
+        };
 
         // Data Analysis and Grouping Functions
         // ------------------------------------
@@ -1410,78 +1776,118 @@
         //     ];
         //     filter(propEq("hair", "brown"), kids);
         //     //=> Fred and Rusty
-        R.propEq = _(function(name, val, obj) {
-            return obj[name] === val;
-        });
+        R.propEq = function (name, val, obj) {
+            var f1 = function propEqCurried1(val, obj) {
+                var f2 = function propEqCurried2(obj) {
+                    return obj[name] === val;
+                };
+                return arguments.length < 2 ? f2 : f2(obj);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(val) :
+                    f1(val, obj);
+        };
 
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
         R.union = compose(uniq, merge);
 
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
         // determined according to the value returned by applying the supplied predicate to two list elements.
-        R.unionWith = _(function(pred, list1, list2) {
-            return uniqWith(pred, merge(list1, list2));
-        });
+        R.unionWith = function (pred, list1, list2) {
+            var f1 = function unionWithCurried1(list1, list2) {
+                var f2 = function unionWithCurried2(list2) {
+                    return uniqWith(pred, merge(list1, list2));
+                };
+                return arguments.length < 2 ? f2 : f2(list2);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(list1) :
+                    f1(list1, list2);
+        };        
 
         // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
-        R.difference = _(function(first, second) {return uniq(reject(flip(contains)(second))(first));});
-
-        // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
-        // Duplication is determined according to the value returned by applying the supplied predicate to two list
-        // elements.
-        R.differenceWith = _(function(pred, first, second) {
-            return uniqWith(pred)(reject(flip(containsWith(pred))(second), first));
-        });
-
-        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
-        R.intersection = _(function(list1, list2) {
-            return uniq(filter(flip(contains)(list1), list2));
-        });
-
-        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
-        // Duplication is determined according to the value returned by applying the supplied predicate to two list
-        // elements.
-        R.intersectionWith = _(function(pred, list1, list2) {
-            var results = [], idx = -1;
-            while (++idx < list1.length) {
-                if (containsWith(pred, list1[idx], list2)) {
-                    results[results.length] = list1[idx];
-                }
+        R.difference = function(first, second) {
+            function _difference(second) {
+                return uniq(reject(flip(contains)(second))(first));
             }
-            return uniqWith(pred, results);
-        });
+            return arguments.length < 2 ? _difference : _difference(second);
+        };
+
+        // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+        // Duplication is determined according to the value returned by applying the supplied predicate to two list
+        // elements.
+        R.differenceWith = function (pred, first, second) {
+            var f1 = function differenceWithCurried1(first, second) {
+                var f2 = function differenceWithCurried2(second) {
+                    return uniqWith(pred)(reject(flip(containsWith(pred))(second), first));
+                };
+                return arguments.length < 2 ? f2 : f2(second);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(first) :
+                    f1(first, second);
+        };
+
+        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
+        R.intersection = function(list1, list2) {
+            function _intersection(list2) {
+                return uniq(filter(flip(contains)(list1), list2));
+            }
+            return arguments.length < 2 ? _intersection : _intersection(list2);
+        };
+
+        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
+        // Duplication is determined according to the value returned by applying the supplied predicate to two list
+        // elements.
+        R.intersectionWith = function (pred, list1, list2) {
+            var f1 = function intersectionWithCurried1(list1, list2) {
+                var f2 = function intersectionWithCurried2(list2) {
+                    var results = [], idx = -1;
+                    while (++idx < list1.length) {
+                        if (containsWith(pred, list1[idx], list2)) {
+                            results[results.length] = list1[idx];
+                        }
+                    }
+                    return uniqWith(pred, results);
+                };
+                return arguments.length < 2 ? f2 : f2(list2);
+            };
+            return arguments.length < 2 ? f1 :
+                arguments.length < 3 ? f1(list1) :
+                    f1(list1, list2);
+        };
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
         // item in the list supplied, and `key` is the result of applying the supplied function to that item.
-        var keyValue = _(function(fn, list) { // TODO: Should this be made public?
-            return map(function(item) {return {key: fn(item), val: item};}, list);
-        });
+        var keyValue = function(fn, list) { // TODO: Should this be made public?
+            function _keyValue(list) {
+                return map(function(item) {return {key: fn(item), val: item};}, list);
+            }
+            return arguments.length < 2 ? _keyValue : _keyValue(list);
+        };
 
         // Sorts the list according to a key generated by the supplied function.
-        R.sortBy = _(function(fn, list) {
+        R.sortBy = function(fn, list) {
             /*
               return sort(comparator(function(a, b) {return fn(a) < fn(b);}), list); // clean, but too time-inefficient
               return pluck("val", sort(comparator(function(a, b) {return a.key < b.key;}), keyValue(fn, list))); // nice, but no need to clone result of keyValue call, so...
             */
-            return pluck("val", keyValue(fn, list).sort(comparator(function(a, b) {return a.key < b.key;})));
-        });
+            function _sortBy(list) {
+                return pluck("val", keyValue(fn, list).sort(comparator(function(a, b) {return a.key < b.key;})));
+            }
+            return arguments.length < 2 ? _sortBy : _sortBy(list);
+        };
 
         // Counts the elements of a list according to how many match each value of a key generated by the supplied function.
-        R.countBy = _(function(fn, list) {
-            return foldl(function(counts, obj) {
-                counts[obj.key] = (counts[obj.key] || 0) + 1;
-                return counts;
-            }, {}, keyValue(fn, list));
-        });
-
-        // Groups the elements of a list by a key generated by the supplied function.
-        R.groupBy = _(function(fn, list) {
-            return foldl(function(groups, obj) {
-                (groups[obj.key] || (groups[obj.key] = [])).push(obj.val);
-                return groups;
-            }, {}, keyValue(fn, list));
-        });
-
+        R.countBy = function(fn, list) {
+            function _countBy(list) {
+                return foldl(function(counts, obj) {
+                    counts[obj.key] = (counts[obj.key] || 0) + 1;
+                    return counts;
+                }, {}, keyValue(fn, list));
+            }
+            return arguments.length < 2 ? _countBy : _countBy(list);
+        };
 
         // All the functional goodness, wrapped in a nice little package, just for you!
         return R;

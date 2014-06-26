@@ -264,8 +264,8 @@ describe('pathWith', function() {
     });
 });
 
-describe('pathBy', function() {
-    var pathBy = Lib.pathBy;
+describe('pathOn', function() {
+    var pathOn = Lib.pathOn;
     it("takes a string separator, string path, and an object and returns the value at the path or undefined", function() {
         var obj = {
           a: {
@@ -282,12 +282,12 @@ describe('pathBy', function() {
           i: 'I', 
           j: ['J']
         };
-        assert.equal(pathBy('|', 'a|b|c', obj), 100);
-        assert.equal(pathBy(' ', '', obj), undefined);
-        assert.equal(pathBy(' ', 'a e f 1', obj), 101);
-        assert.equal(pathBy('_', 'j_0', obj), 'J');
-        assert.equal(pathBy('~', 'j~1', obj), undefined);
-        assert.equal(pathBy('Z', 'aZbZc', null), undefined);
+        assert.equal(pathOn('|', 'a|b|c', obj), 100);
+        assert.equal(pathOn(' ', '', obj), undefined);
+        assert.equal(pathOn(' ', 'a e f 1', obj), 101);
+        assert.equal(pathOn('_', 'j_0', obj), 'J');
+        assert.equal(pathOn('~', 'j~1', obj), undefined);
+        assert.equal(pathOn('Z', 'aZbZc', null), undefined);
     });
 
 });
