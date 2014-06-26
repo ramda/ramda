@@ -790,16 +790,9 @@
                 if (hasMethod('takeWhile', list)) {
                     return list.takeWhile(fn);
                 }
-                var idx = -1, len = list.length, taking = true, result = [];
-                while (taking) {
-                    ++idx;
-                    if (idx < len && fn(list[idx])) {
-                        result.push(list[idx]);
-                    } else {
-                        taking = false;
-                    }
-                }
-                return result;
+                var idx = -1, len = list.length;
+                while (++idx < len && fn(list[idx])) {}
+                return _slice(list, 0, idx);
             }
             return arguments.length < 2 ? _takeWhile : _takeWhile(list);
         };
