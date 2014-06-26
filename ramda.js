@@ -815,17 +815,9 @@
         // supplied returns `false` when passed the element.
         R.skipUntil = function (fn, list) {
             function _skipUntil(list) {
-                var idx = -1, len = list.length, taking = false, result = [];
-                while (!taking) {
-                    ++idx;
-                    if (idx >= len || fn(list[idx])) {
-                        taking = true;
-                    }
-                }
-                while (idx < len) {
-                    result.push(list[idx++]);
-                }
-                return result;
+                var idx = -1, len = list.length;
+                while (++idx < len && !fn(list[idx])) {}
+                return _slice(list, idx);
             }
             return arguments.length < 2 ? _skipUntil : _skipUntil(list);
         };
