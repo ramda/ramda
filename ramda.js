@@ -320,26 +320,20 @@
         //
         // These functions make new functions out of old ones.
 
-        // --------
-        //Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
-        //the more general compose function, which takes any number of functions.
-        var compose2 = function compose2 (f, g) {
-            return function () {
-                return f (g.apply (this, arguments));
-            };
-        };
-
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
-        var compose = R.compose = function() {  // TODO: type check of arguments?
-            var i = 0,
-                f = arguments[0];
-            while (++i < arguments.length) {
-                f = compose2 (f, arguments[i]);
-            }
-            return f;
-        };
+        var compose = R.compose = function() {
+            var funcs = arguments, startIdx = funcs.length - 1;
+            return arity(funcs[startIdx].length, function() {
+                var idx = startIdx,
+                    result = funcs[idx].apply(this, arguments);
+                while (idx--) {
+                    result = funcs[idx].call(this, result);
+                }
+                return result;
+            });
+          };
 
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.

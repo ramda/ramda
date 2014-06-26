@@ -5,7 +5,7 @@ describe('compose', function() {
     var compose = Lib.compose;
     function a(x) {return x + "A";}
     function b(x) {return x + "B";}
-    function c(x) {return x + "C";}
+    function c(x, y) {return x + "C";}
     function d(x) {return x + "D";}
 
     it('executes its passed in functions in order from right to left', function() {
@@ -15,11 +15,15 @@ describe('compose', function() {
     it('returns equivalent function if only passed one function argument', function() {
         assert.equal(compose(a)(""), a(""));
     });
+
+    it('compose uses last functions arity', function() {
+        assert.equal(compose(a, b, c).length, c.length);
+    });
 });
 
 describe('pipe', function() {
     var pipe = Lib.pipe;
-    function a(x) {return x + "A";}
+    function a(x, y) {return x + "A";}
     function b(x) {return x + "B";}
     function c(x) {return x + "C";}
     function d(x) {return x + "D";}
@@ -29,6 +33,10 @@ describe('pipe', function() {
 
     it('returns the equivalent function if only passed one function argument', function() {
         assert.equal(pipe(a)(""), a(""));
+    });
+
+    it('compose uses first functions arity', function() {
+        assert.equal(pipe(a, b, c).length, a.length);
     });
 });
 
