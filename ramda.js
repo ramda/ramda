@@ -659,6 +659,8 @@
 
 
         // Returns a new list constructed by applying the function to every element of the list supplied.
+        // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse 
+        // arrays" (cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description).
         var map = R.map = function(fn, list) {
             var f1 = function mapCurried1(list) {
                 if (hasMethod('map', list)) {
