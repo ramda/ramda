@@ -122,5 +122,7 @@ Acknowledgements
 -----------------
 
 Thanks to [J. C. Phillipps](http://www.jcphillipps.com) for the Ramda logo.
+Ramda logo artwork &copy; 2014 J. C. Phillipps, licensed Creative Commons 
+[CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
 
 
