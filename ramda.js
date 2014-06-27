@@ -550,6 +550,8 @@
         // element of the list, passing the result to the next call.  We start with the `acc` parameter to get
         // things going.  The function supplied should accept this running value and the latest element of the list,
         // and return an updated value.
+        // n.b.: `ramda.foldl` (aka `ramda.reduce`) differs from `Array.prototype.reduce` in that it 
+        // does not distinguish "sparse arrays".
         var foldl = R.foldl =  function (fn, acc, list) {
             function __foldl(acc, list) {
                 function _foldl(list) {
@@ -603,6 +605,8 @@
 
         // Returns a single item, by successively calling the function with the current element and the the next
         // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
+        // n.b.: `ramda.foldr` (aka `ramda.reduceRight`) differs from `Array.prototype.reduceRight` in that it 
+        // does not distinguish "sparse arrays".
         var foldr = R.foldr = function (fn, acc, list) {
             var f1 = function foldrCurried1(acc, list) {
                 var f2 = function foldrCurried2(list) {
@@ -721,6 +725,8 @@
         };
 
         // Returns a new list containing only those items that match a given predicate function.
+        // n.b.: `ramda.filter` differs from `Array.prototype.filter` in that it does not distinguish "sparse 
+        // arrays".
         var filter = R.filter = function(fn, list) {
             var f1 = function filterCurried1(list) {
                 if (hasMethod('filter', list)) {
