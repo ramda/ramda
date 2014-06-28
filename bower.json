@@ -23,6 +23,7 @@
     "bower_components",
     "test",
     "tests",
-    "examples"
+    "examples",
+    "logo"
   ]
 }
