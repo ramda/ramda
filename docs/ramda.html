@@ -2237,7 +2237,7 @@ that this is not destructive</em>: it returns a copy of the list with the change
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.insert = curry(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(index, elt, list)</span> {</span>
+            <div class="content"><div class='highlight'><pre>        R.insert = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(index, elt, list)</span> {</span>
             <span class="hljs-keyword">var</span> f1 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insertCurried1</span><span class="hljs-params">(elt, list)</span> {</span>
                 <span class="hljs-keyword">var</span> f2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insertCurried2</span><span class="hljs-params">(list)</span> {</span>
                     <span class="hljs-keyword">return</span> concat(append(elt, _slice(list, <span class="hljs-number">0</span>, <span class="hljs-built_in">Math</span>.min(index, list.length))), _slice(list, <span class="hljs-built_in">Math</span>.min(index, list.length)));
@@ -2247,7 +2247,7 @@ that this is not destructive</em>: it returns a copy of the list with the change
             <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length &lt; <span class="hljs-number">2</span> ? f1 :
                     <span class="hljs-built_in">arguments</span>.length &lt; <span class="hljs-number">3</span> ? f1(elt) :
                 f1(elt, list);
-        });</pre></div></div>
+        };</pre></div></div>
             
         </li>
         
@@ -2264,7 +2264,7 @@ is not destructive</em>: it returns a copy of the list with the changes.
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.insert.all = curry(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(index, elts, list)</span> {</span>
+            <div class="content"><div class='highlight'><pre>        R.insert.all = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(index, elts, list)</span> {</span>
             <span class="hljs-keyword">var</span> f1 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insertAllCurried1</span><span class="hljs-params">(elt, list)</span> {</span>
                 <span class="hljs-keyword">var</span> f2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insertAllCurried2</span><span class="hljs-params">(list)</span> {</span>
                     <span class="hljs-keyword">return</span> concat(concat(_slice(list, <span class="hljs-number">0</span>, <span class="hljs-built_in">Math</span>.min(index, list.length)), elt), _slice(list, <span class="hljs-built_in">Math</span>.min(index, list.length)));
@@ -2274,7 +2274,7 @@ is not destructive</em>: it returns a copy of the list with the changes.
             <span class="hljs-keyword">return</span> <span class="hljs-built_in">arguments</span>.length &lt; <span class="hljs-number">2</span> ? f1 :
                     <span class="hljs-built_in">arguments</span>.length &lt; <span class="hljs-number">3</span> ? f1(elts) :
                 f1(elts, list);
-        });</pre></div></div>
+        };</pre></div></div>
             
         </li>
         

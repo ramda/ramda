@@ -1154,7 +1154,7 @@
         // Inserts the supplied element into the list, at index `index`.  _Note
         // that this is not destructive_: it returns a copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
-        R.insert = curry(function(index, elt, list) {
+        R.insert = function(index, elt, list) {
             var f1 = function insertCurried1(elt, list) {
                 var f2 = function insertCurried2(list) {
                     return concat(append(elt, _slice(list, 0, Math.min(index, list.length))), _slice(list, Math.min(index, list.length)));
@@ -1164,12 +1164,12 @@
             return arguments.length < 2 ? f1 :
                     arguments.length < 3 ? f1(elt) :
                 f1(elt, list);
-        });
+        };
 
         // Inserts the sub-list into the list, at index `index`.  _Note  that this
         // is not destructive_: it returns a copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
-        R.insert.all = curry(function(index, elts, list) {
+        R.insert.all = function(index, elts, list) {
             var f1 = function insertAllCurried1(elt, list) {
                 var f2 = function insertAllCurried2(list) {
                     return concat(concat(_slice(list, 0, Math.min(index, list.length)), elt), _slice(list, Math.min(index, list.length)));
@@ -1179,7 +1179,7 @@
             return arguments.length < 2 ? f1 :
                     arguments.length < 3 ? f1(elts) :
                 f1(elts, list);
-        });
+        };
 
         // Returns the `n`th element of a list (zero-indexed)
         R.nth = function (n, list) {
