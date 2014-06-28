@@ -401,11 +401,7 @@
         aliasFor("append").is("push");
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
-        var merge = R.merge = function (list1, list2) {
-             return arguments.length < 2 ? 
-               function _merge(list2) { return concat(list1, list2); } :
-               concat(list1, list2);
-        };
+        var merge = R.merge = curry2(concat);
         aliasFor("merge").is("concat");
 
         // A surprisingly useful function that does nothing but return the parameter supplied to it.
@@ -415,17 +411,14 @@
         aliasFor("identity").is("I");
 
         // Returns a fixed list (of size `n`) of identical values.
-        R.repeatN = function (value, n) {
-            function _repeatN(n) {
-                var arr = new Array(n);
-                var i = -1;
-                while (++i < n) {
-                    arr[i] = value;
-                }
-                return arr;
+        R.repeatN = curry2(function (value, n) {
+            var arr = new Array(n);
+            var i = -1;
+            while (++i < n) {
+                arr[i] = value;
             }
-            return arguments.length < 2 ? _repeatN : _repeatN(n);
-        };
+            return arr;
+        });
 
 
         // Function functions :-)
