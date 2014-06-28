@@ -71,8 +71,9 @@
         };
 
         // (private)
-        var isArray = function (val) {
-            return Object.prototype.toString.call(val) === "[object Array]";
+        var toString = Object.prototype.toString;
+        var isArray = Array.isArray || function (val) {
+            return val && val.length >= 0 && toString.call(val) === "[object Array]";
         };
 
         // Returns a curried version of the supplied function.  For example:
@@ -280,16 +281,6 @@
                     }));
                 }
             };
-        };
-
-
-        // Fills out an array to the specified length. Internal private function.
-        var expand = function (a, len) {
-            var arr = a ? isArray(a) ? a : _slice(a) : [];
-            while (arr.length < len) {
-                arr[arr.length] = undef;
-            }
-            return arr;
         };
 
         // Loop over a list for side effects. Nasty, yes, but this is a *practical* library
@@ -1638,14 +1629,14 @@
         };
 
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
-        var max= R.max = function(list) {
+        var max = R.max = function(list) {
             return foldl(binary(Math.max), -Infinity, list);
         };
 
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = function(keyFn, list) {
             function _maxWith(list) {
-                if (!isArray(list) || !list.length) {
+                if (!(list && list.length > 0)) {
                    return undef;
                 }
                 var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
@@ -1666,7 +1657,7 @@
         // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.minWith = function(keyFn, list) {
             function _minWith(list) {
-                if (!isArray(list) || !list.length) {
+                if (!(list && list.length > 0)) {
                     return undef;
                 }
                 var idx = 0, winner = list[idx], min = keyFn(list[idx]), testKey;
