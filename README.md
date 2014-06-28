@@ -9,7 +9,7 @@ Goals
 -----
 
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
-     width="200" height="235" align="left" />
+     width="200" height="235" align="left" hspace="12" />
 Using this library should feel as much like using Javascript as 
 possible.  Of course it's functional Javascript, but we're not 
 introducting lambda expressions in strings, we're not borrowing consed 
