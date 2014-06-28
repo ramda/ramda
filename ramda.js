@@ -104,26 +104,26 @@
         };
 
         // Optimized internal curriers
-        var curry1 = function curried(fn) {
-            return function(a) {
-                return arguments.length ? fn(a) : fn;
+        function curry1(fn) {
+            return function curried(a) {
+                return arguments.length ? fn(a) : curried;
             };
-        };
-        var curry2 = function curried(fn) {
-            return function(a, b) {
+        }
+        function curry2(fn) {
+            return function curried(a, b) {
                 switch (arguments.length) {
-                    case 0: return fn;
+                    case 0: return curried;
                     case 1: return curry1(function(b) {
                         return fn(a, b);
                     });
                 }
                 return fn(a, b);
             };
-        };
-        var curry3 = function curried(fn) {
-            return function(a, b, c) {
+        }
+        function curry3(fn) {
+            return function curried(a, b, c) {
                 switch (arguments.length) {
-                    case 0: return fn;
+                    case 0: return curried;
                     case 1: return curry2(function(b, c) {
                         return fn(a, b, c);
                     });
@@ -133,7 +133,7 @@
                 }
                 return fn(a, b, c);
             };
-        };
+        }
 
         // (private) for dynamically dispatching Ramda method to non-Array objects
         var hasMethod = function (methodName, obj) {
