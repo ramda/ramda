@@ -72,8 +72,8 @@
 
         // (private)
         var toString = Object.prototype.toString;
-        var isArray = function (val) {
-            return val && val.length && toString.call(val) === "[object Array]";
+        var isArray = Array.isArray || function (val) {
+            return val && val.length >= 0 && toString.call(val) === "[object Array]";
         };
 
         // Returns a curried version of the supplied function.  For example:
@@ -1629,14 +1629,14 @@
         };
 
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
-        var max= R.max = function(list) {
+        var max = R.max = function(list) {
             return foldl(binary(Math.max), -Infinity, list);
         };
 
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = function(keyFn, list) {
             function _maxWith(list) {
-                if (list.length < 0) {
+                if (!(list && list.length > 0)) {
                    return undef;
                 }
                 var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
@@ -1657,7 +1657,7 @@
         // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.minWith = function(keyFn, list) {
             function _minWith(list) {
-                if (list.length < 0) {
+                if (!(list && list.length > 0)) {
                     return undef;
                 }
                 var idx = 0, winner = list[idx], min = keyFn(list[idx]), testKey;
