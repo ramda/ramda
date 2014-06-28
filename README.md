@@ -8,7 +8,7 @@ A practical functional library for Javascript programmers.
 Goals
 -----
 
-<img src="https://raw.github.com/CrossEye/ramda/master/logo/ramda_200x235.png" 
+<img src="http://ramda.jcphillipps.com/logo/ramda_200x235.png" 
      width="200" height="235" align="left" />
 Using this library should feel as much like using Javascript as 
 possible.  Of course it's functional Javascript, but we're not 
@@ -17,7 +17,7 @@ lists, we're not porting over all of the Clojure functions.
 
 Our basic data structures will be normal Javascript objects, and our 
 usual collections will be Javascript arrays.  We will not try to reach 
-the point where all the functions have only zero, one, or two arguments.  
+the point where all the functions have only zero, one, or two arguments.
 We will certainly try to keep some of the normal features of Javascript 
 that seem to be unusual in functional languages, including variable 
 length function signatures and functions as objects with properties.
