@@ -710,24 +710,36 @@
             return arr.length;
         };
 
+        var filter = function(fn, list) {
+            if (hasMethod('filter', list)) {
+                return list.filter(fn);
+            }
+            var idx = -1, len = list.length, result = [];
+            while (++idx < len) {
+                if (fn(list[idx])) {
+                    result.push(list[idx]);
+                }
+            }
+            return result;
+        };
+
+        var filterIdx = function(fn, list) {
+            if (hasMethod('filter', list)) {
+                return list.filter(fn);
+            }
+            var idx = -1, len = list.length, result = [];
+            while (++idx < len) {
+                if (fn(list[idx], idx, list)) {
+                    result.push(list[idx]);
+                }
+            }
+            return result;
+        };
+
         // Returns a new list containing only those items that match a given predicate function.
         // n.b.: `ramda.filter` differs from `Array.prototype.filter` in that it does not distinguish "sparse 
         // arrays".
-        var filter = R.filter = function(fn, list) {
-            var f1 = function filterCurried1(list) {
-                if (hasMethod('filter', list)) {
-                    return list.filter(fn);
-                }
-                var idx = -1, len = list.length, result = [];
-                while (++idx < len) {
-                    if (fn(list[idx])) {
-                        result.push(list[idx]);
-                    }
-                }
-                return result;
-            };
-            return arguments.length < 2 ? f1 : f1(list);
-        };
+        R.filter = curry2(filter);
 
         // Like `filter`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -738,28 +750,12 @@
         //         return list.length - idx <= 2;
         //     };
         //     filter.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]); //=> [0, 9]
-        filter.idx = function(fn, list) {
-            var f1 = function filterIdxCurried1(list) {
-                if (hasMethod('filter', list)) {
-                    return list.filter(fn);
-                }
-                var idx = -1, len = list.length, result = [];
-                while (++idx < len) {
-                    if (fn(list[idx], idx, list)) {
-                        result.push(list[idx]);
-                    }
-                }
-                return result;
-            };
-            return arguments.length < 2 ? f1 : f1(list);
-        };
+        R.filter.idx = curry2(filterIdx);
 
         // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
-        var reject = R.reject = function (fn, list) {
-          return arguments.length < 2 ? 
-              function (list) { return filter(not(fn), list); } :
-              filter(not(fn), list);
-        };
+        R.reject = curry2(function(fn, list) {
+            return filter(not(fn), list);
+        });
 
         // Like `reject`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -771,11 +767,9 @@
         //     };
         //     reject.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]);
         //     //=> [8, 6, 7, 5, 3]
-        reject.idx = function (fn, list) {
-          return arguments.length < 2 ? 
-              function (list) { return filter.idx(not(fn), list); } :
-              filter.idx(not(fn), list);
-        };
+        R.reject.idx = curry2(function(fn, list) {
+            return filterIdx(not(fn), list);
+        });
 
         // Returns a new list containing the elements of the given list up until the first one where the function
         // supplied returns `false` when passed the element.
