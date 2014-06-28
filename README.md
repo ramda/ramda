@@ -8,7 +8,7 @@ A practical functional library for Javascript programmers.
 Goals
 -----
 
-<img src="http://ramda.jcphillipps.com/logo/ramda_200x235.png" 
+<img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
      width="200" height="235" align="left" />
 Using this library should feel as much like using Javascript as 
 possible.  Of course it's functional Javascript, but we're not 
