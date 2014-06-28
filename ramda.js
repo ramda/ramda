@@ -103,6 +103,38 @@
             return f([]);
         };
 
+        // Optimized internal curriers
+        var curry1 = function curried(fn) {
+            return function(a) {
+                return arguments.length ? fn(a) : fn;
+            };
+        };
+        var curry2 = function curried(fn) {
+            return function(a, b) {
+                switch (arguments.length) {
+                    case 0: return fn;
+                    case 1: return curry1(function(b) {
+                        return fn(a, b);
+                    });
+                }
+                return fn(a, b);
+            };
+        };
+        var curry3 = function curried(fn) {
+            return function(a, b, c) {
+                switch (arguments.length) {
+                    case 0: return fn;
+                    case 1: return curry2(function(b, c) {
+                        return fn(a, b, c);
+                    });
+                    case 2: return curry1(function(c) {
+                        return fn(a, b, c);
+                    });
+                }
+                return fn(a, b, c);
+            };
+        };
+
         // (private) for dynamically dispatching Ramda method to non-Array objects
         var hasMethod = function (methodName, obj) {
             return obj && !isArray(obj) && typeof obj[methodName] === 'function';
@@ -656,19 +688,16 @@
         // Returns a new list constructed by applying the function to every element of the list supplied.
         // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse 
         // arrays" (cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description).
-        var map = R.map = function(fn, list) {
-            var f1 = function mapCurried1(list) {
-                if (hasMethod('map', list)) {
-                    return list.map(fn);
-                }
-                var idx = -1, len = list.length, result = new Array(len);
-                while (++idx < len) {
-                    result[idx] = fn(list[idx]);
-                }
-                return result;
-            };
-            return arguments.length < 2 ? f1 : f1(list);
-        };
+        var map = R.map = curry2(function(fn, list) {
+            if (hasMethod('map', list)) {
+                return list.map(fn);
+            }
+            var idx = -1, len = list.length, result = new Array(len);
+            while (++idx < len) {
+                result[idx] = fn(list[idx]);
+            }
+            return result;
+        });
 
         // Like `map`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -681,33 +710,27 @@
         //
         //     map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
         //     //=> [64, 6, 7, 5, 3, 0, 81]
-        map.idx = function(fn, list) {
-            var f1 = function mapIdxCurried1(list) {
-                if (hasMethod('map', list)) {
-                    return list.map(fn);
-                }
-                var idx = -1, len = list.length, result = new Array(len);
-                while (++idx < len) {
-                    result[idx] = fn(list[idx], idx, list);
-                }
-                return result;
-            };
-            return arguments.length < 2 ? f1 : f1(list);
-        };
+        map.idx = curry2(function(fn, list) {
+            if (hasMethod('map', list)) {
+                return list.map(fn);
+            }
+            var idx = -1, len = list.length, result = new Array(len);
+            while (++idx < len) {
+                result[idx] = fn(list[idx], idx, list);
+            }
+            return result;
+        });
 
 
         // Adds a `map`-like function for objects.
         //
         // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
-        R.mapObj = function (fn, obj) {
-            function _mapObj(obj) {
-                return foldl(function (acc, key) {
-                    acc[key] = fn(obj[key]);
-                    return acc;
-                }, {}, keys(obj));
-            }
-            return arguments.length < 2 ? _mapObj : _mapObj(obj);
-        };
+        R.mapObj = curry2(function (fn, obj) {
+            return foldl(function (acc, key) {
+                acc[key] = fn(obj[key]);
+                return acc;
+            }, {}, keys(obj));
+        });
 
         // Like `mapObj`, but passes additional parameters to the predicate function.  Parameters are
         // `object key's value`, `key name`, `entire object`.
