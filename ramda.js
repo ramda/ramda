@@ -568,25 +568,18 @@
         // and return an updated value.
         // n.b.: `ramda.foldl` (aka `ramda.reduce`) differs from `Array.prototype.reduce` in that it 
         // does not distinguish "sparse arrays".
-        var foldl = R.foldl =  function (fn, acc, list) {
-            function __foldl(acc, list) {
-                function _foldl(list) {
-                    if (hasMethod('foldl', list)) {
-                        return list.foldl(fn, acc);
-                    }
-                    var idx = -1, len = list.length;
-                    while (++idx < len) {
-                        acc = fn(acc, list[idx]);
-                    }
-                    return acc;
-                }
-                return arguments.length < 2 ? _foldl : _foldl(list);
+        var foldl = R.foldl =  curry3(function(fn, acc, list) {
+            if (hasMethod('foldl', list)) {
+                return list.foldl(fn, acc);
             }
-            return arguments.length < 2 ? __foldl :
-                arguments.length < 3 ? __foldl(acc) :
-                    __foldl(acc, list);
-        };
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                acc = fn(acc, list[idx]);
+            }
+            return acc;
+        });
         aliasFor("foldl").is("reduce");
+        
         // Like `foldl`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
         //
@@ -599,83 +592,56 @@
         //
         //     map(objectify, ['a', 'b', 'c']);
         //     //=> {a: 0, 'b': 1, c: 2}
-        R.foldl.idx = function (fn, acc, list) {
-            var f1 = function foldlIdxCurried1(acc, list) {
-                var f2 = function foldlIdxCurried1(list) {
-                    if (hasMethod('foldl', list)) {
-                        return list.foldl(fn, acc);
-                    }
-                    var idx = -1, len = list.length;
-                    while (++idx < len) {
-                        acc = fn(acc, list[idx], idx, list);
-                    }
-                    return acc;
-                };
-                return arguments.length < 2 ? f2 : f2(list);
-            };
-            return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(acc) :
-                    f1(acc, list);
-        };
-
+        R.foldl.idx = curry3(function(fn, acc, list) {
+            if (hasMethod('foldl', list)) {
+                return list.foldl(fn, acc);
+            }
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                acc = fn(acc, list[idx], idx, list);
+            }
+            return acc;
+        });
 
         // Returns a single item, by successively calling the function with the current element and the the next
         // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
         // n.b.: `ramda.foldr` (aka `ramda.reduceRight`) differs from `Array.prototype.reduceRight` in that it 
         // does not distinguish "sparse arrays".
-        var foldr = R.foldr = function (fn, acc, list) {
-            var f1 = function foldrCurried1(acc, list) {
-                var f2 = function foldrCurried2(list) {
-                    if (hasMethod('foldr', list)) {
-                         return list.foldr(fn, acc);
-                     }
-                     var idx = list.length;
-                     while (idx--) {
-                         acc = fn(acc, list[idx]);
-                     }
-                     return acc;
-                };
-                return arguments.length < 2 ? f2 : f2(list);
-            };
-            return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(acc) :
-                    f1(acc, list);
-        };
+        var foldr = R.foldr = curry3(function(fn, acc, list) {
+            if (hasMethod('foldr', list)) {
+                return list.foldr(fn, acc);
+            }
+            var idx = list.length;
+            while (idx--) {
+                acc = fn(acc, list[idx]);
+            }
+            return acc;
+        });
         aliasFor("foldr").is("reduceRight");
-        R.foldr.idx = function (fn, acc, list) {
-            var f1 = function foldrIdxCurried1(acc, list) {
-                var f2 = function foldfIdxCurried2(list) {
-                    if (hasMethod('foldr', list)) {
-                        return list.foldr(fn, acc);
-                    }
-                    var idx = list.length;
-                    while (idx--) {
-                        acc = fn(acc, list[idx], idx, list);
-                    }
-                    return acc;
-                };
-                return arguments.length < 2 ? f2 : f2(list);
-            };
-            return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(acc) :
-                    f1(acc, list);
-        };
+
+        R.foldr.idx = curry3(function (fn, acc, list) {
+            if (hasMethod('foldr', list)) {
+                return list.foldr(fn, acc);
+            }
+            var idx = list.length;
+            while (idx--) {
+                acc = fn(acc, list[idx], idx, list);
+            }
+            return acc;
+        });
 
         // Builds a list from a seed value, using a function that returns falsy to quit and a pair otherwise,
         // consisting of the current value and the seed to be used for the next value.
 
-        R.unfoldr = function (fn, seed) {
-            function _unfoldr(seed) {
-                var pair = fn(seed);
-                var result = [];
-                while (pair && pair.length) {
-                    result.push(pair[0]);
-                    pair = fn(pair[1]);
-                }
-                return result;
+        R.unfoldr = curry2(function (fn, seed) {
+            var pair = fn(seed);
+            var result = [];
+            while (pair && pair.length) {
+                result.push(pair[0]);
+                pair = fn(pair[1]);
             }
-            return arguments.length < 2 ? _unfoldr : _unfoldr(seed);
-        };
+            return result;
+        });
 
 
         // Returns a new list constructed by applying the function to every element of the list supplied.
