@@ -1148,20 +1148,52 @@
         R.slice = invoker("slice", Array.prototype);
         R.slice.from = flip(R.slice)(undef);
 
-        // ramda.splice has a different contract than Array.splice. Array.splice mutates its array
-        // and returns the removed elements. ramda.splice does not mutate the passed in list (well,
-        // it makes a shallow copy), and returns a new list with the specified elements removed. 
-        R.splice = function (start, len, list) {
-            var f1 = function spliceCurried1(len, list) {
-                var f2 = function spliceCurried2(list) {
-                    return _slice(list, 0, start).concat(_slice(list, start + len));
+        // Removes the sub-list of `list` starting at index `start` and containing
+        // `count` elements.  _Note that this is not destructive_: it returns a
+        // copy of the list with the changes.
+        // <small>No lists have been harmed in the application of this function.</small>
+        R.remove = function(start, count, list) {
+            var f1 = function removeCurried1(count, list) {
+                var f2 = function removeCurried2(list) {
+                    return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
                 };
                 return arguments.length < 2 ? f2 : f2(list);
             };
             return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(len) :
-                    f1(len, list);
+                    arguments.length < 3 ? f1(count) :
+                f1(count, list);
         };
+
+        // Inserts the supplied element into the list, at index `index`.  _Note
+        // that this is not destructive_: it returns a copy of the list with the changes.
+        // <small>No lists have been harmed in the application of this function.</small>
+        R.insert = function(index, elt, list) {
+            var f1 = function insertCurried1(elt, list) {
+                var f2 = function insertCurried2(list) {
+                    return concat(append(elt, _slice(list, 0, Math.min(index, list.length))), _slice(list, Math.min(index, list.length)));
+                };
+                return arguments.length < 2 ? f2 : f2(list);
+            };
+            return arguments.length < 2 ? f1 :
+                    arguments.length < 3 ? f1(elt) :
+                f1(elt, list);
+        };
+
+        // Inserts the sub-list into the list, at index `index`.  _Note  that this
+        // is not destructive_: it returns a copy of the list with the changes.
+        // <small>No lists have been harmed in the application of this function.</small>
+        R.insert.all = function(index, elts, list) {
+            var f1 = function insertAllCurried1(elt, list) {
+                var f2 = function insertAllCurried2(list) {
+                    return concat(concat(_slice(list, 0, Math.min(index, list.length)), elt), _slice(list, Math.min(index, list.length)));
+                };
+                return arguments.length < 2 ? f2 : f2(list);
+            };
+            return arguments.length < 2 ? f1 :
+                    arguments.length < 3 ? f1(elts) :
+                f1(elts, list);
+        };
+
         // Returns the `n`th element of a list (zero-indexed)
         R.nth = function (n, list) {
              return arguments.length < 2 ? function _nth(list) { return list[n]; } : list[n];
