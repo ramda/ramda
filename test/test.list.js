@@ -47,6 +47,12 @@ describe('remove', function () {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
         assert.deepEqual(remove(13, 3, list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
     });
+
+    it('should be curried', function() {
+        var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+        assert.deepEqual(remove(13)(3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
+        assert.deepEqual(remove(13, 3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
+    });
 });
 
 describe('insert', function () {
@@ -65,6 +71,12 @@ describe('insert', function () {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(insert(8, 'z', list), ['a', 'b', 'c', 'd', 'e', 'z']);
     });
+
+    it('should be curried', function() {
+        var list = ['a', 'b', 'c', 'd', 'e'];
+        assert.deepEqual(insert(8)('z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
+        assert.deepEqual(insert(8, 'z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
+    });
 });
 
 
@@ -78,6 +90,11 @@ describe('insert.all', function () {
     it('appends to the end of the list if the index is too large', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(insert.all(8, ['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
+    });
+
+    it('should be curried', function() {
+        var list = ['a', 'b', 'c', 'd', 'e'];
+        assert.deepEqual(insert.all(8)(['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
     });
 });
 

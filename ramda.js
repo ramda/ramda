@@ -1062,17 +1062,17 @@
         // `count` elements.  _Note that this is not destructive_: it returns a
         // copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
-        R.remove = function(start, count, list) {
+        R.remove = curry3(function(start, count, list) {
             return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
-        };
+        });
 
         // Inserts the supplied element into the list, at index `index`.  _Note
         // that this is not destructive_: it returns a copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
-        R.insert = function(index, elt, list) {
+        R.insert = curry3(function(index, elt, list) {
             index = index < list.length && index >= 0 ? index : list.length;
             return concat(append(elt, _slice(list, 0, index)), _slice(list, index));
-        };
+        });
 
         // Inserts the sub-list into the list, at index `index`.  _Note  that this
         // is not destructive_: it returns a copy of the list with the changes.
