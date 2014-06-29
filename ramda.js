@@ -681,7 +681,6 @@
         //
         //     map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
         //     //=> [64, 6, 7, 5, 3, 0, 81]
-
         map.idx = function(fn, list) {
             var f1 = function mapIdxCurried1(list) {
                 if (hasMethod('map', list)) {
@@ -709,6 +708,20 @@
             }
             return arguments.length < 2 ? _mapObj : _mapObj(obj);
         };
+
+        // Like `mapObj`, but passes additional parameters to the predicate function.  Parameters are
+        // `object key's value`, `key name`, `entire object`.
+        R.mapObj.idx = function (fn, obj) {
+            function _mapObjIdx(obj) {
+                return foldl(function (acc, key) {
+                    acc[key] = fn(obj[key], key, obj);
+                    return acc;
+                }, {}, keys(obj));
+            }
+            return arguments.length < 2 ? _mapObjIdx : _mapObjIdx(obj);
+        };
+
+
 
         // Reports the number of elements in the list
         R.size = function (arr) {
