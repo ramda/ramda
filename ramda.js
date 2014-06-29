@@ -1268,7 +1268,7 @@
 
         // Returns a function that when supplied an object returns the indicated property of that object, if it exists.
         var prop = R.prop = function (p, obj) {
-            return arguments.length < 2 ? function (obj) { return obj[p]; } :  obj[p];
+            return arguments.length < 2 ? function _prop(obj) { return obj[p]; } :  obj[p];
         };
         aliasFor("prop").is("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
