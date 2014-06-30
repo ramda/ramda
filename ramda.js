@@ -656,19 +656,10 @@
         // Returns a new list constructed by applying the function to every element of the list supplied.
         // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse 
         // arrays" (cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description).
-        var map = R.map = function(fn, list) {
-            var f1 = function mapCurried1(list) {
-                if (hasMethod('map', list)) {
-                    return list.map(fn);
-                }
-                var idx = -1, len = list.length, result = new Array(len);
-                while (++idx < len) {
-                    result[idx] = fn(list[idx]);
-                }
-                return result;
-            };
-            return arguments.length < 2 ? f1 : f1(list);
-        };
+        var map = R.map = R.curry (function (fn, list) {
+                return  list.map ? list.map (fn) :
+                        Array.prototype.map.call (list, fn);
+        });
 
         // Like `map`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
