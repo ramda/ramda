@@ -89,7 +89,7 @@
         var curry = R.curry = function (fn) {
             var fnArity = fn.length;
             var f = function (args) {
-                return arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
+                return setSource(arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
                     var newArgs = concat(args, arguments);
                     if (newArgs.length >= fnArity) {
                         return fn.apply(this, newArgs);
@@ -97,42 +97,49 @@
                     else {
                         return f(newArgs);
                     }
-                });
+                }), fn);
             };
 
             return f([]);
         };
 
-        // Optimized internal curriers
-        function curry1(fn) {
-            return function curried(a) {
-                return arguments.length ? fn(a) : curried;
+        var NO_ARGS_EXCEPTION = new SyntaxError('Received no arguments');
+
+        // Internal function to set the source attributes on a curried functions
+        // useful for debugging purposes
+        function setSource(curried, source) {
+            curried.toString = function() {
+                return source.toString();
             };
+            curried.source = source;
+            return curried;
         }
+
+        // Optimized internal curriers
         function curry2(fn) {
-            return function curried(a, b) {
+            return setSource(function(a, b) {
                 switch (arguments.length) {
-                    case 0: return curried;
-                    case 1: return curry1(function(b) {
+                    case 0: throw NO_ARGS_EXCEPTION;
+                    case 1: return setSource(function(b) {
                         return fn(a, b);
-                    });
+                    }, fn);
                 }
                 return fn(a, b);
-            };
+            }, fn);
         }
         function curry3(fn) {
-            return function curried(a, b, c) {
+            return setSource(function(a, b, c) {
                 switch (arguments.length) {
-                    case 0: return curried;
+                    case 0: throw NO_ARGS_EXCEPTION;
                     case 1: return curry2(function(b, c) {
                         return fn(a, b, c);
                     });
-                    case 2: return curry1(function(c) {
+                    case 2: return setSource(function(c) {
                         return fn(a, b, c);
                     });
                 }
                 return fn(a, b, c);
-            };
+            }, fn);
         }
 
         // (private) for dynamically dispatching Ramda method to non-Array objects
@@ -647,7 +654,7 @@
         // Returns a new list constructed by applying the function to every element of the list supplied.
         // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse 
         // arrays" (cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description).
-        var map = R.map = curry2(function(fn, list) {
+        function map(fn, list) {
             if (hasMethod('map', list)) {
                 return list.map(fn);
             }
@@ -656,7 +663,8 @@
                 result[idx] = fn(list[idx]);
             }
             return result;
-        });
+        }
+        R.map = curry2(map);
 
         // Like `map`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
@@ -669,7 +677,7 @@
         //
         //     map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
         //     //=> [64, 6, 7, 5, 3, 0, 81]
-        map.idx = curry2(function(fn, list) {
+        R.map.idx = curry2(function(fn, list) {
             if (hasMethod('map', list)) {
                 return list.map(fn);
             }
@@ -932,11 +940,9 @@
 
 
         // Returns a new list by plucking the same named property off all objects in the list supplied.
-        var pluck = R.pluck = function(p, list) {
-            return arguments.length < 2 ? 
-                function _pluck(list) { return map(prop(p), list); } : 
-                map(prop(p), list);
-        };
+        var pluck = R.pluck = curry2(function(p, list) {
+            return map(prop(p), list);
+        });
 
         // Returns a list that contains a flattened version of the supplied list.  For example:
         //
