@@ -657,8 +657,17 @@
         // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse 
         // arrays" (cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description).
         var map = R.map = R.curry (function (fn, list) {
-                return  list.map ? list.map (fn) :
-                        Array.prototype.map.call (list, fn);
+
+            if (list.map) return list.map (fn);
+            if (Array.prototype.map) return Array.prototype.map.call (list, fn);
+
+            //Support for older browsers
+            var idx = -1, len = list.length, result = new Array(len);
+            while (++idx < len) {
+                result[idx] = fn (list [idx]);
+            }
+            return result;
+
         });
 
         // Like `map`, but passes additional parameters to the predicate function.  Parameters are
