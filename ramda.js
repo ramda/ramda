@@ -995,12 +995,22 @@
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
         //     // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         var flatten = R.flatten = function(list) {
-            var idx = -1, len = list ? list.length : 0, result = [], push = result.push, val;
-            while (++idx < len) {
-                val = list[idx];
-                push.apply(result, isArray(val) ? flatten(val) : [val]);
+            var output = [], idx = 0, value;
+            for (var i = 0, length = list.length; i < length; i++) {
+              value = list[i];
+              if (isArray(value)) {
+                //flatten current level of array or arguments object
+                value = flatten(value);
+                var j = 0, len = value.length;
+                output.length += len;
+                while (j < len) {
+                  output[idx++] = value[j++];
+                }
+              } else {
+                output[idx++] = value;
+              }
             }
-            return result;
+            return output;
         };
 
 
