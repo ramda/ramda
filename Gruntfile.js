@@ -36,6 +36,7 @@ module.exports = function(grunt) {
       files: ['ramda.js'],
       options: {
         evil: true,
+        eqnull: true
       }
     },
 

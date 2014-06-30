@@ -12,7 +12,8 @@ var lib = 'ramda.js';
 
 var pkg = require('./package.json');
 var hintConfig = {
-    evil: true
+    evil: true,
+    eqnull: true
 };
 
 gulp.task('clean', function() {
