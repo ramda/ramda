@@ -16,7 +16,7 @@
 //  [umd]: https://github.com/umdjs/umd/blob/master/returnExports.js
 
 (function (root, factory) {if (typeof exports === 'object') {module.exports = factory(root);} else if (typeof define === 'function' && define.amd) {define(factory);} else {root.ramda = factory(root);}}(this, function (global) {
-
+    
     "use strict";
     return  (function() {
         // This object is what is actually returned, with all the exposed functions attached as properties.
@@ -113,13 +113,6 @@
             };
             curried.source = source;
             return curried;
-        }
-
-        function setCompositeRepr (composition, f, g) {
-            composition.toString = function() {
-                return g.toString() + '\n' + '\n' + 'THEN' + '\n' + '\n' + f.toString();
-            };
-            return composition;
         }
 
         // Optimized internal curriers
@@ -444,9 +437,9 @@
         //Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
         //the more general compose function, which takes any number of functions.
         var internalCompose = function(f, g) {
-            return setCompositeRepr( function () {
+            return function () {
                 return f(g.apply(this, arguments));
-            }, f, g);
+            };
         };
 
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
@@ -470,10 +463,10 @@
 
         // Returns a new function much like the supplied one except that the first two arguments are inverted.
         var flip = R.flip = function (fn) {
-            return function (a, b) {
-                return arguments.length < 2 ?
-                    function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); } :
-                    fn.apply(this, [b, a].concat(_slice(arguments, 2)));
+            return function (a, b) {  
+                return arguments.length < 2 ? 
+                  function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); } :
+                  fn.apply(this, [b, a].concat(_slice(arguments, 2)));
             };
         };
 
@@ -593,7 +586,7 @@
             return acc;
         });
         aliasFor("foldl").is("reduce");
-
+        
         // Like `foldl`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
         //
@@ -903,11 +896,57 @@
         R.any = curry2(any);
         aliasFor("any").is("some");
 
+        // Internal implementations of indexOf and lastIndexOf
+
+        // Return the position of the first occurrence of an item in an array,
+        // or -1 if the item is not included in the array.
+        var indexOf = function(array, item, from) {
+            var i = 0, length = array.length;
+            if (typeof from == 'number') {
+                i = from < 0 ? Math.max(0, length + from) : from;
+            }
+            for (; i < length; i++) {
+                if (array[i] === item) return i;
+            }
+            return -1;
+        };
+
+        var lastIndexOf = function(array, item, from) {
+            var idx = array.length;
+            if (typeof from == 'number') {
+                idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
+            }
+            while (--idx >= 0) {
+                if (array[idx] === item) return idx;
+            }
+            return -1;
+        };
+
+        // Returns the first zero-indexed position of an object in a flat list
+        R.indexOf = curry2(function _indexOf(target, list) {
+            return indexOf(list, target);
+        });
+
+        R.indexOf.from = curry3(function indexOfFrom(target, fromIdx, list) {
+            return indexOf(list, target, fromIdx);
+        });
+
+        // Returns the last zero-indexed position of an object in a flat list
+        R.lastIndexOf = curry2(function _lastIndexOf(target, list) {
+            return lastIndexOf(list, target);
+        });
+
+        R.lastIndexOf.from = curry3(function lastIndexOfFrom(target, fromIdx, list) {
+            return lastIndexOf(list, target, fromIdx);
+        });
+
         // Returns `true` if the list contains the sought element, `false` if it does not.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var contains = R.contains = curry2(function(a, list) {
-            return list.indexOf(a) > -1;
-        });
+        function contains(a, list) {
+            return indexOf(list, a) > -1;
+        }
+        R.contains = curry2(contains);
+
 
         // Returns `true` if the list contains the sought element, `false` if it does not, based upon the value
         // returned by applying the supplied predicated to two list elements.  Equality is strict here, meaning
@@ -1056,13 +1095,6 @@
             return result;
         });
 
-
-        // Returns the first zero-indexed position of an object in a flat list
-        R.indexOf = invoker("indexOf", Array.prototype, 1);
-
-        // Returns the last zero-indexed position of an object in a flat list
-        R.lastIndexOf = invoker("lastIndexOf", Array.prototype, 1);
-
         // Returns the elements of the list as a string joined by a separator.
         R.join = invoker("join", Array.prototype);
 
@@ -1097,7 +1129,7 @@
 
         // Returns the `n`th element of a list (zero-indexed)
         R.nth = function (n, list) {
-            return arguments.length < 2 ? function _nth(list) { return list[n]; } : list[n];
+             return arguments.length < 2 ? function _nth(list) { return list[n]; } : list[n];
         };
 
         // Makes a comparator function out of a function that reports whether the first element is less than the second.
@@ -1304,9 +1336,9 @@
                 };
                 return arguments.length < 2 ? f2 : f2(obj2);
             };
-            return arguments.length < 2 ? f1 :
-                    arguments.length < 3 ? f1(obj1) :
-                f1(obj1, obj2);
+            return arguments.length < 2 ? f1 : 
+                arguments.length < 3 ? f1(obj1) :
+                    f1(obj1, obj2);
         };
 
 
@@ -1394,10 +1426,10 @@
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
-        R.and = function(f, g) {
-            function _and(g) {
-                return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
-            }
+        R.and = function(f, g) { 
+           function _and(g) {
+               return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
+           }
             return arguments.length < 2 ? _and : _and(g);
         };
 
@@ -1405,9 +1437,9 @@
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
         // value. (Note also that at least Oliver Twist can pronounce this one...)
         R.or = function(f, g) { // TODO: arity?
-            function _or(g) {
-                return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
-            }
+           function _or(g) {
+               return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
+           }
             return arguments.length < 2 ? _or : _or(g);
         };
 
@@ -1427,10 +1459,10 @@
                     }, preds);
                 };
                 return arguments.length > 1 ?
-                    // Call function imediately if given arguments
-                    predIterator.apply(null, _slice(arguments, 1)) :
-                    // Return a function which will call the predicates with the provided arguments
-                    arity(max(pluck("length", preds)), predIterator);
+                        // Call function imediately if given arguments
+                        predIterator.apply(null, _slice(arguments, 1)) :
+                        // Return a function which will call the predicates with the provided arguments
+                        arity(max(pluck("length", preds)), predIterator);
             };
         };
 
@@ -1493,7 +1525,7 @@
         R.divideBy = flip(divide);
 
         // Divides the second parameter by the first and returns the remainder.
-        var modulo = R.modulo = function(a, b) {
+        var modulo = R.modulo = function(a, b) { 
             return arguments.length < 2 ? function(b) { return a % b; } :  a % b;
         };
 
@@ -1539,7 +1571,7 @@
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = curry2(function(keyFn, list) {
             if (!(list && list.length > 0)) {
-                return undef;
+               return undef;
             }
             var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
             while (++idx < list.length) {
@@ -1642,31 +1674,6 @@
         //         ['a', 'b', 'c', 'xyz', 'd']
         R.split = invoker("split", String.prototype, 1);
 
-<<<<<<< HEAD
-        var pathWith = R.pathWith = function (fn, str, obj) {
-            var f1 = function pathWithCurried1(str, obj) {
-                var f2 = function pathWithCurried2(obj) {
-                    if (!obj) { return undef; }
-                    var parts = fn(str) || [];
-                    if (parts.length === 0) { return undef; }
-                    var i = -1;
-                    var tmpObj = obj;
-                    while (++i < parts.length) {
-                        if (tmpObj[parts[i]] === undef) {
-                            return undef;
-                        } else {
-                            tmpObj = tmpObj[parts[i]];
-                        }
-                    }
-                    return tmpObj;
-                };
-                return arguments.length < 2 ? f2 : f2(obj);
-            };
-            return arguments.length < 2 ? f1 :
-                    arguments.length < 3 ? f1(str) :
-                f1(str, obj);
-        };
-=======
         // internal path function
         // Takes an array, paths, indicating the deep set of keys
         // to find. E.g.
@@ -1678,7 +1685,6 @@
             }
             return val;
         }
->>>>>>> 86e266fffddb6c16e7c385947226b0a7cabd892a
 
         // Retrieve a computed path by a function, fn. Fn will be given
         // a string, str which it will use to compute the path
@@ -1689,20 +1695,6 @@
             return path(paths, obj);
         });
 
-<<<<<<< HEAD
-        R.pathOn = function (sep, str, obj) {
-            var f1 = function pathOnCurried1(str, obj) {
-                var f2 = function pathOnCurried2(obj) {
-                    if (!obj) { return undef; }
-                    return pathWith(R.split(sep), str, obj);
-                };
-                return arguments.length < 2 ? f2 : f2(obj);
-            };
-            return arguments.length < 2 ? f1 :
-                    arguments.length < 3 ? f1(str) :
-                f1(str, obj);
-        };
-=======
         // Retrieve a value on an object from a deep path, str
         // different properties on nested objects are indicated in string
         // by a seperator, sep
@@ -1714,7 +1706,6 @@
         // Retrieve a nested path on an object seperated by periods
         // R.path('a.b'], {a: {b: 2}}) // => 2
         R.path = R.pathOn('.');
->>>>>>> 86e266fffddb6c16e7c385947226b0a7cabd892a
 
         // Data Analysis and Grouping Functions
         // ------------------------------------
@@ -1753,8 +1744,8 @@
                 return arguments.length < 2 ? f2 : f2(obj);
             };
             return arguments.length < 2 ? f1 :
-                    arguments.length < 3 ? f1(val) :
-                f1(val, obj);
+                arguments.length < 3 ? f1(val) :
+                    f1(val, obj);
         };
 
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
@@ -1782,8 +1773,8 @@
                 return arguments.length < 2 ? f2 : f2(second);
             };
             return arguments.length < 2 ? f1 :
-                    arguments.length < 3 ? f1(first) :
-                f1(first, second);
+                arguments.length < 3 ? f1(first) :
+                    f1(first, second);
         };
 
         // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
@@ -1811,8 +1802,8 @@
                 return arguments.length < 2 ? f2 : f2(list2);
             };
             return arguments.length < 2 ? f1 :
-                    arguments.length < 3 ? f1(list1) :
-                f1(list1, list2);
+                arguments.length < 3 ? f1(list1) :
+                    f1(list1, list2);
         };
 
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
@@ -1827,9 +1818,9 @@
         // Sorts the list according to a key generated by the supplied function.
         R.sortBy = function(fn, list) {
             /*
-             return sort(comparator(function(a, b) {return fn(a) < fn(b);}), list); // clean, but too time-inefficient
-             return pluck("val", sort(comparator(function(a, b) {return a.key < b.key;}), keyValue(fn, list))); // nice, but no need to clone result of keyValue call, so...
-             */
+              return sort(comparator(function(a, b) {return fn(a) < fn(b);}), list); // clean, but too time-inefficient
+              return pluck("val", sort(comparator(function(a, b) {return a.key < b.key;}), keyValue(fn, list))); // nice, but no need to clone result of keyValue call, so...
+            */
             function _sortBy(list) {
                 return pluck("val", keyValue(fn, list).sort(comparator(function(a, b) {return a.key < b.key;})));
             }
