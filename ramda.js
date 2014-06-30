@@ -119,7 +119,7 @@
         // useful for debugging purposes
         function setCompositeRepr (composition, f, g) {
             composition.toString = function() {
-                return g.toString() + '\n' + '\n' + 'THEN' + '\n' + '\n' + f.toString();
+                return f.toString() + '\n' + '\n' + 'OF' + '\n' + '\n' + f.toString();
             };
             return composition;
         }
