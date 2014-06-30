@@ -126,6 +126,12 @@ describe('sum', function() {
     it('should add together the array of numbers supplied', function() {
         assert.equal(10, sum([1, 2, 3, 4]));
     });
+
+    it('does not save the state of the accumulator', function() {
+        assert.equal(10, sum([1,2,3,4]));
+        assert.equal(1, sum([1]));
+        assert.equal(25, sum([5,5,5,5,5]));
+    });
 });
 
 describe('product', function() {

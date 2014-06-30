@@ -90,6 +90,7 @@
             fnArity = typeof fnArity === "number" ? fnArity : fn.length;
             function recurry(args) {
                 return setSource(arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
+                    if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                     var newArgs = concat(args, arguments);
                     if (newArgs.length >= fnArity) {
                         return fn.apply(this, newArgs);
@@ -103,7 +104,7 @@
             return recurry([]);
         };
 
-        var NO_ARGS_EXCEPTION = new SyntaxError('Received no arguments');
+        var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 
         // Internal function to set the source attributes on a curried functions
         // useful for debugging purposes

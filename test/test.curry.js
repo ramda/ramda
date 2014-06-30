@@ -14,6 +14,7 @@ describe('curry', function() {
         assert.equal(curried(1, 2, 3), 6);
         assert.notEqual(curried, source);
     });
+
     it('curry should set the toString value to the original', function() {
         assert.equal(String(source), String(curried));
         assert.equal(String(source), String(curried));
@@ -26,6 +27,13 @@ describe('curry', function() {
         assert.equal(curried(1)(2)(3), 6);
         assert.equal(curried(1, 2, 3), 6);
     });
+
+    it('produces functions that throw when called with no arguments', function() {
+        assert.throws(curried, TypeError);
+        assert.throws(curried(1), TypeError);
+        assert.throws(curried(1)(1), TypeError);
+    });
+
 });
 
 describe('internal curry', function() {
