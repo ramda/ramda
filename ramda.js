@@ -896,11 +896,57 @@
         R.any = curry2(any);
         aliasFor("any").is("some");
 
+        // Internal implementations of indexOf and lastIndexOf
+
+        // Return the position of the first occurrence of an item in an array,
+        // or -1 if the item is not included in the array.
+        var indexOf = function(array, item, from) {
+            var i = 0, length = array.length;
+            if (typeof from == 'number') {
+                i = from < 0 ? Math.max(0, length + from) : from;
+            }
+            for (; i < length; i++) {
+                if (array[i] === item) return i;
+            }
+            return -1;
+        };
+
+        var lastIndexOf = function(array, item, from) {
+            var idx = array.length;
+            if (typeof from == 'number') {
+                idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
+            }
+            while (--idx >= 0) {
+                if (array[idx] === item) return idx;
+            }
+            return -1;
+        };
+
+        // Returns the first zero-indexed position of an object in a flat list
+        R.indexOf = curry2(function _indexOf(target, list) {
+            return indexOf(list, target);
+        });
+
+        R.indexOf.from = curry3(function indexOfFrom(target, fromIdx, list) {
+            return indexOf(list, target, fromIdx);
+        });
+
+        // Returns the last zero-indexed position of an object in a flat list
+        R.lastIndexOf = curry2(function _lastIndexOf(target, list) {
+            return lastIndexOf(list, target);
+        });
+
+        R.lastIndexOf.from = curry3(function lastIndexOfFrom(target, fromIdx, list) {
+            return lastIndexOf(list, target, fromIdx);
+        });
+
         // Returns `true` if the list contains the sought element, `false` if it does not.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var contains = R.contains = curry2(function(a, list) {
-            return list.indexOf(a) > -1;
-        });
+        function contains(a, list) {
+            return indexOf(list, a) > -1;
+        }
+        R.contains = curry2(contains);
+
 
         // Returns `true` if the list contains the sought element, `false` if it does not, based upon the value
         // returned by applying the supplied predicated to two list elements.  Equality is strict here, meaning
@@ -1048,13 +1094,6 @@
             }
             return result;
         });
-
-
-        // Returns the first zero-indexed position of an object in a flat list
-        R.indexOf = invoker("indexOf", Array.prototype, 1);
-
-        // Returns the last zero-indexed position of an object in a flat list
-        R.lastIndexOf = invoker("lastIndexOf", Array.prototype, 1);
 
         // Returns the elements of the list as a string joined by a separator.
         R.join = invoker("join", Array.prototype);
