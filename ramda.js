@@ -86,21 +86,21 @@
         //      i(4) ≅ h(4) == g(7, 4) == f(3, 7, 4) == 1
         //
         //  Almost all exposed functions of more than one parameter already have curry applied to them.
-        var curry = R.curry = function (fn) {
-            var fnArity = fn.length;
-            var f = function (args) {
+        var curry = R.curry = function (fn, fnArity) {
+            fnArity = typeof fnArity === "number" ? fnArity : fn.length;
+            function recurry(args) {
                 return setSource(arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
                     var newArgs = concat(args, arguments);
                     if (newArgs.length >= fnArity) {
                         return fn.apply(this, newArgs);
                     }
                     else {
-                        return f(newArgs);
+                        return recurry(newArgs);
                     }
                 }), fn);
-            };
+            }
 
-            return f([]);
+            return recurry([]);
         };
 
         var NO_ARGS_EXCEPTION = new SyntaxError('Received no arguments');
@@ -272,7 +272,7 @@
         var invoker = R.invoker = function (name, obj, len) {
             var method = obj[name];
             var length = len === undef ? method.length : len;
-            return method && curry(nAry(length + 1, function () {
+            return method && curry(function () {
                 if (arguments.length) {
                     var target = Array.prototype.pop.call(arguments);
                     var targetMethod = target[name];
@@ -281,7 +281,7 @@
                     }
                 }
                 return undef;
-            }));
+            }, length + 1);
         };
 
         // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
