@@ -18,6 +18,14 @@ describe('curry', function() {
         assert.equal(String(source), String(curried));
         assert.equal(String(source), String(curried));
     });
+
+    it('curry should accept an arity', function() {
+        var curried = curry(function(a, b, c, d) {
+            return a * b * c;
+        }, 3);
+        assert.equal(curried(1)(2)(3), 6);
+        assert.equal(curried(1, 2, 3), 6);
+    });
 });
 
 describe('internal curry', function() {
@@ -28,6 +36,13 @@ describe('internal curry', function() {
     });
     it('curried function != source', function() {
         assert.notEqual(map, map.source);
+    });
+
+    it('should throw an expcetion given no arguments', function() {
+        assert.throws(map);
+        assert.throws(map(Lib.I));
+        //doesnt throw an exception
+        Lib.concat([]);
     });
 });
 
