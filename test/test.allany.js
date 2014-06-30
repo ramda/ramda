@@ -26,6 +26,12 @@ describe('all', function() {
         assert.equal(count, 4);
     });
 
+    it('is automatically curried', function () {
+        var count = 0;
+        var test = function(n) {count++; return even(n);};
+        assert(all(test)([2, 4, 6, 7, 8, 10]) === false);
+    });
+
     it('should be aliased by `every`', function() {
         assert.equal(Lib.every(even, [2, 4, 6, 8, 10]), true);
         assert.strictEqual(Lib.every, all);
@@ -70,6 +76,12 @@ describe("any", function() {
         var result = any(test, [2, 4, 6, 7, 8, 10]);
         assert(result);
         assert.equal(count, 4);
+    });
+
+    it('is automatically curried', function () {
+        var count = 0;
+        var test = function(n) {count++; return odd(n);};
+        assert(any(test)([2, 4, 6, 7, 8, 10]) === true);
     });
 
     it('should be aliased by `some`', function() {
