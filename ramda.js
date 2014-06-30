@@ -1642,6 +1642,7 @@
         //         ['a', 'b', 'c', 'xyz', 'd']
         R.split = invoker("split", String.prototype, 1);
 
+<<<<<<< HEAD
         var pathWith = R.pathWith = function (fn, str, obj) {
             var f1 = function pathWithCurried1(str, obj) {
                 var f2 = function pathWithCurried2(obj) {
@@ -1665,9 +1666,30 @@
                     arguments.length < 3 ? f1(str) :
                 f1(str, obj);
         };
+=======
+        // internal path function
+        // Takes an array, paths, indicating the deep set of keys
+        // to find. E.g.
+        // path(['a', 'b'], {a: {b: 2}}) // => 2
+        function path(paths, obj) {
+            var i = -1, length = paths.length, val;
+            while (obj != null && ++i < length) {
+                obj = val = obj[paths[i]];
+            }
+            return val;
+        }
+>>>>>>> 86e266fffddb6c16e7c385947226b0a7cabd892a
 
-        R.path = pathWith(R.split("."));
+        // Retrieve a computed path by a function, fn. Fn will be given
+        // a string, str which it will use to compute the path
+        // e.g. fn("a.b") => ["a", "b"]
+        // This path will be looked up on the object
+        R.pathWith = curry3(function pathWith(fn, str, obj) {
+            var paths = fn(str) || [];
+            return path(paths, obj);
+        });
 
+<<<<<<< HEAD
         R.pathOn = function (sep, str, obj) {
             var f1 = function pathOnCurried1(str, obj) {
                 var f2 = function pathOnCurried2(obj) {
@@ -1680,6 +1702,19 @@
                     arguments.length < 3 ? f1(str) :
                 f1(str, obj);
         };
+=======
+        // Retrieve a value on an object from a deep path, str
+        // different properties on nested objects are indicated in string
+        // by a seperator, sep
+        // R.pathOn("|", "a|b", {a: {b: 2}}) // => 2
+        R.pathOn = curry3(function pathOn(sep, str, obj) {
+            return path(str.split(sep), obj);
+        });
+
+        // Retrieve a nested path on an object seperated by periods
+        // R.path('a.b'], {a: {b: 2}}) // => 2
+        R.path = R.pathOn('.');
+>>>>>>> 86e266fffddb6c16e7c385947226b0a7cabd892a
 
         // Data Analysis and Grouping Functions
         // ------------------------------------
