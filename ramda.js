@@ -115,6 +115,15 @@
             return curried;
         }
 
+        // Internal function to set the the string representation of composite functions
+        // useful for debugging purposes
+        function setCompositeRepr (composition, f, g) {
+            composition.toString = function() {
+                return g.toString() + '\n' + '\n' + 'THEN' + '\n' + '\n' + f.toString();
+            };
+            return composition;
+        }
+
         // Optimized internal curriers
         function curry2(fn) {
             return setSource(function(a, b) {
@@ -437,9 +446,9 @@
         //Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
         //the more general compose function, which takes any number of functions.
         var internalCompose = function(f, g) {
-            return function () {
+            return setCompositeRepr( function () {
                 return f(g.apply(this, arguments));
-            };
+            }, f, g);
         };
 
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
