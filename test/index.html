@@ -8,11 +8,9 @@
 <body>
   <h1>Tests for ramda</h1>
   <div id="mocha"></div>
-  <script src="../lib/test/jquery.js"></script>
   <script src="../lib/test/expect.js"></script>
   <script src="../lib/test/mocha.js"></script>
-  <script src="../lib/test/util.js"></script>
-  <script src="../lib/test/assert.js"></script>
+  <script src="../lib/test/assert-shim.js"></script>
   <script src="../ramda.js"></script>
   <script src="../ext/lazylist/lazylist.js"></script>
   <script>ramda.installTo(this);</script>
@@ -54,7 +52,6 @@
   <script src="../ext/lazylist/test/test.lazy.js"></script>
   <script>
     mocha.checkLeaks();
-    mocha.globals(['jQuery']);
     mocha.run();
   </script>
 </body>
