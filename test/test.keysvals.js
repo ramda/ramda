@@ -26,7 +26,7 @@ describe("keys", function() {
         }, [null, undefined, 55, "", true, false, NaN, Infinity, , []]);
         assert.deepEqual(result, Lib.repeatN([], 10));
     });
-    
+
     it("does not include the given object's prototype properties", function() {
         assert.deepEqual(keys(cobj), ['a', 'b']);
     });
@@ -46,6 +46,13 @@ describe("keysIn", function() {
 
     it("includes the given object's prototype properties", function() {
         assert.deepEqual(keysIn(cobj), ['a', 'b', 'x', 'y']);
+    });
+
+    it("should work for primitives", function() {
+        var result = Lib.map(function(val) {
+            return Lib.keys(val);
+        }, [null, undefined, 55, "", true, false, NaN, Infinity, , []]);
+        assert.deepEqual(result, Lib.repeatN([], 10));
     });
 });
 
@@ -68,6 +75,13 @@ describe("values", function() {
 
     it("does not include the given object's prototype properties", function() {
         assert.deepEqual(values(cobj), [100, 200]);
+    });
+    
+    it("should work for primitives", function() {
+        var result = Lib.map(function(val) {
+            return Lib.keys(val);
+        }, [null, undefined, 55, "", true, false, NaN, Infinity, , []]);
+        assert.deepEqual(result, Lib.repeatN([], 10));
     });
 });
 
