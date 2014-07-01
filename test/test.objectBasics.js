@@ -108,31 +108,31 @@ describe('omit', function () {
     });
 });
 
-describe('filterObject', function() {
-    var filterObject = Lib.filterObject;
+describe('pickWith', function() {
+    var pickWith = Lib.pickWith;
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
     it('should create a copy of the object', function() {
-        assert.notEqual(filterObject(Lib.always(true), obj), obj);
+        assert.notEqual(pickWith(Lib.always(true), obj), obj);
     });
     it('returning truthy keeps the key', function() {
-        assert.deepEqual(filterObject(Lib.alwaysTrue, obj), obj);
-        assert.deepEqual(filterObject(Lib.always({}), obj), obj);
-        assert.deepEqual(filterObject(Lib.always(1), obj), obj);
+        assert.deepEqual(pickWith(Lib.alwaysTrue, obj), obj);
+        assert.deepEqual(pickWith(Lib.always({}), obj), obj);
+        assert.deepEqual(pickWith(Lib.always(1), obj), obj);
     });
     it('returning falsy keeps the key', function() {
-        assert.deepEqual(filterObject(Lib.always(false), obj), {});
-        assert.deepEqual(filterObject(Lib.always(0), obj), {});
-        assert.deepEqual(filterObject(Lib.always(null), obj), {});
+        assert.deepEqual(pickWith(Lib.always(false), obj), {});
+        assert.deepEqual(pickWith(Lib.always(0), obj), {});
+        assert.deepEqual(pickWith(Lib.always(null), obj), {});
     });
     it('should be called with (val,key,obj)', function() {
-        assert.deepEqual(filterObject(function(val, key, _obj) {
+        assert.deepEqual(pickWith(function(val, key, _obj) {
             assert.equal(_obj, obj);
             return key === 'd' && val === 4;
         }, obj), {d: 4});
     });
     it('should be automatically curried', function () {
-        var copier = filterObject(Lib.alwaysTrue);
+        var copier = pickWith(Lib.alwaysTrue);
         assert.deepEqual(copier(obj), obj);
     });
 });

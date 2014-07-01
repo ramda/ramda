@@ -1294,7 +1294,7 @@
         };
 
         // internal helper function
-        function filterObject(test, obj) {
+        function pickWith(test, obj) {
             var copy = {},
                 props = keys(obj), prop, val;
             for (var i = 0, len = props.length; i < len; i++) {
@@ -1305,24 +1305,24 @@
                 }
             }
             return copy;
-        };
+        }
 
         // Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
         // property is ignored
         R.pick = curry2(function pick(names, obj) {
-            return filterObject(function(val, key) {
+            return pickWith(function(val, key) {
                 return contains(key, names);
             }, obj);
         });
 
         // Returns a partial copy of an object omitting the keys specified.
         R.omit = curry2(function omit(names, obj) {
-            return filterObject(function(val, key) {
+            return pickWith(function(val, key) {
                 return !contains(key, names);
             }, obj);
         });
 
-        R.filterObject = curry2(filterObject);
+        R.pickWith = curry2(pickWith);
 
         // Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
         var pickAll = function (names, obj) {
