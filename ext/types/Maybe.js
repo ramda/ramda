@@ -1,5 +1,6 @@
-var isNil = require('./util').isNil;
-
+var util = require('./util'),
+    isNil = util.isNil,
+    returnThis = util.returnThis;
 /**
  * @constructor
  * @param {*} x
@@ -8,7 +9,6 @@ var isNil = require('./util').isNil;
 function Maybe (x) {
     return isNil (x) ? new Nothing() : new Just (x);
 }
-
 /**
  * @class
  * @extends Maybe
@@ -47,9 +47,7 @@ Just.prototype.map = function map (f) {
  * @param f
  * @returns {Nothing}
  */
-Nothing.prototype.map = function map (f) {
-    return this;
-};
+Nothing.prototype.map = returnThis;
 
 // apply
 // takes a Maybe that wraps a function (`app`) and applies its `map`
@@ -69,9 +67,7 @@ Just.prototype.ap = function ap (m) {
  * @param {Just} m
  * @returns {Nothing}
  */
-Nothing.prototype.ap = function ap (m) {
-    return this;
-};
+Nothing.prototype.ap = returnThis;
 
 // chain
 //  f must be a function which returns a value
@@ -89,9 +85,7 @@ Just.prototype.chain = function chain (f) {
  * @param f {Function}
  * @returns {Nothing}
  */
-Nothing.prototype.chain = function chain (f) {
-    return this;
-};
+Nothing.prototype.chain = returnThis;
 
 // monad
 // A value that implements the Monad specification must also implement the Applicative and Chain specifications.
@@ -105,18 +99,26 @@ Nothing.prototype.chain = function chain (f) {
 Just.prototype.equals = Nothing.prototype.equals = function (m) {
     return this.value === m.value;
 };
+/**
+ * @type {boolean}
+ */
+Nothing.prototype.isNothing = true;
+/**
+ * @type {boolean}
+ */
+Just.prototype.isNothing = false;
 
-Object.defineProperty (Just.prototype, "isNothing", {
-    get : function () {
-        return false;
-    }
-});
-Object.defineProperty (Nothing.prototype, "isNothing", {
-    get : function () {
-        return true;
-    }
-});
+/**
+ * @returns {string}
+ */
+Just.prototype.toString = function toString () {
+    return 'Just ' + this.value;
+};
+/**
+ * @returns {string}
+ */
+Nothing.prototype.toString = function toString () {
+    return 'Nothing';
+};
 
 module.exports = Maybe;
-
-
