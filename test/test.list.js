@@ -106,7 +106,7 @@ describe('nth', function () {
 
     it("returns null if n is out of the list's range", function () {
         var list = [1, 2, 3];
-        assert.equal(Lib.nth(4, list), null);
+        assert.equal(Lib.nth(4, list), undefined);
     });
 
     it('is automatically curried', function () {

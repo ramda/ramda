@@ -94,7 +94,8 @@ describe('foldr.idx', function() {
     });
 
     it('returns the accumulator for an empty array', function() {
-        assert.equal(foldr.idx(function(a, n, i, ls) { return a.concat(i); }, [], []), 0);
+        var memo = [];
+        assert.equal(foldr.idx(function(a, n, i, ls) { return a.concat(i); }, memo, []), memo);
     });
 
     it('should be automatically curried', function() {

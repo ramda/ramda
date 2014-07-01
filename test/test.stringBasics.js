@@ -74,13 +74,13 @@ describe('match', function() {
 
     it('should determine whether a string matches a regex', function() {
         assert.equal(match(re, 'B17-afn').length, 1);
-        assert.equal(match(re, 'B1-afn'), undefined);
+        assert.equal(match(re, 'B1-afn'), null);
     });
 
     it('should be automatically curried', function() {
         var format = match(re);
         assert.equal(format('B17-afn').length, 1);
-        assert.equal(format('B1-afn'), undefined);
+        assert.equal(format('B1-afn'), null);
     });
 });
 
