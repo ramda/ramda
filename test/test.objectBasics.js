@@ -81,6 +81,7 @@ describe('props', function () {
 describe('pick', function () {
     var pick = Lib.pick;
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
+
     it('should copy the named properties of an object to the new object', function () {
         assert.deepEqual(pick(['a', 'c', 'f'], obj), {a: 1, c: 3, f: 6});
     });
@@ -90,6 +91,49 @@ describe('pick', function () {
     it('should be automatically curried', function () {
         var copyAB = pick(['a', 'b']);
         assert.deepEqual(copyAB(obj), {a: 1, b: 2});
+    });
+});
+
+describe('omit', function () {
+    var omit = Lib.omit;
+    var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
+
+    it('should copy an object omitting the listed properties', function () {
+        assert.deepEqual(omit(['a', 'c', 'f'], obj), {b: 2, d: 4, e: 5});
+    });
+
+    it('should be automatically curried', function () {
+        var skipAB = omit(['a', 'b']);
+        assert.deepEqual(skipAB(obj), {c: 3, d: 4, e: 5, f: 6});
+    });
+});
+
+describe('filterObject', function() {
+    var filterObject = Lib.filterObject;
+    var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
+
+    it('should create a copy of the object', function() {
+        assert.notEqual(filterObject(Lib.always(true), obj), obj);
+    });
+    it('returning truthy keeps the key', function() {
+        assert.deepEqual(filterObject(Lib.alwaysTrue, obj), obj);
+        assert.deepEqual(filterObject(Lib.always({}), obj), obj);
+        assert.deepEqual(filterObject(Lib.always(1), obj), obj);
+    });
+    it('returning falsy keeps the key', function() {
+        assert.deepEqual(filterObject(Lib.always(false), obj), {});
+        assert.deepEqual(filterObject(Lib.always(0), obj), {});
+        assert.deepEqual(filterObject(Lib.always(null), obj), {});
+    });
+    it('should be called with (val,key,obj)', function() {
+        assert.deepEqual(filterObject(function(val, key, _obj) {
+            assert.equal(_obj, obj);
+            return key === 'd' && val === 4;
+        }, obj), {d: 4});
+    });
+    it('should be automatically curried', function () {
+        var copier = filterObject(Lib.alwaysTrue);
+        assert.deepEqual(copier(obj), obj);
     });
 });
 
@@ -106,18 +150,6 @@ describe('pickAll', function () {
     it('should be automatically curried', function () {
         var copyAB = pickAll(['a', 'b']);
         assert.deepEqual(copyAB(obj), {a: 1, b: 2});
-    });
-});
-
-describe('omit', function () {
-    var omit = Lib.omit;
-    var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
-    it('should copy an object omitting the listed properties', function () {
-        assert.deepEqual(omit(['a', 'c', 'f'], obj), {b: 2, d: 4, e: 5});
-    });
-    it('should be automatically curried', function () {
-        var skipAB = omit(['a', 'b']);
-        assert.deepEqual(skipAB(obj), {c: 3, d: 4, e: 5, f: 6});
     });
 });
 
