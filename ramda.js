@@ -1250,12 +1250,16 @@
             return val === null || val === undef;
         });
 
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
+        var nativeKeys = Object.keys;
+
         // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
         var keys = R.keys = function (obj) {
+            if (nativeKeys) return nativeKeys(Object(obj));
             var prop, ks = [];
             for (prop in obj) {
-                if (obj.hasOwnProperty(prop)) {
+                if (hasOwnProperty.call(obj, prop)) {
                     ks.push(prop);
                 }
             }
@@ -1273,14 +1277,14 @@
         };
 
         // Returns a list of all the enumerable own properties of the supplied object.
-        R.values = function(obj) {
-            var prop, vs = [];
-            for (prop in obj) {
-                if (obj.hasOwnProperty(prop)) {
-                    vs.push(obj[prop]);
-                }
+        R.values = function (obj) {
+            var prop, props = keys(obj),
+                length = props.length,
+                vals = new Array(length);
+            for (var i = 0; i < length; i++) {
+                vals[i] = obj[props[i]];
             }
-            return vs;
+            return vals;
         };
 
         // Returns a list of all the properties, including prototype properties, 
