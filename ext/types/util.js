@@ -1,6 +1,6 @@
 
 module.exports = {
-  isNil: function(x) { 
+  isNil: function(x) {
     return x === null || x === undefined || x !== x; // crazy NaN check
   }
 };
