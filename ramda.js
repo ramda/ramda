@@ -1278,7 +1278,9 @@
 
         // Returns a list of all the enumerable own properties of the supplied object.
         R.values = function (obj) {
-            var prop, props = keys(obj), length = props.length, vals = Array(length);
+            var prop, props = keys(obj),
+                length = props.length,
+                vals = new Array(length);
             for (var i = 0; i < length; i++) {
                 vals[i] = obj[props[i]];
             }
