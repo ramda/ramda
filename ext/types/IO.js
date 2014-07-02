@@ -33,7 +33,6 @@ IO.runIO = function(io) {
 };
 
 IO.prototype.runIO = function() {
-  //console.log(arguments);
   return this.fn.apply(this, arguments);
 };
 

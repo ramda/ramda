@@ -1,4 +1,3 @@
-var isNil = require('./util').isNil;
 
 function Maybe(x) {
   if (!(this instanceof Maybe)) {
@@ -13,13 +12,16 @@ Maybe.of = function(x) {
 
 // functor
 Maybe.prototype.map = function(f) {
-  return isNil(this.value) ? this : new Maybe(f(this.value));
+  return this.value == null ? this : new Maybe(f(this.value));
 };
 
 // apply
 // takes a Maybe that wraps a function (`app`) and applies its `map`
 // method to this Maybe's value, which must be a function.
 Maybe.prototype.ap = function(m) {
+  if (this.value == null) { 
+    return m;  // ???
+  }
   if (typeof this.value !== 'function') {
     throw new TypeError("Calling ap on a Maybe requires that the Maybe is wrapping a function");
   }
@@ -35,7 +37,7 @@ Maybe.prototype.of = Maybe.of;
 //  chain must return a value of the same Chain
 //
 Maybe.prototype.chain = function(f) {
-   return this.value ? f(this.value) : this;
+   return this.value == null ? this : f(this.value);
 };
 
 // monad
