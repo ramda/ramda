@@ -1297,23 +1297,35 @@
         };
 
         // internal helper function
-        var partialCopy = function (test, obj) {
-            var copy = {};
-            each(function (key) {
-                if (test(key, obj)) {
-                    copy[key] = obj[key];
+        function pickWith(test, obj) {
+            var copy = {},
+                props = keys(obj), prop, val;
+            for (var i = 0, len = props.length; i < len; i++) {
+                prop = props[i];
+                val = obj[prop];
+                if (test(val, prop, obj)) {
+                    copy[prop] = val;
                 }
-            }, keys(obj));
+            }
             return copy;
-        };
+        }
 
         // Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
         // property is ignored
-        R.pick = curry2(function (names, obj) {
-            return partialCopy(function (key) {
+        R.pick = curry2(function pick(names, obj) {
+            return pickWith(function(val, key) {
                 return contains(key, names);
             }, obj);
         });
+
+        // Returns a partial copy of an object omitting the keys specified.
+        R.omit = curry2(function omit(names, obj) {
+            return pickWith(function(val, key) {
+                return !contains(key, names);
+            }, obj);
+        });
+
+        R.pickWith = curry2(pickWith);
 
         // Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
         var pickAll = function (names, obj) {
@@ -1325,13 +1337,6 @@
         };
 
         R.pickAll = curry2(pickAll);
-
-        // Returns a partial copy of an object omitting the keys specified.
-        R.omit = curry2(function(names, obj) {
-            return partialCopy(function (key) {
-                return !contains(key, names);
-            }, obj);
-        });
 
         // Returns a new object that mixes in the own properties of two objects.
         R.mixin = curry2(function(a, b) {
