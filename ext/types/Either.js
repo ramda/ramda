@@ -1,4 +1,3 @@
-var isNil = require('./util').isNil;
 
 function Either(left, right) {
   if (!(this instanceof Either)) {
@@ -13,16 +12,16 @@ Either.of = function(value, err) {
 };
 
 Either.prototype.map = function(f) {
-  return (isNil(this.right)) ? this : new Either(this.left, f(this.right));
+  return this.right == null ? this : new Either(this.left, f(this.right));
 };
 
 Either.prototype.ap = function(app) {
-  return isNil(this.right) ? this : app.map(this.right);
+  return this.right == null ? this : app.map(this.right);
 };
 
 // `f` must return a new Either; not sure if this impl is sufficient
 Either.prototype.chain = function(f) {
-  return isNil(this.right) ? this : f(this.right);
+  return this.right == null ? this : f(this.right);
 };
 
 Either.prototype.of = Either.of;

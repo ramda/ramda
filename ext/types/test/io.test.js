@@ -21,13 +21,12 @@ describe('IO', function() {
 
   it('is an Apply', function() {
     var aTest = types.apply;
-    var a = IO(R.always(7));
-    var b = IO(R.always(2));
+    var a = IO(function(n) { return R.add(1); });
+    var b = IO(function() { return R.always(2); });
     var c = IO(R.always(4));
 
     assert.equal(true, aTest.iface(i1));
-// TODO: fix broken fucking test    
-//    assert.equal(true, aTest.compose(a, b, c));
+    assert.equal(true, aTest.compose(a, b, c));
   });
 
   it('is an Applicative', function() {
@@ -36,11 +35,11 @@ describe('IO', function() {
     assert.equal(true, aTest.iface(i1));
     assert.equal(true, aTest.id(IO, i2));
     assert.equal(true, aTest.homomorphic(i1, R.add(3), 46));
-//    assert.equal(true, aTest.interchange(
-//        IO(R.multiply(20)),
-//        IO(R.multiply(0.5)),
-//        73
-//    ));
+    assert.equal(true, aTest.interchange(
+        IO(function() { return R.multiply(20); }),
+        IO(function() { return R.multiply(0.5); }),
+       73
+    ));
   });
 
   it('is a Chain', function() {
