@@ -26,8 +26,7 @@
         // Internal Functions and Properties
         // ---------------------------------
 
-        var undef = (function () {
-        })(), EMPTY;
+        var undef = void 0;
 
         // Makes a public alias for one of the public functions:
         var aliasFor = function (oldName) {
@@ -358,9 +357,6 @@
         // --------------
         //
 
-        //   Prototypical (or only) empty list
-        EMPTY = [];
-
         // Boolean function which reports whether a list is empty.
         var isEmpty = R.isEmpty = function (arr) {
             return !arr || !arr.length;
@@ -374,14 +370,14 @@
 
         //  Returns the first element of a list
         var head = R.head = function (arr) {
-            arr = arr || EMPTY;
+            arr = arr || [];
             return arr[0];
         };
         aliasFor("head").is("car").and("first");
 
         //  Returns the last element of a list
         R.last = function (arr) {
-            arr = arr || EMPTY;
+            arr = arr || [];
             return arr[arr.length - 1];
         };
 
@@ -389,7 +385,7 @@
         // If the passed-in list is not annary, but is an object with a `tail` method, 
         // it will return object.tail().
         var tail = R.tail = function (arr) {
-            arr = arr || EMPTY;
+            arr = arr || [];
             if (hasMethod('tail', arr)) {
                 return arr.tail();
             }
@@ -968,7 +964,7 @@
         var uniq = R.uniq = function (list) {
             return foldr(function (acc, x) {
                 return (contains(x, acc)) ? acc : prepend(x, acc);
-            }, EMPTY, list);
+            }, [], list);
         };
 
         // returns `true` if all of the elements in the `list` are unique.
@@ -982,7 +978,7 @@
         var uniqWith = R.uniqWith = curry2(function(pred, list) {
             return foldr(function (acc, x) {
                 return (containsWith(pred, x, acc)) ? acc : prepend(x, acc);
-            }, EMPTY, list);
+            }, [], list);
         });
 
 
@@ -1051,7 +1047,7 @@
         //     //    => [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
         R.xprodWith = curry3(function (fn, a, b) {
             if (isEmpty(a) || isEmpty(b)) {
-                return EMPTY;
+                return [];
             }
             var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
             while (++i < ilen) {
@@ -1069,7 +1065,7 @@
         //     //    => [[1, 'a'], [1, 'b')], [2, 'a'], [2, 'b']];
         R.xprod = curry2(function (a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
             if (isEmpty(a) || isEmpty(b)) {
-                return EMPTY;
+                return [];
             }
             var i = -1;
             var ilen = a.length;
@@ -1097,7 +1093,7 @@
         //     range(50, 53) // => [50, 51, 52]
         R.range = curry2(function (from, to) {
             if (from >= to) {
-                return EMPTY;
+                return [];
             }
             var idx = 0, result = new Array(Math.floor(to) - Math.ceil(from));
             for (; from < to; idx++, from++) {
