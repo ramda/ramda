@@ -1482,92 +1482,83 @@
         // --------------------
         //
         // These functions wrap up the certain core arithmetic operators
-
-        // --------
-
-        // Adds two numbers.  Automatic curried:
-        //
-        //     var add7 = add(7);
-        //     add7(10); // => 17
-        var add = R.add = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a + b; } :  a + b;
+        var expressionMap = {
+            // Adds two numbers.  Automatic curried:
+            //
+            //     var add7 = add(7);
+            //     add7(10); // => 17
+            "+": "add",
+            // Divides the first parameter by the second.  This is automatically curried, and while at times the curried
+            // version might be useful, often the curried version of `divideBy` might be what's wanted.
+            "/": "divide",
+            // Divides the second parameter by the first and returns the remainder.
+            "%": "modulo",
+            // Multiplies two numbers.  Automatically curried:
+            //
+            //     var mult3 = multiply(3);
+            //     mult3(7); // => 21
+            "*": "multiply",
+            // Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
+            // version might be useful, often the curried version of `subtractN` might be what's wanted.
+            //
+            //     var complementaryAngle = subtract(90);
+            //     complementaryAngle(30) ; // => 60
+            "-": "subtract",
+            
+            // Returns true if the first parameter is greater than the second.
+            ">": "gt",
+            // Returns true if the first parameter is greater than or equal to the second.
+            ">=": "gte",
+            // Returns true if the first parameter is less than the second.
+            "<": "lt",
+            // Returns true if the first parameter is less than or equal to the second.
+            "<=": "lte",
+            "==": "eqeq",
+            "!=": "neeq",
+            "===": ["eq", "eqeqeq"],
+            "!==": ["neq", "neqeq"]
+        };
+        var flippedExpressionMap = {
+            // Reversed version of `divide`, where the second parameter is divided by the first.  The curried version of
+            // this one might be more useful than that of `divide`.  For instance:
+            //
+            //     var half = divideBy(2);
+            //     half(42); // => 21
+            "/": "divideBy",
+            // Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
+            // this one might be more useful than that of `modulo`.  For instance:
+            //
+            //     var isOdd = moduloBy(2);
+            //     isOdd(42); // => 0
+            //     isOdd(21); // => 1
+            "%": "moduloBy",
+            // Reversed version of `subtract`, where first parameter is subtracted from the second.  The curried version of
+            // this one might me more useful than that of `subtract`.  For instance:
+            //
+            //     var decrement = subtractN(1);
+            //     decrement(10); // => 9;
+            "-": "subtractN"
         };
 
-        // Multiplies two numbers.  Automatically curried:
-        //
-        //     var mult3 = multiply(3);
-        //     mult3(7); // => 21
-        var multiply = R.multiply = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a * b; } :  a * b;
-        };
+        function integrateMap(map, flipArgs) {
+            for (var oper in map) {
+                var aliases = map[oper];
+                if (!isArray(aliases)) aliases = [aliases];
+                var expression = "return " + (flipArgs ? "b" + oper + "a" : "a" + oper + "b");
+                R[oper] = curry2(new Function("a", "b", expression));
+                each(aliasFor(oper), aliases);
+            }
+        }
 
-        // Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
-        // version might be useful, often the curried version of `subtractN` might be what's wanted.
-        //
-        //     var complementaryAngle = subtract(90);
-        //     complementaryAngle(30) ; // => 60
-        var subtract = R.subtract = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a - b; } :  a - b;
-        };
+        integrateMap(flippedExpressionMap, true);
 
-        // Reversed version of `subtract`, where first parameter is subtracted from the second.  The curried version of
-        // this one might me more useful than that of `subtract`.  For instance:
-        //
-        //     var decrement = subtractN(1);
-        //     decrement(10); // => 9;
-        R.subtractN = flip(subtract);
-
-        // Divides the first parameter by the second.  This is automatically curried, and while at times the curried
-        // version might be useful, often the curried version of `divideBy` might be what's wanted.
-        var divide = R.divide = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a / b; } :  a / b;
-        };
-
-        // Reversed version of `divide`, where the second parameter is divided by the first.  The curried version of
-        // this one might be more useful than that of `divide`.  For instance:
-        //
-        //     var half = divideBy(2);
-        //     half(42); // => 21
-        R.divideBy = flip(divide);
-
-        // Divides the second parameter by the first and returns the remainder.
-        var modulo = R.modulo = function(a, b) { 
-            return arguments.length < 2 ? function(b) { return a % b; } :  a % b;
-        };
-
-        // Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
-        // this one might be more useful than that of `modulo`.  For instance:
-        //
-        //     var isOdd = moduloBy(2);
-        //     isOdd(42); // => 0
-        //     isOdd(21); // => 1
-        R.moduloBy = flip(modulo);
+        integrateMap(expressionMap);
 
         // Adds together all the elements of a list.
-        R.sum = foldl(add, 0);
+        R.sum = foldl(R.add, 0);
 
         // Multiplies together all the elements of a list.
-        R.product = foldl(multiply, 1);
-
-        // Returns true if the first parameter is less than the second.
-        R.lt = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a < b; } :  a < b;
-        };
-
-        // Returns true if the first parameter is less than or equal to the second.
-        R.lte = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a <= b; } :  a <= b;
-        };
-
-        // Returns true if the first parameter is greater than the second.
-        R.gt = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a > b; } :  a > b;
-        };
-
-        // Returns true if the first parameter is greater than or equal to the second.
-        R.gte = function(a, b) {
-            return arguments.length < 2 ? function(b) { return a >= b; } :  a >= b;
-        };
+        R.product = foldl(R.multiply, 1);
 
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
         var max = R.max = function(list) {
