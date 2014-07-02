@@ -18,4 +18,11 @@ describe('range', function() {
         var from10 = range(10);
         assert.deepEqual(from10(15), [10, 11, 12, 13, 14]);
     });
+
+    it('should return an empty array if from > to', function() {
+         var result = range(10, 5);
+         assert.deepEqual(result, []);
+         result.push(5);
+         assert.deepEqual(range(10, 5), []);
+    });
 });
