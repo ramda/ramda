@@ -965,11 +965,9 @@
 
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var uniq = R.uniq = function (list) {
-            return foldr(function (acc, x) {
-                return (contains(x, acc)) ? acc : prepend(x, acc);
-            }, EMPTY, list);
-        };
+        var uniq = R.uniq = foldr(function (acc, x) {
+            return (contains(x, acc)) ? acc : prepend(x, acc);
+        }, EMPTY, list);
 
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
