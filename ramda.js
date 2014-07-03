@@ -1175,6 +1175,7 @@
         //     //   /*, ... */
         //     //   "F": [{name: 'Eddy', score: 58}]
         //     // }
+
         R.partition = curry2(function (fn, list) {
             return foldl(function (acc, elt) {
                 var key = fn(elt);
@@ -1354,6 +1355,8 @@
                     f1(obj1, obj2);
         };
 
+
+
         // `where` takes a spec object and a test object and returns true if the test satisfies the spec. 
         // Any property on the spec that is not a function is interpreted as an equality 
         // relation. For example:
@@ -1376,19 +1379,25 @@
         //     var fxs = filter(where({x: 10}), xs); 
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
-        R.where = curry2(function where(spec, test) {
-            if (test == null) return false;
-            if (test === spec) return true;
+        R.where = curry2(function(spec, test) {
+            function isFn(key) {return typeof spec[key] === 'function';}
             var specKeys = keys(spec);
-            var key, val;
-            for (var i = 0, len = specKeys.length; i < len; i++) {
-                key = specKeys[i];
-                val = spec[key];
-                if (!hasOwnProperty.call(test, key)) return false;
-                if (typeof val === "function") {
-                    if (!val(test[key], test)) return false;
-                } else {
-                    if (val !== test[key]) return false;
+            var fnKeys = filter(isFn, specKeys);
+            var objKeys = reject(isFn, specKeys);
+            if (!test) { return false; }
+            var i = -1, key;
+            while (++i < fnKeys.length) {
+                key = fnKeys[i];
+                if (!spec[key](test[key], test)) {
+                    return false;
+                }
+            }
+            i = -1;
+            while (++i < objKeys.length) {
+                key = objKeys[i];
+                // if (test[key] !== spec[key]) {  // TODO: discuss Scott's objections
+                if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
+                    return false;
                 }
             }
             return true;

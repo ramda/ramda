@@ -167,8 +167,8 @@ describe('eqProps', function () {
 
 describe('where', function () {
     var where = Lib.where;
-    
     it('takes a spec and a test object and returns true if the test object satisfies the spec', function () {
+
         var spec = {x: 1, y: 2};
         var test1 = {x: 0, y: 200};
         var test2 = {x: 0, y: 10};
@@ -232,24 +232,6 @@ describe('where', function () {
         assert.equal(where(spec, test2), false);
         assert.equal(where(spec, test3), true);
         assert.equal(where(spec, test4), false);
-    });
-
-    it('empty spec is true', function() {
-        assert.equal(where({}, {a: 1}), true);
-        assert.equal(where(null, {a: 1}), true);
-    });
-
-    it('equal objects are true', function() {
-        assert.equal(where(Lib, Lib), true);
-    });
-
-    it('only matches own properties', function () {
-        var spec = {
-            toString: Lib.always(true)
-        };
-        assert.equal(where(spec, {}), false);
-        assert.equal(where(spec, {a: 1}), false);
-        assert.equal(where(spec, {toString: 1}), true);
     });
 
     it('is automatically curried', function () {
