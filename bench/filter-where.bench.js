@@ -13,7 +13,7 @@ var objs = [
 ];
 var filterEmpty = filter(where({x: R.isEmpty}))
 
-suite.add('_.filter(nums, {x: []})', function() {
+suite.add('_.filter(objs, {x: []})', function() {
   _.filter(objs, {x: []});
 })
 .add('filter(where({x: isEmpty}), objs)', function() {
