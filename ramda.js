@@ -451,10 +451,10 @@
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
         var compose = R.compose = function() {  // TODO: type check of arguments?
-            if (arguments.length == 1) {
-                return partially (compose, arguments[0]);
-            }
             var f = arguments[0];
+            if (arguments.length == 1) {
+                return partially (compose, f);
+            }
             var i = 0;
             while (++i < arguments.length) {
                 f = internalCompose(f, arguments[i]);
