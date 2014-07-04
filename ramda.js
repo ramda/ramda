@@ -444,7 +444,7 @@
             return function () {
                 var args = [a].concat (_slice (arguments));
                 return f.apply (this, args);
-            }
+            };
         }
 
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
