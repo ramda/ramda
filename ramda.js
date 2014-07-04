@@ -1379,29 +1379,32 @@
         //     var fxs = filter(where({x: 10}), xs); 
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
-        R.where = curry2(function(spec, test) {
+        R.where = function(spec, test) {
             function isFn(key) {return typeof spec[key] === 'function';}
             var specKeys = keys(spec);
             var fnKeys = filter(isFn, specKeys);
             var objKeys = reject(isFn, specKeys);
-            if (!test) { return false; }
-            var i = -1, key;
-            while (++i < fnKeys.length) {
-                key = fnKeys[i];
-                if (!spec[key](test[key], test)) {
-                    return false;
+            var process = function(test) {
+                if (!test) { return false; }
+                var i = -1, key;
+                while (++i < fnKeys.length) {
+                    key = fnKeys[i];
+                    if (!spec[key](test[key], test)) {
+                        return false;
+                    }
                 }
-            }
-            i = -1;
-            while (++i < objKeys.length) {
-                key = objKeys[i];
-                // if (test[key] !== spec[key]) {  // TODO: discuss Scott's objections
-                if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
-                    return false;
+                i = -1;
+                while (++i < objKeys.length) {
+                    key = objKeys[i];
+                    // if (test[key] !== spec[key]) {  // TODO: discuss Scott's objections
+                    if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
+                        return false;
+                    }
                 }
-            }
-            return true;
-        });
+                return true;
+            };
+            return (arguments.length > 1) ? process(test) : process;
+        };
 
         // Miscellaneous Functions
         // -----------------------
