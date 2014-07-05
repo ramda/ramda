@@ -440,17 +440,10 @@
         };
 
         //partially (f, a, b, c...) is a function that return the function f partially applied with the
-        // parameters a, b, c... It is also curried with respect to the first parameter f, and thus can serve
-        // as "curry2" for variadic functions
+        // parameters a, b, c...
         //var partially = R.partially =
         function partially () {
             var f = arguments[0];
-            if (arguments.length == 1) {
-                return setSource(
-                    partially (partially, f),
-                    f
-                );
-            }
             var params = _slice(arguments, 1);
             return setSource(
                 function () {
