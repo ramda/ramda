@@ -439,7 +439,9 @@
             };
         };
 
-        //Partially applies a to f when f is a variadic function that cant be curried
+        //partially (f, a, b, c...) is a function that return the function f partially applied with the
+        // parameters a, b, c... It is also curried with respect to the first parameter f, and thus can serve
+        // as "curry2" for variadic functions
         //var partially = R.partially =
         function partially () {
             var f = arguments[0];
