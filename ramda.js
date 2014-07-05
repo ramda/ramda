@@ -439,12 +439,23 @@
             };
         };
 
+        //Partially applies a to f when f is a variadic function that cant be curried
+        function partially (f, a){
+            return function () {
+                var args = [a].concat (_slice (arguments));
+                return f.apply (this, args);
+            };
+        }
+
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
         var compose = R.compose = function() {  // TODO: type check of arguments?
-            var i = 0;
             var f = arguments[0];
+            if (arguments.length == 1) {
+                return partially (compose, f);
+            }
+            var i = 0;
             while (++i < arguments.length) {
                 f = internalCompose(f, arguments[i]);
             }
@@ -454,6 +465,9 @@
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.
         R.pipe = function() { // TODO: type check of arguments?
+            if (arguments.length == 1) {
+                return partially (R.pipe, arguments[0]);
+            }
             return compose.apply(this, _slice(arguments).reverse());
         };
         aliasFor("pipe").is("sequence");
