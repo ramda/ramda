@@ -440,9 +440,15 @@
         };
 
         //Partially applies a to f when f is a variadic function that cant be curried
-        function partially (f, a){
+        //var partially = R.partially =
+        function partially (){
+            var f = arguments[0];
+            if (arguments.length == 1) {
+                return partially (partially, f);
+            }
+            var params = _slice(arguments, 1);
             return function () {
-                var args = [a].concat (_slice (arguments));
+                var args = params.concat (_slice (arguments));
                 return f.apply (this, args);
             };
         }
