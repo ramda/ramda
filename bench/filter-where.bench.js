@@ -9,9 +9,12 @@ var out = './report/filter-' + (new Date()).toISOString() + '.json';
 var suite = new Benchmark.Suite;
 
 var objs = [
-  {x: [1,2]}, {x: [1,3]}, {x: []}, {x: [2]}, {x: [3]}, {x: [1]}, {x: [1,2,3]}, {x: []}, {x: [1,2]}, {x: [1,3]} 
+  {x: [1,2], y: true}, {x: [1,3], y: true}, {x: [], y: false}, {x: [2], y: false}, 
+  {x: [3], y: true}, {x: [1], y: true}, {x: [1,2,3], y: true}, {x: [], y: true}, 
+  {x: [1,2], y: false}, {x: [1,3], y: true} 
 ];
-var filterEmpty = filter(where({x: R.isEmpty}))
+var filterEmptyX = filter(where({x: R.isEmpty}));
+var filterFalseY = filter(where({y: false}));
 
 suite.add('_.filter(objs, {x: []})', function() {
   _.filter(objs, {x: []});
@@ -22,8 +25,20 @@ suite.add('_.filter(objs, {x: []})', function() {
 .add('filter(where({x: isEmpty}))(objs)', function() {
   filter(where({x: isEmpty}))(objs);
 })
-.add('filterEmpty(objs)', function() {
-  filterEmpty(objs);
+.add('filterEmptyX(objs)', function() {
+  filterEmptyX(objs);
+})
+.add('_.filter(objs, {y: false})', function() {
+  _.filter(objs, {y: false});
+})
+.add('filter(where({y: false}), objs)', function() {
+  filter(where({y: false}), objs);
+})
+.add('filter(where({y: false}))(objs)', function() {
+  filter(where({y: false}))(objs);
+})
+.add('filterFalseY(objs)', function() {
+  filterFalseY(objs);
 })
 .on('cycle', function(event) {
   console.log(String(event.target));
