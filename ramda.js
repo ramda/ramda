@@ -444,9 +444,14 @@
         //var partially = R.partially =
         function partially () {
             var f = arguments[0];
+            if (arguments.length == 1) {
+                return setSource(
+                    partially (partially, f),
+                    f
+                );
+            }
             var params = _slice(arguments, 1);
-            return setSource(
-                function () {
+            return setSource (function () {
                     var args = params.concat (_slice (arguments));
                     return f.apply (this, args);
                 },
