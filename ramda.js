@@ -439,12 +439,23 @@
             };
         };
 
+        //Partially applies a to f when f is a variadic function that cant be curried
+        function partially (f, a){
+            return function () {
+                var args = [a].concat (_slice (arguments));
+                return f.apply (this, args);
+            };
+        }
+
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
         var compose = R.compose = function() {  // TODO: type check of arguments?
-            var i = 0;
             var f = arguments[0];
+            if (arguments.length == 1) {
+                return partially (compose, f);
+            }
+            var i = 0;
             while (++i < arguments.length) {
                 f = internalCompose(f, arguments[i]);
             }
@@ -454,6 +465,9 @@
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.
         R.pipe = function() { // TODO: type check of arguments?
+            if (arguments.length == 1) {
+                return partially (R.pipe, arguments[0]);
+            }
             return compose.apply(this, _slice(arguments).reverse());
         };
         aliasFor("pipe").is("sequence");
@@ -1379,29 +1393,32 @@
         //     var fxs = filter(where({x: 10}), xs); 
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
-        R.where = curry2(function(spec, test) {
+        R.where = function(spec, test) {
             function isFn(key) {return typeof spec[key] === 'function';}
             var specKeys = keys(spec);
             var fnKeys = filter(isFn, specKeys);
             var objKeys = reject(isFn, specKeys);
-            if (!test) { return false; }
-            var i = -1, key;
-            while (++i < fnKeys.length) {
-                key = fnKeys[i];
-                if (!spec[key](test[key], test)) {
-                    return false;
+            var process = function(test) {
+                if (!test) { return false; }
+                var i = -1, key;
+                while (++i < fnKeys.length) {
+                    key = fnKeys[i];
+                    if (!spec[key](test[key], test)) {
+                        return false;
+                    }
                 }
-            }
-            i = -1;
-            while (++i < objKeys.length) {
-                key = objKeys[i];
-                // if (test[key] !== spec[key]) {  // TODO: discuss Scott's objections
-                if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
-                    return false;
+                i = -1;
+                while (++i < objKeys.length) {
+                    key = objKeys[i];
+                    // if (test[key] !== spec[key]) {  // TODO: discuss Scott's objections
+                    if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
+                        return false;
+                    }
                 }
-            }
-            return true;
-        });
+                return true;
+            };
+            return (arguments.length > 1) ? process(test) : process;
+        };
 
         // Miscellaneous Functions
         // -----------------------

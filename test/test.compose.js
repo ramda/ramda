@@ -11,10 +11,6 @@ describe('compose', function() {
     it('executes its passed in functions in order from right to left', function() {
         assert.equal(compose(a, b, c, d)(""), "DCBA");
     });
-
-    it('returns equivalent function if only passed one function argument', function() {
-        assert.equal(compose(a)(""), a(""));
-    });
 });
 
 describe('pipe', function() {
@@ -25,10 +21,6 @@ describe('pipe', function() {
     function d(x) {return x + "D";}
     it('executes its passed in functions in order from left to right', function() {
         assert.equal(pipe(a, b, c, d)(""), "ABCD");
-    });
-
-    it('returns the equivalent function if only passed one function argument', function() {
-        assert.equal(pipe(a)(""), a(""));
     });
 });
 
