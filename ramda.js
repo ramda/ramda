@@ -88,7 +88,7 @@
         var curry = R.curry = function (fn, fnArity) {
             fnArity = typeof fnArity === "number" ? fnArity : fn.length;
             function recurry(args) {
-                return setSource(arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
+                return arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
                     if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                     var newArgs = concat(args, arguments);
                     if (newArgs.length >= fnArity) {
@@ -97,7 +97,7 @@
                     else {
                         return recurry(newArgs);
                     }
-                }), fn);
+                });
             }
 
             return recurry([]);
@@ -105,41 +105,31 @@
 
         var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 
-        // Internal function to set the source attributes on a curried functions
-        // useful for debugging purposes
-        function setSource(curried, source) {
-            curried.toString = function() {
-                return source.toString();
-            };
-            curried.source = source;
-            return curried;
-        }
-
         // Optimized internal curriers
         function curry2(fn) {
-            return setSource(function(a, b) {
+            return function(a, b) {
                 switch (arguments.length) {
                     case 0: throw NO_ARGS_EXCEPTION;
-                    case 1: return setSource(function(b) {
+                    case 1: return function(b) {
                         return fn(a, b);
-                    }, fn);
+                    };
                 }
                 return fn(a, b);
-            }, fn);
+            };
         }
         function curry3(fn) {
-            return setSource(function(a, b, c) {
+            return function(a, b, c) {
                 switch (arguments.length) {
                     case 0: throw NO_ARGS_EXCEPTION;
                     case 1: return curry2(function(b, c) {
                         return fn(a, b, c);
                     });
-                    case 2: return setSource(function(c) {
+                    case 2: return function(c) {
                         return fn(a, b, c);
-                    });
+                    };
                 }
                 return fn(a, b, c);
-            }, fn);
+            };
         }
 
         // (private) for dynamically dispatching Ramda method to non-Array objects

@@ -15,11 +15,6 @@ describe('curry', function() {
         assert.notEqual(curried, source);
     });
 
-    it('curry should set the toString value to the original', function() {
-        assert.equal(String(source), String(curried));
-        assert.equal(String(source), String(curried));
-    });
-
     it('curry should accept an arity', function() {
         var curried = curry(function(a, b, c, d) {
             return a * b * c;
@@ -38,13 +33,6 @@ describe('curry', function() {
 
 describe('internal curry', function() {
     var map = Lib.map, filter = Lib.filter;
-    it('curry should set the toString value to the original', function() {
-        assert.notEqual(String(map), String(filter));
-        assert.equal(String(map), String(map.source));
-    });
-    it('curried function != source', function() {
-        assert.notEqual(map, map.source);
-    });
 
     it('should throw an expcetion given no arguments', function() {
         assert.throws(map);
