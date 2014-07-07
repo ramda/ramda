@@ -1360,6 +1360,31 @@
         };
 
 
+        // internal helper for `where`
+        function satisfiesSpec(spec, parsedSpec, testObj) {
+            if (spec === testObj) { return true; }
+            if (testObj == null) { return false; }
+            parsedSpec.fn = parsedSpec.fn || [];
+            parsedSpec.obj = parsedSpec.obj || [];
+            var key, val, i = -1, fnLen = parsedSpec.fn.length, j = -1, objLen = parsedSpec.obj.length;
+            while (++i < fnLen) {
+                key = parsedSpec.fn[i];
+                val = spec[key];
+                if (!hasOwnProperty.call(testObj, key)) { 
+                    return false; 
+                }
+                if (!val(testObj[key], testObj)) { 
+                    return false; 
+                }                
+            }
+            while (++j < objLen) {
+                key = parsedSpec.obj[j];
+                if (spec[key] !== testObj[key]) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
         // `where` takes a spec object and a test object and returns true if the test satisfies the spec. 
         // Any property on the spec that is not a function is interpreted as an equality 
@@ -1383,31 +1408,19 @@
         //     var fxs = filter(where({x: 10}), xs); 
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
-        R.where = function(spec, test) {
-            function isFn(key) {return typeof spec[key] === 'function';}
-            var specKeys = keys(spec);
-            var fnKeys = filter(isFn, specKeys);
-            var objKeys = reject(isFn, specKeys);
-            var process = function(test) {
-                if (!test) { return false; }
-                var i = -1, key;
-                while (++i < fnKeys.length) {
-                    key = fnKeys[i];
-                    if (!spec[key](test[key], test)) {
-                        return false;
-                    }
-                }
-                i = -1;
-                while (++i < objKeys.length) {
-                    key = objKeys[i];
-                    // if (test[key] !== spec[key]) {  // TODO: discuss Scott's objections
-                    if (!test.hasOwnProperty(key) || test[key] !== spec[key]) {
-                        return false;
-                    }
-                }
-                return true;
-            };
-            return (arguments.length > 1) ? process(test) : process;
+        R.where = function where(spec, testObj) {
+            var parsedSpec = R.partition(function(key) { 
+                    return typeof spec[key] === "function" ? "fn" : "obj";
+                }, keys(spec)
+            );
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: 
+                    return function(testObj) {
+                        return satisfiesSpec(spec, parsedSpec, testObj);
+                    };
+            }
+            return satisfiesSpec(spec, parsedSpec, testObj);
         };
 
         // Miscellaneous Functions
