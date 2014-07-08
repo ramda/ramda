@@ -52,20 +52,36 @@
             return arr;
         };
 
+        // private concat function to merge 2 collections
+        var concat = function(set1, set2) {
+            set1 = set1 || [];
+            set2 = set2 || [];
+            var length1 = set1.length,
+                length2 = set2.length,
+                result = new Array(length1 + length2);
+
+            for (var i = 0; i < length1; i++) {
+                result[i] = set1[i];
+            }
+            for (i = 0; i < length2; i++) {
+                result[i + length1] = set2[i];
+            }
+            return result;
+        };
+
         // concat :: [a] -> [a] -> ... -> [a]
         // concat (s1, s2, ... , sn) = concat (s1) (s2, s3, ... , sn) is a variadic function that takes lists or strings
         // and returns a single list or string containing of the elements or characters of the arguments in order from
         // from left to right. concat is curried with respect to the first argument.
-        var concat = R.concat = function concat () {
+        R.concat = function () {
             if (arguments.length == 1) {
                 return partially(concat, arguments[0]);
             }
 
-            var empty = typeof arguments[0] == "string" ||  arguments[0] instanceof String ? '' : [];
-            var fn = function (acc, b) {
-                return b.concat != null ? acc.concat (b) : acc.concat (_slice(b));
-            };
-            return foldl (fn, empty, arguments);
+            var a = arguments[0];
+            return typeof a === "string" ||  a instanceof String          ?
+                String.prototype.concat.apply (a, _slice (arguments, 1))  :
+                Array. prototype.concat.apply (a, _slice (arguments, 1));
         };
 
         // (private)
