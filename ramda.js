@@ -433,12 +433,24 @@
             };
         };
 
-        //Partially applies a to f when f is a variadic function that cant be curried
-        function partially (f, a){
-            return function () {
-                var args = [a].concat (_slice (arguments));
-                return f.apply (this, args);
-            };
+        //partially (f, a, b, c...) is a function that return the function f partially applied with the
+        // parameters a, b, c...
+        //var partially = R.partially =
+        function partially () {
+            var f = arguments[0];
+            if (arguments.length == 1) {
+                return setSource(
+                    partially (partially, f),
+                    f
+                );
+            }
+            var params = _slice(arguments, 1);
+            return setSource (function () {
+                    var args = params.concat (_slice (arguments));
+                    return f.apply (this, args);
+                },
+                f
+            );
         }
 
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
