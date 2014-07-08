@@ -116,6 +116,22 @@ describe('nth', function () {
     });
 });
 
+describe('times', function() {
+    var times = Lib.times;
+
+    it('takes a map func', function() {
+        assert.deepEqual(times(Lib.identity, 5), [0, 1, 2, 3, 4]);
+        assert.deepEqual(times(function(x) {
+            return x * 2;
+        }, 5), [0, 2, 4, 6, 8]);
+    });
+
+    it('is curried', function() {
+        var mapid = times(Lib.identity);
+        assert.deepEqual(mapid(5), [0, 1, 2, 3, 4]);
+    });
+});
+
 describe('repeatN', function () {
     var repeatN = Lib.repeatN;
 
