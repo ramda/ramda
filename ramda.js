@@ -75,7 +75,7 @@
         // from left to right. concat is curried with respect to the first argument.
         R.concat = function () {
             if (arguments.length == 1) {
-                return partially(concat, arguments[0]);
+                return partially(R.concat, arguments[0]);
             }
 
             var a = arguments[0];
