@@ -69,6 +69,14 @@
             return result;
         };
 
+        concat1 = function concat1 () {
+            var empty = typeof arguments[0] == "string" ? '' : [];
+            var fn = function (acc, b) {
+                return acc.concat (b);
+            };
+            return foldl (fn, empty, arguments);
+        };
+
         // (private)
         var toString = Object.prototype.toString;
         var isArray = Array.isArray || function (val) {
