@@ -52,7 +52,10 @@
             return arr;
         };
 
-        // private concat function to merge 2 collections
+        // concat :: [a] -> [a] -> ... -> [a]
+        // concat (s1, s2, ... , sn) = concat (s1) (s2, s3, ... , sn) is a variadic function that takes lists or strings
+        // and returns a single list or string containing of the elements or characters of the arguments in order from
+        // from left to right. concat is curried with respect to the first argument.
         var concat = R.concat = function concat () {
             if (arguments.length == 1) {
                 return partially(concat, arguments[0]);
