@@ -79,9 +79,7 @@
             }
 
             var a = arguments[0];
-            return isString (a)                                             ?
-                String.prototype.concat.apply (a, _slice (arguments, 1))    :
-                Array. prototype.concat.apply (a, _slice (arguments, 1));
+            return (isString (a) ? String : Array).prototype.concat.apply (a, _slice (arguments, 1));
         };
 
         // (private)
