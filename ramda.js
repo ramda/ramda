@@ -79,8 +79,8 @@
             }
 
             var a = arguments[0];
-            return typeof a === "string" ||  toString.call(a) === "[object String]"     ?
-                String.prototype.concat.apply (a, _slice (arguments, 1))                :
+            return isString (a)                                             ?
+                String.prototype.concat.apply (a, _slice (arguments, 1))    :
                 Array. prototype.concat.apply (a, _slice (arguments, 1));
         };
 
@@ -88,6 +88,10 @@
         var toString = Object.prototype.toString;
         var isArray = Array.isArray || function (val) {
             return val && val.length >= 0 && toString.call(val) === "[object Array]";
+        };
+        
+        var isString = function (a) {
+            return typeof a === "string" ||  toString.call(a) === "[object String]";
         };
 
         // Returns a curried version of the supplied function.  For example:
