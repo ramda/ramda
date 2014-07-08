@@ -53,26 +53,14 @@
         };
 
         // private concat function to merge 2 collections
-        var concat = function(set1, set2) {
-            set1 = set1 || [];
-            set2 = set2 || [];
-            var length1 = set1.length,
-                length2 = set2.length,
-                result = new Array(length1 + length2);
-
-            for (var i = 0; i < length1; i++) {
-                result[i] = set1[i];
+        var concat = R.concat = function concat () {
+            if (arguments.length == 1) {
+                return partially(concat, arguments[0]);
             }
-            for (i = 0; i < length2; i++) {
-                result[i + length1] = set2[i];
-            }
-            return result;
-        };
 
-        concat1 = function concat1 () {
             var empty = typeof arguments[0] == "string" ? '' : [];
             var fn = function (acc, b) {
-                return acc.concat (b);
+                return b.concat != null ? acc.concat (b) : acc.concat (_slice(b));
             };
             return foldl (fn, empty, arguments);
         };
