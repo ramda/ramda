@@ -432,8 +432,7 @@
         //Partially applies a to f when f is a variadic function that cant be curried
         function partially (f, a){
             return function () {
-                var args = [a].concat (_slice (arguments));
-                return f.apply (this, args);
+                return f.apply (this, concat([a], arguments));
             };
         }
 
