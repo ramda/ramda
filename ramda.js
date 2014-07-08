@@ -79,7 +79,7 @@
             }
 
             var a = arguments[0];
-            return typeof a === "string" ||  a instanceof String          ?
+            return typeof a === "string" ||  toString.call(a) === "[object String]"          ?
                 String.prototype.concat.apply (a, _slice (arguments, 1))  :
                 Array. prototype.concat.apply (a, _slice (arguments, 1));
         };
