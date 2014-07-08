@@ -61,7 +61,7 @@
                 return partially(concat, arguments[0]);
             }
 
-            var empty = typeof arguments[0] == "string" ? '' : [];
+            var empty = typeof arguments[0] == "string" ||  arguments[0] instanceof String ? '' : [];
             var fn = function (acc, b) {
                 return b.concat != null ? acc.concat (b) : acc.concat (_slice(b));
             };
