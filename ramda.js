@@ -404,14 +404,18 @@
         };
         aliasFor("identity").is("I");
 
-        // Returns a fixed list (of size `n`) of identical values.
-        R.repeatN = curry2(function (value, n) {
+        R.times = curry2(function (fn, n) {
             var arr = new Array(n);
             var i = -1;
             while (++i < n) {
-                arr[i] = value;
+                arr[i] = fn(i);
             }
             return arr;
+        });
+
+        // Returns a fixed list (of size `n`) of identical values.
+        R.repeatN = curry2(function (value, n) {
+            return R.times(R.always(value), n);
         });
 
 
@@ -432,8 +436,7 @@
         //Partially applies a to f when f is a variadic function that cant be curried
         function partially (f, a){
             return function () {
-                var args = [a].concat (_slice (arguments));
-                return f.apply (this, args);
+                return f.apply (this, concat([a], arguments));
             };
         }
 
