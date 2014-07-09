@@ -50,10 +50,12 @@ module.exports = function(grunt) {
     },
 
     benchmark: {
-      src: ['bench/*.bench.js'],
-      dest: 'bench/report/bench_<%= grunt.template.date("isoDateTime") %>.json',
-      options: {
-        displayResults: true
+      all: {
+        src: ['bench/*.bench.js'],
+        dest: 'bench/report/bench.json',
+        options: {
+          displayResults: true
+        }
       }
     }
 
