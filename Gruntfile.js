@@ -47,6 +47,14 @@ module.exports = function(grunt) {
           output: 'docs/'
         }
       }
+    },
+
+    benchmark: {
+      src: ['bench/*.bench.js'],
+      dest: 'bench/report/bench_<%= grunt.template.date("isoDateTime") %>.json',
+      options: {
+        displayResults: true
+      }
     }
 
   });
@@ -57,6 +65,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
   grunt.loadNpmTasks('grunt-push-release');
+  grunt.loadNpmTasks('grunt-benchmark');
+
+  grunt.registerTask('uploadBenchmarks', 'run benchmarks', function() {
+    // after bench:
+    // upload files in report dir to orchestrate
+
+  });
 
   grunt.registerTask('test', ['jshint', 'mochaTest:test']);
   grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
