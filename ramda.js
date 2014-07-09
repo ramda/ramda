@@ -69,10 +69,27 @@
             return result;
         };
 
+        // concat :: [a] -> [a] -> ... -> [a]
+        // concat (s1, s2, ... , sn) = concat (s1) (s2, s3, ... , sn) is a variadic function that takes lists or strings
+        // and returns a single list or string containing of the elements or characters of the arguments in order from
+        // from left to right. concat is curried with respect to the first argument.
+        R.concat = function () {
+            if (arguments.length == 1) {
+                return partially(R.concat, arguments[0]);
+            }
+
+            var a = arguments[0];
+            return (isString (a) ? String : Array).prototype.concat.apply (a, _slice (arguments, 1));
+        };
+
         // (private)
         var toString = Object.prototype.toString;
         var isArray = Array.isArray || function (val) {
             return val && val.length >= 0 && toString.call(val) === "[object Array]";
+        };
+        
+        var isString = function (a) {
+            return typeof a === "string" ||  toString.call(a) === "[object String]";
         };
 
         // Returns a curried version of the supplied function.  For example:
@@ -396,7 +413,6 @@
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
         var merge = R.merge = curry2(concat);
-        aliasFor("merge").is("concat");
 
         // A surprisingly useful function that does nothing but return the parameter supplied to it.
         var identity = R.identity = function (x) {
