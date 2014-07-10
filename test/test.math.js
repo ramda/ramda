@@ -12,6 +12,10 @@ describe('add', function() {
         var incr = add(1);
         assert.equal(43, incr(42));
     });
+
+    it("should be aliased as '+'", function() {
+        assert.equal(Lib["+"], Lib.add);
+    });
 });
 
 describe('multiply', function() {
@@ -25,6 +29,10 @@ describe('multiply', function() {
         var dbl = multiply(2);
         assert.equal(30, dbl(15));
     });
+
+    it("should be aliased as '*'", function() {
+        assert.equal(Lib["*"], Lib.multiply);
+    });
 });
 
 describe('subtract', function() {
@@ -37,6 +45,10 @@ describe('subtract', function() {
     it('should be automatically curried', function() {
         var ninesCompl = subtract(9);
         assert.equal(3, ninesCompl(6));
+    });
+
+    it("should be aliased as '-'", function() {
+        assert.equal(Lib["-"], Lib.subtract);
     });
 });
 
@@ -63,6 +75,10 @@ describe('divide', function() {
     it('should be automatically curried', function() {
         var divideInto120 = divide(120);
         assert.equal(3, divideInto120(40));
+    });
+
+    it("should be aliased as '/'", function() {
+        assert.equal(Lib["/"], Lib.divide);
     });
 });
 
@@ -98,6 +114,10 @@ describe('modulo', function() {
   it('preserves javascript-style modulo evaluation for negative numbers', function() {
     assert.equal(modulo(-5, 4), -1);
   });
+
+  it("should be aliased as '%'", function() {
+        assert.equal(Lib["%"], Lib.modulo);
+    });
 });
 
 describe('moduloBy', function() {
@@ -159,6 +179,10 @@ describe('lt', function() {
         assert(!atLeast20(20));
         assert(atLeast20(25));
     });
+
+    it("should be aliased as '<'", function() {
+        assert.equal(Lib["<"], Lib.lt);
+    });
 });
 
 describe('lte', function() {
@@ -177,6 +201,10 @@ describe('lte', function() {
         assert(!greaterThan20(10));
         assert(greaterThan20(20));
         assert(greaterThan20(25));
+    });
+
+    it("should be aliased as '<='", function() {
+        assert.equal(Lib["<="], Lib.lte);
     });
 });
 
@@ -197,6 +225,10 @@ describe('gt', function() {
         assert(!lessThan20(20));
         assert(!lessThan20(25));
     });
+
+    it("should be aliased as '>'", function() {
+        assert.equal(Lib[">"], Lib.gt);
+    });
 });
 
 describe('gte', function() {
@@ -215,6 +247,10 @@ describe('gte', function() {
         assert(upTo20(10));
         assert(upTo20(20));
         assert(!upTo20(25));
+    });
+
+    it("should be aliased as '>='", function() {
+        assert.equal(Lib[">="], Lib.gte);
     });
 });
 
