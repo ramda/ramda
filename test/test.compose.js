@@ -11,6 +11,32 @@ describe('compose', function() {
     it('executes its passed in functions in order from right to left', function() {
         assert.equal(compose(a, b, c, d)(""), "DCBA");
     });
+
+    it('first function is passed multiple args', function() {
+        function e(a, b, c) {
+            return c + "E";
+        }
+        assert.equal(compose(a, b, c, e)(1, 2, 3), "3ECBA");
+    });
+
+    it('passes context to functions', function() {
+        function x(x) {
+            return this.x * x;
+        }
+        function y(x) {
+            return this.y * x;
+        }
+        function z(x) {
+            return this.z * x;
+        }
+        var context = {
+            a: compose(x, y, z),
+            x: 4,
+            y: 2,
+            z: 1
+        };
+        assert.equal(context.a(5), 40);
+    });
 });
 
 describe('pipe', function() {
@@ -19,8 +45,35 @@ describe('pipe', function() {
     function b(x) {return x + "B";}
     function c(x) {return x + "C";}
     function d(x) {return x + "D";}
+    
     it('executes its passed in functions in order from left to right', function() {
         assert.equal(pipe(a, b, c, d)(""), "ABCD");
+    });
+
+    it('first function is passed multiple args', function() {
+        function e(a, b, c) {
+            return c + "E";
+        }
+        assert.equal(pipe(e, a, b, c)(1, 2, 3), "3EABC");
+    });
+
+    it('passes context to functions', function() {
+        function x(x) {
+            return this.x * x;
+        }
+        function y(x) {
+            return this.y * x;
+        }
+        function z(x) {
+            return this.z * x;
+        }
+        var context = {
+            a: pipe(x, y, z),
+            x: 4,
+            y: 2,
+            z: 1
+        };
+        assert.equal(context.a(5), 40);
     });
 });
 

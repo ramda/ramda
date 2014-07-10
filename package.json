@@ -34,7 +34,7 @@
     "grunt-contrib-jshint": "~0.7.0",
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-mocha-test": "~0.5.0",
-    "grunt-benchmark": "latest",
+    "grunt-benchmark": "https://github.com/shama/grunt-benchmark/archive/a90d51b0ad0afd0766b4c47621344a3f64ec3384.tar.gz",
     "benchmark": "~1.0.0",
     "lodash": "latest",
     "grunt-contrib-copy": "^0.5.0",
