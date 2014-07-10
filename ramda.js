@@ -424,19 +424,19 @@
         //
         // These functions make new functions out of old ones.
 
+        //Partially applies a to f when f is a variadic function that cant be curried
+        function partially(f, a){
+            return function() {
+                return f.apply(this, concat([a], arguments));
+            };
+        }
+
         // --------
         //Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
         //the more general compose function, which takes any number of functions.
-        var internalCompose = function(f, g) {
-            return function () {
-                return f(g.apply(this, arguments));
-            };
-        };
-
-        //Partially applies a to f when f is a variadic function that cant be curried
-        function partially (f, a){
-            return function () {
-                return f.apply (this, concat([a], arguments));
+        function internalCompose(f, g) {
+            return function() {
+                return f.call(this, g.apply(this, arguments));
             };
         }
 
@@ -444,20 +444,19 @@
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
         var compose = R.compose = function() {  // TODO: type check of arguments?
-            var f = arguments[0];
-            if (arguments.length == 1) {
-                return partially (compose, f);
+            var length = arguments.length, func = arguments[--length];
+            if (!length) {
+                return partially(compose, func);
             }
-            var i = 0;
-            while (++i < arguments.length) {
-                f = internalCompose(f, arguments[i]);
+            while (length--) {
+                func = internalCompose(arguments[length], func);
             }
-            return f;
+            return func;
         };
 
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.
-        R.pipe = function() { // TODO: type check of arguments?
+        R.pipe = function() {  // TODO: type check of arguments?
             if (arguments.length == 1) {
                 return partially (R.pipe, arguments[0]);
             }
