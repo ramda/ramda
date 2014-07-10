@@ -36,6 +36,9 @@
     "grunt-mocha-test": "~0.5.0",
     "grunt-benchmark": "latest",
     "benchmark": "~1.0.0",
-    "lodash": "latest"
+    "lodash": "latest",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-push-release": "^0.1.1"
   }
 }

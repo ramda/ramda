@@ -57,12 +57,39 @@ module.exports = function(grunt) {
           displayResults: true
         }
       }
+    },
+
+    clean: {
+      dist: {
+        src: ['dist']
+      }
+    },
+
+    copy: {
+      dist: {
+        files: [
+            {expand: true, src: ['docs/*'], dest: 'dist/docs'},
+            {expand: true, src: ['ramda.js', 'package.json', 'bower.json', 'LICENSE.txt', 'README.md'], dest: 'dist'}
+        ]
+      }
+    },
+
+    push: {
+      options: {
+        files: ['package.json', 'bower.json'],
+        add: false,
+        commit: false,
+        npm: false,
+        npmTag: 'Release v%VERSION%'
+      }
     }
 
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
@@ -75,8 +102,12 @@ module.exports = function(grunt) {
 
   });
 
+  grunt.registerTask('dist', ['uglify', 'copy:dist']);
+
   grunt.registerTask('test', ['jshint', 'mochaTest:test']);
   grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
+  grunt.registerTask('version', ['clean:dist', 'jshint', 'docco:doc', 'uglify', 'copy:dist']);
+  grunt.registerTask('publish', ['version', 'push']);
 };
 
 
