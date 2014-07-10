@@ -882,17 +882,15 @@ it will return object.tail().</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
-              <hr>
-<p>Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
-the more general compose function, which takes any number of functions.</p>
+              <p>Partially applies a to f when f is a variadic function that cant be curried</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> internalCompose = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(f, g)</span> {</span>
-            <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
-                <span class="hljs-keyword">return</span> f(g.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>));
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">partially</span><span class="hljs-params">(f, a)</span>{</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+                <span class="hljs-keyword">return</span> f.apply(<span class="hljs-keyword">this</span>, concat([a], <span class="hljs-built_in">arguments</span>));
             };
-        };</pre></div></div>
+        }</pre></div></div>
             
         </li>
         
@@ -903,13 +901,15 @@ the more general compose function, which takes any number of functions.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
-              <p>Partially applies a to f when f is a variadic function that cant be curried</p>
+              <hr>
+<p>Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
+the more general compose function, which takes any number of functions.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">partially</span> <span class="hljs-params">(f, a)</span>{</span>
-            <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {</span>
-                <span class="hljs-keyword">return</span> f.apply (<span class="hljs-keyword">this</span>, concat([a], <span class="hljs-built_in">arguments</span>));
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">internalCompose</span><span class="hljs-params">(f, g)</span> {</span>
+            <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+                <span class="hljs-keyword">return</span> f.call(<span class="hljs-keyword">this</span>, g.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>));
             };
         }</pre></div></div>
             
@@ -929,15 +929,14 @@ Note that if <code>var h = compose(f, g)</code>, <code>h(x)</code> calls <code>g
             </div>
             
             <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> compose = R.compose = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>  <span class="hljs-comment">// TODO: type check of arguments?</span>
-            <span class="hljs-keyword">var</span> f = <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>];
-            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">arguments</span>.length == <span class="hljs-number">1</span>) {
-                <span class="hljs-keyword">return</span> partially (compose, f);
+            <span class="hljs-keyword">var</span> length = <span class="hljs-built_in">arguments</span>.length, func = <span class="hljs-built_in">arguments</span>[--length];
+            <span class="hljs-keyword">if</span> (!length) {
+                <span class="hljs-keyword">return</span> partially(compose, func);
             }
-            <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>;
-            <span class="hljs-keyword">while</span> (++i &lt; <span class="hljs-built_in">arguments</span>.length) {
-                f = internalCompose(f, <span class="hljs-built_in">arguments</span>[i]);
+            <span class="hljs-keyword">while</span> (length--) {
+                func = internalCompose(<span class="hljs-built_in">arguments</span>[length], func);
             }
-            <span class="hljs-keyword">return</span> f;
+            <span class="hljs-keyword">return</span> func;
         };</pre></div></div>
             
         </li>
@@ -954,7 +953,7 @@ Note that if <code>var h = compose(f, g)</code>, <code>h(x)</code> calls <code>g
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        R.pipe = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span> <span class="hljs-comment">// TODO: type check of arguments?</span>
+            <div class="content"><div class='highlight'><pre>        R.pipe = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>  <span class="hljs-comment">// TODO: type check of arguments?</span>
             <span class="hljs-keyword">if</span> (<span class="hljs-built_in">arguments</span>.length == <span class="hljs-number">1</span>) {
                 <span class="hljs-keyword">return</span> partially (R.pipe, <span class="hljs-built_in">arguments</span>[<span class="hljs-number">0</span>]);
             }

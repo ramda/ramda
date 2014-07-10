@@ -79,8 +79,8 @@ module.exports = function(grunt) {
         files: ['package.json', 'bower.json'],
         add: false,
         commit: false,
-        npm: false,
-        npmTag: 'Release v%VERSION%'
+        createTag: false,
+        push: false
       }
     }
 
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'mochaTest:test']);
   grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
   grunt.registerTask('version', ['clean:dist', 'jshint', 'docco:doc', 'uglify', 'copy:dist']);
-  grunt.registerTask('publish', ['version', 'push']);
+  grunt.registerTask('publish', ['push', 'version']);
 };
 
 
