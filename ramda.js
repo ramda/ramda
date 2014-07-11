@@ -812,16 +812,24 @@
 
         R.reject = curry2(reject);
 
-        // Like `reject`, but passes additional parameters to the predicate function.  Parameters are
-        // `list item`, `index of item in list`, `entire list`.
-        //
-        // Example:
-        //
-        //     var lastTwo = function(val, idx, list) {
-        //         return list.length - idx <= 2;
-        //     };
-        //     reject.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]);
-        //     //=> [8, 6, 7, 5, 3]
+        /**
+         * Like `reject`, but passes additional parameters to the predicate function. The predicate
+         * function is passed three arguments: *(value, index, list)*.
+         *
+         * @static
+         * @memberOf R
+         * @category Collection
+         * @param {Function} fn The function called per iteration.
+         * @param {Array} list The collection to iterate over.
+         * @return {Array} Returns the new filtered array.
+         * @example
+         *
+         * var lastTwo = function(val, idx, list) {
+         *     return list.length - idx <= 2;
+         * };
+         *
+         * reject.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
+         */
         R.reject.idx = curry2(function(fn, list) {
             return filterIdx(not(fn), list);
         });
