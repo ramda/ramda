@@ -789,20 +789,11 @@
             return result;
         };
 
+        R.filter.idx = curry2(filterIdx);
+
         var reject = function(fn, list) {
             return filter(not(fn), list);
         };
-
-        // Like `filter`, but passes additional parameters to the predicate function.  Parameters are
-        // `list item`, `index of item in list`, `entire list`.
-        //
-        // Example:
-        //
-        //     var lastTwo = function(val, idx, list) {
-        //         return list.length - idx <= 2;
-        //     };
-        //     filter.idx(lastTwo, [8, 6, 7, 5, 3, 0 ,9]); //=> [0, 9]
-        R.filter.idx = curry2(filterIdx);
 
         // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
         R.reject = curry2(reject);
