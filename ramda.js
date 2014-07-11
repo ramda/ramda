@@ -758,8 +758,6 @@
         R.filter = curry2(filter);
 
         /**
-         * filterIdx
-         *
          * Like `filter`, but passes additional parameters to the predicate function. The predicate
          * function is passed three arguments: *(value, index, list)*.
          *
