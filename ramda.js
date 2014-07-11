@@ -756,7 +756,7 @@
          *
          * @static
          * @memberOf R
-         * @category Collection
+         * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
          * @return {Array} Returns the new filtered array.
@@ -788,7 +788,7 @@
          *
          * @static
          * @memberOf R
-         * @category Collection
+         * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
          * @return {Array} Returns the new filtered array.
@@ -820,7 +820,7 @@
          *
          * @static
          * @memberOf R
-         * @category Collection
+         * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
          * @return {Array} Returns the new filtered array.
@@ -843,7 +843,7 @@
          *
          * @static
          * @memberOf R
-         * @category Collection
+         * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
          * @return {Array} Returns the new filtered array.
@@ -867,7 +867,7 @@
          *
          * @static
          * @memberOf R
-         * @category Collection
+         * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
          * @return {Array} Returns the new array.
