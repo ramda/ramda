@@ -755,6 +755,8 @@
             return result;
         };
 
+        R.filter = curry2(filter);
+
         /**
          * filterIdx
          *
@@ -790,11 +792,6 @@
         var reject = function(fn, list) {
             return filter(not(fn), list);
         };
-
-        // Returns a new list containing only those items that match a given predicate function.
-        // n.b.: `ramda.filter` differs from `Array.prototype.filter` in that it does not distinguish "sparse
-        // arrays".
-        R.filter = curry2(filter);
 
         // Like `filter`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
