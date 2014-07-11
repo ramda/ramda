@@ -791,7 +791,7 @@
 
         /**
          * Similar to `filter`, except that it keeps only values for which the given predicate
-         * function returns falsy.
+         * function returns falsy. The predicate function is passed one argument: *(value)*.
          *
          * @static
          * @memberOf R
