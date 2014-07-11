@@ -890,12 +890,15 @@
 
 
         /**
-         * Returns a new list containing the first `n` elements of the given list.
-         * If `n > * list.length`, returns a list of `list.length` elements.
+         * Returns a new list containing the first `n` elements of the given list.  If
+         * `n > * list.length`, returns a list of `list.length` elements.
          *
          * @static
          * @memberOf R
-         * @category Collection
+         * @category List
+         * @param {Number} n The number of elements to return.
+         * @param {Array} list The array to query.
+         * @return {Array} Returns a new array containing the first elements of `list`.
          */
         R.take = curry2(function(n, list) {
             if (hasMethod('take', list)) {
