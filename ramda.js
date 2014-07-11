@@ -936,9 +936,15 @@
         });
 
         /**
-         * XXX
+         * Returns a new list containing all but the first `n` elements of the given `list`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Number} n The number of elements of `list` to skip.
+         * @param {Array} list The array to consider.
+         * @return {Array} Returns the last `n` elements of `list`.
          */
-        // Returns a new list containing all **but** the first `n` elements of the given list.
         R.skip = curry2(function(n, list) {
             if (hasMethod('skip', list)) {
                 return list.skip(n);
