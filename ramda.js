@@ -755,6 +755,25 @@
             return result;
         };
 
+        /**
+         * filterIdx
+         *
+         * Like `filter`, but passes additional parameters to the predicate function. The predicate
+         * function is passed three arguments: *(value, index, list)*.
+         *
+         * @static
+         * @memberOf R
+         * @category Collection
+         * @param {Function} fn The function called per iteration.
+         * @param {Array} list The collection to iterate over.
+         * @return {Array} Returns the new filtered array.
+         * @example
+         *
+         * var lastTwo = function(val, idx, list) {
+         *     return list.length - idx <= 2;
+         * };
+         * ramda.filter.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [0, 9]
+         */
         var filterIdx = function(fn, list) {
             if (hasMethod('filter', list)) {
                 return list.filter(fn);
