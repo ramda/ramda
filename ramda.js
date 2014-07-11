@@ -572,6 +572,9 @@
 
         // --------
 
+        /**
+         * XXX
+         */
         // Returns a single item, by successively calling the function with the current element and the the next
         // element of the list, passing the result to the next call.  We start with the `acc` parameter to get
         // things going.  The function supplied should accept this running value and the latest element of the list,
@@ -590,6 +593,9 @@
         });
         aliasFor("foldl").is("reduce");
 
+        /**
+         * XXX
+         */
         // Like `foldl`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
         //
@@ -613,6 +619,9 @@
             return acc;
         });
 
+        /**
+         * XXX
+         */
         // Returns a single item, by successively calling the function with the current element and the the next
         // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
         // n.b.: `ramda.foldr` (aka `ramda.reduceRight`) differs from `Array.prototype.reduceRight` in that it
@@ -629,6 +638,9 @@
         });
         aliasFor("foldr").is("reduceRight");
 
+        /**
+         * XXX
+         */
         R.foldr.idx = curry3(function (fn, acc, list) {
             if (hasMethod('foldr', list)) {
                 return list.foldr(fn, acc);
@@ -640,9 +652,11 @@
             return acc;
         });
 
+        /**
+         * XXX
+         */
         // Builds a list from a seed value, using a function that returns falsy to quit and a pair otherwise,
         // consisting of the current value and the seed to be used for the next value.
-
         R.unfoldr = curry2(function (fn, seed) {
             var pair = fn(seed);
             var result = [];
@@ -653,7 +667,9 @@
             return result;
         });
 
-
+        /**
+         * XXX
+         */
         // Returns a new list constructed by applying the function to every element of the list supplied.
         // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse
         // arrays" (cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description).
@@ -669,6 +685,9 @@
         }
         R.map = curry2(map);
 
+        /**
+         * XXX
+         */
         // Like `map`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
         //
@@ -691,7 +710,9 @@
             return result;
         });
 
-
+        /**
+         * XXX
+         */
         // Adds a `map`-like function for objects.
         //
         // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
@@ -702,6 +723,9 @@
             }, {}, keys(obj));
         });
 
+        /**
+         * XXX
+         */
         // Like `mapObj`, but passes additional parameters to the predicate function.  Parameters are
         // `object key's value`, `key name`, `entire object`.
         R.mapObj.idx = function (fn, obj) {
@@ -714,8 +738,9 @@
             return arguments.length < 2 ? _mapObjIdx : _mapObjIdx(obj);
         };
 
-
-
+        /**
+         * XXX
+         */
         // Reports the number of elements in the list
         R.size = function (arr) {
             return arr.length;
@@ -865,10 +890,13 @@
 
 
         /**
-         * XXX
+         * Returns a new list containing the first `n` elements of the given list.
+         * If `n > * list.length`, returns a list of `list.length` elements.
+         *
+         * @static
+         * @memberOf R
+         * @category Collection
          */
-        // Returns a new list containing the first `n` elements of the given list.
-        // if `n > list.length`, take will return a list if `list.length` elements.
         R.take = curry2(function(n, list) {
             if (hasMethod('take', list)) {
                 return list.take(n);
