@@ -16,7 +16,7 @@
 //  [umd]: https://github.com/umdjs/umd/blob/master/returnExports.js
 
 (function (root, factory) {if (typeof exports === 'object') {module.exports = factory(root);} else if (typeof define === 'function' && define.amd) {define(factory);} else {root.ramda = factory(root);}}(this, function (global) {
-    
+
     "use strict";
     return  (function() {
         // This object is what is actually returned, with all the exposed functions attached as properties.
@@ -372,7 +372,7 @@
         };
 
         // Returns the rest of the list after the first element.
-        // If the passed-in list is not annary, but is an object with a `tail` method, 
+        // If the passed-in list is not annary, but is an object with a `tail` method,
         // it will return object.tail().
         var tail = R.tail = function (arr) {
             arr = arr || [];
@@ -466,8 +466,8 @@
 
         // Returns a new function much like the supplied one except that the first two arguments are inverted.
         var flip = R.flip = function (fn) {
-            return function (a, b) {  
-                return arguments.length < 2 ? 
+            return function (a, b) {
+                return arguments.length < 2 ?
                   function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); } :
                   fn.apply(this, [b, a].concat(_slice(arguments, 2)));
             };
@@ -576,7 +576,7 @@
         // element of the list, passing the result to the next call.  We start with the `acc` parameter to get
         // things going.  The function supplied should accept this running value and the latest element of the list,
         // and return an updated value.
-        // n.b.: `ramda.foldl` (aka `ramda.reduce`) differs from `Array.prototype.reduce` in that it 
+        // n.b.: `ramda.foldl` (aka `ramda.reduce`) differs from `Array.prototype.reduce` in that it
         // does not distinguish "sparse arrays".
         var foldl = R.foldl =  curry3(function(fn, acc, list) {
             if (hasMethod('foldl', list)) {
@@ -589,14 +589,14 @@
             return acc;
         });
         aliasFor("foldl").is("reduce");
-        
+
         // Like `foldl`, but passes additional parameters to the predicate function.  Parameters are
         // `list item`, `index of item in list`, `entire list`.
         //
         // Example:
         //
         //     var objectify = function(acc, elem, idx, ls) {
-        //         acc[elem] = idx; 
+        //         acc[elem] = idx;
         //         return acc;
         //     }
         //
@@ -615,7 +615,7 @@
 
         // Returns a single item, by successively calling the function with the current element and the the next
         // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
-        // n.b.: `ramda.foldr` (aka `ramda.reduceRight`) differs from `Array.prototype.reduceRight` in that it 
+        // n.b.: `ramda.foldr` (aka `ramda.reduceRight`) differs from `Array.prototype.reduceRight` in that it
         // does not distinguish "sparse arrays".
         var foldr = R.foldr = curry3(function(fn, acc, list) {
             if (hasMethod('foldr', list)) {
@@ -655,7 +655,7 @@
 
 
         // Returns a new list constructed by applying the function to every element of the list supplied.
-        // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse 
+        // n.b.: `ramda.map` differs from `Array.prototype.map` in that it does not distinguish "sparse
         // arrays" (cf. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description).
         function map(fn, list) {
             if (hasMethod('map', list)) {
@@ -752,7 +752,7 @@
         };
 
         // Returns a new list containing only those items that match a given predicate function.
-        // n.b.: `ramda.filter` differs from `Array.prototype.filter` in that it does not distinguish "sparse 
+        // n.b.: `ramda.filter` differs from `Array.prototype.filter` in that it does not distinguish "sparse
         // arrays".
         R.filter = curry2(filter);
 
@@ -1091,7 +1091,7 @@
         };
 
         // // Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
-        // For example, 
+        // For example,
         //
         //     range(1, 5) // => [1, 2, 3, 4]
         //     range(50, 53) // => [50, 51, 52]
@@ -1266,7 +1266,7 @@
             return ks;
         };
 
-        // Returns a list containing the names of all the 
+        // Returns a list containing the names of all the
         // properties of the supplied object, including prototype properties.
         R.keysIn = function (obj) {
             var prop, ks = [];
@@ -1287,7 +1287,7 @@
             return vals;
         };
 
-        // Returns a list of all the properties, including prototype properties, 
+        // Returns a list of all the properties, including prototype properties,
         // of the supplied object.
         R.valuesIn = function (obj) {
             var prop, vs = [];
@@ -1356,7 +1356,7 @@
                 };
                 return arguments.length < 2 ? f2 : f2(obj2);
             };
-            return arguments.length < 2 ? f1 : 
+            return arguments.length < 2 ? f1 :
                 arguments.length < 3 ? f1(obj1) :
                     f1(obj1, obj2);
         };
@@ -1372,12 +1372,12 @@
             while (++i < fnLen) {
                 key = parsedSpec.fn[i];
                 val = spec[key];
-                if (!hasOwnProperty.call(testObj, key)) { 
-                    return false; 
+                if (!hasOwnProperty.call(testObj, key)) {
+                    return false;
                 }
-                if (!val(testObj[key], testObj)) { 
-                    return false; 
-                }                
+                if (!val(testObj[key], testObj)) {
+                    return false;
+                }
             }
             while (++j < objLen) {
                 key = parsedSpec.obj[j];
@@ -1388,15 +1388,15 @@
             return true;
         }
 
-        // `where` takes a spec object and a test object and returns true if the test satisfies the spec. 
-        // Any property on the spec that is not a function is interpreted as an equality 
+        // `where` takes a spec object and a test object and returns true if the test satisfies the spec.
+        // Any property on the spec that is not a function is interpreted as an equality
         // relation. For example:
         //
         //     var spec = {x: 2};
         //     where(spec, {w: 10, x: 2, y: 300}); // => true, x === 2
         //     where(spec, {x: 1, y: 'moo', z: true}); // => false, x !== 2
         //
-        // If the spec has a property mapped to a function, then `where` evaluates the function, passing in 
+        // If the spec has a property mapped to a function, then `where` evaluates the function, passing in
         // the test object's value for the property in question, as well as the whole test object. For example:
         //
         //     var spec = {x: function(val, obj) { return  val + obj.y > 10; };
@@ -1405,19 +1405,19 @@
         //
         // `where` is well suited to declarativley expressing constraints for other functions, e.g., `filter`:
         //
-        //     var xs = [{x: 2, y: 1}, {x: 10, y: 2}, 
+        //     var xs = [{x: 2, y: 1}, {x: 10, y: 2},
         //               {x: 8, y: 3}, {x: 10, y: 4}];
-        //     var fxs = filter(where({x: 10}), xs); 
+        //     var fxs = filter(where({x: 10}), xs);
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
         R.where = function where(spec, testObj) {
-            var parsedSpec = R.partition(function(key) { 
+            var parsedSpec = R.partition(function(key) {
                     return typeof spec[key] === "function" ? "fn" : "obj";
                 }, keys(spec)
             );
             switch (arguments.length) {
                 case 0: throw NO_ARGS_EXCEPTION;
-                case 1: 
+                case 1:
                     return function(testObj) {
                         return satisfiesSpec(spec, parsedSpec, testObj);
                     };
@@ -1432,7 +1432,7 @@
 
         // --------
 
-        // Expose the functions from ramda as properties on another object.  If the passed-in object is the 
+        // Expose the functions from ramda as properties on another object.  If the passed-in object is the
         // global object, or the passed-in object is "falsy", then the ramda functions become global functions.
         R.installTo = function(obj) {
             each(function(key) {
@@ -1462,7 +1462,7 @@
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
-        R.and = function(f, g) { 
+        R.and = function(f, g) {
            function _and(g) {
                return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
            }
@@ -1561,7 +1561,7 @@
         R.divideBy = flip(divide);
 
         // Divides the second parameter by the first and returns the remainder.
-        var modulo = R.modulo = function(a, b) { 
+        var modulo = R.modulo = function(a, b) {
             return arguments.length < 2 ? function(b) { return a % b; } :  a % b;
         };
 
