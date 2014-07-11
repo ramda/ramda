@@ -791,11 +791,27 @@
 
         R.filter.idx = curry2(filterIdx);
 
+        /**
+         * Similar to `filter`, except that it keeps only values for which the given predicate
+         * function returns falsy.
+         *
+         * @static
+         * @memberOf R
+         * @category Collection
+         * @param {Function} fn The function called per iteration.
+         * @param {Array} list The collection to iterate over.
+         * @return {Array} Returns the new filtered array.
+         * @example
+         *
+         * var isEven = function(n) {
+         *     return n % 2 === 0;
+         * };
+         * var odds = ramda.reject(isOdd, [1, 2, 3, 4]); // => [2, 4]
+         */
         var reject = function(fn, list) {
             return filter(not(fn), list);
         };
 
-        // Similar to `filter`, except that it keeps only those that **don't** match the given predicate functions.
         R.reject = curry2(reject);
 
         // Like `reject`, but passes additional parameters to the predicate function.  Parameters are
