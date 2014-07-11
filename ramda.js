@@ -870,11 +870,11 @@
          * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
-         * @return {Array} Returns the new array.
+         * @return {Array} Returns a new array.
          * @example
          *
          * var isNotFour = function(x) {
-         *   return !x === 4;
+         *   return !(x === 4);
          * };
          *
          * takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
