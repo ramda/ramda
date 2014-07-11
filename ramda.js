@@ -739,9 +739,18 @@
         };
 
         /**
-         * XXX
+         * Returns the number of elements in the array by returning `arr.length`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} arr The array to inspect.
+         * @return {Number} Returns the size of the array.
+         * @example
+         *
+         * ramda.size([]); //=> 0
+         * ramda.size([1, 2, 3]); //=> 3
          */
-        // Reports the number of elements in the list
         R.size = function (arr) {
             return arr.length;
         };
