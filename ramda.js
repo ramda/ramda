@@ -863,6 +863,10 @@
             return _slice(list, 0, idx);
         });
 
+
+        /**
+         * XXX
+         */
         // Returns a new list containing the first `n` elements of the given list.
         // if `n > list.length`, take will return a list if `list.length` elements.
         R.take = curry2(function(n, list) {
@@ -874,6 +878,9 @@
             return ls;
         });
 
+        /**
+         * XXX
+         */
         // Returns a new list containing the elements of the given list starting with the first one where the function
         // supplied returns `false` when passed the element.
         R.skipUntil = curry2(function (fn, list) {
@@ -882,6 +889,9 @@
             return _slice(list, idx);
         });
 
+        /**
+         * XXX
+         */
         // Returns a new list containing all **but** the first `n` elements of the given list.
         R.skip = curry2(function(n, list) {
             if (hasMethod('skip', list)) {
@@ -891,6 +901,9 @@
         });
         aliasFor('skip').is('drop');
 
+        /**
+         * XXX
+         */
         // Returns the first element of the list which matches the predicate, or `undefined` if no element matches.
         R.find = function (fn, list) {
             function _find(list) {
@@ -906,6 +919,9 @@
             return arguments.length < 2 ? _find : _find(list);
         };
 
+        /**
+         * XXX
+         */
         // Returns the index of first element of the list which matches the predicate, or `undefined` if no element matches.
         R.findIndex = curry2(function(fn, list) {
             var idx = -1;
@@ -918,6 +934,9 @@
             return -1;
         });
 
+        /**
+         * XXX
+         */
         // Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
         R.findLast = curry2(function(fn, list) {
             var idx = list.length;
@@ -929,6 +948,9 @@
             return undef;
         });
 
+        /**
+         * XXX
+         */
         // Returns the index of last element of the list which matches the predicate, or `undefined` if no element matches.
         R.findLastIndex = curry2(function(fn, list) {
             var idx = list.length;
@@ -940,6 +962,9 @@
             return -1;
         });
 
+        /**
+         * XXX
+         */
         // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
         var all = function(fn, list) {
             var i = -1;
@@ -954,6 +979,9 @@
         aliasFor("all").is("every");
 
 
+        /**
+         * XXX
+         */
         // Returns `true` if any elements of the list match the predicate, `false` if none do.
         var any = function (fn, list) {
             var i = -1;
@@ -967,6 +995,9 @@
         R.any = curry2(any);
         aliasFor("any").is("some");
 
+        /**
+         * XXX
+         */
         // Internal implementations of indexOf and lastIndexOf
 
         // Return the position of the first occurrence of an item in an array,
@@ -982,6 +1013,9 @@
             return -1;
         };
 
+        /**
+         * XXX
+         */
         var lastIndexOf = function(array, item, from) {
             var idx = array.length;
             if (typeof from == 'number') {
@@ -993,24 +1027,39 @@
             return -1;
         };
 
+        /**
+         * XXX
+         */
         // Returns the first zero-indexed position of an object in a flat list
         R.indexOf = curry2(function _indexOf(target, list) {
             return indexOf(list, target);
         });
 
+        /**
+         * XXX
+         */
         R.indexOf.from = curry3(function indexOfFrom(target, fromIdx, list) {
             return indexOf(list, target, fromIdx);
         });
 
+        /**
+         * XXX
+         */
         // Returns the last zero-indexed position of an object in a flat list
         R.lastIndexOf = curry2(function _lastIndexOf(target, list) {
             return lastIndexOf(list, target);
         });
 
+        /**
+         * XXX
+         */
         R.lastIndexOf.from = curry3(function lastIndexOfFrom(target, fromIdx, list) {
             return lastIndexOf(list, target, fromIdx);
         });
 
+        /**
+         * XXX
+         */
         // Returns `true` if the list contains the sought element, `false` if it does not.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
         function contains(a, list) {
@@ -1019,6 +1068,9 @@
         R.contains = curry2(contains);
 
 
+        /**
+         * XXX
+         */
         // Returns `true` if the list contains the sought element, `false` if it does not, based upon the value
         // returned by applying the supplied predicated to two list elements.  Equality is strict here, meaning
         // reference equality for objects and non-coercing equality for primitives.  Probably inefficient.
@@ -1033,17 +1085,26 @@
         };
         R.containsWith = curry3(containsWith);
 
+        /**
+         * XXX
+         */
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
         var uniq = R.uniq = foldr(function (acc, x) {
             return (contains(x, acc)) ? acc : prepend(x, acc);
         }, []);
 
+        /**
+         * XXX
+         */
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
             return uniq(list).length === list.length;
         };
 
+        /**
+         * XXX
+         */
         // Returns a new list containing only one copy of each element in the original list, based upon the value
         // returned by applying the supplied predicate to two list elements.   Equality is strict here,  meaning
         // reference equality for objects and non-coercing equality for primitives.
@@ -1054,11 +1115,17 @@
         });
 
 
+        /**
+         * XXX
+         */
         // Returns a new list by plucking the same named property off all objects in the list supplied.
         var pluck = R.pluck = curry2(function(p, list) {
             return map(prop(p), list);
         });
 
+        /**
+         * XXX
+         */
         // Returns a list that contains a flattened version of the supplied list.  For example:
         //
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
@@ -1082,7 +1149,9 @@
             return output;
         };
 
-
+        /**
+         * XXX
+         */
         // Creates a new list out of the two supplied by applying the function to each equally-positioned pair in the
         // lists.  For example,
         //
@@ -1097,6 +1166,10 @@
             }
             return rv;
         });
+
+        /**
+         * XXX
+         */
         // Creates a new list out of the two supplied by yielding the pair of each equally-positioned pair in the
         // lists.  For example,
         //
@@ -1112,6 +1185,9 @@
             return rv;
         });
 
+        /**
+         * XXX
+         */
         // Creates a new list out of the two supplied by applying the function to each possible pair in the lists.
         //  For example,
         //
@@ -1130,6 +1206,10 @@
             }
             return result;
         });
+
+        /**
+         * XXX
+         */
         // Creates a new list out of the two supplied by yielding the pair of each possible pair in the lists.
         // For example,
         //
@@ -1153,11 +1233,17 @@
             return result;
         });
 
+        /**
+         * XXX
+         */
         // Returns a new list with the same elements as the original list, just in the reverse order.
         R.reverse = function (list) {
             return clone(list || []).reverse();
         };
 
+        /**
+         * XXX
+         */
         // // Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
         // For example,
         //
@@ -1174,14 +1260,26 @@
             return result;
         });
 
+        /**
+         * XXX
+         */
         // Returns the elements of the list as a string joined by a separator.
         R.join = invoker("join", Array.prototype);
 
+        /**
+         * XXX
+         */
         // Returns the sublist of a list starting with the first index and
         // ending before the second one.
         R.slice = invoker("slice", Array.prototype);
+        /**
+         * XXX
+         */
         R.slice.from = flip(R.slice)(undef);
 
+        /**
+         * XXX
+         */
         // Removes the sub-list of `list` starting at index `start` and containing
         // `count` elements.  _Note that this is not destructive_: it returns a
         // copy of the list with the changes.
@@ -1190,6 +1288,9 @@
             return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
         });
 
+        /**
+         * XXX
+         */
         // Inserts the supplied element into the list, at index `index`.  _Note
         // that this is not destructive_: it returns a copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
@@ -1198,6 +1299,9 @@
             return concat(append(elt, _slice(list, 0, index)), _slice(list, index));
         });
 
+        /**
+         * XXX
+         */
         // Inserts the sub-list into the list, at index `index`.  _Note  that this
         // is not destructive_: it returns a copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
@@ -1206,11 +1310,17 @@
             return concat(concat(_slice(list, 0, index), elts), _slice(list, index));
         });
 
+        /**
+         * XXX
+         */
         // Returns the `n`th element of a list (zero-indexed)
         R.nth = function (n, list) {
              return arguments.length < 2 ? function _nth(list) { return list[n]; } : list[n];
         };
 
+        /**
+         * XXX
+         */
         // Makes a comparator function out of a function that reports whether the first element is less than the second.
         //
         //     var cmp = comparator(function(a, b) {
@@ -1223,6 +1333,9 @@
             };
         };
 
+        /**
+         * XXX
+         */
         // Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
         // time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
         // if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
@@ -1250,6 +1363,9 @@
         //     //   "F": [{name: 'Eddy', score: 58}]
         //     // }
 
+        /**
+         * XXX
+         */
         R.partition = curry2(function (fn, list) {
             return foldl(function (acc, elt) {
                 var key = fn(elt);
@@ -1268,6 +1384,9 @@
 
         // --------
 
+        /**
+         * XXX
+         */
         // Runs the given function with the supplied object, then returns the object.
         R.tap = curry2(function(x, fn) {
             if (typeof fn === "function") { fn(x); }
@@ -1275,12 +1394,18 @@
         });
         aliasFor("tap").is("K");
 
+        /**
+         * XXX
+         */
         // Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
         // non-coercing equality for primitives.
         R.eq = function (a, b) {
             return arguments.length < 2 ? function _eq(b) { return a === b; } : a === b;
         };
 
+        /**
+         * XXX
+         */
         // Returns a function that when supplied an object returns the indicated property of that object, if it exists.
         var prop = R.prop = function (p, obj) {
             return arguments.length < 2 ? function _prop(obj) { return obj[p]; } :  obj[p];
@@ -1288,6 +1413,9 @@
         aliasFor("prop").is("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
 
+        /**
+         * XXX
+         */
         // Returns a function that when supplied an object returns the result of running the indicated function on
         // that object, if it has such a function.
         R.func = function (fn, obj) {
@@ -1298,6 +1426,9 @@
         };
 
 
+        /**
+         * XXX
+         */
         // Returns a function that when supplied a property name returns that property on the indicated object, if it
         // exists.
         R.props = function (obj, prop) {
@@ -1305,6 +1436,9 @@
         };
 
 
+        /**
+         * XXX
+         */
         // Returns a function that always returns the given value.
         var always = R.always = function (val) {
             return function () {
@@ -1314,6 +1448,9 @@
         aliasFor("always").is("constant");
 
 
+        /**
+         * XXX
+         */
         var anyBlanks = R.any(function (val) {
             return val === null || val === undef;
         });
@@ -1321,6 +1458,9 @@
         var hasOwnProperty = Object.prototype.hasOwnProperty;
         var nativeKeys = Object.keys;
 
+        /**
+         * XXX
+         */
         // Returns a list containing the names of all the enumerable own
         // properties of the supplied object.
         var keys = R.keys = function (obj) {
@@ -1334,6 +1474,9 @@
             return ks;
         };
 
+        /**
+         * XXX
+         */
         // Returns a list containing the names of all the
         // properties of the supplied object, including prototype properties.
         R.keysIn = function (obj) {
@@ -1344,6 +1487,9 @@
             return ks;
         };
 
+        /**
+         * XXX
+         */
         // Returns a list of all the enumerable own properties of the supplied object.
         R.values = function (obj) {
             var prop, props = keys(obj),
@@ -1355,6 +1501,9 @@
             return vals;
         };
 
+        /**
+         * XXX
+         */
         // Returns a list of all the properties, including prototype properties,
         // of the supplied object.
         R.valuesIn = function (obj) {
@@ -1365,6 +1514,9 @@
             return vs;
         };
 
+        /**
+         * XXX
+         */
         // internal helper function
         function pickWith(test, obj) {
             var copy = {},
@@ -1379,6 +1531,9 @@
             return copy;
         }
 
+        /**
+         * XXX
+         */
         // Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
         // property is ignored
         R.pick = curry2(function pick(names, obj) {
@@ -1387,6 +1542,9 @@
             }, obj);
         });
 
+        /**
+         * XXX
+         */
         // Returns a partial copy of an object omitting the keys specified.
         R.omit = curry2(function omit(names, obj) {
             return pickWith(function(val, key) {
@@ -1394,8 +1552,14 @@
             }, obj);
         });
 
+        /**
+         * XXX
+         */
         R.pickWith = curry2(pickWith);
 
+        /**
+         * XXX
+         */
         // Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
         var pickAll = function (names, obj) {
             var copy = {};
@@ -1405,8 +1569,14 @@
             return copy;
         };
 
+        /**
+         * XXX
+         */
         R.pickAll = curry2(pickAll);
 
+        /**
+         * XXX
+         */
         // Returns a new object that mixes in the own properties of two objects.
         R.mixin = curry2(function(a, b) {
             var mixed = pickAll(R.keys(a), a);
@@ -1416,6 +1586,9 @@
             return mixed;
         });
 
+        /**
+         * XXX
+         */
         // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
         R.eqProps = function (prop, obj1, obj2) {
             var f1 = function eqPropsCurried1(obj1, obj2) {
@@ -1430,6 +1603,9 @@
         };
 
 
+        /**
+         * XXX
+         */
         // internal helper for `where`
         function satisfiesSpec(spec, parsedSpec, testObj) {
             if (spec === testObj) { return true; }
@@ -1456,6 +1632,9 @@
             return true;
         }
 
+        /**
+         * XXX
+         */
         // `where` takes a spec object and a test object and returns true if the test satisfies the spec.
         // Any property on the spec that is not a function is interpreted as an equality
         // relation. For example:
@@ -1500,6 +1679,9 @@
 
         // --------
 
+        /**
+         * XXX
+         */
         // Expose the functions from ramda as properties on another object.  If the passed-in object is the
         // global object, or the passed-in object is "falsy", then the ramda functions become global functions.
         R.installTo = function(obj) {
@@ -1508,12 +1690,21 @@
             })(keys(R));
         };
 
+        /**
+         * XXX
+         */
         // A function that always returns `0`.
         R.alwaysZero = always(0);
 
+        /**
+         * XXX
+         */
         // A function that always returns `false`.
         R.alwaysFalse = always(false);
 
+        /**
+         * XXX
+         */
         // A function that always returns `true`.
         R.alwaysTrue = always(true);
 
@@ -1527,6 +1718,9 @@
 
         // --------
 
+        /**
+         * XXX
+         */
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
@@ -1537,6 +1731,9 @@
             return arguments.length < 2 ? _and : _and(g);
         };
 
+        /**
+         * XXX
+         */
         // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
         // value. (Note also that at least Oliver Twist can pronounce this one...)
@@ -1547,12 +1744,18 @@
             return arguments.length < 2 ? _or : _or(g);
         };
 
+        /**
+         * XXX
+         */
         // A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
         // underlying function would return a false-y value, and `false` when it would return a truth-y one.
         var not = R.not = function (f) {
             return function() {return !f.apply(this, arguments);};
         };
 
+        /**
+         * XXX
+         */
         // Create a predicate wrapper which will call a pick function (all/any) for each predicate
         var predicateWrap = function(predPicker) {
             return function(preds /* , args */) {
@@ -1570,9 +1773,15 @@
             };
         };
 
+        /**
+         * XXX
+         */
         // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
         R.allPredicates = predicateWrap(all);
 
+        /**
+         * XXX
+         */
         // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
         R.anyPredicates = predicateWrap(any);
 
@@ -1583,6 +1792,9 @@
 
         // --------
 
+        /**
+         * XXX
+         */
         // Adds two numbers.  Automatic curried:
         //
         //     var add7 = add(7);
@@ -1591,6 +1803,9 @@
             return arguments.length < 2 ? function(b) { return a + b; } :  a + b;
         };
 
+        /**
+         * XXX
+         */
         // Multiplies two numbers.  Automatically curried:
         //
         //     var mult3 = multiply(3);
@@ -1599,6 +1814,9 @@
             return arguments.length < 2 ? function(b) { return a * b; } :  a * b;
         };
 
+        /**
+         * XXX
+         */
         // Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
         // version might be useful, often the curried version of `subtractN` might be what's wanted.
         //
@@ -1608,6 +1826,9 @@
             return arguments.length < 2 ? function(b) { return a - b; } :  a - b;
         };
 
+        /**
+         * XXX
+         */
         // Reversed version of `subtract`, where first parameter is subtracted from the second.  The curried version of
         // this one might me more useful than that of `subtract`.  For instance:
         //
@@ -1615,12 +1836,18 @@
         //     decrement(10); // => 9;
         R.subtractN = flip(subtract);
 
+        /**
+         * XXX
+         */
         // Divides the first parameter by the second.  This is automatically curried, and while at times the curried
         // version might be useful, often the curried version of `divideBy` might be what's wanted.
         var divide = R.divide = function(a, b) {
             return arguments.length < 2 ? function(b) { return a / b; } :  a / b;
         };
 
+        /**
+         * XXX
+         */
         // Reversed version of `divide`, where the second parameter is divided by the first.  The curried version of
         // this one might be more useful than that of `divide`.  For instance:
         //
@@ -1628,11 +1855,17 @@
         //     half(42); // => 21
         R.divideBy = flip(divide);
 
+        /**
+         * XXX
+         */
         // Divides the second parameter by the first and returns the remainder.
         var modulo = R.modulo = function(a, b) {
             return arguments.length < 2 ? function(b) { return a % b; } :  a % b;
         };
 
+        /**
+         * XXX
+         */
         // Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
         // this one might be more useful than that of `modulo`.  For instance:
         //
@@ -1641,37 +1874,61 @@
         //     isOdd(21); // => 1
         R.moduloBy = flip(modulo);
 
+        /**
+         * XXX
+         */
         // Adds together all the elements of a list.
         R.sum = foldl(add, 0);
 
+        /**
+         * XXX
+         */
         // Multiplies together all the elements of a list.
         R.product = foldl(multiply, 1);
 
+        /**
+         * XXX
+         */
         // Returns true if the first parameter is less than the second.
         R.lt = function(a, b) {
             return arguments.length < 2 ? function(b) { return a < b; } :  a < b;
         };
 
+        /**
+         * XXX
+         */
         // Returns true if the first parameter is less than or equal to the second.
         R.lte = function(a, b) {
             return arguments.length < 2 ? function(b) { return a <= b; } :  a <= b;
         };
 
+        /**
+         * XXX
+         */
         // Returns true if the first parameter is greater than the second.
         R.gt = function(a, b) {
             return arguments.length < 2 ? function(b) { return a > b; } :  a > b;
         };
 
+        /**
+         * XXX
+         */
         // Returns true if the first parameter is greater than or equal to the second.
         R.gte = function(a, b) {
             return arguments.length < 2 ? function(b) { return a >= b; } :  a >= b;
         };
 
+        /**
+         * XXX
+         */
         // Determines the largest of a list of numbers (or elements that can be cast to numbers)
         var max = R.max = function(list) {
             return foldl(binary(Math.max), -Infinity, list);
         };
 
+        /**
+         * XXX
+         */
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = curry2(function(keyFn, list) {
             if (!(list && list.length > 0)) {
@@ -1688,6 +1945,9 @@
             return winner;
         });
 
+        /**
+         * XXX
+         */
         // TODO: combine this with maxWith?
 
         // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
@@ -1707,6 +1967,9 @@
         });
 
 
+        /**
+         * XXX
+         */
         // Determines the smallest of a list of numbers (or elements that can be cast to numbers)
         R.min = function(list) {
             return foldl(binary(Math.min), Infinity, list);
@@ -1720,64 +1983,100 @@
 
         // --------
 
+        /**
+         * XXX
+         */
         // A substring of a String:
         //
         //     substring(2, 5, "abcdefghijklm"); //=> "cde"
         var substring = R.substring = invoker("substring", String.prototype);
 
+        /**
+         * XXX
+         */
         // The trailing substring of a String starting with the nth character:
         //
         //     substringFrom(8, "abcdefghijklm"); //=> "ijklm"
         R.substringFrom = flip(substring)(undef);
 
+        /**
+         * XXX
+         */
         // The leading substring of a String ending before the nth character:
         //
         //     substringTo(8, "abcdefghijklm"); //=> "abcdefgh"
         R.substringTo = substring(0);
 
+        /**
+         * XXX
+         */
         // The character at the nth position in a String:
         //
         //     charAt(8, "abcdefghijklm"); //=> "i"
         R.charAt = invoker("charAt", String.prototype);
 
+        /**
+         * XXX
+         */
         // The ascii code of the character at the nth position in a String:
         //
         //     charCodeAt(8, "abcdefghijklm"); //=> 105
         //     // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
         R.charCodeAt = invoker("charCodeAt", String.prototype);
 
+        /**
+         * XXX
+         */
         // Tests a regular expression agains a String
         //
         //     match(/([a-z]a)/g, "bananas"); //=> ["ba", "na", "na"]
         R.match = invoker("match", String.prototype);
 
+        /**
+         * XXX
+         */
         // Finds the index of a substring in a string, returning -1 if it's not present
         //
         //     strIndexOf('c', 'abcdefg) //=> 2
         R.strIndexOf = invoker("indexOf", String.prototype);
 
+        /**
+         * XXX
+         */
         // Finds the last index of a substring in a string, returning -1 if it's not present
         //
         //     strLastIndexOf('a', 'banana split') //=> 5
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
+        /**
+         * XXX
+         */
         // The uppercase version of a string.
         //
         //     toUpperCase('abc') //=> 'ABC'
         R.toUpperCase = invoker("toUpperCase", String.prototype);
 
+        /**
+         * XXX
+         */
         // The lowercase version of a string.
         //
         //     toLowerCase('XYZ') //=> 'xyz'
         R.toLowerCase = invoker("toLowerCase", String.prototype);
 
 
+        /**
+         * XXX
+         */
         // The string split into substring at the specified token
         //
         //     split('.', 'a.b.c.xyz.d') //=>
         //         ['a', 'b', 'c', 'xyz', 'd']
         R.split = invoker("split", String.prototype, 1);
 
+        /**
+         * XXX
+         */
         // internal path function
         // Takes an array, paths, indicating the deep set of keys
         // to find. E.g.
@@ -1790,6 +2089,9 @@
             return val;
         }
 
+        /**
+         * XXX
+         */
         // Retrieve a computed path by a function, fn. Fn will be given
         // a string, str which it will use to compute the path
         // e.g. fn("a.b") => ["a", "b"]
@@ -1799,6 +2101,9 @@
             return path(paths, obj);
         });
 
+        /**
+         * XXX
+         */
         // Retrieve a value on an object from a deep path, str
         // different properties on nested objects are indicated in string
         // by a seperator, sep
@@ -1807,6 +2112,9 @@
             return path(str.split(sep), obj);
         });
 
+        /**
+         * XXX
+         */
         // Retrieve a nested path on an object seperated by periods
         // R.path('a.b'], {a: {b: 2}}) // => 2
         R.path = R.pathOn('.');
@@ -1819,6 +2127,9 @@
 
         // --------
 
+        /**
+         * XXX
+         */
         // Reasonable analog to SQL `select` statement.
         //
         //     var kids = [
@@ -1829,6 +2140,9 @@
         //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         R.project = useWith(map, R.pickAll, identity); // passing `identity` gives correct arity
 
+        /**
+         * XXX
+         */
         // Determines whether the given property of an object has a specific value
         // Most likely used to filter a list:
         //
@@ -1852,20 +2166,32 @@
                     f1(val, obj);
         };
 
+        /**
+         * XXX
+         */
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
         R.union = compose(uniq, merge);
 
+        /**
+         * XXX
+         */
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
         // determined according to the value returned by applying the supplied predicate to two list elements.
         R.unionWith = curry3(function (pred, list1, list2) {
             return uniqWith(pred, merge(list1, list2));
         });
 
+        /**
+         * XXX
+         */
         // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
         R.difference = curry2(function(first, second) {
             return uniq(reject(flip(contains)(second), first));
         });
 
+        /**
+         * XXX
+         */
         // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
         // Duplication is determined according to the value returned by applying the supplied predicate to two list
         // elements.
@@ -1889,6 +2215,9 @@
             return arguments.length < 2 ? _intersection : _intersection(list2);
         };
 
+        /**
+         * XXX
+         */
         // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
         // Duplication is determined according to the value returned by applying the supplied predicate to two list
         // elements.
@@ -1910,6 +2239,9 @@
                     f1(list1, list2);
         };
 
+        /**
+         * XXX
+         */
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
         // item in the list supplied, and `key` is the result of applying the supplied function to that item.
         var keyValue = function(fn, list) { // TODO: Should this be made public?
@@ -1919,6 +2251,9 @@
             return arguments.length < 2 ? _keyValue : _keyValue(list);
         };
 
+        /**
+         * XXX
+         */
         // Sorts the list according to a key generated by the supplied function.
         R.sortBy = function(fn, list) {
             /*
@@ -1931,6 +2266,9 @@
             return arguments.length < 2 ? _sortBy : _sortBy(list);
         };
 
+        /**
+         * XXX
+         */
         // Counts the elements of a list according to how many match each value of a key generated by the supplied function.
         R.countBy = function(fn, list) {
             function _countBy(list) {
