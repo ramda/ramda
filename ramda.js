@@ -929,19 +929,32 @@
         R.map = curry2(map);
 
         /**
-         * XXX
+         * Like `map`, but but passes additional parameters to the predicate function.
+         *
+         * `fn` receives three arguments: *(value, index, list)*.
+         *
+         * Note: `ramda.map.idx` does not skip deleted or unassigned indices (sparse arrays), unlike
+         * the native `Array.prototype.map` method. For more details on this behavior, see:
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The function to be called on every element of the input `list`.
+         * @param {Array} list The list to be iterated over.
+         * @return {Array} Returns the new list.
+         * @example
+         *
+         * var squareEnds = function(elt, idx, list) {
+         *   if (idx === 0 || idx === list.length - 1) {
+         *     return elt * elt;
+         *   }
+         *   return elt;
+         * };
+         *
+         * map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
+         * //=> [64, 6, 7, 5, 3, 0, 81]
          */
-        // Like `map`, but passes additional parameters to the predicate function.  Parameters are
-        // `list item`, `index of item in list`, `entire list`.
-        //
-        // Example:
-        //
-        //     var squareEnds = function(x, idx, list) {
-        //         return (idx === 0 || idx === list.length - 1) ? x * x : x;
-        //     };
-        //
-        //     map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
-        //     //=> [64, 6, 7, 5, 3, 0, 81]
         R.map.idx = curry2(function(fn, list) {
             if (hasMethod('map', list)) {
                 return list.map(fn);
