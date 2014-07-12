@@ -53,9 +53,13 @@ or the minified version:
 
     <script src="path/to/yourCopyOf/ramda.min.js"></script>
 
-or from a CDN
+or from a CDN, either CDNJS:
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.2.3/ramda.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.2.3/ramda.min.js"></script>
+
+or jsdelivr:
+
+    <script src="//cdn.jsdelivr.net/ramda/0.2.3/ramda.min.js"></script>
 
 These script tags add the variable `ramda` on the browser's global scope.
 
