@@ -47,11 +47,15 @@ Then in the console:
 
 To use directly in the browser:
 
-     <script src="path/to/yourCopyOf/ramda.js"></script>
- 
+    <script src="path/to/yourCopyOf/ramda.js"></script>
+
 or the minified version:
 
-     <script src="path/to/yourCopyOf/ramda.min.js"></script>
+    <script src="path/to/yourCopyOf/ramda.min.js"></script>
+
+or from a CDN
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.2.3/ramda.min.js"></script>
 
 These script tags add the variable `ramda` on the browser's global scope.
 
@@ -124,5 +128,3 @@ Acknowledgements
 Thanks to [J. C. Phillipps](http://www.jcphillipps.com) for the Ramda logo.
 Ramda logo artwork &copy; 2014 J. C. Phillipps. Licensed Creative Commons 
 [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
-
-
