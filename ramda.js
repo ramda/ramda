@@ -724,7 +724,7 @@
          * current element from the array.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} The final, accumulated value
+         * @return {*} The final, accumulated value.
          * @example
          *
          * var numbers = [1, 2, 3];
@@ -747,7 +747,7 @@
         aliasFor("foldl").is("reduce");
 
         /**
-        // Like `foldl`, but passes additional parameters to the predicate function.
+         * Like `foldl`, but passes additional parameters to the predicate function.
          *
          * The iterator function receives four values: *(acc, value, index, list)*
          *
