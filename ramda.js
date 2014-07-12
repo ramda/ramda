@@ -385,7 +385,7 @@
 
         //   Boolean function which is `true` for non-list, `false` for a list.
         R.isAtom = function (x) {
-            return (x !== null) && (x !== undef) && !isArray(x);
+            return x != null && !isArray(x);
         };
 
         // Returns a new list with the new element at the end of a list following all the existing ones.
