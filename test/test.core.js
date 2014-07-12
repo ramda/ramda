@@ -60,6 +60,24 @@ describe('merge', function() {
     });
 });
 
+describe('concat', function() {
+    var concat = Lib.concat;
+    var z1 = {
+      x: 'z1',
+      concat: function(that) { return this.x + ' ' + that.x; }
+    };
+    var z2 = { x: 'z2' };
+
+    it('adds combines the elements of the two lists', function() {
+        assert.deepEqual(concat(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
+        assert.deepEqual(concat([], ['c', 'd']), ['c', 'd']);
+    });
+    it('works for objects with a concat method', function() {
+      assert.equal(concat('foo', 'bar'), 'foobar');
+      assert.equal(concat(z1, z2), 'z1 z2');
+    });
+});
+
 describe('head', function() {
     var head = Lib.head;
 
