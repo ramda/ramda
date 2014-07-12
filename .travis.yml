@@ -7,5 +7,5 @@ env:
 
 before_script:
 - npm install -g grunt-cli
-after_success: 
-- "grunt bench"
+#after_success: 
+#- "grunt bench"

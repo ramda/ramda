@@ -121,7 +121,7 @@ module.exports = function(grunt) {
         db.put('benchmarks', json.timestamp, json)
           .then(function() { 
             console.log('SUCCESS'); 
-//            grunt.file.delete(abspath);
+            grunt.file.delete(abspath);
             done(); 
           })
           .fail(function(err) { 
