@@ -975,7 +975,16 @@
 
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
-            return uniq(list).length === list.length;
+            var i = list.length;
+            var copy = R.clone(list);
+            while(--i > 0) {
+                var elem = copy[i];
+                copy.length -= 1;
+                if (R.contains(elem, copy)) {
+                    return false;
+                }
+            }
+            return true;
         };
 
         // Returns a new list containing only one copy of each element in the original list, based upon the value

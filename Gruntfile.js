@@ -115,7 +115,7 @@ module.exports = function(grunt) {
           commit: process.env.TRAVIS_COMMIT,
           commitRange: process.env.TRAVIS_COMMIT_RANGE,
           tag: process.env.TRAVIS_TAG,
-          node: process.env.TRAVIS_NODE_VERSION
+          node: process.env.TRAVIS_NODE_VERSION || process.versions.node
         };
         json.report = grunt.file.readJSON(abspath);
         db.put('benchmarks', json.timestamp, json)
