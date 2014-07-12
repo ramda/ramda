@@ -785,12 +785,36 @@
         });
 
         /**
-         * XXX
+         * Returns a single item by iterating through the list, successively calling the iterator
+         * function and passing it an accumulator value and the current value from the array, and
+         * then passing the result to the next call.
+         *
+         * Similar to `foldl`, except moves through the input list from the right to the left.
+         *
+         * The iterator function receives two values: *(acc, value)*
+         *
+         * Note: `ramda.foldr` does not skip deleted or unassigned indices (sparse arrays), unlike
+         * the native `Array.prototype.filter` method. For more details on this behavior, see:
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @alias reduceRight
+         * @param {Function} fn The iterator function. Receives two values, the accumulator and the
+         * current element from the array.
+         * @param {*} acc The accumulator value.
+         * @param {Array} list The list to iterate over.
+         * @return {*} The final, accumulated value.
+         * @example
+         *
+         * var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
+         * var flattenPairs = function(acc, pair) {
+         *   return acc.concat(pair);
+         * };
+         *
+         * foldr(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
          */
-        // Returns a single item, by successively calling the function with the current element and the the next
-        // Similar to `foldl`/`reduce` except that it moves from right to left on the list.
-        // n.b.: `ramda.foldr` (aka `ramda.reduceRight`) differs from `Array.prototype.reduceRight` in that it
-        // does not distinguish "sparse arrays".
         var foldr = R.foldr = curry3(function(fn, acc, list) {
             if (hasMethod('foldr', list)) {
                 return list.foldr(fn, acc);
