@@ -714,7 +714,7 @@
          *
          * Note: `ramda.foldl` does not skip deleted or unassigned indices (sparse arrays), unlike
          * the native `Array.prototype.filter` method. For more details on this behavior, see:
-         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
          * @memberOf R
@@ -754,7 +754,7 @@
          * Note: `ramda.foldl.idx` does not skip deleted or unassigned indices (sparse arrays),
          * unlike the native `Array.prototype.filter` method. For more details on this behavior,
          * see:
-         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
          * @memberOf R
@@ -795,7 +795,7 @@
          *
          * Note: `ramda.foldr` does not skip deleted or unassigned indices (sparse arrays), unlike
          * the native `Array.prototype.filter` method. For more details on this behavior, see:
-         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
          * @memberOf R
@@ -836,7 +836,7 @@
          * Note: `ramda.foldr.idx` does not skip deleted or unassigned indices (sparse arrays),
          * unlike the native `Array.prototype.filter` method. For more details on this behavior,
          * see:
-         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
          * @memberOf R
@@ -871,12 +871,12 @@
          * to stop iteration or an array of length 2 containing the value to add to the resulting
          * list and the seed to be used in the next call to the iterator function.
          *
-         * The iterator function receives one value: *(seed)*.
+         * The iterator function receives one argument: *(seed)*.
          *
          * @static
          * @memberOf R
          * @category List
-         * @param {Function} fn The iterator function. Receives one value, `seed`, and returns
+         * @param {Function} fn The iterator function. receives one argument, `seed`, and returns
          * either false to quit iteration or an array of length two to proceed. The element at index
          * 0 of this array will be added to the resulting array, and the element at index 1 will be
          * passed to the next call to `fn`.
@@ -899,8 +899,8 @@
          * supplied list.
          *
          * Note: `ramda.map` does not skip deleted or unassigned indices (sparse arrays), unlike the
-         * native `Array.prototype.filter` method. For more details on this behavior, see:
-         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
+         * native `Array.prototype.map` method. For more details on this behavior, see:
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
          *
          * @static
          * @memberOf R
