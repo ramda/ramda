@@ -724,7 +724,7 @@
          * current element from the array.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} The final, accumulated value.
+         * @return {*} Returns the final, accumulated value.
          * @example
          *
          * var numbers = [1, 2, 3];
@@ -763,7 +763,7 @@
          * current element from `list`, that element's index, and the entire `list` itself.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} The final, accumulated value.
+         * @return {*} Returns the final, accumulated value.
          * @example
          *
          * var letters = ['a', 'b', 'c'];
@@ -805,7 +805,7 @@
          * current element from the array.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} The final, accumulated value.
+         * @return {*} Returns the final, accumulated value.
          * @example
          *
          * var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
@@ -845,7 +845,7 @@
          * current element from `list`, that element's index, and the entire `list` itself.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} The final, accumulated value.
+         * @return {*} Returns the final, accumulated value.
          * @example
          *
          * var letters = ['a', 'b', 'c'];
@@ -881,7 +881,7 @@
          * 0 of this array will be added to the resulting array, and the element at index 1 will be
          * passed to the next call to `fn`.
          * @param {*} seed The seed value.
-         * @return {Array} The final list.
+         * @return {Array} Returns the final list.
          * @example TODO
          */
         R.unfoldr = curry2(function (fn, seed) {
