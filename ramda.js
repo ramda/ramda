@@ -469,7 +469,7 @@
          */
         //   Boolean function which is `true` for non-list, `false` for a list.
         R.isAtom = function (x) {
-            return (x !== null) && (x !== undef) && !isArray(x);
+            return x != null && !isArray(x);
         };
 
         /**
@@ -1451,7 +1451,16 @@
          */
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
-            return uniq(list).length === list.length;
+            var i = list.length;
+            var copy = R.clone(list);
+            while(--i > 0) {
+                var elem = copy[i];
+                copy.length -= 1;
+                if (R.contains(elem, copy)) {
+                    return false;
+                }
+            }
+            return true;
         };
 
         /**
