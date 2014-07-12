@@ -706,14 +706,34 @@
         // --------
 
         /**
-         * XXX
+         * Returns a single item by iterating through the list, successively calling the iterator
+         * function and passing it an accumulator value and the current value from the array, and
+         * then passing the result to the next call.
+         *
+         * The iterator function receives two values: *(acc, value)*
+         *
+         * Note: `ramda.foldl` does not skip deleted or unassigned indices (sparse arrays), unlike
+         * the native `Array.prototype.filter` method. For more details on this behavior, see:
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @alias reduce
+         * @param {Function} fn The iterator function. Receives two values, the accumulator and the
+         * current element from the array.
+         * @param {*} acc The accumulator value.
+         * @param {Array} list The list to iterate over.
+         * @return {*} The final, accumulated value
+         * @example
+         *
+         * var numbers = [1, 2, 3];
+         * var add = function(a, b) {
+         *   return a + b;
+         * };
+         *
+         * foldl(numbers, add, 10); //=> 16
          */
-        // Returns a single item, by successively calling the function with the current element and the the next
-        // element of the list, passing the result to the next call.  We start with the `acc` parameter to get
-        // things going.  The function supplied should accept this running value and the latest element of the list,
-        // and return an updated value.
-        // n.b.: `ramda.foldl` (aka `ramda.reduce`) differs from `Array.prototype.reduce` in that it
-        // does not distinguish "sparse arrays".
         var foldl = R.foldl =  curry3(function(fn, acc, list) {
             if (hasMethod('foldl', list)) {
                 return list.foldl(fn, acc);
