@@ -21,13 +21,22 @@
     return  (function() {
         // This object is what is actually returned, with all the exposed functions attached as properties.
 
+        /**
+         * XXX
+         */
         var R = {};
 
         // Internal Functions and Properties
         // ---------------------------------
 
+        /**
+         * XXX
+         */
         var undef = (function () {})();
 
+        /**
+         * XXX
+         */
         // Makes a public alias for one of the public functions:
         var aliasFor = function (oldName) {
             var fn = function (newName) {
@@ -38,6 +47,9 @@
             return fn;
         };
 
+        /**
+         * XXX
+         */
         // (private) `slice` implemented iteratively for performance
         var _slice = function (args, from, to) {
             from = from || 0;
@@ -52,6 +64,9 @@
             return arr;
         };
 
+        /**
+         * XXX
+         */
         // private concat function to merge 2 collections
         var concat = function(set1, set2) {
             set1 = set1 || [];
@@ -69,12 +84,21 @@
             return result;
         };
 
+        /**
+         * XXX
+         */
         // (private)
         var toString = Object.prototype.toString;
+        /**
+         * XXX
+         */
         var isArray = Array.isArray || function (val) {
             return val && val.length >= 0 && toString.call(val) === "[object Array]";
         };
 
+        /**
+         * XXX
+         */
         // Returns a curried version of the supplied function.  For example:
         //
         //      var discriminant = function(a, b, c) {
@@ -105,6 +129,9 @@
 
         var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 
+        /**
+         * XXX
+         */
         // Optimized internal curriers
         function curry2(fn) {
             return function(a, b) {
@@ -117,6 +144,9 @@
                 return fn(a, b);
             };
         }
+        /**
+         * XXX
+         */
         function curry3(fn) {
             return function(a, b, c) {
                 switch (arguments.length) {
@@ -132,11 +162,17 @@
             };
         }
 
+        /**
+         * XXX
+         */
         // (private) for dynamically dispatching Ramda method to non-Array objects
         var hasMethod = function (methodName, obj) {
             return obj && !isArray(obj) && typeof obj[methodName] === 'function';
         };
 
+        /**
+         * XXX
+         */
         var mkArgStr = function (n) {
             var arr = [], idx = -1;
             while (++idx < n) {
@@ -145,6 +181,9 @@
             return arr.join(", ");
         };
 
+        /**
+         * XXX
+         */
         // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
         // specifically takes exactly `n` parameters.  Any extraneous parameters will not be passed on to the function
         // supplied
@@ -195,18 +234,27 @@
             };
         }());
 
+        /**
+         * XXX
+         */
         // Returns a function that only accepts a single parameter, regardless of how
         // many the supplied one takes.
         R.unary = function (fn) {
             return nAry(1, fn);
         };
 
+        /**
+         * XXX
+         */
         // Returns a function that only accepts two parameters, regardless of how
         // many the supplied one takes.
         var binary = R.binary = function (fn) {
             return nAry(2, fn);
         };
 
+        /**
+         * XXX
+         */
         // Wraps a function that may be nullary, or may take fewer than or more than `n` parameters, in a function that
         // specifically takes exactly `n` parameters.  Note, though, that all parameters supplied will in fact be
         // passed along, in contrast with `nAry`, which only passes along the exact number specified.
@@ -256,6 +304,9 @@
             };
         }());
 
+        /**
+         * XXX
+         */
         // Turns a named method of an object (or object prototype) into a function that can be called directly.
         // The object becomes the last parameter to the function, and the function is automatically curried.
         // Passing the optional `len` parameter restricts the function to the initial `len` parameters of the method.
@@ -274,6 +325,9 @@
             }, length + 1);
         };
 
+        /**
+         * XXX
+         */
         // Creates a new function that calls the function `fn` with parameters consisting of  the result of the
         // calling each supplied handler on successive arguments, followed by all unmatched arguments.
         //
@@ -292,6 +346,9 @@
             }));
         };
 
+        /**
+         * XXX
+         */
         // A two-step version of the `useWith` function.  This would allow us to write `project`, currently written
         // as `useWith(map, pickAll, identity)`, as, instead, `use(map).over(pickAll, identity)`, which is a bit
         // more explicit.
@@ -312,6 +369,9 @@
             };
         };
 
+        /**
+         * XXX
+         */
         // Loop over a list for side effects. Nasty, yes, but this is a *practical* library
         var each = R.each = function (fn, list) {
             function _each(list) {
@@ -325,6 +385,9 @@
             return arguments.length < 2 ? _each : _each(list);
         };
 
+        /**
+         * XXX
+         */
         each.idx = function (fn, list) {
             function _eachIdx(list) {
                 var idx = -1, len = list.length;
@@ -338,6 +401,9 @@
         };
         aliasFor("each").is("forEach");
 
+        /**
+         * XXX
+         */
         // Create a shallow copy of an array.
         var clone = R.clone = function(list) {
             return _slice(list);
@@ -347,17 +413,26 @@
         // --------------
         //
 
+        /**
+         * XXX
+         */
         // Boolean function which reports whether a list is empty.
         var isEmpty = R.isEmpty = function (arr) {
             return !arr || !arr.length;
         };
 
+        /**
+         * XXX
+         */
         // Returns a new list with the new element at the front and the existing elements following
         var prepend = R.prepend = function (el, arr) {
             return concat([el], arr);
         };
         aliasFor("prepend").is("cons");
 
+        /**
+         * XXX
+         */
         //  Returns the first element of a list
         var head = R.head = function (arr) {
             arr = arr || [];
@@ -365,12 +440,18 @@
         };
         aliasFor("head").is("car").and("first");
 
+        /**
+         * XXX
+         */
         //  Returns the last element of a list
         R.last = function (arr) {
             arr = arr || [];
             return arr[arr.length - 1];
         };
 
+        /**
+         * XXX
+         */
         // Returns the rest of the list after the first element.
         // If the passed-in list is not annary, but is an object with a `tail` method,
         // it will return object.tail().
@@ -383,27 +464,42 @@
         };
         aliasFor("tail").is("cdr");
 
+        /**
+         * XXX
+         */
         //   Boolean function which is `true` for non-list, `false` for a list.
         R.isAtom = function (x) {
             return (x !== null) && (x !== undef) && !isArray(x);
         };
 
+        /**
+         * XXX
+         */
         // Returns a new list with the new element at the end of a list following all the existing ones.
         var append = R.append = function(el, list) {
             return concat(list, [el]);
         };
         aliasFor("append").is("push");
 
+        /**
+         * XXX
+         */
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
         var merge = R.merge = curry2(concat);
         aliasFor("merge").is("concat");
 
+        /**
+         * XXX
+         */
         // A surprisingly useful function that does nothing but return the parameter supplied to it.
         var identity = R.identity = function (x) {
             return x;
         };
         aliasFor("identity").is("I");
 
+        /**
+         * XXX
+         */
         R.times = curry2(function (fn, n) {
             var arr = new Array(n);
             var i = -1;
@@ -413,6 +509,9 @@
             return arr;
         });
 
+        /**
+         * XXX
+         */
         // Returns a fixed list (of size `n`) of identical values.
         R.repeatN = curry2(function (value, n) {
             return R.times(R.always(value), n);
@@ -432,6 +531,10 @@
         }
 
         // --------
+
+        /**
+         * XXX
+         */
         //Basic composition function, takes 2 functions and returns the composite function. Its mainly used to build
         //the more general compose function, which takes any number of functions.
         function internalCompose(f, g) {
@@ -440,6 +543,9 @@
             };
         }
 
+        /**
+         * XXX
+         */
         // Creates a new function that runs each of the functions supplied as parameters in turn, passing the output
         // of each one to the next one, starting with whatever arguments were passed to the initial invocation.
         // Note that if `var h = compose(f, g)`, `h(x)` calls `g(x)` first, passing the result of that to `f()`.
@@ -454,6 +560,9 @@
             return func;
         };
 
+        /**
+         * XXX
+         */
         // Similar to `compose`, but processes the functions in the reverse order so that if if `var h = pipe(f, g)`,
         // `h(x)` calls `f(x)` first, passing the result of that to `g()`.
         R.pipe = function() {  // TODO: type check of arguments?
@@ -464,6 +573,9 @@
         };
         aliasFor("pipe").is("sequence");
 
+        /**
+         * XXX
+         */
         // Returns a new function much like the supplied one except that the first two arguments are inverted.
         var flip = R.flip = function (fn) {
             return function (a, b) {
@@ -473,6 +585,9 @@
             };
         };
 
+        /**
+         * XXX
+         */
         // Creates a new function that acts like the supplied function except that the left-most parameters are
         // pre-filled.
         R.lPartial = function (fn) {
@@ -483,6 +598,9 @@
         };
         aliasFor("lPartial").is("applyLeft");
 
+        /**
+         * XXX
+         */
         // Creates a new function that acts like the supplied function except that the right-most parameters are
         // pre-filled.
         R.rPartial = function (fn) {
@@ -493,6 +611,9 @@
         };
         aliasFor("rPartial").is("applyRight");
 
+        /**
+         * XXX
+         */
         // Creates a new function that stores the results of running the supplied function and returns those
         // stored value when the same request is made.  **Note**: this really only handles string and number parameters.
         R.memoize = function (fn) {
@@ -507,6 +628,9 @@
             };
         };
 
+        /**
+         * XXX
+         */
         // Wraps a function up in one that will only call the internal one once, no matter how many times the outer one
         // is called.  ** Note**: this is not really pure; it's mostly meant to keep side-effects from repeating.
         R.once = function (fn) {
@@ -521,6 +645,9 @@
             };
         };
 
+        /**
+         * XXX
+         */
         // Wrap a function inside another to allow you to make adjustments to the parameters or do other processing
         // either before the internal function is called or with its results.
         R.wrap = function(fn, wrapper) {
@@ -529,6 +656,9 @@
             };
         };
 
+        /**
+         * XXX
+         */
         // Wraps a constructor function inside a (curried) plain function that can be called with the same arguments
         // and returns the same type.  Allows, for instance,
         //
@@ -544,6 +674,9 @@
             return Fn.length > 1 ? curry(nAry(Fn.length, f)) : f;
         };
 
+        /**
+         * XXX
+         */
         // Runs two separate functions against a single one and then calls another
         // function with the results of those initial calls.
         R.fork = function (after) {
