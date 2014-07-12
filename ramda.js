@@ -952,7 +952,7 @@
          *   return elt;
          * };
          *
-         * map(squareEnds, [8, 6, 7, 5, 3, 0, 9];
+         * ramda.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
          * //=> [64, 6, 7, 5, 3, 0, 81]
          */
         R.map.idx = curry2(function(fn, list) {
