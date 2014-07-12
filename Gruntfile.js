@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+
     pkg: grunt.file.readJSON('package.json'),
+
+    orchestrate_token: process.env.ORCHESTRATE_API_KEY,
 
     uglify: {
       options: {
@@ -52,10 +55,7 @@ module.exports = function(grunt) {
     benchmark: {
       all: {
         src: ['bench/*.bench.js'],
-        dest: 'bench/report/bench.json',
-        options: {
-          displayResults: true
-        }
+        dest: 'bench/report/bench.<%= (new Date()).getTime() %>.json',
       }
     },
 
@@ -96,10 +96,40 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-push-release');
   grunt.loadNpmTasks('grunt-benchmark');
 
-  grunt.registerTask('uploadBenchmarks', 'run benchmarks', function() {
-    // after bench:
+  grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
     // upload files in report dir to orchestrate
+    var done = this.async();
+    var reportDir = 'bench/report/';
+    var token = grunt.config.get('orchestrate_token');
+    var db = require('orchestrate')(token);
 
+    grunt.file.recurse(reportDir, function(abspath, rootdir, subdir, filename) {
+      var json = {}; 
+      var timestamp = filename.split(".")[1];
+      if (timestamp) {
+        json.timestamp = timestamp;
+        json.datestamp = (new Date(+timestamp)).toISOString();
+        json.platform = {
+          branch: process.env.TRAVIS_BRANCH,
+          buildId: process.env.TRAVIS_BUILD_ID,
+          commit: process.env.TRAVIS_COMMIT,
+          commitRange: process.env.TRAVIS_COMMIT_RANGE,
+          tag: process.env.TRAVIS_TAG,
+          node: process.env.TRAVIS_NODE_VERSION
+        };
+        json.report = grunt.file.readJSON(abspath);
+        db.put('benchmarks', json.timestamp, json)
+          .then(function() { 
+            console.log('SUCCESS'); 
+            grunt.file.delete(abspath);
+            done(); 
+          })
+          .fail(function(err) { 
+            console.log('FAIL', err.body.message); 
+            done(); 
+          });
+      }
+    });
   });
 
   grunt.registerTask('dist', ['uglify', 'copy:dist']);
@@ -108,6 +138,7 @@ module.exports = function(grunt) {
   grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
   grunt.registerTask('version', ['clean:dist', 'jshint', 'docco:doc', 'uglify', 'copy:dist']);
   grunt.registerTask('publish', ['push', 'version']);
+  grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
 };
 
 

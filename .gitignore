@@ -13,3 +13,8 @@ coverage
 /node_modules
 /examples/math.html
 /examples/math.js
+
+
+.travis.yml
+
+

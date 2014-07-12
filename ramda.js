@@ -396,7 +396,9 @@
 
         // Returns a new list consisting of the elements of the first list followed by the elements of the second.
         var merge = R.merge = curry2(concat);
-        aliasFor("merge").is("concat");
+        R.concat = curry2(function(set1, set2) {
+            return (hasMethod('concat', set1)) ? set1.concat(set2) : concat(set1, set2);
+        });
 
         // A surprisingly useful function that does nothing but return the parameter supplied to it.
         var identity = R.identity = function (x) {
