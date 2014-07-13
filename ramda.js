@@ -1451,8 +1451,12 @@
          */
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
-            for (var i = 0; i < list.length; i++) {
-                if (indexOf(list, list[i], i+1) >= 0) return false;
+            var len = list.length;
+            var i = -1;
+            while (++i < len) {
+                if (indexOf(list, list[i], i+1) >= 0) {
+                    return false;
+                }
             }
             return true;
         };
