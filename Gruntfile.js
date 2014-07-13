@@ -49,6 +49,8 @@ module.exports = function(grunt) {
       doc: {
         src: ['<%= pkg.name %>.js'],
         options: {
+          template: 'docs/tpl/ramda.jst',
+          css: 'docs/tpl/ramda.css',
           output: 'docs/'
         }
       }
