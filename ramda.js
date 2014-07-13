@@ -1442,9 +1442,18 @@
          */
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var uniq = R.uniq = foldl(function (acc, x) {
-            return (contains(x, acc)) ? acc : append(x, acc);
-        }, []);
+        
+        var uniq = R.uniq = function uniq(list) {
+            var idx = -1, len = list.length;
+            var result = [], item;
+            while (++idx < len) {
+                item = list[idx];
+                if (!contains(item, result)) {
+                    result.push(item);
+                }
+            }
+            return result;
+        };
 
         /**
          * XXX
@@ -1468,9 +1477,15 @@
         // returned by applying the supplied predicate to two list elements.   Equality is strict here,  meaning
         // reference equality for objects and non-coercing equality for primitives.
         var uniqWith = R.uniqWith = curry2(function(pred, list) {
-            return foldl(function (acc, x) {
-                return (containsWith(pred, x, acc)) ? acc : append(x, acc);
-            }, [], list);
+            var idx = -1, len = list.length;
+            var result = [], item;
+            while (++idx < len) {
+                item = list[idx];
+                if (!containsWith(pred, item, result)) {
+                    result.push(item);
+                }
+            }
+            return result;
         });
 
 
