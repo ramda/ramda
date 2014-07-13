@@ -1442,8 +1442,8 @@
          */
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var uniq = R.uniq = foldr(function (acc, x) {
-            return (contains(x, acc)) ? acc : prepend(x, acc);
+        var uniq = R.uniq = foldl(function (acc, x) {
+            return (contains(x, acc)) ? acc : append(x, acc);
         }, []);
 
         /**
