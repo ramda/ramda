@@ -1,3 +1,5 @@
+var desireds = require('./sauce/desireds');
+
 module.exports = function(grunt) {
   grunt.initConfig({
 

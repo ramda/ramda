@@ -1971,7 +1971,10 @@
             while (++i < fnLen) {
                 key = parsedSpec.fn[i];
                 val = spec[key];
-                if (!hasOwnProperty.call(testObj, key)) {
+                //if (!hasOwnProperty.call(testObj, key)) {
+                //    return false;
+                //}
+                if (!(key in testObj)) {
                     return false;
                 }
                 if (!val(testObj[key], testObj)) {
