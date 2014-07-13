@@ -239,6 +239,51 @@ describe('where', function () {
         assert.equal(predicate({x: 1, y: 2, z: 3}), true);
         assert.equal(predicate({x: 3, y: 2, z: 1}), false);
     });
+
+    it('empty spec is true', function() {
+        assert.equal(where({}, {a: 1}), true);
+        assert.equal(where(null, {a: 1}), true);
+    });
+
+    it('equal objects are true', function() {
+        assert.equal(where(Lib, Lib), true);
+    });
+
+    function Parent() {
+        this.y = 6;
+    }
+    Parent.prototype.a = undefined;
+    Parent.prototype.x = 5;
+    var parent = new Parent();
+
+    it('matches inherited functions', function () {
+        var spec = {
+            toString: Lib.always(true)
+        };
+        assert.equal(where(spec, {}), true);
+        assert.equal(where(spec, {a: 1}), true);
+        assert.equal(where(spec, {toString: 1}), true);
+        assert.equal(where({a: Lib.alwaysTrue}, {x: 1}), false);
+    });
+
+    it('matches inherited props', function () {
+        assert.equal(where({y: 6}, parent), true);
+        assert.equal(where({x: 5}, parent), true);
+        assert.equal(where({x: 5, y: 6}, parent), true);
+        assert.equal(where({x: 4, y: 6}, parent), false);
+    });
+
+    it('doesnt match inherited spec', function() {
+        assert.equal(where(parent, {y: 6}), true);
+        assert.equal(where(parent, {x: 5}), false);
+    });
+
+    it('handles undefined props on spec', function () {
+        parent.b = undefined;
+        assert.equal(where({z: undefined}, parent), false);
+        assert.equal(where({a: undefined}, parent), true);
+        assert.equal(where({b: undefined}, parent), true);
+    });
 });
 
 describe('mixin', function () {

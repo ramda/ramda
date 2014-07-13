@@ -1957,32 +1957,31 @@
                     f1(obj1, obj2);
         };
 
-
         /**
          * XXX
          */
         // internal helper for `where`
         function satisfiesSpec(spec, parsedSpec, testObj) {
             if (spec === testObj) { return true; }
-            if (testObj == null) { return false; }
-            parsedSpec.fn = parsedSpec.fn || [];
-            parsedSpec.obj = parsedSpec.obj || [];
-            var key, val, i = -1, fnLen = parsedSpec.fn.length, j = -1, objLen = parsedSpec.obj.length;
-            while (++i < fnLen) {
-                key = parsedSpec.fn[i];
-                val = spec[key];
-                if (!hasOwnProperty.call(testObj, key)) {
-                    return false;
-                }
-                if (!val(testObj[key], testObj)) {
+            testObj = Object(testObj);
+            // parsed spec is an object {"true": [functions], "false": [non-functions]}
+            var funcProps = parsedSpec[true],
+                props = parsedSpec[false];
+            var key, val, tVal;
+            for (var i = 0, length = props ? props.length : 0; i < length; i++) {
+                key = props[i];
+                tVal = testObj[key];
+                if (!(tVal !== undef || key in testObj) || spec[key] !== tVal) {
                     return false;
                 }
             }
-            while (++j < objLen) {
-                key = parsedSpec.obj[j];
-                if (spec[key] !== testObj[key]) {
-                    return false;
-                }
+            for (i = 0, length = funcProps ? funcProps.length : 0; i < length; i++) {
+                key = funcProps[i];
+                val = spec[key];
+                tVal = testObj[key];
+                if (!(tVal !== undef || key in testObj) || !val(tVal, testObj)) { 
+                    return false; 
+                }                
             }
             return true;
         }
@@ -1990,8 +1989,8 @@
         /**
          * XXX
          */
-        // `where` takes a spec object and a test object and returns true if the test satisfies the spec.
-        // Any property on the spec that is not a function is interpreted as an equality
+        // `where` takes a spec object and a test object and returns true if the test satisfies the spec. 
+        // Any property on the spec that is not a function is interpreted as an equality 
         // relation. For example:
         //
         //     var spec = {x: 2};
@@ -2013,8 +2012,8 @@
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
         R.where = function where(spec, testObj) {
-            var parsedSpec = R.partition(function(key) {
-                    return typeof spec[key] === "function" ? "fn" : "obj";
+            var parsedSpec = R.partition(function(key) { 
+                    return typeof spec[key] === "function";
                 }, keys(spec)
             );
             switch (arguments.length) {
