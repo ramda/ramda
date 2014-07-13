@@ -24,6 +24,10 @@ describe('uniq', function() {
         var arr = [1,2,3,1,2,3,1,2,3];
         assert.deepEqual(uniq(arr), [1,2,3]);
     });
+    
+    it('keeps elements from the left', function() {
+      assert.deepEqual(uniq([1, 2, 3, 4, 1]), [1,2,3,4]); 
+    });
 
     it('returns an empty array for an empty array', function() {
         assert.deepEqual(uniq([]), []);

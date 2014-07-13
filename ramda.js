@@ -1442,8 +1442,8 @@
          */
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        var uniq = R.uniq = foldr(function (acc, x) {
-            return (contains(x, acc)) ? acc : prepend(x, acc);
+        var uniq = R.uniq = foldl(function (acc, x) {
+            return (contains(x, acc)) ? acc : append(x, acc);
         }, []);
 
         /**
@@ -1451,8 +1451,12 @@
          */
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
-            for (var i = 0; i < list.length; i++) {
-                if (indexOf(list, list[i], i+1) >= 0) return false;
+            var len = list.length;
+            var i = -1;
+            while (++i < len) {
+                if (indexOf(list, list[i], i+1) >= 0) {
+                    return false;
+                }
             }
             return true;
         };
