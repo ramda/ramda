@@ -1468,8 +1468,8 @@
         // returned by applying the supplied predicate to two list elements.   Equality is strict here,  meaning
         // reference equality for objects and non-coercing equality for primitives.
         var uniqWith = R.uniqWith = curry2(function(pred, list) {
-            return foldr(function (acc, x) {
-                return (containsWith(pred, x, acc)) ? acc : prepend(x, acc);
+            return foldl(function (acc, x) {
+                return (containsWith(pred, x, acc)) ? acc : append(x, acc);
             }, [], list);
         });
 
