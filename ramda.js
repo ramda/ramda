@@ -1451,14 +1451,8 @@
          */
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
-            var i = list.length;
-            var copy = R.clone(list);
-            while(--i > 0) {
-                var elem = copy[i];
-                copy.length -= 1;
-                if (R.contains(elem, copy)) {
-                    return false;
-                }
+            for (var i = 0; i < list.length; i++) {
+                if (indexOf(list, list[i], i+1) >= 0) return false;
             }
             return true;
         };
