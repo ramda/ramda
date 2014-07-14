@@ -30,15 +30,13 @@
         // ---------------------------------
 
         /**
-         * A function that does nothing. Frequently known as a noop, for no operation.
+         * A reference to the `undefined` value.
          *
-         * @private
-         * @category Internal
-         * @return {Undefined} Returns undefined.
-         * @example
+         * Note that this is defined as the result of calling an empty function because JSHint
+         * complains about these constructs:
          *
-         * undef(2); //=> undefined
-         * undef('nothing'); //=> undefined
+         * var undef = void 0;
+         * var undef = undefined;
          */
         var undef = (function () {})();
 
@@ -2107,7 +2105,7 @@
          */
         // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
         // meaning reference equality for objects and non-coercing equality for primitives.
-        
+
         var uniq = R.uniq = function uniq(list) {
             var idx = -1, len = list.length;
             var result = [], item;
