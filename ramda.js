@@ -155,13 +155,14 @@
          * @return {Function} A new, curried function.
          * @example
          *
-         * var discriminant = function(a, b, c, d) {
-         *   return (b * b - 4 * a * c) / d;
+         * var addFourNumbers = function(a, b, c, d) {
+         *   return a + b + c + d;
          * };
-         * var curriedDiscriminant = curry(discriminant);
-         * var f = curriedDiscriminant(1, 2);
+         *
+         * var curriedAddFourNumbers = curry(addFourNumbers);
+         * var f = curriedAddFourNumbers(1, 2);
          * var g = f(3);
-         * g(4);//=> -2
+         * g(4);//=> 10
          */
         var curry = R.curry = function (fn, fnArity) {
             fnArity = typeof fnArity === "number" ? fnArity : fn.length;
