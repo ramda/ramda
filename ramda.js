@@ -143,9 +143,12 @@
         };
 
         /**
-         * Creates a new version of `fn` that, when invoked, will return a new function until all of
-         * `fn`'s arguments have been provided or its result if all of `fn`'s expected arguments
-         * have been provided. Optionally, you may provide an arity for the returned function.
+         * Creates a new version of `fn` that, when invoked, will return either:
+         * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
+         * `fn`'s expected arguments have not yet been provided
+         * - `fn`'s result if all of its expected arguments have been provided
+         *
+         * Optionally, you may provide an arity for the returned function.
          *
          * @static
          * @memberOf R
