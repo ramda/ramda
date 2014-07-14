@@ -878,19 +878,13 @@
          * @param {Array} list1 The first list to merge.
          * @param {Array} list2 The second set to merge.
          * @return {Array} A new array consisting of the contents of `list1` followed by the
-         * contents of `list2`.
+         * contents of `list2`. If, instead of an {Array} for `list1`, you pass an object with a `concat`
+         * method on it, `concat` will call `list1.concat` and it the value of `list2`.
          * @example
          *
-         * ramda.merge([], []); //=> []
-         * ramda.merge([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
-         */
-        var merge = R.merge = curry2(concat);
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         *
-         * XXX: How is this different than R.merge? Delegation to native method? Could we settle on
-         * one of these methods, and have one alias to the other?
+         * ramda.concat([], []); //=> []
+         * ramda.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+         * ramda.concat("ABC", "DEF"); // "ABCDEF"
          */
         R.concat = curry2(function(set1, set2) {
             return (hasMethod('concat', set1)) ? set1.concat(set2) : concat(set1, set2);
@@ -3216,7 +3210,7 @@
          * TODO: JSDoc-style documentation for this function
          */
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
-        R.union = compose(uniq, merge);
+        R.union = compose(uniq, R.concat);
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -3224,7 +3218,7 @@
         // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
         // determined according to the value returned by applying the supplied predicate to two list elements.
         R.unionWith = curry3(function (pred, list1, list2) {
-            return uniqWith(pred, merge(list1, list2));
+            return uniqWith(pred, concat(list1, list2));
         });
 
         /**

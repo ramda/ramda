@@ -51,17 +51,14 @@ describe('append', function() {
     });
 });
 
-describe('merge', function() {
-    var merge = Lib.merge;
-
-    it('adds combines the elements of the two lists', function() {
-        assert.deepEqual(merge(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
-        assert.deepEqual(merge([], ['c', 'd']), ['c', 'd']);
-    });
-});
-
 describe('concat', function() {
     var concat = Lib.concat;
+
+    it('adds combines the elements of the two lists', function() {
+        assert.deepEqual(concat(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
+        assert.deepEqual(concat([], ['c', 'd']), ['c', 'd']);
+    });
+
     var z1 = {
       x: 'z1',
       concat: function(that) { return this.x + ' ' + that.x; }
