@@ -46,9 +46,9 @@
          * @private
          * @category Internal
          * @param {string} oldName The name of the public function to alias.
-         * @return {Function} Returns a function decorated with the `is`, `are`, and `and` methods.
-         * Create an alias for the `oldName function by invoking any of these methods an passing it
-         * a string with the `newName` parameter.
+         * @return {Function} A function decorated with the `is`, `are`, and `and` methods. Create
+         * an alias for the `oldName function by invoking any of these methods an passing it a
+         * string with the `newName` parameter.
          * @example
          *
          * // Create an alias for `each` named `forEach`
@@ -71,7 +71,7 @@
          * @param {Arguments|Array} args The array or arguments object to consider.
          * @param {number} [from=0] The array index to slice from, inclusive.
          * @param {number} [to=args.length] The array index to slice to, exclusive.
-         * @return {Array} Returns a new, sliced array.
+         * @return {Array} A new, sliced array.
          * @example
          *
          * _slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
@@ -101,7 +101,7 @@
          * @category Internal
          * @param {Array|Arguments} [set1=[]] An array-like object.
          * @param {Array|Arguments} [set2=[]] An array-like object.
-         * @return {Array} Returns a new, merged array.
+         * @return {Array} A new, merged array.
          * @example
          *
          * concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
@@ -131,7 +131,7 @@
          * @private
          * @category Internal
          * @param {*} val The object to test.
-         * @return {boolean} Returns `true` if `val` is an array, `false` otherwise.
+         * @return {boolean} `true` if `val` is an array, `false` otherwise.
          * @example
          *
          * isArray([]); //=> true
@@ -152,7 +152,7 @@
          * @category Function
          * @param {Function} fn The function to curry.
          * @param {number} [fnArity=fn.length] An optional arity for the returned function.
-         * @return {Function} Returns a new, curried function.
+         * @return {Function} A new, curried function.
          * @example
          *
          * var discriminant = function(a, b, c, d) {
@@ -189,7 +189,7 @@
          * @private
          * @category Function
          * @param {Function} fn The function to curry.
-         * @return {boolean} Returns `true` if `val` is an array, `false` otherwise.
+         * @return {boolean} `true` if `val` is an array, `false` otherwise.
          * @example
          *
          * var addTwo = function(a, b) {
@@ -215,7 +215,7 @@
          * @private
          * @category Function
          * @param {Function} fn The function to curry.
-         * @return {boolean} Returns `true` if `val` is an array, `false` otherwise.
+         * @return {boolean} `true` if `val` is an array, `false` otherwise.
          * @example
          *
          * var addThree = function(a, b, c) {
@@ -247,7 +247,7 @@
          * @category Internal
          * @param {Function} methodName The name of the method to check for.
          * @param {Function} obj The object to test.
-         * @return {boolean} Returns `true` has a given method, `false` otherwise.
+         * @return {boolean} `true` has a given method, `false` otherwise.
          * @example
          *
          * var person = { name: 'John' };
@@ -288,8 +288,8 @@
          * @category Function
          * @param {number} n The desired arity of the new function.
          * @param {Function} fn The function to wrap.
-         * @return {Function} Returns a new function wrapping `fn`. The new function is guaranteed
-         * to be of arity `n`.
+         * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
+         * arity `n`.
          * @example
          *
          * var takesTwoArgs = function(a, b) {
@@ -358,8 +358,8 @@
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to wrap.
-         * @return {Function} Returns a new function wrapping `fn`. The new function is guaranteed
-         * to be of arity 1.
+         * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
+         * arity 1.
          * @example
          *
          * var takesTwoArgs = function(a, b) {
@@ -385,8 +385,8 @@
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to wrap.
-         * @return {Function} Returns a new function wrapping `fn`. The new function is guaranteed
-         * to be of arity 2.
+         * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
+         * arity 2.
          * @example
          *
          * var takesThreeArgs = function(a, b, c) {
@@ -414,8 +414,8 @@
          * @category Function
          * @param {number} n The desired arity of the returned function.
          * @param {Function} fn The function to wrap.
-         * @return {Function} Returns a new function wrapping `fn`. The new function is guaranteed
-         * to be of arity `n`.
+         * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
+         * arity `n`.
          * @example
          *
          * var takesTwoArgs = function(a, b) {
@@ -489,8 +489,7 @@
          * @param {string} name The name of the method to wrap.
          * @param {Object} obj The object to search for the `name` method.
          * @param [len] The desired arity of the wrapped method.
-         * @return {Function} Returns a new function or `undefined` if the specified method is not
-         * found.
+         * @return {Function} A new function or `undefined` if the specified method is not found.
          * @example
          *
          * var numbers = [1, 2, 3];
@@ -537,7 +536,7 @@
          * @category Function
          * @param {Function} fn The function to wrap.
          * @param {...Function} transformers A variable number of transformer functions
-         * @return {Function} Returns the wrapped function.
+         * @return {Function} The wrapped function.
          * @example
          *
          * var double = function(y) { return y * 2; };
@@ -617,7 +616,7 @@
          * @category List
          * @param {Function} fn The function to invoke. Receives one argument, `value`.
          * @param {Array} list The list to iterate over.
-         * @return {Array} Returns the original list.
+         * @return {Array} The original list.
          * @example
          *
          * ramda.each(function(num) {
@@ -659,7 +658,7 @@
          * @param {Function} fn The function to invoke. Receives three arguments: (`value`, `index`,
          * `list`).
          * @param {Array} list The list to iterate over.
-         * @return {Array} Returns the original list.
+         * @return {Array} The original list.
          * @example
          *
          * // Note that having access to the original `list` allows for mutation. While you *can* do
@@ -689,7 +688,7 @@
          * @memberOf R
          * @category Array
          * @param {Array} list The list to clone.
-         * @return {Array} Returns a new copy of the original list.
+         * @return {Array} A new copy of the original list.
          * @example
          *
          * var numbers = [1, 2, 3];
@@ -716,8 +715,8 @@
          * @memberOf R
          * @category Array
          * @param {Array} arr The array to consider.
-         * @return {boolean} Returns true if the `arr` argument has a length of 0 or if `arr` is a
-         * falsy value (e.g. undefined).
+         * @return {boolean} `true` if the `arr` argument has a length of 0 or if `arr` is a falsy
+         * value (e.g. undefined).
          * @example
          *
          * ramda.isEmpty([1, 2, 3]); //=> false
@@ -739,7 +738,7 @@
          * @alias cons
          * @param {*} el The item to add to the head of the output list.
          * @param {Array} arr The array to add to the tail of the output list.
-         * @return {Array} Returns a new array.
+         * @return {Array} A new array.
          * @example
          *
          * ramda.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
@@ -758,7 +757,7 @@
          * @category Array
          * @alias car, first
          * @param {Array} [arr=[]] The array to consider.
-         * @return {*} Returns the first element of the list, or `undefined` if the list is empty.
+         * @return {*} The first element of the list, or `undefined` if the list is empty.
          * @example
          *
          * ramda.head(['fi', 'fo', 'fum']); //=> 'fi'
@@ -777,7 +776,7 @@
          * @memberOf R
          * @category Array
          * @param {Array} [arr=[]] The array to consider.
-         * @return {*} Returns the last element of the list, or `undefined` if the list is empty.
+         * @return {*} The last element of the list, or `undefined` if the list is empty.
          * @example
          *
          * ramda.last(['fi', 'fo', 'fum']); //=> 'fum'
@@ -796,8 +795,8 @@
          * @category Array
          * @alias cdr
          * @param {Array} [arr=[]] The array to consider.
-         * @return {Array} Returns a new array containing all but the first element of the input
-         * list, or an empty list if the input list is a falsy value (e.g. `undefined`).
+         * @return {Array} A new array containing all but the first element of the input list, or an
+         * empty list if the input list is a falsy value (e.g. `undefined`).
          * @example
          *
          * ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
@@ -820,7 +819,7 @@
          * @memberOf R
          * @category Array
          * @param {*} x The element to consider.
-         * @return {boolean} Returns true if `x` is an atom, and false otherwise.
+         * @return {boolean} `true` if `x` is an atom, and `false` otherwise.
          * @example
          *
          * ramda.isAtom([]); //=> false
@@ -847,8 +846,7 @@
          * @param {*} el The element to add to the end of the new list.
          * @param {Array} list The list whose contents will be added to the beginning of the output
          * list.
-         * @return {Array} Returns a new list containing the contents of the old list followed by
-         * `el`.
+         * @return {Array} A new list containing the contents of the old list followed by `el`.
          * @example
          *
          * ramda.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
@@ -870,7 +868,7 @@
          * @category Array
          * @param {Array} list1 The first list to merge.
          * @param {Array} list2 The second set to merge.
-         * @return {} Returns a new array consisting of the contents of `list1` followed by the
+         * @return {Array} A new array consisting of the contents of `list1` followed by the
          * contents of `list2`.
          * @example
          *
@@ -898,7 +896,7 @@
          * @category Core
          * @alias I
          * @param {*} x The value to return.
-         * @return {*} Returns the input value, `x`.
+         * @return {*} The input value, `x`.
          * @example
          *
          * ramda.identity(1); //=> 1
@@ -924,7 +922,7 @@
          * @category List
          * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
          * @param {number} n A value between `0` and `n - 1`. Increments after each function call.
-         * @return {Array} Returns an array containing the return values of all calls to `fn`.
+         * @return {Array} An array containing the return values of all calls to `fn`.
          * @example
          *
          * ramda.times(function(n) { return n; }, 5); //=> [0, 1, 2, 3, 4]
@@ -947,7 +945,7 @@
          * @category Array
          * @param {*} value The value to repeat.
          * @param {number} n The desired size of the output list.
-         * @return {Array} Returns a new array containing `n` `value`s.
+         * @return {Array} A new array containing `n` `value`s.
          * @example
          *
          * ramda.repeatN('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
@@ -974,7 +972,7 @@
          * @category Function
          * @param {Function} f The function to partially apply `a` onto.
          * @param {*} a The argument to partially apply onto `f`.
-         * @return {Function} Returns a new function.
+         * @return {Function} A new function.
          * @example
          *
          * var addThree = function(a, b, c) {
@@ -1009,7 +1007,7 @@
          * @category Function
          * @param {Function} f A function.
          * @param {Function} g A function.
-         * @return {Function} Returns a new function that is the equivalent of `f(g(x))`.
+         * @return {Function} A new function that is the equivalent of `f(g(x))`.
          * @example
          *
          * var double = function(x) { return x * 2; };
@@ -1038,9 +1036,9 @@
          * @memberOf R
          * @category Function
          * @param {...Function} functions A variable number of functions.
-         * @return {Function} Returns a new function which represents the result of calling each
-         * of the input `functions`, passing the result of each function call to the next, from
-         * right to left.
+         * @return {Function} A new function which represents the result of calling each of the
+         * input `functions`, passing the result of each function call to the next, from right to
+         * left.
          * @example
          *
          * var triple = function(x) { return x * 2; };
@@ -1073,9 +1071,9 @@
          * @memberOf R
          * @category Function
          * @param {...Function} functions A variable number of functions.
-         * @return {Function} Returns a new function which represents the result of calling each
-         * of the input `functions`, passing the result of each function call to the next, from
-         * right to left.
+         * @return {Function} A new function which represents the result of calling each of the
+         * input `functions`, passing the result of each function call to the next, from right to
+         * left.
          * @example
          *
          * var triple = function(x) { return x * 2; };
@@ -1101,8 +1099,7 @@
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to invoke with its first two parameters reversed.
-         * @return {*} Returns the result of invoking `fn` with its first two parameters' order
-         * reversed.
+         * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
          * @example
          *
          * var mergeThree = function(a, b, c) {
@@ -1132,7 +1129,7 @@
          * @category Function
          * @param {Function} fn The function to invoke.
          * @param {...*} [args] Arguments to prepend to `fn` when the returned function is invoked.
-         * @return {Function} Returns a new function wrapping `fn`. When invoked, it will call `fn`
+         * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn`
          * with `args` prepended to `fn`'s arguments list.
          * @example
          *
@@ -1171,8 +1168,8 @@
          * @category Function
          * @param {Function} fn The function to invoke.
          * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
-         * @return {Function} Returns a new function wrapping `fn`. When invoked, it will call `fn`
-         * with `args` appended to `fn`'s arguments list.
+         * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
+         * `args` appended to `fn`'s arguments list.
          * @example
          *
          * var greet = function(salutation, title, firstName, lastName) {
@@ -1241,7 +1238,7 @@
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to wrap in a call-only-once wrapper.
-         * @return {Function} Returns the wrapped function.
+         * @return {Function} The wrapped function.
          * @example
          *
          * var alertOnce = ramda.once(alert);
@@ -1270,7 +1267,7 @@
          * @category Function
          * @param {Function} fn The function to wrap.
          * @param {Function} wrapper The wrapper function.
-         * @return {Function} Returns the wrapped function.
+         * @return {Function} The wrapped function.
          * @example
          *
          * TODO
@@ -1289,7 +1286,7 @@
          * @memberOf R
          * @category Function
          * @param {Function} Fn The constructor function to wrap.
-         * @return {Function} Returns a wrapped, curried constructor function.
+         * @return {Function} A wrapped, curried constructor function.
          * @example
          *
          * // Constructor function
@@ -1333,7 +1330,7 @@
          * @param {Function} fn2 A function. It will be invoked with the arguments passed to the
          * returned function. Afterward, its resulting value will be passed to `after` as its second
          * argument.
-         * @return {Function} Returns a new function.
+         * @return {Function} A new function.
          * @example
          *
          * var add = function(a, b) { return a + b; };
@@ -1389,7 +1386,7 @@
          * current element from the array.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} Returns the final, accumulated value.
+         * @return {*} The final, accumulated value.
          * @example
          *
          * var numbers = [1, 2, 3];
@@ -1428,7 +1425,7 @@
          * current element from `list`, that element's index, and the entire `list` itself.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} Returns the final, accumulated value.
+         * @return {*} The final, accumulated value.
          * @example
          *
          * var letters = ['a', 'b', 'c'];
@@ -1470,7 +1467,7 @@
          * current element from the array.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} Returns the final, accumulated value.
+         * @return {*} The final, accumulated value.
          * @example
          *
          * var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
@@ -1510,7 +1507,7 @@
          * current element from `list`, that element's index, and the entire `list` itself.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
-         * @return {*} Returns the final, accumulated value.
+         * @return {*} The final, accumulated value.
          * @example
          *
          * var letters = ['a', 'b', 'c'];
@@ -1546,7 +1543,7 @@
          * 0 of this array will be added to the resulting array, and the element at index 1 will be
          * passed to the next call to `fn`.
          * @param {*} seed The seed value.
-         * @return {Array} Returns the final list.
+         * @return {Array} The final list.
          * @example TODO
          */
         R.unfoldr = curry2(function (fn, seed) {
@@ -1572,7 +1569,7 @@
          * @category List
          * @param {Function} fn The function to be called on every element of the input `list`.
          * @param {Array} list The list to be iterated over.
-         * @return {Array} Returns the new list.
+         * @return {Array} The new list.
          * @example
          *
          * var double = function(x) {
@@ -1607,7 +1604,7 @@
          * @category List
          * @param {Function} fn The function to be called on every element of the input `list`.
          * @param {Array} list The list to be iterated over.
-         * @return {Array} Returns the new list.
+         * @return {Array} The new list.
          * @example
          *
          * var squareEnds = function(elt, idx, list) {
@@ -1642,8 +1639,8 @@
          * @param {Array} fn A function called for each property in `obj`. Its return value will
          * become a new property on the return object.
          * @param {Object} obj The object to iterate over.
-         * @return {Object} Returns new object with the same keys as `obj` and values that are the
-         * result of running each property through `fn`.
+         * @return {Object} A new object with the same keys as `obj` and values that are the result
+         * of running each property through `fn`.
          * @example
          *
          * var values = { x: 1, y: 2, z: 3 };
@@ -1671,8 +1668,8 @@
          * @param {Array} fn A function called for each property in `obj`. Its return value will
          * become a new property on the return object.
          * @param {Object} obj The object to iterate over.
-         * @return {Object} Returns new object with the same keys as `obj` and values that are the
-         * result of running each property through `fn`.
+         * @return {Object} A new object with the same keys as `obj` and values that are the result
+         * of running each property through `fn`.
          * @example
          *
          * var values = { x: 1, y: 2, z: 3 };
@@ -1699,7 +1696,7 @@
          * @memberOf R
          * @category List
          * @param {Array} arr The array to inspect.
-         * @return {number} Returns the size of the array.
+         * @return {number} The size of the array.
          * @example
          *
          * ramda.size([]); //=> 0
@@ -1722,7 +1719,7 @@
          * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
-         * @return {Array} Returns the new filtered array.
+         * @return {Array} The new filtered array.
          * @example
          *
          * var isEven = function(n) {
@@ -1754,7 +1751,7 @@
          * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
-         * @return {Array} Returns the new filtered array.
+         * @return {Array} The new filtered array.
          * @example
          *
          * var lastTwo = function(val, idx, list) {
@@ -1786,7 +1783,7 @@
          * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
-         * @return {Array} Returns the new filtered array.
+         * @return {Array} The new filtered array.
          * @example
          *
          * var isEven = function(n) {
@@ -1809,7 +1806,7 @@
          * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
-         * @return {Array} Returns the new filtered array.
+         * @return {Array} The new filtered array.
          * @example
          *
          * var lastTwo = function(val, idx, list) {
@@ -1833,7 +1830,7 @@
          * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
-         * @return {Array} Returns a new array.
+         * @return {Array} A new array.
          * @example
          *
          * var isNotFour = function(x) {
@@ -1861,7 +1858,7 @@
          * @category List
          * @param {number} n The number of elements to return.
          * @param {Array} list The array to query.
-         * @return {Array} Returns a new array containing the first elements of `list`.
+         * @return {Array} A new array containing the first elements of `list`.
          */
         R.take = curry2(function(n, list) {
             if (hasMethod('take', list)) {
@@ -1883,7 +1880,7 @@
          * @category List
          * @param {Function} fn The function called per iteration.
          * @param {Array} list The collection to iterate over.
-         * @return {Array} Returns a new array.
+         * @return {Array} A new array.
          * @example
          *
          * var isNotTwo = function(x) {
@@ -1906,7 +1903,7 @@
          * @category List
          * @param {number} n The number of elements of `list` to skip.
          * @param {Array} list The array to consider.
-         * @return {Array} Returns the last `n` elements of `list`.
+         * @return {Array} The last `n` elements of `list`.
          */
         R.skip = curry2(function(n, list) {
             if (hasMethod('skip', list)) {
