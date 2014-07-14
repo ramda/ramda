@@ -493,9 +493,14 @@
          * @return {Function} A new function or `undefined` if the specified method is not found.
          * @example
          *
-         * var numbers = [1, 2, 3];
-         * var toString = invoker('toString', Array.prototype);
-         * toString(numbers); //=> '1,2,3'
+         *
+         * var charAt = ramda.invoker('charAt', String.prototype);
+         * charAt(6, 'abcdefghijklm'); //=> 'g'
+         *
+         * var join = ramda.invoker('join', Array.prototype);
+         * var firstChar = charAt(0);
+         * join('', ramda.map(firstChar, ["light", "ampliifed", "stimulated", "emission", "radiation"]));
+         * //=> 'laser'
          */
         var invoker = R.invoker = function (name, obj, len) {
             var method = obj[name];
