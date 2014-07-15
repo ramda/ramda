@@ -2611,16 +2611,39 @@
          */
         R.pickAll = curry2(pickAll);
 
+
+        /**
+         * Assigns own enumerable properties of source object(s) to the destination
+         * object. Subsequent sources overwrite property assignments of previous sources.
+         *
+         * @static
+         * @memberOf R
+         * @category Object
+         * @param {Object} object The destination object.
+         * @param {Object} source The source object.
+         * @param {Function} [customizer] The function to customize assigning values.
+         * @returns {Object} Returns the destination object.
+         *
+         * @example
+         * R.extend({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+         * // => { 'name': 'fred', 'age': 40 }
+         */
+        var extend = R.extend = curry2(function(source, items) {
+            var props = keys(items),
+                i = -1,
+                length = props.length;
+            while (++i < length) {
+                source[props[i]] = items[props[i]];
+            }
+            return source;
+        });
+
         /**
          * TODO: JSDoc-style documentation for this function
          */
         // Returns a new object that mixes in the own properties of two objects.
         R.mixin = curry2(function(a, b) {
-            var mixed = pickAll(R.keys(a), a);
-            each(function(key) {
-                mixed[key] = b[key];
-            }, R.keys(b));
-            return mixed;
+            return extend(extend({}, a), b);
         });
 
         /**
@@ -2725,10 +2748,7 @@
         // Expose the functions from ramda as properties on another object.  If the passed-in object is the
         // global object, or the passed-in object is "falsy", then the ramda functions become global functions.
         R.installTo = function(obj) {
-            each(function(key) {
-                (obj || global)[key] = R[key];
-            })(keys(R));
-            return R;
+            return extend(obj || global, R);
         };
 
         /**
