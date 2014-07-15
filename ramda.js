@@ -2728,6 +2728,7 @@
             each(function(key) {
                 (obj || global)[key] = R[key];
             })(keys(R));
+            return R;
         };
 
         /**
