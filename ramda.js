@@ -2613,35 +2613,42 @@
 
 
         /**
-         * Assigns own enumerable properties of source object(s) to the destination
-         * object. Subsequent sources overwrite property assignments of previous sources.
+         * Assigns own enumerable properties of the other object to the destination
+         * object prefering items in other.
+         *
+         * @private
+         * @param {Object} object The destination object.
+         * @param {Object} other The other object to merge with destination.
+         * @returns {Object} Returns the destination object.
+         *
+         * @example
+         * extend({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+         * // => { 'name': 'fred', 'age': 40 }
+         */
+        function extend(destination, other) {
+            var props = keys(other),
+                i = -1, length = props.length;
+            while (++i < length) {
+                destination[props[i]] = other[props[i]];
+            }
+            return destination;
+        }
+
+        /**
+         * Create a new object with the own properties of a
+         * merged with the own properties of object b.
          *
          * @static
          * @memberOf R
          * @category Object
-         * @param {Object} object The destination object.
-         * @param {Object} source The source object.
-         * @param {Function} [customizer] The function to customize assigning values.
+         * @param {Object} a source object
+         * @param {Object} b object with higher precendence in output
          * @returns {Object} Returns the destination object.
          *
          * @example
-         * R.extend({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+         * mixin({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
          * // => { 'name': 'fred', 'age': 40 }
          */
-        var extend = R.extend = curry2(function(source, items) {
-            var props = keys(items),
-                i = -1,
-                length = props.length;
-            while (++i < length) {
-                source[props[i]] = items[props[i]];
-            }
-            return source;
-        });
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Returns a new object that mixes in the own properties of two objects.
         R.mixin = curry2(function(a, b) {
             return extend(extend({}, a), b);
         });
