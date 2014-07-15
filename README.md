@@ -22,9 +22,13 @@ We will certainly try to keep some of the normal features of Javascript
 that seem to be unusual in functional languages, including variable 
 length function signatures and functions as objects with properties.
 
+Ramda will never be a drop-in replacement for Underscore (or LoDash, or 
+even a drop-in-and-mechanically-switch-the-parameter-order-everywhere 
+replacement.) It is intended to work with a different style of coding. 
 Functional programming is in good part about immutable objects and 
-side-effect free functions.  We will stick to that as much as feasible, 
-but will not be dogmatic about it.
+side-effect free functions. While Ramda does not expect to do anything to 
+*enforce* that style, its code should always work to make that style as 
+frictionless as possible.
 
 As much as we can, we would like the implementation to be both clean and 
 elegant.  But the API is king: we will sacrifice a great deal of 
