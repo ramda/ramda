@@ -294,5 +294,25 @@ describe('mixin', function () {
         var b = {w: 100, y: 3, z: 4};
         assert.deepEqual(mixin(a, b), {w: 100, x: 2, y: 3, z: 4});
     });
-});
 
+    it('should not be destructive', function() {
+        var a = {w: 1, x: 2};
+        var res = mixin(a, {x: 5});
+        assert.notEqual(a, res);
+        assert.deepEqual(res, {w: 1, x: 5});
+    });
+
+    it('only own properties', function() {
+        var a = {w: 1, x: 2};
+        function Cla() {}
+        Cla.prototype.x = 5;
+        assert.deepEqual(mixin(new Cla, a), {w: 1, x: 2});
+        assert.deepEqual(mixin(a, new Cla), {w: 1, x: 2});
+    });
+
+    it('outta be curried', function () {
+        var curried = mixin({w: 1, x: 2});
+        var b = {y: 3, z: 4};
+        assert.deepEqual(curried(b), {w: 1, x: 2, y: 3, z: 4});
+    });
+});
