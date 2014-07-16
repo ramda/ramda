@@ -2322,7 +2322,9 @@
         // copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
         R.remove = curry3(function(start, count, list) {
-            return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
+            return start === 0 ? 
+                _slice(list, Math.min(list.length, count)) : 
+                concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
         });
 
         /**
