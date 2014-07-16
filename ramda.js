@@ -82,8 +82,8 @@
          * firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
          */
         var _slice = function (args, from, to) {
-            from = from || 0;
-            to = to || args.length;
+            from = (typeof from === "number" ) ? from : 0;
+            to = (typeof to === "number" ) ? to : args.length;
             var length = to - from,
                 arr = new Array(length),
                 i = -1;
@@ -2322,9 +2322,7 @@
         // copy of the list with the changes.
         // <small>No lists have been harmed in the application of this function.</small>
         R.remove = curry3(function(start, count, list) {
-            return start === 0 ? 
-                _slice(list, Math.min(list.length, count)) : 
-                concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
+            return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
         });
 
         /**
