@@ -2350,14 +2350,6 @@
         /**
          * TODO: JSDoc-style documentation for this function
          */
-        // Returns the `n`th element of a list (zero-indexed)
-        R.nth = function (n, list) {
-             return arguments.length < 2 ? function _nth(list) { return list[n]; } : list[n];
-        };
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
         // Makes a comparator function out of a function that reports whether the first element is less than the second.
         //
         //     var cmp = comparator(function(a, b) {
@@ -2429,7 +2421,6 @@
             if (typeof fn === "function") { fn(x); }
             return x;
         });
-        aliasFor("tap").is("K");
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -2447,7 +2438,7 @@
         var prop = R.prop = function (p, obj) {
             return arguments.length < 2 ? function _prop(obj) { return obj[p]; } :  obj[p];
         };
-        aliasFor("prop").is("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
+        aliasFor("prop").is("nth").and("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
 
         /**
@@ -2482,7 +2473,7 @@
                 return val;
             };
         };
-        aliasFor("always").is("constant");
+        aliasFor("always").is("constant").and("K");
 
 
         /**
