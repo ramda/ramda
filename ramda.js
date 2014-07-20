@@ -265,15 +265,17 @@
         };
 
         /**
-         * TODO
+         * Private function that generates a parameter list based on the paremeter count passed in.
          *
          * @private
          * @category Internal
-         * @param {TODO} n TODO
-         * @return {string} TODO
+         * @param {number} n The number of parameters
+         * @return {string} The parameter list
          * @example
          *
-         * TODO
+         * mkArgStr(1); //= "arg1"
+         * mkArgStr(2); //= "arg1, arg2"
+         * mkArgStr(3); //= "arg1, arg2, arg3"
          */
         var mkArgStr = function (n) {
             var arr = [], idx = -1;
@@ -1273,7 +1275,12 @@
          * @return {Function} The wrapped function.
          * @example
          *
-         * TODO
+         * var slashify = wrap(flip(add)('/'), function(f, x) {
+         *  return match(/\/$/)(x) ? x : f(x)
+         * });
+         *
+         * slashify("a") //= "a/"
+         * slashify("a/") //= "a/"
          */
         R.wrap = function(fn, wrapper) {
             return function() {
@@ -1547,7 +1554,10 @@
          * passed to the next call to `fn`.
          * @param {*} seed The seed value.
          * @return {Array} The final list.
-         * @example TODO
+         * @example
+         *
+         * var f = function(n) { return n > 50 ? false : [-n, n + 10] };
+         * unfoldr(f, 10) //= [-10, -20, -30, -40, -50]
          */
         R.unfoldr = curry2(function (fn, seed) {
             var pair = fn(seed);
@@ -1917,7 +1927,21 @@
         aliasFor('skip').is('drop');
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the first element of the list which matches the predicate, or `undefined` if no
+         * element matches.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The predicate function used to determine if the element is the
+         * desired one.
+         * @param {Array} list The array to consider.
+         * @return {Object} The element found, or `undefined`.
+         * @example
+         *
+         * var xs = [{a: 1}, {a: 2}, {a: 3}];
+         * find(propEq("a", 2))(xs); //= {a: 2}
+         * find(propEq("a", 4))(xs); //= undefined
          */
         // Returns the first element of the list which matches the predicate, or `undefined` if no element matches.
         R.find = function (fn, list) {
@@ -1935,9 +1959,24 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the index of the first element of the list which matches the predicate, or `-1`
+         * if no element matches.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The predicate function used to determine if the element is the
+         * desired one.
+         * @param {Array} list The array to consider.
+         * @return {number} The index of the element found, or `-1`.
+         * @example
+         *
+         * var xs = [{a: 1}, {a: 2}, {a: 3}];
+         * find(propEq("a", 2))(xs); //= 1
+         * find(propEq("a", 4))(xs); //= -1
          */
-        // Returns the index of first element of the list which matches the predicate, or `undefined` if no element matches.
+        // Returns the index of first element of the list which matches the predicate, or `-1` if no
+        // element matches.
         R.findIndex = curry2(function(fn, list) {
             var idx = -1;
             var len = list.length;
@@ -1950,9 +1989,24 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the last element of the list which matches the predicate, or `undefined` if no
+         * element matches.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The predicate function used to determine if the element is the
+         * desired one.
+         * @param {Array} list The array to consider.
+         * @return {Object} The element found, or `undefined`.
+         * @example
+         *
+         * var xs = [{a: 1, b: 0}, {a:1, b: 1}];
+         * findLast(propEq("a", 1))(xs); //= {a: 1, b: 1}
+         * findLast(propEq("a", 4))(xs); //= undefined
          */
-        // Returns the last element of the list which matches the predicate, or `undefined` if no element matches.
+        // Returns the last element of the list which matches the predicate, or `undefined` if no
+        // element matches.
         R.findLast = curry2(function(fn, list) {
             var idx = list.length;
             while (--idx) {
@@ -1964,9 +2018,24 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the index of the last element of the list which matches the predicate, or
+         * `-1` if no element matches.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The predicate function used to determine if the element is the
+         * desired one.
+         * @param {Array} list The array to consider.
+         * @return {number} The index of the element found, or `-1`.
+         * @example
+         *
+         * var xs = [{a: 1, b: 0}, {a:1, b: 1}];
+         * findLastIndex(propEq("a", 1))(xs); //= 1
+         * findLastIndex(propEq("a", 4))(xs); //= -1
          */
-        // Returns the index of last element of the list which matches the predicate, or `undefined` if no element matches.
+        // Returns the last element of the list which matches the predicate, or `undefined` if no
+        // element matches.
         R.findLastIndex = curry2(function(fn, list) {
             var idx = list.length;
             while (--idx) {
@@ -1978,9 +2047,26 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns `true` if all elements of the list match the predicate, `false` if there are any
+         * that don't.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The predicate function.
+         * @param {Array} list The array to consider.
+         * @return {boolean} `true` if the predicate is satisfied by every element, `false`
+         * otherwise
+         * @example
+         *
+         * var lessThan2 = flip(lt)(2);
+         * var lessThan3 = flip(lt)(3);
+         * var xs = range(1, 3); //= [1, 2]
+         * all(lessThan2)(xs); //= false
+         * all(lessThan3)(xs); //= true
          */
-        // Returns `true` if all elements of the list match the predicate, `false` if there are any that don't.
+        // Returns `true` if all elements of the list match the predicate, `false` if there are any
+        // that don't.
         var all = function(fn, list) {
             var i = -1;
             while (++i < list.length) {
@@ -1995,9 +2081,26 @@
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns `true` if at least one of elements of the list match the predicate, `false`
+         * otherwise.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The predicate function.
+         * @param {Array} list The array to consider.
+         * @return {boolean} `true` if the predicate is satisfied by at least one element, `false`
+         * otherwise
+         * @example
+         *
+         * var lessThan0 = flip(lt)(0);
+         * var lessThan2 = flip(lt)(2);
+         * var xs = range(1, 3); //= [1, 2]
+         * any(lessThan0)(xs); //= false
+         * any(lessThan2)(xs); //= true
          */
-        // Returns `true` if any elements of the list match the predicate, `false` if none do.
+        // Returns `true` if all elements of the list match the predicate, `false` if there are any
+        // that don't.
         var any = function (fn, list) {
             var i = -1;
             while (++i < list.length) {
@@ -2073,10 +2176,26 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
+         * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Object} a The item to compare against.
+         * @param {Array} list The array to consider.
+         * @return {boolean} `true` if the item is in the list, `false` otherwise.
+         * @example
+         *
+         * contains(3)([1, 2, 3]); //= true
+         * contains(4)([1, 2, 3]); //= false
+         * contains({})([{}, {}]); //= false
+         * var obj = {};
+         * contains(obj)([{}, obj, {}]); //= true
          */
-        // Returns `true` if the list contains the sought element, `false` if it does not.  Equality is strict here,
-        // meaning reference equality for objects and non-coercing equality for primitives.
+        // Returns `true` if the list contains the sought element, `false` if it does not.  Equality
+        // is strict here, meaning reference equality for objects and non-coercing equality for
+        // primitives.
         function contains(a, list) {
             return indexOf(list, a) > -1;
         }
@@ -2101,11 +2220,24 @@
         R.containsWith = curry3(containsWith);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a new list containing only one copy of each element in the original list.
+         * Equality is strict here, meaning reference equality for objects and non-coercing equality
+         * for primitives.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The array to consider.
+         * @return {Array} The list of unique items.
+         * @example
+         *
+         * uniq([1, 1, 2, 1]); //= [1, 2]
+         * uniq([{}, {}]);     //= [{}, {}]
+         * uniq([1, "1"]);     //= [1, "1"]
          */
-        // Returns a new list containing only one copy of each element in the original list.  Equality is strict here,
-        // meaning reference equality for objects and non-coercing equality for primitives.
-
+        // Returns a new list containing only one copy of each element in the original list.
+        // Equality is strict here, meaning reference equality for objects and non-coercing equality
+        // for primitives.
         var uniq = R.uniq = function uniq(list) {
             var idx = -1, len = list.length;
             var result = [], item;
@@ -2134,11 +2266,23 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a new list containing only one copy of each element in the original list, based
+         * upon the value returned by applying the supplied predicate to two list elements. Prefers
+         * the first item if two items compare equal based on the predicate.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The array to consider.
+         * @return {Array} The list of unique items.
+         * @example
+         *
+         * var strEq = function(a, b) { return ("" + a) === ("" + b) };
+         * uniqWith(strEq)([1, "1", 2, 1]); //= [1, 2]
+         * uniqWith(strEq)([{}, {}]);       //= [{}]
+         * uniqWith(strEq)([1, "1", 1]);    //= [1]
+         * uniqWith(strEq)(["1", 1, 1]);    //= ["1"]
          */
-        // Returns a new list containing only one copy of each element in the original list, based upon the value
-        // returned by applying the supplied predicate to two list elements.   Equality is strict here,  meaning
-        // reference equality for objects and non-coercing equality for primitives.
         var uniqWith = R.uniqWith = curry2(function(pred, list) {
             var idx = -1, len = list.length;
             var result = [], item;
@@ -2153,7 +2297,18 @@
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a new list by plucking the same named property off all objects in the list supplied.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {string|number} key The key name to pluck off of each object.
+         * @param {Array} list The array to consider.
+         * @return {Array} The list of values for the given key.
+         * @example
+         *
+         * pluck("a")([{a: 1}, {a: 2}]); //= [1, 2]
+         * pluck(0)([[1, 2], [3, 4]]);   //= [1, 3]
          */
         // Returns a new list by plucking the same named property off all objects in the list supplied.
         var pluck = R.pluck = curry2(function(p, list) {
@@ -2161,7 +2316,18 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a new list by pulling every item out of it (and all its sub-arrays) and putting
+         * them in a new array, depth-first.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The array to consider.
+         * @return {Array} The flattened list.
+         * @example
+         *
+         * flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
+         * //= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
          */
         // Returns a list that contains a flattened version of the supplied list.  For example:
         //
@@ -2187,13 +2353,27 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list out of the two supplied by applying the function to each
+         * equally-positioned pair in the lists.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The function used to combine the two elements into one value.
+         * @param {Array} list1 The first array to consider.
+         * @param {Array} list2 The second array to consider.
+         * @return {Array} The list made by combining same-indexed elements of `list1` and `list2`
+         * using `fn`.
+         * @example
+         *
+         * zipWith(f, [1, 2, 3], ['a', 'b', 'c']);
+         * //= [f(1, 'a'), f(2, 'b'), f(3, 'c')]
          */
-        // Creates a new list out of the two supplied by applying the function to each equally-positioned pair in the
-        // lists.  For example,
+        // Creates a new list out of the two supplied by applying the function to each
+        // equally-positioned pair in the lists.  For example,
         //
-        //     zipWith(f, [1, 2, 3], ['a', 'b', 'c'])
-        //     //    => [f(1, 'a'), f(2, 'b'), f(3, 'c')];
+        //     zipWith(f, [1, 2, 3], ['a', 'b', 'c']);
+        //     //= [f(1, 'a'), f(2, 'b'), f(3, 'c')]
         //
         // Note that the output list will only be as long as the length of the shorter input list.
         R.zipWith = curry3(function(fn, a, b) {
@@ -2205,14 +2385,26 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list out of the two supplied by pairing up equally-positioned items from
+         * both lists. Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list1 The first array to consider.
+         * @param {Array} list2 The second array to consider.
+         * @return {Array} The list made by pairing up same-indexed elements of `list1` and `list2`.
+         * @example
+         *
+         * zip([1, 2, 3], ['a', 'b', 'c']);
+         * //= [[1, 'a'], [2, 'b'], [3, 'c']]
          */
-        // Creates a new list out of the two supplied by yielding the pair of each equally-positioned pair in the
-        // lists.  For example,
+        // Creates a new list out of the two supplied by yielding the pair of each
+        // equally-positioned pair in the lists.  For example,
         //
-        //     zip([1, 2, 3], ['a', 'b', 'c'])
-        //     //    => [[1, 'a'], [2, 'b'], [3, 'c']];
-        R.zip = curry2(function(a, b) { // = zipWith(prepend);
+        //     zip([1, 2, 3], ['a', 'b', 'c']);
+        //     //= [[1, 'a'], [2, 'b'], [3, 'c']]
+        R.zip = curry2(function(a, b) {
             var rv = [];
             var i = -1;
             var len = Math.min(a.length, b.length);
