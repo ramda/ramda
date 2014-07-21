@@ -2251,7 +2251,19 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns `true` if all elements are unique, otherwise `false`.
+         * Uniquness is determined using strict equality (`===`).
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The array to consider.
+         * @return {boolean} `true` if all elements are unique, else `false`.
+         * @example
+         *
+         * isSet(["1", 1]); //= true
+         * isSet([1, 1]);   //= false
+         * isSet([{}, {}]); //= true
          */
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function (list) {
@@ -2415,18 +2427,35 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list out of the two supplied by applying the function
+         * to each possible pair in the lists.
+         *
+         * @see xprod
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The function to join pairs with.
+         * @param {Array} as The first list.
+         * @param {Array} bs The second list.
+         * @return {Array} The list made by combining each possible pair from
+         * `as` and `bs` using `fn`.
+         * @example
+         *
+         * xProdWith(f, [1, 2], ['a', 'b'])
+         * //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
          */
-        // Creates a new list out of the two supplied by applying the function to each possible pair in the lists.
-        //  For example,
+        // Creates a new list out of the two supplied by applying the function
+        // to each possible pair in the lists.  For example,
         //
         //     xProdWith(f, [1, 2], ['a', 'b'])
-        //     //    => [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
+        //     //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
         R.xprodWith = curry3(function (fn, a, b) {
             if (isEmpty(a) || isEmpty(b)) {
                 return [];
             }
-            var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            // Better to push them all or to do `new Array(ilen * jlen)` and
+            // calculate indices?
+            var i = -1, ilen = a.length, j, jlen = b.length, result = [];
             while (++i < ilen) {
                 j = -1;
                 while (++j < jlen) {
@@ -2437,14 +2466,27 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list out of the two supplied by creating each possible
+         * pair from the lists.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} as The first list.
+         * @param {Array} bs The second list.
+         * @return {Array} The list made by combining each possible pair from
+         * `as` and `bs` into pairs (`[a, b]`).
+         * @example
+         *
+         * xProdWith(f, [1, 2], ['a', 'b'])
+         * //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
          */
-        // Creates a new list out of the two supplied by yielding the pair of each possible pair in the lists.
-        // For example,
+        // Creates a new list out of the two supplied by yielding the pair of
+        // each possible pair in the lists.  For example,
         //
-        //     xProd([1, 2], ['a', 'b'])
-        //     //    => [[1, 'a'], [1, 'b')], [2, 'a'], [2, 'b']];
-        R.xprod = curry2(function (a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
+        //     xProd([1, 2], ['a', 'b']);
+        //     //= [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+        R.xprod = curry2(function (a, b) {
             if (isEmpty(a) || isEmpty(b)) {
                 return [];
             }
@@ -2452,7 +2494,8 @@
             var ilen = a.length;
             var j;
             var jlen = b.length;
-            var result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            var result = [];
             while (++i < ilen) {
                 j = -1;
                 while (++j < jlen) {
@@ -2463,17 +2506,44 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a new list with the same elements as the original list, just
+         * in the reverse order.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The list to reverse.
+         * @return {Array} A copy of the list in reverse order.
+         * @example
+         *
+         * reverse([1, 2, 3]);  //= [3, 2, 1]
+         * reverse([1, 2]);     //= [2, 1]
+         * reverse([1]);        //= [1]
+         * reverse([]);         //= []
          */
-        // Returns a new list with the same elements as the original list, just in the reverse order.
+        // Returns a new list with the same elements as the original list, just
+        // in the reverse order.
         R.reverse = function (list) {
             return clone(list || []).reverse();
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a list of numbers from `from` (inclusive) to `to`
+         * (exclusive). In mathematical terms, `range(a, b)` is equivalent to
+         * the half-open interval `[a, b)`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {number} from The first number in the list.
+         * @param {number} to One more than the last number in the list.
+         * @return {Array} The list of numbers in tthe set `[a, b)`.
+         * @example
+         *
+         * range(1, 5);     //= [1, 2, 3, 4]
+         * range(50, 53);   //= [50, 51, 52]
          */
-        // // Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
+        // Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
         // For example,
         //
         //     range(1, 5) // => [1, 2, 3, 4]
@@ -2490,19 +2560,59 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a string made by inserting the `separator` between each
+         * element and concatenating all the elements into a single string.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {string|number} separator The string used to separate the elements.
+         * @param {Array} xs The elements to join into a string.
+         * @return {string} The string made by concatenating `xs` with `separator`.
+         * @example
+         *
+         * var spacer = join(" ");
+         * spacer(["a", 2, 3.4]);   //= "a 2 3.4"
+         * join("|", [1, 2, 3]);    //= "1|2|3"
          */
         // Returns the elements of the list as a string joined by a separator.
         R.join = invoker("join", Array.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the elements from `xs` starting at `a` and ending at `b - 1`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {number} a The starting index.
+         * @param {number} b One more than the ending index.
+         * @param {Array} xs The list to take elements from.
+         * @return {Array} The items from `a` to `b - 1` from `xs`.
+         * @example
+         *
+         * var xs = range(0, 10);
+         * slice(2, 5)(xs); //= [2, 3, 4]
          */
         // Returns the sublist of a list starting with the first index and
         // ending before the second one.
         R.slice = invoker("slice", Array.prototype);
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the elements from `xs` starting at `a` going to the end of `xs`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {number} a The starting index.
+         * @param {Array} xs The list to take elements from.
+         * @return {Array} The items from `a` to the end of `xs`.
+         * @example
+         *
+         * var xs = range(0, 10);
+         * slice.from(2)(xs); //= [2, 3, 4, 5, 6, 7, 8, 9]
+         *
+         * var ys = range(4, 8);
+         * var tail = slice.from(1);
+         * tail(xs); //= [5, 6, 7]
          */
         R.slice.from = flip(R.slice)(undef);
 
@@ -3044,35 +3154,83 @@
         // --------
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Adds two numbers (or strings). Equivalent to `a + b` but curried.
+         *
+         * @static
+         * @memberOf R
+         * @param {number|string} a The first value.
+         * @param {number|string} b The second value.
+         * @return {number|string} The result of `a + b`.
+         * @example
+         *
+         * var increment = add(1);
+         * increment(10);   //= 11
+         * add(2, 3);       //=  5
+         * add(7)(10);      //= 17
          */
-        // Adds two numbers.  Automatic curried:
+        // Adds two numbers (or strings). Equivalent to `a + b` but curried.
         //
-        //     var add7 = add(7);
-        //     add7(10); // => 17
+        //     var increment = add(1);
+        //     increment(10);   //= 11
+        //     add(2, 3);       //=  5
+        //     add(7)(10);      //= 17
         var add = R.add = function(a, b) {
             return arguments.length < 2 ? function(b) { return a + b; } :  a + b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Multiplies two numbers. Equivalent to `a * b` but curried.
+         *
+         * @static
+         * @memberOf R
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a * b`.
+         * @example
+         *
+         * var double = multiply(2);
+         * var triple = multiply(3);
+         * double(3);       //=  6
+         * triple(4);       //= 12
+         * multiply(2, 5);  //= 10
          */
-        // Multiplies two numbers.  Automatically curried:
+        // Multiplies two numbers. Equivalent to `a * b` but curried.
         //
-        //     var mult3 = multiply(3);
-        //     mult3(7); // => 21
+        //     var double = multiply(2);
+        //     var triple = multiply(3);
+        //     double(3);       //=  6
+        //     triple(4);       //= 12
+        //     multiply(2, 5);  //= 10
         var multiply = R.multiply = function(a, b) {
             return arguments.length < 2 ? function(b) { return a * b; } :  a * b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Subtracts two numbers. Equivalent to `a - b` but curried.
+         *
+         * @static
+         * @memberOf R
+         * @see subtractN
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a - b`.
+         * @example
+         *
+         * var complementaryAngle = subtract(90);
+         * complementaryAngle(30); //= 60
+         *
+         * var theRestOf = subtract(1);
+         * theRestOf(0.25); //= 0.75
+         *
+         * subtract(10)(8); //= 2
          */
-        // Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
-        // version might be useful, often the curried version of `subtractN` might be what's wanted.
+        // Subtracts the second parameter from the first.  This is
+        // automatically curried, and while at times the curried version might
+        // be useful, often the curried version of `subtractN` might be what's
+        // wanted.
         //
         //     var complementaryAngle = subtract(90);
-        //     complementaryAngle(30) ; // => 60
+        //     complementaryAngle(30); //= 60
         var subtract = R.subtract = function(a, b) {
             return arguments.length < 2 ? function(b) { return a - b; } :  a - b;
         };
@@ -3080,24 +3238,69 @@
         /**
          * TODO: JSDoc-style documentation for this function
          */
-        // Reversed version of `subtract`, where first parameter is subtracted from the second.  The curried version of
-        // this one might me more useful than that of `subtract`.  For instance:
+        /**
+         * Subtracts two numbers in reverse order. Equivalent to `b - a` but
+         * curried. Probably more useful when partially applied than
+         * `subtract`.
+         *
+         * @static
+         * @memberOf R
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a - b`.
+         * @example
+         *
+         * var complementaryAngle = subtract(90);
+         * complementaryAngle(30); //= 60
+         *
+         * var theRestOf = subtract(1);
+         * theRestOf(0.25); //= 0.75
+         *
+         * subtract(10)(8); //= 2
+         */
+        // Reversed version of `subtract`, where first parameter is subtracted
+        // from the second.  The curried version of this one might me more
+        // useful than that of `subtract`.  For instance:
         //
         //     var decrement = subtractN(1);
-        //     decrement(10); // => 9;
+        //     decrement(10);   //= 9;
+        //     subtractN(2)(5); //= 3
         R.subtractN = flip(subtract);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Divides two numbers. Equivalent to `a / b`.
+         *
+         * @static
+         * @memberOf R
+         * @see divideBy
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a / b`.
+         * @example
+         *
+         * var reciprocal = divide(1);
+         * reciprocal(4);   //= 0.25
+         * divide(71, 100); //= 0.71
          */
-        // Divides the first parameter by the second.  This is automatically curried, and while at times the curried
+        // Divides the first parameter by the second.  This is automatically
+        // curried, and while at times the curried
         // version might be useful, often the curried version of `divideBy` might be what's wanted.
         var divide = R.divide = function(a, b) {
             return arguments.length < 2 ? function(b) { return a / b; } :  a / b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Divides two numbers in reverse order. Equivalent to `b / a`.
+         *
+         * @static
+         * @memberOf R
+         * @param {number} a The second value.
+         * @param {number} b The first value.
+         * @return {number} The result of `b / a`.
+         * @example
+         *
+         * var half = divideBy(2);
+         * half(42); // => 21
          */
         // Reversed version of `divide`, where the second parameter is divided by the first.  The curried version of
         // this one might be more useful than that of `divide`.  For instance:
