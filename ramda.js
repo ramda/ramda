@@ -637,17 +637,15 @@
          * //-> 102
          * //-> 103
          */
-        var each = R.each = function (fn, list) {
-            function _each(list) {
-                var idx = -1, len = list.length;
-                while (++idx < len) {
-                    fn(list[idx]);
-                }
-                // i can't bear not to return *something*
-                return list;
+        function each(fn, list) {
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                fn(list[idx]);
             }
-            return arguments.length < 2 ? _each : _each(list);
-        };
+            // i can't bear not to return *something*
+            return list;
+        }
+        R.each = curry2(each);
 
         /**
          * Like `each`, but but passes additional parameters to the predicate function.
@@ -678,18 +676,14 @@
          *   list[idx] = num + 100;
          * }, [1, 2, 3]); //=> [101, 102, 103]
          */
-        each.idx = function (fn, list) {
-            function _eachIdx(list) {
-                var idx = -1, len = list.length;
-                while (++idx < len) {
-                    fn(list[idx], idx, list);
-                }
-                // i can't bear not to return *something*
-                return list;
+        R.each.idx = curry2(function eachIdx(fn, list) {
+            var idx = -1, len = list.length;
+            while (++idx < len) {
+                fn(list[idx], idx, list);
             }
-            return arguments.length < 2 ? _eachIdx : _eachIdx(list);
-        };
-
+            // i can't bear not to return *something*
+            return list;
+        });
         aliasFor("each").is("forEach");
 
         /**
@@ -735,9 +729,10 @@
          * ramda.isEmpty(); //=> true
          * ramda.isEmpty(null); //=> true
          */
-        var isEmpty = R.isEmpty = function (arr) {
+        function isEmpty(arr) {
             return !arr || !arr.length;
-        };
+        }
+        R.isEmpty = isEmpty;
 
         /**
          * Returns a new list with the given element at the front, followed by the contents of the
@@ -754,10 +749,10 @@
          *
          * ramda.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
          */
-        var prepend = R.prepend = function (el, arr) {
+        function prepend(el, arr) {
             return concat([el], arr);
-        };
-
+        }
+        R.prepend = prepend;
         aliasFor("prepend").is("cons");
 
         /**
@@ -1664,7 +1659,7 @@
          * ramda.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
          */
         // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
-        R.mapObj = curry2(function (fn, obj) {
+        R.mapObj = curry2(function mapObject(fn, obj) {
             return foldl(function (acc, key) {
                 acc[key] = fn(obj[key]);
                 return acc;
@@ -1692,29 +1687,14 @@
          *
          * ramda.mapObj(double, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
          */
-        R.mapObj.idx = function (fn, obj) {
-            function _mapObjIdx(obj) {
-                return foldl(function (acc, key) {
-                    acc[key] = fn(obj[key], key, obj);
-                    return acc;
-                }, {}, keys(obj));
-            }
-            return arguments.length < 2 ? _mapObjIdx : _mapObjIdx(obj);
-        };
+        R.mapObj.idx = curry2(function mapObjectIdx(fn, obj) {
+            return foldl(function (acc, key) {
+                acc[key] = fn(obj[key], key, obj);
+                return acc;
+            }, {}, keys(obj));
+        });
 
-        /**
-         * Returns the number of elements in the array by returning `arr.length`.
-         *
-         * @static
-         * @memberOf R
-         * @category List
-         * @param {Array} arr The array to inspect.
-         * @return {number} The size of the array.
-         * @example
-         *
-         * ramda.size([]); //=> 0
-         * ramda.size([1, 2, 3]); //=> 3
-         */
+        // Reports the number of elements in the list
         R.size = function (arr) {
             return arr.length;
         };
@@ -1944,19 +1924,15 @@
          * find(propEq("a", 4))(xs); //= undefined
          */
         // Returns the first element of the list which matches the predicate, or `undefined` if no element matches.
-        R.find = function (fn, list) {
-            function _find(list) {
-                var idx = -1;
-                var len = list.length;
-                while (++idx < len) {
-                    if (fn(list[idx])) {
-                        return list[idx];
-                    }
+        R.find = curry2(function find(fn, list) {
+            var idx = -1;
+            var len = list.length;
+            while (++idx < len) {
+                if (fn(list[idx])) {
+                    return list[idx];
                 }
-                return undef;
             }
-            return arguments.length < 2 ? _find : _find(list);
-        };
+        });
 
         /**
          * Returns the index of the first element of the list which matches the predicate, or `-1`
@@ -2067,7 +2043,7 @@
          */
         // Returns `true` if all elements of the list match the predicate, `false` if there are any
         // that don't.
-        var all = function(fn, list) {
+        function all(fn, list) {
             var i = -1;
             while (++i < list.length) {
                 if (!fn(list[i])) {
@@ -2075,10 +2051,9 @@
                 }
             }
             return true;
-        };
+        }
         R.all = curry2(all);
         aliasFor("all").is("every");
-
 
         /**
          * Returns `true` if at least one of elements of the list match the predicate, `false`
@@ -2099,9 +2074,7 @@
          * any(lessThan0)(xs); //= false
          * any(lessThan2)(xs); //= true
          */
-        // Returns `true` if all elements of the list match the predicate, `false` if there are any
-        // that don't.
-        var any = function (fn, list) {
+        function any(fn, list) {
             var i = -1;
             while (++i < list.length) {
                 if (fn(list[i])) {
@@ -2109,7 +2082,7 @@
                 }
             }
             return false;
-        };
+        }
         R.any = curry2(any);
         aliasFor("any").is("some");
 
@@ -2208,7 +2181,7 @@
         // Returns `true` if the list contains the sought element, `false` if it does not, based upon the value
         // returned by applying the supplied predicated to two list elements.  Equality is strict here, meaning
         // reference equality for objects and non-coercing equality for primitives.  Probably inefficient.
-        var containsWith = function (pred, x, list) {
+        function containsWith(pred, x, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 if (pred(x, list[idx])) {
@@ -2216,7 +2189,7 @@
                 }
             }
             return false;
-        };
+        }
         R.containsWith = curry3(containsWith);
 
         /**
@@ -2560,11 +2533,9 @@
         // Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
         // time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
         // if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
-        var sort = R.sort = function(comparator, list) {
-            return arguments.length < 2 ?
-                function _sort(list) { return clone(list).sort(comparator); } :
-                clone(list).sort(comparator);
-        };
+        var sort = R.sort = curry2(function sort(comparator, list) {
+            return clone(list).sort(comparator);
+        });
 
         // Splits a list into sublists stored in an object, based on the result of calling a String-returning function
         // on each element, and grouping the results according to values returned.
@@ -2840,17 +2811,9 @@
          * TODO: JSDoc-style documentation for this function
          */
         // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
-        R.eqProps = function (prop, obj1, obj2) {
-            var f1 = function eqPropsCurried1(obj1, obj2) {
-                var f2 = function eqPropsCurried2(obj2) {
-                    return obj1[prop] === obj2[prop];
-                };
-                return arguments.length < 2 ? f2 : f2(obj2);
-            };
-            return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(obj1) :
-                    f1(obj1, obj2);
-        };
+        R.eqProps = curry3(function eqProps(prop, obj1, obj2) {
+            return obj1[prop] === obj2[prop];
+        });
 
 
         /**
@@ -2975,12 +2938,11 @@
         // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
         // value.
-        R.and = function(f, g) {
-           function _and(g) {
-               return function() {return !!(f.apply(this, arguments) && g.apply(this, arguments));};
-           }
-            return arguments.length < 2 ? _and : _and(g);
-        };
+        R.and = curry2(function and(f, g) {
+            return function _and() {
+                return !!(f.apply(this, arguments) && g.apply(this, arguments));
+            };
+        });
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -2988,12 +2950,11 @@
         // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
         // value. (Note also that at least Oliver Twist can pronounce this one...)
-        R.or = function(f, g) { // TODO: arity?
-           function _or(g) {
-               return function() {return !!(f.apply(this, arguments) || g.apply(this, arguments));};
-           }
-            return arguments.length < 2 ? _or : _or(g);
-        };
+        R.or = curry2(function or(f, g) {
+            return function _or() {
+                return !!(f.apply(this, arguments) || g.apply(this, arguments));
+            };
+        });
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -3405,17 +3366,9 @@
         //     ];
         //     filter(propEq("hair", "brown"), kids);
         //     //=> Fred and Rusty
-        R.propEq = function (name, val, obj) {
-            var f1 = function propEqCurried1(val, obj) {
-                var f2 = function propEqCurried2(obj) {
-                    return obj[name] === val;
-                };
-                return arguments.length < 2 ? f2 : f2(obj);
-            };
-            return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(val) :
-                    f1(val, obj);
-        };
+        R.propEq = curry3(function propEq(name, val, obj) {
+            return obj[name] === val;
+        });
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -3446,25 +3399,14 @@
         // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
         // Duplication is determined according to the value returned by applying the supplied predicate to two list
         // elements.
-        R.differenceWith = function (pred, first, second) {
-            var f1 = function differenceWithCurried1(first, second) {
-                var f2 = function differenceWithCurried2(second) {
-                    return uniqWith(pred)(reject(flip(R.containsWith(pred))(second), first));
-                };
-                return arguments.length < 2 ? f2 : f2(second);
-            };
-            return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(first) :
-                    f1(first, second);
-        };
+        R.differenceWith = curry3(function differenceWith(pred, first, second) {
+            return uniqWith(pred)(reject(flip(R.containsWith(pred))(second), first));
+        });
 
         // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
-        R.intersection = function(list1, list2) {
-            function _intersection(list2) {
-                return uniq(filter(flip(contains)(list1), list2));
-            }
-            return arguments.length < 2 ? _intersection : _intersection(list2);
-        };
+        R.intersection = curry2(function intersection(list1, list2) {
+            return uniq(filter(flip(contains)(list1), list2));
+        });
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -3472,64 +3414,47 @@
         // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
         // Duplication is determined according to the value returned by applying the supplied predicate to two list
         // elements.
-        R.intersectionWith = function (pred, list1, list2) {
-            var f1 = function intersectionWithCurried1(list1, list2) {
-                var f2 = function intersectionWithCurried2(list2) {
-                    var results = [], idx = -1;
-                    while (++idx < list1.length) {
-                        if (containsWith(pred, list1[idx], list2)) {
-                            results[results.length] = list1[idx];
-                        }
-                    }
-                    return uniqWith(pred, results);
-                };
-                return arguments.length < 2 ? f2 : f2(list2);
-            };
-            return arguments.length < 2 ? f1 :
-                arguments.length < 3 ? f1(list1) :
-                    f1(list1, list2);
-        };
+        R.intersectionWith = curry3(function intersectionWith(pred, list1, list2) {
+            var results = [], idx = -1;
+            while (++idx < list1.length) {
+                if (containsWith(pred, list1[idx], list2)) {
+                    results[results.length] = list1[idx];
+                }
+            }
+            return uniqWith(pred, results);
+        });
 
         /**
          * TODO: JSDoc-style documentation for this function
          */
         // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
         // item in the list supplied, and `key` is the result of applying the supplied function to that item.
-        var keyValue = function(fn, list) { // TODO: Should this be made public?
-            function _keyValue(list) {
-                return map(function(item) {return {key: fn(item), val: item};}, list);
-            }
-            return arguments.length < 2 ? _keyValue : _keyValue(list);
-        };
+        function keyValue(fn, list) { // TODO: Should this be made public?
+            return map(function(item) {return {key: fn(item), val: item};}, list);
+        }
 
         /**
          * TODO: JSDoc-style documentation for this function
          */
         // Sorts the list according to a key generated by the supplied function.
-        R.sortBy = function(fn, list) {
+        R.sortBy = curry2(function sortyBy(fn, list) {
             /*
               return sort(comparator(function(a, b) {return fn(a) < fn(b);}), list); // clean, but too time-inefficient
               return pluck("val", sort(comparator(function(a, b) {return a.key < b.key;}), keyValue(fn, list))); // nice, but no need to clone result of keyValue call, so...
             */
-            function _sortBy(list) {
-                return pluck("val", keyValue(fn, list).sort(comparator(function(a, b) {return a.key < b.key;})));
-            }
-            return arguments.length < 2 ? _sortBy : _sortBy(list);
-        };
+            return pluck("val", keyValue(fn, list).sort(comparator(function(a, b) {return a.key < b.key;})));
+        });
 
         /**
          * TODO: JSDoc-style documentation for this function
          */
         // Counts the elements of a list according to how many match each value of a key generated by the supplied function.
-        R.countBy = function(fn, list) {
-            function _countBy(list) {
-                return foldl(function(counts, obj) {
-                    counts[obj.key] = (counts[obj.key] || 0) + 1;
-                    return counts;
-                }, {}, keyValue(fn, list));
-            }
-            return arguments.length < 2 ? _countBy : _countBy(list);
-        };
+        R.countBy = curry2(function countBy(fn, list) {
+            return foldl(function(counts, obj) {
+                counts[obj.key] = (counts[obj.key] || 0) + 1;
+                return counts;
+            }, {}, keyValue(fn, list));
+        });
 
         // All the functional goodness, wrapped in a nice little package, just for you!
         return R;
