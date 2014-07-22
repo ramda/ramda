@@ -3511,11 +3511,18 @@
         R.toUpperCase = invoker("toUpperCase", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The lowercase version of a string.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} str The string to lower case.
+         * @return {string} The lower case version of `str`.
+         * @example
+         * toLowerCase('XYZ') //= 'xyz'
          */
         // The lowercase version of a string.
         //
-        //     toLowerCase('XYZ') //=> 'xyz'
+        //     toLowerCase('XYZ') //= 'xyz'
         R.toLowerCase = invoker("toLowerCase", String.prototype);
 
 
@@ -3556,28 +3563,44 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Retrieve a nested path on an object seperated by the specified
+         * separator value.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} sep The separator to use in `path`.
+         * @param {string} path The path to use.
+         * @return {*} The data at `path`.
+         * @example
+         * pathOn('/', 'a/b/c', {a: {b: {c: 3}}}) //= 3
          */
-        // Retrieve a value on an object from a deep path, str
-        // different properties on nested objects are indicated in string
-        // by a seperator, sep
-        // R.pathOn("|", "a|b", {a: {b: 2}}) // => 2
+        // Retrieve a nested path on an object seperated by the specified
+        // separator value.
+        //
+        //     pathOn('/', 'a/b/c', {a: {b: {c: 3}}}) //= 3
         R.pathOn = curry3(function pathOn(sep, str, obj) {
             return path(str.split(sep), obj);
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Retrieve a nested path on an object seperated by periods
+         *
+         * @static
+         * @memberOf R
+         * @param {string} path The dot path to use.
+         * @return {*} The data at `path`.
+         * @example
+         * path('a.b', {a: {b: 2}}) //= 2
          */
         // Retrieve a nested path on an object seperated by periods
-        // R.path('a.b'], {a: {b: 2}}) // => 2
+        // R.path('a.b', {a: {b: 2}}) //= 2
         R.path = R.pathOn('.');
 
         // Data Analysis and Grouping Functions
         // ------------------------------------
         //
-        // Functions performing SQL-like actions on lists of objects.  These do not have any SQL-like optimizations
-        // performed on them, however.
+        // Functions performing SQL-like actions on lists of objects.  These do
+        // not have any SQL-like optimizations performed on them, however.
 
         // --------
 
@@ -3586,28 +3609,43 @@
          */
         // Reasonable analog to SQL `select` statement.
         //
-        //     var kids = [
-        //         {name: 'Abby', age: 7, hair: 'blond', grade: 2},
-        //         {name: 'Fred', age: 12, hair: 'brown', grade: 7}
-        //     ];
+        //     var abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2},
+        //     var fred = {name: 'Fred', age: 12, hair: 'brown', grade: 7}
+        //     var kids = [abby, fred];
         //     project(['name', 'grade'], kids);
-        //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
+        //     //= [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         R.project = useWith(map, R.pickAll, identity); // passing `identity` gives correct arity
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Determines whether the given property of an object has a specific
+         * value according to strict equality (`===`).  Most likely used to
+         * filter a list:
+         *
+         * @static
+         * @memberOf R
+         * @param {string|number} name The property name (or index) to use.
+         * @param {*} val The value to compare the property with.
+         * @return {boolean} `true` if the properties are equal, `false` otherwise.
+         * @example
+         *
+         * var abby = {name: 'Abby', age: 7, hair: 'blond'};
+         * var fred = {name: 'Fred', age: 12, hair: 'brown'};
+         * var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
+         * var alois = {name: 'Alois', age: 15, disposition: 'surly'};
+         * var kids = [abby, fred, rusty, alois];
+         * var hasBrownHair = propEq("hair", "brown");
+         * filter(hasBrownHair, kids); //= [fred, rusty]
          */
         // Determines whether the given property of an object has a specific value
         // Most likely used to filter a list:
         //
-        //     var kids = [
-        //       {name: 'Abby', age: 7, hair: 'blond'},
-        //       {name: 'Fred', age: 12, hair: 'brown'},
-        //       {name: 'Rusty', age: 10, hair: 'brown'},
-        //       {name: 'Alois', age: 15, disposition: 'surly'}
-        //     ];
-        //     filter(propEq("hair", "brown"), kids);
-        //     //=> Fred and Rusty
+        //     var abby = {name: 'Abby', age: 7, hair: 'blond'};
+        //     var fred = {name: 'Fred', age: 12, hair: 'brown'};
+        //     var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
+        //     var alois = {name: 'Alois', age: 15, disposition: 'surly'};
+        //     var kids = [abby, fred, rusty, alois];
+        //     var hasBrownHair = propEq("hair", "brown");
+        //     filter(hasBrownHair, kids); //= [fred, rusty]
         R.propEq = function (name, val, obj) {
             var f1 = function propEqCurried1(val, obj) {
                 var f2 = function propEqCurried2(obj) {
@@ -3621,9 +3659,21 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Combines two lists into a set (i.e. no duplicates) composed of the
+         * elements of each list.
+         *
+         * @static
+         * @memberOf R
+         * @param {Array} as The first list.
+         * @param {Array} bs The second list.
+         * @return {Array} The first and second lists concatenated, with
+         * duplicates removed.
+         * @example
+         *
+         * union([1, 2, 3], [2, 3, 4]); //= [1, 2, 3, 4]
          */
-        // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
+        // Combines two lists into a set (i.e. no duplicates) composed of the
+        // elements of each list.
         R.union = compose(uniq, R.concat);
 
         /**
@@ -3694,10 +3744,16 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list whose elements each have two properties: `val` is
+         * the value of the corresponding item in the list supplied, and `key`
+         * is the result of applying the supplied function to that item.
+         *
+         * @static
+         * @private
          */
-        // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
-        // item in the list supplied, and `key` is the result of applying the supplied function to that item.
+        // Creates a new list whose elements each have two properties: `val` is
+        // the value of the corresponding item in the list supplied, and `key`
+        // is the result of applying the supplied function to that item.
         var keyValue = function(fn, list) { // TODO: Should this be made public?
             function _keyValue(list) {
                 return map(function(item) {return {key: fn(item), val: item};}, list);
@@ -3706,7 +3762,33 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Sorts the list according to a key generated by the supplied function.
+         *
+         * @static
+         * @memberOf R
+         * @param {Function} fn The function mapping `list` items to keys.
+         * @param {Array} list The list to sort.
+         * @return {Array} A new list sorted by the keys generated by `fn`.
+         * @example
+         *
+         * var sortByFirstItem = sortBy(nth(0));
+         * var sortByNameCaseInsensitive = sortBy(compose(toLowerCase, prop("name")));
+         * var pairs = [[-1, 1], [-2, 2], [-3, 3]];
+         * sortByFirstItem(pairs); //= [[-3, 3], [-2, 2], [-1, 1]]
+         * var alice = {
+         *      name: "ALICE",
+         *      age: 101
+         * };
+         * var bob = {
+         *      name: "Bob",
+         *      age: -10
+         * };
+         * var clara = {
+         *      name: "clara",
+         *      age: 314.159
+         * };
+         * var people = [clara, bob, alice];
+         * sortByNameCaseInsensitive(people); //= [alice, bob, clara]
          */
         // Sorts the list according to a key generated by the supplied function.
         R.sortBy = function(fn, list) {
@@ -3721,9 +3803,26 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Counts the elements of a list according to how many match each value
+         * of a key generated by the supplied function. Returns an object
+         * mapping the keys produced by `fn` to the number of occurrences in
+         * the list. Note that all keys are coerced to strings because of how
+         * JavaScript objects work.
+         *
+         * @static
+         * @memberOf R
+         * @param {Function} fn The function used to map values to keys.
+         * @param {Array} list The list to count elements from.
+         * @return {Object} An object mapping keys to number of occurrences in the list.
+         * @example
+         *
+         * var numbers = [1.0, 1.1, 1.2, 2.0, 3.0, 2.2];
+         * var letters = split("", "abcABCaaaBBc");
+         * countBy(Math.floor)(numbers);    //= {"1": 3, "2": 2, "3": 1}
+         * countBy(toLowerCase)(letters);   //= {"a": 5, "b": 4, "c": 3}
          */
-        // Counts the elements of a list according to how many match each value of a key generated by the supplied function.
+        // Counts the elements of a list according to how many match each value
+        // of a key generated by the supplied function.
         R.countBy = function(fn, list) {
             function _countBy(list) {
                 return foldl(function(counts, obj) {
