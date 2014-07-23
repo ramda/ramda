@@ -1049,14 +1049,15 @@
          * squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
         var compose = R.compose = function _compose() {  // TODO: type check of arguments?
-            var length = arguments.length, func = arguments[--length];
+            var length = arguments.length, func = arguments[--length], fnArity;
             if (!length) {
                 return partially(compose, func);
             }
+            fnArity = func.length;
             while (length--) {
                 func = internalCompose(arguments[length], func);
             }
-            return func;
+            return arity(fnArity, func);
         };
 
         /**
