@@ -2329,6 +2329,17 @@
         };
 
         /**
+         *
+         */
+        R.flattenShallow = function _flattenShallow(list) {
+            var i = -1, len = list.length, out = [];
+            while (++i < len) {
+               out = isArray(list[i]) ? concat(out, list[i]) : append(list[i], out);
+            }
+            return out;
+        };
+
+        /**
          * Creates a new list out of the two supplied by applying the function to each
          * equally-positioned pair in the lists.
          *
