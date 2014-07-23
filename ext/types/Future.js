@@ -1,4 +1,4 @@
-// `f` is a function that takes two function arguments: `reject` (`fail`) and `resolve` (`success`)
+// `f` is a function that takes two function arguments: `reject` (failure) and `resolve` (success)
 function Future(f) {
   if (!(this instanceof Future)) {
     return new Future(f);
