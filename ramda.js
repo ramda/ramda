@@ -1870,9 +1870,7 @@
             if (hasMethod('take', list)) {
                 return list.take(n);
             }
-            var ls = clone(list);
-            ls.length = Math.min(n, list.length);
-            return ls;
+            return _slice(list, 0, Math.min(n, list.length));
         });
 
         /**
