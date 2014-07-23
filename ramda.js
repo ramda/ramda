@@ -3503,15 +3503,22 @@
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The upper case version of a string.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} str The string to upper case.
+         * @return {string} The upper case version of `str`.
+         * @example
+         * toUpperCase('abc') //= 'ABC'
          */
-        // The uppercase version of a string.
+        // The upper case version of a string.
         //
-        //     toUpperCase('abc') //=> 'ABC'
+        //     toUpperCase('abc') //= 'ABC'
         R.toUpperCase = invoker("toUpperCase", String.prototype);
 
         /**
-         * The lowercase version of a string.
+         * The lower case version of a string.
          *
          * @static
          * @memberOf R
@@ -3520,19 +3527,39 @@
          * @example
          * toLowerCase('XYZ') //= 'xyz'
          */
-        // The lowercase version of a string.
+        // The lower case version of a string.
         //
         //     toLowerCase('XYZ') //= 'xyz'
         R.toLowerCase = invoker("toLowerCase", String.prototype);
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Splits a string into an array of strings based on the given
+         * separator.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} sep The separator string.
+         * @param {string} str The string to separate into an array.
+         * @return {Array} The array of strings from `str` separated by `str`.
+         * @example
+         *
+         * var pathComponents = split('/');
+         * pathComponents('/usr/local/bin/node');
+         * //= ['usr', 'local', 'bin', 'node']
+         *
+         * split('.', 'a.b.c.xyz.d');
+         * //= ['a', 'b', 'c', 'xyz', 'd']
          */
-        // The string split into substring at the specified token
+        // Splits a string into an array of strings based on the given
+        // separator.
         //
-        //     split('.', 'a.b.c.xyz.d') //=>
-        //         ['a', 'b', 'c', 'xyz', 'd']
+        //     var pathComponents = split('/');
+        //     pathComponents('/usr/local/bin/node');
+        //     //= ['usr', 'local', 'bin', 'node']
+        //
+        //     split('.', 'a.b.c.xyz.d');
+        //     //= ['a', 'b', 'c', 'xyz', 'd']
         R.split = invoker("split", String.prototype, 1);
 
         /**
