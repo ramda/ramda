@@ -585,29 +585,7 @@
                 return fn.apply(this, args.concat(_slice(arguments, tlen)));
             }));
         };
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // A two-step version of the `useWith` function.  This would allow us to write `project`, currently written
-        // as `useWith(map, pickAll, identity)`, as, instead, `use(map).over(pickAll, identity)`, which is a bit
-        // more explicit.
-        // TODO: One of these versions should be eliminated eventually.  So not worrying about the duplication for now.
-        R.use = function _use(fn) {
-            return {
-                over: function (/*transformers*/) {
-                    var transformers = _slice(arguments, 0);
-                    var tlen = transformers.length;
-                    return curry(arity(tlen, function () {
-                        var args = [], idx = -1;
-                        while (++idx < tlen) {
-                            args.push(transformers[idx](arguments[idx]));
-                        }
-                        return fn.apply(this, args.concat(_slice(arguments, tlen)));
-                    }));
-                }
-            };
-        };
+        aliasFor('useWith').is('disperseTo');
 
         /**
          * Iterate over an input `list`, calling a provided function `fn` for each element in the
@@ -1356,6 +1334,7 @@
                 }, fns));
             };
         };
+        aliasFor('fork').is('distributeTo');
 
         // List Functions
         // --------------
@@ -3543,24 +3522,12 @@
         // to find. E.g.
         // path(['a', 'b'], {a: {b: 2}}) // => 2
         function path(paths, obj) {
-            var i = -1, length = paths.length, val;
-            while (obj != null && ++i < length) {
-                obj = val = obj[paths[i]];
+            var i = -1, length = paths.length, val = obj;
+            while (val != null && ++i < length) {
+                val = val[paths[i]];
             }
             return val;
         }
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Retrieve a computed path by a function, fn. Fn will be given
-        // a string, str which it will use to compute the path
-        // e.g. fn("a.b") => ["a", "b"]
-        // This path will be looked up on the object
-        R.pathWith = curry3(function pathWith(fn, str, obj) {
-            var paths = fn(str) || [];
-            return path(paths, obj);
-        });
 
         /**
          * Retrieve a nested path on an object seperated by the specified
