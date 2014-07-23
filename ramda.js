@@ -193,7 +193,7 @@
          * @private
          * @category Function
          * @param {Function} fn The function to curry.
-         * @return {boolean} `true` if `val` is an array, `false` otherwise.
+         * @return {Function} curried function
          * @example
          *
          * var addTwo = function(a, b) {
@@ -219,13 +219,13 @@
          * @private
          * @category Function
          * @param {Function} fn The function to curry.
-         * @return {boolean} `true` if `val` is an array, `false` otherwise.
+         * @return {Function} curried function
          * @example
          *
          * var addThree = function(a, b, c) {
          *   return a + b + c;
          * };
-         * var curriedAddThree = curry2(addThree);
+         * var curriedAddThree = curry3(addThree);
          */
         function curry3(fn) {
             return function(a, b, c) {
@@ -249,8 +249,8 @@
          *
          * @private
          * @category Internal
-         * @param {Function} methodName The name of the method to check for.
-         * @param {Function} obj The object to test.
+         * @param {string} methodName The name of the method to check for.
+         * @param {Object} obj The object to test.
          * @return {boolean} `true` has a given method, `false` otherwise.
          * @example
          *
