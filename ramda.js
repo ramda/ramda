@@ -585,29 +585,7 @@
                 return fn.apply(this, args.concat(_slice(arguments, tlen)));
             }));
         };
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // A two-step version of the `useWith` function.  This would allow us to write `project`, currently written
-        // as `useWith(map, pickAll, identity)`, as, instead, `use(map).over(pickAll, identity)`, which is a bit
-        // more explicit.
-        // TODO: One of these versions should be eliminated eventually.  So not worrying about the duplication for now.
-        R.use = function _use(fn) {
-            return {
-                over: function (/*transformers*/) {
-                    var transformers = _slice(arguments, 0);
-                    var tlen = transformers.length;
-                    return curry(arity(tlen, function () {
-                        var args = [], idx = -1;
-                        while (++idx < tlen) {
-                            args.push(transformers[idx](arguments[idx]));
-                        }
-                        return fn.apply(this, args.concat(_slice(arguments, tlen)));
-                    }));
-                }
-            };
-        };
+        aliasFor('useWith').is('disperseTo');
 
         /**
          * Iterate over an input `list`, calling a provided function `fn` for each element in the
@@ -1356,6 +1334,7 @@
                 }, fns));
             };
         };
+        aliasFor('fork').is('distributeTo');
 
         // List Functions
         // --------------
