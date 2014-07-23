@@ -37,6 +37,21 @@ describe('compose', function() {
         };
         assert.equal(context.a(5), 40);
     });
+    
+     it('returns a function with arity == rightmost argument', function() {
+       function a2(x, y) { return 'A2'; }
+       function a3(x, y) { return 'A2'; }
+       function a4(x, y) { return 'A2'; }
+
+       var f1 = compose(b, a);
+       assert.equal(f1.length, a.length);
+       var f2 = compose(b, a2);
+       assert.equal(f2.length, a2.length);
+       var f3 = compose(b, a3);
+       assert.equal(f3.length, a3.length);
+       var f4 = compose(b, a4);
+       assert.equal(f4.length, a4.length);
+    });
 });
 
 describe('pipe', function() {
