@@ -2329,7 +2329,20 @@
         };
 
         /**
+         * Returns a new list by pulling every item at the first level of nesting out, and putting
+         * them in a new array.
          *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The array to consider.
+         * @return {Array} The flattened list.
+         * @example
+         *
+         * flattenShallow([1, [2], [[3]]]);
+         * //= [1, 2, [3]]
+         * flattenShallow([[1, 2], [3, 4], [5, 6]]);
+         * //= [1, 2, 3, 4, 5, 6]
          */
         R.flattenShallow = function _flattenShallow(list) {
             var i = -1, len = list.length, out = [];
@@ -2400,6 +2413,29 @@
             }
             return rv;
         });
+
+        /**
+         * Creates a new object out of a list of keys and a list of values.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} keys The array that will be properties on the output object.
+         * @param {Array} values The list of values on the output object.
+         * @return {Object} The object made by pairing up same-indexed elements of `keys` and `values`.
+         * @example
+         *
+         * zipObj(['a', 'b', 'c'], [1, 2, 3]);
+         * //= {a: 1, b: 2, c: 3}
+         */ 
+        R.zipObj = curry2(function(keys, values) {
+            var i = -1, len = keys.length, out = {};
+            while (++i < len) {
+                out[keys[i]] = values[i];
+            }
+            return out;
+        });
+
 
         /**
          * Creates a new list out of the two supplied by applying the function
