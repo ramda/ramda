@@ -85,7 +85,7 @@ describe("pathOn", function() {
     });
 });
 
-
+/*
 describe("pathWith", function() {
     var obj = {
       a: {
@@ -135,3 +135,5 @@ describe("pathWith", function() {
         assert.equal(pathWith(squareBrackets, "a['b']['c']", obj), 100);
     });
 });
+*/
+

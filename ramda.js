@@ -3543,24 +3543,12 @@
         // to find. E.g.
         // path(['a', 'b'], {a: {b: 2}}) // => 2
         function path(paths, obj) {
-            var i = -1, length = paths.length, val;
-            while (obj != null && ++i < length) {
-                obj = val = obj[paths[i]];
+            var i = -1, length = paths.length, val = obj;
+            while (val != null && ++i < length) {
+                val = val[paths[i]];
             }
             return val;
         }
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Retrieve a computed path by a function, fn. Fn will be given
-        // a string, str which it will use to compute the path
-        // e.g. fn("a.b") => ["a", "b"]
-        // This path will be looked up on the object
-        R.pathWith = curry3(function pathWith(fn, str, obj) {
-            var paths = fn(str) || [];
-            return path(paths, obj);
-        });
 
         /**
          * Retrieve a nested path on an object seperated by the specified
