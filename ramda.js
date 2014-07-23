@@ -2428,13 +2428,36 @@
          * zipObj(['a', 'b', 'c'], [1, 2, 3]);
          * //= {a: 1, b: 2, c: 3}
          */ 
-        R.zipObj = curry2(function(keys, values) {
+        R.zipObj = curry2(function _zipObj(keys, values) {
             var i = -1, len = keys.length, out = {};
             while (++i < len) {
                 out[keys[i]] = values[i];
             }
             return out;
         });
+
+        /**
+         * Creates a new object out of a list key-value pairs.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} An array of two-element arrays that will be the keys and values of the ouput object.
+         * @return {Object} The object made by pairing up `keys` and `values`.
+         * @example
+         *
+         * fromPairs([['a', 1], ['b', 2],  ['c', 3]]);
+         * //= {a: 1, b: 2, c: 3}
+         */ 
+        R.fromPairs = function _fromPairs(pairs) {
+            var i = -1, len = pairs.length, out = {};
+            while (++i < len) {
+                if (isArray(pairs[i]) && pairs[i].length) {
+                    out[pairs[i][0]] = pairs[i][1];
+                }
+            }
+            return out;
+        };
 
 
         /**
