@@ -2235,7 +2235,19 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns `true` if all elements are unique, otherwise `false`.
+         * Uniquness is determined using strict equality (`===`).
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The array to consider.
+         * @return {boolean} `true` if all elements are unique, else `false`.
+         * @example
+         *
+         * isSet(["1", 1]); //= true
+         * isSet([1, 1]);   //= false
+         * isSet([{}, {}]); //= true
          */
         // returns `true` if all of the elements in the `list` are unique.
         R.isSet = function _isSet(list) {
@@ -2399,18 +2411,35 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list out of the two supplied by applying the function
+         * to each possible pair in the lists.
+         *
+         * @see xprod
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function} fn The function to join pairs with.
+         * @param {Array} as The first list.
+         * @param {Array} bs The second list.
+         * @return {Array} The list made by combining each possible pair from
+         * `as` and `bs` using `fn`.
+         * @example
+         *
+         * xProdWith(f, [1, 2], ['a', 'b'])
+         * //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
          */
-        // Creates a new list out of the two supplied by applying the function to each possible pair in the lists.
-        //  For example,
+        // Creates a new list out of the two supplied by applying the function
+        // to each possible pair in the lists.  For example,
         //
         //     xProdWith(f, [1, 2], ['a', 'b'])
-        //     //    => [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
+        //     //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
         R.xprodWith = curry3(function _xprodWith(fn, a, b) {
             if (isEmpty(a) || isEmpty(b)) {
                 return [];
             }
-            var i = -1, ilen = a.length, j, jlen = b.length, result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            // Better to push them all or to do `new Array(ilen * jlen)` and
+            // calculate indices?
+            var i = -1, ilen = a.length, j, jlen = b.length, result = [];
             while (++i < ilen) {
                 j = -1;
                 while (++j < jlen) {
@@ -2421,13 +2450,26 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list out of the two supplied by creating each possible
+         * pair from the lists.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} as The first list.
+         * @param {Array} bs The second list.
+         * @return {Array} The list made by combining each possible pair from
+         * `as` and `bs` into pairs (`[a, b]`).
+         * @example
+         *
+         * xProdWith(f, [1, 2], ['a', 'b'])
+         * //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
          */
-        // Creates a new list out of the two supplied by yielding the pair of each possible pair in the lists.
-        // For example,
+        // Creates a new list out of the two supplied by yielding the pair of
+        // each possible pair in the lists.  For example,
         //
-        //     xProd([1, 2], ['a', 'b'])
-        //     //    => [[1, 'a'], [1, 'b')], [2, 'a'], [2, 'b']];
+        //     xProd([1, 2], ['a', 'b']);
+        //     //= [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
         R.xprod = curry2(function _xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
             if (isEmpty(a) || isEmpty(b)) {
                 return [];
@@ -2436,7 +2478,8 @@
             var ilen = a.length;
             var j;
             var jlen = b.length;
-            var result = []; // better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
+            var result = [];
             while (++i < ilen) {
                 j = -1;
                 while (++j < jlen) {
@@ -2447,17 +2490,44 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a new list with the same elements as the original list, just
+         * in the reverse order.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The list to reverse.
+         * @return {Array} A copy of the list in reverse order.
+         * @example
+         *
+         * reverse([1, 2, 3]);  //= [3, 2, 1]
+         * reverse([1, 2]);     //= [2, 1]
+         * reverse([1]);        //= [1]
+         * reverse([]);         //= []
          */
-        // Returns a new list with the same elements as the original list, just in the reverse order.
+        // Returns a new list with the same elements as the original list, just
+        // in the reverse order.
         R.reverse = function _reverse(list) {
             return clone(list || []).reverse();
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a list of numbers from `from` (inclusive) to `to`
+         * (exclusive). In mathematical terms, `range(a, b)` is equivalent to
+         * the half-open interval `[a, b)`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {number} from The first number in the list.
+         * @param {number} to One more than the last number in the list.
+         * @return {Array} The list of numbers in tthe set `[a, b)`.
+         * @example
+         *
+         * range(1, 5);     //= [1, 2, 3, 4]
+         * range(50, 53);   //= [50, 51, 52]
          */
-        // // Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
+        // Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
         // For example,
         //
         //     range(1, 5) // => [1, 2, 3, 4]
@@ -2474,19 +2544,59 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a string made by inserting the `separator` between each
+         * element and concatenating all the elements into a single string.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {string|number} separator The string used to separate the elements.
+         * @param {Array} xs The elements to join into a string.
+         * @return {string} The string made by concatenating `xs` with `separator`.
+         * @example
+         *
+         * var spacer = join(" ");
+         * spacer(["a", 2, 3.4]);   //= "a 2 3.4"
+         * join("|", [1, 2, 3]);    //= "1|2|3"
          */
         // Returns the elements of the list as a string joined by a separator.
         R.join = invoker("join", Array.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the elements from `xs` starting at `a` and ending at `b - 1`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {number} a The starting index.
+         * @param {number} b One more than the ending index.
+         * @param {Array} xs The list to take elements from.
+         * @return {Array} The items from `a` to `b - 1` from `xs`.
+         * @example
+         *
+         * var xs = range(0, 10);
+         * slice(2, 5)(xs); //= [2, 3, 4]
          */
         // Returns the sublist of a list starting with the first index and
         // ending before the second one.
         R.slice = invoker("slice", Array.prototype);
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the elements from `xs` starting at `a` going to the end of `xs`.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {number} a The starting index.
+         * @param {Array} xs The list to take elements from.
+         * @return {Array} The items from `a` to the end of `xs`.
+         * @example
+         *
+         * var xs = range(0, 10);
+         * slice.from(2)(xs); //= [2, 3, 4, 5, 6, 7, 8, 9]
+         *
+         * var ys = range(4, 8);
+         * var tail = slice.from(1);
+         * tail(xs); //= [5, 6, 7]
          */
         R.slice.from = flip(R.slice)(undef);
 
@@ -3016,35 +3126,83 @@
         // --------
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Adds two numbers (or strings). Equivalent to `a + b` but curried.
+         *
+         * @static
+         * @memberOf R
+         * @param {number|string} a The first value.
+         * @param {number|string} b The second value.
+         * @return {number|string} The result of `a + b`.
+         * @example
+         *
+         * var increment = add(1);
+         * increment(10);   //= 11
+         * add(2, 3);       //=  5
+         * add(7)(10);      //= 17
          */
-        // Adds two numbers.  Automatic curried:
+        // Adds two numbers (or strings). Equivalent to `a + b` but curried.
         //
-        //     var add7 = add(7);
-        //     add7(10); // => 17
+        //     var increment = add(1);
+        //     increment(10);   //= 11
+        //     add(2, 3);       //=  5
+        //     add(7)(10);      //= 17
         var add = R.add = function _add(a, b) {
             return arguments.length < 2 ? function(b) { return a + b; } :  a + b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Multiplies two numbers. Equivalent to `a * b` but curried.
+         *
+         * @static
+         * @memberOf R
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a * b`.
+         * @example
+         *
+         * var double = multiply(2);
+         * var triple = multiply(3);
+         * double(3);       //=  6
+         * triple(4);       //= 12
+         * multiply(2, 5);  //= 10
          */
-        // Multiplies two numbers.  Automatically curried:
+        // Multiplies two numbers. Equivalent to `a * b` but curried.
         //
-        //     var mult3 = multiply(3);
-        //     mult3(7); // => 21
+        //     var double = multiply(2);
+        //     var triple = multiply(3);
+        //     double(3);       //=  6
+        //     triple(4);       //= 12
+        //     multiply(2, 5);  //= 10
         var multiply = R.multiply = function _multiply(a, b) {
             return arguments.length < 2 ? function(b) { return a * b; } :  a * b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Subtracts two numbers. Equivalent to `a - b` but curried.
+         *
+         * @static
+         * @memberOf R
+         * @see subtractN
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a - b`.
+         * @example
+         *
+         * var complementaryAngle = subtract(90);
+         * complementaryAngle(30); //= 60
+         *
+         * var theRestOf = subtract(1);
+         * theRestOf(0.25); //= 0.75
+         *
+         * subtract(10)(8); //= 2
          */
-        // Subtracts the second parameter from the first.  This is automatically curried, and while at times the curried
-        // version might be useful, often the curried version of `subtractN` might be what's wanted.
+        // Subtracts the second parameter from the first.  This is
+        // automatically curried, and while at times the curried version might
+        // be useful, often the curried version of `subtractN` might be what's
+        // wanted.
         //
         //     var complementaryAngle = subtract(90);
-        //     complementaryAngle(30) ; // => 60
+        //     complementaryAngle(30); //= 60
         var subtract = R.subtract = function _subtract(a, b) {
             return arguments.length < 2 ? function(b) { return a - b; } :  a - b;
         };
@@ -3052,24 +3210,69 @@
         /**
          * TODO: JSDoc-style documentation for this function
          */
-        // Reversed version of `subtract`, where first parameter is subtracted from the second.  The curried version of
-        // this one might me more useful than that of `subtract`.  For instance:
+        /**
+         * Subtracts two numbers in reverse order. Equivalent to `b - a` but
+         * curried. Probably more useful when partially applied than
+         * `subtract`.
+         *
+         * @static
+         * @memberOf R
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a - b`.
+         * @example
+         *
+         * var complementaryAngle = subtract(90);
+         * complementaryAngle(30); //= 60
+         *
+         * var theRestOf = subtract(1);
+         * theRestOf(0.25); //= 0.75
+         *
+         * subtract(10)(8); //= 2
+         */
+        // Reversed version of `subtract`, where first parameter is subtracted
+        // from the second.  The curried version of this one might me more
+        // useful than that of `subtract`.  For instance:
         //
         //     var decrement = subtractN(1);
-        //     decrement(10); // => 9;
+        //     decrement(10);   //= 9;
+        //     subtractN(2)(5); //= 3
         R.subtractN = flip(subtract);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Divides two numbers. Equivalent to `a / b`.
+         *
+         * @static
+         * @memberOf R
+         * @see divideBy
+         * @param {number} a The first value.
+         * @param {number} b The second value.
+         * @return {number} The result of `a / b`.
+         * @example
+         *
+         * var reciprocal = divide(1);
+         * reciprocal(4);   //= 0.25
+         * divide(71, 100); //= 0.71
          */
-        // Divides the first parameter by the second.  This is automatically curried, and while at times the curried
+        // Divides the first parameter by the second.  This is automatically
+        // curried, and while at times the curried
         // version might be useful, often the curried version of `divideBy` might be what's wanted.
         var divide = R.divide = function _divide(a, b) {
             return arguments.length < 2 ? function(b) { return a / b; } :  a / b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Divides two numbers in reverse order. Equivalent to `b / a`.
+         *
+         * @static
+         * @memberOf R
+         * @param {number} a The second value.
+         * @param {number} b The first value.
+         * @return {number} The result of `b / a`.
+         * @example
+         *
+         * var half = divideBy(2);
+         * half(42); // => 21
          */
         // Reversed version of `divide`, where the second parameter is divided by the first.  The curried version of
         // this one might be more useful than that of `divide`.  For instance:
@@ -3272,29 +3475,63 @@
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The upper case version of a string.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} str The string to upper case.
+         * @return {string} The upper case version of `str`.
+         * @example
+         * toUpperCase('abc') //= 'ABC'
          */
-        // The uppercase version of a string.
+        // The upper case version of a string.
         //
-        //     toUpperCase('abc') //=> 'ABC'
+        //     toUpperCase('abc') //= 'ABC'
         R.toUpperCase = invoker("toUpperCase", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The lower case version of a string.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} str The string to lower case.
+         * @return {string} The lower case version of `str`.
+         * @example
+         * toLowerCase('XYZ') //= 'xyz'
          */
-        // The lowercase version of a string.
+        // The lower case version of a string.
         //
-        //     toLowerCase('XYZ') //=> 'xyz'
+        //     toLowerCase('XYZ') //= 'xyz'
         R.toLowerCase = invoker("toLowerCase", String.prototype);
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Splits a string into an array of strings based on the given
+         * separator.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} sep The separator string.
+         * @param {string} str The string to separate into an array.
+         * @return {Array} The array of strings from `str` separated by `str`.
+         * @example
+         *
+         * var pathComponents = split('/');
+         * pathComponents('/usr/local/bin/node');
+         * //= ['usr', 'local', 'bin', 'node']
+         *
+         * split('.', 'a.b.c.xyz.d');
+         * //= ['a', 'b', 'c', 'xyz', 'd']
          */
-        // The string split into substring at the specified token
+        // Splits a string into an array of strings based on the given
+        // separator.
         //
-        //     split('.', 'a.b.c.xyz.d') //=>
-        //         ['a', 'b', 'c', 'xyz', 'd']
+        //     var pathComponents = split('/');
+        //     pathComponents('/usr/local/bin/node');
+        //     //= ['usr', 'local', 'bin', 'node']
+        //
+        //     split('.', 'a.b.c.xyz.d');
+        //     //= ['a', 'b', 'c', 'xyz', 'd']
         R.split = invoker("split", String.prototype, 1);
 
         /**
@@ -3325,28 +3562,44 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Retrieve a nested path on an object seperated by the specified
+         * separator value.
+         *
+         * @static
+         * @memberOf R
+         * @param {string} sep The separator to use in `path`.
+         * @param {string} path The path to use.
+         * @return {*} The data at `path`.
+         * @example
+         * pathOn('/', 'a/b/c', {a: {b: {c: 3}}}) //= 3
          */
-        // Retrieve a value on an object from a deep path, str
-        // different properties on nested objects are indicated in string
-        // by a seperator, sep
-        // R.pathOn("|", "a|b", {a: {b: 2}}) // => 2
+        // Retrieve a nested path on an object seperated by the specified
+        // separator value.
+        //
+        //     pathOn('/', 'a/b/c', {a: {b: {c: 3}}}) //= 3
         R.pathOn = curry3(function pathOn(sep, str, obj) {
             return path(str.split(sep), obj);
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Retrieve a nested path on an object seperated by periods
+         *
+         * @static
+         * @memberOf R
+         * @param {string} path The dot path to use.
+         * @return {*} The data at `path`.
+         * @example
+         * path('a.b', {a: {b: 2}}) //= 2
          */
         // Retrieve a nested path on an object seperated by periods
-        // R.path('a.b'], {a: {b: 2}}) // => 2
+        // R.path('a.b', {a: {b: 2}}) //= 2
         R.path = R.pathOn('.');
 
         // Data Analysis and Grouping Functions
         // ------------------------------------
         //
-        // Functions performing SQL-like actions on lists of objects.  These do not have any SQL-like optimizations
-        // performed on them, however.
+        // Functions performing SQL-like actions on lists of objects.  These do
+        // not have any SQL-like optimizations performed on them, however.
 
         // --------
 
@@ -3355,36 +3608,63 @@
          */
         // Reasonable analog to SQL `select` statement.
         //
-        //     var kids = [
-        //         {name: 'Abby', age: 7, hair: 'blond', grade: 2},
-        //         {name: 'Fred', age: 12, hair: 'brown', grade: 7}
-        //     ];
+        //     var abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2},
+        //     var fred = {name: 'Fred', age: 12, hair: 'brown', grade: 7}
+        //     var kids = [abby, fred];
         //     project(['name', 'grade'], kids);
-        //     //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
+        //     //= [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         R.project = useWith(map, R.pickAll, identity); // passing `identity` gives correct arity
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Determines whether the given property of an object has a specific
+         * value according to strict equality (`===`).  Most likely used to
+         * filter a list:
+         *
+         * @static
+         * @memberOf R
+         * @param {string|number} name The property name (or index) to use.
+         * @param {*} val The value to compare the property with.
+         * @return {boolean} `true` if the properties are equal, `false` otherwise.
+         * @example
+         *
+         * var abby = {name: 'Abby', age: 7, hair: 'blond'};
+         * var fred = {name: 'Fred', age: 12, hair: 'brown'};
+         * var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
+         * var alois = {name: 'Alois', age: 15, disposition: 'surly'};
+         * var kids = [abby, fred, rusty, alois];
+         * var hasBrownHair = propEq("hair", "brown");
+         * filter(hasBrownHair, kids); //= [fred, rusty]
          */
         // Determines whether the given property of an object has a specific value
         // Most likely used to filter a list:
         //
-        //     var kids = [
-        //       {name: 'Abby', age: 7, hair: 'blond'},
-        //       {name: 'Fred', age: 12, hair: 'brown'},
-        //       {name: 'Rusty', age: 10, hair: 'brown'},
-        //       {name: 'Alois', age: 15, disposition: 'surly'}
-        //     ];
-        //     filter(propEq("hair", "brown"), kids);
-        //     //=> Fred and Rusty
+        //     var abby = {name: 'Abby', age: 7, hair: 'blond'};
+        //     var fred = {name: 'Fred', age: 12, hair: 'brown'};
+        //     var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
+        //     var alois = {name: 'Alois', age: 15, disposition: 'surly'};
+        //     var kids = [abby, fred, rusty, alois];
+        //     var hasBrownHair = propEq("hair", "brown");
+        //     filter(hasBrownHair, kids); //= [fred, rusty]
         R.propEq = curry3(function propEq(name, val, obj) {
             return obj[name] === val;
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Combines two lists into a set (i.e. no duplicates) composed of the
+         * elements of each list.
+         *
+         * @static
+         * @memberOf R
+         * @param {Array} as The first list.
+         * @param {Array} bs The second list.
+         * @return {Array} The first and second lists concatenated, with
+         * duplicates removed.
+         * @example
+         *
+         * union([1, 2, 3], [2, 3, 4]); //= [1, 2, 3, 4]
          */
-        // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.
+        // Combines two lists into a set (i.e. no duplicates) composed of the
+        // elements of each list.
         R.union = compose(uniq, R.concat);
 
         /**
@@ -3436,16 +3716,48 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Creates a new list whose elements each have two properties: `val` is
+         * the value of the corresponding item in the list supplied, and `key`
+         * is the result of applying the supplied function to that item.
+         *
+         * @static
+         * @private
          */
-        // Creates a new list whose elements each have two properties: `val` is the value of the corresponding
-        // item in the list supplied, and `key` is the result of applying the supplied function to that item.
+        // Creates a new list whose elements each have two properties: `val` is
+        // the value of the corresponding item in the list supplied, and `key`
+        // is the result of applying the supplied function to that item.
         function keyValue(fn, list) { // TODO: Should this be made public?
             return map(function(item) {return {key: fn(item), val: item};}, list);
         }
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Sorts the list according to a key generated by the supplied function.
+         *
+         * @static
+         * @memberOf R
+         * @param {Function} fn The function mapping `list` items to keys.
+         * @param {Array} list The list to sort.
+         * @return {Array} A new list sorted by the keys generated by `fn`.
+         * @example
+         *
+         * var sortByFirstItem = sortBy(nth(0));
+         * var sortByNameCaseInsensitive = sortBy(compose(toLowerCase, prop("name")));
+         * var pairs = [[-1, 1], [-2, 2], [-3, 3]];
+         * sortByFirstItem(pairs); //= [[-3, 3], [-2, 2], [-1, 1]]
+         * var alice = {
+         *      name: "ALICE",
+         *      age: 101
+         * };
+         * var bob = {
+         *      name: "Bob",
+         *      age: -10
+         * };
+         * var clara = {
+         *      name: "clara",
+         *      age: 314.159
+         * };
+         * var people = [clara, bob, alice];
+         * sortByNameCaseInsensitive(people); //= [alice, bob, clara]
          */
         // Sorts the list according to a key generated by the supplied function.
         R.sortBy = curry2(function sortyBy(fn, list) {
@@ -3457,9 +3769,26 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Counts the elements of a list according to how many match each value
+         * of a key generated by the supplied function. Returns an object
+         * mapping the keys produced by `fn` to the number of occurrences in
+         * the list. Note that all keys are coerced to strings because of how
+         * JavaScript objects work.
+         *
+         * @static
+         * @memberOf R
+         * @param {Function} fn The function used to map values to keys.
+         * @param {Array} list The list to count elements from.
+         * @return {Object} An object mapping keys to number of occurrences in the list.
+         * @example
+         *
+         * var numbers = [1.0, 1.1, 1.2, 2.0, 3.0, 2.2];
+         * var letters = split("", "abcABCaaaBBc");
+         * countBy(Math.floor)(numbers);    //= {"1": 3, "2": 2, "3": 1}
+         * countBy(toLowerCase)(letters);   //= {"a": 5, "b": 4, "c": 3}
          */
-        // Counts the elements of a list according to how many match each value of a key generated by the supplied function.
+        // Counts the elements of a list according to how many match each value
+        // of a key generated by the supplied function.
         R.countBy = curry2(function countBy(fn, list) {
             return foldl(function(counts, obj) {
                 counts[obj.key] = (counts[obj.key] || 0) + 1;
