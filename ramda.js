@@ -81,7 +81,7 @@
          * };
          * firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
          */
-        var _slice = function _slice(args, from, to) {
+        function _slice(args, from, to) {
             from = (typeof from === "number" ) ? from : 0;
             to = (typeof to === "number" ) ? to : args.length;
             var length = to - from,
@@ -92,7 +92,7 @@
                 arr[i] = args[from + i];
             }
             return arr;
-        };
+        }
 
         /**
          * Private `concat` function to merge two array-like objects.
@@ -263,6 +263,32 @@
         var hasMethod = function _hasMethod(methodName, obj) {
             return obj && !isArray(obj) && typeof obj[methodName] === 'function';
         };
+
+        /**
+         * Similar to hasMethod, this checks whether a function has a [methodname]
+         * function. If it isn't an array it will execute that function otherwise it will
+         * default to the ramda implementation.
+         *
+         * @private
+         * @category Internal
+         * @param {Function} func ramda implemtation
+         * @param {String} methodname property to check for a custom implementation
+         * @return {Object} whatever the return value of the method is
+         */
+        function wrapCheckMethod(func, methodname) {
+            return function(a, b, c) {
+                var length = arguments.length;
+                var obj = arguments[length - 1],
+                    callBound = obj && !isArray(obj) && typeof obj[methodname] === 'function';
+                switch (arguments.length) {
+                    case 0: return func();
+                    case 1: return callBound ? obj[methodname]() : func(a);
+                    case 2: return callBound ? obj[methodname](a) : func(a, b);
+                    case 3: return callBound ? obj[methodname](a, b) : func(a, b, c);
+                    case 4: return callBound ? obj[methodname](a, b, c) : func(a, b, c, obj);
+                }
+            };
+        }
 
         /**
          * Private function that generates a parameter list based on the paremeter count passed in.
@@ -807,13 +833,10 @@
          *
          * ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
          */
-        var tail = R.tail = function _cdr(arr) {
+        var tail = R.tail = wrapCheckMethod(function(arr) {
             arr = arr || [];
-            if (hasMethod('tail', arr)) {
-                return arr.tail();
-            }
             return (arr.length > 1) ? _slice(arr, 1) : [];
-        };
+        }, 'tail');
 
         aliasFor("tail").is("cdr");
 
@@ -1401,16 +1424,13 @@
          *
          * foldl(numbers, add, 10); //=> 16
          */
-        var foldl = R.foldl =  curry3(function _foldl(fn, acc, list) {
-            if (hasMethod('foldl', list)) {
-                return list.foldl(fn, acc);
-            }
+        var foldl = R.foldl =  curry3(wrapCheckMethod(function(fn, acc, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 acc = fn(acc, list[idx]);
             }
             return acc;
-        });
+        }, 'foldl'));
         aliasFor("foldl").is("reduce");
 
         /**
@@ -1440,16 +1460,13 @@
          *
          * foldl.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
          */
-        R.foldl.idx = curry3(function _foldlIdx(fn, acc, list) {
-            if (hasMethod('foldl', list)) {
-                return list.foldl(fn, acc);
-            }
+        R.foldl.idx = curry3(wrapCheckMethod(function(fn, acc, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 acc = fn(acc, list[idx], idx, list);
             }
             return acc;
-        });
+        }, 'foldl'));
 
         /**
          * Returns a single item by iterating through the list, successively calling the iterator
@@ -1482,16 +1499,13 @@
          *
          * foldr(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
          */
-        var foldr = R.foldr = curry3(function _foldr(fn, acc, list) {
-            if (hasMethod('foldr', list)) {
-                return list.foldr(fn, acc);
-            }
+        var foldr = R.foldr = curry3(wrapCheckMethod(function(fn, acc, list) {
             var idx = list.length;
             while (idx--) {
                 acc = fn(acc, list[idx]);
             }
             return acc;
-        });
+        }, 'foldr'));
         aliasFor("foldr").is("reduceRight");
 
         /**
@@ -1522,16 +1536,13 @@
          *
          * foldr.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
          */
-        R.foldr.idx = curry3(function _foldrIdx(fn, acc, list) {
-            if (hasMethod('foldr', list)) {
-                return list.foldr(fn, acc);
-            }
+        R.foldr.idx = curry3(wrapCheckMethod(function(fn, acc, list) {
             var idx = list.length;
             while (idx--) {
                 acc = fn(acc, list[idx], idx, list);
             }
             return acc;
-        });
+        }, 'foldr'));
 
         /**
          * Builds a list from a seed value. Accepts an iterator function, which returns either false
@@ -1587,16 +1598,13 @@
          * ramda.map(double, [1, 2, 3]); //=> [2, 4, 6]
          */
         function map(fn, list) {
-            if (hasMethod('map', list)) {
-                return list.map(fn);
-            }
             var idx = -1, len = list.length, result = new Array(len);
             while (++idx < len) {
                 result[idx] = fn(list[idx]);
             }
             return result;
         }
-        R.map = curry2(map);
+        R.map = curry2(wrapCheckMethod(map, 'map'));
 
         /**
          * Like `map`, but but passes additional parameters to the predicate function.
@@ -1625,16 +1633,13 @@
          * ramda.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
          * //=> [64, 6, 7, 5, 3, 0, 81]
          */
-        R.map.idx = curry2(function _mapIdx(fn, list) {
-            if (hasMethod('map', list)) {
-                return list.map(fn);
-            }
+        R.map.idx = curry2(wrapCheckMethod(function _mapIdx(fn, list) {
             var idx = -1, len = list.length, result = new Array(len);
             while (++idx < len) {
                 result[idx] = fn(list[idx], idx, list);
             }
             return result;
-        });
+        }, 'map'));
 
         /**
          * Map, but for objects. Creates an object with the same keys as `obj` and values
@@ -1697,7 +1702,7 @@
         // Reports the number of elements in the list
         /**
          * Returns the number of elements in the array by returning `arr.length`.
-         * 
+         *
          * @static
          * @memberOf R
          * @category List
@@ -1734,9 +1739,6 @@
          * var evens = ramda.filter(isEven, [1, 2, 3, 4]); // => [2, 4]
          */
         var filter = function _filter(fn, list) {
-            if (hasMethod('filter', list)) {
-                return list.filter(fn);
-            }
             var idx = -1, len = list.length, result = [];
             while (++idx < len) {
                 if (fn(list[idx])) {
@@ -1746,7 +1748,7 @@
             return result;
         };
 
-        R.filter = curry2(filter);
+        R.filter = curry2(wrapCheckMethod(filter, 'filter'));
 
         /**
          * Like `filter`, but passes additional parameters to the predicate function. The predicate
@@ -1765,10 +1767,7 @@
          * };
          * ramda.filter.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [0, 9]
          */
-        var filterIdx = function _filterIdx(fn, list) {
-            if (hasMethod('filter', list)) {
-                return list.filter(fn);
-            }
+        function filterIdx(fn, list) {
             var idx = -1, len = list.length, result = [];
             while (++idx < len) {
                 if (fn(list[idx], idx, list)) {
@@ -1776,9 +1775,8 @@
                 }
             }
             return result;
-        };
-
-        R.filter.idx = curry2(filterIdx);
+        }
+        R.filter.idx = curry2(wrapCheckMethod(filterIdx, 'filter'));
 
         /**
          * Similar to `filter`, except that it keeps only values for which the given predicate
@@ -1845,14 +1843,11 @@
          *
          * takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
          */
-        R.takeWhile = curry2(function _takeWhile(fn, list) {
-            if (hasMethod('takeWhile', list)) {
-                return list.takeWhile(fn);
-            }
+        R.takeWhile = curry2(wrapCheckMethod(function(fn, list) {
             var idx = -1, len = list.length;
             while (++idx < len && fn(list[idx])) {}
             return _slice(list, 0, idx);
-        });
+        }, 'takeWhile'));
 
 
         /**
@@ -1866,12 +1861,9 @@
          * @param {Array} list The array to query.
          * @return {Array} A new array containing the first elements of `list`.
          */
-        R.take = curry2(function _take(n, list) {
-            if (hasMethod('take', list)) {
-                return list.take(n);
-            }
+        R.take = curry2(wrapCheckMethod(function(n, list) {
             return _slice(list, 0, Math.min(n, list.length));
-        });
+        }, 'take'));
 
         /**
          * Returns a new list containing the last `n` elements of a given list, passing each value
@@ -1909,12 +1901,9 @@
          * @param {Array} list The array to consider.
          * @return {Array} The last `n` elements of `list`.
          */
-        R.skip = curry2(function _skip(n, list) {
-            if (hasMethod('skip', list)) {
-                return list.skip(n);
-            }
+        R.skip = curry2(wrapCheckMethod(function _skip(n, list) {
             return _slice(list, n);
-        });
+        }, 'skip'));
         aliasFor('skip').is('drop');
 
         /**
