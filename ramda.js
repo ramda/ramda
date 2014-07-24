@@ -193,7 +193,7 @@
          * @private
          * @category Function
          * @param {Function} fn The function to curry.
-         * @return {boolean} `true` if `val` is an array, `false` otherwise.
+         * @return {Function} curried function
          * @example
          *
          * var addTwo = function(a, b) {
@@ -219,13 +219,13 @@
          * @private
          * @category Function
          * @param {Function} fn The function to curry.
-         * @return {boolean} `true` if `val` is an array, `false` otherwise.
+         * @return {Function} curried function
          * @example
          *
          * var addThree = function(a, b, c) {
          *   return a + b + c;
          * };
-         * var curriedAddThree = curry2(addThree);
+         * var curriedAddThree = curry3(addThree);
          */
         function curry3(fn) {
             return function(a, b, c) {
@@ -249,8 +249,8 @@
          *
          * @private
          * @category Internal
-         * @param {Function} methodName The name of the method to check for.
-         * @param {Function} obj The object to test.
+         * @param {string} methodName The name of the method to check for.
+         * @param {Object} obj The object to test.
          * @return {boolean} `true` has a given method, `false` otherwise.
          * @example
          *
@@ -611,29 +611,7 @@
                 return fn.apply(this, args.concat(_slice(arguments, tlen)));
             }));
         };
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // A two-step version of the `useWith` function.  This would allow us to write `project`, currently written
-        // as `useWith(map, pickAll, identity)`, as, instead, `use(map).over(pickAll, identity)`, which is a bit
-        // more explicit.
-        // TODO: One of these versions should be eliminated eventually.  So not worrying about the duplication for now.
-        R.use = function _use(fn) {
-            return {
-                over: function (/*transformers*/) {
-                    var transformers = _slice(arguments, 0);
-                    var tlen = transformers.length;
-                    return curry(arity(tlen, function () {
-                        var args = [], idx = -1;
-                        while (++idx < tlen) {
-                            args.push(transformers[idx](arguments[idx]));
-                        }
-                        return fn.apply(this, args.concat(_slice(arguments, tlen)));
-                    }));
-                }
-            };
-        };
+        aliasFor('useWith').is('disperseTo');
 
         /**
          * Iterate over an input `list`, calling a provided function `fn` for each element in the
@@ -1072,14 +1050,15 @@
          * squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
         var compose = R.compose = function _compose() {  // TODO: type check of arguments?
-            var length = arguments.length, func = arguments[--length];
+            var length = arguments.length, func = arguments[--length], fnArity;
             if (!length) {
                 return partially(compose, func);
             }
+            fnArity = func.length;
             while (length--) {
                 func = internalCompose(arguments[length], func);
             }
-            return func;
+            return arity(fnArity, func);
         };
 
         /**
@@ -1378,6 +1357,7 @@
                 }, fns));
             };
         };
+        aliasFor('fork').is('distributeTo');
 
         // List Functions
         // --------------
@@ -2338,6 +2318,30 @@
         };
 
         /**
+         * Returns a new list by pulling every item at the first level of nesting out, and putting
+         * them in a new array.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} list The array to consider.
+         * @return {Array} The flattened list.
+         * @example
+         *
+         * flattenShallow([1, [2], [[3]]]);
+         * //= [1, 2, [3]]
+         * flattenShallow([[1, 2], [3, 4], [5, 6]]);
+         * //= [1, 2, 3, 4, 5, 6]
+         */
+        R.flattenShallow = function _flattenShallow(list) {
+            var i = -1, len = list.length, out = [];
+            while (++i < len) {
+               out = isArray(list[i]) ? concat(out, list[i]) : append(list[i], out);
+            }
+            return out;
+        };
+
+        /**
          * Creates a new list out of the two supplied by applying the function to each
          * equally-positioned pair in the lists.
          *
@@ -2398,6 +2402,52 @@
             }
             return rv;
         });
+
+        /**
+         * Creates a new object out of a list of keys and a list of values.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} keys The array that will be properties on the output object.
+         * @param {Array} values The list of values on the output object.
+         * @return {Object} The object made by pairing up same-indexed elements of `keys` and `values`.
+         * @example
+         *
+         * zipObj(['a', 'b', 'c'], [1, 2, 3]);
+         * //= {a: 1, b: 2, c: 3}
+         */ 
+        R.zipObj = curry2(function _zipObj(keys, values) {
+            var i = -1, len = keys.length, out = {};
+            while (++i < len) {
+                out[keys[i]] = values[i];
+            }
+            return out;
+        });
+
+        /**
+         * Creates a new object out of a list key-value pairs.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Array} An array of two-element arrays that will be the keys and values of the ouput object.
+         * @return {Object} The object made by pairing up `keys` and `values`.
+         * @example
+         *
+         * fromPairs([['a', 1], ['b', 2],  ['c', 3]]);
+         * //= {a: 1, b: 2, c: 3}
+         */ 
+        R.fromPairs = function _fromPairs(pairs) {
+            var i = -1, len = pairs.length, out = {};
+            while (++i < len) {
+                if (isArray(pairs[i]) && pairs[i].length) {
+                    out[pairs[i][0]] = pairs[i][1];
+                }
+            }
+            return out;
+        };
+
 
         /**
          * Creates a new list out of the two supplied by applying the function
@@ -3531,24 +3581,12 @@
         // to find. E.g.
         // path(['a', 'b'], {a: {b: 2}}) // => 2
         function path(paths, obj) {
-            var i = -1, length = paths.length, val;
-            while (obj != null && ++i < length) {
-                obj = val = obj[paths[i]];
+            var i = -1, length = paths.length, val = obj;
+            while (val != null && ++i < length) {
+                val = val[paths[i]];
             }
             return val;
         }
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Retrieve a computed path by a function, fn. Fn will be given
-        // a string, str which it will use to compute the path
-        // e.g. fn("a.b") => ["a", "b"]
-        // This path will be looked up on the object
-        R.pathWith = curry3(function pathWith(fn, str, obj) {
-            var paths = fn(str) || [];
-            return path(paths, obj);
-        });
 
         /**
          * Retrieve a nested path on an object seperated by the specified

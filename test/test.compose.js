@@ -37,6 +37,21 @@ describe('compose', function() {
         };
         assert.equal(context.a(5), 40);
     });
+    
+     it('returns a function with arity == rightmost argument', function() {
+       function a2(x, y) { return 'A2'; }
+       function a3(x, y) { return 'A2'; }
+       function a4(x, y) { return 'A2'; }
+
+       var f1 = compose(b, a);
+       assert.equal(f1.length, a.length);
+       var f2 = compose(b, a2);
+       assert.equal(f2.length, a2.length);
+       var f3 = compose(b, a3);
+       assert.equal(f3.length, a3.length);
+       var f4 = compose(b, a4);
+       assert.equal(f4.length, a4.length);
+    });
 });
 
 describe('pipe', function() {
@@ -75,35 +90,6 @@ describe('pipe', function() {
         };
         assert.equal(context.a(5), 40);
     });
-});
-
-describe('use-over', function() {
-    var use = Lib.use;
-
-    function max() { return Math.max.apply(Math, arguments); }
-    function add1(x) { return x + 1; }
-    function mult2(x) { return x * 2; }
-    function div3(x) { return x/3; }
-    var f = use(max).over(add1, mult2, div3);
-
-    it('takes a arbitrary number of function arguments and returns a function', function() {
-        assert.equal(typeof use(max).over(add1), 'function');
-        assert.equal(typeof use(max).over(add1, mult2, div3), 'function');
-    });
-
-    it('passes the arguments received to their respective functions', function() {
-        assert.equal(f(7, 8, 9), 16); // max(7 + 1, 8 * 2, 9 / 3);
-    });
-
-    it('passes additional arguments to the main function', function() {
-        assert.equal(f(7, 8, 9, 10), 16);
-        assert.equal(f(7, 8, 9, 20), 20);
-    });
-
-    it('nonetheless has the correct arity', function() {
-        assert.equal(f.length, 3);
-    });
-
 });
 
 describe('useWith', function() {
