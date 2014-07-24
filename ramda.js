@@ -275,7 +275,7 @@
          * @param {String} methodname property to check for a custom implementation
          * @return {Object} whatever the return value of the method is
          */
-        function wrapCheckMethod(func, methodname) {
+        function checkForMethod(methodname, func) {
             return function(a, b, c) {
                 var length = arguments.length;
                 var obj = arguments[length - 1],
@@ -833,10 +833,10 @@
          *
          * ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
          */
-        var tail = R.tail = wrapCheckMethod(function(arr) {
+        var tail = R.tail = checkForMethod('tail', function(arr) {
             arr = arr || [];
             return (arr.length > 1) ? _slice(arr, 1) : [];
-        }, 'tail');
+        });
 
         aliasFor("tail").is("cdr");
 
@@ -1424,13 +1424,13 @@
          *
          * foldl(numbers, add, 10); //=> 16
          */
-        var foldl = R.foldl =  curry3(wrapCheckMethod(function(fn, acc, list) {
+        var foldl = R.foldl =  curry3(checkForMethod('foldl', function(fn, acc, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 acc = fn(acc, list[idx]);
             }
             return acc;
-        }, 'foldl'));
+        }));
         aliasFor("foldl").is("reduce");
 
         /**
@@ -1460,13 +1460,13 @@
          *
          * foldl.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
          */
-        R.foldl.idx = curry3(wrapCheckMethod(function(fn, acc, list) {
+        R.foldl.idx = curry3(checkForMethod('foldl', function(fn, acc, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 acc = fn(acc, list[idx], idx, list);
             }
             return acc;
-        }, 'foldl'));
+        }));
 
         /**
          * Returns a single item by iterating through the list, successively calling the iterator
@@ -1499,13 +1499,13 @@
          *
          * foldr(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
          */
-        var foldr = R.foldr = curry3(wrapCheckMethod(function(fn, acc, list) {
+        var foldr = R.foldr = curry3(checkForMethod('foldr', function(fn, acc, list) {
             var idx = list.length;
             while (idx--) {
                 acc = fn(acc, list[idx]);
             }
             return acc;
-        }, 'foldr'));
+        }));
         aliasFor("foldr").is("reduceRight");
 
         /**
@@ -1536,13 +1536,13 @@
          *
          * foldr.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
          */
-        R.foldr.idx = curry3(wrapCheckMethod(function(fn, acc, list) {
+        R.foldr.idx = curry3(checkForMethod('foldr', function(fn, acc, list) {
             var idx = list.length;
             while (idx--) {
                 acc = fn(acc, list[idx], idx, list);
             }
             return acc;
-        }, 'foldr'));
+        }));
 
         /**
          * Builds a list from a seed value. Accepts an iterator function, which returns either false
@@ -1604,7 +1604,7 @@
             }
             return result;
         }
-        R.map = curry2(wrapCheckMethod(map, 'map'));
+        R.map = curry2(checkForMethod('map', map));
 
         /**
          * Like `map`, but but passes additional parameters to the predicate function.
@@ -1633,13 +1633,13 @@
          * ramda.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
          * //=> [64, 6, 7, 5, 3, 0, 81]
          */
-        R.map.idx = curry2(wrapCheckMethod(function _mapIdx(fn, list) {
+        R.map.idx = curry2(checkForMethod('map', function _mapIdx(fn, list) {
             var idx = -1, len = list.length, result = new Array(len);
             while (++idx < len) {
                 result[idx] = fn(list[idx], idx, list);
             }
             return result;
-        }, 'map'));
+        }));
 
         /**
          * Map, but for objects. Creates an object with the same keys as `obj` and values
@@ -1748,7 +1748,7 @@
             return result;
         };
 
-        R.filter = curry2(wrapCheckMethod(filter, 'filter'));
+        R.filter = curry2(checkForMethod('filter', filter));
 
         /**
          * Like `filter`, but passes additional parameters to the predicate function. The predicate
@@ -1776,7 +1776,7 @@
             }
             return result;
         }
-        R.filter.idx = curry2(wrapCheckMethod(filterIdx, 'filter'));
+        R.filter.idx = curry2(checkForMethod('filter', filterIdx));
 
         /**
          * Similar to `filter`, except that it keeps only values for which the given predicate
@@ -1843,11 +1843,11 @@
          *
          * takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
          */
-        R.takeWhile = curry2(wrapCheckMethod(function(fn, list) {
+        R.takeWhile = curry2(checkForMethod('takeWhile', function(fn, list) {
             var idx = -1, len = list.length;
             while (++idx < len && fn(list[idx])) {}
             return _slice(list, 0, idx);
-        }, 'takeWhile'));
+        }));
 
 
         /**
@@ -1861,9 +1861,9 @@
          * @param {Array} list The array to query.
          * @return {Array} A new array containing the first elements of `list`.
          */
-        R.take = curry2(wrapCheckMethod(function(n, list) {
+        R.take = curry2(checkForMethod('take', function(n, list) {
             return _slice(list, 0, Math.min(n, list.length));
-        }, 'take'));
+        }));
 
         /**
          * Returns a new list containing the last `n` elements of a given list, passing each value
@@ -1901,9 +1901,9 @@
          * @param {Array} list The array to consider.
          * @return {Array} The last `n` elements of `list`.
          */
-        R.skip = curry2(wrapCheckMethod(function _skip(n, list) {
+        R.skip = curry2(checkForMethod('skip', function _skip(n, list) {
             return _slice(list, n);
-        }, 'skip'));
+        }));
         aliasFor('skip').is('drop');
 
         /**
