@@ -1693,13 +1693,12 @@
          * var next = ramda.ap(1, R.add)
          *
          */
-        R.ap = curry2(function _ap(list, fn) {
-            if (typeof fn !== 'function' && typeof fn.ap === 'function') {
-                return fn.ap(list);
-            }
-            return map(fn, list);
-        });
-
+        R.ap = curry2(checkForMethod('ap', function _ap(fns, vs) {
+            return foldl(function(acc, fn) { 
+                return concat(acc, map(fn, vs)); 
+            },  [], fns);
+        }));
+        
         // Reports the number of elements in the list
         /**
          * Returns the number of elements in the array by returning `arr.length`.
