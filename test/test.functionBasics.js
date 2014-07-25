@@ -132,21 +132,22 @@ describe('binary', function() {
 describe('ap', function() {
     var ap = Lib.ap;
     function inc(x) { return x + 1; }
+    function mult2(x) { return x * 2; }
+    function plus3(x) { return x + 3; }
 
-    it('applies a list to a function', function() {
-      assert.deepEqual(ap([100, 200, 300], inc), [101, 201, 301]);
+    it('applies a list of functions to a list of values', function() {
+      assert.deepEqual(ap([mult2, plus3], [1, 2, 3]), [2,4,6,4,5,6]);
     });
 
-    it('if not passed a function, dispatches to the passed object\'s ap method ', function() {
-      var obj = { ap: function(xs) { return 'got list of length ' + xs.length; } }; 
-      assert.deepEqual(ap([2,3,4], obj), obj.ap([2,3,4]));
-      assert.equal(ap([2,3,4], obj), 'got list of length 3');
+    it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
+      var obj = { ap: function(fs) { return { x: fs[0](1) } } }; 
+      assert.deepEqual(ap([Lib.add(1)], obj), obj.ap([Lib.add(1)]));
     });
 
     it('is curried', function() {
-      var val = ap([200, 400]); 
+      var val = ap([mult2, plus3]); 
       assert.equal(typeof val, 'function');
-      assert.deepEqual(val(inc), [201, 401]);
+      assert.deepEqual(val([1,2,3]), [2,4,6,4,5,6]);
     });
 });
 
