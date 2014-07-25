@@ -3349,6 +3349,44 @@
             return arguments.length < 2 ? function(b) { return a % b; } :  a % b;
         };
 
+
+        /**
+         * Determine if he passed argument is an integer.
+         *
+         * @private
+         * @param n
+         * @return {Boolean}
+         */
+        var isInteger = Number.isInteger || function isInteger(n) {
+            return (n << 0) === n; 
+        };
+
+        /**
+         * mathMod behaves like the modulo operator should mathematically, unlike the `%`
+         * operator (and by extension, ramda.modulo). So while "-17 % 5" is 2, 
+         * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN 
+         * when the modulus is zero or negative.
+         *
+         * @static
+         * @memberOf R
+         * @param {number} m The dividend.
+         * @param {number} p the modulus.
+         * @return {number} The result of `b mod a`.
+         * @example
+         *
+         * mathMod(-17, 5)  // 3
+         * mathMod(17, 5)   // 2
+         * mathMod(17, -5)  // NaN
+         * mathMod(17, 0)   // NaN
+         * mathMod(17.2, 5) // NaN
+         * mathMod(17, 5.3) // NaN
+         */
+        R.mathMod = curry2(function _mathMod(m, p) {
+            if (!isInteger(m) || m < 1) { return NaN; }
+            if (!isInteger(p)) { return NaN; }
+            return ((m % p) + p) % p;
+        });
+
         /**
          * TODO: JSDoc-style documentation for this function
          */

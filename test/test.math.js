@@ -120,6 +120,29 @@ describe('moduloBy', function() {
   });
 });
 
+describe('mathMod', function() {
+  var mathMod = Lib.mathMod;
+
+  it('requires integer arguments', function() {
+    assert.notEqual(mathMod('s', 3), mathMod('s', 3));
+    assert.notEqual(mathMod(3, 's'), mathMod(3, 's'));
+    assert.notEqual(mathMod(12.2, 3), mathMod(12.2, 3));
+    assert.notEqual(mathMod(3, 12.2), mathMod(3, 12.2));
+  });
+
+  it('behaves differently than JS modulo', function() {
+    assert.notEqual(mathMod(-17, 5), -17 % 5);
+    assert.notEqual(mathMod(17.2, 5), 17.2 % 5);
+    assert.notEqual(mathMod(17, -5), 17 % -5);
+  });
+
+  it('is curried', function() {
+    var f = mathMod(29);
+    assert.equal(f(6), 5);
+  });
+
+});
+
 describe('sum', function() {
     var sum = Lib.sum;
 
