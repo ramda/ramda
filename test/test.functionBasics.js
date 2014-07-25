@@ -133,20 +133,20 @@ describe('ap', function() {
     var ap = Lib.ap;
     function inc(x) { return x + 1; }
 
-    it('applies a value to a function', function() {
-      assert.equal(ap(100, inc), 101);
+    it('applies a list to a function', function() {
+      assert.deepEqual(ap([100, 200, 300], inc), [101, 201, 301]);
     });
 
     it('if not passed a function, dispatches to the passed object\'s ap method ', function() {
-      var obj = { ap: function(x) { return 'ap method: ' + x; } }; 
-      assert.equal(ap('see?', obj), obj.ap('see?'));
-      assert.equal(ap('see?', obj), 'ap method: see?');
+      var obj = { ap: function(xs) { return 'got list of length ' + xs.length; } }; 
+      assert.deepEqual(ap([2,3,4], obj), obj.ap([2,3,4]));
+      assert.equal(ap([2,3,4], obj), 'got list of length 3');
     });
 
     it('is curried', function() {
-      var val = ap(200); 
+      var val = ap([200, 400]); 
       assert.equal(typeof val, 'function');
-      assert(val(inc), 201);
+      assert.deepEqual(val(inc), [201, 401]);
     });
 });
 

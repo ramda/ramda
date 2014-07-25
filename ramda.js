@@ -437,27 +437,6 @@
         };
 
         /**
-         * ap abstracts the notion of function application.
-         *
-         * @static
-         * @memberOf R
-         * @category Function
-         * @param value 
-         * @param {Function|Applicative} fn
-         * @return the value of applying `value` to the function `fn`
-         * @example
-         *
-         * var next = ramda.ap(1, R.add)
-         *
-         */
-        R.ap = curry2(function(value, fn) {
-            if (typeof fn !== 'function' && typeof fn.ap === 'function') {
-                return fn.ap(value);
-            }
-            return fn(value);
-        });
-
-        /**
          * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
          * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
          * functions produced by `arity` will pass all provided arguments to the wrapped function.
@@ -1698,6 +1677,27 @@
                 acc[key] = fn(obj[key], key, obj);
                 return acc;
             }, {}, keys(obj));
+        });
+
+        /**
+         * ap abstracts the notion of function application.
+         *
+         * @static
+         * @memberOf R
+         * @category Function
+         * @param {Array} list 
+         * @param {Function|Applicative} fn
+         * @return the value of applying `value` to the function `fn`
+         * @example
+         *
+         * var next = ramda.ap(1, R.add)
+         *
+         */
+        R.ap = curry2(function(list, fn) {
+            if (typeof fn !== 'function' && typeof fn.ap === 'function') {
+                return fn.ap(list);
+            }
+            return map(fn, list);
         });
 
         // Reports the number of elements in the list
