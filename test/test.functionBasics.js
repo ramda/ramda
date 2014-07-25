@@ -132,7 +132,7 @@ describe('binary', function() {
 describe('ap', function() {
     var ap = Lib.ap;
     function inc(x) { return x + 1; }
-    function mutl2(x) { return x * 2; }
+    function mult2(x) { return x * 2; }
     function plus3(x) { return x + 3; }
 
     it('applies a list of functions to a list of values', function() {
