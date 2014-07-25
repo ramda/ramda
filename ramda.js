@@ -450,11 +450,11 @@
          * var next = ramda.ap(1, R.add)
          *
          */
-        R.ap = curry2(function(value, fn) {
+        R.ap = curry2(function(list, fn) {
             if (typeof fn !== 'function' && typeof fn.ap === 'function') {
-                return fn.ap(value);
+                return fn.ap(list);
             }
-            return fn(value);
+            return map(fn, list);
         });
 
         /**
