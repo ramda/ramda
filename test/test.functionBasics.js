@@ -140,7 +140,7 @@ describe('ap', function() {
     });
 
     it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
-      var obj = { ap: function(fs) { return { x: fs[0](1); } } }; 
+      var obj = { ap: function(fs) { return { x: fs[0](1) } } }; 
       assert.deepEqual(ap([Lib.add(1)], obj), obj.ap([Lib.add(1)]));
     });
 
