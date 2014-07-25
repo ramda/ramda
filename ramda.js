@@ -1693,7 +1693,7 @@
          * var next = ramda.ap(1, R.add)
          *
          */
-        R.ap = curry2(function(list, fn) {
+        R.ap = curry2(function _ap(list, fn) {
             if (typeof fn !== 'function' && typeof fn.ap === 'function') {
                 return fn.ap(list);
             }
@@ -3351,7 +3351,7 @@
 
 
         /**
-         * Determine if he passed argument is an integer.
+         * Determine if the passed argument is an integer.
          *
          * @private
          * @param n
@@ -3363,7 +3363,7 @@
 
         /**
          * mathMod behaves like the modulo operator should mathematically, unlike the `%`
-         * operator (and by extension, ramda.modulo). So while "-17 % 5" is 2, 
+         * operator (and by extension, ramda.modulo). So while "-17 % 5" is -2, 
          * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN 
          * when the modulus is zero or negative.
          *
