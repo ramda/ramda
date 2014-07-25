@@ -128,3 +128,25 @@ describe('binary', function() {
         })(10, 20, 30);
     });
 });
+
+describe('ap', function() {
+    var ap = Lib.ap;
+    function inc(x) { return x + 1; }
+
+    it('applies a value to a function', function() {
+      assert.equal(ap(100, inc), 101);
+    });
+
+    it('if not passed a function, dispatches to the passed object\'s ap method ', function() {
+      var obj = { ap: function(x) { return 'ap method: ' + x; } }; 
+      assert.equal(ap('see?', obj), obj.ap('see?'));
+      assert.equal(ap('see?', obj), 'ap method: see?');
+    });
+
+    it('is curried', function() {
+      var val = ap(200); 
+      assert.equal(typeof val, 'function');
+      assert(val(inc), 201);
+    });
+});
+
