@@ -1680,18 +1680,17 @@
         });
 
         /**
-         * ap abstracts the notion of function application.
+         * ap applies a list of functions to a list of values.
          *
          * @static
          * @memberOf R
          * @category Function
-         * @param {Array} list 
-         * @param {Function|Applicative} fn
-         * @return the value of applying `value` to the function `fn`
+         * @param {Array} fns An arry of functions
+         * @param {Array} vs An array of values
+         * @return the value of applying each the function `fns` to each value in `vs`
          * @example
          *
-         * var next = ramda.ap(1, R.add)
-         *
+         * R.ap([R.multiply(2), R.add(3), [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
          */
         R.ap = curry2(checkForMethod('ap', function _ap(fns, vs) {
             return foldl(function(acc, fn) { 
@@ -3639,7 +3638,9 @@
         // to find. E.g.
         // path(['a', 'b'], {a: {b: 2}}) // => 2
         function path(paths, obj) {
-            var i = -1, length = paths.length, val = obj;
+            var i = -1, length = paths.length, val;
+            if (obj == null) { return; }
+            val = obj;
             while (val != null && ++i < length) {
                 val = val[paths[i]];
             }
