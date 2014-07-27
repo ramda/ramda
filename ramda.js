@@ -1715,6 +1715,7 @@
         R.size = function _size(arr) {
             return arr.length;
         };
+        aliasFor('size').is('length');
 
         /**
          * Returns a new list containing only those items that match a given predicate function.

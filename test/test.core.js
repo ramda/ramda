@@ -123,6 +123,12 @@ describe('size', function() {
     it('counts the elements of a list', function() {
         assert.equal(size(['a', 'b', 'c', 'd']), 4);
     });
+
+    it('should be aliased by `length`', function() {
+        assert.equal(Lib.length([2, 4, 6, 8, 10]), 5);
+        assert.strictEqual(Lib.length, size);
+    });
+
 });
 
 describe('sort', function() {
