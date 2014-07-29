@@ -3129,7 +3129,7 @@
          */
         // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
         // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
-        // value. (Note also that at least Oliver Twist can pronounce this one...)
+        // value.
         R.or = curry2(function or(f, g) {
             return function _or() {
                 return !!(f.apply(this, arguments) || g.apply(this, arguments));
