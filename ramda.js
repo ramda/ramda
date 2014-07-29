@@ -1042,7 +1042,7 @@
          * left.
          * @example
          *
-         * var triple = function(x) { return x * 2; };
+         * var triple = function(x) { return x * 3; };
          * var double = function(x) { return x * 2; };
          * var square = function(x) { return x * x; };
          * var squareThenDoubleThenTriple = ramda.compose(triple, double, square);
@@ -1078,7 +1078,7 @@
          * left.
          * @example
          *
-         * var triple = function(x) { return x * 2; };
+         * var triple = function(x) { return x * 3; };
          * var double = function(x) { return x * 2; };
          * var square = function(x) { return x * x; };
          * var squareThenDoubleThenTriple = ramda.pipe(square, double, triple);
