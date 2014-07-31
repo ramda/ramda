@@ -98,8 +98,8 @@ Introductions
 -------------
 
 * [Introducing Ramda](http://buzzdecafe.github.io/code/2014/05/16/introducing-ramda/) by Buzz de Cafe
-* [Why Ramda?](http://fr.umio.us/why-ramda/) by frumious
-* [Favoring Curry](http://fr.umio.us/favoring-curry/) by frumious
+* [Why Ramda?](http://fr.umio.us/why-ramda/) by Scott Sauyet
+* [Favoring Curry](http://fr.umio.us/favoring-curry/) by Scott Sauyet
 
 
 
