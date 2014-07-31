@@ -43,29 +43,41 @@ Installation
 
 To use with node:
 
-    npm install ramda
+```bash
+$ npm install ramda
+```
 
 Then in the console:
 
-    var ramda = require('ramda')
+```javascript
+var ramda = require('ramda');
+```
 
 To use directly in the browser:
 
-    <script src="path/to/yourCopyOf/ramda.js"></script>
+```html
+<script src="path/to/yourCopyOf/ramda.js"></script>
+```
 
 or the minified version:
 
-    <script src="path/to/yourCopyOf/ramda.min.js"></script>
+```html
+<script src="path/to/yourCopyOf/ramda.min.js"></script>
+```
 
 or from a CDN, either cdnjs:
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.2.3/ramda.min.js"></script>
+```html
+<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.2.3/ramda.min.js"></script>
+```
 
-or jsdelivr:
+or one of the below links from [jsDelivr](http://jsdelivr.net):
 
-    <script src="//cdn.jsdelivr.net/ramda/0.2.3/ramda.min.js"></script>
-    <script src="//cdn.jsdelivr.net/ramda/0.2/ramda.min.js"></script>
-    <script src="//cdn.jsdelivr.net/ramda/latest/ramda.min.js"></script>
+```html
+<script src="//cdn.jsdelivr.net/ramda/0.2.3/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/ramda/0.2/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/ramda/latest/ramda.min.js"></script>
+```
 
 (note that using `latest` is taking a significant risk that ramda API changes could break your code.)
 
@@ -115,21 +127,30 @@ functional components (I'm looking at you Underscore!)
 
 The idea is that, if foldl has this signature:
 
-    var foldl = function(fn, accum, arr) { /* ... */}
+
+```javascript
+var foldl = function(fn, accum, arr) { /* ... */}
+```
 
 and we have this simple function:
 
-    var add = function(a, b) {return a + b;};
+```javascript
+var add = function(a, b) {return a + b;};
+```
 
 then, instead of having to manually call lPartial like this:
 
-     var sum = lPartial(foldl, add, 0);
-     var total = sum([1, 2, 3, 4]);
+```javascript
+var sum = lPartial(foldl, add, 0);
+var total = sum([1, 2, 3, 4]);
+```
 
 with ramda, we can just do this:
 
-     var sum = foldl(add, 0);
-     var total = sum([1, 2, 3, 4]);
+```javascript
+var sum = foldl(add, 0);
+var total = sum([1, 2, 3, 4]);
+```
 
 
 
