@@ -1384,7 +1384,7 @@
          * The iterator function receives two values: *(acc, value)*
          *
          * Note: `ramda.foldl` does not skip deleted or unassigned indices (sparse arrays), unlike
-         * the native `Array.prototype.filter` method. For more details on this behavior, see:
+         * the native `Array.prototype.reduce` method. For more details on this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
@@ -1420,7 +1420,7 @@
          * The iterator function receives four values: *(acc, value, index, list)*
          *
          * Note: `ramda.foldl.idx` does not skip deleted or unassigned indices (sparse arrays),
-         * unlike the native `Array.prototype.filter` method. For more details on this behavior,
+         * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
          * see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
@@ -1459,7 +1459,7 @@
          * The iterator function receives two values: *(acc, value)*
          *
          * Note: `ramda.foldr` does not skip deleted or unassigned indices (sparse arrays), unlike
-         * the native `Array.prototype.filter` method. For more details on this behavior, see:
+         * the native `Array.prototype.reduce` method. For more details on this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
@@ -1496,7 +1496,7 @@
          * The iterator function receives four values: *(acc, value, index, list)*.
          *
          * Note: `ramda.foldr.idx` does not skip deleted or unassigned indices (sparse arrays),
-         * unlike the native `Array.prototype.filter` method. For more details on this behavior,
+         * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
          * see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
@@ -3888,4 +3888,3 @@
         return R;
     }());
 }));
-
