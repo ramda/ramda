@@ -52,6 +52,16 @@ describe('compose', function() {
        var f4 = compose(b, a4);
        assert.equal(f4.length, a4.length);
     });
+
+    it('throws if given no arguments', function() {
+        assert.throws(function() { compose(); });
+    });
+
+    it('returns argument if given exactly one argument', function() {
+        function f() {}
+        assert.strictEqual(compose(f), f);
+    });
+
 });
 
 describe('pipe', function() {
