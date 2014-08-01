@@ -30,17 +30,6 @@
         // ---------------------------------
 
         /**
-         * A reference to the `undefined` value.
-         *
-         * Note that this is defined as the result of calling an empty function because JSHint
-         * complains about these constructs:
-         *
-         * var undef = void 0;
-         * var undef = undefined;
-         */
-        var undef = (function () {})();
-
-        /**
          * Creates an alias for a public function.
          *
          * @private
@@ -535,7 +524,7 @@
          */
         var invoker = R.invoker = function _invoker(name, obj, len) {
             var method = obj[name];
-            var length = len === undef ? method.length : len;
+            var length = len === void 0 ? method.length : len;
             return method && curry(function () {
                 if (arguments.length) {
                     var target = Array.prototype.pop.call(arguments);
@@ -544,7 +533,6 @@
                         return targetMethod.apply(target, arguments);
                     }
                 }
-                return undef;
             }, length + 1);
         };
 
@@ -1991,7 +1979,6 @@
                     return list[idx];
                 }
             }
-            return undef;
         });
 
         /**
@@ -2658,7 +2645,7 @@
          * var tail = slice.from(1);
          * tail(xs); //= [5, 6, 7]
          */
-        R.slice.from = flip(R.slice)(undef);
+        R.slice.from = flip(R.slice)(void 0);
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -2824,7 +2811,7 @@
          * TODO: JSDoc-style documentation for this function
          */
         var anyBlanks = R.any(function _any(val) {
-            return val === null || val === undef;
+            return val == null;
         });
 
         var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -3456,7 +3443,7 @@
         // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = curry2(function _maxWith(keyFn, list) {
             if (!(list && list.length > 0)) {
-               return undef;
+               return;
             }
             var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
             while (++idx < list.length) {
@@ -3477,7 +3464,7 @@
         // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.minWith = curry2(function _minWith(keyFn, list) {
             if (!(list && list.length > 0)) {
-                return undef;
+                return;
             }
             var idx = 0, winner = list[idx], min = keyFn(list[idx]), testKey;
             while (++idx < list.length) {
@@ -3521,7 +3508,7 @@
         // The trailing substring of a String starting with the nth character:
         //
         //     substringFrom(8, "abcdefghijklm"); //=> "ijklm"
-        R.substringFrom = flip(substring)(undef);
+        R.substringFrom = flip(substring)(void 0);
 
         /**
          * TODO: JSDoc-style documentation for this function
