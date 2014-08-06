@@ -157,3 +157,33 @@ describe('repeatN', function () {
     });
 });
 
+describe('of', function() {
+    var of = Lib.of;
+
+    it('wraps a value inside an Array', function() {
+        assert.deepEqual(of(100), [100]);
+        assert.deepEqual(of([100]), [[100]]);
+        assert.deepEqual(of(null), [null]);
+        assert.deepEqual(of(undefined), [undefined]);
+        assert.deepEqual(of([]), [[]]);
+    });
+});
+
+describe('empty', function() {
+    var empty = Lib.empty;
+    it('returns an empty list', function() {
+        assert.deepEqual(empty([1,2,3]), []);
+    });
+
+});
+
+/*
+describe('chain', function() {
+    var chain = Lib.chain;
+    it('chains', function() {
+
+    });
+});
+*/
+
+
