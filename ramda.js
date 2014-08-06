@@ -1674,7 +1674,7 @@
          * @static
          * @memberOf R
          * @category Function
-         * @param {Array} fns An arry of functions
+         * @param {Array} fns An array of functions
          * @param {Array} vs An array of values
          * @return the value of applying each the function `fns` to each value in `vs`
          * @example
@@ -1686,7 +1686,38 @@
                 return concat(acc, map(fn, vs)); 
             },  [], fns);
         }));
-        
+      
+        /**
+         *
+         * `of` wraps any object in an array. This implementation is compatible with the 
+         * Fantasy-land Applicative spec, and will work with types that implement that spec.
+         *
+         * @static
+         * @memberOf R
+         * @category Function
+         * @param x any value
+         * @return [x]
+         * @example
+         * 
+         * R.of(1); // => [1]
+         */ 
+        R.of = checkForMethod('of', function _of(x) { return [x]; });
+
+
+        /**
+         * `empty` wraps any object in an array. This implementation is compatible with the 
+         * Fantasy-land Monoid spec, and will work with types that implement that spec.
+         *
+         * @static
+         * @memberOf R
+         * @category Function
+         * @return {Array} an empty array
+         * @example
+         *
+         * R.empty([1,2,3,4,5]); // => []
+         */
+        R.empty = checkForMethod('empty', function _empty() { return []; });
+
         // Reports the number of elements in the list
         /**
          * Returns the number of elements in the array by returning `arr.length`.
