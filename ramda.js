@@ -2708,7 +2708,7 @@
         // Splits a list into sublists stored in an object, based on the result of calling a String-returning function
         // on each element, and grouping the results according to values returned.
         //
-        //     var byGrade = partition(function(student) {
+        //     var byGrade = groupBy(function(student) {
         //         var score = student.score
         //         return (score < 65) ? 'F' : (score < 70) ? 'D' :
         //                (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
@@ -2726,14 +2726,26 @@
         /**
          * TODO: JSDoc-style documentation for this function
          */
-        R.partition = curry2(function _partition(fn, list) {
+        R.groupBy = curry2(function _groupBy(fn, list) {
             return foldl(function (acc, elt) {
                 var key = fn(elt);
                 acc[key] = append(elt, acc[key] || (acc[key] = []));
                 return acc;
             }, {}, list);
         });
-        aliasFor("partition").is("groupBy");
+
+        // Takes a predicate and a list and returns the pair of lists of
+        // elements which do and do not satisfy the predicate, respectively.
+
+        /**
+         * TODO: JSDoc-style documentation for this function
+         */
+        R.partition = curry2(function _groupBy(pred, list) {
+            return foldl(function (acc, elt) {
+                acc[pred(elt) ? 0 : 1].push(elt);
+                return acc;
+            }, [[], []], list);
+        });
 
         // Object Functions
         // ----------------
@@ -3042,7 +3054,7 @@
         //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
         //
         R.where = function where(spec, testObj) {
-            var parsedSpec = R.partition(function(key) {
+            var parsedSpec = R.groupBy(function(key) {
                     return typeof spec[key] === "function" ? "fn" : "obj";
                 }, keys(spec)
             );
