@@ -2,146 +2,125 @@ var assert = require('assert');
 var R = require('..');
 
 describe('substring', function() {
-    var substring = R.substring;
-
     it('should return the substring of a string', function() {
-        assert.equal(substring(2, 5, 'abcdefghijklm'), 'cde');
+        assert.equal(R.substring(2, 5, 'abcdefghijklm'), 'cde');
     });
 
     it('should be automatically curried', function() {
-        var from2 = substring(2);
+        var from2 = R.substring(2);
         assert.equal(from2(5, 'abcdefghijklm'), 'cde');
-        var from2to5 = substring(2, 5);
+        var from2to5 = R.substring(2, 5);
         assert.equal(from2to5('abcdefghijklm'), 'cde');
     });
 });
 
 describe('substringFrom', function() {
-    var substringFrom = R.substringFrom;
-
     it('should return the trailing substring of a string', function() {
-        assert.equal(substringFrom(8, 'abcdefghijklm'), 'ijklm');
+        assert.equal(R.substringFrom(8, 'abcdefghijklm'), 'ijklm');
     });
 
     it('should be automatically curried', function() {
-        var after8 = substringFrom(8);
+        var after8 = R.substringFrom(8);
         assert.equal(after8('abcdefghijklm'), 'ijklm');
     });
 });
 
 describe('substringTo', function() {
-    var substringTo = R.substringTo;
-
     it('should return the trailing substring of a string', function() {
-        assert.equal(substringTo(8, 'abcdefghijklm'), 'abcdefgh');
+        assert.equal(R.substringTo(8, 'abcdefghijklm'), 'abcdefgh');
     });
 
     it('should be automatically curried', function() {
-        var through8 = substringTo(8);
+        var through8 = R.substringTo(8);
         assert.equal(through8('abcdefghijklm'), 'abcdefgh');
     });
 });
 
 describe('charAt', function() {
-    var charAt = R.charAt;
-
     it('should return the character at the nth position of a string', function() {
-        assert.equal(charAt(8, 'abcdefghijklm'), 'i');
+        assert.equal(R.charAt(8, 'abcdefghijklm'), 'i');
     });
 
     it('should be automatically curried', function() {
-        var at8 = charAt(8);
+        var at8 = R.charAt(8);
         assert.equal(at8('abcdefghijklm'), 'i');
     });
 });
 
 describe('charCodeAt', function() {
-    var charCodeAt = R.charCodeAt;
-
     it('should return the ascii character at the nth position of a string', function() {
-        assert.equal(charCodeAt(8, 'abcdefghijklm'), 105);  // 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105
+        assert.equal(R.charCodeAt(8, 'abcdefghijklm'), 105);  // 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105
     });
 
     it('should be automatically curried', function() {
-        var at8 = charCodeAt(8);
+        var at8 = R.charCodeAt(8);
         assert.equal(at8('abcdefghijklm'), 105);
     });
 });
 
 describe('match', function() {
-    var match = R.match;
     var re = /[A-Z]\d\d\-[a-zA-Z]+/;
 
     it('should determine whether a string matches a regex', function() {
-        assert.equal(match(re, 'B17-afn').length, 1);
-        assert.equal(match(re, 'B1-afn'), null);
+        assert.equal(R.match(re, 'B17-afn').length, 1);
+        assert.equal(R.match(re, 'B1-afn'), null);
     });
 
     it('should be automatically curried', function() {
-        var format = match(re);
+        var format = R.match(re);
         assert.equal(format('B17-afn').length, 1);
         assert.equal(format('B1-afn'), null);
     });
 });
 
 describe('strIndexOf', function() {
-    var strIndexOf = R.strIndexOf;
-
     it('should find the index of a substring inside a string', function() {
-        assert.equal(strIndexOf('c', 'abcdefg'), 2);
+        assert.equal(R.strIndexOf('c', 'abcdefg'), 2);
     });
 
     it('should return -1 if the value is not found', function() {
-        assert.equal(strIndexOf('x', 'abcdefg'), -1);
+        assert.equal(R.strIndexOf('x', 'abcdefg'), -1);
     });
 
     it('should be automatically curried', function() {
-        var findD = strIndexOf('d');
+        var findD = R.strIndexOf('d');
         assert.equal(findD('abcdefg'), 3);
     });
 });
 
 describe('strLastIndexOf', function() {
-    var strLastIndexOf = R.strLastIndexOf;
-
     it('should find the index of a substring inside a string', function() {
-        assert.equal(strLastIndexOf('a', 'bananas'), 5);
+        assert.equal(R.strLastIndexOf('a', 'bananas'), 5);
     });
 
     it('should return -1 if the value is not found', function() {
-        assert.equal(strLastIndexOf('x', 'abcdefg'), -1);
+        assert.equal(R.strLastIndexOf('x', 'abcdefg'), -1);
     });
 
     it('should be automatically curried', function() {
-        var findA = strLastIndexOf('a');
+        var findA = R.strLastIndexOf('a');
         assert.equal(findA('banana split'), 5);
     });
 });
 
 describe('toUpperCase', function() {
-    var toUpperCase = R.toUpperCase;
-
     it('should uppercase a string', function() {
-        assert.equal(toUpperCase('abc'), 'ABC');
+        assert.equal(R.toUpperCase('abc'), 'ABC');
     });
 });
 
 describe('toLowerCase', function() {
-    var toLowerCase = R.toLowerCase;
-
     it('should lowercase a string', function() {
-        assert.equal(toLowerCase('XYZ'), 'xyz');
+        assert.equal(R.toLowerCase('XYZ'), 'xyz');
     });
 });
 
 describe('split', function() {
-    var split = R.split;
-
     it('should split a string into an array', function() {
-        assert.deepEqual(split('.', 'a.b.c.xyz.d'), ['a', 'b', 'c', 'xyz', 'd']);
+        assert.deepEqual(R.split('.', 'a.b.c.xyz.d'), ['a', 'b', 'c', 'xyz', 'd']);
     });
 
     it('the split string can be arbitrary', function() {
-        assert.deepEqual(split('at', 'The Cat in the Hat sat on the mat'), ['The C', ' in the H', ' s', ' on the m', '']);
+        assert.deepEqual(R.split('at', 'The Cat in the Hat sat on the mat'), ['The C', ' in the H', ' s', ' on the m', '']);
     });
 });

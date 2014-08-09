@@ -9,77 +9,73 @@ describe('join', function () {
 });
 
 describe('remove', function () {
-    var remove = R.remove;
-
     it('splices out a sub-list of the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-        assert.deepEqual(remove(2, 5, list), ['a', 'b', 'h', 'i', 'j']);
+        assert.deepEqual(R.remove(2, 5, list), ['a', 'b', 'h', 'i', 'j']);
     });
 
     it('returns the appropriate sublist when start == 0', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-        assert.deepEqual(remove(0, 5, list), ['f', 'g', 'h', 'i', 'j']);
-        assert.deepEqual(remove(0, 1, list), ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
-        assert.deepEqual(remove(0, list.length, list), []);
+        assert.deepEqual(R.remove(0, 5, list), ['f', 'g', 'h', 'i', 'j']);
+        assert.deepEqual(R.remove(0, 1, list), ['b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
+        assert.deepEqual(R.remove(0, list.length, list), []);
     });
 
     it('removes the end of the list if the count is too large', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-        assert.deepEqual(remove(2, 20, list), ['a', 'b']);
+        assert.deepEqual(R.remove(2, 20, list), ['a', 'b']);
     });
 
     it('retains the entire list if the start is too large', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-        assert.deepEqual(remove(13, 3, list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
+        assert.deepEqual(R.remove(13, 3, list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
     });
 
     it('should be curried', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-        assert.deepEqual(remove(13)(3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
-        assert.deepEqual(remove(13, 3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
+        assert.deepEqual(R.remove(13)(3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
+        assert.deepEqual(R.remove(13, 3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
     });
 });
 
 describe('insert', function () {
-    var insert = R.insert;
     it('inserts an element into the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
-        assert.deepEqual(insert(2, 'x', list), ['a', 'b', 'x', 'c', 'd', 'e']);
+        assert.deepEqual(R.insert(2, 'x', list), ['a', 'b', 'x', 'c', 'd', 'e']);
     });
 
     it('inserts another list as an element', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
-        assert.deepEqual(insert(2, ['s', 't'], list), ['a', 'b', ['s', 't'], 'c', 'd', 'e']);
+        assert.deepEqual(R.insert(2, ['s', 't'], list), ['a', 'b', ['s', 't'], 'c', 'd', 'e']);
     });
 
     it('appends to the end of the list if the index is too large', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
-        assert.deepEqual(insert(8, 'z', list), ['a', 'b', 'c', 'd', 'e', 'z']);
+        assert.deepEqual(R.insert(8, 'z', list), ['a', 'b', 'c', 'd', 'e', 'z']);
     });
 
     it('should be curried', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
-        assert.deepEqual(insert(8)('z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
-        assert.deepEqual(insert(8, 'z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
+        assert.deepEqual(R.insert(8)('z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
+        assert.deepEqual(R.insert(8, 'z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
     });
 });
 
 
 describe('insert.all', function () {
-    var insert = R.insert;
     it('inserts a list of elements into the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
-        assert.deepEqual(insert.all(2, ['x', 'y', 'z'], list), ['a', 'b', 'x', 'y', 'z', 'c', 'd', 'e']);
+        assert.deepEqual(R.insert.all(2, ['x', 'y', 'z'], list), ['a', 'b', 'x', 'y', 'z', 'c', 'd', 'e']);
     });
 
     it('appends to the end of the list if the index is too large', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
-        assert.deepEqual(insert.all(8, ['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
+        assert.deepEqual(R.insert.all(8, ['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
     });
 
     it('should be curried', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
-        assert.deepEqual(insert.all(8)(['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
+        assert.deepEqual(R.insert.all(8)(['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
     });
 });
 
@@ -125,63 +121,55 @@ describe('nth', function () {
 });
 
 describe('times', function() {
-    var times = R.times;
-
     it('takes a map func', function() {
-        assert.deepEqual(times(R.identity, 5), [0, 1, 2, 3, 4]);
-        assert.deepEqual(times(function(x) {
+        assert.deepEqual(R.times(R.identity, 5), [0, 1, 2, 3, 4]);
+        assert.deepEqual(R.times(function(x) {
             return x * 2;
         }, 5), [0, 2, 4, 6, 8]);
     });
 
     it('is curried', function() {
-        var mapid = times(R.identity);
+        var mapid = R.times(R.identity);
         assert.deepEqual(mapid(5), [0, 1, 2, 3, 4]);
     });
 });
 
 describe('repeatN', function () {
-    var repeatN = R.repeatN;
-
     it('returns a lazy list of identical values', function () {
-        assert.deepEqual(repeatN(0, 5), [0, 0, 0, 0, 0]);
+        assert.deepEqual(R.repeatN(0, 5), [0, 0, 0, 0, 0]);
     });
 
     it('can accept any value, including `null`', function () {
-        assert.deepEqual(repeatN(null, 3), [null, null, null]);
+        assert.deepEqual(R.repeatN(null, 3), [null, null, null]);
     });
 
     it('is automatically curried', function () {
-        var nTrues = repeatN(true);
+        var nTrues = R.repeatN(true);
         assert.deepEqual(nTrues(4), [true, true, true, true]);
     });
 });
 
 describe('of', function() {
-    var of = R.of;
-
     it('returns its argument as an Array', function() {
-        assert.deepEqual(of(100), [100]);
-        assert.deepEqual(of([100]), [[100]]);
-        assert.deepEqual(of(null), [null]);
-        assert.deepEqual(of(undefined), [undefined]);
-        assert.deepEqual(of([]), [[]]);
+        assert.deepEqual(R.of(100), [100]);
+        assert.deepEqual(R.of([100]), [[100]]);
+        assert.deepEqual(R.of(null), [null]);
+        assert.deepEqual(R.of(undefined), [undefined]);
+        assert.deepEqual(R.of([]), [[]]);
     });
 });
 
 describe('empty', function() {
-    var empty = R.empty;
     it('returns an empty list', function() {
-        assert.deepEqual(empty([1,2,3]), []);
+        assert.deepEqual(R.empty([1,2,3]), []);
     });
 
 });
 
 describe('chain', function() {
-    var chain = R.chain;
     var dbl = R.map(R.multiply(2));
     it('maps a function over a nested list and returns the (shallow) flattened result', function() {
-        assert.deepEqual(chain(dbl, [[1,2,3], [1], [0, 10, -3, 5, 7]]), [2, 4, 6, 2, 0, 20, -6, 10, 14]);
-        assert.deepEqual(chain(dbl, [[1,2,3], []]), [2, 4, 6]);
+        assert.deepEqual(R.chain(dbl, [[1,2,3], [1], [0, 10, -3, 5, 7]]), [2, 4, 6, 2, 0, 20, -6, 10, 14]);
+        assert.deepEqual(R.chain(dbl, [[1,2,3], []]), [2, 4, 6]);
     });
 });

@@ -2,8 +2,6 @@ var assert = require('assert');
 var R = require('..');
 
 describe('groupBy', function() {
-    var groupBy = R.groupBy, prop = R.prop;
-
     it('should split the list into groups according to the grouping function', function() {
         var grade = function(score) {
             return (score < 65) ? 'F' : (score < 70) ? 'D' : (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
@@ -21,7 +19,7 @@ describe('groupBy', function() {
             {name: 'Jack', score: 69}
         ];
         var byGrade = function(student) {return grade(student.score || 0);};
-        assert.deepEqual(groupBy(byGrade, students), {
+        assert.deepEqual(R.groupBy(byGrade, students), {
             'A': [{name: 'Dianne', score: 99}, {name: 'Gillian', score: 91}],
             'B': [{name: 'Abby', score: 84}, {name: 'Chris', score: 89}, {name: 'Irene', score: 85}],
             'C': [{name: 'Brad', score: 73}, {name: 'Hannah', score: 78}],
@@ -31,7 +29,7 @@ describe('groupBy', function() {
     });
 
     it('should be automatically curried', function() {
-        var splitByType = groupBy(prop("type"));
+        var splitByType = R.groupBy(R.prop("type"));
         assert.deepEqual(splitByType([
             {type: 'A', val: 10},
             {type: 'B', val: 20},

@@ -100,7 +100,7 @@
 
     // Returns a shuffled version of a list, using the
     // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
-    var shuffle = R.shuffle = function(random, list) {
+    R.shuffle = function(random, list) {
         var idx = -1;
         var len = list.length;
         var position;

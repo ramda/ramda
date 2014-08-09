@@ -2,7 +2,6 @@ var assert = require("assert");
 var R = require("..");
 
 describe('project', function() {
-    var project = R.project;
     var kids = [
         {name: 'Abby', age: 7, hair: 'blond'},
         {name: 'Fred', age: 12, hair: 'brown'},
@@ -11,7 +10,7 @@ describe('project', function() {
     ];
 
     it('should select the chosen properties from each element in a list', function() {
-        assert.deepEqual(project(['name', 'age'], kids), [
+        assert.deepEqual(R.project(['name', 'age'], kids), [
             {name: 'Abby', age: 7},
             {name: 'Fred', age: 12},
             {name: 'Rusty', age: 10},
@@ -20,7 +19,7 @@ describe('project', function() {
     });
 
     it('should have an undefined property on the output tuple for any input tuple that does not have the property', function() {
-        assert.deepEqual(project(["name", "hair"], kids), [
+        assert.deepEqual(R.project(["name", "hair"], kids), [
             {name: 'Abby', hair: 'blond'},
             {name: 'Fred', hair: 'brown'},
             {name: 'Rusty', hair: 'brown'},
@@ -29,7 +28,7 @@ describe('project', function() {
     });
 
     it('should be automatically curried', function() {
-        var myFields = project(['name', 'age']);
+        var myFields = R.project(['name', 'age']);
         assert.deepEqual(myFields(kids), [
             {name: 'Abby', age: 7},
             {name: 'Fred', age: 12},
@@ -40,57 +39,53 @@ describe('project', function() {
 });
 
 describe('propEq', function() {
-    var propEq = R.propEq, filter = R.filter;
     var obj1 = {name: 'Abby', age: 7, hair: 'blond'};
     var obj2 = {name: 'Fred', age: 12, hair: 'brown'};
     var obj3 = {name: 'Rusty', age: 10, hair: 'brown'};
     var obj4 = {name: 'Alois', age: 15, disposition: 'surly'};
 
     it('should determine whether a particular property matches a given value for a specific object', function() {
-        assert.equal(propEq('name', 'Abby', obj1), true);
-        assert.equal(propEq('hair', 'brown', obj2), true);
-        assert.equal(propEq('hair', 'blond', obj2), false);
+        assert.equal(R.propEq('name', 'Abby', obj1), true);
+        assert.equal(R.propEq('hair', 'brown', obj2), true);
+        assert.equal(R.propEq('hair', 'blond', obj2), false);
     });
 
     it('should be automatically curried', function() {
         var kids = [obj1, obj2, obj3, obj4];
-        var hairMatch = propEq("hair");
+        var hairMatch = R.propEq("hair");
         assert.equal(typeof hairMatch, "function");
         var brunette = hairMatch("brown");
-        assert.deepEqual(filter(brunette, kids), [obj2, obj3]);
+        assert.deepEqual(R.filter(brunette, kids), [obj2, obj3]);
         // more likely usage:
-        assert.deepEqual(filter(propEq("hair", "brown"), kids), [obj2, obj3]);
+        assert.deepEqual(R.filter(R.propEq("hair", "brown"), kids), [obj2, obj3]);
     });
 
 });
 
 describe('union', function() {
-    var union = R.union;
     var M = [1,2,3,4];
     var N = [3,4,5,6];
     var Mo = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var No = [{a: 3},{a: 4},{a: 5},{a: 6}];
     it("combines two lists into the set of all their elements", function() {
-        assert.deepEqual(union(M, N), [1,2,3,4,5,6]);
+        assert.deepEqual(R.union(M, N), [1,2,3,4,5,6]);
     });
 
     it("does not work for non-primitives (use `unionWith`)", function() {
-        assert.equal(union(Mo, No).length, 8);
+        assert.equal(R.union(Mo, No).length, 8);
     });
 });
 
 describe('unionWith', function() {
-    var unionWith = R.unionWith;
     var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
     var eqA = function(r, s) { return r.a === s.a; };
     it("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
-        assert.deepEqual(unionWith(eqA, Ro, So), [{a: 1},{a: 2},{a: 3},{a: 4},{a: 5},{a: 6}]);
+        assert.deepEqual(R.unionWith(eqA, Ro, So), [{a: 1},{a: 2},{a: 3},{a: 4},{a: 5},{a: 6}]);
     });
 });
 
 describe('intersection', function() {
-    var intersection = R.intersection;
     var M = [1,2,3,4];
     var M2 = [1,2,3,4,1,2,3,4];
     var N = [3,4,5,6];
@@ -98,30 +93,28 @@ describe('intersection', function() {
     var Mo = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var No = [{a: 3},{a: 4},{a: 5},{a: 6}];
     it("combines two lists into the set of common elements", function() {
-        assert.deepEqual(intersection(M, N), [3,4]);
+        assert.deepEqual(R.intersection(M, N), [3,4]);
     });
 
     it("does not allow duplicates in the output even if the input lists had duplicates", function() {
-        assert.deepEqual(intersection(M2, N2), [3,4]);
+        assert.deepEqual(R.intersection(M2, N2), [3,4]);
     });
 
     it("does not work for non-primitives (use `intersectionWith`)", function() {
-        assert.equal(intersection(Mo, No).length, 0);
+        assert.equal(R.intersection(Mo, No).length, 0);
     });
 });
 
 describe('intersectionWith', function() {
-    var intersectionWith = R.intersectionWith;
     var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
     var eqA = function(r, s) { return r.a === s.a; };
     it("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
-        assert.deepEqual(intersectionWith(eqA, Ro, So), [{a: 3},{a: 4}]);
+        assert.deepEqual(R.intersectionWith(eqA, Ro, So), [{a: 3},{a: 4}]);
     });
 });
 
 describe('difference', function() {
-    var difference = R.difference;
     var M = [1,2,3,4];
     var M2 = [1,2,3,4,1,2,3,4];
     var N = [3,4,5,6];
@@ -129,30 +122,29 @@ describe('difference', function() {
     var Mo = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var No = [{a: 3},{a: 4},{a: 5},{a: 6}];
     it("finds the set of all elements in the first list not contained in the second", function() {
-        assert.deepEqual(difference(M, N), [1,2]);
+        assert.deepEqual(R.difference(M, N), [1,2]);
     });
 
     it("does not allow duplicates in the output even if the input lists had duplicates", function() {
-        assert.deepEqual(difference(M2, N2), [1,2]);
+        assert.deepEqual(R.difference(M2, N2), [1,2]);
     });
 
     it("does not work for non-primitives (use `differenceWith`)", function() {
-        assert.equal(difference(Mo, No).length, 4);
+        assert.equal(R.difference(Mo, No).length, 4);
     });
 });
 
 describe('differenceWith', function() {
-    var differenceWith = R.differenceWith;
     var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var Ro2 = [{a: 1},{a: 2},{a: 3},{a: 4},{a: 1},{a: 2},{a: 3},{a: 4}];
     var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
     var So2 = [{a: 3},{a: 4},{a: 5},{a: 6},{a: 3},{a: 4},{a: 5},{a: 6}];
     var eqA = function(r, s) { return r.a === s.a; };
     it("combines two lists into the set of all their elements based on the passed-in equality predicate", function() {
-        assert.deepEqual(differenceWith(eqA, Ro, So), [{a: 1},{a: 2}]);
+        assert.deepEqual(R.differenceWith(eqA, Ro, So), [{a: 1},{a: 2}]);
     });
     it("does not allow duplicates in the output even if the input lists had duplicates", function() {
-        assert.deepEqual(differenceWith(eqA, Ro2, So2), [{a: 1},{a: 2}]);
+        assert.deepEqual(R.differenceWith(eqA, Ro2, So2), [{a: 1},{a: 2}]);
     });
 });
 
@@ -171,7 +163,6 @@ describe('differenceWith', function() {
         {title: 'Five Leaves Left', artist: 'Nick Drake', genre: 'Folk'},
         {title: 'The Magic Flute', artist: 'John Eliot Gardiner', genre: 'Classical'}
     ];
-    var prop = R.prop;
     var derivedGenre = (function() {
         var remap = {
             Baroque: 'Classical',
@@ -180,23 +171,21 @@ describe('differenceWith', function() {
             Metal: 'Rock'  /*, etc */
         };
         return function(album) {
-            var genre = prop("genre", album);
+            var genre = R.prop("genre", album);
             return remap[genre] || genre;
         };
     }());
 
     describe('sortBy', function() {
-        var sortBy = R.sortBy;
-
         it('should sort by a simple property of the objects', function() {
-            var sortedAlbums = sortBy(prop("title"), albums);
+            var sortedAlbums = R.sortBy(R.prop("title"), albums);
             assert.equal(sortedAlbums.length, albums.length);
             assert.equal(sortedAlbums[0].title, "A Farewell to Kings");
             assert.equal(sortedAlbums[11].title, "Timeout");
         });
 
         it('should be automatically curried', function() {
-            var sorter = sortBy(prop("title"));
+            var sorter = R.sortBy(R.prop("title"));
             var sortedAlbums = sorter(albums);
             assert.equal(sortedAlbums.length, albums.length);
             assert.equal(sortedAlbums[0].title, "A Farewell to Kings");
@@ -205,22 +194,20 @@ describe('differenceWith', function() {
     });
 
     describe('countBy', function() {
-        var countBy = R.countBy;
-
         it('should count by a simple property of the objects', function() {
-            assert.deepEqual(countBy(prop("genre"), albums), {
+            assert.deepEqual(R.countBy(R.prop("genre"), albums), {
                 Baroque: 2, Rock: 2, Jazz: 2, Romantic: 1, Metal: 1, Modern: 1, Broadway: 1, Folk: 1, Classical: 1
             });
         });
 
         it('should count by a more complex function on the objects', function() {
-            assert.deepEqual(countBy(derivedGenre, albums), {
+            assert.deepEqual(R.countBy(derivedGenre, albums), {
                 Classical: 5, Rock: 3, Jazz: 2, Broadway: 1, Folk: 1
             });
         });
 
         it('should be automatically curried', function() {
-            var counter = countBy(prop("genre"));
+            var counter = R.countBy(R.prop("genre"));
             assert.deepEqual(counter(albums), {
                 Baroque: 2, Rock: 2, Jazz: 2, Romantic: 1, Metal: 1, Modern: 1, Broadway: 1, Folk: 1, Classical: 1
             });
@@ -228,9 +215,8 @@ describe('differenceWith', function() {
     });
 
     describe('groupBy', function() {
-        var groupBy = R.groupBy;
         it('should group by a simple property of the objects', function() {
-            assert.deepEqual(groupBy(prop("genre"), albums), {
+            assert.deepEqual(R.groupBy(R.prop("genre"), albums), {
                 Baroque: [{title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'}, {title: 'Goldberg Variations', artist: 'Daniel Barenboim', genre: 'Baroque'}],
                 Rock: [{title: 'A Farewell to Kings', artist: 'Rush', genre: 'Rock'}, {title: 'Fly By Night', artist: 'Rush', genre: 'Rock'}],
                 Jazz: [{title: 'Timeout', artist: 'Dave Brubeck Quartet', genre: 'Jazz'}, {title: 'Romance with the Unseen', artist: 'Don Byron', genre: 'Jazz'}],
@@ -244,7 +230,7 @@ describe('differenceWith', function() {
         });
 
         it('should group by a more complex function on the objects', function() {
-            assert.deepEqual(groupBy(derivedGenre, albums), {
+            assert.deepEqual(R.groupBy(derivedGenre, albums), {
                 Classical: [
                     {title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'},
                     {title: 'Goldberg Variations', artist: 'Daniel Barenboim', genre: 'Baroque'},
@@ -264,7 +250,7 @@ describe('differenceWith', function() {
         });
 
         it('should be automatically curried', function() {
-            var grouper = groupBy(prop("genre"));
+            var grouper = R.groupBy(R.prop("genre"));
             assert.deepEqual(grouper(albums), {
                 Baroque: [{title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'}, {title: 'Goldberg Variations', artist: 'Daniel Barenboim', genre: 'Baroque'}],
                 Rock: [{title: 'A Farewell to Kings', artist: 'Rush', genre: 'Rock'}, {title: 'Fly By Night', artist: 'Rush', genre: 'Rock'}],
