@@ -1705,8 +1705,7 @@
          * R.of({}); // => [{}]
          *
          */ 
-        R.of = checkForMethod('of', Array.of || function _of(x) { return [x]; });
-
+        R.of = checkForMethod('of', function _of(x, container) { return [x]; });
 
         /**
          * `empty` wraps any object in an array. This implementation is compatible with the 
