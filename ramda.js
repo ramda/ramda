@@ -132,6 +132,23 @@
         };
 
         /**
+         * Tests whether or not an object is similar to an array.
+         *
+         * @private
+         * @category Internal
+         * @param {*} val The object to test.
+         * @return {boolean} `true` if `val` has a numeric length property; `false` otherwise.
+         * @example
+         *
+         * isArrayLike([]); //=> true
+         * isArrayLike(true); //=> false
+         * isArrayLike({}); //=> false
+         * isArrayLike({length: 10}); //=> true
+         */
+        var isArrayLike = function(x) {
+            return isArray(x) || (typeof x !== "string" && x && x.length && x.length >= 0);
+        };
+        /**
          * Creates a new version of `fn` that, when invoked, will return either:
          * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
          * `fn`'s expected arguments have not yet been provided
@@ -2363,7 +2380,7 @@
                 var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
                 while (++i < ilen) {
                     array = list[i];
-                    if (isArray(array)) { 
+                    if (isArrayLike(array)) { 
                         value = (recursive) ? __flatt(array) : array;
                         j = -1;
                         jlen = value.length;
