@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Lib = require('../../../ramda');
+var R = require('../../../ramda');
 var Random = require('../random');
 
 describe('Random', function() {
@@ -27,7 +27,7 @@ describe('Random', function() {
 });
 
 describe('shuffle', function() {
-    var shuffle = Lib.shuffle;
+    var shuffle = R.shuffle;
     var random;
 
     beforeEach(function() {

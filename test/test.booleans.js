@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('or', function() {
-    var or = Lib.or;
+    var or = R.or;
 
     it('should combine two boolean-returning functions into one', function() {
         var even = function(x) {return x % 2 === 0;};
@@ -32,7 +32,7 @@ describe('or', function() {
 });
 
 describe('and', function() {
-    var and = Lib.and;
+    var and = R.and;
 
     it('should combine two boolean-returning functions into one', function() {
         var even = function(x) {return x % 2 === 0;};
@@ -62,7 +62,7 @@ describe('and', function() {
 });
 
 describe('not', function() {
-    var not = Lib.not;
+    var not = R.not;
 
     it('should create boolean-returning function that reverses another', function() {
         var even = function(x) {return x % 2 === 0;};
@@ -80,7 +80,7 @@ describe('not', function() {
 });
 
 describe('allPredicates', function() {
-    var allPredicates = Lib.allPredicates;
+    var allPredicates = R.allPredicates;
     var odd = function(n) {return !!(n % 2);};
     var lt20 = function(n) {return n < 20;};
     var gt5 = function(n) {return n > 5;};
@@ -106,7 +106,7 @@ describe('allPredicates', function() {
 });
 
 describe('anyPredicates', function() {
-    var anyPredicates = Lib.anyPredicates;
+    var anyPredicates = R.anyPredicates;
     var odd = function(n) {return !!(n % 2);};
     var gt20 = function(n) {return n > 20;};
     var lt5 = function(n) {return n < 5;};

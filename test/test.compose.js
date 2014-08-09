@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('compose', function() {
-    var compose = Lib.compose;
+    var compose = R.compose;
     function a(x) {return x + "A";}
     function b(x) {return x + "B";}
     function c(x) {return x + "C";}
@@ -65,7 +65,7 @@ describe('compose', function() {
 });
 
 describe('pipe', function() {
-    var pipe = Lib.pipe;
+    var pipe = R.pipe;
     function a(x) {return x + "A";}
     function b(x) {return x + "B";}
     function c(x) {return x + "C";}
@@ -103,7 +103,7 @@ describe('pipe', function() {
 });
 
 describe('useWith', function() {
-    var useWith = Lib.useWith;
+    var useWith = R.useWith;
  
     function max() { return Math.max.apply(Math, arguments); }
     function add1(x) { return x + 1; }
@@ -133,7 +133,7 @@ describe('useWith', function() {
 });
 
 describe('fork', function() {
-    var fork = Lib.fork, add = Lib.add;
+    var fork = R.fork, add = R.add;
     var mult = function(a, b) {return a * b;};
 
     it('passes the results of applying the arguments individually to two separate functions into a single one', function() {

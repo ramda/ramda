@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('reverse', function() {
-    var reverse = Lib.reverse;
+    var reverse = R.reverse;
 
     it('should reverse arrays', function() {
         assert.deepEqual(reverse([1, 2, 3, 4]), [4, 3, 2, 1]);

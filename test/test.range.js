@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('range', function() {
-    var range = Lib.range;
+    var range = R.range;
 
     it('should return list of numbers', function() {
         assert.deepEqual(range(0, 5), [0, 1, 2, 3, 4]);

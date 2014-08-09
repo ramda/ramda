@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('isEmpty', function() {
-    var isEmpty = Lib.isEmpty;
+    var isEmpty = R.isEmpty;
 
     it('returns true if the list is empty', function() {
         assert.equal(isEmpty([]), true);
@@ -14,7 +14,7 @@ describe('isEmpty', function() {
 });
 
 describe('isAtom', function() {
-    var isAtom = Lib.isAtom;
+    var isAtom = R.isAtom;
     it('is false for Arrays', function() {
         assert.equal(isAtom([]), false);
         assert.equal(isAtom([1, 2, 3, 4]), false);
@@ -34,7 +34,7 @@ describe('isAtom', function() {
 });
 
 describe('prepend', function() {
-    var prepend = Lib.prepend;
+    var prepend = R.prepend;
 
     it('adds the element to the beginning of the list', function() {
         assert.deepEqual(prepend('x', ['y', 'z']), ['x', 'y', 'z']);
@@ -43,7 +43,7 @@ describe('prepend', function() {
 });
 
 describe('append', function() {
-    var append = Lib.append;
+    var append = R.append;
 
     it('adds the element to the end of the list', function() {
         assert.deepEqual(append('z', ['x', 'y']), ['x', 'y', 'z']);
@@ -52,7 +52,7 @@ describe('append', function() {
 });
 
 describe('concat', function() {
-    var concat = Lib.concat;
+    var concat = R.concat;
 
     it('adds combines the elements of the two lists', function() {
         assert.deepEqual(concat(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
@@ -76,7 +76,7 @@ describe('concat', function() {
 });
 
 describe('head', function() {
-    var head = Lib.head;
+    var head = R.head;
 
     it('returns undefined for an empty list', function() {
         assert.equal(typeof(head([])),  "undefined");
@@ -90,7 +90,7 @@ describe('head', function() {
 });
 
 describe('last', function() {
-    var last = Lib.last;
+    var last = R.last;
 
     it('returns undefined for an empty list', function() {
         assert.equal(typeof(last([])),  "undefined");
@@ -104,7 +104,7 @@ describe('last', function() {
 });
 
 describe('tail', function() {
-    var tail = Lib.tail;
+    var tail = R.tail;
 
     it('returns an empty list for an empty list', function() {
         assert.deepEqual(tail([]), []);
@@ -118,21 +118,21 @@ describe('tail', function() {
 });
 
 describe('size', function() {
-    var size = Lib.size;
+    var size = R.size;
 
     it('counts the elements of a list', function() {
         assert.equal(size(['a', 'b', 'c', 'd']), 4);
     });
 
     it('should be aliased by `length`', function() {
-        assert.equal(Lib.length([2, 4, 6, 8, 10]), 5);
-        assert.strictEqual(Lib.length, size);
+        assert.equal(R.length([2, 4, 6, 8, 10]), 5);
+        assert.strictEqual(R.length, size);
     });
 
 });
 
 describe('sort', function() {
-    var sort = Lib.sort;
+    var sort = R.sort;
 
     it('sorts the elements of a list', function() {
         assert.deepEqual(sort(function(a, b) {return a - b;}, [3, 1, 8, 1, 2, 5]), [1, 1, 2, 3, 5, 8]);
@@ -152,7 +152,7 @@ describe('sort', function() {
 });
 
 describe('comparator', function() {
-    var comparator = Lib.comparator;
+    var comparator = R.comparator;
     it('builds a comparator function for sorting out of a simple predicate that reports whether the first param is smaller', function() {
         assert.deepEqual([3, 1, 8, 1, 2, 5].sort(comparator(function(a, b) {return a < b;})), [1, 1, 2, 3, 5, 8]);
     });

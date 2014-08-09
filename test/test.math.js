@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('add', function() {
-    var add = Lib.add;
+    var add = R.add;
 
     it('should add together two numbers', function() {
         assert.equal(10, add(3, 7));
@@ -15,7 +15,7 @@ describe('add', function() {
 });
 
 describe('multiply', function() {
-    var multiply = Lib.multiply;
+    var multiply = R.multiply;
 
     it('should add together two numbers', function() {
         assert.equal(42, multiply(6, 7));
@@ -28,7 +28,7 @@ describe('multiply', function() {
 });
 
 describe('subtract', function() {
-    var subtract = Lib.subtract;
+    var subtract = R.subtract;
 
     it('should subtract two numbers', function() {
         assert.equal(15, subtract(22, 7));
@@ -41,7 +41,7 @@ describe('subtract', function() {
 });
 
 describe('subtractN', function() {
-    var subtractN = Lib.subtractN;
+    var subtractN = R.subtractN;
 
     it('should subtract two numbers', function() {
         assert.equal(15, subtractN(7,22));
@@ -54,7 +54,7 @@ describe('subtractN', function() {
 });
 
 describe('divide', function() {
-    var divide = Lib.divide;
+    var divide = R.divide;
 
     it('should divide two numbers', function() {
         assert.equal(4, divide(28, 7));
@@ -67,7 +67,7 @@ describe('divide', function() {
 });
 
 describe('divideBy', function() {
-    var divideBy = Lib.divideBy;
+    var divideBy = R.divideBy;
 
     it('should divide two numbers', function() {
         assert.equal(4, divideBy(7, 28));
@@ -81,7 +81,7 @@ describe('divideBy', function() {
 });
 
 describe('modulo', function() {
-  var modulo = Lib.modulo;
+  var modulo = R.modulo;
   it('divides the first param by the second and returns the remainder', function() {
     assert.equal(modulo(100, 2), 0);
     assert.equal(modulo(100, 3), 1);
@@ -101,7 +101,7 @@ describe('modulo', function() {
 });
 
 describe('moduloBy', function() {
-  var moduloBy = Lib.moduloBy;
+  var moduloBy = R.moduloBy;
   it('divides the second param by the first and returns the remainder', function() {
     assert.equal(moduloBy(2, 100), 0);
     assert.equal(moduloBy(3, 100), 1);
@@ -121,7 +121,7 @@ describe('moduloBy', function() {
 });
 
 describe('mathMod', function() {
-  var mathMod = Lib.mathMod;
+  var mathMod = R.mathMod;
 
   it('requires integer arguments', function() {
     assert.notEqual(mathMod('s', 3), mathMod('s', 3));
@@ -144,7 +144,7 @@ describe('mathMod', function() {
 });
 
 describe('sum', function() {
-    var sum = Lib.sum;
+    var sum = R.sum;
 
     it('should add together the array of numbers supplied', function() {
         assert.equal(10, sum([1, 2, 3, 4]));
@@ -158,7 +158,7 @@ describe('sum', function() {
 });
 
 describe('product', function() {
-    var product = Lib.product;
+    var product = R.product;
 
     it('should multiply together the array of numbers supplied', function() {
         assert.equal(24, product([1, 2, 3, 4]));
@@ -166,7 +166,7 @@ describe('product', function() {
 });
 
 describe('lt', function() {
-    var lt = Lib.lt;
+    var lt = R.lt;
 
     it('should report whether one item is less than another', function() {
         assert(lt(3, 5));
@@ -185,7 +185,7 @@ describe('lt', function() {
 });
 
 describe('lte', function() {
-    var lte = Lib.lte;
+    var lte = R.lte;
 
     it('should report whether one item is less than another', function() {
         assert(lte(3, 5));
@@ -204,7 +204,7 @@ describe('lte', function() {
 });
 
 describe('gt', function() {
-    var gt = Lib.gt;
+    var gt = R.gt;
 
     it('should report whether one item is less than another', function() {
         assert(!gt(3, 5));
@@ -223,7 +223,7 @@ describe('gt', function() {
 });
 
 describe('gte', function() {
-    var gte = Lib.gte;
+    var gte = R.gte;
 
     it('should report whether one item is less than another', function() {
         assert(!gte(3, 5));
@@ -242,7 +242,7 @@ describe('gte', function() {
 });
 
 describe('max', function() {
-    var max = Lib.max;
+    var max = R.max;
 
     it('calculates the largest value of a list', function() {
         assert.equal(max([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 9);
@@ -256,7 +256,7 @@ describe('max', function() {
 });
 
 describe('min', function() {
-    var min = Lib.min;
+    var min = R.min;
 
     it('calculates the smallest value of a list', function() {
         assert.equal(min([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 0);
@@ -270,7 +270,7 @@ describe('min', function() {
 });
 
 describe('maxWith', function() {
-    var maxWith = Lib.maxWith, prop = Lib.prop;
+    var maxWith = R.maxWith, prop = R.prop;
 
     it('calculates the largest value of a list using the supplied comparator', function() {
         assert.deepEqual(maxWith(prop('x'), [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
@@ -287,7 +287,7 @@ describe('maxWith', function() {
 });
 
 describe('minWith', function() {
-    var minWith = Lib.minWith, prop = Lib.prop;
+    var minWith = R.minWith, prop = R.prop;
 
     it('calculates the smallest value of a list using the supplied comparator', function() {
         assert.deepEqual(minWith(prop('x'), [{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: -2, y: 0});

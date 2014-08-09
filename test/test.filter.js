@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('filter', function() {
-    var filter = Lib.filter;
+    var filter = R.filter;
     var even = function(x) {return x % 2 === 0;};
 
     it('reduces an array to those matching a filter', function() {
@@ -16,7 +16,7 @@ describe('filter', function() {
 });
 
 describe('filter.idx', function() {
-    var filter = Lib.filter;
+    var filter = R.filter;
     var even = function(x) {return x % 2 === 0;};
     var everyOther = function(val, idx) {return idx % 2 === 0;};
     var lastTwo = function(val, idx, list) {return list.length - idx < 3;};
@@ -40,7 +40,7 @@ describe('filter.idx', function() {
 });
 
 describe('reject', function() {
-    var reject = Lib.reject;
+    var reject = R.reject;
     var even = function(x) {return x % 2 === 0;};
 
     it('reduces an array to those not matching a filter', function() {
@@ -54,7 +54,7 @@ describe('reject', function() {
 });
 
 describe('reject.idx', function() {
-    var reject = Lib.reject;
+    var reject = R.reject;
     var even = function(x) {return x % 2 === 0;};
     var everyOther = function(val, idx) {return idx % 2 === 0;};
     var lastTwo = function(val, idx, list) {return list.length - idx < 3;};
@@ -78,7 +78,7 @@ describe('reject.idx', function() {
 });
 
 describe('take', function() {
-    var take = Lib.take;
+    var take = R.take;
 
     it('should take only the first `n` elements from a list', function() {
         assert.deepEqual(take(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
@@ -92,7 +92,7 @@ describe('take', function() {
 });
 
 describe('takeWhile', function() {
-    var takeWhile = Lib.takeWhile;
+    var takeWhile = R.takeWhile;
 
     it('should continue taking elements while the function reports `true`', function() {
         assert.deepEqual(takeWhile(function(x) {return x != 5;}, [1, 3, 5, 7, 9]), [1, 3]);
@@ -111,7 +111,7 @@ describe('takeWhile', function() {
 });
 
 describe('skip', function() {
-    var skip = Lib.skip;
+    var skip = R.skip;
 
     it('should skip the first `n` elements from a list, returning the remainder', function() {
         assert.deepEqual(skip(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g']);
@@ -124,13 +124,13 @@ describe('skip', function() {
     });
 
     it('should be aliased by `drop`', function() {
-        assert.deepEqual(Lib.drop(1, ['a', 'b', 'c']), ['b', 'c']);
-        assert.strictEqual(Lib.drop, skip);
+        assert.deepEqual(R.drop(1, ['a', 'b', 'c']), ['b', 'c']);
+        assert.strictEqual(R.drop, skip);
     });
 });
 
 describe('skipUntil', function() {
-    var skipUntil = Lib.skipUntil;
+    var skipUntil = R.skipUntil;
 
     it('should continue taking elements while the function reports `true`', function() {
         assert.deepEqual(skipUntil(function(x) {return x === 5;}, [1, 3, 5, 7, 9]), [5, 7, 9]);

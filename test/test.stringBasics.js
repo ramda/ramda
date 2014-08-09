@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('substring', function() {
-    var substring = Lib.substring;
+    var substring = R.substring;
 
     it('should return the substring of a string', function() {
         assert.equal(substring(2, 5, 'abcdefghijklm'), 'cde');
@@ -17,7 +17,7 @@ describe('substring', function() {
 });
 
 describe('substringFrom', function() {
-    var substringFrom = Lib.substringFrom;
+    var substringFrom = R.substringFrom;
 
     it('should return the trailing substring of a string', function() {
         assert.equal(substringFrom(8, 'abcdefghijklm'), 'ijklm');
@@ -30,7 +30,7 @@ describe('substringFrom', function() {
 });
 
 describe('substringTo', function() {
-    var substringTo = Lib.substringTo;
+    var substringTo = R.substringTo;
 
     it('should return the trailing substring of a string', function() {
         assert.equal(substringTo(8, 'abcdefghijklm'), 'abcdefgh');
@@ -43,7 +43,7 @@ describe('substringTo', function() {
 });
 
 describe('charAt', function() {
-    var charAt = Lib.charAt;
+    var charAt = R.charAt;
 
     it('should return the character at the nth position of a string', function() {
         assert.equal(charAt(8, 'abcdefghijklm'), 'i');
@@ -56,7 +56,7 @@ describe('charAt', function() {
 });
 
 describe('charCodeAt', function() {
-    var charCodeAt = Lib.charCodeAt;
+    var charCodeAt = R.charCodeAt;
 
     it('should return the ascii character at the nth position of a string', function() {
         assert.equal(charCodeAt(8, 'abcdefghijklm'), 105);  // 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105
@@ -69,7 +69,7 @@ describe('charCodeAt', function() {
 });
 
 describe('match', function() {
-    var match = Lib.match;
+    var match = R.match;
     var re = /[A-Z]\d\d\-[a-zA-Z]+/;
 
     it('should determine whether a string matches a regex', function() {
@@ -85,7 +85,7 @@ describe('match', function() {
 });
 
 describe('strIndexOf', function() {
-    var strIndexOf = Lib.strIndexOf;
+    var strIndexOf = R.strIndexOf;
 
     it('should find the index of a substring inside a string', function() {
         assert.equal(strIndexOf('c', 'abcdefg'), 2);
@@ -102,7 +102,7 @@ describe('strIndexOf', function() {
 });
 
 describe('strLastIndexOf', function() {
-    var strLastIndexOf = Lib.strLastIndexOf;
+    var strLastIndexOf = R.strLastIndexOf;
 
     it('should find the index of a substring inside a string', function() {
         assert.equal(strLastIndexOf('a', 'bananas'), 5);
@@ -119,7 +119,7 @@ describe('strLastIndexOf', function() {
 });
 
 describe('toUpperCase', function() {
-    var toUpperCase = Lib.toUpperCase;
+    var toUpperCase = R.toUpperCase;
 
     it('should uppercase a string', function() {
         assert.equal(toUpperCase('abc'), 'ABC');
@@ -127,7 +127,7 @@ describe('toUpperCase', function() {
 });
 
 describe('toLowerCase', function() {
-    var toLowerCase = Lib.toLowerCase;
+    var toLowerCase = R.toLowerCase;
 
     it('should lowercase a string', function() {
         assert.equal(toLowerCase('XYZ'), 'xyz');
@@ -135,7 +135,7 @@ describe('toLowerCase', function() {
 });
 
 describe('split', function() {
-    var split = Lib.split;
+    var split = R.split;
 
     it('should split a string into an array', function() {
         assert.deepEqual(split('.', 'a.b.c.xyz.d'), ['a', 'b', 'c', 'xyz', 'd']);

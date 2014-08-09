@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('xprod', function() {
-    var xprod = Lib.xprod;
+    var xprod = R.xprod;
     var a = [1, 2], b = ['a', 'b', 'c'];
 
     it('returns an empty list if either input list is empty', function() {
@@ -26,7 +26,7 @@ describe('xprod', function() {
 });
 
 describe('xprodWith', function() {
-    var xprodWith = Lib.xprodWith;
+    var xprodWith = R.xprodWith;
     var concat = function(x, y) {return '' + x + y;};
     var a = [1, 2], b = ['a', 'b', 'c'];
 
