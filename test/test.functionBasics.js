@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('flip', function() {
-    var flip = Lib.flip;
+    var flip = R.flip;
     it('should return a function which inverts the first two arguments to the supplied function', function() {
         var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
         var g = flip(f);
@@ -18,7 +18,7 @@ describe('flip', function() {
 });
 
 describe('once', function() {
-    var once = Lib.once;
+    var once = R.once;
 
     it('should return a function that calls the supplied function only the first time called', function() {
         var ctr = 0;
@@ -50,7 +50,7 @@ describe('once', function() {
 });
 
 describe('memoize', function() {
-    var memoize = Lib.memoize;
+    var memoize = R.memoize;
 
     it('should calculate the value for a given input only once', function() {
         var ctr = 0;
@@ -70,7 +70,7 @@ describe('memoize', function() {
 });
 
 describe('construct', function() {
-    var construct = Lib.construct;
+    var construct = R.construct;
     var Rectangle = function(w, h) {this.width = w; this.height = h;};
     Rectangle.prototype.area = function() {return this.width * this.height;};
 
@@ -94,7 +94,7 @@ describe('construct', function() {
 });
 
 describe('unary', function() {
-    var unary = Lib.unary;
+    var unary = R.unary;
 
     it('should turn multiple-argument function into unary one', function() {
         unary(function(x, y, z) {
@@ -112,7 +112,7 @@ describe('unary', function() {
 });
 
 describe('binary', function() {
-    var binary = Lib.binary;
+    var binary = R.binary;
 
     it('should turn multiple-argument function into binary one', function() {
         binary(function(x, y, z) {
@@ -130,7 +130,7 @@ describe('binary', function() {
 });
 
 describe('ap', function() {
-    var ap = Lib.ap;
+    var ap = R.ap;
     function inc(x) { return x + 1; }
     function mult2(x) { return x * 2; }
     function plus3(x) { return x + 3; }
@@ -141,7 +141,7 @@ describe('ap', function() {
 
     it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
       var obj = { ap: function(fs) { return { x: fs[0](1) } } }; 
-      assert.deepEqual(ap([Lib.add(1)], obj), obj.ap([Lib.add(1)]));
+      assert.deepEqual(ap([R.add(1)], obj), obj.ap([R.add(1)]));
     });
 
     it('is curried', function() {

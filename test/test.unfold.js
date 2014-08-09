@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('unfoldr', function() {
-    var unfoldr = Lib.unfoldr;
+    var unfoldr = R.unfoldr;
 
     it('should unfold simple functions with a starting point to create a list', function() {
         assert.deepEqual(unfoldr(function(n) {if (n > 0) {return [n, n - 1];}}, 10), [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);

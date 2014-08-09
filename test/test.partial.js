@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('lPartial', function() {
-    var lPartial = Lib.lPartial;
+    var lPartial = R.lPartial;
     var disc = function(a, b, c) { // note disc(3, 7, 4) => 1
         return b * b - 4 * a * c;
     };
@@ -15,7 +15,7 @@ describe('lPartial', function() {
     });
 
     it('should be aliased by `applyLeft`', function() {
-        assert.strictEqual(Lib.applyLeft, lPartial);
+        assert.strictEqual(R.applyLeft, lPartial);
     });
 
     it('should correctly report the arity of the new function', function() {
@@ -27,7 +27,7 @@ describe('lPartial', function() {
 });
 
 describe('rPartial', function() {
-    var rPartial = Lib.rPartial;
+    var rPartial = R.rPartial;
     var disc = function(a, b, c) { // note disc(3, 7, 4) => 1
         return b * b - 4 * a * c;
     };
@@ -40,7 +40,7 @@ describe('rPartial', function() {
     });
 
     it('should be aliased by `applyRight`', function() {
-        assert.strictEqual(Lib.applyRight, rPartial);
+        assert.strictEqual(R.applyRight, rPartial);
     });
 
     it('should correctly report the arity of the new function', function() {
@@ -52,7 +52,7 @@ describe('rPartial', function() {
 });
 
 describe('curry', function() {
-    var curry = Lib.curry;
+    var curry = R.curry;
 
     it('should curry a single value', function() {
         var f = curry(function(a, b, c, d) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15

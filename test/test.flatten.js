@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('flatten', function() {
-    var flatten = Lib.flatten;
+    var flatten = R.flatten;
 
     it("turns a nested list into one flat list", function() {
         var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];
@@ -18,12 +18,12 @@ describe('flatten', function() {
     });
 
     it("handles ridiculously large inputs", function() {
-        assert.equal(flatten([new Array(1000000), Lib.range(0, 56000), 5, 1, 3]).length, 1056003);
+        assert.equal(flatten([new Array(1000000), R.range(0, 56000), 5, 1, 3]).length, 1056003);
     });
 });
 
 describe('flat', function() {
-    var flat = Lib.flat;
+    var flat = R.flat;
 
     it("only flattens one layer deep of a nested list", function() {
         var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];

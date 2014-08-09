@@ -1,5 +1,5 @@
 var assert = require("assert");
-var Lib = require("../../../ramda");
+var R = require("../../../ramda");
 var lazylist = require('../lazylist');
 
 describe('lazylist', function() {
@@ -20,7 +20,7 @@ describe('lazylist', function() {
 });
 
 describe('take for a lazylist', function() {
-    var take = Lib.take;
+    var take = R.take;
     var lz;
     function I(x) { return x; }
     function inc(n) { return n + 1; }
@@ -32,7 +32,7 @@ describe('take for a lazylist', function() {
 });
 
 describe('takeWhile for a lazylist', function() {
-    var takeWhile = Lib.takeWhile, identity = Lib.identity;
+    var takeWhile = R.takeWhile, identity = R.identity;
     var inc = function (n) {return n + 1;};
     var pred = function(n) {return n < 5;};
 
@@ -43,7 +43,7 @@ describe('takeWhile for a lazylist', function() {
 });
 
 describe('skip for a lazylist', function() {
-    var take = Lib.take, skip = Lib.skip;
+    var take = R.take, skip = R.skip;
     var lz;
     function I(x) { return x; }
     function inc(n) { return n + 1; }
@@ -55,7 +55,7 @@ describe('skip for a lazylist', function() {
 });
 
 describe('map for a lazylist', function() {
-    var take = Lib.take, map = Lib.map;
+    var take = R.take, map = R.map;
     var lz;
     function I(x) { return x; }
     function inc(n) { return n + 1; }
@@ -69,7 +69,7 @@ describe('map for a lazylist', function() {
 });
 
 describe('filter for a lazylist', function() {
-    var take = Lib.take, filter = Lib.filter;
+    var take = R.take, filter = R.filter;
     var even = function(n) {return n % 2 === 0;};
 
     var fibonacci = lazylist(
@@ -84,7 +84,7 @@ describe('filter for a lazylist', function() {
 });
 
 describe('repeat', function() {
-    var take = Lib.take, repeat = Lib.repeat;
+    var take = R.take, repeat = R.repeat;
 
     it("returns a lazy list of identical values", function() {
         assert.deepEqual(take(5, repeat(0)), [0, 0, 0, 0, 0]);

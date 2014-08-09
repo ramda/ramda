@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('..');
+var R = require('..');
 
 describe('is', function() {
-    var is = Lib.is;
+    var is = R.is;
 
     it('works with built-in types', function() {
         assert.strictEqual(is(Array, []), true);

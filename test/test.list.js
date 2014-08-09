@@ -1,15 +1,15 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('join', function () {
     it("concatenates a list's elements to a string, with an seperator string between elements", function () {
         var list = [1, 2, 3, 4];
-        assert.equal(Lib.join('~', list), '1~2~3~4');
+        assert.equal(R.join('~', list), '1~2~3~4');
     });
 });
 
 describe('remove', function () {
-    var remove = Lib.remove;
+    var remove = R.remove;
     
     it('splices out a sub-list of the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
@@ -41,7 +41,7 @@ describe('remove', function () {
 });
 
 describe('insert', function () {
-    var insert = Lib.insert;
+    var insert = R.insert;
     it('inserts an element into the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(insert(2, 'x', list), ['a', 'b', 'x', 'c', 'd', 'e']);
@@ -66,7 +66,7 @@ describe('insert', function () {
 
 
 describe('insert.all', function () {
-    var insert = Lib.insert;
+    var insert = R.insert;
     it('inserts a list of elements into the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(insert.all(2, ['x', 'y', 'z'], list), ['a', 'b', 'x', 'y', 'z', 'c', 'd', 'e']);
@@ -87,61 +87,61 @@ describe('insert.all', function () {
 describe('slice', function () {
     it('retrieves the proper sublist of a list', function () {
         var list = [8, 6, 7, 5, 3, 0, 9];
-        assert.deepEqual(Lib.slice(2, 5, list), [7, 5, 3]);
+        assert.deepEqual(R.slice(2, 5, list), [7, 5, 3]);
     });
 
     // TODO
     // it('retturn undefined if the paramters don't make sense', function() {
     //   var list = [8, 6, 7, 5, 3, 0, 9];
-    //   assert.equal(typeof(Lib.slice(5, 2, list)), 'undefined');
+    //   assert.equal(typeof(R.slice(5, 2, list)), 'undefined');
     // });
 });
 
 describe('slice.from', function () {
     it('retrieves the proper suffix sublist of a list starting with the desired index', function () {
         var list = [8, 6, 7, 5, 3, 0, 9];
-        assert.deepEqual(Lib.slice.from(2, list), [7, 5, 3, 0, 9]);
+        assert.deepEqual(R.slice.from(2, list), [7, 5, 3, 0, 9]);
     });
 });
 
 describe('nth', function () {
     it('returns the object at position n of the list', function () {
         var list = ['x', 1, {a: 1, b: 2}, [4, 5, 6], true];
-        assert.equal(Lib.nth(4, list), true);
-        assert.equal(Lib.nth(0, list), 'x');
-        assert.deepEqual(Lib.nth(3, list), [4, 5, 6]);
+        assert.equal(R.nth(4, list), true);
+        assert.equal(R.nth(0, list), 'x');
+        assert.deepEqual(R.nth(3, list), [4, 5, 6]);
     });
 
     it("returns null if n is out of the list's range", function () {
         var list = [1, 2, 3];
-        assert.equal(Lib.nth(4, list), undefined);
+        assert.equal(R.nth(4, list), undefined);
     });
 
     it('is automatically curried', function () {
         var list = [3, 4, 5, 6, 7, 8];
-        var get3rd = Lib.nth(2);
+        var get3rd = R.nth(2);
         assert.equal(get3rd(list), 5);
     });
 });
 
 describe('times', function() {
-    var times = Lib.times;
+    var times = R.times;
 
     it('takes a map func', function() {
-        assert.deepEqual(times(Lib.identity, 5), [0, 1, 2, 3, 4]);
+        assert.deepEqual(times(R.identity, 5), [0, 1, 2, 3, 4]);
         assert.deepEqual(times(function(x) {
             return x * 2;
         }, 5), [0, 2, 4, 6, 8]);
     });
 
     it('is curried', function() {
-        var mapid = times(Lib.identity);
+        var mapid = times(R.identity);
         assert.deepEqual(mapid(5), [0, 1, 2, 3, 4]);
     });
 });
 
 describe('repeatN', function () {
-    var repeatN = Lib.repeatN;
+    var repeatN = R.repeatN;
 
     it('returns a lazy list of identical values', function () {
         assert.deepEqual(repeatN(0, 5), [0, 0, 0, 0, 0]);
@@ -158,7 +158,7 @@ describe('repeatN', function () {
 });
 
 describe('of', function() {
-    var of = Lib.of;
+    var of = R.of;
 
     it('returns its argument as an Array', function() {
         assert.deepEqual(of(100), [100]);
@@ -170,7 +170,7 @@ describe('of', function() {
 });
 
 describe('empty', function() {
-    var empty = Lib.empty;
+    var empty = R.empty;
     it('returns an empty list', function() {
         assert.deepEqual(empty([1,2,3]), []);
     });
@@ -178,8 +178,8 @@ describe('empty', function() {
 });
 
 describe('chain', function() {
-    var chain = Lib.chain;
-    var dbl = Lib.map(Lib.multiply(2));
+    var chain = R.chain;
+    var dbl = R.map(R.multiply(2));
     it('maps a function over a nested list and returns the (shallow) flattened result', function() {
         assert.deepEqual(chain(dbl, [[1,2,3], [1], [0, 10, -3, 5, 7]]), [2, 4, 6, 2, 0, 20, -6, 10, 14]);
         assert.deepEqual(chain(dbl, [[1,2,3], []]), [2, 4, 6]);

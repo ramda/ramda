@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('foldl', function() {
-    var foldl = Lib.foldl;
+    var foldl = R.foldl;
     var add = function(a, b) {return a + b;};
     var mult = function(a, b) {return a * b;};
 
@@ -22,8 +22,8 @@ describe('foldl', function() {
     });
 
     it('should be aliased by `reduce`', function() {
-        assert.equal(Lib.reduce(add, 0, [1, 2, 3, 4]), 10);
-        assert.strictEqual(Lib.reduce, foldl);
+        assert.equal(R.reduce(add, 0, [1, 2, 3, 4]), 10);
+        assert.strictEqual(R.reduce, foldl);
     });
 
     it('should correctly report the arity of curried versions', function() {
@@ -33,7 +33,7 @@ describe('foldl', function() {
 });
 
 describe('foldr', function() {
-    var foldr = Lib.foldr;
+    var foldr = R.foldr;
     var avg = function(a, b) {return (a + b) / 2;};
 
     it('should fold lists in the right order', function() {
@@ -54,8 +54,8 @@ describe('foldr', function() {
     });
 
     it('should be aliased by `reduceRight`', function() {
-        assert.equal(Lib.reduceRight(avg, 54, [12, 4, 10, 6]), 12);
-        assert.strictEqual(Lib.reduceRight, foldr);
+        assert.equal(R.reduceRight(avg, 54, [12, 4, 10, 6]), 12);
+        assert.strictEqual(R.reduceRight, foldr);
     });
 
     it('should correctly report the arity of curried versions', function() {
@@ -65,7 +65,7 @@ describe('foldr', function() {
 });
 
 describe('foldl.idx', function() {
-    var foldl = Lib.foldl;
+    var foldl = R.foldl;
     var timesIdx = function(tot, num, idx, ls) {return tot + (num * idx);};
     var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
 
@@ -83,7 +83,7 @@ describe('foldl.idx', function() {
 });
 
 describe('foldr.idx', function() {
-    var foldr = Lib.foldr;
+    var foldr = R.foldr;
 
     it('folds lists in the right order', function() {
         assert.equal(foldr.idx(function(a, b, idx, list) {return a + idx + b;}, '', ['a', 'b', 'c', 'd']), '3d2c1b0a');
@@ -104,7 +104,7 @@ describe('foldr.idx', function() {
     });
 
     it('should be aliased by `reduceRight`', function() {
-        assert.strictEqual(Lib.reduceRight.idx, foldr.idx);
+        assert.strictEqual(R.reduceRight.idx, foldr.idx);
     });
 
     it('should correctly report the arity of curried versions', function() {

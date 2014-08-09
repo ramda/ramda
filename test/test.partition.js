@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('partition', function() {
-    var partition = Lib.partition;
+    var partition = R.partition;
 
     it('splits a list into two lists according to a predicate', function() {
         var pred = function(n) { return n % 2; };

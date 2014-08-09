@@ -1,6 +1,6 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
-var each = Lib.each;
+var R = require('./../ramda');
+var each = R.each;
 
 describe('each', function() {
     var list = [{x: 1, y: 2}, {x: 100, y: 200}, {x: 300, y: 400}, {x: 234, y: 345}];

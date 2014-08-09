@@ -1,6 +1,6 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
-var curry = Lib.curry;
+var R = require('./../ramda');
+var curry = R.curry;
 
 describe('curry', function() {
     function source(a, b, c) {
@@ -32,13 +32,13 @@ describe('curry', function() {
 });
 
 describe('internal curry', function() {
-    var map = Lib.map, filter = Lib.filter;
+    var map = R.map, filter = R.filter;
 
     it('should throw an expcetion given no arguments', function() {
         assert.throws(map);
-        assert.throws(map(Lib.I));
+        assert.throws(map(R.I));
         //doesnt throw an exception
-        Lib.concat([]);
+        R.concat([]);
     });
 });
 

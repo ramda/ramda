@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('find', function() {
-    var find = Lib.find;
+    var find = R.find;
     var obj1 = {x: 100};
     var obj2 = {x: 200};
     var a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0];
@@ -24,7 +24,7 @@ describe('find', function() {
 });
 
 describe('findIndex', function() {
-    var findIndex = Lib.findIndex;
+    var findIndex = R.findIndex;
     var obj1 = {x: 100};
     var obj2 = {x: 200};
     var a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0];
@@ -46,7 +46,7 @@ describe('findIndex', function() {
 });
 
 describe('findLast', function() {
-    var findLast = Lib.findLast;
+    var findLast = R.findLast;
     var obj1 = {x: 100};
     var obj2 = {x: 200};
     var a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0];
@@ -68,7 +68,7 @@ describe('findLast', function() {
 });
 
 describe('findLastIndex', function() {
-    var findLastIndex = Lib.findLastIndex;
+    var findLastIndex = R.findLastIndex;
     var obj1 = {x: 100};
     var obj2 = {x: 200};
     var a = [11, 10, 9, 'cow', obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0];

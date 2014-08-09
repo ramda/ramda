@@ -1,9 +1,9 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe("path", function() {
     var deepObject = { a: { b: { c: "c" } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ["arr"] };
-    var path = Lib.path;
+    var path = R.path;
     it("takes a dot-delimited path and an object and returns the value at the path or undefined", function() {
         var obj = {
           a: {
@@ -29,32 +29,32 @@ describe("path", function() {
     });
 
     it("should get a deep property's value from objects", function() {
-        assert.equal(Lib.path("a.b.c", deepObject), "c");
-        assert.equal(Lib.path("a", deepObject), deepObject.a);
+        assert.equal(R.path("a.b.c", deepObject), "c");
+        assert.equal(R.path("a", deepObject), deepObject.a);
     });
 
     it("should return undefined for items not found", function() {
-        assert.equal(Lib.path("a.b.foo", deepObject), undefined);
-        assert.equal(Lib.path("bar", deepObject), undefined);
+        assert.equal(R.path("a.b.foo", deepObject), undefined);
+        assert.equal(R.path("bar", deepObject), undefined);
     });
 
     it("should return undefined for null/undefined", function() {
-        assert.equal(Lib.path("toString", null), undefined);
-        assert.equal(Lib.path("toString", undefined), undefined);
+        assert.equal(R.path("toString", null), undefined);
+        assert.equal(R.path("toString", undefined), undefined);
     });
 
     it("should work with falsy items", function() {
-        assert.equal(Lib.path("toString", false), Boolean.prototype.toString);
+        assert.equal(R.path("toString", false), Boolean.prototype.toString);
     });
 
     it("should be curried", function() {
-        assert.equal(Lib.path("arrayVal.0")(deepObject), "arr");
+        assert.equal(R.path("arrayVal.0")(deepObject), "arr");
     });
 });
 
 describe("pathOn", function() {
     var deepObject = { a: { b: { c: "c" } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ["arr"] };
-    var pathOn = Lib.pathOn;
+    var pathOn = R.pathOn;
     it("takes a string separator, string path, and an object and returns the value at the path or undefined", function() {
         var obj = {
           a: {
@@ -80,8 +80,8 @@ describe("pathOn", function() {
     });
 
     it("should get a deep property's value from objects", function() {
-        assert.equal(Lib.pathOn("|", "a|b|c", deepObject), "c");
-        assert.equal(Lib.pathOn("|", "a", deepObject), deepObject.a);
+        assert.equal(R.pathOn("|", "a|b|c", deepObject), "c");
+        assert.equal(R.pathOn("|", "a", deepObject), deepObject.a);
     });
 });
 
@@ -102,7 +102,7 @@ describe("pathWith", function() {
       i: "I", 
       j: ["J"]
     };
-    var pathWith = Lib.pathWith;
+    var pathWith = R.pathWith;
     it("takes a function, a string path, and an object, and returns the value at that path or undefined.", function() {
         
         var everyThirdChar = function(str) {

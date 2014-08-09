@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('wrap', function() {
-    var wrap = Lib.wrap;
+    var wrap = R.wrap;
 
     it('surrounds the invocation of one function with another', function() {
         var greet = function(name) {return 'Hello ' + name;};
