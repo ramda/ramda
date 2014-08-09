@@ -132,23 +132,6 @@
         };
 
         /**
-         * Tests whether or not an object is similar to an array.
-         *
-         * @private
-         * @category Internal
-         * @param {*} val The object to test.
-         * @return {boolean} `true` if `val` has a numeric length property; `false` otherwise.
-         * @example
-         *
-         * isArrayLike([]); //=> true
-         * isArrayLike(true); //=> false
-         * isArrayLike({}); //=> false
-         * isArrayLike({length: 10}); //=> true
-         */
-        var isArrayLike = function(x) {
-            return isArray(x) || (typeof x !== "string" && x && x.length && x.length >= 0);
-        };
-        /**
          * Creates a new version of `fn` that, when invoked, will return either:
          * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
          * `fn`'s expected arguments have not yet been provided
@@ -1763,7 +1746,7 @@
          *
          */
         R.chain = curry2(checkForMethod('chain', function _chain(f, nestedList) {
-            return unnest(map(f, nestedList));
+            return flat(map(f, nestedList));
         }));
         aliasFor('chain').is('flatMap');
 
@@ -2380,7 +2363,7 @@
                 var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
                 while (++i < ilen) {
                     array = list[i];
-                    if (isArrayLike(array)) { 
+                    if (isArray(array)) { 
                         value = (recursive) ? __flatt(array) : array;
                         j = -1;
                         jlen = value.length;
@@ -2432,8 +2415,8 @@
          * flat([[1, 2], [3, 4], [5, 6]]);
          * //= [1, 2, 3, 4, 5, 6]
          */
-        var unnest = R.unnest = makeFlat(false);
-        aliasFor('unnest').is('flattenShallow');
+        var flat = R.flat = makeFlat(false);
+        aliasFor('flat').is('flattenShallow');
 
         /**
          * Creates a new list out of the two supplied by applying the function to each
