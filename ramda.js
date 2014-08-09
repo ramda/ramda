@@ -896,7 +896,6 @@
         var identity = R.identity = function _I(x) {
             return x;
         };
-
         aliasFor("identity").is("I");
 
         /**
@@ -1689,8 +1688,10 @@
       
         /**
          *
-         * `of` wraps any object in an array. This implementation is compatible with the 
+         * `of` wraps any object in an Array. This implementation is compatible with the 
          * Fantasy-land Applicative spec, and will work with types that implement that spec.
+         * Note this `of` is different from the ES6 `of`; See 
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
          *
          * @static
          * @memberOf R
@@ -1700,9 +1701,11 @@
          * @example
          * 
          * R.of(1); // => [1]
+         * R.of([2]); // => [[2]]
+         * R.of({}); // => [{}]
+         *
          */ 
-        R.of = checkForMethod('of', function _of(x) { return [x]; });
-
+        R.of = checkForMethod('of', function _of(x, container) { return [x]; });
 
         /**
          * `empty` wraps any object in an array. This implementation is compatible with the 
@@ -1716,7 +1719,32 @@
          *
          * R.empty([1,2,3,4,5]); // => []
          */
-        R.empty = checkForMethod('empty', function _empty() { return []; });
+        R.empty = checkForMethod('empty', function _empty(x) { return []; });
+
+
+        /**
+         * `chain` takes a function that maps a nested list to a nested list and a nested list.
+         * It maps the function over the nested list and then flattens the result (one level deep,
+         * i.e. not recursively).
+         * This implementatiou is compatible with the 
+         * Fantasy-land Chain spec, and will work with types that implement that spec.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param {Function}
+         * @param {Array} a nested array
+         * @return {Array}
+         *
+         * @eaxmple
+         *
+         * R.chain(R.map(R.multiply(2)), [[1,2,3], [1], [0, -3]]); // => [2,4,6,2,0,-6]
+         *
+         */
+        R.chain = curry2(checkForMethod('chain', function _chain(f, nestedList) {
+            return flat(map(f, nestedList));
+        }));
+        aliasFor('chain').is('flatMap');
 
         // Reports the number of elements in the list
         /**
@@ -2320,6 +2348,34 @@
         });
 
         /**
+         * `makeFlat` is a helper function that returns a one-level or fully recursive function
+         * based on the flag passed in.
+         *
+         * @private
+         *
+         */
+        var makeFlat = function _makeFlat(recursive) {
+            return function __flatt(list) {
+                var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
+                result = [];
+                while (++i < ilen) {
+                    array = list[i];
+                    if (isArray(array)) { 
+                        value = (recursive) ? __flatt(array) : array;
+                        j = -1;
+                        jlen = value.length;
+                        while (++j < jlen) {
+                            result.push(value[j]);
+                        }
+                    } else {
+                        result.push(array);
+                    }
+                }
+                return result;
+            };
+        };
+
+        /**
          * Returns a new list by pulling every item out of it (and all its sub-arrays) and putting
          * them in a new array, depth-first.
          *
@@ -2337,24 +2393,7 @@
         //
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
         //     // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-        var flatten = R.flatten = function _flatten(list) {
-            var output = [], idx = 0, value;
-            for (var i = 0, length = list.length; i < length; i++) {
-              value = list[i];
-              if (isArray(value)) {
-                //flatten current level of array or arguments object
-                value = flatten(value);
-                var j = 0, len = value.length;
-                output.length += len;
-                while (j < len) {
-                  output[idx++] = value[j++];
-                }
-              } else {
-                output[idx++] = value;
-              }
-            }
-            return output;
-        };
+        var flatten = R.flatten = makeFlat(true);
 
         /**
          * Returns a new list by pulling every item at the first level of nesting out, and putting
@@ -2367,18 +2406,13 @@
          * @return {Array} The flattened list.
          * @example
          *
-         * flattenShallow([1, [2], [[3]]]);
+         * flat([1, [2], [[3]]]);
          * //= [1, 2, [3]]
-         * flattenShallow([[1, 2], [3, 4], [5, 6]]);
+         * flat([[1, 2], [3, 4], [5, 6]]);
          * //= [1, 2, 3, 4, 5, 6]
          */
-        R.flattenShallow = function _flattenShallow(list) {
-            var i = -1, len = list.length, out = [];
-            while (++i < len) {
-               out = isArray(list[i]) ? concat(out, list[i]) : append(list[i], out);
-            }
-            return out;
-        };
+        var flat = R.flat = makeFlat(false);
+        aliasFor('flat').is('flattenShallow');
 
         /**
          * Creates a new list out of the two supplied by applying the function to each
