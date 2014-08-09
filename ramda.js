@@ -3153,6 +3153,10 @@
             return extend(obj || global, R);
         };
 
+        R.is = curry2(function is(ctor, val) {
+            return val != null && Object(val) instanceof ctor;
+        });
+
         /**
          * TODO: JSDoc-style documentation for this function
          */
