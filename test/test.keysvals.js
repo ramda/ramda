@@ -1,9 +1,9 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 
 describe("keys", function() {
-    var keys = Lib.keys;
+    var keys = R.keys;
     var obj = {a: 100, b: [1,2,3], c: { x: 200, y: 300}, d: "D", e: null, f: (function(){}())};
     function C() { this.a = 100; this.b = 200; }
     C.prototype.x = function() { return "x"; };
@@ -21,10 +21,10 @@ describe("keys", function() {
     });
 
     it("should work for primitives", function() {
-        var result = Lib.map(function(val) {
-            return Lib.keys(val);
+        var result = R.map(function(val) {
+            return R.keys(val);
         }, [null, undefined, 55, "", true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, Lib.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN([], 10));
     });
 
     it("does not include the given object's prototype properties", function() {
@@ -33,7 +33,7 @@ describe("keys", function() {
 });
 
 describe("keysIn", function() {
-    var keysIn = Lib.keysIn;
+    var keysIn = R.keysIn;
     var obj = {a: 100, b: [1,2,3], c: { x: 200, y: 300}, d: "D", e: null, f: (function(){}())};
     function C() { this.a = 100; this.b = 200; }
     C.prototype.x = function() { return "x"; };
@@ -49,16 +49,16 @@ describe("keysIn", function() {
     });
 
     it("should work for primitives", function() {
-        var result = Lib.map(function(val) {
-            return Lib.keys(val);
+        var result = R.map(function(val) {
+            return R.keys(val);
         }, [null, undefined, 55, "", true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, Lib.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN([], 10));
     });
 });
 
 
 describe("values", function() {
-    var values = Lib.values;
+    var values = R.values;
     var obj = {a: 100, b: [1,2,3], c: { x: 200, y: 300}, d: "D", e: null, f: (function(){}())};
     function C() { this.a = 100; this.b = 200; }
     C.prototype.x = function() { return "x"; };
@@ -77,15 +77,15 @@ describe("values", function() {
     });
     
     it("should work for primitives", function() {
-        var result = Lib.map(function(val) {
-            return Lib.keys(val);
+        var result = R.map(function(val) {
+            return R.keys(val);
         }, [null, undefined, 55, "", true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, Lib.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN([], 10));
     });
 });
 
 describe("valuesIn", function() {
-    var valuesIn = Lib.valuesIn;
+    var valuesIn = R.valuesIn;
     var obj = {a: 100, b: [1,2,3], c: { x: 200, y: 300}, d: "D", e: null, f: (function(){}())};
     function C() { this.a = 100; this.b = 200; }
     C.prototype.x = function() { return "x"; };
@@ -101,10 +101,10 @@ describe("valuesIn", function() {
     });
 
     it("should work for primitives", function() {
-        var result = Lib.map(function(val) {
-            return Lib.values(val);
+        var result = R.map(function(val) {
+            return R.values(val);
         }, [null, undefined, 55, "", true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, Lib.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN([], 10));
     });
 });
 

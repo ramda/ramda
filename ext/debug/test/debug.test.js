@@ -1,6 +1,6 @@
 var assert = require('assert');
-var Lib = require('./../../../ramda');
-var curry = Lib.curry;
+var R = require('./../../../ramda');
+var curry = R.curry;
 
 describe('curry', function() {
     function source(a, b, c) {
@@ -16,7 +16,7 @@ describe('curry', function() {
 });
 
 describe('internal curry', function() {
-    var map = Lib.map, filter = Lib.filter;
+    var map = R.map, filter = R.filter;
     it('curry should set the toString value to the original', function() {
         assert.notEqual(String(map), String(filter));
         assert.equal(String(map), String(map.source));

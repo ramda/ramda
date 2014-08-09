@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('map', function() {
-    var map = Lib.map;
+    var map = R.map;
     var times2 = function(x) {return x * 2;};
     var add1 = function(x) {return x + 1;};
 
@@ -23,7 +23,7 @@ describe('map', function() {
 });
 
 describe('map.idx', function() {
-    var map = Lib.map;
+    var map = R.map;
     var times2 = function(x) {return x * 2;};
     var addIdx = function(x, idx) {return x + idx;};
     var squareEnds = function(x, idx, list) {
@@ -49,7 +49,7 @@ describe('map.idx', function() {
 });
 
 describe('mapObj', function() {
-    var mapObj = Lib.mapObj;
+    var mapObj = R.mapObj;
     var square = function(n) {return n * n;};
 
     it('runs the given function over each of the object properties', function() {
@@ -59,12 +59,12 @@ describe('mapObj', function() {
 });
 
 describe('mapObj.idx', function() {
-    var mapObj = Lib.mapObj;
+    var mapObj = R.mapObj;
     var times2 = function(x) {return x * 2;};
     var addIdx = function(x, key) {return x + key;};
     var squareVowels = function(x, key, obj) {
         var vowels = ['a', 'e', 'i', 'o', 'u'];
-        return Lib.contains(key, vowels) ? x * x : x;
+        return R.contains(key, vowels) ? x * x : x;
     };
 
     it('works just like a normal mapObj', function() {

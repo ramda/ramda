@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('prop', function () {
-    var prop = Lib.prop;
+    var prop = R.prop;
     var fred = {name: 'Fred', age: 23};
 
     it('should return a function that fetches the appropriate property', function () {
@@ -12,13 +12,13 @@ describe('prop', function () {
     });
 
     it('should be aliased by `get`', function () { // TODO: should it?
-        assert.equal(Lib.get('age')(fred), 23);
-        assert.strictEqual(Lib.get, prop);
+        assert.equal(R.get('age')(fred), 23);
+        assert.strictEqual(R.get, prop);
     });
 });
 
 describe('func', function () {
-    var func = Lib.func;
+    var func = R.func;
 
     it('should return a function that applies the appropriate function to the supplied object', function () {
         var fred = {first: 'Fred', last: 'Flintstone', getName: function () {
@@ -52,7 +52,7 @@ describe('func', function () {
 
 // TODO: This needs a better home than objectBasics
 describe('pluck', function () {
-    var pluck = Lib.pluck;
+    var pluck = R.pluck;
     var people = [
         {name: 'Fred', age: 23},
         {name: 'Wilma', age: 21} ,
@@ -67,7 +67,7 @@ describe('pluck', function () {
 });
 
 describe('props', function () {
-    var props = Lib.props;
+    var props = R.props;
     var fred = {name: 'Fred', age: 23, feet: 'large'};
 
     it('should return a function that fetches the appropriate properties from the initially supplied object', function () {
@@ -79,7 +79,7 @@ describe('props', function () {
 });
 
 describe('pick', function () {
-    var pick = Lib.pick;
+    var pick = R.pick;
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
     it('should copy the named properties of an object to the new object', function () {
@@ -95,7 +95,7 @@ describe('pick', function () {
 });
 
 describe('omit', function () {
-    var omit = Lib.omit;
+    var omit = R.omit;
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
     it('should copy an object omitting the listed properties', function () {
@@ -109,21 +109,21 @@ describe('omit', function () {
 });
 
 describe('pickWith', function() {
-    var pickWith = Lib.pickWith;
+    var pickWith = R.pickWith;
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
     it('should create a copy of the object', function() {
-        assert.notEqual(pickWith(Lib.always(true), obj), obj);
+        assert.notEqual(pickWith(R.always(true), obj), obj);
     });
     it('returning truthy keeps the key', function() {
-        assert.deepEqual(pickWith(Lib.alwaysTrue, obj), obj);
-        assert.deepEqual(pickWith(Lib.always({}), obj), obj);
-        assert.deepEqual(pickWith(Lib.always(1), obj), obj);
+        assert.deepEqual(pickWith(R.alwaysTrue, obj), obj);
+        assert.deepEqual(pickWith(R.always({}), obj), obj);
+        assert.deepEqual(pickWith(R.always(1), obj), obj);
     });
     it('returning falsy keeps the key', function() {
-        assert.deepEqual(pickWith(Lib.always(false), obj), {});
-        assert.deepEqual(pickWith(Lib.always(0), obj), {});
-        assert.deepEqual(pickWith(Lib.always(null), obj), {});
+        assert.deepEqual(pickWith(R.always(false), obj), {});
+        assert.deepEqual(pickWith(R.always(0), obj), {});
+        assert.deepEqual(pickWith(R.always(null), obj), {});
     });
     it('should be called with (val,key,obj)', function() {
         assert.deepEqual(pickWith(function(val, key, _obj) {
@@ -132,14 +132,14 @@ describe('pickWith', function() {
         }, obj), {d: 4});
     });
     it('should be automatically curried', function () {
-        var copier = pickWith(Lib.alwaysTrue);
+        var copier = pickWith(R.alwaysTrue);
         assert.deepEqual(copier(obj), obj);
     });
 });
 
 
 describe('pickAll', function () {
-    var pickAll = Lib.pickAll;
+    var pickAll = R.pickAll;
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
     it('should copy the named properties of an object to the new object', function () {
         assert.deepEqual(pickAll(['a', 'c', 'f'], obj), {a: 1, c: 3, f: 6});
@@ -154,7 +154,7 @@ describe('pickAll', function () {
 });
 
 describe('eqProps', function () {
-    var eqProps = Lib.eqProps;
+    var eqProps = R.eqProps;
     it('reports whether two objects have the same value for a given property', function () {
         assert.equal(eqProps('name', {name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
         assert.equal(eqProps('name', {name: 'fred', age: 10}, {name: 'franny', age: 10}), false);
@@ -166,7 +166,7 @@ describe('eqProps', function () {
 });
 
 describe('where', function () {
-    var where = Lib.where;
+    var where = R.where;
     it('takes a spec and a test object and returns true if the test object satisfies the spec', function () {
 
         var spec = {x: 1, y: 2};
@@ -246,7 +246,7 @@ describe('where', function () {
     });
 
     it('equal objects are true', function() {
-        assert.equal(where(Lib, Lib), true);
+        assert.equal(where(R, R), true);
     });
 
     function Parent() {
@@ -258,12 +258,12 @@ describe('where', function () {
 
     it('matches inherited functions', function () {
         var spec = {
-            toString: Lib.alwaysTrue
+            toString: R.alwaysTrue
         };
         assert.equal(where(spec, {}), true);
         assert.equal(where(spec, {a: 1}), true);
         assert.equal(where(spec, {toString: 1}), true);
-        assert.equal(where({a: Lib.alwaysTrue}, {x: 1}), false);
+        assert.equal(where({a: R.alwaysTrue}, {x: 1}), false);
     });
 
     it('matches inherited props', function () {
@@ -281,7 +281,7 @@ describe('where', function () {
 });
 
 describe('mixin', function () {
-    var mixin = Lib.mixin;
+    var mixin = R.mixin;
 
     it('takes two objects, merges their own properties and returns a new object', function () {
         var a = {w: 1, x: 2};

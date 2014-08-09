@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('clone', function() {
-    var clone = Lib.clone;
+    var clone = R.clone;
 
     it('returns a copy of an array', function() {
       assert.deepEqual(clone([1,2,3,4,5]), [1,2,3,4,5]);

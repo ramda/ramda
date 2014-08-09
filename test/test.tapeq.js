@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('tap', function() {
-    var tap = Lib.tap;
+    var tap = R.tap;
     it("returns a function that returns tap's argument", function() {
         var f = tap(100);
         assert.equal(typeof f, "function");
@@ -28,7 +28,7 @@ describe('tap', function() {
 });
 
 describe('eq', function() {
-    var eq = Lib.eq;
+    var eq = R.eq;
     var a = [];
     var b = a;
     it("tests for strict equality of its operands", function() {

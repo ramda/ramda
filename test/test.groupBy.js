@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('groupBy', function() {
-    var groupBy = Lib.groupBy, prop = Lib.prop;
+    var groupBy = R.groupBy, prop = R.prop;
 
     it('should split the list into groups according to the grouping function', function() {
         var grade = function(score) {

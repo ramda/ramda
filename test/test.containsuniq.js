@@ -1,9 +1,9 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 
 describe("contains", function() {
-    var contains = Lib.contains;
+    var contains = R.contains;
     it("returns true if an element is in a list", function() {
         assert.equal(contains(7, [1,2,3,9,8,7,100,200,300]), true);
     });
@@ -18,7 +18,7 @@ describe("contains", function() {
 });
 
 describe('uniq', function() {
-    var uniq = Lib.uniq;
+    var uniq = R.uniq;
 
     it('returns a set from any array (i.e. purges duplicate elements)', function() {
         var arr = [1,2,3,1,2,3,1,2,3];
@@ -35,9 +35,9 @@ describe('uniq', function() {
 });
 
 describe('uniqWith', function() {
-    var uniqWith = Lib.uniqWith;
-    var T = Lib.alwaysTrue;
-    var F = Lib.alwaysFalse;
+    var uniqWith = R.uniqWith;
+    var T = R.alwaysTrue;
+    var F = R.alwaysFalse;
     function eqI(x, accX) { return x.i === accX.i; }
 
     it('returns a set from any array (i.e. purges duplicate elements) based on predicate', function() {
@@ -57,7 +57,7 @@ describe('uniqWith', function() {
 });
 
 describe('isSet', function() {
-    var isSet = Lib.isSet;
+    var isSet = R.isSet;
 
     it('returns true if a list is composed of unique elements', function() {
         var arr = [1,2,3,1,2,3,1,2,3];

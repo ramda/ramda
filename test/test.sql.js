@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('project', function() {
-    var project = Lib.project;
+    var project = R.project;
     var kids = [
         {name: 'Abby', age: 7, hair: 'blond'},
         {name: 'Fred', age: 12, hair: 'brown'},
@@ -40,7 +40,7 @@ describe('project', function() {
 });
 
 describe('propEq', function() {
-    var propEq = Lib.propEq, filter = Lib.filter;
+    var propEq = R.propEq, filter = R.filter;
     var obj1 = {name: 'Abby', age: 7, hair: 'blond'};
     var obj2 = {name: 'Fred', age: 12, hair: 'brown'};
     var obj3 = {name: 'Rusty', age: 10, hair: 'brown'};
@@ -65,22 +65,22 @@ describe('propEq', function() {
 });
 
 describe('union', function() {
-    var union = Lib.union;
-    var R = [1,2,3,4];
-    var S = [3,4,5,6];
-    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
-    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    var union = R.union;
+    var M = [1,2,3,4];
+    var N = [3,4,5,6];
+    var Mo = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var No = [{a: 3},{a: 4},{a: 5},{a: 6}];
     it("combines two lists into the set of all their elements", function() {
-        assert.deepEqual(union(R, S), [1,2,3,4,5,6]);
+        assert.deepEqual(union(M, N), [1,2,3,4,5,6]);
     });
 
     it("does not work for non-primitives (use `unionWith`)", function() {
-        assert.equal(union(Ro, So).length, 8);
+        assert.equal(union(Mo, No).length, 8);
     });
 });
 
 describe('unionWith', function() {
-    var unionWith = Lib.unionWith;
+    var unionWith = R.unionWith;
     var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
     var eqA = function(r, s) { return r.a === s.a; };
@@ -90,28 +90,28 @@ describe('unionWith', function() {
 });
 
 describe('intersection', function() {
-    var intersection = Lib.intersection;
-    var R = [1,2,3,4];
-    var R2 = [1,2,3,4,1,2,3,4];
-    var S = [3,4,5,6];
-    var S2 = [3,3,4,4,5,5,6,6];
-    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
-    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    var intersection = R.intersection;
+    var M = [1,2,3,4];
+    var M2 = [1,2,3,4,1,2,3,4];
+    var N = [3,4,5,6];
+    var N2 = [3,3,4,4,5,5,6,6];
+    var Mo = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var No = [{a: 3},{a: 4},{a: 5},{a: 6}];
     it("combines two lists into the set of common elements", function() {
-        assert.deepEqual(intersection(R, S), [3,4]);
+        assert.deepEqual(intersection(M, N), [3,4]);
     });
 
     it("does not allow duplicates in the output even if the input lists had duplicates", function() {
-        assert.deepEqual(intersection(R2, S2), [3,4]);
+        assert.deepEqual(intersection(M2, N2), [3,4]);
     });
 
     it("does not work for non-primitives (use `intersectionWith`)", function() {
-        assert.equal(intersection(Ro, So).length, 0);
+        assert.equal(intersection(Mo, No).length, 0);
     });
 });
 
 describe('intersectionWith', function() {
-    var intersectionWith = Lib.intersectionWith;
+    var intersectionWith = R.intersectionWith;
     var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
     var eqA = function(r, s) { return r.a === s.a; };
@@ -121,28 +121,28 @@ describe('intersectionWith', function() {
 });
 
 describe('difference', function() {
-    var difference = Lib.difference;
-    var R = [1,2,3,4];
-    var R2 = [1,2,3,4,1,2,3,4];
-    var S = [3,4,5,6];
-    var S2 = [3,3,4,4,5,5,6,6];
-    var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
-    var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
+    var difference = R.difference;
+    var M = [1,2,3,4];
+    var M2 = [1,2,3,4,1,2,3,4];
+    var N = [3,4,5,6];
+    var N2 = [3,3,4,4,5,5,6,6];
+    var Mo = [{a: 1},{a: 2},{a: 3},{a: 4}];
+    var No = [{a: 3},{a: 4},{a: 5},{a: 6}];
     it("finds the set of all elements in the first list not contained in the second", function() {
-        assert.deepEqual(difference(R, S), [1,2]);
+        assert.deepEqual(difference(M, N), [1,2]);
     });
 
     it("does not allow duplicates in the output even if the input lists had duplicates", function() {
-        assert.deepEqual(difference(R2, S2), [1,2]);
+        assert.deepEqual(difference(M2, N2), [1,2]);
     });
 
     it("does not work for non-primitives (use `differenceWith`)", function() {
-        assert.equal(difference(Ro, So).length, 4);
+        assert.equal(difference(Mo, No).length, 4);
     });
 });
 
 describe('differenceWith', function() {
-    var differenceWith = Lib.differenceWith;
+    var differenceWith = R.differenceWith;
     var Ro = [{a: 1},{a: 2},{a: 3},{a: 4}];
     var Ro2 = [{a: 1},{a: 2},{a: 3},{a: 4},{a: 1},{a: 2},{a: 3},{a: 4}];
     var So = [{a: 3},{a: 4},{a: 5},{a: 6}];
@@ -171,7 +171,7 @@ describe('differenceWith', function() {
         {title: 'Five Leaves Left', artist: 'Nick Drake', genre: 'Folk'},
         {title: 'The Magic Flute', artist: 'John Eliot Gardiner', genre: 'Classical'}
     ];
-    var prop = Lib.prop;
+    var prop = R.prop;
     var derivedGenre = (function() {
         var remap = {
             Baroque: 'Classical',
@@ -186,7 +186,7 @@ describe('differenceWith', function() {
     }());
 
     describe('sortBy', function() {
-        var sortBy = Lib.sortBy;
+        var sortBy = R.sortBy;
 
         it('should sort by a simple property of the objects', function() {
             var sortedAlbums = sortBy(prop("title"), albums);
@@ -205,7 +205,7 @@ describe('differenceWith', function() {
     });
 
     describe('countBy', function() {
-        var countBy = Lib.countBy;
+        var countBy = R.countBy;
 
         it('should count by a simple property of the objects', function() {
             assert.deepEqual(countBy(prop("genre"), albums), {
@@ -228,7 +228,7 @@ describe('differenceWith', function() {
     });
 
     describe('groupBy', function() {
-        var groupBy = Lib.groupBy;
+        var groupBy = R.groupBy;
         it('should group by a simple property of the objects', function() {
             assert.deepEqual(groupBy(prop("genre"), albums), {
                 Baroque: [{title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'}, {title: 'Goldberg Variations', artist: 'Daniel Barenboim', genre: 'Baroque'}],

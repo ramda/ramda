@@ -7,7 +7,7 @@ describe('impure', function() {
 
   describe('setProp', function() {
 
-    var setProp = Lib.setProp;
+    var setProp = R.setProp;
 
     it('sets a property to a value on the input object', function() {
       var obj = {};

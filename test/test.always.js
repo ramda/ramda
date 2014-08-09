@@ -1,8 +1,8 @@
 var assert = require('assert');
-var Lib = require('./../ramda');
+var R = require('./../ramda');
 
 describe('always', function() {
-    var always = Lib.always;
+    var always = R.always;
     it('should return a function that returns the object initially supplied', function() {
         var theMeaning = always(42);
         assert.equal(theMeaning(), 42);
@@ -21,12 +21,12 @@ describe('always', function() {
     });
 
     it('should be aliased by `constant`', function() {
-        assert.strictEqual(Lib.constant, always);
+        assert.strictEqual(R.constant, always);
     });
 });
 
 describe ('alwaysZero', function() {
-    var alwaysZero = Lib.alwaysZero;
+    var alwaysZero = R.alwaysZero;
     it('should always return zero', function() {
         assert.equal(alwaysZero(), 0);
         assert.equal(alwaysZero(10), 0);
@@ -35,7 +35,7 @@ describe ('alwaysZero', function() {
 });
 
 describe ('alwaysFalse', function() {
-    var alwaysFalse = Lib.alwaysFalse;
+    var alwaysFalse = R.alwaysFalse;
     it('should always return false', function() {
         assert.equal(alwaysFalse(), false);
         assert.equal(alwaysFalse(10), false);
@@ -44,7 +44,7 @@ describe ('alwaysFalse', function() {
 });
 
 describe ('alwaysTrue', function() {
-    var alwaysTrue = Lib.alwaysTrue;
+    var alwaysTrue = R.alwaysTrue;
     it('should always return true', function() {
         assert.equal(alwaysTrue(), true);
         assert.equal(alwaysTrue(10), true);

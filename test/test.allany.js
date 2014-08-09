@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('all', function() {
-    var all = Lib.all;
+    var all = R.all;
     var even = function(n) {return n % 2 === 0;};
     var T = function() {return true;};
 
@@ -33,13 +33,13 @@ describe('all', function() {
     });
 
     it('should be aliased by `every`', function() {
-        assert.equal(Lib.every(even, [2, 4, 6, 8, 10]), true);
-        assert.strictEqual(Lib.every, all);
+        assert.equal(R.every(even, [2, 4, 6, 8, 10]), true);
+        assert.strictEqual(R.every, all);
     });
 });
 
 describe("any", function() {
-    var any = Lib.any;
+    var any = R.any;
     var odd = function(n) {return n % 2 === 1;};
     var T = function() {return true;};
 
@@ -85,8 +85,8 @@ describe("any", function() {
     });
 
     it('should be aliased by `some`', function() {
-        assert.equal(Lib.some(odd, [2, 4, 6, 8, 10, 11, 12]), true);
-        assert.strictEqual(Lib.some, any);
+        assert.equal(R.some(odd, [2, 4, 6, 8, 10, 11, 12]), true);
+        assert.strictEqual(R.some, any);
     });
 });
 

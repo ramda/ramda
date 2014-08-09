@@ -1,8 +1,8 @@
 var assert = require("assert");
-var Lib = require("./../ramda");
+var R = require("./../ramda");
 
 describe('zipWith', function() {
-    var zipWith = Lib.zipWith;
+    var zipWith = R.zipWith;
     var a = [1,2,3], b = [100, 200, 300], c = [10, 20, 30, 40, 50, 60];
     var add = function(a, b) { return a + b; };
     var x = function(a, b) { return a * b; };
@@ -19,7 +19,7 @@ describe('zipWith', function() {
 });
 
 describe('zip', function() {
-    var zip = Lib.zip;
+    var zip = R.zip;
     it("returns an array of 'tuples'", function() {
         var a = [1,2,3], b = [100, 200, 300];
         assert.deepEqual(zip(a, b), [[1, 100], [2, 200], [3, 300]]);
@@ -33,7 +33,7 @@ describe('zip', function() {
 });
 
 describe('zipObj', function() {
-    var zipObj = Lib.zipObj;
+    var zipObj = R.zipObj;
     it("combines an array of keys with an arrau of values into a single object", function() {
         assert.deepEqual(zipObj(['a', 'b', 'c'], [1, 2, 3]), {a: 1, b: 2, c: 3});
     });
@@ -50,7 +50,7 @@ describe('zipObj', function() {
 });
 
 describe('fromPairs', function() {
-    var fromPairs = Lib.fromPairs;
+    var fromPairs = R.fromPairs;
     it("combines an array of two-element arrays into an object", function() {
         assert.deepEqual(fromPairs([['a', 1], ['b', 2], ['c', 3]]), {a: 1, b: 2, c: 3});
     });
