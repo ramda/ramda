@@ -29,7 +29,7 @@ describe('flatten', function() {
 });
 
 describe('unnest', function() {
-    var unnest = Lib.unnest;
+    var unnest = R.unnest;
 
     it("only flattens one layer deep of a nested list", function() {
         var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];
