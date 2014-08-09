@@ -2357,7 +2357,6 @@
         var makeFlat = function _makeFlat(recursive) {
             return function __flatt(list) {
                 var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
-                result = [];
                 while (++i < ilen) {
                     array = list[i];
                     if (isArray(array)) { 
@@ -2394,6 +2393,7 @@
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
         //     // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         var flatten = R.flatten = makeFlat(true);
+        aliasFor('flatten').is('flattenDeep');
 
         /**
          * Returns a new list by pulling every item at the first level of nesting out, and putting
