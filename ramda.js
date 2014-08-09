@@ -2415,8 +2415,8 @@
          * flat([[1, 2], [3, 4], [5, 6]]);
          * //= [1, 2, 3, 4, 5, 6]
          */
-        var flat = R.flat = makeFlat(false);
-        aliasFor('flat').is('flattenShallow');
+        var unnest = R.unnest = makeFlat(false);
+        aliasFor('unnest').is('flattenShallow');
 
         /**
          * Creates a new list out of the two supplied by applying the function to each
