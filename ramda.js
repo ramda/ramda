@@ -1705,7 +1705,9 @@
          * R.of({}); // => [{}]
          *
          */ 
-        R.of = checkForMethod('of', function _of(x, container) { return [x]; });
+        R.of = function _of(x, container) { 
+            return (hasMethod('of', container)) ? container.of(x) : [x]; 
+        };
 
         /**
          * `empty` wraps any object in an array. This implementation is compatible with the 
@@ -1719,7 +1721,9 @@
          *
          * R.empty([1,2,3,4,5]); // => []
          */
-        R.empty = checkForMethod('empty', function _empty(x) { return []; });
+        R.empty = function _empty(x) { 
+            return (hasMethod('empty', x)) ? x.empty() : []; 
+        };
 
 
         /**
