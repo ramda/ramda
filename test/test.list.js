@@ -160,7 +160,7 @@ describe('repeatN', function () {
 describe('of', function() {
     var of = Lib.of;
 
-    it('wraps a value inside an Array', function() {
+    it('returns its argument as an Array', function() {
         assert.deepEqual(of(100), [100]);
         assert.deepEqual(of([100]), [[100]]);
         assert.deepEqual(of(null), [null]);
@@ -177,13 +177,13 @@ describe('empty', function() {
 
 });
 
-/*
 describe('chain', function() {
     var chain = Lib.chain;
-    it('chains', function() {
-
+    var dbl = Lib.map(Lib.multiply(2));
+    it('maps a function over a nested list and returns the (shallow) flattened result', function() {
+        assert.deepEqual(chain(dbl, [[1,2,3], [1], [0, 10, -3, 5, 7]]), [2, 4, 6, 2, 0, 20, -6, 10, 14]);
+        assert.deepEqual(chain(dbl, [[1,2,3], []]), [2, 4, 6]);
     });
 });
-*/
 
 
