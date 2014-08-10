@@ -55,7 +55,7 @@ describe('mapObj', function() {
     it('runs the given function over each of the object properties', function() {
         var obj = {a: 1, b: 2, c: 3};
         assert.deepEqual(mapObj(square, obj), {a: 1, b: 4, c: 9});
-    })
+    });
 });
 
 describe('mapObj.idx', function() {

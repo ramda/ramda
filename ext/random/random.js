@@ -53,8 +53,8 @@
             var s2 = 0;
             var c = 1;
 
-            if (args.length == 0) {
-                args = [+new Date];
+            if (args.length === 0) {
+                args = [+new Date()];
             }
             var mash = Mash();
             s0 = mash(' ');
@@ -81,7 +81,8 @@
                 var t = 2091639 * s0 + c * 2.3283064365386963e-10; // 2^-32
                 s0 = s1;
                 s1 = s2;
-                return s2 = t - (c = t | 0);
+                s2 = t - (c = t | 0);
+                return s2;
             };
             random.uint32 = function () {
                 return random() * 0x100000000; // 2^32

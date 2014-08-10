@@ -215,7 +215,7 @@ describe('where', function () {
     it('is false if the test object is null-ish', function () {
         var spec = {x: 200};
         var testN = null;
-        var testU = undefined;
+        var testU;
         var testF = false;
         assert.equal(where(spec, testN), false);
         assert.equal(where(spec, testU), false);
@@ -306,8 +306,8 @@ describe('mixin', function () {
         var a = {w: 1, x: 2};
         function Cla() {}
         Cla.prototype.x = 5;
-        assert.deepEqual(mixin(new Cla, a), {w: 1, x: 2});
-        assert.deepEqual(mixin(a, new Cla), {w: 1, x: 2});
+        assert.deepEqual(mixin(new Cla(), a), {w: 1, x: 2});
+        assert.deepEqual(mixin(a, new Cla()), {w: 1, x: 2});
     });
 
     it('outta be curried', function () {

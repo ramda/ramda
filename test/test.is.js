@@ -1,3 +1,5 @@
+/* jshint -W053 */
+
 var assert = require('assert');
 var R = require('..');
 

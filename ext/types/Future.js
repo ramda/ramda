@@ -8,7 +8,7 @@ function Future(f) {
 
 // functor
 Future.prototype.map = function(f) {
-  return this.chain(function(a){ return Future.of(f(a)) })
+  return this.chain(function(a){ return Future.of(f(a)); });
 };
 
 // apply
@@ -30,8 +30,8 @@ Future.prototype.of = Future.of;
 //  chain must return a value of the same Chain
 Future.prototype.chain = function(f) {  // Sorella's:
   return new Future(function(reject, resolve) {
-    return this.fork(function(a){ return reject(a) },
-                     function(b){ return f(b).fork(reject, resolve) });
+    return this.fork(function(a){ return reject(a); },
+                     function(b){ return f(b).fork(reject, resolve); });
   }.bind(this));
 };
 
