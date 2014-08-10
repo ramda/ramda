@@ -1746,7 +1746,7 @@
          *
          */
         R.chain = curry2(checkForMethod('chain', function _chain(f, nestedList) {
-            return flat(map(f, nestedList));
+            return unnest(map(f, nestedList));
         }));
         aliasFor('chain').is('flatMap');
 
