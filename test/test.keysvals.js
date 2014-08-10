@@ -16,7 +16,9 @@ describe("keys", function() {
 
     it("should work with hasOwnProperty override", function() {
         assert.deepEqual(keys({
+            /* jshint -W001 */
             "hasOwnProperty": false
+            /* jshint +W001 */
         }), ["hasOwnProperty"]);
     });
 
@@ -68,7 +70,9 @@ describe("values", function() {
     it("returns an array of the given object's values", function() {
         assert.deepEqual(values(obj), [100,[1,2,3],{x: 200, y: 300},'D',null,undefined]);
         assert.deepEqual(values({
+            /* jshint -W001 */
             hasOwnProperty: false
+            /* jshint +W001 */
         }), [false]);
     });
 

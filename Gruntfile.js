@@ -38,7 +38,7 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['ramda.js'],
+      files: ['ramda.js', 'ext/**/*.js', 'test/*.js'],
       options: {
         evil: true,
         eqnull: true

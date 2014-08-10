@@ -43,7 +43,7 @@ describe('groupBy', function() {
             'A': [{type: 'A', val: 10}, {type: 'A', val: 30},{type: 'A', val: 40}],
             'B': [{type: 'B', val: 20}, {type: 'B', val: 60}],
             'C': [{type: 'C', val: 50}]
-        })
+        });
 
     });
 });

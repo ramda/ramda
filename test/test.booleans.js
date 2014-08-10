@@ -81,10 +81,10 @@ describe('not', function() {
 
 describe('allPredicates', function() {
     var allPredicates = R.allPredicates;
-    var odd = function(n) {return !!(n % 2);};
+    var odd = function(n) {return n % 2 !== 0;};
     var lt20 = function(n) {return n < 20;};
     var gt5 = function(n) {return n > 5;};
-    var plusEq = function(w, x, y, z) { return w + x  === y + z };
+    var plusEq = function(w, x, y, z) { return w + x  === y + z; };
 
     it('should report whether all predicates are satisfied by a given value', function() {
         var ok = allPredicates([odd, lt20, gt5]);
@@ -107,10 +107,10 @@ describe('allPredicates', function() {
 
 describe('anyPredicates', function() {
     var anyPredicates = R.anyPredicates;
-    var odd = function(n) {return !!(n % 2);};
+    var odd = function(n) {return n % 2 !== 0;};
     var gt20 = function(n) {return n > 20;};
     var lt5 = function(n) {return n < 5;};
-    var plusEq = function(w, x, y, z) { return w + x  === y + z };
+    var plusEq = function(w, x, y, z) { return w + x  === y + z; };
 
     it('should report whether any predicates are satisfied by a given value', function() {
         var ok = anyPredicates([odd, gt20, lt5]);

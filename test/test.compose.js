@@ -20,14 +20,14 @@ describe('compose', function() {
     });
 
     it('passes context to functions', function() {
-        function x(x) {
-            return this.x * x;
+        function x(val) {
+            return this.x * val;
         }
-        function y(x) {
-            return this.y * x;
+        function y(val) {
+            return this.y * val;
         }
-        function z(x) {
-            return this.z * x;
+        function z(val) {
+            return this.z * val;
         }
         var context = {
             a: compose(x, y, z),
@@ -83,14 +83,14 @@ describe('pipe', function() {
     });
 
     it('passes context to functions', function() {
-        function x(x) {
-            return this.x * x;
+        function x(val) {
+            return this.x * val;
         }
-        function y(x) {
-            return this.y * x;
+        function y(val) {
+            return this.y * val;
         }
-        function z(x) {
-            return this.z * x;
+        function z(val) {
+            return this.z * val;
         }
         var context = {
             a: pipe(x, y, z),
