@@ -146,7 +146,7 @@
          * isArrayLike({length: 10}); //=> true
          */
         var isArrayLike = function(x) {
-            return isArray(x) || (typeof x !== "string" && x && x.length && x.length >= 0);
+            return isArray(x) || (typeof x !== "string" && x != null && x.length >= 0);
         };
 
         /**
