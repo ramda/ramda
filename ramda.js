@@ -1,4 +1,5 @@
-//     ramda.js 0.3.0
+//     ramda.js
+//     "version": "0.3.0"
 //     https://github.com/CrossEye/ramda
 //     (c) 2013-2014 Scott Sauyet and Michael Hurley
 //     Ramda may be freely distributed under the MIT license.
@@ -1313,9 +1314,11 @@
          */
         R.construct = function _construct(Fn) {
             var f = function () {
-                var obj = new Fn();
-                Fn.apply(obj, arguments);
-                return obj;
+                var Temp = function() {}, inst, ret;
+                Temp.prototype = Fn.prototype;
+                inst = new Temp();
+                ret = Fn.apply(inst, arguments);
+                return Object(ret) === ret ? ret: inst;
             };
             return Fn.length > 1 ? curry(nAry(Fn.length, f)) : f;
         };

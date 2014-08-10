@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 
     push: {
       options: {
-        files: ['package.json', 'bower.json'],
+        files: ['package.json', 'bower.json', 'ramda.js'],
         add: false,
         commit: false,
         createTag: false,
