@@ -1,5 +1,5 @@
 var assert = require('assert');
-var R = require('./../ramda');
+var R = require('..');
 
 describe('indexOf', function() {
     it("returns a number indicating an object's position in a list", function() {

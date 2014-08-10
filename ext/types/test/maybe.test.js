@@ -1,6 +1,6 @@
 var assert = require('assert');
 var types = require('./types');
-var R = require('../../../ramda');
+var R = require('../../..');
 
 var Maybe = require('../Maybe');
 

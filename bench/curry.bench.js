@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var curry = require('../ramda').curry;
+var curry = require('..').curry;
 
 function mult(x, y) { return x * y; }
 var mult4 = curry(mult)(4);

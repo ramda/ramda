@@ -1,5 +1,5 @@
 var assert = require('assert');
-var R = require('./../ramda');
+var R = require('..');
 
 describe('installTo', function() {
     it('can be exposed on arbitrary object', function() {

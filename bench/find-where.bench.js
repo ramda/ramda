@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var R = require('../ramda');
+var R = require('..');
 var find = R.find;
 var where = R.where;
 var isEmpty = R.isEmpty;
