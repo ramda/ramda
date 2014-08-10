@@ -1,5 +1,5 @@
 var assert = require('assert');
-var R = require('./../ramda');
+var R = require('..');
 
 describe('join', function () {
     it("concatenates a list's elements to a string, with an seperator string between elements", function () {

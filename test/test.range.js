@@ -1,5 +1,5 @@
 var assert = require("assert");
-var R = require("./../ramda");
+var R = require("..");
 
 describe('range', function() {
     var range = R.range;

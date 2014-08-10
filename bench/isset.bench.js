@@ -1,4 +1,4 @@
-var isSet = require('../ramda').isSet;
+var isSet = require('..').isSet;
 
 var unsortedBag = [8,2,85,2,34,3,23,247,57,8,0,6,5,46,54,643];
 var unsortedSet = [8,2,85,34,3,23,247,57,8,0,6,5,46,54,643];

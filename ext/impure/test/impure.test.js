@@ -1,6 +1,6 @@
 /*
 var assert = require('assert');
-var R = require('../../../ramda');
+var R = require('../../..');
 var setProp = require('../setProp');
 
 describe('impure', function() {

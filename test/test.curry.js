@@ -1,5 +1,5 @@
 var assert = require('assert');
-var R = require('./../ramda');
+var R = require('..');
 var curry = R.curry;
 
 describe('curry', function() {

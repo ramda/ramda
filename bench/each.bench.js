@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var each = require('../ramda').each;
+var each = require('..').each;
 
 var nums = [8,2,85,2,34,3,23,247,57,8,0,6,5,46,54,643];
 var mkEach = function(result) {

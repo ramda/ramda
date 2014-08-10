@@ -2,7 +2,7 @@
     if (typeof define === 'function' && define.amd) {
         define(['ramda'], factory);
     } else if (typeof exports === 'object') {
-        module.exports = factory(require('../../ramda'));
+        module.exports = factory(require('../..'));
     } else {
         root.Random = factory(root.ramda);
     }

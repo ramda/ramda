@@ -1,5 +1,5 @@
 var assert = require("assert");
-var R = require("./../ramda");
+var R = require("..");
 
 describe('compose', function() {
     var compose = R.compose;

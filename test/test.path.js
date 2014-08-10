@@ -1,5 +1,5 @@
 var assert = require("assert");
-var R = require("./../ramda");
+var R = require("..");
 
 describe("path", function() {
     var deepObject = { a: { b: { c: "c" } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ["arr"] };

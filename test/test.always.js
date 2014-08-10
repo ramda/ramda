@@ -1,5 +1,5 @@
 var assert = require('assert');
-var R = require('./../ramda');
+var R = require('..');
 
 describe('always', function() {
     var always = R.always;
