@@ -29,7 +29,7 @@ describe('groupBy', function() {
             'F': [{name: 'Eddy', score: 58}]
         });
     });
-    
+
     it('should be automatically curried', function() {
         var splitByType = groupBy(prop("type"));
         assert.deepEqual(splitByType([

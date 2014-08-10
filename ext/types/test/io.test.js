@@ -44,12 +44,12 @@ describe('IO', function() {
 
   it('is a Chain', function() {
     var cTest = types.chain;
-    var c = IO(function() { 
-      return IO(function() { 
-        return IO(function() { 
-          return 3; 
-        }); 
-      }); 
+    var c = IO(function() {
+      return IO(function() {
+        return IO(function() {
+          return 3;
+        });
+      });
     });
     assert.equal(true, cTest.iface(i1));
     assert.equal(true, cTest.associative(c, R.I, R.I));
@@ -61,5 +61,3 @@ describe('IO', function() {
   });
 
 });
-
-

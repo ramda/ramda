@@ -145,4 +145,3 @@ describe('split', function() {
         assert.deepEqual(split('at', 'The Cat in the Hat sat on the mat'), ['The C', ' in the H', ' s', ' on the m', '']);
     });
 });
-

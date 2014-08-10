@@ -19,7 +19,7 @@ Maybe.prototype.map = function(f) {
 // takes a Maybe that wraps a function (`app`) and applies its `map`
 // method to this Maybe's value, which must be a function.
 Maybe.prototype.ap = function(m) {
-  if (this.value == null) { 
+  if (this.value == null) {
     return m;  // ???
   }
   if (typeof this.value !== 'function') {
@@ -50,5 +50,3 @@ Maybe.prototype.equals = function(that) {
 };
 
 module.exports = Maybe;
-
-

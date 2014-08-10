@@ -22,4 +22,3 @@ describe('impure', function() {
 
 });
 */
-

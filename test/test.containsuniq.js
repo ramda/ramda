@@ -24,9 +24,9 @@ describe('uniq', function() {
         var arr = [1,2,3,1,2,3,1,2,3];
         assert.deepEqual(uniq(arr), [1,2,3]);
     });
-    
+
     it('keeps elements from the left', function() {
-      assert.deepEqual(uniq([1, 2, 3, 4, 1]), [1,2,3,4]); 
+      assert.deepEqual(uniq([1, 2, 3, 4, 1]), [1,2,3,4]);
     });
 
     it('returns an empty array for an empty array', function() {
@@ -46,9 +46,9 @@ describe('uniqWith', function() {
         assert.deepEqual(uniqWith(eqI, objs), objs);
         assert.deepEqual(uniqWith(eqI, objs2), [{x: T, i: 0}, {x: F, i: 1},{x: T, i: 2}, {x: T, i: 3}]);
     });
-    
+
     it('keeps elements from the left', function() {
-      assert.deepEqual(uniqWith(eqI, [{i: 1}, {i: 2}, {i: 3}, {i: 4}, {i: 1}]), [{i: 1}, {i: 2}, {i: 3}, {i: 4}]); 
+      assert.deepEqual(uniqWith(eqI, [{i: 1}, {i: 2}, {i: 3}, {i: 4}, {i: 1}]), [{i: 1}, {i: 2}, {i: 3}, {i: 4}]);
     });
 
     it('returns an empty array for an empty array', function() {
@@ -70,4 +70,3 @@ describe('isSet', function() {
     });
 
 });
-

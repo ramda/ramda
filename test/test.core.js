@@ -23,7 +23,7 @@ describe('isAtom', function() {
         assert.equal(isAtom(), false);
         assert.equal(isAtom(null), false);
     });
-    
+
     it('is true for primitive values', function() {
         assert.equal(isAtom(1), true);
         assert.equal(isAtom('a'), true);
@@ -157,4 +157,3 @@ describe('comparator', function() {
         assert.deepEqual([3, 1, 8, 1, 2, 5].sort(comparator(function(a, b) {return a < b;})), [1, 1, 2, 3, 5, 8]);
     });
 });
-

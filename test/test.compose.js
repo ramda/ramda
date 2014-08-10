@@ -37,7 +37,7 @@ describe('compose', function() {
         };
         assert.equal(context.a(5), 40);
     });
-    
+
      it('returns a function with arity == rightmost argument', function() {
        function a2(x, y) { return 'A2'; }
        function a3(x, y) { return 'A2'; }
@@ -70,7 +70,7 @@ describe('pipe', function() {
     function b(x) {return x + "B";}
     function c(x) {return x + "C";}
     function d(x) {return x + "D";}
-    
+
     it('executes its passed in functions in order from left to right', function() {
         assert.equal(pipe(a, b, c, d)(""), "ABCD");
     });
@@ -104,7 +104,7 @@ describe('pipe', function() {
 
 describe('useWith', function() {
     var useWith = R.useWith;
- 
+
     function max() { return Math.max.apply(Math, arguments); }
     function add1(x) { return x + 1; }
     function mult2(x) { return x * 2; }
@@ -140,4 +140,3 @@ describe('fork', function() {
         assert.equal(fork(mult, add(1), add(3))(2), 15); // mult(add1(2), add3(2)) = mult(3, 5) = 3 * 15;
     });
 });
-

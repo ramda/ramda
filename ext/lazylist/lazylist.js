@@ -11,7 +11,7 @@
   // Lazy lists
   // ----------
   //
-  
+
   // Support for infinite lists, using an initial seed, a function that calculates the head from the seed and
   // a function that creates a new seed from the current seed.  Lazy list objects have this structure:
   //
@@ -37,7 +37,7 @@
   //
   // Note that the `take(5)` call is necessary to get a finite list out of this.  Otherwise, this would still
   // be an infinite list.
-  
+
   var lazylist = (function() {
     // partial shim for Object.create
     var create = (function() {
@@ -47,7 +47,7 @@
         return new F();
       };
     }());
-  
+
     // Trampolining to support recursion in Lazy lists
     var trampoline = function(fn) {
       var result = fn.apply(this, R.tail(arguments));
@@ -63,7 +63,7 @@
         return new LZ(step(seed), current, step);
       };
     };
-  
+
     // Lazy lists can be used with OO techniques as well as our standard functional calls.  These are the
     // implementations of those methods and other properties.
     LZ.prototype = {
@@ -115,13 +115,13 @@
         return lz;
       }
     };
-  
+
     // The actual public `lazylist` function.
     return function(seed, current, step) {
       return new LZ(seed, current, step);
     };
   }());
-  
+
   R.lazylist = lazylist;
 
   // Returns a lazy list of identical values, probably most useful with `take` for initializing a list.
@@ -129,8 +129,6 @@
      var fn = R.always(value);
      return lazylist(null, fn, fn);
   };
-  
+
   return lazylist;
 }));
-  
-

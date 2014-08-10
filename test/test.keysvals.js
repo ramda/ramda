@@ -75,7 +75,7 @@ describe("values", function() {
     it("does not include the given object's prototype properties", function() {
         assert.deepEqual(values(cobj), [100, 200]);
     });
-    
+
     it("should work for primitives", function() {
         var result = R.map(function(val) {
             return R.keys(val);
@@ -107,6 +107,3 @@ describe("valuesIn", function() {
         assert.deepEqual(result, R.repeatN([], 10));
     });
 });
-
-
-

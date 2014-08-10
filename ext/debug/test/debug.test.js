@@ -26,4 +26,3 @@ describe('internal curry', function() {
     });
 */
 });
-

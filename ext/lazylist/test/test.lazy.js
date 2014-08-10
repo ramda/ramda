@@ -5,7 +5,7 @@ var lazylist = require('../lazylist');
 describe('lazylist', function() {
     function I(x) { return x; }
     function inc(n) { return n + 1; }
-    
+
     var lz = lazylist(0, I, inc);
 
     it("has a '0' property", function() {
@@ -102,5 +102,3 @@ describe('repeat', function() {
         assert.deepEqual(take(2, repeat({a: 10, b: {c: 20}})), [{a: 10, b: {c: 20}}, {a: 10, b: {c: 20}}]);
     });
 });
-
-

@@ -1699,16 +1699,16 @@
          * R.ap([R.multiply(2), R.add(3), [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
          */
         R.ap = curry2(checkForMethod('ap', function _ap(fns, vs) {
-            return foldl(function(acc, fn) { 
-                return concat(acc, map(fn, vs)); 
+            return foldl(function(acc, fn) {
+                return concat(acc, map(fn, vs));
             },  [], fns);
         }));
-      
+
         /**
          *
-         * `of` wraps any object in an Array. This implementation is compatible with the 
+         * `of` wraps any object in an Array. This implementation is compatible with the
          * Fantasy-land Applicative spec, and will work with types that implement that spec.
-         * Note this `of` is different from the ES6 `of`; See 
+         * Note this `of` is different from the ES6 `of`; See
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
          *
          * @static
@@ -1717,18 +1717,18 @@
          * @param x any value
          * @return [x]
          * @example
-         * 
+         *
          * R.of(1); // => [1]
          * R.of([2]); // => [[2]]
          * R.of({}); // => [{}]
          *
-         */ 
-        R.of = function _of(x, container) { 
-            return (hasMethod('of', container)) ? container.of(x) : [x]; 
+         */
+        R.of = function _of(x, container) {
+            return (hasMethod('of', container)) ? container.of(x) : [x];
         };
 
         /**
-         * `empty` wraps any object in an array. This implementation is compatible with the 
+         * `empty` wraps any object in an array. This implementation is compatible with the
          * Fantasy-land Monoid spec, and will work with types that implement that spec.
          *
          * @static
@@ -1739,8 +1739,8 @@
          *
          * R.empty([1,2,3,4,5]); // => []
          */
-        R.empty = function _empty(x) { 
-            return (hasMethod('empty', x)) ? x.empty() : []; 
+        R.empty = function _empty(x) {
+            return (hasMethod('empty', x)) ? x.empty() : [];
         };
 
 
@@ -1748,7 +1748,7 @@
          * `chain` takes a function that maps a nested list to a nested list and a nested list.
          * It maps the function over the nested list and then flattens the result (one level deep,
          * i.e. not recursively).
-         * This implementatiou is compatible with the 
+         * This implementatiou is compatible with the
          * Fantasy-land Chain spec, and will work with types that implement that spec.
          *
          * @static
@@ -2381,7 +2381,7 @@
                 var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
                 while (++i < ilen) {
                     array = list[i];
-                    if (isArrayLike(array)) { 
+                    if (isArrayLike(array)) {
                         value = (recursive) ? __flatt(array) : array;
                         j = -1;
                         jlen = value.length;
@@ -2511,7 +2511,7 @@
          *
          * zipObj(['a', 'b', 'c'], [1, 2, 3]);
          * //= {a: 1, b: 2, c: 3}
-         */ 
+         */
         R.zipObj = curry2(function _zipObj(keys, values) {
             var i = -1, len = keys.length, out = {};
             while (++i < len) {
@@ -2532,7 +2532,7 @@
          *
          * fromPairs([['a', 1], ['b', 2],  ['c', 3]]);
          * //= {a: 1, b: 2, c: 3}
-         */ 
+         */
         R.fromPairs = function _fromPairs(pairs) {
             var i = -1, len = pairs.length, out = {};
             while (++i < len) {
@@ -3448,13 +3448,13 @@
          * @return {Boolean}
          */
         var isInteger = Number.isInteger || function isInteger(n) {
-            return (n << 0) === n; 
+            return (n << 0) === n;
         };
 
         /**
          * mathMod behaves like the modulo operator should mathematically, unlike the `%`
-         * operator (and by extension, ramda.modulo). So while "-17 % 5" is -2, 
-         * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN 
+         * operator (and by extension, ramda.modulo). So while "-17 % 5" is -2,
+         * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
          * when the modulus is zero or negative.
          *
          * @static

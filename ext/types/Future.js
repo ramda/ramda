@@ -46,5 +46,3 @@ Future.prototype.equals = function(that) {
 };
 
 module.exports = Future;
-
-

@@ -5,9 +5,9 @@ var where = R.where;
 var isEmpty = R.isEmpty;
 
 var objs = [
-  {x: [1,2], y: true}, {x: [1,3], y: true}, {x: [], y: false}, {x: [2], y: false}, 
-  {x: [3], y: true}, {x: [1], y: true}, {x: [1,2,3], y: true}, {x: [], y: true}, 
-  {x: [1,2], y: false}, {x: [1,3], y: true} 
+  {x: [1,2], y: true}, {x: [1,3], y: true}, {x: [], y: false}, {x: [2], y: false},
+  {x: [3], y: true}, {x: [1], y: true}, {x: [1,2,3], y: true}, {x: [], y: true},
+  {x: [1,2], y: false}, {x: [1,3], y: true}
 ];
 var filterEmptyX = filter(where({x: R.isEmpty}));
 var filterFalseY = filter(where({y: false}));
@@ -41,4 +41,3 @@ module.exports = {
     }
   }
 };
-

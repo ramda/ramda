@@ -16,7 +16,7 @@ var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 var curry = R.curry = function (fn, fnArity) {
   fnArity = typeof fnArity === "number" ? fnArity : fn.length;
   function recurry(args) {
-    return setSource(arity(Math.max(fnArity - (args && args.length || 0), 0), function () { 
+    return setSource(arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
       if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
       var newArgs = concat(args, arguments);
       if (newArgs.length >= fnArity) {
@@ -25,7 +25,7 @@ var curry = R.curry = function (fn, fnArity) {
       else {
         return recurry(newArgs);
       }
-    }), fn); 
+    }), fn);
   }
   return recurry([]);
 };
@@ -56,4 +56,3 @@ function curry3(fn) {
     return fn(a, b, c);
   }, fn);
 }
-

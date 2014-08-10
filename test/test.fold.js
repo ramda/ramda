@@ -112,5 +112,3 @@ describe('foldr.idx', function() {
         assert.equal(something.length, 1);
     });
 });
-
-

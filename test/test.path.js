@@ -8,16 +8,16 @@ describe("path", function() {
         var obj = {
           a: {
             b: {
-              c: 100, 
+              c: 100,
               d: 200
-            }, 
+            },
             e: {
-              f: [100, 101, 102], 
+              f: [100, 101, 102],
               g: "G"
-            }, 
-            h: "H" 
-          }, 
-          i: "I", 
+            },
+            h: "H"
+          },
+          i: "I",
           j: ["J"]
         };
         assert.equal(path("a.b.c", obj), 100);
@@ -59,16 +59,16 @@ describe("pathOn", function() {
         var obj = {
           a: {
             b: {
-              c: 100, 
+              c: 100,
               d: 200
-            }, 
+            },
             e: {
-              f: [100, 101, 102], 
+              f: [100, 101, 102],
               g: "G"
-            }, 
-            h: "H" 
-          }, 
-          i: "I", 
+            },
+            h: "H"
+          },
+          i: "I",
           j: ["J"]
         };
         assert.equal(pathOn("|", "a|b|c", obj), 100);
@@ -90,21 +90,21 @@ describe("pathWith", function() {
     var obj = {
       a: {
         b: {
-          c: 100, 
+          c: 100,
           d: 200
-        }, 
+        },
         e: {
-          f: [100, 101, 102], 
+          f: [100, 101, 102],
           g: "G"
-        }, 
-        h: "H" 
-      }, 
-      i: "I", 
+        },
+        h: "H"
+      },
+      i: "I",
       j: ["J"]
     };
     var pathWith = R.pathWith;
     it("takes a function, a string path, and an object, and returns the value at that path or undefined.", function() {
-        
+
         var everyThirdChar = function(str) {
             var parts = [];
             var i = -1;
@@ -136,4 +136,3 @@ describe("pathWith", function() {
     });
 });
 */
-
