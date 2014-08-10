@@ -43,7 +43,7 @@ var fpDedupe1 = foldl(function(acc, curr) {
 
 /*
 The functional code is a bit tighter and more readable, at the cost of some
-calls to external functions (`contains` and `append`). 
+calls to external functions (`contains` and `append`).
 */
 
 imperativeDedupe1([1, 2, 3, 4, 2, 3, 4, 1, 2, 3]); // [1, 2, 3, 4]
@@ -200,4 +200,3 @@ fpDedupe2(function(a, b) { return a.x === b.x && a.z.a === b.z.a; }, objs2);
 /*
 See???
 */
-

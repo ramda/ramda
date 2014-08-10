@@ -35,6 +35,3 @@ Either.equals = function(e1, e2) {
 };
 
 module.exports = Either;
-
-
-

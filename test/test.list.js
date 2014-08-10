@@ -10,12 +10,12 @@ describe('join', function () {
 
 describe('remove', function () {
     var remove = R.remove;
-    
+
     it('splices out a sub-list of the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
         assert.deepEqual(remove(2, 5, list), ['a', 'b', 'h', 'i', 'j']);
     });
-    
+
     it('returns the appropriate sublist when start == 0', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
         assert.deepEqual(remove(0, 5, list), ['f', 'g', 'h', 'i', 'j']);
@@ -185,5 +185,3 @@ describe('chain', function() {
         assert.deepEqual(chain(dbl, [[1,2,3], []]), [2, 4, 6]);
     });
 });
-
-

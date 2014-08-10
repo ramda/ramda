@@ -50,5 +50,3 @@ describe('Either', function() {
     assert.equal(true, mTest.iface(e));
   });
 });
-
-

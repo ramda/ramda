@@ -21,7 +21,7 @@ module.exports = {
 
   functor: {
     iface: correctInterface('functor'),
-    id: function(obj) { 
+    id: function(obj) {
       return obj.equals(obj.map(I));
     },
     compose: function(obj, f, g) {
@@ -29,21 +29,21 @@ module.exports = {
                 .equals(obj.map(g).map(f));
     }
   },
-  
+
   apply: {
     iface: correctInterface('apply'),
     compose: function(a, u, v) {
       return a.ap(u.ap(v)).equals(
-               a.map(function(f) { 
-                 return function(g) { 
-                   return function(x) { 
+               a.map(function(f) {
+                 return function(g) {
+                   return function(x) {
                      return f(g(x));
-                   }; 
-                 }; 
+                   };
+                 };
                }).ap(u).ap(v));
     }
   },
-  
+
   applicative: {
     iface: correctInterface('applicative'),
     id: function(obj, obj2) {
@@ -57,7 +57,7 @@ module.exports = {
              obj1.of(function(f) { return f(x); }).ap(obj2));
     }
   },
-  
+
   chain: {
     iface: correctInterface('chain'),
     associative: function(obj, f, g) {
@@ -66,10 +66,8 @@ module.exports = {
              );
     }
   },
-  
+
   monad: {
     iface: correctInterface('monad')
   }
 };
-
-

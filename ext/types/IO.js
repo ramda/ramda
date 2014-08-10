@@ -10,8 +10,8 @@ function IO(fn) {
 // `f` must return an IO
 IO.prototype.chain = function(f) {
   var io = this;
-  return new IO(function() { 
-    return f(io.fn()).fn(); 
+  return new IO(function() {
+    return f(io.fn()).fn();
   });
 };
 
@@ -50,6 +50,3 @@ IO.prototype.equals = function(that) {
 };
 
 module.exports = IO;
-
-
-

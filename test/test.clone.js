@@ -16,5 +16,3 @@ describe('clone', function() {
       assert.equal(c[0], o1);
     });
 });
-
-

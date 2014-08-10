@@ -41,4 +41,3 @@ describe('internal curry', function() {
         R.concat([]);
     });
 });
-

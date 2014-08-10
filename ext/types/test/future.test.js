@@ -9,5 +9,3 @@ describe('Future', function() {
     assert.equal(true, !!"imagine your ad here");
   });
 });
-
-

@@ -38,4 +38,3 @@ describe('eq', function() {
         assert.equal(eq(a, b), true);
     });
 });
-

@@ -88,4 +88,3 @@ describe('findLastIndex', function() {
         assert.equal(findLastIndex(even, 'zing'), -1);
     });
 });
-

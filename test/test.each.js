@@ -7,7 +7,7 @@ describe('each', function() {
 
     it('performs the passed in function on each element of the list', function() {
         var sideEffect = {};
-        each(function(elem) { sideEffect[elem.x] = elem.y; }, list); 
+        each(function(elem) { sideEffect[elem.x] = elem.y; }, list);
         assert.deepEqual(sideEffect, {1: 2, 100: 200, 300: 400, 234: 345});
     });
 
@@ -23,7 +23,7 @@ describe('each.idx', function() {
 
     it('performs the passed in function on each element of the list and passes in the index and list as well', function() {
         var sideEffect = {};
-        each.idx(function(elem, idx) { sideEffect[elem.x] = idx; }, list); 
+        each.idx(function(elem, idx) { sideEffect[elem.x] = idx; }, list);
         assert.deepEqual(sideEffect, {1: 0, 100: 1, 300: 2, 234: 3});
     });
 
@@ -33,4 +33,3 @@ describe('each.idx', function() {
         assert.equal('1100300234', s);
     });
 });
-

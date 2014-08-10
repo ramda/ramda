@@ -9,7 +9,7 @@ describe('xprod', function() {
         assert.deepEqual(xprod([], [1,2,3]), []);
         assert.deepEqual(xprod([1,2,3], []), []);
     });
-    
+
     it('should create the collection of all cross-product pairs of its parameters', function() {
         assert.deepEqual(xprod(a, b), [[1, 'a'], [1, 'b'], [1, 'c'], [2, 'a'], [2, 'b'], [2, 'c']]);
     });
@@ -34,7 +34,7 @@ describe('xprodWith', function() {
         assert.deepEqual(xprodWith(concat, [], [1,2,3]), []);
         assert.deepEqual(xprodWith(concat, [1,2,3], []), []);
     });
-    
+
     it('should create the collection of all cross-product pairs of its parameters', function() {
         assert.deepEqual(xprodWith(concat, a, b), ['1a', '1b', '1c', '2a', '2b', '2c']);
     });

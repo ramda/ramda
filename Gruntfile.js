@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         run: true
       }
     },
-    
+
     mochaTest: {
       test: {
         options: {
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
     var db = require('orchestrate')(token);
 
     grunt.file.recurse(reportDir, function(abspath, rootdir, subdir, filename) {
-      var json = {}; 
+      var json = {};
       var timestamp = filename.split(".")[1];
       if (timestamp) {
         json.timestamp = timestamp;
@@ -123,14 +123,14 @@ module.exports = function(grunt) {
         };
         json.report = grunt.file.readJSON(abspath);
         db.put('benchmarks', json.timestamp, json)
-          .then(function() { 
-            console.log('SUCCESS'); 
+          .then(function() {
+            console.log('SUCCESS');
             grunt.file.delete(abspath);
-            done(); 
+            done();
           })
-          .fail(function(err) { 
-            console.log('FAIL', err.body.message); 
-            done(); 
+          .fail(function(err) {
+            console.log('FAIL', err.body.message);
+            done();
           });
       }
     });
@@ -144,6 +144,3 @@ module.exports = function(grunt) {
   grunt.registerTask('publish', ['push', 'version']);
   grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
 };
-
-
-

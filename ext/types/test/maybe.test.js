@@ -67,5 +67,3 @@ describe('Maybe', function() {
   });
 
 });
-
-

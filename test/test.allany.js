@@ -89,4 +89,3 @@ describe("any", function() {
         assert.strictEqual(R.some, any);
     });
 });
-
