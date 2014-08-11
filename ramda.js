@@ -153,7 +153,7 @@
                 ! (x instanceof String) &&
                 (
                     !!(x.nodeType === 1 && x.length) ||
-                    x.length >= 0)
+                    x.length >= 0
                 )
             );
         };
