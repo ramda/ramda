@@ -146,8 +146,16 @@
          * isArrayLike({}); //=> false
          * isArrayLike({length: 10}); //=> true
          */
-        var isArrayLike = function(x) {
-            return x != null && x.length >= 0 && (isArray(x) || !R.is(String, x));
+        var isArrayLike = function isArrayLike(x) {
+            return isArray(x) || (
+                !!x &&
+                typeof x === "object" && 
+                ! (x instanceof String) &&
+                (
+                    !!(x.nodeType === 1 && x.length) ||
+                    x.length >= 0)
+                )
+            );
         };
 
         /**
