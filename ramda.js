@@ -1101,9 +1101,6 @@
          * squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
         R.pipe = function _pipe() {  // TODO: type check of arguments?
-            if (arguments.length == 1) {
-                return partially (R.pipe, arguments[0]);
-            }
             return compose.apply(this, _slice(arguments).reverse());
         };
         aliasFor("pipe").is("sequence");
