@@ -100,6 +100,15 @@ describe('pipe', function() {
         };
         assert.equal(context.a(5), 40);
     });
+
+    it('throws if given no arguments', function() {
+        assert.throws(function() { pipe(); });
+    });
+
+    it('returns argument if given exactly one argument', function() {
+        function f() {}
+        assert.strictEqual(pipe(f), f);
+    });
 });
 
 describe('useWith', function() {
