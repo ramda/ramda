@@ -100,12 +100,12 @@ describe('pipe', function() {
     });
 
     it('throws if given no arguments', function() {
-        assert.throws(function() { pipe(); });
+        assert.throws(function() { R.pipe(); });
     });
 
     it('returns argument if given exactly one argument', function() {
         function f() {}
-        assert.strictEqual(pipe(f), f);
+        assert.strictEqual(R.pipe(f), f);
     });
 });
 
