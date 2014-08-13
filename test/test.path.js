@@ -3,7 +3,6 @@ var R = require("..");
 
 describe("path", function() {
     var deepObject = { a: { b: { c: "c" } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ["arr"] };
-    var path = R.path;
     it("takes a dot-delimited path and an object and returns the value at the path or undefined", function() {
         var obj = {
           a: {
@@ -20,12 +19,12 @@ describe("path", function() {
           i: "I",
           j: ["J"]
         };
-        assert.equal(path("a.b.c", obj), 100);
-        assert.equal(path("", obj), undefined);
-        assert.equal(path("a.e.f.1", obj), 101);
-        assert.equal(path("j.0", obj), "J");
-        assert.equal(path("j.1", obj), undefined);
-        assert.equal(path("a.b.c", null), undefined);
+        assert.equal(R.path("a.b.c", obj), 100);
+        assert.equal(R.path("", obj), undefined);
+        assert.equal(R.path("a.e.f.1", obj), 101);
+        assert.equal(R.path("j.0", obj), "J");
+        assert.equal(R.path("j.1", obj), undefined);
+        assert.equal(R.path("a.b.c", null), undefined);
     });
 
     it("should get a deep property's value from objects", function() {
@@ -54,7 +53,6 @@ describe("path", function() {
 
 describe("pathOn", function() {
     var deepObject = { a: { b: { c: "c" } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ["arr"] };
-    var pathOn = R.pathOn;
     it("takes a string separator, string path, and an object and returns the value at the path or undefined", function() {
         var obj = {
           a: {
@@ -71,12 +69,12 @@ describe("pathOn", function() {
           i: "I",
           j: ["J"]
         };
-        assert.equal(pathOn("|", "a|b|c", obj), 100);
-        assert.equal(pathOn(" ", "", obj), undefined);
-        assert.equal(pathOn(" ", "a e f 1", obj), 101);
-        assert.equal(pathOn("_", "j_0", obj), "J");
-        assert.equal(pathOn("~", "j~1", obj), undefined);
-        assert.equal(pathOn("Z", "aZbZc", null), undefined);
+        assert.equal(R.pathOn("|", "a|b|c", obj), 100);
+        assert.equal(R.pathOn(" ", "", obj), undefined);
+        assert.equal(R.pathOn(" ", "a e f 1", obj), 101);
+        assert.equal(R.pathOn("_", "j_0", obj), "J");
+        assert.equal(R.pathOn("~", "j~1", obj), undefined);
+        assert.equal(R.pathOn("Z", "aZbZc", null), undefined);
     });
 
     it("should get a deep property's value from objects", function() {
@@ -102,7 +100,6 @@ describe("pathWith", function() {
       i: "I",
       j: ["J"]
     };
-    var pathWith = R.pathWith;
     it("takes a function, a string path, and an object, and returns the value at that path or undefined.", function() {
 
         var everyThirdChar = function(str) {
@@ -117,12 +114,12 @@ describe("pathWith", function() {
         };
         var path = "axxbyyc";
 
-        assert.equal(pathWith(everyThirdChar, "azsbt5c", obj), 100);
-        assert.equal(pathWith(everyThirdChar, "", obj), undefined);
-        assert.equal(pathWith(everyThirdChar, "axxeaafaa1", obj), 101);
-        assert.equal(pathWith(everyThirdChar, "j__0", obj), "J");
-        assert.equal(pathWith(everyThirdChar, "j__1", obj), undefined);
-        assert.equal(pathWith(everyThirdChar, "azsbt5c", null), undefined);
+        assert.equal(R.pathWith(everyThirdChar, "azsbt5c", obj), 100);
+        assert.equal(R.pathWith(everyThirdChar, "", obj), undefined);
+        assert.equal(R.pathWith(everyThirdChar, "axxeaafaa1", obj), 101);
+        assert.equal(R.pathWith(everyThirdChar, "j__0", obj), "J");
+        assert.equal(R.pathWith(everyThirdChar, "j__1", obj), undefined);
+        assert.equal(R.pathWith(everyThirdChar, "azsbt5c", null), undefined);
     });
 
     function squareBrackets(path) {
@@ -132,7 +129,7 @@ describe("pathWith", function() {
     }
 
     it("takes a function accepting a string returnign an array for path", function() {
-        assert.equal(pathWith(squareBrackets, "a['b']['c']", obj), 100);
+        assert.equal(R.pathWith(squareBrackets, "a['b']['c']", obj), 100);
     });
 });
 */

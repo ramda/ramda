@@ -1,12 +1,11 @@
 var assert = require('assert');
 var R = require('..');
-var curry = R.curry;
 
 describe('curry', function() {
     function source(a, b, c) {
         return a * b * c;
     }
-    var curried = curry(source);
+    var curried = R.curry(source);
     it('curry should curry', function() {
         assert.equal(curried(1)(2)(3), 6);
         assert.equal(curried(1, 2)(3), 6);
@@ -16,7 +15,7 @@ describe('curry', function() {
     });
 
     it('curry should accept an arity', function() {
-        var curried = curry(function(a, b, c, d) {
+        var curried = R.curry(function(a, b, c, d) {
             return a * b * c;
         }, 3);
         assert.equal(curried(1)(2)(3), 6);
@@ -32,11 +31,9 @@ describe('curry', function() {
 });
 
 describe('internal curry', function() {
-    var map = R.map, filter = R.filter;
-
     it('should throw an expcetion given no arguments', function() {
-        assert.throws(map);
-        assert.throws(map(R.I));
+        assert.throws(R.map);
+        assert.throws(R.map(R.I));
         //doesnt throw an exception
         R.concat([]);
     });

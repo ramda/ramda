@@ -1,5 +1,4 @@
 var R = require('./ramda');
-var arity = R.arity;
 
 // Internal function to set the source attributes on a curried functions
 // useful for debugging purposes
@@ -13,10 +12,10 @@ function setSource(curried, source) {
 
 var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 
-var curry = R.curry = function (fn, fnArity) {
+R.curry = function (fn, fnArity) {
   fnArity = typeof fnArity === "number" ? fnArity : fn.length;
   function recurry(args) {
-    return setSource(arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
+    return setSource(R.arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
       if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
       var newArgs = concat(args, arguments);
       if (newArgs.length >= fnArity) {

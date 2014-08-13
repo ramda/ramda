@@ -1,7 +1,5 @@
 var R = require('../../..');
 
-var I = R.identity;
-
 var interfaces = { functor: ['map'] };
 interfaces.apply = interfaces.functor.concat(['ap']);
 interfaces.applicative = interfaces.apply.concat(['of']);
@@ -22,7 +20,7 @@ module.exports = {
   functor: {
     iface: correctInterface('functor'),
     id: function(obj) {
-      return obj.equals(obj.map(I));
+      return obj.equals(obj.map(R.identity));
     },
     compose: function(obj, f, g) {
       return obj.map(function(x) { return f(g(x)); })
@@ -47,7 +45,7 @@ module.exports = {
   applicative: {
     iface: correctInterface('applicative'),
     id: function(obj, obj2) {
-      return obj.of(I).ap(obj2).equals(obj2);
+      return obj.of(R.identity).ap(obj2).equals(obj2);
     },
     homomorphic: function(obj, f, x) {
       return obj.of(f).ap(obj.of(x)).equals(obj.of(f(x)));
