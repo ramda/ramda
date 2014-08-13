@@ -75,7 +75,7 @@ describe('construct', function() {
         assert.equal(r1.width, 3);
         assert.equal(r1.area(), 12);
 
-        var regex = construct(RegExp);
+        var regex = R.construct(RegExp);
         var word = regex('word', 'gi');
         assert(word instanceof RegExp);
         assert.equal(word.source, 'word');
@@ -91,7 +91,7 @@ describe('construct', function() {
         assert.equal(r1.height, 4);
         assert.equal(r1.area(), 12);
 
-        var regex = construct(RegExp);
+        var regex = R.construct(RegExp);
         var word = regex('word');
         var complete = word('gi');
         assert(complete instanceof RegExp);

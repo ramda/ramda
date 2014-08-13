@@ -99,6 +99,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-docco');
   grunt.loadNpmTasks('grunt-push-release');
   grunt.loadNpmTasks('grunt-benchmark');
+  grunt.loadNpmTasks('grunt-readme');
 
   grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
     // upload files in report dir to orchestrate
