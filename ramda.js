@@ -2551,7 +2551,6 @@
             return out;
         };
 
-
         /**
          * Creates a new list out of the two supplied by applying the function
          * to each possible pair in the lists.
@@ -2952,6 +2951,16 @@
             }
             return ks;
         };
+
+        var pairBy = function(fn) {
+            return function(obj) {
+                return R.map(function(key) { return [key, obj[key]]; }, fn(obj));
+            };
+        };
+
+        R.toPairs = pairBy(R.keys);
+
+        R.toPairsIn = pairBy(R.keysIn);
 
         /**
          * TODO: JSDoc-style documentation for this function
