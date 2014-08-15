@@ -3,7 +3,20 @@
   <meta charset="utf-8">
   <title>Ramda Tests</title>
   <link rel="stylesheet" href="../lib/test/mocha.css" />
-  <script>function require(str) {return this[str.substring(str.lastIndexOf("/") +1)];}</script>
+  <script>
+    function require(path) {
+      switch (path.substr(path.lastIndexOf('/') + 1)) {
+        case 'assert':
+          return assert;
+        case '..':
+          return ramda;
+        case 'lazylist':
+          return ramda.lazylist;
+        default:
+          throw new Error('Unexpected require path "' + path + '"');
+      }
+    }
+  </script>
 </head>
 <body>
   <h1>Tests for ramda</h1>
