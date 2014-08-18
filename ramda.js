@@ -1396,14 +1396,14 @@
          *
          * The iterator function receives two values: *(acc, value)*
          *
-         * Note: `ramda.foldl` does not skip deleted or unassigned indices (sparse arrays), unlike
+         * Note: `ramda.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
          * the native `Array.prototype.reduce` method. For more details on this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
          * @memberOf R
          * @category List
-         * @alias reduce
+         * @alias foldl
          * @param {Function} fn The iterator function. Receives two values, the accumulator and the
          * current element from the array.
          * @param {*} acc The accumulator value.
@@ -1416,16 +1416,16 @@
          *   return a + b;
          * };
          *
-         * foldl(numbers, add, 10); //=> 16
+         * reduce(numbers, add, 10); //=> 16
          */
-        var foldl = R.foldl =  curry3(checkForMethod('foldl', function(fn, acc, list) {
+        var foldl = R.reduce =  curry3(checkForMethod('reduce', function _reduce(fn, acc, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
                 acc = fn(acc, list[idx]);
             }
             return acc;
         }));
-        aliasFor("foldl").is("reduce");
+        aliasFor("reduce").is("foldl");
 
         /**
          * Like `foldl`, but passes additional parameters to the predicate function.
