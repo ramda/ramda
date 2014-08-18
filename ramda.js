@@ -149,7 +149,7 @@
         var isArrayLike = function isArrayLike(x) {
             return isArray(x) || (
                 !!x &&
-                typeof x === "object" && 
+                typeof x === "object" &&
                 ! (x instanceof String) &&
                 (
                     !!(x.nodeType === 1 && x.length) ||
@@ -1390,14 +1390,54 @@
         // --------
 
         /**
+         * An internal version of foldl. Works on array-like objects.
+         *
+         * @private
+         * @param {Function} fn The iterator function. Receives two values, the accumulator and the
+         * current element from the array.
+         * @param {*} acc The accumulator value.
+         * @param {Array} list The list to iterate over.
+         * @return {*} The final, accumulated value.
+         */
+        var arrayFoldl = function arrayFoldl(fn, acc, array) {
+            var idx = -1,
+                len = array.length;
+            while (++idx < len) {
+                acc = fn(acc, array[idx]);
+            }
+            return acc;
+        };
+
+        /**
+         * An internal version of foldl. Works on plain objects.
+         *
+         * @private
+         * @param {Function} fn The iterator function. Receives two values, the accumulator and the
+         * current element from the array.
+         * @param {*} acc The accumulator value.
+         * @param {Object} list The list to iterate over.
+         * @return {*} The final, accumulated value.
+         */
+        var objFoldl = function objFoldl(fn, acc, list) {
+            var ks = keys(list),
+                idx = -1,
+                len = ks.length;
+            while (++idx < len) {
+                acc = fn(acc, list[ks[idx]]);
+            }
+            return acc;
+        };
+
+        /**
          * Returns a single item by iterating through the list, successively calling the iterator
-         * function and passing it an accumulator value and the current value from the array, and
+         * function and passing it an accumulator value and the current value from the list, and
          * then passing the result to the next call.
          *
          * The iterator function receives two values: *(acc, value)*
          *
-         * Note: `ramda.foldl` does not skip deleted or unassigned indices (sparse arrays), unlike
-         * the native `Array.prototype.reduce` method. For more details on this behavior, see:
+         * Note: When operating on arrays, `ramda.foldl` does not skip deleted or unassigned indices
+         * (sparse arrays), unlike the native `Array.prototype.reduce` method. For more details on
+         * this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
          * @static
@@ -1407,7 +1447,7 @@
          * @param {Function} fn The iterator function. Receives two values, the accumulator and the
          * current element from the array.
          * @param {*} acc The accumulator value.
-         * @param {Array} list The list to iterate over.
+         * @param {Array,Object} list The list to iterate over.
          * @return {*} The final, accumulated value.
          * @example
          *
@@ -1419,11 +1459,7 @@
          * foldl(numbers, add, 10); //=> 16
          */
         var foldl = R.foldl =  curry3(checkForMethod('foldl', function(fn, acc, list) {
-            var idx = -1, len = list.length;
-            while (++idx < len) {
-                acc = fn(acc, list[idx]);
-            }
-            return acc;
+            return (isArray(list) ? arrayFoldl : objFoldl)(fn, acc, list);
         }));
         aliasFor("foldl").is("reduce");
 
