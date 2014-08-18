@@ -15,6 +15,24 @@ describe('foldl', function() {
         assert.equal(R.foldl(mult, 1, []), 1);
     });
 
+    it('should fold simple functions over objects with the supplied accumulator', function() {
+        assert.equal(R.foldl(add, 0, { a: 1, b: 2, c: 3, d: 4 }), 10);
+        assert.equal(R.foldl(mult, 1, { a: 1, b: 2, c: 3, d: 4 }), 24);
+    });
+
+    it('should ignore prototypally inherited properties on objects', function() {
+        var parent = { parent: 1 };
+        var child = Object.create(parent);
+        child.child = 100;
+        assert.equal(child.parent, 1);
+        assert.equal(R.foldl(add, 0, child), 100);
+    });
+
+    it('should return the accumulator for an empty object', function() {
+        assert.equal(R.foldl(add, 0, {}), 0);
+        assert.equal(R.foldl(mult, 1, {}), 1);
+    });
+
     it('should be automatically curried', function() {
         var sum = R.foldl(add, 0);
         assert.equal(sum([1, 2, 3, 4]), 10);
