@@ -2834,7 +2834,7 @@
         /**
          * TODO: JSDoc-style documentation for this function
          */
-        R.partition = curry2(function _groupBy(pred, list) {
+        R.partition = curry2(function _partition(pred, list) {
             return foldl(function (acc, elt) {
                 acc[pred(elt) ? 0 : 1].push(elt);
                 return acc;
