@@ -1063,7 +1063,7 @@
          *
          * squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
-        var compose = R.compose = function _compose() {  // TODO: type check of arguments?
+        var compose = R.compose = function _compose() {  
             switch (arguments.length) {
                 case 0: throw NO_ARGS_EXCEPTION;
                 case 1: return arguments[0];
@@ -1100,7 +1100,7 @@
          *
          * squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
-        R.pipe = function _pipe() {  // TODO: type check of arguments?
+        R.pipe = function _pipe() {
             return compose.apply(this, _slice(arguments).reverse());
         };
         aliasFor("pipe").is("sequence");
@@ -2164,12 +2164,19 @@
         aliasFor("any").is("some");
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Internal implementation of `indexOf`. 
+         * Returns the position of the first occurrence of an item in an array
+         * (by strict equality),
+         * or -1 if the item is not included in the array. 
+         *
+         * @private 
+         * @category Internal
+         * @param {Array} The array to search
+         * @param item the item to find in the Array
+         * @param {Number} from (optional) the index to start searching the Array
+         * @return {Number} the index of the found item, or -1
+         *
          */
-        // Internal implementations of indexOf and lastIndexOf
-
-        // Return the position of the first occurrence of an item in an array,
-        // or -1 if the item is not included in the array.
         var indexOf = function _indexOf(array, item, from) {
             var i = 0, length = array.length;
             if (typeof from == 'number') {
@@ -2182,7 +2189,18 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Internal implementation of `lastIndexOf`. 
+         * Returns the position of the last occurrence of an item in an array
+         * (by strict equality),
+         * or -1 if the item is not included in the array. 
+         *
+         * @private 
+         * @category Internal
+         * @param {Array} The array to search
+         * @param item the item to find in the Array
+         * @param {Number} from (optional) the index to start searching the Array
+         * @return {Number} the index of the found item, or -1
+         *
          */
         var lastIndexOf = function _lastIndexOf(array, item, from) {
             var idx = array.length;
@@ -2196,7 +2214,21 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the position of the first occurrence of an item in an array
+         * (by strict equality),
+         * or -1 if the item is not included in the array. 
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param target The item to find.
+         * @param {Array} list The array to search in.
+         * @return {Number} the index of the target, or -1 if the target is not found.
+         *
+         * @example
+         *
+         * indexOf(3, [1,2,3,4]) // => 2
+         * indexOf(10, [1,2,3,4]) // => -1
          */
         // Returns the first zero-indexed position of an object in a flat list
         R.indexOf = curry2(function _indexOf(target, list) {
@@ -2204,22 +2236,66 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the position of the first occurrence of an item (by strict equality) in
+         * an array, or -1 if the item is not included in the array. However, 
+         * `indexOf.from` will only search the tail of the array, starting from the 
+         * `fromIdx` parameter. 
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param target The item to find.
+         * @param {Array} list The array to search in.
+         * @param {Number} fromIdx the index to start searching from
+         * @return {Number} the index of the target, or -1 if the target is not found.
+         *
+         * @example
+         *
+         * indexOf.from(3, 2, [-1,0,1,2,3,4]) // => 4
+         * indexOf.from(10, 2, [1,2,3,4]) // => -1
          */
         R.indexOf.from = curry3(function indexOfFrom(target, fromIdx, list) {
             return indexOf(list, target, fromIdx);
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the position of the last occurrence of an item (by strict equality) in
+         * an array, or -1 if the item is not included in the array.
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param target The item to find.
+         * @param {Array} list The array to search in.
+         * @return {Number} the index of the target, or -1 if the target is not found.
+         *
+         * @example
+         *
+         * lastIndexOf(3, [-1,3,3,0,1,2,3,4]) // => 6
+         * lastIndexOf(10, [1,2,3,4]) // => -1
          */
-        // Returns the last zero-indexed position of an object in a flat list
         R.lastIndexOf = curry2(function _lastIndexOf(target, list) {
             return lastIndexOf(list, target);
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns the position of the last occurrence of an item (by strict equality) in
+         * an array, or -1 if the item is not included in the array. However, 
+         * `lastIndexOf.from` will only search the tail of the array, starting from the 
+         * `fromIdx` parameter. 
+         *
+         * @static
+         * @memberOf R
+         * @category List
+         * @param target The item to find.
+         * @param {Array} list The array to search in.
+         * @param {Number} fromIdx the index to start searching from
+         * @return {Number} the index of the target, or -1 if the target is not found.
+         *
+         * @example
+         *
+         * lastIndexOf.from(3, 2, [-1,3,3,0,1,2,3,4]) // => 6
+         * lastIndexOf.from(10, 2, [1,2,3,4]) // => -1
          */
         R.lastIndexOf.from = curry3(function lastIndexOfFrom(target, fromIdx, list) {
             return lastIndexOf(list, target, fromIdx);
@@ -2253,11 +2329,18 @@
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns `true` if the `x` is found in the `list`, using `pred` as an 
+         * equality predicate for `x`.
+         *
+         * @static
+         * @memberOf R
+         * @param {Function} pred :: x -> x -> Bool
+         * @param x the item to find
+         * @param {Array} list the list to iterate over
+         * @return {Boolean} `true` if `x` is in `list`, else `false` 
          */
         // Returns `true` if the list contains the sought element, `false` if it does not, based upon the value
-        // returned by applying the supplied predicated to two list elements.  Equality is strict here, meaning
-        // reference equality for objects and non-coercing equality for primitives.  Probably inefficient.
+        // returned by applying the supplied predicated to two list elements.
         function containsWith(pred, x, list) {
             var idx = -1, len = list.length;
             while (++idx < len) {
@@ -2742,33 +2825,64 @@
         R.slice.from = flip(R.slice)(void 0);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Removes the sub-list of `list` starting at index `start` and containing
+         * `count` elements.  _Note that this is not destructive_: it returns a
+         * copy of the list with the changes.
+         * <small>No lists have been harmed in the application of this function.</small>
+         *
+         * @static 
+         * @memberOf R
+         * @param {Number} start The position to start removing elements
+         * @param {Number} count The number of elements to remove
+         * @param {Array} list The list to remove from
+         * @return {Array} a new Array with `count` elements from `start` removed
+         * 
+         * @example
+         * 
+         * remove(2, 3, [1,2,3,4,5,6,7,8]) // => [1,2,6,7,8]
+         *
          */
-        // Removes the sub-list of `list` starting at index `start` and containing
-        // `count` elements.  _Note that this is not destructive_: it returns a
-        // copy of the list with the changes.
-        // <small>No lists have been harmed in the application of this function.</small>
         R.remove = curry3(function _remove(start, count, list) {
             return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Inserts the supplied element into the list, at index `index`.  _Note
+         * that this is not destructive_: it returns a copy of the list with the changes.
+         *
+         * @static 
+         * @memberOf R
+         * @param {Number} index The position to insert the element
+         * @param elt The element to insert into the Array
+         * @param {Array} list The list to insert into
+         * @return {Array} a new Array with `elt` inserted at `index`
+         * 
+         * @example
+         * 
+         * insert(2, "x", [1,2,3,4]) // => [1,2,'x',3,4]
+         *
          */
-        // Inserts the supplied element into the list, at index `index`.  _Note
-        // that this is not destructive_: it returns a copy of the list with the changes.
-        // <small>No lists have been harmed in the application of this function.</small>
         R.insert = curry3(function _insert(index, elt, list) {
             index = index < list.length && index >= 0 ? index : list.length;
             return concat(append(elt, _slice(list, 0, index)), _slice(list, index));
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Inserts the sub-list into the list, at index `index`.  _Note  that this
+         * is not destructive_: it returns a copy of the list with the changes.
+         * <small>No lists have been harmed in the application of this function.</small>
+         *
+         * @static 
+         * @memberOf R
+         * @param {Number} index The position to insert the sublist
+         * @param {Array} elts The sub-list to insert into the Array
+         * @param {Array} list The list to insert the sub-list into
+         * @return {Array} a new Array with `elts` inserted starting at `index`
+         * 
+         * @example
+         * 
+         * insert.all(2, ['x','y','z'], [1,2,3,4]) // => [1,2,'x','y','z',3,4]
          */
-        // Inserts the sub-list into the list, at index `index`.  _Note  that this
-        // is not destructive_: it returns a copy of the list with the changes.
-        // <small>No lists have been harmed in the application of this function.</small>
         R.insert.all = curry3(function _insertAll(index, elts, list) {
             index = index < list.length && index >= 0 ? index : list.length;
             return concat(concat(_slice(list, 0, index), elts), _slice(list, index));
