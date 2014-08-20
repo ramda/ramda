@@ -3061,8 +3061,8 @@
         var hasOwnProperty = Object.prototype.hasOwnProperty;
 
         /**
-         * Returns a function that when supplied an object returns the
-         * indicated own property of that object, if it exists.
+         * If the given object has an own property with the specified name,
+         * returns the value of that property.
          * Otherwise returns the provided default value.
          *
          * @static
