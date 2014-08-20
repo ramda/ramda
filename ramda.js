@@ -2026,8 +2026,8 @@
          * @example
          *
          * var xs = [{a: 1}, {a: 2}, {a: 3}];
-         * find(propEq("a", 2))(xs); //= 1
-         * find(propEq("a", 4))(xs); //= -1
+         * findIndex(propEq("a", 2))(xs); //= 1
+         * findIndex(propEq("a", 4))(xs); //= -1
          */
         // Returns the index of first element of the list which matches the predicate, or `-1` if no
         // element matches.
@@ -2649,13 +2649,13 @@
          * `as` and `bs` using `fn`.
          * @example
          *
-         * xProdWith(f, [1, 2], ['a', 'b'])
+         * xprodWith(f, [1, 2], ['a', 'b'])
          * //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
          */
         // Creates a new list out of the two supplied by applying the function
         // to each possible pair in the lists.  For example,
         //
-        //     xProdWith(f, [1, 2], ['a', 'b'])
+        //     xprodWith(f, [1, 2], ['a', 'b'])
         //     //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
         R.xprodWith = curry3(function _xprodWith(fn, a, b) {
             if (isEmpty(a) || isEmpty(b)) {
@@ -2686,13 +2686,13 @@
          * `as` and `bs` into pairs (`[a, b]`).
          * @example
          *
-         * xProdWith(f, [1, 2], ['a', 'b'])
-         * //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
+         * xprod([1, 2], ['a', 'b']);
+         * //= [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
          */
         // Creates a new list out of the two supplied by yielding the pair of
         // each possible pair in the lists.  For example,
         //
-        //     xProd([1, 2], ['a', 'b']);
+        //     xprod([1, 2], ['a', 'b']);
         //     //= [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
         R.xprod = curry2(function _xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
             if (isEmpty(a) || isEmpty(b)) {
