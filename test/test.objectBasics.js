@@ -16,6 +16,30 @@ describe('prop', function () {
     });
 });
 
+describe('propOrDefault', function () {
+    var fred = {name: 'Fred', age: 23};
+    var anon = {age: 99};
+
+    var nm = R.propOrDefault('name', 'Unknown');
+
+    it('should return a function that fetches the appropriate property', function () {
+        assert.equal(typeof nm, 'function');
+        assert.equal(nm(fred), 'Fred');
+    });
+
+    it('should return the default value when the property does not exist', function () {
+        assert.equal(nm(anon), 'Unknown');
+    });
+
+    it('should not return properties from the prototype chain', function () {
+        var Person = function () {};
+        Person.prototype.age = function () {};
+
+        var bob = new Person();
+        assert.equal(R.propOrDefault('age', 100, bob), 100);
+    });
+});
+
 describe('func', function () {
     it('should return a function that applies the appropriate function to the supplied object', function () {
         var fred = {first: 'Fred', last: 'Flintstone', getName: function () {

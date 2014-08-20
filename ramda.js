@@ -3058,6 +3058,38 @@
         };
         aliasFor("prop").is("nth").and("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+        /**
+         * Returns a function that when supplied an object returns the
+         * indicated own property of that object, if it exists.
+         * Otherwise returns the provided default value.
+         *
+         * @static
+         * @memberOf R
+         * @category Object
+         * @param {String} p The name of the property to return.
+         * @param {*} val The default value.
+         * @returns {*} The value of given property or default value.
+         *
+         * @example
+         * var alice = {
+         *     name: "ALICE",
+         *     age: 101
+         * };
+         * var favorite = prop("favoriteLibrary");
+         * var favoriteWithDefault = propOrDefault("favoriteLibrary", "Ramda");
+         *
+         * favorite(alice);  //=> undefined
+         * favoriteWithDefault(alice);  //=> "Ramda"
+         */
+        R.propOrDefault = curry3(function _propOrDefault(p, val, obj) {
+            if (hasOwnProperty.call(obj, p)) {
+                return obj[p];
+            } else {
+                return val;
+            }
+        });
 
         /**
          * TODO: JSDoc-style documentation for this function
@@ -3101,7 +3133,6 @@
             return val == null;
         });
 
-        var hasOwnProperty = Object.prototype.hasOwnProperty;
         var nativeKeys = Object.keys;
 
         /**
