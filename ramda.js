@@ -3084,11 +3084,7 @@
          * favoriteWithDefault(alice);  //=> "Ramda"
          */
         R.propOrDefault = curry3(function _propOrDefault(p, val, obj) {
-            if (hasOwnProperty.call(obj, p)) {
-                return obj[p];
-            } else {
-                return val;
-            }
+            return hasOwnProperty.call(obj, p) ? obj[p] : val;
         });
 
         /**
