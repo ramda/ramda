@@ -2889,14 +2889,20 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Makes a comparator function out of a function that reports whether the first element is less than the second.
-        //
-        //     var cmp = comparator(function(a, b) {
-        //         return a.age < b.age;
-        //     };
-        //     sort(cmp, people);
+         * Makes a comparator function out of a function that reports whether the first element is less than the second.
+         *
+         * @static 
+         * @memberOf R
+         * @param {Function} pred A predicate function of arity two.
+         * @return {Function} a Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
+         *
+         * @example
+         *
+         * var cmp = comparator(function(a, b) {
+         *      return a.age < b.age;
+         * };
+         * sort(cmp, people);
+         */     
         var comparator = R.comparator = function _comparator(pred) {
             return function (a, b) {
                 return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
@@ -2904,35 +2910,54 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
+         * time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
+         * if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
+         * 
+         * @static 
+         * @memberOf R
+         * @param {Function} comparator A sorting function :: a -> b -> Int
+         * @param {Array} list The list to sort
+         * @return {Array} a new array with its elements sorted by the comparator function.
+         *
+         * @example
+         * 
+         * sort(function(a, b) { return a - b; }, [4,2,7,5]); // => [2, 4, 5, 7];
+         *
          */
-        // Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
-        // time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
-        // if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
         var sort = R.sort = curry2(function sort(comparator, list) {
             return clone(list).sort(comparator);
         });
 
-        // Splits a list into sublists stored in an object, based on the result of calling a String-returning function
-        // on each element, and grouping the results according to values returned.
-        //
-        //     var byGrade = groupBy(function(student) {
-        //         var score = student.score
-        //         return (score < 65) ? 'F' : (score < 70) ? 'D' :
-        //                (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
-        //     };
-        //     var students = [{name: "Abby", score: 84} /*, ... */,
-        //                     {name: 'Jack', score: 69}];
-        //     byGrade(students);
-        //     //=> {
-        //     //   "A": [{name: 'Dianne', score: 99} /*, ... */],
-        //     //   "B": [{name: "Abby", score: 84} /*, ... */]
-        //     //   /*, ... */
-        //     //   "F": [{name: 'Eddy', score: 58}]
-        //     // }
-
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Splits a list into sublists stored in an object, based on the result of calling a String-returning function
+         * on each element, and grouping the results according to values returned.
+         *
+         * @memberOf R
+         * @static
+         * @param {Function} fn Function :: a -> String
+         * @param {Array} list The array to group
+         * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements 
+         *                  that produced that key when passed to `fn`.
+         *
+         * @example
+         *     var byGrade = groupBy(function(student) {
+         *         var score = student.score
+         *         return (score < 65) ? 'F' : (score < 70) ? 'D' :
+         *                (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
+         *     };
+         *     var students = [{name: "Abby", score: 84},
+         *                     {name: 'Eddy', score: 58},
+         *                     // ...
+         *                     {name: 'Jack', score: 69}];
+         *     byGrade(students);
+         *     //=> {
+         *     //   "A": [{name: 'Dianne', score: 99}],
+         *     //   "B": [{name: "Abby", score: 84}]
+         *     //   // ...,
+         *     //   "F": [{name: 'Eddy', score: 58}]
+         *     // }
+         *     
          */
         R.groupBy = curry2(function _groupBy(fn, list) {
             return foldl(function (acc, elt) {
@@ -2942,11 +2967,22 @@
             }, {}, list);
         });
 
-        // Takes a predicate and a list and returns the pair of lists of
-        // elements which do and do not satisfy the predicate, respectively.
-
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Takes a predicate and a list and returns the pair of lists of
+         * elements which do and do not satisfy the predicate, respectively.
+         *
+         * @memberOf R
+         * @static
+         * @param {Function} pred Function :: a -> Boolean
+         * @param {Array} list The array to partition
+         * @return {Array} A nested array, containing first an array of elements that satisfied the predicate,
+         *                 and second an array of elements that did not satisfy.
+         *
+         * @example
+         *
+         * partition(contains('s'), ['sss', 'ttt', 'foo', 'bars']) 
+         *     // => [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
+         *
          */
         R.partition = curry2(function _partition(pred, list) {
             return foldl(function (acc, elt) {
