@@ -1302,6 +1302,8 @@
          * arguments and returns the same type. The arity of the function returned is specified
          * to allow using variadic constructor functions.
          *
+         * NOTE: Does not work with some built-in objects such as Date.
+         *
          * @static
          * @memberOf R
          * @category Function
@@ -1334,6 +1336,8 @@
         /**
          * Wraps a constructor function inside a curried function that can be called with the same
          * arguments and returns the same type.
+         *
+         * NOTE: Does not work with some built-in objects such as Date.
          *
          * @static
          * @memberOf R
