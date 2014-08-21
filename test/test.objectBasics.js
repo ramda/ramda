@@ -54,6 +54,14 @@ describe('func', function () {
         assert.equal(gName(barney), 'Barney Rubble');
     });
 
+    it('passes arguments appropriately when not curried', function() {
+        assert.equal(R.func('add', R, 3, 6), 9);
+    });
+
+    it('returns a reference to the function when called with 2 args', function() {
+        assert.equal(R.func('add', R), R.add);
+    });
+
     it('should apply additional arguments to the function', function () {
         var Point = function (x, y) {
             this.x = x;
@@ -65,9 +73,6 @@ describe('func', function () {
         };
         var p1 = new Point(10, 20);
 
-//        R.func('moveBy', p1, 3, 6);
-//        assert.equal(p1.x, 10);
-//        assert.equal(p1.y, 20);
 
         var moveBy = R.func('moveBy');
         moveBy(p1, 5, 7);

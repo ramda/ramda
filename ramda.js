@@ -3163,7 +3163,9 @@
             function _func(obj) {
                 return obj[fn].apply(obj, _slice(arguments, 1));
             }
-            return arguments.length < 2 ? _func : _func(obj);
+            return arguments.length < 2 ? _func : 
+                   arguments.length === 2 ? obj[fn] :
+                   obj[fn].apply(obj, _slice(arguments, 2));
         };
 
 
