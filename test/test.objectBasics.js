@@ -64,6 +64,11 @@ describe('func', function () {
             this.y += dy;
         };
         var p1 = new Point(10, 20);
+
+//        R.func('moveBy', p1, 3, 6);
+//        assert.equal(p1.x, 10);
+//        assert.equal(p1.y, 20);
+
         var moveBy = R.func('moveBy');
         moveBy(p1, 5, 7);
         assert.equal(p1.x, 15);
