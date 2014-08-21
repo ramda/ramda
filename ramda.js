@@ -3167,7 +3167,6 @@
             switch (arguments.length) {
                 case 0: throw NO_ARGS_EXCEPTION;
                 case 1: return function(obj) { return obj[fn].apply(obj, _slice(arguments, 1)); };
-                case 2: return obj[fn]();
                 default: return obj[fn].apply(obj, _slice(arguments, 2));
             }
         };
