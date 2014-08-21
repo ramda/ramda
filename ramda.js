@@ -3032,32 +3032,90 @@
         // --------
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Runs the given function with the supplied object, then returns the object.
+         * 
+         * @memberOf R
+         * @static
+         * @param {*} x
+         * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
+         * @return {*} x
+         *
+         * @example
+         *
+         * tap(100, function(x) { console.log('x is ' + x); }); // => 100 (and logs: 'x is 100')
          */
-        // Runs the given function with the supplied object, then returns the object.
         R.tap = curry2(function _tap(x, fn) {
             if (typeof fn === "function") { fn(x); }
             return x;
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
+         * non-coercing equality for primitives.
+         * 
+         * @memberOf R
+         * @static
+         * @param {*} a
+         * @param {*} b
+         * @return {Boolean} 
+         *
+         * @example
+         * 
+         * var o = {};
+         * eq(o, o) // => true
+         * eq(o, {}) // => false
+         * eq(1, 1) // => true
+         * eq(1, '1') // => false
          */
-        // Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
-        // non-coercing equality for primitives.
         R.eq = function _eq(a, b) {
             return arguments.length < 2 ? function _eq(b) { return a === b; } : a === b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a function that when supplied an object returns the indicated property of that object, if it exists.
+         * 
+         * @memberOf R
+         * @static
+         * @category Object
+         * @alias nth
+         * @alias get
+         * @param {String} p The property name
+         * @param {Object} obj The object to query
+         * @return {*} The value at obj.p 
+         *
+         * @example
+         *
+         * prop('x', {x: 100}) // => 100
+         * prop('x', {}) // => undefined
          */
-        // Returns a function that when supplied an object returns the indicated property of that object, if it exists.
         var prop = R.prop = function _prop(p, obj) {
             return arguments.length < 2 ? function _prop(obj) { return obj[p]; } :  obj[p];
         };
         aliasFor("prop").is("nth").and("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 
+
+        /**
+         * Returns the value at the specified property.
+         * The only difference from `prop` is the parameter order.
+         * 
+         * @memberOf R
+         * @static
+         * @see prop
+         * @category Object
+         * @param {Object} obj The object to query
+         * @param {String} prop The property name
+         * @return {*} The value at obj.p 
+         *
+         * @example
+         *
+         * prop({x: 100}, 'x'); // => 100
+         */
+        R.props = flip(R.prop);
+
+        /**
+         * An internal reference to `Object.prototype.hasOwnProperty`
+         * @private
+         */
         var hasOwnProperty = Object.prototype.hasOwnProperty;
 
         /**
@@ -3088,10 +3146,19 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Calls the specified function on the supplied object.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {String} p The name of the property mapped to the function to invoke
+         * @param {Object} obj The object 
+         * @return {*} The value of invoking `obj.fn` 
+         *
+         * @example
+         *
+         *
          */
-        // Returns a function that when supplied an object returns the result of running the indicated function on
-        // that object, if it has such a function.
         R.func = function func(fn, obj) {
             function _func(obj) {
                 return obj[fn].apply(obj, _slice(arguments, 1));
@@ -3099,15 +3166,6 @@
             return arguments.length < 2 ? _func : _func(obj);
         };
 
-
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Returns a function that when supplied a property name returns that property on the indicated object, if it
-        // exists.
-        R.props = function _props(obj, prop) {
-            return arguments.length < 2 ? function _props(prop) { return obj && obj[prop]; } : obj && obj[prop];
-        };
 
 
         /**
