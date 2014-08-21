@@ -83,6 +83,10 @@ describe('func', function () {
         assert.equal(p1.x, 15);
         assert.equal(p1.y, 27);
     });
+
+    it('throws if given no arguments', function() {
+        assert.throws(function() { R.func(); });
+    });
 });
 
 // TODO: This needs a better home than objectBasics
