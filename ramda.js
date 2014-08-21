@@ -3088,8 +3088,12 @@
          * prop('x', {x: 100}) // => 100
          * prop('x', {}) // => undefined
          */
-        var prop = R.prop = function _prop(p, obj) {
-            return arguments.length < 2 ? function _prop(obj) { return obj[p]; } :  obj[p];
+        var prop = R.prop = function prop(p, obj) {
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function _prop(obj) { return obj[p]; };
+            }
+            return obj[p];
         };
         aliasFor("prop").is("nth").and("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
 

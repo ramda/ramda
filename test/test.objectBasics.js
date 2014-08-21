@@ -14,6 +14,10 @@ describe('prop', function () {
         assert.equal(R.get('age')(fred), 23);
         assert.strictEqual(R.get, R.prop);
     });
+
+    it('should throw when called with no arguments', function() {
+        assert.throws(R.prop, TypeError);
+    });
 });
 
 describe('propOrDefault', function () {
