@@ -62,8 +62,9 @@ describe('func', function () {
         assert.equal(R.func('add', R, 3, 6), 9);
     });
 
-    it('returns a reference to the function when called with 2 args', function() {
-        assert.equal(R.func('add', R), R.add);
+    it('invokes the function with no arguments when no extra params are supplied', function() {
+        var obj = {f: function() { return "called f"; } };
+        assert.equal(R.func('f', obj), "called f");
     });
 
     it('should apply additional arguments to the function', function () {
