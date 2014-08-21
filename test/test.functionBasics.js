@@ -14,6 +14,12 @@ describe('flip', function() {
         var g = R.flip(f)('a');
         assert.equal(g('b', 'c'), 'b a c');
     });
+
+    it('produces a function that throws if given no arguments', function() {
+      var f = function(x, y) { return x + ' then ' + y; };
+      var g = R.flip(f);
+      assert.throws(g, TypeError);
+    });
 });
 
 describe('once', function() {

@@ -1127,9 +1127,11 @@
          */
         var flip = R.flip = function _flip(fn) {
             return function (a, b) {
-                return arguments.length < 2 ?
-                  function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); } :
-                  fn.apply(this, [b, a].concat(_slice(arguments, 2)));
+                switch (arguments.length) {
+                    case 0: throw NO_ARGS_EXCEPTION;
+                    case 1: return function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); };
+                    default: return fn.apply(this, concat([b, a], _slice(arguments, 2)));
+                }
             };
         };
 
@@ -3150,7 +3152,9 @@
         });
 
         /**
-         * Calls the specified function on the supplied object.
+         * Calls the specified function on the supplied object. Any additional arguments 
+         * after `fn` and `obj` are passed in to `fn`. If no additional arguments are passed to `func`, 
+         * `fn` is invoked with no arguments.
          *
          * @memberOf R
          * @static
@@ -3161,6 +3165,10 @@
          *
          * @example
          *
+         * func('add', R, 1, 2) // => 3
+         * 
+         * var obj = { f: function() { return "f called"; } };
+         * func('f', obj); // => "f called"
          *
          */
         R.func = function func(fn, obj) {
@@ -3586,7 +3594,11 @@
         //     add(2, 3);       //=  5
         //     add(7)(10);      //= 17
         var add = R.add = function _add(a, b) {
-            return arguments.length < 2 ? function(b) { return a + b; } :  a + b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a + b; };
+                default: return a + b;
+            }
         };
 
         /**
@@ -3613,7 +3625,11 @@
         //     triple(4);       //= 12
         //     multiply(2, 5);  //= 10
         var multiply = R.multiply = function _multiply(a, b) {
-            return arguments.length < 2 ? function(b) { return a * b; } :  a * b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a * b; };
+                default: return a * b;
+            }
         };
 
         /**
@@ -3643,12 +3659,13 @@
         //     var complementaryAngle = subtract(90);
         //     complementaryAngle(30); //= 60
         var subtract = R.subtract = function _subtract(a, b) {
-            return arguments.length < 2 ? function(b) { return a - b; } :  a - b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a - b; };
+                default: return a - b;
+            }
         };
 
-        /**
-         * TODO: JSDoc-style documentation for this function
-         */
         /**
          * Subtracts two numbers in reverse order. Equivalent to `b - a` but
          * curried. Probably more useful when partially applied than
@@ -3680,6 +3697,8 @@
 
         /**
          * Divides two numbers. Equivalent to `a / b`.
+         * While at times the curried version of `divide` might be useful, 
+         * probably the curried version of `divideBy` will be more useful.
          *
          * @static
          * @memberOf R
@@ -3693,18 +3712,23 @@
          * reciprocal(4);   //= 0.25
          * divide(71, 100); //= 0.71
          */
-        // Divides the first parameter by the second.  This is automatically
-        // curried, and while at times the curried
-        // version might be useful, often the curried version of `divideBy` might be what's wanted.
         var divide = R.divide = function _divide(a, b) {
-            return arguments.length < 2 ? function(b) { return a / b; } :  a / b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a / b; };
+                default: return a / b;
+            }
         };
 
         /**
          * Divides two numbers in reverse order. Equivalent to `b / a`.
+         * `divideBy` is the reversed version of `divide`, where the second parameter is 
+         * divided by the first.  The curried version of `divideBy` may prove more useful 
+         * than that of `divide`.
          *
          * @static
          * @memberOf R
+         * @see divide
          * @param {number} a The second value.
          * @param {number} b The first value.
          * @return {number} The result of `b / a`.
@@ -3713,11 +3737,6 @@
          * var half = divideBy(2);
          * half(42); // => 21
          */
-        // Reversed version of `divide`, where the second parameter is divided by the first.  The curried version of
-        // this one might be more useful than that of `divide`.  For instance:
-        //
-        //     var half = divideBy(2);
-        //     half(42); // => 21
         R.divideBy = flip(divide);
 
         /**
@@ -3725,7 +3744,11 @@
          */
         // Divides the second parameter by the first and returns the remainder.
         var modulo = R.modulo = function _modulo(a, b) {
-            return arguments.length < 2 ? function(b) { return a % b; } :  a % b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a % b; };
+                default: return a % b;
+            }
         };
 
 
@@ -3734,6 +3757,7 @@
          *
          * @private
          * @param n
+         * @category type
          * @return {Boolean}
          */
         var isInteger = Number.isInteger || function isInteger(n) {
@@ -3748,6 +3772,7 @@
          *
          * @static
          * @memberOf R
+         * @see moduloBy
          * @param {number} m The dividend.
          * @param {number} p the modulus.
          * @return {number} The result of `b mod a`.
@@ -3767,26 +3792,51 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
+         * this one might be more useful than that of `modulo`.
+         *
+         * @static
+         * @memberOf R
+         * @see modulo
+         * @param {number} m The dividend.
+         * @param {number} p the modulus.
+         * @return {number} The result of `b mod a`.
+         * @example
+         *
+         * var isOdd = moduloBy(2);
+         * isOdd(42); // => 0
+         * isOdd(21); // => 1
          */
-        // Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
-        // this one might be more useful than that of `modulo`.  For instance:
-        //
-        //     var isOdd = moduloBy(2);
-        //     isOdd(42); // => 0
-        //     isOdd(21); // => 1
         R.moduloBy = flip(modulo);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Adds together all the elements of a list.
+         *
+         * @static
+         * @memberOf R
+         * @see reduce
+         * @param {Array} list An array of numbers
+         * @return {number} The sum of all the numbers in the list.
+         *
+         * @example
+         *
+         * sum([2,4,6,8,100,1]); // => 121
          */
-        // Adds together all the elements of a list.
         R.sum = foldl(add, 0);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Multiplies together all the elements of a list.
+         *
+         * @static
+         * @memberOf R
+         * @see reduce
+         * @param {Array} list An array of numbers
+         * @return {number} The product of all the numbers in the list.
+         *
+         * @example
+         *
+         * product([2,4,6,8,100,1]); // => 38400
          */
-        // Multiplies together all the elements of a list.
         R.product = foldl(multiply, 1);
 
         /**

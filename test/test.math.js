@@ -10,6 +10,10 @@ describe('add', function() {
         var incr = R.add(1);
         assert.equal(43, incr(42));
     });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.add, TypeError);
+    });
 });
 
 describe('multiply', function() {
@@ -20,6 +24,10 @@ describe('multiply', function() {
     it('should be automatically curried', function() {
         var dbl = R.multiply(2);
         assert.equal(30, dbl(15));
+    });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.multiply, TypeError);
     });
 });
 
@@ -32,6 +40,10 @@ describe('subtract', function() {
         var ninesCompl = R.subtract(9);
         assert.equal(3, ninesCompl(6));
     });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.subtract, TypeError);
+    });
 });
 
 describe('subtractN', function() {
@@ -42,6 +54,10 @@ describe('subtractN', function() {
     it('should be automatically curried', function() {
         var minus6 = R.subtractN(6);
         assert.equal(3, minus6(9));
+    });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.subtractN, TypeError);
     });
 });
 
@@ -54,6 +70,10 @@ describe('divide', function() {
         var divideInto120 = R.divide(120);
         assert.equal(3, divideInto120(40));
     });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.divide, TypeError);
+    });
 });
 
 describe('divideBy', function() {
@@ -64,7 +84,10 @@ describe('divideBy', function() {
     it('should be automatically curried', function() {
         var half = R.divideBy(2);
         assert.equal(20, half(40));
+    });
 
+    it('throws if given no arguments', function() {
+        assert.throws(R.divideBy, TypeError);
     });
 });
 
@@ -85,6 +108,10 @@ describe('modulo', function() {
   it('preserves javascript-style modulo evaluation for negative numbers', function() {
     assert.equal(R.modulo(-5, 4), -1);
   });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.modulo, TypeError);
+    });
 });
 
 describe('moduloBy', function() {
@@ -104,6 +131,10 @@ describe('moduloBy', function() {
   it('preserves javascript-style modulo evaluation for negative numbers', function() {
     assert.equal(R.moduloBy(4, -5), -1);
   });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.moduloBy);
+    });
 });
 
 describe('mathMod', function() {
@@ -125,6 +156,10 @@ describe('mathMod', function() {
     assert.equal(f(6), 5);
   });
 
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.mathMod);
+    });
 });
 
 describe('sum', function() {
