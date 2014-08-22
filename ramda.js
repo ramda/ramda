@@ -1786,26 +1786,27 @@
 
 
         /**
-         * `chain` takes a function that maps a nested list to a nested list and a nested list.
-         * It maps the function over the nested list and then flattens the result (one level deep,
-         * i.e. not recursively).
-         * This implementatiou is compatible with the
+         * `chain` maps a function over a list and concatenates the results.
+         * This implementation is compatible with the
          * Fantasy-land Chain spec, and will work with types that implement that spec.
          *
          * @static
          * @memberOf R
          * @category List
          * @param {Function}
-         * @param {Array} a nested array
+         * @param {Array}
          * @return {Array}
          *
          * @eaxmple
          *
-         * R.chain(R.map(R.multiply(2)), [[1,2,3], [1], [0, -3]]); // => [2,4,6,2,0,-6]
+         * var duplicate = function(n) {
+         *     return [n, n];
+         * };
+         * R.chain(duplicate, [1, 2, 3]); // => [1, 1, 2, 2, 3, 3]
          *
          */
-        R.chain = curry2(checkForMethod('chain', function _chain(f, nestedList) {
-            return unnest(map(f, nestedList));
+        R.chain = curry2(checkForMethod('chain', function _chain(f, list) {
+            return unnest(map(f, list));
         }));
         aliasFor('chain').is('flatMap');
 
