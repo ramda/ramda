@@ -31,29 +31,6 @@
         // ---------------------------------
 
         /**
-         * Creates an alias for a public function.
-         *
-         * @private
-         * @category Internal
-         * @param {string} oldName The name of the public function to alias.
-         * @return {Function} A function decorated with the `is`, `are`, and `and` methods. Create
-         * an alias for the `oldName function by invoking any of these methods an passing it a
-         * string with the `newName` parameter.
-         * @example
-         *
-         * // Create an alias for `each` named `forEach`
-         * aliasFor('each').is('forEach');
-         */
-        var aliasFor = function (oldName) {
-            var fn = function (newName) {
-                R[newName] = R[oldName];
-                return fn;
-            };
-            fn.is = fn.are = fn.and = fn;
-            return fn;
-        };
-
-        /**
          * An optimized, private array `slice` implementation.
          *
          * @private
@@ -586,6 +563,7 @@
          * @static
          * @memberOf R
          * @category Function
+         * @alias disperseTo
          * @param {Function} fn The function to wrap.
          * @param {...Function} transformers A variable number of transformer functions
          * @return {Function} The wrapped function.
@@ -626,7 +604,7 @@
                 return fn.apply(this, args.concat(_slice(arguments, tlen)));
             }));
         };
-        aliasFor('useWith').is('disperseTo');
+        R.disperseTo = R.useWith;
 
         /**
          * Iterate over an input `list`, calling a provided function `fn` for each element in the
@@ -703,7 +681,7 @@
             // i can't bear not to return *something*
             return list;
         });
-        aliasFor("each").is("forEach");
+        R.forEach = R.each;
 
         /**
          * Creates a shallow copy of an array.
@@ -772,7 +750,7 @@
             return concat([el], arr);
         }
         R.prepend = prepend;
-        aliasFor("prepend").is("cons");
+        R.cons = R.prepend;
 
         /**
          * Returns the first element in a list.
@@ -792,7 +770,7 @@
             return arr[0];
         };
 
-        aliasFor("head").is("car").and("first");
+        R.car = R.first = R.head;
 
         /**
          * Returns the last element from a list.
@@ -831,7 +809,7 @@
             return (arr.length > 1) ? _slice(arr, 1) : [];
         });
 
-        aliasFor("tail").is("cdr");
+        R.cdr = R.tail;
 
         /**
          * Returns `true` if the argument is an atom; `false` otherwise. An atom is defined as any
@@ -879,7 +857,7 @@
             return concat(list, [el]);
         };
 
-        aliasFor("append").is("push");
+        R.push = R.append;
 
         /**
          * Returns a new list consisting of the elements of the first list followed by the elements
@@ -923,7 +901,7 @@
         var identity = R.identity = function _I(x) {
             return x;
         };
-        aliasFor("identity").is("I");
+        R.I = R.identity;
 
         /**
          * Calls an input function `n` times, returning an array containing the results of those
@@ -1087,6 +1065,7 @@
          * @static
          * @memberOf R
          * @category Function
+         * @alias sequence
          * @param {...Function} functions A variable number of functions.
          * @return {Function} A new function which represents the result of calling each of the
          * input `functions`, passing the result of each function call to the next, from right to
@@ -1103,7 +1082,7 @@
         R.pipe = function _pipe() {
             return compose.apply(this, _slice(arguments).reverse());
         };
-        aliasFor("pipe").is("sequence");
+        R.sequence = R.pipe;
 
         /**
          * Returns a new function much like the supplied one, except that the first two arguments'
@@ -1143,6 +1122,7 @@
          * @static
          * @memberOf R
          * @category Function
+         * @alias applyLeft
          * @param {Function} fn The function to invoke.
          * @param {...*} [args] Arguments to prepend to `fn` when the returned function is invoked.
          * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn`
@@ -1169,7 +1149,7 @@
                 return fn.apply(this, concat(args, arguments));
             });
         };
-        aliasFor("lPartial").is("applyLeft");
+        R.applyLeft = R.lPartial;
 
         /**
          * Accepts as its arguments a function and any number of values and returns a function that,
@@ -1182,6 +1162,7 @@
          * @static
          * @memberOf R
          * @category Function
+         * @alias applyRight
          * @param {Function} fn The function to invoke.
          * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
          * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
@@ -1201,7 +1182,7 @@
                 return fn.apply(this, concat(arguments, args));
             });
         };
-        aliasFor("rPartial").is("applyRight");
+        R.applyRight = R.rPartial;
 
         /**
          * Creates a new function that, when invoked, caches the result of calling `fn` for a given
@@ -1376,6 +1357,7 @@
          * @static
          * @memberOf R
          * @category
+         * @alias distributeTo
          * @param {Function} after A function. `after` will be invoked with the return values of
          * `fn1` and `fn2` as its arguments.
          * @param {Function} fn1 A function. It will be invoked with the arguments passed to the
@@ -1404,7 +1386,7 @@
                 }, fns));
             };
         };
-        aliasFor('fork').is('distributeTo');
+        R.distributeTo = R.fork;
 
         // List Functions
         // --------------
@@ -1458,7 +1440,7 @@
             }
             return acc;
         }));
-        aliasFor("reduce").is("foldl");
+        R.foldl = R.reduce;
 
         /**
          * Like `foldl`, but passes additional parameters to the predicate function.
@@ -1533,7 +1515,7 @@
             }
             return acc;
         }));
-        aliasFor("foldr").is("reduceRight");
+        R.reduceRight = R.foldr;
 
         /**
          * Like `foldr`, but passes additional parameters to the predicate function. Moves through
@@ -1793,6 +1775,7 @@
          * @static
          * @memberOf R
          * @category List
+         * @alias flatMap
          * @param {Function}
          * @param {Array}
          * @return {Array}
@@ -1808,7 +1791,7 @@
         R.chain = curry2(checkForMethod('chain', function _chain(f, list) {
             return unnest(map(f, list));
         }));
-        aliasFor('chain').is('flatMap');
+        R.flatMap = R.chain;
 
         // Reports the number of elements in the list
         /**
@@ -1817,6 +1800,7 @@
          * @static
          * @memberOf R
          * @category List
+         * @alias length
          * @param {Array} arr The array to inspect.
          * @return {number} The size of the array.
          * @example
@@ -1827,7 +1811,7 @@
         R.size = function _size(arr) {
             return arr.length;
         };
-        aliasFor('size').is('length');
+        R.length = R.size;
 
         /**
          * Returns a new list containing only those items that match a given predicate function.
@@ -2009,6 +1993,7 @@
          * @static
          * @memberOf R
          * @category List
+         * @alias drop
          * @param {number} n The number of elements of `list` to skip.
          * @param {Array} list The array to consider.
          * @return {Array} The last `n` elements of `list`.
@@ -2016,7 +2001,7 @@
         R.skip = curry2(checkForMethod('skip', function _skip(n, list) {
             return _slice(list, n);
         }));
-        aliasFor('skip').is('drop');
+        R.drop = R.skip;
 
         /**
          * Returns the first element of the list which matches the predicate, or `undefined` if no
@@ -2140,6 +2125,7 @@
          * @static
          * @memberOf R
          * @category List
+         * @alias every
          * @param {Function} fn The predicate function.
          * @param {Array} list The array to consider.
          * @return {boolean} `true` if the predicate is satisfied by every element, `false`
@@ -2164,7 +2150,7 @@
             return true;
         }
         R.all = curry2(all);
-        aliasFor("all").is("every");
+        R.every = R.all;
 
         /**
          * Returns `true` if at least one of elements of the list match the predicate, `false`
@@ -2173,6 +2159,7 @@
          * @static
          * @memberOf R
          * @category List
+         * @alias some
          * @param {Function} fn The predicate function.
          * @param {Array} list The array to consider.
          * @return {boolean} `true` if the predicate is satisfied by at least one element, `false`
@@ -2195,7 +2182,7 @@
             return false;
         }
         R.any = curry2(any);
-        aliasFor("any").is("some");
+        R.some = R.any;
 
         /**
          * Internal implementation of `indexOf`. 
@@ -2528,6 +2515,7 @@
          * @static
          * @memberOf R
          * @category List
+         * @alias flattenDeep
          * @param {Array} list The array to consider.
          * @return {Array} The flattened list.
          * @example
@@ -2540,7 +2528,7 @@
         //     flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
         //     // => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         var flatten = R.flatten = makeFlat(true);
-        aliasFor('flatten').is('flattenDeep');
+        R.flattenDeep = R.flatten;
 
         /**
          * Returns a new list by pulling every item at the first level of nesting out, and putting
@@ -2549,6 +2537,7 @@
          * @static
          * @memberOf R
          * @category List
+         * @alias flattenShallow
          * @param {Array} list The array to consider.
          * @return {Array} The flattened list.
          * @example
@@ -2559,7 +2548,7 @@
          * //= [1, 2, 3, 4, 5, 6]
          */
         var unnest = R.unnest = makeFlat(false);
-        aliasFor('unnest').is('flattenShallow');
+        R.flattenShallow = R.unnest;
 
         /**
          * Creates a new list out of the two supplied by applying the function to each
@@ -3098,7 +3087,7 @@
             }
             return obj[p];
         };
-        aliasFor("prop").is("nth").and("get");
+        R.nth = R.get = R.prop;
 
 
         /**
@@ -3188,6 +3177,8 @@
          * @memberOf R
          * @static
          * @category Function
+         * @alias constant
+         * @alias K
          * @param {*} val The value to wrap in a function
          * @return {Function} A Function :: * -> val
          *
@@ -3201,7 +3192,7 @@
                 return val;
             };
         };
-        aliasFor("always").is("constant").and("K");
+        R.constant = R.K = R.always;
 
 
         /**
