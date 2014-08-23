@@ -3098,7 +3098,7 @@
             }
             return obj[p];
         };
-        aliasFor("prop").is("nth").and("get"); // TODO: are we sure?  Matches some other libs, but might want to reserve for other use.
+        aliasFor("prop").is("nth").and("get");
 
 
         /**
@@ -3183,9 +3183,19 @@
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a function that always returns the given value.
+         *
+         * @memberOf R
+         * @static
+         * @category Function
+         * @param {*} val The value to wrap in a function
+         * @return {Function} A Function :: * -> val
+         *
+         * @example
+         *
+         * var t = always('Tee');
+         * t(); // => 'Tee' 
          */
-        // Returns a function that always returns the given value.
         var always = R.always = function _always(val) {
             return function () {
                 return val;
@@ -3195,19 +3205,53 @@
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Scans a list for a `null` or `undefined` element.
+         * Returns true if it finds one, false otherwise.
+         *
+         * @memberOf R
+         * @static
+         * @category list
+         * @param {Array} list The array to scan
+         * @return {Boolean}
+         *
+         * @example
+         *
+         * anyBlanks([1,2,null,3,4]); // => true 
+         * anyBlanks([1,2,undefined,3,4]); // => true 
+         * anyBlanks([1,2,3,4]); // => false 
+         * anyBlanks([]); // => false 
+         * 
          */
         var anyBlanks = R.any(function _any(val) {
             return val == null;
         });
 
+        /**
+         * Internal reference to Object.keys
+         *
+         * @private
+         * @param {Object} 
+         * @return {Array}
+         */
         var nativeKeys = Object.keys;
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a list containing the names of all the enumerable own
+         * properties of the supplied object.
+         * Note that the order of the output array is not guaranteed to be
+         * consistent across different JS platforms.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Object} obj The object to extract properties from
+         * @return {Array} An array of the object's own properties
+         *
+         * @example
+         *
+         * keys({a: 1, b: 2, c: 3}) // => ['a', 'b', 'c']
+         *
          */
-        // Returns a list containing the names of all the enumerable own
-        // properties of the supplied object.
         var keys = R.keys = function _keys(obj) {
             if (nativeKeys) return nativeKeys(Object(obj));
             var prop, ks = [];
@@ -3220,10 +3264,23 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a list containing the names of all the
+         * properties of the supplied object, including prototype properties.
+         * Note that the order of the output array is not guaranteed to be
+         * consistent across different JS platforms.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Object} obj The object to extract properties from
+         * @return {Array} An array of the object's own and prototype properties
+         *
+         * @example
+         * var F = function() { this.x = 'X'; };
+         * F.prototype.y = 'Y';
+         * var f = new F();
+         * keys(f) // => ['x', 'y']
          */
-        // Returns a list containing the names of all the
-        // properties of the supplied object, including prototype properties.
         R.keysIn = function _keysIn(obj) {
             var prop, ks = [];
             for (prop in obj) {
@@ -3232,20 +3289,73 @@
             return ks;
         };
 
-        var pairBy = function(fn) {
+        /**
+         * @private
+         * @param {Function} fn The strategy for extracting keys from an object
+         * @return {Function} A function that takes an object and returns an array of 
+         *                    key-value arrays.
+         */
+        var pairWith = function(fn) {
             return function(obj) {
                 return R.map(function(key) { return [key, obj[key]]; }, fn(obj));
             };
         };
 
-        R.toPairs = pairBy(R.keys);
-
-        R.toPairsIn = pairBy(R.keysIn);
+        /**
+         * Converts an object into an array of key, value arrays.
+         * Only the object's own properties are used.
+         * Note that the order of the output array is not guaranteed to be
+         * consistent across different JS platforms.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Object} obj The object to extract from
+         * @return {Array} An array of key, value arrays from the object's own properties
+         *
+         * @example
+         * 
+         * toPairs({a: 1, b: 2, c: 3}); // [['a', 1], ['b', 2], ['c', 3]]
+         */
+        R.toPairs = pairWith(R.keys);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Converts an object into an array of key, value arrays.
+         * The object's own properties and prototype properties are used.
+         * Note that the order of the output array is not guaranteed to be
+         * consistent across different JS platforms.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Object} obj The object to extract from
+         * @return {Array} An array of key, value arrays from the object's own 
+         *                 and prototype properties
+         *
+         * @example
+         * 
+         * var F = function() { this.x = 'X'; };
+         * F.prototype.y = 'Y';
+         * var f = new F();
+         * toPairsIn(f) // => [['x','X'], ['y','Y']]
          */
-        // Returns a list of all the enumerable own properties of the supplied object.
+        R.toPairsIn = pairWith(R.keysIn);
+
+        /**
+         * Returns a list of all the enumerable own properties of the supplied object.
+         * Note that the order of the output array is not guaranteed across 
+         * different JS platforms.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Object} obj The object to extract values from
+         * @return {Array} An array of the values of the object's own properties
+         *
+         * @example
+         *
+         * values({a: 1, b: 2, c: 3}) // => [1, 2, 3]
+         */
         R.values = function _values(obj) {
             var prop, props = keys(obj),
                 length = props.length,
@@ -3257,10 +3367,23 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a list of all the properties, including prototype properties,
+         * of the supplied object.
+         * Note that the order of the output array is not guaranteed to be
+         * consistent across different JS platforms.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Object} obj The object to extract values from
+         * @return {Array} An array of the values of the object's own and prototype properties
+         *
+         * @example
+         * var F = function() { this.x = 'X'; };
+         * F.prototype.y = 'Y';
+         * var f = new F();
+         * valuesIn(f) // => ['X', 'Y']
          */
-        // Returns a list of all the properties, including prototype properties,
-        // of the supplied object.
         R.valuesIn = function _valuesIn(obj) {
             var prop, vs = [];
             for (prop in obj) {
