@@ -3393,7 +3393,10 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Internal helper function for making a partial copy of an object
+         *
+         * @private
+         * 
          */
         // internal helper function
         function pickWith(test, obj) {
@@ -3410,10 +3413,20 @@
         }
 
         /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
-        // property is ignored
+         * Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
+         * property is ignored. 
+         * 
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Array} names an array of String propery names to copy onto a new object
+         * @param {Object} obj The object to copy from
+         * @return {Object} A new object with only properties from `names` on it. 
+         *
+         * @example
+         * pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, d: 4}
+         * pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1}
+         */         
         R.pick = curry2(function pick(names, obj) {
             return pickWith(function(val, key) {
                 return contains(key, names);
@@ -3421,7 +3434,17 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a partial copy of an object omitting the keys specified.
+         *
+         * @memberOf R
+         * @static
+         * @category Object
+         * @param {Array} names an array of String propery names to omit from the new object
+         * @param {Object} obj The object to copy from
+         * @return {Object} A new object with properties from `names` not on it. 
+         *
+         * @example
+         * omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {b: 2, c: 3}
          */
         // Returns a partial copy of an object omitting the keys specified.
         R.omit = curry2(function omit(names, obj) {
@@ -3431,14 +3454,28 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns a partial copy of an object containing only the keys that satisfy the supplied predicate.
+         * 
+         * @memberOf R
+         * @static
+         * @see pick 
+         * @category Object
+         * @param {Function} pred A predicate to determine whether or not a key should be included on the output object.
+         * @param {Object} obj The object to copy from
+         * @return {Object} A new object with only properties that satisfy `pred` on it. 
+         *
+         * @example
+         * function isUpperCase(x) { return x.toUpperCase() === x; }
+         * pickWith(isUpperCase, {a: 1, b: 2, A: 3, B: 4}) // => {A: 3, B: 4}
          */
         R.pickWith = curry2(pickWith);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Internal implementation of `pickAll`
+         *
+         * @private
+         * @see pickAll
          */
-        // Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
         var pickAll = function _pickAll(names, obj) {
             var copy = {};
             each(function (name) {
@@ -3448,7 +3485,19 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
+         *
+         * @memberOf R
+         * @static
+         * @see pick 
+         * @category Object
+         * @param {Array} names an array of String propery names to copy onto a new object
+         * @param {Object} obj The object to copy from
+         * @return {Object} A new object with only properties from `names` on it. 
+         *
+         * @example
+         * pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, d: 4}
+         * pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, e: undefined, f: undefined}
          */
         R.pickAll = curry2(pickAll);
 
@@ -3478,6 +3527,7 @@
         /**
          * Create a new object with the own properties of a
          * merged with the own properties of object b.
+         * This function will *not* mutate passed-in objects.
          *
          * @static
          * @memberOf R
@@ -3495,18 +3545,34 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
+         * 
+         * @static
+         * @memberOf R
+         * @category Object
+         * @param {String} prop The name of the property to compare
+         * @param {Object} obj1 
+         * @param {Object} obj2
+         * @return {Boolean}
+         *
+         * @example
+         *
+         * o1 = {a: 1, b: 2, c: 3, d: 4};
+         * o2 = { a: 10, b: 20, c: 3, d: 40};
+         * eqProps('a', o1, o2) // => false
+         * eqProps('c', o1, o2) // => true
          */
-        // Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
         R.eqProps = curry3(function eqProps(prop, obj1, obj2) {
             return obj1[prop] === obj2[prop];
         });
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * internal helper for `where`
+         * 
+         * @private
+         * @see where
          */
-        // internal helper for `where`
         function satisfiesSpec(spec, parsedSpec, testObj) {
             if (spec === testObj) { return true; }
             if (testObj == null) { return false; }
@@ -3536,30 +3602,36 @@
         }
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Takes a spec object and a test object and returns true if the test satisfies the spec.
+         * Any property on the spec that is not a function is interpreted as an equality
+         * relation.
+         *
+         * If the spec has a property mapped to a function, then `where` evaluates the function, passing in
+         * the test object's value for the property in question, as well as the whole test object.
+         *
+         * `where` is well suited to declarativley expressing constraints for other functions, e.g., 
+         * `filter`, `find`, `pickWith`, etc.
+         *
+         * @static
+         * @memberOf R
+         * @category Object
+         * @param {Object} spec 
+         * @param {Object} testObj
+         * @return {Boolean}
+         *
+         * @example
+         *
+         * var spec = {x: 2};
+         * where(spec, {w: 10, x: 2, y: 300}); // => true
+         * where(spec, {x: 1, y: 'moo', z: true}); // => false
+         *
+         * var spec2 = {x: function(val, obj) { return  val + obj.y > 10; };
+         * where(spec2, {x: 2, y: 7}); // => false
+         * where(spec2, {x: 3, y: 8}); // => true
+         *
+         * var xs = [{x: 2, y: 1}, {x: 10, y: 2}, {x: 8, y: 3}, {x: 10, y: 4}];
+         * filter(where({x: 10}), xs); // ==> [{x: 10, y: 2}, {x: 10, y: 4}]
          */
-        // `where` takes a spec object and a test object and returns true if the test satisfies the spec.
-        // Any property on the spec that is not a function is interpreted as an equality
-        // relation. For example:
-        //
-        //     var spec = {x: 2};
-        //     where(spec, {w: 10, x: 2, y: 300}); // => true, x === 2
-        //     where(spec, {x: 1, y: 'moo', z: true}); // => false, x !== 2
-        //
-        // If the spec has a property mapped to a function, then `where` evaluates the function, passing in
-        // the test object's value for the property in question, as well as the whole test object. For example:
-        //
-        //     var spec = {x: function(val, obj) { return  val + obj.y > 10; };
-        //     where(spec, {x: 2, y: 7}); // => false
-        //     where(spec, {x: 3, y: 8}); // => true
-        //
-        // `where` is well suited to declarativley expressing constraints for other functions, e.g., `filter`:
-        //
-        //     var xs = [{x: 2, y: 1}, {x: 10, y: 2},
-        //               {x: 8, y: 3}, {x: 10, y: 4}];
-        //     var fxs = filter(where({x: 10}), xs);
-        //     // fxs ==> [{x: 10, y: 2}, {x: 10, y: 4}]
-        //
         R.where = function where(spec, testObj) {
             var parsedSpec = R.groupBy(function(key) {
                     return typeof spec[key] === "function" ? "fn" : "obj";
@@ -3583,34 +3655,93 @@
         // --------
 
         /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Expose the functions from ramda as properties on another object.  If the passed-in object is the
-        // global object, or the passed-in object is "falsy", then the ramda functions become global functions.
+         * Expose the functions from ramda as properties on another object.  If the passed-in object is the
+         * global object, or the passed-in object is "falsy", then the ramda functions become global functions.
+         * Warning: This function *will* mutate the passed -in object (or the global object when called with no arguments).
+         *
+         * @static
+         * @memberOf R
+         * @category Object
+         * @param {Object} obj The object to attach ramda functions 
+         * @return {Object} a reference to the mutated object
+         *
+         * @example
+         * var x = {}
+         * R.installTo(x) // => x now contains ramda functions
+         * R.installTo(this) // => add ramda functions to `this` object
+         * R.installTo() // => ramda functions in global scope
+         */ 
         R.installTo = function(obj) {
             return extend(obj || global, R);
         };
 
+        /**
+         * See if an object (`val`) is an instance of the supplied constructor.
+         * This function will check up the inheritance chain, if any.
+         *
+         * @static
+         * @memberOf R
+         * @category type
+         * @param {Object} ctor A constructor
+         * @param {*} val The value to test
+         * @return {Boolean}
+         *
+         * @example
+         *
+         * is(Object, {}) // => true
+         * is(Number, 1) // => true
+         * is(String, "s") // => true
+         * is(String, new String("")) // => true
+         * is(Object, new String("")) // => true
+         * is(Number, {}) // => false
+         */
         R.is = curry2(function is(ctor, val) {
             return val != null && Object(val) instanceof ctor;
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * A function that always returns `0`. Any passed in parameters are ignored.
+         * 
+         * @static
+         * @memberOf R
+         * @category function
+         * @see always
+         * @return {Number} 0. Always zero.
+         *
+         * @example
+         *
+         * alwaysZero() // => 0
          */
-        // A function that always returns `0`.
         R.alwaysZero = always(0);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * A function that always returns `false`. Any passed in parameters are ignored.
+         * 
+         * @static
+         * @memberOf R
+         * @category function
+         * @see always
+         * @return {Boolean} false
+         *
+         * @example
+         *
+         * alwaysFalse() // => false
          */
-        // A function that always returns `false`.
         R.alwaysFalse = always(false);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * A function that always returns `true`. Any passed in parameters are ignored.
+         * 
+         * @static
+         * @memberOf R
+         * @category function
+         * @see always
+         * @return {Boolean} true
+         *
+         * @example
+         *
+         * alwaysTrue() // => true
          */
-        // A function that always returns `true`.
         R.alwaysTrue = always(true);
 
 
