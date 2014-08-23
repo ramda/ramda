@@ -4483,11 +4483,33 @@
          * is the result of applying the supplied function to that item.
          *
          * @static
-         * @private
-         */
-        // Creates a new list whose elements each have two properties: `val` is
-        // the value of the corresponding item in the list supplied, and `key`
-        // is the result of applying the supplied function to that item.
+         * @memberOf R
+         * @param {Function} fn An arbitrary unary function returning a potential
+         *        object key.
+         * @param {Array} list The list of items to process
+         * @return {Array} A new list with .
+         * @example
+         *     var people = [
+         *        {first: 'Fred', last: 'Flintstone', age: 23},
+         *        {first: 'Betty', last: 'Rubble', age: 21},
+         *        {first: 'George', last: 'Jetson', age: 29}
+         *     ];
+         *     var fullName = function(p) {return p.first + ' ' + p.last;};
+         *     keyValue(fullName, people);
+         *
+         *     //=> [
+         *     //     {
+         *     //         key: "Fred Flintstone",
+         *     //         val: {first: "Fred", last: "Flintstone", age: 23}
+         *     //     }, {
+         *     //         key: "Betty Rubble",
+         *     //         val: {first: "Betty", last: "Rubble", age: 21}
+         *     //    }, {
+         *     //        key: "George Jetson",
+         *     //        val: {first: "George", last: "Jetson", age: 29}
+         *     //    }
+         *     // ];
+         * */
         function keyValue(fn, list) { // TODO: Should this be made public?
             return map(function(item) {return {key: fn(item), val: item};}, list);
         }
