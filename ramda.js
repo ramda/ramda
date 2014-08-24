@@ -3745,12 +3745,27 @@
 
         // --------
 
-        /**
-         * TODO: JSDoc-style documentation for this function
+/**
+         *
+         * A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
+         * this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
+         * value.
+         *
+         * @static
+         * @memberOf R
+         * @category logic
+         * @param {Function} f a predicate
+         * @param {Function} g another predicate
+         * @return {Function} a function that applies its arguments to `f` and `g` and ANDs their outputs together. 
+         *
+         * @example
+         * 
+         * gt10 = function(x) { return x > 10; };
+         * even = function(x) { return x % 2 === 0 };
+         * f = and(gt10, even);
+         * f(100) // => true
+         * f(101) // => false
          */
-        // A function wrapping calls to the two functions in an `&&` operation, returning `true` or `false`.  Note that
-        // this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
-        // value.
         R.and = curry2(function and(f, g) {
             return function _and() {
                 return !!(f.apply(this, arguments) && g.apply(this, arguments));
@@ -3758,11 +3773,25 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
+         * this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
+         * value.
+         *
+         * @static
+         * @memberOf R
+         * @category logic
+         * @param {Function} f a predicate
+         * @param {Function} g another predicate
+         * @return {Function} a function that applies its arguments to `f` and `g` and ORs their outputs together. 
+         *
+         * @example
+         * 
+         * gt10 = function(x) { return x > 10; };
+         * even = function(x) { return x % 2 === 0 };
+         * f = or(gt10, even);
+         * f(101) // => false
+         * f(8) // => true
          */
-        // A function wrapping calls to the two functions in an `||` operation, returning `true` or `false`.  Note that
-        // this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
-        // value.
         R.or = curry2(function or(f, g) {
             return function _or() {
                 return !!(f.apply(this, arguments) || g.apply(this, arguments));
@@ -3770,18 +3799,32 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
+         * underlying function would return a false-y value, and `false` when it would return a truth-y one.
+         *
+         * @static
+         * @memberOf R
+         * @category logic
+         * @param {Function} f a predicate
+         * @return {Function} a function that applies its arguments to `f` and logically inverts its output. 
+         *
+         * @example
+         * 
+         * gt10 = function(x) { return x > 10; };
+         * f = not(gt10);
+         * f(11) // => false
+         * f(9) // => true
          */
-        // A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
-        // underlying function would return a false-y value, and `false` when it would return a truth-y one.
         var not = R.not = function _not(f) {
             return function() {return !f.apply(this, arguments);};
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Create a predicate wrapper which will call a pick function (all/any) for each predicate
+         *
+         * @private
+         * @see all, any
          */
-        // Create a predicate wrapper which will call a pick function (all/any) for each predicate
         var predicateWrap = function _predicateWrap(predPicker) {
             return function(preds /* , args */) {
                 var predIterator = function() {
@@ -3799,15 +3842,46 @@
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Given a list of predicates returns a new predicate that will be true exactly when all of them are.
+         *
+         * @static
+         * @memberOf R
+         * @category logic
+         * @param {Array} list An array of predicate functions
+         * @param {*} optional Any arguments to pass into the predicates
+         * @return {Function} a function that applies its arguments to each of the predicates, returning 
+         *                   `true` if all are satisfied.
+         *
+         * @example
+         * 
+         * gt10 = function(x) { return x > 10; };
+         * even = function(x) { return x % 2 === 0};
+         * f = allPredicates([gt10, even]);
+         * f(11) // => false
+         * f(12) // => true
          */
-        // Given a list of predicates returns a new predicate that will be true exactly when all of them are.
         R.allPredicates = predicateWrap(all);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
+         *
+         * @static
+         * @memberOf R
+         * @category logic
+         * @param {Array} list An array of predicate functions
+         * @param {*} optional Any arguments to pass into the predicates
+         * @return {Function}  a function that applies its arguments to each of the predicates, returning 
+         *                   `true` if all are satisfied.. 
+         *
+         * @example
+         * 
+         * gt10 = function(x) { return x > 10; };
+         * even = function(x) { return x % 2 === 0};
+         * f = allPredicates([gt10, even]);
+         * f(11) // => true
+         * f(8) // => true
+         * f(9) // => false
          */
-        // Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
         R.anyPredicates = predicateWrap(any);
 
         // Arithmetic Functions
@@ -3985,9 +4059,24 @@
         R.divideBy = flip(divide);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Divides the second parameter by the first and returns the remainder.
+         * The flipped version (`moduloBy`) may be more useful curried.
+         * Note that this functions preserves the JavaScript-style behavior for
+         * modulo. For mathematical modulo see `mathMod`
+         *
+         * @static
+         * @memberOf R
+         * @see moduloBy, mathMod
+         * @param {number} a The value to the divide.
+         * @param {number} b The pseudo-modulus
+         * @return {number} The result of `b % a`.
+         * @example
+         *
+         * modulo(17, 3) // => 2
+         * // JS behavior:
+         * modulo(-17, 3) // => -2
+         * modulo(17, -3) // => 2
          */
-        // Divides the second parameter by the first and returns the remainder.
         var modulo = R.modulo = function _modulo(a, b) {
             switch (arguments.length) {
                 case 0: throw NO_ARGS_EXCEPTION;
@@ -4085,49 +4174,114 @@
         R.product = foldl(multiply, 1);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns true if the first parameter is less than the second.
+         *
+         * @static
+         * @memberOf R
+         * @param {Number} a
+         * @param {Number} b
+         * @return {Boolean} a < b
+         *
+         * @example
+         *
+         * lt(2, 6) // => true
+         * lt(2, 0) // => false
+         * lt(2, 2) // => false
          */
-        // Returns true if the first parameter is less than the second.
         R.lt = function _lt(a, b) {
             return arguments.length < 2 ? function(b) { return a < b; } :  a < b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns true if the first parameter is less than or equal to the second.
+         *
+         * @static
+         * @memberOf R
+         * @param {Number} a
+         * @param {Number} b
+         * @return {Boolean} a <= b
+         *
+         * @example
+         *
+         * lte(2, 6) // => true
+         * lt(2, 0) // => false
+         * lt(2, 2) // => true
          */
-        // Returns true if the first parameter is less than or equal to the second.
         R.lte = function _lte(a, b) {
             return arguments.length < 2 ? function(b) { return a <= b; } :  a <= b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Returns true if the first parameter is greater than the second.
+         *
+         * @static
+         * @memberOf R
+         * @param {Number} a
+         * @param {Number} b
+         * @return {Boolean} a > b
+         *
+         * @example
+         *
+         * gt(2, 6) // => false
+         * gt(2, 0) // => true
+         * gt(2, 2) // => false
          */
-        // Returns true if the first parameter is greater than the second.
         R.gt = function _gt(a, b) {
             return arguments.length < 2 ? function(b) { return a > b; } :  a > b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Returns true if the first parameter is greater than or equal to the second.
+         * Returns true if the first parameter is greater than or equal to the second.
+         *
+         * @static
+         * @memberOf R
+         * @param {Number} a
+         * @param {Number} b
+         * @return {Boolean} a >= b
+         *
+         * @example
+         *
+         * gt(2, 6) // => false
+         * gt(2, 0) // => true
+         * gt(2, 2) // => true
+         */ 
         R.gte = function _gte(a, b) {
             return arguments.length < 2 ? function(b) { return a >= b; } :  a >= b;
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Determines the largest of a list of numbers (or elements that can be cast to numbers)
+         *
+         * @static
+         * @memberOf R
+         * @see maxWith
+         * @param {Array} list A list of numbers
+         * @return {Number} The greatest number in the list
+         *
+         * @example
+         *
+         * max([7, 3, 9, 2, 4, 9, 3]) // => 9
          */
-        // Determines the largest of a list of numbers (or elements that can be cast to numbers)
         var max = R.max = function _max(list) {
             return foldl(binary(Math.max), -Infinity, list);
         };
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
+         *
+         * @static
+         * @memberOf R
+         * @see max
+         * @param {Function} keyFn A comparator function for elements in the list
+         * @param {Array} list A list of comparable elements
+         * @return {*} The greatest element in the list. `undefined` if the list is empty.
+         *
+         * @example
+         * 
+         * function cmp(obj) { return obj.x; }
+         * a = {x: 1}, b = {x: 2}, c = {x: 3}; 
+         * maxWith(cmp, [a, b, c]) // => {x: 3}
          */
-        // Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.maxWith = curry2(function _maxWith(keyFn, list) {
             if (!(list && list.length > 0)) {
                return;
@@ -4144,11 +4298,22 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
+         *
+         * @static
+         * @memberOf R
+         * @see min
+         * @param {Function} keyFn A comparator function for elements in the list
+         * @param {Array} list A list of comparable elements
+         * @return {*} The greatest element in the list. `undefined` if the list is empty.
+         *
+         * @example
+         * 
+         * function cmp(obj) { return obj.x; }
+         * var a = {x: 1}, b = {x: 2}, c = {x: 3}; 
+         * minWith(cmp, [a, b, c]) // => {x: 1}
          */
         // TODO: combine this with maxWith?
-
-        // Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
         R.minWith = curry2(function _minWith(keyFn, list) {
             if (!(list && list.length > 0)) {
                 return;
@@ -4166,12 +4331,22 @@
 
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Determines the smallest of a list of numbers (or elements that can be cast to numbers)
+         *
+         * @static
+         * @memberOf R
+         * @see minWith
+         * @param {Array} list A list of numbers
+         * @return {Number} The greatest number in the list
+         *
+         * @example
+         *
+         * min([7, 3, 9, 2, 4, 9, 3]) // => 2
          */
-        // Determines the smallest of a list of numbers (or elements that can be cast to numbers)
         R.min = function _min(list) {
             return foldl(binary(Math.min), Infinity, list);
         };
+
 
 
         // String Functions
@@ -4182,68 +4357,134 @@
         // --------
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * returns a subset of a string between one index and another.
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {Number} indexA An integer between 0 and the length of the string.
+         * @param {Number} indexB An integer between 0 and the length of the string.
+         * @param {String} The string to extract from
+         * @return {String} the extracted substring
+         *
+         * @example
+         * 
+         * substring(2, 5, "abcdefghijklm"); //=> "cde"
          */
-        // A substring of a String:
-        //
-        //     substring(2, 5, "abcdefghijklm"); //=> "cde"
         var substring = R.substring = invoker("substring", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The trailing substring of a String starting with the nth character:
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {Number} indexA An integer between 0 and the length of the string.
+         * @param {String} The string to extract from
+         * @return {String} the extracted substring
+         *
+         * @example
+         * 
+         * substringFrom(8, "abcdefghijklm"); //=> "ijklm"
          */
-        // The trailing substring of a String starting with the nth character:
-        //
-        //     substringFrom(8, "abcdefghijklm"); //=> "ijklm"
         R.substringFrom = flip(substring)(void 0);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The leading substring of a String ending before the nth character:
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {Number} indexA An integer between 0 and the length of the string.
+         * @param {String} The string to extract from
+         * @return {String} the extracted substring
+         *
+         * @example
+         * 
+         * substringTo(8, "abcdefghijklm"); //=> "abcdefgh"
          */
-        // The leading substring of a String ending before the nth character:
-        //
-        //     substringTo(8, "abcdefghijklm"); //=> "abcdefgh"
         R.substringTo = substring(0);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The character at the nth position in a String:
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {Number} index An integer between 0 and the length of the string.
+         * @param {String} str The string to extract a char from
+         * @return {String} the character at `index` of `str`
+         *
+         * @example
+         * 
+         * charAt(8, "abcdefghijklm"); //=> "i"
          */
-        // The character at the nth position in a String:
-        //
-        //     charAt(8, "abcdefghijklm"); //=> "i"
         R.charAt = invoker("charAt", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * The ascii code of the character at the nth position in a String:
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {Number} index An integer between 0 and the length of the string.
+         * @param {String} str The string to extract a charCode from
+         * @return {Number} the code of the character at `index` of `str`
+         *
+         * @example
+         *
+         * charCodeAt(8, "abcdefghijklm"); //=> 105
+         *     // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
          */
-        // The ascii code of the character at the nth position in a String:
-        //
-        //     charCodeAt(8, "abcdefghijklm"); //=> 105
-        //     // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
         R.charCodeAt = invoker("charCodeAt", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Tests a regular expression agains a String
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {RegExp} rx A regular expression.
+         * @param {String} str The string to match against
+         * @return {Array} The list of matches, or null if no matches found
+         *
+         * @example
+         *
+         * match(/([a-z]a)/g, "bananas"); //=> ["ba", "na", "na"]
          */
-        // Tests a regular expression agains a String
-        //
-        //     match(/([a-z]a)/g, "bananas"); //=> ["ba", "na", "na"]
         R.match = invoker("match", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Finds the first index of a substring in a string, returning -1 if it's not present
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {String} c A string to find.
+         * @param {String} str The string to search in
+         * @return {Number} The first index of `c` or -1 if not found
+         *
+         * @example
+         *
+         * strIndexOf('c', 'abcdefg) //=> 2
          */
-        // Finds the index of a substring in a string, returning -1 if it's not present
-        //
-        //     strIndexOf('c', 'abcdefg) //=> 2
         R.strIndexOf = invoker("indexOf", String.prototype);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * 
+         * Finds the last index of a substring in a string, returning -1 if it's not present
+         *
+         * @static
+         * @memberOf R
+         * @see invoker
+         * @param {String} c A string to find.
+         * @param {String} str The string to search in
+         * @return {Number} The last index of `c` or -1 if not found
+         *
+         * @example
+         *
+         * strLastIndexOf('a', 'banana split') //=> 5
          */
-        // Finds the last index of a substring in a string, returning -1 if it's not present
-        //
-        //     strLastIndexOf('a', 'banana split') //=> 5
         R.strLastIndexOf = invoker("lastIndexOf", String.prototype);
 
         /**
@@ -4307,12 +4548,19 @@
         R.split = invoker("split", String.prototype, 1);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * internal path function
+         * Takes an array, paths, indicating the deep set of keys
+         * to find.
+         * 
+         * @private
+         * 
+         * @param {Array} paths An array of strings to map to object properties
+         * @param {Object} obj The object to find the path in
+         * @return {Array} The value at the end of the path or `undefined`.
+         * @example
+         *
+         * path(['a', 'b'], {a: {b: 2}}) // => 2
          */
-        // internal path function
-        // Takes an array, paths, indicating the deep set of keys
-        // to find. E.g.
-        // path(['a', 'b'], {a: {b: 2}}) // => 2
         function path(paths, obj) {
             var i = -1, length = paths.length, val;
             if (obj == null) { return; }
@@ -4335,10 +4583,6 @@
          * @example
          * pathOn('/', 'a/b/c', {a: {b: {c: 3}}}) //= 3
          */
-        // Retrieve a nested path on an object seperated by the specified
-        // separator value.
-        //
-        //     pathOn('/', 'a/b/c', {a: {b: {c: 3}}}) //= 3
         R.pathOn = curry3(function pathOn(sep, str, obj) {
             return path(str.split(sep), obj);
         });
@@ -4353,8 +4597,6 @@
          * @example
          * path('a.b', {a: {b: 2}}) //= 2
          */
-        // Retrieve a nested path on an object seperated by periods
-        // R.path('a.b', {a: {b: 2}}) //= 2
         R.path = R.pathOn('.');
 
         // Data Analysis and Grouping Functions
@@ -4366,15 +4608,22 @@
         // --------
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Reasonable analog to SQL `select` statement.
+         *
+         * @static
+         * @memberOf R
+         * @category object
+         * @category relation
+         * @param {Array} props The property names to project
+         * @param {Array} objs The objects to query
+         * @return {Array} An array of objects with just the `props` properties.
+         * @example
+         *
+         * var abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2},
+         * var fred = {name: 'Fred', age: 12, hair: 'brown', grade: 7}
+         * var kids = [abby, fred];
+         * project(['name', 'grade'], kids); //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
          */
-        // Reasonable analog to SQL `select` statement.
-        //
-        //     var abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2},
-        //     var fred = {name: 'Fred', age: 12, hair: 'brown', grade: 7}
-        //     var kids = [abby, fred];
-        //     project(['name', 'grade'], kids);
-        //     //= [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
         R.project = useWith(map, R.pickAll, identity); // passing `identity` gives correct arity
 
         /**
@@ -4397,16 +4646,6 @@
          * var hasBrownHair = propEq("hair", "brown");
          * filter(hasBrownHair, kids); //= [fred, rusty]
          */
-        // Determines whether the given property of an object has a specific value
-        // Most likely used to filter a list:
-        //
-        //     var abby = {name: 'Abby', age: 7, hair: 'blond'};
-        //     var fred = {name: 'Fred', age: 12, hair: 'brown'};
-        //     var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
-        //     var alois = {name: 'Alois', age: 15, disposition: 'surly'};
-        //     var kids = [abby, fred, rusty, alois];
-        //     var hasBrownHair = propEq("hair", "brown");
-        //     filter(hasBrownHair, kids); //= [fred, rusty]
         R.propEq = curry3(function propEq(name, val, obj) {
             return obj[name] === val;
         });
@@ -4425,42 +4664,97 @@
          *
          * union([1, 2, 3], [2, 3, 4]); //= [1, 2, 3, 4]
          */
-        // Combines two lists into a set (i.e. no duplicates) composed of the
-        // elements of each list.
         R.union = compose(uniq, R.concat);
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
+         * determined according to the value returned by applying the supplied predicate to two list elements.
+         *
+         * @static
+         * @memberOf R
+         * @see union
+         * @category relation
+         * @param {Function} pred 
+         * @param {Array} list1 The first list.
+         * @param {Array} list2 The second list.
+         * @return {Array} The first and second lists concatenated, with
+         * duplicates removed.
+         * @example
+         * function cmp(x, y) { return x.a === y.a; }
+         * var l1 = [{a: 1}, {a: 2}];
+         * var l2 = [{a: 1}, {a: 4}];
+         * unionWith(cmp, l1, l2); //= [{a: 1}, {a: 2}, {a: 4}]
          */
-        // Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
-        // determined according to the value returned by applying the supplied predicate to two list elements.
         R.unionWith = curry3(function _unionWith(pred, list1, list2) {
             return uniqWith(pred, concat(list1, list2));
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+         * 
+         * @static
+         * @memberOf R
+         * @see differenceWith
+         * @category relation 
+         * @param {Array} list1 The first list.
+         * @param {Array} list2 The second list.
+         * @return {Array} The elements in `list1` that are not in `list2`
+         * 
+         * @example
+         * 
+         * difference([1,2,3,4], [7,6,5,4,3]); //= [1,2]
+         * difference([7,6,5,4,3], [1,2,3,4]); //= [7,6,5]
          */
-        // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
         R.difference = curry2(function _difference(first, second) {
             return uniq(reject(flip(contains)(second), first));
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
-         */
-        // Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
-        // Duplication is determined according to the value returned by applying the supplied predicate to two list
-        // elements.
+         * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+         * Duplication is determined according to the value returned by applying the supplied predicate to two list
+         * elements.
+         * 
+         * @static
+         * @memberOf R
+         * @see difference
+         * @category relation
+         * @param {Function} pred 
+         * @param {Array} list1 The first list.
+         * @param {Array} list2 The second list.
+         * @return {Array} The first and second lists concatenated, with
+         *                 duplicates removed.
+         * 
+         * @example
+         * 
+         * function cmp(x, y) { return x.a === y.a; }
+         * var l1 = [{a: 1}, {a: 2}, {a: 3}];
+         * var l2 = [{a: 3}, {a: 4}];
+         * differenceWith(cmp, l1, l2); //= [{a: 1}, {a: 2}]
+         * 
+         */ 
         R.differenceWith = curry3(function differenceWith(pred, first, second) {
             return uniqWith(pred)(reject(flip(R.containsWith(pred))(second), first));
         });
 
-        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
+        /**
+         * Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
+         * 
+         * @static
+         * @memberOf R
+         * @see intersectionWith
+         * @category relation 
+         * @param {Array} list1 The first list.
+         * @param {Array} list2 The second list.
+         * @return {Array} The list of elements found in both `list1` and `list2`
+         * 
+         * @example
+         * 
+         * intersection(1,2,3,4], [7,6,5,4,3]); //= [1,2,3,4] 
+         * 
+         */
         R.intersection = curry2(function intersection(list1, list2) {
             return uniq(filter(flip(contains)(list1), list2));
         });
-
         /**
          * Combines two lists into a set (i.e. no duplicates) composed of those
          * elements common to both lists.  Duplication is determined according
@@ -4577,12 +4871,7 @@
          * var people = [clara, bob, alice];
          * sortByNameCaseInsensitive(people); //= [alice, bob, clara]
          */
-        // Sorts the list according to a key generated by the supplied function.
         R.sortBy = curry2(function sortBy(fn, list) {
-            /*
-              return sort(comparator(function(a, b) {return fn(a) < fn(b);}), list); // clean, but too time-inefficient
-              return pluck("val", sort(comparator(function(a, b) {return a.key < b.key;}), keyValue(fn, list))); // nice, but no need to clone result of keyValue call, so...
-            */
             return pluck("val", keyValue(fn, list).sort(comparator(function(a, b) {return a.key < b.key;})));
         });
 
