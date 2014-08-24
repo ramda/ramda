@@ -4462,11 +4462,43 @@
         });
 
         /**
-         * TODO: JSDoc-style documentation for this function
+         * Combines two lists into a set (i.e. no duplicates) composed of those
+         * elements common to both lists.  Duplication is determined according
+         * to the value returned by applying the supplied predicate to two list
+         * elements.
+         *
+         * @static
+         * @memberOf R
+         * @param {Function} pred A predicate function that determines whether
+         *        the two supplied elements are equal.
+         *        Signatrue: a -> a -> Boolean
+         * @param {Array} list1 One list of items to compare
+         * @param {Array} list2 A second list of items to compare
+         * @return {Array} A new list containing those elements common to both lists.
+         * @example
+         *     var buffaloSpringfield = [
+         *         {id: 824, name: 'Richie Furay'},
+         *         {id: 956, name: 'Dewey Martin'},
+         *         {id: 313, name: 'Bruce Palmer'},
+         *         {id: 456, name: 'Stephen Stills'},
+         *         {id: 177, name: 'Neil Young'}
+         *     ];
+         *     var csny = [
+         *         {id: 204, name: 'David Crosby'},
+         *         {id: 456, name: 'Stephen Stills'},
+         *         {id: 539, name: 'Graham Nash'},
+         *         {id: 177, name: 'Neil Young'}
+         *     ];
+         *
+         *     var sameId = function(o1, o2) {return o1.id === o2.id;};
+         *
+         *     intersectionWith(sameId, buffaloSpringfield, csny);
+         *
+         *     //=> [
+         *     //     {id: 456, name: 'Stephen Stills'},
+         *     //     {id: 177, name: 'Neil Young'}
+         *     // ];
          */
-        // Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
-        // Duplication is determined according to the value returned by applying the supplied predicate to two list
-        // elements.
         R.intersectionWith = curry3(function intersectionWith(pred, list1, list2) {
             var results = [], idx = -1;
             while (++idx < list1.length) {
@@ -4487,14 +4519,16 @@
          * @param {Function} fn An arbitrary unary function returning a potential
          *        object key.
          * @param {Array} list The list of items to process
-         * @return {Array} A new list with .
+         * @return {Array} A new list with the described structure.
          * @example
          *     var people = [
          *        {first: 'Fred', last: 'Flintstone', age: 23},
          *        {first: 'Betty', last: 'Rubble', age: 21},
          *        {first: 'George', last: 'Jetson', age: 29}
          *     ];
+         *
          *     var fullName = function(p) {return p.first + ' ' + p.last;};
+         *
          *     keyValue(fullName, people);
          *
          *     //=> [
@@ -4509,7 +4543,7 @@
          *     //        val: {first: "George", last: "Jetson", age: 29}
          *     //    }
          *     // ];
-         * */
+         */
         function keyValue(fn, list) { // TODO: Should this be made public?
             return map(function(item) {return {key: fn(item), val: item};}, list);
         }
