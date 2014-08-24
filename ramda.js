@@ -4186,7 +4186,11 @@
          * lt(2, 2) // => false
          */
         R.lt = function _lt(a, b) {
-            return arguments.length < 2 ? function(b) { return a < b; } :  a < b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a < b; };
+                default: return a < b;
+            }
         };
 
         /**
@@ -4205,7 +4209,11 @@
          * lt(2, 2) // => true
          */
         R.lte = function _lte(a, b) {
-            return arguments.length < 2 ? function(b) { return a <= b; } :  a <= b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a <= b; };
+                default: return a <= b;
+            }
         };
 
         /**
@@ -4224,7 +4232,11 @@
          * gt(2, 2) // => false
          */
         R.gt = function _gt(a, b) {
-            return arguments.length < 2 ? function(b) { return a > b; } :  a > b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a > b; };
+                default: return a > b;
+            }
         };
 
         /**
@@ -4243,7 +4255,11 @@
          * gt(2, 2) // => true
          */ 
         R.gte = function _gte(a, b) {
-            return arguments.length < 2 ? function(b) { return a >= b; } :  a >= b;
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return function(b) { return a >= b; };
+                default: return a >= b;
+            }
         };
 
         /**
@@ -4630,6 +4646,7 @@
          *
          * @static
          * @memberOf R
+         * @category relation
          * @param {string|number} name The property name (or index) to use.
          * @param {*} val The value to compare the property with.
          * @return {boolean} `true` if the properties are equal, `false` otherwise.
@@ -4653,6 +4670,7 @@
          *
          * @static
          * @memberOf R
+         * @category relation
          * @param {Array} as The first list.
          * @param {Array} bs The second list.
          * @return {Array} The first and second lists concatenated, with
@@ -4752,6 +4770,7 @@
         R.intersection = curry2(function intersection(list1, list2) {
             return uniq(filter(flip(contains)(list1), list2));
         });
+
         /**
          * Combines two lists into a set (i.e. no duplicates) composed of those
          * elements common to both lists.  Duplication is determined according
@@ -4760,6 +4779,7 @@
          *
          * @static
          * @memberOf R
+         * @category relation
          * @param {Function} pred A predicate function that determines whether
          *        the two supplied elements are equal.
          *        Signatrue: a -> a -> Boolean
