@@ -195,6 +195,10 @@ describe('lt', function() {
         assert(!atLeast20(20));
         assert(atLeast20(25));
     });
+
+    it('throws when given no arguments', function() {
+      assert.throws(R.lt, TypeError);
+    });
 });
 
 describe('lte', function() {
@@ -211,6 +215,10 @@ describe('lte', function() {
         assert(!greaterThan20(10));
         assert(greaterThan20(20));
         assert(greaterThan20(25));
+    });
+
+    it('throws when given no arguments', function() {
+      assert.throws(R.lte, TypeError);
     });
 });
 
@@ -229,6 +237,10 @@ describe('gt', function() {
         assert(!lessThan20(20));
         assert(!lessThan20(25));
     });
+
+    it('throws when given no arguments', function() {
+      assert.throws(R.gt, TypeError);
+    });
 });
 
 describe('gte', function() {
@@ -245,6 +257,10 @@ describe('gte', function() {
         assert(upTo20(10));
         assert(upTo20(20));
         assert(!upTo20(25));
+    });
+
+    it('throws when given no arguments', function() {
+      assert.throws(R.gte, TypeError);
     });
 });
 
