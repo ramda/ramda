@@ -60,7 +60,7 @@ describe('toPairs', function() {
         assert.deepEqual(R.toPairs({a: 1, b: 2, c: 3}), [['a', 1], ['b', 2], ['c', 3]]);
     });
     it("only iterates the object's own properties", function() {
-        var F = function() { 
+        var F = function() {
             this.x = 1;
             this.y = 2;
         };
@@ -75,7 +75,7 @@ describe('toPairsIn', function() {
         assert.deepEqual(R.toPairsIn({a: 1, b: 2, c: 3}), [['a', 1], ['b', 2], ['c', 3]]);
     });
     it("iterates properties on the object's prototype chain", function() {
-        var F = function() { 
+        var F = function() {
             this.x = 1;
             this.y = 2;
         };

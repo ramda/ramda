@@ -132,7 +132,7 @@
         var isArrayLike = function isArrayLike(x) {
             return isArray(x) || (
                 !!x &&
-                typeof x === "object" && 
+                typeof x === "object" &&
                 ! (x instanceof String) &&
                 (
                     !!(x.nodeType === 1 && x.length) ||
@@ -1078,7 +1078,7 @@
          *
          *      squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
-        var compose = R.compose = function _compose() {  
+        var compose = R.compose = function _compose() {
             switch (arguments.length) {
                 case 0: throw NO_ARGS_EXCEPTION;
                 case 1: return arguments[0];
@@ -2257,10 +2257,10 @@
 
 
         /**
-         * Internal implementation of `indexOf`. 
+         * Internal implementation of `indexOf`.
          * Returns the position of the first occurrence of an item in an array
          * (by strict equality),
-         * or -1 if the item is not included in the array. 
+         * or -1 if the item is not included in the array.
          *
          * @private .
          * @category Internal
@@ -2283,10 +2283,10 @@
 
 
         /**
-         * Internal implementation of `lastIndexOf`. 
+         * Internal implementation of `lastIndexOf`.
          * Returns the position of the last occurrence of an item in an array
          * (by strict equality),
-         * or -1 if the item is not included in the array. 
+         * or -1 if the item is not included in the array.
          *
          * @private .
          * @category Internal
@@ -2311,7 +2311,7 @@
         /**
          * Returns the position of the first occurrence of an item in an array
          * (by strict equality),
-         * or -1 if the item is not included in the array. 
+         * or -1 if the item is not included in the array.
          *
          * @static .
          * @memberOf R
@@ -2332,9 +2332,9 @@
 
         /**
          * Returns the position of the first occurrence of an item (by strict equality) in
-         * an array, or -1 if the item is not included in the array. However, 
-         * `indexOf.from` will only search the tail of the array, starting from the 
-         * `fromIdx` parameter. 
+         * an array, or -1 if the item is not included in the array. However,
+         * `indexOf.from` will only search the tail of the array, starting from the
+         * `fromIdx` parameter.
          *
          * @static .
          * @memberOf R
@@ -2377,9 +2377,9 @@
 
         /**
          * Returns the position of the last occurrence of an item (by strict equality) in
-         * an array, or -1 if the item is not included in the array. However, 
-         * `lastIndexOf.from` will only search the tail of the array, starting from the 
-         * `fromIdx` parameter. 
+         * an array, or -1 if the item is not included in the array. However,
+         * `lastIndexOf.from` will only search the tail of the array, starting from the
+         * `fromIdx` parameter.
          *
          * @static .
          * @memberOf R
@@ -2425,7 +2425,7 @@
 
 
         /**
-         * Returns `true` if the `x` is found in the `list`, using `pred` as an 
+         * Returns `true` if the `x` is found in the `list`, using `pred` as an
          * equality predicate for `x`.
          *
          * @static .
@@ -2433,7 +2433,7 @@
          * @param {Function} pred :: x -> x -> Bool
          * @param x the item to find
          * @param {Array} list the list to iterate over
-         * @return {Boolean} `true` if `x` is in `list`, else `false` 
+         * @return {Boolean} `true` if `x` is in `list`, else `false`
          */ //TODO: add an example
         function containsWith(pred, x, list) {
             var idx = -1, len = list.length;
@@ -2905,15 +2905,15 @@
          * copy of the list with the changes.
          * <small>No lists have been harmed in the application of this function.</small>
          *
-         * @static 
+         * @static
          * @memberOf R
          * @param {Number} start The position to start removing elements
          * @param {Number} count The number of elements to remove
          * @param {Array} list The list to remove from
          * @return {Array} a new Array with `count` elements from `start` removed
-         * 
+         *
          * @example .
-         * 
+         *
          *      remove(2, 3, [1,2,3,4,5,6,7,8]) // => [1,2,6,7,8]
          */
         R.remove = curry3(function _remove(start, count, list) {
@@ -2926,15 +2926,15 @@
          * that this is not destructive_: it returns a copy of the list with the changes.
          * <small>No lists have been harmed in the application of this function.</small>
          *
-         * @static 
+         * @static
          * @memberOf R
          * @param {Number} index The position to insert the element
          * @param elt The element to insert into the Array
          * @param {Array} list The list to insert into
          * @return {Array} a new Array with `elt` inserted at `index`
-         * 
+         *
          * @example .
-         * 
+         *
          *      insert(2, "x", [1,2,3,4]) // => [1,2,'x',3,4]
          */
         R.insert = curry3(function _insert(index, elt, list) {
@@ -2948,15 +2948,15 @@
          * is not destructive_: it returns a copy of the list with the changes.
          * <small>No lists have been harmed in the application of this function.</small>
          *
-         * @static 
+         * @static
          * @memberOf R
          * @param {Number} index The position to insert the sublist
          * @param {Array} elts The sub-list to insert into the Array
          * @param {Array} list The list to insert the sub-list into
          * @return {Array} a new Array with `elts` inserted starting at `index`
-         * 
+         *
          * @example .
-         * 
+         *
          *      insert.all(2, ['x','y','z'], [1,2,3,4]) // => [1,2,'x','y','z',3,4]
          */
         R.insert.all = curry3(function _insertAll(index, elts, list) {
@@ -2968,7 +2968,7 @@
         /**
          * Makes a comparator function out of a function that reports whether the first element is less than the second.
          *
-         * @static 
+         * @static
          * @memberOf R
          * @param {Function} pred A predicate function of arity two.
          * @return {Function} a Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
@@ -2979,7 +2979,7 @@
          *        return a.age < b.age;
          *      };
          *      sort(cmp, people);
-         */     
+         */
         var comparator = R.comparator = function _comparator(pred) {
             return function (a, b) {
                 return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
@@ -2991,15 +2991,15 @@
          * Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
          * time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
          * if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
-         * 
-         * @static 
+         *
+         * @static
          * @memberOf R
          * @param {Function} comparator A sorting function :: a -> b -> Int
          * @param {Array} list The list to sort
          * @return {Array} a new array with its elements sorted by the comparator function.
          *
          * @example .
-         * 
+         *
          *      sort(function(a, b) { return a - b; }, [4,2,7,5]); // => [2, 4, 5, 7];
          */
         var sort = R.sort = curry2(function sort(comparator, list) {
@@ -3015,7 +3015,7 @@
          * @static .
          * @param {Function} fn Function :: a -> String
          * @param {Array} list The array to group
-         * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements 
+         * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
          *         that produced that key when passed to `fn`.
          *
          * @example .
@@ -3082,7 +3082,7 @@
 
         /**
          * Runs the given function with the supplied object, then returns the object.
-         * 
+         *
          * @memberOf R
          * @static .
          * @param {*} x
@@ -3102,15 +3102,15 @@
         /**
          * Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
          * non-coercing equality for primitives.
-         * 
+         *
          * @memberOf R
          * @static .
          * @param {*} a
          * @param {*} b
-         * @return {Boolean} 
+         * @return {Boolean}
          *
          * @example .
-         * 
+         *
          *      var o = {};
          *      eq(o, o) // => true
          *      eq(o, {}) // => false
@@ -3124,7 +3124,7 @@
 
         /**
          * Returns a function that when supplied an object returns the indicated property of that object, if it exists.
-         * 
+         *
          * @memberOf R
          * @static .
          * @category Object
@@ -3132,7 +3132,7 @@
          * @alias get
          * @param {String} p The property name
          * @param {Object} obj The object to query
-         * @return {*} The value at obj.p 
+         * @return {*} The value at obj.p
          *
          * @example .
          *
@@ -3159,14 +3159,14 @@
         /**
          * Returns the value at the specified property.
          * The only difference from `prop` is the parameter order.
-         * 
+         *
          * @memberOf R
          * @static .
          * @see prop
          * @category Object
          * @param {Object} obj The object to query
          * @param {String} prop The property name
-         * @return {*} The value at obj.p 
+         * @return {*} The value at obj.p
          *
          * @example .
          *
@@ -3211,16 +3211,16 @@
 
 
         /**
-         * Calls the specified function on the supplied object. Any additional arguments 
-         * after `fn` and `obj` are passed in to `fn`. If no additional arguments are passed to `func`, 
+         * Calls the specified function on the supplied object. Any additional arguments
+         * after `fn` and `obj` are passed in to `fn`. If no additional arguments are passed to `func`,
          * `fn` is invoked with no arguments.
          *
          * @memberOf R
          * @static .
          * @category Object
          * @param {String} fn The name of the property mapped to the function to invoke
-         * @param {Object} obj The object 
-         * @return {*} The value of invoking `obj.fn` 
+         * @param {Object} obj The object
+         * @return {*} The value of invoking `obj.fn`
          * @example .
          *
          *      func('add', R, 1, 2) // => 3
@@ -3286,7 +3286,7 @@
          * Internal reference to Object.keys
          *
          * @private
-         * @param {Object} 
+         * @param {Object}
          * @return {Array}
          */
         var nativeKeys = Object.keys;
@@ -3349,7 +3349,7 @@
         /**
          * @private
          * @param {Function} fn The strategy for extracting keys from an object
-         * @return {Function} A function that takes an object and returns an array of 
+         * @return {Function} A function that takes an object and returns an array of
          *                    key-value arrays.
          */
         var pairWith = function(fn) {
@@ -3371,7 +3371,7 @@
          * @param {Object} obj The object to extract from
          * @return {Array} An array of key, value arrays from the object's own properties
          * @example .
-         * 
+         *
          *      toPairs({a: 1, b: 2, c: 3}); // [['a', 1], ['b', 2], ['c', 3]]
          */
         R.toPairs = pairWith(R.keys);
@@ -3387,10 +3387,10 @@
          * @memberOf R
          * @category Object
          * @param {Object} obj The object to extract from
-         * @return {Array} An array of key, value arrays from the object's own 
+         * @return {Array} An array of key, value arrays from the object's own
          *         and prototype properties
          * @example .
-         * 
+         *
          *      var F = function() { this.x = 'X'; };
          *      F.prototype.y = 'Y';
          *      var f = new F();
@@ -3401,7 +3401,7 @@
 
         /**
          * Returns a list of all the enumerable own properties of the supplied object.
-         * Note that the order of the output array is not guaranteed across 
+         * Note that the order of the output array is not guaranteed across
          * different JS platforms.
          *
          * @static .
@@ -3455,7 +3455,7 @@
          * Internal helper function for making a partial copy of an object
          *
          * @private .
-         * 
+         *
          */
         // TODO: document, even for internals...
         function pickWith(test, obj) {
@@ -3474,19 +3474,19 @@
 
         /**
          * Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
-         * property is ignored. 
-         * 
+         * property is ignored.
+         *
          * @static .
          * @memberOf R
          * @category Object
          * @param {Array} names an array of String propery names to copy onto a new object
          * @param {Object} obj The object to copy from
-         * @return {Object} A new object with only properties from `names` on it. 
+         * @return {Object} A new object with only properties from `names` on it.
          * @example .
          *
          *      pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, d: 4}
          *      pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1}
-         */         
+         */
         R.pick = curry2(function pick(names, obj) {
             return pickWith(function(val, key) {
                 return contains(key, names);
@@ -3502,7 +3502,7 @@
          * @category Object
          * @param {Array} names an array of String propery names to omit from the new object
          * @param {Object} obj The object to copy from
-         * @return {Object} A new object with properties from `names` not on it. 
+         * @return {Object} A new object with properties from `names` not on it.
          * @example .
          *
          *      omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {b: 2, c: 3}
@@ -3516,13 +3516,13 @@
 
         /**
          * Returns a partial copy of an object containing only the keys that satisfy the supplied predicate.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category Object
          * @param {Function} pred A predicate to determine whether or not a key should be included on the output object.
          * @param {Object} obj The object to copy from
-         * @return {Object} A new object with only properties that satisfy `pred` on it. 
+         * @return {Object} A new object with only properties that satisfy `pred` on it.
          * @see pick
          * @example .
          *
@@ -3556,7 +3556,7 @@
          * @category Object
          * @param {Array} names an array of String propery names to copy onto a new object
          * @param {Object} obj The object to copy from
-         * @return {Object} A new object with only properties from `names` on it. 
+         * @return {Object} A new object with only properties from `names` on it.
          * @see pick
          * @example .
          *
@@ -3614,12 +3614,12 @@
 
         /**
          * Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category Object
          * @param {String} prop The name of the property to compare
-         * @param {Object} obj1 
+         * @param {Object} obj1
          * @param {Object} obj2
          * @return {Boolean}
          *
@@ -3637,7 +3637,7 @@
 
         /**
          * internal helper for `where`
-         * 
+         *
          * @private
          * @see where
          */
@@ -3678,13 +3678,13 @@
          * If the spec has a property mapped to a function, then `where` evaluates the function, passing in
          * the test object's value for the property in question, as well as the whole test object.
          *
-         * `where` is well suited to declarativley expressing constraints for other functions, e.g., 
+         * `where` is well suited to declarativley expressing constraints for other functions, e.g.,
          * `filter`, `find`, `pickWith`, etc.
          *
          * @static .
          * @memberOf R
          * @category Object
-         * @param {Object} spec 
+         * @param {Object} spec
          * @param {Object} testObj
          * @return {Boolean}
          * @example .
@@ -3732,7 +3732,7 @@
          * @static .
          * @memberOf R
          * @category Object
-         * @param {Object} obj The object to attach ramda functions 
+         * @param {Object} obj The object to attach ramda functions
          * @return {Object} a reference to the mutated object
          * @example .
          *
@@ -3740,7 +3740,7 @@
          *      R.installTo(x) // => x now contains ramda functions
          *      R.installTo(this) // => add ramda functions to `this` object
          *      R.installTo() // => ramda functions in global scope
-         */ 
+         */
         R.installTo = function(obj) {
             return extend(obj || global, R);
         };
@@ -3772,7 +3772,7 @@
 
         /**
          * A function that always returns `0`. Any passed in parameters are ignored.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category function
@@ -3787,7 +3787,7 @@
 
         /**
          * A function that always returns `false`. Any passed in parameters are ignored.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category function
@@ -3802,7 +3802,7 @@
 
         /**
          * A function that always returns `true`. Any passed in parameters are ignored.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category function
@@ -3835,9 +3835,9 @@
          * @category logic
          * @param {Function} f a predicate
          * @param {Function} g another predicate
-         * @return {Function} a function that applies its arguments to `f` and `g` and ANDs their outputs together. 
+         * @return {Function} a function that applies its arguments to `f` and `g` and ANDs their outputs together.
          * @example .
-         * 
+         *
          *      gt10 = function(x) { return x > 10; };
          *      even = function(x) { return x % 2 === 0 };
          *      f = and(gt10, even);
@@ -3861,9 +3861,9 @@
          * @category logic
          * @param {Function} f a predicate
          * @param {Function} g another predicate
-         * @return {Function} a function that applies its arguments to `f` and `g` and ORs their outputs together. 
+         * @return {Function} a function that applies its arguments to `f` and `g` and ORs their outputs together.
          * @example .
-         * 
+         *
          *      gt10 = function(x) { return x > 10; };
          *      even = function(x) { return x % 2 === 0 };
          *      f = or(gt10, even);
@@ -3885,9 +3885,9 @@
          * @memberOf R
          * @category logic
          * @param {Function} f a predicate
-         * @return {Function} a function that applies its arguments to `f` and logically inverts its output. 
+         * @return {Function} a function that applies its arguments to `f` and logically inverts its output.
          * @example .
-         * 
+         *
          *      gt10 = function(x) { return x > 10; };
          *      f = not(gt10);
          *      f(11) // => false
@@ -3933,7 +3933,7 @@
          * @return {Function} a function that applies its arguments to each of
          *         the predicates, returning `true` if all are satisfied.
          * @example .
-         * 
+         *
          *      gt10 = function(x) { return x > 10; };
          *      even = function(x) { return x % 2 === 0};
          *      f = allPredicates([gt10, even]);
@@ -3951,10 +3951,10 @@
          * @category logic
          * @param {Array} list An array of predicate functions
          * @param {*} optional Any arguments to pass into the predicates
-         * @return {Function}  a function that applies its arguments to each of the predicates, returning 
-         *                   `true` if all are satisfied.. 
+         * @return {Function}  a function that applies its arguments to each of the predicates, returning
+         *                   `true` if all are satisfied..
          * @example .
-         * 
+         *
          *      gt10 = function(x) { return x > 10; };
          *      even = function(x) { return x % 2 === 0};
          *      f = allPredicates([gt10, even]);
@@ -4062,7 +4062,7 @@
 
         /**
          * Divides two numbers. Equivalent to `a / b`.
-         * While at times the curried version of `divide` might be useful, 
+         * While at times the curried version of `divide` might be useful,
          * probably the curried version of `divideBy` will be more useful.
          *
          * @static .
@@ -4083,8 +4083,8 @@
 
         /**
          * Divides two numbers in reverse order. Equivalent to `b / a`.
-         * `divideBy` is the reversed version of `divide`, where the second parameter is 
-         * divided by the first.  The curried version of `divideBy` may prove more useful 
+         * `divideBy` is the reversed version of `divide`, where the second parameter is
+         * divided by the first.  The curried version of `divideBy` may prove more useful
          * than that of `divide`.
          *
          * @static .
@@ -4288,7 +4288,7 @@
          *      gt(2, 6) // => false
          *      gt(2, 0) // => true
          *      gt(2, 2) // => true
-         */ 
+         */
         R.gte = curry2(function _gte(a, b) { return a >= b; });
 
 
@@ -4321,7 +4321,7 @@
          * @return {*} The greatest element in the list. `undefined` if the list is empty.
          * @see max
          * @example .
-         * 
+         *
          *      function cmp(obj) { return obj.x; }
          *      a = {x: 1}, b = {x: 2}, c = {x: 3};
          *      maxWith(cmp, [a, b, c]) // => {x: 3}
@@ -4353,7 +4353,7 @@
          * @see min
          * @return {*} The greatest element in the list. `undefined` if the list is empty.
          * @example .
-         * 
+         *
          *      function cmp(obj) { return obj.x; }
          *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
          *      minWith(cmp, [a, b, c]) // => {x: 1}
@@ -4413,7 +4413,7 @@
          * @return {String} the extracted substring
          * @see invoker
          * @example .
-         * 
+         *
          *      substring(2, 5, "abcdefghijklm"); //=> "cde"
          */
         var substring = R.substring = invoker("substring", String.prototype);
@@ -4430,7 +4430,7 @@
          * @return {String} the extracted substring
          * @see invoker
          * @example .
-         * 
+         *
          *      substringFrom(8, "abcdefghijklm"); //=> "ijklm"
          */
         R.substringFrom = flip(substring)(void 0);
@@ -4447,7 +4447,7 @@
          * @return {String} the extracted substring
          * @see invoker
          * @example .
-         * 
+         *
          *      substringTo(8, "abcdefghijklm"); //=> "abcdefgh"
          */
         R.substringTo = substring(0);
@@ -4464,7 +4464,7 @@
          * @return {String} the character at `index` of `str`
          * @see invoker
          * @example .
-         * 
+         *
          *      charAt(8, "abcdefghijklm"); //=> "i"
          */
         R.charAt = invoker("charAt", String.prototype);
@@ -4523,7 +4523,7 @@
 
 
         /**
-         * 
+         *
          * Finds the last index of a substring in a string, returning -1 if it's not present
          *
          * @static .
@@ -4596,7 +4596,7 @@
          * internal path function
          * Takes an array, paths, indicating the deep set of keys
          * to find.
-         * 
+         *
          * @private
          * @memberOf R
          * @category string
@@ -4732,7 +4732,7 @@
          * @static .
          * @memberOf R
          * @category relation
-         * @param {Function} pred 
+         * @param {Function} pred
          * @param {Array} list1 The first list.
          * @param {Array} list2 The second list.
          * @return {Array} The first and second lists concatenated, with
@@ -4752,7 +4752,7 @@
 
         /**
          * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category relation
@@ -4761,7 +4761,7 @@
          * @return {Array} The elements in `list1` that are not in `list2`
          * @see differenceWith
          * @example .
-         * 
+         *
          *      difference([1,2,3,4], [7,6,5,4,3]); //= [1,2]
          *      difference([7,6,5,4,3], [1,2,3,4]); //= [7,6,5]
          */
@@ -4774,24 +4774,24 @@
          * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
          * Duplication is determined according to the value returned by applying the supplied predicate to two list
          * elements.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category relation
-         * @param {Function} pred 
+         * @param {Function} pred
          * @param {Array} list1 The first list.
          * @param {Array} list2 The second list.
          * @see difference
          * @return {Array} The first and second lists concatenated, with
          *                 duplicates removed.
          * @example .
-         * 
+         *
          *      function cmp(x, y) { return x.a === y.a; }
          *      var l1 = [{a: 1}, {a: 2}, {a: 3}];
          *      var l2 = [{a: 3}, {a: 4}];
          *      differenceWith(cmp, l1, l2); //= [{a: 1}, {a: 2}]
-         * 
-         */ 
+         *
+         */
         R.differenceWith = curry3(function differenceWith(pred, first, second) {
             return uniqWith(pred)(reject(flip(R.containsWith(pred))(second), first));
         });
@@ -4799,7 +4799,7 @@
 
         /**
          * Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
-         * 
+         *
          * @static .
          * @memberOf R
          * @category relation
@@ -4808,7 +4808,7 @@
          * @see intersectionWith
          * @return {Array} The list of elements found in both `list1` and `list2`
          * @example .
-         * 
+         *
          *      intersection(1,2,3,4], [7,6,5,4,3]); //= [1,2,3,4]
          */
         R.intersection = curry2(function intersection(list1, list2) {
