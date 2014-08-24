@@ -33,20 +33,20 @@
         /**
          * An optimized, private array `slice` implementation.
          *
-         * @private
+         * @private .
          * @category Internal
          * @param {Arguments|Array} args The array or arguments object to consider.
          * @param {number} [from=0] The array index to slice from, inclusive.
          * @param {number} [to=args.length] The array index to slice to, exclusive.
          * @return {Array} A new, sliced array.
-         * @example
+         * @example .
          *
-         * _slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
+         *      _slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
          *
-         * var firstThreeArgs = function(a, b, c, d) {
-         *   return _slice(arguments, 0, 3);
-         * };
-         * firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
+         *      var firstThreeArgs = function(a, b, c, d) {
+         *        return _slice(arguments, 0, 3);
+         *      };
+         *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
          */
         function _slice(args, from, to) {
             from = (typeof from === "number" ) ? from : 0;
@@ -64,14 +64,14 @@
         /**
          * Private `concat` function to merge two array-like objects.
          *
-         * @private
+         * @private .
          * @category Internal
          * @param {Array|Arguments} [set1=[]] An array-like object.
          * @param {Array|Arguments} [set2=[]] An array-like object.
          * @return {Array} A new, merged array.
-         * @example
+         * @example .
          *
-         * concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+         *      concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
          */
         var concat = function _concat(set1, set2) {
             set1 = set1 || [];
@@ -95,15 +95,15 @@
         /**
          * Tests whether or not an object is an array.
          *
-         * @private
+         * @private .
          * @category Internal
          * @param {*} val The object to test.
          * @return {boolean} `true` if `val` is an array, `false` otherwise.
-         * @example
+         * @example .
          *
-         * isArray([]); //=> true
-         * isArray(true); //=> false
-         * isArray({}); //=> false
+         *      isArray([]); //=> true
+         *      isArray(true); //=> false
+         *      isArray({}); //=> false
          */
         var isArray = Array.isArray || function _isArray(val) {
             return val && val.length >= 0 && toString.call(val) === "[object Array]";
@@ -112,16 +112,16 @@
         /**
          * Tests whether or not an object is similar to an array.
          *
-         * @private
+         * @private .
          * @category Internal
          * @param {*} val The object to test.
          * @return {boolean} `true` if `val` has a numeric length property; `false` otherwise.
-         * @example
+         * @example .
          *
-         * isArrayLike([]); //=> true
-         * isArrayLike(true); //=> false
-         * isArrayLike({}); //=> false
-         * isArrayLike({length: 10}); //=> true
+         *      isArrayLike([]); //=> true
+         *      isArrayLike(true); //=> false
+         *      isArrayLike({}); //=> false
+         *      isArrayLike({length: 10}); //=> true
          */
         var isArrayLike = function isArrayLike(x) {
             return isArray(x) || (
@@ -143,22 +143,22 @@
          *
          * Optionally, you may provide an arity for the returned function.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to curry.
          * @param {number} [fnArity=fn.length] An optional arity for the returned function.
          * @return {Function} A new, curried function.
-         * @example
+         * @example .
          *
-         * var addFourNumbers = function(a, b, c, d) {
-         *   return a + b + c + d;
-         * };
+         *      var addFourNumbers = function(a, b, c, d) {
+         *        return a + b + c + d;
+         *      };
          *
-         * var curriedAddFourNumbers = curry(addFourNumbers);
-         * var f = curriedAddFourNumbers(1, 2);
-         * var g = f(3);
-         * g(4);//=> 10
+         *      var curriedAddFourNumbers = curry(addFourNumbers);
+         *      var f = curriedAddFourNumbers(1, 2);
+         *      var g = f(3);
+         *      g(4);//=> 10
          */
         var curry = R.curry = function _curry(fn, fnArity) {
             fnArity = typeof fnArity === "number" ? fnArity : fn.length;
@@ -183,16 +183,17 @@
         /**
          * Optimized internal two-arity curry function.
          *
-         * @private
+         * @private .
          * @category Function
          * @param {Function} fn The function to curry.
          * @return {Function} curried function
-         * @example
+         * @example .
          *
-         * var addTwo = function(a, b) {
-         *   return a + b;
-         * };
-         * var curriedAddTwo = curry2(addTwo);
+         *      var addTwo = function(a, b) {
+         *        return a + b;
+         *      };
+         *
+         *      var curriedAddTwo = curry2(addTwo);
          */
         function curry2(fn) {
             return function(a, b) {
@@ -209,16 +210,17 @@
         /**
          * Optimized internal three-arity curry function.
          *
-         * @private
+         * @private .
          * @category Function
          * @param {Function} fn The function to curry.
          * @return {Function} curried function
-         * @example
+         * @example .
          *
-         * var addThree = function(a, b, c) {
-         *   return a + b + c;
-         * };
-         * var curriedAddThree = curry3(addThree);
+         *      var addThree = function(a, b, c) {
+         *        return a + b + c;
+         *      };
+         *
+         *      var curriedAddThree = curry3(addThree);
          */
         function curry3(fn) {
             return function(a, b, c) {
@@ -240,18 +242,18 @@
          * Does not ignore methods stored on the object's prototype chain. Used for dynamically
          * dispatching Ramda methods to non-Array objects.
          *
-         * @private
+         * @private .
          * @category Internal
          * @param {string} methodName The name of the method to check for.
          * @param {Object} obj The object to test.
          * @return {boolean} `true` has a given method, `false` otherwise.
-         * @example
+         * @example .
          *
-         * var person = { name: 'John' };
-         * person.shout = function() { alert(this.name); };
+         *      var person = { name: 'John' };
+         *      person.shout = function() { alert(this.name); };
          *
-         * hasMethod('shout', person); //=> true
-         * hasMethod('foo', person); //=> false
+         *      hasMethod('shout', person); //=> true
+         *      hasMethod('foo', person); //=> false
          */
         var hasMethod = function _hasMethod(methodName, obj) {
             return obj && !isArray(obj) && typeof obj[methodName] === 'function';
@@ -262,7 +264,7 @@
          * function. If it isn't an array it will execute that function otherwise it will
          * default to the ramda implementation.
          *
-         * @private
+         * @private .
          * @category Internal
          * @param {Function} func ramda implemtation
          * @param {String} methodname property to check for a custom implementation
@@ -286,15 +288,15 @@
         /**
          * Private function that generates a parameter list based on the paremeter count passed in.
          *
-         * @private
+         * @private .
          * @category Internal
          * @param {number} n The number of parameters
          * @return {string} The parameter list
-         * @example
+         * @example .
          *
-         * mkArgStr(1); //= "arg1"
-         * mkArgStr(2); //= "arg1, arg2"
-         * mkArgStr(3); //= "arg1, arg2, arg3"
+         *      mkArgStr(1); //= "arg1"
+         *      mkArgStr(2); //= "arg1, arg2"
+         *      mkArgStr(3); //= "arg1, arg2, arg3"
          */
         var mkArgStr = function _makeArgStr(n) {
             var arr = [], idx = -1;
@@ -308,25 +310,25 @@
          * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
          * parameters. Any extraneous parameters will not be passed to the supplied function.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {number} n The desired arity of the new function.
          * @param {Function} fn The function to wrap.
          * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
          * arity `n`.
-         * @example
+         * @example .
          *
-         * var takesTwoArgs = function(a, b) {
-         *   return [a, b];
-         * };
-         * takesTwoArgs.length; //=> 2
-         * takesTwoArgs(1, 2); //=> [1, 2]
+         *      var takesTwoArgs = function(a, b) {
+         *        return [a, b];
+         *      };
+         *      takesTwoArgs.length; //=> 2
+         *      takesTwoArgs(1, 2); //=> [1, 2]
          *
-         * var takesOneArg = ramda.nAry(1, takesTwoArgs);
-         * takesOneArg.length; //=> 1
-         * // Only `n` arguments are passed to the wrapped function
-         * takesOneArg(1, 2); //=> [1, undefined]
+         *      var takesOneArg = ramda.nAry(1, takesTwoArgs);
+         *      takesOneArg.length; //=> 1
+         *      // Only `n` arguments are passed to the wrapped function
+         *      takesOneArg(1, 2); //=> [1, undefined]
          */
         var nAry = R.nAry = (function () {
             var cache = {
@@ -379,24 +381,24 @@
          * Wraps a function of any arity (including nullary) in a function that accepts exactly 1
          * parameter. Any extraneous parameters will not be passed to the supplied function.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to wrap.
          * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
-         * arity 1.
-         * @example
+         *         arity 1.
+         * @example .
          *
-         * var takesTwoArgs = function(a, b) {
-         *   return [a, b];
-         * };
-         * takesTwoArgs.length; //=> 2
-         * takesTwoArgs(1, 2); //=> [1, 2]
+         *      var takesTwoArgs = function(a, b) {
+         *        return [a, b];
+         *      };
+         *      takesTwoArgs.length; //=> 2
+         *      takesTwoArgs(1, 2); //=> [1, 2]
          *
-         * var takesOneArg = ramda.unary(1, takesTwoArgs);
-         * takesOneArg.length; //=> 1
-         * // Only 1 argument is passed to the wrapped function
-         * takesOneArg(1, 2); //=> [1, undefined]
+         *      var takesOneArg = ramda.unary(1, takesTwoArgs);
+         *      takesOneArg.length; //=> 1
+         *      // Only 1 argument is passed to the wrapped function
+         *      takesOneArg(1, 2); //=> [1, undefined]
          */
         R.unary = function _unary(fn) {
             return nAry(1, fn);
@@ -406,24 +408,24 @@
          * Wraps a function of any arity (including nullary) in a function that accepts exactly 2
          * parameters. Any extraneous parameters will not be passed to the supplied function.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to wrap.
          * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
          * arity 2.
-         * @example
+         * @example .
          *
-         * var takesThreeArgs = function(a, b, c) {
-         *   return [a, b, c];
-         * };
-         * takesThreeArgs.length; //=> 3
-         * takesThreeArgs(1, 2, 3); //=> [1, 2, 3]
+         *      var takesThreeArgs = function(a, b, c) {
+         *        return [a, b, c];
+         *      };
+         *      takesThreeArgs.length; //=> 3
+         *      takesThreeArgs(1, 2, 3); //=> [1, 2, 3]
          *
-         * var takesTwoArgs = ramda.binary(1, takesThreeArgs);
-         * takesTwoArgs.length; //=> 2
-         * // Only 2 arguments are passed to the wrapped function
-         * takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
+         *      var takesTwoArgs = ramda.binary(1, takesThreeArgs);
+         *      takesTwoArgs.length; //=> 2
+         *      // Only 2 arguments are passed to the wrapped function
+         *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
          */
         var binary = R.binary = function _binary(fn) {
             return nAry(2, fn);
@@ -434,25 +436,25 @@
          * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
          * functions produced by `arity` will pass all provided arguments to the wrapped function.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {number} n The desired arity of the returned function.
          * @param {Function} fn The function to wrap.
-         * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
-         * arity `n`.
-         * @example
+         * @return {Function} A new function wrapping `fn`. The new function is
+         *         guaranteed to be of arity `n`.
+         * @example .
          *
-         * var takesTwoArgs = function(a, b) {
-         *   return [a, b];
-         * };
-         * takesTwoArgs.length; //=> 2
-         * takesTwoArgs(1, 2); //=> [1, 2]
+         *      var takesTwoArgs = function(a, b) {
+         *        return [a, b];
+         *      };
+         *      takesTwoArgs.length; //=> 2
+         *      takesTwoArgs(1, 2); //=> [1, 2]
          *
-         * var takesOneArg = ramda.unary(1, takesTwoArgs);
-         * takesOneArg.length; //=> 1
-         * // All arguments are passed through to the wrapped function
-         * takesOneArg(1, 2); //=> [1, 2]
+         *      var takesOneArg = ramda.unary(1, takesTwoArgs);
+         *      takesOneArg.length; //=> 1
+         *      // All arguments are passed through to the wrapped function
+         *      takesOneArg(1, 2); //=> [1, 2]
          */
         var arity = R.arity = (function () {
             var cache = {
@@ -508,23 +510,22 @@
          * The returned function is curried and accepts `len + 1` parameters (or `method.length + 1`
          * when `len` is not specified), and the final parameter is the target object.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {string} name The name of the method to wrap.
          * @param {Object} obj The object to search for the `name` method.
          * @param [len] The desired arity of the wrapped method.
          * @return {Function} A new function or `undefined` if the specified method is not found.
-         * @example
+         * @example .
          *
+         *      var charAt = ramda.invoker('charAt', String.prototype);
+         *      charAt(6, 'abcdefghijklm'); //=> 'g'
          *
-         * var charAt = ramda.invoker('charAt', String.prototype);
-         * charAt(6, 'abcdefghijklm'); //=> 'g'
-         *
-         * var join = ramda.invoker('join', Array.prototype);
-         * var firstChar = charAt(0);
-         * join('', ramda.map(firstChar, ["light", "ampliifed", "stimulated", "emission", "radiation"]));
-         * //=> 'laser'
+         *      var join = ramda.invoker('join', Array.prototype);
+         *      var firstChar = charAt(0);
+         *      join('', ramda.map(firstChar, ["light", "ampliifed", "stimulated", "emission", "radiation"]));
+         *      //=> 'laser'
          */
         var invoker = R.invoker = function _invoker(name, obj, len) {
             var method = obj[name];
@@ -560,38 +561,38 @@
          * arguments that don't need to be transformed, although you can ignore them, it's best to
          * pass an identity function so that the new function reports the correct arity.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @alias disperseTo
          * @param {Function} fn The function to wrap.
          * @param {...Function} transformers A variable number of transformer functions
          * @return {Function} The wrapped function.
-         * @example
+         * @example .
          *
-         * var double = function(y) { return y * 2; };
-         * var square = function(x) { return x * x; };
-         * var add = function(a, b) { return a + b; };
-         * // Adds any number of arguments together
-         * var addAll = function() {
-         *   return ramda.reduce(add, 0, arguments);
-         * };
+         *      var double = function(y) { return y * 2; };
+         *      var square = function(x) { return x * x; };
+         *      var add = function(a, b) { return a + b; };
+         *      // Adds any number of arguments together
+         *      var addAll = function() {
+         *        return ramda.reduce(add, 0, arguments);
+         *      };
          *
-         * // Basic example
-         * var addDoubleAndSquare = ramda.useWith(addAll, double, square);
+         *      // Basic example
+         *      var addDoubleAndSquare = ramda.useWith(addAll, double, square);
          *
-         * addDoubleAndSquare(10, 5); //≅ addAll(double(10), square(5));
-         * //=> 125
+         *      addDoubleAndSquare(10, 5); //≅ addAll(double(10), square(5));
+         *      //=> 125
          *
-         * // Example of passing more arguments than transformers
-         * addDoubleAndSquare(10, 5, 100); //≅ addAll(double(10), square(5), 100);
-         * //=> 225
+         *      // Example of passing more arguments than transformers
+         *      addDoubleAndSquare(10, 5, 100); //≅ addAll(double(10), square(5), 100);
+         *      //=> 225
          *
-         * // But if you're expecting additional arguments that don't need transformation, it's best
-         * // to pass transformer functions so the resulting function has the correct arity
-         * var addDoubleAndSquareWithExtraParams = ramda.useWith(addAll, double, square, ramda.identity);
-         * addDoubleAndSquare(10, 5, 100); //≅ addAll(double(10), square(5), ramda.identity(100));
-         * //=> 225
+         *      // But if you're expecting additional arguments that don't need transformation, it's best
+         *      // to pass transformer functions so the resulting function has the correct arity
+         *      var addDoubleAndSquareWithExtraParams = ramda.useWith(addAll, double, square, ramda.identity);
+         *      addDoubleAndSquare(10, 5, 100); //≅ addAll(double(10), square(5), ramda.identity(100));
+         *      //=> 225
          */
         var useWith = R.useWith = function _useWith(fn /*, transformers */) {
             var transformers = _slice(arguments, 1);
@@ -619,20 +620,20 @@
          * Also note that, unlike `Array.prototype.forEach`, Ramda's `each` returns the original
          * array.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Function} fn The function to invoke. Receives one argument, `value`.
          * @param {Array} list The list to iterate over.
          * @return {Array} The original list.
-         * @example
+         * @example .
          *
-         * ramda.each(function(num) {
-         *   console.log(num + 100);
-         * }, [1, 2, 3]); //=> [1, 2, 3]
-         * //-> 101
-         * //-> 102
-         * //-> 103
+         *      ramda.each(function(num) {
+         *        console.log(num + 100);
+         *      }, [1, 2, 3]); //=> [1, 2, 3]
+         *      //-> 101
+         *      //-> 102
+         *      //-> 103
          */
         function each(fn, list) {
             var idx = -1, len = list.length;
@@ -657,21 +658,21 @@
          * Also note that, unlike `Array.prototype.forEach`, Ramda's `each` returns the original
          * array.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @alias forEach
-         * @param {Function} fn The function to invoke. Receives three arguments: (`value`, `index`,
-         * `list`).
+         * @param {Function} fn The function to invoke. Receives three arguments:
+         *        (`value`, `index`, `list`).
          * @param {Array} list The list to iterate over.
          * @return {Array} The original list.
-         * @example
+         * @example .
          *
-         * // Note that having access to the original `list` allows for mutation. While you *can* do
-         * // this, it's very un-functional behavior:
-         * ramda.each.idx(function(num, idx, list) {
-         *   list[idx] = num + 100;
-         * }, [1, 2, 3]); //=> [101, 102, 103]
+         *      // Note that having access to the original `list` allows for
+         *      // mutation. While you *can* do this, it's very un-functional behavior:
+         *      ramda.each.idx(function(num, idx, list) {
+         *        list[idx] = num + 100;
+         *      }, [1, 2, 3]); //=> [101, 102, 103]
          */
         R.each.idx = curry2(function eachIdx(fn, list) {
             var idx = -1, len = list.length;
@@ -686,21 +687,21 @@
         /**
          * Creates a shallow copy of an array.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @param {Array} list The list to clone.
          * @return {Array} A new copy of the original list.
-         * @example
+         * @example .
          *
-         * var numbers = [1, 2, 3];
-         * var numbersClone = ramda.clone(numbers); //=> [1, 2, 3]
-         * numbers === numbersClone; //=> false
+         *      var numbers = [1, 2, 3];
+         *      var numbersClone = ramda.clone(numbers); //=> [1, 2, 3]
+         *      numbers === numbersClone; //=> false
          *
-         * // Note that this is a shallow clone--it does not clone complex values:
-         * var objects = [{}, {}, {}];
-         * var objectsClone = ramda.clone(objects);
-         * objects[0] === objectsClone[0]; //=> true
+         *      // Note that this is a shallow clone--it does not clone complex values:
+         *      var objects = [{}, {}, {}];
+         *      var objectsClone = ramda.clone(objects);
+         *      objects[0] === objectsClone[0]; //=> true
          */
         var clone = R.clone = function _clone(list) {
             return _slice(list);
@@ -713,18 +714,18 @@
         /**
          * Reports whether an array is empty.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @param {Array} arr The array to consider.
-         * @return {boolean} `true` if the `arr` argument has a length of 0 or if `arr` is a falsy
-         * value (e.g. undefined).
-         * @example
+         * @return {boolean} `true` if the `arr` argument has a length of 0 or
+         *         if `arr` is a falsy value (e.g. undefined).
+         * @example .
          *
-         * ramda.isEmpty([1, 2, 3]); //=> false
-         * ramda.isEmpty([]); //=> true
-         * ramda.isEmpty(); //=> true
-         * ramda.isEmpty(null); //=> true
+         *      ramda.isEmpty([1, 2, 3]); //=> false
+         *      ramda.isEmpty([]); //=> true
+         *      ramda.isEmpty(); //=> true
+         *      ramda.isEmpty(null); //=> true
          */
         function isEmpty(arr) {
             return !arr || !arr.length;
@@ -735,16 +736,16 @@
          * Returns a new list with the given element at the front, followed by the contents of the
          * list.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @alias cons
          * @param {*} el The item to add to the head of the output list.
          * @param {Array} arr The array to add to the tail of the output list.
          * @return {Array} A new array.
-         * @example
+         * @example .
          *
-         * ramda.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
+         *      ramda.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
          */
         function prepend(el, arr) {
             return concat([el], arr);
@@ -755,15 +756,15 @@
         /**
          * Returns the first element in a list.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @alias car, first
          * @param {Array} [arr=[]] The array to consider.
          * @return {*} The first element of the list, or `undefined` if the list is empty.
-         * @example
+         * @example .
          *
-         * ramda.head(['fi', 'fo', 'fum']); //=> 'fi'
+         *      ramda.head(['fi', 'fo', 'fum']); //=> 'fi'
          */
         var head = R.head = function _car(arr) {
             arr = arr || [];
@@ -775,14 +776,14 @@
         /**
          * Returns the last element from a list.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @param {Array} [arr=[]] The array to consider.
          * @return {*} The last element of the list, or `undefined` if the list is empty.
-         * @example
+         * @example .
          *
-         * ramda.last(['fi', 'fo', 'fum']); //=> 'fum'
+         *      ramda.last(['fi', 'fo', 'fum']); //=> 'fum'
          */
         R.last = function _last(arr) {
             arr = arr || [];
@@ -793,16 +794,16 @@
          * Returns all but the first element of a list. If the list provided has the `tail` method,
          * it will instead return `list.tail()`.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @alias cdr
          * @param {Array} [arr=[]] The array to consider.
          * @return {Array} A new array containing all but the first element of the input list, or an
          * empty list if the input list is a falsy value (e.g. `undefined`).
-         * @example
+         * @example .
          *
-         * ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
+         *      ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
          */
         var tail = R.tail = checkForMethod('tail', function(arr) {
             arr = arr || [];
@@ -815,21 +816,21 @@
          * Returns `true` if the argument is an atom; `false` otherwise. An atom is defined as any
          * value that is not an array, `undefined`, or `null`.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @param {*} x The element to consider.
          * @return {boolean} `true` if `x` is an atom, and `false` otherwise.
-         * @example
+         * @example .
          *
-         * ramda.isAtom([]); //=> false
-         * ramda.isAtom(null); //=> false
-         * ramda.isAtom(undefined); //=> false
+         *      ramda.isAtom([]); //=> false
+         *      ramda.isAtom(null); //=> false
+         *      ramda.isAtom(undefined); //=> false
          *
-         * ramda.isAtom(0); //=> true
-         * ramda.isAtom(''); //=> true
-         * ramda.isAtom('test'); //=> true
-         * ramda.isAtom({}); //=> true
+         *      ramda.isAtom(0); //=> true
+         *      ramda.isAtom(''); //=> true
+         *      ramda.isAtom('test'); //=> true
+         *      ramda.isAtom({}); //=> true
          */
         R.isAtom = function _isAtom(x) {
             return x != null && !isArray(x);
@@ -839,19 +840,19 @@
          * Returns a new list containing the contents of the given list, followed by the given
          * element.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @alias push
          * @param {*} el The element to add to the end of the new list.
          * @param {Array} list The list whose contents will be added to the beginning of the output
-         * list.
+         *        list.
          * @return {Array} A new list containing the contents of the old list followed by `el`.
-         * @example
+         * @example .
          *
-         * ramda.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
-         * ramda.append('tests', []); //=> ['tests']
-         * ramda.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
+         *      ramda.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
+         *      ramda.append('tests', []); //=> ['tests']
+         *      ramda.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
          */
         var append = R.append = function _append(el, list) {
             return concat(list, [el]);
@@ -863,7 +864,7 @@
          * Returns a new list consisting of the elements of the first list followed by the elements
          * of the second.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @param {Array} list1 The first list to merge.
@@ -871,11 +872,11 @@
          * @return {Array} A new array consisting of the contents of `list1` followed by the
          * contents of `list2`. If, instead of an {Array} for `list1`, you pass an object with a `concat`
          * method on it, `concat` will call `list1.concat` and it the value of `list2`.
-         * @example
+         * @example .
          *
-         * ramda.concat([], []); //=> []
-         * ramda.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
-         * ramda.concat("ABC", "DEF"); // "ABCDEF"
+         *      ramda.concat([], []); //=> []
+         *      ramda.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+         *      ramda.concat("ABC", "DEF"); // "ABCDEF"
          */
         R.concat = curry2(function(set1, set2) {
             return (hasMethod('concat', set1)) ? set1.concat(set2) : concat(set1, set2);
@@ -885,18 +886,18 @@
          * A function that does nothing but return the parameter supplied to it. Good as a default
          * or placeholder function.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Core
          * @alias I
          * @param {*} x The value to return.
          * @return {*} The input value, `x`.
-         * @example
+         * @example .
          *
-         * ramda.identity(1); //=> 1
+         *      ramda.identity(1); //=> 1
          *
-         * var obj = {};
-         * ramda.identity(obj) === obj; //=> true
+         *      var obj = {};
+         *      ramda.identity(obj) === obj; //=> true
          */
         var identity = R.identity = function _I(x) {
             return x;
@@ -910,15 +911,15 @@
          * `fn` is passed one argument: The current value of `n`, which begins at `0` and is
          * gradually incremented to `n - 1`.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
          * @param {number} n A value between `0` and `n - 1`. Increments after each function call.
          * @return {Array} An array containing the return values of all calls to `fn`.
-         * @example
+         * @example .
          *
-         * ramda.times(function(n) { return n; }, 5); //=> [0, 1, 2, 3, 4]
+         *      ramda.times(function(n) { return n; }, 5); //=> [0, 1, 2, 3, 4]
          */
         R.times = curry2(function _times(fn, n) {
             var arr = new Array(n);
@@ -933,19 +934,19 @@
         /**
          * Returns a fixed list of size `n` containing a specified identical value.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Array
          * @param {*} value The value to repeat.
          * @param {number} n The desired size of the output list.
          * @return {Array} A new array containing `n` `value`s.
-         * @example
+         * @example .
          *
-         * ramda.repeatN('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
+         *      ramda.repeatN('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
          *
-         * var obj = {};
-         * var repeatedObjs = ramda.repeatN(obj, 5); //=> [{}, {}, {}, {}, {}]
-         * repeatedObjs[0] === repeatedObjs[1]; //=> true
+         *      var obj = {};
+         *      var repeatedObjs = ramda.repeatN(obj, 5); //=> [{}, {}, {}, {}, {}]
+         *      repeatedObjs[0] === repeatedObjs[1]; //=> true
          */
         R.repeatN = curry2(function _repeatN(value, n) {
             return R.times(R.always(value), n);
@@ -961,23 +962,23 @@
          * Returns a new function which partially applies a value to a given function, where the
          * function is a variadic function that cannot be curried.
          *
-         * @private
+         * @private .
          * @category Function
          * @param {Function} f The function to partially apply `a` onto.
          * @param {*} a The argument to partially apply onto `f`.
          * @return {Function} A new function.
-         * @example
+         * @example .
          *
-         * var addThree = function(a, b, c) {
-         *   return a + b + c;
-         * };
-         * var partialAdd = partially(add, 1);
-         * partialAdd(2, 3); //=> 6
+         *      var addThree = function(a, b, c) {
+         *        return a + b + c;
+         *      };
+         *      var partialAdd = partially(add, 1);
+         *      partialAdd(2, 3); //=> 6
          *
-         * // partialAdd is invoked immediately, even though it expects three arguments. This is
-         * // because, unlike many functions here, the result of `partially` is not a curried
-         * // function.
-         * partialAdd(2); //≅ addThree(1, 2, undefined) => NaN
+         *      // partialAdd is invoked immediately, even though it expects three arguments. This is
+         *      // because, unlike many functions here, the result of `partially` is not a curried
+         *      // function.
+         *      partialAdd(2); //≅ addThree(1, 2, undefined) => NaN
          */
         function partially(f, a){
             return function() {
@@ -996,18 +997,18 @@
          * This function's main use is to build the more general `compose` function, which accepts
          * any number of functions.
          *
-         * @private
+         * @private .
          * @category Function
          * @param {Function} f A function.
          * @param {Function} g A function.
          * @return {Function} A new function that is the equivalent of `f(g(x))`.
-         * @example
+         * @example .
          *
-         * var double = function(x) { return x * 2; };
-         * var square = function(x) { return x * x; };
-         * var squareThenDouble = internalCompose(double, square);
+         *      var double = function(x) { return x * 2; };
+         *      var square = function(x) { return x * x; };
+         *      var squareThenDouble = internalCompose(double, square);
          *
-         * squareThenDouble(5); //≅ double(square(5)) => 50
+         *      squareThenDouble(5); //≅ double(square(5)) => 50
          */
         function internalCompose(f, g) {
             return function() {
@@ -1025,21 +1026,21 @@
          * the function `h` is equivalent to `f( g(x) )`, where `x` represents the arguments
          * originally passed to `h`.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {...Function} functions A variable number of functions.
          * @return {Function} A new function which represents the result of calling each of the
-         * input `functions`, passing the result of each function call to the next, from right to
-         * left.
-         * @example
+         *         input `functions`, passing the result of each function call to the next, from
+         *         right to left.
+         * @example .
          *
-         * var triple = function(x) { return x * 3; };
-         * var double = function(x) { return x * 2; };
-         * var square = function(x) { return x * x; };
-         * var squareThenDoubleThenTriple = ramda.compose(triple, double, square);
+         *      var triple = function(x) { return x * 3; };
+         *      var double = function(x) { return x * 2; };
+         *      var square = function(x) { return x * x; };
+         *      var squareThenDoubleThenTriple = ramda.compose(triple, double, square);
          *
-         * squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
+         *      squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
         var compose = R.compose = function _compose() {  
             switch (arguments.length) {
@@ -1062,22 +1063,22 @@
          * `pipe` is the mirror version of `compose`. `pipe` is left-associative, which means that
          * each of the functions provided is executed in order from left to right.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @alias sequence
          * @param {...Function} functions A variable number of functions.
          * @return {Function} A new function which represents the result of calling each of the
-         * input `functions`, passing the result of each function call to the next, from right to
-         * left.
-         * @example
+         *         input `functions`, passing the result of each function call to the next, from
+         *         right to left.
+         * @example .
          *
-         * var triple = function(x) { return x * 3; };
-         * var double = function(x) { return x * 2; };
-         * var square = function(x) { return x * x; };
-         * var squareThenDoubleThenTriple = ramda.pipe(square, double, triple);
+         *      var triple = function(x) { return x * 3; };
+         *      var double = function(x) { return x * 2; };
+         *      var square = function(x) { return x * x; };
+         *      var squareThenDoubleThenTriple = ramda.pipe(square, double, triple);
          *
-         * squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
+         *      squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
          */
         R.pipe = function _pipe() {
             return compose.apply(this, _slice(arguments).reverse());
@@ -1088,21 +1089,21 @@
          * Returns a new function much like the supplied one, except that the first two arguments'
          * order is reversed.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to invoke with its first two parameters reversed.
          * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
-         * @example
+         * @example .
          *
-         * var mergeThree = function(a, b, c) {
-         *   ([]).concat(a, b, c);
-         * };
-         * var numbers = [1, 2, 3];
+         *      var mergeThree = function(a, b, c) {
+         *        ([]).concat(a, b, c);
+         *      };
+         *      var numbers = [1, 2, 3];
          *
-         * mergeThree(numbers); //=> [1, 2, 3]
+         *      mergeThree(numbers); //=> [1, 2, 3]
          *
-         * ramda.flip([1, 2, 3]); //=> [2, 1, 3]
+         *      ramda.flip([1, 2, 3]); //=> [2, 1, 3]
          */
         var flip = R.flip = function _flip(fn) {
             return function (a, b) {
@@ -1119,7 +1120,7 @@
          * when invoked, calls the original function with all of the values prepended to the
          * original function's arguments list.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @alias applyLeft
@@ -1127,21 +1128,18 @@
          * @param {...*} [args] Arguments to prepend to `fn` when the returned function is invoked.
          * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn`
          * with `args` prepended to `fn`'s arguments list.
-         * @example
+         * @example .
          *
-         * var multiply = function(a, b) { return a * b; };
-         * var double = ramda.lPartial(multiply, 2);
+         *      var multiply = function(a, b) { return a * b; };
+         *      var double = ramda.lPartial(multiply, 2);
+         *      double(2); //=> 4
          *
-         * double(2); //=> 4
-         *
-         *
-         * var greet = function(salutation, title, firstName, lastName) {
-         *   return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
-         * };
-         * var sayHello = ramda.lPartial(greet, 'Hello');
-         * var sayHelloToMs = ramda.lPartial(sayHello, 'Ms.');
-         *
-         * sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
+         *      var greet = function(salutation, title, firstName, lastName) {
+         *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+         *      };
+         *      var sayHello = ramda.lPartial(greet, 'Hello');
+         *      var sayHelloToMs = ramda.lPartial(sayHello, 'Ms.');
+         *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
          */
         R.lPartial = function _lPartial(fn /*, args */) {
             var args = _slice(arguments, 1);
@@ -1159,7 +1157,7 @@
          * Note that `rPartial` is the opposite of `lPartial`: `rPartial` fills `fn`'s arguments
          * from the right to the left.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @alias applyRight
@@ -1167,14 +1165,14 @@
          * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
          * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
          * `args` appended to `fn`'s arguments list.
-         * @example
+         * @example .
          *
-         * var greet = function(salutation, title, firstName, lastName) {
-         *   return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
-         * };
-         * var greetMsJaneJones = ramda.rPartial(greet, 'Ms.', 'Jane', 'Jones');
+         *      var greet = function(salutation, title, firstName, lastName) {
+         *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+         *      };
+         *      var greetMsJaneJones = ramda.rPartial(greet, 'Ms.', 'Jane', 'Jones');
          *
-         * greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
+         *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
          */
         R.rPartial = function _rPartial(fn) {
             var args = _slice(arguments, 1);
@@ -1193,26 +1191,26 @@
          * Note that this version of `memoize` effectively handles only string and number
          * parameters.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to be wrapped by `memoize`.
          * @return {Function}  Returns a memoized version of `fn`.
          * @example
          *
-         * var numberOfCalls = 0;
-         * var tracedAdd = function(a, b) {
-         *   numberOfCalls += 1;
-         *   return a + b;
-         * };
-         * var memoTrackedAdd = ramda.memoize(trackedAdd);
+         *      var numberOfCalls = 0;
+         *      var tracedAdd = function(a, b) {
+         *        numberOfCalls += 1;
+         *        return a + b;
+         *      };
+         *      var memoTrackedAdd = ramda.memoize(trackedAdd);
          *
-         * memoAdd(1, 2); //=> 3 (numberOfCalls => 1)
-         * memoAdd(1, 2); //=> 3 (numberOfCalls => 1)
-         * memoAdd(2, 3); //=> 5 (numberOfCalls => 2)
+         *      memoAdd(1, 2); //=> 3 (numberOfCalls => 1)
+         *      memoAdd(1, 2); //=> 3 (numberOfCalls => 1)
+         *      memoAdd(2, 3); //=> 5 (numberOfCalls => 2)
          *
-         * // Note that argument order matters
-         * memoAdd(2, 1); //=> 3 (numberOfCalls => 3)
+         *      // Note that argument order matters
+         *      memoAdd(2, 1); //=> 3 (numberOfCalls => 3)
          */
         R.memoize = function _memoize(fn) {
             var cache = {};
@@ -1231,17 +1229,17 @@
          * `fn` can only ever be called once, no matter how many times the returned function is
          * invoked.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to wrap in a call-only-once wrapper.
          * @return {Function} The wrapped function.
-         * @example
+         * @example .
          *
-         * var alertOnce = ramda.once(alert);
-         * alertOnce('Hello!'); // Alerts 'Hello!'
-         * alertOnce('Nothing'); // Doesn't alert
-         * alertOnce('Again'); // Doesn't alert
+         *      var alertOnce = ramda.once(alert);
+         *      alertOnce('Hello!'); // Alerts 'Hello!'
+         *      alertOnce('Nothing'); // Doesn't alert
+         *      alertOnce('Again'); // Doesn't alert
          */
         R.once = function _once(fn) {
             var called = false, result;
@@ -1259,17 +1257,17 @@
          * Wrap a function inside another to allow you to make adjustments to the parameters, or do
          * other processing either before the internal function is called or with its results.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} fn The function to wrap.
          * @param {Function} wrapper The wrapper function.
          * @return {Function} The wrapped function.
-         * @example
+         * @example .
          *
-         * var slashify = wrap(flip(add)('/'), function(f, x) {
-         *  return match(/\/$/)(x) ? x : f(x)
-         * });
+         *      var slashify = wrap(flip(add)('/'), function(f, x) {
+         *        return match(/\/$/)(x) ? x : f(x)
+         *      });
          *
          * slashify("a") //= "a/"
          * slashify("a/") //= "a/"
@@ -1287,23 +1285,23 @@
          *
          * NOTE: Does not work with some built-in objects such as Date.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {number} n The arity of the constructor function.
          * @param {Function} Fn The constructor function to wrap.
          * @return {Function} A wrapped, curried constructor function.
-         * @example
+         * @example .
          *
-         * // Variadic constructor function
-         * var Widget = function() {
-         *   this.children = Array.prototype.slice.call(arguments);
-         *   // ...
-         * };
-         * Widget.prototype = {
-         *   // ...
-         * };
-         * map(constructN(1, Widget), allConfigs); //=> a list of Widgets
+         *      // Variadic constructor function
+         *      var Widget = function() {
+         *        this.children = Array.prototype.slice.call(arguments);
+         *        // ...
+         *      };
+         *      Widget.prototype = {
+         *        // ...
+         *      };
+         *      map(constructN(1, Widget), allConfigs); //=> a list of Widgets
          */
         var constructN = R.constructN = function _constructN(n, Fn) {
             var f = function () {
@@ -1322,21 +1320,21 @@
          *
          * NOTE: Does not work with some built-in objects such as Date.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Function} Fn The constructor function to wrap.
          * @return {Function} A wrapped, curried constructor function.
-         * @example
+         * @example .
          *
-         * // Constructor function
-         * var Widget = function(config) {
-         *   // ...
-         * };
-         * Widget.prototype = {
-         *   // ...
-         * };
-         * map(construct(Widget), allConfigs); //=> a list of Widgets
+         *      // Constructor function
+         *      var Widget = function(config) {
+         *        // ...
+         *      };
+         *      Widget.prototype = {
+         *        // ...
+         *      };
+         *      map(construct(Widget), allConfigs); //=> a list of Widgets
          */
         R.construct = function _construct(Fn) {
             return constructN(Fn.length, Fn);
@@ -1354,7 +1352,7 @@
          *   h(1, 2); //≅ e( f(1, 2), g(1, 2) )
          * ```
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category
          * @alias distributeTo
@@ -1367,15 +1365,15 @@
          * returned function. Afterward, its resulting value will be passed to `after` as its second
          * argument.
          * @return {Function} A new function.
-         * @example
+         * @example .
          *
-         * var add = function(a, b) { return a + b; };
-         * var multiply = function(a, b) { return a * b; };
-         * var subtract = function(a, b) { return a - b; };
+         *      var add = function(a, b) { return a + b; };
+         *      var multiply = function(a, b) { return a * b; };
+         *      var subtract = function(a, b) { return a - b; };
          *
-         * ramda.fork(multiply, add, subtract)(1, 2);
-         * //≅ multiply( add(1, 2), subtract(1, 2) );
-         * //=> -3
+         *      ramda.fork(multiply, add, subtract)(1, 2);
+         *      //≅ multiply( add(1, 2), subtract(1, 2) );
+         *      //=> -3
          */
         R.fork = function (after) {
             var fns = _slice(arguments, 1);
@@ -1415,7 +1413,7 @@
          * the native `Array.prototype.reduce` method. For more details on this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @alias foldl
@@ -1424,14 +1422,14 @@
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
          * @return {*} The final, accumulated value.
-         * @example
+         * @example .
          *
-         * var numbers = [1, 2, 3];
-         * var add = function(a, b) {
-         *   return a + b;
-         * };
+         *      var numbers = [1, 2, 3];
+         *      var add = function(a, b) {
+         *        return a + b;
+         *      };
          *
-         * reduce(numbers, add, 10); //=> 16
+         *      reduce(numbers, add, 10); //=> 16
          */
         var foldl = R.reduce =  curry3(checkForMethod('reduce', function _reduce(fn, acc, list) {
             var idx = -1, len = list.length;
@@ -1452,7 +1450,7 @@
          * see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -1460,14 +1458,14 @@
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
          * @return {*} The final, accumulated value.
-         * @example
+         * @example .
          *
-         * var letters = ['a', 'b', 'c'];
-         * var objectify = function(accObject, elem, idx, list) {
-         *   return accObject[elem] = idx;
-         * };
+         *      var letters = ['a', 'b', 'c'];
+         *      var objectify = function(accObject, elem, idx, list) {
+         *        return accObject[elem] = idx;
+         *      };
          *
-         * foldl.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
+         *      foldl.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
          */
         R.foldl.idx = curry3(checkForMethod('foldl', function(fn, acc, list) {
             var idx = -1, len = list.length;
@@ -1490,7 +1488,7 @@
          * the native `Array.prototype.reduce` method. For more details on this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @alias reduceRight
@@ -1499,14 +1497,14 @@
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
          * @return {*} The final, accumulated value.
-         * @example
+         * @example .
          *
-         * var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
-         * var flattenPairs = function(acc, pair) {
-         *   return acc.concat(pair);
-         * };
+         *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
+         *      var flattenPairs = function(acc, pair) {
+         *        return acc.concat(pair);
+         *      };
          *
-         * foldr(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
+         *      foldr(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
          */
         var foldr = R.foldr = curry3(checkForMethod('foldr', function(fn, acc, list) {
             var idx = list.length;
@@ -1528,7 +1526,7 @@
          * see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -1536,14 +1534,14 @@
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
          * @return {*} The final, accumulated value.
-         * @example
+         * @example .
          *
-         * var letters = ['a', 'b', 'c'];
-         * var objectify = function(accObject, elem, idx, list) {
-         *   return accObject[elem] = idx;
-         * };
+         *      var letters = ['a', 'b', 'c'];
+         *      var objectify = function(accObject, elem, idx, list) {
+         *        return accObject[elem] = idx;
+         *      };
          *
-         * foldr.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
+         *      foldr.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
          */
         R.foldr.idx = curry3(checkForMethod('foldr', function(fn, acc, list) {
             var idx = list.length;
@@ -1560,7 +1558,7 @@
          *
          * The iterator function receives one argument: *(seed)*.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Function} fn The iterator function. receives one argument, `seed`, and returns
@@ -1569,10 +1567,10 @@
          * passed to the next call to `fn`.
          * @param {*} seed The seed value.
          * @return {Array} The final list.
-         * @example
+         * @example .
          *
-         * var f = function(n) { return n > 50 ? false : [-n, n + 10] };
-         * unfoldr(f, 10) //= [-10, -20, -30, -40, -50]
+         *      var f = function(n) { return n > 50 ? false : [-n, n + 10] };
+         *      unfoldr(f, 10) //= [-10, -20, -30, -40, -50]
          */
         R.unfoldr = curry2(function _unfoldr(fn, seed) {
             var pair = fn(seed);
@@ -1592,19 +1590,19 @@
          * native `Array.prototype.map` method. For more details on this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Function} fn The function to be called on every element of the input `list`.
          * @param {Array} list The list to be iterated over.
          * @return {Array} The new list.
-         * @example
+         * @example .
          *
-         * var double = function(x) {
-         *   return x * 2;
-         * };
+         *      var double = function(x) {
+         *        return x * 2;
+         *      };
          *
-         * ramda.map(double, [1, 2, 3]); //=> [2, 4, 6]
+         *      ramda.map(double, [1, 2, 3]); //=> [2, 4, 6]
          */
         function map(fn, list) {
             var idx = -1, len = list.length, result = new Array(len);
@@ -1624,23 +1622,23 @@
          * the native `Array.prototype.map` method. For more details on this behavior, see:
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Function} fn The function to be called on every element of the input `list`.
          * @param {Array} list The list to be iterated over.
          * @return {Array} The new list.
-         * @example
+         * @example .
          *
-         * var squareEnds = function(elt, idx, list) {
-         *   if (idx === 0 || idx === list.length - 1) {
-         *     return elt * elt;
-         *   }
-         *   return elt;
-         * };
+         *      var squareEnds = function(elt, idx, list) {
+         *        if (idx === 0 || idx === list.length - 1) {
+         *          return elt * elt;
+         *        }
+         *        return elt;
+         *      };
          *
-         * ramda.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
-         * //=> [64, 6, 7, 5, 3, 0, 81]
+         *      ramda.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
+         *      //=> [64, 6, 7, 5, 3, 0, 81]
          */
         R.map.idx = curry2(checkForMethod('map', function _mapIdx(fn, list) {
             var idx = -1, len = list.length, result = new Array(len);
@@ -1655,7 +1653,7 @@
          * generated by running each property of `obj` through `fn`. `fn` is passed one argument:
          * *(value)*.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Array} fn A function called for each property in `obj`. Its return value will
@@ -1663,14 +1661,14 @@
          * @param {Object} obj The object to iterate over.
          * @return {Object} A new object with the same keys as `obj` and values that are the result
          * of running each property through `fn`.
-         * @example
+         * @example .
          *
-         * var values = { x: 1, y: 2, z: 3 };
-         * var double = function(num) {
-         *   return num * 2;
-         * };
+         *      var values = { x: 1, y: 2, z: 3 };
+         *      var double = function(num) {
+         *        return num * 2;
+         *      };
          *
-         * ramda.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
+         *      ramda.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
          */
         // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
         R.mapObj = curry2(function _mapObject(fn, obj) {
@@ -1684,7 +1682,7 @@
          * Like `mapObj`, but but passes additional arguments to the predicate function. The
          * predicate function is passed three arguments: *(value, key, obj)*.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @param {Array} fn A function called for each property in `obj`. Its return value will
@@ -1692,14 +1690,14 @@
          * @param {Object} obj The object to iterate over.
          * @return {Object} A new object with the same keys as `obj` and values that are the result
          * of running each property through `fn`.
-         * @example
+         * @example .
          *
-         * var values = { x: 1, y: 2, z: 3 };
-         * var double = function(num, key, obj) {
-         *   return key + num;
-         * };
+         *      var values = { x: 1, y: 2, z: 3 };
+         *      var double = function(num, key, obj) {
+         *        return key + num;
+         *      };
          *
-         * ramda.mapObj(double, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
+         *      ramda.mapObj(double, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
          */
         R.mapObj.idx = curry2(function mapObjectIdx(fn, obj) {
             return foldl(function (acc, key) {
@@ -1711,15 +1709,15 @@
         /**
          * ap applies a list of functions to a list of values.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param {Array} fns An array of functions
          * @param {Array} vs An array of values
          * @return the value of applying each the function `fns` to each value in `vs`
-         * @example
+         * @example .
          *
-         * R.ap([R.multiply(2), R.add(3), [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
+         *      R.ap([R.multiply(2), R.add(3), [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
          */
         R.ap = curry2(checkForMethod('ap', function _ap(fns, vs) {
             return foldl(function(acc, fn) {
@@ -1734,17 +1732,16 @@
          * Note this `of` is different from the ES6 `of`; See
          * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @param x any value
          * @return [x]
-         * @example
+         * @example .
          *
-         * R.of(1); // => [1]
-         * R.of([2]); // => [[2]]
-         * R.of({}); // => [{}]
-         *
+         *      R.of(1); // => [1]
+         *      R.of([2]); // => [[2]]
+         *      R.of({}); // => [{}]
          */
         R.of = function _of(x, container) {
             return (hasMethod('of', container)) ? container.of(x) : [x];
@@ -1754,11 +1751,11 @@
          * `empty` wraps any object in an array. This implementation is compatible with the
          * Fantasy-land Monoid spec, and will work with types that implement that spec.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category Function
          * @return {Array} an empty array
-         * @example
+         * @example .
          *
          * R.empty([1,2,3,4,5]); // => []
          */
@@ -1772,7 +1769,7 @@
          * This implementation is compatible with the
          * Fantasy-land Chain spec, and will work with types that implement that spec.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @category List
          * @alias flatMap
@@ -1780,7 +1777,7 @@
          * @param {Array}
          * @return {Array}
          *
-         * @eaxmple
+         * @eaxmple .
          *
          * var duplicate = function(n) {
          *     return [n, n];
@@ -4770,28 +4767,29 @@
          * @param {Array} list2 A second list of items to compare
          * @return {Array} A new list containing those elements common to both lists.
          * @example
-         *     var buffaloSpringfield = [
-         *         {id: 824, name: 'Richie Furay'},
-         *         {id: 956, name: 'Dewey Martin'},
-         *         {id: 313, name: 'Bruce Palmer'},
-         *         {id: 456, name: 'Stephen Stills'},
-         *         {id: 177, name: 'Neil Young'}
-         *     ];
-         *     var csny = [
-         *         {id: 204, name: 'David Crosby'},
-         *         {id: 456, name: 'Stephen Stills'},
-         *         {id: 539, name: 'Graham Nash'},
-         *         {id: 177, name: 'Neil Young'}
-         *     ];
          *
-         *     var sameId = function(o1, o2) {return o1.id === o2.id;};
+         *      var buffaloSpringfield = [
+         *          {id: 824, name: 'Richie Furay'},
+         *          {id: 956, name: 'Dewey Martin'},
+         *          {id: 313, name: 'Bruce Palmer'},
+         *          {id: 456, name: 'Stephen Stills'},
+         *          {id: 177, name: 'Neil Young'}
+         *      ];
+         *      var csny = [
+         *          {id: 204, name: 'David Crosby'},
+         *          {id: 456, name: 'Stephen Stills'},
+         *          {id: 539, name: 'Graham Nash'},
+         *          {id: 177, name: 'Neil Young'}
+         *      ];
          *
-         *     intersectionWith(sameId, buffaloSpringfield, csny);
+         *      var sameId = function(o1, o2) {return o1.id === o2.id;};
          *
-         *     //=> [
-         *     //     {id: 456, name: 'Stephen Stills'},
-         *     //     {id: 177, name: 'Neil Young'}
-         *     // ];
+         *      intersectionWith(sameId, buffaloSpringfield, csny);
+         *
+         *      //=> [
+         *      //     {id: 456, name: 'Stephen Stills'},
+         *      //     {id: 177, name: 'Neil Young'}
+         *      // ];
          */
         R.intersectionWith = curry3(function intersectionWith(pred, list1, list2) {
             var results = [], idx = -1;
@@ -4809,34 +4807,36 @@
          * is the result of applying the supplied function to that item.
          *
          * @static
+         * @private
          * @memberOf R
          * @param {Function} fn An arbitrary unary function returning a potential
-         *        object key.
+         *        object key.  Signature: Any -> String
          * @param {Array} list The list of items to process
          * @return {Array} A new list with the described structure.
          * @example
-         *     var people = [
-         *        {first: 'Fred', last: 'Flintstone', age: 23},
-         *        {first: 'Betty', last: 'Rubble', age: 21},
-         *        {first: 'George', last: 'Jetson', age: 29}
-         *     ];
          *
-         *     var fullName = function(p) {return p.first + ' ' + p.last;};
+         *      var people = [
+         *         {first: 'Fred', last: 'Flintstone', age: 23},
+         *         {first: 'Betty', last: 'Rubble', age: 21},
+         *         {first: 'George', last: 'Jetson', age: 29}
+         *      ];
          *
-         *     keyValue(fullName, people);
+         *      var fullName = function(p) {return p.first + ' ' + p.last;};
          *
-         *     //=> [
-         *     //     {
-         *     //         key: "Fred Flintstone",
-         *     //         val: {first: "Fred", last: "Flintstone", age: 23}
-         *     //     }, {
-         *     //         key: "Betty Rubble",
-         *     //         val: {first: "Betty", last: "Rubble", age: 21}
-         *     //    }, {
-         *     //        key: "George Jetson",
-         *     //        val: {first: "George", last: "Jetson", age: 29}
-         *     //    }
-         *     // ];
+         *      keyValue(fullName, people);
+         *
+         *      //=> [
+         *      //     {
+         *      //         key: "Fred Flintstone",
+         *      //         val: {first: "Fred", last: "Flintstone", age: 23}
+         *      //     }, {
+         *      //         key: "Betty Rubble",
+         *      //         val: {first: "Betty", last: "Rubble", age: 21}
+         *      //    }, {
+         *      //        key: "George Jetson",
+         *      //        val: {first: "George", last: "Jetson", age: 29}
+         *      //    }
+         *      // ];
          */
         function keyValue(fn, list) { // TODO: Should this be made public?
             return map(function(item) {return {key: fn(item), val: item};}, list);

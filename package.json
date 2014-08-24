@@ -41,6 +41,7 @@
     "lodash": "latest",
     "orchestrate": "~0.3.4",
     "grunt-contrib-copy": "^0.5.0",
-    "grunt-push-release": "^0.1.1"
+    "grunt-push-release": "^0.1.1",
+    "docker": "^0.2.13"
   }
 }
