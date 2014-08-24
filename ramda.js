@@ -211,8 +211,8 @@
                     case 1: return function(b) {
                         return fn(a, b);
                     };
+                    default: return fn(a, b);
                 }
-                return fn(a, b);
             };
         }
 
@@ -242,8 +242,8 @@
                     case 2: return function(c) {
                         return fn(a, b, c);
                     };
+                    default: return fn(a, b, c);
                 }
-                return fn(a, b, c);
             };
         }
 
@@ -3990,13 +3990,7 @@
          *      add(2, 3);       //=  5
          *      add(7)(10);      //= 17
          */
-        var add = R.add = function _add(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a + b; };
-                default: return a + b;
-            }
-        };
+        var add = R.add = curry2(function _add(a, b) { return a + b; });
 
 
         /**
@@ -4016,13 +4010,7 @@
          *      triple(4);       //= 12
          *      multiply(2, 5);  //= 10
          */
-        var multiply = R.multiply = function _multiply(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a * b; };
-                default: return a * b;
-            }
-        };
+        var multiply = R.multiply = curry2(function _multiply(a, b) { return a * b; });
 
 
         /**
@@ -4045,13 +4033,7 @@
          *
          *      subtract(10)(8); //= 2
          */
-        var subtract = R.subtract = function _subtract(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a - b; };
-                default: return a - b;
-            }
-        };
+        var subtract = R.subtract = curry2(function _subtract(a, b) { return a - b; });
 
 
         /**
@@ -4096,13 +4078,7 @@
          *      reciprocal(4);   //= 0.25
          *      divide(71, 100); //= 0.71
          */
-        var divide = R.divide = function _divide(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a / b; };
-                default: return a / b;
-            }
-        };
+        var divide = R.divide = curry2(function _divide(a, b) { return a / b; });
 
 
         /**
@@ -4146,13 +4122,7 @@
          *      modulo(-17, 3) // => -2
          *      modulo(17, -3) // => 2
          */
-        var modulo = R.modulo = function _modulo(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a % b; };
-                default: return a % b;
-            }
-        };
+        var modulo = R.modulo = curry2(function _modulo(a, b) { return a % b; });
 
 
         /**
@@ -4265,13 +4235,7 @@
          *      lt(2, 0) // => false
          *      lt(2, 2) // => false
          */
-        R.lt = function _lt(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a < b; };
-                default: return a < b;
-            }
-        };
+        R.lt = curry2(function _lt(a, b) { return a < b; });
 
 
         /**
@@ -4289,13 +4253,7 @@
          *      lt(2, 0) // => false
          *      lt(2, 2) // => true
          */
-        R.lte = function _lte(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a <= b; };
-                default: return a <= b;
-            }
-        };
+        R.lte = curry2(function _lte(a, b) { return a <= b; });
 
 
         /**
@@ -4313,13 +4271,7 @@
          *      gt(2, 0) // => true
          *      gt(2, 2) // => false
          */
-        R.gt = function _gt(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a > b; };
-                default: return a > b;
-            }
-        };
+        R.gt = curry2(function _gt(a, b) { return a > b; });
 
 
         /**
@@ -4337,13 +4289,7 @@
          *      gt(2, 0) // => true
          *      gt(2, 2) // => true
          */ 
-        R.gte = function _gte(a, b) {
-            switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return a >= b; };
-                default: return a >= b;
-            }
-        };
+        R.gte = curry2(function _gte(a, b) { return a >= b; });
 
 
         /**
