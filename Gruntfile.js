@@ -86,6 +86,15 @@ module.exports = function(grunt) {
         createTag: false,
         push: false
       }
+    },
+
+    jsdoc : {
+      dist : {
+        src: ['C:/_Projects/ramda/tmp/*.js'],
+        options: {
+          destination: 'jsdoc-out'
+        }
+      }
     }
 
   });
@@ -100,6 +109,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-push-release');
   grunt.loadNpmTasks('grunt-benchmark');
   grunt.loadNpmTasks('grunt-readme');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
     // upload files in report dir to orchestrate

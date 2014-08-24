@@ -583,10 +583,10 @@
          * @static .
          * @memberOf R
          * @category Function
-         * @alias disperseTo
          * @param {Function} fn The function to wrap.
          * @param {...Function} transformers A variable number of transformer functions
          * @return {Function} The wrapped function.
+         * @alias disperseTo
          * @example .
          *
          *      var double = function(y) { return y * 2; };
@@ -682,11 +682,11 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias forEach
          * @param {Function} fn The function to invoke. Receives three arguments:
          *        (`value`, `index`, `list`).
          * @param {Array} list The list to iterate over.
          * @return {Array} The original list.
+         * @alias forEach
          * @example .
          *
          *      // Note that having access to the original `list` allows for
@@ -763,10 +763,10 @@
          * @static .
          * @memberOf R
          * @category Array
-         * @alias cons
          * @param {*} el The item to add to the head of the output list.
          * @param {Array} arr The array to add to the tail of the output list.
          * @return {Array} A new array.
+         * @alias cons
          * @example .
          *
          *      ramda.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
@@ -784,9 +784,9 @@
          * @static .
          * @memberOf R
          * @category Array
-         * @alias car, first
          * @param {Array} [arr=[]] The array to consider.
          * @return {*} The first element of the list, or `undefined` if the list is empty.
+         * @alias car, first
          * @example .
          *
          *      ramda.head(['fi', 'fo', 'fum']); //=> 'fi'
@@ -824,10 +824,10 @@
          * @static .
          * @memberOf R
          * @category Array
-         * @alias cdr
          * @param {Array} [arr=[]] The array to consider.
          * @return {Array} A new array containing all but the first element of the input list, or an
          *         empty list if the input list is a falsy value (e.g. `undefined`).
+         * @alias cdr
          * @example .
          *
          *      ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
@@ -872,11 +872,11 @@
          * @static .
          * @memberOf R
          * @category Array
-         * @alias push
          * @param {*} el The element to add to the end of the new list.
          * @param {Array} list The list whose contents will be added to the beginning of the output
          *        list.
          * @return {Array} A new list containing the contents of the old list followed by `el`.
+         * @alias push
          * @example .
          *
          *      ramda.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
@@ -921,9 +921,9 @@
          * @static .
          * @memberOf R
          * @category Core
-         * @alias I
          * @param {*} x The value to return.
          * @return {*} The input value, `x`.
+         * @alias I
          * @example .
          *
          *      ramda.identity(1); //=> 1
@@ -1103,11 +1103,11 @@
          * @static .
          * @memberOf R
          * @category Function
-         * @alias sequence
          * @param {...Function} functions A variable number of functions.
          * @return {Function} A new function which represents the result of calling each of the
          *         input `functions`, passing the result of each function call to the next, from
          *         right to left.
+         * @alias sequence
          * @example .
          *
          *      var triple = function(x) { return x * 3; };
@@ -1163,11 +1163,11 @@
          * @static .
          * @memberOf R
          * @category Function
-         * @alias applyLeft
          * @param {Function} fn The function to invoke.
          * @param {...*} [args] Arguments to prepend to `fn` when the returned function is invoked.
          * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn`
          *         with `args` prepended to `fn`'s arguments list.
+         * @alias applyLeft
          * @example .
          *
          *      var multiply = function(a, b) { return a * b; };
@@ -1202,11 +1202,11 @@
          * @static .
          * @memberOf R
          * @category Function
-         * @alias applyRight
          * @param {Function} fn The function to invoke.
          * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
          * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
          *         `args` appended to `fn`'s arguments list.
+         * @alias applyRight
          * @example .
          *
          *      var greet = function(salutation, title, firstName, lastName) {
@@ -1403,8 +1403,7 @@
          *
          * @static .
          * @memberOf R
-         * @category
-         * @alias distributeTo
+         * @category Function
          * @param {Function} after A function. `after` will be invoked with the return values of
          *        `fn1` and `fn2` as its arguments.
          * @param {Function} fn1 A function. It will be invoked with the arguments passed to the
@@ -1414,6 +1413,7 @@
          *        returned function. Afterward, its resulting value will be passed to `after` as
          *        its second argument.
          * @return {Function} A new function.
+         * @alias distributeTo
          * @example .
          *
          *      var add = function(a, b) { return a + b; };
@@ -1468,12 +1468,12 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias foldl
          * @param {Function} fn The iterator function. Receives two values, the accumulator and the
          *        current element from the array.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
          * @return {*} The final, accumulated value.
+         * @alias foldl
          * @example .
          *
          *      var numbers = [1, 2, 3];
@@ -1546,12 +1546,12 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias reduceRight
          * @param {Function} fn The iterator function. Receives two values, the accumulator and the
          *        current element from the array.
          * @param {*} acc The accumulator value.
          * @param {Array} list The list to iterate over.
          * @return {*} The final, accumulated value.
+         * @alias reduceRight
          * @example .
          *
          *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
@@ -1838,12 +1838,11 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias flatMap
          * @param {Function}
          * @param {Array}
          * @return {Array}
-         *
-         * @eaxmple .
+         * @alias flatMap
+         * @example .
          *
          * var duplicate = function(n) {
          *     return [n, n];
@@ -1863,9 +1862,9 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias length
          * @param {Array} arr The array to inspect.
          * @return {number} The size of the array.
+         * @alias length
          * @example .
          *
          *      ramda.size([]); //=> 0
@@ -2065,10 +2064,10 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias drop
          * @param {number} n The number of elements of `list` to skip.
          * @param {Array} list The array to consider.
          * @return {Array} The last `n` elements of `list`.
+         * @alias drop
          */
         R.skip = curry2(checkForMethod('skip', function _skip(n, list) {
             return _slice(list, n);
@@ -2196,11 +2195,11 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias every
          * @param {Function} fn The predicate function.
          * @param {Array} list The array to consider.
          * @return {boolean} `true` if the predicate is satisfied by every element, `false`
          *         otherwise
+         * @alias every
          * @example .
          *
          *      var lessThan2 = flip(lt)(2);
@@ -2230,11 +2229,11 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias some
          * @param {Function} fn The predicate function.
          * @param {Array} list The array to consider.
          * @return {boolean} `true` if the predicate is satisfied by at least one element, `false`
          *         otherwise
+         * @alias some
          * @example .
          *
          *      var lessThan0 = flip(lt)(0);
@@ -2589,9 +2588,9 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias flattenDeep
          * @param {Array} list The array to consider.
          * @return {Array} The flattened list.
+         * @alias flattenDeep
          * @example .
          *
          * flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
@@ -2608,9 +2607,9 @@
          * @static .
          * @memberOf R
          * @category List
-         * @alias flattenShallow
          * @param {Array} list The array to consider.
          * @return {Array} The flattened list.
+         * @alias flattenShallow
          * @example .
          *
          * flat([1, [2], [[3]]]);
@@ -2905,13 +2904,12 @@
          * copy of the list with the changes.
          * <small>No lists have been harmed in the application of this function.</small>
          *
-         * @static
+         * @static .
          * @memberOf R
          * @param {Number} start The position to start removing elements
          * @param {Number} count The number of elements to remove
          * @param {Array} list The list to remove from
          * @return {Array} a new Array with `count` elements from `start` removed
-         *
          * @example .
          *
          *      remove(2, 3, [1,2,3,4,5,6,7,8]) // => [1,2,6,7,8]
@@ -2926,13 +2924,12 @@
          * that this is not destructive_: it returns a copy of the list with the changes.
          * <small>No lists have been harmed in the application of this function.</small>
          *
-         * @static
+         * @static .
          * @memberOf R
          * @param {Number} index The position to insert the element
          * @param elt The element to insert into the Array
          * @param {Array} list The list to insert into
          * @return {Array} a new Array with `elt` inserted at `index`
-         *
          * @example .
          *
          *      insert(2, "x", [1,2,3,4]) // => [1,2,'x',3,4]
@@ -2948,13 +2945,12 @@
          * is not destructive_: it returns a copy of the list with the changes.
          * <small>No lists have been harmed in the application of this function.</small>
          *
-         * @static
+         * @static .
          * @memberOf R
          * @param {Number} index The position to insert the sublist
          * @param {Array} elts The sub-list to insert into the Array
          * @param {Array} list The list to insert the sub-list into
          * @return {Array} a new Array with `elts` inserted starting at `index`
-         *
          * @example .
          *
          *      insert.all(2, ['x','y','z'], [1,2,3,4]) // => [1,2,'x','y','z',3,4]
@@ -2968,11 +2964,10 @@
         /**
          * Makes a comparator function out of a function that reports whether the first element is less than the second.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @param {Function} pred A predicate function of arity two.
          * @return {Function} a Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
-         *
          * @example .
          *
          *      var cmp = comparator(function(a, b) {
@@ -2992,12 +2987,11 @@
          * time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
          * if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
          *
-         * @static
+         * @static .
          * @memberOf R
          * @param {Function} comparator A sorting function :: a -> b -> Int
          * @param {Array} list The list to sort
          * @return {Array} a new array with its elements sorted by the comparator function.
-         *
          * @example .
          *
          *      sort(function(a, b) { return a - b; }, [4,2,7,5]); // => [2, 4, 5, 7];
@@ -3011,13 +3005,12 @@
          * Splits a list into sublists stored in an object, based on the result of calling a String-returning function
          * on each element, and grouping the results according to values returned.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @param {Function} fn Function :: a -> String
          * @param {Array} list The array to group
          * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
          *         that produced that key when passed to `fn`.
-         *
          * @example .
          *     var byGrade = groupBy(function(student) {
          *       var score = student.score
@@ -3049,13 +3042,12 @@
          * Takes a predicate and a list and returns the pair of lists of
          * elements which do and do not satisfy the predicate, respectively.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @param {Function} pred Function :: a -> Boolean
          * @param {Array} list The array to partition
          * @return {Array} A nested array, containing first an array of elements that satisfied the predicate,
          *                 and second an array of elements that did not satisfy.
-         *
          * @example .
          *
          *      partition(contains('s'), ['sss', 'ttt', 'foo', 'bars'])
@@ -3083,12 +3075,11 @@
         /**
          * Runs the given function with the supplied object, then returns the object.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @param {*} x
          * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
          * @return {*} x
-         *
          * @example .
          *
          *      tap(100, function(x) { console.log('x is ' + x); }); // => 100 (and logs: 'x is 100')
@@ -3103,12 +3094,11 @@
          * Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
          * non-coercing equality for primitives.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @param {*} a
          * @param {*} b
          * @return {Boolean}
-         *
          * @example .
          *
          *      var o = {};
@@ -3125,15 +3115,14 @@
         /**
          * Returns a function that when supplied an object returns the indicated property of that object, if it exists.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @category Object
-         * @alias nth
-         * @alias get
          * @param {String} p The property name
          * @param {Object} obj The object to query
          * @return {*} The value at obj.p
-         *
+         * @alias nth
+         * @alias get
          * @example .
          *
          *      prop('x', {x: 100}) // => 100
@@ -3160,14 +3149,13 @@
          * Returns the value at the specified property.
          * The only difference from `prop` is the parameter order.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @see prop
          * @category Object
          * @param {Object} obj The object to query
          * @param {String} prop The property name
          * @return {*} The value at obj.p
-         *
          * @example .
          *
          *      prop({x: 100}, 'x'); // => 100
@@ -3215,8 +3203,8 @@
          * after `fn` and `obj` are passed in to `fn`. If no additional arguments are passed to `func`,
          * `fn` is invoked with no arguments.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @category Object
          * @param {String} fn The name of the property mapped to the function to invoke
          * @param {Object} obj The object
@@ -3240,13 +3228,13 @@
         /**
          * Returns a function that always returns the given value.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @category Function
-         * @alias constant
-         * @alias K
          * @param {*} val The value to wrap in a function
          * @return {Function} A Function :: * -> val
+         * @alias constant
+         * @alias K
          * @example .
          *
          *      var t = always('Tee');
@@ -3265,8 +3253,8 @@
          * Scans a list for a `null` or `undefined` element.
          * Returns true if it finds one, false otherwise.
          *
-         * @memberOf R
          * @static .
+         * @memberOf R
          * @category list
          * @param {Array} list The array to scan
          * @return {Boolean}
@@ -3303,8 +3291,8 @@
          * @category Object
          * @param {Object} obj The object to extract properties from
          * @return {Array} An array of the object's own properties
-         *
          * @example .
+         *
          *      keys({a: 1, b: 2, c: 3}) // => ['a', 'b', 'c']
          */
         var keys = R.keys = function _keys(obj) {
@@ -3515,14 +3503,17 @@
 
 
         /**
-         * Returns a partial copy of an object containing only the keys that satisfy the supplied predicate.
+         * Returns a partial copy of an object containing only the keys that
+         * satisfy the supplied predicate.
          *
          * @static .
          * @memberOf R
          * @category Object
-         * @param {Function} pred A predicate to determine whether or not a key should be included on the output object.
+         * @param {Function} pred A predicate to determine whether or not a key
+         *        should be included on the output object.
          * @param {Object} obj The object to copy from
-         * @return {Object} A new object with only properties that satisfy `pred` on it.
+         * @return {Object} A new object with only properties that satisfy `pred`
+         *         on it.
          * @see pick
          * @example .
          *

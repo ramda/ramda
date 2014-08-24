@@ -35,13 +35,14 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-uglify": "~0.5.1",
     "grunt-mocha-test": "~0.11.0",
-    "grunt-readme": "~0.4.5",
+    "grunt-readme": "^0.4.5",
     "grunt-benchmark": "https://github.com/buzzdecafe/grunt-benchmark/archive/09999a8c3fbfff04a1695846c1ccd0bd8a0ef5ab.tar.gz",
     "benchmark": "~1.0.0",
     "lodash": "latest",
     "orchestrate": "~0.3.4",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-push-release": "^0.1.1",
-    "docker": "^0.2.13"
+    "docker": "^0.2.13",
+    "grunt-jsdoc": "^0.6.0"
   }
 }
