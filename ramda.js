@@ -4962,6 +4962,49 @@
             }, {}, keyValue(fn, list));
         });
 
+        /**
+         * @private
+         * @param {Function} fn The strategy for extracting function names from an object
+         * @return {Function} A function that takes an object and returns an array of function names
+         *
+         */
+        var functionsWith = function(fn) {
+            return function(obj) {
+                return R.filter(function(key) { return typeof obj[key] === 'function'; }, fn(obj));
+            };
+        };
+
+        /**
+         * Returns a list of function names of object's own functions
+         *
+         * @static .
+         * @memberOf R
+         * @category Object
+         * @param {Object} obj The objects with functions in it
+         * @return {Array} returns list of object's own function names
+         * @example .
+         *
+         *      R.functions(R) // => returns list of ramda's own function names
+         *      R.functions(this) // => returns list of function names in global scope's own function names
+         */
+        R.functions = functionsWith(R.keys);
+
+
+        /**
+         * Returns a list of function names of object's own and prototype functions
+         *
+         * @static .
+         * @memberOf R
+         * @category Object
+         * @param {Object} obj The objects with functions in it
+         * @return {Array} returns list of object's own and prototype function names
+         * @example .
+         *
+         *      R.functionsIn(R) // => returns list of ramda's own and prototype function names
+         *      R.functionsIn(this) // => returns list of function names in global scope's own and prototype function names
+         */
+        R.functionsIn = functionsWith(R.keysIn);
+
 
         // All the functional goodness, wrapped in a nice little package, just for you!
         return R;
