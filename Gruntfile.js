@@ -90,7 +90,7 @@ module.exports = function(grunt) {
 
     jsdoc : {
       dist : {
-        src: ['C:/_Projects/ramda/tmp/*.js'],
+        src: ['*.js'],
         options: {
           destination: 'jsdoc-out'
         }
