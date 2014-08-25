@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('filter', function() {
     var even = function(x) {return x % 2 === 0;};

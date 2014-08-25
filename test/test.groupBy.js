@@ -29,7 +29,7 @@ describe('groupBy', function() {
     });
 
     it('should be automatically curried', function() {
-        var splitByType = R.groupBy(R.prop("type"));
+        var splitByType = R.groupBy(R.prop('type'));
         assert.deepEqual(splitByType([
             {type: 'A', val: 10},
             {type: 'B', val: 20},

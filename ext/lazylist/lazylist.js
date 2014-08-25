@@ -16,7 +16,7 @@
   // a function that creates a new seed from the current seed.  Lazy list objects have this structure:
   //
   //     {
-  //        "0": someValue,
+  //        '0': someValue,
   //        tail: someFunction() {},
   //        length: Infinity
   //     }
@@ -51,14 +51,14 @@
     // Trampolining to support recursion in Lazy lists
     var trampoline = function(fn) {
       var result = fn.apply(this, R.tail(arguments));
-      while (typeof result === "function") {
+      while (typeof result === 'function') {
         result = result();
       }
       return result;
     };
     // Internal Lazy list constructor
     var  LZ = function(seed, current, step) {
-      this["0"] = current(seed);
+      this['0'] = current(seed);
       this.tail = function() {
         return new LZ(step(seed), current, step);
       };

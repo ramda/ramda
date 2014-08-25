@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('lPartial', function() {
     var disc = function(a, b, c) { // note disc(3, 7, 4) => 1

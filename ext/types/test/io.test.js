@@ -5,9 +5,9 @@ var R = require('../../..');
 var IO = require('../IO');
 
 describe('IO', function() {
-  var f1 = function(x) { console.log("IO 1"); return "1 "; };
-  var f2 = function(x) { console.log("IO 2"); return x + "2 "; };
-  var f3 = function(x) { console.log("IO 3"); return x + "3 "; };
+  var f1 = function(x) { console.log('IO 1'); return '1 '; };
+  var f2 = function(x) { console.log('IO 2'); return x + '2 '; };
+  var f3 = function(x) { console.log('IO 3'); return x + '3 '; };
   var i1 = IO(f1);
   var i2 = IO(f2);
   var i3 = IO(f3);

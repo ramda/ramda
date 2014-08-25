@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('clone', function() {
     it('returns a copy of an array', function() {

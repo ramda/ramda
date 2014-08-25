@@ -132,8 +132,8 @@ describe('unary', function() {
     it('should turn multiple-argument function into unary one', function() {
         R.unary(function(x, y, z) {
             assert.equal(arguments.length, 1);
-            assert.equal(typeof y, "undefined");
-            assert.equal(typeof z, "undefined");
+            assert.equal(typeof y, 'undefined');
+            assert.equal(typeof z, 'undefined');
         })(10, 20, 30);
     });
 
@@ -148,7 +148,7 @@ describe('binary', function() {
     it('should turn multiple-argument function into binary one', function() {
         R.binary(function(x, y, z) {
             assert.equal(arguments.length, 2);
-            assert.equal(typeof z, "undefined");
+            assert.equal(typeof z, 'undefined');
         })(10, 20, 30);
     });
 
