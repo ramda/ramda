@@ -3717,9 +3717,10 @@
         // --------
 
         /**
-         * Expose the functions from ramda as properties on another object.  If the passed-in object is the
-         * global object, or the passed-in object is "falsy", then the ramda functions become global functions.
-         * Warning: This function *will* mutate the passed -in object (or the global object when called with no arguments).
+         * Expose the functions from ramda as properties of another object.
+         * If the provided object is the global object then the ramda
+         * functions become global functions.
+         * Warning: This function *will* mutate the object provided.
          *
          * @static
          * @memberOf R
@@ -3731,10 +3732,9 @@
          *      var x = {}
          *      R.installTo(x) // => x now contains ramda functions
          *      R.installTo(this) // => add ramda functions to `this` object
-         *      R.installTo() // => ramda functions in global scope
          */
         R.installTo = function(obj) {
-            return extend(obj || global, R);
+            return extend(obj, R);
         };
 
 
