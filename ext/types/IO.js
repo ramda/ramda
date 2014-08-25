@@ -1,4 +1,4 @@
-var compose = require("../..").compose;
+var compose = require('../..').compose;
 
 function IO(fn) {
   if (!(this instanceof IO)) {

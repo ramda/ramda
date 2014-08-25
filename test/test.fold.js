@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('foldl', function() {
     var add = function(a, b) {return a + b;};

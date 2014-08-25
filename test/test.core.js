@@ -68,10 +68,10 @@ describe('concat', function() {
 
 describe('head', function() {
     it('returns undefined for an empty list', function() {
-        assert.equal(typeof(R.head([])),  "undefined");
+        assert.equal(typeof(R.head([])),  'undefined');
     });
     it('returns undefined for no arguments', function() {
-        assert.equal(typeof(R.head()), "undefined");
+        assert.equal(typeof(R.head()), 'undefined');
     });
     it('returns the first element of a list', function() {
         assert.equal(R.head(['a', 'b', 'c', 'd']), 'a');
@@ -80,10 +80,10 @@ describe('head', function() {
 
 describe('last', function() {
     it('returns undefined for an empty list', function() {
-        assert.equal(typeof(R.last([])),  "undefined");
+        assert.equal(typeof(R.last([])),  'undefined');
     });
     it('returns undefined for no arguments', function() {
-        assert.equal(typeof(R.last()), "undefined");
+        assert.equal(typeof(R.last()), 'undefined');
     });
     it('returns the first element of a list', function() {
         assert.equal(R.last(['a', 'b', 'c', 'd']), 'd');
@@ -127,8 +127,8 @@ describe('sort', function() {
 
     it('is automatically curried', function() {
         var sortByLength = R.sort(function(a, b) {return a.length - b.length;});
-        assert.deepEqual(sortByLength(["one", "two", "three", "four", "five", "six"]),
-                                      ["one", "two", "six", "four", "five", "three"]);
+        assert.deepEqual(sortByLength(['one', 'two', 'three', 'four', 'five', 'six']),
+                                      ['one', 'two', 'six', 'four', 'five', 'three']);
     });
 });
 

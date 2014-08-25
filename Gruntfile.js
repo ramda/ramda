@@ -37,6 +37,13 @@ module.exports = function(grunt) {
       }
     },
 
+    jscs: {
+      files: ['*.js', 'ext/**/*.js', 'test/*.js'],
+      options: {
+        validateQuoteMarks: {escape: true, mark: "'"}
+      }
+    },
+
     jshint: {
       files: ['ramda.js', 'ext/**/*.js', 'test/*.js'],
       options: {
@@ -103,6 +110,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-docco');
@@ -120,7 +128,7 @@ module.exports = function(grunt) {
 
     grunt.file.recurse(reportDir, function(abspath, rootdir, subdir, filename) {
       var json = {};
-      var timestamp = filename.split(".")[1];
+      var timestamp = filename.split('.')[1];
       if (timestamp) {
         json.timestamp = timestamp;
         json.datestamp = (new Date(+timestamp)).toISOString();
@@ -149,7 +157,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dist', ['uglify', 'copy:dist']);
 
-  grunt.registerTask('test', ['jshint', 'mochaTest:test']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
   grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
   grunt.registerTask('version', ['clean:dist', 'jshint', 'docco:doc', 'uglify', 'copy:dist']);
   grunt.registerTask('publish', ['push', 'version']);

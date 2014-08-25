@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('xprod', function() {
     var a = [1, 2], b = ['a', 'b', 'c'];

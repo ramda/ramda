@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('unfoldr', function() {
     it('should unfold simple functions with a starting point to create a list', function() {
