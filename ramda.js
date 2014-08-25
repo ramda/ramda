@@ -911,7 +911,10 @@
          *      ramda.concat('ABC', 'DEF'); // 'ABCDEF'
          */
         R.concat = curry2(function(set1, set2) {
-            return (hasMethod('concat', set1)) ? set1.concat(set2) : concat(set1, set2);
+            if (isArray(set2)) { return concat(set1, set2); }
+            else if (R.is(String, set1)) { return set1.concat(set2); }
+            else if (hasMethod('concat', set2)) { return set2.concat(set1); }
+            else { throw new TypeError("can't concat " + typeof set2); }
         });
 
 
