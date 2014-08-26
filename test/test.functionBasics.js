@@ -166,17 +166,17 @@ describe('ap', function() {
     function plus3(x) { return x + 3; }
 
     it('applies a list of functions to a list of values', function() {
-      assert.deepEqual(R.ap([mult2, plus3], [1, 2, 3]), [2,4,6,4,5,6]);
+      assert.deepEqual(R.ap([mult2, plus3], [1, 2, 3]), [2, 4, 6, 4, 5, 6]);
     });
 
     it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
-      var obj = { ap: function(fs) { return { x: fs[0](1) }; } };
+      var obj = {ap: function(fs) { return {x: fs[0](1)}; }};
       assert.deepEqual(R.ap([R.add(1)], obj), obj.ap([R.add(1)]));
     });
 
     it('is curried', function() {
       var val = R.ap([mult2, plus3]);
       assert.equal(typeof val, 'function');
-      assert.deepEqual(val([1,2,3]), [2,4,6,4,5,6]);
+      assert.deepEqual(val([1, 2, 3]), [2, 4, 6, 4, 5, 6]);
     });
 });

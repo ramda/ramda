@@ -57,11 +57,11 @@ gulp.task('test2', function () {
   });
 });
 
-gulp.task('default', function(){
+gulp.task('default', function() {
     gulp.run('hint', 'min');
 
     // Watch For Changes To Our JS
-    gulp.watch(lib, function(){
+    gulp.watch(lib, function() {
         gulp.run('hint', 'min');
     });
 });

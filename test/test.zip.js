@@ -2,7 +2,7 @@ var assert = require('assert');
 var R = require('..');
 
 describe('zipWith', function() {
-    var a = [1,2,3], b = [100, 200, 300], c = [10, 20, 30, 40, 50, 60];
+    var a = [1, 2, 3], b = [100, 200, 300], c = [10, 20, 30, 40, 50, 60];
     var add = function(a, b) { return a + b; };
     var x = function(a, b) { return a * b; };
     var s = function(a, b) { return a + ' cow ' + b; };
@@ -19,12 +19,12 @@ describe('zipWith', function() {
 
 describe('zip', function() {
     it('returns an array of "tuples"', function() {
-        var a = [1,2,3], b = [100, 200, 300];
+        var a = [1, 2, 3], b = [100, 200, 300];
         assert.deepEqual(R.zip(a, b), [[1, 100], [2, 200], [3, 300]]);
     });
 
     it('returns a list as long as the shorter of the lists input', function() {
-        var a = [1,2,3], b = [100, 200, 300, 400], c = [10, 20];
+        var a = [1, 2, 3], b = [100, 200, 300, 400], c = [10, 20];
         assert.deepEqual(R.zip(a, b), [[1, 100], [2, 200], [3, 300]]);
         assert.deepEqual(R.zip(a, c), [[1, 10], [2, 20]]);
     });
@@ -66,7 +66,7 @@ describe('toPairs', function() {
         };
         F.prototype.protoProp = 'you can\'t see me';
         var f = new F();
-        assert.deepEqual(R.toPairs(f), [['x',1], ['y',2]]);
+        assert.deepEqual(R.toPairs(f), [['x', 1], ['y', 2]]);
     });
 });
 
@@ -81,6 +81,6 @@ describe('toPairsIn', function() {
         };
         F.prototype.protoProp = 'you can see me';
         var f = new F();
-        assert.deepEqual(R.toPairsIn(f), [['x',1], ['y',2], ['protoProp', 'you can see me']]);
+        assert.deepEqual(R.toPairsIn(f), [['x', 1], ['y', 2], ['protoProp', 'you can see me']]);
     });
 });

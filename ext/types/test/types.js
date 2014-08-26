@@ -1,6 +1,6 @@
 var R = require('../../..');
 
-var interfaces = { functor: ['map'] };
+var interfaces = {functor: ['map']};
 interfaces.apply = interfaces.functor.concat(['ap']);
 interfaces.applicative = interfaces.apply.concat(['of']);
 interfaces.chain = interfaces.apply.concat(['chain']);

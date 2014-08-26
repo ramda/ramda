@@ -48,7 +48,7 @@ describe('subtract', function() {
 
 describe('subtractN', function() {
     it('should subtract two numbers', function() {
-        assert.equal(15, R.subtractN(7,22));
+        assert.equal(15, R.subtractN(7, 22));
     });
 
     it('should be automatically curried', function() {
@@ -168,9 +168,9 @@ describe('sum', function() {
     });
 
     it('does not save the state of the accumulator', function() {
-        assert.equal(10, R.sum([1,2,3,4]));
+        assert.equal(10, R.sum([1, 2, 3, 4]));
         assert.equal(1, R.sum([1]));
-        assert.equal(25, R.sum([5,5,5,5,5]));
+        assert.equal(25, R.sum([5, 5, 5, 5, 5]));
     });
 });
 

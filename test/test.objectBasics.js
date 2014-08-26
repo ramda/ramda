@@ -63,7 +63,7 @@ describe('func', function () {
     });
 
     it('invokes the function with no arguments when no extra params are supplied', function() {
-        var obj = {f: function() { return 'called f'; } };
+        var obj = {f: function() { return 'called f'; }};
         assert.equal(R.func('f', obj), 'called f');
     });
 

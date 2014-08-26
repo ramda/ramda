@@ -2,7 +2,7 @@ var assert = require('assert');
 var R = require('..');
 
 describe('path', function() {
-    var deepObject = { a: { b: { c: 'c' } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr'] };
+    var deepObject = {a: {b: {c: 'c'}}, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr']};
     it('takes a dot-delimited path and an object and returns the value at the path or undefined', function() {
         var obj = {
           a: {
@@ -52,7 +52,7 @@ describe('path', function() {
 });
 
 describe('pathOn', function() {
-    var deepObject = { a: { b: { c: 'c' } }, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr'] };
+    var deepObject = {a: {b: {c: 'c'}}, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr']};
     it('takes a string separator, string path, and an object and returns the value at the path or undefined', function() {
         var obj = {
           a: {

@@ -34,7 +34,7 @@ describe('shuffle', function() {
     });
 
     it('returns a shuffled copy of a list', function() {
-        var list = [1, 2, 3,4, 5, 6, 7, 8, 9, 10];
+        var list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         assert.deepEqual(R.shuffle(random, list), [6, 3, 4, 8, 5, 1, 7, 10, 2, 9]);
     });
 

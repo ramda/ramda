@@ -19,7 +19,7 @@
 (function (root, factory) {if (typeof exports === 'object') {module.exports = factory(root);} else if (typeof define === 'function' && define.amd) {define(factory);} else {root.ramda = factory(root);}}(this, function (global) {
 
     'use strict';
-    return  (function() {
+    return (function() {
         // This object is what is actually returned, with all the exposed functions attached as properties.
 
         /**
@@ -51,8 +51,8 @@
          *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
          */
         function _slice(args, from, to) {
-            from = (typeof from === 'number' ) ? from : 0;
-            to = (typeof to === 'number' ) ? to : args.length;
+            from = (typeof from === 'number') ? from : 0;
+            to = (typeof to === 'number') ? to : args.length;
             var length = to - from,
                 arr = new Array(length),
                 i = -1;
@@ -133,7 +133,7 @@
             return isArray(x) || (
                 !!x &&
                 typeof x === 'object' &&
-                ! (x instanceof String) &&
+                !(x instanceof String) &&
                 (
                     !!(x.nodeType === 1 && x.length) ||
                     x.length >= 0
@@ -1020,7 +1020,7 @@
          *      // function.
          *      partialAdd(2); //≅ addThree(1, 2, undefined) => NaN
          */
-        function partially(f, a){
+        function partially(f, a) {
             return function() {
                 return f.apply(this, concat([a], arguments));
             };
@@ -1360,7 +1360,7 @@
                 Temp.prototype = Fn.prototype;
                 inst = new Temp();
                 ret = Fn.apply(inst, arguments);
-                return Object(ret) === ret ? ret: inst;
+                return Object(ret) === ret ? ret : inst;
             };
             return n > 1 ? curry(nAry(n, f)) : f;
         };
@@ -2499,7 +2499,7 @@
             var len = list.length;
             var i = -1;
             while (++i < len) {
-                if (indexOf(list, list[i], i+1) >= 0) {
+                if (indexOf(list, list[i], i + 1) >= 0) {
                     return false;
                 }
             }
