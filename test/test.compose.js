@@ -113,7 +113,7 @@ describe('useWith', function() {
     function max() { return Math.max.apply(Math, arguments); }
     function add1(x) { return x + 1; }
     function mult2(x) { return x * 2; }
-    function div3(x) { return x/3; }
+    function div3(x) { return x / 3; }
     var f = R.useWith(max, add1, mult2, div3);
 
     it('takes a arbitrary number of function arguments and returns a function', function() {

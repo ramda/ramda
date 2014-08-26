@@ -3,7 +3,7 @@ var R = require('..');
 
 describe('clone', function() {
     it('returns a copy of an array', function() {
-      var input = [1,2,3,4,5];
+      var input = [1, 2, 3, 4, 5];
       var output = R.clone(input);
       assert.deepEqual(output, input);
       assert.notStrictEqual(output, input);

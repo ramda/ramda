@@ -46,7 +46,7 @@ describe('reject', function() {
 
     it('should be automatically curried', function() {
         var odd = R.reject(even);
-        assert.deepEqual(odd([1, 2, 3,4, 5, 6, 7]), [1, 3, 5, 7]);
+        assert.deepEqual(odd([1, 2, 3, 4, 5, 6, 7]), [1, 3, 5, 7]);
     });
 });
 

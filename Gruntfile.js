@@ -40,6 +40,20 @@ module.exports = function(grunt) {
     jscs: {
       files: ['*.js', 'ext/**/*.js', 'test/*.js'],
       options: {
+        disallowMixedSpacesAndTabs: true,
+        disallowSpaceAfterObjectKeys: true,
+        disallowSpaceAfterPrefixUnaryOperators: ['++', '--', '+', '-', '~', '!'],
+        disallowSpaceBeforePostfixUnaryOperators: ['++', '--'],
+        disallowSpacesInsideArrayBrackets: true,
+        disallowSpacesInsideObjectBrackets: true,
+        disallowSpacesInsideParentheses: true,
+        disallowTrailingWhitespace: true,
+        requireSpaceAfterBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<=', ',', ':'],
+        requireSpaceAfterKeywords: ['if', 'else', 'for', 'while', 'do', 'switch', 'return', 'try', 'catch', 'finally'],
+        requireSpaceBeforeBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<='],
+        requireSpaceBeforeBlockStatements: true,
+        requireSpacesInConditionalExpression: true,
+        requireSpacesInFunctionExpression: {beforeOpeningCurlyBrace: true},
         validateQuoteMarks: {escape: true, mark: "'"}
       }
     },
@@ -95,8 +109,8 @@ module.exports = function(grunt) {
       }
     },
 
-    jsdoc : {
-      dist : {
+    jsdoc: {
+      dist: {
         src: ['*.js'],
         options: {
           destination: 'jsdoc-out'
