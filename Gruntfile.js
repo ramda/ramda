@@ -172,8 +172,8 @@ module.exports = function(grunt) {
   grunt.registerTask('dist', ['uglify', 'copy:dist']);
 
   grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
-  grunt.registerTask('min', ['test', /* 'docco:doc', */ 'uglify']);
-  grunt.registerTask('version', ['clean:dist', 'jshint', 'docco:doc', 'uglify', 'copy:dist']);
+  grunt.registerTask('min', ['jshint', 'mochaTest:test', /* 'docco:doc', */ 'uglify']);
+  grunt.registerTask('version', ['clean:dist', 'jshint', /*'docco:doc',*/ 'uglify', 'copy:dist']);
   grunt.registerTask('publish', ['push', 'version']);
   grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
 };
