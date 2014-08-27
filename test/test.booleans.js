@@ -120,6 +120,6 @@ describe('anyPredicates', function() {
     });
 
     it('reports its arity as the longest predicate length', function() {
-      assert.equal(R.anyPredicates([odd, lt5, plusEq]).length, 4);
+        assert.equal(R.anyPredicates([odd, lt5, plusEq]).length, 4);
     });
 });

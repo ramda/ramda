@@ -31,7 +31,7 @@ describe('take for a lazylist', function() {
 });
 
 describe('takeWhile for a lazylist', function() {
-    var inc = function (n) {return n + 1;};
+    var inc = function(n) {return n + 1;};
     var pred = function(n) {return n < 5;};
 
     var lz = lazylist(0, R.identity, inc);

@@ -4,8 +4,8 @@ var R = require('..');
 describe('functionsIn', function() {
 
     function F() {
-        this.sort = function () {};
-        this.map = function () {};
+        this.sort = function() {};
+        this.map = function() {};
         this.obj = {};
         this.num = 4;
     }

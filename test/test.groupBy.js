@@ -20,11 +20,11 @@ describe('groupBy', function() {
         ];
         var byGrade = function(student) {return grade(student.score || 0);};
         assert.deepEqual(R.groupBy(byGrade, students), {
-            'A': [{name: 'Dianne', score: 99}, {name: 'Gillian', score: 91}],
-            'B': [{name: 'Abby', score: 84}, {name: 'Chris', score: 89}, {name: 'Irene', score: 85}],
-            'C': [{name: 'Brad', score: 73}, {name: 'Hannah', score: 78}],
-            'D': [{name: 'Fred', score: 67}, {name: 'Jack', score: 69}],
-            'F': [{name: 'Eddy', score: 58}]
+            A: [{name: 'Dianne', score: 99}, {name: 'Gillian', score: 91}],
+            B: [{name: 'Abby', score: 84}, {name: 'Chris', score: 89}, {name: 'Irene', score: 85}],
+            C: [{name: 'Brad', score: 73}, {name: 'Hannah', score: 78}],
+            D: [{name: 'Fred', score: 67}, {name: 'Jack', score: 69}],
+            F: [{name: 'Eddy', score: 58}]
         });
     });
 
@@ -38,9 +38,9 @@ describe('groupBy', function() {
             {type: 'C', val: 50},
             {type: 'B', val: 60}
         ]), {
-            'A': [{type: 'A', val: 10}, {type: 'A', val: 30}, {type: 'A', val: 40}],
-            'B': [{type: 'B', val: 20}, {type: 'B', val: 60}],
-            'C': [{type: 'C', val: 50}]
+            A: [{type: 'A', val: 10}, {type: 'A', val: 30}, {type: 'A', val: 40}],
+            B: [{type: 'B', val: 20}, {type: 'B', val: 60}],
+            C: [{type: 'C', val: 50}]
         });
 
     });

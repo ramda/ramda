@@ -51,11 +51,11 @@ describe('concat', function() {
     });
 
     var z1 = {
-      x: 'z1'
+        x: 'z1'
     };
     var z2 = {
-      x: 'z2',
-      concat: function(that) { return this.x + ' ' + that.x; }
+        x: 'z2',
+        concat: function(that) { return this.x + ' ' + that.x; }
     };
 
     it('adds combines the elements of the two lists', function() {
@@ -63,18 +63,18 @@ describe('concat', function() {
         assert.deepEqual(R.concat([], ['c', 'd']), ['c', 'd']);
     });
     it('works on strings', function() {
-      assert.equal(R.concat('foo', 'bar'), 'foobar');
+        assert.equal(R.concat('foo', 'bar'), 'foobar');
     });
     it('delegates to non-String object with a concat method, as second param', function() {
-      assert.equal(R.concat(z1, z2), 'z2 z1');
+        assert.equal(R.concat(z1, z2), 'z2 z1');
     });
     it('is curried', function() {
-      var conc123 = R.concat([1, 2, 3]);
-      assert.deepEqual(conc123([4, 5, 6]), [1, 2, 3, 4, 5, 6]);
-      assert.deepEqual(conc123(['a', 'b', 'c']), [1, 2, 3, 'a', 'b', 'c']);
+        var conc123 = R.concat([1, 2, 3]);
+        assert.deepEqual(conc123([4, 5, 6]), [1, 2, 3, 4, 5, 6]);
+        assert.deepEqual(conc123(['a', 'b', 'c']), [1, 2, 3, 'a', 'b', 'c']);
     });
     it('throws if not an array, String, or object with a concat method', function() {
-      assert.throws(function() { return R.concat({}, {}); }, TypeError);
+        assert.throws(function() { return R.concat({}, {}); }, TypeError);
     });
 });
 

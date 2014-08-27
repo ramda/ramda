@@ -92,22 +92,22 @@ describe('divideBy', function() {
 });
 
 describe('modulo', function() {
-  it('divides the first param by the second and returns the remainder', function() {
-    assert.equal(R.modulo(100, 2), 0);
-    assert.equal(R.modulo(100, 3), 1);
-    assert.equal(R.modulo(100, 17), 15);
-  });
+    it('divides the first param by the second and returns the remainder', function() {
+        assert.equal(R.modulo(100, 2), 0);
+        assert.equal(R.modulo(100, 3), 1);
+        assert.equal(R.modulo(100, 17), 15);
+    });
 
-  it('is automatically curried', function() {
-    var modOf120by = R.modulo(120);
-    assert.equal(typeof modOf120by, 'function');
-    assert.equal(modOf120by(3), 0);
-    assert.equal(modOf120by(19), 6);
-  });
+    it('is automatically curried', function() {
+        var modOf120by = R.modulo(120);
+        assert.equal(typeof modOf120by, 'function');
+        assert.equal(modOf120by(3), 0);
+        assert.equal(modOf120by(19), 6);
+    });
 
-  it('preserves javascript-style modulo evaluation for negative numbers', function() {
-    assert.equal(R.modulo(-5, 4), -1);
-  });
+    it('preserves javascript-style modulo evaluation for negative numbers', function() {
+        assert.equal(R.modulo(-5, 4), -1);
+    });
 
     it('throws if given no arguments', function() {
         assert.throws(R.modulo, TypeError);
@@ -115,22 +115,22 @@ describe('modulo', function() {
 });
 
 describe('moduloBy', function() {
-  it('divides the second param by the first and returns the remainder', function() {
-    assert.equal(R.moduloBy(2, 100), 0);
-    assert.equal(R.moduloBy(3, 100), 1);
-    assert.equal(R.moduloBy(17, 100), 15);
-  });
+    it('divides the second param by the first and returns the remainder', function() {
+        assert.equal(R.moduloBy(2, 100), 0);
+        assert.equal(R.moduloBy(3, 100), 1);
+        assert.equal(R.moduloBy(17, 100), 15);
+    });
 
-  it('is automatically curried', function() {
-    var isOdd = R.moduloBy(2);
-    assert.equal(typeof isOdd, 'function');
-    assert.equal(isOdd(3), 1);
-    assert.equal(isOdd(198), 0);
-  });
+    it('is automatically curried', function() {
+        var isOdd = R.moduloBy(2);
+        assert.equal(typeof isOdd, 'function');
+        assert.equal(isOdd(3), 1);
+        assert.equal(isOdd(198), 0);
+    });
 
-  it('preserves javascript-style modulo evaluation for negative numbers', function() {
-    assert.equal(R.moduloBy(4, -5), -1);
-  });
+    it('preserves javascript-style modulo evaluation for negative numbers', function() {
+        assert.equal(R.moduloBy(4, -5), -1);
+    });
 
     it('throws if given no arguments', function() {
         assert.throws(R.moduloBy);
@@ -138,23 +138,23 @@ describe('moduloBy', function() {
 });
 
 describe('mathMod', function() {
-  it('requires integer arguments', function() {
-    assert.notEqual(R.mathMod('s', 3), R.mathMod('s', 3));
-    assert.notEqual(R.mathMod(3, 's'), R.mathMod(3, 's'));
-    assert.notEqual(R.mathMod(12.2, 3), R.mathMod(12.2, 3));
-    assert.notEqual(R.mathMod(3, 12.2), R.mathMod(3, 12.2));
-  });
+    it('requires integer arguments', function() {
+        assert.notEqual(R.mathMod('s', 3), R.mathMod('s', 3));
+        assert.notEqual(R.mathMod(3, 's'), R.mathMod(3, 's'));
+        assert.notEqual(R.mathMod(12.2, 3), R.mathMod(12.2, 3));
+        assert.notEqual(R.mathMod(3, 12.2), R.mathMod(3, 12.2));
+    });
 
-  it('behaves differently than JS modulo', function() {
-    assert.notEqual(R.mathMod(-17, 5), -17 % 5);
-    assert.notEqual(R.mathMod(17.2, 5), 17.2 % 5);
-    assert.notEqual(R.mathMod(17, -5), 17 % -5);
-  });
+    it('behaves differently than JS modulo', function() {
+        assert.notEqual(R.mathMod(-17, 5), -17 % 5);
+        assert.notEqual(R.mathMod(17.2, 5), 17.2 % 5);
+        assert.notEqual(R.mathMod(17, -5), 17 % -5);
+    });
 
-  it('is curried', function() {
-    var f = R.mathMod(29);
-    assert.equal(f(6), 5);
-  });
+    it('is curried', function() {
+        var f = R.mathMod(29);
+        assert.equal(f(6), 5);
+    });
 
 
     it('throws if given no arguments', function() {
@@ -197,7 +197,7 @@ describe('lt', function() {
     });
 
     it('throws when given no arguments', function() {
-      assert.throws(R.lt, TypeError);
+        assert.throws(R.lt, TypeError);
     });
 });
 
@@ -218,7 +218,7 @@ describe('lte', function() {
     });
 
     it('throws when given no arguments', function() {
-      assert.throws(R.lte, TypeError);
+        assert.throws(R.lte, TypeError);
     });
 });
 
@@ -239,7 +239,7 @@ describe('gt', function() {
     });
 
     it('throws when given no arguments', function() {
-      assert.throws(R.gt, TypeError);
+        assert.throws(R.gt, TypeError);
     });
 });
 
@@ -260,7 +260,7 @@ describe('gte', function() {
     });
 
     it('throws when given no arguments', function() {
-      assert.throws(R.gte, TypeError);
+        assert.throws(R.gte, TypeError);
     });
 });
 

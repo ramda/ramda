@@ -1,14 +1,14 @@
 var assert = require('assert');
 var R = require('..');
 
-describe('join', function () {
-    it("concatenates a list's elements to a string, with an seperator string between elements", function () {
+describe('join', function() {
+    it("concatenates a list's elements to a string, with an seperator string between elements", function() {
         var list = [1, 2, 3, 4];
         assert.equal(R.join('~', list), '1~2~3~4');
     });
 });
 
-describe('remove', function () {
+describe('remove', function() {
     it('splices out a sub-list of the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
         assert.deepEqual(R.remove(2, 5, list), ['a', 'b', 'h', 'i', 'j']);
@@ -38,7 +38,7 @@ describe('remove', function () {
     });
 });
 
-describe('insert', function () {
+describe('insert', function() {
     it('inserts an element into the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(R.insert(2, 'x', list), ['a', 'b', 'x', 'c', 'd', 'e']);
@@ -62,7 +62,7 @@ describe('insert', function () {
 });
 
 
-describe('insert.all', function () {
+describe('insert.all', function() {
     it('inserts a list of elements into the given list', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(R.insert.all(2, ['x', 'y', 'z'], list), ['a', 'b', 'x', 'y', 'z', 'c', 'd', 'e']);
@@ -80,8 +80,8 @@ describe('insert.all', function () {
 });
 
 
-describe('slice', function () {
-    it('retrieves the proper sublist of a list', function () {
+describe('slice', function() {
+    it('retrieves the proper sublist of a list', function() {
         var list = [8, 6, 7, 5, 3, 0, 9];
         assert.deepEqual(R.slice(2, 5, list), [7, 5, 3]);
     });
@@ -93,8 +93,8 @@ describe('slice', function () {
     // });
 });
 
-describe('slice.from', function () {
-    it('retrieves the proper suffix sublist of a list starting with the desired index', function () {
+describe('slice.from', function() {
+    it('retrieves the proper suffix sublist of a list starting with the desired index', function() {
         var list = [8, 6, 7, 5, 3, 0, 9];
         assert.deepEqual(R.slice.from(2, list), [7, 5, 3, 0, 9]);
     });
@@ -114,16 +114,16 @@ describe('times', function() {
     });
 });
 
-describe('repeatN', function () {
-    it('returns a lazy list of identical values', function () {
+describe('repeatN', function() {
+    it('returns a lazy list of identical values', function() {
         assert.deepEqual(R.repeatN(0, 5), [0, 0, 0, 0, 0]);
     });
 
-    it('can accept any value, including `null`', function () {
+    it('can accept any value, including `null`', function() {
         assert.deepEqual(R.repeatN(null, 3), [null, null, null]);
     });
 
-    it('is automatically curried', function () {
+    it('is automatically curried', function() {
         var nTrues = R.repeatN(true);
         assert.deepEqual(nTrues(4), [true, true, true, true]);
     });
