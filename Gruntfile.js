@@ -41,6 +41,7 @@ module.exports = function(grunt) {
       files: ['*.js', 'ext/**/*.js', 'test/*.js'],
       options: {
         disallowMixedSpacesAndTabs: true,
+        disallowMultipleLineStrings: true,
         disallowSpaceAfterObjectKeys: true,
         disallowSpaceAfterPrefixUnaryOperators: ['++', '--', '+', '-', '~', '!'],
         disallowSpaceBeforePostfixUnaryOperators: ['++', '--'],
@@ -48,12 +49,19 @@ module.exports = function(grunt) {
         disallowSpacesInsideObjectBrackets: true,
         disallowSpacesInsideParentheses: true,
         disallowTrailingWhitespace: true,
+        disallowYodaConditions: true,
+        requireCapitalizedConstructors: true,
+        requireCommaBeforeLineBreak: true,
+        requireDotNotation: true,
+        requireLineFeedAtFileEnd: true,
+        requireParenthesesAroundIIFE: true,
         requireSpaceAfterBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<=', ',', ':'],
         requireSpaceAfterKeywords: ['if', 'else', 'for', 'while', 'do', 'switch', 'return', 'try', 'catch', 'finally'],
         requireSpaceBeforeBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<='],
         requireSpaceBeforeBlockStatements: true,
         requireSpacesInConditionalExpression: true,
         requireSpacesInFunctionExpression: {beforeOpeningCurlyBrace: true},
+        validateLineBreaks: 'LF',
         validateQuoteMarks: {escape: true, mark: "'"}
       }
     },
