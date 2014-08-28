@@ -1,12 +1,12 @@
-(function (root, factory) {
+(function (factory) {
     if (typeof define === 'function' && define.amd) {
         define(['ramda'], factory);
     } else if (typeof exports === 'object') {
         module.exports = factory(require('../..'));
     } else {
-        root.Random = factory(root.ramda);
+        this.Random = factory(this.ramda);
     }
-}(this, function (R) {
+}(function (R) {
 
     // Random
     // ----------
