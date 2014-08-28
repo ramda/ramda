@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('add', function() {
     it('should add together two numbers', function() {
@@ -48,7 +48,7 @@ describe('subtract', function() {
 
 describe('subtractN', function() {
     it('should subtract two numbers', function() {
-        assert.equal(15, R.subtractN(7,22));
+        assert.equal(15, R.subtractN(7, 22));
     });
 
     it('should be automatically curried', function() {
@@ -168,9 +168,9 @@ describe('sum', function() {
     });
 
     it('does not save the state of the accumulator', function() {
-        assert.equal(10, R.sum([1,2,3,4]));
+        assert.equal(10, R.sum([1, 2, 3, 4]));
         assert.equal(1, R.sum([1]));
-        assert.equal(25, R.sum([5,5,5,5,5]));
+        assert.equal(25, R.sum([5, 5, 5, 5, 5]));
     });
 });
 
@@ -272,7 +272,7 @@ describe('max', function() {
 
     it('accepts negative numbers, decimals, and even strings', function() {
         assert.equal(R.max([-6, -2, -4.3, -1.1, -5]), -1.1);
-        assert.equal(R.max([7, "22", 11, 34, 17, "52", 26, 13, 40, 20, "10", 5, 16, 8, 4, "2", "1"]), 52);
+        assert.equal(R.max([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 52);
     });
 });
 
@@ -284,7 +284,7 @@ describe('min', function() {
 
     it('accepts negative numbers, decimals, and even strings', function() {
         assert.equal(R.min([-6, -2, -4.3, -1.1, -5]), -6);
-        assert.equal(R.min([7, "22", 11, 34, 17, "52", 26, 13, 40, 20, "10", 5, 16, 8, 4, "2", "1"]), 1);
+        assert.equal(R.min([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 1);
     });
 });
 
@@ -309,7 +309,7 @@ describe('minWith', function() {
     });
 
     it('returns null for the empty list', function() {
-        assert.equal(typeof(R.minWith(R.prop('x'), [])), "undefined");
+        assert.equal(typeof(R.minWith(R.prop('x'), [])), 'undefined');
     });
 
     it('is properly curried', function() {

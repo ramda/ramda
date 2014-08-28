@@ -23,7 +23,7 @@ Maybe.prototype.ap = function(m) {
     return m;  // ???
   }
   if (typeof this.value !== 'function') {
-    throw new TypeError("Calling ap on a Maybe requires that the Maybe is wrapping a function");
+    throw new TypeError('Calling ap on a Maybe requires that the Maybe is wrapping a function');
   }
   return m.map(this.value);
 };

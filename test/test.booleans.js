@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('or', function() {
     it('should combine two boolean-returning functions into one', function() {
@@ -20,12 +20,12 @@ describe('or', function() {
         assert.equal(f(7, 5, 1), false);
     });
 
-    it("does not evaluate the second expression if the first one is true", function() {
+    it('does not evaluate the second expression if the first one is true', function() {
         var T = function() { return true; };
-        var Z = function() { effect = "Z got evaluated"; };
-        var effect = "not evaluated";
+        var Z = function() { effect = 'Z got evaluated'; };
+        var effect = 'not evaluated';
         R.or(T, Z);
-        assert.equal(effect, "not evaluated");
+        assert.equal(effect, 'not evaluated');
     });
 });
 
@@ -48,12 +48,12 @@ describe('and', function() {
         assert.equal(f(5, 6, 15), false);
     });
 
-    it("does not evaluate the second expression if the first one is false", function() {
+    it('does not evaluate the second expression if the first one is false', function() {
         var F = function() { return false; };
-        var Z = function() { effect = "Z got evaluated"; };
-        var effect = "not evaluated";
+        var Z = function() { effect = 'Z got evaluated'; };
+        var effect = 'not evaluated';
         R.and(F, Z);
-        assert.equal(effect, "not evaluated");
+        assert.equal(effect, 'not evaluated');
     });
 });
 

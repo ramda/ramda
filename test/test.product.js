@@ -1,12 +1,12 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('xprod', function() {
     var a = [1, 2], b = ['a', 'b', 'c'];
 
     it('returns an empty list if either input list is empty', function() {
-        assert.deepEqual(R.xprod([], [1,2,3]), []);
-        assert.deepEqual(R.xprod([1,2,3], []), []);
+        assert.deepEqual(R.xprod([], [1, 2, 3]), []);
+        assert.deepEqual(R.xprod([1, 2, 3], []), []);
     });
 
     it('should create the collection of all cross-product pairs of its parameters', function() {
@@ -29,8 +29,8 @@ describe('xprodWith', function() {
     var a = [1, 2], b = ['a', 'b', 'c'];
 
     it('returns an empty list if either input list is empty', function() {
-        assert.deepEqual(R.xprodWith(concat, [], [1,2,3]), []);
-        assert.deepEqual(R.xprodWith(concat, [1,2,3], []), []);
+        assert.deepEqual(R.xprodWith(concat, [], [1, 2, 3]), []);
+        assert.deepEqual(R.xprodWith(concat, [1, 2, 3], []), []);
     });
 
     it('should create the collection of all cross-product pairs of its parameters', function() {

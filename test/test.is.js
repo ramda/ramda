@@ -54,9 +54,21 @@ describe('is', function() {
         assert.strictEqual(isObject(undefined), false);
     });
 
-    it('treats primitives like object equivalents', function() {
+    it('does not coerce', function() {
+        assert.strictEqual(R.is(Boolean, 1), false);
+        assert.strictEqual(R.is(Number, '1'), false);
+        assert.strictEqual(R.is(Number, false), false);
+    });
+
+    it('recognizes primitives as their object equivalents', function() {
         assert.strictEqual(R.is(Boolean, false), true);
         assert.strictEqual(R.is(Number, 0), true);
         assert.strictEqual(R.is(String, ''), true);
+    });
+
+    it('does not consider primitives to be instances of Object', function() {
+        assert.strictEqual(R.is(Object, false), false);
+        assert.strictEqual(R.is(Object, 0), false);
+        assert.strictEqual(R.is(Object, ''), false);
     });
 });

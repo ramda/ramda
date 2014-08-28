@@ -51,27 +51,39 @@ describe('concat', function() {
     });
 
     var z1 = {
-      x: 'z1',
+      x: 'z1'
+    };
+    var z2 = {
+      x: 'z2',
       concat: function(that) { return this.x + ' ' + that.x; }
     };
-    var z2 = { x: 'z2' };
 
     it('adds combines the elements of the two lists', function() {
         assert.deepEqual(R.concat(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
         assert.deepEqual(R.concat([], ['c', 'd']), ['c', 'd']);
     });
-    it('works for objects with a concat method', function() {
+    it('works on strings', function() {
       assert.equal(R.concat('foo', 'bar'), 'foobar');
-      assert.equal(R.concat(z1, z2), 'z1 z2');
+    });
+    it('delegates to non-String object with a concat method, as second param', function() {
+      assert.equal(R.concat(z1, z2), 'z2 z1');
+    });
+    it('is curried', function() {
+      var conc123 = R.concat([1, 2, 3]);
+      assert.deepEqual(conc123([4, 5, 6]), [1, 2, 3, 4, 5, 6]);
+      assert.deepEqual(conc123(['a', 'b', 'c']), [1, 2, 3, 'a', 'b', 'c']);
+    });
+    it('throws if not an array, String, or object with a concat method', function() {
+      assert.throws(function() { return R.concat({}, {}); }, TypeError);
     });
 });
 
 describe('head', function() {
     it('returns undefined for an empty list', function() {
-        assert.equal(typeof(R.head([])),  "undefined");
+        assert.equal(typeof(R.head([])),  'undefined');
     });
     it('returns undefined for no arguments', function() {
-        assert.equal(typeof(R.head()), "undefined");
+        assert.equal(typeof(R.head()), 'undefined');
     });
     it('returns the first element of a list', function() {
         assert.equal(R.head(['a', 'b', 'c', 'd']), 'a');
@@ -80,10 +92,10 @@ describe('head', function() {
 
 describe('last', function() {
     it('returns undefined for an empty list', function() {
-        assert.equal(typeof(R.last([])),  "undefined");
+        assert.equal(typeof(R.last([])),  'undefined');
     });
     it('returns undefined for no arguments', function() {
-        assert.equal(typeof(R.last()), "undefined");
+        assert.equal(typeof(R.last()), 'undefined');
     });
     it('returns the first element of a list', function() {
         assert.equal(R.last(['a', 'b', 'c', 'd']), 'd');
@@ -127,8 +139,8 @@ describe('sort', function() {
 
     it('is automatically curried', function() {
         var sortByLength = R.sort(function(a, b) {return a.length - b.length;});
-        assert.deepEqual(sortByLength(["one", "two", "three", "four", "five", "six"]),
-                                      ["one", "two", "six", "four", "five", "three"]);
+        assert.deepEqual(sortByLength(['one', 'two', 'three', 'four', 'five', 'six']),
+                                      ['one', 'two', 'six', 'four', 'five', 'three']);
     });
 });
 

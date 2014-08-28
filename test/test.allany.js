@@ -1,5 +1,5 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('all', function() {
     var even = function(n) {return n % 2 === 0;};
@@ -37,7 +37,7 @@ describe('all', function() {
     });
 });
 
-describe("any", function() {
+describe('any', function() {
     var odd = function(n) {return n % 2 === 1;};
     var T = function() {return true;};
 

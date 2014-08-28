@@ -13,7 +13,7 @@ function setSource(curried, source) {
 var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 
 R.curry = function (fn, fnArity) {
-  fnArity = typeof fnArity === "number" ? fnArity : fn.length;
+  fnArity = typeof fnArity === 'number' ? fnArity : fn.length;
   function recurry(args) {
     return setSource(R.arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
       if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }

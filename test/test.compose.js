@@ -1,21 +1,21 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('compose', function() {
-    function a(x) {return x + "A";}
-    function b(x) {return x + "B";}
-    function c(x) {return x + "C";}
-    function d(x) {return x + "D";}
+    function a(x) {return x + 'A';}
+    function b(x) {return x + 'B';}
+    function c(x) {return x + 'C';}
+    function d(x) {return x + 'D';}
 
     it('executes its passed in functions in order from right to left', function() {
-        assert.equal(R.compose(a, b, c, d)(""), "DCBA");
+        assert.equal(R.compose(a, b, c, d)(''), 'DCBA');
     });
 
     it('first function is passed multiple args', function() {
         function e(a, b, c) {
-            return c + "E";
+            return c + 'E';
         }
-        assert.equal(R.compose(a, b, c, e)(1, 2, 3), "3ECBA");
+        assert.equal(R.compose(a, b, c, e)(1, 2, 3), '3ECBA');
     });
 
     it('passes context to functions', function() {
@@ -64,20 +64,20 @@ describe('compose', function() {
 });
 
 describe('pipe', function() {
-    function a(x) {return x + "A";}
-    function b(x) {return x + "B";}
-    function c(x) {return x + "C";}
-    function d(x) {return x + "D";}
+    function a(x) {return x + 'A';}
+    function b(x) {return x + 'B';}
+    function c(x) {return x + 'C';}
+    function d(x) {return x + 'D';}
 
     it('executes its passed in functions in order from left to right', function() {
-        assert.equal(R.pipe(a, b, c, d)(""), "ABCD");
+        assert.equal(R.pipe(a, b, c, d)(''), 'ABCD');
     });
 
     it('first function is passed multiple args', function() {
         function e(a, b, c) {
-            return c + "E";
+            return c + 'E';
         }
-        assert.equal(R.pipe(e, a, b, c)(1, 2, 3), "3EABC");
+        assert.equal(R.pipe(e, a, b, c)(1, 2, 3), '3EABC');
     });
 
     it('passes context to functions', function() {
@@ -113,7 +113,7 @@ describe('useWith', function() {
     function max() { return Math.max.apply(Math, arguments); }
     function add1(x) { return x + 1; }
     function mult2(x) { return x * 2; }
-    function div3(x) { return x/3; }
+    function div3(x) { return x / 3; }
     var f = R.useWith(max, add1, mult2, div3);
 
     it('takes a arbitrary number of function arguments and returns a function', function() {

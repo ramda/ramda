@@ -1,9 +1,12 @@
-var assert = require("assert");
-var R = require("..");
+var assert = require('assert');
+var R = require('..');
 
 describe('clone', function() {
     it('returns a copy of an array', function() {
-      assert.deepEqual(R.clone([1,2,3,4,5]), [1,2,3,4,5]);
+      var input = [1, 2, 3, 4, 5];
+      var output = R.clone(input);
+      assert.deepEqual(output, input);
+      assert.notStrictEqual(output, input);
     });
 
     it('copies objects in the array by reference', function() {
