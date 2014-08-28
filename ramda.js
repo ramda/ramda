@@ -145,8 +145,8 @@
             (
                 !!(x.nodeType === 1 && x.length) ||
                 x.length >= 0
-            )
-        );
+                )
+            );
     };
 
 
@@ -1744,7 +1744,7 @@
      *
      *      ramda.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
      */
-    // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
+        // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
     R.mapObj = curry2(function _mapObject(fn, obj) {
         return foldl(function (acc, key) {
             acc[key] = fn(obj[key]);
@@ -3457,7 +3457,7 @@
      * @private
      *
      */
-    // TODO: document, even for internals...
+        // TODO: document, even for internals...
     function pickWith(test, obj) {
         var copy = {},
             props = keys(obj), prop, val;
@@ -3917,10 +3917,10 @@
                 }, preds);
             };
             return arguments.length > 1 ?
-                    // Call function imediately if given arguments
-                    predIterator.apply(null, _slice(arguments, 1)) :
-                    // Return a function which will call the predicates with the provided arguments
-                    arity(max(pluck('length', preds)), predIterator);
+                // Call function imediately if given arguments
+                predIterator.apply(null, _slice(arguments, 1)) :
+                // Return a function which will call the predicates with the provided arguments
+                arity(max(pluck('length', preds)), predIterator);
         };
     };
 
@@ -4331,7 +4331,7 @@
      */
     R.maxWith = curry2(function _maxWith(keyFn, list) {
         if (!(list && list.length > 0)) {
-           return;
+            return;
         }
         var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
         while (++idx < list.length) {
@@ -4361,7 +4361,7 @@
      *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
      *      minWith(cmp, [a, b, c]) // => {x: 1}
      */
-    // TODO: combine this with maxWith?
+        // TODO: combine this with maxWith?
     R.minWith = curry2(function _minWith(keyFn, list) {
         if (!(list && list.length > 0)) {
             return;
@@ -4973,6 +4973,51 @@
             return counts;
         }, {}, keyValue(fn, list));
     });
+
+
+    /**
+     * @private
+     * @param {Function} fn The strategy for extracting function names from an object
+     * @return {Function} A function that takes an object and returns an array of function names
+     *
+     */
+    var functionsWith = function(fn) {
+        return function(obj) {
+            return R.filter(function(key) { return typeof obj[key] === 'function'; }, fn(obj));
+        };
+    };
+
+
+    /**
+     * Returns a list of function names of object's own functions
+     *
+     * @static .
+     * @memberOf R
+     * @category Object
+     * @param {Object} obj The objects with functions in it
+     * @return {Array} returns list of object's own function names
+     * @example .
+     *
+     *      R.functions(R) // => returns list of ramda's own function names
+     *      R.functions(this) // => returns list of function names in global scope's own function names
+     */
+    R.functions = functionsWith(R.keys);
+
+
+    /**
+     * Returns a list of function names of object's own and prototype functions
+     *
+     * @static .
+     * @memberOf R
+     * @category Object
+     * @param {Object} obj The objects with functions in it
+     * @return {Array} returns list of object's own and prototype function names
+     * @example .
+     *
+     *      R.functionsIn(R) // => returns list of ramda's own and prototype function names
+     *      R.functionsIn(this) // => returns list of function names in global scope's own and prototype function names
+     */
+    R.functionsIn = functionsWith(R.keysIn);
 
 
     // All the functional goodness, wrapped in a nice little package, just for you!
