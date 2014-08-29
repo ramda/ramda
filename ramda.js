@@ -594,7 +594,6 @@
      * @param {Function} fn The function to wrap.
      * @param {...Function} transformers A variable number of transformer functions
      * @return {Function} The wrapped function.
-     * @alias disperseTo
      * @example
      *
      *      var double = function(y) { return y * 2; };
@@ -632,7 +631,6 @@
             return fn.apply(this, args.concat(_slice(arguments, tlen)));
         }));
     };
-    R.disperseTo = R.useWith;
 
 
     /**
@@ -641,12 +639,12 @@
      *
      * `fn` receives one argument: *(value)*.
      *
-     * Note: `ramda.each` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `ramda.forEach` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.forEach` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Description
      *
-     * Also note that, unlike `Array.prototype.forEach`, Ramda's `each` returns the original
-     * array.
+     * Also note that, unlike `Array.prototype.forEach`, Ramda's `forEach` returns the original
+     * array. In some libraries this function is named `each`.
      *
      * @static
      * @memberOf R
@@ -656,14 +654,14 @@
      * @return {Array} The original list.
      * @example
      *
-     *      ramda.each(function(num) {
+     *      ramda.forEach(function(num) {
      *        console.log(num + 100);
      *      }, [1, 2, 3]); //=> [1, 2, 3]
      *      //-> 101
      *      //-> 102
      *      //-> 103
      */
-    function each(fn, list) {
+    function forEach(fn, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             fn(list[idx]);
@@ -671,21 +669,21 @@
         // i can't bear not to return *something*
         return list;
     }
-    R.each = curry2(each);
+    R.forEach = curry2(forEach);
 
 
     /**
-     * Like `each`, but but passes additional parameters to the predicate function.
+     * Like `forEach`, but but passes additional parameters to the predicate function.
      *
      * `fn` receives three arguments: *(value, index, list)*.
      *
-     * Note: `ramda.each.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `ramda.forEach.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.forEach` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Description
      *
-     * Also note that, unlike `Array.prototype.forEach`, Ramda's `each` returns the original
-     * array.
+     * Also note that, unlike `Array.prototype.forEach`, Ramda's `forEach` returns the original
+     * array. In some libraries this function is named `each`.
      *
      * @static
      * @memberOf R
@@ -694,16 +692,15 @@
      *        (`value`, `index`, `list`).
      * @param {Array} list The list to iterate over.
      * @return {Array} The original list.
-     * @alias forEach
      * @example
      *
      *      // Note that having access to the original `list` allows for
      *      // mutation. While you *can* do this, it's very un-functional behavior:
-     *      ramda.each.idx(function(num, idx, list) {
+     *      ramda.forEach.idx(function(num, idx, list) {
      *        list[idx] = num + 100;
      *      }, [1, 2, 3]); //=> [101, 102, 103]
      */
-    R.each.idx = curry2(function eachIdx(fn, list) {
+    R.forEach.idx = curry2(function forEachIdx(fn, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             fn(list[idx], idx, list);
@@ -711,7 +708,6 @@
         // i can't bear not to return *something*
         return list;
     });
-    R.forEach = R.each;
 
 
     /**
@@ -788,6 +784,7 @@
 
     /**
      * Returns the first element in a list.
+     * In some libraries this function is named `first`.
      *
      * @static
      * @memberOf R
@@ -795,7 +792,6 @@
      * @param {Array} [arr=[]] The array to consider.
      * @return {*} The first element of the list, or `undefined` if the list is empty.
      * @alias car
-     * @alias first
      * @example
      *
      *      ramda.head(['fi', 'fo', 'fum']); //=> 'fi'
@@ -805,7 +801,7 @@
         return arr[0];
     };
 
-    R.car = R.first = R.head;
+    R.car = R.head;
 
 
     /**
@@ -1112,6 +1108,7 @@
      * `pipe` is the mirror version of `compose`. `pipe` is left-associative, which means that
      * each of the functions provided is executed in order from left to right.
      *
+     * In some libraries this function is named `sequence`.
      * @static
      * @memberOf R
      * @category Function
@@ -1119,7 +1116,6 @@
      * @return {Function} A new function which represents the result of calling each of the
      *         input `functions`, passing the result of each function call to the next, from
      *         right to left.
-     * @alias sequence
      * @example
      *
      *      var triple = function(x) { return x * 3; };
@@ -1132,8 +1128,6 @@
     R.pipe = function _pipe() {
         return compose.apply(this, _slice(arguments).reverse());
     };
-
-    R.sequence = R.pipe;
 
 
     /**
@@ -1170,7 +1164,7 @@
     /**
      * Accepts as its arguments a function and any number of values and returns a function that,
      * when invoked, calls the original function with all of the values prepended to the
-     * original function's arguments list.
+     * original function's arguments list. In some libraries this function is named `applyLeft`.
      *
      * @static
      * @memberOf R
@@ -1179,7 +1173,6 @@
      * @param {...*} [args] Arguments to prepend to `fn` when the returned function is invoked.
      * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn`
      *         with `args` prepended to `fn`'s arguments list.
-     * @alias applyLeft
      * @example
      *
      *      var multiply = function(a, b) { return a * b; };
@@ -1200,8 +1193,6 @@
         });
     };
 
-    R.applyLeft = R.lPartial;
-
 
     /**
      * Accepts as its arguments a function and any number of values and returns a function that,
@@ -1209,7 +1200,7 @@
      * function's arguments list.
      *
      * Note that `rPartial` is the opposite of `lPartial`: `rPartial` fills `fn`'s arguments
-     * from the right to the left.
+     * from the right to the left.  In some libraries this function is named `applyRight`.
      *
      * @static
      * @memberOf R
@@ -1218,7 +1209,6 @@
      * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
      * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
      *         `args` appended to `fn`'s arguments list.
-     * @alias applyRight
      * @example
      *
      *      var greet = function(salutation, title, firstName, lastName) {
@@ -1234,8 +1224,6 @@
             return fn.apply(this, concat(arguments, args));
         });
     };
-
-    R.applyRight = R.rPartial;
 
 
     /**
@@ -1425,7 +1413,6 @@
      *        returned function. Afterward, its resulting value will be passed to `after` as
      *        its second argument.
      * @return {Function} A new function.
-     * @alias distributeTo
      * @example
      *
      *      var add = function(a, b) { return a + b; };
@@ -1445,8 +1432,6 @@
             }, fns));
         };
     };
-
-    R.distributeTo = R.fork;
 
 
 
@@ -1507,11 +1492,11 @@
 
 
     /**
-     * Like `foldl`, but passes additional parameters to the predicate function.
+     * Like `reduce`, but passes additional parameters to the predicate function.
      *
      * The iterator function receives four values: *(acc, value, index, list)*
      *
-     * Note: `ramda.foldl.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `ramda.reduce.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
@@ -1531,9 +1516,9 @@
      *        return accObject[elem] = idx;
      *      };
      *
-     *      foldl.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
+     *      reduce.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
      */
-    R.foldl.idx = curry3(checkForMethod('foldl', function(fn, acc, list) {
+    R.reduce.idx = curry3(checkForMethod('foldl', function(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx], idx, list);
@@ -1547,11 +1532,11 @@
      * function and passing it an accumulator value and the current value from the array, and
      * then passing the result to the next call.
      *
-     * Similar to `foldl`, except moves through the input list from the right to the left.
+     * Similar to `reduce`, except moves through the input list from the right to the left.
      *
      * The iterator function receives two values: *(acc, value)*
      *
-     * Note: `ramda.foldr` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `ramda.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
@@ -1563,7 +1548,7 @@
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
      * @return {*} The final, accumulated value.
-     * @alias reduceRight
+     * @alias foldr
      * @example
      *
      *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
@@ -1571,9 +1556,9 @@
      *        return acc.concat(pair);
      *      };
      *
-     *      foldr(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
+     *      reduceRight(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
      */
-    var foldr = R.foldr = curry3(checkForMethod('foldr', function(fn, acc, list) {
+    var foldr = R.reduceRight = curry3(checkForMethod('reduceRight', function _reduceRight(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx]);
@@ -1581,11 +1566,11 @@
         return acc;
     }));
 
-    R.reduceRight = R.foldr;
+    R.foldr = R.reduceRight;
 
 
     /**
-     * Like `foldr`, but passes additional parameters to the predicate function. Moves through
+     * Like `reduceRight`, but passes additional parameters to the predicate function. Moves through
      * the input list from the right to the left.
      *
      * The iterator function receives four values: *(acc, value, index, list)*.
@@ -1612,7 +1597,7 @@
      *
      *      foldr.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
      */
-    R.foldr.idx = curry3(checkForMethod('foldr', function(fn, acc, list) {
+    R.reduceRight.idx = curry3(checkForMethod('foldr', function(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx], idx, list);
@@ -1846,6 +1831,7 @@
      * `chain` maps a function over a list and concatenates the results.
      * This implementation is compatible with the
      * Fantasy-land Chain spec, and will work with types that implement that spec.
+     * `chain` is also known as `flatMap` in some libraries
      *
      * @static
      * @memberOf R
@@ -1853,7 +1839,6 @@
      * @param {Function}
      * @param {Array}
      * @return {Array}
-     * @alias flatMap
      * @example
      *
      * var duplicate = function(n) {
@@ -1865,7 +1850,6 @@
     R.chain = curry2(checkForMethod('chain', function _chain(f, list) {
         return unnest(map(f, list));
     }));
-    R.flatMap = R.chain;
 
 
     /**
@@ -1885,7 +1869,6 @@
     R.size = function _size(arr) {
         return arr.length;
     };
-
     R.length = R.size;
 
 
@@ -1949,7 +1932,6 @@
         }
         return result;
     }
-
     R.filter.idx = curry2(checkForMethod('filter', filterIdx));
 
 
@@ -1973,7 +1955,6 @@
     var reject = function _reject(fn, list) {
         return filter(not(fn), list);
     };
-
     R.reject = curry2(reject);
 
 
@@ -2079,13 +2060,13 @@
      * @param {number} n The number of elements of `list` to skip.
      * @param {Array} list The array to consider.
      * @return {Array} The last `n` elements of `list`.
-     * @alias drop
+     * @example
+     *
+     *     skip(3, [1,2,3,4,5,6,7]); // => [4,5,6,7]
      */
     R.skip = curry2(checkForMethod('skip', function _skip(n, list) {
         return _slice(list, n);
     }));
-
-    R.drop = R.skip;
 
 
     /**
@@ -2211,7 +2192,6 @@
      * @param {Array} list The array to consider.
      * @return {boolean} `true` if the predicate is satisfied by every element, `false`
      *         otherwise
-     * @alias every
      * @example
      *
      *      var lessThan2 = flip(lt)(2);
@@ -2220,7 +2200,7 @@
      *      all(lessThan2)(xs); //= false
      *      all(lessThan3)(xs); //= true
      */
-    function all(fn, list) {
+    function every(fn, list) {
         var i = -1;
         while (++i < list.length) {
             if (!fn(list[i])) {
@@ -2229,9 +2209,7 @@
         }
         return true;
     }
-
-    R.all = curry2(all);
-    R.every = R.all;
+    R.every = curry2(every);
 
 
     /**
@@ -2245,7 +2223,6 @@
      * @param {Array} list The array to consider.
      * @return {boolean} `true` if the predicate is satisfied by at least one element, `false`
      *         otherwise
-     * @alias some
      * @example
      *
      *      var lessThan0 = flip(lt)(0);
@@ -2254,7 +2231,7 @@
      *      any(lessThan0)(xs); //= false
      *      any(lessThan2)(xs); //= true
      */
-    function any(fn, list) {
+    function some(fn, list) {
         var i = -1;
         while (++i < list.length) {
             if (fn(list[i])) {
@@ -2263,8 +2240,7 @@
         }
         return false;
     }
-    R.any = curry2(any);
-    R.some = R.any;
+    R.some = curry2(some);
 
 
     /**
@@ -2602,14 +2578,12 @@
      * @category List
      * @param {Array} list The array to consider.
      * @return {Array} The flattened list.
-     * @alias flattenDeep
      * @example
      *
      * flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
      * //= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
      */
     var flatten = R.flatten = makeFlat(true);
-    R.flattenDeep = R.flatten;
 
 
     /**
@@ -2621,16 +2595,12 @@
      * @category List
      * @param {Array} list The array to consider.
      * @return {Array} The flattened list.
-     * @alias flattenShallow
      * @example
      *
-     * flat([1, [2], [[3]]]);
-     * //= [1, 2, [3]]
-     * flat([[1, 2], [3, 4], [5, 6]]);
-     * //= [1, 2, 3, 4, 5, 6]
+     * flat([1, [2], [[3]]]); //= [1, 2, [3]]
+     * flat([[1, 2], [3, 4], [5, 6]]); //= [1, 2, 3, 4, 5, 6]
      */
     var unnest = R.unnest = makeFlat(false);
-    R.flattenShallow = R.unnest;
 
 
     /**
@@ -3133,16 +3103,13 @@
      * @param {String} p The property name
      * @param {Object} obj The object to query
      * @return {*} The value at obj.p
-     * @alias nth
      * @alias get
      * @example
      *
      *      prop('x', {x: 100}) // => 100
      *      prop('x', {}) // => undefined
      *
-     *      // or via the `nth` alias:
-     *
-     *      var fifth = nth(4); // indexed from 0, remember
+     *      var fifth = prop(4); // indexed from 0, remember
      *      fifth(['Bashful', 'Doc', 'Dopey', 'Grumpy', 'Happy', 'Sleepy', 'Sneezy']);
      *      //=> 'Happy'
      */
@@ -3153,8 +3120,7 @@
         }
         return obj[p];
     };
-
-    R.nth = R.get = R.prop;
+    R.get = R.prop;
 
 
     /**
@@ -3245,8 +3211,6 @@
      * @category Function
      * @param {*} val The value to wrap in a function
      * @return {Function} A Function :: * -> val
-     * @alias constant
-     * @alias K
      * @example
      *
      *      var t = always('Tee');
@@ -3257,8 +3221,6 @@
             return val;
         };
     };
-
-    R.constant = R.K = R.always;
 
 
     /**
@@ -3277,7 +3239,7 @@
      *      anyBlanks([1,2,3,4]); // => false
      *      anyBlanks([]); // => false
      */
-    var anyBlanks = R.any(function _any(val) {
+    var anyBlanks = R.some(function _any(val) {
         return val == null;
     });
 
@@ -3544,7 +3506,7 @@
     // TODO: document, even for internals...
     var pickAll = function _pickAll(names, obj) {
         var copy = {};
-        each(function (name) {
+        forEach(function (name) {
             copy[name] = obj[name];
         }, names);
         return copy;
@@ -3943,7 +3905,7 @@
      *      f(11) // => false
      *      f(12) // => true
      */
-    R.allPredicates = predicateWrap(all);
+    R.allPredicates = predicateWrap(every);
 
 
     /**
@@ -3965,7 +3927,7 @@
      *      f(8) // => true
      *      f(9) // => false
      */
-    R.anyPredicates = predicateWrap(any);
+    R.anyPredicates = predicateWrap(some);
 
 
 

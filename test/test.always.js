@@ -18,10 +18,6 @@ describe('always', function() {
         var now = new Date(1776, 6, 4);
         assert.deepEqual(R.always(now)(), new Date(1776, 6, 4));
     });
-
-    it('should be aliased by `constant`', function() {
-        assert.strictEqual(R.constant, R.always);
-    });
 });
 
 describe ('alwaysZero', function() {

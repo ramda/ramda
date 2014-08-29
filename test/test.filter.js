@@ -112,11 +112,6 @@ describe('skip', function() {
         assert.deepEqual(skip2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
         assert.deepEqual(skip2(['x', 'y', 'z']), ['z']);
     });
-
-    it('should be aliased by `drop`', function() {
-        assert.deepEqual(R.drop(1, ['a', 'b', 'c']), ['b', 'c']);
-        assert.strictEqual(R.drop, R.skip);
-    });
 });
 
 describe('skipUntil', function() {
