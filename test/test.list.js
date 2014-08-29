@@ -100,26 +100,6 @@ describe('slice.from', function () {
     });
 });
 
-describe('nth', function () {
-    it('returns the object at position n of the list', function () {
-        var list = ['x', 1, {a: 1, b: 2}, [4, 5, 6], true];
-        assert.equal(R.nth(4, list), true);
-        assert.equal(R.nth(0, list), 'x');
-        assert.deepEqual(R.nth(3, list), [4, 5, 6]);
-    });
-
-    it("returns null if n is out of the list's range", function () {
-        var list = [1, 2, 3];
-        assert.equal(R.nth(4, list), undefined);
-    });
-
-    it('is automatically curried', function () {
-        var list = [3, 4, 5, 6, 7, 8];
-        var get3rd = R.nth(2);
-        assert.equal(get3rd(list), 5);
-    });
-});
-
 describe('times', function() {
     it('takes a map func', function() {
         assert.deepEqual(R.times(R.identity, 5), [0, 1, 2, 3, 4]);

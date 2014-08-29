@@ -13,10 +13,6 @@ describe('lPartial', function() {
         assert.equal(g(4), 1);
     });
 
-    it('should be aliased by `applyLeft`', function() {
-        assert.strictEqual(R.applyLeft, R.lPartial);
-    });
-
     it('should correctly report the arity of the new function', function() {
         var f = R.lPartial(disc, 3);
         assert.equal(f.length, 2);
@@ -35,10 +31,6 @@ describe('rPartial', function() {
         assert.equal(f(3, 7), 1);
         var g = R.rPartial(disc, 7, 4);
         assert.equal(g(3), 1);
-    });
-
-    it('should be aliased by `applyRight`', function() {
-        assert.strictEqual(R.applyRight, R.rPartial);
     });
 
     it('should correctly report the arity of the new function', function() {
