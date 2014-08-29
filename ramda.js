@@ -2597,8 +2597,8 @@
      * @return {Array} The flattened list.
      * @example
      *
-     * flat([1, [2], [[3]]]); //= [1, 2, [3]]
-     * flat([[1, 2], [3, 4], [5, 6]]); //= [1, 2, 3, 4, 5, 6]
+     * unnest([1, [2], [[3]]]); //= [1, 2, [3]]
+     * unnest([[1, 2], [3, 4], [5, 6]]); //= [1, 2, 3, 4, 5, 6]
      */
     var unnest = R.unnest = makeFlat(false);
 
