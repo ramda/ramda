@@ -9,9 +9,9 @@
         case 'assert':
           return assert;
         case '..':
-          return ramda;
+          return R;
         case 'lazylist':
-          return ramda.lazylist;
+          return R.lazylist;
         default:
           throw new Error('Unexpected require path "' + path + '"');
       }
@@ -26,7 +26,7 @@
   <script src="../lib/test/assert-shim.js"></script>
   <script src="../ramda.js"></script>
   <script src="../ext/lazylist/lazylist.js"></script>
-  <script>ramda.installTo(this);</script>
+  <script>R.installTo(this);</script>
   <script>mocha.setup('bdd')</script>
   <script src="test.core.js"></script>
   <script src="test.curry.js"></script>
