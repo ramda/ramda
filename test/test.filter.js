@@ -121,7 +121,7 @@ describe('skipUntil', function() {
 
     it('should start at the right arg and acknowledges undefined', function() {
         assert.deepEqual(R.skipUntil(function(x) {
-           assert.ok(false);
+            assert.ok(false);
         }, []), []);
         assert.deepEqual(R.skipUntil(function(x) {return x === void 0;}, [1, 3, void 0, 5, 7]), [void 0, 5, 7]);
     });

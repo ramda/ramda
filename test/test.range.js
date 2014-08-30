@@ -18,9 +18,9 @@ describe('range', function() {
     });
 
     it('should return an empty array if from > to', function() {
-         var result = R.range(10, 5);
-         assert.deepEqual(result, []);
-         result.push(5);
-         assert.deepEqual(R.range(10, 5), []);
+        var result = R.range(10, 5);
+        assert.deepEqual(result, []);
+        result.push(5);
+        assert.deepEqual(R.range(10, 5), []);
     });
 });

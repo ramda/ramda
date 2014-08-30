@@ -5,19 +5,19 @@ describe('path', function() {
     var deepObject = {a: {b: {c: 'c'}}, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr']};
     it('takes a dot-delimited path and an object and returns the value at the path or undefined', function() {
         var obj = {
-          a: {
-            b: {
-              c: 100,
-              d: 200
+            a: {
+                b: {
+                    c: 100,
+                    d: 200
+                },
+                e: {
+                    f: [100, 101, 102],
+                    g: 'G'
+                },
+                h: 'H'
             },
-            e: {
-              f: [100, 101, 102],
-              g: 'G'
-            },
-            h: 'H'
-          },
-          i: 'I',
-          j: ['J']
+            i: 'I',
+            j: ['J']
         };
         assert.equal(R.path('a.b.c', obj), 100);
         assert.equal(R.path('', obj), undefined);
@@ -55,19 +55,19 @@ describe('pathOn', function() {
     var deepObject = {a: {b: {c: 'c'}}, falseVal: false, nullVal: null, undefinedVal: undefined, arrayVal: ['arr']};
     it('takes a string separator, string path, and an object and returns the value at the path or undefined', function() {
         var obj = {
-          a: {
-            b: {
-              c: 100,
-              d: 200
+            a: {
+                b: {
+                    c: 100,
+                    d: 200
+                },
+                e: {
+                    f: [100, 101, 102],
+                    g: 'G'
+                },
+                h: 'H'
             },
-            e: {
-              f: [100, 101, 102],
-              g: 'G'
-            },
-            h: 'H'
-          },
-          i: 'I',
-          j: ['J']
+            i: 'I',
+            j: ['J']
         };
         assert.equal(R.pathOn('|', 'a|b|c', obj), 100);
         assert.equal(R.pathOn(' ', '', obj), undefined);

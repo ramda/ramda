@@ -16,7 +16,7 @@
 //
 //  [umd]: https://github.com/umdjs/umd/blob/master/returnExports.js
 
-(function (factory) {
+(function(factory) {
     if (typeof exports === 'object') {
         module.exports = factory(this);
     } else if (typeof define === 'function' && define.amd) {
@@ -24,7 +24,7 @@
     } else {
         this.ramda = factory(this);
     }
-}(function (global) {
+}(function(global) {
 
     'use strict';
 
@@ -178,13 +178,12 @@
     var curry = R.curry = function _curry(fn, fnArity) {
         fnArity = typeof fnArity === 'number' ? fnArity : fn.length;
         function recurry(args) {
-            return arity(Math.max(fnArity - (args && args.length || 0), 0), function () {
+            return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                 var newArgs = concat(args, arguments);
                 if (newArgs.length >= fnArity) {
                     return fn.apply(this, newArgs);
-                }
-                else {
+                } else {
                     return recurry(newArgs);
                 }
             });
@@ -215,11 +214,14 @@
     function curry2(fn) {
         return function(a, b) {
             switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) {
+                case 0:
+                    throw NO_ARGS_EXCEPTION;
+                case 1:
+                    return function(b) {
+                        return fn(a, b);
+                    };
+                default:
                     return fn(a, b);
-                };
-                default: return fn(a, b);
             }
         };
     }
@@ -243,14 +245,18 @@
     function curry3(fn) {
         return function(a, b, c) {
             switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return curry2(function(b, c) {
+                case 0:
+                    throw NO_ARGS_EXCEPTION;
+                case 1:
+                    return curry2(function(b, c) {
+                        return fn(a, b, c);
+                    });
+                case 2:
+                    return function(c) {
+                        return fn(a, b, c);
+                    };
+                default:
                     return fn(a, b, c);
-                });
-                case 2: return function(c) {
-                    return fn(a, b, c);
-                };
-                default: return fn(a, b, c);
             }
         };
     }
@@ -352,25 +358,25 @@
      *      // Only `n` arguments are passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
      */
-    var nAry = R.nAry = (function () {
+    var nAry = R.nAry = (function() {
         var cache = {
-            0: function (func) {
-                return function () {
+            0: function(func) {
+                return function() {
                     return func.call(this);
                 };
             },
-            1: function (func) {
-                return function (arg0) {
+            1: function(func) {
+                return function(arg0) {
                     return func.call(this, arg0);
                 };
             },
-            2: function (func) {
-                return function (arg0, arg1) {
+            2: function(func) {
+                return function(arg0, arg1) {
                     return func.call(this, arg0, arg1);
                 };
             },
-            3: function (func) {
-                return function (arg0, arg1, arg2) {
+            3: function(func) {
+                return function(arg0, arg1, arg2) {
                     return func.call(this, arg0, arg1, arg2);
                 };
             }
@@ -384,11 +390,11 @@
         //         }
         //     };
 
-        var makeN = function (n) {
+        var makeN = function(n) {
             var fnArgs = mkArgStr(n);
             var body = [
-                    '    return function(' + fnArgs + ') {',
-                    '        return func.call(this' + (fnArgs ? ', ' + fnArgs : '') + ');',
+                '    return function(' + fnArgs + ') {',
+                '        return func.call(this' + (fnArgs ? ', ' + fnArgs : '') + ');',
                 '    }'
             ].join('\n');
             return new Function('func', body);
@@ -481,25 +487,25 @@
      *      // All arguments are passed through to the wrapped function
      *      takesOneArg(1, 2); //=> [1, 2]
      */
-    var arity = R.arity = (function () {
+    var arity = R.arity = (function() {
         var cache = {
-            0: function (func) {
-                return function () {
+            0: function(func) {
+                return function() {
                     return func.apply(this, arguments);
                 };
             },
-            1: function (func) {
-                return function (arg0) {
+            1: function(func) {
+                return function(arg0) {
                     return func.apply(this, arguments);
                 };
             },
-            2: function (func) {
-                return function (arg0, arg1) {
+            2: function(func) {
+                return function(arg0, arg1) {
                     return func.apply(this, arguments);
                 };
             },
-            3: function (func) {
-                return function (arg0, arg1, arg2) {
+            3: function(func) {
+                return function(arg0, arg1, arg2) {
                     return func.apply(this, arguments);
                 };
             }
@@ -512,10 +518,10 @@
         //         }
         //     };
 
-        var makeN = function (n) {
+        var makeN = function(n) {
             var fnArgs = mkArgStr(n);
             var body = [
-                    '    return function(' + fnArgs + ') {',
+                '    return function(' + fnArgs + ') {',
                 '        return func.apply(this, arguments);',
                 '    }'
             ].join('\n');
@@ -556,7 +562,7 @@
     var invoker = R.invoker = function _invoker(name, obj, len) {
         var method = obj[name];
         var length = len === void 0 ? method.length : len;
-        return method && curry(function () {
+        return method && curry(function() {
             if (arguments.length) {
                 var target = Array.prototype.pop.call(arguments);
                 var targetMethod = target[name];
@@ -623,7 +629,7 @@
     var useWith = R.useWith = function _useWith(fn /*, transformers */) {
         var transformers = _slice(arguments, 1);
         var tlen = transformers.length;
-        return curry(arity(tlen, function () {
+        return curry(arity(tlen, function() {
             var args = [], idx = -1;
             while (++idx < tlen) {
                 args.push(transformers[idx](arguments[idx]));
@@ -915,10 +921,15 @@
      *      ramda.concat('ABC', 'DEF'); // 'ABCDEF'
      */
     R.concat = curry2(function(set1, set2) {
-        if (isArray(set2)) { return concat(set1, set2); }
-        else if (R.is(String, set1)) { return set1.concat(set2); }
-        else if (hasMethod('concat', set2)) { return set2.concat(set1); }
-        else { throw new TypeError("can't concat " + typeof set2); }
+        if (isArray(set2)) {
+            return concat(set1, set2);
+        } else if (R.is(String, set1)) {
+            return set1.concat(set2);
+        } else if (hasMethod('concat', set2)) {
+            return set2.concat(set1);
+        } else {
+            throw new TypeError("can't concat " + typeof set2);
+        }
     });
 
 
@@ -1151,7 +1162,7 @@
      *      ramda.flip([1, 2, 3]); //=> [2, 1, 3]
      */
     var flip = R.flip = function _flip(fn) {
-        return function (a, b) {
+        return function(a, b) {
             switch (arguments.length) {
                 case 0: throw NO_ARGS_EXCEPTION;
                 case 1: return function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); };
@@ -1188,7 +1199,7 @@
      */
     R.lPartial = function _lPartial(fn /*, args */) {
         var args = _slice(arguments, 1);
-        return arity(Math.max(fn.length - args.length, 0), function () {
+        return arity(Math.max(fn.length - args.length, 0), function() {
             return fn.apply(this, concat(args, arguments));
         });
     };
@@ -1258,8 +1269,8 @@
      */
     R.memoize = function _memoize(fn) {
         var cache = {};
-        return function () {
-            var position = foldl(function (cache, arg) {
+        return function() {
+            var position = foldl(function(cache, arg) {
                     return cache[arg] || (cache[arg] = {});
                 }, cache,
                 _slice(arguments, 0, arguments.length - 1));
@@ -1288,7 +1299,7 @@
      */
     R.once = function _once(fn) {
         var called = false, result;
-        return function () {
+        return function() {
             if (called) {
                 return result;
             }
@@ -1351,7 +1362,7 @@
      *      map(constructN(1, Widget), allConfigs); //=> a list of Widgets
      */
     var constructN = R.constructN = function _constructN(n, Fn) {
-        var f = function () {
+        var f = function() {
             var Temp = function() {}, inst, ret;
             Temp.prototype = Fn.prototype;
             inst = new Temp();
@@ -1423,11 +1434,11 @@
      *      //≅ multiply( add(1, 2), subtract(1, 2) );
      *      //=> -3
      */
-    R.fork = function (after) {
+    R.fork = function(after) {
         var fns = _slice(arguments, 1);
-        return function () {
+        return function() {
             var args = arguments;
-            return after.apply(this, map(function (fn) {
+            return after.apply(this, map(function(fn) {
                 return fn.apply(this, args);
             }, fns));
         };
@@ -1731,7 +1742,7 @@
      */
     // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
     R.mapObj = curry2(function _mapObject(fn, obj) {
-        return foldl(function (acc, key) {
+        return foldl(function(acc, key) {
             acc[key] = fn(obj[key]);
             return acc;
         }, {}, keys(obj));
@@ -1760,7 +1771,7 @@
      *      ramda.mapObj(double, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
      */
     R.mapObj.idx = curry2(function mapObjectIdx(fn, obj) {
-        return foldl(function (acc, key) {
+        return foldl(function(acc, key) {
             acc[key] = fn(obj[key], key, obj);
             return acc;
         }, {}, keys(obj));
@@ -2263,7 +2274,9 @@
             i = from < 0 ? Math.max(0, length + from) : from;
         }
         for (; i < length; i++) {
-            if (array[i] === item) return i;
+            if (array[i] === item) {
+                return i;
+            }
         }
         return -1;
     };
@@ -2289,7 +2302,9 @@
             idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
         }
         while (--idx >= 0) {
-            if (array[idx] === item) return idx;
+            if (array[idx] === item) {
+                return idx;
+            }
         }
         return -1;
     };
@@ -2421,7 +2436,8 @@
      * @param x the item to find
      * @param {Array} list the list to iterate over
      * @return {Boolean} `true` if `x` is in `list`, else `false`
-     */ //TODO: add an example
+     */
+    // TODO: add an example
     function containsWith(pred, x, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
@@ -2958,7 +2974,7 @@
      *      sort(cmp, people);
      */
     var comparator = R.comparator = function _comparator(pred) {
-        return function (a, b) {
+        return function(a, b) {
             return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
         };
     };
@@ -3012,7 +3028,7 @@
      *     // }
      */
     R.groupBy = curry2(function _groupBy(fn, list) {
-        return foldl(function (acc, elt) {
+        return foldl(function(acc, elt) {
             var key = fn(elt);
             acc[key] = append(elt, acc[key] || (acc[key] = []));
             return acc;
@@ -3036,7 +3052,7 @@
      *     // => [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
      */
     R.partition = curry2(function _partition(pred, list) {
-        return foldl(function (acc, elt) {
+        return foldl(function(acc, elt) {
             acc[pred(elt) ? 0 : 1].push(elt);
             return acc;
         }, [[], []], list);
@@ -3217,7 +3233,7 @@
      *      t(); // => 'Tee'
      */
     var always = R.always = function _always(val) {
-        return function () {
+        return function() {
             return val;
         };
     };
@@ -3270,7 +3286,9 @@
      *      keys({a: 1, b: 2, c: 3}) // => ['a', 'b', 'c']
      */
     var keys = R.keys = function _keys(obj) {
-        if (nativeKeys) return nativeKeys(Object(obj));
+        if (nativeKeys) {
+            return nativeKeys(Object(obj));
+        }
         var prop, ks = [];
         for (prop in obj) {
             if (hasOwnProperty.call(obj, prop)) {
@@ -3506,7 +3524,7 @@
     // TODO: document, even for internals...
     var pickAll = function _pickAll(names, obj) {
         var copy = {};
-        forEach(function (name) {
+        forEach(function(name) {
             copy[name] = obj[name];
         }, names);
         return copy;
@@ -3667,9 +3685,9 @@
      */
     R.where = function where(spec, testObj) {
         var parsedSpec = R.groupBy(function(key) {
-                return typeof spec[key] === 'function' ? 'fn' : 'obj';
-            }, keys(spec)
-        );
+            return typeof spec[key] === 'function' ? 'fn' : 'obj';
+        }, keys(spec));
+
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
             case 1:
@@ -4293,7 +4311,7 @@
      */
     R.maxWith = curry2(function _maxWith(keyFn, list) {
         if (!(list && list.length > 0)) {
-           return;
+            return;
         }
         var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
         while (++idx < list.length) {

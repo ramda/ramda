@@ -31,15 +31,15 @@ gulp.task('min', function() {
     var banner = '/*! <%= pkg.name %> <%= pkg.version %>: ' + moment().format('YYYY-MM-DD') + ' */\n';
     gulp.src(lib)
         .pipe(uglify())
-        .pipe(header(banner, {'pkg': pkg}))
+        .pipe(header(banner, {pkg: pkg}))
         .pipe(rename('ramda.min.js'))
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('cover', function (cb) {
-  gulp.src(lib)
-      .pipe(istanbul())
-      .on('end', cb);
+gulp.task('cover', function(cb) {
+    gulp.src(lib)
+        .pipe(istanbul())
+        .on('end', cb);
 });
 
 gulp.task('test', function() {
@@ -49,12 +49,12 @@ gulp.task('test', function() {
 });
 
 // Run tests and output reports
-gulp.task('test2', function () {
-  gulp.run('cover', function () {
-    gulp.src('test/*.js')
-        .pipe(mocha({reporter: 'spec'})) // Run any unit test frameworks here
-        .pipe(istanbul.writeReports());
-  });
+gulp.task('test2', function() {
+    gulp.run('cover', function() {
+        gulp.src('test/*.js')
+            .pipe(mocha({reporter: 'spec'})) // Run any unit test frameworks here
+            .pipe(istanbul.writeReports());
+    });
 });
 
 gulp.task('default', function() {
