@@ -158,7 +158,7 @@
      *
      * Optionally, you may provide an arity for the returned function.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to curry.
@@ -338,7 +338,7 @@
      * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
      * parameters. Any extraneous parameters will not be passed to the supplied function.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {number} n The desired arity of the new function.
@@ -410,7 +410,7 @@
      * Wraps a function of any arity (including nullary) in a function that accepts exactly 1
      * parameter. Any extraneous parameters will not be passed to the supplied function.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to wrap.
@@ -438,7 +438,7 @@
      * Wraps a function of any arity (including nullary) in a function that accepts exactly 2
      * parameters. Any extraneous parameters will not be passed to the supplied function.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to wrap.
@@ -467,7 +467,7 @@
      * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
      * functions produced by `arity` will pass all provided arguments to the wrapped function.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {number} n The desired arity of the returned function.
@@ -542,7 +542,7 @@
      * The returned function is curried and accepts `len + 1` parameters (or `method.length + 1`
      * when `len` is not specified), and the final parameter is the target object.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {string} name The name of the method to wrap.
@@ -594,7 +594,7 @@
      * arguments that don't need to be transformed, although you can ignore them, it's best to
      * pass an identity function so that the new function reports the correct arity.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to wrap.
@@ -652,7 +652,7 @@
      * Also note that, unlike `Array.prototype.forEach`, Ramda's `forEach` returns the original
      * array. In some libraries this function is named `each`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function to invoke. Receives one argument, `value`.
@@ -691,13 +691,14 @@
      * Also note that, unlike `Array.prototype.forEach`, Ramda's `forEach` returns the original
      * array. In some libraries this function is named `each`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function to invoke. Receives three arguments:
      *        (`value`, `index`, `list`).
      * @param {Array} list The list to iterate over.
      * @return {Array} The original list.
+     * @alias forEach.idx
      * @example
      *
      *      // Note that having access to the original `list` allows for
@@ -719,7 +720,7 @@
     /**
      * Creates a shallow copy of an array.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {Array} list The list to clone.
@@ -747,7 +748,7 @@
     /**
      * Reports whether an array is empty.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {Array} arr The array to consider.
@@ -770,21 +771,26 @@
      * Returns a new list with the given element at the front, followed by the contents of the
      * list.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {*} el The item to add to the head of the output list.
      * @param {Array} arr The array to add to the tail of the output list.
      * @return {Array} A new array.
-     * @alias cons
      * @example
      *
      *      ramda.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
-    function prepend(el, arr) {
+    R.prepend = function prepend(el, arr) {
         return concat([el], arr);
-    }
-    R.prepend = prepend;
+    };
+
+    /**
+     * @func
+     * @memberOf R
+     * @category Array
+     * @see R.prepend
+     */
     R.cons = R.prepend;
 
 
@@ -792,28 +798,33 @@
      * Returns the first element in a list.
      * In some libraries this function is named `first`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {Array} [arr=[]] The array to consider.
      * @return {*} The first element of the list, or `undefined` if the list is empty.
-     * @alias car
      * @example
      *
      *      ramda.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
-    var head = R.head = function _car(arr) {
+    var head = R.head = function head(arr) {
         arr = arr || [];
         return arr[0];
     };
 
+    /**
+     * @func
+     * @memberOf R
+     * @category Array
+     * @see R.head
+     */
     R.car = R.head;
 
 
     /**
      * Returns the last element from a list.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {Array} [arr=[]] The array to consider.
@@ -832,13 +843,12 @@
      * Returns all but the first element of a list. If the list provided has the `tail` method,
      * it will instead return `list.tail()`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {Array} [arr=[]] The array to consider.
      * @return {Array} A new array containing all but the first element of the input list, or an
      *         empty list if the input list is a falsy value (e.g. `undefined`).
-     * @alias cdr
      * @example
      *
      *      ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
@@ -848,6 +858,12 @@
         return (arr.length > 1) ? _slice(arr, 1) : [];
     });
 
+    /**
+     * @func
+     * @memberOf R
+     * @category Array
+     * @see R.tail
+     */
     R.cdr = R.tail;
 
 
@@ -855,7 +871,7 @@
      * Returns `true` if the argument is an atom; `false` otherwise. An atom is defined as any
      * value that is not an array, `undefined`, or `null`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {*} x The element to consider.
@@ -880,14 +896,13 @@
      * Returns a new list containing the contents of the given list, followed by the given
      * element.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {*} el The element to add to the end of the new list.
      * @param {Array} list The list whose contents will be added to the beginning of the output
      *        list.
      * @return {Array} A new list containing the contents of the old list followed by `el`.
-     * @alias push
      * @example
      *
      *      ramda.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
@@ -898,6 +913,12 @@
         return concat(list, [el]);
     };
 
+    /**
+     * @func
+     * @memberOf R
+     * @category Array
+     * @see R.append
+     */
     R.push = R.append;
 
 
@@ -905,7 +926,7 @@
      * Returns a new list consisting of the elements of the first list followed by the elements
      * of the second.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {Array} list1 The first list to merge.
@@ -937,12 +958,11 @@
      * A function that does nothing but return the parameter supplied to it. Good as a default
      * or placeholder function.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Core
      * @param {*} x The value to return.
      * @return {*} The input value, `x`.
-     * @alias I
      * @example
      *
      *      ramda.identity(1); //=> 1
@@ -953,6 +973,13 @@
     var identity = R.identity = function _I(x) {
         return x;
     };
+
+    /**
+     * @func
+     * @memberOf R
+     * @category Core
+     * @see R.identity
+     */
     R.I = R.identity;
 
 
@@ -963,7 +990,7 @@
      * `fn` is passed one argument: The current value of `n`, which begins at `0` and is
      * gradually incremented to `n - 1`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
@@ -986,7 +1013,7 @@
     /**
      * Returns a fixed list of size `n` containing a specified identical value.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Array
      * @param {*} value The value to repeat.
@@ -1081,7 +1108,7 @@
      * the function `h` is equivalent to `f( g(x) )`, where `x` represents the arguments
      * originally passed to `h`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {...Function} functions A variable number of functions.
@@ -1120,7 +1147,7 @@
      * each of the functions provided is executed in order from left to right.
      *
      * In some libraries this function is named `sequence`.
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {...Function} functions A variable number of functions.
@@ -1145,7 +1172,7 @@
      * Returns a new function much like the supplied one, except that the first two arguments'
      * order is reversed.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to invoke with its first two parameters reversed.
@@ -1177,7 +1204,7 @@
      * when invoked, calls the original function with all of the values prepended to the
      * original function's arguments list. In some libraries this function is named `applyLeft`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to invoke.
@@ -1213,7 +1240,7 @@
      * Note that `rPartial` is the opposite of `lPartial`: `rPartial` fills `fn`'s arguments
      * from the right to the left.  In some libraries this function is named `applyRight`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to invoke.
@@ -1246,7 +1273,7 @@
      * Note that this version of `memoize` effectively handles only string and number
      * parameters.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to be wrapped by `memoize`.
@@ -1285,7 +1312,7 @@
      * `fn` can only ever be called once, no matter how many times the returned function is
      * invoked.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to wrap in a call-only-once wrapper.
@@ -1314,7 +1341,7 @@
      * Wrap a function inside another to allow you to make adjustments to the parameters, or do
      * other processing either before the internal function is called or with its results.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} fn The function to wrap.
@@ -1343,7 +1370,7 @@
      *
      * NOTE: Does not work with some built-in objects such as Date.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {number} n The arity of the constructor function.
@@ -1379,7 +1406,7 @@
      *
      * NOTE: Does not work with some built-in objects such as Date.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} Fn The constructor function to wrap.
@@ -1412,7 +1439,7 @@
      *   h(1, 2); //≅ e( f(1, 2), g(1, 2) )
      * ```
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Function} after A function. `after` will be invoked with the return values of
@@ -1473,7 +1500,7 @@
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -1481,7 +1508,6 @@
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
      * @return {*} The final, accumulated value.
-     * @alias foldl
      * @example
      *
      *      var numbers = [1, 2, 3];
@@ -1491,7 +1517,7 @@
      *
      *      reduce(numbers, add, 10); //=> 16
      */
-    var foldl = R.reduce =  curry3(checkForMethod('reduce', function _reduce(fn, acc, list) {
+    R.reduce = curry3(checkForMethod('reduce', function _reduce(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx]);
@@ -1499,7 +1525,13 @@
         return acc;
     }));
 
-    R.foldl = R.reduce;
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @see R.reduce
+     */
+    var foldl = R.foldl = R.reduce;
 
 
     /**
@@ -1512,7 +1544,7 @@
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -1520,6 +1552,7 @@
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
      * @return {*} The final, accumulated value.
+     * @alias reduce.idx
      * @example
      *
      *      var letters = ['a', 'b', 'c'];
@@ -1551,7 +1584,7 @@
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -1559,7 +1592,6 @@
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
      * @return {*} The final, accumulated value.
-     * @alias foldr
      * @example
      *
      *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
@@ -1569,7 +1601,7 @@
      *
      *      reduceRight(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
      */
-    var foldr = R.reduceRight = curry3(checkForMethod('reduceRight', function _reduceRight(fn, acc, list) {
+    R.reduceRight = curry3(checkForMethod('reduceRight', function _reduceRight(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx]);
@@ -1577,7 +1609,13 @@
         return acc;
     }));
 
-    R.foldr = R.reduceRight;
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @see R.reduceRight
+     */
+    var foldr = R.foldr = R.reduceRight;
 
 
     /**
@@ -1591,7 +1629,7 @@
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -1599,6 +1637,7 @@
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
      * @return {*} The final, accumulated value.
+     * @alias reduceRight.idx
      * @example
      *
      *      var letters = ['a', 'b', 'c'];
@@ -1624,7 +1663,7 @@
      *
      * The iterator function receives one argument: *(seed)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The iterator function. receives one argument, `seed`, and returns
@@ -1657,7 +1696,7 @@
      * native `Array.prototype.map` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function to be called on every element of the input `list`.
@@ -1691,12 +1730,13 @@
      * the native `Array.prototype.map` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function to be called on every element of the input `list`.
      * @param {Array} list The list to be iterated over.
      * @return {Array} The new list.
+     * @alias map.idx
      * @example
      *
      *      var squareEnds = function(elt, idx, list) {
@@ -1723,7 +1763,7 @@
      * generated by running each property of `obj` through `fn`. `fn` is passed one argument:
      * *(value)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} fn A function called for each property in `obj`. Its return value will
@@ -1753,7 +1793,7 @@
      * Like `mapObj`, but but passes additional arguments to the predicate function. The
      * predicate function is passed three arguments: *(value, key, obj)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} fn A function called for each property in `obj`. Its return value will
@@ -1761,6 +1801,7 @@
      * @param {Object} obj The object to iterate over.
      * @return {Object} A new object with the same keys as `obj` and values that are the result
      *         of running each property through `fn`.
+     * @alias mapObj.idx
      * @example
      *
      *      var values = { x: 1, y: 2, z: 3 };
@@ -1781,7 +1822,7 @@
     /**
      * ap applies a list of functions to a list of values.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {Array} fns An array of functions
@@ -1805,7 +1846,7 @@
      * Note this `of` is different from the ES6 `of`; See
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param x any value
@@ -1825,7 +1866,7 @@
      * `empty` wraps any object in an array. This implementation is compatible with the
      * Fantasy-land Monoid spec, and will work with types that implement that spec.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @return {Array} an empty array
@@ -1844,7 +1885,7 @@
      * Fantasy-land Chain spec, and will work with types that implement that spec.
      * `chain` is also known as `flatMap` in some libraries
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function}
@@ -1866,12 +1907,11 @@
     /**
      * Returns the number of elements in the array by returning `arr.length`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} arr The array to inspect.
      * @return {number} The size of the array.
-     * @alias length
      * @example
      *
      *      ramda.size([]); //=> 0
@@ -1880,6 +1920,13 @@
     R.size = function _size(arr) {
         return arr.length;
     };
+
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @see R.size
+     */
     R.length = R.size;
 
 
@@ -1891,7 +1938,7 @@
      * `Array.prototype.filter` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function called per iteration.
@@ -1921,12 +1968,13 @@
      * Like `filter`, but passes additional parameters to the predicate function. The predicate
      * function is passed three arguments: *(value, index, list)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
+     * @alias filter.idx
      * @example
      *
      *      var lastTwo = function(val, idx, list) {
@@ -1950,7 +1998,7 @@
      * Similar to `filter`, except that it keeps only values for which the given predicate
      * function returns falsy. The predicate function is passed one argument: *(value)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function called per iteration.
@@ -1973,12 +2021,13 @@
      * Like `reject`, but passes additional parameters to the predicate function. The predicate
      * function is passed three arguments: *(value, index, list)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
+     * @alias reject.idx
      * @example
      *
      *      var lastTwo = function(val, idx, list) {
@@ -1998,7 +2047,7 @@
      * `false`. Excludes the element that caused the predicate function to fail. The predicate
      * function is passed one argument: *(value)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function called per iteration.
@@ -2023,7 +2072,7 @@
      * Returns a new list containing the first `n` elements of the given list.  If
      * `n > * list.length`, returns a list of `list.length` elements.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {number} n The number of elements to return.
@@ -2041,7 +2090,7 @@
      * `true`. Excludes the element that caused the predicate function to fail. The predicate
      * function is passed one argument: *(value)*.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function called per iteration.
@@ -2065,7 +2114,7 @@
     /**
      * Returns a new list containing all but the first `n` elements of the given `list`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {number} n The number of elements of `list` to skip.
@@ -2084,7 +2133,7 @@
      * Returns the first element of the list which matches the predicate, or `undefined` if no
      * element matches.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The predicate function used to determine if the element is the
@@ -2112,7 +2161,7 @@
      * Returns the index of the first element of the list which matches the predicate, or `-1`
      * if no element matches.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The predicate function used to determine if the element is the
@@ -2141,7 +2190,7 @@
      * Returns the last element of the list which matches the predicate, or `undefined` if no
      * element matches.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The predicate function used to determine if the element is the
@@ -2168,7 +2217,7 @@
      * Returns the index of the last element of the list which matches the predicate, or
      * `-1` if no element matches.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The predicate function used to determine if the element is the
@@ -2196,7 +2245,7 @@
      * Returns `true` if all elements of the list match the predicate, `false` if there are any
      * that don't.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The predicate function.
@@ -2227,7 +2276,7 @@
      * Returns `true` if at least one of elements of the list match the predicate, `false`
      * otherwise.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The predicate function.
@@ -2315,7 +2364,7 @@
      * (by strict equality),
      * or -1 if the item is not included in the array.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param target The item to find.
@@ -2338,7 +2387,7 @@
      * `indexOf.from` will only search the tail of the array, starting from the
      * `fromIdx` parameter.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param target The item to find.
@@ -2360,7 +2409,7 @@
      * Returns the position of the last occurrence of an item (by strict equality) in
      * an array, or -1 if the item is not included in the array.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param target The item to find.
@@ -2383,7 +2432,7 @@
      * `lastIndexOf.from` will only search the tail of the array, starting from the
      * `fromIdx` parameter.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param target The item to find.
@@ -2405,7 +2454,7 @@
      * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
      * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Object} a The item to compare against.
@@ -2430,7 +2479,7 @@
      * Returns `true` if the `x` is found in the `list`, using `pred` as an
      * equality predicate for `x`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Function} pred :: x -> x -> Bool
      * @param x the item to find
@@ -2456,7 +2505,7 @@
      * Equality is strict here, meaning reference equality for objects and non-coercing equality
      * for primitives.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} list The array to consider.
@@ -2484,7 +2533,7 @@
      * Returns `true` if all elements are unique, otherwise `false`.
      * Uniquness is determined using strict equality (`===`).
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} list The array to consider.
@@ -2512,7 +2561,7 @@
      * upon the value returned by applying the supplied predicate to two list elements. Prefers
      * the first item if two items compare equal based on the predicate.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} list The array to consider.
@@ -2541,7 +2590,7 @@
     /**
      * Returns a new list by plucking the same named property off all objects in the list supplied.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {string|number} key The key name to pluck off of each object.
@@ -2589,7 +2638,7 @@
      * Returns a new list by pulling every item out of it (and all its sub-arrays) and putting
      * them in a new array, depth-first.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} list The array to consider.
@@ -2606,7 +2655,7 @@
      * Returns a new list by pulling every item at the first level of nesting out, and putting
      * them in a new array.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} list The array to consider.
@@ -2623,7 +2672,7 @@
      * Creates a new list out of the two supplied by applying the function to each
      * equally-positioned pair in the lists.
      *
-     * @static
+     * @function
      * @memberOf R
      * @category List
      * @param {Function} fn The function used to combine the two elements into one value.
@@ -2649,7 +2698,7 @@
      * Creates a new list out of the two supplied by pairing up equally-positioned items from
      * both lists. Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} list1 The first array to consider.
@@ -2674,7 +2723,7 @@
     /**
      * Creates a new object out of a list of keys and a list of values.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} keys The array that will be properties on the output object.
@@ -2697,7 +2746,7 @@
     /**
      * Creates a new object out of a list key-value pairs.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} An array of two-element arrays that will be the keys and values of the ouput object.
@@ -2723,7 +2772,7 @@
      * to each possible pair in the lists.
      *
      * @see xprod
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Function} fn The function to join pairs with.
@@ -2757,7 +2806,7 @@
      * Creates a new list out of the two supplied by creating each possible
      * pair from the lists.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} as The first list.
@@ -2793,7 +2842,7 @@
      * Returns a new list with the same elements as the original list, just
      * in the reverse order.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {Array} list The list to reverse.
@@ -2815,7 +2864,7 @@
      * (exclusive). In mathematical terms, `range(a, b)` is equivalent to
      * the half-open interval `[a, b)`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {number} from The first number in the list.
@@ -2842,7 +2891,7 @@
      * Returns a string made by inserting the `separator` between each
      * element and concatenating all the elements into a single string.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {string|number} separator The string used to separate the elements.
@@ -2860,7 +2909,7 @@
     /**
      * Returns the elements from `xs` starting at `a` and ending at `b - 1`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {number} a The starting index.
@@ -2878,7 +2927,7 @@
     /**
      * Returns the elements from `xs` starting at `a` going to the end of `xs`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category List
      * @param {number} a The starting index.
@@ -2902,7 +2951,7 @@
      * copy of the list with the changes.
      * <small>No lists have been harmed in the application of this function.</small>
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Number} start The position to start removing elements
      * @param {Number} count The number of elements to remove
@@ -2922,7 +2971,7 @@
      * that this is not destructive_: it returns a copy of the list with the changes.
      * <small>No lists have been harmed in the application of this function.</small>
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Number} index The position to insert the element
      * @param elt The element to insert into the Array
@@ -2943,7 +2992,7 @@
      * is not destructive_: it returns a copy of the list with the changes.
      * <small>No lists have been harmed in the application of this function.</small>
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Number} index The position to insert the sublist
      * @param {Array} elts The sub-list to insert into the Array
@@ -2962,7 +3011,7 @@
     /**
      * Makes a comparator function out of a function that reports whether the first element is less than the second.
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Function} pred A predicate function of arity two.
      * @return {Function} a Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
@@ -2985,7 +3034,7 @@
      * time and return a negative number if the first value is smaller, a positive number if it's larger, and zero
      * if they are equal.  Please note that this is a **copy** of the list.  It does not modify the original.
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Function} comparator A sorting function :: a -> b -> Int
      * @param {Array} list The list to sort
@@ -3003,7 +3052,7 @@
      * Splits a list into sublists stored in an object, based on the result of calling a String-returning function
      * on each element, and grouping the results according to values returned.
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Function} fn Function :: a -> String
      * @param {Array} list The array to group
@@ -3040,7 +3089,7 @@
      * Takes a predicate and a list and returns the pair of lists of
      * elements which do and do not satisfy the predicate, respectively.
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {Function} pred Function :: a -> Boolean
      * @param {Array} list The array to partition
@@ -3073,7 +3122,7 @@
     /**
      * Runs the given function with the supplied object, then returns the object.
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {*} x
      * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
@@ -3092,7 +3141,7 @@
      * Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
      * non-coercing equality for primitives.
      *
-     * @static
+     * @func
      * @memberOf R
      * @param {*} a
      * @param {*} b
@@ -3113,13 +3162,12 @@
     /**
      * Returns a function that when supplied an object returns the indicated property of that object, if it exists.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {String} p The property name
      * @param {Object} obj The object to query
      * @return {*} The value at obj.p
-     * @alias get
      * @example
      *
      *      prop('x', {x: 100}) // => 100
@@ -3136,6 +3184,13 @@
         }
         return obj[p];
     };
+
+    /**
+     * @func
+     * @memberOf R
+     * @category Object
+     * @see R.prop
+     */
     R.get = R.prop;
 
 
@@ -3143,7 +3198,7 @@
      * Returns the value at the specified property.
      * The only difference from `prop` is the parameter order.
      *
-     * @static
+     * @func
      * @memberOf R
      * @see prop
      * @category Object
@@ -3169,7 +3224,7 @@
      * returns the value of that property.
      * Otherwise returns the provided default value.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {String} p The name of the property to return.
@@ -3197,7 +3252,7 @@
      * after `fn` and `obj` are passed in to `fn`. If no additional arguments are passed to `func`,
      * `fn` is invoked with no arguments.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {String} fn The name of the property mapped to the function to invoke
@@ -3222,7 +3277,7 @@
     /**
      * Returns a function that always returns the given value.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Function
      * @param {*} val The value to wrap in a function
@@ -3243,7 +3298,7 @@
      * Scans a list for a `null` or `undefined` element.
      * Returns true if it finds one, false otherwise.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category list
      * @param {Array} list The array to scan
@@ -3276,7 +3331,7 @@
      * Note that the order of the output array is not guaranteed to be
      * consistent across different JS platforms.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The object to extract properties from
@@ -3305,7 +3360,7 @@
      * Note that the order of the output array is not guaranteed to be
      * consistent across different JS platforms.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The object to extract properties from
@@ -3345,7 +3400,7 @@
      * Note that the order of the output array is not guaranteed to be
      * consistent across different JS platforms.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The object to extract from
@@ -3363,7 +3418,7 @@
      * Note that the order of the output array is not guaranteed to be
      * consistent across different JS platforms.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The object to extract from
@@ -3384,7 +3439,7 @@
      * Note that the order of the output array is not guaranteed across
      * different JS platforms.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The object to extract values from
@@ -3410,7 +3465,7 @@
      * Note that the order of the output array is not guaranteed to be
      * consistent across different JS platforms.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The object to extract values from
@@ -3456,7 +3511,7 @@
      * Returns a partial copy of an object containing only the keys specified.  If the key does not exist, the
      * property is ignored.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Array} names an array of String propery names to copy onto a new object
@@ -3477,7 +3532,7 @@
     /**
      * Returns a partial copy of an object omitting the keys specified.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Array} names an array of String propery names to omit from the new object
@@ -3498,7 +3553,7 @@
      * Returns a partial copy of an object containing only the keys that
      * satisfy the supplied predicate.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Function} pred A predicate to determine whether or not a key
@@ -3534,7 +3589,7 @@
     /**
      * Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Array} names an array of String propery names to copy onto a new object
@@ -3579,7 +3634,7 @@
      * merged with the own properties of object b.
      * This function will *not* mutate passed-in objects.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} a source object
@@ -3598,7 +3653,7 @@
     /**
      * Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {String} prop The name of the property to compare
@@ -3664,7 +3719,7 @@
      * `where` is well suited to declarativley expressing constraints for other functions, e.g.,
      * `filter`, `find`, `pickWith`, etc.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} spec
@@ -3713,7 +3768,7 @@
      * functions become global functions.
      * Warning: This function *will* mutate the object provided.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The object to attach ramda functions
@@ -3733,7 +3788,7 @@
      * See if an object (`val`) is an instance of the supplied constructor.
      * This function will check up the inheritance chain, if any.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category type
      * @param {Object} ctor A constructor
@@ -3756,7 +3811,7 @@
     /**
      * A function that always returns `0`. Any passed in parameters are ignored.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category function
      * @see always
@@ -3771,7 +3826,7 @@
     /**
      * A function that always returns `false`. Any passed in parameters are ignored.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category function
      * @see always
@@ -3786,7 +3841,7 @@
     /**
      * A function that always returns `true`. Any passed in parameters are ignored.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category function
      * @see always
@@ -3813,7 +3868,7 @@
      * this is short-circuited, meaning that the second function will not be invoked if the first returns a false-y
      * value.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category logic
      * @param {Function} f a predicate
@@ -3839,7 +3894,7 @@
      * this is short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
      * value.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category logic
      * @param {Function} f a predicate
@@ -3864,7 +3919,7 @@
      * A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
      * underlying function would return a false-y value, and `false` when it would return a truth-y one.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category logic
      * @param {Function} f a predicate
@@ -3908,7 +3963,7 @@
     /**
      * Given a list of predicates returns a new predicate that will be true exactly when all of them are.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category logic
      * @param {Array} list An array of predicate functions
@@ -3929,7 +3984,7 @@
     /**
      * Given a list of predicates returns a new predicate that will be true exactly when any one of them is.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category logic
      * @param {Array} list An array of predicate functions
@@ -3960,7 +4015,7 @@
     /**
      * Adds two numbers (or strings). Equivalent to `a + b` but curried.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number|string} a The first value.
@@ -3979,7 +4034,7 @@
     /**
      * Multiplies two numbers. Equivalent to `a * b` but curried.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} a The first value.
@@ -3999,7 +4054,7 @@
     /**
      * Subtracts two numbers. Equivalent to `a - b` but curried.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} a The first value.
@@ -4024,7 +4079,7 @@
      * curried. Probably more useful when partially applied than
      * `subtract`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} a The first value.
@@ -4048,7 +4103,7 @@
      * While at times the curried version of `divide` might be useful,
      * probably the curried version of `divideBy` will be more useful.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} a The first value.
@@ -4070,7 +4125,7 @@
      * divided by the first.  The curried version of `divideBy` may prove more useful
      * than that of `divide`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} a The second value.
@@ -4091,7 +4146,7 @@
      * Note that this functions preserves the JavaScript-style behavior for
      * modulo. For mathematical modulo see `mathMod`
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} a The value to the divide.
@@ -4128,7 +4183,7 @@
      * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
      * when the modulus is zero or negative.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} m The dividend.
@@ -4155,7 +4210,7 @@
      * Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
      * this one might be more useful than that of `modulo`.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {number} m The dividend.
@@ -4174,7 +4229,7 @@
     /**
      * Adds together all the elements of a list.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Array} list An array of numbers
@@ -4190,7 +4245,7 @@
     /**
      * Multiplies together all the elements of a list.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Array} list An array of numbers
@@ -4206,7 +4261,7 @@
     /**
      * Returns true if the first parameter is less than the second.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Number} a
@@ -4224,7 +4279,7 @@
     /**
      * Returns true if the first parameter is less than or equal to the second.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Number} a
@@ -4242,7 +4297,7 @@
     /**
      * Returns true if the first parameter is greater than the second.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Number} a
@@ -4260,7 +4315,7 @@
     /**
      * Returns true if the first parameter is greater than or equal to the second.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Number} a
@@ -4278,7 +4333,7 @@
     /**
      * Determines the largest of a list of numbers (or elements that can be cast to numbers)
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @see maxWith
@@ -4296,7 +4351,7 @@
     /**
      * Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Function} keyFn A comparator function for elements in the list
@@ -4328,7 +4383,7 @@
     /**
      * Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Function} keyFn A comparator function for elements in the list
@@ -4361,7 +4416,7 @@
     /**
      * Determines the smallest of a list of numbers (or elements that can be cast to numbers)
      *
-     * @static
+     * @func
      * @memberOf R
      * @category math
      * @param {Array} list A list of numbers
@@ -4387,7 +4442,7 @@
     /**
      * returns a subset of a string between one index and another.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {Number} indexA An integer between 0 and the length of the string.
@@ -4405,7 +4460,7 @@
     /**
      * The trailing substring of a String starting with the nth character:
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {Number} indexA An integer between 0 and the length of the string.
@@ -4422,7 +4477,7 @@
     /**
      * The leading substring of a String ending before the nth character:
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {Number} indexA An integer between 0 and the length of the string.
@@ -4439,7 +4494,7 @@
     /**
      * The character at the nth position in a String:
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {Number} index An integer between 0 and the length of the string.
@@ -4456,7 +4511,7 @@
     /**
      * The ascii code of the character at the nth position in a String:
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {Number} index An integer between 0 and the length of the string.
@@ -4474,7 +4529,7 @@
     /**
      * Tests a regular expression agains a String
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {RegExp} rx A regular expression.
@@ -4491,7 +4546,7 @@
     /**
      * Finds the first index of a substring in a string, returning -1 if it's not present
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {String} c A string to find.
@@ -4509,7 +4564,7 @@
      *
      * Finds the last index of a substring in a string, returning -1 if it's not present
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {String} c A string to find.
@@ -4526,7 +4581,7 @@
     /**
      * The upper case version of a string.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {string} str The string to upper case.
@@ -4541,7 +4596,7 @@
     /**
      * The lower case version of a string.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {string} str The string to lower case.
@@ -4557,7 +4612,7 @@
      * Splits a string into an array of strings based on the given
      * separator.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {string} sep The separator string.
@@ -4605,7 +4660,7 @@
      * Retrieve a nested path on an object seperated by the specified
      * separator value.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {string} sep The separator to use in `path`.
@@ -4623,7 +4678,7 @@
     /**
      * Retrieve a nested path on an object seperated by periods
      *
-     * @static
+     * @func
      * @memberOf R
      * @category string
      * @param {string} path The dot path to use.
@@ -4647,7 +4702,7 @@
     /**
      * Reasonable analog to SQL `select` statement.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category object
      * @category relation
@@ -4669,7 +4724,7 @@
      * value according to strict equality (`===`).  Most likely used to
      * filter a list:
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {string|number} name The property name (or index) to use.
@@ -4694,7 +4749,7 @@
      * Combines two lists into a set (i.e. no duplicates) composed of the
      * elements of each list.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Array} as The first list.
@@ -4712,7 +4767,7 @@
      * Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
      * determined according to the value returned by applying the supplied predicate to two list elements.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Function} pred
@@ -4736,7 +4791,7 @@
     /**
      * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Array} list1 The first list.
@@ -4758,7 +4813,7 @@
      * Duplication is determined according to the value returned by applying the supplied predicate to two list
      * elements.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Function} pred
@@ -4783,7 +4838,7 @@
     /**
      * Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Array} list1 The first list.
@@ -4805,7 +4860,7 @@
      * to the value returned by applying the supplied predicate to two list
      * elements.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Function} pred A predicate function that determines whether
@@ -4856,7 +4911,7 @@
      * is the result of applying the supplied function to that item.
      *
      * @private
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Function} fn An arbitrary unary function returning a potential
@@ -4895,7 +4950,7 @@
     /**
      * Sorts the list according to a key generated by the supplied function.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Function} fn The function mapping `list` items to keys.
@@ -4934,7 +4989,7 @@
      * the list. Note that all keys are coerced to strings because of how
      * JavaScript objects work.
      *
-     * @static
+     * @func
      * @memberOf R
      * @category relation
      * @param {Function} fn The function used to map values to keys.
@@ -4971,12 +5026,12 @@
     /**
      * Returns a list of function names of object's own functions
      *
-     * @static .
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The objects with functions in it
      * @return {Array} returns list of object's own function names
-     * @example .
+     * @example
      *
      *      R.functions(R) // => returns list of ramda's own function names
      *      R.functions(this) // => returns list of function names in global scope's own function names
@@ -4987,12 +5042,12 @@
     /**
      * Returns a list of function names of object's own and prototype functions
      *
-     * @static .
+     * @func
      * @memberOf R
      * @category Object
      * @param {Object} obj The objects with functions in it
      * @return {Array} returns list of object's own and prototype function names
-     * @example .
+     * @example
      *
      *      R.functionsIn(R) // => returns list of ramda's own and prototype function names
      *      R.functionsIn(this) // => returns list of function names in global scope's own and prototype function names
