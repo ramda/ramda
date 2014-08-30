@@ -18,3 +18,5 @@ coverage
 .travis.yml
 
 
+
+/ramda.api.js
