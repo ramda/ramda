@@ -1,4 +1,4 @@
-(function (factory) {
+(function(factory) {
     if (typeof define === 'function' && define.amd) {
         define(['ramda'], factory);
     } else if (typeof exports === 'object') {
@@ -6,7 +6,7 @@
     } else {
         this.Random = factory(this.ramda);
     }
-}(function (R) {
+}(function(R) {
 
     // Random
     // ----------
@@ -24,7 +24,7 @@
     var Mash = function Mash() {
         var n = 0xefc8249d;
 
-        var mash = function (data) {
+        var mash = function(data) {
             data = data.toString();
             for (var i = 0; i < data.length; i++) {
                 n += data.charCodeAt(i);
@@ -47,7 +47,7 @@
     // mirrored at https://github.com/nquinlan/better-random-numbers-for-javascript-mirror
     // Johannes Baagøe <baagoe@baagoe.com>, 2010
     var Random = function Random() {
-        return (function (args) {
+        return (function(args) {
             var s0 = 0;
             var s1 = 0;
             var s2 = 0;
@@ -77,17 +77,17 @@
             }
             mash = null;
 
-            var random = function () {
+            var random = function() {
                 var t = 2091639 * s0 + c * 2.3283064365386963e-10; // 2^-32
                 s0 = s1;
                 s1 = s2;
                 s2 = t - (c = t | 0);
                 return s2;
             };
-            random.uint32 = function () {
+            random.uint32 = function() {
                 return random() * 0x100000000; // 2^32
             };
-            random.fract53 = function () {
+            random.fract53 = function() {
                 return random() +
                     (random() * 0x200000 | 0) * 1.1102230246251565e-16; // 2^-53
             };

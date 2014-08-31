@@ -16,9 +16,9 @@ describe('flip', function() {
     });
 
     it('produces a function that throws if given no arguments', function() {
-      var f = function(x, y) { return x + ' then ' + y; };
-      var g = R.flip(f);
-      assert.throws(g, TypeError);
+        var f = function(x, y) { return x + ' then ' + y; };
+        var g = R.flip(f);
+        assert.throws(g, TypeError);
     });
 });
 
@@ -55,7 +55,7 @@ describe('once', function() {
 describe('memoize', function() {
     it('should calculate the value for a given input only once', function() {
         var ctr = 0;
-        var fib = R.memoize(function (n) {ctr++; return n < 2 ? n : fib(n - 2) + fib(n - 1);});
+        var fib = R.memoize(function(n) {ctr++; return n < 2 ? n : fib(n - 2) + fib(n - 1);});
         var result = fib(10);
         assert.equal(result, 55);
         assert.equal(ctr, 11); // fib(0), fib(1), ... fib(10), no memoization would take 177 iterations.
@@ -160,23 +160,48 @@ describe('binary', function() {
     });
 });
 
+describe('nAry', function() {
+
+    function toArray(args) { return Array.prototype.slice.call(args, 0); }
+
+    it('should turn multiple-argument function into a nullary one', function() {
+        var fn = R.nAry(0, function(x, y, z) { return toArray(arguments); });
+        assert.equal(fn.length, 0);
+        assert.deepEqual(fn(1, 2, 3), []);
+    });
+
+    it('should turn multiple-argument function into a ternary one', function() {
+        var fn = R.nAry(3, function(a, b, c, d) { return toArray(arguments); });
+        assert.equal(fn.length, 3);
+        assert.deepEqual(fn(1, 2, 3, 4), [1, 2, 3]);
+        assert.deepEqual(fn(1), [1, undefined, undefined]);
+    });
+
+    it('should be able to create functions of arbitrary arity', function() {
+        var fn = R.nAry(10, function() { return toArray(arguments); });
+        assert.equal(fn.length, 10);
+        assert.deepEqual(fn.apply(null, R.range(0, 25)), R.range(0, 10));
+        assert.deepEqual(fn(), R.repeatN(undefined, 10));
+    });
+});
+
 describe('ap', function() {
     function inc(x) { return x + 1; }
     function mult2(x) { return x * 2; }
     function plus3(x) { return x + 3; }
 
     it('applies a list of functions to a list of values', function() {
-      assert.deepEqual(R.ap([mult2, plus3], [1, 2, 3]), [2, 4, 6, 4, 5, 6]);
+        assert.deepEqual(R.ap([mult2, plus3], [1, 2, 3]), [2, 4, 6, 4, 5, 6]);
     });
 
     it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
-      var obj = {ap: function(fs) { return {x: fs[0](1)}; }};
-      assert.deepEqual(R.ap([R.add(1)], obj), obj.ap([R.add(1)]));
+        var obj = {ap: function(fs) { return {x: fs[0](1)}; }};
+        assert.deepEqual(R.ap([R.add(1)], obj), obj.ap([R.add(1)]));
     });
 
     it('is curried', function() {
-      var val = R.ap([mult2, plus3]);
-      assert.equal(typeof val, 'function');
-      assert.deepEqual(val([1, 2, 3]), [2, 4, 6, 4, 5, 6]);
+        var val = R.ap([mult2, plus3]);
+        assert.equal(typeof val, 'function');
+        assert.deepEqual(val([1, 2, 3]), [2, 4, 6, 4, 5, 6]);
     });
 });

@@ -25,7 +25,7 @@ describe('every', function() {
         assert.equal(count, 4);
     });
 
-    it('is automatically curried', function () {
+    it('is automatically curried', function() {
         var count = 0;
         var test = function(n) {count++; return even(n);};
         assert(R.every(test)([2, 4, 6, 7, 8, 10]) === false);
@@ -71,7 +71,7 @@ describe('some', function() {
         assert.equal(count, 4);
     });
 
-    it('is automatically curried', function () {
+    it('is automatically curried', function() {
         var count = 0;
         var test = function(n) {count++; return odd(n);};
         assert(R.some(test)([2, 4, 6, 7, 8, 10]) === true);

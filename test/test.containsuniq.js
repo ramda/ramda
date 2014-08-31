@@ -23,7 +23,7 @@ describe('uniq', function() {
     });
 
     it('keeps elements from the left', function() {
-      assert.deepEqual(R.uniq([1, 2, 3, 4, 1]), [1, 2, 3, 4]);
+        assert.deepEqual(R.uniq([1, 2, 3, 4, 1]), [1, 2, 3, 4]);
     });
 
     it('returns an empty array for an empty array', function() {
@@ -44,7 +44,7 @@ describe('uniqWith', function() {
     });
 
     it('keeps elements from the left', function() {
-      assert.deepEqual(R.uniqWith(eqI, [{i: 1}, {i: 2}, {i: 3}, {i: 4}, {i: 1}]), [{i: 1}, {i: 2}, {i: 3}, {i: 4}]);
+        assert.deepEqual(R.uniqWith(eqI, [{i: 1}, {i: 2}, {i: 3}, {i: 4}, {i: 1}]), [{i: 1}, {i: 2}, {i: 3}, {i: 4}]);
     });
 
     it('returns an empty array for an empty array', function() {

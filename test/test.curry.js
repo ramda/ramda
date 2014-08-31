@@ -34,7 +34,7 @@ describe('internal curry', function() {
     it('should throw an expcetion given no arguments', function() {
         assert.throws(R.map);
         assert.throws(R.map(R.I));
-        //doesnt throw an exception
+        // doesnt throw an exception
         R.concat([]);
     });
 });

@@ -16,7 +16,7 @@ describe('keys', function() {
     it('should work with hasOwnProperty override', function() {
         assert.deepEqual(R.keys({
             /* jshint -W001 */
-            'hasOwnProperty': false
+            hasOwnProperty: false
             /* jshint +W001 */
         }), ['hasOwnProperty']);
     });
