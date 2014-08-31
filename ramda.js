@@ -306,7 +306,6 @@
                 case 1: return callBound ? obj[methodname]() : func(a);
                 case 2: return callBound ? obj[methodname](a) : func(a, b);
                 case 3: return callBound ? obj[methodname](a, b) : func(a, b, c);
-                case 4: return callBound ? obj[methodname](a, b, c) : func(a, b, c, obj);
             }
         };
     }
@@ -1039,35 +1038,6 @@
     // These functions make new functions out of old ones.
 
     // --------
-
-    /**
-     * Returns a new function which partially applies a value to a given function, where the
-     * function is a variadic function that cannot be curried.
-     *
-     * @private
-     * @category Function
-     * @param {Function} f The function to partially apply `a` onto.
-     * @param {*} a The argument to partially apply onto `f`.
-     * @return {Function} A new function.
-     * @example
-     *
-     *      var addThree = function(a, b, c) {
-     *        return a + b + c;
-     *      };
-     *      var partialAdd = partially(add, 1);
-     *      partialAdd(2, 3); //=> 6
-     *
-     *      // partialAdd is invoked immediately, even though it expects three arguments. This is
-     *      // because, unlike many functions here, the result of `partially` is not a curried
-     *      // function.
-     *      partialAdd(2); //≅ addThree(1, 2, undefined) => NaN
-     */
-    function partially(f, a) {
-        return function() {
-            return f.apply(this, concat([a], arguments));
-        };
-    }
-
 
     /**
      * Basic, right-associative composition function. Accepts two functions and returns the
