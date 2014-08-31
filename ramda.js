@@ -581,7 +581,7 @@
      * new function. For example:
      *
      * ```javascript
-     *   var useWithExample = invoke(someFn, transformerFn1, transformerFn2);
+     *   var useWithExample = R.useWith(someFn, transformerFn1, transformerFn2);
      *
      *   // This invocation:
      *   useWithExample('x', 'y');
@@ -2257,8 +2257,8 @@
      *      var lessThan2 = flip(lt)(2);
      *      var lessThan3 = flip(lt)(3);
      *      var xs = range(1, 3); //= [1, 2]
-     *      all(lessThan2)(xs); //= false
-     *      all(lessThan3)(xs); //= true
+     *      every(lessThan2)(xs); //= false
+     *      every(lessThan3)(xs); //= true
      */
     function every(fn, list) {
         var i = -1;
@@ -2288,8 +2288,8 @@
      *      var lessThan0 = flip(lt)(0);
      *      var lessThan2 = flip(lt)(2);
      *      var xs = range(1, 3); //= [1, 2]
-     *      any(lessThan0)(xs); //= false
-     *      any(lessThan2)(xs); //= true
+     *      some(lessThan0)(xs); //= false
+     *      some(lessThan2)(xs); //= true
      */
     function some(fn, list) {
         var i = -1;
@@ -2771,7 +2771,7 @@
      * Creates a new list out of the two supplied by applying the function
      * to each possible pair in the lists.
      *
-     * @see xprod
+     * @see R.xprod
      * @func
      * @memberOf R
      * @category List
@@ -3200,7 +3200,7 @@
      *
      * @func
      * @memberOf R
-     * @see prop
+     * @see R.prop
      * @category Object
      * @param {Object} obj The object to query
      * @param {String} prop The property name
@@ -3561,7 +3561,7 @@
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with only properties that satisfy `pred`
      *         on it.
-     * @see pick
+     * @see R.pick
      * @example
      *
      *      function isUpperCase(x) { return x.toUpperCase() === x; }
@@ -3574,7 +3574,7 @@
      * Internal implementation of `pickAll`
      *
      * @private
-     * @see pickAll
+     * @see R.pickAll
      */
     // TODO: document, even for internals...
     var pickAll = function _pickAll(names, obj) {
@@ -3595,7 +3595,7 @@
      * @param {Array} names an array of String propery names to copy onto a new object
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with only properties from `names` on it.
-     * @see pick
+     * @see R.pick
      * @example
      *
      *      pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, d: 4}
@@ -3677,7 +3677,7 @@
      * internal helper for `where`
      *
      * @private
-     * @see where
+     * @see R.where
      */
     function satisfiesSpec(spec, parsedSpec, testObj) {
         if (spec === testObj) { return true; }
@@ -3814,7 +3814,7 @@
      * @func
      * @memberOf R
      * @category function
-     * @see always
+     * @see R.always
      * @return {Number} 0. Always zero.
      * @example
      *
@@ -3829,7 +3829,7 @@
      * @func
      * @memberOf R
      * @category function
-     * @see always
+     * @see R.always
      * @return {Boolean} false
      * @example
      *
@@ -3844,7 +3844,7 @@
      * @func
      * @memberOf R
      * @category function
-     * @see always
+     * @see R.always
      * @return {Boolean} true
      * @example
      *
@@ -3940,7 +3940,8 @@
      * Create a predicate wrapper which will call a pick function (all/any) for each predicate
      *
      * @private
-     * @see all, any
+     * @see R.every
+     * @see R.some
      */
     // TODO: document, even for internals...
     var predicateWrap = function _predicateWrap(predPicker) {
@@ -4060,7 +4061,7 @@
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a - b`.
-     * @see subtractN
+     * @see R.subtractN
      * @example
      *
      *      var complementaryAngle = subtract(90);
@@ -4109,7 +4110,7 @@
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a / b`.
-     * @see divideBy
+     * @see R.divideBy
      * @example
      *
      *      var reciprocal = divide(1);
@@ -4131,7 +4132,7 @@
      * @param {number} a The second value.
      * @param {number} b The first value.
      * @return {number} The result of `b / a`.
-     * @see divide
+     * @see R.divide
      * @example
      *
      *      var half = divideBy(2);
@@ -4152,7 +4153,8 @@
      * @param {number} a The value to the divide.
      * @param {number} b The pseudo-modulus
      * @return {number} The result of `b % a`.
-     * @see moduloBy, mathMod
+     * @see R.moduloBy
+     * @see R.mathMod
      * @example
      *
      *      modulo(17, 3) // => 2
@@ -4189,7 +4191,7 @@
      * @param {number} m The dividend.
      * @param {number} p the modulus.
      * @return {number} The result of `b mod a`.
-     * @see moduloBy
+     * @see R.moduloBy
      * @example
      *
      *      mathMod(-17, 5)  // 3
@@ -4216,7 +4218,7 @@
      * @param {number} m The dividend.
      * @param {number} p the modulus.
      * @return {number} The result of `b mod a`.
-     * @see modulo
+     * @see R.modulo
      * @example
      *
      *      var isOdd = moduloBy(2);
@@ -4336,7 +4338,7 @@
      * @func
      * @memberOf R
      * @category math
-     * @see maxWith
+     * @see R.maxWith
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
      * @example
@@ -4357,7 +4359,7 @@
      * @param {Function} keyFn A comparator function for elements in the list
      * @param {Array} list A list of comparable elements
      * @return {*} The greatest element in the list. `undefined` if the list is empty.
-     * @see max
+     * @see R.max
      * @example
      *
      *      function cmp(obj) { return obj.x; }
@@ -4388,7 +4390,7 @@
      * @category math
      * @param {Function} keyFn A comparator function for elements in the list
      * @param {Array} list A list of comparable elements
-     * @see min
+     * @see R.min
      * @return {*} The greatest element in the list. `undefined` if the list is empty.
      * @example
      *
@@ -4421,7 +4423,7 @@
      * @category math
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
-     * @see minWith
+     * @see R.minWith
      * @example
      *
      *      min([7, 3, 9, 2, 4, 9, 3]) // => 2
@@ -4449,7 +4451,7 @@
      * @param {Number} indexB An integer between 0 and the length of the string.
      * @param {String} The string to extract from
      * @return {String} the extracted substring
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      substring(2, 5, 'abcdefghijklm'); //=> 'cde'
@@ -4466,7 +4468,7 @@
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} The string to extract from
      * @return {String} the extracted substring
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      substringFrom(8, 'abcdefghijklm'); //=> 'ijklm'
@@ -4483,7 +4485,7 @@
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} The string to extract from
      * @return {String} the extracted substring
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
@@ -4500,7 +4502,7 @@
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a char from
      * @return {String} the character at `index` of `str`
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      charAt(8, 'abcdefghijklm'); //=> 'i'
@@ -4517,7 +4519,7 @@
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a charCode from
      * @return {Number} the code of the character at `index` of `str`
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      charCodeAt(8, 'abcdefghijklm'); //=> 105
@@ -4535,7 +4537,7 @@
      * @param {RegExp} rx A regular expression.
      * @param {String} str The string to match against
      * @return {Array} The list of matches, or null if no matches found
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
@@ -4552,7 +4554,7 @@
      * @param {String} c A string to find.
      * @param {String} str The string to search in
      * @return {Number} The first index of `c` or -1 if not found
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      strIndexOf('c', 'abcdefg) //=> 2
@@ -4570,7 +4572,7 @@
      * @param {String} c A string to find.
      * @param {String} str The string to search in
      * @return {Number} The last index of `c` or -1 if not found
-     * @see invoker
+     * @see R.invoker
      * @example
      *
      *      strLastIndexOf('a', 'banana split') //=> 5
@@ -4775,7 +4777,7 @@
      * @param {Array} list2 The second list.
      * @return {Array} The first and second lists concatenated, with
      *         duplicates removed.
-     * @see union
+     * @see R.union
      * @example
      *
      *      function cmp(x, y) { return x.a === y.a; }
@@ -4797,7 +4799,7 @@
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @return {Array} The elements in `list1` that are not in `list2`
-     * @see differenceWith
+     * @see R.differenceWith
      * @example
      *
      *      difference([1,2,3,4], [7,6,5,4,3]); //= [1,2]
@@ -4819,7 +4821,7 @@
      * @param {Function} pred
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
-     * @see difference
+     * @see R.difference
      * @return {Array} The first and second lists concatenated, with
      *                 duplicates removed.
      * @example
@@ -4843,7 +4845,7 @@
      * @category relation
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
-     * @see intersectionWith
+     * @see R.intersectionWith
      * @return {Array} The list of elements found in both `list1` and `list2`
      * @example
      *
@@ -4868,7 +4870,7 @@
      *        Signatrue: a -> a -> Boolean
      * @param {Array} list1 One list of items to compare
      * @param {Array} list2 A second list of items to compare
-     * @see intersection
+     * @see R.intersection
      * @return {Array} A new list containing those elements common to both lists.
      * @example
      *
