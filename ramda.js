@@ -1634,16 +1634,6 @@
 
 
     /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @alias foldr.idx
-     * @see R.reduceRight.idx
-     */
-    R.foldr.idx = R.reduceRight.idx;
-
-
-    /**
      * Like `reduceRight`, but passes additional parameters to the predicate function. Moves through
      * the input list from the right to the left.
      *
@@ -1680,6 +1670,16 @@
         }
         return acc;
     });
+
+
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @alias foldr.idx
+     * @see R.reduceRight.idx
+     */
+    R.foldr.idx = R.reduceRight.idx;
 
 
     /**
