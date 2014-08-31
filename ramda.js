@@ -151,51 +151,6 @@
     };
 
 
-    /**
-     * Creates a new version of `fn` that, when invoked, will return either:
-     * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
-     * `fn`'s expected arguments have not yet been provided
-     * - `fn`'s result if all of its expected arguments have been provided
-     *
-     * Optionally, you may provide an arity for the returned function.
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig (* -> a) -> Number -> (* -> a)
-     * @sig (* -> a) -> (* -> a)
-     * @param {Function} fn The function to curry.
-     * @param {number} [fnArity=fn.length] An optional arity for the returned function.
-     * @return {Function} A new, curried function.
-     * @example
-     *
-     *      var addFourNumbers = function(a, b, c, d) {
-     *        return a + b + c + d;
-     *      };
-     *
-     *      var curriedAddFourNumbers = R.curry(addFourNumbers);
-     *      var f = curriedAddFourNumbers(1, 2);
-     *      var g = f(3);
-     *      g(4);//=> 10
-     */
-    var curry = R.curry = function _curry(fn, fnArity) {
-        if (arguments.length < 2) {
-            return _curry(fn, fn.length);
-        }
-        return (function recurry(args) {
-            return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
-                if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
-                var newArgs = concat(args, arguments);
-                if (newArgs.length >= fnArity) {
-                    return fn.apply(this, newArgs);
-                } else {
-                    return recurry(newArgs);
-                }
-            });
-        }([]));
-    };
-
-
     var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 
 
@@ -263,6 +218,80 @@
             }
         };
     }
+
+
+    /**
+     * Creates a new version of `fn` with given arity that, when invoked,
+     * will return either:
+     * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
+     * `fn`'s expected arguments have not yet been provided
+     * - `fn`'s result if all of its expected arguments have been provided
+     *
+     * This function is useful in place of `curry`, when the arity of the
+     * function to curry cannot be determined from its signature, e.g. if it's
+     * a variadic function.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig Number -> (* -> a) -> (* -> a)
+     * @param {number} fnArity The arity for the returned function.
+     * @param {Function} fn The function to curry.
+     * @return {Function} A new, curried function.
+     * @see R.curry
+     * @example
+     *
+     *      var addFourNumbers = function() {
+     *        return R.sum([].slice.call(arguments, 0, 4));
+     *      };
+     *
+     *      var curriedAddFourNumbers = R.curryN(4, addFourNumbers);
+     *      var f = curriedAddFourNumbers(1, 2);
+     *      var g = f(3);
+     *      g(4);//=> 10
+     */
+    var curryN = R.curryN = function curryN(fnArity, fn) {
+        return (function recurry(args) {
+            return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
+                if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
+                var newArgs = concat(args, arguments);
+                if (newArgs.length >= fnArity) {
+                    return fn.apply(this, newArgs);
+                } else {
+                    return recurry(newArgs);
+                }
+            });
+        }([]));
+    };
+
+
+    /**
+     * Creates a new version of `fn` that, when invoked, will return either:
+     * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
+     * `fn`'s expected arguments have not yet been provided
+     * - `fn`'s result if all of its expected arguments have been provided
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig (* -> a) -> (* -> a)
+     * @param {Function} fn The function to curry.
+     * @return {Function} A new, curried function.
+     * @see R.curryN
+     * @example
+     *
+     *      var addFourNumbers = function(a, b, c, d) {
+     *        return a + b + c + d;
+     *      };
+     *
+     *      var curriedAddFourNumbers = R.curry(addFourNumbers);
+     *      var f = curriedAddFourNumbers(1, 2);
+     *      var g = f(3);
+     *      g(4);//=> 10
+     */
+    var curry = R.curry = function curry(fn) {
+        return curryN(fn.length, fn);
+    };
 
 
     /**
@@ -569,7 +598,7 @@
     var invoker = R.invoker = function _invoker(name, obj, len) {
         var method = obj[name];
         var length = len === void 0 ? method.length : len;
-        return method && curry(function() {
+        return method && curryN(length + 1, function() {
             if (arguments.length) {
                 var target = Array.prototype.pop.call(arguments);
                 var targetMethod = target[name];
@@ -577,7 +606,7 @@
                     return targetMethod.apply(target, arguments);
                 }
             }
-        }, length + 1);
+        });
     };
 
 
