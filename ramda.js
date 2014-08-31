@@ -22,7 +22,7 @@
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
     } else {
-        this.ramda = factory(this);
+        this.R = factory(this);
     }
 }(function(global) {
 
@@ -355,7 +355,7 @@
      *      takesTwoArgs.length; //=> 2
      *      takesTwoArgs(1, 2); //=> [1, 2]
      *
-     *      var takesOneArg = ramda.nAry(1, takesTwoArgs);
+     *      var takesOneArg = R.nAry(1, takesTwoArgs);
      *      takesOneArg.length; //=> 1
      *      // Only `n` arguments are passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
@@ -427,7 +427,7 @@
      *      takesTwoArgs.length; //=> 2
      *      takesTwoArgs(1, 2); //=> [1, 2]
      *
-     *      var takesOneArg = ramda.unary(1, takesTwoArgs);
+     *      var takesOneArg = R.unary(1, takesTwoArgs);
      *      takesOneArg.length; //=> 1
      *      // Only 1 argument is passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
@@ -456,7 +456,7 @@
      *      takesThreeArgs.length; //=> 3
      *      takesThreeArgs(1, 2, 3); //=> [1, 2, 3]
      *
-     *      var takesTwoArgs = ramda.binary(1, takesThreeArgs);
+     *      var takesTwoArgs = R.binary(1, takesThreeArgs);
      *      takesTwoArgs.length; //=> 2
      *      // Only 2 arguments are passed to the wrapped function
      *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
@@ -487,7 +487,7 @@
      *      takesTwoArgs.length; //=> 2
      *      takesTwoArgs(1, 2); //=> [1, 2]
      *
-     *      var takesOneArg = ramda.unary(1, takesTwoArgs);
+     *      var takesOneArg = R.unary(1, takesTwoArgs);
      *      takesOneArg.length; //=> 1
      *      // All arguments are passed through to the wrapped function
      *      takesOneArg(1, 2); //=> [1, 2]
@@ -557,12 +557,12 @@
      * @return {Function} A new function or `undefined` if the specified method is not found.
      * @example
      *
-     *      var charAt = ramda.invoker('charAt', String.prototype);
+     *      var charAt = R.invoker('charAt', String.prototype);
      *      charAt(6, 'abcdefghijklm'); //=> 'g'
      *
-     *      var join = ramda.invoker('join', Array.prototype);
+     *      var join = R.invoker('join', Array.prototype);
      *      var firstChar = charAt(0);
-     *      join('', ramda.map(firstChar, ['light', 'ampliifed', 'stimulated', 'emission', 'radiation']));
+     *      join('', R.map(firstChar, ['light', 'ampliifed', 'stimulated', 'emission', 'radiation']));
      *      //=> 'laser'
      */
     var invoker = R.invoker = function _invoker(name, obj, len) {
@@ -614,11 +614,11 @@
      *      var add = function(a, b) { return a + b; };
      *      // Adds any number of arguments together
      *      var addAll = function() {
-     *        return ramda.reduce(add, 0, arguments);
+     *        return R.reduce(add, 0, arguments);
      *      };
      *
      *      // Basic example
-     *      var addDoubleAndSquare = ramda.useWith(addAll, double, square);
+     *      var addDoubleAndSquare = R.useWith(addAll, double, square);
      *
      *      addDoubleAndSquare(10, 5); //≅ addAll(double(10), square(5));
      *      //=> 125
@@ -629,8 +629,8 @@
      *
      *      // But if you're expecting additional arguments that don't need transformation, it's best
      *      // to pass transformer functions so the resulting function has the correct arity
-     *      var addDoubleAndSquareWithExtraParams = ramda.useWith(addAll, double, square, ramda.identity);
-     *      addDoubleAndSquare(10, 5, 100); //≅ addAll(double(10), square(5), ramda.identity(100));
+     *      var addDoubleAndSquareWithExtraParams = R.useWith(addAll, double, square, R.identity);
+     *      addDoubleAndSquare(10, 5, 100); //≅ addAll(double(10), square(5), R.identity(100));
      *      //=> 225
      */
     var useWith = R.useWith = function _useWith(fn /*, transformers */) {
@@ -652,7 +652,7 @@
      *
      * `fn` receives one argument: *(value)*.
      *
-     * Note: `ramda.forEach` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.forEach` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.forEach` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Description
      *
@@ -668,7 +668,7 @@
      * @return {Array} The original list.
      * @example
      *
-     *      ramda.forEach(function(num) {
+     *      R.forEach(function(num) {
      *        console.log(num + 100);
      *      }, [1, 2, 3]); //=> [1, 2, 3]
      *      //-> 101
@@ -691,7 +691,7 @@
      *
      * `fn` receives three arguments: *(value, index, list)*.
      *
-     * Note: `ramda.forEach.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.forEach.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.forEach` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Description
@@ -712,7 +712,7 @@
      *
      *      // Note that having access to the original `list` allows for
      *      // mutation. While you *can* do this, it's very un-functional behavior:
-     *      ramda.forEach.idx(function(num, idx, list) {
+     *      R.forEach.idx(function(num, idx, list) {
      *        list[idx] = num + 100;
      *      }, [1, 2, 3]); //=> [101, 102, 103]
      */
@@ -738,12 +738,12 @@
      * @example
      *
      *      var numbers = [1, 2, 3];
-     *      var numbersClone = ramda.clone(numbers); //=> [1, 2, 3]
+     *      var numbersClone = R.clone(numbers); //=> [1, 2, 3]
      *      numbers === numbersClone; //=> false
      *
      *      // Note that this is a shallow clone--it does not clone complex values:
      *      var objects = [{}, {}, {}];
-     *      var objectsClone = ramda.clone(objects);
+     *      var objectsClone = R.clone(objects);
      *      objects[0] === objectsClone[0]; //=> true
      */
     var clone = R.clone = function _clone(list) {
@@ -767,10 +767,10 @@
      *         if `arr` is a falsy value (e.g. undefined).
      * @example
      *
-     *      ramda.isEmpty([1, 2, 3]); //=> false
-     *      ramda.isEmpty([]); //=> true
-     *      ramda.isEmpty(); //=> true
-     *      ramda.isEmpty(null); //=> true
+     *      R.isEmpty([1, 2, 3]); //=> false
+     *      R.isEmpty([]); //=> true
+     *      R.isEmpty(); //=> true
+     *      R.isEmpty(null); //=> true
      */
     function isEmpty(arr) {
         return !arr || !arr.length;
@@ -791,7 +791,7 @@
      * @return {Array} A new array.
      * @example
      *
-     *      ramda.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
+     *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
     R.prepend = function prepend(el, arr) {
         return concat([el], arr);
@@ -818,7 +818,7 @@
      * @return {*} The first element of the list, or `undefined` if the list is empty.
      * @example
      *
-     *      ramda.head(['fi', 'fo', 'fum']); //=> 'fi'
+     *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
     var head = R.head = function head(arr) {
         arr = arr || [];
@@ -845,7 +845,7 @@
      * @return {*} The last element of the list, or `undefined` if the list is empty.
      * @example
      *
-     *      ramda.last(['fi', 'fo', 'fum']); //=> 'fum'
+     *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
      */
     R.last = function _last(arr) {
         arr = arr || [];
@@ -866,7 +866,7 @@
      *         empty list if the input list is a falsy value (e.g. `undefined`).
      * @example
      *
-     *      ramda.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
+     *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
      */
     var tail = R.tail = checkForMethod('tail', function(arr) {
         arr = arr || [];
@@ -894,14 +894,14 @@
      * @return {boolean} `true` if `x` is an atom, and `false` otherwise.
      * @example
      *
-     *      ramda.isAtom([]); //=> false
-     *      ramda.isAtom(null); //=> false
-     *      ramda.isAtom(undefined); //=> false
+     *      R.isAtom([]); //=> false
+     *      R.isAtom(null); //=> false
+     *      R.isAtom(undefined); //=> false
      *
-     *      ramda.isAtom(0); //=> true
-     *      ramda.isAtom(''); //=> true
-     *      ramda.isAtom('test'); //=> true
-     *      ramda.isAtom({}); //=> true
+     *      R.isAtom(0); //=> true
+     *      R.isAtom(''); //=> true
+     *      R.isAtom('test'); //=> true
+     *      R.isAtom({}); //=> true
      */
     R.isAtom = function _isAtom(x) {
         return x != null && !isArray(x);
@@ -922,9 +922,9 @@
      * @return {Array} A new list containing the contents of the old list followed by `el`.
      * @example
      *
-     *      ramda.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
-     *      ramda.append('tests', []); //=> ['tests']
-     *      ramda.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
+     *      R.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
+     *      R.append('tests', []); //=> ['tests']
+     *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
      */
     var append = R.append = function _append(el, list) {
         return concat(list, [el]);
@@ -955,9 +955,9 @@
      *         and it the value of `list2`.
      * @example
      *
-     *      ramda.concat([], []); //=> []
-     *      ramda.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
-     *      ramda.concat('ABC', 'DEF'); // 'ABCDEF'
+     *      R.concat([], []); //=> []
+     *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+     *      R.concat('ABC', 'DEF'); // 'ABCDEF'
      */
     R.concat = curry2(function(set1, set2) {
         if (isArray(set2)) {
@@ -984,10 +984,10 @@
      * @return {*} The input value, `x`.
      * @example
      *
-     *      ramda.identity(1); //=> 1
+     *      R.identity(1); //=> 1
      *
      *      var obj = {};
-     *      ramda.identity(obj) === obj; //=> true
+     *      R.identity(obj) === obj; //=> true
      */
     var identity = R.identity = function _I(x) {
         return x;
@@ -1018,7 +1018,7 @@
      * @return {Array} An array containing the return values of all calls to `fn`.
      * @example
      *
-     *      ramda.times(function(n) { return n; }, 5); //=> [0, 1, 2, 3, 4]
+     *      R.times(function(n) { return n; }, 5); //=> [0, 1, 2, 3, 4]
      */
     R.times = curry2(function _times(fn, n) {
         var arr = new Array(n);
@@ -1042,10 +1042,10 @@
      * @return {Array} A new array containing `n` `value`s.
      * @example
      *
-     *      ramda.repeatN('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
+     *      R.repeatN('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
      *
      *      var obj = {};
-     *      var repeatedObjs = ramda.repeatN(obj, 5); //=> [{}, {}, {}, {}, {}]
+     *      var repeatedObjs = R.repeatN(obj, 5); //=> [{}, {}, {}, {}, {}]
      *      repeatedObjs[0] === repeatedObjs[1]; //=> true
      */
     R.repeatN = curry2(function _repeatN(value, n) {
@@ -1113,7 +1113,7 @@
      *      var triple = function(x) { return x * 3; };
      *      var double = function(x) { return x * 2; };
      *      var square = function(x) { return x * x; };
-     *      var squareThenDoubleThenTriple = ramda.compose(triple, double, square);
+     *      var squareThenDoubleThenTriple = R.compose(triple, double, square);
      *
      *      squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
      */
@@ -1153,7 +1153,7 @@
      *      var triple = function(x) { return x * 3; };
      *      var double = function(x) { return x * 2; };
      *      var square = function(x) { return x * x; };
-     *      var squareThenDoubleThenTriple = ramda.pipe(square, double, triple);
+     *      var squareThenDoubleThenTriple = R.pipe(square, double, triple);
      *
      *      squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
      */
@@ -1181,7 +1181,7 @@
      *
      *      mergeThree(numbers); //=> [1, 2, 3]
      *
-     *      ramda.flip([1, 2, 3]); //=> [2, 1, 3]
+     *      R.flip([1, 2, 3]); //=> [2, 1, 3]
      */
     var flip = R.flip = function _flip(fn) {
         return function(a, b) {
@@ -1210,14 +1210,14 @@
      * @example
      *
      *      var multiply = function(a, b) { return a * b; };
-     *      var double = ramda.lPartial(multiply, 2);
+     *      var double = R.lPartial(multiply, 2);
      *      double(2); //=> 4
      *
      *      var greet = function(salutation, title, firstName, lastName) {
      *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
      *      };
-     *      var sayHello = ramda.lPartial(greet, 'Hello');
-     *      var sayHelloToMs = ramda.lPartial(sayHello, 'Ms.');
+     *      var sayHello = R.lPartial(greet, 'Hello');
+     *      var sayHelloToMs = R.lPartial(sayHello, 'Ms.');
      *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
      */
     R.lPartial = function _lPartial(fn /*, args */) {
@@ -1249,7 +1249,7 @@
      *      var greet = function(salutation, title, firstName, lastName) {
      *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
      *      };
-     *      var greetMsJaneJones = ramda.rPartial(greet, 'Ms.', 'Jane', 'Jones');
+     *      var greetMsJaneJones = R.rPartial(greet, 'Ms.', 'Jane', 'Jones');
      *
      *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
      */
@@ -1283,7 +1283,7 @@
      *        numberOfCalls += 1;
      *        return a + b;
      *      };
-     *      var memoTrackedAdd = ramda.memoize(trackedAdd);
+     *      var memoTrackedAdd = R.memoize(trackedAdd);
      *
      *      memoAdd(1, 2); //=> 3 (numberOfCalls => 1)
      *      memoAdd(1, 2); //=> 3 (numberOfCalls => 1)
@@ -1318,7 +1318,7 @@
      * @return {Function} The wrapped function.
      * @example
      *
-     *      var alertOnce = ramda.once(alert);
+     *      var alertOnce = R.once(alert);
      *      alertOnce('Hello!'); // Alerts 'Hello!'
      *      alertOnce('Nothing'); // Doesn't alert
      *      alertOnce('Again'); // Doesn't alert
@@ -1437,7 +1437,7 @@
      * For example, a function produced by `fork` is equivalent to:
      *
      * ```javascript
-     *   var h = ramda.fork(e, f, g);
+     *   var h = R.fork(e, f, g);
      *   h(1, 2); //≅ e( f(1, 2), g(1, 2) )
      * ```
      *
@@ -1460,7 +1460,7 @@
      *      var multiply = function(a, b) { return a * b; };
      *      var subtract = function(a, b) { return a - b; };
      *
-     *      ramda.fork(multiply, add, subtract)(1, 2);
+     *      R.fork(multiply, add, subtract)(1, 2);
      *      //≅ multiply( add(1, 2), subtract(1, 2) );
      *      //=> -3
      */
@@ -1499,7 +1499,7 @@
      *
      * The iterator function receives two values: *(acc, value)*
      *
-     * Note: `ramda.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
@@ -1543,7 +1543,7 @@
      *
      * The iterator function receives four values: *(acc, value, index, list)*
      *
-     * Note: `ramda.reduce.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.reduce.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
@@ -1595,7 +1595,7 @@
      *
      * The iterator function receives two values: *(acc, value)*
      *
-     * Note: `ramda.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
@@ -1640,7 +1640,7 @@
      *
      * The iterator function receives four values: *(acc, value, index, list)*.
      *
-     * Note: `ramda.reduceRight.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.reduceRight.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
@@ -1720,7 +1720,7 @@
      * Returns a new list, constructed by applying the supplied function to every element of the
      * supplied list.
      *
-     * Note: `ramda.map` does not skip deleted or unassigned indices (sparse arrays), unlike the
+     * Note: `R.map` does not skip deleted or unassigned indices (sparse arrays), unlike the
      * native `Array.prototype.map` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
      *
@@ -1737,7 +1737,7 @@
      *        return x * 2;
      *      };
      *
-     *      ramda.map(double, [1, 2, 3]); //=> [2, 4, 6]
+     *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
      */
     function map(fn, list) {
         var idx = -1, len = list.length, result = new Array(len);
@@ -1755,7 +1755,7 @@
      *
      * `fn` receives three arguments: *(value, index, list)*.
      *
-     * Note: `ramda.map.idx` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.map.idx` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.map` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
      *
@@ -1776,7 +1776,7 @@
      *        return elt;
      *      };
      *
-     *      ramda.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
+     *      R.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
      *      //=> [64, 6, 7, 5, 3, 0, 81]
      */
     R.map.idx = curry2(function _mapIdx(fn, list) {
@@ -1809,7 +1809,7 @@
      *        return num * 2;
      *      };
      *
-     *      ramda.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
+     *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
      */
     // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
     R.mapObj = curry2(function _mapObject(fn, obj) {
@@ -1842,7 +1842,7 @@
      *        return key + num;
      *      };
      *
-     *      ramda.mapObj(double, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
+     *      R.mapObj(double, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
      */
     R.mapObj.idx = curry2(function mapObjectIdx(fn, obj) {
         return foldl(function(acc, key) {
@@ -1952,8 +1952,8 @@
      * @return {number} The size of the array.
      * @example
      *
-     *      ramda.size([]); //=> 0
-     *      ramda.size([1, 2, 3]); //=> 3
+     *      R.size([]); //=> 0
+     *      R.size([1, 2, 3]); //=> 3
      */
     R.size = function _size(arr) {
         return arr.length;
@@ -1972,7 +1972,7 @@
      * Returns a new list containing only those items that match a given predicate function.
      * The predicate function is passed one argument: *(value)*.
      *
-     * Note that `ramda.filter` does not skip deleted or unassigned indices, unlike the native
+     * Note that `R.filter` does not skip deleted or unassigned indices, unlike the native
      * `Array.prototype.filter` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
      *
@@ -1988,7 +1988,7 @@
      *      var isEven = function(n) {
      *        return n % 2 === 0;
      *      };
-     *      var evens = ramda.filter(isEven, [1, 2, 3, 4]); // => [2, 4]
+     *      var evens = R.filter(isEven, [1, 2, 3, 4]); // => [2, 4]
      */
     var filter = function _filter(fn, list) {
         var idx = -1, len = list.length, result = [];
@@ -2020,7 +2020,7 @@
      *      var lastTwo = function(val, idx, list) {
      *        return list.length - idx <= 2;
      *      };
-     *      ramda.filter.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [0, 9]
+     *      R.filter.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [0, 9]
      */
     function filterIdx(fn, list) {
         var idx = -1, len = list.length, result = [];
@@ -2050,7 +2050,7 @@
      *      var isOdd = function(n) {
      *        return n % 2 === 1;
      *      };
-     *      var evens = ramda.reject(isOdd, [1, 2, 3, 4]); // => [2, 4]
+     *      var evens = R.reject(isOdd, [1, 2, 3, 4]); // => [2, 4]
      */
     var reject = function _reject(fn, list) {
         return filter(not(fn), list);
@@ -4291,7 +4291,7 @@
 
     /**
      * mathMod behaves like the modulo operator should mathematically, unlike the `%`
-     * operator (and by extension, ramda.modulo). So while "-17 % 5" is -2,
+     * operator (and by extension, R.modulo). So while "-17 % 5" is -2,
      * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
      * when the modulus is zero or negative.
      *

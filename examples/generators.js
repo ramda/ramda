@@ -53,7 +53,7 @@ var gens = (function() {
     };
 }());
 
-ramda.installTo(this);
+R.installTo(this);
 
 var identity = function(x) {return x;};
 var square = function(n) {return n * n;};
