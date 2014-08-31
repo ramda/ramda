@@ -3154,9 +3154,7 @@
      *      eq(1, 1) // => true
      *      eq(1, '1') // => false
      */
-    R.eq = function _eq(a, b) {
-        return arguments.length < 2 ? function _eq(b) { return a === b; } : a === b;
-    };
+    R.eq = curry2(function _eq(a, b) { return a === b; });
 
 
     /**

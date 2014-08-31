@@ -160,6 +160,31 @@ describe('binary', function() {
     });
 });
 
+describe('nAry', function() {
+
+    function toArray(args) { return Array.prototype.slice.call(args, 0); }
+
+    it('should turn multiple-argument function into a nullary one', function() {
+        var fn = R.nAry(0, function(x, y, z) { return toArray(arguments); });
+        assert.equal(fn.length, 0);
+        assert.deepEqual(fn(1, 2, 3), []);
+    });
+
+    it('should turn multiple-argument function into a ternary one', function() {
+        var fn = R.nAry(3, function(a, b, c, d) { return toArray(arguments); });
+        assert.equal(fn.length, 3);
+        assert.deepEqual(fn(1, 2, 3, 4), [1, 2, 3]);
+        assert.deepEqual(fn(1), [1, undefined, undefined]);
+    });
+
+    it('should be able to create functions of arbitrary arity', function() {
+        var fn = R.nAry(10, function() { return toArray(arguments); });
+        assert.equal(fn.length, 10);
+        assert.deepEqual(fn.apply(null, R.range(0, 25)), R.range(0, 10));
+        assert.deepEqual(fn(), R.repeatN(undefined, 10));
+    });
+});
+
 describe('ap', function() {
     function inc(x) { return x + 1; }
     function mult2(x) { return x * 2; }

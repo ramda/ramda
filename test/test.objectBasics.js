@@ -42,6 +42,10 @@ describe('propOrDefault', function() {
         var bob = new Person();
         assert.equal(R.propOrDefault('age', 100, bob), 100);
     });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.propOrDefault, TypeError);
+    });
 });
 
 describe('func', function() {
@@ -308,6 +312,10 @@ describe('where', function() {
     it('doesnt match inherited spec', function() {
         assert.equal(R.where(parent, {y: 6}), true);
         assert.equal(R.where(parent, {x: 5}), false);
+    });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.where, TypeError);
     });
 
 });

@@ -35,4 +35,13 @@ describe('eq', function() {
         assert.equal(R.eq([], []), false);
         assert.equal(R.eq(a, b), true);
     });
+
+    it('is curried', function() {
+        var isA = R.eq(a);
+        assert.equal(isA([]), false);
+    });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.eq, TypeError);
+    });
 });
