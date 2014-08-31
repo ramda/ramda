@@ -3035,6 +3035,8 @@
      *
      * @func
      * @memberOf R
+     * @category
+     * @sig Number -> a -> [a] -> [a]
      * @param {Number} index The position to insert the element
      * @param elt The element to insert into the Array
      * @param {Array} list The list to insert into
@@ -3056,6 +3058,8 @@
      *
      * @func
      * @memberOf R
+     * @category List
+     * @sig Number -> [a] -> [a] -> [a]
      * @param {Number} index The position to insert the sublist
      * @param {Array} elts The sub-list to insert into the Array
      * @param {Array} list The list to insert the sub-list into
@@ -3075,6 +3079,8 @@
      *
      * @func
      * @memberOf R
+     * @category Function
+     * @sig (a, b -> Boolean) -> (a, b -> Number)
      * @param {Function} pred A predicate function of arity two.
      * @return {Function} a Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
      * @example
@@ -3098,6 +3104,8 @@
      *
      * @func
      * @memberOf R
+     * @category List
+     * @sig (a,a -> Number) -> [a] -> [a]
      * @param {Function} comparator A sorting function :: a -> b -> Int
      * @param {Array} list The list to sort
      * @return {Array} a new array with its elements sorted by the comparator function.
@@ -3116,6 +3124,8 @@
      *
      * @func
      * @memberOf R
+     * @category List
+     * @sig (a -> s) -> [a] -> {s: a}
      * @param {Function} fn Function :: a -> String
      * @param {Array} list The array to group
      * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
@@ -3153,6 +3163,8 @@
      *
      * @func
      * @memberOf R
+     * @category List
+     * @sig (a -> Boolean) -> [a] -> [[a],[a]]
      * @param {Function} pred Function :: a -> Boolean
      * @param {Array} list The array to partition
      * @return {Array} A nested array, containing first an array of elements that satisfied the predicate,
@@ -3186,6 +3198,8 @@
      *
      * @func
      * @memberOf R
+     * @category Function
+     * @sig a -> (a -> *) -> a
      * @param {*} x
      * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
      * @return {*} x
@@ -3205,6 +3219,8 @@
      *
      * @func
      * @memberOf R
+     * @category Relation
+     * @sig a -> b -> Boolean
      * @param {*} a
      * @param {*} b
      * @return {Boolean}
@@ -3225,6 +3241,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig s -> {s: a} -> a
      * @param {String} p The property name
      * @param {Object} obj The object to query
      * @return {*} The value at obj.p
@@ -3262,6 +3279,7 @@
      * @memberOf R
      * @see R.prop
      * @category Object
+     * @sig {s: a} -> s -> a
      * @param {Object} obj The object to query
      * @param {String} prop The property name
      * @return {*} The value at obj.p
@@ -3287,6 +3305,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig s -> v -> {s: x} -> x | v
      * @param {String} p The name of the property to return.
      * @param {*} val The default value.
      * @returns {*} The value of given property or default value.
@@ -3315,6 +3334,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig (* -> *) -> {*} -> *
      * @param {String} fn The name of the property mapped to the function to invoke
      * @param {Object} obj The object
      * @return {*} The value of invoking `obj.fn`
@@ -3340,6 +3360,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig a -> (* -> a)
      * @param {*} val The value to wrap in a function
      * @return {Function} A Function :: * -> val
      * @example
@@ -3373,6 +3394,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> [k]
      * @param {Object} obj The object to extract properties from
      * @return {Array} An array of the object's own properties
      * @example
@@ -3402,6 +3424,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> [k]
      * @param {Object} obj The object to extract properties from
      * @return {Array} An array of the object's own and prototype properties
      * @example
@@ -3442,6 +3465,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> [[k,v]]
      * @param {Object} obj The object to extract from
      * @return {Array} An array of key, value arrays from the object's own properties
      * @example
@@ -3460,6 +3484,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> [[k,v]]
      * @param {Object} obj The object to extract from
      * @return {Array} An array of key, value arrays from the object's own
      *         and prototype properties
@@ -3481,6 +3506,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> [v]
      * @param {Object} obj The object to extract values from
      * @return {Array} An array of the values of the object's own properties
      * @example
@@ -3507,6 +3533,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> [v]
      * @param {Object} obj The object to extract values from
      * @return {Array} An array of the values of the object's own and prototype properties
      * @example
@@ -3553,6 +3580,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig [k] -> {k: v} -> {k: v}
      * @param {Array} names an array of String propery names to copy onto a new object
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with only properties from `names` on it.
@@ -3574,6 +3602,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig [k] -> {k: v} -> {k: v}
      * @param {Array} names an array of String propery names to omit from the new object
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with properties from `names` not on it.
@@ -3595,6 +3624,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig (v, k -> Boolean) -> {k: v} -> {k: v}
      * @param {Function} pred A predicate to determine whether or not a key
      *        should be included on the output object.
      * @param {Object} obj The object to copy from
@@ -3631,14 +3661,15 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig [k] -> {k: v} -> {k: v}
      * @param {Array} names an array of String propery names to copy onto a new object
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with only properties from `names` on it.
      * @see R.pick
      * @example
      *
-     *      pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, d: 4}
-     *      pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, e: undefined, f: undefined}
+     *      pickAll(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, d: 4}
+     *      pickAll(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}) // => {a: 1, e: undefined, f: undefined}
      */
     R.pickAll = curry2(pickAll);
 
@@ -3676,6 +3707,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> {k: v} -> {k: v}
      * @param {Object} a source object
      * @param {Object} b object with higher precendence in output
      * @returns {Object} Returns the destination object.
@@ -3695,6 +3727,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig k -> {k: v} -> {k: v} -> Boolean
      * @param {String} prop The name of the property to compare
      * @param {Object} obj1
      * @param {Object} obj2
@@ -3761,6 +3794,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {k: v} -> {k: v} -> Boolean
      * @param {Object} spec
      * @param {Object} testObj
      * @return {Boolean}
@@ -3810,6 +3844,7 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig -> {*} -> {*}
      * @param {Object} obj The object to attach ramda functions
      * @return {Object} a reference to the mutated object
      * @example
@@ -3830,6 +3865,7 @@
      * @func
      * @memberOf R
      * @category type
+     * @sig (* -> {*}) -> a -> Boolean
      * @param {Object} ctor A constructor
      * @param {*} val The value to test
      * @return {Boolean}
@@ -3853,6 +3889,7 @@
      * @func
      * @memberOf R
      * @category function
+     * @sig * -> 0
      * @see R.always
      * @return {Number} 0. Always zero.
      * @example
@@ -3868,6 +3905,7 @@
      * @func
      * @memberOf R
      * @category function
+     * @sig * -> false
      * @see R.always
      * @return {Boolean} false
      * @example
@@ -3883,6 +3921,7 @@
      * @func
      * @memberOf R
      * @category function
+     * @sig * -> true
      * @see R.always
      * @return {Boolean} true
      * @example
@@ -3910,6 +3949,7 @@
      * @func
      * @memberOf R
      * @category logic
+     * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
      * @param {Function} f a predicate
      * @param {Function} g another predicate
      * @return {Function} a function that applies its arguments to `f` and `g` and ANDs their outputs together.
@@ -3936,6 +3976,7 @@
      * @func
      * @memberOf R
      * @category logic
+     * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
      * @param {Function} f a predicate
      * @param {Function} g another predicate
      * @return {Function} a function that applies its arguments to `f` and `g` and ORs their outputs together.
@@ -3961,6 +4002,7 @@
      * @func
      * @memberOf R
      * @category logic
+     * @sig (*... -> Boolean) -> (*... -> Boolean)
      * @param {Function} f a predicate
      * @return {Function} a function that applies its arguments to `f` and logically inverts its output.
      * @example
@@ -4006,6 +4048,7 @@
      * @func
      * @memberOf R
      * @category logic
+     * @sig [(*... -> Boolean)] -> (*... -> Boolean)
      * @param {Array} list An array of predicate functions
      * @param {*} optional Any arguments to pass into the predicates
      * @return {Function} a function that applies its arguments to each of
@@ -4027,6 +4070,7 @@
      * @func
      * @memberOf R
      * @category logic
+     * @sig [(*... -> Boolean)] -> (*... -> Boolean)
      * @param {Array} list An array of predicate functions
      * @param {*} optional Any arguments to pass into the predicates
      * @return {Function}  a function that applies its arguments to each of the predicates, returning
