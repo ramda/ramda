@@ -2278,6 +2278,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> Boolean
      * @param {Function} fn The predicate function.
      * @param {Array} list The array to consider.
      * @return {boolean} `true` if the predicate is satisfied by every element, `false`
@@ -2309,6 +2310,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> Boolean
      * @param {Function} fn The predicate function.
      * @param {Array} list The array to consider.
      * @return {boolean} `true` if the predicate is satisfied by at least one element, `false`
@@ -2397,6 +2399,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig a -> [a] -> Number
      * @param target The item to find.
      * @param {Array} list The array to search in.
      * @return {Number} the index of the target, or -1 if the target is not found.
@@ -2420,6 +2423,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig a -> Number -> [a] -> Number
      * @param target The item to find.
      * @param {Array} list The array to search in.
      * @param {Number} fromIdx the index to start searching from
@@ -2442,6 +2446,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig a -> [a] -> Number
      * @param target The item to find.
      * @param {Array} list The array to search in.
      * @return {Number} the index of the target, or -1 if the target is not found.
@@ -2465,6 +2470,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig a -> Number -> [a] -> Number
      * @param target The item to find.
      * @param {Array} list The array to search in.
      * @param {Number} fromIdx the index to start searching from
@@ -2487,6 +2493,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig a -> [a] -> Boolean
      * @param {Object} a The item to compare against.
      * @param {Array} list The array to consider.
      * @return {boolean} `true` if the item is in the list, `false` otherwise.
@@ -2511,12 +2518,18 @@
      *
      * @func
      * @memberOf R
+     * @category List
+     * @sig (x, a -> Boolean) -> x -> [a] -> Boolean
      * @param {Function} pred :: x -> x -> Bool
      * @param x the item to find
      * @param {Array} list the list to iterate over
      * @return {Boolean} `true` if `x` is in `list`, else `false`
+     * @example
+     *
+     *     var xs = [{x: 12}, {x: 11}, {x: 10}];
+     *     containsWith(function(a, b) { return a.x === b.x; }, {x: 10}, xs); // true
+     *     containsWith(function(a, b) { return a.x === b.x; }, {x: 1}, xs); // false
      */
-    // TODO: add an example
     function containsWith(pred, x, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
@@ -2538,6 +2551,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig [a] -> [a]
      * @param {Array} list The array to consider.
      * @return {Array} The list of unique items.
      * @example
@@ -2566,6 +2580,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig [a] -> Boolean
      * @param {Array} list The array to consider.
      * @return {boolean} `true` if all elements are unique, else `false`.
      * @example
@@ -2594,6 +2609,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (x, a -> Boolean) -> [a] -> [a]
      * @param {Array} list The array to consider.
      * @return {Array} The list of unique items.
      * @example
@@ -2623,6 +2639,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig String -> {*} -> [*]
      * @param {string|number} key The key name to pluck off of each object.
      * @param {Array} list The array to consider.
      * @return {Array} The list of values for the given key.
@@ -2671,6 +2688,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig [a] -> [b]
      * @param {Array} list The array to consider.
      * @return {Array} The flattened list.
      * @example
@@ -2688,6 +2706,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig [a] -> [b]
      * @param {Array} list The array to consider.
      * @return {Array} The flattened list.
      * @example
@@ -2705,6 +2724,7 @@
      * @function
      * @memberOf R
      * @category List
+     * @sig (a,b -> c) -> a -> b -> [c]
      * @param {Function} fn The function used to combine the two elements into one value.
      * @param {Array} list1 The first array to consider.
      * @param {Array} list2 The second array to consider.
@@ -2731,6 +2751,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig a -> b -> [[a,b]]
      * @param {Array} list1 The first array to consider.
      * @param {Array} list2 The second array to consider.
      * @return {Array} The list made by pairing up same-indexed elements of `list1` and `list2`.
@@ -2756,6 +2777,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig k -> v -> {k: v}
      * @param {Array} keys The array that will be properties on the output object.
      * @param {Array} values The list of values on the output object.
      * @return {Object} The object made by pairing up same-indexed elements of `keys` and `values`.
@@ -2779,6 +2801,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig [[k,v]] -> {k: v}
      * @param {Array} An array of two-element arrays that will be the keys and values of the ouput object.
      * @return {Object} The object made by pairing up `keys` and `values`.
      * @example
@@ -2805,6 +2828,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a,b -> c) -> a -> b -> [c]
      * @param {Function} fn The function to join pairs with.
      * @param {Array} as The first list.
      * @param {Array} bs The second list.
@@ -2839,6 +2863,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig a -> b -> [[a,b]]
      * @param {Array} as The first list.
      * @param {Array} bs The second list.
      * @return {Array} The list made by combining each possible pair from
@@ -2875,6 +2900,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig [a] -> [a]
      * @param {Array} list The list to reverse.
      * @return {Array} A copy of the list in reverse order.
      * @example
@@ -2897,6 +2923,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig Number -> Number -> [Number]
      * @param {number} from The first number in the list.
      * @param {number} to One more than the last number in the list.
      * @return {Array} The list of numbers in tthe set `[a, b)`.
@@ -2924,6 +2951,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig String -> [a] -> String
      * @param {string|number} separator The string used to separate the elements.
      * @param {Array} xs The elements to join into a string.
      * @return {string} The string made by concatenating `xs` with `separator`.
@@ -2942,6 +2970,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig Number -> Number -> [a] -> [a]
      * @param {number} a The starting index.
      * @param {number} b One more than the ending index.
      * @param {Array} xs The list to take elements from.
@@ -2960,6 +2989,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig Number -> [a] -> [a]
      * @param {number} a The starting index.
      * @param {Array} xs The list to take elements from.
      * @return {Array} The items from `a` to the end of `xs`.
@@ -2983,6 +3013,8 @@
      *
      * @func
      * @memberOf R
+     * @category List
+     * @sig Number -> Number -> [a] -> [a]
      * @param {Number} start The position to start removing elements
      * @param {Number} count The number of elements to remove
      * @param {Array} list The list to remove from
