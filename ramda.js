@@ -1535,6 +1535,16 @@
 
 
     /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @alias foldl.idx
+     * @see R.reduce.idx
+     */
+    R.foldl.idx = R.reduce.idx;
+
+
+    /**
      * Like `reduce`, but passes additional parameters to the predicate function.
      *
      * The iterator function receives four values: *(acc, value, index, list)*
@@ -1562,13 +1572,13 @@
      *
      *      reduce.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
      */
-    R.reduce.idx = curry3(checkForMethod('foldl', function(fn, acc, list) {
+    R.reduce.idx = curry3(function _reduceIdx(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx], idx, list);
         }
         return acc;
-    }));
+    });
 
 
     /**
@@ -1619,12 +1629,22 @@
 
 
     /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @alias foldr.idx
+     * @see R.reduceRight.idx
+     */
+    R.foldr.idx = R.reduceRight.idx;
+
+
+    /**
      * Like `reduceRight`, but passes additional parameters to the predicate function. Moves through
      * the input list from the right to the left.
      *
      * The iterator function receives four values: *(acc, value, index, list)*.
      *
-     * Note: `ramda.foldr.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `ramda.reduceRight.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
@@ -1645,15 +1665,15 @@
      *        return accObject[elem] = idx;
      *      };
      *
-     *      foldr.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
+     *      reduceRight.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
      */
-    R.reduceRight.idx = curry3(checkForMethod('foldr', function(fn, acc, list) {
+    R.reduceRight.idx = curry3(function _reduceRightIdx(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx], idx, list);
         }
         return acc;
-    }));
+    });
 
 
     /**
@@ -1749,13 +1769,13 @@
      *      ramda.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
      *      //=> [64, 6, 7, 5, 3, 0, 81]
      */
-    R.map.idx = curry2(checkForMethod('map', function _mapIdx(fn, list) {
+    R.map.idx = curry2(function _mapIdx(fn, list) {
         var idx = -1, len = list.length, result = new Array(len);
         while (++idx < len) {
             result[idx] = fn(list[idx], idx, list);
         }
         return result;
-    }));
+    });
 
 
     /**
@@ -1991,7 +2011,7 @@
         }
         return result;
     }
-    R.filter.idx = curry2(checkForMethod('filter', filterIdx));
+    R.filter.idx = curry2(filterIdx);
 
 
     /**
