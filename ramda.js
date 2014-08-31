@@ -177,8 +177,10 @@
      *      g(4);//=> 10
      */
     var curry = R.curry = function _curry(fn, fnArity) {
-        fnArity = typeof fnArity === 'number' ? fnArity : fn.length;
-        function recurry(args) {
+        if (arguments.length < 2) {
+            return _curry(fn, fn.length);
+        }
+        return (function recurry(args) {
             return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                 var newArgs = concat(args, arguments);
@@ -188,9 +190,7 @@
                     return recurry(newArgs);
                 }
             });
-        }
-
-        return recurry([]);
+        }([]));
     };
 
 
