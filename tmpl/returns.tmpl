@@ -1,0 +1,77 @@
+<?js
+var returns = obj;
+var parentReturn = null;
+
+returns.forEach(function (ret, i) {
+    if (ret && (ret.description || ret.name)) {
+        ret.description = ret.description.toString().replace(/<\/?p>/g, '');
+
+        var isNamed = ret.name ? true : false;
+        var name = ret.name || ret.description;
+        var startSpacePos = name.indexOf(" ");
+
+        if (parentReturn !== null && name.indexOf(parentReturn.name + '.') === 0) {
+            ret.name = isNamed ? name.substr(parentReturn.name.length + 1) : name.substr(parentReturn.name.length + 1, startSpacePos - (parentReturn.name.length + 1));
+        
+            if (!isNamed) {
+                ret.description = ret.description.substr(startSpacePos + 1);
+            }
+            
+            parentReturn.subReturns = parentReturn.subReturns || [];
+            parentReturn.subReturns.push(ret);
+            returns[i] = null;
+        } else {
+            if (!isNamed) {
+                ret.name = ret.description.substr(0, startSpacePos !== -1 ? startSpacePos : ret.description.length);
+                ret.description = startSpacePos !== -1 ? ret.description.substr(startSpacePos + 1) : '';
+            }
+            
+            parentReturn = ret;
+        }
+    }
+});
+?>
+
+<?js
+if (returns.length > 1) {
+?>
+<table class="params">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?js
+        var self = this;
+        returns.forEach(function(ret) {
+            if (!ret) {
+                return false;
+            }
+    ?>
+        <tr>
+            <td class="name"><code><?js= ret.name ?></code></td>
+            <td class="type">
+            <?js
+                if (ret.type && ret.type.names) {
+                    ret.type.names.forEach(function(name, i) { ?>
+                        <?js= self.linkto(name, self.htmlsafe(name)) ?>
+                        <?js if (i < ret.type.names.length-1) { ?> | <?js } ?>
+                    <?js }); 
+                }
+            ?>
+            </td>
+            <td class="description last"><?js= ret.description ?><?js if (ret.subReturns) { ?>
+                <?js= self.partial('returns.tmpl', ret.subReturns) ?>
+            <?js } ?></td>
+        </tr>
+    <?js }); ?>
+    </tbody>
+</table>
+<?js } else if (returns[0].description) { ?>
+<h5>Returns:</h5>
+<?js= returns[0].description ?>
+<br />
+<?js } ?>

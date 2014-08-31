@@ -1,192 +1,129 @@
-var desireds = require('./sauce/desireds');
-
-module.exports = function(grunt) {
+/**
+ * http://gruntjs.com/configuring-tasks
+ */
+module.exports = function (grunt) {
+    var path = require('path');
+    var DEMO_PATH = 'docs';
+    
     grunt.initConfig({
-
         pkg: grunt.file.readJSON('package.json'),
 
-        orchestrate_token: process.env.ORCHESTRATE_API_KEY,
-
-        uglify: {
+        connect: {
             options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                hostname: '*'
             },
-            dist: {
-                files: {
-                    'dist/<%= pkg.name %>.min.js': ['<%= pkg.name %>.js']
+            demo: {
+                options: {
+                    port: 8000,
+                    base: DEMO_PATH,
+                    middleware: function (connect, options) {
+                        return [
+                            require('connect-livereload')(),
+                            connect.static(path.resolve(options.base))
+                        ];
+                    }
                 }
             }
         },
 
-        mocha: {
-            browser: ['test/**/*.html'],
+        watch: {
             options: {
-                run: true
-            }
-        },
+                livereload: true
+            },
+            less: {
+                files: ['less/**/*.less'],
+                tasks: ['less']
+            },
 
-        mochaTest: {
-            test: {
-                options: {
-                    // reporter: 'progress'
-                    // reporter: 'list'
-                    reporter: 'spec'
-                },
-                src: ['test/**/*.js', 'ext/**/test/*.js']
-            }
-        },
+            lesscopy: {
+                files: ['static/styles/jaguar.css'],
+                tasks: ['copy:css']
+            },
 
-        jscs: {
-            files: ['*.js', 'ext/**/*.js', 'test/*.js'],
-            options: {
-                disallowKeywordsOnNewLine: ['else', 'catch', 'finally'],
-                disallowMixedSpacesAndTabs: true,
-                disallowMultipleLineStrings: true,
-                disallowQuotedKeysInObjects: 'allButReserved',
-                disallowSpaceAfterObjectKeys: true,
-                disallowSpaceAfterPrefixUnaryOperators: ['++', '--', '+', '-', '~', '!'],
-                disallowSpaceBeforePostfixUnaryOperators: ['++', '--'],
-                disallowSpacesInFunction: {beforeOpeningRoundBrace: true},
-                disallowSpacesInsideArrayBrackets: true,
-                disallowSpacesInsideObjectBrackets: true,
-                disallowSpacesInsideParentheses: true,
-                disallowTrailingWhitespace: true,
-                disallowYodaConditions: true,
-                requireCapitalizedConstructors: true,
-                requireCommaBeforeLineBreak: true,
-                requireCurlyBraces: ['if', 'else', 'for', 'while', 'do', 'try', 'catch', 'finally'],
-                requireDotNotation: true,
-                requireLineFeedAtFileEnd: true,
-                requireParenthesesAroundIIFE: true,
-                requireSpaceAfterBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<=', ',', ':'],
-                requireSpaceAfterKeywords: ['if', 'else', 'for', 'while', 'do', 'switch', 'return', 'try', 'catch', 'finally'],
-                requireSpaceAfterLineComment: true,
-                requireSpaceBeforeBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<='],
-                requireSpaceBeforeBlockStatements: true,
-                requireSpacesInConditionalExpression: true,
-                requireSpacesInFunction: {beforeOpeningCurlyBrace: true},
-                validateIndentation: 4,
-                validateLineBreaks: 'LF',
-                validateQuoteMarks: {escape: true, mark: "'"}
-            }
-        },
+            jscopy: {
+                files: ['static/scripts/main.js'],
+                tasks: ['copy:js']
+            },
 
-        jshint: {
-            files: ['ramda.js', 'ext/**/*.js', 'test/*.js'],
-            options: {
-                evil: true,
-                eqnull: true
-            }
-        },
-
-        docco: {
-            doc: {
-                src: ['<%= pkg.name %>.js'],
-                options: {
-                    template: 'docs/tpl/ramda.jst',
-                    css: 'docs/tpl/ramda.css',
-                    output: 'docs/'
-                }
-            }
-        },
-
-        benchmark: {
-            all: {
-                src: ['bench/*.bench.js'],
-                dest: 'bench/report/bench.<%= (new Date()).getTime() %>.json',
+            jsdoc: {
+                files: ['**/*.tmpl', '*.js', '../ramda/**/*.js'],
+                tasks: ['jsdoc']
             }
         },
 
         clean: {
-            dist: {
-                src: ['dist']
+            demo: {
+                src: DEMO_PATH
             }
         },
 
-        copy: {
-            dist: {
-                files: [
-                    {expand: true, src: ['docs/*'], dest: 'dist/docs'},
-                    {expand: true, src: ['ramda.js', 'package.json', 'bower.json', 'LICENSE.txt', 'README.md'], dest: 'dist'}
-                ]
-            }
-        },
-
-        push: {
-            options: {
-                files: ['package.json', 'bower.json', 'ramda.js'],
-                add: false,
-                commit: false,
-                createTag: false,
-                push: false
+        'curl-dir': {
+            'ramda': {
+                src: [
+                    'https://raw.githubusercontent.com/CrossEye/ramda/master/ramda.js',
+                    'https://raw.githubusercontent.com/CrossEye/ramda/master/README.md'
+                ],
+                dest: 'src'
             }
         },
 
         jsdoc: {
-            dist: {
-                src: ['*.js'],
+            ramda: {
+                src: ['src/ramda.js', 'src/README.md'],
                 options: {
-                    destination: 'jsdoc-out'
+                    verbose: true,
+                    destination: DEMO_PATH,
+                    configure: 'conf.json',
+                    template: './',
+                    'private': false
                 }
             }
-        }
+        },
 
-    });
-
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-jscs');
-    grunt.loadNpmTasks('grunt-mocha');
-    grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-docco');
-    grunt.loadNpmTasks('grunt-push-release');
-    grunt.loadNpmTasks('grunt-benchmark');
-    grunt.loadNpmTasks('grunt-readme');
-    grunt.loadNpmTasks('grunt-jsdoc');
-
-    grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
-        // upload files in report dir to orchestrate
-        var done = this.async();
-        var reportDir = 'bench/report/';
-        var token = grunt.config.get('orchestrate_token');
-        var db = require('orchestrate')(token);
-
-        grunt.file.recurse(reportDir, function(abspath, rootdir, subdir, filename) {
-            var json = {};
-            var timestamp = filename.split('.')[1];
-            if (timestamp) {
-                json.timestamp = timestamp;
-                json.datestamp = (new Date(+timestamp)).toISOString();
-                json.platform = {
-                    branch: process.env.TRAVIS_BRANCH,
-                    buildId: process.env.TRAVIS_BUILD_ID,
-                    commit: process.env.TRAVIS_COMMIT,
-                    commitRange: process.env.TRAVIS_COMMIT_RANGE,
-                    tag: process.env.TRAVIS_TAG,
-                    node: process.env.TRAVIS_NODE_VERSION || process.versions.node
-                };
-                json.report = grunt.file.readJSON(abspath);
-                db.put('benchmarks', json.timestamp, json)
-                    .then(function() {
-                        console.log('SUCCESS');
-                        grunt.file.delete(abspath);
-                        done();
-                    })
-                    .fail(function(err) {
-                        console.log('FAIL', err.body.message);
-                        done();
-                    });
+        less: {
+            dist: {
+                src: 'less/**/jaguar.less',
+                dest: 'static/styles/jaguar.css'
             }
-        });
+        },
+
+        copy: {
+            css: {
+                src: 'static/styles/jaguar.css',
+                dest: DEMO_PATH + '/styles/jaguar.css'
+            },
+
+            js: {
+                src: 'static/scripts/main.js',
+                dest: DEMO_PATH + '/scripts/main.js'
+            }
+        }
     });
 
-    grunt.registerTask('dist', ['uglify', 'copy:dist']);
+    // Load task libraries
+    [
+        'grunt-contrib-connect',
+        'grunt-contrib-watch',
+        'grunt-contrib-copy',
+        'grunt-contrib-clean',
+        'grunt-contrib-less',
+        'grunt-jsdoc',
+        'grunt-curl'
+    ].forEach(function (taskName) {
+        grunt.loadNpmTasks(taskName);
+    });
 
-    grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
-    grunt.registerTask('min', ['jshint', 'mochaTest:test', /* 'docco:doc', */ 'uglify']);
-    grunt.registerTask('version', ['clean:dist', 'jshint', /*'docco:doc',*/ 'uglify', 'copy:dist']);
-    grunt.registerTask('publish', ['push', 'version']);
-    grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
+    // Definitions of tasks
+    grunt.registerTask('default', 'Watch project files', [
+        'demo',
+        'connect:demo',
+        'watch'
+    ]);
+
+    grunt.registerTask('docs', 'Create ramda documentations', [
+        'less',
+        'clean',
+        'curl-dir:ramda',
+        'jsdoc'
+    ]);
 };

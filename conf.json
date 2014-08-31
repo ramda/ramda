@@ -1,0 +1,35 @@
+{
+  "source": "../ramda/ramda.js",
+	"tags": {
+		"allowUnknownTags" : true
+	},
+	"plugins": ["plugins/markdown", "tags/sig"],
+	"templates": {
+		"cleverLinks": true,
+		"monospaceLinks": true,
+		"default": {
+			"outputSourceFiles" : true
+		},
+		"applicationName": "Ramda",
+		"disqus": "",
+		"googleAnalytics": "",
+		"openGraph": {
+			"title": "",
+			"type": "website",
+			"image": "",
+			"site_name": "",
+			"url": ""
+		},
+		"meta": {
+			"title": "",
+			"description": "",
+			"keyword": ""
+		},
+		"linenums": false
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true,
+		"tags": ["examples"]
+	}
+}
