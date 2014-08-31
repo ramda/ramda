@@ -4102,6 +4102,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number | String -> Number | String -> Number | String
      * @param {number|string} a The first value.
      * @param {number|string} b The second value.
      * @return {number|string} The result of `a + b`.
@@ -4121,6 +4122,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a * b`.
@@ -4141,6 +4143,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a - b`.
@@ -4166,6 +4169,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a - b`.
@@ -4190,6 +4194,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a / b`.
@@ -4212,6 +4217,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} a The second value.
      * @param {number} b The first value.
      * @return {number} The result of `b / a`.
@@ -4233,6 +4239,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} a The value to the divide.
      * @param {number} b The pseudo-modulus
      * @return {number} The result of `b % a`.
@@ -4271,6 +4278,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} m The dividend.
      * @param {number} p the modulus.
      * @return {number} The result of `b mod a`.
@@ -4298,6 +4306,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Number
      * @param {number} m The dividend.
      * @param {number} p the modulus.
      * @return {number} The result of `b mod a`.
@@ -4317,6 +4326,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig [Number] -> Number
      * @param {Array} list An array of numbers
      * @return {number} The sum of all the numbers in the list.
      * @see reduce
@@ -4333,6 +4343,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig [Number] -> Number
      * @param {Array} list An array of numbers
      * @return {number} The product of all the numbers in the list.
      * @see reduce
@@ -4349,6 +4360,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a < b
@@ -4367,6 +4379,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a <= b
@@ -4385,6 +4398,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a > b
@@ -4403,6 +4417,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a >= b
@@ -4421,6 +4436,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig [Number] -> Number
      * @see R.maxWith
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
@@ -4439,6 +4455,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig (a -> Number) -> [a] -> a
      * @param {Function} keyFn A comparator function for elements in the list
      * @param {Array} list A list of comparable elements
      * @return {*} The greatest element in the list. `undefined` if the list is empty.
@@ -4471,6 +4488,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig (a -> Number) -> [a] -> a
      * @param {Function} keyFn A comparator function for elements in the list
      * @param {Array} list A list of comparable elements
      * @see R.min
@@ -4504,6 +4522,7 @@
      * @func
      * @memberOf R
      * @category math
+     * @sig [Number] -> Number
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
      * @see R.minWith
@@ -4530,6 +4549,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig Number -> Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {Number} indexB An integer between 0 and the length of the string.
      * @param {String} The string to extract from
@@ -4548,6 +4568,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} The string to extract from
      * @return {String} the extracted substring
@@ -4565,6 +4586,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} The string to extract from
      * @return {String} the extracted substring
@@ -4582,6 +4604,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig Number -> String -> String
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a char from
      * @return {String} the character at `index` of `str`
@@ -4599,6 +4622,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig Number -> String -> Number
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a charCode from
      * @return {Number} the code of the character at `index` of `str`
@@ -4617,6 +4641,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig RegExp -> String -> [String] | null
      * @param {RegExp} rx A regular expression.
      * @param {String} str The string to match against
      * @return {Array} The list of matches, or null if no matches found
@@ -4634,6 +4659,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig String -> String -> Number
      * @param {String} c A string to find.
      * @param {String} str The string to search in
      * @return {Number} The first index of `c` or -1 if not found
@@ -4652,6 +4678,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig String -> String -> Number
      * @param {String} c A string to find.
      * @param {String} str The string to search in
      * @return {Number} The last index of `c` or -1 if not found
@@ -4669,6 +4696,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig String -> String
      * @param {string} str The string to upper case.
      * @return {string} The upper case version of `str`.
      * @example
@@ -4684,6 +4712,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig String -> String
      * @param {string} str The string to lower case.
      * @return {string} The lower case version of `str`.
      * @example
@@ -4700,6 +4729,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig String -> String -> [String]
      * @param {string} sep The separator string.
      * @param {string} str The string to separate into an array.
      * @return {Array} The array of strings from `str` separated by `str`.
@@ -4748,6 +4778,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig String -> String -> {*} -> *
      * @param {string} sep The separator to use in `path`.
      * @param {string} path The path to use.
      * @return {*} The data at `path`.
@@ -4766,6 +4797,7 @@
      * @func
      * @memberOf R
      * @category string
+     * @sig String -> {*} -> *
      * @param {string} path The dot path to use.
      * @return {*} The data at `path`.
      * @example
@@ -4791,6 +4823,7 @@
      * @memberOf R
      * @category object
      * @category relation
+     * @string [k] -> [{k: v}] -> [{k: v}]
      * @param {Array} props The property names to project
      * @param {Array} objs The objects to query
      * @return {Array} An array of objects with just the `props` properties.
@@ -4812,6 +4845,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig k -> v -> {k: v} -> Boolean
      * @param {string|number} name The property name (or index) to use.
      * @param {*} val The value to compare the property with.
      * @return {boolean} `true` if the properties are equal, `false` otherwise.
@@ -4837,6 +4871,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig [a] -> [a] -> [a]
      * @param {Array} as The first list.
      * @param {Array} bs The second list.
      * @return {Array} The first and second lists concatenated, with
@@ -4855,6 +4890,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
@@ -4879,6 +4915,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @return {Array} The elements in `list1` that are not in `list2`
@@ -4901,6 +4938,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
@@ -4926,6 +4964,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @see R.intersectionWith
@@ -4948,6 +4987,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate function that determines whether
      *        the two supplied elements are equal.
      *        Signatrue: a -> a -> Boolean
@@ -5038,12 +5078,13 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig (a -> String) -> [a] -> [a]
      * @param {Function} fn The function mapping `list` items to keys.
      * @param {Array} list The list to sort.
      * @return {Array} A new list sorted by the keys generated by `fn`.
      * @example
      *
-     *      var sortByFirstItem = sortBy(nth(0));
+     *      var sortByFirstItem = sortBy(prop(0));
      *      var sortByNameCaseInsensitive = sortBy(compose(toLowerCase, prop('name')));
      *      var pairs = [[-1, 1], [-2, 2], [-3, 3]];
      *      sortByFirstItem(pairs); //= [[-3, 3], [-2, 2], [-1, 1]]
@@ -5077,6 +5118,7 @@
      * @func
      * @memberOf R
      * @category relation
+     * @sig (a -> String) -> [a] -> {*}
      * @param {Function} fn The function used to map values to keys.
      * @param {Array} list The list to count elements from.
      * @return {Object} An object mapping keys to number of occurrences in the list.
@@ -5114,12 +5156,17 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
      * @return {Array} returns list of object's own function names
      * @example
      *
      *      R.functions(R) // => returns list of ramda's own function names
-     *      R.functions(this) // => returns list of function names in global scope's own function names
+     *
+     *      var F = function() { this.x = function(){}; this.y = 1; }
+     *      F.prototype.z = function() {};
+     *      F.prototype.a = 100;
+     *      R.functions(new F()); // ["x"];
      */
     R.functions = functionsWith(R.keys);
 
@@ -5130,12 +5177,17 @@
      * @func
      * @memberOf R
      * @category Object
+     * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
      * @return {Array} returns list of object's own and prototype function names
      * @example
      *
      *      R.functionsIn(R) // => returns list of ramda's own and prototype function names
-     *      R.functionsIn(this) // => returns list of function names in global scope's own and prototype function names
+     *
+     *      var F = function() { this.x = function(){}; this.y = 1; }
+     *      F.prototype.z = function() {};
+     *      F.prototype.a = 100;
+     *      R.functionsIn(new F()); // ["x", "z"];
      */
     R.functionsIn = functionsWith(R.keysIn);
 
