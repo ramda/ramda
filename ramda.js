@@ -1538,16 +1538,6 @@
 
 
     /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @alias foldl.idx
-     * @see R.reduce.idx
-     */
-    R.foldl.idx = R.reduce.idx;
-
-
-    /**
      * Like `reduce`, but passes additional parameters to the predicate function.
      *
      * The iterator function receives four values: *(acc, value, index, list)*
@@ -1583,6 +1573,16 @@
         }
         return acc;
     });
+
+
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @alias foldl.idx
+     * @see R.reduce.idx
+     */
+    R.foldl.idx = R.reduce.idx;
 
 
     /**
