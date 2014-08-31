@@ -1409,6 +1409,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig (* -> {*}) -> (* -> {*})
      * @param {Function} Fn The constructor function to wrap.
      * @return {Function} A wrapped, curried constructor function.
      * @example
@@ -1442,6 +1443,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig ((a, b -> c) -> (((* -> a), (* -> b), ...) -> c)
      * @param {Function} after A function. `after` will be invoked with the return values of
      *        `fn1` and `fn2` as its arguments.
      * @param {Function} fn1 A function. It will be invoked with the arguments passed to the
@@ -1503,6 +1505,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a,b -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
      *        current element from the array.
      * @param {*} acc The accumulator value.
@@ -1547,6 +1550,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a,b,i,[b] -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
      *        current element from `list`, that element's index, and the entire `list` itself.
      * @param {*} acc The accumulator value.
@@ -1587,6 +1591,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a,b -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
      *        current element from the array.
      * @param {*} acc The accumulator value.
@@ -1632,6 +1637,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a,b,i,[b] -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
      *        current element from `list`, that element's index, and the entire `list` itself.
      * @param {*} acc The accumulator value.
@@ -1666,6 +1672,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> [b]) -> * -> [b]
      * @param {Function} fn The iterator function. receives one argument, `seed`, and returns
      *        either false to quit iteration or an array of length two to proceed. The element
      *        at index 0 of this array will be added to the resulting array, and the element
@@ -1699,6 +1706,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> b) -> [a] -> [b]
      * @param {Function} fn The function to be called on every element of the input `list`.
      * @param {Array} list The list to be iterated over.
      * @return {Array} The new list.
@@ -1733,6 +1741,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a,i,[b] -> b) -> [a] -> [b]
      * @param {Function} fn The function to be called on every element of the input `list`.
      * @param {Array} list The list to be iterated over.
      * @return {Array} The new list.
@@ -1766,6 +1775,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig ({*}, String -> {*}) -> {*} -> {*}
      * @param {Array} fn A function called for each property in `obj`. Its return value will
      * become a new property on the return object.
      * @param {Object} obj The object to iterate over.
@@ -1796,6 +1806,8 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig ({*}, String, {*} -> {*}) -> {*} -> {*}
+     * @param {Array} fn A function called for each property in `obj`. Its return value will
      * @param {Array} fn A function called for each property in `obj`. Its return value will
      *        become a new property on the return object.
      * @param {Object} obj The object to iterate over.
@@ -1825,6 +1837,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig [f] -> [a] -> [f a]
      * @param {Array} fns An array of functions
      * @param {Array} vs An array of values
      * @return the value of applying each the function `fns` to each value in `vs`
@@ -1849,6 +1862,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig a -> [a]
      * @param x any value
      * @return [x]
      * @example
@@ -1869,6 +1883,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig * -> []
      * @return {Array} an empty array
      * @example
      *
@@ -1888,6 +1903,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> b) -> [a] -> [c]
      * @param {Function}
      * @param {Array}
      * @return {Array}
@@ -1910,6 +1926,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig [a] -> Number
      * @param {Array} arr The array to inspect.
      * @return {number} The size of the array.
      * @example
@@ -1941,6 +1958,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
@@ -1971,6 +1989,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a, i, [a] -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
@@ -2001,6 +2020,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
@@ -2024,6 +2044,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a, i, [a] -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
@@ -2050,6 +2071,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} A new array.
@@ -2075,6 +2097,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig Number -> [a] -> [a]
      * @param {number} n The number of elements to return.
      * @param {Array} list The array to query.
      * @return {Array} A new array containing the first elements of `list`.
@@ -2093,6 +2116,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} A new array.
@@ -2117,6 +2141,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig Number -> [a] -> [a]
      * @param {number} n The number of elements of `list` to skip.
      * @param {Array} list The array to consider.
      * @return {Array} The last `n` elements of `list`.
@@ -2136,6 +2161,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> a | undefined
      * @param {Function} fn The predicate function used to determine if the element is the
      *        desired one.
      * @param {Array} list The array to consider.
@@ -2164,6 +2190,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> Number
      * @param {Function} fn The predicate function used to determine if the element is the
      * desired one.
      * @param {Array} list The array to consider.
@@ -2193,6 +2220,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> a | undefined
      * @param {Function} fn The predicate function used to determine if the element is the
      * desired one.
      * @param {Array} list The array to consider.
@@ -2220,6 +2248,8 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> Boolean) -> [a] -> Number
+     * @param {Function} fn The predicate function used to determine if the element is the
      * @param {Function} fn The predicate function used to determine if the element is the
      * desired one.
      * @param {Array} list The array to consider.
