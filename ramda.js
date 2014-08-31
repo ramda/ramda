@@ -2271,7 +2271,6 @@
      * @category List
      * @sig (a -> Boolean) -> [a] -> Number
      * @param {Function} fn The predicate function used to determine if the element is the
-     * @param {Function} fn The predicate function used to determine if the element is the
      * desired one.
      * @param {Array} list The array to consider.
      * @return {number} The index of the element found, or `-1`.
