@@ -162,6 +162,7 @@
      * @memberOf R
      * @category Function
      * @sig (* -> a) -> Number -> (* -> a)
+     * @sig (* -> a) -> (* -> a)
      * @param {Function} fn The function to curry.
      * @param {number} [fnArity=fn.length] An optional arity for the returned function.
      * @return {Function} A new, curried function.
@@ -1168,7 +1169,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig ((a, b) -> c) -> ((b, a) -> c)
+     * @sig (a -> b -> c -> ... -> z) -> (b -> a -> c -> ... -> z)
      * @param {Function} fn The function to invoke with its first two parameters reversed.
      * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
      * @example
@@ -1201,7 +1202,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig ((* -> *), ...) -> (* -> *)
+     * @sig (a -> b -> ... -> i -> j -> ... -> m -> n) -> a -> b-> ... -> i -> (j -> ... -> m -> n)
      * @param {Function} fn The function to invoke.
      * @param {...*} [args] Arguments to prepend to `fn` when the returned function is invoked.
      * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn`
@@ -1238,7 +1239,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig ((* -> *), ...) -> (* -> *)
+     * @sig (a -> b-> ... -> i -> j -> ... -> m -> n) -> j -> ... -> m -> n -> (a -> b-> ... -> i)
      * @param {Function} fn The function to invoke.
      * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
      * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
