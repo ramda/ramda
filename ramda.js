@@ -161,6 +161,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig (* -> a) -> Number -> (* -> a)
      * @param {Function} fn The function to curry.
      * @param {number} [fnArity=fn.length] An optional arity for the returned function.
      * @return {Function} A new, curried function.
@@ -341,6 +342,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig Number -> (* -> a) -> (* -> a)
      * @param {number} n The desired arity of the new function.
      * @param {Function} fn The function to wrap.
      * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
@@ -413,6 +415,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig (* -> b) -> (a -> b)
      * @param {Function} fn The function to wrap.
      * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
      *         arity 1.
@@ -441,6 +444,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig (* -> c) -> (a, b -> c)
      * @param {Function} fn The function to wrap.
      * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
      *         arity 2.
@@ -469,6 +473,7 @@
      *
      * @func
      * @memberOf R
+     * @sig (Number, (* -> *)) -> (* -> *)
      * @category Function
      * @param {number} n The desired arity of the returned function.
      * @param {Function} fn The function to wrap.
@@ -545,6 +550,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig (String, Object, Number) -> (* -> *)
      * @param {string} name The name of the method to wrap.
      * @param {Object} obj The object to search for the `name` method.
      * @param [len] The desired arity of the wrapped method.
@@ -597,6 +603,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig ((* -> *), (* -> *)...) -> (* -> *)
      * @param {Function} fn The function to wrap.
      * @param {...Function} transformers A variable number of transformer functions
      * @return {Function} The wrapped function.
@@ -655,6 +662,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a -> *) -> [a] -> [a]
      * @param {Function} fn The function to invoke. Receives one argument, `value`.
      * @param {Array} list The list to iterate over.
      * @return {Array} The original list.
@@ -694,6 +702,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (a, i, [a] -> ) -> [a] -> [a]
      * @param {Function} fn The function to invoke. Receives three arguments:
      *        (`value`, `index`, `list`).
      * @param {Array} list The list to iterate over.
@@ -723,6 +732,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig [a] -> [a]
      * @param {Array} list The list to clone.
      * @return {Array} A new copy of the original list.
      * @example
@@ -751,6 +761,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig [a] -> Boolean
      * @param {Array} arr The array to consider.
      * @return {boolean} `true` if the `arr` argument has a length of 0 or
      *         if `arr` is a falsy value (e.g. undefined).
@@ -774,6 +785,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig a -> [a] -> [a]
      * @param {*} el The item to add to the head of the output list.
      * @param {Array} arr The array to add to the tail of the output list.
      * @return {Array} A new array.
@@ -801,6 +813,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig [a] -> a
      * @param {Array} [arr=[]] The array to consider.
      * @return {*} The first element of the list, or `undefined` if the list is empty.
      * @example
@@ -827,6 +840,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig [a] -> a
      * @param {Array} [arr=[]] The array to consider.
      * @return {*} The last element of the list, or `undefined` if the list is empty.
      * @example
@@ -846,6 +860,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig [a] -> [a]
      * @param {Array} [arr=[]] The array to consider.
      * @return {Array} A new array containing all but the first element of the input list, or an
      *         empty list if the input list is a falsy value (e.g. `undefined`).
@@ -874,6 +889,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig a -> Boolean
      * @param {*} x The element to consider.
      * @return {boolean} `true` if `x` is an atom, and `false` otherwise.
      * @example
@@ -899,6 +915,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig a -> [a] -> [a]
      * @param {*} el The element to add to the end of the new list.
      * @param {Array} list The list whose contents will be added to the beginning of the output
      *        list.
@@ -929,6 +946,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list to merge.
      * @param {Array} list2 The second set to merge.
      * @return {Array} A new array consisting of the contents of `list1` followed by the
@@ -961,6 +979,7 @@
      * @func
      * @memberOf R
      * @category Core
+     * @sig a -> a
      * @param {*} x The value to return.
      * @return {*} The input value, `x`.
      * @example
@@ -993,6 +1012,7 @@
      * @func
      * @memberOf R
      * @category List
+     * @sig (i -> a) -> i -> [a]
      * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
      * @param {number} n A value between `0` and `n - 1`. Increments after each function call.
      * @return {Array} An array containing the return values of all calls to `fn`.
@@ -1016,6 +1036,7 @@
      * @func
      * @memberOf R
      * @category Array
+     * @sig a -> n -> [a]
      * @param {*} value The value to repeat.
      * @param {number} n The desired size of the output list.
      * @return {Array} A new array containing `n` `value`s.
@@ -1111,6 +1132,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig ((y -> z), (x -> y), ..., (b -> c), (a... -> b)) -> (a... -> z)
      * @param {...Function} functions A variable number of functions.
      * @return {Function} A new function which represents the result of calling each of the
      *         input `functions`, passing the result of each function call to the next, from
@@ -1150,6 +1172,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig ((a... -> b), (b -> c), ..., (x -> y), (y -> z)) -> (a... -> z)
      * @param {...Function} functions A variable number of functions.
      * @return {Function} A new function which represents the result of calling each of the
      *         input `functions`, passing the result of each function call to the next, from
@@ -1175,6 +1198,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig ((a, b) -> c) -> ((b, a) -> c)
      * @param {Function} fn The function to invoke with its first two parameters reversed.
      * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
      * @example
@@ -1207,6 +1231,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig ((* -> *), ...) -> (* -> *)
      * @param {Function} fn The function to invoke.
      * @param {...*} [args] Arguments to prepend to `fn` when the returned function is invoked.
      * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn`
@@ -1243,6 +1268,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig ((* -> *), ...) -> (* -> *)
      * @param {Function} fn The function to invoke.
      * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
      * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
@@ -1276,6 +1302,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig (a... -> b) -> (a... -> b)
      * @param {Function} fn The function to be wrapped by `memoize`.
      * @return {Function}  Returns a memoized version of `fn`.
      * @example
@@ -1315,6 +1342,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig (a... -> b) -> (a... -> b)
      * @param {Function} fn The function to wrap in a call-only-once wrapper.
      * @return {Function} The wrapped function.
      * @example
@@ -1344,6 +1372,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * ((* -> *) -> ((* -> *), a...) -> (*, a... -> *)
      * @param {Function} fn The function to wrap.
      * @param {Function} wrapper The wrapper function.
      * @return {Function} The wrapped function.
@@ -1373,6 +1402,7 @@
      * @func
      * @memberOf R
      * @category Function
+     * @sig Number -> (* -> {*}) -> (* -> {*})
      * @param {number} n The arity of the constructor function.
      * @param {Function} Fn The constructor function to wrap.
      * @return {Function} A wrapped, curried constructor function.
