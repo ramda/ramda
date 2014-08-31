@@ -3295,27 +3295,6 @@
 
 
     /**
-     * Scans a list for a `null` or `undefined` element.
-     * Returns true if it finds one, false otherwise.
-     *
-     * @func
-     * @memberOf R
-     * @category list
-     * @param {Array} list The array to scan
-     * @return {Boolean}
-     * @example
-     *
-     *      anyBlanks([1,2,null,3,4]); // => true
-     *      anyBlanks([1,2,undefined,3,4]); // => true
-     *      anyBlanks([1,2,3,4]); // => false
-     *      anyBlanks([]); // => false
-     */
-    var anyBlanks = R.some(function _any(val) {
-        return val == null;
-    });
-
-
-    /**
      * Internal reference to Object.keys
      *
      * @private
