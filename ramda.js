@@ -4314,8 +4314,8 @@
      *      mathMod(17, 5.3) // NaN
      */
     R.mathMod = curry2(function _mathMod(m, p) {
-        if (!isInteger(m) || m < 1) { return NaN; }
-        if (!isInteger(p)) { return NaN; }
+        if (!isInteger(m)) { return NaN; }
+        if (!isInteger(p) || p < 1) { return NaN; }
         return ((m % p) + p) % p;
     });
 

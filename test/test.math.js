@@ -151,6 +151,14 @@ describe('mathMod', function() {
         assert.notEqual(R.mathMod(17, -5), 17 % -5);
     });
 
+    it('computes the true modulo function', function() {
+        assert.equal(R.mathMod(-17, 5), 3);
+        assert.equal(isNaN(R.mathMod(17, -5)), true);
+        assert.equal(isNaN(R.mathMod(17, 0)), true);
+        assert.equal(isNaN(R.mathMod(17.2, 5)), true);
+        assert.equal(isNaN(R.mathMod(17, 5.5)), true);
+    });
+
     it('is curried', function() {
         var f = R.mathMod(29);
         assert.equal(f(6), 5);
