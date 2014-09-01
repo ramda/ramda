@@ -14,7 +14,7 @@ module.exports = function (grunt) {
             },
             demo: {
                 options: {
-                    port: 8000,
+                    port: +process.env.RAMDA_DOCS_PORT || 8000,
                     base: DEMO_PATH,
                     middleware: function (connect, options) {
                         return [
