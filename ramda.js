@@ -1435,10 +1435,10 @@
      * invoke the first function, `after`, passing as its arguments the results of invoking the
      * second and third functions with whatever arguments are passed to the new function.
      *
-     * For example, a function produced by `fork` is equivalent to:
+     * For example, a function produced by `converge` is equivalent to:
      *
      * ```javascript
-     *   var h = R.fork(e, f, g);
+     *   var h = R.converge(e, f, g);
      *   h(1, 2); //≅ e( f(1, 2), g(1, 2) )
      * ```
      *
@@ -1461,11 +1461,11 @@
      *      var multiply = function(a, b) { return a * b; };
      *      var subtract = function(a, b) { return a - b; };
      *
-     *      R.fork(multiply, add, subtract)(1, 2);
+     *      R.converge(multiply, add, subtract)(1, 2);
      *      //≅ multiply( add(1, 2), subtract(1, 2) );
      *      //=> -3
      */
-    R.fork = function(after) {
+    R.converge = function(after) {
         var fns = _slice(arguments, 1);
         return function() {
             var args = arguments;
@@ -1752,8 +1752,7 @@
 
 
     /**
-     * Like `map`, but but passes additional parameters to the predicate function.
-     *
+     * Like `map`, but but passes additional parameters to the mapping function.
      * `fn` receives three arguments: *(value, index, list)*.
      *
      * Note: `R.map.idx` does not skip deleted or unassigned indices (sparse arrays), unlike
@@ -1797,7 +1796,7 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig ({*}, String -> {*}) -> {*} -> {*}
+     * @sig (v -> v) -> {k: v} -> {k: v}
      * @param {Array} fn A function called for each property in `obj`. Its return value will
      * become a new property on the return object.
      * @param {Object} obj The object to iterate over.
@@ -1828,7 +1827,7 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig ({*}, String, {*} -> {*}) -> {*} -> {*}
+     * @sig (v, k, {k: v} -> v) -> {k: v} -> {k: v}
      * @param {Array} fn A function called for each property in `obj`. Its return value will
      * @param {Array} fn A function called for each property in `obj`. Its return value will
      *        become a new property on the return object.
@@ -1925,7 +1924,7 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig (a -> b) -> [a] -> [c]
+     * @sig (a -> [b]) -> [a] -> [b]
      * @param {Function}
      * @param {Array}
      * @return {Array}
@@ -2596,7 +2595,7 @@
 
     /**
      * Returns `true` if all elements are unique, otherwise `false`.
-     * Uniquness is determined using strict equality (`===`).
+     * Uniqueness is determined using strict equality (`===`).
      *
      * @func
      * @memberOf R
@@ -3355,7 +3354,7 @@
      * @func
      * @memberOf R
      * @category Object
-     * @sig (* -> *) -> {*} -> *
+     * @sig k -> {k : v} -> v(*)
      * @param {String} fn The name of the property mapped to the function to invoke
      * @param {Object} obj The object
      * @return {*} The value of invoking `obj.fn`
@@ -3366,11 +3365,11 @@
      *      var obj = { f: function() { return 'f called'; } };
      *      func('f', obj); // => 'f called'
      */
-    R.func = function func(fn, obj) { // TODO: change param name: reserve `fn` for functions, not names?
+    R.func = function func(funcName, obj) {
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
-            case 1: return function(obj) { return obj[fn].apply(obj, _slice(arguments, 1)); };
-            default: return obj[fn].apply(obj, _slice(arguments, 2));
+            case 1: return function(obj) { return obj[funcName].apply(obj, _slice(arguments, 1)); };
+            default: return obj[funcName].apply(obj, _slice(arguments, 2));
         }
     };
 
@@ -3894,9 +3893,11 @@
      *
      *      is(Object, {}) // => true
      *      is(Number, 1) // => true
+     *      is(Object, 1) // => false
      *      is(String, 's') // => true
      *      is(String, new String('')) // => true
      *      is(Object, new String('')) // => true
+     *      is(Object, 's') // => false
      *      is(Number, {}) // => false
      */
     R.is = curry2(function is(ctor, val) {
@@ -4064,7 +4065,7 @@
 
 
     /**
-     * Given a list of predicates returns a new predicate that will be true exactly when all of them are.
+     * Given a list of predicates, returns a new predicate that will be true exactly when all of them are.
      *
      * @func
      * @memberOf R
@@ -4123,7 +4124,8 @@
      * @func
      * @memberOf R
      * @category math
-     * @sig Number | String -> Number | String -> Number | String
+     * @sig Number -> Number -> Number
+     * @sig String -> String -> String
      * @param {number|string} a The first value.
      * @param {number|string} b The second value.
      * @return {number|string} The result of `a + b`.
@@ -4964,8 +4966,7 @@
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @see R.difference
-     * @return {Array} The first and second lists concatenated, with
-     *                 duplicates removed.
+     * @return {Array} The elements in `list1` that are not in `list2`
      * @example
      *
      *      function cmp(x, y) { return x.a === y.a; }
@@ -5179,7 +5180,7 @@
      * @category Object
      * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
-     * @return {Array} returns list of object's own function names
+     * @return {Array} returns a list of the object's own properites that map to functions
      * @example
      *
      *      R.functions(R) // => returns list of ramda's own function names
@@ -5200,7 +5201,8 @@
      * @category Object
      * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
-     * @return {Array} returns list of object's own and prototype function names
+     * @return {Array} returns a list of the object's own properites and prototype
+     *                 properties that map to functions
      * @example
      *
      *      R.functionsIn(R) // => returns list of ramda's own and prototype function names

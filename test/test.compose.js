@@ -137,10 +137,10 @@ describe('useWith', function() {
 
 });
 
-describe('fork', function() {
+describe('converge', function() {
     var mult = function(a, b) {return a * b;};
 
     it('passes the results of applying the arguments individually to two separate functions into a single one', function() {
-        assert.equal(R.fork(mult, R.add(1), R.add(3))(2), 15); // mult(add1(2), add3(2)) = mult(3, 5) = 3 * 15;
+        assert.equal(R.converge(mult, R.add(1), R.add(3))(2), 15); // mult(add1(2), add3(2)) = mult(3, 5) = 3 * 15;
     });
 });
