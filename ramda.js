@@ -59,16 +59,17 @@
      *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
      */
     function _slice(args, from, to) {
-        from = (typeof from === 'number') ? from : 0;
-        to = (typeof to === 'number') ? to : args.length;
-        var length = to - from,
-            arr = new Array(length),
-            i = -1;
-
-        while (++i < length) {
-            arr[i] = args[from + i];
+        switch (arguments.length) {
+            case 0: throw NO_ARGS_EXCEPTION;
+            case 1: return _slice(args, 0);
+            case 2: return _slice(args, from, args.length);
+            default:
+                var length = to - from, arr = new Array(length), i = -1;
+                while (++i < length) {
+                    arr[i] = args[from + i];
+                }
+                return arr;
         }
-        return arr;
     }
 
 
