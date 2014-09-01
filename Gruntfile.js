@@ -115,7 +115,7 @@ module.exports = function (grunt) {
 
     // Definitions of tasks
     grunt.registerTask('default', 'Watch project files', [
-        'demo',
+        'docs',
         'connect:demo',
         'watch'
     ]);
