@@ -1520,7 +1520,7 @@
      *        return a + b;
      *      };
      *
-     *      reduce(numbers, add, 10); //=> 16
+     *      reduce(add, 10, numbers); //=> 16
      */
     R.reduce = curry3(checkForMethod('reduce', function _reduce(fn, acc, list) {
         var idx = -1, len = list.length;
