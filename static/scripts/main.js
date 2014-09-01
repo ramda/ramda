@@ -1,12 +1,12 @@
 $(function () {
-    // Search Items
-    $('#search').on('keyup', function (e) {
-        var value = $(this).val();
+    var $search = $('#search');
+    function _filterSearchItems() {
+        var value = $search.val();
         var $el = $('.navigation');
 
         if (value) {
             var regexp = new RegExp(value, 'i');
-            $el.find('li, .itemMembers').hide();
+            $el.find('li, .item, .itemMembers').hide();
 
             $el.find('li').each(function (i, v) {
                 var $item = $(v);
@@ -18,11 +18,13 @@ $(function () {
                 }
             });
         } else {
-            $el.find('.item, .itemMembers').show();
+            $el.find('li, .item, .itemMembers').show();
         }
 
         $el.find('.list').scrollTop(0);
-    });
+    }
+    $search.on('keyup change input', _filterSearchItems);
+    _filterSearchItems();
 
     // Toggle when click an item element
     $('.navigation').on('click', '.title', function (e) {
