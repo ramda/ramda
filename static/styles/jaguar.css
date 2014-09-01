@@ -94,7 +94,10 @@ li {
 .navigation li.item ul > li {
   font-size: 0.7em;
   padding-left: 8px;
-  margin-top: 2px;
+}
+.navigation li.item ul > li > a {
+  padding: 4px;
+  display: block;
 }
 .navigation li.item .itemMembers {
   display: none;
