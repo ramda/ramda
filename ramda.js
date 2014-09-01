@@ -1,5 +1,5 @@
 //     ramda.js
-//     "version": "0.4.1"
+//     "version": "0.4.2"
 //     https://github.com/CrossEye/ramda
 //     (c) 2013-2014 Scott Sauyet and Michael Hurley
 //     Ramda may be freely distributed under the MIT license.
@@ -22,7 +22,7 @@
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
     } else {
-        this.R = factory(this);
+        this.R = this.ramda = factory(this);
     }
 }(function(global) {
 
