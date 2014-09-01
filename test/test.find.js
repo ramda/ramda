@@ -62,6 +62,14 @@ describe('findLast', function() {
     it('returns `undefined` when no element satisfies the predicate', function() {
         assert.equal(R.findLast(even, 'zing'), undefined);
     });
+
+    it('works when the first element matches', function() {
+        assert.equal(R.findLast(even, [2, 3, 5]), 2);
+    });
+
+    it('does not go into an infinite loop on an empty array', function() {
+        assert.equal(R.findLast(even, []), undefined);
+    });
 });
 
 describe('findLastIndex', function() {
@@ -82,5 +90,13 @@ describe('findLastIndex', function() {
 
     it('returns -1 when no element satisfies the predicate', function() {
         assert.equal(R.findLastIndex(even, 'zing'), -1);
+    });
+
+    it('works when the first element matches', function() {
+        assert.equal(R.findLastIndex(even, [2, 3, 5]), 0);
+    });
+
+    it('does not go into an infinite loop on an empty array', function() {
+        assert.equal(R.findLastIndex(even, []), -1);
     });
 });
