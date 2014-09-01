@@ -2255,7 +2255,7 @@
      */
     R.findLast = curry2(function _findLast(fn, list) {
         var idx = list.length;
-        while (--idx >= 0) {
+        while (idx--) {
             if (fn(list[idx])) {
                 return list[idx];
             }
@@ -2283,7 +2283,7 @@
      */
     R.findLastIndex = curry2(function _findLastIndex(fn, list) {
         var idx = list.length;
-        while (--idx >= 0) {
+        while (idx--) {
             if (fn(list[idx])) {
                 return idx;
             }
