@@ -51,18 +51,18 @@
      * @return {Array} A new, sliced array.
      * @example
      *
-     *      _slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
+     *      slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
      *
      *      var firstThreeArgs = function(a, b, c, d) {
-     *        return _slice(arguments, 0, 3);
+     *        return slice(arguments, 0, 3);
      *      };
      *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
      */
-    function _slice(args, from, to) {
+    function slice(args, from, to) {
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
-            case 1: return _slice(args, 0);
-            case 2: return _slice(args, from, args.length);
+            case 1: return slice(args, 0);
+            case 2: return slice(args, from, args.length);
             default:
                 var length = to - from, arr = new Array(length), i = -1;
                 while (++i < length) {
@@ -85,7 +85,7 @@
      *
      *      concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
      */
-    var concat = function _concat(set1, set2) {
+    function concat(set1, set2) {
         set1 = set1 || [];
         set2 = set2 || [];
         var length1 = set1.length,
@@ -99,11 +99,7 @@
             result[i + length1] = set2[i];
         }
         return result;
-    };
-
-
-    // Private reference to toString function.
-    var toString = Object.prototype.toString;
+    }
 
 
     /**
@@ -119,8 +115,8 @@
      *      isArray(true); //=> false
      *      isArray({}); //=> false
      */
-    var isArray = Array.isArray || function _isArray(val) {
-        return val && val.length >= 0 && toString.call(val) === '[object Array]';
+    var isArray = Array.isArray || function isArray(val) {
+        return val && val.length >= 0 && Object.prototype.toString.call(val) === '[object Array]';
     };
 
 
@@ -138,7 +134,7 @@
      *      isArrayLike({}); //=> false
      *      isArrayLike({length: 10}); //=> true
      */
-    var isArrayLike = function isArrayLike(x) {
+    function isArrayLike(x) {
         return isArray(x) || (
             !!x &&
             typeof x === 'object' &&
@@ -148,7 +144,7 @@
                 x.length >= 0
             )
         );
-    };
+    }
 
 
     /**
@@ -178,12 +174,12 @@
      *      var g = f(3);
      *      g(4);//=> 10
      */
-    var curry = R.curry = function _curry(fn, fnArity) {
+    R.curry = function curry(fn, fnArity) {
         if (arguments.length < 2) {
-            return _curry(fn, fn.length);
+            return curry(fn, fn.length);
         }
         return (function recurry(args) {
-            return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
+            return R.arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                 var newArgs = concat(args, arguments);
                 if (newArgs.length >= fnArity) {
@@ -283,9 +279,9 @@
      *      hasMethod('shout', person); //=> true
      *      hasMethod('foo', person); //=> false
      */
-    var hasMethod = function _hasMethod(methodName, obj) {
+    function hasMethod(methodName, obj) {
         return obj && !isArray(obj) && typeof obj[methodName] === 'function';
-    };
+    }
 
 
     /**
@@ -327,13 +323,13 @@
      *      mkArgStr(2); //= 'arg1, arg2'
      *      mkArgStr(3); //= 'arg1, arg2, arg3'
      */
-    var mkArgStr = function _makeArgStr(n) {
+    function mkArgStr(n) {
         var arr = [], idx = -1;
         while (++idx < n) {
             arr[idx] = 'arg' + idx;
         }
         return arr.join(', ');
-    };
+    }
 
 
     /**
@@ -361,7 +357,7 @@
      *      // Only `n` arguments are passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
      */
-    var nAry = R.nAry = (function() {
+    R.nAry = (function() {
         var cache = {
             0: function(func) {
                 return function() {
@@ -393,7 +389,7 @@
         //         }
         //     };
 
-        var makeN = function(n) {
+        function makeN(n) {
             var fnArgs = mkArgStr(n);
             var body = [
                 '    return function(' + fnArgs + ') {',
@@ -401,9 +397,9 @@
                 '    }'
             ].join('\n');
             return new Function('func', body);
-        };
+        }
 
-        return function _nAry(n, fn) {
+        return function nAry(n, fn) {
             return (cache[n] || (cache[n] = makeN(n)))(fn);
         };
     }());
@@ -433,8 +429,8 @@
      *      // Only 1 argument is passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
      */
-    R.unary = function _unary(fn) {
-        return nAry(1, fn);
+    R.unary = function unary(fn) {
+        return R.nAry(1, fn);
     };
 
 
@@ -462,8 +458,8 @@
      *      // Only 2 arguments are passed to the wrapped function
      *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
      */
-    var binary = R.binary = function _binary(fn) {
-        return nAry(2, fn);
+    R.binary = function binary(fn) {
+        return R.nAry(2, fn);
     };
 
 
@@ -493,7 +489,7 @@
      *      // All arguments are passed through to the wrapped function
      *      takesOneArg(1, 2); //=> [1, 2]
      */
-    var arity = R.arity = (function() {
+    R.arity = (function() {
         var cache = {
             0: function(func) {
                 return function() {
@@ -534,7 +530,7 @@
             return new Function('func', body);
         };
 
-        return function _arity(n, fn) {
+        return function arity(n, fn) {
             return (cache[n] || (cache[n] = makeN(n)))(fn);
         };
     }());
@@ -566,10 +562,10 @@
      *      join('', R.map(firstChar, ['light', 'ampliifed', 'stimulated', 'emission', 'radiation']));
      *      //=> 'laser'
      */
-    var invoker = R.invoker = function _invoker(name, obj, len) {
+    R.invoker = function invoker(name, obj, len) {
         var method = obj[name];
         var length = len === void 0 ? method.length : len;
-        return method && curry(function() {
+        return method && R.curry(function() {
             if (arguments.length) {
                 var target = Array.prototype.pop.call(arguments);
                 var targetMethod = target[name];
@@ -634,15 +630,15 @@
      *      addDoubleAndSquare(10, 5, 100); //≅ addAll(double(10), square(5), R.identity(100));
      *      //=> 225
      */
-    var useWith = R.useWith = function _useWith(fn /*, transformers */) {
-        var transformers = _slice(arguments, 1);
+    R.useWith = function useWith(fn /*, transformers */) {
+        var transformers = slice(arguments, 1);
         var tlen = transformers.length;
-        return curry(arity(tlen, function() {
+        return R.curry(R.arity(tlen, function() {
             var args = [], idx = -1;
             while (++idx < tlen) {
                 args.push(transformers[idx](arguments[idx]));
             }
-            return fn.apply(this, args.concat(_slice(arguments, tlen)));
+            return fn.apply(this, args.concat(slice(arguments, tlen)));
         }));
     };
 
@@ -747,8 +743,8 @@
      *      var objectsClone = R.clone(objects);
      *      objects[0] === objectsClone[0]; //=> true
      */
-    var clone = R.clone = function _clone(list) {
-        return _slice(list);
+    R.clone = function clone(list) {
+        return slice(list);
     };
 
     // Core Functions
@@ -773,10 +769,9 @@
      *      R.isEmpty(); //=> true
      *      R.isEmpty(null); //=> true
      */
-    function isEmpty(arr) {
+    R.isEmpty = function isEmpty(arr) {
         return !arr || !arr.length;
-    }
-    R.isEmpty = isEmpty;
+    };
 
 
     /**
@@ -821,7 +816,7 @@
      *
      *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
-    var head = R.head = function head(arr) {
+    R.head = function head(arr) {
         arr = arr || [];
         return arr[0];
     };
@@ -848,7 +843,7 @@
      *
      *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
      */
-    R.last = function _last(arr) {
+    R.last = function last(arr) {
         arr = arr || [];
         return arr[arr.length - 1];
     };
@@ -869,9 +864,9 @@
      *
      *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
      */
-    var tail = R.tail = checkForMethod('tail', function(arr) {
+    R.tail = checkForMethod('tail', function(arr) {
         arr = arr || [];
-        return (arr.length > 1) ? _slice(arr, 1) : [];
+        return (arr.length > 1) ? slice(arr, 1) : [];
     });
 
     /**
@@ -904,7 +899,7 @@
      *      R.isAtom('test'); //=> true
      *      R.isAtom({}); //=> true
      */
-    R.isAtom = function _isAtom(x) {
+    R.isAtom = function isAtom(x) {
         return x != null && !isArray(x);
     };
 
@@ -927,7 +922,7 @@
      *      R.append('tests', []); //=> ['tests']
      *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
      */
-    var append = R.append = function _append(el, list) {
+    R.append = function append(el, list) {
         return concat(list, [el]);
     };
 
@@ -990,7 +985,7 @@
      *      var obj = {};
      *      R.identity(obj) === obj; //=> true
      */
-    var identity = R.identity = function _I(x) {
+    R.identity = function identity(x) {
         return x;
     };
 
@@ -1021,7 +1016,7 @@
      *
      *      R.times(function(n) { return n; }, 5); //=> [0, 1, 2, 3, 4]
      */
-    R.times = curry2(function _times(fn, n) {
+    R.times = curry2(function times(fn, n) {
         var arr = new Array(n);
         var i = -1;
         while (++i < n) {
@@ -1049,7 +1044,7 @@
      *      var repeatedObjs = R.repeatN(obj, 5); //=> [{}, {}, {}, {}, {}]
      *      repeatedObjs[0] === repeatedObjs[1]; //=> true
      */
-    R.repeatN = curry2(function _repeatN(value, n) {
+    R.repeatN = curry2(function repeatN(value, n) {
         return R.times(R.always(value), n);
     });
 
@@ -1118,7 +1113,7 @@
      *
      *      squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
      */
-    var compose = R.compose = function _compose() {
+    R.compose = function compose() {
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
             case 1: return arguments[0];
@@ -1127,7 +1122,7 @@
                 while (idx--) {
                     func = internalCompose(arguments[idx], func);
                 }
-                return arity(fnArity, func);
+                return R.arity(fnArity, func);
         }
     };
 
@@ -1158,8 +1153,8 @@
      *
      *      squareThenDoubleThenTriple(5); //≅ triple(double(square(5))) => 150
      */
-    R.pipe = function _pipe() {
-        return compose.apply(this, _slice(arguments).reverse());
+    R.pipe = function pipe() {
+        return R.compose.apply(this, slice(arguments).reverse());
     };
 
 
@@ -1184,12 +1179,12 @@
      *
      *      R.flip([1, 2, 3]); //=> [2, 1, 3]
      */
-    var flip = R.flip = function _flip(fn) {
+    R.flip = function flip(fn) {
         return function(a, b) {
             switch (arguments.length) {
                 case 0: throw NO_ARGS_EXCEPTION;
-                case 1: return function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); };
-                default: return fn.apply(this, concat([b, a], _slice(arguments, 2)));
+                case 1: return function(b) { return fn.apply(this, [b, a].concat(slice(arguments, 1))); };
+                default: return fn.apply(this, concat([b, a], slice(arguments, 2)));
             }
         };
     };
@@ -1221,9 +1216,9 @@
      *      var sayHelloToMs = R.lPartial(sayHello, 'Ms.');
      *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
      */
-    R.lPartial = function _lPartial(fn /*, args */) {
-        var args = _slice(arguments, 1);
-        return arity(Math.max(fn.length - args.length, 0), function() {
+    R.lPartial = function lPartial(fn /*, args */) {
+        var args = slice(arguments, 1);
+        return R.arity(Math.max(fn.length - args.length, 0), function() {
             return fn.apply(this, concat(args, arguments));
         });
     };
@@ -1254,9 +1249,9 @@
      *
      *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
      */
-    R.rPartial = function _rPartial(fn) {
-        var args = _slice(arguments, 1);
-        return arity(Math.max(fn.length - args.length, 0), function() {
+    R.rPartial = function rPartial(fn) {
+        var args = slice(arguments, 1);
+        return R.arity(Math.max(fn.length - args.length, 0), function() {
             return fn.apply(this, concat(arguments, args));
         });
     };
@@ -1293,13 +1288,13 @@
      *      // Note that argument order matters
      *      memoAdd(2, 1); //=> 3 (numberOfCalls => 3)
      */
-    R.memoize = function _memoize(fn) {
+    R.memoize = function memoize(fn) {
         var cache = {};
         return function() {
-            var position = foldl(function(cache, arg) {
+            var position = R.reduce(function(cache, arg) {
                     return cache[arg] || (cache[arg] = {});
                 }, cache,
-                _slice(arguments, 0, arguments.length - 1));
+                slice(arguments, 0, arguments.length - 1));
             var arg = arguments[arguments.length - 1];
             return (position[arg] || (position[arg] = fn.apply(this, arguments)));
         };
@@ -1324,7 +1319,7 @@
      *      alertOnce('Nothing'); // Doesn't alert
      *      alertOnce('Again'); // Doesn't alert
      */
-    R.once = function _once(fn) {
+    R.once = function once(fn) {
         var called = false, result;
         return function() {
             if (called) {
@@ -1357,7 +1352,7 @@
      * slashify('a') //= 'a/'
      * slashify('a/') //= 'a/'
      */
-    R.wrap = function _wrap(fn, wrapper) {
+    R.wrap = function wrap(fn, wrapper) {
         return function() {
             return wrapper.apply(this, concat([fn], arguments));
         };
@@ -1390,7 +1385,7 @@
      *      };
      *      map(constructN(1, Widget), allConfigs); //=> a list of Widgets
      */
-    var constructN = R.constructN = function _constructN(n, Fn) {
+    R.constructN = function constructN(n, Fn) {
         var f = function() {
             var Temp = function() {}, inst, ret;
             Temp.prototype = Fn.prototype;
@@ -1398,7 +1393,7 @@
             ret = Fn.apply(inst, arguments);
             return Object(ret) === ret ? ret : inst;
         };
-        return n > 1 ? curry(nAry(n, f)) : f;
+        return n > 1 ? R.curry(R.nAry(n, f)) : f;
     };
 
 
@@ -1425,8 +1420,8 @@
      *      };
      *      map(construct(Widget), allConfigs); //=> a list of Widgets
      */
-    R.construct = function _construct(Fn) {
-        return constructN(Fn.length, Fn);
+    R.construct = function construct(Fn) {
+        return R.constructN(Fn.length, Fn);
     };
 
 
@@ -1465,8 +1460,8 @@
      *      //≅ multiply( add(1, 2), subtract(1, 2) );
      *      //=> -3
      */
-    R.fork = function(after) {
-        var fns = _slice(arguments, 1);
+    R.fork = function fork(after) {
+        var fns = slice(arguments, 1);
         return function() {
             var args = arguments;
             return after.apply(this, map(function(fn) {
@@ -1522,7 +1517,7 @@
      *
      *      reduce(numbers, add, 10); //=> 16
      */
-    R.reduce = curry3(checkForMethod('reduce', function _reduce(fn, acc, list) {
+    R.reduce = curry3(checkForMethod('reduce', function reduce(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx]);
@@ -1536,7 +1531,7 @@
      * @category List
      * @see R.reduce
      */
-    var foldl = R.foldl = R.reduce;
+    R.foldl = R.reduce;
 
 
     /**
@@ -1568,7 +1563,7 @@
      *
      *      reduce.idx(letters, objectify, {}); //=> { 'a': 0, 'b': 1, 'c': 2 }
      */
-    R.reduce.idx = curry3(function _reduceIdx(fn, acc, list) {
+    R.reduce.idx = curry3(function reduceIdx(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx], idx, list);
@@ -1618,7 +1613,7 @@
      *
      *      reduceRight(numbers, flattenPairs, []); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
      */
-    R.reduceRight = curry3(checkForMethod('reduceRight', function _reduceRight(fn, acc, list) {
+    R.reduceRight = curry3(checkForMethod('reduceRight', function reduceRight(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx]);
@@ -1632,7 +1627,7 @@
      * @category List
      * @see R.reduceRight
      */
-    var foldr = R.foldr = R.reduceRight;
+    R.foldr = R.reduceRight;
 
 
     /**
@@ -1665,7 +1660,7 @@
      *
      *      reduceRight.idx(letters, objectify, {}); //=> { 'c': 2, 'b': 1, 'a': 0 }
      */
-    R.reduceRight.idx = curry3(function _reduceRightIdx(fn, acc, list) {
+    R.reduceRight.idx = curry3(function reduceRightIdx(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx], idx, list);
@@ -1706,7 +1701,7 @@
      *      var f = function(n) { return n > 50 ? false : [-n, n + 10] };
      *      unfoldr(f, 10) //= [-10, -20, -30, -40, -50]
      */
-    R.unfoldr = curry2(function _unfoldr(fn, seed) {
+    R.unfoldr = curry2(function unfoldr(fn, seed) {
         var pair = fn(seed);
         var result = [];
         while (pair && pair.length) {
@@ -1780,7 +1775,7 @@
      *      R.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9];
      *      //=> [64, 6, 7, 5, 3, 0, 81]
      */
-    R.map.idx = curry2(function _mapIdx(fn, list) {
+    R.map.idx = curry2(function mapIdx(fn, list) {
         var idx = -1, len = list.length, result = new Array(len);
         while (++idx < len) {
             result[idx] = fn(list[idx], idx, list);
@@ -1813,11 +1808,11 @@
      *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
      */
     // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
-    R.mapObj = curry2(function _mapObject(fn, obj) {
-        return foldl(function(acc, key) {
+    R.mapObj = curry2(function mapObject(fn, obj) {
+        return R.reduce(function(acc, key) {
             acc[key] = fn(obj[key]);
             return acc;
-        }, {}, keys(obj));
+        }, {}, R.keys(obj));
     });
 
 
@@ -1846,10 +1841,10 @@
      *      R.mapObj(double, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
      */
     R.mapObj.idx = curry2(function mapObjectIdx(fn, obj) {
-        return foldl(function(acc, key) {
+        return R.reduce(function(acc, key) {
             acc[key] = fn(obj[key], key, obj);
             return acc;
-        }, {}, keys(obj));
+        }, {}, R.keys(obj));
     });
 
 
@@ -1867,8 +1862,8 @@
      *
      *      R.ap([R.multiply(2), R.add(3), [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
      */
-    R.ap = curry2(checkForMethod('ap', function _ap(fns, vs) {
-        return foldl(function(acc, fn) {
+    R.ap = curry2(checkForMethod('ap', function ap(fns, vs) {
+        return R.reduce(function(acc, fn) {
             return concat(acc, map(fn, vs));
         },  [], fns);
     }));
@@ -1911,7 +1906,7 @@
      *
      * R.empty([1,2,3,4,5]); // => []
      */
-    R.empty = function _empty(x) {
+    R.empty = function empty(x) {
         return (hasMethod('empty', x)) ? x.empty() : [];
     };
 
@@ -1937,8 +1932,8 @@
      * R.chain(duplicate, [1, 2, 3]); // => [1, 1, 2, 2, 3, 3]
      *
      */
-    R.chain = curry2(checkForMethod('chain', function _chain(f, list) {
-        return unnest(map(f, list));
+    R.chain = curry2(checkForMethod('chain', function chain(f, list) {
+        return R.unnest(map(f, list));
     }));
 
 
@@ -1956,7 +1951,7 @@
      *      R.size([]); //=> 0
      *      R.size([1, 2, 3]); //=> 3
      */
-    R.size = function _size(arr) {
+    R.size = function size(arr) {
         return arr.length;
     };
 
@@ -1991,7 +1986,7 @@
      *      };
      *      var evens = R.filter(isEven, [1, 2, 3, 4]); // => [2, 4]
      */
-    var filter = function _filter(fn, list) {
+    function filter(fn, list) {
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx])) {
@@ -1999,7 +1994,7 @@
             }
         }
         return result;
-    };
+    }
 
     R.filter = curry2(checkForMethod('filter', filter));
 
@@ -2053,9 +2048,9 @@
      *      };
      *      var evens = R.reject(isOdd, [1, 2, 3, 4]); // => [2, 4]
      */
-    var reject = function _reject(fn, list) {
-        return filter(not(fn), list);
-    };
+    function reject(fn, list) {
+        return filter(R.not(fn), list);
+    }
     R.reject = curry2(reject);
 
 
@@ -2079,8 +2074,8 @@
      *
      *      reject.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
      */
-    R.reject.idx = curry2(function _rejectIdx(fn, list) {
-        return filterIdx(not(fn), list);
+    R.reject.idx = curry2(function rejectIdx(fn, list) {
+        return filterIdx(R.not(fn), list);
     });
 
 
@@ -2105,10 +2100,10 @@
      *
      *      takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
      */
-    R.takeWhile = curry2(checkForMethod('takeWhile', function(fn, list) {
+    R.takeWhile = curry2(checkForMethod('takeWhile', function takeWhile(fn, list) {
         var idx = -1, len = list.length;
         while (++idx < len && fn(list[idx])) {}
-        return _slice(list, 0, idx);
+        return slice(list, 0, idx);
     }));
 
 
@@ -2124,8 +2119,8 @@
      * @param {Array} list The array to query.
      * @return {Array} A new array containing the first elements of `list`.
      */
-    R.take = curry2(checkForMethod('take', function(n, list) {
-        return _slice(list, 0, Math.min(n, list.length));
+    R.take = curry2(checkForMethod('take', function take(n, list) {
+        return slice(list, 0, Math.min(n, list.length));
     }));
 
 
@@ -2150,10 +2145,10 @@
      *
      *      skipUntil(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
      */
-    R.skipUntil = curry2(function _skipUntil(fn, list) {
+    R.skipUntil = curry2(function skipUntil(fn, list) {
         var idx = -1, len = list.length;
         while (++idx < len && !fn(list[idx])) {}
-        return _slice(list, idx);
+        return slice(list, idx);
     });
 
 
@@ -2171,8 +2166,8 @@
      *
      *     skip(3, [1,2,3,4,5,6,7]); // => [4,5,6,7]
      */
-    R.skip = curry2(checkForMethod('skip', function _skip(n, list) {
-        return _slice(list, n);
+    R.skip = curry2(checkForMethod('skip', function skip(n, list) {
+        return slice(list, n);
     }));
 
 
@@ -2223,7 +2218,7 @@
      *      findIndex(propEq('a', 2))(xs); //= 1
      *      findIndex(propEq('a', 4))(xs); //= -1
      */
-    R.findIndex = curry2(function _findIndex(fn, list) {
+    R.findIndex = curry2(function findIndex(fn, list) {
         var idx = -1;
         var len = list.length;
         while (++idx < len) {
@@ -2253,7 +2248,7 @@
      *      findLast(propEq('a', 1))(xs); //= {a: 1, b: 1}
      *      findLast(propEq('a', 4))(xs); //= undefined
      */
-    R.findLast = curry2(function _findLast(fn, list) {
+    R.findLast = curry2(function findLast(fn, list) {
         var idx = list.length;
         while (--idx) {
             if (fn(list[idx])) {
@@ -2281,7 +2276,7 @@
      *      findLastIndex(propEq('a', 1))(xs); //= 1
      *      findLastIndex(propEq('a', 4))(xs); //= -1
      */
-    R.findLastIndex = curry2(function _findLastIndex(fn, list) {
+    R.findLastIndex = curry2(function findLastIndex(fn, list) {
         var idx = list.length;
         while (--idx) {
             if (fn(list[idx])) {
@@ -2370,7 +2365,7 @@
      * @return {Number} the index of the found item, or -1
      *
      */
-    var indexOf = function _indexOf(array, item, from) {
+    function indexOf(array, item, from) {
         var i = 0, length = array.length;
         if (typeof from == 'number') {
             i = from < 0 ? Math.max(0, length + from) : from;
@@ -2381,7 +2376,7 @@
             }
         }
         return -1;
-    };
+    }
 
 
     /**
@@ -2398,7 +2393,7 @@
      * @return {Number} the index of the found item, or -1
      *
      */
-    var lastIndexOf = function _lastIndexOf(array, item, from) {
+    function lastIndexOf(array, item, from) {
         var idx = array.length;
         if (typeof from == 'number') {
             idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
@@ -2409,7 +2404,7 @@
             }
         }
         return -1;
-    };
+    }
 
 
     /**
@@ -2430,9 +2425,7 @@
      *      indexOf(3, [1,2,3,4]) // => 2
      *      indexOf(10, [1,2,3,4]) // => -1
      */
-    R.indexOf = curry2(function _indexOf(target, list) {
-        return indexOf(list, target);
-    });
+    R.indexOf = R.flip(indexOf);
 
 
     /**
@@ -2477,9 +2470,7 @@
      *      lastIndexOf(3, [-1,3,3,0,1,2,3,4]) // => 6
      *      lastIndexOf(10, [1,2,3,4]) // => -1
      */
-    R.lastIndexOf = curry2(function _lastIndexOf(target, list) {
-        return lastIndexOf(list, target);
-    });
+    R.lastIndexOf = R.flip(lastIndexOf);
 
 
     /**
@@ -2581,7 +2572,7 @@
      *      uniq([{}, {}]);     //= [{}, {}]
      *      uniq([1, '1']);     //= [1, '1']
      */
-    var uniq = R.uniq = function uniq(list) {
+    R.uniq = function uniq(list) {
         var idx = -1, len = list.length;
         var result = [], item;
         while (++idx < len) {
@@ -2610,7 +2601,7 @@
      *      isSet([1, 1]);   //= false
      *      isSet([{}, {}]); //= true
      */
-    R.isSet = function _isSet(list) {
+    R.isSet = function isSet(list) {
         var len = list.length;
         var i = -1;
         while (++i < len) {
@@ -2641,7 +2632,7 @@
      * uniqWith(strEq)([1, '1', 1]);    //= [1]
      * uniqWith(strEq)(['1', 1, 1]);    //= ['1']
      */
-    var uniqWith = R.uniqWith = curry2(function _uniqWith(pred, list) {
+    R.uniqWith = curry2(function uniqWith(pred, list) {
         var idx = -1, len = list.length;
         var result = [], item;
         while (++idx < len) {
@@ -2669,8 +2660,8 @@
      * pluck('a')([{a: 1}, {a: 2}]); //= [1, 2]
      * pluck(0)([[1, 2], [3, 4]]);   //= [1, 3]
      */
-    var pluck = R.pluck = curry2(function _pluck(p, list) {
-        return map(prop(p), list);
+    R.pluck = curry2(function pluck(p, list) {
+        return map(R.prop(p), list);
     });
 
 
@@ -2681,13 +2672,13 @@
      * @private
      */
     // TODO: document, even for internals...
-    var makeFlat = function _makeFlat(recursive) {
-        return function __flatt(list) {
+    function makeFlat(recursive) {
+        return function flatt(list) {
             var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
             while (++i < ilen) {
                 array = list[i];
                 if (isArrayLike(array)) {
-                    value = (recursive) ? __flatt(array) : array;
+                    value = (recursive) ? flatt(array) : array;
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {
@@ -2699,7 +2690,7 @@
             }
             return result;
         };
-    };
+    }
 
 
     /**
@@ -2717,7 +2708,7 @@
      * flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
      * //= [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
      */
-    var flatten = R.flatten = makeFlat(true);
+    R.flatten = makeFlat(true);
 
 
     /**
@@ -2735,7 +2726,7 @@
      * unnest([1, [2], [[3]]]); //= [1, 2, [3]]
      * unnest([[1, 2], [3, 4], [5, 6]]); //= [1, 2, 3, 4, 5, 6]
      */
-    var unnest = R.unnest = makeFlat(false);
+    R.unnest = makeFlat(false);
 
 
     /**
@@ -2756,7 +2747,7 @@
      * zipWith(f, [1, 2, 3], ['a', 'b', 'c']);
      * //= [f(1, 'a'), f(2, 'b'), f(3, 'c')]
      */
-    R.zipWith = curry3(function _zipWith(fn, a, b) {
+    R.zipWith = curry3(function zipWith(fn, a, b) {
         var rv = [], i = -1, len = Math.min(a.length, b.length);
         while (++i < len) {
             rv[i] = fn(a[i], b[i]);
@@ -2781,7 +2772,7 @@
      * zip([1, 2, 3], ['a', 'b', 'c']);
      * //= [[1, 'a'], [2, 'b'], [3, 'c']]
      */
-    R.zip = curry2(function _zip(a, b) {
+    R.zip = curry2(function zip(a, b) {
         var rv = [];
         var i = -1;
         var len = Math.min(a.length, b.length);
@@ -2807,7 +2798,7 @@
      *      zipObj(['a', 'b', 'c'], [1, 2, 3]);
      *      //= {a: 1, b: 2, c: 3}
      */
-    R.zipObj = curry2(function _zipObj(keys, values) {
+    R.zipObj = curry2(function zipObj(keys, values) {
         var i = -1, len = keys.length, out = {};
         while (++i < len) {
             out[keys[i]] = values[i];
@@ -2830,7 +2821,7 @@
      *      fromPairs([['a', 1], ['b', 2],  ['c', 3]]);
      *      //= {a: 1, b: 2, c: 3}
      */
-    R.fromPairs = function _fromPairs(pairs) {
+    R.fromPairs = function fromPairs(pairs) {
         var i = -1, len = pairs.length, out = {};
         while (++i < len) {
             if (isArray(pairs[i]) && pairs[i].length) {
@@ -2860,8 +2851,8 @@
      *      xprodWith(f, [1, 2], ['a', 'b'])
      *      //= [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
      */
-    R.xprodWith = curry3(function _xprodWith(fn, a, b) {
-        if (isEmpty(a) || isEmpty(b)) {
+    R.xprodWith = curry3(function xprodWith(fn, a, b) {
+        if (R.isEmpty(a) || R.isEmpty(b)) {
             return [];
         }
         // Better to push them all or to do `new Array(ilen * jlen)` and
@@ -2894,8 +2885,8 @@
      *      xprod([1, 2], ['a', 'b']);
      *      //= [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
      */
-    R.xprod = curry2(function _xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
-        if (isEmpty(a) || isEmpty(b)) {
+    R.xprod = curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
+        if (R.isEmpty(a) || R.isEmpty(b)) {
             return [];
         }
         var i = -1;
@@ -2931,8 +2922,8 @@
      *      reverse([1]);        //= [1]
      *      reverse([]);         //= []
      */
-    R.reverse = function _reverse(list) {
-        return clone(list || []).reverse();
+    R.reverse = function reverse(list) {
+        return R.clone(list || []).reverse();
     };
 
 
@@ -2953,7 +2944,7 @@
      *      range(1, 5);     //= [1, 2, 3, 4]
      *      range(50, 53);   //= [50, 51, 52]
      */
-    R.range = curry2(function _range(from, to) {
+    R.range = curry2(function range(from, to) {
         if (from >= to) {
             return [];
         }
@@ -2982,7 +2973,7 @@
      *      spacer(['a', 2, 3.4]);   //= 'a 2 3.4'
      *      join('|', [1, 2, 3]);    //= '1|2|3'
      */
-    R.join = invoker('join', Array.prototype);
+    R.join = R.invoker('join', Array.prototype);
 
 
     /**
@@ -3001,7 +2992,7 @@
      *      var xs = range(0, 10);
      *      slice(2, 5)(xs); //= [2, 3, 4]
      */
-    R.slice = invoker('slice', Array.prototype);
+    R.slice = R.invoker('slice', Array.prototype);
 
 
     /**
@@ -3023,7 +3014,7 @@
      *      var tail = slice.from(1);
      *      tail(xs); //= [5, 6, 7]
      */
-    R.slice.from = flip(R.slice)(void 0);
+    R.slice.from = R.flip(R.slice)(void 0);
 
 
     /**
@@ -3044,8 +3035,8 @@
      *
      *      remove(2, 3, [1,2,3,4,5,6,7,8]) // => [1,2,6,7,8]
      */
-    R.remove = curry3(function _remove(start, count, list) {
-        return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
+    R.remove = curry3(function remove(start, count, list) {
+        return concat(slice(list, 0, Math.min(start, list.length)), slice(list, Math.min(list.length, start + count)));
     });
 
 
@@ -3066,9 +3057,9 @@
      *
      *      insert(2, 'x', [1,2,3,4]) // => [1,2,'x',3,4]
      */
-    R.insert = curry3(function _insert(index, elt, list) {
+    R.insert = curry3(function insert(index, elt, list) {
         index = index < list.length && index >= 0 ? index : list.length;
-        return concat(append(elt, _slice(list, 0, index)), _slice(list, index));
+        return concat(R.append(elt, slice(list, 0, index)), slice(list, index));
     });
 
 
@@ -3089,9 +3080,9 @@
      *
      *      insert.all(2, ['x','y','z'], [1,2,3,4]) // => [1,2,'x','y','z',3,4]
      */
-    R.insert.all = curry3(function _insertAll(index, elts, list) {
+    R.insert.all = curry3(function insertAll(index, elts, list) {
         index = index < list.length && index >= 0 ? index : list.length;
-        return concat(concat(_slice(list, 0, index), elts), _slice(list, index));
+        return concat(concat(slice(list, 0, index), elts), slice(list, index));
     });
 
 
@@ -3111,7 +3102,7 @@
      *      };
      *      sort(cmp, people);
      */
-    var comparator = R.comparator = function _comparator(pred) {
+    R.comparator = function comparator(pred) {
         return function(a, b) {
             return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
         };
@@ -3134,8 +3125,8 @@
      *
      *      sort(function(a, b) { return a - b; }, [4,2,7,5]); // => [2, 4, 5, 7];
      */
-    var sort = R.sort = curry2(function sort(comparator, list) {
-        return clone(list).sort(comparator);
+    R.sort = curry2(function sort(comparator, list) {
+        return R.clone(list).sort(comparator);
     });
 
 
@@ -3169,10 +3160,10 @@
      *     //   'F': [{name: 'Eddy', score: 58}]
      *     // }
      */
-    R.groupBy = curry2(function _groupBy(fn, list) {
-        return foldl(function(acc, elt) {
+    R.groupBy = curry2(function groupBy(fn, list) {
+        return R.reduce(function(acc, elt) {
             var key = fn(elt);
-            acc[key] = append(elt, acc[key] || (acc[key] = []));
+            acc[key] = R.append(elt, acc[key] || (acc[key] = []));
             return acc;
         }, {}, list);
     });
@@ -3195,8 +3186,8 @@
      *      partition(contains('s'), ['sss', 'ttt', 'foo', 'bars'])
      *     // => [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
      */
-    R.partition = curry2(function _partition(pred, list) {
-        return foldl(function(acc, elt) {
+    R.partition = curry2(function partition(pred, list) {
+        return R.reduce(function(acc, elt) {
             acc[pred(elt) ? 0 : 1].push(elt);
             return acc;
         }, [[], []], list);
@@ -3228,7 +3219,7 @@
      *
      *      tap(100, function(x) { console.log('x is ' + x); }); // => 100 (and logs: 'x is 100')
      */
-    R.tap = curry2(function _tap(x, fn) {
+    R.tap = curry2(function tap(x, fn) {
         if (typeof fn === 'function') { fn(x); }
         return x;
     });
@@ -3253,7 +3244,7 @@
      *      eq(1, 1) // => true
      *      eq(1, '1') // => false
      */
-    R.eq = curry2(function _eq(a, b) { return a === b; });
+    R.eq = curry2(function eq(a, b) { return a === b; });
 
 
     /**
@@ -3275,7 +3266,7 @@
      *      fifth(['Bashful', 'Doc', 'Dopey', 'Grumpy', 'Happy', 'Sleepy', 'Sneezy']);
      *      //=> 'Happy'
      */
-    var prop = R.prop = function prop(p, obj) {
+    R.prop = function prop(p, obj) {
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
             case 1: return function _prop(obj) { return obj[p]; };
@@ -3308,14 +3299,7 @@
      *
      *      prop({x: 100}, 'x'); // => 100
      */
-    R.props = flip(R.prop);
-
-
-    /**
-     * An internal reference to `Object.prototype.hasOwnProperty`
-     * @private
-     */
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    R.props = R.flip(R.prop);
 
 
     /**
@@ -3342,8 +3326,8 @@
      *      favorite(alice);  //=> undefined
      *      favoriteWithDefault(alice);  //=> 'Ramda'
      */
-    R.propOrDefault = curry3(function _propOrDefault(p, val, obj) {
-        return hasOwnProperty.call(obj, p) ? obj[p] : val;
+    R.propOrDefault = curry3(function propOrDefault(p, val, obj) {
+        return Object.prototype.hasOwnProperty.call(obj, p) ? obj[p] : val;
     });
 
 
@@ -3369,8 +3353,8 @@
     R.func = function func(fn, obj) { // TODO: change param name: reserve `fn` for functions, not names?
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
-            case 1: return function(obj) { return obj[fn].apply(obj, _slice(arguments, 1)); };
-            default: return obj[fn].apply(obj, _slice(arguments, 2));
+            case 1: return function(obj) { return obj[fn].apply(obj, slice(arguments, 1)); };
+            default: return obj[fn].apply(obj, slice(arguments, 2));
         }
     };
 
@@ -3389,21 +3373,11 @@
      *      var t = always('Tee');
      *      t(); // => 'Tee'
      */
-    var always = R.always = function _always(val) {
+    R.always = function always(val) {
         return function() {
             return val;
         };
     };
-
-
-    /**
-     * Internal reference to Object.keys
-     *
-     * @private
-     * @param {Object}
-     * @return {Array}
-     */
-    var nativeKeys = Object.keys;
 
 
     /**
@@ -3422,13 +3396,13 @@
      *
      *      keys({a: 1, b: 2, c: 3}) // => ['a', 'b', 'c']
      */
-    var keys = R.keys = function _keys(obj) {
-        if (nativeKeys) {
-            return nativeKeys(Object(obj));
+    R.keys = function keys(obj) {
+        if (Object.keys) {
+            return Object.keys(Object(obj));
         }
         var prop, ks = [];
         for (prop in obj) {
-            if (hasOwnProperty.call(obj, prop)) {
+            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
                 ks.push(prop);
             }
         }
@@ -3455,7 +3429,7 @@
      *      var f = new F();
      *      keys(f) // => ['x', 'y']
      */
-    R.keysIn = function _keysIn(obj) {
+    R.keysIn = function keysIn(obj) {
         var prop, ks = [];
         for (prop in obj) {
             ks.push(prop);
@@ -3470,11 +3444,11 @@
      * @return {Function} A function that takes an object and returns an array of
      *                    key-value arrays.
      */
-    var pairWith = function(fn) {
+    function pairWith(fn) {
         return function(obj) {
             return R.map(function(key) { return [key, obj[key]]; }, fn(obj));
         };
-    };
+    }
 
 
     /**
@@ -3534,8 +3508,8 @@
      *
      *      values({a: 1, b: 2, c: 3}) // => [1, 2, 3]
      */
-    R.values = function _values(obj) {
-        var prop, props = keys(obj),
+    R.values = function values(obj) {
+        var prop, props = R.keys(obj),
             length = props.length,
             vals = new Array(length);
         for (var i = 0; i < length; i++) {
@@ -3564,7 +3538,7 @@
      *      var f = new F();
      *      valuesIn(f) // => ['X', 'Y']
      */
-    R.valuesIn = function _valuesIn(obj) {
+    R.valuesIn = function valuesIn(obj) {
         var prop, vs = [];
         for (prop in obj) {
             vs.push(obj[prop]);
@@ -3582,7 +3556,7 @@
     // TODO: document, even for internals...
     function pickWith(test, obj) {
         var copy = {},
-            props = keys(obj), prop, val;
+            props = R.keys(obj), prop, val;
         for (var i = 0, len = props.length; i < len; i++) {
             prop = props[i];
             val = obj[prop];
@@ -3667,13 +3641,13 @@
      * @see R.pickAll
      */
     // TODO: document, even for internals...
-    var pickAll = function _pickAll(names, obj) {
+    function pickAll(names, obj) {
         var copy = {};
         forEach(function(name) {
             copy[name] = obj[name];
         }, names);
         return copy;
-    };
+    }
 
 
     /**
@@ -3711,7 +3685,7 @@
      *      // => { 'name': 'fred', 'age': 40 }
      */
     function extend(destination, other) {
-        var props = keys(other),
+        var props = R.keys(other),
             i = -1, length = props.length;
         while (++i < length) {
             destination[props[i]] = other[props[i]];
@@ -3737,7 +3711,7 @@
      *      mixin({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
      *      // => { 'name': 'fred', 'age': 40 }
      */
-    R.mixin = curry2(function _mixin(a, b) {
+    R.mixin = curry2(function mixin(a, b) {
         return extend(extend({}, a), b);
     });
 
@@ -3781,9 +3755,6 @@
         while (++i < fnLen) {
             key = parsedSpec.fn[i];
             val = spec[key];
-            //     if (!hasOwnProperty.call(testObj, key)) {
-            //       return false;
-            //     }
             if (!(key in testObj)) {
                 return false;
             }
@@ -3835,7 +3806,7 @@
     R.where = function where(spec, testObj) {
         var parsedSpec = R.groupBy(function(key) {
             return typeof spec[key] === 'function' ? 'fn' : 'obj';
-        }, keys(spec));
+        }, R.keys(spec));
 
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
@@ -3917,7 +3888,7 @@
      *
      *      alwaysZero() // => 0
      */
-    R.alwaysZero = always(0);
+    R.alwaysZero = R.always(0);
 
 
     /**
@@ -3933,7 +3904,7 @@
      *
      *      alwaysFalse() // => false
      */
-    R.alwaysFalse = always(false);
+    R.alwaysFalse = R.always(false);
 
 
     /**
@@ -3949,7 +3920,7 @@
      *
      *      alwaysTrue() // => true
      */
-    R.alwaysTrue = always(true);
+    R.alwaysTrue = R.always(true);
 
 
 
@@ -4033,7 +4004,7 @@
      *      f(11) // => false
      *      f(9) // => true
      */
-    var not = R.not = function _not(f) {
+    R.not = function not(f) {
         return function() {return !f.apply(this, arguments);};
     };
 
@@ -4046,7 +4017,7 @@
      * @see R.some
      */
     // TODO: document, even for internals...
-    var predicateWrap = function _predicateWrap(predPicker) {
+    function predicateWrap(predPicker) {
         return function(preds /* , args */) {
             var predIterator = function() {
                 var args = arguments;
@@ -4056,11 +4027,11 @@
             };
             return arguments.length > 1 ?
                     // Call function imediately if given arguments
-                    predIterator.apply(null, _slice(arguments, 1)) :
+                    predIterator.apply(null, slice(arguments, 1)) :
                     // Return a function which will call the predicates with the provided arguments
-                    arity(max(pluck('length', preds)), predIterator);
+                    R.arity(R.max(R.pluck('length', preds)), predIterator);
         };
-    };
+    }
 
 
     /**
@@ -4134,7 +4105,7 @@
      *      add(2, 3);       //=  5
      *      add(7)(10);      //= 17
      */
-    var add = R.add = curry2(function _add(a, b) { return a + b; });
+    R.add = curry2(function add(a, b) { return a + b; });
 
 
     /**
@@ -4155,7 +4126,7 @@
      *      triple(4);       //= 12
      *      multiply(2, 5);  //= 10
      */
-    var multiply = R.multiply = curry2(function _multiply(a, b) { return a * b; });
+    R.multiply = curry2(function multiply(a, b) { return a * b; });
 
 
     /**
@@ -4179,7 +4150,7 @@
      *
      *      subtract(10)(8); //= 2
      */
-    var subtract = R.subtract = curry2(function _subtract(a, b) { return a - b; });
+    R.subtract = curry2(function subtract(a, b) { return a - b; });
 
 
     /**
@@ -4204,7 +4175,7 @@
      *
      *      subtract(10)(8); //= 2
      */
-    R.subtractN = flip(subtract);
+    R.subtractN = R.flip(R.subtract);
 
 
     /**
@@ -4226,7 +4197,7 @@
      *      reciprocal(4);   //= 0.25
      *      divide(71, 100); //= 0.71
      */
-    var divide = R.divide = curry2(function _divide(a, b) { return a / b; });
+    R.divide = curry2(function divide(a, b) { return a / b; });
 
 
     /**
@@ -4248,7 +4219,7 @@
      *      var half = divideBy(2);
      *      half(42); // => 21
      */
-    R.divideBy = flip(divide);
+    R.divideBy = R.flip(R.divide);
 
 
     /**
@@ -4273,7 +4244,7 @@
      *      modulo(-17, 3) // => -2
      *      modulo(17, -3) // => 2
      */
-    var modulo = R.modulo = curry2(function _modulo(a, b) { return a % b; });
+    R.modulo = curry2(function modulo(a, b) { return a % b; });
 
 
     /**
@@ -4313,7 +4284,7 @@
      *      mathMod(17.2, 5) // NaN
      *      mathMod(17, 5.3) // NaN
      */
-    R.mathMod = curry2(function _mathMod(m, p) {
+    R.mathMod = curry2(function mathMod(m, p) {
         if (!isInteger(m) || m < 1) { return NaN; }
         if (!isInteger(p)) { return NaN; }
         return ((m % p) + p) % p;
@@ -4338,7 +4309,7 @@
      *      isOdd(42); // => 0
      *      isOdd(21); // => 1
      */
-    R.moduloBy = flip(modulo);
+    R.moduloBy = R.flip(R.modulo);
 
 
     /**
@@ -4355,7 +4326,7 @@
      *
      *      sum([2,4,6,8,100,1]); // => 121
      */
-    R.sum = foldl(add, 0);
+    R.sum = R.reduce(R.add, 0);
 
 
     /**
@@ -4372,7 +4343,7 @@
      *
      *      product([2,4,6,8,100,1]); // => 38400
      */
-    R.product = foldl(multiply, 1);
+    R.product = R.reduce(R.multiply, 1);
 
 
     /**
@@ -4391,7 +4362,7 @@
      *      lt(2, 0) // => false
      *      lt(2, 2) // => false
      */
-    R.lt = curry2(function _lt(a, b) { return a < b; });
+    R.lt = curry2(function lt(a, b) { return a < b; });
 
 
     /**
@@ -4410,7 +4381,7 @@
      *      lt(2, 0) // => false
      *      lt(2, 2) // => true
      */
-    R.lte = curry2(function _lte(a, b) { return a <= b; });
+    R.lte = curry2(function lte(a, b) { return a <= b; });
 
 
     /**
@@ -4429,7 +4400,7 @@
      *      gt(2, 0) // => true
      *      gt(2, 2) // => false
      */
-    R.gt = curry2(function _gt(a, b) { return a > b; });
+    R.gt = curry2(function gt(a, b) { return a > b; });
 
 
     /**
@@ -4448,7 +4419,7 @@
      *      gt(2, 0) // => true
      *      gt(2, 2) // => true
      */
-    R.gte = curry2(function _gte(a, b) { return a >= b; });
+    R.gte = curry2(function gte(a, b) { return a >= b; });
 
 
     /**
@@ -4465,8 +4436,8 @@
      *
      *      max([7, 3, 9, 2, 4, 9, 3]) // => 9
      */
-    var max = R.max = function _max(list) {
-        return foldl(binary(Math.max), -Infinity, list);
+    R.max = function max(list) {
+        return R.reduce(R.binary(Math.max), -Infinity, list);
     };
 
 
@@ -4487,7 +4458,7 @@
      *      a = {x: 1}, b = {x: 2}, c = {x: 3};
      *      maxWith(cmp, [a, b, c]) // => {x: 3}
      */
-    R.maxWith = curry2(function _maxWith(keyFn, list) {
+    R.maxWith = curry2(function maxWith(keyFn, list) {
         if (!(list && list.length > 0)) {
             return;
         }
@@ -4521,7 +4492,7 @@
      *      minWith(cmp, [a, b, c]) // => {x: 1}
      */
     // TODO: combine this with maxWith?
-    R.minWith = curry2(function _minWith(keyFn, list) {
+    R.minWith = curry2(function minWith(keyFn, list) {
         if (!(list && list.length > 0)) {
             return;
         }
@@ -4551,8 +4522,8 @@
      *
      *      min([7, 3, 9, 2, 4, 9, 3]) // => 2
      */
-    R.min = function _min(list) {
-        return foldl(binary(Math.min), Infinity, list);
+    R.min = function min(list) {
+        return R.reduce(R.binary(Math.min), Infinity, list);
     };
 
 
@@ -4580,7 +4551,7 @@
      *
      *      substring(2, 5, 'abcdefghijklm'); //=> 'cde'
      */
-    var substring = R.substring = invoker('substring', String.prototype);
+    R.substring = R.invoker('substring', String.prototype);
 
 
     /**
@@ -4598,7 +4569,7 @@
      *
      *      substringFrom(8, 'abcdefghijklm'); //=> 'ijklm'
      */
-    R.substringFrom = flip(substring)(void 0);
+    R.substringFrom = R.flip(R.substring)(void 0);
 
 
     /**
@@ -4616,7 +4587,7 @@
      *
      *      substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
      */
-    R.substringTo = substring(0);
+    R.substringTo = R.substring(0);
 
 
     /**
@@ -4634,7 +4605,7 @@
      *
      *      charAt(8, 'abcdefghijklm'); //=> 'i'
      */
-    R.charAt = invoker('charAt', String.prototype);
+    R.charAt = R.invoker('charAt', String.prototype);
 
 
     /**
@@ -4653,7 +4624,7 @@
      *      charCodeAt(8, 'abcdefghijklm'); //=> 105
      *     // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
      */
-    R.charCodeAt = invoker('charCodeAt', String.prototype);
+    R.charCodeAt = R.invoker('charCodeAt', String.prototype);
 
 
     /**
@@ -4671,7 +4642,7 @@
      *
      *      match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
      */
-    R.match = invoker('match', String.prototype);
+    R.match = R.invoker('match', String.prototype);
 
 
     /**
@@ -4689,7 +4660,7 @@
      *
      *      strIndexOf('c', 'abcdefg) //=> 2
      */
-    R.strIndexOf = invoker('indexOf', String.prototype);
+    R.strIndexOf = R.invoker('indexOf', String.prototype);
 
 
     /**
@@ -4708,7 +4679,7 @@
      *
      *      strLastIndexOf('a', 'banana split') //=> 5
      */
-    R.strLastIndexOf = invoker('lastIndexOf', String.prototype);
+    R.strLastIndexOf = R.invoker('lastIndexOf', String.prototype);
 
 
     /**
@@ -4724,7 +4695,7 @@
      *
      *      toUpperCase('abc') //= 'ABC'
      */
-    R.toUpperCase = invoker('toUpperCase', String.prototype);
+    R.toUpperCase = R.invoker('toUpperCase', String.prototype);
 
 
     /**
@@ -4740,7 +4711,7 @@
      *
      *      toLowerCase('XYZ') //= 'xyz'
      */
-    R.toLowerCase = invoker('toLowerCase', String.prototype);
+    R.toLowerCase = R.invoker('toLowerCase', String.prototype);
 
 
     /**
@@ -4763,7 +4734,7 @@
      *      split('.', 'a.b.c.xyz.d');
      *      //= ['a', 'b', 'c', 'xyz', 'd']
      */
-    R.split = invoker('split', String.prototype, 1);
+    R.split = R.invoker('split', String.prototype, 1);
 
 
     /**
@@ -4855,7 +4826,7 @@
      *      var kids = [abby, fred];
      *      project(['name', 'grade'], kids); //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
      */
-    R.project = useWith(map, R.pickAll, identity); // passing `identity` gives correct arity
+    R.project = R.useWith(map, R.pickAll, R.identity); // passing `R.identity` gives correct arity
 
 
     /**
@@ -4901,7 +4872,7 @@
      *
      *      union([1, 2, 3], [2, 3, 4]); //= [1, 2, 3, 4]
      */
-    R.union = compose(uniq, R.concat);
+    R.union = R.compose(R.uniq, R.concat);
 
 
     /**
@@ -4925,8 +4896,8 @@
      *      var l2 = [{a: 1}, {a: 4}];
      *      unionWith(cmp, l1, l2); //= [{a: 1}, {a: 2}, {a: 4}]
      */
-    R.unionWith = curry3(function _unionWith(pred, list1, list2) {
-        return uniqWith(pred, concat(list1, list2));
+    R.unionWith = curry3(function unionWith(pred, list1, list2) {
+        return R.uniqWith(pred, concat(list1, list2));
     });
 
 
@@ -4946,8 +4917,8 @@
      *      difference([1,2,3,4], [7,6,5,4,3]); //= [1,2]
      *      difference([7,6,5,4,3], [1,2,3,4]); //= [7,6,5]
      */
-    R.difference = curry2(function _difference(first, second) {
-        return uniq(reject(flip(contains)(second), first));
+    R.difference = curry2(function difference(first, second) {
+        return R.uniq(reject(R.flip(contains)(second), first));
     });
 
 
@@ -4975,7 +4946,7 @@
      *
      */
     R.differenceWith = curry3(function differenceWith(pred, first, second) {
-        return uniqWith(pred)(reject(flip(R.containsWith(pred))(second), first));
+        return R.uniqWith(pred)(reject(R.flip(R.containsWith(pred))(second), first));
     });
 
 
@@ -4995,7 +4966,7 @@
      *      intersection(1,2,3,4], [7,6,5,4,3]); //= [1,2,3,4]
      */
     R.intersection = curry2(function intersection(list1, list2) {
-        return uniq(filter(flip(contains)(list1), list2));
+        return R.uniq(filter(R.flip(contains)(list1), list2));
     });
 
 
@@ -5047,7 +5018,7 @@
                 results[results.length] = list1[idx];
             }
         }
-        return uniqWith(pred, results);
+        return R.uniqWith(pred, results);
     });
 
 
@@ -5125,7 +5096,7 @@
      *      sortByNameCaseInsensitive(people); //= [alice, bob, clara]
      */
     R.sortBy = curry2(function sortBy(fn, list) {
-        return pluck('val', keyValue(fn, list).sort(comparator(function(a, b) {return a.key < b.key;})));
+        return R.pluck('val', keyValue(fn, list).sort(R.comparator(function(a, b) {return a.key < b.key;})));
     });
 
 
@@ -5151,7 +5122,7 @@
      *      countBy(toLowerCase)(letters);   //= {'a': 5, 'b': 4, 'c': 3}
      */
     R.countBy = curry2(function countBy(fn, list) {
-        return foldl(function(counts, obj) {
+        return R.reduce(function(counts, obj) {
             counts[obj.key] = (counts[obj.key] || 0) + 1;
             return counts;
         }, {}, keyValue(fn, list));
@@ -5164,11 +5135,11 @@
      * @return {Function} A function that takes an object and returns an array of function names
      *
      */
-    var functionsWith = function(fn) {
+    function functionsWith(fn) {
         return function(obj) {
             return R.filter(function(key) { return typeof obj[key] === 'function'; }, fn(obj));
         };
-    };
+    }
 
 
     /**
