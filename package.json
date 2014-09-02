@@ -27,7 +27,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "assert": "https://github.com/Jxck/assert/archive/f25d9b80eac2cde3080613f4ef18a0a507dd4882.tar.gz",
     "benchmark": "~1.0.0",
     "docker": "^0.2.13",
     "grunt": "~0.4.5",
