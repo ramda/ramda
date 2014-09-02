@@ -1797,7 +1797,7 @@
      * @memberOf R
      * @category List
      * @sig (v -> v) -> {k: v} -> {k: v}
-     * @param {Array} fn A function called for each property in `obj`. Its return value will
+     * @param {Function} fn A function called for each property in `obj`. Its return value will
      * become a new property on the return object.
      * @param {Object} obj The object to iterate over.
      * @return {Object} A new object with the same keys as `obj` and values that are the result
@@ -1828,8 +1828,7 @@
      * @memberOf R
      * @category List
      * @sig (v, k, {k: v} -> v) -> {k: v} -> {k: v}
-     * @param {Array} fn A function called for each property in `obj`. Its return value will
-     * @param {Array} fn A function called for each property in `obj`. Its return value will
+     * @param {Function} fn A function called for each property in `obj`. Its return value will
      *        become a new property on the return object.
      * @param {Object} obj The object to iterate over.
      * @return {Object} A new object with the same keys as `obj` and values that are the result
