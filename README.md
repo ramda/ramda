@@ -150,6 +150,19 @@ var total = sum([1, 2, 3, 4]);
 ```
 
 
+Running The Test Suite
+----------------------
+
+To run the test suite, you can simply open `test/index.html` in your browser.
+
+Alternatively, you can use [testem](https://github.com/airportyh/testem) to
+test across different browsers (or even headlessly), with livereloading of
+tests too. Install testem (`npm install -g testem`) and run `testem`. Open the
+link provided in your browser and you will see the results in your terminal.
+
+If you have PhantomJS installed, you can run `testem -l phantomjs` to run the
+tests completely headlessly.
+
 
 So What's With Eweda?
 ---------------------

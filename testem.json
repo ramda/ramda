@@ -1,0 +1,19 @@
+{
+  "framework": "mocha",
+  "cwd": ".",
+  "src_files": [
+      "ramda.js",
+      "test/*.js",
+      "ext/lazylist/lazylist.js",
+      "ext/lazylist/test/test.lazy.js"
+  ],
+  "serve_files": [
+      "lib/test/require-shim.js",
+      "ramda.js",
+      "ext/lazylist/lazylist.js",
+      "lib/test/expect.js",
+      "lib/test/assert-shim.js",
+      "test/*.js",
+      "ext/lazylist/test/test.lazy.js"
+  ]
+}
