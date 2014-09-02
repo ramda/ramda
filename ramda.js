@@ -2171,7 +2171,11 @@
      *     skip(3, [1,2,3,4,5,6,7]); // => [4,5,6,7]
      */
     R.skip = curry2(checkForMethod('skip', function _skip(n, list) {
-        return _slice(list, n);
+        if (n < list.length) {
+            return _slice(list, n);
+        } else {
+            return [];
+        }
     }));
 
 
