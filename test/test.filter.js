@@ -16,6 +16,11 @@ describe('filter', function() {
         assert.deepEqual(R.filter(function(x) { return x > 100; }, []), []);
     });
 
+    it('dispatches to passed-in non-Array object with a `filter` method', function() {
+        var f = {filter: function(f) { return f('called f.filter'); }};
+        assert.equal(R.filter(function(s) { return s; }, f), 'called f.filter');
+    });
+
     it('should be automatically curried', function() {
         var onlyEven = R.filter(even);
         assert.deepEqual(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
