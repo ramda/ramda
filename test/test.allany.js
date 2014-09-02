@@ -25,10 +25,22 @@ describe('every', function() {
         assert.equal(count, 4);
     });
 
+    it('works with more complex objects', function() {
+        xs = [{x: 'abc'}, {x: 'ade'}, {x: 'fghiajk'}];
+        function len3(o) { return o.x.length === 3; }
+        function hasA(o) { return o.x.indexOf('a') > -1; }
+        assert.equal(R.every(len3, xs), false);
+        assert.equal(R.every(hasA, xs), true);
+    });
+
     it('is automatically curried', function() {
         var count = 0;
         var test = function(n) {count++; return even(n);};
         assert(R.every(test)([2, 4, 6, 7, 8, 10]) === false);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.every, TypeError);
     });
 });
 
@@ -75,5 +87,9 @@ describe('some', function() {
         var count = 0;
         var test = function(n) {count++; return odd(n);};
         assert(R.some(test)([2, 4, 6, 7, 8, 10]) === true);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.some, TypeError);
     });
 });

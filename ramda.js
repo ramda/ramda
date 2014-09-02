@@ -794,9 +794,9 @@
      *
      *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
-    R.prepend = function prepend(el, arr) {
+    R.prepend = curry2(function prepend(el, arr) {
         return concat([el], arr);
-    };
+    });
 
     /**
      * @func
@@ -905,7 +905,7 @@
      *      R.isAtom({}); //=> true
      */
     R.isAtom = function _isAtom(x) {
-        return x != null && !isArray(x);
+        return x != null && x === x && !isArray(x);
     };
 
 
@@ -927,9 +927,9 @@
      *      R.append('tests', []); //=> ['tests']
      *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
      */
-    var append = R.append = function _append(el, list) {
+    var append = R.append = curry2(function _append(el, list) {
         return concat(list, [el]);
-    };
+    });
 
     /**
      * @func
