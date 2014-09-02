@@ -44,6 +44,7 @@
     "grunt-push-release": "^0.1.1",
     "grunt-readme": "^0.4.5",
     "lodash": "latest",
-    "orchestrate": "~0.3.4"
+    "orchestrate": "~0.3.4",
+    "testem": "^0.6.18"
   }
 }
