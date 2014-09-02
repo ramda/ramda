@@ -18,7 +18,20 @@ describe('find', function() {
     });
 
     it('returns `undefined` when no element satisfies the predicate', function() {
-        assert.equal(R.find(even, 'zing'), undefined);
+        assert.equal(R.find(even, ['zing']), undefined);
+    });
+
+    it('returns `undefined` when given an empty list', function() {
+        assert.equal(R.find(even, []), undefined);
+    });
+
+    it('is curried', function() {
+        assert.equal(typeof R.find(even), 'function');
+        assert.equal(R.find(even)(a), 10);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.find, TypeError);
     });
 });
 
@@ -39,7 +52,17 @@ describe('findIndex', function() {
     });
 
     it('returns -1 when no element satisfies the predicate', function() {
-        assert.equal(R.findIndex(even, 'zing'), -1);
+        assert.equal(R.findIndex(even, ['zing']), -1);
+        assert.equal(R.findIndex(even, []), -1);
+    });
+
+    it('is curried', function() {
+        assert.equal(typeof R.findIndex(even), 'function');
+        assert.equal(R.findIndex(even)(a), 1);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.findIndex, TypeError);
     });
 });
 
@@ -70,6 +93,15 @@ describe('findLast', function() {
     it('does not go into an infinite loop on an empty array', function() {
         assert.equal(R.findLast(even, []), undefined);
     });
+
+    it('is curried', function() {
+        assert.equal(typeof R.findLast(even), 'function');
+        assert.equal(R.findLast(even)(a), 0);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.findLast, TypeError);
+    });
 });
 
 describe('findLastIndex', function() {
@@ -98,5 +130,14 @@ describe('findLastIndex', function() {
 
     it('does not go into an infinite loop on an empty array', function() {
         assert.equal(R.findLastIndex(even, []), -1);
+    });
+
+    it('is curried', function() {
+        assert.equal(typeof R.findLastIndex(even), 'function');
+        assert.equal(R.findLastIndex(even)(a), 15);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.findLastIndex, TypeError);
     });
 });

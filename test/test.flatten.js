@@ -23,6 +23,15 @@ describe('flatten', function() {
         var o = {length: 3, 0: [1, 2, [3]], 1: [], 2: ['a', 'b', 'c', ['d', 'e']]};
         assert.deepEqual(R.flatten(o), [1, 2, 3, 'a', 'b', 'c', 'd', 'e']);
     });
+
+    it('flattens an array of empty arrays', function() {
+        assert.deepEqual(R.flatten([[], [], []]), []);
+        assert.deepEqual(R.flatten([]), []);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.flatten, TypeError);
+    });
 });
 
 describe('unnest', function() {
@@ -42,5 +51,14 @@ describe('unnest', function() {
     it('handles array-like objects', function() {
         var o = {length: 3, 0: [1, 2, [3]], 1: [], 2: ['a', 'b', 'c', ['d', 'e']]};
         assert.deepEqual(R.unnest(o), [1, 2, [3], 'a', 'b', 'c', ['d', 'e']]);
+    });
+
+    it('flattens an array of empty arrays', function() {
+        assert.deepEqual(R.unnest([[], [], []]), []);
+        assert.deepEqual(R.unnest([]), []);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.unnest, TypeError);
     });
 });
