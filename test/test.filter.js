@@ -107,6 +107,10 @@ describe('skip', function() {
         assert.deepEqual(R.skip(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g']);
     });
 
+    it('should return an empty array if `n` is too large', function() {
+        assert.deepEqual(R.skip(20, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), []);
+    });
+
     it('should be automatically curried', function() {
         var skip2 = R.skip(2);
         assert.deepEqual(skip2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
