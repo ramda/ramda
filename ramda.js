@@ -61,7 +61,7 @@
     function _slice(args, from, to) {
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
-            case 1: return _slice(args, 0);
+            case 1: return _slice(args, 0, args.length);
             case 2: return _slice(args, from, args.length);
             default:
                 var length = to - from, arr = new Array(length), i = -1;
