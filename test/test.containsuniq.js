@@ -14,6 +14,16 @@ describe('contains', function() {
     it('returns false for the empty list', function() {
         assert.equal(R.contains(1, []), false);
     });
+
+    it('is curried', function() {
+        assert.equal(typeof R.contains(7), 'function');
+        assert.equal(R.contains(7)([1, 2, 3]), false);
+        assert.equal(R.contains(7)([1, 2, 7, 3]), true);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.contains, TypeError);
+    });
 });
 
 describe('uniq', function() {
@@ -34,11 +44,11 @@ describe('uniq', function() {
 describe('uniqWith', function() {
     var T = R.alwaysTrue;
     var F = R.alwaysFalse;
+    var objs = [{x: T, i: 0}, {x: F, i: 1}, {x: T, i: 2}, {x: T, i: 3}, {x: F, i: 4}, {x: F, i: 5}, {x: T, i: 6}, {x: F, i: 7}];
+    var objs2 = [{x: T, i: 0}, {x: F, i: 1}, {x: T, i: 2}, {x: T, i: 3}, {x: F, i: 0}, {x: T, i: 1}, {x: F, i: 2}, {x: F, i: 3}];
     function eqI(x, accX) { return x.i === accX.i; }
 
     it('returns a set from any array (i.e. purges duplicate elements) based on predicate', function() {
-        var objs = [{x: T, i: 0}, {x: F, i: 1}, {x: T, i: 2}, {x: T, i: 3}, {x: F, i: 4}, {x: F, i: 5}, {x: T, i: 6}, {x: F, i: 7}];
-        var objs2 = [{x: T, i: 0}, {x: F, i: 1}, {x: T, i: 2}, {x: T, i: 3}, {x: F, i: 0}, {x: T, i: 1}, {x: F, i: 2}, {x: F, i: 3}];
         assert.deepEqual(R.uniqWith(eqI, objs), objs);
         assert.deepEqual(R.uniqWith(eqI, objs2), [{x: T, i: 0}, {x: F, i: 1}, {x: T, i: 2}, {x: T, i: 3}]);
     });
@@ -49,6 +59,16 @@ describe('uniqWith', function() {
 
     it('returns an empty array for an empty array', function() {
         assert.deepEqual(R.uniqWith(eqI, []), []);
+    });
+
+    it('is curried', function() {
+        assert.equal(typeof R.uniqWith(eqI), 'function');
+        assert.deepEqual(R.uniqWith(eqI)(objs), objs);
+        assert.deepEqual(R.uniqWith(eqI)(objs2), [{x: T, i: 0}, {x: F, i: 1}, {x: T, i: 2}, {x: T, i: 3}]);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.uniqWith, TypeError);
     });
 });
 

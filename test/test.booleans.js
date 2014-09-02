@@ -27,6 +27,19 @@ describe('or', function() {
         R.or(T, Z);
         assert.equal(effect, 'not evaluated');
     });
+
+    it('is curried', function() {
+        var even = function(x) {return x % 2 === 0;};
+        var gt10 = function(x) {return x > 10;};
+        var evenOr = R.or(even);
+        assert.equal(typeof evenOr(gt10), 'function');
+        assert.equal(evenOr(gt10)(11), true);
+        assert.equal(evenOr(gt10)(9), false);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.or, TypeError);
+    });
 });
 
 describe('and', function() {
@@ -54,6 +67,19 @@ describe('and', function() {
         var effect = 'not evaluated';
         R.and(F, Z);
         assert.equal(effect, 'not evaluated');
+    });
+
+    it('is curried', function() {
+        var even = function(x) {return x % 2 === 0;};
+        var gt10 = function(x) {return x > 10;};
+        var evenAnd = R.and(even);
+        assert.equal(typeof evenAnd(gt10), 'function');
+        assert.equal(evenAnd(gt10)(11), false);
+        assert.equal(evenAnd(gt10)(12), true);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.and, TypeError);
     });
 });
 
