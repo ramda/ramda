@@ -1,0 +1,23 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ramda Tests</title>
+  <link rel="stylesheet" href="../lib/test/mocha.css" />
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../lib/test/require-shim.js"></script>
+  <script src="../lib/test/expect.js"></script>
+  <script src="../lib/test/mocha.js"></script>
+  <script src="../lib/test/assert-shim.js"></script>
+  <script src="../ramda.js"></script>
+  <script src="../ext/lazylist/lazylist.js"></script>
+  <script src="../ext/random/random.js"></script>
+  <script>mocha.setup('bdd')</script>
+  {TESTS}
+  <script>
+    mocha.checkLeaks();
+    mocha.run();
+  </script>
+</body>
+</html>

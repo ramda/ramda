@@ -23,7 +23,7 @@
   },
   "main": "ramda.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "make && grunt test"
   },
   "dependencies": {},
   "devDependencies": {
