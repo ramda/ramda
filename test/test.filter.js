@@ -8,9 +8,21 @@ describe('filter', function() {
         assert.deepEqual(R.filter(even, [1, 2, 3, 4, 5]), [2, 4]);
     });
 
+    it('returns an empty array if no element matches', function() {
+        assert.deepEqual(R.filter(function(x) { return x > 100; }, [1, 9, 99]), []);
+    });
+
+    it('returns an empty array if asked to filter an empty array', function() {
+        assert.deepEqual(R.filter(function(x) { return x > 100; }, []), []);
+    });
+
     it('should be automatically curried', function() {
         var onlyEven = R.filter(even);
         assert.deepEqual(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.filter, TypeError);
     });
 });
 
@@ -31,9 +43,21 @@ describe('filter.idx', function() {
         assert.deepEqual(R.filter.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]), [0, 9]);
     });
 
+    it('returns an empty array if no element matches', function() {
+        assert.deepEqual(R.filter.idx(function(x, i, o) { return x > 100; }, [1, 9, 99]), []);
+    });
+
+    it('returns an empty array if asked to filter an empty array', function() {
+        assert.deepEqual(R.filter.idx(function(x, i, o) { return x > 100; }, []), []);
+    });
+
     it('should be automatically curried', function() {
         var everyOtherPosition = R.filter.idx(everyOther);
         assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [8, 7, 3, 9]);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.filter.idx, TypeError);
     });
 });
 
@@ -44,9 +68,29 @@ describe('reject', function() {
         assert.deepEqual(R.reject(even, [1, 2, 3, 4, 5]), [1, 3, 5]);
     });
 
+    it('returns an empty array if no element matches', function() {
+        assert.deepEqual(R.reject(function(x, i, o) { return x < 100; }, [1, 9, 99]), []);
+    });
+
+    it('returns an empty array if asked to filter an empty array', function() {
+        assert.deepEqual(R.reject(function(x, i, o) { return x > 100; }, []), []);
+    });
+
+    it('returns an empty array if no element matches', function() {
+        assert.deepEqual(R.reject(function(x, i, o) { return x < 100; }, [1, 9, 99]), []);
+    });
+
+    it('returns an empty array if asked to filter an empty array', function() {
+        assert.deepEqual(R.reject(function(x, i, o) { return x > 100; }, []), []);
+    });
+
     it('should be automatically curried', function() {
         var odd = R.reject(even);
         assert.deepEqual(odd([1, 2, 3, 4, 5, 6, 7]), [1, 3, 5, 7]);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.reject.idx, TypeError);
     });
 });
 
@@ -67,9 +111,21 @@ describe('reject.idx', function() {
         assert.deepEqual(R.reject.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]), [8, 6, 7, 5, 3]);
     });
 
+    it('returns an empty array if no element matches', function() {
+        assert.deepEqual(R.reject.idx(function(x, i, o) { return x < 100; }, [1, 9, 99]), []);
+    });
+
+    it('returns an empty array if asked to filter an empty array', function() {
+        assert.deepEqual(R.reject.idx(function(x, i, o) { return x > 100; }, []), []);
+    });
+
     it('should be automatically curried', function() {
         var everyOtherPosition = R.reject.idx(everyOther);
         assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [6, 5, 0]);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.reject.idx, TypeError);
     });
 });
 
@@ -78,10 +134,19 @@ describe('take', function() {
         assert.deepEqual(R.take(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
     });
 
+    it('returns only as many as the array can provide', function() {
+        assert.deepEqual(R.take(3, [1, 2]), [1, 2]);
+        assert.deepEqual(R.take(3, []), []);
+    });
+
     it('should be automatically curried', function() {
         var take3 = R.take(3);
         assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
         assert.deepEqual(take3(['w', 'x', 'y', 'z']), ['w', 'x', 'y']);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.take, TypeError);
     });
 });
 

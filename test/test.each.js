@@ -15,6 +15,22 @@ describe('forEach', function() {
         assert.deepEqual(R.forEach(function(obj) { s += obj.x; }, list), list);
         assert.equal('1100300234', s);
     });
+
+    it('handles empty list', function() {
+        assert.deepEqual(R.forEach(function(x) { return x * x; }, []), []);
+    });
+
+    it('is curried', function() {
+        var xStr = '';
+        var xe = R.forEach(function(x) { xStr += (x + ' '); });
+        assert.equal(typeof xe, 'function');
+        xe([1, 2, 4]);
+        assert.equal(xStr, '1 2 4 ');
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.forEach, TypeError);
+    });
 });
 
 describe('forEach.idx', function() {
@@ -30,5 +46,21 @@ describe('forEach.idx', function() {
         var s = '';
         assert.deepEqual(R.forEach.idx(function(obj, idx, ls) { s += obj.x; }, list), list);
         assert.equal('1100300234', s);
+    });
+
+    it('handles empty list', function() {
+        assert.deepEqual(R.forEach.idx(function(x, i, o) { return x + i; }, []), []);
+    });
+
+    it('is curried', function() {
+        var sum = 0;
+        var xe = R.forEach.idx(function(x, i, o) { sum += (x + i); });
+        assert.equal(typeof xe, 'function');
+        xe([1, 2, 4]);
+        assert.equal(sum, 10);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.forEach.idx, TypeError);
     });
 });
