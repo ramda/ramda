@@ -1522,13 +1522,13 @@
      *
      *      reduce(add, 10, numbers); //=> 16
      */
-    R.reduce = curry3(checkForMethod('reduce', function _reduce(fn, acc, list) {
+    R.reduce = curry3(function _reduce(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx]);
         }
         return acc;
-    }));
+    });
 
     /**
      * @func
