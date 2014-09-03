@@ -1390,7 +1390,7 @@
      *      };
      *      map(constructN(1, Widget), allConfigs); //=> a list of Widgets
      */
-    var constructN = R.constructN = function _constructN(n, Fn) {
+    var constructN = R.constructN = curry2(function _constructN(n, Fn) {
         var f = function() {
             var Temp = function() {}, inst, ret;
             Temp.prototype = Fn.prototype;
@@ -1399,7 +1399,7 @@
             return Object(ret) === ret ? ret : inst;
         };
         return n > 1 ? curry(nAry(n, f)) : f;
-    };
+    });
 
 
     /**
