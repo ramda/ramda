@@ -26,7 +26,7 @@ describe('every', function() {
     });
 
     it('works with more complex objects', function() {
-        xs = [{x: 'abc'}, {x: 'ade'}, {x: 'fghiajk'}];
+        var xs = [{x: 'abc'}, {x: 'ade'}, {x: 'fghiajk'}];
         function len3(o) { return o.x.length === 3; }
         function hasA(o) { return o.x.indexOf('a') > -1; }
         assert.equal(R.every(len3, xs), false);
