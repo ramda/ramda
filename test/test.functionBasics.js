@@ -126,6 +126,20 @@ describe('constructN', function() {
         assert(pattern instanceof RegExp);
         assert.equal(pattern.source, '[a-z]');
     });
+
+    it('is curried', function() {
+        function G(a, b, c) { this.a = a; this.b = b; this.c = c; }
+        var construct2 = R.constructN(2);
+        assert(typeof construct2 === 'function');
+        var g2 = construct2(G);
+        assert(typeof g2 === 'function');
+        assert(g2('a', 'b') instanceof G);
+        assert(g2('a')('b') instanceof G);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.constructN, TypeError);
+    });
 });
 
 describe('unary', function() {
