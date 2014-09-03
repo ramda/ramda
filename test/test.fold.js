@@ -13,11 +13,15 @@ describe('foldl', function() {
     it('should return the accumulator for an empty array', function() {
         assert.equal(R.foldl(add, 0, []), 0);
         assert.equal(R.foldl(mult, 1, []), 1);
+        assert.deepEqual(R.foldl(R.concat, [], []), []);
     });
 
     it('should be automatically curried', function() {
-        var sum = R.foldl(add, 0);
+        var addOrConcat = R.foldl(add);
+        var sum = addOrConcat(0);
+        var cat = addOrConcat('');
         assert.equal(sum([1, 2, 3, 4]), 10);
+        assert.equal(cat(['1', '2', '3', '4']), '1234');
     });
 
     it('should be aliased by `reduce`', function() {
@@ -28,6 +32,11 @@ describe('foldl', function() {
     it('should correctly report the arity of curried versions', function() {
         var sum = R.foldl(add, 0);
         assert.equal(sum.length, 1);
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.foldl, TypeError);
+        assert.throws(R.foldl(R.add), TypeError);
     });
 });
 
@@ -48,7 +57,9 @@ describe('foldr', function() {
 
     it('should be automatically curried', function() {
         var something = R.foldr(avg, 54);
+        var rcat = R.foldr(R.add, '');
         assert.equal(something([12, 4, 10, 6]), 12);
+        assert.equal(rcat(['1', '2', '3', '4']), '4321');
     });
 
     it('should be aliased by `reduceRight`', function() {
@@ -60,6 +71,11 @@ describe('foldr', function() {
         var something = R.foldr(avg, 0);
         assert.equal(something.length, 1);
     });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.foldr, TypeError);
+        assert.throws(R.foldr(R.add), TypeError);
+    });
 });
 
 describe('foldl.idx', function() {
@@ -67,6 +83,12 @@ describe('foldl.idx', function() {
     var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
 
     it('works just like normal foldl', function() {
+        assert.equal(R.foldl.idx(R.add, 0, [1, 2, 3, 4]), 10);
+        assert.equal(R.foldl.idx(R.multiply, 1, [1, 2, 3, 4]), 24);
+    });
+
+    it('should be aliased by `reduceRight`', function() {
+        assert.strictEqual(R.reduceRight, R.foldr);
     });
 
     it('passes the index as a third parameter to the predicate', function() {
@@ -75,11 +97,31 @@ describe('foldl.idx', function() {
     });
 
     it('passes the entire list as a fourth parameter to the predicate', function() {
+        var list = [1, 2, 3];
+        R.foldl.idx(function(acc, x, i, ls) {
+            assert.strictEqual(ls, list);
+            return acc;
+        }, 0, list);
     });
 
+    it('should be automatically curried', function() {
+        var addOrConcat = R.foldl.idx(R.add);
+        var sum = addOrConcat(0);
+        var cat = addOrConcat('');
+        assert.equal(sum([1, 2, 3, 4]), 10);
+        assert.equal(cat(['1', '2', '3', '4']), '1234');
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.foldl.idx, TypeError);
+        assert.throws(R.foldl.idx(R.add), TypeError);
+    });
 });
 
 describe('foldr.idx', function() {
+    var timesIdx = function(tot, num, idx, ls) {return tot + (num * idx);};
+    var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
+
     it('folds lists in the right order', function() {
         assert.equal(R.foldr.idx(function(a, b, idx, list) {return a + idx + b;}, '', ['a', 'b', 'c', 'd']), '3d2c1b0a');
     });
@@ -98,12 +140,38 @@ describe('foldr.idx', function() {
         assert.equal(something([12, 4, 10, 6]), 92);
     });
 
-    it('should be aliased by `reduceRight`', function() {
+    it('should be aliased by `reduceRight.idx`', function() {
         assert.strictEqual(R.reduceRight.idx, R.foldr.idx);
     });
 
     it('should correctly report the arity of curried versions', function() {
         var something = R.foldr.idx(function(acc, b, i) { return acc += i + b; }, 0);
         assert.equal(something.length, 1);
+    });
+
+    it('passes the index as a third parameter to the predicate', function() {
+        assert.equal(R.foldr.idx(timesIdx, 0, [1, 2, 3, 4, 5]), 40);
+        assert.deepEqual(R.foldr.idx(objectify, {}, ['a', 'b', 'c', 'd', 'e']), {a: 0, b: 1, c: 2, d: 3, e: 4});
+    });
+
+    it('passes the entire list as a fourth parameter to the predicate', function() {
+        var list = [1, 2, 3];
+        R.foldr.idx(function(acc, x, i, ls) {
+            assert.strictEqual(ls, list);
+            return acc;
+        }, 0, list);
+    });
+
+    it('should be automatically curried', function() {
+        var addOrConcat = R.foldr.idx(R.add);
+        var sum = addOrConcat(0);
+        var cat = addOrConcat('');
+        assert.equal(sum([1, 2, 3, 4]), 10);
+        assert.equal(cat(['1', '2', '3', '4']), '4321');
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.foldr.idx, TypeError);
+        assert.throws(R.foldr.idx(R.add), TypeError);
     });
 });
