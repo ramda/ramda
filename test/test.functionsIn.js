@@ -21,4 +21,8 @@ describe('functionsIn', function() {
         assert.equal(R.functionsIn(f).length, 4);
     });
 
+    it('returns an empty array if there are no functions on the object or its prototype chain', function() {
+        function G() {}
+        assert.deepEqual(R.functionsIn(new G()), []);
+    });
 });

@@ -19,6 +19,11 @@ describe('functions', function() {
     it('should return list of functions without prototype functions', function() {
         assert.deepEqual(R.functions(f).sort(), ['map', 'sort']);
         assert.equal(R.functions(f).length, 2);
+        assert.deepEqual(R.functions({add: R.add, foldl: R.foldl}).sort(), ['add', 'foldl']);
     });
 
+    it('returns an empty array if there are no functions on the object or its prototype chain', function() {
+        function G() {}
+        assert.deepEqual(R.functions(new G()), []);
+    });
 });
