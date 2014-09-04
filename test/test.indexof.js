@@ -35,6 +35,10 @@ describe('indexOf', function() {
         assert.equal(R.indexOf('1', arr), -1);
     });
 
+    it('returns -1 for an empty array', function() {
+        assert.equal(R.indexOf('x', []), -1);
+    });
+
     it('should be curried', function() {
         var curried = R.indexOf(3);
         assert.equal(curried(arr), 2);
@@ -67,6 +71,10 @@ describe('indexOf.from', function() {
     });
     it('from index -4', function() {
         assert.equal(R.indexOf.from(3, -4, arr), 2);
+    });
+    it('returns -1 for an empty array', function() {
+        assert.equal(R.indexOf.from('x', 3, []), -1);
+        assert.equal(R.indexOf.from('x', -3, []), -1);
     });
 
     it('should be curried', function() {
@@ -133,6 +141,10 @@ describe('lastIndexOf', function() {
     it('from index -4', function() {
         assert.equal(R.lastIndexOf.from('a', -4, arr), -1);
     });
+    it('returns -1 for an empty array', function() {
+        assert.equal(R.lastIndexOf('x', 2, []), -1);
+        assert.equal(R.lastIndexOf('x', -5, []), -1);
+    });
 
     it('should be curried', function() {
         var curried = R.lastIndexOf('a');
@@ -171,7 +183,10 @@ describe('lastIndexOf.from', function() {
     it('from index -4', function() {
         assert.equal(R.lastIndexOf.from('a', -4, arr), -1);
     });
-
+    it('returns -1 for an empty array', function() {
+        assert.equal(R.lastIndexOf.from('x', 2, []), -1);
+        assert.equal(R.lastIndexOf.from('x', -5, []), -1);
+    });
     it('should be curried', function() {
         var curried = R.lastIndexOf.from('a');
         assert.equal(curried(3)(arr), 2);

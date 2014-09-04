@@ -42,6 +42,13 @@ describe('groupBy', function() {
             B: [{type: 'B', val: 20}, {type: 'B', val: 60}],
             C: [{type: 'C', val: 50}]
         });
+    });
 
+    it('returns an empty object if given an empty array', function() {
+        assert.deepEqual(R.groupBy(R.prop('x'), []), {});
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.groupBy, TypeError);
     });
 });

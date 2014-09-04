@@ -71,4 +71,13 @@ describe('is', function() {
         assert.strictEqual(R.is(Object, 0), false);
         assert.strictEqual(R.is(Object, ''), false);
     });
+
+    it('is curried', function() {
+        assert(typeof R.is(String) === 'function');
+        assert(R.is(String)('s'));
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.is, TypeError);
+    });
 });
