@@ -1,4 +1,5 @@
-var desireds = require('./sauce/desireds');
+var sauceConf = require('./sauce/conf');
+var sauceSrv = require('./sauce/server');
 
 module.exports = function(grunt) {
     grunt.initConfig({
@@ -79,17 +80,6 @@ module.exports = function(grunt) {
             }
         },
 
-        docco: {
-            doc: {
-                src: ['<%= pkg.name %>.js'],
-                options: {
-                    template: 'docs/tpl/ramda.jst',
-                    css: 'docs/tpl/ramda.css',
-                    output: 'docs/'
-                }
-            }
-        },
-
         benchmark: {
             all: {
                 src: ['bench/*.bench.js'],
@@ -129,21 +119,25 @@ module.exports = function(grunt) {
                     destination: 'jsdoc-out'
                 }
             }
-        }
+        },
 
+        'saucelabs-mocha': sauceConf,
+
+        connect: sauceSrv
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-docco');
     grunt.loadNpmTasks('grunt-push-release');
     grunt.loadNpmTasks('grunt-benchmark');
     grunt.loadNpmTasks('grunt-readme');
+    grunt.loadNpmTasks('grunt-saucelabs');
     grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
@@ -182,11 +176,11 @@ module.exports = function(grunt) {
         });
     });
 
-    grunt.registerTask('dist', ['uglify', 'copy:dist']);
-
-    grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
-    grunt.registerTask('min', ['jshint', 'mochaTest:test', /* 'docco:doc', */ 'uglify']);
-    grunt.registerTask('version', ['clean:dist', 'jshint', /*'docco:doc',*/ 'uglify', 'copy:dist']);
-    grunt.registerTask('publish', ['push', 'version']);
     grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
+    grunt.registerTask('dist', ['uglify', 'copy:dist']);
+    grunt.registerTask('min', ['jshint', 'mochaTest:test', 'uglify']);
+    grunt.registerTask('publish', ['push', 'version']);
+    grunt.registerTask('sauce', ['connect', 'saucelabs-mocha']);
+    grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
+    grunt.registerTask('version', ['clean:dist', 'jshint', 'uglify', 'copy:dist']);
 };
