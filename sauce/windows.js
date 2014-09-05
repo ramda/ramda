@@ -21,11 +21,6 @@ module.exports = [
   },
   {
     browserName: 'internet explorer',
-    version: '8',
-    platform: 'XP'
-  },
-  {
-    browserName: 'internet explorer',
     version: '7',
     platform: 'XP'
   },
