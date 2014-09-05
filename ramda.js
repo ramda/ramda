@@ -3058,7 +3058,7 @@
      *
      * @func
      * @memberOf R
-     * @category
+     * @category List
      * @sig Number -> a -> [a] -> [a]
      * @param {Number} index The position to insert the element
      * @param elt The element to insert into the Array
