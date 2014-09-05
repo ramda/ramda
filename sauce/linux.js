@@ -6,7 +6,7 @@ module.exports = [
   },
   {
     browserName: 'chrome',
-    version: '36',
+    version: '35',
     platform: 'Linux'
   }
 ];
