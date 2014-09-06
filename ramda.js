@@ -3431,6 +3431,9 @@
                                   'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
 
         return function _keys(obj) {
+            if (!R.is(Object, obj)) {
+                return [];
+            }
             if (nativeKeys) {
                 return nativeKeys(Object(obj));
             }
