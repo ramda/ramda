@@ -65,7 +65,7 @@ describe('values', function() {
     var cobj = new C();
 
     it("returns an array of the given object's values", function() {
-        assert.deepEqual(R.values(obj), [100, [1, 2, 3], {x: 200, y: 300}, 'D', null, undefined]);
+        assert.deepEqual(R.values(obj).sort(), [[1, 2, 3], 100, 'D', {x: 200, y: 300}, null, undefined]);
         assert.deepEqual(R.values({
             /* jshint -W001 */
             hasOwnProperty: false
