@@ -10,7 +10,7 @@ describe('keys', function() {
     var cobj = new C();
 
     it("returns an array of the given object's own keys", function() {
-        assert.deepEqual(R.keys(obj), ['a', 'b', 'c', 'd', 'e', 'f']);
+        assert.deepEqual(R.keys(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
     });
 
     it('should work with hasOwnProperty override', function() {
@@ -29,7 +29,7 @@ describe('keys', function() {
     });
 
     it("does not include the given object's prototype properties", function() {
-        assert.deepEqual(R.keys(cobj), ['a', 'b']);
+        assert.deepEqual(R.keys(cobj).sort(), ['a', 'b']);
     });
 });
 
@@ -41,11 +41,11 @@ describe('keysIn', function() {
     var cobj = new C();
 
     it("returns an array of the given object's keys", function() {
-        assert.deepEqual(R.keysIn(obj), ['a', 'b', 'c', 'd', 'e', 'f']);
+        assert.deepEqual(R.keysIn(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
     });
 
     it("includes the given object's prototype properties", function() {
-        assert.deepEqual(R.keysIn(cobj), ['a', 'b', 'x', 'y']);
+        assert.deepEqual(R.keysIn(cobj).sort(), ['a', 'b', 'x', 'y']);
     });
 
     it('should work for primitives', function() {
@@ -93,14 +93,26 @@ describe('valuesIn', function() {
     var cobj = new C();
 
     it("returns an array of the given object's values", function() {
-        assert.deepEqual(R.valuesIn(obj), [100, [1, 2, 3], {x: 200, y: 300}, 'D', null, undefined]);
+        var vs = R.valuesIn(obj);
+        assert(vs.length === 6);
+        assert(R.indexOf(100, vs) > -1);
+        assert(R.indexOf('D', vs) > -1);
+        assert(R.indexOf(null, vs) > -1);
+        assert(R.indexOf(undefined, vs) > -1);
+        assert(R.indexOf(obj.b, vs) > -1);
+        assert(R.indexOf(obj.c, vs) > -1);
     });
 
     it("includes the given object's prototype properties", function() {
-        assert.deepEqual(R.valuesIn(cobj), [100, 200, C.prototype.x, 'y']);
+        var vs = R.valuesIn(cobj);
+        assert(vs.length === 4);
+        assert(R.indexOf(100, vs) > -1);
+        assert(R.indexOf(200, vs) > -1);
+        assert(R.indexOf(cobj.x, vs) > -1);
+        assert(R.indexOf('y', vs) > -1);
     });
 
-    it('should work for primitives', function() {
+    it('works for primitives', function() {
         var result = R.map(function(val) {
             return R.values(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);

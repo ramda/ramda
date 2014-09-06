@@ -3407,7 +3407,6 @@
      */
     var nativeKeys = Object.keys;
 
-
     /**
      * Returns a list containing the names of all the enumerable own
      * properties of the supplied object.
@@ -3424,18 +3423,34 @@
      *
      *      keys({a: 1, b: 2, c: 3}) // => ['a', 'b', 'c']
      */
-    var keys = R.keys = function _keys(obj) {
-        if (nativeKeys) {
-            return nativeKeys(Object(obj));
-        }
-        var prop, ks = [];
-        for (prop in obj) {
-            if (hasOwnProperty.call(obj, prop)) {
-                ks.push(prop);
+    var keys = R.keys = (function() {
+        // cover IE < 9 keys issues
+        var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
+        var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
+                                  'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+
+        return function _keys(obj) {
+            if (nativeKeys) {
+                return nativeKeys(Object(obj));
             }
-        }
-        return ks;
-    };
+            var prop, ks = [], nIdx;
+            for (prop in obj) {
+                if (hasOwnProperty.call(obj, prop)) {
+                    ks.push(prop);
+                }
+            }
+            if (hasEnumBug) {
+                nIdx = nonEnumerableProps.length;
+                while (nIdx--) {
+                    prop = nonEnumerableProps[nIdx];
+                    if (hasOwnProperty.call(obj.prop) && !R.contains(prop, ks)) {
+                        ks.push(prop);
+                    }
+                }
+            }
+            return ks;
+        };
+    }());
 
 
     /**

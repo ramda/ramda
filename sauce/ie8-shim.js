@@ -1,5 +1,3 @@
-// somehow `R` gets lost, but `ramda` remains. hmmm. 
-R = ramda;
 
 if( typeof document.getElementsByClassName !== "function"){
   document.getElementsByClassName = function( className, nodeName )
