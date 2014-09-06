@@ -3025,8 +3025,9 @@
      *      var tail = slice.from(1);
      *      tail(xs); //= [5, 6, 7]
      */
-    R.slice.from = flip(R.slice)(void 0);
-
+    R.slice.from = curry2(function(a, xs) {
+        return xs.slice(a, xs.length);
+    });
 
     /**
      * Removes the sub-list of `list` starting at index `start` and containing
@@ -4709,7 +4710,9 @@
      *
      *      strIndexOf('c', 'abcdefg) //=> 2
      */
-    R.strIndexOf = invoker('indexOf', String.prototype);
+    R.strIndexOf = curry2(function _strIndexOf(c, str) {
+        return str.indexOf(c);
+    });
 
 
     /**
@@ -4728,7 +4731,9 @@
      *
      *      strLastIndexOf('a', 'banana split') //=> 5
      */
-    R.strLastIndexOf = invoker('lastIndexOf', String.prototype);
+    R.strLastIndexOf = curry2(function(c, str) {
+        return str.lastIndexOf(c);
+    });
 
 
     /**
