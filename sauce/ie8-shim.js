@@ -12,7 +12,6 @@ function require(path) {
   }
 }
 
-
 if( typeof document.getElementsByClassName !== "function"){
   document.getElementsByClassName = function( className, nodeName )
   {

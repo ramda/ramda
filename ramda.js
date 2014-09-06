@@ -3444,7 +3444,7 @@
                 nIdx = nonEnumerableProps.length;
                 while (nIdx--) {
                     prop = nonEnumerableProps[nIdx];
-                    if (hasOwnProperty.call(obj.prop) && !R.contains(prop, ks)) {
+                    if (hasOwnProperty.call(obj, prop) && !R.contains(prop, ks)) {
                         ks.push(prop);
                     }
                 }
