@@ -200,7 +200,7 @@ describe('nAry', function() {
         var ns = R.repeatN(undefined, 10);
         assert(undefs.length === ns.length);
         var i = undefs.length;
-        while(--i) {
+        while (--i) {
             assert(undefs[i] === ns[i]);
         }
     });
