@@ -195,7 +195,14 @@ describe('nAry', function() {
         var fn = R.nAry(10, function() { return toArray(arguments); });
         assert.equal(fn.length, 10);
         assert.deepEqual(fn.apply(null, R.range(0, 25)), R.range(0, 10));
-        assert.deepEqual(fn(), R.repeatN(undefined, 10));
+
+        var undefs = fn();
+        var ns = R.repeatN(undefined, 10);
+        assert(undefs.length === ns.length);
+        var i = undefs.length;
+        while (--i) {
+            assert(undefs[i] === ns[i]);
+        }
     });
 });
 

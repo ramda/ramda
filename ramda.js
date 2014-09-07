@@ -3038,8 +3038,9 @@
      *      var tail = R.slice.from(1);
      *      tail(ys); //=> [5, 6, 7]
      */
-    R.slice.from = flip(R.slice)(void 0);
-
+    R.slice.from = curry2(function(a, xs) {
+        return xs.slice(a, xs.length);
+    });
 
     /**
      * Removes the sub-list of `list` starting at index `start` and containing
@@ -3427,7 +3428,6 @@
      */
     var nativeKeys = Object.keys;
 
-
     /**
      * Returns a list containing the names of all the enumerable own
      * properties of the supplied object.
@@ -3444,18 +3444,37 @@
      *
      *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
      */
-    var keys = R.keys = function _keys(obj) {
-        if (nativeKeys) {
-            return nativeKeys(Object(obj));
-        }
-        var prop, ks = [];
-        for (prop in obj) {
-            if (hasOwnProperty.call(obj, prop)) {
-                ks.push(prop);
+    var keys = R.keys = (function() {
+        // cover IE < 9 keys issues
+        var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
+        var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
+                                  'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+
+        return function _keys(obj) {
+            if (!R.is(Object, obj)) {
+                return [];
             }
-        }
-        return ks;
-    };
+            if (nativeKeys) {
+                return nativeKeys(Object(obj));
+            }
+            var prop, ks = [], nIdx;
+            for (prop in obj) {
+                if (hasOwnProperty.call(obj, prop)) {
+                    ks.push(prop);
+                }
+            }
+            if (hasEnumBug) {
+                nIdx = nonEnumerableProps.length;
+                while (nIdx--) {
+                    prop = nonEnumerableProps[nIdx];
+                    if (hasOwnProperty.call(obj, prop) && !R.contains(prop, ks)) {
+                        ks.push(prop);
+                    }
+                }
+            }
+            return ks;
+        };
+    }());
 
 
     /**
@@ -4714,7 +4733,9 @@
      *
      *      R.strIndexOf('c', 'abcdefg'); //=> 2
      */
-    R.strIndexOf = invoker('indexOf', String.prototype);
+    R.strIndexOf = curry2(function _strIndexOf(c, str) {
+        return str.indexOf(c);
+    });
 
 
     /**
@@ -4733,7 +4754,9 @@
      *
      *      R.strLastIndexOf('a', 'banana split'); //=> 5
      */
-    R.strLastIndexOf = invoker('lastIndexOf', String.prototype);
+    R.strLastIndexOf = curry2(function(c, str) {
+        return str.lastIndexOf(c);
+    });
 
 
     /**

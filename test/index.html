@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -8,12 +9,14 @@
   <h1>Tests for ramda</h1>
   <div id="mocha"></div>
   <script src="../lib/test/require-shim.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../sauce/ie8-shim.js"></script>
+  <![endif]-->
   <script src="../lib/test/expect.js"></script>
   <script src="../lib/test/mocha.js"></script>
   <script src="../lib/test/assert-shim.js"></script>
   <script src="../ramda.js"></script>
   <script src="../ext/lazylist/lazylist.js"></script>
-  <script>R.installTo(this);</script>
   <script>mocha.setup('bdd')</script>
   <script src="test.core.js"></script>
   <script src="test.curry.js"></script>
@@ -54,9 +57,5 @@
   <script src="test.is.js"></script>
   <script src="../ext/lazylist/test/test.lazy.js"></script>
   <script src="../sauce/mocharun.js"></script>
-  <script>
-    //mocha.checkLeaks();
-    //mocha.run();
-  </script>
 </body>
 </html>

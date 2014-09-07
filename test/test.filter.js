@@ -193,11 +193,17 @@ describe('skipUntil', function() {
         assert.deepEqual(R.skipUntil(function(x) {return x === 5;}, [1, 3, 5, 7, 9]), [5, 7, 9]);
     });
 
-    it('should start at the right arg and acknowledges undefined', function() {
-        assert.deepEqual(R.skipUntil(function(x) {
-            assert.ok(false);
-        }, []), []);
-        assert.deepEqual(R.skipUntil(function(x) {return x === void 0;}, [1, 3, void 0, 5, 7]), [void 0, 5, 7]);
+    it('returns an empty list for an ampty list', function() {
+        assert.deepEqual(R.skipUntil(function(x) { return false; }, []), []);
+        assert.deepEqual(R.skipUntil(function(x) { return true; }, []), []);
+    });
+
+    it('starts at the right arg and acknowledges undefined', function() {
+        var sublist = R.skipUntil(function(x) {return x === void 0;}, [1, 3, void 0, 5, 7]);
+        assert.equal(sublist.length, 3);
+        assert.equal(sublist[0], void 0);
+        assert.equal(sublist[1], 5);
+        assert.equal(sublist[2], 7);
     });
 
     it('should be automatically curried', function() {
