@@ -1355,7 +1355,7 @@
      * @return {Function} The wrapped function.
      * @example
      *
-     *      var slashify = R.wrap(flip(add)('/'), function(f, x) {
+     *      var slashify = R.wrap(R.flip(add)('/'), function(f, x) {
      *        return R.match(/\/$/, x) ? x : f(x);
      *      });
      *
@@ -1396,7 +1396,7 @@
      *      var allConfigs = {
      *        // ...
      *      };
-     *      map(R.constructN(1, Widget), allConfigs); // a list of Widgets
+     *      R.map(R.constructN(1, Widget), allConfigs); // a list of Widgets
      */
     var constructN = R.constructN = curry2(function _constructN(n, Fn) {
         var f = function() {
@@ -1434,7 +1434,7 @@
      *      var allConfigs = {
      *        // ...
      *      };
-     *      map(R.construct(Widget), allConfigs); // a list of Widgets
+     *      R.map(R.construct(Widget), allConfigs); // a list of Widgets
      */
     R.construct = function _construct(Fn) {
         return constructN(Fn.length, Fn);
@@ -1894,7 +1894,7 @@
      * @memberOf R
      * @category Function
      * @sig a -> [a]
-     * @param x any value
+     * @param {*} x any value
      * @return [x]
      * @example
      *
@@ -1935,8 +1935,8 @@
      * @memberOf R
      * @category List
      * @sig (a -> [b]) -> [a] -> [b]
-     * @param {Function}
-     * @param {Array}
+     * @param {Function} fn
+     * @param {Array} list
      * @return {Array}
      * @example
      *
@@ -2380,7 +2380,7 @@
      * @private
      * @category Internal
      * @param {Array} The array to search
-     * @param item the item to find in the Array
+     * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
      * @return {Number} the index of the found item, or -1
      *
@@ -2408,7 +2408,7 @@
      * @private
      * @category Internal
      * @param {Array} The array to search
-     * @param item the item to find in the Array
+     * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
      * @return {Number} the index of the found item, or -1
      *
@@ -2436,7 +2436,7 @@
      * @memberOf R
      * @category List
      * @sig a -> [a] -> Number
-     * @param target The item to find.
+     * @param {*} target The item to find.
      * @param {Array} list The array to search in.
      * @return {Number} the index of the target, or -1 if the target is not found.
      *
@@ -2460,7 +2460,7 @@
      * @memberOf R
      * @category List
      * @sig a -> Number -> [a] -> Number
-     * @param target The item to find.
+     * @param {*} target The item to find.
      * @param {Array} list The array to search in.
      * @param {Number} fromIdx the index to start searching from
      * @return {Number} the index of the target, or -1 if the target is not found.
@@ -2483,7 +2483,7 @@
      * @memberOf R
      * @category List
      * @sig a -> [a] -> Number
-     * @param target The item to find.
+     * @param {*} target The item to find.
      * @param {Array} list The array to search in.
      * @return {Number} the index of the target, or -1 if the target is not found.
      *
@@ -2507,7 +2507,7 @@
      * @memberOf R
      * @category List
      * @sig a -> Number -> [a] -> Number
-     * @param target The item to find.
+     * @param {*} target The item to find.
      * @param {Array} list The array to search in.
      * @param {Number} fromIdx the index to start searching from
      * @return {Number} the index of the target, or -1 if the target is not found.
@@ -2557,7 +2557,7 @@
      * @category List
      * @sig (x, a -> Boolean) -> x -> [a] -> Boolean
      * @param {Function} pred :: x -> x -> Bool
-     * @param x the item to find
+     * @param {*} x the item to find
      * @param {Array} list the list to iterate over
      * @return {Boolean} `true` if `x` is in `list`, else `false`
      * @example
@@ -2646,6 +2646,7 @@
      * @memberOf R
      * @category List
      * @sig (x, a -> Boolean) -> [a] -> [a]
+     * @param {Function} pred :: x -> x -> Bool
      * @param {Array} list The array to consider.
      * @return {Array} The list of unique items.
      * @example
@@ -3079,7 +3080,7 @@
      * @category List
      * @sig Number -> a -> [a] -> [a]
      * @param {Number} index The position to insert the element
-     * @param elt The element to insert into the Array
+     * @param {*} elt The element to insert into the Array
      * @param {Array} list The list to insert into
      * @return {Array} a new Array with `elt` inserted at `index`
      * @example
@@ -4328,7 +4329,7 @@
      * Determine if the passed argument is an integer.
      *
      * @private
-     * @param n
+     * @param {*} n
      * @category type
      * @return {Boolean}
      */
