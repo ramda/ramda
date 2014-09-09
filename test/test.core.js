@@ -20,26 +20,6 @@ describe('isEmpty', function() {
     });
 });
 
-describe('isAtom', function() {
-    it('is false for Arrays', function() {
-        assert.equal(R.isAtom([]), false);
-        assert.equal(R.isAtom([1, 2, 3, 4]), false);
-    });
-    it('is false for undefined, null, and NaN', function() {
-        assert.equal(R.isAtom(), false);
-        assert.equal(R.isAtom(null), false);
-        assert.equal(R.isAtom(NaN), false);
-    });
-
-    it('is true for primitive values', function() {
-        assert.equal(R.isAtom(1), true);
-        assert.equal(R.isAtom('a'), true);
-        assert.equal(R.isAtom({}), true);
-        assert.equal(R.isAtom(true), true);
-        assert.equal(R.isAtom(false), true);
-    });
-});
-
 describe('prepend', function() {
     it('adds the element to the beginning of the list', function() {
         assert.deepEqual(R.prepend('x', ['y', 'z']), ['x', 'y', 'z']);
