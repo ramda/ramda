@@ -264,6 +264,40 @@
         };
     }
 
+    /**
+     * Converts a function into something like an infix operation, meaning that
+     * when called with a single argument, that argument is applied to the
+     * second position, sort of a curry-right.  This allows for more natural
+     * processing of functions which are really binary operators.
+     *
+     * @memberOf R
+     * @category Functions
+     * @param {function} fn The operation to adjust
+     * @return {function} A new function that acts somewhat like an infix operator.
+     * @example
+     *
+     *      var div = op(function (a, b) {
+     *          return a / b;
+     *      });
+     *
+     *      div(6, 3) //=> 2
+     *      div(6, _)(3) //=> 2
+     *      div(3)(6) //=> 2
+     */
+    var op = R.op = function op(fn) {
+        var length = fn.length, _; // we want underscore to be undefined
+        if (length < 2) {throw new Error('Expected binary function.');}
+        var left = curry(fn), right = curry(R.flip(fn));
+
+        return function(a, b) {
+            switch (arguments.length) {
+                case 0: throw new TypeError('No arguments.');
+                case 1: return right(a);
+                case 2: return (b === _) ? left(a) : left.apply(null, arguments);
+                default: return left.apply(null, arguments);
+            }
+        };
+    };
 
     /**
      * Private function that determines whether or not a provided object has a given method.
@@ -4429,13 +4463,16 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a < b
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
-     *      R.lt(2, 6); //=> true
-     *      R.lt(2, 0); //=> false
-     *      R.lt(2, 2); //=> false
+     *      lt(2, 6); //=> true
+     *      lt(2, 0); //=> false
+     *      lt(2, 2); //=> false
+     *      lt(5)(10); //=> true // default currying is right-sectioned
+     *      lt(5, _)(10); //=> false // left-sectioned currying
      */
-    R.lt = curry2(function _lt(a, b) { return a < b; });
+    R.lt = op(function _lt(a, b) { return a < b; });
 
 
     /**
@@ -4448,13 +4485,14 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a <= b
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
      *      R.lte(2, 6); //=> true
      *      R.lte(2, 0); //=> false
      *      R.lte(2, 2); //=> true
      */
-    R.lte = curry2(function _lte(a, b) { return a <= b; });
+    R.lte = op(function _lte(a, b) { return a <= b; });
 
 
     /**

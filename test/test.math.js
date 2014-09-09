@@ -189,6 +189,7 @@ describe('product', function() {
 });
 
 describe('lt', function() {
+    var _ = void 0;
     it('should report whether one item is less than another', function() {
         assert(R.lt(3, 5));
         assert(!R.lt(6, 4));
@@ -197,11 +198,18 @@ describe('lt', function() {
         assert(!R.lt('abcd', 'abc'));
     });
 
-    it('should be automatically curried', function() {
-        var atLeast20 = R.lt(20);
-        assert(!atLeast20(10));
-        assert(!atLeast20(20));
-        assert(atLeast20(25));
+    it('should be automatically right-curried', function() {
+        var lt5 = R.lt(5);
+        assert(!lt5(10));
+        assert(!lt5(5));
+        assert(lt5(3));
+    });
+
+    it('should allow for left sections too', function() {
+        var gt5 = R.lt(5, _);
+        assert(gt5(10));
+        assert(!gt5(5));
+        assert(!gt5(3));
     });
 
     it('throws when given no arguments', function() {
@@ -210,6 +218,7 @@ describe('lt', function() {
 });
 
 describe('lte', function() {
+    var _ = void 0;
     it('should report whether one item is less than another', function() {
         assert(R.lte(3, 5));
         assert(!R.lte(6, 4));
@@ -218,11 +227,18 @@ describe('lte', function() {
         assert(!R.lte('abcd', 'abc'));
     });
 
-    it('should be automatically curried', function() {
-        var greaterThan20 = R.lte(20);
-        assert(!greaterThan20(10));
-        assert(greaterThan20(20));
-        assert(greaterThan20(25));
+    it('should be automatically right-curried', function() {
+        var noMoreThan20 = R.lte(20);
+        assert(noMoreThan20(10));
+        assert(noMoreThan20(20));
+        assert(!noMoreThan20(25));
+    });
+
+    it('should allow for left sections too', function() {
+        var atLeast20 = R.lte(20, _);
+        assert(!atLeast20(10));
+        assert(atLeast20(20));
+        assert(atLeast20(25));
     });
 
     it('throws when given no arguments', function() {
