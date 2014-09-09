@@ -883,32 +883,6 @@
 
 
     /**
-     * Returns `true` if the argument is an atom; `false` otherwise. An atom is defined as any
-     * value that is not an array, `undefined`, or `null`.
-     *
-     * @func
-     * @memberOf R
-     * @category Array
-     * @sig a -> Boolean
-     * @param {*} x The element to consider.
-     * @return {boolean} `true` if `x` is an atom, and `false` otherwise.
-     * @example
-     *
-     *      R.isAtom([]); //=> false
-     *      R.isAtom(null); //=> false
-     *      R.isAtom(undefined); //=> false
-     *
-     *      R.isAtom(0); //=> true
-     *      R.isAtom(''); //=> true
-     *      R.isAtom('test'); //=> true
-     *      R.isAtom({}); //=> true
-     */
-    R.isAtom = function _isAtom(x) {
-        return x != null && x === x && !isArray(x);
-    };
-
-
-    /**
      * Returns a new list containing the contents of the given list, followed by the given
      * element.
      *
