@@ -6,20 +6,12 @@ describe('curry', function() {
         return a * b * c;
     }
     var curried = R.curry(source);
-    it('curry should curry', function() {
+    it('should curry', function() {
         assert.equal(curried(1)(2)(3), 6);
         assert.equal(curried(1, 2)(3), 6);
         assert.equal(curried(1)(2, 3), 6);
         assert.equal(curried(1, 2, 3), 6);
         assert.notEqual(curried, source);
-    });
-
-    it('curry should accept an arity', function() {
-        var curried = R.curry(function(a, b, c, d) {
-            return a * b * c;
-        }, 3);
-        assert.equal(curried(1)(2)(3), 6);
-        assert.equal(curried(1, 2, 3), 6);
     });
 
     it('produces functions that throw when called with no arguments', function() {
@@ -30,8 +22,21 @@ describe('curry', function() {
 
 });
 
+describe('curryN', function() {
+    function source(a, b, c, d) {
+        return a * b * c;
+    }
+    it('should accept an arity', function() {
+        var curried = R.curryN(3, source);
+        assert.equal(curried(1)(2)(3), 6);
+        assert.equal(curried(1, 2)(3), 6);
+        assert.equal(curried(1)(2, 3), 6);
+        assert.equal(curried(1, 2, 3), 6);
+    });
+});
+
 describe('internal curry', function() {
-    it('should throw an expcetion given no arguments', function() {
+    it('should throw an exception given no arguments', function() {
         assert.throws(R.map);
         assert.throws(R.map(R.I));
         // doesnt throw an exception
