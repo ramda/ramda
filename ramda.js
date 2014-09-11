@@ -1877,12 +1877,11 @@
      *
      *      R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
      */
-    R.ap = curry2(checkForMethod('ap', function _ap(fns, vs) {
-        return foldl(function(acc, fn) {
+    R.ap = curry2(function _ap(fns, vs) {
+        return hasMethod('ap', fns) ? fns.ap(vs) : foldl(function(acc, fn) {
             return concat(acc, map(fn, vs));
         },  [], fns);
-    }));
-
+    });
 
     /**
      *
