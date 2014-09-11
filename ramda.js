@@ -2752,8 +2752,9 @@
 
 
     /**
-     * Creates a new list out of the two supplied by applying the function to each
-     * equally-positioned pair in the lists.
+     * Creates a new list out of the two supplied by applying the function to
+     * each equally-positioned pair in the lists. The returned list is
+     * truncated in length to the length of the shortest of the two lists.
      *
      * @function
      * @memberOf R
@@ -2782,8 +2783,10 @@
 
 
     /**
-     * Creates a new list out of the two supplied by pairing up equally-positioned items from
-     * both lists. Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
+     * Creates a new list out of the two supplied by pairing up
+     * equally-positioned items from both lists.  The returned list is
+     * truncated in length to the length of the shortest of the two lists.
+     * Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
      *
      * @func
      * @memberOf R
