@@ -1,8 +1,8 @@
 module.exports = [
   {
-    browserName: 'iphone',
+    browserName: 'ipad',
     version: '7.1',
-    deviceName: 'iPhone',
+    deviceName: 'iPad',
     'device-orientation': 'portrait',
     platform: 'OS X 10.9'
   },
@@ -11,6 +11,6 @@ module.exports = [
     version: '7.1',
     deviceName: 'iPad',
     'device-orientation': 'portrait',
-    platform: 'OS X 10.9'
+    platform: 'OS X 10.6'
   }
 ];
