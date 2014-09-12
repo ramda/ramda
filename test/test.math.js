@@ -1,12 +1,13 @@
 var assert = require('assert');
 var R = require('..');
+var _ = void 0;
 
 describe('add', function() {
-    it('should add together two numbers', function() {
+    it('adds together two numbers', function() {
         assert.equal(10, R.add(3, 7));
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var incr = R.add(1);
         assert.equal(43, incr(42));
     });
@@ -17,11 +18,11 @@ describe('add', function() {
 });
 
 describe('multiply', function() {
-    it('should add together two numbers', function() {
+    it('adds together two numbers', function() {
         assert.equal(42, R.multiply(6, 7));
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var dbl = R.multiply(2);
         assert.equal(30, dbl(15));
     });
@@ -32,13 +33,18 @@ describe('multiply', function() {
 });
 
 describe('subtract', function() {
-    it('should subtract two numbers', function() {
+    it('subtracts two numbers', function() {
         assert.equal(15, R.subtract(22, 7));
     });
 
-    it('should be automatically curried', function() {
-        var ninesCompl = R.subtract(9);
+    it('is automatically right-curried', function() {
+        var ninesCompl = R.subtract(9, void 0);
         assert.equal(3, ninesCompl(6));
+    });
+
+    it('allows for left sections too', function() {
+        var minus5 = R.subtract(5);
+        assert.equal(12, minus5(17));
     });
 
     it('throws if given no arguments', function() {
@@ -46,29 +52,20 @@ describe('subtract', function() {
     });
 });
 
-describe('subtractN', function() {
-    it('should subtract two numbers', function() {
-        assert.equal(15, R.subtractN(7, 22));
-    });
-
-    it('should be automatically curried', function() {
-        var minus6 = R.subtractN(6);
-        assert.equal(3, minus6(9));
-    });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.subtractN, TypeError);
-    });
-});
 
 describe('divide', function() {
-    it('should divide two numbers', function() {
+    it('divides two numbers', function() {
         assert.equal(4, R.divide(28, 7));
     });
 
-    it('should be automatically curried', function() {
-        var divideInto120 = R.divide(120);
-        assert.equal(3, divideInto120(40));
+    it('is automatically right-curried', function() {
+        var into28 = R.divide(28, _);
+        assert.equal(4, into28(7));
+    });
+
+    it('allows for left sections too', function() {
+        var half = R.divide(2);
+        assert.equal(20, half(40));
     });
 
     it('throws if given no arguments', function() {
@@ -76,20 +73,6 @@ describe('divide', function() {
     });
 });
 
-describe('divideBy', function() {
-    it('should divide two numbers', function() {
-        assert.equal(4, R.divideBy(7, 28));
-    });
-
-    it('should be automatically curried', function() {
-        var half = R.divideBy(2);
-        assert.equal(20, half(40));
-    });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.divideBy, TypeError);
-    });
-});
 
 describe('modulo', function() {
     it('divides the first param by the second and returns the remainder', function() {
@@ -98,11 +81,19 @@ describe('modulo', function() {
         assert.equal(R.modulo(100, 17), 15);
     });
 
-    it('is automatically curried', function() {
-        var modOf120by = R.modulo(120);
-        assert.equal(typeof modOf120by, 'function');
-        assert.equal(modOf120by(3), 0);
-        assert.equal(modOf120by(19), 6);
+    it('is automatically right-curried', function() {
+        var hundredMod = R.modulo(100, _);
+        assert.equal(typeof hundredMod, 'function');
+        assert.equal(hundredMod(2), 0);
+        assert.equal(hundredMod(3), 1);
+        assert.equal(hundredMod(17), 15);
+    });
+
+    it('allows for left sections too', function() {
+        var isOdd = R.modulo(2);
+        assert.equal(typeof isOdd, 'function');
+        assert.equal(isOdd(3), 1);
+        assert.equal(isOdd(198), 0);
     });
 
     it('preserves javascript-style modulo evaluation for negative numbers', function() {
@@ -114,28 +105,6 @@ describe('modulo', function() {
     });
 });
 
-describe('moduloBy', function() {
-    it('divides the second param by the first and returns the remainder', function() {
-        assert.equal(R.moduloBy(2, 100), 0);
-        assert.equal(R.moduloBy(3, 100), 1);
-        assert.equal(R.moduloBy(17, 100), 15);
-    });
-
-    it('is automatically curried', function() {
-        var isOdd = R.moduloBy(2);
-        assert.equal(typeof isOdd, 'function');
-        assert.equal(isOdd(3), 1);
-        assert.equal(isOdd(198), 0);
-    });
-
-    it('preserves javascript-style modulo evaluation for negative numbers', function() {
-        assert.equal(R.moduloBy(4, -5), -1);
-    });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.moduloBy);
-    });
-});
 
 describe('mathMod', function() {
     it('requires integer arguments', function() {
@@ -159,11 +128,17 @@ describe('mathMod', function() {
         assert.equal(isNaN(R.mathMod(17, 5.5)), true);
     });
 
-    it('is curried', function() {
-        var f = R.mathMod(29);
+    it('is automatically right-curried', function() {
+        var f = R.mathMod(29, _);
         assert.equal(f(6), 5);
     });
 
+
+    it('allows for left sections too', function() {
+        var mod5 = R.modulo(5);
+        assert.equal(mod5(12), 2);
+        assert.equal(mod5(8), 3);
+    });
 
     it('throws if given no arguments', function() {
         assert.throws(R.mathMod);
@@ -171,7 +146,7 @@ describe('mathMod', function() {
 });
 
 describe('sum', function() {
-    it('should add together the array of numbers supplied', function() {
+    it('adds together the array of numbers supplied', function() {
         assert.equal(10, R.sum([1, 2, 3, 4]));
     });
 
@@ -183,14 +158,14 @@ describe('sum', function() {
 });
 
 describe('product', function() {
-    it('should multiply together the array of numbers supplied', function() {
+    it('multiplies together the array of numbers supplied', function() {
         assert.equal(24, R.product([1, 2, 3, 4]));
     });
 });
 
 describe('lt', function() {
     var _ = void 0;
-    it('should report whether one item is less than another', function() {
+    it('reports whether one item is less than another', function() {
         assert(R.lt(3, 5));
         assert(!R.lt(6, 4));
         assert(!R.lt(7.0, 7.0));
@@ -198,14 +173,14 @@ describe('lt', function() {
         assert(!R.lt('abcd', 'abc'));
     });
 
-    it('should be automatically right-curried', function() {
+    it('is automatically right-curried', function() {
         var lt5 = R.lt(5);
         assert(!lt5(10));
         assert(!lt5(5));
         assert(lt5(3));
     });
 
-    it('should allow for left sections too', function() {
+    it('allows for left sections too', function() {
         var gt5 = R.lt(5, _);
         assert(gt5(10));
         assert(!gt5(5));
@@ -219,7 +194,7 @@ describe('lt', function() {
 
 describe('lte', function() {
     var _ = void 0;
-    it('should report whether one item is less than another', function() {
+    it('reports whether one item is less than another', function() {
         assert(R.lte(3, 5));
         assert(!R.lte(6, 4));
         assert(R.lte(7.0, 7.0));
@@ -227,14 +202,14 @@ describe('lte', function() {
         assert(!R.lte('abcd', 'abc'));
     });
 
-    it('should be automatically right-curried', function() {
+    it('is automatically right-curried', function() {
         var noMoreThan20 = R.lte(20);
         assert(noMoreThan20(10));
         assert(noMoreThan20(20));
         assert(!noMoreThan20(25));
     });
 
-    it('should allow for left sections too', function() {
+    it('allows for left sections too', function() {
         var atLeast20 = R.lte(20, _);
         assert(!atLeast20(10));
         assert(atLeast20(20));
@@ -247,7 +222,7 @@ describe('lte', function() {
 });
 
 describe('gt', function() {
-    it('should report whether one item is less than another', function() {
+    it('reports whether one item is less than another', function() {
         assert(!R.gt(3, 5));
         assert(R.gt(6, 4));
         assert(!R.gt(7.0, 7.0));
@@ -255,11 +230,18 @@ describe('gt', function() {
         assert(R.gt('abcd', 'abc'));
     });
 
-    it('should be automatically curried', function() {
-        var lessThan20 = R.gt(20);
-        assert(lessThan20(10));
-        assert(!lessThan20(20));
-        assert(!lessThan20(25));
+    it('is automatically right-curried', function() {
+        var gt20 = R.gt(20);
+        assert(!gt20(10));
+        assert(!gt20(20));
+        assert(gt20(25));
+    });
+
+    it('allows for left sections too', function() {
+        var upto20 = R.gt(20, _);
+        assert(upto20(10));
+        assert(!upto20(20));
+        assert(!upto20(25));
     });
 
     it('throws when given no arguments', function() {
@@ -268,7 +250,7 @@ describe('gt', function() {
 });
 
 describe('gte', function() {
-    it('should report whether one item is less than another', function() {
+    it('reports whether one item is less than another', function() {
         assert(!R.gte(3, 5));
         assert(R.gte(6, 4));
         assert(R.gte(7.0, 7.0));
@@ -276,11 +258,18 @@ describe('gte', function() {
         assert(R.gte('abcd', 'abc'));
     });
 
-    it('should be automatically curried', function() {
-        var upTo20 = R.gte(20);
-        assert(upTo20(10));
-        assert(upTo20(20));
-        assert(!upTo20(25));
+    it('is automatically right-curried', function() {
+        var gte20 = R.gte(20);
+        assert(!gte20(10));
+        assert(gte20(20));
+        assert(gte20(25));
+    });
+
+    it('allows for left sections too', function() {
+        var upto20 = R.gte(20, _);
+        assert(upto20(10));
+        assert(upto20(20));
+        assert(!upto20(25));
     });
 
     it('throws when given no arguments', function() {
