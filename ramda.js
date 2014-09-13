@@ -176,7 +176,7 @@
      *      var curriedAddFourNumbers = R.curry(addFourNumbers);
      *      var f = curriedAddFourNumbers(1, 2);
      *      var g = f(3);
-     *      g(4);//=> 10
+     *      g(4); //=> 10
      */
     var curry = R.curry = function _curry(fn, fnArity) {
         if (arguments.length < 2) {
@@ -737,8 +737,7 @@
      * @example
      *
      *      var numbers = [1, 2, 3];
-     *      var numbersClone = R.clone(numbers);
-     *      console.log(numbersClone); //=> [1, 2, 3]
+     *      var numbersClone = R.clone(numbers); //=> [1, 2, 3]
      *      numbers === numbersClone; //=> false
      *
      *      // Note that this is a shallow clone--it does not clone complex values:
@@ -1180,7 +1179,7 @@
      *        return ([]).concat(a, b, c);
      *      };
      *
-     *      mergeThree(1, 2, 3)); //=> [1, 2, 3]
+     *      mergeThree(1, 2, 3); //=> [1, 2, 3]
      *
      *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
      */
@@ -3252,7 +3251,7 @@
      *
      *      var sayX = function(x) { console.log('x is ' + x); };
      *      R.tap(100, sayX); //=> 100
-     *      // (and logs: 'x is 100')
+     *      //-> 'x is 100')
      */
     R.tap = curry2(function _tap(x, fn) {
         if (typeof fn === 'function') { fn(x); }
@@ -4353,12 +4352,12 @@
      * @see R.moduloBy
      * @example
      *
-     *      R.mathMod(-17, 5)  // 3
-     *      R.mathMod(17, 5)   // 2
-     *      R.mathMod(17, -5)  // NaN
-     *      R.mathMod(17, 0)   // NaN
-     *      R.mathMod(17.2, 5) // NaN
-     *      R.mathMod(17, 5.3) // NaN
+     *      R.mathMod(-17, 5);  //=> 3
+     *      R.mathMod(17, 5);   //=> 2
+     *      R.mathMod(17, -5);  //=> NaN
+     *      R.mathMod(17, 0);   //=> NaN
+     *      R.mathMod(17.2, 5); //=> NaN
+     *      R.mathMod(17, 5.3); //=> NaN
      */
     R.mathMod = curry2(function _mathMod(m, p) {
         if (!isInteger(m)) { return NaN; }
