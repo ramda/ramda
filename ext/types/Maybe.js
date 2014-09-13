@@ -19,10 +19,7 @@ Maybe.prototype.map = function(f) {
 // takes a Maybe that wraps a function (`app`) and applies its `map`
 // method to this Maybe's value, which must be a function.
 Maybe.prototype.ap = function(m) {
-    if (typeof this.value !== 'function') {
-        throw new TypeError('Calling ap on a Maybe requires that the Maybe is wrapping a function');
-    }
-    return this.value == null ? this : m.map(this.value);
+    return typeof this.value !== 'function' ? new Maybe(null) : m.map(this.value);
 };
 
 // applicative
