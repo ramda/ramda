@@ -315,24 +315,28 @@
 
 
     /**
-     * Private function that generates a parameter list based on the paremeter count passed in.
-     *
      * @private
      * @category Internal
-     * @param {number} n The number of parameters
-     * @return {string} The parameter list
-     * @example
-     *
-     *      mkArgStr(1); //=> 'arg0'
-     *      mkArgStr(2); //=> 'arg0, arg1'
-     *      mkArgStr(3); //=> 'arg0, arg1, arg2'
+     * @sig ([String] -> String) -> Number,(* -> a) -> (* -> a)
+     * @param {Function} formatReturnValue
+     * @return {Function}
      */
-    var mkArgStr = function _makeArgStr(n) {
-        var list = [], idx = -1;
-        while (++idx < n) {
-            list[idx] = 'arg' + idx;
-        }
-        return list.join(', ');
+    var makeArityFunction = function makeArityFunction(formatReturnValue) {
+        var makeN = function makeN(n) {
+            var params = R.map(function(n) { return 'arg' + n; }, R.range(0, n));
+            return new Function('fn', [
+                '    return function(' + params.join(', ') + ') {',
+                '        return ' + formatReturnValue(params) + ';',
+                '    }'
+            ].join('\n'));
+        };
+        var cache = {};
+        return function(n, fn) {
+            if (!Object.prototype.hasOwnProperty.call(cache, n)) {
+                cache[n] = makeN(n);
+            }
+            return cache[n](fn);
+        };
     };
 
 
@@ -361,52 +365,9 @@
      *      // Only `n` arguments are passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
      */
-    var nAry = R.nAry = (function() {
-        var cache = {
-            0: function(fn) {
-                return function() {
-                    return fn.call(this);
-                };
-            },
-            1: function(fn) {
-                return function(arg0) {
-                    return fn.call(this, arg0);
-                };
-            },
-            2: function(fn) {
-                return function(arg0, arg1) {
-                    return fn.call(this, arg0, arg1);
-                };
-            },
-            3: function(fn) {
-                return function(arg0, arg1, arg2) {
-                    return fn.call(this, arg0, arg1, arg2);
-                };
-            }
-        };
-
-
-        //     For example:
-        //     cache[5] = function(fn) {
-        //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return fn.call(this, arg0, arg1, arg2, arg3, arg4);
-        //         }
-        //     };
-
-        var makeN = function(n) {
-            var fnArgs = mkArgStr(n);
-            var body = [
-                '    return function(' + fnArgs + ') {',
-                '        return fn.call(this' + (fnArgs ? ', ' + fnArgs : '') + ');',
-                '    }'
-            ].join('\n');
-            return new Function('fn', body);
-        };
-
-        return function _nAry(n, fn) {
-            return (cache[n] || (cache[n] = makeN(n)))(fn);
-        };
-    }());
+    var nAry = R.nAry = makeArityFunction(function(params) {
+        return 'fn.call(' + ['this'].concat(params).join(', ') + ')';
+    });
 
 
     /**
@@ -493,51 +454,9 @@
      *      // All arguments are passed through to the wrapped function
      *      takesOneArg(1, 2); //=> [1, 2]
      */
-    var arity = R.arity = (function() {
-        var cache = {
-            0: function(fn) {
-                return function() {
-                    return fn.apply(this, arguments);
-                };
-            },
-            1: function(fn) {
-                return function(arg0) {
-                    return fn.apply(this, arguments);
-                };
-            },
-            2: function(fn) {
-                return function(arg0, arg1) {
-                    return fn.apply(this, arguments);
-                };
-            },
-            3: function(fn) {
-                return function(arg0, arg1, arg2) {
-                    return fn.apply(this, arguments);
-                };
-            }
-        };
-
-        //     For example:
-        //     cache[5] = function(fn) {
-        //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return fn.apply(this, arguments);
-        //         }
-        //     };
-
-        var makeN = function(n) {
-            var fnArgs = mkArgStr(n);
-            var body = [
-                '    return function(' + fnArgs + ') {',
-                '        return fn.apply(this, arguments);',
-                '    }'
-            ].join('\n');
-            return new Function('fn', body);
-        };
-
-        return function _arity(n, fn) {
-            return (cache[n] || (cache[n] = makeN(n)))(fn);
-        };
-    }());
+    var arity = R.arity = makeArityFunction(function() {
+        return 'fn.apply(this, arguments)';
+    });
 
 
     /**
