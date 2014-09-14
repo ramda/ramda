@@ -17,7 +17,7 @@ R.curry = function(fn, length) {
     function recurry(args) {
         return setSource(R.arity(Math.max(length - (args && args.length || 0), 0), function() {
             if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
-            var newArgs = concat(args, arguments);
+            var newArgs = R.concat(args, arguments);
             if (newArgs.length >= length) {
                 return fn.apply(this, newArgs);
             } else {
@@ -27,35 +27,3 @@ R.curry = function(fn, length) {
     }
     return recurry([]);
 };
-
-function curry2(fn) {
-    return setSource(function(a, b) {
-        switch (arguments.length) {
-            case 0:
-                throw NO_ARGS_EXCEPTION;
-            case 1:
-                return setSource(function(b) {
-                    return fn(a, b);
-                }, fn);
-        }
-        return fn(a, b);
-    }, fn);
-}
-
-function curry3(fn) {
-    return setSource(function(a, b, c) {
-        switch (arguments.length) {
-            case 0:
-                throw NO_ARGS_EXCEPTION;
-            case 1:
-                return curry2(function(b, c) {
-                    return fn(a, b, c);
-                });
-            case 2:
-                return setSource(function(c) {
-                    return fn(a, b, c);
-                });
-        }
-        return fn(a, b, c);
-    }, fn);
-}

@@ -24,7 +24,7 @@
     } else {
         this.R = this.ramda = factory(this);
     }
-}(function(global) {
+}(function() {
 
     'use strict';
 
@@ -502,16 +502,19 @@
             },
             1: function(fn) {
                 return function(arg0) {
+                    void arg0;
                     return fn.apply(this, arguments);
                 };
             },
             2: function(fn) {
                 return function(arg0, arg1) {
+                    void arg1;
                     return fn.apply(this, arguments);
                 };
             },
             3: function(fn) {
                 return function(arg0, arg1, arg2) {
+                    void arg2;
                     return fn.apply(this, arguments);
                 };
             }
@@ -819,7 +822,7 @@
      *
      *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
-    var head = R.head = function head(list) {
+    R.head = function head(list) {
         list = list || [];
         return list[0];
     };
@@ -867,7 +870,7 @@
      *
      *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
      */
-    var tail = R.tail = checkForMethod('tail', function(list) {
+    R.tail = checkForMethod('tail', function(list) {
         list = list || [];
         return (list.length > 1) ? _slice(list, 1) : [];
     });
@@ -1640,7 +1643,7 @@
      * @category List
      * @see R.reduceRight
      */
-    var foldr = R.foldr = R.reduceRight;
+    R.foldr = R.reduceRight;
 
 
     /**
@@ -2695,7 +2698,7 @@
     // TODO: document, even for internals...
     var makeFlat = function _makeFlat(recursive) {
         return function __flatt(list) {
-            var value, result = [], val, idx = -1, j, ilen = list.length, jlen;
+            var value, result = [], idx = -1, j, ilen = list.length, jlen;
             while (++idx < ilen) {
                 if (isArrayLike(list[idx])) {
                     value = (recursive) ? __flatt(list[idx]) : list[idx];
@@ -2728,7 +2731,7 @@
      *      R.flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
      *      //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
      */
-    var flatten = R.flatten = makeFlat(true);
+    R.flatten = makeFlat(true);
 
 
     /**
@@ -3129,7 +3132,7 @@
      *      var people = [
      *        // ...
      *      ];
-     *      sort(cmp, people);
+     *      R.sort(cmp, people);
      */
     var comparator = R.comparator = function _comparator(pred) {
         return function(a, b) {
@@ -3155,7 +3158,7 @@
      *      var diff = function(a, b) { return a - b; };
      *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
      */
-    var sort = R.sort = curry2(function sort(comparator, list) {
+    R.sort = curry2(function sort(comparator, list) {
         return clone(list).sort(comparator);
     });
 
@@ -3577,7 +3580,7 @@
      *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
      */
     R.values = function _values(obj) {
-        var prop, props = keys(obj),
+        var props = keys(obj),
             length = props.length,
             vals = new Array(length);
         for (var idx = 0; idx < length; idx++) {

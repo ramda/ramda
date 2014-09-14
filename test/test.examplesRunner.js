@@ -118,7 +118,7 @@ function runExample(e) {
     });
 }
 
-function checkForAliasExample(e, all_examples) {
+function checkForAliasExample(e) {
     it(e.func_name + ' should have example or be an alias for function that has exmample', function() {
         // TODO: uncomment to enforce this
       //   if (R.isEmpty(e.alias_of)) {
@@ -151,7 +151,7 @@ var propIn = R.curry(function(prop_name, prop_vals, object) {
 });
 
 // create our example objects from dox
-function getExampleFromDox(dox_info, idx, list) {
+function getExampleFromDox(dox_info) {
     var tags = R.filter(propIn('type', ['example', 'see', 'namespace']), dox_info.tags);
     var tag_map = tagListToMap({example: 'string', namespace: 'string', see: 'local'}, tags);
     if (tag_map.namespace) {

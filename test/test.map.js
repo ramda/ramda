@@ -58,7 +58,7 @@ describe('mapObj', function() {
 describe('mapObj.idx', function() {
     var times2 = function(x) {return x * 2;};
     var addIdx = function(x, key) {return x + key;};
-    var squareVowels = function(x, key, obj) {
+    var squareVowels = function(x, key) {
         var vowels = ['a', 'e', 'i', 'o', 'u'];
         return R.contains(key, vowels) ? x * x : x;
     };

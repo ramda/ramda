@@ -1,4 +1,3 @@
-
 function Either(left, right) {
     if (!(this instanceof Either)) {
         return new Either(left, right);

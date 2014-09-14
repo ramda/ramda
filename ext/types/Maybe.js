@@ -1,4 +1,3 @@
-
 function Maybe(x) {
     if (!(this instanceof Maybe)) {
         return new Maybe(x);

@@ -67,7 +67,6 @@ describe('values', function() {
     it("returns an array of the given object's values", function() {
         var vs = R.values(obj).sort();
         var ts = [[1, 2, 3], 100, 'D', {x: 200, y: 300}, null, undefined];
-        var idx = 0;
         assert.equal(vs.length, ts.length);
         assert.deepEqual(vs[0], ts[0]);
         assert.equal(vs[1], ts[1]);
