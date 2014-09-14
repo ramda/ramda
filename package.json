@@ -28,6 +28,7 @@
   "dependencies": {},
   "devDependencies": {
     "benchmark": "~1.0.0",
+    "deedpoll": "0.2.x",
     "docker": "^0.2.13",
     "grunt": "~0.4.5",
     "grunt-benchmark": "https://github.com/buzzdecafe/grunt-benchmark/archive/09999a8c3fbfff04a1695846c1ccd0bd8a0ef5ab.tar.gz",

@@ -28,8 +28,8 @@ describe('contains', function() {
 
 describe('uniq', function() {
     it('returns a set from any array (i.e. purges duplicate elements)', function() {
-        var arr = [1, 2, 3, 1, 2, 3, 1, 2, 3];
-        assert.deepEqual(R.uniq(arr), [1, 2, 3]);
+        var list = [1, 2, 3, 1, 2, 3, 1, 2, 3];
+        assert.deepEqual(R.uniq(list), [1, 2, 3]);
     });
 
     it('keeps elements from the left', function() {
@@ -74,8 +74,8 @@ describe('uniqWith', function() {
 
 describe('isSet', function() {
     it('returns true if a list is composed of unique elements', function() {
-        var arr = [1, 2, 3, 1, 2, 3, 1, 2, 3];
-        assert.equal(R.isSet(arr), false);
+        var list = [1, 2, 3, 1, 2, 3, 1, 2, 3];
+        assert.equal(R.isSet(list), false);
         assert.equal(R.isSet([3, 1, 4, 2, 5, 7, 9]), true);
     });
 

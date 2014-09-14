@@ -64,11 +64,11 @@
             case 1: return _slice(args, 0, args.length);
             case 2: return _slice(args, from, args.length);
             default:
-                var length = to - from, arr = new Array(length), i = -1;
+                var length = to - from, list = new Array(length), i = -1;
                 while (++i < length) {
-                    arr[i] = args[from + i];
+                    list[i] = args[from + i];
                 }
-                return arr;
+                return list;
         }
     }
 
@@ -165,7 +165,7 @@
      * @sig (* -> a) -> Number -> (* -> a)
      * @sig (* -> a) -> (* -> a)
      * @param {Function} fn The function to curry.
-     * @param {number} [fnArity=fn.length] An optional arity for the returned function.
+     * @param {number} [length=fn.length] An optional arity for the returned function.
      * @return {Function} A new, curried function.
      * @example
      *
@@ -178,15 +178,15 @@
      *      var g = f(3);
      *      g(4); //=> 10
      */
-    var curry = R.curry = function _curry(fn, fnArity) {
+    var curry = R.curry = function _curry(fn, length) {
         if (arguments.length < 2) {
             return _curry(fn, fn.length);
         }
         return (function recurry(args) {
-            return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
+            return arity(Math.max(length - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                 var newArgs = concat(args, arguments);
-                if (newArgs.length >= fnArity) {
+                if (newArgs.length >= length) {
                     return fn.apply(this, newArgs);
                 } else {
                     return recurry(newArgs);
@@ -295,20 +295,20 @@
      *
      * @private
      * @category Internal
-     * @param {Function} func ramda implemtation
+     * @param {Function} fn ramda implemtation
      * @param {String} methodname property to check for a custom implementation
      * @return {Object} whatever the return value of the method is
      */
-    function checkForMethod(methodname, func) {
+    function checkForMethod(methodname, fn) {
         return function(a, b, c) {
             var length = arguments.length;
             var obj = arguments[length - 1],
                 callBound = obj && !isArray(obj) && typeof obj[methodname] === 'function';
             switch (arguments.length) {
-                case 0: return func();
-                case 1: return callBound ? obj[methodname]() : func(a);
-                case 2: return callBound ? obj[methodname](a) : func(a, b);
-                case 3: return callBound ? obj[methodname](a, b) : func(a, b, c);
+                case 0: return fn();
+                case 1: return callBound ? obj[methodname]() : fn(a);
+                case 2: return callBound ? obj[methodname](a) : fn(a, b);
+                case 3: return callBound ? obj[methodname](a, b) : fn(a, b, c);
             }
         };
     }
@@ -328,11 +328,11 @@
      *      mkArgStr(3); //=> 'arg0, arg1, arg2'
      */
     var mkArgStr = function _makeArgStr(n) {
-        var arr = [], idx = -1;
+        var list = [], idx = -1;
         while (++idx < n) {
-            arr[idx] = 'arg' + idx;
+            list[idx] = 'arg' + idx;
         }
-        return arr.join(', ');
+        return list.join(', ');
     };
 
 
@@ -363,33 +363,33 @@
      */
     var nAry = R.nAry = (function() {
         var cache = {
-            0: function(func) {
+            0: function(fn) {
                 return function() {
-                    return func.call(this);
+                    return fn.call(this);
                 };
             },
-            1: function(func) {
+            1: function(fn) {
                 return function(arg0) {
-                    return func.call(this, arg0);
+                    return fn.call(this, arg0);
                 };
             },
-            2: function(func) {
+            2: function(fn) {
                 return function(arg0, arg1) {
-                    return func.call(this, arg0, arg1);
+                    return fn.call(this, arg0, arg1);
                 };
             },
-            3: function(func) {
+            3: function(fn) {
                 return function(arg0, arg1, arg2) {
-                    return func.call(this, arg0, arg1, arg2);
+                    return fn.call(this, arg0, arg1, arg2);
                 };
             }
         };
 
 
         //     For example:
-        //     cache[5] = function(func) {
+        //     cache[5] = function(fn) {
         //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return func.call(this, arg0, arg1, arg2, arg3, arg4);
+        //             return fn.call(this, arg0, arg1, arg2, arg3, arg4);
         //         }
         //     };
 
@@ -397,10 +397,10 @@
             var fnArgs = mkArgStr(n);
             var body = [
                 '    return function(' + fnArgs + ') {',
-                '        return func.call(this' + (fnArgs ? ', ' + fnArgs : '') + ');',
+                '        return fn.call(this' + (fnArgs ? ', ' + fnArgs : '') + ');',
                 '    }'
             ].join('\n');
-            return new Function('func', body);
+            return new Function('fn', body);
         };
 
         return function _nAry(n, fn) {
@@ -495,32 +495,32 @@
      */
     var arity = R.arity = (function() {
         var cache = {
-            0: function(func) {
+            0: function(fn) {
                 return function() {
-                    return func.apply(this, arguments);
+                    return fn.apply(this, arguments);
                 };
             },
-            1: function(func) {
+            1: function(fn) {
                 return function(arg0) {
-                    return func.apply(this, arguments);
+                    return fn.apply(this, arguments);
                 };
             },
-            2: function(func) {
+            2: function(fn) {
                 return function(arg0, arg1) {
-                    return func.apply(this, arguments);
+                    return fn.apply(this, arguments);
                 };
             },
-            3: function(func) {
+            3: function(fn) {
                 return function(arg0, arg1, arg2) {
-                    return func.apply(this, arguments);
+                    return fn.apply(this, arguments);
                 };
             }
         };
 
         //     For example:
-        //     cache[5] = function(func) {
+        //     cache[5] = function(fn) {
         //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return func.apply(this, arguments);
+        //             return fn.apply(this, arguments);
         //         }
         //     };
 
@@ -528,10 +528,10 @@
             var fnArgs = mkArgStr(n);
             var body = [
                 '    return function(' + fnArgs + ') {',
-                '        return func.apply(this, arguments);',
+                '        return fn.apply(this, arguments);',
                 '    }'
             ].join('\n');
-            return new Function('func', body);
+            return new Function('fn', body);
         };
 
         return function _arity(n, fn) {
@@ -761,9 +761,9 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> Boolean
-     * @param {Array} arr The array to consider.
-     * @return {boolean} `true` if the `arr` argument has a length of 0 or
-     *         if `arr` is a falsy value (e.g. undefined).
+     * @param {Array} list The array to consider.
+     * @return {boolean} `true` if the `list` argument has a length of 0 or
+     *         if `list` is a falsy value (e.g. undefined).
      * @example
      *
      *      R.isEmpty([1, 2, 3]); //=> false
@@ -771,8 +771,8 @@
      *      R.isEmpty(); //=> true
      *      R.isEmpty(null); //=> true
      */
-    function isEmpty(arr) {
-        return !arr || !arr.length;
+    function isEmpty(list) {
+        return !list || !list.length;
     }
     R.isEmpty = isEmpty;
 
@@ -786,14 +786,14 @@
      * @category Array
      * @sig a -> [a] -> [a]
      * @param {*} el The item to add to the head of the output list.
-     * @param {Array} arr The array to add to the tail of the output list.
+     * @param {Array} list The array to add to the tail of the output list.
      * @return {Array} A new array.
      * @example
      *
      *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
-    R.prepend = curry2(function prepend(el, arr) {
-        return concat([el], arr);
+    R.prepend = curry2(function prepend(el, list) {
+        return concat([el], list);
     });
 
     /**
@@ -813,15 +813,15 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> a
-     * @param {Array} [arr=[]] The array to consider.
+     * @param {Array} [list=[]] The array to consider.
      * @return {*} The first element of the list, or `undefined` if the list is empty.
      * @example
      *
      *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
-    var head = R.head = function head(arr) {
-        arr = arr || [];
-        return arr[0];
+    var head = R.head = function head(list) {
+        list = list || [];
+        return list[0];
     };
 
     /**
@@ -840,15 +840,15 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> a
-     * @param {Array} [arr=[]] The array to consider.
+     * @param {Array} [list=[]] The array to consider.
      * @return {*} The last element of the list, or `undefined` if the list is empty.
      * @example
      *
      *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
      */
-    R.last = function _last(arr) {
-        arr = arr || [];
-        return arr[arr.length - 1];
+    R.last = function _last(list) {
+        list = list || [];
+        return list[list.length - 1];
     };
 
 
@@ -860,16 +860,16 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> [a]
-     * @param {Array} [arr=[]] The array to consider.
+     * @param {Array} [list=[]] The array to consider.
      * @return {Array} A new array containing all but the first element of the input list, or an
      *         empty list if the input list is a falsy value (e.g. `undefined`).
      * @example
      *
      *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
      */
-    var tail = R.tail = checkForMethod('tail', function(arr) {
-        arr = arr || [];
-        return (arr.length > 1) ? _slice(arr, 1) : [];
+    var tail = R.tail = checkForMethod('tail', function(list) {
+        list = list || [];
+        return (list.length > 1) ? _slice(list, 1) : [];
     });
 
     /**
@@ -1020,12 +1020,12 @@
      *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
      */
     R.times = curry2(function _times(fn, n) {
-        var arr = new Array(n);
+        var list = new Array(n);
         var i = -1;
         while (++i < n) {
-            arr[i] = fn(i);
+            list[i] = fn(i);
         }
-        return arr;
+        return list;
     });
 
 
@@ -1122,11 +1122,11 @@
             case 0: throw NO_ARGS_EXCEPTION;
             case 1: return arguments[0];
             default:
-                var idx = arguments.length - 1, func = arguments[idx], fnArity = func.length;
+                var idx = arguments.length - 1, fn = arguments[idx], length = fn.length;
                 while (idx--) {
-                    func = internalCompose(arguments[idx], func);
+                    fn = internalCompose(arguments[idx], fn);
                 }
-                return arity(fnArity, func);
+                return arity(length, fn);
         }
     };
 
@@ -1949,21 +1949,21 @@
 
 
     /**
-     * Returns the number of elements in the array by returning `arr.length`.
+     * Returns the number of elements in the array by returning `list.length`.
      *
      * @func
      * @memberOf R
      * @category List
      * @sig [a] -> Number
-     * @param {Array} arr The array to inspect.
+     * @param {Array} list The array to inspect.
      * @return {number} The size of the array.
      * @example
      *
      *      R.size([]); //=> 0
      *      R.size([1, 2, 3]); //=> 3
      */
-    R.size = function _size(arr) {
-        return arr.length;
+    R.size = function _size(list) {
+        return list.length;
     };
 
     /**
@@ -2382,13 +2382,13 @@
      * @return {Number} the index of the found item, or -1
      *
      */
-    var indexOf = function _indexOf(array, item, from) {
-        var i = 0, length = array.length;
+    var indexOf = function _indexOf(list, item, from) {
+        var i = 0, length = list.length;
         if (typeof from == 'number') {
             i = from < 0 ? Math.max(0, length + from) : from;
         }
         for (; i < length; i++) {
-            if (array[i] === item) {
+            if (list[i] === item) {
                 return i;
             }
         }
@@ -2410,13 +2410,13 @@
      * @return {Number} the index of the found item, or -1
      *
      */
-    var lastIndexOf = function _lastIndexOf(array, item, from) {
-        var idx = array.length;
+    var lastIndexOf = function _lastIndexOf(list, item, from) {
+        var idx = list.length;
         if (typeof from == 'number') {
             idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
         }
         while (--idx >= 0) {
-            if (array[idx] === item) {
+            if (list[idx] === item) {
                 return idx;
             }
         }
@@ -2695,18 +2695,17 @@
     // TODO: document, even for internals...
     var makeFlat = function _makeFlat(recursive) {
         return function __flatt(list) {
-            var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
+            var value, result = [], val, i = -1, j, ilen = list.length, jlen;
             while (++i < ilen) {
-                array = list[i];
-                if (isArrayLike(array)) {
-                    value = (recursive) ? __flatt(array) : array;
+                if (isArrayLike(list[i])) {
+                    value = (recursive) ? __flatt(list[i]) : list[i];
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {
                         result.push(value[j]);
                     }
                 } else {
-                    result.push(array);
+                    result.push(list[i]);
                 }
             }
             return result;
@@ -3391,7 +3390,7 @@
      *      var obj = { f: function() { return 'f called'; } };
      *      R.func('f', obj); //=> 'f called'
      */
-    R.func = function func(funcName, obj) {
+    R.func = function _func(funcName, obj) {
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
             case 1: return function(obj) { return obj[funcName].apply(obj, _slice(arguments, 1)); };
