@@ -75,10 +75,10 @@ var buildLineItem = function(line) {
 //=============================================================================
 
 var processOrder1 = function(order) {
-    var lineItems = [], line, price, item, qty, i, len, cost;
+    var lineItems = [], line, price, item, qty, idx, len, cost;
     var total = 0;
-    for (i = 0, len = order.length; i < len; i++) {
-        line = order[i];
+    for (idx = 0, len = order.length; idx < len; idx++) {
+        line = order[idx];
         item = line.item;
         qty = line.qty;
         if (checkLine(line)) {

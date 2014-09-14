@@ -62,8 +62,7 @@ describe('curry', function() {
         assert.equal(g(3, 6, 2), 15);
         var h = g(3);
         assert.equal(h(6, 2), 15);
-        var i = g(3, 6);
-        assert.equal(i(2), 15);
+        assert.equal(g(3, 6)(2), 15);
     });
 
     it('should properly report the length of the curried function', function() {
@@ -73,7 +72,6 @@ describe('curry', function() {
         assert.equal(g.length, 3);
         var h = g(3);
         assert.equal(h.length, 2);
-        var i = g(3, 6);
-        assert.equal(i.length, 1);
+        assert.equal(g(3, 6).length, 1);
     });
 });

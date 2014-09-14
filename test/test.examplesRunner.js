@@ -77,11 +77,11 @@ function splitAt(str, target) {
     if (!R.is(String, str)) {
         str = String(str);
     }
-    var i = str.indexOf(target);
-    if (i < 0) {
+    var idx = str.indexOf(target);
+    if (idx < 0) {
         return false;
     }
-    return [str.substr(0, i), str.substr(i)];
+    return [str.substr(0, idx), str.substr(idx)];
 }
 
 function assertPairEqual(test_info) {
@@ -95,7 +95,7 @@ function requireFromStr(src, filename) {
     return m.exports;
 }
 
-function processExample(e, i, all_examples) {
+function processExample(e, idx, all_examples) {
     // dox ends up with a few local functions and extra
     // functions from comments we don't need to worry about
     if (e.func_name === false) {
@@ -151,7 +151,7 @@ var propIn = R.curry(function(prop_name, prop_vals, object) {
 });
 
 // create our example objects from dox
-function getExampleFromDox(dox_info, i, list) {
+function getExampleFromDox(dox_info, idx, list) {
     var tags = R.filter(propIn('type', ['example', 'see', 'namespace']), dox_info.tags);
     var tag_map = tagListToMap({example: 'string', namespace: 'string', see: 'local'}, tags);
     if (tag_map.namespace) {

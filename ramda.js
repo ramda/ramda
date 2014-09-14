@@ -64,9 +64,9 @@
             case 1: return _slice(args, 0, args.length);
             case 2: return _slice(args, from, args.length);
             default:
-                var length = to - from, list = new Array(length), i = -1;
-                while (++i < length) {
-                    list[i] = args[from + i];
+                var length = to - from, list = new Array(length), idx = -1;
+                while (++idx < length) {
+                    list[idx] = args[from + idx];
                 }
                 return list;
         }
@@ -92,11 +92,11 @@
             length2 = set2.length,
             result = new Array(length1 + length2);
 
-        for (var i = 0; i < length1; i++) {
-            result[i] = set1[i];
+        for (var idx = 0; idx < length1; idx++) {
+            result[idx] = set1[idx];
         }
-        for (i = 0; i < length2; i++) {
-            result[i + length1] = set2[i];
+        for (idx = 0; idx < length2; idx++) {
+            result[idx + length1] = set2[idx];
         }
         return result;
     };
@@ -1021,9 +1021,9 @@
      */
     R.times = curry2(function _times(fn, n) {
         var list = new Array(n);
-        var i = -1;
-        while (++i < n) {
-            list[i] = fn(i);
+        var idx = -1;
+        while (++idx < n) {
+            list[idx] = fn(idx);
         }
         return list;
     });
@@ -2324,9 +2324,9 @@
      *      R.every(lessThan3)(xs); //=> true
      */
     function every(fn, list) {
-        var i = -1;
-        while (++i < list.length) {
-            if (!fn(list[i])) {
+        var idx = -1;
+        while (++idx < list.length) {
+            if (!fn(list[idx])) {
                 return false;
             }
         }
@@ -2357,9 +2357,9 @@
      *      R.some(lessThan2)(xs); //=> true
      */
     function some(fn, list) {
-        var i = -1;
-        while (++i < list.length) {
-            if (fn(list[i])) {
+        var idx = -1;
+        while (++idx < list.length) {
+            if (fn(list[idx])) {
                 return true;
             }
         }
@@ -2383,13 +2383,13 @@
      *
      */
     var indexOf = function _indexOf(list, item, from) {
-        var i = 0, length = list.length;
+        var idx = 0, length = list.length;
         if (typeof from == 'number') {
-            i = from < 0 ? Math.max(0, length + from) : from;
+            idx = from < 0 ? Math.max(0, length + from) : from;
         }
-        for (; i < length; i++) {
-            if (list[i] === item) {
-                return i;
+        for (; idx < length; idx++) {
+            if (list[idx] === item) {
+                return idx;
             }
         }
         return -1;
@@ -2624,9 +2624,9 @@
      */
     R.isSet = function _isSet(list) {
         var len = list.length;
-        var i = -1;
-        while (++i < len) {
-            if (indexOf(list, list[i], i + 1) >= 0) {
+        var idx = -1;
+        while (++idx < len) {
+            if (indexOf(list, list[idx], idx + 1) >= 0) {
                 return false;
             }
         }
@@ -2695,17 +2695,17 @@
     // TODO: document, even for internals...
     var makeFlat = function _makeFlat(recursive) {
         return function __flatt(list) {
-            var value, result = [], val, i = -1, j, ilen = list.length, jlen;
-            while (++i < ilen) {
-                if (isArrayLike(list[i])) {
-                    value = (recursive) ? __flatt(list[i]) : list[i];
+            var value, result = [], val, idx = -1, j, ilen = list.length, jlen;
+            while (++idx < ilen) {
+                if (isArrayLike(list[idx])) {
+                    value = (recursive) ? __flatt(list[idx]) : list[idx];
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {
                         result.push(value[j]);
                     }
                 } else {
-                    result.push(list[i]);
+                    result.push(list[idx]);
                 }
             }
             return result;
@@ -2772,9 +2772,9 @@
      *      //=> [f(1, 'a'), f(2, 'b'), f(3, 'c')]
      */
     R.zipWith = curry3(function _zipWith(fn, a, b) {
-        var rv = [], i = -1, len = Math.min(a.length, b.length);
-        while (++i < len) {
-            rv[i] = fn(a[i], b[i]);
+        var rv = [], idx = -1, len = Math.min(a.length, b.length);
+        while (++idx < len) {
+            rv[idx] = fn(a[idx], b[idx]);
         }
         return rv;
     });
@@ -2799,10 +2799,10 @@
      */
     R.zip = curry2(function _zip(a, b) {
         var rv = [];
-        var i = -1;
+        var idx = -1;
         var len = Math.min(a.length, b.length);
-        while (++i < len) {
-            rv[i] = [a[i], b[i]];
+        while (++idx < len) {
+            rv[idx] = [a[idx], b[idx]];
         }
         return rv;
     });
@@ -2823,9 +2823,9 @@
      *      R.zipObj(['a', 'b', 'c'], [1, 2, 3]); //=> {a: 1, b: 2, c: 3}
      */
     R.zipObj = curry2(function _zipObj(keys, values) {
-        var i = -1, len = keys.length, out = {};
-        while (++i < len) {
-            out[keys[i]] = values[i];
+        var idx = -1, len = keys.length, out = {};
+        while (++idx < len) {
+            out[keys[idx]] = values[idx];
         }
         return out;
     });
@@ -2845,10 +2845,10 @@
      *      R.fromPairs([['a', 1], ['b', 2],  ['c', 3]]); //=> {a: 1, b: 2, c: 3}
      */
     R.fromPairs = function _fromPairs(pairs) {
-        var i = -1, len = pairs.length, out = {};
-        while (++i < len) {
-            if (isArray(pairs[i]) && pairs[i].length) {
-                out[pairs[i][0]] = pairs[i][1];
+        var idx = -1, len = pairs.length, out = {};
+        while (++idx < len) {
+            if (isArray(pairs[idx]) && pairs[idx].length) {
+                out[pairs[idx][0]] = pairs[idx][1];
             }
         }
         return out;
@@ -2883,11 +2883,11 @@
         }
         // Better to push them all or to do `new Array(ilen * jlen)` and
         // calculate indices?
-        var i = -1, ilen = a.length, j, jlen = b.length, result = [];
-        while (++i < ilen) {
+        var idx = -1, ilen = a.length, j, jlen = b.length, result = [];
+        while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
-                result.push(fn(a[i], b[j]));
+                result.push(fn(a[idx], b[j]));
             }
         }
         return result;
@@ -2914,16 +2914,16 @@
         if (isEmpty(a) || isEmpty(b)) {
             return [];
         }
-        var i = -1;
+        var idx = -1;
         var ilen = a.length;
         var j;
         var jlen = b.length;
         // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
         var result = [];
-        while (++i < ilen) {
+        while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
-                result.push([a[i], b[j]]);
+                result.push([a[idx], b[j]]);
             }
         }
         return result;
@@ -3083,9 +3083,9 @@
      *
      *      R.insert(2, 'x', [1,2,3,4]); //=> [1,2,'x',3,4]
      */
-    R.insert = curry3(function _insert(index, elt, list) {
-        index = index < list.length && index >= 0 ? index : list.length;
-        return concat(append(elt, _slice(list, 0, index)), _slice(list, index));
+    R.insert = curry3(function _insert(idx, elt, list) {
+        idx = idx < list.length && idx >= 0 ? idx : list.length;
+        return concat(append(elt, _slice(list, 0, idx)), _slice(list, idx));
     });
 
 
@@ -3106,9 +3106,9 @@
      *
      *      R.insert.all(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
      */
-    R.insert.all = curry3(function _insertAll(index, elts, list) {
-        index = index < list.length && index >= 0 ? index : list.length;
-        return concat(concat(_slice(list, 0, index), elts), _slice(list, index));
+    R.insert.all = curry3(function _insertAll(idx, elts, list) {
+        idx = idx < list.length && idx >= 0 ? idx : list.length;
+        return concat(concat(_slice(list, 0, idx), elts), _slice(list, idx));
     });
 
 
@@ -3580,8 +3580,8 @@
         var prop, props = keys(obj),
             length = props.length,
             vals = new Array(length);
-        for (var i = 0; i < length; i++) {
-            vals[i] = obj[props[i]];
+        for (var idx = 0; idx < length; idx++) {
+            vals[idx] = obj[props[idx]];
         }
         return vals;
     };
@@ -3625,8 +3625,8 @@
     function pickWith(test, obj) {
         var copy = {},
             props = keys(obj), prop, val;
-        for (var i = 0, len = props.length; i < len; i++) {
-            prop = props[i];
+        for (var idx = 0, len = props.length; idx < len; idx++) {
+            prop = props[idx];
             val = obj[prop];
             if (test(val, prop, obj)) {
                 copy[prop] = val;
@@ -3754,9 +3754,9 @@
      */
     function extend(destination, other) {
         var props = keys(other),
-            i = -1, length = props.length;
-        while (++i < length) {
-            destination[props[i]] = other[props[i]];
+            idx = -1, length = props.length;
+        while (++idx < length) {
+            destination[props[idx]] = other[props[idx]];
         }
         return destination;
     }
@@ -3819,9 +3819,9 @@
         if (testObj == null) { return false; }
         parsedSpec.fn = parsedSpec.fn || [];
         parsedSpec.obj = parsedSpec.obj || [];
-        var key, val, i = -1, fnLen = parsedSpec.fn.length, j = -1, objLen = parsedSpec.obj.length;
-        while (++i < fnLen) {
-            key = parsedSpec.fn[i];
+        var key, val, idx = -1, fnLen = parsedSpec.fn.length, j = -1, objLen = parsedSpec.obj.length;
+        while (++idx < fnLen) {
+            key = parsedSpec.fn[idx];
             val = spec[key];
             //     if (!hasOwnProperty.call(testObj, key)) {
             //       return false;
@@ -4829,11 +4829,11 @@
      *      path(['a', 'b'], {a: {b: 2}}); //=> 2
      */
     function path(paths, obj) {
-        var i = -1, length = paths.length, val;
+        var idx = -1, length = paths.length, val;
         if (obj == null) { return; }
         val = obj;
-        while (val != null && ++i < length) {
-            val = val[paths[i]];
+        while (val != null && ++idx < length) {
+            val = val[paths[idx]];
         }
         return val;
     }

@@ -26,8 +26,8 @@
 
         var mash = function(data) {
             data = data.toString();
-            for (var i = 0; i < data.length; i++) {
-                n += data.charCodeAt(i);
+            for (var idx = 0; idx < data.length; idx++) {
+                n += data.charCodeAt(idx);
                 var h = 0.02519603282416938 * n;
                 n = h >>> 0;
                 h -= n;
@@ -61,16 +61,16 @@
             s1 = mash(' ');
             s2 = mash(' ');
 
-            for (var i = 0; i < args.length; i++) {
-                s0 -= mash(args[i]);
+            for (var idx = 0; idx < args.length; idx++) {
+                s0 -= mash(args[idx]);
                 if (s0 < 0) {
                     s0 += 1;
                 }
-                s1 -= mash(args[i]);
+                s1 -= mash(args[idx]);
                 if (s1 < 0) {
                     s1 += 1;
                 }
-                s2 -= mash(args[i]);
+                s2 -= mash(args[idx]);
                 if (s2 < 0) {
                     s2 += 1;
                 }
