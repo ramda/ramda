@@ -38,9 +38,9 @@ describe('compose', function() {
     });
 
     it('returns a function with arity == rightmost argument', function() {
-        function a2(x, y) { return 'A2'; }
-        function a3(x, y) { return 'A2'; }
-        function a4(x, y) { return 'A2'; }
+        function a2(x, y) { void y; return 'A2'; }
+        function a3(x, y) { void y; return 'A2'; }
+        function a4(x, y) { void y; return 'A2'; }
 
         var f1 = R.compose(b, a);
         assert.equal(f1.length, a.length);

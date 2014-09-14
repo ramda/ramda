@@ -79,8 +79,8 @@ describe('foldr', function() {
 });
 
 describe('foldl.idx', function() {
-    var timesIdx = function(tot, num, idx, ls) {return tot + (num * idx);};
-    var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
+    var timesIdx = function(tot, num, idx) {return tot + (num * idx);};
+    var objectify = function(acc, elem, idx) { acc[elem] = idx; return acc;};
 
     it('works just like normal foldl', function() {
         assert.equal(R.foldl.idx(R.add, 0, [1, 2, 3, 4]), 10);
@@ -119,11 +119,11 @@ describe('foldl.idx', function() {
 });
 
 describe('foldr.idx', function() {
-    var timesIdx = function(tot, num, idx, ls) {return tot + (num * idx);};
-    var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
+    var timesIdx = function(tot, num, idx) {return tot + (num * idx);};
+    var objectify = function(acc, elem, idx) { acc[elem] = idx; return acc;};
 
     it('folds lists in the right order', function() {
-        assert.equal(R.foldr.idx(function(a, b, idx, list) {return a + idx + b;}, '', ['a', 'b', 'c', 'd']), '3d2c1b0a');
+        assert.equal(R.foldr.idx(function(a, b, idx) {return a + idx + b;}, '', ['a', 'b', 'c', 'd']), '3d2c1b0a');
     });
 
     it('folds simple functions over arrays with the supplied accumulator', function() {
@@ -132,7 +132,7 @@ describe('foldr.idx', function() {
 
     it('returns the accumulator for an empty array', function() {
         var memo = [];
-        assert.equal(R.foldr.idx(function(a, n, idx, ls) { return a.concat(idx); }, memo, []), memo);
+        assert.equal(R.foldr.idx(function(a, n, idx) { return a.concat(idx); }, memo, []), memo);
     });
 
     it('should be automatically curried', function() {

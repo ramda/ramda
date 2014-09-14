@@ -1,4 +1,3 @@
-var assert = require('assert');
 var R = require('../../..');
 
 describe('curry', function() {
@@ -6,6 +5,7 @@ describe('curry', function() {
         return a * b * c;
     }
     var curried = R.curry(source);
+    void curried;
 /* TODO: restore these for debug build
     it('curry should set the toString value to the original', function() {
         assert.equal(String(source), String(curried));

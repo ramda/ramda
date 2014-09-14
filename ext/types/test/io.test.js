@@ -5,12 +5,11 @@ var R = require('../../..');
 var IO = require('../IO');
 
 describe('IO', function() {
-    var f1 = function(x) { console.log('IO 1'); return '1 '; };
+    var f1 = function() { console.log('IO 1'); return '1 '; };
     var f2 = function(x) { console.log('IO 2'); return x + '2 '; };
     var f3 = function(x) { console.log('IO 3'); return x + '3 '; };
     var i1 = IO(f1);
     var i2 = IO(f2);
-    var i3 = IO(f3);
 
     it('is a Functor', function() {
         var fTest = types.functor;
@@ -21,7 +20,7 @@ describe('IO', function() {
 
     it('is an Apply', function() {
         var aTest = types.apply;
-        var a = IO(function(n) { return R.add(1); });
+        var a = IO(function() { return R.add(1); });
         var b = IO(function() { return R.always(2); });
         var c = IO(R.always(4));
 

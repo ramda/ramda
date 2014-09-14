@@ -76,7 +76,10 @@ module.exports = function(grunt) {
             files: ['ramda.js', 'ext/**/*.js', 'test/*.js'],
             options: {
                 evil: true,
-                eqnull: true
+                eqnull: true,
+                predef: ['beforeEach', 'console', 'define', 'describe', 'it', 'module', 'require'],
+                undef: true,
+                unused: true,
             }
         },
 

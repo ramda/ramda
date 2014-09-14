@@ -154,6 +154,7 @@ describe('unary', function() {
     it('initial argument is passed through normally', function() {
         R.unary(function(x, y, z) {
             assert.equal(x, 10);
+            void z;
         })(10, 20, 30);
     });
 });
@@ -170,6 +171,7 @@ describe('binary', function() {
         R.binary(function(x, y, z) {
             assert.equal(x, 10);
             assert.equal(y, 20);
+            void z;
         })(10, 20, 30);
     });
 });
@@ -179,13 +181,13 @@ describe('nAry', function() {
     function toArray(args) { return Array.prototype.slice.call(args, 0); }
 
     it('should turn multiple-argument function into a nullary one', function() {
-        var fn = R.nAry(0, function(x, y, z) { return toArray(arguments); });
+        var fn = R.nAry(0, function(x, y, z) { void z; return toArray(arguments); });
         assert.equal(fn.length, 0);
         assert.deepEqual(fn(1, 2, 3), []);
     });
 
     it('should turn multiple-argument function into a ternary one', function() {
-        var fn = R.nAry(3, function(a, b, c, d) { return toArray(arguments); });
+        var fn = R.nAry(3, function(a, b, c, d) { void d; return toArray(arguments); });
         assert.equal(fn.length, 3);
         assert.deepEqual(fn(1, 2, 3, 4), [1, 2, 3]);
         assert.deepEqual(fn(1), [1, undefined, undefined]);
@@ -207,7 +209,6 @@ describe('nAry', function() {
 });
 
 describe('ap', function() {
-    function inc(x) { return x + 1; }
     function mult2(x) { return x * 2; }
     function plus3(x) { return x + 3; }
 

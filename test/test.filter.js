@@ -49,11 +49,11 @@ describe('filter.idx', function() {
     });
 
     it('returns an empty array if no element matches', function() {
-        assert.deepEqual(R.filter.idx(function(x, idx, o) { return x > 100; }, [1, 9, 99]), []);
+        assert.deepEqual(R.filter.idx(function(x) { return x > 100; }, [1, 9, 99]), []);
     });
 
     it('returns an empty array if asked to filter an empty array', function() {
-        assert.deepEqual(R.filter.idx(function(x, idx, o) { return x > 100; }, []), []);
+        assert.deepEqual(R.filter.idx(function(x) { return x > 100; }, []), []);
     });
 
     it('should be automatically curried', function() {
@@ -74,19 +74,19 @@ describe('reject', function() {
     });
 
     it('returns an empty array if no element matches', function() {
-        assert.deepEqual(R.reject(function(x, idx, o) { return x < 100; }, [1, 9, 99]), []);
+        assert.deepEqual(R.reject(function(x) { return x < 100; }, [1, 9, 99]), []);
     });
 
     it('returns an empty array if asked to filter an empty array', function() {
-        assert.deepEqual(R.reject(function(x, idx, o) { return x > 100; }, []), []);
+        assert.deepEqual(R.reject(function(x) { return x > 100; }, []), []);
     });
 
     it('returns an empty array if no element matches', function() {
-        assert.deepEqual(R.reject(function(x, idx, o) { return x < 100; }, [1, 9, 99]), []);
+        assert.deepEqual(R.reject(function(x) { return x < 100; }, [1, 9, 99]), []);
     });
 
     it('returns an empty array if asked to filter an empty array', function() {
-        assert.deepEqual(R.reject(function(x, idx, o) { return x > 100; }, []), []);
+        assert.deepEqual(R.reject(function(x) { return x > 100; }, []), []);
     });
 
     it('should be automatically curried', function() {
@@ -117,11 +117,11 @@ describe('reject.idx', function() {
     });
 
     it('returns an empty array if no element matches', function() {
-        assert.deepEqual(R.reject.idx(function(x, idx, o) { return x < 100; }, [1, 9, 99]), []);
+        assert.deepEqual(R.reject.idx(function(x) { return x < 100; }, [1, 9, 99]), []);
     });
 
     it('returns an empty array if asked to filter an empty array', function() {
-        assert.deepEqual(R.reject.idx(function(x, idx, o) { return x > 100; }, []), []);
+        assert.deepEqual(R.reject.idx(function(x) { return x > 100; }, []), []);
     });
 
     it('should be automatically curried', function() {
@@ -161,7 +161,7 @@ describe('takeWhile', function() {
     });
 
     it('should start at the right arg and acknowledges undefined', function() {
-        assert.deepEqual(R.takeWhile(function(x) { assert.ok(false); }, []), []);
+        assert.deepEqual(R.takeWhile(function() { assert.ok(false); }, []), []);
         assert.deepEqual(R.takeWhile(function(x) {return x !== void 0;}, [1, 3, void 0, 5, 7]), [1, 3]);
     });
 
@@ -194,8 +194,8 @@ describe('skipUntil', function() {
     });
 
     it('returns an empty list for an ampty list', function() {
-        assert.deepEqual(R.skipUntil(function(x) { return false; }, []), []);
-        assert.deepEqual(R.skipUntil(function(x) { return true; }, []), []);
+        assert.deepEqual(R.skipUntil(function() { return false; }, []), []);
+        assert.deepEqual(R.skipUntil(function() { return true; }, []), []);
     });
 
     it('starts at the right arg and acknowledges undefined', function() {

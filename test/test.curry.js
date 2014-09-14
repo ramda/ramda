@@ -16,6 +16,7 @@ describe('curry', function() {
 
     it('curry should accept an arity', function() {
         var curried = R.curry(function(a, b, c, d) {
+            void d;
             return a * b * c;
         }, 3);
         assert.equal(curried(1)(2)(3), 6);
