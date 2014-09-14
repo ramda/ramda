@@ -199,9 +199,9 @@ describe('nAry', function() {
         var undefs = fn();
         var ns = R.repeatN(undefined, 10);
         assert(undefs.length === ns.length);
-        var i = undefs.length;
-        while (--i) {
-            assert(undefs[i] === ns[i]);
+        var idx = undefs.length;
+        while (--idx) {
+            assert(undefs[idx] === ns[idx]);
         }
     });
 });

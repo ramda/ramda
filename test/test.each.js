@@ -49,12 +49,12 @@ describe('forEach.idx', function() {
     });
 
     it('handles empty list', function() {
-        assert.deepEqual(R.forEach.idx(function(x, i, o) { return x + i; }, []), []);
+        assert.deepEqual(R.forEach.idx(function(x, idx, o) { return x + idx; }, []), []);
     });
 
     it('is curried', function() {
         var sum = 0;
-        var xe = R.forEach.idx(function(x, i, o) { sum += (x + i); });
+        var xe = R.forEach.idx(function(x, idx, o) { sum += (x + idx); });
         assert.equal(typeof xe, 'function');
         xe([1, 2, 4]);
         assert.equal(sum, 10);
