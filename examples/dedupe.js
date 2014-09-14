@@ -11,15 +11,15 @@ Consider the function `imperativeDedupe1`, written in imperative style.
 `imperativeDedupe1` takes an array, pushes its elements into an object indexed by
 the object value, then pushes back to an array, thereby eliminating duplicates.
 */
-var imperativeDedupe1 = function(arr) {
+var imperativeDedupe1 = function(list) {
     var i,
-        len=arr.length,
+        len=list.length,
         out=[],
         cache={},
         item;
 
     for (i=0;i<len;i++) {
-        item = arr[i];
+        item = list[i];
         if (!(item in cache)) {
             out.push(cache[item] = item);
         }
@@ -123,20 +123,20 @@ equality.
 
 The imperative code might look as nasty as this:
 */
-var imperativeDedupe2 = function(arr) {
+var imperativeDedupe2 = function(list) {
     var i,
-        len=arr.length,
-        out=[arr[0]],
+        len=list.length,
+        out=[list[0]],
         matched = true;
 
     for (i = 0; i < len; i++) {
         for (var j = 0; j < out.length; j++) {
-            if (arr[i].a === out[j].a && arr[i].b === out[j].b) {
+            if (list[i].a === out[j].a && list[i].b === out[j].b) {
                 var matched = true;
             }
         }
         if (!matched) {
-            out.push(arr[i]);
+            out.push(list[i]);
         }
         matched = false;
     }
@@ -168,13 +168,13 @@ var objs2 = [
 /*
 imperativeDedupe3 is a possible approach to this problem using imperative style:
 */
-imperativeDedupe3 = function(arr) {
+imperativeDedupe3 = function(list) {
     var i,
-        len=arr.length,
+        len=list.length,
         out=[],
         obj={};
     for (i = 0; i < len; i++) {
-        obj[arr[i].x + ":" + arr[i].z.a] = arr[i];
+        obj[list[i].x + ":" + list[i].z.a] = list[i];
     }
     for (i in obj) {
         if (obj.hasOwnProperty(i)) {

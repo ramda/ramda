@@ -8,6 +8,8 @@ env:
     - secure: RdTqvihsZTytLsHWjhdRiA3W0dIhM1dDW07ow0wbzWb7OMZSnZUKEBm0bMME1ndpt5V0T1iqeNuhCZ7BDwTAKa8+kKoJ+kxjSHzgdTAKa0IRglq/FMJT/kjJ7uYyxX1HPD7q1Y3PzAhM77fXnEE3DzjpgpXUIXplkDIE+A0R3pA=
 before_script:
 - npm install -g grunt-cli
+script:
+- npm test && make lint
 after_success: 
 - "grunt bench"
 #- "grunt sauce"

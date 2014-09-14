@@ -5,42 +5,42 @@ var defaultComparator = function (a, b) {
 // Imperative:
 
 var quickSortImper = (function () {
-    var swap = function (arr, a, b) {
-        var tmp = arr[a];
-        arr[a] = arr[b];
-        arr[b] = tmp;
+    var swap = function (list, a, b) {
+        var tmp = list[a];
+        list[a] = list[b];
+        list[b] = tmp;
     };
 
-    var partition = function (array, begin, end, pivot, comparator) {
-        var piv = array[pivot];
-        swap(array, pivot, end - 1);
+    var partition = function (list, begin, end, pivot, comparator) {
+        var piv = list[pivot];
+        swap(list, pivot, end - 1);
         var store = begin;
         var ix;
         for (ix = begin; ix < end - 1; ++ix) {
-            if (piv != undefined && comparator(piv, array[ix]) >= 0) {
-                swap(array, store, ix);
+            if (piv != undefined && comparator(piv, list[ix]) >= 0) {
+                swap(list, store, ix);
                 ++store;
             }
         }
-        swap(array, end - 1, store);
+        swap(list, end - 1, store);
 
         return store;
     };
 
-    var qsort = function (array, begin, end, comparator) {
+    var qsort = function (list, begin, end, comparator) {
         if (end - 1 > begin) {
             var pivot = begin + Math.floor(Math.random() * (end - begin));
 
-            pivot = partition(array, begin, end, pivot, comparator);
+            pivot = partition(list, begin, end, pivot, comparator);
 
-            qsort(array, begin, pivot, comparator);
-            qsort(array, pivot + 1, end, comparator);
+            qsort(list, begin, pivot, comparator);
+            qsort(list, pivot + 1, end, comparator);
         }
     };
 
-    return function (array, comparator) {
-        qsort(array, 0, array.length, comparator || defaultComparator);
-        return array;
+    return function (list, comparator) {
+        qsort(list, 0, list.length, comparator || defaultComparator);
+        return list;
     };
 }());
 
