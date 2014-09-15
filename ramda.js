@@ -315,28 +315,6 @@
 
 
     /**
-     * Private function that generates a parameter list based on the paremeter count passed in.
-     *
-     * @private
-     * @category Internal
-     * @param {number} n The number of parameters
-     * @return {string} The parameter list
-     * @example
-     *
-     *      mkArgStr(1); //=> 'arg0'
-     *      mkArgStr(2); //=> 'arg0, arg1'
-     *      mkArgStr(3); //=> 'arg0, arg1, arg2'
-     */
-    var mkArgStr = function _makeArgStr(n) {
-        var list = [], idx = -1;
-        while (++idx < n) {
-            list[idx] = 'arg' + idx;
-        }
-        return list.join(', ');
-    };
-
-
-    /**
      * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
      * parameters. Any extraneous parameters will not be passed to the supplied function.
      *
@@ -361,52 +339,22 @@
      *      // Only `n` arguments are passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
      */
-    var nAry = R.nAry = (function() {
-        var cache = {
-            0: function(fn) {
-                return function() {
-                    return fn.call(this);
-                };
-            },
-            1: function(fn) {
-                return function(arg0) {
-                    return fn.call(this, arg0);
-                };
-            },
-            2: function(fn) {
-                return function(arg0, arg1) {
-                    return fn.call(this, arg0, arg1);
-                };
-            },
-            3: function(fn) {
-                return function(arg0, arg1, arg2) {
-                    return fn.call(this, arg0, arg1, arg2);
-                };
-            }
-        };
-
-
-        //     For example:
-        //     cache[5] = function(fn) {
-        //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return fn.call(this, arg0, arg1, arg2, arg3, arg4);
-        //         }
-        //     };
-
-        var makeN = function(n) {
-            var fnArgs = mkArgStr(n);
-            var body = [
-                '    return function(' + fnArgs + ') {',
-                '        return fn.call(this' + (fnArgs ? ', ' + fnArgs : '') + ');',
-                '    }'
-            ].join('\n');
-            return new Function('fn', body);
-        };
-
-        return function _nAry(n, fn) {
-            return (cache[n] || (cache[n] = makeN(n)))(fn);
-        };
-    }());
+    var nAry = R.nAry = function(n, fn) {
+        switch (n) {
+            case 0: return function() {return fn.call(this);};
+            case 1: return function(a0) {return fn.call(this, a0);};
+            case 2: return function(a0, a1) {return fn.call(this, a0, a1);};
+            case 3: return function(a0, a1, a2) {return fn.call(this, a0, a1, a2);};
+            case 4: return function(a0, a1, a2, a3) {return fn.call(this, a0, a1, a2, a3);};
+            case 5: return function(a0, a1, a2, a3, a4) {return fn.call(this, a0, a1, a2, a3, a4);};
+            case 6: return function(a0, a1, a2, a3, a4, a5) {return fn.call(this, a0, a1, a2, a3, a4, a5);};
+            case 7: return function(a0, a1, a2, a3, a4, a5, a6) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6);};
+            case 8: return function(a0, a1, a2, a3, a4, a5, a6, a7) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7);};
+            case 9: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7, a8);};
+            case 10: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);};
+            default: return fn; // TODO: or throw?
+        }
+    };
 
 
     /**
@@ -493,54 +441,22 @@
      *      // All arguments are passed through to the wrapped function
      *      takesOneArg(1, 2); //=> [1, 2]
      */
-    var arity = R.arity = (function() {
-        var cache = {
-            0: function(fn) {
-                return function() {
-                    return fn.apply(this, arguments);
-                };
-            },
-            1: function(fn) {
-                return function(arg0) {
-                    void arg0;
-                    return fn.apply(this, arguments);
-                };
-            },
-            2: function(fn) {
-                return function(arg0, arg1) {
-                    void arg1;
-                    return fn.apply(this, arguments);
-                };
-            },
-            3: function(fn) {
-                return function(arg0, arg1, arg2) {
-                    void arg2;
-                    return fn.apply(this, arguments);
-                };
-            }
-        };
-
-        //     For example:
-        //     cache[5] = function(fn) {
-        //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return fn.apply(this, arguments);
-        //         }
-        //     };
-
-        var makeN = function(n) {
-            var fnArgs = mkArgStr(n);
-            var body = [
-                '    return function(' + fnArgs + ') {',
-                '        return fn.apply(this, arguments);',
-                '    }'
-            ].join('\n');
-            return new Function('fn', body);
-        };
-
-        return function _arity(n, fn) {
-            return (cache[n] || (cache[n] = makeN(n)))(fn);
-        };
-    }());
+    var arity = R.arity = function(n, fn) {
+        switch (n) {
+            case 0: return function() {return fn.apply(this, arguments);};
+            case 1: return function(a0) {void a0; return fn.apply(this, arguments);};
+            case 2: return function(a0, a1) {void a1; return fn.apply(this, arguments);};
+            case 3: return function(a0, a1, a2) {void a2; return fn.apply(this, arguments);};
+            case 4: return function(a0, a1, a2, a3) {void a3; return fn.apply(this, arguments);};
+            case 5: return function(a0, a1, a2, a3, a4) {void a4; return fn.apply(this, arguments);};
+            case 6: return function(a0, a1, a2, a3, a4, a5) {void a5; return fn.apply(this, arguments);};
+            case 7: return function(a0, a1, a2, a3, a4, a5, a6) {void a6; return fn.apply(this, arguments);};
+            case 8: return function(a0, a1, a2, a3, a4, a5, a6, a7) {void a7; return fn.apply(this, arguments);};
+            case 9: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {void a8; return fn.apply(this, arguments);};
+            case 10: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {void a9; return fn.apply(this, arguments);};
+            default: return fn; // TODO: or throw?
+        }
+    };
 
 
     /**
