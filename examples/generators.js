@@ -1,7 +1,9 @@
+var R = require('..');
+
 var gens = (function() {
     var trampoline = function(fn) {
-        var result = fn.apply(this, tail(arguments));
-        while (typeof result == "function") {
+        var result = fn.apply(this, R.tail(arguments));
+        while (typeof result == 'function') {
             result = result();
         }
         return result;
@@ -16,7 +18,7 @@ var gens = (function() {
 
     var genTake = function(n, gen) {
         var take = function(ctr, g, ret) {
-            return (ctr == 0) ? ret : take(ctr - 1, g.tail(), append(g.head, ret))
+            return (ctr === 0) ? ret : take(ctr - 1, g.tail(), R.append(g.head, ret));
         };
         return trampoline(take, n, gen, []);
     };
@@ -57,7 +59,7 @@ R.installTo(this);
 
 var identity = function(x) {return x;};
 var square = function(n) {return n * n;};
-var even = function(n) {return !(n % 2);};
+var even = function(n) {return n % 2 === 0;};
 
 var ints = gens.generator(0, identity, function(n) {return n + 1;});
 console.log(gens.take(10, ints));
