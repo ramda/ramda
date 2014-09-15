@@ -12,7 +12,7 @@ Goals
      width="200" height="235" align="left" hspace="12" />
 Using this library should feel as much like using Javascript as 
 possible.  Of course it's functional Javascript, but we're not 
-introducting lambda expressions in strings, we're not borrowing consed 
+introducting lambda expressions in strings, we're not borrowing Consed 
 lists, we're not porting over all of the Clojure functions.
 
 Our basic data structures will be normal Javascript objects, and our 
