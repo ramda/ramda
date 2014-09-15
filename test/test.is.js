@@ -81,3 +81,38 @@ describe('is', function() {
         assert.throws(R.is, TypeError);
     });
 });
+
+describe('isArrayLike', function() {
+    it('is true for Arrays', function() {
+        assert(R.isArrayLike([]));
+        assert(R.isArrayLike([1, 2, 3, 4]));
+        assert(R.isArrayLike([null]));
+    });
+
+    it('is true for arguments', function() {
+        function test() {
+            return R.isArrayLike(arguments);
+        }
+        assert(test());
+        assert(test(1, 2, 3));
+        assert(test(null));
+    });
+
+    it('is false for Strings', function() {
+        assert.equal(R.isArrayLike(''), false);
+        assert.equal(R.isArrayLike('abcdefg'), false);
+    });
+
+    it('is true for arbitrary objects with numeric length', function() {
+        var obj = {length: 0};
+        assert(R.isArrayLike(obj));
+    });
+
+    it('is false for everything else', function() {
+        assert.equal(R.isArrayLike(), false);
+        assert.equal(R.isArrayLike(1), false);
+        assert.equal(R.isArrayLike({}), false);
+        assert.equal(R.isArrayLike(false), false);
+        assert.equal(R.isArrayLike(function() {}), false);
+    });
+});
