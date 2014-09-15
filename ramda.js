@@ -2957,8 +2957,7 @@
 
     /**
      * Returns a list of numbers from `from` (inclusive) to `to`
-     * (exclusive). In mathematical terms, `range(a, b)` is equivalent to
-     * the half-open interval `[a, b)`.
+     * (exclusive). 
      *
      * @func
      * @memberOf R
