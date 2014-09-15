@@ -2957,7 +2957,7 @@
 
     /**
      * Returns a list of numbers from `from` (inclusive) to `to`
-     * (exclusive). 
+     * (exclusive).
      *
      * @func
      * @memberOf R
