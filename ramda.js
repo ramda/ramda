@@ -222,7 +222,9 @@
     }
 
     if (typeof Object.defineProperty === 'function') {
-        Object.defineProperty(R, '_', {writable: false, value: void 0});
+        try {
+            Object.defineProperty(R, '_', {writable: false, value: void 0});
+        } catch (e) {}
     }
     var _ = R._;  void _;// This intentionally left `undefined`.
 
