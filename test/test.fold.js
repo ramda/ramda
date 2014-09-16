@@ -79,8 +79,8 @@ describe('foldr', function() {
 });
 
 describe('foldl.idx', function() {
-    var timesIdx = function(tot, num, idx, ls) {return tot + (num * idx);};
-    var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
+    var timesIdx = function(tot, num, idx) {return tot + (num * idx);};
+    var objectify = function(acc, elem, idx) { acc[elem] = idx; return acc;};
 
     it('works just like normal foldl', function() {
         assert.equal(R.foldl.idx(R.add, 0, [1, 2, 3, 4]), 10);
@@ -98,7 +98,7 @@ describe('foldl.idx', function() {
 
     it('passes the entire list as a fourth parameter to the predicate', function() {
         var list = [1, 2, 3];
-        R.foldl.idx(function(acc, x, i, ls) {
+        R.foldl.idx(function(acc, x, idx, ls) {
             assert.strictEqual(ls, list);
             return acc;
         }, 0, list);
@@ -119,24 +119,24 @@ describe('foldl.idx', function() {
 });
 
 describe('foldr.idx', function() {
-    var timesIdx = function(tot, num, idx, ls) {return tot + (num * idx);};
-    var objectify = function(acc, elem, idx, ls) { acc[elem] = idx; return acc;};
+    var timesIdx = function(tot, num, idx) {return tot + (num * idx);};
+    var objectify = function(acc, elem, idx) { acc[elem] = idx; return acc;};
 
     it('folds lists in the right order', function() {
-        assert.equal(R.foldr.idx(function(a, b, idx, list) {return a + idx + b;}, '', ['a', 'b', 'c', 'd']), '3d2c1b0a');
+        assert.equal(R.foldr.idx(function(a, b, idx) {return a + idx + b;}, '', ['a', 'b', 'c', 'd']), '3d2c1b0a');
     });
 
     it('folds simple functions over arrays with the supplied accumulator', function() {
-        assert.deepEqual(R.foldr.idx(function(acc, n, i) { return acc.concat([i, n]); }, [], [12, 4, 10, 6]), [3, 6, 2, 10, 1, 4, 0, 12]);
+        assert.deepEqual(R.foldr.idx(function(acc, n, idx) { return acc.concat([idx, n]); }, [], [12, 4, 10, 6]), [3, 6, 2, 10, 1, 4, 0, 12]);
     });
 
     it('returns the accumulator for an empty array', function() {
         var memo = [];
-        assert.equal(R.foldr.idx(function(a, n, i, ls) { return a.concat(i); }, memo, []), memo);
+        assert.equal(R.foldr.idx(function(a, n, idx) { return a.concat(idx); }, memo, []), memo);
     });
 
     it('should be automatically curried', function() {
-        var something = R.foldr.idx(function(acc, b, i) { return acc += i + b; }, 54);
+        var something = R.foldr.idx(function(acc, b, idx) { return acc += idx + b; }, 54);
         assert.equal(something([12, 4, 10, 6]), 92);
     });
 
@@ -145,7 +145,7 @@ describe('foldr.idx', function() {
     });
 
     it('should correctly report the arity of curried versions', function() {
-        var something = R.foldr.idx(function(acc, b, i) { return acc += i + b; }, 0);
+        var something = R.foldr.idx(function(acc, b, idx) { return acc += idx + b; }, 0);
         assert.equal(something.length, 1);
     });
 
@@ -156,7 +156,7 @@ describe('foldr.idx', function() {
 
     it('passes the entire list as a fourth parameter to the predicate', function() {
         var list = [1, 2, 3];
-        R.foldr.idx(function(acc, x, i, ls) {
+        R.foldr.idx(function(acc, x, idx, ls) {
             assert.strictEqual(ls, list);
             return acc;
         }, 0, list);

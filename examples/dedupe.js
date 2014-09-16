@@ -11,15 +11,15 @@ Consider the function `imperativeDedupe1`, written in imperative style.
 `imperativeDedupe1` takes an array, pushes its elements into an object indexed by
 the object value, then pushes back to an array, thereby eliminating duplicates.
 */
-var imperativeDedupe1 = function(arr) {
-    var i,
-        len=arr.length,
+var imperativeDedupe1 = function(list) {
+    var idx,
+        len=list.length,
         out=[],
         cache={},
         item;
 
-    for (i=0;i<len;i++) {
-        item = arr[i];
+    for (idx=0;idx<len;idx++) {
+        item = list[idx];
         if (!(item in cache)) {
             out.push(cache[item] = item);
         }
@@ -123,20 +123,20 @@ equality.
 
 The imperative code might look as nasty as this:
 */
-var imperativeDedupe2 = function(arr) {
-    var i,
-        len=arr.length,
-        out=[arr[0]],
+var imperativeDedupe2 = function(list) {
+    var idx,
+        len=list.length,
+        out=[list[0]],
         matched = true;
 
-    for (i = 0; i < len; i++) {
+    for (idx = 0; idx < len; idx++) {
         for (var j = 0; j < out.length; j++) {
-            if (arr[i].a === out[j].a && arr[i].b === out[j].b) {
+            if (list[idx].a === out[j].a && list[idx].b === out[j].b) {
                 var matched = true;
             }
         }
         if (!matched) {
-            out.push(arr[i]);
+            out.push(list[idx]);
         }
         matched = false;
     }
@@ -168,17 +168,17 @@ var objs2 = [
 /*
 imperativeDedupe3 is a possible approach to this problem using imperative style:
 */
-imperativeDedupe3 = function(arr) {
-    var i,
-        len=arr.length,
+imperativeDedupe3 = function(list) {
+    var idx,
+        len=list.length,
         out=[],
         obj={};
-    for (i = 0; i < len; i++) {
-        obj[arr[i].x + ":" + arr[i].z.a] = arr[i];
+    for (idx = 0; idx < len; idx++) {
+        obj[list[idx].x + ":" + list[idx].z.a] = list[idx];
     }
-    for (i in obj) {
-        if (obj.hasOwnProperty(i)) {
-            out.push(obj[i]);
+    for (idx in obj) {
+        if (obj.hasOwnProperty(idx)) {
+            out.push(obj[idx]);
         }
     }
     return out;

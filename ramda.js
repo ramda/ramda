@@ -24,7 +24,7 @@
     } else {
         this.R = this.ramda = factory(this);
     }
-}(function(global) {
+}(function() {
 
     'use strict';
 
@@ -64,11 +64,11 @@
             case 1: return _slice(args, 0, args.length);
             case 2: return _slice(args, from, args.length);
             default:
-                var length = to - from, arr = new Array(length), i = -1;
-                while (++i < length) {
-                    arr[i] = args[from + i];
+                var length = to - from, list = new Array(length), idx = -1;
+                while (++idx < length) {
+                    list[idx] = args[from + idx];
                 }
-                return arr;
+                return list;
         }
     }
 
@@ -92,11 +92,11 @@
             length2 = set2.length,
             result = new Array(length1 + length2);
 
-        for (var i = 0; i < length1; i++) {
-            result[i] = set1[i];
+        for (var idx = 0; idx < length1; idx++) {
+            result[idx] = set1[idx];
         }
-        for (i = 0; i < length2; i++) {
-            result[i + length1] = set2[i];
+        for (idx = 0; idx < length2; idx++) {
+            result[idx + length1] = set2[idx];
         }
         return result;
     };
@@ -165,7 +165,7 @@
      * @sig (* -> a) -> Number -> (* -> a)
      * @sig (* -> a) -> (* -> a)
      * @param {Function} fn The function to curry.
-     * @param {number} [fnArity=fn.length] An optional arity for the returned function.
+     * @param {number} [length=fn.length] An optional arity for the returned function.
      * @return {Function} A new, curried function.
      * @example
      *
@@ -176,17 +176,17 @@
      *      var curriedAddFourNumbers = R.curry(addFourNumbers);
      *      var f = curriedAddFourNumbers(1, 2);
      *      var g = f(3);
-     *      g(4);//=> 10
+     *      g(4); //=> 10
      */
-    var curry = R.curry = function _curry(fn, fnArity) {
+    var curry = R.curry = function _curry(fn, length) {
         if (arguments.length < 2) {
             return _curry(fn, fn.length);
         }
         return (function recurry(args) {
-            return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
+            return arity(Math.max(length - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                 var newArgs = concat(args, arguments);
-                if (newArgs.length >= fnArity) {
+                if (newArgs.length >= length) {
                     return fn.apply(this, newArgs);
                 } else {
                     return recurry(newArgs);
@@ -267,7 +267,7 @@
     if (typeof Object.defineProperty === 'function') {
         Object.defineProperty(R, '_', {writable: false, value: void 0});
     }
-    var _ = R._;  // This intentionally left `undefined`.
+    var _ = R._;  void _;// This intentionally left `undefined`.
 
     /**
      * Converts a function into something like an infix operation, meaning that
@@ -335,45 +335,23 @@
      *
      * @private
      * @category Internal
-     * @param {Function} func ramda implemtation
+     * @param {Function} fn ramda implemtation
      * @param {String} methodname property to check for a custom implementation
      * @return {Object} whatever the return value of the method is
      */
-    function checkForMethod(methodname, func) {
+    function checkForMethod(methodname, fn) {
         return function(a, b, c) {
             var length = arguments.length;
             var obj = arguments[length - 1],
                 callBound = obj && !isArray(obj) && typeof obj[methodname] === 'function';
             switch (arguments.length) {
-                case 0: return func();
-                case 1: return callBound ? obj[methodname]() : func(a);
-                case 2: return callBound ? obj[methodname](a) : func(a, b);
-                case 3: return callBound ? obj[methodname](a, b) : func(a, b, c);
+                case 0: return fn();
+                case 1: return callBound ? obj[methodname]() : fn(a);
+                case 2: return callBound ? obj[methodname](a) : fn(a, b);
+                case 3: return callBound ? obj[methodname](a, b) : fn(a, b, c);
             }
         };
     }
-
-
-    /**
-     * Private function that generates a parameter list based on the paremeter count passed in.
-     *
-     * @private
-     * @category Internal
-     * @param {number} n The number of parameters
-     * @return {string} The parameter list
-     * @example
-     *
-     *      mkArgStr(1); //=> 'arg0'
-     *      mkArgStr(2); //=> 'arg0, arg1'
-     *      mkArgStr(3); //=> 'arg0, arg1, arg2'
-     */
-    var mkArgStr = function _makeArgStr(n) {
-        var arr = [], idx = -1;
-        while (++idx < n) {
-            arr[idx] = 'arg' + idx;
-        }
-        return arr.join(', ');
-    };
 
 
     /**
@@ -401,52 +379,22 @@
      *      // Only `n` arguments are passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
      */
-    var nAry = R.nAry = (function() {
-        var cache = {
-            0: function(func) {
-                return function() {
-                    return func.call(this);
-                };
-            },
-            1: function(func) {
-                return function(arg0) {
-                    return func.call(this, arg0);
-                };
-            },
-            2: function(func) {
-                return function(arg0, arg1) {
-                    return func.call(this, arg0, arg1);
-                };
-            },
-            3: function(func) {
-                return function(arg0, arg1, arg2) {
-                    return func.call(this, arg0, arg1, arg2);
-                };
-            }
-        };
-
-
-        //     For example:
-        //     cache[5] = function(func) {
-        //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return func.call(this, arg0, arg1, arg2, arg3, arg4);
-        //         }
-        //     };
-
-        var makeN = function(n) {
-            var fnArgs = mkArgStr(n);
-            var body = [
-                '    return function(' + fnArgs + ') {',
-                '        return func.call(this' + (fnArgs ? ', ' + fnArgs : '') + ');',
-                '    }'
-            ].join('\n');
-            return new Function('func', body);
-        };
-
-        return function _nAry(n, fn) {
-            return (cache[n] || (cache[n] = makeN(n)))(fn);
-        };
-    }());
+    var nAry = R.nAry = function(n, fn) {
+        switch (n) {
+            case 0: return function() {return fn.call(this);};
+            case 1: return function(a0) {return fn.call(this, a0);};
+            case 2: return function(a0, a1) {return fn.call(this, a0, a1);};
+            case 3: return function(a0, a1, a2) {return fn.call(this, a0, a1, a2);};
+            case 4: return function(a0, a1, a2, a3) {return fn.call(this, a0, a1, a2, a3);};
+            case 5: return function(a0, a1, a2, a3, a4) {return fn.call(this, a0, a1, a2, a3, a4);};
+            case 6: return function(a0, a1, a2, a3, a4, a5) {return fn.call(this, a0, a1, a2, a3, a4, a5);};
+            case 7: return function(a0, a1, a2, a3, a4, a5, a6) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6);};
+            case 8: return function(a0, a1, a2, a3, a4, a5, a6, a7) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7);};
+            case 9: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7, a8);};
+            case 10: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {return fn.call(this, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9);};
+            default: return fn; // TODO: or throw?
+        }
+    };
 
 
     /**
@@ -533,51 +481,22 @@
      *      // All arguments are passed through to the wrapped function
      *      takesOneArg(1, 2); //=> [1, 2]
      */
-    var arity = R.arity = (function() {
-        var cache = {
-            0: function(func) {
-                return function() {
-                    return func.apply(this, arguments);
-                };
-            },
-            1: function(func) {
-                return function(arg0) {
-                    return func.apply(this, arguments);
-                };
-            },
-            2: function(func) {
-                return function(arg0, arg1) {
-                    return func.apply(this, arguments);
-                };
-            },
-            3: function(func) {
-                return function(arg0, arg1, arg2) {
-                    return func.apply(this, arguments);
-                };
-            }
-        };
-
-        //     For example:
-        //     cache[5] = function(func) {
-        //         return function(arg0, arg1, arg2, arg3, arg4) {
-        //             return func.apply(this, arguments);
-        //         }
-        //     };
-
-        var makeN = function(n) {
-            var fnArgs = mkArgStr(n);
-            var body = [
-                '    return function(' + fnArgs + ') {',
-                '        return func.apply(this, arguments);',
-                '    }'
-            ].join('\n');
-            return new Function('func', body);
-        };
-
-        return function _arity(n, fn) {
-            return (cache[n] || (cache[n] = makeN(n)))(fn);
-        };
-    }());
+    var arity = R.arity = function(n, fn) {
+        switch (n) {
+            case 0: return function() {return fn.apply(this, arguments);};
+            case 1: return function(a0) {void a0; return fn.apply(this, arguments);};
+            case 2: return function(a0, a1) {void a1; return fn.apply(this, arguments);};
+            case 3: return function(a0, a1, a2) {void a2; return fn.apply(this, arguments);};
+            case 4: return function(a0, a1, a2, a3) {void a3; return fn.apply(this, arguments);};
+            case 5: return function(a0, a1, a2, a3, a4) {void a4; return fn.apply(this, arguments);};
+            case 6: return function(a0, a1, a2, a3, a4, a5) {void a5; return fn.apply(this, arguments);};
+            case 7: return function(a0, a1, a2, a3, a4, a5, a6) {void a6; return fn.apply(this, arguments);};
+            case 8: return function(a0, a1, a2, a3, a4, a5, a6, a7) {void a7; return fn.apply(this, arguments);};
+            case 9: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8) {void a8; return fn.apply(this, arguments);};
+            case 10: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {void a9; return fn.apply(this, arguments);};
+            default: return fn; // TODO: or throw?
+        }
+    };
 
 
     /**
@@ -777,8 +696,7 @@
      * @example
      *
      *      var numbers = [1, 2, 3];
-     *      var numbersClone = R.clone(numbers);
-     *      console.log(numbersClone); //=> [1, 2, 3]
+     *      var numbersClone = R.clone(numbers); //=> [1, 2, 3]
      *      numbers === numbersClone; //=> false
      *
      *      // Note that this is a shallow clone--it does not clone complex values:
@@ -802,9 +720,9 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> Boolean
-     * @param {Array} arr The array to consider.
-     * @return {boolean} `true` if the `arr` argument has a length of 0 or
-     *         if `arr` is a falsy value (e.g. undefined).
+     * @param {Array} list The array to consider.
+     * @return {boolean} `true` if the `list` argument has a length of 0 or
+     *         if `list` is a falsy value (e.g. undefined).
      * @example
      *
      *      R.isEmpty([1, 2, 3]); //=> false
@@ -812,8 +730,8 @@
      *      R.isEmpty(); //=> true
      *      R.isEmpty(null); //=> true
      */
-    function isEmpty(arr) {
-        return !arr || !arr.length;
+    function isEmpty(list) {
+        return !list || !list.length;
     }
     R.isEmpty = isEmpty;
 
@@ -827,14 +745,14 @@
      * @category Array
      * @sig a -> [a] -> [a]
      * @param {*} el The item to add to the head of the output list.
-     * @param {Array} arr The array to add to the tail of the output list.
+     * @param {Array} list The array to add to the tail of the output list.
      * @return {Array} A new array.
      * @example
      *
      *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
-    R.prepend = curry2(function prepend(el, arr) {
-        return concat([el], arr);
+    R.prepend = curry2(function prepend(el, list) {
+        return concat([el], list);
     });
 
     /**
@@ -854,15 +772,15 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> a
-     * @param {Array} [arr=[]] The array to consider.
+     * @param {Array} [list=[]] The array to consider.
      * @return {*} The first element of the list, or `undefined` if the list is empty.
      * @example
      *
      *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
-    var head = R.head = function head(arr) {
-        arr = arr || [];
-        return arr[0];
+    R.head = function head(list) {
+        list = list || [];
+        return list[0];
     };
 
     /**
@@ -881,15 +799,15 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> a
-     * @param {Array} [arr=[]] The array to consider.
+     * @param {Array} [list=[]] The array to consider.
      * @return {*} The last element of the list, or `undefined` if the list is empty.
      * @example
      *
      *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
      */
-    R.last = function _last(arr) {
-        arr = arr || [];
-        return arr[arr.length - 1];
+    R.last = function _last(list) {
+        list = list || [];
+        return list[list.length - 1];
     };
 
 
@@ -901,16 +819,16 @@
      * @memberOf R
      * @category Array
      * @sig [a] -> [a]
-     * @param {Array} [arr=[]] The array to consider.
+     * @param {Array} [list=[]] The array to consider.
      * @return {Array} A new array containing all but the first element of the input list, or an
      *         empty list if the input list is a falsy value (e.g. `undefined`).
      * @example
      *
      *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
      */
-    var tail = R.tail = checkForMethod('tail', function(arr) {
-        arr = arr || [];
-        return (arr.length > 1) ? _slice(arr, 1) : [];
+    R.tail = checkForMethod('tail', function(list) {
+        list = list || [];
+        return (list.length > 1) ? _slice(list, 1) : [];
     });
 
     /**
@@ -1061,12 +979,12 @@
      *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
      */
     R.times = curry2(function _times(fn, n) {
-        var arr = new Array(n);
-        var i = -1;
-        while (++i < n) {
-            arr[i] = fn(i);
+        var list = new Array(n);
+        var idx = -1;
+        while (++idx < n) {
+            list[idx] = fn(idx);
         }
-        return arr;
+        return list;
     });
 
 
@@ -1163,11 +1081,11 @@
             case 0: throw NO_ARGS_EXCEPTION;
             case 1: return arguments[0];
             default:
-                var idx = arguments.length - 1, func = arguments[idx], fnArity = func.length;
+                var idx = arguments.length - 1, fn = arguments[idx], length = fn.length;
                 while (idx--) {
-                    func = internalCompose(arguments[idx], func);
+                    fn = internalCompose(arguments[idx], fn);
                 }
-                return arity(fnArity, func);
+                return arity(length, fn);
         }
     };
 
@@ -1220,7 +1138,7 @@
      *        return ([]).concat(a, b, c);
      *      };
      *
-     *      mergeThree(1, 2, 3)); //=> [1, 2, 3]
+     *      mergeThree(1, 2, 3); //=> [1, 2, 3]
      *
      *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
      */
@@ -1681,7 +1599,7 @@
      * @category List
      * @see R.reduceRight
      */
-    var foldr = R.foldr = R.reduceRight;
+    R.foldr = R.reduceRight;
 
 
     /**
@@ -1990,21 +1908,21 @@
 
 
     /**
-     * Returns the number of elements in the array by returning `arr.length`.
+     * Returns the number of elements in the array by returning `list.length`.
      *
      * @func
      * @memberOf R
      * @category List
      * @sig [a] -> Number
-     * @param {Array} arr The array to inspect.
+     * @param {Array} list The array to inspect.
      * @return {number} The size of the array.
      * @example
      *
      *      R.size([]); //=> 0
      *      R.size([1, 2, 3]); //=> 3
      */
-    R.size = function _size(arr) {
-        return arr.length;
+    R.size = function _size(list) {
+        return list.length;
     };
 
     /**
@@ -2365,9 +2283,9 @@
      *      R.every(lessThan3)(xs); //=> true
      */
     function every(fn, list) {
-        var i = -1;
-        while (++i < list.length) {
-            if (!fn(list[i])) {
+        var idx = -1;
+        while (++idx < list.length) {
+            if (!fn(list[idx])) {
                 return false;
             }
         }
@@ -2398,9 +2316,9 @@
      *      R.some(lessThan2)(xs); //=> true
      */
     function some(fn, list) {
-        var i = -1;
-        while (++i < list.length) {
-            if (fn(list[i])) {
+        var idx = -1;
+        while (++idx < list.length) {
+            if (fn(list[idx])) {
                 return true;
             }
         }
@@ -2423,14 +2341,14 @@
      * @return {Number} the index of the found item, or -1
      *
      */
-    var indexOf = function _indexOf(array, item, from) {
-        var i = 0, length = array.length;
+    var indexOf = function _indexOf(list, item, from) {
+        var idx = 0, length = list.length;
         if (typeof from == 'number') {
-            i = from < 0 ? Math.max(0, length + from) : from;
+            idx = from < 0 ? Math.max(0, length + from) : from;
         }
-        for (; i < length; i++) {
-            if (array[i] === item) {
-                return i;
+        for (; idx < length; idx++) {
+            if (list[idx] === item) {
+                return idx;
             }
         }
         return -1;
@@ -2451,13 +2369,13 @@
      * @return {Number} the index of the found item, or -1
      *
      */
-    var lastIndexOf = function _lastIndexOf(array, item, from) {
-        var idx = array.length;
+    var lastIndexOf = function _lastIndexOf(list, item, from) {
+        var idx = list.length;
         if (typeof from == 'number') {
             idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
         }
         while (--idx >= 0) {
-            if (array[idx] === item) {
+            if (list[idx] === item) {
                 return idx;
             }
         }
@@ -2665,9 +2583,9 @@
      */
     R.isSet = function _isSet(list) {
         var len = list.length;
-        var i = -1;
-        while (++i < len) {
-            if (indexOf(list, list[i], i + 1) >= 0) {
+        var idx = -1;
+        while (++idx < len) {
+            if (indexOf(list, list[idx], idx + 1) >= 0) {
                 return false;
             }
         }
@@ -2736,18 +2654,17 @@
     // TODO: document, even for internals...
     var makeFlat = function _makeFlat(recursive) {
         return function __flatt(list) {
-            var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
-            while (++i < ilen) {
-                array = list[i];
-                if (isArrayLike(array)) {
-                    value = (recursive) ? __flatt(array) : array;
+            var value, result = [], idx = -1, j, ilen = list.length, jlen;
+            while (++idx < ilen) {
+                if (isArrayLike(list[idx])) {
+                    value = (recursive) ? __flatt(list[idx]) : list[idx];
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {
                         result.push(value[j]);
                     }
                 } else {
-                    result.push(array);
+                    result.push(list[idx]);
                 }
             }
             return result;
@@ -2770,7 +2687,7 @@
      *      R.flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
      *      //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
      */
-    var flatten = R.flatten = makeFlat(true);
+    R.flatten = makeFlat(true);
 
 
     /**
@@ -2792,8 +2709,9 @@
 
 
     /**
-     * Creates a new list out of the two supplied by applying the function to each
-     * equally-positioned pair in the lists.
+     * Creates a new list out of the two supplied by applying the function to
+     * each equally-positioned pair in the lists. The returned list is
+     * truncated to the length of the shorter of the two input lists.
      *
      * @function
      * @memberOf R
@@ -2813,17 +2731,19 @@
      *      //=> [f(1, 'a'), f(2, 'b'), f(3, 'c')]
      */
     R.zipWith = curry3(function _zipWith(fn, a, b) {
-        var rv = [], i = -1, len = Math.min(a.length, b.length);
-        while (++i < len) {
-            rv[i] = fn(a[i], b[i]);
+        var rv = [], idx = -1, len = Math.min(a.length, b.length);
+        while (++idx < len) {
+            rv[idx] = fn(a[idx], b[idx]);
         }
         return rv;
     });
 
 
     /**
-     * Creates a new list out of the two supplied by pairing up equally-positioned items from
-     * both lists. Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
+     * Creates a new list out of the two supplied by pairing up
+     * equally-positioned items from both lists.  The returned list is
+     * truncated to the length of the shorter of the two input lists.
+     * Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
      *
      * @func
      * @memberOf R
@@ -2838,10 +2758,10 @@
      */
     R.zip = curry2(function _zip(a, b) {
         var rv = [];
-        var i = -1;
+        var idx = -1;
         var len = Math.min(a.length, b.length);
-        while (++i < len) {
-            rv[i] = [a[i], b[i]];
+        while (++idx < len) {
+            rv[idx] = [a[idx], b[idx]];
         }
         return rv;
     });
@@ -2862,9 +2782,9 @@
      *      R.zipObj(['a', 'b', 'c'], [1, 2, 3]); //=> {a: 1, b: 2, c: 3}
      */
     R.zipObj = curry2(function _zipObj(keys, values) {
-        var i = -1, len = keys.length, out = {};
-        while (++i < len) {
-            out[keys[i]] = values[i];
+        var idx = -1, len = keys.length, out = {};
+        while (++idx < len) {
+            out[keys[idx]] = values[idx];
         }
         return out;
     });
@@ -2884,10 +2804,10 @@
      *      R.fromPairs([['a', 1], ['b', 2],  ['c', 3]]); //=> {a: 1, b: 2, c: 3}
      */
     R.fromPairs = function _fromPairs(pairs) {
-        var i = -1, len = pairs.length, out = {};
-        while (++i < len) {
-            if (isArray(pairs[i]) && pairs[i].length) {
-                out[pairs[i][0]] = pairs[i][1];
+        var idx = -1, len = pairs.length, out = {};
+        while (++idx < len) {
+            if (isArray(pairs[idx]) && pairs[idx].length) {
+                out[pairs[idx][0]] = pairs[idx][1];
             }
         }
         return out;
@@ -2922,11 +2842,11 @@
         }
         // Better to push them all or to do `new Array(ilen * jlen)` and
         // calculate indices?
-        var i = -1, ilen = a.length, j, jlen = b.length, result = [];
-        while (++i < ilen) {
+        var idx = -1, ilen = a.length, j, jlen = b.length, result = [];
+        while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
-                result.push(fn(a[i], b[j]));
+                result.push(fn(a[idx], b[j]));
             }
         }
         return result;
@@ -2953,16 +2873,16 @@
         if (isEmpty(a) || isEmpty(b)) {
             return [];
         }
-        var i = -1;
+        var idx = -1;
         var ilen = a.length;
         var j;
         var jlen = b.length;
         // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
         var result = [];
-        while (++i < ilen) {
+        while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
-                result.push([a[i], b[j]]);
+                result.push([a[idx], b[j]]);
             }
         }
         return result;
@@ -2993,8 +2913,7 @@
 
     /**
      * Returns a list of numbers from `from` (inclusive) to `to`
-     * (exclusive). In mathematical terms, `range(a, b)` is equivalent to
-     * the half-open interval `[a, b)`.
+     * (exclusive).
      *
      * @func
      * @memberOf R
@@ -3122,9 +3041,9 @@
      *
      *      R.insert(2, 'x', [1,2,3,4]); //=> [1,2,'x',3,4]
      */
-    R.insert = curry3(function _insert(index, elt, list) {
-        index = index < list.length && index >= 0 ? index : list.length;
-        return concat(append(elt, _slice(list, 0, index)), _slice(list, index));
+    R.insert = curry3(function _insert(idx, elt, list) {
+        idx = idx < list.length && idx >= 0 ? idx : list.length;
+        return concat(append(elt, _slice(list, 0, idx)), _slice(list, idx));
     });
 
 
@@ -3145,9 +3064,9 @@
      *
      *      R.insert.all(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
      */
-    R.insert.all = curry3(function _insertAll(index, elts, list) {
-        index = index < list.length && index >= 0 ? index : list.length;
-        return concat(concat(_slice(list, 0, index), elts), _slice(list, index));
+    R.insert.all = curry3(function _insertAll(idx, elts, list) {
+        idx = idx < list.length && idx >= 0 ? idx : list.length;
+        return concat(concat(_slice(list, 0, idx), elts), _slice(list, idx));
     });
 
 
@@ -3168,7 +3087,7 @@
      *      var people = [
      *        // ...
      *      ];
-     *      sort(cmp, people);
+     *      R.sort(cmp, people);
      */
     var comparator = R.comparator = function _comparator(pred) {
         return function(a, b) {
@@ -3194,7 +3113,7 @@
      *      var diff = function(a, b) { return a - b; };
      *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
      */
-    var sort = R.sort = curry2(function sort(comparator, list) {
+    R.sort = curry2(function sort(comparator, list) {
         return clone(list).sort(comparator);
     });
 
@@ -3289,7 +3208,7 @@
      *
      *      var sayX = function(x) { console.log('x is ' + x); };
      *      R.tap(100, sayX); //=> 100
-     *      // (and logs: 'x is 100')
+     *      //-> 'x is 100')
      */
     R.tap = curry2(function _tap(x, fn) {
         if (typeof fn === 'function') { fn(x); }
@@ -3429,7 +3348,7 @@
      *      var obj = { f: function() { return 'f called'; } };
      *      R.func('f', obj); //=> 'f called'
      */
-    R.func = function func(funcName, obj) {
+    R.func = function _func(funcName, obj) {
         switch (arguments.length) {
             case 0: throw NO_ARGS_EXCEPTION;
             case 1: return function(obj) { return obj[funcName].apply(obj, _slice(arguments, 1)); };
@@ -3616,11 +3535,11 @@
      *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
      */
     R.values = function _values(obj) {
-        var prop, props = keys(obj),
+        var props = keys(obj),
             length = props.length,
             vals = new Array(length);
-        for (var i = 0; i < length; i++) {
-            vals[i] = obj[props[i]];
+        for (var idx = 0; idx < length; idx++) {
+            vals[idx] = obj[props[idx]];
         }
         return vals;
     };
@@ -3664,8 +3583,8 @@
     function pickWith(test, obj) {
         var copy = {},
             props = keys(obj), prop, val;
-        for (var i = 0, len = props.length; i < len; i++) {
-            prop = props[i];
+        for (var idx = 0, len = props.length; idx < len; idx++) {
+            prop = props[idx];
             val = obj[prop];
             if (test(val, prop, obj)) {
                 copy[prop] = val;
@@ -3793,9 +3712,9 @@
      */
     function extend(destination, other) {
         var props = keys(other),
-            i = -1, length = props.length;
-        while (++i < length) {
-            destination[props[i]] = other[props[i]];
+            idx = -1, length = props.length;
+        while (++idx < length) {
+            destination[props[idx]] = other[props[idx]];
         }
         return destination;
     }
@@ -3858,9 +3777,9 @@
         if (testObj == null) { return false; }
         parsedSpec.fn = parsedSpec.fn || [];
         parsedSpec.obj = parsedSpec.obj || [];
-        var key, val, i = -1, fnLen = parsedSpec.fn.length, j = -1, objLen = parsedSpec.obj.length;
-        while (++i < fnLen) {
-            key = parsedSpec.fn[i];
+        var key, val, idx = -1, fnLen = parsedSpec.fn.length, j = -1, objLen = parsedSpec.obj.length;
+        while (++idx < fnLen) {
+            key = parsedSpec.fn[idx];
             val = spec[key];
             //     if (!hasOwnProperty.call(testObj, key)) {
             //       return false;
@@ -4265,7 +4184,7 @@
      *      complementaryAngle(30); //=> 60
      *      complementaryAngle(72); //=> 18
      */
-    var subtract = R.subtract = op(function _subtract(a, b) { return a - b; });
+    R.subtract = op(function _subtract(a, b) { return a - b; });
 
 
     /**
@@ -4292,7 +4211,7 @@
      *      var reciprocal = divide(1);
      *      reciprocal(4);   //=> 0.25
      */
-    var divide = R.divide = op(function _divide(a, b) { return a / b; });
+    R.divide = op(function _divide(a, b) { return a / b; });
 
 
     /**
@@ -4320,7 +4239,7 @@
      *      isOdd(42); //=> 0
      *      isOdd(21); //=> 1
      */
-    var modulo = R.modulo = op(function _modulo(a, b) { return a % b; });
+    R.modulo = op(function _modulo(a, b) { return a % b; });
 
 
     /**
@@ -4827,11 +4746,11 @@
      *      path(['a', 'b'], {a: {b: 2}}); //=> 2
      */
     function path(paths, obj) {
-        var i = -1, length = paths.length, val;
+        var idx = -1, length = paths.length, val;
         if (obj == null) { return; }
         val = obj;
-        while (val != null && ++i < length) {
-            val = val[paths[i]];
+        while (val != null && ++idx < length) {
+            val = val[paths[idx]];
         }
         return val;
     }
