@@ -53,7 +53,7 @@ describe('once', function() {
 });
 
 describe('memoize', function() {
-    it('should calculate the value for a given input only once', function() {
+    it('calculates the value for a given input only once', function() {
         var ctr = 0;
         var fib = R.memoize(function(n) {ctr++; return n < 2 ? n : fib(n - 2) + fib(n - 1);});
         var result = fib(10);
@@ -61,12 +61,17 @@ describe('memoize', function() {
         assert.equal(ctr, 11); // fib(0), fib(1), ... fib(10), no memoization would take 177 iterations.
     });
 
-    it('should handle multiple parameters', function() {
+    it('handles multiple parameters', function() {
         var f = R.memoize(function(a, b, c) {return a + ', ' + b + c;});
         assert.equal(f('Hello', 'World' , '!'), 'Hello, World!');
         assert.equal(f('Goodbye', 'Cruel World' , '!!!'), 'Goodbye, Cruel World!!!');
         assert.equal(f('Hello', 'how are you' , '?'), 'Hello, how are you?');
         assert.equal(f('Hello', 'World' , '!'), 'Hello, World!');
+    });
+
+    it('returns undefined if supplied no parameters for a positive arity function', function() {
+        var fib = R.memoize(function(n) {return n < 2 ? n : fib(n - 2) + fib(n - 1);});
+        assert.equal(typeof fib(), 'undefined');
     });
 });
 

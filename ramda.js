@@ -1227,7 +1227,7 @@
      * for that set of arguments will be returned.
      *
      * Note that this version of `memoize` effectively handles only string and number
-     * parameters.
+     * parameters.  Also note that it does not work on variadic functions.
      *
      * @func
      * @memberOf R
@@ -1256,12 +1256,15 @@
      *      numberOfCalls; //=> 3
      */
     R.memoize = function _memoize(fn) {
+        if (!fn.length) {
+            return once(fn);
+        }
         var cache = {};
         return function() {
+            if (!arguments.length) {return;}
             var position = foldl(function(cache, arg) {
                     return cache[arg] || (cache[arg] = {});
-                }, cache,
-                _slice(arguments, 0, arguments.length - 1));
+                }, cache, _slice(arguments, 0, arguments.length - 1));
             var arg = arguments[arguments.length - 1];
             return (position[arg] || (position[arg] = fn.apply(this, arguments)));
         };
@@ -1285,7 +1288,7 @@
      *      addOneOnce(10); //=> 11
      *      addOneOnce(addOneOnce(50)); //=> 11
      */
-    R.once = function _once(fn) {
+    var once = R.once = function _once(fn) {
         var called = false, result;
         return function() {
             if (called) {
