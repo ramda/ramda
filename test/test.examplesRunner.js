@@ -4,8 +4,9 @@ var R = require('..');
 var dox = require('dox');
 
 // simple object to hold info about our examples
-function ExampleTest(func_code, original_source, alias_of) {
-    this.func_name = this.getFunctionName(func_code);
+function ExampleTest(dox_info, original_source, alias_of) {
+    this.func_name = this.getFunctionName(dox_info.code);
+    this.line_number = dox_info.line;
     this.original_source = original_source;
     this.alias_of = alias_of;
     this.testable_source = this.getTestableSource();
@@ -51,7 +52,7 @@ ExampleTest.prototype.getTestableSource = function() {
 // check line for sample output, add to our _tests array
 ExampleTest.prototype.getTestLine = function(line) {
     line = line.trim();
-    var matches = line.match(/^(.*);\s*\/\/=>\s*(.+)$/);
+    var matches = line.match(/^(.*);\s*\/\/=>\s*(.+?)(\/\/.+$|$)/);
     if (matches) {
         var expression = matches[1],
           expected = matches[2],
@@ -103,7 +104,9 @@ function processExample(e, idx, all_examples) {
     }
     if (e.testable_source) {
         // we have testable source, run example
-        runExample(e);
+        var run_func_name = 'runExample_' + e.func_name.replace(/\W/g, '_') + '_' + e.line_number;
+        runExample[run_func_name] = function(etmp) { runExample(etmp); };
+        runExample[run_func_name](e);
     } else {
         // see if e is alias for function with example
         checkForAliasExample(e, all_examples);
@@ -158,7 +161,7 @@ function getExampleFromDox(dox_info) {
         // ignore namespaces
         return false;
     } else {
-        return new ExampleTest(dox_info.code, tag_map.example, tag_map.see);
+        return new ExampleTest(dox_info, tag_map.example, tag_map.see);
     }
 }
 
