@@ -292,12 +292,12 @@
      *      var g = f(3);
      *      g(4);//=> 10
      */
-    var curryN = R.curryN = function curryN(fnArity, fn) {
+    var curryN = R.curryN = function curryN(length, fn) {
         return (function recurry(args) {
-            return arity(Math.max(fnArity - (args && args.length || 0), 0), function() {
+            return arity(Math.max(length - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
                 var newArgs = concat(args, arguments);
-                if (newArgs.length >= fnArity) {
+                if (newArgs.length >= length) {
                     return fn.apply(this, newArgs);
                 } else {
                     return recurry(newArgs);
