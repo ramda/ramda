@@ -264,6 +264,46 @@
         };
     }
 
+    if (typeof Object.defineProperty === 'function') {
+        Object.defineProperty(R, '_', {writable: false, value: void 0});
+    }
+    var _ = R._;  void _;// This intentionally left `undefined`.
+
+    /**
+     * Converts a function into something like an infix operation, meaning that
+     * when called with a single argument, that argument is applied to the
+     * second position, sort of a curry-right.  This allows for more natural
+     * processing of functions which are really binary operators.
+     *
+     * @memberOf R
+     * @category Functions
+     * @param {function} fn The operation to adjust
+     * @return {function} A new function that acts somewhat like an infix operator.
+     * @example
+     *
+     *      var div = op(function (a, b) {
+     *          return a / b;
+     *      });
+     *
+     *      div(6, 3) //=> 2
+     *      div(6, _)(3) //=> 2 // note: `_` here is just an `undefined` value.  You could use `void 0` instead
+     *      div(3)(6) //=> 2
+     */
+    var op = R.op = function op(fn) {
+        var length = fn.length;
+        if (length < 2) {throw new Error('Expected binary function.');}
+        var left = curry(fn), right = curry(R.flip(fn));
+
+        return function(a, b) {
+            switch (arguments.length) {
+                case 0: throw NO_ARGS_EXCEPTION;
+                case 1: return right(a);
+                case 2: return (b === R._) ? left(a) : left.apply(null, arguments);
+                default: return left.apply(null, arguments);
+            }
+        };
+    };
+
 
     /**
      * Private function that determines whether or not a provided object has a given method.
@@ -4131,43 +4171,20 @@
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a - b`.
-     * @see R.subtractN
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
-     *      var complementaryAngle = R.subtract(90);
+     *      subtract(10, 8); //=> 2
+     *
+     *      var minus5 = subtract(5);
+     *      minus5(17); //=> 12;
+     *
+     *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
+     *      var complementaryAngle = R.subtract(90, _);
      *      complementaryAngle(30); //=> 60
-     *
-     *      var theRestOf = R.subtract(1);
-     *      theRestOf(0.25); //=> 0.75
-     *
-     *      R.subtract(10)(8); //=> 2
+     *      complementaryAngle(72); //=> 18
      */
-    var subtract = R.subtract = curry2(function _subtract(a, b) { return a - b; });
-
-
-    /**
-     * Subtracts two numbers in reverse order. Equivalent to `b - a` but
-     * curried. Probably more useful when partially applied than
-     * `subtract`.
-     *
-     * @func
-     * @memberOf R
-     * @category math
-     * @sig Number -> Number -> Number
-     * @param {number} a The first value.
-     * @param {number} b The second value.
-     * @return {number} The result of `a - b`.
-     * @example
-     *
-     *      var complementaryAngle = R.subtractN(90);
-     *      complementaryAngle(30); //=> -60
-     *
-     *      var theRestOf = R.subtractN(1);
-     *      theRestOf(0.25); //=> -0.75
-     *
-     *      R.subtractN(10)(8); //=> -2
-     */
-    R.subtractN = flip(subtract);
+    R.subtract = op(function _subtract(a, b) { return a - b; });
 
 
     /**
@@ -4182,41 +4199,23 @@
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a / b`.
-     * @see R.divideBy
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
-     *      var reciprocal = R.divide(1);
-     *      reciprocal(4);   //=> 0.25
-     *      R.divide(71, 100); //=> 0.71
-     */
-    var divide = R.divide = curry2(function _divide(a, b) { return a / b; });
-
-
-    /**
-     * Divides two numbers in reverse order. Equivalent to `b / a`.
-     * `divideBy` is the reversed version of `divide`, where the second parameter is
-     * divided by the first.  The curried version of `divideBy` may prove more useful
-     * than that of `divide`.
+     *      divide(71, 100); //=> 0.71
      *
-     * @func
-     * @memberOf R
-     * @category math
-     * @sig Number -> Number -> Number
-     * @param {number} a The second value.
-     * @param {number} b The first value.
-     * @return {number} The result of `b / a`.
-     * @see R.divide
-     * @example
-     *
-     *      var half = R.divideBy(2);
+     *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
+     *      var half = divide(2, _);
      *      half(42); //=> 21
+     *
+     *      var reciprocal = divide(1);
+     *      reciprocal(4);   //=> 0.25
      */
-    R.divideBy = flip(divide);
+    R.divide = op(function _divide(a, b) { return a / b; });
 
 
     /**
      * Divides the second parameter by the first and returns the remainder.
-     * The flipped version (`moduloBy`) may be more useful curried.
      * Note that this functions preserves the JavaScript-style behavior for
      * modulo. For mathematical modulo see `mathMod`
      *
@@ -4227,7 +4226,7 @@
      * @param {number} a The value to the divide.
      * @param {number} b The pseudo-modulus
      * @return {number} The result of `b % a`.
-     * @see R.moduloBy
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @see R.mathMod
      * @example
      *
@@ -4235,8 +4234,12 @@
      *      // JS behavior:
      *      R.modulo(-17, 3); //=> -2
      *      R.modulo(17, -3); //=> 2
+     *
+     *      var isOdd = R.modulo(2);
+     *      isOdd(42); //=> 0
+     *      isOdd(21); //=> 1
      */
-    var modulo = R.modulo = curry2(function _modulo(a, b) { return a % b; });
+    R.modulo = op(function _modulo(a, b) { return a % b; });
 
 
     /**
@@ -4269,39 +4272,29 @@
      * @see R.moduloBy
      * @example
      *
-     *      R.mathMod(-17, 5);  //=> 3
-     *      R.mathMod(17, 5);   //=> 2
-     *      R.mathMod(17, -5);  //=> NaN
-     *      R.mathMod(17, 0);   //=> NaN
-     *      R.mathMod(17.2, 5); //=> NaN
-     *      R.mathMod(17, 5.3); //=> NaN
+     *      mathMod(-17, 5);  //=> 3
+     *      mathMod(17, 5);   //=> 2
+     *      mathMod(17, -5);  //=> NaN
+     *      mathMod(17, 0);   //=> NaN
+     *      mathMod(17.2, 5); //=> NaN
+     *      mathMod(17, 5.3); //=> NaN
+     *
+     *      var clock = mathMod(12);
+     *      clock(15); //=> 3
+     *      clock(24); //=> 0
+     *
+     *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
+     *      var seventeenMod = mathMod(17, _);
+     *      seventeenMod(3);  //=> 2
+     *      seventeenMod(4);  //=> 1
+     *      seventeenMod(10); //=> 7
      */
-    R.mathMod = curry2(function _mathMod(m, p) {
+    R.mathMod = op(function _mathMod(m, p) {
         if (!isInteger(m)) { return NaN; }
         if (!isInteger(p) || p < 1) { return NaN; }
         return ((m % p) + p) % p;
     });
 
-
-    /**
-     * Reversed version of `modulo`, where the second parameter is divided by the first.  The curried version of
-     * this one might be more useful than that of `modulo`.
-     *
-     * @func
-     * @memberOf R
-     * @category math
-     * @sig Number -> Number -> Number
-     * @param {number} m The dividend.
-     * @param {number} p the modulus.
-     * @return {number} The result of `b mod a`.
-     * @see R.modulo
-     * @example
-     *
-     *      var isOdd = R.moduloBy(2);
-     *      isOdd(42); //=> 0
-     *      isOdd(21); //=> 1
-     */
-    R.moduloBy = flip(modulo);
 
 
     /**
@@ -4348,13 +4341,16 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a < b
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
-     *      R.lt(2, 6); //=> true
-     *      R.lt(2, 0); //=> false
-     *      R.lt(2, 2); //=> false
+     *      lt(2, 6); //=> true
+     *      lt(2, 0); //=> false
+     *      lt(2, 2); //=> false
+     *      lt(5)(10); //=> true // default currying is right-sectioned
+     *      lt(5, _)(10); //=> false // left-sectioned currying
      */
-    R.lt = curry2(function _lt(a, b) { return a < b; });
+    R.lt = op(function _lt(a, b) { return a < b; });
 
 
     /**
@@ -4367,13 +4363,14 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a <= b
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
      *      R.lte(2, 6); //=> true
      *      R.lte(2, 0); //=> false
      *      R.lte(2, 2); //=> true
      */
-    R.lte = curry2(function _lte(a, b) { return a <= b; });
+    R.lte = op(function _lte(a, b) { return a <= b; });
 
 
     /**
@@ -4386,13 +4383,14 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a > b
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
      *      R.gt(2, 6); //=> false
      *      R.gt(2, 0); //=> true
      *      R.gt(2, 2); //=> false
      */
-    R.gt = curry2(function _gt(a, b) { return a > b; });
+    R.gt = op(function _gt(a, b) { return a > b; });
 
 
     /**
@@ -4405,13 +4403,14 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a >= b
+     * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
      *      R.gte(2, 6); //=> false
      *      R.gte(2, 0); //=> true
      *      R.gte(2, 2); //=> true
      */
-    R.gte = curry2(function _gte(a, b) { return a >= b; });
+    R.gte = op(function _gte(a, b) { return a >= b; });
 
 
     /**
@@ -4467,6 +4466,25 @@
 
 
     /**
+     * Determines the smallest of a list of numbers (or elements that can be cast to numbers)
+     *
+     * @func
+     * @memberOf R
+     * @category math
+     * @sig [Number] -> Number
+     * @param {Array} list A list of numbers
+     * @return {Number} The greatest number in the list
+     * @see R.minWith
+     * @example
+     *
+     *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
+     */
+    R.min = function _min(list) {
+        return foldl(binary(Math.min), Infinity, list);
+    };
+
+
+    /**
      * Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
      *
      * @func
@@ -4498,25 +4516,6 @@
         }
         return winner;
     });
-
-
-    /**
-     * Determines the smallest of a list of numbers (or elements that can be cast to numbers)
-     *
-     * @func
-     * @memberOf R
-     * @category math
-     * @sig [Number] -> Number
-     * @param {Array} list A list of numbers
-     * @return {Number} The greatest number in the list
-     * @see R.minWith
-     * @example
-     *
-     *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
-     */
-    R.min = function _min(list) {
-        return foldl(binary(Math.min), Infinity, list);
-    };
 
 
 
