@@ -153,6 +153,54 @@
     };
 
 
+<<<<<<< HEAD
+    /**
+     * Creates a new version of `fn` that, when invoked, will return either:
+     * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
+     * `fn`'s expected arguments have not yet been provided
+     * - `fn`'s result if all of its expected arguments have been provided
+     *
+     * Optionally, you may provide an arity for the returned function.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig (* -> a) -> Number -> (* -> a)
+     * @sig (* -> a) -> (* -> a)
+     * @param {Function} fn The function to curry.
+     * @param {number} [length=fn.length] An optional arity for the returned function.
+     * @return {Function} A new, curried function.
+     * @example
+     *
+     *      var addFourNumbers = function(a, b, c, d) {
+     *        return a + b + c + d;
+     *      };
+     *
+     *      var curriedAddFourNumbers = R.curry(addFourNumbers);
+     *      var f = curriedAddFourNumbers(1, 2);
+     *      var g = f(3);
+     *      g(4); //=> 10
+     */
+    var curry = R.curry = function _curry(fn, length) {
+        if (arguments.length < 2) {
+            return _curry(fn, fn.length);
+        }
+        return (function recurry(args) {
+            return arity(Math.max(length - (args && args.length || 0), 0), function() {
+                if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
+                var newArgs = concat(args, arguments);
+                if (newArgs.length >= length) {
+                    return fn.apply(this, newArgs);
+                } else {
+                    return recurry(newArgs);
+                }
+            });
+        }([]));
+    };
+
+
+=======
+>>>>>>> v0.5.0
     var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
 
 
@@ -2662,10 +2710,18 @@
     // TODO: document, even for internals...
     var makeFlat = function _makeFlat(recursive) {
         return function __flatt(list) {
+<<<<<<< HEAD
             var value, result = [], idx = -1, j, ilen = list.length, jlen;
             while (++idx < ilen) {
-                if (R.isArrayLike(list[idx])) {
+                if (isArrayLike(list[idx])) {
                     value = (recursive) ? __flatt(list[idx]) : list[idx];
+=======
+            var array, value, result = [], val, i = -1, j, ilen = list.length, jlen;
+            while (++i < ilen) {
+                array = list[i];
+                if (R.isArrayLike(array)) {
+                    value = (recursive) ? __flatt(array) : array;
+>>>>>>> v0.5.0
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {

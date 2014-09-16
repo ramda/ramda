@@ -222,8 +222,8 @@ describe('ap', function() {
     });
 
     it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
-        var obj = {ap: function(fs) { return {x: fs[0](1)}; }};
-        assert.deepEqual(R.ap([R.add(1)], obj), obj.ap([R.add(1)]));
+        var obj = {ap: function(n) { return 'called ap with ' + n; }};
+        assert.deepEqual(R.ap(obj, 10), obj.ap(10));
     });
 
     it('is curried', function() {

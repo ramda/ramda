@@ -14,6 +14,18 @@ describe('curry', function() {
         assert.notEqual(curried, source);
     });
 
+<<<<<<< HEAD
+    it('curry should accept an arity', function() {
+        var curried = R.curry(function(a, b, c, d) {
+            void d;
+            return a * b * c;
+        }, 3);
+        assert.equal(curried(1)(2)(3), 6);
+        assert.equal(curried(1, 2, 3), 6);
+    });
+
+=======
+>>>>>>> v0.5.0
     it('produces functions that throw when called with no arguments', function() {
         assert.throws(curried, TypeError);
         assert.throws(curried(1), TypeError);
@@ -24,7 +36,6 @@ describe('curry', function() {
 
 describe('curryN', function() {
     function source(a, b, c, d) {
-        void d;
         return a * b * c;
     }
     it('should accept an arity', function() {

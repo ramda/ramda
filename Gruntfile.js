@@ -183,7 +183,9 @@ module.exports = function(grunt) {
     grunt.registerTask('dist', ['uglify', 'copy:dist']);
     grunt.registerTask('min', ['jshint', 'mochaTest:test', 'uglify']);
     grunt.registerTask('publish', ['push', 'version']);
-    grunt.registerTask('sauce', ['connect', 'saucelabs-mocha']);
+    grunt.registerTask('sauce', (function() {
+        return (typeof process.env.SAUCE_ACCESS_KEY === 'undefined') ? [] : ['connect', 'saucelabs-mocha'];
+    }()));
     grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
     grunt.registerTask('version', ['clean:dist', 'jshint', 'uglify', 'copy:dist']);
 };
