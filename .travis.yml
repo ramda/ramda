@@ -12,4 +12,4 @@ script:
 - npm test && make lint
 after_success: 
 - "grunt bench"
-#- "grunt sauce"
+- "grunt sauce"
