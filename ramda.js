@@ -281,13 +281,13 @@
      * @return {function} A new function that acts somewhat like an infix operator.
      * @example
      *
-     *      var div = op(function (a, b) {
+     *      var div = R.op(function (a, b) {
      *          return a / b;
      *      });
      *
-     *      div(6, 3) //=> 2
-     *      div(6, _)(3) //=> 2 // note: `_` here is just an `undefined` value.  You could use `void 0` instead
-     *      div(3)(6) //=> 2
+     *      div(6, 3); //=> 2
+     *      div(6, _)(3); //=> 2 // note: `_` here is just an `undefined` value.  You could use `void 0` instead
+     *      div(3)(6); //=> 2
      */
     var op = R.op = function op(fn) {
         var length = fn.length;
@@ -4177,10 +4177,10 @@
      * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
-     *      subtract(10, 8); //=> 2
+     *      R.subtract(10, 8); //=> 2
      *
-     *      var minus5 = subtract(5);
-     *      minus5(17); //=> 12;
+     *      var minus5 = R.subtract(5);
+     *      minus5(17); //=> 12
      *
      *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
      *      var complementaryAngle = R.subtract(90, _);
@@ -4205,13 +4205,13 @@
      * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
-     *      divide(71, 100); //=> 0.71
+     *      R.divide(71, 100); //=> 0.71
      *
      *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
-     *      var half = divide(2, _);
+     *      var half = R.divide(2);
      *      half(42); //=> 21
      *
-     *      var reciprocal = divide(1);
+     *      var reciprocal = R.divide(1, _);
      *      reciprocal(4);   //=> 0.25
      */
     R.divide = op(function _divide(a, b) { return a / b; });
@@ -4275,19 +4275,19 @@
      * @see R.moduloBy
      * @example
      *
-     *      mathMod(-17, 5);  //=> 3
-     *      mathMod(17, 5);   //=> 2
-     *      mathMod(17, -5);  //=> NaN
-     *      mathMod(17, 0);   //=> NaN
-     *      mathMod(17.2, 5); //=> NaN
-     *      mathMod(17, 5.3); //=> NaN
+     *      R.mathMod(-17, 5);  //=> 3
+     *      R.mathMod(17, 5);   //=> 2
+     *      R.mathMod(17, -5);  //=> NaN
+     *      R.mathMod(17, 0);   //=> NaN
+     *      R.mathMod(17.2, 5); //=> NaN
+     *      R.mathMod(17, 5.3); //=> NaN
      *
-     *      var clock = mathMod(12);
+     *      var clock = R.mathMod(12);
      *      clock(15); //=> 3
      *      clock(24); //=> 0
      *
      *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
-     *      var seventeenMod = mathMod(17, _);
+     *      var seventeenMod = R.mathMod(17, _);
      *      seventeenMod(3);  //=> 2
      *      seventeenMod(4);  //=> 1
      *      seventeenMod(10); //=> 7
@@ -4347,11 +4347,11 @@
      * @note Operator: this is right-curried by default, but can be called via sections
      * @example
      *
-     *      lt(2, 6); //=> true
-     *      lt(2, 0); //=> false
-     *      lt(2, 2); //=> false
-     *      lt(5)(10); //=> true // default currying is right-sectioned
-     *      lt(5, _)(10); //=> false // left-sectioned currying
+     *      R.lt(2, 6); //=> true
+     *      R.lt(2, 0); //=> false
+     *      R.lt(2, 2); //=> false
+     *      R.lt(5)(10); //=> false // default currying is right-sectioned
+     *      R.lt(5, _)(10); //=> true // left-sectioned currying
      */
     R.lt = op(function _lt(a, b) { return a < b; });
 
