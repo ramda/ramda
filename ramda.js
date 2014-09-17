@@ -2521,9 +2521,9 @@
      * @memberOf R
      * @category List
      * @sig (x, a -> Boolean) -> x -> [a] -> Boolean
-     * @param {Function} pred :: x -> x -> Bool
-     * @param {*} x the item to find
-     * @param {Array} list the list to iterate over
+     * @param {Function} pred A predicate used to test whether two items are equal.
+     * @param {*} x The item to find
+     * @param {Array} list The list to iterate over
      * @return {Boolean} `true` if `x` is in `list`, else `false`
      * @example
      *
@@ -2611,7 +2611,7 @@
      * @memberOf R
      * @category List
      * @sig (x, a -> Boolean) -> [a] -> [a]
-     * @param {Function} pred :: x -> x -> Bool
+     * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list The array to consider.
      * @return {Array} The list of unique items.
      * @example
@@ -3176,8 +3176,8 @@
      * @memberOf R
      * @category List
      * @sig (a -> Boolean) -> [a] -> [[a],[a]]
-     * @param {Function} pred Function :: a -> Boolean
-     * @param {Array} list The array to partition
+     * @param {Function} pred A predicate to determine which array the element belongs to.
+     * @param {Array} list The array to partition.
      * @return {Array} A nested array, containing first an array of elements that satisfied the predicate,
      *                 and second an array of elements that did not satisfy.
      * @example
@@ -4904,7 +4904,7 @@
      * @memberOf R
      * @category relation
      * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
-     * @param {Function} pred
+     * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @return {Array} The first and second lists concatenated, with
@@ -4952,7 +4952,7 @@
      * @memberOf R
      * @category relation
      * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
-     * @param {Function} pred
+     * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @see R.difference
@@ -5002,7 +5002,6 @@
      * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate function that determines whether
      *        the two supplied elements are equal.
-     *        Signatrue: a -> a -> Boolean
      * @param {Array} list1 One list of items to compare
      * @param {Array} list2 A second list of items to compare
      * @see R.intersection
