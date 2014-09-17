@@ -8,15 +8,9 @@ node_modules
 /jasmine-1.1.0.js
 coverage
 *.swp
-
-
+*.orig
 /node_modules
 /examples/math.html
 /examples/math.js
-
-
 .travis.yml
-
-
-
 /ramda.api.js
