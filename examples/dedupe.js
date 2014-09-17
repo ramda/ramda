@@ -4,7 +4,7 @@ Why Ramda? Why Functional Programming?
 Functional programming can make complex code more abstract, simpler, and less
 verbose.
 
-For example, conside the not uncommon problem of purging an array of objects of
+For example, consider the not uncommon problem of purging an array of objects of
 its duplicates.
 
 Consider the function `imperativeDedupe1`, written in imperative style.
@@ -160,7 +160,7 @@ var objs2 = [
     {x: 1, y: 2, z: {a: 100, b: 200}},
     {x: 3, y: 6, z: {a: 300, b: 900}},
     {x: 1, y: 2, z: {a: 111, b: 200}},
-    {x: 4, y: 0, z: {a: 3, b: 9}},
+    {x: 4, y: 0, z: {a:   3, b:   9}},
     {x: 3, y: 6, z: {a: 300, b: 900}},
     {x: 2, y: 4, z: {a: 222, b: 400}}
 ];
