@@ -21,7 +21,7 @@ ExampleTest.prototype.getFunctionName = function(code) {
     if ((matches = func_line.match(/^function (\w+)/)) !== null) {
         return matches[1];
     } else if ((matches = func_line.match(/([\w\.]+\s*=\s*)+/)) !== null) {
-        var names = R.reject(R.isEmpty, R.map(R.invoker('trim', String.prototype), matches[0].split('=')));
+        var names = R.reject(R.isEmpty, R.map(R.invoker(String.prototype.trim), matches[0].split('=')));
         var ramda_func = R.find(R.match(/^R\./), names);
         return (names.length === 0) ? false : ((R.isEmpty(ramda_func)) ? names[0] : ramda_func);
     } else {
