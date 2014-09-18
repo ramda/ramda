@@ -42,6 +42,17 @@
     // ---------------------------------
 
     /**
+     * Creates an exception about calling a function with no arguments.
+     *
+     * @private
+     * @category Internal
+     * @return {TypeError} A no arguments exception.
+     */
+    function noArgsException() {
+        return new TypeError('Function called with no arguments');
+    }
+
+    /**
      * An optimized, private array `slice` implementation.
      *
      * @private
@@ -61,7 +72,7 @@
      */
     function _slice(args, from, to) {
         switch (arguments.length) {
-            case 0: throw NO_ARGS_EXCEPTION;
+            case 0: throw noArgsException();
             case 1: return _slice(args, 0, args.length);
             case 2: return _slice(args, from, args.length);
             default:
@@ -153,9 +164,6 @@
     };
 
 
-    var NO_ARGS_EXCEPTION = new TypeError('Function called with no arguments');
-
-
     /**
      * Optimized internal two-arity curry function.
      *
@@ -175,7 +183,7 @@
         return function(a, b) {
             switch (arguments.length) {
                 case 0:
-                    throw NO_ARGS_EXCEPTION;
+                    throw noArgsException();
                 case 1:
                     return function(b) {
                         return fn(a, b);
@@ -206,7 +214,7 @@
         return function(a, b, c) {
             switch (arguments.length) {
                 case 0:
-                    throw NO_ARGS_EXCEPTION;
+                    throw noArgsException();
                 case 1:
                     return curry2(function(b, c) {
                         return fn(a, b, c);
@@ -255,7 +263,7 @@
 
         return function(a, b) {
             switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
+                case 0: throw noArgsException();
                 case 1: return right(a);
                 case 2: return (b === R._) ? left(a) : left.apply(null, arguments);
                 default: return left.apply(null, arguments);
@@ -297,7 +305,7 @@
     var curryN = R.curryN = function curryN(length, fn) {
         return (function recurry(args) {
             return arity(Math.max(length - (args && args.length || 0), 0), function() {
-                if (arguments.length === 0) { throw NO_ARGS_EXCEPTION; }
+                if (arguments.length === 0) { throw noArgsException(); }
                 var newArgs = concat(args, arguments);
                 if (newArgs.length >= length) {
                     return fn.apply(this, newArgs);
@@ -1108,7 +1116,7 @@
      */
     var compose = R.compose = function _compose() {
         switch (arguments.length) {
-            case 0: throw NO_ARGS_EXCEPTION;
+            case 0: throw noArgsException();
             case 1: return arguments[0];
             default:
                 var idx = arguments.length - 1, fn = arguments[idx], length = fn.length;
@@ -1175,7 +1183,7 @@
     var flip = R.flip = function _flip(fn) {
         return function(a, b) {
             switch (arguments.length) {
-                case 0: throw NO_ARGS_EXCEPTION;
+                case 0: throw noArgsException();
                 case 1: return function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); };
                 default: return fn.apply(this, concat([b, a], _slice(arguments, 2)));
             }
@@ -3292,7 +3300,7 @@
      */
     var prop = R.prop = function prop(p, obj) {
         switch (arguments.length) {
-            case 0: throw NO_ARGS_EXCEPTION;
+            case 0: throw noArgsException();
             case 1: return function _prop(obj) { return obj[p]; };
         }
         return obj[p];
@@ -3383,7 +3391,7 @@
      */
     R.func = function _func(funcName, obj) {
         switch (arguments.length) {
-            case 0: throw NO_ARGS_EXCEPTION;
+            case 0: throw noArgsException();
             case 1: return function(obj) { return obj[funcName].apply(obj, _slice(arguments, 1)); };
             default: return obj[funcName].apply(obj, _slice(arguments, 2));
         }
@@ -3889,7 +3897,7 @@
         }, keys(spec));
 
         switch (arguments.length) {
-            case 0: throw NO_ARGS_EXCEPTION;
+            case 0: throw noArgsException();
             case 1:
                 return function(testObj) {
                     return satisfiesSpec(spec, parsedSpec, testObj);
