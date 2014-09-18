@@ -153,7 +153,29 @@ var total = sum([1, 2, 3, 4]);
 Running The Test Suite
 ----------------------
 
-To run the test suite, you can simply open `test/index.html` in your browser.
+**Console:**
+
+To run the test suite from the console, you need to have `mocha` installed:
+
+    npm install -g mocha
+
+Then from the root of the project, you can just call
+
+    mocha
+
+Alternately, if you've installed the dependencies, via:
+
+    npm install
+    npm install -g grunt-cli
+
+then you can run the tests (and get more detailed output) via our `grunt`
+task:
+
+    grunt test
+
+**Browser:**
+
+To run the test suite in the browser, you can simply open `test/index.html`.
 
 Alternatively, you can use [testem](https://github.com/airportyh/testem) to
 test across different browsers (or even headlessly), with livereloading of
@@ -164,6 +186,7 @@ If you have PhantomJS installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
 ![ramda on sauce labs](https://saucelabs.com/browser-matrix/ramda.svg)
+
 
 
 So What's With Eweda?
