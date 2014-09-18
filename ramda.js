@@ -221,12 +221,12 @@
         };
     }
 
-    if (typeof Object.defineProperty === 'function') {
-        try {
-            Object.defineProperty(R, '_', {writable: false, value: void 0});
-        } catch (e) {}
+    var _;  // This is intentionally left `undefined`.
+    try {
+        Object.defineProperty(R, '_', {writable: false, value: _});
+    } catch (e) {
+        R._ = _;
     }
-    var _ = R._;  void _;// This intentionally left `undefined`.
 
     /**
      * Converts a function into something like an infix operation, meaning that
