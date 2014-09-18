@@ -533,20 +533,52 @@
 
 
     /**
-     * Turns a named method of an object (or object prototype) into a function that can be
-     * called directly. Passing the optional `len` parameter restricts the returned function to
-     * the initial `len` parameters of the method.
+     * Turns a named method of an object (or object prototype) into a function
+     * that can be called directly.
      *
-     * The returned function is curried and accepts `len + 1` parameters (or `method.length + 1`
-     * when `len` is not specified), and the final parameter is the target object.
+     * The returned function is curried and accepts `len + 1` parameters and
+     * the final parameter is the target object.
      *
      * @func
      * @memberOf R
      * @category Function
-     * @sig (String, Object, Number) -> (* -> *)
+     * @sig (Number, String, Object) -> (* -> *)
      * @param {string} name The name of the method to wrap.
      * @param {Object} obj The object to search for the `name` method.
-     * @param [len] The desired arity of the wrapped method.
+     * @param {number} len The desired arity of the wrapped method.
+     * @return {Function} A new function or `undefined` if the specified method is not found.
+     * @see R.invoker
+     * @example
+     *
+     *      var sliceFrom = R.invokerN(1, 'slice', String.prototype);
+     *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
+     */
+    var invokerN = R.invokerN = function invokerN(len, name, obj) {
+        var method = obj[name];
+        return method && curryN(len + 1, function() {
+            var target = R.last(arguments);
+            var targetMethod = target[name];
+            if (targetMethod === method) {
+                return targetMethod.apply(target,
+                    Array.prototype.slice.call(arguments, 0, -1));
+            }
+        });
+    };
+
+
+    /**
+     * Turns a named method of an object (or object prototype) into a function that can be
+     * called directly.
+     *
+     * The returned function is curried and accepts `method.length + 1` parameters
+     * and the final parameter is the target object.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig (String, Object) -> (* -> *)
+     * @param {string} name The name of the method to wrap.
+     * @param {Object} obj The object to search for the `name` method.
      * @return {Function} A new function or `undefined` if the specified method is not found.
      * @example
      *
@@ -558,18 +590,9 @@
      *      join('', R.map(firstChar, ['light', 'ampliifed', 'stimulated', 'emission', 'radiation']));
      *      //=> 'laser'
      */
-    var invoker = R.invoker = function _invoker(name, obj, len) {
+    var invoker = R.invoker = function invoker(name, obj) {
         var method = obj[name];
-        var length = len === void 0 ? method.length : len;
-        return method && curryN(length + 1, function() {
-            if (arguments.length) {
-                var target = Array.prototype.pop.call(arguments);
-                var targetMethod = target[name];
-                if (targetMethod == method) {
-                    return targetMethod.apply(target, arguments);
-                }
-            }
-        });
+        return method && invokerN(method.length, name, obj);
     };
 
 
@@ -4755,7 +4778,7 @@
      *
      *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
      */
-    R.split = invoker('split', String.prototype, 1);
+    R.split = invokerN(1, 'split', String.prototype);
 
 
     /**
