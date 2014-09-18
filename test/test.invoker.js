@@ -25,7 +25,7 @@ describe('invoker', function() {
 });
 
 describe('invokerN', function() {
-    var concat3 = R.invokerN('concat', Array.prototype, 2);
+    var concat3 = R.invokerN(2, 'concat', Array.prototype);
 
     it('should return a function with correct arity', function() {
         assert.equal(concat3.length, 3);

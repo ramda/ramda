@@ -542,7 +542,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig (String, Object, Number) -> (* -> *)
+     * @sig (Number, String, Object) -> (* -> *)
      * @param {string} name The name of the method to wrap.
      * @param {Object} obj The object to search for the `name` method.
      * @param {number} len The desired arity of the wrapped method.
@@ -550,10 +550,10 @@
      * @see R.invoker
      * @example
      *
-     *      var sliceFrom = R.invokerN('slice', String.prototype, 1);
+     *      var sliceFrom = R.invokerN(1, 'slice', String.prototype);
      *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
      */
-    var invokerN = R.invokerN = function invokerN(name, obj, len) {
+    var invokerN = R.invokerN = function invokerN(len, name, obj) {
         var method = obj[name];
         return method && curryN(len + 1, function() {
             var target = R.last(arguments);
@@ -576,7 +576,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig (String, Object, Number) -> (* -> *)
+     * @sig (String, Object) -> (* -> *)
      * @param {string} name The name of the method to wrap.
      * @param {Object} obj The object to search for the `name` method.
      * @return {Function} A new function or `undefined` if the specified method is not found.
@@ -592,7 +592,7 @@
      */
     var invoker = R.invoker = function invoker(name, obj) {
         var method = obj[name];
-        return method && invokerN(name, obj, method.length);
+        return method && invokerN(method.length, name, obj);
     };
 
 
@@ -4778,7 +4778,7 @@
      *
      *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
      */
-    R.split = invokerN('split', String.prototype, 1);
+    R.split = invokerN(1, 'split', String.prototype);
 
 
     /**
