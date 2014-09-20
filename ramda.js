@@ -242,6 +242,7 @@
      * second position, sort of a curry-right.  This allows for more natural
      * processing of functions which are really binary operators.
      *
+     * @func
      * @memberOf R
      * @category Functions
      * @param {function} fn The operation to adjust
