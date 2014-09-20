@@ -38,48 +38,16 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            files: ['*.js', 'ext/**/*.js', 'test/*.js'],
+            files: ['**/*.js', '!{lib/test,node_modules,sauce}/**'],
             options: {
-                disallowKeywordsOnNewLine: ['else', 'catch', 'finally'],
-                disallowMixedSpacesAndTabs: true,
-                disallowMultipleLineStrings: true,
-                disallowQuotedKeysInObjects: 'allButReserved',
-                disallowSpaceAfterObjectKeys: true,
-                disallowSpaceAfterPrefixUnaryOperators: ['++', '--', '+', '-', '~', '!'],
-                disallowSpaceBeforePostfixUnaryOperators: ['++', '--'],
-                disallowSpacesInFunction: {beforeOpeningRoundBrace: true},
-                disallowSpacesInsideArrayBrackets: true,
-                disallowSpacesInsideObjectBrackets: true,
-                disallowSpacesInsideParentheses: true,
-                disallowTrailingWhitespace: true,
-                disallowYodaConditions: true,
-                requireCapitalizedConstructors: true,
-                requireCommaBeforeLineBreak: true,
-                requireCurlyBraces: ['if', 'else', 'for', 'while', 'do', 'try', 'catch', 'finally'],
-                requireDotNotation: true,
-                requireLineFeedAtFileEnd: true,
-                requireParenthesesAroundIIFE: true,
-                requireSpaceAfterBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<=', ',', ':'],
-                requireSpaceAfterKeywords: ['if', 'else', 'for', 'while', 'do', 'switch', 'return', 'try', 'catch', 'finally'],
-                requireSpaceAfterLineComment: true,
-                requireSpaceBeforeBinaryOperators: ['+', '-', '/', '*', '=', '==', '===', '!=', '!==', '>', '>=', '<', '<='],
-                requireSpaceBeforeBlockStatements: true,
-                requireSpacesInConditionalExpression: true,
-                requireSpacesInFunction: {beforeOpeningCurlyBrace: true},
-                validateIndentation: 4,
-                validateLineBreaks: 'LF',
-                validateQuoteMarks: {escape: true, mark: "'"}
+                config: '.jscsrc'
             }
         },
 
         jshint: {
-            files: ['ramda.js', 'ext/**/*.js', 'test/*.js'],
+            files: ['**/*.js', '!{lib/test,node_modules,sauce}/**'],
             options: {
-                evil: true,
-                eqnull: true,
-                predef: ['beforeEach', 'console', 'define', 'describe', 'it', 'module', 'require'],
-                undef: true,
-                unused: true,
+                jshintrc: '.jshintrc'
             }
         },
 

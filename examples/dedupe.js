@@ -1,3 +1,5 @@
+var R = require('..');
+
 /*
 Why Ramda? Why Functional Programming?
 
@@ -13,19 +15,19 @@ the object value, then pushes back to an array, thereby eliminating duplicates.
 */
 var imperativeDedupe1 = function(list) {
     var idx,
-        len=list.length,
-        out=[],
-        cache={},
+        len = list.length,
+        out = [],
+        cache = {},
         item;
 
-    for (idx=0;idx<len;idx++) {
+    for (idx = 0; idx < len; idx++) {
         item = list[idx];
         if (!(item in cache)) {
             out.push(cache[item] = item);
         }
     }
     return out;
-}
+};
 
 /*
 Here's a possible implementation of that in functional style, `fpDedupe1`.
@@ -34,9 +36,9 @@ then looks to see if that object exists in the tail of the list. If not,
 then push the head of the list onto the accumulator, and recur on the tail of
 the list.
 */
-var fpDedupe1 = foldl(function(acc, curr) {
-    if (!contains(curr, acc)) {
-        acc = append(curr, acc);
+var fpDedupe1 = R.foldl(function(acc, curr) {
+    if (!R.contains(curr, acc)) {
+        acc = R.append(curr, acc);
     }
     return acc;
 }, []);
@@ -97,13 +99,13 @@ the rest.
 */
 var fpDedupe2 = function(pred, list) {
     function reducer(acc, curr) {
-        if (!some(function(accElem) { return pred(accElem, curr); }, acc)) {
-            acc = append(curr, acc);
+        if (!R.some(function(accElem) { return pred(accElem, curr); }, acc)) {
+            acc = R.append(curr, acc);
         }
         return acc;
     }
-    return foldl(reducer, [], list);
-}
+    return R.foldl(reducer, [], list);
+};
 
 /*
 To purge the array `objs`, we want to remove any objects from the array where
@@ -125,14 +127,14 @@ The imperative code might look as nasty as this:
 */
 var imperativeDedupe2 = function(list) {
     var idx,
-        len=list.length,
-        out=[list[0]],
+        len = list.length,
+        out = [list[0]],
         matched = true;
 
     for (idx = 0; idx < len; idx++) {
         for (var j = 0; j < out.length; j++) {
             if (list[idx].a === out[j].a && list[idx].b === out[j].b) {
-                var matched = true;
+                matched = true;
             }
         }
         if (!matched) {
@@ -141,7 +143,8 @@ var imperativeDedupe2 = function(list) {
         matched = false;
     }
     return out;
-}
+};
+void imperativeDedupe2;
 
 /*
 This works, but is still inflexible; the function `imperativeDedupe2` depends
@@ -168,13 +171,13 @@ var objs2 = [
 /*
 imperativeDedupe3 is a possible approach to this problem using imperative style:
 */
-imperativeDedupe3 = function(list) {
+var imperativeDedupe3 = function(list) {
     var idx,
-        len=list.length,
-        out=[],
-        obj={};
+        len = list.length,
+        out = [],
+        obj = {};
     for (idx = 0; idx < len; idx++) {
-        obj[list[idx].x + ":" + list[idx].z.a] = list[idx];
+        obj[list[idx].x + ':' + list[idx].z.a] = list[idx];
     }
     for (idx in obj) {
         if (obj.hasOwnProperty(idx)) {
@@ -182,7 +185,7 @@ imperativeDedupe3 = function(list) {
         }
     }
     return out;
-}
+};
 
 imperativeDedupe3(objs2);
 /*

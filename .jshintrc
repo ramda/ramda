@@ -1,0 +1,7 @@
+{
+  "evil": true,
+  "eqnull": true,
+  "predef": ["beforeEach", "console", "define", "describe", "it", "module", "process", "require"],
+  "undef": true,
+  "unused": true
+}
