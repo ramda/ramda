@@ -3442,7 +3442,7 @@
      */
     R.bind = curry2(function bind(fn, thisObj) {
         return function() {
-            return fn.apply(thisObj, _slice(arguments));
+            return fn.apply(thisObj, arguments);
         };
     });
 

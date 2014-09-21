@@ -61,7 +61,7 @@ describe('bind', function() {
         assert(incPojso() === 101);
     });
 
-    it('overrides existing object methods', function() {
+    it('does not interefere with existing object methods', function() {
         var b = new Bar('a', 'b');
         function getX() {
             return this.x;
