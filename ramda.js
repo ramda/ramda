@@ -3429,6 +3429,24 @@
     var nativeKeys = Object.keys;
 
     /**
+     * Creates a function that is bound to a context.
+     *
+     * @func
+     * memberOf R
+     * @category Function
+     * @category Object
+     * @sig (* -> *) -> {*} -> (* -> *)
+     * @param {Function} fn The function to bind to context
+     * @param {Object} thisObj The context to bind `fn` to
+     * @return {Function} A function that will execute in the context of `thisObj`
+     */
+    R.bind = curry2(function bind(fn, thisObj) {
+        return function() {
+            return fn.apply(thisObj, _slice(arguments));
+        };
+    });
+
+    /**
      * Returns a list containing the names of all the enumerable own
      * properties of the supplied object.
      * Note that the order of the output array is not guaranteed to be
