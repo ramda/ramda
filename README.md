@@ -4,6 +4,8 @@ Project Ramda
 A practical functional library for Javascript programmers.
 
 [![Build Status](https://travis-ci.org/CrossEye/ramda.svg?branch=master)](https://travis-ci.org/CrossEye/ramda)
+[![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
+[![dependencies](https://david-dm.org/CrossEye/ramda.png)](https://david-dm.org/CrossEye/ramda)
 
 Goals
 -----
