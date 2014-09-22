@@ -13,34 +13,71 @@
     }
 }(this, function() {
     function Either(left, right) {
-        if (!(this instanceof Either)) {
-            return new Either(left, right);
+        switch (arguments.length) {
+            case 0:
+                throw new TypeError('Either called with no arguments');
+            case 1:
+                return function(right) {
+                    return new Either(left, right);
+                };
+            default:
+                if (!(this instanceof Either)) {
+                    return new Either(left, right);
+                }
         }
-        this.left = left;
-        this.right = right;
+        this._left = left;
+        this._right = right;
     }
 
-    Either.of = function(value, err) {
-        return new Either(err, value);
+    Either.Left = function(err) {
+        return new Either(err, null);
+    };
+
+    Either.prototype.Left = Either.Left;
+
+    Either.prototype.isLeft = function() {
+        return !this.isRight();
+    };
+
+    Either.prototype.left = function() {
+        return this._left;
+    };
+
+    Either.Right = function(value) {
+        return new Either(null, value);
+    };
+
+    Either.prototype.Right = Either.Right;
+
+    Either.prototype.isRight = function() {
+        return this._right !== null && this._right !== undefined;
+    };
+
+    Either.prototype.right = function() {
+        return this._right;
+    };
+
+    Either.of = function(value) {
+        return Either.Right(value);
     };
 
     Either.prototype.map = function(f) {
-        return this.right == null ? this : new Either(this.left, f(this.right));
+        return this.isRight() ? new Either(this._left, f(this._right)) : this;
     };
 
     Either.prototype.ap = function(app) {
-        return this.right == null ? this : app.map(this.right);
+        return this.isRight() ? app.map(this._right) : this;
     };
 
     // `f` must return a new Either; not sure if this impl is sufficient
     Either.prototype.chain = function(f) {
-        return this.right == null ? this : f(this.right);
+        return this.isRight() ? f(this._right) : this;
     };
 
     Either.prototype.of = Either.of;
 
     Either.prototype.equals = function(that) {
-        return this.right === that.right;
+        return this._right === that._right;
     };
 
     Either.equals = function(e1, e2) {

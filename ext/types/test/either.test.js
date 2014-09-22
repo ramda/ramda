@@ -50,3 +50,33 @@ describe('Either', function() {
         assert.equal(true, mTest.iface(e));
     });
 });
+
+describe('some examples using Either', function() {
+
+    it('success is no failure', function() {
+        var success = Either.Right(20);
+        var failure = Either.Left(20);
+        assert.equal(success.equals(failure), false);
+    });
+
+    it('success is curried failure', function() {
+        var success = Either.Right(20);
+        var failure = Either('bad');
+        assert.equal(success.equals(failure(20)), true);
+    });
+
+    it('is adding 1 to success', function() {
+        var success = Either.Right(20);
+        assert.equal(success.map(function(x) {
+            return x + 1;
+        }).right(), 21);
+        assert.equal(success.right(), 20);
+    });
+
+    it('is ignoring + 1 on failure', function() {
+        var failure = Either.Left(20);
+        assert.equal(failure.map(function(x) {
+            return x + 1;
+        }).left(), 20);
+    });
+});
