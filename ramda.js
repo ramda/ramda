@@ -551,26 +551,22 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig (Number, String, Object) -> (* -> *)
-     * @param {string} name The name of the method to wrap.
-     * @param {Object} obj The object to search for the `name` method.
-     * @param {number} len The desired arity of the wrapped method.
-     * @return {Function} A new function or `undefined` if the specified method is not found.
+     * @sig (Number, (a... -> b)) -> (a... -> c -> b)
+     * @param {number} len Number of arguments the returned function should take
+     *        before the target object.
+     * @param {Function} method The method to wrap.
+     * @return {Function} A new curried function.
      * @see R.invoker
      * @example
      *
-     *      var sliceFrom = R.invokerN(1, 'slice', String.prototype);
+     *      var sliceFrom = R.invokerN(1, String.prototype.slice);
      *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
      */
-    var invokerN = R.invokerN = function invokerN(len, name, obj) {
-        var method = obj[name];
-        return method && curryN(len + 1, function() {
+    var invokerN = R.invokerN = function invokerN(len, method) {
+        return curryN(len + 1, function() {
             var target = R.last(arguments);
-            var targetMethod = target[name];
-            if (targetMethod === method) {
-                return targetMethod.apply(target,
-                    Array.prototype.slice.call(arguments, 0, -1));
-            }
+            return method.apply(target,
+                Array.prototype.slice.call(arguments, 0, -1));
         });
     };
 
@@ -585,23 +581,22 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig (String, Object) -> (* -> *)
-     * @param {string} name The name of the method to wrap.
-     * @param {Object} obj The object to search for the `name` method.
-     * @return {Function} A new function or `undefined` if the specified method is not found.
+     * @sig (a... -> b) -> (a... -> c -> b)
+     * @param {Function} method The method to wrap.
+     * @return {Function} A new curried function.
+     * @see R.invokerN
      * @example
      *
-     *      var charAt = R.invoker('charAt', String.prototype);
+     *      var charAt = R.invoker(String.prototype.charAt);
      *      charAt(6, 'abcdefghijklm'); //=> 'g'
      *
-     *      var join = R.invoker('join', Array.prototype);
+     *      var join = R.invoker(Array.prototype.join);
      *      var firstChar = charAt(0);
      *      join('', R.map(firstChar, ['light', 'ampliifed', 'stimulated', 'emission', 'radiation']));
      *      //=> 'laser'
      */
-    var invoker = R.invoker = function invoker(name, obj) {
-        var method = obj[name];
-        return method && invokerN(method.length, name, obj);
+    var invoker = R.invoker = function invoker(method) {
+        return invokerN(method.length, method);
     };
 
 
@@ -2998,7 +2993,7 @@
      *      spacer(['a', 2, 3.4]);   //=> 'a 2 3.4'
      *      R.join('|', [1, 2, 3]);    //=> '1|2|3'
      */
-    R.join = invoker('join', Array.prototype);
+    R.join = invoker(Array.prototype.join);
 
 
     /**
@@ -3017,7 +3012,7 @@
      *      var xs = R.range(0, 10);
      *      R.slice(2, 5)(xs); //=> [2, 3, 4]
      */
-    R.slice = invoker('slice', Array.prototype);
+    R.slice = invoker(Array.prototype.slice);
 
 
     /**
@@ -4622,7 +4617,7 @@
      *
      *      R.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
      */
-    var substring = R.substring = invoker('substring', String.prototype);
+    var substring = R.substring = invoker(String.prototype.substring);
 
 
     /**
@@ -4676,7 +4671,7 @@
      *
      *      R.charAt(8, 'abcdefghijklm'); //=> 'i'
      */
-    R.charAt = invoker('charAt', String.prototype);
+    R.charAt = invoker(String.prototype.charAt);
 
 
     /**
@@ -4695,7 +4690,7 @@
      *      R.charCodeAt(8, 'abcdefghijklm'); //=> 105
      *      // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
      */
-    R.charCodeAt = invoker('charCodeAt', String.prototype);
+    R.charCodeAt = invoker(String.prototype.charCodeAt);
 
 
     /**
@@ -4713,7 +4708,7 @@
      *
      *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
      */
-    R.match = invoker('match', String.prototype);
+    R.match = invoker(String.prototype.match);
 
 
     /**
@@ -4770,7 +4765,7 @@
      *
      *      R.toUpperCase('abc'); //=> 'ABC'
      */
-    R.toUpperCase = invoker('toUpperCase', String.prototype);
+    R.toUpperCase = invoker(String.prototype.toUpperCase);
 
 
     /**
@@ -4786,7 +4781,7 @@
      *
      *      R.toLowerCase('XYZ'); //=> 'xyz'
      */
-    R.toLowerCase = invoker('toLowerCase', String.prototype);
+    R.toLowerCase = invoker(String.prototype.toLowerCase);
 
 
     /**
@@ -4807,7 +4802,7 @@
      *
      *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
      */
-    R.split = invokerN(1, 'split', String.prototype);
+    R.split = invokerN(1, String.prototype.split);
 
 
     /**
