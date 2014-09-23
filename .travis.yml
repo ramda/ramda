@@ -3,13 +3,13 @@ node_js:
 - '0.10'
 env:
   global:
-    - secure: radR/rowNe64+BfZoD/9jH5owfKnjLz1KM2Dns3G7K9vyL9b2pQUJ37wZ8p68iAWj8BS7izn0nBEXzV/W0P2D9iFpaQ1zdZCpwMhfXg7eeAjYaEi5eVSPzZkxPggHdcRZvV0OFj9CTTGbgesqO2vCEPHx0UqOhn40i3td7s+aNk=
-    - secure: dgshxCQaY6olKOZnD+BT8R1Vp8uJhwCIUlSnoFji1m+7KIy3zwbbgi/2jkf/SWBCxzlpzDBWUuWbaMJOrJHWfjUaX3JfUY+2gbAPunrofD+42+brfo506rIxr20yaoomsnLxXFLgleLW5FuaezP6KP4lW5IOlWZXOEv0vTvoxQk=
-    - secure: RdTqvihsZTytLsHWjhdRiA3W0dIhM1dDW07ow0wbzWb7OMZSnZUKEBm0bMME1ndpt5V0T1iqeNuhCZ7BDwTAKa8+kKoJ+kxjSHzgdTAKa0IRglq/FMJT/kjJ7uYyxX1HPD7q1Y3PzAhM77fXnEE3DzjpgpXUIXplkDIE+A0R3pA=
+  - secure: dgshxCQaY6olKOZnD+BT8R1Vp8uJhwCIUlSnoFji1m+7KIy3zwbbgi/2jkf/SWBCxzlpzDBWUuWbaMJOrJHWfjUaX3JfUY+2gbAPunrofD+42+brfo506rIxr20yaoomsnLxXFLgleLW5FuaezP6KP4lW5IOlWZXOEv0vTvoxQk=
+  - secure: RdTqvihsZTytLsHWjhdRiA3W0dIhM1dDW07ow0wbzWb7OMZSnZUKEBm0bMME1ndpt5V0T1iqeNuhCZ7BDwTAKa8+kKoJ+kxjSHzgdTAKa0IRglq/FMJT/kjJ7uYyxX1HPD7q1Y3PzAhM77fXnEE3DzjpgpXUIXplkDIE+A0R3pA=
+  - secure: TJ1ZGwnQa7xuPyLQf2GFX5zFzjsiJhZMFFGEYSaMiNauln1mm7x8v0K7eof8nNxObbFCZK/oyV9MPYgIquoCSgwnu7PwgRSKpeuatiwFLnhTvVpuNrXu2nDm9zCaoR4E3yxtg78g8kU5CioVCVKzQucTRKg8i4HXMQfp3GAj4NM=
 before_script:
 - npm install -g grunt-cli
 script:
 - npm test && make lint
-after_success: 
-- "grunt bench"
-- "grunt sauce"
+after_success:
+- grunt bench
+- grunt sauce
