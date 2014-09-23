@@ -3430,7 +3430,7 @@
      * [Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
      *
      * @func
-     * memberOf R
+     * @memberOf R
      * @category Function
      * @category Object
      * @sig (* -> *) -> {*} -> (* -> *)
