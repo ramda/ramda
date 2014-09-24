@@ -4191,7 +4191,7 @@
     R.anyPredicates = predicateWrap(some);
 
     /**
-     * Creates a function that will process either the `onTrue` or the `onFalse` function depending 
+     * Creates a function that will process either the `onTrue` or the `onFalse` function depending
      * upon the result of the `condition` predicate.
      *
      * @func
