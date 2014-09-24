@@ -4191,13 +4191,13 @@
     R.anyPredicates = predicateWrap(some);
 
     /**
-     * Given a validator function calls the the first predicate if truthy and the second
-     * predicate if falsey.
+     * Creates a function that will process either the `onTrue` or the `onFalse` function depending 
+     * upon the result of the `condition` predicate.
      *
      * @func
      * @memberOf R
      * @category logic
-     * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> *
+     * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)
      * @param {Function} condition A condition function
      * @param {Function} onTrue A predicate to invoke when the condition evaluates to a truthy value
      * @param {Function} onFalse A predicate to invoke when the condition evaluates to a falsy value
