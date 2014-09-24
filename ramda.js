@@ -4190,7 +4190,32 @@
      */
     R.anyPredicates = predicateWrap(some);
 
-
+    /**
+     * Given a validator function calls the the first predicate if truthy and the second
+     * predicate if falsey.
+     *
+     * @func
+     * @memberOf R
+     * @category logic
+     * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> *
+     * @param {Function} condition A condition function
+     * @param {Function} onTrue A predicate to invoke when the condition evaluates to a truthy value
+     * @param {Function} onFalse A predicate to invoke when the condition evaluates to a falsy value
+     * @returns {Function} a function that validates the arguments before executing "truthy"
+     *                     predicate or the the "falsey" predicate.
+     * @example
+     *
+     *      // Flatten all arrays in the list and return whatever is not an array
+     *      var flattenArrays = R.map(R.cond(Array.isArray, R.flatten, R.identity));
+     *
+     *      flattenArrays([[0], [[10], [8]], 1234, {}]); //=> [[0], [10, 8], 1234, {}]
+     *      flattenArrays([[[10], 123], [8, [10]], "hello"]); //=> [[10, 123], [8, 10], "hello"]
+     */
+    R.cond = curry3(function(condition, onTrue, onFalse) {
+        return function _cond() {
+            return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
+        };
+    });
 
 
     // Arithmetic Functions
