@@ -607,18 +607,18 @@
      * new function. For example:
      *
      * ```javascript
-     * 
+     *
      *   var between = R.useWith(R.and,R.lt,R.gt)
      *
      *   //This invocation
      *   var isTeen = between(12,20)
-     
+     *
      *   //Is functionally equivalent to:
      *   var isTeen = R.and(R.gt(12), R.lt(20))
-     * 
+     *
      *   isTeen(13) //=> true
      *   isTeen(45) //=> false
-     *   
+     *
      * ```
      *
      * If more arguments are passed to the returned function than transformer functions, those
