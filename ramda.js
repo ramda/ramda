@@ -3368,12 +3368,12 @@
      *        age: 101
      *      };
      *      var favorite = R.prop('favoriteLibrary');
-     *      var favoriteWithDefault = R.propOrDefault('favoriteLibrary', 'Ramda');
+     *      var favoriteWithDefault = R.propOr('favoriteLibrary', 'Ramda');
      *
      *      favorite(alice);  //=> undefined
      *      favoriteWithDefault(alice);  //=> 'Ramda'
      */
-    R.propOrDefault = curry3(function _propOrDefault(p, val, obj) {
+    R.propOr = curry3(function _propOrDefault(p, val, obj) {
         return hasOwnProperty.call(obj, p) ? obj[p] : val;
     });
 
