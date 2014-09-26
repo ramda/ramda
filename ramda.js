@@ -2998,7 +2998,7 @@
      * @sig String -> [a] -> String
      * @param {string|number} separator The string used to separate the elements.
      * @param {Array} xs The elements to join into a string.
-     * @return {string} The string made by concatenating `xs` with `separator`.
+     * @return {string} str The string made by concatenating `xs` with `separator`.
      * @example
      *
      *      var spacer = R.join(' ');
@@ -3360,6 +3360,7 @@
      * @sig s -> v -> {s: x} -> x | v
      * @param {String} p The name of the property to return.
      * @param {*} val The default value.
+     * @param {Object} obj The object to query.
      * @returns {*} The value of given property or default value.
      * @example
      *
@@ -4647,7 +4648,7 @@
      * @sig Number -> Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {Number} indexB An integer between 0 and the length of the string.
-     * @param {String} The string to extract from
+     * @param {String} str The string to extract from
      * @return {String} the extracted substring
      * @see R.invoker
      * @example
@@ -4665,7 +4666,7 @@
      * @category string
      * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
-     * @param {String} The string to extract from
+     * @param {String} str The string to extract from
      * @return {String} the extracted substring
      * @see R.invoker
      * @example
@@ -4683,8 +4684,8 @@
      * @category string
      * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
-     * @param {String} The string to extract from
-     * @return {String} the extracted substring
+     * @param {String} str The string to extract from
+     * @return {String} The extracted substring
      * @see R.invoker
      * @example
      *
@@ -4920,7 +4921,7 @@
      * @memberOf R
      * @category object
      * @category relation
-     * @string [k] -> [{k: v}] -> [{k: v}]
+     * @sig [k] -> [{k: v}] -> [{k: v}]
      * @param {Array} props The property names to project
      * @param {Array} objs The objects to query
      * @return {Array} An array of objects with just the `props` properties.
