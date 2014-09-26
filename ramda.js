@@ -229,23 +229,23 @@
         };
     }
 
-    var _;  // This is intentionally left `undefined`.
+    var __;  // This is intentionally left `undefined`.
     try {
-        Object.defineProperty(R, '_', {writable: false, value: _});
+        Object.defineProperty(R, '__', {writable: false, value: __});
     } catch (e) {
-        R._ = _;
+        R.__ = __;
     }
 
     /**
-     * Converts a function into something like an infix operation, meaning that
-     * when called with a single argument, that argument is applied to the
-     * second position, sort of a curry-right.  This allows for more natural
-     * processing of functions which are really binary operators.
+     * Uses a placeholder to convert a binary function into something like an infix operation.
+     * When called with an `undefined` placeholder (e.g. `R.__`) the second argument is applied to the
+     * second position, and it returns a function waiting for its first argument.
+     * This can allow for more natural processing of functions which are really binary operators.
      *
      * @func
      * @memberOf R
      * @category Functions
-     * @param {function} fn The operation to adjust
+     * @param {function} fn The binary operation to adjust
      * @return {function} A new function that acts somewhat like an infix operator.
      * @example
      *
@@ -254,20 +254,30 @@
      *      });
      *
      *      div(6, 3); //=> 2
-     *      div(6, _)(3); //=> 2 // note: `_` here is just an `undefined` value.  You could use `void 0` instead
-     *      div(3)(6); //=> 2
+     *      div(6)(3); //=> 2
+     *      div(__, 3)(6); //=> 2 // note: `__` here is just an `undefined` value.  You could use `void 0` instead
+     *      div(__)(3, 6); //=> 2
+     *      div(__)(3)(6); //=> 2
      */
     var op = R.op = function op(fn) {
         var length = fn.length;
-        if (length < 2) {throw new Error('Expected binary function.');}
-        var left = curry(fn), right = curry(R.flip(fn));
+        if (length !== 2) {throw new Error('Expected binary function.');}
 
-        return function(a, b) {
+        return function _op(a, b) {
             switch (arguments.length) {
                 case 0: throw noArgsException();
-                case 1: return right(a);
-                case 2: return (b === R._) ? left(a) : left.apply(null, arguments);
-                default: return left.apply(null, arguments);
+                case 1:
+                    if (a === __) {
+                        return R.flip(_op);
+                    }
+                    return R.lPartial(fn, a);
+                default:
+                    if (a === __) {
+                        return function(a) {
+                            return fn(a, b);
+                        };
+                    }
+                    return fn(a, b);
             }
         };
     };
@@ -4284,16 +4294,17 @@
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a - b`.
-     * @note Operator: this is right-curried by default, but can be called via sections
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
      *
      *      R.subtract(10, 8); //=> 2
      *
-     *      var minus5 = R.subtract(5);
+     *      var minus5 = R.subtract(__, 5); // '__' stands for any `undefined` value
      *      minus5(17); //=> 12
      *
      *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
-     *      var complementaryAngle = R.subtract(90, _);
+     *      var complementaryAngle = R.subtract(90);
      *      complementaryAngle(30); //=> 60
      *      complementaryAngle(72); //=> 18
      */
@@ -4312,16 +4323,17 @@
      * @param {number} a The first value.
      * @param {number} b The second value.
      * @return {number} The result of `a / b`.
-     * @note Operator: this is right-curried by default, but can be called via sections
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
      *
      *      R.divide(71, 100); //=> 0.71
      *
-     *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
-     *      var half = R.divide(2);
+     *      // note: In this example, `__`  is just an `undefined` value.  You could use `void 0` instead
+     *      var half = R.divide(__, 2);
      *      half(42); //=> 21
      *
-     *      var reciprocal = R.divide(1, _);
+     *      var reciprocal = R.divide(1);
      *      reciprocal(4);   //=> 0.25
      */
     R.divide = op(function _divide(a, b) { return a / b; });
@@ -4339,7 +4351,8 @@
      * @param {number} a The value to the divide.
      * @param {number} b The pseudo-modulus
      * @return {number} The result of `b % a`.
-     * @note Operator: this is right-curried by default, but can be called via sections
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
      * @see R.mathMod
      * @example
      *
@@ -4348,7 +4361,7 @@
      *      R.modulo(-17, 3); //=> -2
      *      R.modulo(17, -3); //=> 2
      *
-     *      var isOdd = R.modulo(2);
+     *      var isOdd = R.modulo(__, 2);
      *      isOdd(42); //=> 0
      *      isOdd(21); //=> 1
      */
@@ -4383,6 +4396,8 @@
      * @param {number} p the modulus.
      * @return {number} The result of `b mod a`.
      * @see R.moduloBy
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
      *
      *      R.mathMod(-17, 5);  //=> 3
@@ -4392,12 +4407,12 @@
      *      R.mathMod(17.2, 5); //=> NaN
      *      R.mathMod(17, 5.3); //=> NaN
      *
-     *      var clock = R.mathMod(12);
+     *      var clock = R.mathMod(__, 12);
      *      clock(15); //=> 3
      *      clock(24); //=> 0
      *
      *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
-     *      var seventeenMod = R.mathMod(17, _);
+     *      var seventeenMod = R.mathMod(17);
      *      seventeenMod(3);  //=> 2
      *      seventeenMod(4);  //=> 1
      *      seventeenMod(10); //=> 7
@@ -4407,7 +4422,6 @@
         if (!isInteger(p) || p < 1) { return NaN; }
         return ((m % p) + p) % p;
     });
-
 
 
     /**
@@ -4454,14 +4468,15 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a < b
-     * @note Operator: this is right-curried by default, but can be called via sections
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
      *
      *      R.lt(2, 6); //=> true
      *      R.lt(2, 0); //=> false
      *      R.lt(2, 2); //=> false
-     *      R.lt(5)(10); //=> false // default currying is right-sectioned
-     *      R.lt(5, _)(10); //=> true // left-sectioned currying
+     *      R.lt(5)(10); //=> true
+     *      R.lt(__, 5)(10); //=> false // right-sectioned currying
      */
     R.lt = op(function _lt(a, b) { return a < b; });
 
@@ -4476,12 +4491,16 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a <= b
-     * @note Operator: this is right-curried by default, but can be called via sections
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
      *
      *      R.lte(2, 6); //=> true
      *      R.lte(2, 0); //=> false
      *      R.lte(2, 2); //=> true
+     *      R.lte(__, 2)(1); //=> true
+     *      R.lte(2)(10); //=> true
+     *      R.lte(__)(5, 4) // => true
      */
     R.lte = op(function _lte(a, b) { return a <= b; });
 
@@ -4496,12 +4515,16 @@
      * @param {Number} a
      * @param {Number} b
      * @return {Boolean} a > b
-     * @note Operator: this is right-curried by default, but can be called via sections
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
      *
      *      R.gt(2, 6); //=> false
      *      R.gt(2, 0); //=> true
      *      R.gt(2, 2); //=> false
+     *      R.gt(__, 2)(10); //=> true
+     *      R.gt(2)(10); //=> false
+     *      R.lte(__)(4, 5) // => true
      */
     R.gt = op(function _gt(a, b) { return a > b; });
 
@@ -4522,6 +4545,9 @@
      *      R.gte(2, 6); //=> false
      *      R.gte(2, 0); //=> true
      *      R.gte(2, 2); //=> true
+     *      R.gte(__, 6)(2); //=> false
+     *      R.gte(2)(0); //=> true
+     *      R.gte(__)(1, 2); //=> true
      */
     R.gte = op(function _gte(a, b) { return a >= b; });
 
