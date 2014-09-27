@@ -4311,8 +4311,6 @@
 
     /**
      * Divides two numbers. Equivalent to `a / b`.
-     * While at times the curried version of `divide` might be useful,
-     * probably the curried version of `divideBy` will be more useful.
      *
      * @func
      * @memberOf R
