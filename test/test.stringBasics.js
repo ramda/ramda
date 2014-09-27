@@ -115,6 +115,12 @@ describe('toLowerCase', function() {
     });
 });
 
+describe('trim', function() {
+    it('should trim a string', function() {
+        assert.equal(R.trim('   xyz  '), 'xyz');
+    });
+});
+
 describe('split', function() {
     it('should split a string into an array', function() {
         assert.deepEqual(R.split('.', 'a.b.c.xyz.d'), ['a', 'b', 'c', 'xyz', 'd']);
