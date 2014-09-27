@@ -1,5 +1,6 @@
 docs/public
 .idea
+*.iml
 dist
 report
 build
