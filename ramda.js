@@ -273,9 +273,7 @@
                     return R.lPartial(fn, a);
                 default:
                     if (a === __) {
-                        return function(a) {
-                            return fn(a, b);
-                        };
+                        return R.rPartial(fn, b);
                     }
                     return fn(a, b);
             }
