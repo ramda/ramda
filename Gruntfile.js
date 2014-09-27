@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         benchmark: {
             all: {
                 src: ['bench/*.bench.js'],
-                dest: 'bench/report/bench.<%= (new Date()).getTime() %>.json',
+                dest: 'bench/report/bench.<%= (new Date()).getTime() %>.json'
             }
         },
 
@@ -98,7 +98,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-push-release');
     grunt.loadNpmTasks('grunt-benchmark');
-    grunt.loadNpmTasks('grunt-readme');
     grunt.loadNpmTasks('grunt-saucelabs');
 
     grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {

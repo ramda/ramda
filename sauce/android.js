@@ -1,11 +1,10 @@
-
 module.exports = [
   {
     browserName: 'android',
     version: '4.4',
     deviceName: 'Android',
     'device-orientation': 'portrait',
-    platform: 'Linux',
+    platform: 'Linux'
   },
   {
     browserName: 'android',
@@ -36,5 +35,3 @@ module.exports = [
     platform: 'Linux'
   }
 ];
-
-    
