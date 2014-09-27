@@ -142,8 +142,8 @@
      * @func
      * @category Type
      * @category List
-     * @param {*} val The object to test.
-     * @return {boolean} `true` if `val` has a numeric length property; `false` otherwise.
+     * @param {*} x The object to test.
+     * @return {boolean} `true` if `x` has a numeric length property; `false` otherwise.
      * @example
      *
      *      R.isArrayLike([]); //=> true
@@ -2377,7 +2377,7 @@
      *
      * @private
      * @category Internal
-     * @param {Array} The array to search
+     * @param {Array} list The array to search
      * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
      * @return {Number} the index of the found item, or -1
@@ -2405,7 +2405,7 @@
      *
      * @private
      * @category Internal
-     * @param {Array} The array to search
+     * @param {Array} list The array to search
      * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
      * @return {Number} the index of the found item, or -1
@@ -2840,7 +2840,7 @@
      * @memberOf R
      * @category List
      * @sig [[k,v]] -> {k: v}
-     * @param {Array} An array of two-element arrays that will be the keys and values of the ouput object.
+     * @param {Array} pairs An array of two-element arrays that will be the keys and values of the output object.
      * @return {Object} The object made by pairing up `keys` and `values`.
      * @example
      *
@@ -3105,7 +3105,7 @@
      * @memberOf R
      * @category List
      * @sig Number -> [a] -> [a] -> [a]
-     * @param {Number} index The position to insert the sublist
+     * @param {Number} index The position to insert the sub-list
      * @param {Array} elts The sub-list to insert into the Array
      * @param {Array} list The list to insert the sub-list into
      * @return {Array} a new Array with `elts` inserted starting at `index`
@@ -3168,7 +3168,7 @@
 
 
     /**
-     * Splits a list into sublists stored in an object, based on the result of calling a String-returning function
+     * Splits a list into sub-lists stored in an object, based on the result of calling a String-returning function
      * on each element, and grouping the results according to values returned.
      *
      * @func
@@ -3388,7 +3388,7 @@
      * @memberOf R
      * @category Object
      * @sig k -> {k : v} -> v(*)
-     * @param {String} fn The name of the property mapped to the function to invoke
+     * @param {String} funcName The name of the property mapped to the function to invoke
      * @param {Object} obj The object
      * @return {*} The value of invoking `obj.fn`
      * @example
@@ -3672,7 +3672,7 @@
      * @memberOf R
      * @category Object
      * @sig [k] -> {k: v} -> {k: v}
-     * @param {Array} names an array of String propery names to copy onto a new object
+     * @param {Array} names an array of String property names to copy onto a new object
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with only properties from `names` on it.
      * @example
@@ -3694,7 +3694,7 @@
      * @memberOf R
      * @category Object
      * @sig [k] -> {k: v} -> {k: v}
-     * @param {Array} names an array of String propery names to omit from the new object
+     * @param {Array} names an array of String property names to omit from the new object
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with properties from `names` not on it.
      * @example
@@ -3753,7 +3753,7 @@
      * @memberOf R
      * @category Object
      * @sig [k] -> {k: v} -> {k: v}
-     * @param {Array} names an array of String propery names to copy onto a new object
+     * @param {Array} names an array of String property names to copy onto a new object
      * @param {Object} obj The object to copy from
      * @return {Object} A new object with only properties from `names` on it.
      * @see R.pick
@@ -3767,12 +3767,12 @@
 
     /**
      * Assigns own enumerable properties of the other object to the destination
-     * object prefering items in other.
+     * object preferring items in other.
      *
      * @private
      * @memberOf R
      * @category Object
-     * @param {Object} object The destination object.
+     * @param {Object} destination The destination object.
      * @param {Object} other The other object to merge with destination.
      * @returns {Object} Returns the destination object.
      * @example
@@ -3800,7 +3800,7 @@
      * @category Object
      * @sig {k: v} -> {k: v} -> {k: v}
      * @param {Object} a source object
-     * @param {Object} b object with higher precendence in output
+     * @param {Object} b object with higher precedence in output
      * @returns {Object} Returns the destination object.
      * @example
      *
@@ -3897,7 +3897,7 @@
      * If the spec has a property mapped to a function, then `where` evaluates the function, passing in
      * the test object's value for the property in question, as well as the whole test object.
      *
-     * `where` is well suited to declarativley expressing constraints for other functions, e.g.,
+     * `where` is well suited to declaratively expressing constraints for other functions, e.g.,
      * `filter`, `find`, `pickWith`, etc.
      *
      * @func
@@ -4145,7 +4145,7 @@
                 }, preds);
             };
             return arguments.length > 1 ?
-                    // Call function imediately if given arguments
+                    // Call function immediately if given arguments
                     predIterator.apply(null, _slice(arguments, 1)) :
                     // Return a function which will call the predicates with the provided arguments
                     arity(max(pluck('length', preds)), predIterator);
@@ -4732,7 +4732,7 @@
 
 
     /**
-     * Tests a regular expression agains a String
+     * Tests a regular expression against a String
      *
      * @func
      * @memberOf R
@@ -4870,7 +4870,7 @@
 
 
     /**
-     * Retrieve a nested path on an object seperated by the specified
+     * Retrieve a nested path on an object separated by the specified
      * separator value.
      *
      * @func
@@ -4890,7 +4890,7 @@
 
 
     /**
-     * Retrieve a nested path on an object seperated by periods
+     * Retrieve a nested path on an object separated by periods
      *
      * @func
      * @memberOf R
@@ -5251,7 +5251,7 @@
      * @category Object
      * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
-     * @return {Array} returns a list of the object's own properites that map to functions
+     * @return {Array} returns a list of the object's own properties that map to functions
      * @example
      *
      *      R.functions(R); // returns list of ramda's own function names
@@ -5272,7 +5272,7 @@
      * @category Object
      * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
-     * @return {Array} returns a list of the object's own properites and prototype
+     * @return {Array} returns a list of the object's own properties and prototype
      *                 properties that map to functions
      * @example
      *
