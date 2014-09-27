@@ -50,4 +50,3 @@ module.exports = [
     platform: 'Windows 8.1'
   }
 ];
-

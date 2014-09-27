@@ -31,4 +31,3 @@ if( typeof document.getElementsByClassName !== "function"){
     return result;
   };
 }
-
