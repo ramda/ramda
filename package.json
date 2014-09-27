@@ -29,7 +29,6 @@
   "devDependencies": {
     "benchmark": "~1.0.0",
     "deedpoll": "0.2.x",
-    "docker": "^0.2.13",
     "grunt": "~0.4.5",
     "grunt-benchmark": "https://github.com/buzzdecafe/grunt-benchmark/archive/09999a8c3fbfff04a1695846c1ccd0bd8a0ef5ab.tar.gz",
     "grunt-cli": "~0.1.13",
@@ -44,9 +43,7 @@
     "grunt-mocha": "~0.4.11",
     "grunt-mocha-test": "~0.11.0",
     "grunt-push-release": "^0.1.1",
-    "grunt-readme": "^0.4.5",
     "grunt-saucelabs": "^8.3.1",
-    "dox": "latest",
     "lodash": "latest",
     "orchestrate": "~0.3.4",
     "testem": "^0.6.18"

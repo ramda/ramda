@@ -83,15 +83,6 @@ module.exports = function(grunt) {
             }
         },
 
-        jsdoc: {
-            dist: {
-                src: ['*.js'],
-                options: {
-                    destination: 'jsdoc-out'
-                }
-            }
-        },
-
         'saucelabs-mocha': sauceConf,
 
         connect: sauceSrv
@@ -109,7 +100,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-benchmark');
     grunt.loadNpmTasks('grunt-readme');
     grunt.loadNpmTasks('grunt-saucelabs');
-    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
         // upload files in report dir to orchestrate
