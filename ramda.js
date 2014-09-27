@@ -4823,6 +4823,24 @@
 
 
     /**
+     * Removes whitespace from both ends of the string.
+     * @func
+     * @memberOf R
+     * @category string
+     * @sig String -> String
+     * @param {String} str The string to trim.
+     * @returns {String} Trimmed version of `str`.
+     * @example
+     *
+     *      R.trim('   xyz  '); //=> 'xyz'
+     *      R.map(R.trim, R.split(',', 'x, y, z')); //=> ['x', 'y', 'z']
+     */
+    R.trim = function(str) {
+        return str.replace(/^[\s\xA0]+|[\s\xA0]+$/g, '');
+    };
+
+
+    /**
      * Splits a string into an array of strings based on the given
      * separator.
      *
