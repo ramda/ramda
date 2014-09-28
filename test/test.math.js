@@ -1,6 +1,5 @@
 var assert = require('assert');
 var R = require('..');
-var _ = void 0;
 
 describe('add', function() {
     it('adds together two numbers', function() {
@@ -37,13 +36,13 @@ describe('subtract', function() {
         assert.equal(15, R.subtract(22, 7));
     });
 
-    it('is automatically right-curried', function() {
-        var ninesCompl = R.subtract(9, void 0);
+    it('is curried', function() {
+        var ninesCompl = R.subtract(9);
         assert.equal(3, ninesCompl(6));
     });
 
-    it('allows for left sections too', function() {
-        var minus5 = R.subtract(5);
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var minus5 = R.subtract(void 0, 5);
         assert.equal(12, minus5(17));
     });
 
@@ -58,13 +57,13 @@ describe('divide', function() {
         assert.equal(4, R.divide(28, 7));
     });
 
-    it('is automatically right-curried', function() {
-        var into28 = R.divide(28, _);
+    it('is curried', function() {
+        var into28 = R.divide(28);
         assert.equal(4, into28(7));
     });
 
-    it('allows for left sections too', function() {
-        var half = R.divide(2);
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var half = R.divide(void 0, 2);
         assert.equal(20, half(40));
     });
 
@@ -81,16 +80,16 @@ describe('modulo', function() {
         assert.equal(R.modulo(100, 17), 15);
     });
 
-    it('is automatically right-curried', function() {
-        var hundredMod = R.modulo(100, _);
+    it('is curried', function() {
+        var hundredMod = R.modulo(100);
         assert.equal(typeof hundredMod, 'function');
         assert.equal(hundredMod(2), 0);
         assert.equal(hundredMod(3), 1);
         assert.equal(hundredMod(17), 15);
     });
 
-    it('allows for left sections too', function() {
-        var isOdd = R.modulo(2);
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var isOdd = R.modulo(void 0, 2);
         assert.equal(typeof isOdd, 'function');
         assert.equal(isOdd(3), 1);
         assert.equal(isOdd(198), 0);
@@ -128,14 +127,14 @@ describe('mathMod', function() {
         assert.equal(isNaN(R.mathMod(17, 5.5)), true);
     });
 
-    it('is automatically right-curried', function() {
-        var f = R.mathMod(29, _);
+    it('is curried', function() {
+        var f = R.mathMod(29);
         assert.equal(f(6), 5);
     });
 
 
-    it('allows for left sections too', function() {
-        var mod5 = R.modulo(5);
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var mod5 = R.modulo(void 0, 5);
         assert.equal(mod5(12), 2);
         assert.equal(mod5(8), 3);
     });
@@ -164,7 +163,7 @@ describe('product', function() {
 });
 
 describe('lt', function() {
-    var _ = void 0;
+    var __ = void 0;
     it('reports whether one item is less than another', function() {
         assert(R.lt(3, 5));
         assert(!R.lt(6, 4));
@@ -173,18 +172,18 @@ describe('lt', function() {
         assert(!R.lt('abcd', 'abc'));
     });
 
-    it('is automatically right-curried', function() {
-        var lt5 = R.lt(5);
-        assert(!lt5(10));
-        assert(!lt5(5));
-        assert(lt5(3));
-    });
-
-    it('allows for left sections too', function() {
-        var gt5 = R.lt(5, _);
+    it('is curried', function() {
+        var gt5 = R.lt(5);
         assert(gt5(10));
         assert(!gt5(5));
         assert(!gt5(3));
+    });
+
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var lt5 = R.lt(__, 5);
+        assert(!lt5(10));
+        assert(!lt5(5));
+        assert(lt5(3));
     });
 
     it('throws when given no arguments', function() {
@@ -193,7 +192,7 @@ describe('lt', function() {
 });
 
 describe('lte', function() {
-    var _ = void 0;
+    var __ = void 0;
     it('reports whether one item is less than another', function() {
         assert(R.lte(3, 5));
         assert(!R.lte(6, 4));
@@ -202,18 +201,18 @@ describe('lte', function() {
         assert(!R.lte('abcd', 'abc'));
     });
 
-    it('is automatically right-curried', function() {
-        var noMoreThan20 = R.lte(20);
-        assert(noMoreThan20(10));
-        assert(noMoreThan20(20));
-        assert(!noMoreThan20(25));
+    it('is curried', function() {
+        var gte20 = R.lte(20);
+        assert(!gte20(10));
+        assert(gte20(20));
+        assert(gte20(25));
     });
 
-    it('allows for left sections too', function() {
-        var atLeast20 = R.lte(20, _);
-        assert(!atLeast20(10));
-        assert(atLeast20(20));
-        assert(atLeast20(25));
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var upTo20 = R.lte(__, 20);
+        assert(upTo20(10));
+        assert(upTo20(20));
+        assert(!upTo20(25));
     });
 
     it('throws when given no arguments', function() {
@@ -222,6 +221,7 @@ describe('lte', function() {
 });
 
 describe('gt', function() {
+    var __ = void 0;
     it('reports whether one item is less than another', function() {
         assert(!R.gt(3, 5));
         assert(R.gt(6, 4));
@@ -230,18 +230,18 @@ describe('gt', function() {
         assert(R.gt('abcd', 'abc'));
     });
 
-    it('is automatically right-curried', function() {
-        var gt20 = R.gt(20);
+    it('is curried', function() {
+        var lt20 = R.gt(20);
+        assert(lt20(10));
+        assert(!lt20(20));
+        assert(!lt20(25));
+    });
+
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var gt20 = R.gt(__, 20);
         assert(!gt20(10));
         assert(!gt20(20));
         assert(gt20(25));
-    });
-
-    it('allows for left sections too', function() {
-        var upto20 = R.gt(20, _);
-        assert(upto20(10));
-        assert(!upto20(20));
-        assert(!upto20(25));
     });
 
     it('throws when given no arguments', function() {
@@ -258,18 +258,19 @@ describe('gte', function() {
         assert(R.gte('abcd', 'abc'));
     });
 
-    it('is automatically right-curried', function() {
-        var gte20 = R.gte(20);
+    it('is curried', function() {
+        var lte20 = R.gte(20);
+        assert(lte20(10));
+        assert(lte20(20));
+        assert(!lte20(25));
+    });
+
+    it('behaves right curried when passed `undefined` for its first argument', function() {
+        var __ = void 0;
+        var gte20 = R.gte(__, 20);
         assert(!gte20(10));
         assert(gte20(20));
         assert(gte20(25));
-    });
-
-    it('allows for left sections too', function() {
-        var upto20 = R.gte(20, _);
-        assert(upto20(10));
-        assert(upto20(20));
-        assert(!upto20(25));
     });
 
     it('throws when given no arguments', function() {
