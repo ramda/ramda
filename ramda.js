@@ -3480,11 +3480,11 @@
                                   'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
 
         return function _keys(obj) {
-            if (!R.is(Object, obj)) {
+            if (Object(obj) !== obj) {
                 return [];
             }
             if (nativeKeys) {
-                return nativeKeys(Object(obj));
+                return nativeKeys(obj);
             }
             var prop, ks = [], nIdx;
             for (prop in obj) {
