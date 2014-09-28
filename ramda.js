@@ -4857,9 +4857,9 @@
      *      R.trim('   xyz  '); //=> 'xyz'
      *      R.map(R.trim, R.split(',', 'x, y, z')); //=> ['x', 'y', 'z']
      */
-    R.trim = function(str) {
-        return str.replace(/^[\s\xA0]+|[\s\xA0]+$/g, '');
-    };
+    R.trim = typeof String.prototype.trim === 'function' ?
+        function(str) { return str.trim(); } :
+        function(str) { return str.replace(/^[\s\xA0]+|[\s\xA0]+$/g, ''); };
 
 
     /**
