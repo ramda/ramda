@@ -4864,8 +4864,7 @@
             '\u2029\uFEFF';
         var zeroWidth = '\u200b';
         var hasProtoTrim = (typeof String.prototype.trim === 'function');
-        var hasTrimBug = ws.trim() || !zeroWidth.trim();
-        if (!hasProtoTrim || hasTrimBug) {
+        if (!hasProtoTrim || (ws.trim() || !zeroWidth.trim())) {
             return function _trim(str) {
                 var beginRx = new RegExp('^[' + ws + '][' + ws + ']*');
                 var endRx = new RegExp('[' + ws + '][' + ws + ']*$');
