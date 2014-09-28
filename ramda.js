@@ -3997,8 +3997,8 @@
      *      R.is(Object, 's'); //=> false
      *      R.is(Number, {}); //=> false
      */
-    R.is = curry2(function is(ctor, val) {
-        return val != null && val.constructor === ctor || val instanceof ctor;
+    R.is = curry2(function is(Ctor, val) {
+        return val != null && val.constructor === Ctor || val instanceof Ctor;
     });
 
 
