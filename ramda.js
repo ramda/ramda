@@ -3990,8 +3990,30 @@
      *      R.is(Number, {}); //=> false
      */
     R.is = curry2(function is(ctor, val) {
-        return val != null && val.constructor === ctor || val instanceof ctor;
+        return typeStr(new ctor()) == typeStr(val);
     });
+
+    /**
+     * internal type function
+     * Takes an object and returns a string describing its type.
+     *
+     * @private
+     * @memberOf R
+     * @category type
+     * @param {*} val The value to be tested
+     * @return {String} The description of type.
+     * @example
+     *
+     *      typeStr([]) //=> 'Array'
+     *      typeStr({}) //=> 'Object'
+     *      typeStr(4) //=> 'Number'
+     *      typeStr(null) //=> 'Null'
+     *      typeStr(undefined) //=> 'Undefined'
+     *      typeStr(false) //=> 'Boolean'
+     */
+    function typeStr(val){
+        return ({}).toString.call(val).slice(8,-1);
+    }
 
 
     /**
