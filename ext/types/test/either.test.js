@@ -14,8 +14,6 @@ describe('Either', function() {
         assert.equal(true, fTest.id(r));
         assert.equal(true, fTest.compose(r, R.multiply(2), R.add(3)));
         assert.equal(true, fTest.iface(l));
-        assert.equal(true, fTest.id(l));
-        assert.equal(true, fTest.compose(l, R.multiply(2), R.add(3)));
     });
 
     it('is an Apply', function() {
@@ -26,13 +24,6 @@ describe('Either', function() {
 
         assert.equal(true, aTest.iface(appA));
         assert.equal(true, aTest.compose(appA, appU, appV));
-
-        var appB = Either.Left(R.multiply(10));
-        var appX = Either.Left(R.add(5));
-        var appY = Either.Left(10);
-
-        assert.equal(true, aTest.iface(appB));
-        assert.equal(true, aTest.compose(appB, appX, appY));
     });
 
     it('is an Applicative', function() {
@@ -45,15 +36,6 @@ describe('Either', function() {
         assert.equal(true, aTest.id(app1, app2));
         assert.equal(true, aTest.homomorphic(app1, R.add(3), 46));
         assert.equal(true, aTest.interchange(app1, appF, 17));
-
-        var appL1 = Either.Left(101);
-        var appL2 = Either.Left(-123);
-        var appLF = Either.Left(R.multiply(3));
-
-        assert.equal(true, aTest.iface(appL1));
-        assert.equal(true, aTest.id(appL1, appL2));
-        assert.equal(true, aTest.homomorphic(appL1, R.add(3), 46));
-        assert.equal(true, aTest.interchange(appL1, appLF, 17));
     });
 
     it('is a Chain', function() {
@@ -71,7 +53,7 @@ describe('Either', function() {
     });
 });
 
-xdescribe('some examples using Either', function() {
+describe('some examples using Either', function() {
 
     it('success is no failure', function() {
         var success = Either.Right(20);
@@ -80,23 +62,54 @@ xdescribe('some examples using Either', function() {
     });
 
     it('success is curried failure', function() {
-        var success = Either.Right(20);
         var failure = Either('bad');
-        assert.equal(success.equals(failure(20)), true);
+        assert.ok(typeof failure == 'function');
+        assert.ok(failure(20).isRight);
     });
 
     it('is adding 1 to success', function() {
         var success = Either.Right(20);
         assert.equal(success.map(function(x) {
             return x + 1;
-        }).right(), 21);
-        assert.equal(success.right(), 20);
+        }).get(), 21);
+        assert.equal(success.get(), 20);
     });
 
-    it('is ignoring + 1 on failure', function() {
-        var failure = Either.Left(20);
-        assert.equal(failure.map(function(x) {
-            return x + 1;
-        }).left(), 20);
+    it('currying Either in compose', function() {
+        function isBig(x) {
+            return x > 10 ? 'This is big' : null;
+        }
+
+        var fn = R.compose(
+            R.map(R.toUpperCase),
+            Either('This is small'),
+            isBig
+        );
+
+        assert.ok(fn(1).isLeft);
+        assert.ok(fn(11).isRight);
+        assert.equal(fn(11).get(), 'THIS IS BIG');
+        assert.equal(fn(1).merge(), 'This is small');
+        assert.equal(fn(1).get(), 'This is small');
     });
+
+
+    it('chaining Eithers', function() {
+        function div(x, y) {
+            return y == 0 ? Either.Left('Division by 0') : Either.Right(x/y);
+        }
+
+        var result = div(10, 2).chain(function(valueA) {
+            return R.map(function(valueB) {
+                return valueA + valueB;
+            }, div(4, 2));
+        });
+        assert.ok(result.isRight);
+        assert.equal(result.get(), 7);
+
+        result = div(10, 0);
+        assert.ok(result.isLeft);
+        assert.equal(result.get(), 'Division by 0');
+    });
+
 });
