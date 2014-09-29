@@ -6,41 +6,54 @@ describe('impure', function() {
 
     describe('Global Mutable Reference', function() {
 
-        it('global counter', function() {
-            var counterRef = STRef.new(0)();
-
-            STRef.modify(counterRef, function(x) { return x + 1;})();
-            assert.equal(STRef.read(counterRef)(), 1);
-
-            STRef.write(counterRef, 3)();
-            assert.equal(STRef.read(counterRef)(), 3);
-        });
-
         it('global state object', function() {
-            var stateRef = STRef.new({})();
+            var stateRef = STRef({});
 
-            STRef.modify(stateRef, function(o) {
+            stateRef.modify(function() {
                 return {name: 'Joe'};
-            })();
-            assert.deepEqual(STRef.read(stateRef)(), {name: 'Joe'});
+            });
+            assert.deepEqual(stateRef.read(), {name: 'Joe'});
 
-            STRef.modify(stateRef, function(o) {
+            stateRef.modify(function(o) {
                 return {name: o.name + ' Doe'};
-            })();
-            assert.deepEqual(STRef.read(stateRef)(), {name: 'Joe Doe'});
+            });
+            assert.deepEqual(stateRef.read(), {name: 'Joe Doe'});
 
-            STRef.write(stateRef, {address: 'Foo'})();
-            assert.deepEqual(STRef.read(stateRef)(), {address: 'Foo'});
+            stateRef.write({address: 'Foo'});
+            assert.deepEqual(stateRef.read(), {address: 'Foo'});
         });
 
-        it('rewriting global variable', function() {
-            var pokes = STRef.new(0)();
+        it('partial update', function() {
+            var bigObject = STRef({person:{name: 'Joe', age: 22}});
 
-            R.range(1, 1000).forEach(function(i) {
-                STRef.write(pokes, i)();
+            bigObject.write('Doe', 'person.name');
+            assert.deepEqual(bigObject.read(), {person:{name: 'Doe', age: 22}});
+        });
+
+        it('creates reference to object path', function() {
+            var bigObject = STRef({person:{name: 'Joe', age: 22}});
+
+            var link = bigObject.linkTo('person.name');
+            STRef.writeLink('Doe', link);
+
+            assert.deepEqual(bigObject.read(), {person:{name: 'Doe', age: 22}});
+        });
+
+        xit('state is private', function() {
+            var bigObject = STRef({person:{name: 'Joe', age: 22}});
+
+            assert.throws(function() {
+                bigObject.person.name = 'fail';
             });
 
-            assert.deepEqual(STRef.read(pokes)(), 999);
+            var clone = bigObject.read();
+            assert.deepEqual(clone, {person:{name: 'Joe', age: 22}});
+
+            clone.person.name = 'fail';
+            assert.deepEqual(clone, {person:{name: 'fail', age: 22}});
+            assert.deepEqual(bigObject.read(), {person:{name: 'Joe', age: 22}});
+
         });
+
     });
 });
