@@ -165,7 +165,44 @@
 
 
     /**
-     * Optimized internal two-arity curry function.
+     * Ramda argument placeholder.
+     */
+    R.__ = {};
+
+
+    /**
+     * Optimized (haha) internal unary curry function.
+     *
+     * @private
+     * @category Function
+     * @param {Function} fn The function to curry.
+     * @return {Function} curried function
+     * @example
+     *
+     *      var double = function(x) {
+     *        return x * 2;
+     *      };
+     *
+     *      var curried = curry1(double);
+     *      var stillCurried = curried(R.__);
+     *      curried(10);      //=> 20
+     *      stillCurried(10); //=> 20
+     */
+    function curry1(fn) {
+        return function(a) {
+            if (a === R.__) {
+                return curry1(function(x) {
+                    return fn(x);
+                });
+            } else {
+                return fn(a);
+            }
+        };
+    }
+
+
+    /**
+     * Optimized (?) internal two-arity curry function.
      *
      * @private
      * @category Function
@@ -177,7 +214,20 @@
      *        return a + b;
      *      };
      *
-     *      var curriedAddTwo = curry2(addTwo);
+     *      var curried = curry2(addTwo);
+     *      var addXto5 = curried(R.__, 5);
+     *      var add5toX = curried(5);
+     *      addXto5(20); //=> 25
+     *      add5toX(20); //=> 25
+     *
+     *      var placeholderTest1 = addXto5(R.__);
+     *      placeholderTest1(20); //=> 25
+     *
+     *      var placeholderTest2 = addXto5(R.__);
+     *      placeholderTest2(20); //=> 25
+
+     *      var placeholderTestMore = placeholderTest2(R.__, R.__, R.__);
+     *      placeholderTestMore(20); //=> 25
      */
     function curry2(fn) {
         return function(a, b) {
@@ -185,100 +235,32 @@
                 case 0:
                     throw noArgsException();
                 case 1:
-                    return function(b) {
-                        return fn(a, b);
-                    };
-                default:
-                    return fn(a, b);
-            }
-        };
-    }
-
-
-    /**
-     * Optimized internal three-arity curry function.
-     *
-     * @private
-     * @category Function
-     * @param {Function} fn The function to curry.
-     * @return {Function} curried function
-     * @example
-     *
-     *      var addThree = function(a, b, c) {
-     *        return a + b + c;
-     *      };
-     *
-     *      var curriedAddThree = curry3(addThree);
-     */
-    function curry3(fn) {
-        return function(a, b, c) {
-            switch (arguments.length) {
-                case 0:
-                    throw noArgsException();
-                case 1:
-                    return curry2(function(b, c) {
-                        return fn(a, b, c);
+                    if (a === R.__) {
+                        return curry2(function(x, y) {
+                            return fn(x, y);
+                        });
+                    }
+                    return curry1(function(y) {
+                        return fn(a, y);
                     });
-                case 2:
-                    return function(c) {
-                        return fn(a, b, c);
-                    };
                 default:
-                    return fn(a, b, c);
-            }
-        };
-    }
-
-    var __;  // This is intentionally left `undefined`.
-    try {
-        Object.defineProperty(R, '__', {writable: false, value: __});
-    } catch (e) {
-        R.__ = __;
-    }
-
-    /**
-     * Uses a placeholder to convert a binary function into something like an infix operation.
-     * When called with an `undefined` placeholder (e.g. `R.__`) the second argument is applied to the
-     * second position, and it returns a function waiting for its first argument.
-     * This can allow for more natural processing of functions which are really binary operators.
-     *
-     * @func
-     * @memberOf R
-     * @category Functions
-     * @param {function} fn The binary operation to adjust
-     * @return {function} A new function that acts somewhat like an infix operator.
-     * @example
-     *
-     *      var div = R.op(function (a, b) {
-     *          return a / b;
-     *      });
-     *
-     *      div(6, 3); //=> 2
-     *      div(6)(3); //=> 2
-     *      div(__, 3)(6); //=> 2 // note: `__` here is just an `undefined` value.  You could use `void 0` instead
-     *      div(__)(3, 6); //=> 2
-     *      div(__)(3)(6); //=> 2
-     */
-    var op = R.op = function op(fn) {
-        var length = fn.length;
-        if (length !== 2) {throw new Error('Expected binary function.');}
-
-        return function _op(a, b) {
-            switch (arguments.length) {
-                case 0: throw noArgsException();
-                case 1:
-                    if (a === __) {
-                        return R.flip(_op);
-                    }
-                    return R.lPartial(fn, a);
-                default:
-                    if (a === __) {
-                        return R.rPartial(fn, b);
+                    if (a === R.__ && b === R.__) {
+                        return curry2(function(x, y) {
+                            return fn(x, y);
+                        });
+                    } else if (a === R.__) {
+                        return curry1(function(x) {
+                            return fn(x, b);
+                        });
+                    } else if (b === R.__) {
+                        return curry1(function(y) {
+                            return fn(a, y);
+                        });
                     }
                     return fn(a, b);
             }
         };
-    };
+    }
 
 
     /**
@@ -309,20 +291,44 @@
      *      var curriedAddFourNumbers = R.curryN(4, addFourNumbers);
      *      var f = curriedAddFourNumbers(1, 2);
      *      var g = f(3);
-     *      g(4);//=> 10
+     *      g(4); //=> 10
      */
     var curryN = R.curryN = function curryN(length, fn) {
         return (function recurry(args) {
             return arity(Math.max(length - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw noArgsException(); }
-                var newArgs = concat(args, arguments);
+                var i, ni, newArgs = R.cloneObj(args);
+                for (i = 0, ni = 0; i < arguments.length; ++i, ++ni) {
+                    // advance are newArgs index past previously bound args
+                    while (ni in newArgs) {
+                        ++ni;
+                    }
+                    if (arguments[i] !== R.__) {
+                        // add all non-placeholder args
+                        newArgs[ni] = arguments[i];
+                        // only increment length if we are less then length
+                        // so we know when to apply our function
+                        if (ni < length) {
+                            newArgs.length++;
+                        }
+                    }
+                }
                 if (newArgs.length >= length) {
-                    return fn.apply(this, newArgs);
+                    // get all consecutive args at beginning of newArgs
+                    var applyArgs = [];
+                    for (i = 0; 1; ++i) {
+                        if (i in newArgs) {
+                            applyArgs.push(newArgs[i]);
+                        } else {
+                            break;
+                        }
+                    }
+                    return fn.apply(this, applyArgs);
                 } else {
                     return recurry(newArgs);
                 }
             });
-        }([]));
+        }({length:0}));
     };
 
 
@@ -381,7 +387,8 @@
     /**
      * Similar to hasMethod, this checks whether a function has a [methodname]
      * function. If it isn't an array it will execute that function otherwise it will
-     * default to the ramda implementation.
+     * default to the ramda implementation. Only for functions that take 3 or
+     * less arguments.
      *
      * @private
      * @category Internal
@@ -390,17 +397,17 @@
      * @return {Object} whatever the return value of the method is
      */
     function checkForMethod(methodname, fn) {
-        return function(a, b, c) {
+        return arity(fn.length, function() {
             var length = arguments.length;
             var obj = arguments[length - 1],
                 callBound = obj && !isArray(obj) && typeof obj[methodname] === 'function';
             switch (arguments.length) {
                 case 0: return fn();
-                case 1: return callBound ? obj[methodname]() : fn(a);
-                case 2: return callBound ? obj[methodname](a) : fn(a, b);
-                case 3: return callBound ? obj[methodname](a, b) : fn(a, b, c);
+                case 1: return callBound ? obj[methodname]() : fn(arguments[0]);
+                case 2: return callBound ? obj[methodname](arguments[0]) : fn(arguments[0], arguments[1]);
+                case 3: return callBound ? obj[methodname](arguments[0], arguments[1]) : fn(arguments[0], arguments[1], arguments[2]);
             }
-        };
+        });
     }
 
 
@@ -665,7 +672,7 @@
      *      // to pass transformer functions so the resulting function has the correct arity
      *      var addDoubleAndSquareWithExtraParams = R.useWith(addAll, double, square, R.identity);
      *      //≅ addAll(double(10), square(5), R.identity(100));
-     *      addDoubleAndSquare(10, 5, 100); //=> 145
+     *      addDoubleAndSquareWithExtraParams(10, 5, 100); //=> 145
      */
     var useWith = R.useWith = function _useWith(fn /*, transformers */) {
         var transformers = _slice(arguments, 1);
@@ -1539,7 +1546,7 @@
      *
      *      R.reduce(add, 10, numbers); //=> 16
      */
-    R.reduce = curry3(function _reduce(fn, acc, list) {
+    R.reduce = curry(function _reduce(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx]);
@@ -1586,7 +1593,7 @@
      *
      *      R.reduce.idx(objectify, {}, letters); //=> { 'a': 0, 'b': 1, 'c': 2 }
      */
-    R.reduce.idx = curry3(function _reduceIdx(fn, acc, list) {
+    R.reduce.idx = curry(function _reduceIdx(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx], idx, list);
@@ -1636,7 +1643,7 @@
      *
      *      R.reduceRight(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
      */
-    R.reduceRight = curry3(checkForMethod('reduceRight', function _reduceRight(fn, acc, list) {
+    R.reduceRight = curry(checkForMethod('reduceRight', function _reduceRight(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx]);
@@ -1684,7 +1691,7 @@
      *
      *      R.reduceRight.idx(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
      */
-    R.reduceRight.idx = curry3(function _reduceRightIdx(fn, acc, list) {
+    R.reduceRight.idx = curry(function _reduceRightIdx(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx], idx, list);
@@ -1766,7 +1773,6 @@
         }
         return result;
     }
-
     R.map = curry2(checkForMethod('map', map));
 
 
@@ -2476,7 +2482,7 @@
      *      R.indexOf.from(3, 2, [-1,0,1,2,3,4]); //=> 4
      *      R.indexOf.from(10, 2, [1,2,3,4]); //=> -1
      */
-    R.indexOf.from = curry3(function indexOfFrom(target, fromIdx, list) {
+    R.indexOf.from = curry(function indexOfFrom(target, fromIdx, list) {
         return indexOf(list, target, fromIdx);
     });
 
@@ -2523,7 +2529,7 @@
      *      R.lastIndexOf.from(3, 2, [-1,3,3,0,1,2,3,4]); //=> 2
      *      R.lastIndexOf.from(10, 2, [1,2,3,4]); //=> -1
      */
-    R.lastIndexOf.from = curry3(function lastIndexOfFrom(target, fromIdx, list) {
+    R.lastIndexOf.from = curry(function lastIndexOfFrom(target, fromIdx, list) {
         return lastIndexOf(list, target, fromIdx);
     });
 
@@ -2582,7 +2588,7 @@
         return false;
     }
 
-    R.containsWith = curry3(containsWith);
+    R.containsWith = curry(containsWith);
 
 
     /**
@@ -2781,7 +2787,7 @@
      *      R.zipWith(f, [1, 2, 3], ['a', 'b', 'c']);
      *      //=> [f(1, 'a'), f(2, 'b'), f(3, 'c')]
      */
-    R.zipWith = curry3(function _zipWith(fn, a, b) {
+    R.zipWith = curry(function _zipWith(fn, a, b) {
         var rv = [], idx = -1, len = Math.min(a.length, b.length);
         while (++idx < len) {
             rv[idx] = fn(a[idx], b[idx]);
@@ -2887,7 +2893,7 @@
      *      R.xprodWith(f, [1, 2], ['a', 'b']);
      *      // [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
      */
-    R.xprodWith = curry3(function _xprodWith(fn, a, b) {
+    R.xprodWith = curry(function _xprodWith(fn, a, b) {
         if (isEmpty(a) || isEmpty(b)) {
             return [];
         }
@@ -3076,7 +3082,7 @@
      *
      *      R.remove(2, 3, [1,2,3,4,5,6,7,8]); //=> [1,2,6,7,8]
      */
-    R.remove = curry3(function _remove(start, count, list) {
+    R.remove = curry(function _remove(start, count, list) {
         return concat(_slice(list, 0, Math.min(start, list.length)), _slice(list, Math.min(list.length, start + count)));
     });
 
@@ -3098,7 +3104,7 @@
      *
      *      R.insert(2, 'x', [1,2,3,4]); //=> [1,2,'x',3,4]
      */
-    R.insert = curry3(function _insert(idx, elt, list) {
+    R.insert = curry(function _insert(idx, elt, list) {
         idx = idx < list.length && idx >= 0 ? idx : list.length;
         return concat(append(elt, _slice(list, 0, idx)), _slice(list, idx));
     });
@@ -3121,7 +3127,7 @@
      *
      *      R.insert.all(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
      */
-    R.insert.all = curry3(function _insertAll(idx, elts, list) {
+    R.insert.all = curry(function _insertAll(idx, elts, list) {
         idx = idx < list.length && idx >= 0 ? idx : list.length;
         return concat(concat(_slice(list, 0, idx), elts), _slice(list, idx));
     });
@@ -3382,7 +3388,7 @@
      *      favorite(alice);  //=> undefined
      *      favoriteWithDefault(alice);  //=> 'Ramda'
      */
-    R.propOr = curry3(function _propOrDefault(p, val, obj) {
+    R.propOr = curry(function _propOrDefault(p, val, obj) {
         return hasOwnProperty.call(obj, p) ? obj[p] : val;
     });
 
@@ -3857,7 +3863,7 @@
      *      R.eqProps('a', o1, o2); //=> false
      *      R.eqProps('c', o1, o2); //=> true
      */
-    R.eqProps = curry3(function eqProps(prop, obj1, obj2) {
+    R.eqProps = curry(function eqProps(prop, obj1, obj2) {
         return obj1[prop] === obj2[prop];
     });
 
@@ -4226,7 +4232,7 @@
      *      flattenArrays([[0], [[10], [8]], 1234, {}]); //=> [[0], [10, 8], 1234, {}]
      *      flattenArrays([[[10], 123], [8, [10]], "hello"]); //=> [[10, 123], [8, 10], "hello"]
      */
-    R.cond = curry3(function(condition, onTrue, onFalse) {
+    R.cond = curry(function(condition, onTrue, onFalse) {
         return function _cond() {
             return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
         };
@@ -4298,7 +4304,7 @@
      *
      *      R.subtract(10, 8); //=> 2
      *
-     *      var minus5 = R.subtract(__, 5); // '__' stands for any `undefined` value
+     *      var minus5 = R.subtract(R.__, 5);
      *      minus5(17); //=> 12
      *
      *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
@@ -4306,7 +4312,7 @@
      *      complementaryAngle(30); //=> 60
      *      complementaryAngle(72); //=> 18
      */
-    R.subtract = op(function _subtract(a, b) { return a - b; });
+    R.subtract = curry2(function _subtract(a, b) { return a - b; });
 
 
     /**
@@ -4325,14 +4331,13 @@
      *
      *      R.divide(71, 100); //=> 0.71
      *
-     *      // note: In this example, `__`  is just an `undefined` value.  You could use `void 0` instead
-     *      var half = R.divide(__, 2);
+     *      var half = R.divide(R.__, 2);
      *      half(42); //=> 21
      *
      *      var reciprocal = R.divide(1);
      *      reciprocal(4);   //=> 0.25
      */
-    R.divide = op(function _divide(a, b) { return a / b; });
+    R.divide = curry2(function _divide(a, b) { return a / b; });
 
 
     /**
@@ -4357,11 +4362,11 @@
      *      R.modulo(-17, 3); //=> -2
      *      R.modulo(17, -3); //=> 2
      *
-     *      var isOdd = R.modulo(__, 2);
+     *      var isOdd = R.modulo(R.__, 2);
      *      isOdd(42); //=> 0
      *      isOdd(21); //=> 1
      */
-    R.modulo = op(function _modulo(a, b) { return a % b; });
+    R.modulo = curry2(function _modulo(a, b) { return a % b; });
 
 
     /**
@@ -4403,7 +4408,7 @@
      *      R.mathMod(17.2, 5); //=> NaN
      *      R.mathMod(17, 5.3); //=> NaN
      *
-     *      var clock = R.mathMod(__, 12);
+     *      var clock = R.mathMod(R.__, 12);
      *      clock(15); //=> 3
      *      clock(24); //=> 0
      *
@@ -4413,7 +4418,7 @@
      *      seventeenMod(4);  //=> 1
      *      seventeenMod(10); //=> 7
      */
-    R.mathMod = op(function _mathMod(m, p) {
+    R.mathMod = curry2(function _mathMod(m, p) {
         if (!isInteger(m)) { return NaN; }
         if (!isInteger(p) || p < 1) { return NaN; }
         return ((m % p) + p) % p;
@@ -4472,9 +4477,9 @@
      *      R.lt(2, 0); //=> false
      *      R.lt(2, 2); //=> false
      *      R.lt(5)(10); //=> true
-     *      R.lt(__, 5)(10); //=> false // right-sectioned currying
+     *      R.lt(R.__, 5)(10); //=> false // right-sectioned currying
      */
-    R.lt = op(function _lt(a, b) { return a < b; });
+    R.lt = curry2(function _lt(a, b) { return a < b; });
 
 
     /**
@@ -4494,11 +4499,10 @@
      *      R.lte(2, 6); //=> true
      *      R.lte(2, 0); //=> false
      *      R.lte(2, 2); //=> true
-     *      R.lte(__, 2)(1); //=> true
+     *      R.lte(R.__, 2)(1); //=> true
      *      R.lte(2)(10); //=> true
-     *      R.lte(__)(5, 4) // => true
      */
-    R.lte = op(function _lte(a, b) { return a <= b; });
+    R.lte = curry2(function _lte(a, b) { return a <= b; });
 
 
     /**
@@ -4518,11 +4522,10 @@
      *      R.gt(2, 6); //=> false
      *      R.gt(2, 0); //=> true
      *      R.gt(2, 2); //=> false
-     *      R.gt(__, 2)(10); //=> true
+     *      R.gt(R.__, 2)(10); //=> true
      *      R.gt(2)(10); //=> false
-     *      R.lte(__)(4, 5) // => true
      */
-    R.gt = op(function _gt(a, b) { return a > b; });
+    R.gt = curry2(function _gt(a, b) { return a > b; });
 
 
     /**
@@ -4541,11 +4544,10 @@
      *      R.gte(2, 6); //=> false
      *      R.gte(2, 0); //=> true
      *      R.gte(2, 2); //=> true
-     *      R.gte(__, 6)(2); //=> false
+     *      R.gte(R.__, 6)(2); //=> false
      *      R.gte(2)(0); //=> true
-     *      R.gte(__)(1, 2); //=> true
      */
-    R.gte = op(function _gte(a, b) { return a >= b; });
+    R.gte = curry2(function _gte(a, b) { return a >= b; });
 
 
     /**
@@ -4937,7 +4939,7 @@
      *
      *      R.pathOn('/', 'a/b/c', {a: {b: {c: 3}}}); //=> 3
      */
-    R.pathOn = curry3(function pathOn(sep, str, obj) {
+    R.pathOn = curry(function pathOn(sep, str, obj) {
         return path(str.split(sep), obj);
     });
 
@@ -5010,7 +5012,7 @@
      *      var hasBrownHair = R.propEq('hair', 'brown');
      *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
      */
-    R.propEq = curry3(function propEq(name, val, obj) {
+    R.propEq = curry(function propEq(name, val, obj) {
         return obj[name] === val;
     });
 
@@ -5055,7 +5057,7 @@
      *      var l2 = [{a: 1}, {a: 4}];
      *      R.unionWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}, {a: 4}]
      */
-    R.unionWith = curry3(function _unionWith(pred, list1, list2) {
+    R.unionWith = curry(function _unionWith(pred, list1, list2) {
         return uniqWith(pred, concat(list1, list2));
     });
 
@@ -5103,7 +5105,7 @@
      *      R.differenceWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}]
      *
      */
-    R.differenceWith = curry3(function differenceWith(pred, first, second) {
+    R.differenceWith = curry(function differenceWith(pred, first, second) {
         return uniqWith(pred)(reject(flip(R.containsWith(pred))(second), first));
     });
 
@@ -5165,7 +5167,7 @@
      *      R.intersectionWith(sameId, buffaloSpringfield, csny);
      *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
      */
-    R.intersectionWith = curry3(function intersectionWith(pred, list1, list2) {
+    R.intersectionWith = curry(function intersectionWith(pred, list1, list2) {
         var results = [], idx = -1;
         while (++idx < list1.length) {
             if (containsWith(pred, list1[idx], list2)) {

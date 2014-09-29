@@ -36,6 +36,33 @@ describe('curryN', function() {
     });
 });
 
+describe('curry with placeholders', function() {
+    function makeString(a, b, c, d) {
+        return (String(a) + b + c + d) + (arguments.length > 4 ? ([].slice.call(arguments, 4)).join('') : '');
+    }
+    var curried = R.curry(makeString);
+    it('should handle placeholders', function() {
+        var lastX = curried(R.__, R.__, R.__, 'x');
+        assert.equal(lastX('a', 'b', 'c'), 'abcx');
+
+        var noop = lastX(R.__, R.__);
+        assert.equal(noop('a', 'b', 'c'), 'abcx');
+
+        var middle = curried(R.__, 'e', 'l');
+        assert.equal(middle('h', 'p'), 'help');
+
+        var ignoreMe = curried(R.__, R.__, R.__, R.__, R.__, R.__, 'haha');
+        assert.equal(ignoreMe('a', 'b', 'c', 'd'), 'abcd');
+
+        var firstY = lastX('y');
+        assert.equal(firstY('a', 'b'), 'yabx');
+
+        // extra args passed along
+        assert.equal(curried('a', 'b', 'c', 'd', 'e', 'f'), 'abcdef');
+        assert.equal(firstY('a', 'b', 'c', 'd'), 'yabxcd');
+    });
+});
+
 describe('internal curry', function() {
     it('should throw an exception given no arguments', function() {
         assert.throws(R.map);

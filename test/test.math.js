@@ -41,8 +41,8 @@ describe('subtract', function() {
         assert.equal(3, ninesCompl(6));
     });
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var minus5 = R.subtract(void 0, 5);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var minus5 = R.subtract(R.__, 5);
         assert.equal(12, minus5(17));
     });
 
@@ -62,8 +62,8 @@ describe('divide', function() {
         assert.equal(4, into28(7));
     });
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var half = R.divide(void 0, 2);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var half = R.divide(R.__, 2);
         assert.equal(20, half(40));
     });
 
@@ -88,8 +88,8 @@ describe('modulo', function() {
         assert.equal(hundredMod(17), 15);
     });
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var isOdd = R.modulo(void 0, 2);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var isOdd = R.modulo(R.__, 2);
         assert.equal(typeof isOdd, 'function');
         assert.equal(isOdd(3), 1);
         assert.equal(isOdd(198), 0);
@@ -133,8 +133,8 @@ describe('mathMod', function() {
     });
 
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var mod5 = R.modulo(void 0, 5);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var mod5 = R.modulo(R.__, 5);
         assert.equal(mod5(12), 2);
         assert.equal(mod5(8), 3);
     });
@@ -163,7 +163,6 @@ describe('product', function() {
 });
 
 describe('lt', function() {
-    var __ = void 0;
     it('reports whether one item is less than another', function() {
         assert(R.lt(3, 5));
         assert(!R.lt(6, 4));
@@ -179,8 +178,8 @@ describe('lt', function() {
         assert(!gt5(3));
     });
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var lt5 = R.lt(__, 5);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var lt5 = R.lt(R.__, 5);
         assert(!lt5(10));
         assert(!lt5(5));
         assert(lt5(3));
@@ -192,7 +191,6 @@ describe('lt', function() {
 });
 
 describe('lte', function() {
-    var __ = void 0;
     it('reports whether one item is less than another', function() {
         assert(R.lte(3, 5));
         assert(!R.lte(6, 4));
@@ -208,8 +206,8 @@ describe('lte', function() {
         assert(gte20(25));
     });
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var upTo20 = R.lte(__, 20);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var upTo20 = R.lte(R.__, 20);
         assert(upTo20(10));
         assert(upTo20(20));
         assert(!upTo20(25));
@@ -221,7 +219,6 @@ describe('lte', function() {
 });
 
 describe('gt', function() {
-    var __ = void 0;
     it('reports whether one item is less than another', function() {
         assert(!R.gt(3, 5));
         assert(R.gt(6, 4));
@@ -237,8 +234,8 @@ describe('gt', function() {
         assert(!lt20(25));
     });
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var gt20 = R.gt(__, 20);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var gt20 = R.gt(R.__, 20);
         assert(!gt20(10));
         assert(!gt20(20));
         assert(gt20(25));
@@ -265,9 +262,8 @@ describe('gte', function() {
         assert(!lte20(25));
     });
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var __ = void 0;
-        var gte20 = R.gte(__, 20);
+    it('behaves right curried when passed placeholder for its first argument', function() {
+        var gte20 = R.gte(R.__, 20);
         assert(!gte20(10));
         assert(gte20(20));
         assert(gte20(25));
