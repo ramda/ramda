@@ -19,7 +19,7 @@ describe('impure', function() {
         it('global state object', function() {
             var stateRef = STRef.new({})();
 
-            STRef.modify(stateRef, function(o) {
+            STRef.modify(stateRef, function() {
                 return {name: 'Joe'};
             })();
             assert.deepEqual(STRef.read(stateRef)(), {name: 'Joe'});
@@ -36,8 +36,8 @@ describe('impure', function() {
         it('rewriting global variable', function() {
             var pokes = STRef.new(0)();
 
-            R.range(1, 1000).forEach(function(i) {
-                STRef.write(pokes, i)();
+            R.range(1, 1000).forEach(function(idx) {
+                STRef.write(pokes, idx)();
             });
 
             assert.deepEqual(STRef.read(pokes)(), 999);
