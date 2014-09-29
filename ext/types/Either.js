@@ -208,7 +208,7 @@
          * is thrown.
          *
          * @method
-         * @sig (@Either[a, b → c], f:Applicative[_]) => f[b] → f[c]
+         * @sig (@Either[a, b → c], f:Applicative[_]) => f[b] -> f[c]
          */
         Either.prototype.ap = unimplemented;
 
@@ -245,7 +245,7 @@
          * function to monads.
          *
          * @method
-         * @sig (@Either[a, b], m:Monad[_]) => (b → m[c]) → m[c]
+         * @sig (@Either[a, b], m:Monad[_]) => (b -> m[c]) -> m[c]
          */
         Either.prototype.chain = unimplemented;
         Left.prototype.chain   = noop;
@@ -261,7 +261,7 @@
          * Returns a textual representation of the `Either[a, b]` structure.
          *
          * @method
-         * @sig (@Either[a, b]) => Void → String
+         * @sig (@Either[a, b]) => Void -> String
          */
         Either.prototype.toString = unimplemented;
 
@@ -281,7 +281,7 @@
          * structure.
          *
          * @method
-         * @sig (@Either[a, b]) => Either[a, b] → Boolean
+         * @sig (@Either[a, b]) => Either[a, b] -> Boolean
          */
         Either.prototype.equals = unimplemented;
 
@@ -417,7 +417,7 @@
          * Maps both sides of the disjunction.
          *
          * @method
-         * @sig (@Either[a, b]) => (a → c), (b → δ) → Either[c, δ]
+         * @sig (@Either[a, b]) => (a → c), (b → d) → Either[c, d]
          */
         Either.prototype.bimap = unimplemented;
 
