@@ -1,3 +1,18 @@
+/**
+ * STRef is a data type constructor to handle global mutable references. It is
+ * used to track global mutation. It wraps a value in a container.
+ *
+ * @example
+ *
+ *      var pokes = STRef.new(0)();
+ *
+ *       R.range(1, 1000).forEach(function(i) {
+ *          STRef.write(pokes, i)();
+ *      });
+ *
+ *      STRef.read(pokes)() // => 999);
+ *
+ */
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -13,38 +28,45 @@
     }
 }(this, function(R) {
 
-    function STRef() {
-    }
+    function STRef() {}
 
     /**
-     * @sig a -> STRef a
+     * @sig a -> STRef (RefVal a)
      */
     STRef.new = function(val) {
-        return { value: val };
-    }; //" :: forall s r. s -> Eff (ref :: Ref | r) (RefVal s)
+        return function() {
+            return {value: val};
+        };
+    };
 
     /**
-     * @sig STRef a -> a
+     * @sig RefVal a -> STRef a
      */
     STRef.read = function(ref) {
-        return ref.value;
-    }; //" :: forall s r. RefVal s -> Eff (ref :: Ref | r) s
+        return function() {
+            return ref.value;
+        };
+    };
 
     /**
-     * @sig STRef a -> (a -> a) -> void
+     * @sig RefVal a -> (a -> a) -> STRef Unit
      */
-    STRef.modify = function(ref, f) {
-        ref.value = f(ref.value);
-        return {};
-    }; //" :: forall s r. RefVal s -> (s -> s) -> Eff (ref :: Ref | r) Unit
+    STRef.modify = R.curryN(2, function(ref, f) {
+        return function() {
+            ref.value = f(ref.value);
+            return {};
+        };
+    });
 
     /**
-     * @sig STRef a -> a -> void
+     * @sig RefVal a -> a -> STRef Unit
      */
-    STRef.write = R.curryN(2, function (ref, val) {
-        ref.value = val;
-        return {};
-    }); //" :: forall s r. RefVal s -> s -> Eff (ref :: Ref | r) Unit
+    STRef.write = R.curryN(2, function(ref, val) {
+        return function() {
+            ref.value = val;
+            return {};
+        };
+    });
 
     return STRef;
 }));
