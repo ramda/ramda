@@ -244,7 +244,7 @@
      *
      * @func
      * @memberOf R
-     * @category Functions
+     * @category Function
      * @param {function} fn The binary operation to adjust
      * @return {function} A new function that acts somewhat like an infix operator.
      * @example
@@ -294,6 +294,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category Function
      * @sig Number -> (* -> a) -> (* -> a)
      * @param {number} fnArity The arity for the returned function.
@@ -334,6 +335,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category Function
      * @sig (* -> a) -> (* -> a)
      * @param {Function} fn The function to curry.
@@ -763,7 +765,8 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category core
+     * @category List
      * @sig [a] -> [a]
      * @param {Array} list The list to clone.
      * @return {Array} A new copy of the original list.
@@ -792,7 +795,7 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category List
      * @sig [a] -> Boolean
      * @param {Array} list The array to consider.
      * @return {boolean} `true` if the `list` argument has a length of 0 or
@@ -816,7 +819,8 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category core
+     * @category List
      * @sig a -> [a] -> [a]
      * @param {*} el The item to add to the head of the output list.
      * @param {Array} list The array to add to the tail of the output list.
@@ -832,7 +836,7 @@
     /**
      * @func
      * @memberOf R
-     * @category Array
+     * @category List
      * @see R.prepend
      */
     R.cons = R.prepend;
@@ -844,7 +848,8 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category core
+     * @category List
      * @sig [a] -> a
      * @param {Array} [list=[]] The array to consider.
      * @return {*} The first element of the list, or `undefined` if the list is empty.
@@ -860,7 +865,7 @@
     /**
      * @func
      * @memberOf R
-     * @category Array
+     * @category List
      * @see R.head
      */
     R.car = R.head;
@@ -871,7 +876,7 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category List
      * @sig [a] -> a
      * @param {Array} [list=[]] The array to consider.
      * @return {*} The last element of the list, or `undefined` if the list is empty.
@@ -891,7 +896,8 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category core
+     * @category List
      * @sig [a] -> [a]
      * @param {Array} [list=[]] The array to consider.
      * @return {Array} A new array containing all but the first element of the input list, or an
@@ -908,7 +914,7 @@
     /**
      * @func
      * @memberOf R
-     * @category Array
+     * @category List
      * @see R.tail
      */
     R.cdr = R.tail;
@@ -920,7 +926,8 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category core
+     * @category List
      * @sig a -> [a] -> [a]
      * @param {*} el The element to add to the end of the new list.
      * @param {Array} list The list whose contents will be added to the beginning of the output
@@ -939,7 +946,7 @@
     /**
      * @func
      * @memberOf R
-     * @category Array
+     * @category List
      * @see R.append
      */
     R.push = R.append;
@@ -951,7 +958,8 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category core
+     * @category List
      * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list to merge.
      * @param {Array} list2 The second set to merge.
@@ -1041,7 +1049,7 @@
      *
      * @func
      * @memberOf R
-     * @category Array
+     * @category List
      * @sig a -> n -> [a]
      * @param {*} value The value to repeat.
      * @param {number} n The desired size of the output list.
@@ -1108,6 +1116,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category Function
      * @sig ((y -> z), (x -> y), ..., (b -> c), (a... -> b)) -> (a... -> z)
      * @param {...Function} functions A variable number of functions.
@@ -1356,7 +1365,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * ((* -> *) -> ((* -> *), a...) -> (*, a... -> *)
+     * @sig ((* -> *) -> ((* -> *), a...) -> (*, a... -> *)
      * @param {Function} fn The function to wrap.
      * @param {Function} wrapper The wrapper function.
      * @return {Function} The wrapped function.
@@ -1523,6 +1532,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a,b -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -1568,6 +1578,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a,b,i,[b] -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -1598,6 +1609,7 @@
     /**
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @alias foldl.idx
      * @see R.reduce.idx
@@ -1620,6 +1632,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a,b -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -1647,6 +1660,7 @@
     /**
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @see R.reduceRight
      */
@@ -1666,6 +1680,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a,b,i,[b] -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -1746,6 +1761,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a -> b) -> [a] -> [b]
      * @param {Function} fn The function to be called on every element of the input `list`.
@@ -1780,6 +1796,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a,i,[b] -> b) -> [a] -> [b]
      * @param {Function} fn The function to be called on every element of the input `list`.
@@ -1994,6 +2011,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
@@ -2025,6 +2043,7 @@
      *
      * @func
      * @memberOf R
+     * @category core
      * @category List
      * @sig (a, i, [a] -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
