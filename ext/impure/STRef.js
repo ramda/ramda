@@ -38,13 +38,13 @@
         this.modify = function(f) {
             privateValue = f(privateValue);
             return this;
-        }
+        };
 
         this.write = function(val, path) {
             if (path) {
                 var paths = R.split('.', path);
                 var current = privateValue;
-                for (idx = 0; idx < paths.length - 1; idx++) {
+                for (var idx = 0; idx < paths.length - 1; idx++) {
                     current = current[paths[idx]];
                 }
                 current[paths[idx]] = val;
@@ -52,73 +52,37 @@
                 privateValue = val;
             }
             return this;
-        }
+        };
 
         this.linkTo = function(path) {
             return {
                 _value: privateValue,
                 _path: path
             };
-        }
+        };
 
         this.read = function(val, path) {
             if (path) {
                 var paths = R.split('.', path);
                 var current = privateValue;
-                for (idx = 0; idx < paths.length; idx++) {
+                for (var idx = 0; idx < paths.length; idx++) {
                     current = current[paths[idx]];
                 }
                 return R.cloneObj(current); // does not clone!
             } else {
                 return R.cloneObj(privateValue); // does not clone!;
             }
-        }
+        };
     }
 
     STRef.writeLink = function(val, link) {
         var current = link._value;
         var paths = R.split('.', link._path);
-        for (idx = 0; idx < paths.length - 1; idx++) {
+        for (var idx = 0; idx < paths.length - 1; idx++) {
             current = current[paths[idx]];
         }
         current[paths[idx]] = val;
-    }
-
-    // /**
-    //  * @sig a -> STRef (RefVal a)
-    //  */
-    // STRef.new = function(val) {
-    //     return {value: val};
-    // };
-    //
-    // /**
-    //  * @sig RefVal a -> STRef a
-    //  */
-    // STRef.prototype.read = function(ref) {
-    //     return function() {
-    //         return ref.value;
-    //     };
-    // };
-    //
-    // /**
-    //  * @sig RefVal a -> (a -> a) -> STRef Unit
-    //  */
-    // STRef.modify = R.curryN(2, function(ref, f) {
-    //     return function() {
-    //         ref.value = f(ref.value);
-    //         return {};
-    //     };
-    // });
-    //
-    // /**
-    //  * @sig RefVal a -> a -> STRef Unit
-    //  */
-    // STRef.write = R.curryN(2, function(ref, val) {
-    //     return function() {
-    //         ref.value = val;
-    //         return {};
-    //     };
-    // });
+    };
 
     return STRef;
 }));

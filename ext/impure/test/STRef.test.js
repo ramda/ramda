@@ -1,5 +1,4 @@
 var assert = require('assert');
-var R = require('../../..');
 var STRef = require('../STRef');
 
 describe('impure', function() {
@@ -39,21 +38,23 @@ describe('impure', function() {
             assert.deepEqual(bigObject.read(), {person:{name: 'Doe', age: 22}});
         });
 
-        xit('state is private', function() {
-            var bigObject = STRef({person:{name: 'Joe', age: 22}});
-
-            assert.throws(function() {
-                bigObject.person.name = 'fail';
-            });
-
-            var clone = bigObject.read();
-            assert.deepEqual(clone, {person:{name: 'Joe', age: 22}});
-
-            clone.person.name = 'fail';
-            assert.deepEqual(clone, {person:{name: 'fail', age: 22}});
-            assert.deepEqual(bigObject.read(), {person:{name: 'Joe', age: 22}});
-
-        });
+        // Will only succeed if read() with return cloned objects
+        // See issue #364
+        // it('state is private', function() {
+        //     var bigObject = STRef({person:{name: 'Joe', age: 22}});
+        //
+        //     assert.throws(function() {
+        //         bigObject.person.name = 'fail';
+        //     });
+        //
+        //     var clone = bigObject.read();
+        //     assert.deepEqual(clone, {person:{name: 'Joe', age: 22}});
+        //
+        //     clone.person.name = 'fail';
+        //     assert.deepEqual(clone, {person:{name: 'fail', age: 22}});
+        //     assert.deepEqual(bigObject.read(), {person:{name: 'Joe', age: 22}});
+        //
+        // });
 
     });
 });
