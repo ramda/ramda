@@ -96,7 +96,7 @@ describe('some examples using Either', function() {
 
     it('chaining Eithers', function() {
         function div(x, y) {
-            return y == 0 ? Either.Left('Division by 0') : Either.Right(x/y);
+            return y === 0 ? Either.Left('Division by 0') : Either.Right(x/y);
         }
 
         var result = div(10, 2).chain(function(valueA) {
