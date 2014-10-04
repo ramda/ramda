@@ -140,6 +140,7 @@
      * Tests whether or not an object is similar to an array.
      *
      * @func
+     * @memberOf R
      * @category Type
      * @category List
      * @param {*} x The object to test.
