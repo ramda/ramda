@@ -7,7 +7,7 @@ DEEDPOLL = node_modules/.bin/deedpoll \
 	--rename i:idx \
 	--rename index:idx
 
-SRC = $(shell find . -name '*.js' -not -path './lib/test/*' -not -path './node_modules/*' -not -path './sauce/*')
+SRC = $(shell find . -name '*.js' -not -name '*.min.js' -not -path './lib/test/*' -not -path './node_modules/*' -not -path './sauce/*')
 
 
 lint:
