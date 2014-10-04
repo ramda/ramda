@@ -40,13 +40,15 @@ module.exports = function(grunt) {
         jscs: {
             files: ['**/*.js', '!{lib/test,node_modules,sauce}/**'],
             options: {
-                config: '.jscsrc'
+                config: '.jscsrc',
+                excludeFiles: ['**/*.min.js']
             }
         },
 
         jshint: {
             files: ['**/*.js', '!{lib/test,node_modules,sauce}/**'],
             options: {
+                ignores: ['**/*.min.js'],
                 jshintrc: '.jshintrc'
             }
         },
