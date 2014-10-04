@@ -35,7 +35,7 @@
      * @namespace R
      */
     // jscs:disable disallowQuotedKeysInObjects
-    var R = {'version': '0.5.0'};
+    var R = {'version': '0.6.0'};
     // jscs:enable disallowQuotedKeysInObjects
 
     // Internal Functions and Properties
