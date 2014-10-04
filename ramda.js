@@ -964,9 +964,9 @@
      * @param {Array} list1 The first list to merge.
      * @param {Array} list2 The second set to merge.
      * @return {Array} A new array consisting of the contents of `list1` followed by the
-     *         contents of `list2`. If, instead of an {Array} for `list1`, you pass an
+     *         contents of `list2`. If, instead of an Array for `list1`, you pass an
      *         object with a `concat` method on it, `concat` will call `list1.concat`
-     *         and it the value of `list2`.
+     *         and pass it the value of `list2`.
      * @example
      *
      *      R.concat([], []); //=> []
@@ -976,12 +976,10 @@
     R.concat = curry2(function(set1, set2) {
         if (isArray(set2)) {
             return concat(set1, set2);
-        } else if (R.is(String, set1)) {
+        } else if (hasMethod('concat', set1)) {
             return set1.concat(set2);
-        } else if (hasMethod('concat', set2)) {
-            return set2.concat(set1);
         } else {
-            throw new TypeError("can't concat " + typeof set2);
+            throw new TypeError("can't concat " + typeof set1);
         }
     });
 

@@ -67,11 +67,11 @@ describe('concat', function() {
     });
 
     var z1 = {
-        x: 'z1'
+        x: 'z1',
+        concat: function(that) { return this.x + ' ' + that.x; }
     };
     var z2 = {
-        x: 'z2',
-        concat: function(that) { return this.x + ' ' + that.x; }
+        x: 'z2'
     };
 
     it('adds combines the elements of the two lists', function() {
@@ -82,7 +82,7 @@ describe('concat', function() {
         assert.equal(R.concat('foo', 'bar'), 'foobar');
     });
     it('delegates to non-String object with a concat method, as second param', function() {
-        assert.equal(R.concat(z1, z2), 'z2 z1');
+        assert.equal(R.concat(z1, z2), 'z1 z2');
     });
     it('is curried', function() {
         var conc123 = R.concat([1, 2, 3]);
