@@ -13,48 +13,65 @@
     }
 }(this, function() {
 
-    function Either(left, right) {
-        if (arguments.length === 0) {
-            throw new TypeError('Either called with no arguments');
-        } else if (arguments.length === 1) {
-            return function(right) {
-                return new Either(left, right);
-            };
+    function F() {}
+
+    function inherit(Parent, Child) {
+        if (Object.create) {
+            Child.prototype = Object.create(Parent.prototype);
         } else {
-            if (!(this instanceof Either)) {
-                return new Either(left, right);
-            }
-            this.left = left;
-            this.right = right;
+            F.prototype = Parent.prototype;
+            Child.prototype = new F();
+            Child.prototype.constructor = Child;
+        }
+        return Child;
+    }
+
+    function Either(left, right) {
+        switch (arguments.length) {
+            case 0:
+                throw new TypeError('no arguments to Either');
+            case 1:
+                return function(right) {
+                    return right == null ? Left(left) : Right(right);
+                };
+            default:
+                return right == null ? Left(left) : Right(right);
         }
     }
 
-    Either.of = function(value, err) {
-        return new Either(err, value);
+    function Right(value) {
+        if (!(this instanceof Right)) {
+            return new Right(value);
+        }
+        this.value = value;
+    }
+    function Left(value) {
+        if (!(this instanceof Left)) {
+            return new Left(value);
+        }
+        this.value = value;
+    }
+
+    function returnThis() { return this; }
+
+    Either.Right = Right;
+    Either.Left = Left;
+
+    Either.prototype.map = returnThis;
+    Either.of = Either.prototype.of = function(value) { return new Right(value); };
+    Either.prototype.chain = returnThis; // throw
+    Either.equals = Either.prototype.equals = function(that) {
+        return this.constructor === that.constructor && this.value === that.value;
     };
 
-    Either.prototype.map = function(f) {
-        return this.right == null ? this : new Either(this.left, f(this.right));
-    };
+    inherit(Either, Right);
+    inherit(Either, Left);
 
-    Either.prototype.ap = function(app) {
-        return this.right == null ? this : app.map(this.right);
-    };
+    Right.prototype.map = function(fn) { return new Right(fn(this.value)); };
+    Right.prototype.ap = function(that) { return that.map(this.value); };
+    Right.prototype.chain = function(f) { return f(this.value); };
 
-    // `f` must return a new Either; not sure if this impl is sufficient
-    Either.prototype.chain = function(f) {
-        return this.right == null ? this : f(this.right);
-    };
-
-    Either.prototype.of = Either.of;
-
-    Either.prototype.equals = function(that) {
-        return this.right === that.right;
-    };
-
-    Either.equals = function(e1, e2) {
-        return e1.equals(e2);
-    };
+    Left.prototype.ap = function(that) { return that; };
 
     return Either;
 }));
