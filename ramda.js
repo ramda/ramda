@@ -5031,7 +5031,7 @@
 
 
     /**
-     * Determines whether the given, possibly nested, path of an object
+     * Determines whether a nested path on an object, seperated by periods,
      * has a specific value according to strict equality ('==='). Most
      * likely used to filter a list:
      *
