@@ -83,6 +83,32 @@ describe('pathOn', function() {
     });
 });
 
+describe('pathEq', function() {
+
+    var obj = {
+        a: 1,
+        b: {
+            ba: '2'
+        }
+    };
+
+    it('should return true if the path mathces the value', function() {
+        assert.ok(R.pathEq('a', 1, obj));
+        assert.ok(R.pathEq('b.ba', '2', obj));
+    });
+
+    it('should return fals for non matches', function() {
+        assert.ok(!R.pathEq('a', '1', obj));
+        assert.ok(!R.pathEq('b.ba', 2, obj));
+    });
+
+    it('should return false for non existing values', function() {
+        assert.ok(!R.pathEq('c', 'foo', obj));
+        assert.ok(!R.pathEq('c.d', 'foo', obj));
+    });
+
+});
+
 /*
 describe('pathWith', function() {
     var obj = {
