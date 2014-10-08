@@ -48,6 +48,74 @@ describe('propOr', function() {
     });
 });
 
+describe('has', function() {
+    var fred = {name: 'Fred', age: 23};
+    var anon = {age: 99};
+
+    it('should return a function that checks the appropriate property', function() {
+        var nm = R.has('name');
+        assert.equal(typeof nm, 'function');
+        assert.equal(nm(fred), true);
+        assert.equal(nm(anon), false);
+    });
+
+    it('should not check properties from the prototype chain', function() {
+        var Person = function() {};
+        Person.prototype.age = function() {};
+
+        var bob = new Person();
+        assert.equal(R.has('age', bob), false);
+    });
+
+    it('throws for null and undefined objects', function() {
+        assert.throws(function() {R.has('name', null);}, TypeError);
+        assert.throws(function() {R.has('name', undefined);}, TypeError);
+    });
+
+    it('works properly when called with two arguments', function() {
+        assert.equal(R.has('name', fred), true);
+        assert.equal(R.has('name', anon), false);
+    });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.has, TypeError);
+    });
+});
+
+describe('hasIn', function() {
+    var fred = {name: 'Fred', age: 23};
+    var anon = {age: 99};
+
+    it('should return a function that checks the appropriate property', function() {
+        var nm = R.hasIn('name');
+        assert.equal(typeof nm, 'function');
+        assert.equal(nm(fred), true);
+        assert.equal(nm(anon), false);
+    });
+
+    it('should check properties from the prototype chain', function() {
+        var Person = function() {};
+        Person.prototype.age = function() {};
+
+        var bob = new Person();
+        assert.equal(R.hasIn('age', bob), true);
+    });
+
+    it('throws for null and undefined objects', function() {
+        assert.throws(function() {R.has('name', null);}, TypeError);
+        assert.throws(function() {R.has('name', undefined);}, TypeError);
+    });
+
+    it('works properly when called with two arguments', function() {
+        assert.equal(R.hasIn('name', fred), true);
+        assert.equal(R.hasIn('name', anon), false);
+    });
+
+    it('throws if given no arguments', function() {
+        assert.throws(R.hasIn, TypeError);
+    });
+});
+
 describe('func', function() {
     it('should return a function that applies the appropriate function to the supplied object', function() {
         var fred = {first: 'Fred', last: 'Flintstone', getName: function() {
