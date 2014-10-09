@@ -52,6 +52,16 @@
         return new TypeError('Function called with no arguments');
     }
 
+    function requiresArg(fn) {
+        return function() {
+            if (arguments.length === 0) {
+                throw noArgsException();
+            } else {
+                return fn.apply(null, arguments);
+            }
+        };
+    }
+
     /**
      * An optimized, private array `slice` implementation.
      *
@@ -315,15 +325,14 @@
      */
     var curryN = R.curryN = function curryN(length, fn) {
         return (function recurry(args) {
-            return arity(Math.max(length - (args && args.length || 0), 0), function() {
-                if (arguments.length === 0) { throw noArgsException(); }
+            return arity(Math.max(length - (args && args.length || 0), 0), requiresArg(function() {
                 var newArgs = concat(args, arguments);
                 if (newArgs.length >= length) {
                     return fn.apply(this, newArgs);
                 } else {
                     return recurry(newArgs);
                 }
-            });
+            }));
         }([]));
     };
 
@@ -1903,15 +1912,12 @@
      *     }));
      *     madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
      */
-    R.liftN = curry2(function liftN(arity, fn) {
+    R.liftN = curry2(requiresArg(function liftN(arity, fn) {
         var lifted = curryN(arity, fn);
-        if (arguments.length === 0) {
-            throw noArgsException();
-        }
         return R.curryN(arity, function() {
             return R.foldl(R.ap, R.map(lifted, arguments[0]), _slice(arguments, 1));
         });
-    });
+    }));
 
 
     /**
@@ -1937,12 +1943,9 @@
      *     }));
      *     madd5([1,2], [3], [4, 5], [6], [7, 8]); //=> [21, 22, 22, 23, 22, 23, 23, 24]
      */
-    R.lift = function lift(fn) {
-        if (arguments.length === 0) {
-            throw noArgsException();
-        }
+    R.lift = requiresArg(function lift(fn) {
         return R.liftN(fn.length, fn);
-    };
+    });
 
 
     /**
