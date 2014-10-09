@@ -5382,7 +5382,7 @@
      *
      * @private
      * @func
-     * category relation
+     * @category relation
      * @param {*} a
      * @param {*} b
      */
