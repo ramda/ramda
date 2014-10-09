@@ -67,11 +67,6 @@ describe('has', function() {
         assert.equal(R.has('age', bob), false);
     });
 
-    it('throws for null and undefined objects', function() {
-        assert.throws(function() {R.has('name', null);}, TypeError);
-        assert.throws(function() {R.has('name', undefined);}, TypeError);
-    });
-
     it('works properly when called with two arguments', function() {
         assert.equal(R.has('name', fred), true);
         assert.equal(R.has('name', anon), false);
@@ -99,11 +94,6 @@ describe('hasIn', function() {
 
         var bob = new Person();
         assert.equal(R.hasIn('age', bob), true);
-    });
-
-    it('throws for null and undefined objects', function() {
-        assert.throws(function() {R.has('name', null);}, TypeError);
-        assert.throws(function() {R.has('name', undefined);}, TypeError);
     });
 
     it('works properly when called with two arguments', function() {
