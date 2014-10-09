@@ -92,12 +92,12 @@ describe('pathEq', function() {
         }
     };
 
-    it('should return true if the path mathces the value', function() {
+    it('should return true if the path matches the value', function() {
         assert.ok(R.pathEq('a', 1, obj));
         assert.ok(R.pathEq('b.ba', '2', obj));
     });
 
-    it('should return fals for non matches', function() {
+    it('should return false for non matches', function() {
         assert.ok(!R.pathEq('a', '1', obj));
         assert.ok(!R.pathEq('b.ba', 2, obj));
     });
