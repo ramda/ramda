@@ -4214,7 +4214,7 @@
      */
     R.and = curry2(function and(f, g) {
         return function _and() {
-            return !!(f.apply(this, arguments) && g.apply(this, arguments));
+            return f.apply(this, arguments) && g.apply(this, arguments);
         };
     });
 
@@ -4241,7 +4241,7 @@
      */
     R.or = curry2(function or(f, g) {
         return function _or() {
-            return !!(f.apply(this, arguments) || g.apply(this, arguments));
+            return f.apply(this, arguments) || g.apply(this, arguments);
         };
     });
 
