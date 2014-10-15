@@ -575,7 +575,7 @@
      */
     var invokerN = R.invokerN = function invokerN(len, method) {
         return curryN(len + 1, function() {
-            var target = R.last(arguments);
+            var target = arguments[len];
             return method.apply(target,
                 Array.prototype.slice.call(arguments, 0, -1));
         });
