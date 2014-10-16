@@ -1,5 +1,5 @@
 //     ramda.js
-//     https://github.com/CrossEye/ramda
+//     https://github.com/ramda/ramda
 //     (c) 2013-2014 Scott Sauyet and Michael Hurley
 //     Ramda may be freely distributed under the MIT license.
 
