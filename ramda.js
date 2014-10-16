@@ -577,7 +577,7 @@
         return curryN(len + 1, function() {
             var target = arguments[len];
             return method.apply(target,
-                Array.prototype.slice.call(arguments, 0, -1));
+                Array.prototype.slice.call(arguments, 0, len));
         });
     };
 
