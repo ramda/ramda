@@ -4,18 +4,18 @@ var R = require('..');
 describe('prop', function() {
     var fred = {name: 'Fred', age: 23};
 
-    it('should return a function that fetches the appropriate property', function() {
+    it('returns a function that fetches the appropriate property', function() {
         var nm = R.prop('name');
         assert.equal(typeof nm, 'function');
         assert.equal(nm(fred), 'Fred');
     });
 
-    it('should be aliased by `get`', function() { // TODO: should it?
+    it('is aliased by `get`', function() { // TODO: should it?
         assert.equal(R.get('age')(fred), 23);
         assert.strictEqual(R.get, R.prop);
     });
 
-    it('should throw when called with no arguments', function() {
+    it('throws when called with no arguments', function() {
         assert.throws(R.prop, TypeError);
     });
 });
@@ -26,16 +26,16 @@ describe('propOr', function() {
 
     var nm = R.propOr('name', 'Unknown');
 
-    it('should return a function that fetches the appropriate property', function() {
+    it('returns a function that fetches the appropriate property', function() {
         assert.equal(typeof nm, 'function');
         assert.equal(nm(fred), 'Fred');
     });
 
-    it('should return the default value when the property does not exist', function() {
+    it('returns the default value when the property does not exist', function() {
         assert.equal(nm(anon), 'Unknown');
     });
 
-    it('should not return properties from the prototype chain', function() {
+    it('does not return properties from the prototype chain', function() {
         var Person = function() {};
         Person.prototype.age = function() {};
 
@@ -52,14 +52,14 @@ describe('has', function() {
     var fred = {name: 'Fred', age: 23};
     var anon = {age: 99};
 
-    it('should return a function that checks the appropriate property', function() {
+    it('returns a function that checks the appropriate property', function() {
         var nm = R.has('name');
         assert.equal(typeof nm, 'function');
         assert.equal(nm(fred), true);
         assert.equal(nm(anon), false);
     });
 
-    it('should not check properties from the prototype chain', function() {
+    it('does not check properties from the prototype chain', function() {
         var Person = function() {};
         Person.prototype.age = function() {};
 
@@ -81,14 +81,14 @@ describe('hasIn', function() {
     var fred = {name: 'Fred', age: 23};
     var anon = {age: 99};
 
-    it('should return a function that checks the appropriate property', function() {
+    it('returns a function that checks the appropriate property', function() {
         var nm = R.hasIn('name');
         assert.equal(typeof nm, 'function');
         assert.equal(nm(fred), true);
         assert.equal(nm(anon), false);
     });
 
-    it('should check properties from the prototype chain', function() {
+    it('checks properties from the prototype chain', function() {
         var Person = function() {};
         Person.prototype.age = function() {};
 
@@ -107,7 +107,7 @@ describe('hasIn', function() {
 });
 
 describe('func', function() {
-    it('should return a function that applies the appropriate function to the supplied object', function() {
+    it('returns a function that applies the appropriate function to the supplied object', function() {
         var fred = {first: 'Fred', last: 'Flintstone', getName: function() {
             return this.first + ' ' + this.last;
         }};
@@ -129,7 +129,7 @@ describe('func', function() {
         assert.equal(R.func('f', obj), 'called f');
     });
 
-    it('should apply additional arguments to the function', function() {
+    it('applies additional arguments to the function', function() {
         var Point = function(x, y) {
             this.x = x;
             this.y = y;
@@ -160,7 +160,7 @@ describe('pluck', function() {
         {name: 'Pebbles', age: 2}
     ];
 
-    it('should return a function that maps the appropriate property over an array', function() {
+    it('returns a function that maps the appropriate property over an array', function() {
         var nm = R.pluck('name');
         assert.equal(typeof nm, 'function');
         assert.deepEqual(nm(people), ['Fred', 'Wilma', 'Pebbles']);
@@ -170,7 +170,7 @@ describe('pluck', function() {
 describe('props', function() {
     var fred = {name: 'Fred', age: 23, feet: 'large'};
 
-    it('should return a function that fetches the appropriate properties from the initially supplied object', function() {
+    it('returns a function that fetches the appropriate properties from the initially supplied object', function() {
         var p = R.props(fred);
         assert.equal(p('name'), 'Fred');
         assert.equal(p('age'), 23);
@@ -181,13 +181,23 @@ describe('props', function() {
 describe('pick', function() {
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
-    it('should copy the named properties of an object to the new object', function() {
+    it('copies the named properties of an object to the new object', function() {
         assert.deepEqual(R.pick(['a', 'c', 'f'], obj), {a: 1, c: 3, f: 6});
     });
-    it('should ignore properties not included', function() {
+
+    it('ignores properties not included', function() {
         assert.deepEqual(R.pick(['a', 'c', 'g'], obj), {a: 1, c: 3});
     });
-    it('should be automatically curried', function() {
+
+    it('retrieves prototype properties', function() {
+        var F = function(param) {this.x = param;};
+        F.prototype.y = 40; F.prototype.z = 50;
+        var obj = new F(30);
+        obj.v = 10; obj.w = 20;
+        assert.deepEqual(R.pick(['w', 'x', 'y'], obj), {w: 20, x: 30, y: 40});
+    });
+
+    it('is automatically curried', function() {
         var copyAB = R.pick(['a', 'b']);
         assert.deepEqual(copyAB(obj), {a: 1, b: 2});
     });
@@ -196,11 +206,19 @@ describe('pick', function() {
 describe('omit', function() {
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
-    it('should copy an object omitting the listed properties', function() {
+    it('copies an object omitting the listed properties', function() {
         assert.deepEqual(R.omit(['a', 'c', 'f'], obj), {b: 2, d: 4, e: 5});
     });
 
-    it('should be automatically curried', function() {
+    it('includes prototype properties', function() {
+        var F = function(param) {this.x = param;};
+        F.prototype.y = 40; F.prototype.z = 50;
+        var obj = new F(30);
+        obj.v = 10; obj.w = 20;
+        assert.deepEqual(R.omit(['w', 'x', 'y'], obj), {v: 10, z: 50});
+    });
+
+    it('is automatically curried', function() {
         var skipAB = R.omit(['a', 'b']);
         assert.deepEqual(skipAB(obj), {c: 3, d: 4, e: 5, f: 6});
     });
@@ -209,26 +227,39 @@ describe('omit', function() {
 describe('pickWith', function() {
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
-    it('should create a copy of the object', function() {
+    it('creates a copy of the object', function() {
         assert.notEqual(R.pickWith(R.always(true), obj), obj);
     });
-    it('returning truthy keeps the key', function() {
+
+    it('when returning truthy, keeps the key', function() {
         assert.deepEqual(R.pickWith(R.alwaysTrue, obj), obj);
         assert.deepEqual(R.pickWith(R.always({}), obj), obj);
         assert.deepEqual(R.pickWith(R.always(1), obj), obj);
     });
-    it('returning falsy keeps the key', function() {
+
+    it('when returning falsy, keeps the key', function() {
         assert.deepEqual(R.pickWith(R.always(false), obj), {});
         assert.deepEqual(R.pickWith(R.always(0), obj), {});
         assert.deepEqual(R.pickWith(R.always(null), obj), {});
     });
-    it('should be called with (val,key,obj)', function() {
+
+    it('is called with (val,key,obj)', function() {
         assert.deepEqual(R.pickWith(function(val, key, _obj) {
             assert.equal(_obj, obj);
             return key === 'd' && val === 4;
         }, obj), {d: 4});
     });
-    it('should be automatically curried', function() {
+
+    it('retrieves prototype properties', function() {
+        var F = function(param) {this.x = param;};
+        F.prototype.y = 40; F.prototype.z = 50;
+        var obj = new F(30);
+        obj.v = 10; obj.w = 20;
+        assert.deepEqual(R.pickWith(function(val) {return val < 45;}, obj), {v: 10, w: 20, x: 30, y: 40});
+    });
+
+
+    it('is automatically curried', function() {
         var copier = R.pickWith(R.alwaysTrue);
         assert.deepEqual(copier(obj), obj);
     });
@@ -237,13 +268,15 @@ describe('pickWith', function() {
 
 describe('pickAll', function() {
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
-    it('should copy the named properties of an object to the new object', function() {
+    it('copies the named properties of an object to the new object', function() {
         assert.deepEqual(R.pickAll(['a', 'c', 'f'], obj), {a: 1, c: 3, f: 6});
     });
-    it('should include properties not present on the input object', function() {
+
+    it('includes properties not present on the input object', function() {
         assert.deepEqual(R.pickAll(['a', 'c', 'g'], obj), {a: 1, c: 3, g: undefined});
     });
-    it('should be automatically curried', function() {
+
+    it('is automatically curried', function() {
         var copyAB = R.pickAll(['a', 'b']);
         assert.deepEqual(copyAB(obj), {a: 1, b: 2});
     });
@@ -254,7 +287,8 @@ describe('eqProps', function() {
         assert.equal(R.eqProps('name', {name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
         assert.equal(R.eqProps('name', {name: 'fred', age: 10}, {name: 'franny', age: 10}), false);
     });
-    it('should be automatically curried', function() {
+
+    it('is automatically curried', function() {
         var sameName = R.eqProps('name');
         assert.equal(sameName({name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
     });
@@ -334,12 +368,12 @@ describe('where', function() {
         assert.equal(predicate({x: 3, y: 2, z: 1}), false);
     });
 
-    it('empty spec is true', function() {
+    it('is true for an empty spec', function() {
         assert.equal(R.where({}, {a: 1}), true);
         assert.equal(R.where(null, {a: 1}), true);
     });
 
-    it('equal objects are true', function() {
+    it('reports true when the object equals the spec', function() {
         assert.equal(R.where(R, R), true);
     });
 
@@ -391,14 +425,14 @@ describe('mixin', function() {
         assert.deepEqual(R.mixin(a, b), {w: 100, x: 2, y: 3, z: 4});
     });
 
-    it('should not be destructive', function() {
+    it('is not destructive', function() {
         var a = {w: 1, x: 2};
         var res = R.mixin(a, {x: 5});
         assert.notEqual(a, res);
         assert.deepEqual(res, {w: 1, x: 5});
     });
 
-    it('only own properties', function() {
+    it('reports only own properties', function() {
         var a = {w: 1, x: 2};
         function Cla() {}
         Cla.prototype.x = 5;
@@ -406,7 +440,7 @@ describe('mixin', function() {
         assert.deepEqual(R.mixin(a, new Cla()), {w: 1, x: 2});
     });
 
-    it('outta be curried', function() {
+    it('is curried', function() {
         var curried = R.mixin({w: 1, x: 2});
         var b = {y: 3, z: 4};
         assert.deepEqual(curried(b), {w: 1, x: 2, y: 3, z: 4});

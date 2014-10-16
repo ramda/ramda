@@ -3665,7 +3665,7 @@
      *      var f = new F();
      *      R.keysIn(f); //=> ['x', 'y']
      */
-    R.keysIn = function _keysIn(obj) {
+    var keysIn = R.keysIn = function _keysIn(obj) {
         var prop, ks = [];
         for (prop in obj) {
             ks.push(prop);
@@ -3792,7 +3792,7 @@
     // TODO: document, even for internals...
     function pickWith(test, obj) {
         var copy = {},
-            props = keys(obj), prop, val;
+            props = keysIn(obj), prop, val;
         for (var idx = 0, len = props.length; idx < len; idx++) {
             prop = props[idx];
             val = obj[prop];
