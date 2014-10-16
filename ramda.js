@@ -2944,6 +2944,31 @@
 
 
     /**
+     * Creates an object containing a single key:value pair.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig String -> a -> {String:a}
+     * @param {String} key
+     * @param {*} val
+     * @return {Object}
+     * @example
+     *
+     *      var matchPhrases = R.compose(
+     *          R.createMapEntry('must'),
+     *          R.map(R.createMapEntry('match_phrase'))
+     *      );
+     *      matchPhrases(['foo', 'bar', 'baz']); //=> {must: [{match_phrase: 'foo'}, {match_phrase: 'bar'}, {match_phrase: 'baz'}]}
+     */
+    R.createMapEntry = curry2(function(key, val) {
+        var obj = {};
+        obj[key] = val;
+        return obj;
+    });
+
+
+    /**
      * Creates a new list out of the two supplied by applying the function
      * to each possible pair in the lists.
      *
