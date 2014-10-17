@@ -3,7 +3,7 @@ Project Ramda
 
 A practical functional library for Javascript programmers.
 
-[![Build Status](https://travis-ci.org/CrossEye/ramda.svg?branch=master)](https://travis-ci.org/CrossEye/ramda)
+[![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
 
 Goals
 -----
