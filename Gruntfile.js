@@ -4,20 +4,7 @@ var sauceSrv = require('./sauce/server');
 module.exports = function(grunt) {
     grunt.initConfig({
 
-        pkg: grunt.file.readJSON('package.json'),
-
         orchestrate_token: process.env.ORCHESTRATE_API_KEY,
-
-        uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
-            dist: {
-                files: {
-                    'dist/<%= pkg.name %>.min.js': ['<%= pkg.name %>.js']
-                }
-            }
-        },
 
         mocha: {
             browser: ['test/**/*.html'],
@@ -29,8 +16,6 @@ module.exports = function(grunt) {
         mochaTest: {
             test: {
                 options: {
-                    // reporter: 'progress'
-                    // reporter: 'list'
                     reporter: 'spec'
                 },
                 src: ['test/**/*.js', 'ext/**/test/*.js']
@@ -60,45 +45,16 @@ module.exports = function(grunt) {
             }
         },
 
-        clean: {
-            dist: {
-                src: ['dist']
-            }
-        },
-
-        copy: {
-            dist: {
-                files: [
-                    {expand: true, src: ['docs/*'], dest: 'dist/docs'},
-                    {expand: true, src: ['ramda.js', 'package.json', 'bower.json', 'LICENSE.txt', 'README.md'], dest: 'dist'}
-                ]
-            }
-        },
-
-        push: {
-            options: {
-                files: ['package.json', 'bower.json', 'ramda.js'],
-                add: false,
-                commit: false,
-                createTag: false,
-                push: false
-            }
-        },
-
         'saucelabs-mocha': sauceConf,
 
         connect: sauceSrv
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-push-release');
     grunt.loadNpmTasks('grunt-benchmark');
     grunt.loadNpmTasks('grunt-saucelabs');
 
@@ -139,12 +95,8 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
-    grunt.registerTask('dist', ['uglify', 'copy:dist']);
-    grunt.registerTask('min', ['jshint', 'mochaTest:test', 'uglify']);
-    grunt.registerTask('publish', ['push', 'version']);
     grunt.registerTask('sauce', (function() {
         return (typeof process.env.SAUCE_ACCESS_KEY === 'undefined') ? [] : ['connect', 'saucelabs-mocha'];
     }()));
     grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
-    grunt.registerTask('version', ['clean:dist', 'jshint', 'uglify', 'copy:dist']);
 };

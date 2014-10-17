@@ -1,0 +1,15 @@
+/bench/
+/docs/
+/sauce/
+/scripts/
+**/test/
+/.editorconfig
+/.npmignore
+/.travis.yml
+/.jscsrc
+/.jshintrc
+/Gruntfile.js
+/Makefile
+/bower.json
+/npm-debug.log
+/testem.json
