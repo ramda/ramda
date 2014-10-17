@@ -445,3 +445,92 @@ describe('mixin', function() {
         assert.deepEqual(curried(b), {w: 1, x: 2, y: 3, z: 4});
     });
 });
+
+describe('setProp', function() {
+    it('makes a shallow clone of an object, overriding only the specified property', function() {
+        var obj1 = {
+            a: 1,
+            b: {
+                c: 2,
+                d: 3
+            },
+            e: 4,
+            f: 5
+        };
+        var obj2 = R.setProp('e', {x: 42}, obj1);
+        assert.deepEqual(obj2, {
+            a: 1,
+            b: {
+                c: 2,
+                d: 3
+            },
+            e: {
+                x: 42
+            },
+            f: 5
+        });
+        // Note: reference equality below!
+        assert.equal(obj2.a, obj1.a);
+        assert.equal(obj2.b, obj1.b);
+        assert.equal(obj2.f, obj1.f);
+    });
+});
+
+describe('setPath', function() {
+    it('makes a shallow clone of an object, overriding only what is necessary for the path', function() {
+        var obj1 = {
+            a: {
+                b: 1,
+                c: 2,
+                d: {
+                    e: 3
+                }
+            },
+            f: {
+                g: {
+                    h: 4,
+                    i: 5,
+                    j: {
+                        k: 6,
+                        l: 7
+                    }
+                }
+            },
+            m: 8
+        };
+        var obj2 = R.setPath('f.g.i', {x: 42}, obj1);
+        assert.deepEqual(obj2, {
+            a: {
+                b: 1,
+                c: 2,
+                d: {
+                    e: 3
+                }
+            },
+            f: {
+                g: {
+                    h: 4,
+                    i: {
+                        x: 42
+                    },
+                    j: {
+                        k: 6,
+                        l: 7
+                    }
+                }
+            },
+            m: 8
+        });
+        // Note: reference equality below!
+        assert.equal(obj2.a, obj1.a);
+        assert.equal(obj2.m, obj1.m);
+        assert.equal(obj2.f.g.h, obj1.f.g.h);
+        assert.equal(obj2.f.g.j, obj1.f.g.j);
+    });
+});
+
+
+        var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
+        var obj2 = R.setPath('f.g.i', {x: 42}, obj1);
+        assert.deepEqual(obj2, {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4,
+                        i: {x: 42}, j: {k: 6, l: 7}}}, m: 8});

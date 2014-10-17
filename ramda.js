@@ -2932,7 +2932,7 @@
      *
      *      R.fromPairs([['a', 1], ['b', 2],  ['c', 3]]); //=> {a: 1, b: 2, c: 3}
      */
-    R.fromPairs = function _fromPairs(pairs) {
+    var fromPairs = R.fromPairs = function _fromPairs(pairs) {
         var idx = -1, len = pairs.length, out = {};
         while (++idx < len) {
             if (isArray(pairs[idx]) && pairs[idx].length) {
@@ -2961,7 +2961,7 @@
      *      );
      *      matchPhrases(['foo', 'bar', 'baz']); //=> {must: [{match_phrase: 'foo'}, {match_phrase: 'bar'}, {match_phrase: 'baz'}]}
      */
-    R.createMapEntry = curry2(function(key, val) {
+    var createMapEntry = R.createMapEntry = curry2(function(key, val) {
         var obj = {};
         obj[key] = val;
         return obj;
@@ -4101,6 +4101,73 @@
     };
 
 
+    /**
+     * Makes a shallow clone of an object, overriding the specified property
+     * with the given value.  Note that this copies and flattens prototype
+     * properties onto the new object as well.  All non-primitive properties
+     * are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig String -> a -> {k: v} -> {k -> v}
+     * @param {String} prop the property name to set
+     * @param {*} val the new value
+     * @param {Object} obj the object to clone
+     * @return {Object} a new object similar to the original except for the specified property
+     * @example
+     *
+     *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
+     *      var obj2 = R.setPath('f.g.i', {x: 42}, obj1);
+     *      //=>  {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8};
+     *
+     *      // And moreover, obj2.a is a reference to obj1.a, similarly with obj2.f.g.j;
+     *      // No unnecessary objects are created.
+     */
+    var setProp = R.setProp = curry3(function(prop, val, obj) {
+        // rather than `clone` to get prototype props too, even though they're flattened
+        return extend(fromPairs(keysIn(obj).map(function(key) {
+            return [key, obj[key]]
+        })), createMapEntry(prop, val));
+    });
+
+
+    /**
+     * Makes a shallow clone of an object, overriding the nodes required to
+     * create the given path, and placing the specifiec value at the tail end
+     * of that path.  Note that this copies and flattens prototype
+     * properties onto the new object as well.  All non-primitive properties
+     * are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig String -> a -> {k: v} -> {k -> v}
+     * @param {String} path the dot-delimited path to set
+     * @param {*} val the new value
+     * @param {Object} obj the object to clone
+     * @return {Object} a new object similar to the original except along the specified path
+     * @example
+     *
+     *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g:
+     *                {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
+     *      var obj2 = R.setPath('f.g.i', {x: 42}, obj1);
+     *      //=> obj2, {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4,
+     *                  i: {x: 42}, j: {k: 6, l: 7}}}, m: 8});
+     */
+    R.setPath = (function() {
+        var setParts = function(parts, val, obj) {
+            // TODO: empty path
+            if (parts.length === 1) {return setProp(parts[0], val, obj);}
+            var current = obj[parts[0]];
+            return setProp(parts[0], setParts(_slice(parts, 1), val, is(Object, current) ? current : {}), obj);
+        };
+        return curry3(function(path, val, obj) {
+            var parts = split(".", path);
+            return setParts(parts, val, obj);
+        });
+    }());
+
 
     // Miscellaneous Functions
     // -----------------------
@@ -4154,7 +4221,7 @@
      *      R.is(Object, 's'); //=> false
      *      R.is(Number, {}); //=> false
      */
-    R.is = curry2(function is(Ctor, val) {
+    var is = R.is = curry2(function is(Ctor, val) {
         return val != null && val.constructor === Ctor || val instanceof Ctor;
     });
 
@@ -5050,7 +5117,7 @@
      *
      *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
      */
-    R.split = invokerN(1, String.prototype.split);
+    var split = R.split = invokerN(1, String.prototype.split);
 
 
     /**
