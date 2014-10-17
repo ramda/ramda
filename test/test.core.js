@@ -136,7 +136,6 @@ describe('size', function() {
     });
 
     it('should be aliased by `length`', function() {
-        assert.equal(R.length([2, 4, 6, 8, 10]), 5);
         assert.strictEqual(R.length, R.size);
     });
 

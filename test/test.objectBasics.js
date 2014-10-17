@@ -11,7 +11,6 @@ describe('prop', function() {
     });
 
     it('is aliased by `get`', function() { // TODO: should it?
-        assert.equal(R.get('age')(fred), 23);
         assert.strictEqual(R.get, R.prop);
     });
 

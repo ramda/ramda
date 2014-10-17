@@ -25,7 +25,6 @@ describe('foldl', function() {
     });
 
     it('should be aliased by `reduce`', function() {
-        assert.equal(R.reduce(add, 0, [1, 2, 3, 4]), 10);
         assert.strictEqual(R.reduce, R.foldl);
     });
 
@@ -63,7 +62,6 @@ describe('foldr', function() {
     });
 
     it('should be aliased by `reduceRight`', function() {
-        assert.equal(R.reduceRight(avg, 54, [12, 4, 10, 6]), 12);
         assert.strictEqual(R.reduceRight, R.foldr);
     });
 
