@@ -4727,7 +4727,7 @@
         var idx = 0, winner = list[idx];
         while (++idx < list.length) {
             if (list[idx] > winner) {
-                winner = list[idx];
+                winner = +list[idx];
             }
         }
         return winner;
