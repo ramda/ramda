@@ -288,6 +288,21 @@ describe('max', function() {
         assert.equal(R.max([-6, -2, -4.3, -1.1, -5]), -1.1);
         assert.equal(R.max([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 52);
     });
+
+    it('finds max in any position', function() {
+        assert.equal(R.max([6, 2, 1, 3]), 6);
+        assert.equal(R.max([3, 6, 2, 1]), 6);
+        assert.equal(R.max([3, 1, 6, 2]), 6);
+        assert.equal(R.max([3, 1, 2, 6]), 6);
+    });
+
+    it('returns -Infinity for an empty list', function() {
+        assert.equal(R.max([]), -Infinity);
+    });
+
+    it('returns a number', function() {
+        assert.equal(R.max(['4', '1', '100', '10', '2']), 100);
+    });
 });
 
 describe('min', function() {
@@ -299,6 +314,21 @@ describe('min', function() {
     it('accepts negative numbers, decimals, and even strings', function() {
         assert.equal(R.min([-6, -2, -4.3, -1.1, -5]), -6);
         assert.equal(R.min([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 1);
+    });
+
+    it('finds min in any position', function() {
+        assert.equal(R.min([0, 2, 1, 3]), 0);
+        assert.equal(R.min([3, 0, 2, 1]), 0);
+        assert.equal(R.min([3, 1, 0, 2]), 0);
+        assert.equal(R.min([3, 1, 2, 0]), 0);
+    });
+
+    it('returns Infinity for an empty list', function() {
+        assert.equal(R.min([]), Infinity);
+    });
+
+    it('returns a number', function() {
+        assert.equal(R.min(['4', '1', '100', '10', '2']), 1);
     });
 });
 

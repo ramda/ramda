@@ -4720,13 +4720,12 @@
      *      R.max([7, 3, 9, 2, 4, 9, 3]); //=> 9
      */
     var max = R.max = function _max(list) {
-        // return foldl(binary(Math.max), -Infinity, list);
         if (arguments.length === 0) {
             throw noArgsException();
         }
-        var idx = 0, winner = list[idx];
+        var idx = -1, winner = -Infinity;
         while (++idx < list.length) {
-            if (list[idx] > winner) {
+            if (+list[idx] > winner) {
                 winner = +list[idx];
             }
         }
@@ -4782,7 +4781,16 @@
      *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
      */
     R.min = function _min(list) {
-        return foldl(binary(Math.min), Infinity, list);
+        if (arguments.length === 0) {
+            throw noArgsException();
+        }
+        var idx = -1, winner = Infinity;
+        while (++idx < list.length) {
+            if (+list[idx] < winner) {
+                winner = +list[idx];
+            }
+        }
+        return winner;
     };
 
 
