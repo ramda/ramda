@@ -5261,7 +5261,15 @@
      *      R.difference([7,6,5,4,3], [1,2,3,4]); //=> [7,6,5]
      */
     R.difference = curry2(function _difference(first, second) {
-        return uniq(reject(flip(contains)(second), first));
+        var out = [];
+        var idx = -1;
+        var firstLen = first.length;
+        while (++idx < firstLen) {
+            if (indexOf(second, first[idx]) === -1 && indexOf(out, first[idx]) === -1) {
+                out.push(first[idx]);
+            }
+        }
+        return out;
     });
 
 
