@@ -503,7 +503,7 @@
      *      // Only 2 arguments are passed to the wrapped function
      *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
      */
-    var binary = R.binary = function _binary(fn) {
+    R.binary = function _binary(fn) {
         return nAry(2, fn);
     };
 
