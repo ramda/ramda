@@ -3485,7 +3485,7 @@
      *      favorite(alice);  //=> undefined
      *      favoriteWithDefault(alice);  //=> 'Ramda'
      */
-    R.propOr = curry3(function _propOrDefault(p, val, obj) {
+    R.propOr = curry3(function _propOr(p, val, obj) {
         return hasOwnProperty.call(obj, p) ? obj[p] : val;
     });
 
@@ -4720,7 +4720,17 @@
      *      R.max([7, 3, 9, 2, 4, 9, 3]); //=> 9
      */
     var max = R.max = function _max(list) {
-        return foldl(binary(Math.max), -Infinity, list);
+        // return foldl(binary(Math.max), -Infinity, list);
+        if (arguments.length === 0) {
+            throw noArgsException();
+        }
+        var idx = 0, winner = list[idx];
+        while (++idx < list.length) {
+            if (list[idx] > winner) {
+                winner = list[idx];
+            }
+        }
+        return winner;
     };
 
 
@@ -5296,7 +5306,16 @@
      *
      */
     R.differenceWith = curry3(function differenceWith(pred, first, second) {
-        return uniqWith(pred)(reject(flip(R.containsWith(pred))(second), first));
+        var out = [];
+        var idx = -1;
+        var firstLen = first.length;
+        var containsPred = R.containsWith(pred);
+        while (++idx < firstLen) {
+            if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
+                out.push(first[idx]);
+            }
+        }
+        return out;
     });
 
 
