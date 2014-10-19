@@ -4631,7 +4631,8 @@
      *      R.lt(5)(10); //=> true
      *      R.lt(__, 5)(10); //=> false // right-sectioned currying
      */
-    R.lt = op(function _lt(a, b) { return a < b; });
+    function lt(a, b) { return a < b; }
+    R.lt = op(lt);
 
 
     /**
@@ -4679,7 +4680,8 @@
      *      R.gt(2)(10); //=> false
      *      R.lte(__)(4, 5) // => true
      */
-    R.gt = op(function _gt(a, b) { return a > b; });
+    function gt(a, b) { return a > b; }
+    R.gt = op(gt);
 
 
     /**
@@ -4705,6 +4707,22 @@
     R.gte = op(function _gte(a, b) { return a >= b; });
 
 
+    function createMaxMin(comparator, initialVal) {
+        return function(list) {
+            if (arguments.length === 0) {
+                throw noArgsException();
+            }
+            var idx = -1, winner = initialVal, computed;
+            while (++idx < list.length) {
+                computed = +list[idx];
+                if (comparator(computed, winner)) {
+                    winner = computed;
+                }
+            }
+            return winner;
+        };
+    }
+
     /**
      * Determines the largest of a list of numbers (or elements that can be cast to numbers)
      *
@@ -4719,18 +4737,7 @@
      *
      *      R.max([7, 3, 9, 2, 4, 9, 3]); //=> 9
      */
-    var max = R.max = function _max(list) {
-        if (arguments.length === 0) {
-            throw noArgsException();
-        }
-        var idx = -1, winner = -Infinity;
-        while (++idx < list.length) {
-            if (+list[idx] > winner) {
-                winner = +list[idx];
-            }
-        }
-        return winner;
-    };
+    var max = R.max = createMaxMin(gt, -Infinity);
 
 
     /**
@@ -4780,18 +4787,7 @@
      *
      *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
      */
-    R.min = function _min(list) {
-        if (arguments.length === 0) {
-            throw noArgsException();
-        }
-        var idx = -1, winner = Infinity;
-        while (++idx < list.length) {
-            if (+list[idx] < winner) {
-                winner = +list[idx];
-            }
-        }
-        return winner;
-    };
+    R.min = createMaxMin(lt, Infinity);
 
 
     /**
