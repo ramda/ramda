@@ -15,6 +15,11 @@
       "name": "David Chambers",
       "email": "dc@davidchambers.me",
       "web": "http://davidchambers.me"
+    },
+    {
+      "name": "Graeme Yeates",
+      "email": "yeatesgraeme@gmail.com",
+      "web": "https://github.com/megawac"
     }
   ],
   "name": "ramda",
