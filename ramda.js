@@ -4723,6 +4723,26 @@
         };
     }
 
+    function createMaxMinWith(comparator) {
+        return function _maxWith(keyFn, list) {
+            if (!(list && list.length > 0)) {
+                return;
+            }
+            var idx = 0,
+                winner = list[idx],
+                computedWinner = keyFn(winner),
+                computedCurrent;
+            while (++idx < list.length) {
+                computedCurrent = keyFn(list[idx]);
+                if (comparator(computedCurrent, computedWinner)) {
+                    computedWinner = computedCurrent;
+                    winner = list[idx];
+                }
+            }
+            return winner;
+        };
+    }
+
     /**
      * Determines the largest of a list of numbers (or elements that can be cast to numbers)
      *
@@ -4757,20 +4777,7 @@
      *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
      *      R.maxWith(cmp, [a, b, c]); //=> {x: 3}
      */
-    R.maxWith = curry2(function _maxWith(keyFn, list) {
-        if (!(list && list.length > 0)) {
-            return;
-        }
-        var idx = 0, winner = list[idx], max = keyFn(winner), testKey;
-        while (++idx < list.length) {
-            testKey = keyFn(list[idx]);
-            if (testKey > max) {
-                max = testKey;
-                winner = list[idx];
-            }
-        }
-        return winner;
-    });
+    R.maxWith = curry2(createMaxMinWith(gt));
 
 
     /**
@@ -4808,20 +4815,7 @@
      *      R.minWith(cmp, [a, b, c]); //=> {x: 1}
      */
     // TODO: combine this with maxWith?
-    R.minWith = curry2(function _minWith(keyFn, list) {
-        if (!(list && list.length > 0)) {
-            return;
-        }
-        var idx = 0, winner = list[idx], min = keyFn(list[idx]), testKey;
-        while (++idx < list.length) {
-            testKey = keyFn(list[idx]);
-            if (testKey < min) {
-                min = testKey;
-                winner = list[idx];
-            }
-        }
-        return winner;
-    });
+    R.minWith = curry2(createMaxMinWith(lt));
 
 
 
