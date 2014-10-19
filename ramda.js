@@ -4707,6 +4707,17 @@
     R.gte = op(function _gte(a, b) { return a >= b; });
 
 
+    /**
+     * Create a function which takes a a list
+     * and determines the winning value by a compatator. Used internally
+     * by `R.max` and `R.min`
+     *
+     * @private
+     * @param {Function} compatator a function to compare two items
+     * @param {*} intialVal, default value if nothing else wins
+     * @category math
+     * @return {Function}
+     */
     function createMaxMin(comparator, initialVal) {
         return function(list) {
             if (arguments.length === 0) {
@@ -4723,6 +4734,16 @@
         };
     }
 
+    /**
+     * Create a function which takes a comparator function and a list
+     * and determines the winning value by a compatator. Used internally
+     * by `R.maxWith` and `R.minWith`
+     *
+     * @private
+     * @param {Function} compatator a function to compare two items
+     * @category math
+     * @return {Function}
+     */
     function createMaxMinWith(comparator) {
         return function(valueComputer, list) {
             if (!(list && list.length > 0)) {
