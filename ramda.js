@@ -4724,16 +4724,16 @@
     }
 
     function createMaxMinWith(comparator) {
-        return function _maxWith(keyFn, list) {
+        return function(valueComputer, list) {
             if (!(list && list.length > 0)) {
                 return;
             }
             var idx = 0,
                 winner = list[idx],
-                computedWinner = keyFn(winner),
+                computedWinner = valueComputer(winner),
                 computedCurrent;
             while (++idx < list.length) {
-                computedCurrent = keyFn(list[idx]);
+                computedCurrent = valueComputer(list[idx]);
                 if (comparator(computedCurrent, computedWinner)) {
                     computedWinner = computedCurrent;
                     winner = list[idx];
@@ -4814,7 +4814,6 @@
      *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
      *      R.minWith(cmp, [a, b, c]); //=> {x: 1}
      */
-    // TODO: combine this with maxWith?
     R.minWith = curry2(createMaxMinWith(lt));
 
 
