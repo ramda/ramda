@@ -3360,18 +3360,18 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig a -> (a -> *) -> a
-     * @param {*} x
+     * @sig (a -> *) -> a -> a
      * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
+     * @param {*} x
      * @return {*} x
      * @example
      *
      *      var sayX = function(x) { console.log('x is ' + x); };
-     *      R.tap(100, sayX); //=> 100
+     *      R.tap(sayX, 100); //=> 100
      *      //-> 'x is 100')
      */
-    R.tap = curry2(function _tap(x, fn) {
-        if (typeof fn === 'function') { fn(x); }
+    R.tap = curry2(function _tap(fn, x) {
+        fn(x);
         return x;
     });
 
