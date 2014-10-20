@@ -2,28 +2,20 @@ var assert = require('assert');
 var R = require('..');
 
 describe('tap', function() {
-    it("returns a function that returns tap's argument", function() {
-        var f = R.tap(100);
+    it('returns a function that always returns its argument', function() {
+        var f = R.tap(R.I);
         assert.equal(typeof f, 'function');
-        assert.equal(f(null), 100);
+        assert.equal(f(100), 100);
     });
 
-    it("may take a function for a second argument that executes with tap's argument", function() {
+    it("may take a function as the first argument that executes with tap's argument", function() {
         var sideEffect = 0;
         assert.equal(sideEffect, 0);
-        var rv = R.tap(200, function(x) { sideEffect = 'string ' + x; });
+        var rv = R.tap(function(x) { sideEffect = 'string ' + x; }, 200);
         assert.equal(rv, 200);
         assert.equal(sideEffect, 'string 200');
     });
 
-    it("ignores the scond argument if it's not a function", function() {
-        assert(R.tap(300, 400), 300);
-        assert(R.tap(300, [400]), 300);
-        assert(R.tap(300, {x: 400}), 300);
-        assert(R.tap(300, '400'), 300);
-        assert(R.tap(300, false), 300);
-        assert(R.tap(300, null), 300);
-    });
 });
 
 describe('eq', function() {
