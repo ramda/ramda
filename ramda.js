@@ -1075,6 +1075,29 @@
     // --------
 
     /**
+     * Applies function `fn` to the argument list `args`. This is useful for
+     * creating a fixed-arity function from a variadic function. `fn` should
+     * be a bound function if context is significant.
+     *
+     * @func
+     * @memberOf R
+     * @category core
+     * @category Function
+     * @sig (*... -> a) -> [*] -> a
+     * @param {Function} fn
+     * @param {Array} args
+     * @return {*}
+     * @example
+     *
+     *      var nums = [1, 2, 3, -99, 42, 6, 7];
+     *      R.apply(Math.max, nums); //=> 42
+     */
+    R.apply = curry2(function _apply(fn, args) {
+        return fn.apply(this, args);
+    });
+
+
+    /**
      * Basic, right-associative composition function. Accepts two functions and returns the
      * composite function; this composite function represents the operation `var h = f(g(x))`,
      * where `f` is the first argument, `g` is the second argument, and `x` is whatever
