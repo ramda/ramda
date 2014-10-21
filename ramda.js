@@ -5111,7 +5111,7 @@
      *
      * @private
      * @memberOf R
-     * @category string
+     * @category object
      * @param {Array} paths An array of strings to map to object properties
      * @param {Object} obj The object to find the path in
      * @return {Array} The value at the end of the path or `undefined`.
@@ -5136,7 +5136,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category object
      * @sig String -> String -> {*} -> *
      * @param {string} sep The separator to use in `path`.
      * @param {string} path The path to use.
@@ -5155,7 +5155,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category object
      * @sig String -> {*} -> *
      * @param {string} path The dot path to use.
      * @return {*} The data at `path`.
