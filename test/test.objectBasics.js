@@ -10,10 +10,6 @@ describe('prop', function() {
         assert.equal(nm(fred), 'Fred');
     });
 
-    it('is aliased by `get`', function() { // TODO: should it?
-        assert.strictEqual(R.get, R.prop);
-    });
-
     it('throws when called with no arguments', function() {
         assert.throws(R.prop, TypeError);
     });

@@ -3473,14 +3473,6 @@
         return obj[p];
     };
 
-    /**
-     * @func
-     * @memberOf R
-     * @category Object
-     * @see R.prop
-     */
-    R.get = R.prop;
-
 
     /**
      * Returns the value at the specified property.
