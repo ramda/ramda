@@ -26,6 +26,5 @@
   "requireSpacesInConditionalExpression": true,
   "requireSpacesInFunction": {"beforeOpeningCurlyBrace": true},
   "validateIndentation": 4,
-  "validateLineBreaks": "LF",
   "validateQuoteMarks": {"escape": true, "mark": "'"}
 }
