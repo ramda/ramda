@@ -5,18 +5,18 @@ describe('foldl', function() {
     var add = function(a, b) {return a + b;};
     var mult = function(a, b) {return a * b;};
 
-    it('should fold simple functions over arrays with the supplied accumulator', function() {
+    it('folds simple functions over arrays with the supplied accumulator', function() {
         assert.equal(R.foldl(add, 0, [1, 2, 3, 4]), 10);
         assert.equal(R.foldl(mult, 1, [1, 2, 3, 4]), 24);
     });
 
-    it('should return the accumulator for an empty array', function() {
+    it('returns the accumulator for an empty array', function() {
         assert.equal(R.foldl(add, 0, []), 0);
         assert.equal(R.foldl(mult, 1, []), 1);
         assert.deepEqual(R.foldl(R.concat, [], []), []);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var addOrConcat = R.foldl(add);
         var sum = addOrConcat(0);
         var cat = addOrConcat('');
@@ -24,11 +24,11 @@ describe('foldl', function() {
         assert.equal(cat(['1', '2', '3', '4']), '1234');
     });
 
-    it('should be aliased by `reduce`', function() {
+    it('is aliased by `reduce`', function() {
         assert.strictEqual(R.reduce, R.foldl);
     });
 
-    it('should correctly report the arity of curried versions', function() {
+    it('correctly reports the arity of curried versions', function() {
         var sum = R.foldl(add, 0);
         assert.equal(sum.length, 1);
     });
@@ -42,30 +42,30 @@ describe('foldl', function() {
 describe('foldr', function() {
     var avg = function(a, b) {return (a + b) / 2;};
 
-    it('should fold lists in the right order', function() {
+    it('folds lists in the right order', function() {
         assert.equal(R.foldr(function(a, b) {return a + b;}, '', ['a', 'b', 'c', 'd']), 'dcba');
     });
 
-    it('should fold simple functions over arrays with the supplied accumulator', function() {
+    it('folds simple functions over arrays with the supplied accumulator', function() {
         assert.equal(R.foldr(avg, 54, [12, 4, 10, 6]), 12);
     });
 
-    it('should return the accumulator for an empty array', function() {
+    it('returns the accumulator for an empty array', function() {
         assert.equal(R.foldr(avg, 0, []), 0);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var something = R.foldr(avg, 54);
         var rcat = R.foldr(R.add, '');
         assert.equal(something([12, 4, 10, 6]), 12);
         assert.equal(rcat(['1', '2', '3', '4']), '4321');
     });
 
-    it('should be aliased by `reduceRight`', function() {
+    it('is aliased by `reduceRight`', function() {
         assert.strictEqual(R.reduceRight, R.foldr);
     });
 
-    it('should correctly report the arity of curried versions', function() {
+    it('correctly reports the arity of curried versions', function() {
         var something = R.foldr(avg, 0);
         assert.equal(something.length, 1);
     });
@@ -85,7 +85,7 @@ describe('foldl.idx', function() {
         assert.equal(R.foldl.idx(R.multiply, 1, [1, 2, 3, 4]), 24);
     });
 
-    it('should be aliased by `reduceRight`', function() {
+    it('is aliased by `reduceRight`', function() {
         assert.strictEqual(R.reduceRight, R.foldr);
     });
 
@@ -102,7 +102,7 @@ describe('foldl.idx', function() {
         }, 0, list);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var addOrConcat = R.foldl.idx(R.add);
         var sum = addOrConcat(0);
         var cat = addOrConcat('');
@@ -133,16 +133,16 @@ describe('foldr.idx', function() {
         assert.equal(R.foldr.idx(function(a, n, idx) { return a.concat(idx); }, memo, []), memo);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var something = R.foldr.idx(function(acc, b, idx) { return acc += idx + b; }, 54);
         assert.equal(something([12, 4, 10, 6]), 92);
     });
 
-    it('should be aliased by `reduceRight.idx`', function() {
+    it('is aliased by `reduceRight.idx`', function() {
         assert.strictEqual(R.reduceRight.idx, R.foldr.idx);
     });
 
-    it('should correctly report the arity of curried versions', function() {
+    it('correctly reports the arity of curried versions', function() {
         var something = R.foldr.idx(function(acc, b, idx) { return acc += idx + b; }, 0);
         assert.equal(something.length, 1);
     });
@@ -160,7 +160,7 @@ describe('foldr.idx', function() {
         }, 0, list);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var addOrConcat = R.foldr.idx(R.add);
         var sum = addOrConcat(0);
         var cat = addOrConcat('');

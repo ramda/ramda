@@ -21,7 +21,7 @@ describe('filter', function() {
         assert.equal(R.filter(function(s) { return s; }, f), 'called f.filter');
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var onlyEven = R.filter(even);
         assert.deepEqual(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
     });
@@ -56,7 +56,7 @@ describe('filter.idx', function() {
         assert.deepEqual(R.filter.idx(function(x) { return x > 100; }, []), []);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var everyOtherPosition = R.filter.idx(everyOther);
         assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [8, 7, 3, 9]);
     });
@@ -89,7 +89,7 @@ describe('reject', function() {
         assert.deepEqual(R.reject(function(x) { return x > 100; }, []), []);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var odd = R.reject(even);
         assert.deepEqual(odd([1, 2, 3, 4, 5, 6, 7]), [1, 3, 5, 7]);
     });
@@ -124,7 +124,7 @@ describe('reject.idx', function() {
         assert.deepEqual(R.reject.idx(function(x) { return x > 100; }, []), []);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var everyOtherPosition = R.reject.idx(everyOther);
         assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [6, 5, 0]);
     });
@@ -135,7 +135,7 @@ describe('reject.idx', function() {
 });
 
 describe('take', function() {
-    it('should take only the first `n` elements from a list', function() {
+    it('takes only the first `n` elements from a list', function() {
         assert.deepEqual(R.take(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
     });
 
@@ -144,7 +144,7 @@ describe('take', function() {
         assert.deepEqual(R.take(3, []), []);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var take3 = R.take(3);
         assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
         assert.deepEqual(take3(['w', 'x', 'y', 'z']), ['w', 'x', 'y']);
@@ -156,16 +156,16 @@ describe('take', function() {
 });
 
 describe('takeWhile', function() {
-    it('should continue taking elements while the function reports `true`', function() {
+    it('continues taking elements while the function reports `true`', function() {
         assert.deepEqual(R.takeWhile(function(x) {return x != 5;}, [1, 3, 5, 7, 9]), [1, 3]);
     });
 
-    it('should start at the right arg and acknowledges undefined', function() {
+    it('starts at the right arg and acknowledges undefined', function() {
         assert.deepEqual(R.takeWhile(function() { assert.ok(false); }, []), []);
         assert.deepEqual(R.takeWhile(function(x) {return x !== void 0;}, [1, 3, void 0, 5, 7]), [1, 3]);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var takeUntil7 = R.takeWhile(function(x) {return x != 7;});
         assert.deepEqual(takeUntil7([1, 3, 5, 7, 9]), [1, 3, 5]);
         assert.deepEqual(takeUntil7([2, 4, 6, 8, 10]), [2, 4, 6, 8, 10]);
@@ -173,15 +173,15 @@ describe('takeWhile', function() {
 });
 
 describe('skip', function() {
-    it('should skip the first `n` elements from a list, returning the remainder', function() {
+    it('skips the first `n` elements from a list, returning the remainder', function() {
         assert.deepEqual(R.skip(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g']);
     });
 
-    it('should return an empty array if `n` is too large', function() {
+    it('returns an empty array if `n` is too large', function() {
         assert.deepEqual(R.skip(20, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), []);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var skip2 = R.skip(2);
         assert.deepEqual(skip2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
         assert.deepEqual(skip2(['x', 'y', 'z']), ['z']);
@@ -189,7 +189,7 @@ describe('skip', function() {
 });
 
 describe('skipUntil', function() {
-    it('should continue taking elements while the function reports `true`', function() {
+    it('continues taking elements while the function reports `true`', function() {
         assert.deepEqual(R.skipUntil(function(x) {return x === 5;}, [1, 3, 5, 7, 9]), [5, 7, 9]);
     });
 
@@ -206,7 +206,7 @@ describe('skipUntil', function() {
         assert.equal(sublist[2], 7);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var skipUntil7 = R.skipUntil(function(x) {return x === 7;});
         assert.deepEqual(skipUntil7([1, 3, 5, 7, 9]), [7, 9]);
         assert.deepEqual(skipUntil7([2, 4, 6, 8, 10]), []);

@@ -12,10 +12,10 @@ describe('indexOf', function() {
     });
 
     var input = [1, 2, 3, 4, 5];
-    it('should return the index of the first item', function() {
+    it('returns the index of the first item', function() {
         assert.equal(R.indexOf(1, input), 0);
     });
-    it('should return the index of the last item', function() {
+    it('returns the index of the last item', function() {
         assert.equal(R.indexOf(5, input), 4);
     });
 
@@ -39,7 +39,7 @@ describe('indexOf', function() {
         assert.equal(R.indexOf('x', []), -1);
     });
 
-    it('should be curried', function() {
+    it('is curried', function() {
         var curried = R.indexOf(3);
         assert.equal(curried(list), 2);
     });
@@ -77,7 +77,7 @@ describe('indexOf.from', function() {
         assert.equal(R.indexOf.from('x', -3, []), -1);
     });
 
-    it('should be curried', function() {
+    it('is curried', function() {
         var curried = R.indexOf.from(3);
         assert.equal(curried(0)(list), 2);
         assert.equal(curried(0, list), 2);
@@ -95,10 +95,10 @@ describe('lastIndexOf', function() {
     });
 
     var input = [1, 2, 3, 4, 5, 1];
-    it('should return the last index of the first item', function() {
+    it('returns the last index of the first item', function() {
         assert.equal(R.lastIndexOf(1, input), 5);
     });
-    it('should return the index of the last item', function() {
+    it('returns the index of the last item', function() {
         assert.equal(R.lastIndexOf(5, input), 4);
     });
 
@@ -146,7 +146,7 @@ describe('lastIndexOf', function() {
         assert.equal(R.lastIndexOf('x', -5, []), -1);
     });
 
-    it('should be curried', function() {
+    it('is curried', function() {
         var curried = R.lastIndexOf('a');
         assert.equal(curried(list), 2);
     });
@@ -187,7 +187,7 @@ describe('lastIndexOf.from', function() {
         assert.equal(R.lastIndexOf.from('x', 2, []), -1);
         assert.equal(R.lastIndexOf.from('x', -5, []), -1);
     });
-    it('should be curried', function() {
+    it('is curried', function() {
         var curried = R.lastIndexOf.from('a');
         assert.equal(curried(3)(list), 2);
         assert.equal(curried(3, list), 2);

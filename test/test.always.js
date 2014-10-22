@@ -2,14 +2,14 @@ var assert = require('assert');
 var R = require('..');
 
 describe('always', function() {
-    it('should return a function that returns the object initially supplied', function() {
+    it('returns a function that returns the object initially supplied', function() {
         var theMeaning = R.always(42);
         assert.equal(theMeaning(), 42);
         assert.equal(theMeaning(10), 42);
         assert.equal(theMeaning(false), 42);
     });
 
-    it('should work with various types', function() {
+    it('works with various types', function() {
         assert.equal(R.always(false)(), false);
         assert.equal(R.always('abc')(), 'abc');
         assert.deepEqual(R.always({a: 1, b: 2})(), {a: 1, b: 2});
@@ -22,7 +22,7 @@ describe('always', function() {
 });
 
 describe ('alwaysZero', function() {
-    it('should always return zero', function() {
+    it('always returns zero', function() {
         assert.equal(R.alwaysZero(), 0);
         assert.equal(R.alwaysZero(10), 0);
         assert.equal(R.alwaysZero(false), 0);
@@ -30,7 +30,7 @@ describe ('alwaysZero', function() {
 });
 
 describe ('alwaysFalse', function() {
-    it('should always return false', function() {
+    it('always returns false', function() {
         assert.equal(R.alwaysFalse(), false);
         assert.equal(R.alwaysFalse(10), false);
         assert.equal(R.alwaysFalse(true), false);
@@ -38,7 +38,7 @@ describe ('alwaysFalse', function() {
 });
 
 describe ('alwaysTrue', function() {
-    it('should always return true', function() {
+    it('always returns true', function() {
         assert.equal(R.alwaysTrue(), true);
         assert.equal(R.alwaysTrue(10), true);
         assert.equal(R.alwaysTrue(true), true);

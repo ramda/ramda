@@ -17,7 +17,7 @@ describe('every', function() {
         assert.equal(R.every(T, []), true);
     });
 
-    it('should short-circuit on first false value', function() {
+    it('short-circuits on first false value', function() {
         var count = 0;
         var test = function(n) {count++; return even(n);};
         var result = R.every(test, [2, 4, 6, 7, 8, 10]);
@@ -75,7 +75,7 @@ describe('some', function() {
         assert.equal(R.some(T, []), false);
     });
 
-    it('should short-circuit on first true value', function() {
+    it('short-circuits on first true value', function() {
         var count = 0;
         var test = function(n) {count++; return odd(n);};
         var result = R.some(test, [2, 4, 6, 7, 8, 10]);

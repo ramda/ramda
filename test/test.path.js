@@ -27,26 +27,26 @@ describe('path', function() {
         assert.equal(R.path('a.b.c', null), undefined);
     });
 
-    it("should get a deep property's value from objects", function() {
+    it("gets a deep property's value from objects", function() {
         assert.equal(R.path('a.b.c', deepObject), 'c');
         assert.equal(R.path('a', deepObject), deepObject.a);
     });
 
-    it('should return undefined for items not found', function() {
+    it('returns undefined for items not found', function() {
         assert.equal(R.path('a.b.foo', deepObject), undefined);
         assert.equal(R.path('bar', deepObject), undefined);
     });
 
-    it('should return undefined for null/undefined', function() {
+    it('returns undefined for null/undefined', function() {
         assert.equal(R.path('toString', null), undefined);
         assert.equal(R.path('toString', undefined), undefined);
     });
 
-    it('should work with falsy items', function() {
+    it('works with falsy items', function() {
         assert.equal(R.path('toString', false), Boolean.prototype.toString);
     });
 
-    it('should be curried', function() {
+    it('is curried', function() {
         assert.equal(R.path('arrayVal.0')(deepObject), 'arr');
     });
 });
@@ -77,7 +77,7 @@ describe('pathOn', function() {
         assert.equal(R.pathOn('Z', 'aZbZc', null), undefined);
     });
 
-    it("should get a deep property's value from objects", function() {
+    it("gets a deep property's value from objects", function() {
         assert.equal(R.pathOn('|', 'a|b|c', deepObject), 'c');
         assert.equal(R.pathOn('|', 'a', deepObject), deepObject.a);
     });
@@ -92,17 +92,17 @@ describe('pathEq', function() {
         }
     };
 
-    it('should return true if the path matches the value', function() {
+    it('returns true if the path matches the value', function() {
         assert.ok(R.pathEq('a', 1, obj));
         assert.ok(R.pathEq('b.ba', '2', obj));
     });
 
-    it('should return false for non matches', function() {
+    it('returns false for non matches', function() {
         assert.ok(!R.pathEq('a', '1', obj));
         assert.ok(!R.pathEq('b.ba', 2, obj));
     });
 
-    it('should return false for non existing values', function() {
+    it('returns false for non existing values', function() {
         assert.ok(!R.pathEq('c', 'foo', obj));
         assert.ok(!R.pathEq('c.d', 'foo', obj));
     });

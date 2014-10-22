@@ -31,7 +31,7 @@ describe('remove', function() {
         assert.deepEqual(R.remove(13, 3, list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
     });
 
-    it('should be curried', function() {
+    it('is curried', function() {
         var list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
         assert.deepEqual(R.remove(13)(3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
         assert.deepEqual(R.remove(13, 3)(list), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']);
@@ -54,7 +54,7 @@ describe('insert', function() {
         assert.deepEqual(R.insert(8, 'z', list), ['a', 'b', 'c', 'd', 'e', 'z']);
     });
 
-    it('should be curried', function() {
+    it('is curried', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(R.insert(8)('z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
         assert.deepEqual(R.insert(8, 'z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
@@ -73,7 +73,7 @@ describe('insert.all', function() {
         assert.deepEqual(R.insert.all(8, ['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
     });
 
-    it('should be curried', function() {
+    it('is curried', function() {
         var list = ['a', 'b', 'c', 'd', 'e'];
         assert.deepEqual(R.insert.all(8)(['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
     });

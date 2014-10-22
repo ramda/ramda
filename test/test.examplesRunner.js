@@ -122,7 +122,7 @@ function runExample(e) {
 }
 
 function checkForAliasExample(e) {
-    it(e.func_name + ' should have example or be an alias for function that has exmample', function() {
+    it(e.func_name + ' has example or is an alias for function that has example', function() {
         // TODO: uncomment to enforce this
       //   if (R.isEmpty(e.alias_of)) {
       //       fail('undefined', 'example source', 'function has no example and no alias');

@@ -6,23 +6,23 @@ describe('cond', function() {
     var identity = function(a) { return a; };
     var isArray = function(a) { return Object.prototype.toString.call(a) === '[object Array]'; };
 
-    it('should call the truth case function if the validator returns a truthy value', function() {
+    it('calls the truth case function if the validator returns a truthy value', function() {
         var v = function(a) { return typeof a === 'number'; };
         assert.equal(R.cond(v, t, identity)(10), 11);
     });
 
-    it('should call the false case function if the validator returns a falsey value', function() {
+    it('calls the false case function if the validator returns a falsey value', function() {
         var v = function(a) { return typeof a === 'number'; };
         assert.equal(R.cond(v, t, identity)('hello'), 'hello');
     });
 
-    it('should call the true case on array items and the false case on non array items', function() {
+    it('calls the true case on array items and the false case on non array items', function() {
         var list = [[1, 2, 3, 4, 5], 10, [0, 1], 15];
         var arrayToLength = R.map(R.cond(isArray, R.prop('length'), identity));
         assert.deepEqual(arrayToLength(list), [5, 10, 2, 15]);
     });
 
-    it('should pass the arguments to the true case function', function() {
+    it('passes the arguments to the true case function', function() {
         var v = function() { return true; };
         var onTrue = function(a, b) {
             assert.equal(a, 123);
@@ -31,7 +31,7 @@ describe('cond', function() {
         R.cond(v, onTrue, identity)(123, 'abc');
     });
 
-    it('should pass the arguments to the false case function', function() {
+    it('passes the arguments to the false case function', function() {
         var v = function() { return false; };
         var onFalse = function(a, b) {
             assert.equal(a, 123);
@@ -40,7 +40,7 @@ describe('cond', function() {
         R.cond(v, identity, onFalse)(123, 'abc');
     });
 
-    it('should return a curried function', function() {
+    it('returns a curried function', function() {
         var v = function(a) { return typeof a === 'number'; };
         var ifIsNumber = R.cond(v);
         assert.equal(ifIsNumber(t, identity)(15), 16);
