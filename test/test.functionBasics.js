@@ -18,14 +18,14 @@ describe('apply', function() {
 });
 
 describe('flip', function() {
-    it('should return a function which inverts the first two arguments to the supplied function', function() {
+    it('returns a function which inverts the first two arguments to the supplied function', function() {
         var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
         var g = R.flip(f);
         assert.equal(f('a', 'b', 'c'), 'a b c');
         assert.equal(g('a', 'b', 'c'), 'b a c');
     });
 
-    it('should return a curried function', function() {
+    it('returns a curried function', function() {
         var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
         var g = R.flip(f)('a');
         assert.equal(g('b', 'c'), 'b a c');
@@ -39,7 +39,7 @@ describe('flip', function() {
 });
 
 describe('once', function() {
-    it('should return a function that calls the supplied function only the first time called', function() {
+    it('returns a function that calls the supplied function only the first time called', function() {
         var ctr = 0;
         var fn = R.once(function() {ctr++;});
         fn();
@@ -50,13 +50,13 @@ describe('once', function() {
         assert.equal(ctr, 1);
     });
 
-    it('should pass along arguments supplied', function() {
+    it('passes along arguments supplied', function() {
         var fn = R.once(function(a, b) {return a + b;});
         var result = fn(5, 10);
         assert.equal(result, 15);
     });
 
-    it('should retain and return the first value calculated, even if different arguments are passed later', function() {
+    it('retains and returns the first value calculated, even if different arguments are passed later', function() {
         var ctr = 0;
         var fn = R.once(function(a, b) {ctr++; return a + b;});
         var result = fn(5, 10);
@@ -95,7 +95,7 @@ describe('construct', function() {
     var Rectangle = function(w, h) {this.width = w; this.height = h;};
     Rectangle.prototype.area = function() {return this.width * this.height;};
 
-    it('should turn a constructor function into one that can be called without `new`', function() {
+    it('turns a constructor function into one that can be called without `new`', function() {
         var rect = R.construct(Rectangle);
         var r1 = rect(3, 4);
         assert(r1 instanceof Rectangle);
@@ -109,7 +109,7 @@ describe('construct', function() {
         assert.equal(word.global, true);
     });
 
-    it('should return a curried function', function() {
+    it('returns a curried function', function() {
         var rect = R.construct(Rectangle);
         var rect3 = rect(3);
         var r1 = rect3(4);
@@ -134,7 +134,7 @@ describe('constructN', function() {
     };
     Circle.prototype.area = function() {return Math.PI * Math.pow(this.r, 2);};
 
-    it('should turn a constructor function into a function with n arguments', function() {
+    it('turns a constructor function into a function with n arguments', function() {
         var circle = R.constructN(2, Circle);
         var c1 = circle(1, 'red');
         assert(c1 instanceof Circle);
@@ -164,7 +164,7 @@ describe('constructN', function() {
 });
 
 describe('unary', function() {
-    it('should turn multiple-argument function into unary one', function() {
+    it('turns multiple-argument function into unary one', function() {
         R.unary(function(x, y, z) {
             assert.equal(arguments.length, 1);
             assert.equal(typeof y, 'undefined');
@@ -181,7 +181,7 @@ describe('unary', function() {
 });
 
 describe('binary', function() {
-    it('should turn multiple-argument function into binary one', function() {
+    it('turns multiple-argument function into binary one', function() {
         R.binary(function(x, y, z) {
             assert.equal(arguments.length, 2);
             assert.equal(typeof z, 'undefined');
@@ -201,20 +201,20 @@ describe('nAry', function() {
 
     function toArray(args) { return Array.prototype.slice.call(args, 0); }
 
-    it('should turn multiple-argument function into a nullary one', function() {
+    it('turns multiple-argument function into a nullary one', function() {
         var fn = R.nAry(0, function(x, y, z) { void z; return toArray(arguments); });
         assert.equal(fn.length, 0);
         assert.deepEqual(fn(1, 2, 3), []);
     });
 
-    it('should turn multiple-argument function into a ternary one', function() {
+    it('turns multiple-argument function into a ternary one', function() {
         var fn = R.nAry(3, function(a, b, c, d) { void d; return toArray(arguments); });
         assert.equal(fn.length, 3);
         assert.deepEqual(fn(1, 2, 3, 4), [1, 2, 3]);
         assert.deepEqual(fn(1), [1, undefined, undefined]);
     });
 
-    it('should be able to create functions of arbitrary arity', function() {
+    it('creates functions of arbitrary arity', function() {
         var fn = R.nAry(10, function() { return toArray(arguments); });
         assert.equal(fn.length, 10);
         assert.deepEqual(fn.apply(null, R.range(0, 25)), R.range(0, 10));

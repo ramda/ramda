@@ -13,7 +13,7 @@ describe('keys', function() {
         assert.deepEqual(R.keys(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
     });
 
-    it('should work with hasOwnProperty override', function() {
+    it('works with hasOwnProperty override', function() {
         assert.deepEqual(R.keys({
             /* jshint -W001 */
             hasOwnProperty: false
@@ -21,7 +21,7 @@ describe('keys', function() {
         }), ['hasOwnProperty']);
     });
 
-    it('should work for primitives', function() {
+    it('works for primitives', function() {
         var result = R.map(function(val) {
             return R.keys(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
@@ -48,7 +48,7 @@ describe('keysIn', function() {
         assert.deepEqual(R.keysIn(cobj).sort(), ['a', 'b', 'x', 'y']);
     });
 
-    it('should work for primitives', function() {
+    it('works for primitives', function() {
         var result = R.map(function(val) {
             return R.keys(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
@@ -86,7 +86,7 @@ describe('values', function() {
         assert.deepEqual(R.values(cobj), [100, 200]);
     });
 
-    it('should work for primitives', function() {
+    it('works for primitives', function() {
         var result = R.map(function(val) {
             return R.keys(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);

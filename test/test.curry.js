@@ -6,7 +6,7 @@ describe('curry', function() {
         return a * b * c;
     }
     var curried = R.curry(source);
-    it('should curry', function() {
+    it('curries', function() {
         assert.equal(curried(1)(2)(3), 6);
         assert.equal(curried(1, 2)(3), 6);
         assert.equal(curried(1)(2, 3), 6);
@@ -27,7 +27,7 @@ describe('curryN', function() {
         void d;
         return a * b * c;
     }
-    it('should accept an arity', function() {
+    it('accepts an arity', function() {
         var curried = R.curryN(3, source);
         assert.equal(curried(1)(2)(3), 6);
         assert.equal(curried(1, 2)(3), 6);
@@ -37,7 +37,7 @@ describe('curryN', function() {
 });
 
 describe('internal curry', function() {
-    it('should throw an exception given no arguments', function() {
+    it('throws an exception given no arguments', function() {
         assert.throws(R.map);
         assert.throws(R.map(R.I));
         // doesnt throw an exception

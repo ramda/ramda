@@ -9,7 +9,7 @@ describe('project', function() {
         {name: 'Alois', age: 15, disposition: 'surly'}
     ];
 
-    it('should select the chosen properties from each element in a list', function() {
+    it('selects the chosen properties from each element in a list', function() {
         assert.deepEqual(R.project(['name', 'age'], kids), [
             {name: 'Abby', age: 7},
             {name: 'Fred', age: 12},
@@ -18,7 +18,7 @@ describe('project', function() {
         ]);
     });
 
-    it('should have an undefined property on the output tuple for any input tuple that does not have the property', function() {
+    it('has an undefined property on the output tuple for any input tuple that does not have the property', function() {
         assert.deepEqual(R.project(['name', 'hair'], kids), [
             {name: 'Abby', hair: 'blond'},
             {name: 'Fred', hair: 'brown'},
@@ -27,7 +27,7 @@ describe('project', function() {
         ]);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var myFields = R.project(['name', 'age']);
         assert.deepEqual(myFields(kids), [
             {name: 'Abby', age: 7},
@@ -44,13 +44,13 @@ describe('propEq', function() {
     var obj3 = {name: 'Rusty', age: 10, hair: 'brown'};
     var obj4 = {name: 'Alois', age: 15, disposition: 'surly'};
 
-    it('should determine whether a particular property matches a given value for a specific object', function() {
+    it('determines whether a particular property matches a given value for a specific object', function() {
         assert.equal(R.propEq('name', 'Abby', obj1), true);
         assert.equal(R.propEq('hair', 'brown', obj2), true);
         assert.equal(R.propEq('hair', 'blond', obj2), false);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var kids = [obj1, obj2, obj3, obj4];
         var hairMatch = R.propEq('hair');
         assert.equal(typeof hairMatch, 'function');
@@ -195,14 +195,14 @@ describe('differenceWith', function() {
     }());
 
     describe('sortBy', function() {
-        it('should sort by a simple property of the objects', function() {
+        it('sorts by a simple property of the objects', function() {
             var sortedAlbums = R.sortBy(R.prop('title'), albums);
             assert.equal(sortedAlbums.length, albums.length);
             assert.equal(sortedAlbums[0].title, 'A Farewell to Kings');
             assert.equal(sortedAlbums[11].title, 'Timeout');
         });
 
-        it('should be automatically curried', function() {
+        it('is automatically curried', function() {
             var sorter = R.sortBy(R.prop('title'));
             var sortedAlbums = sorter(albums);
             assert.equal(sortedAlbums.length, albums.length);
@@ -212,19 +212,19 @@ describe('differenceWith', function() {
     });
 
     describe('countBy', function() {
-        it('should count by a simple property of the objects', function() {
+        it('counts by a simple property of the objects', function() {
             assert.deepEqual(R.countBy(R.prop('genre'), albums), {
                 Baroque: 2, Rock: 2, Jazz: 2, Romantic: 1, Metal: 1, Modern: 1, Broadway: 1, Folk: 1, Classical: 1
             });
         });
 
-        it('should count by a more complex function on the objects', function() {
+        it('counts by a more complex function on the objects', function() {
             assert.deepEqual(R.countBy(derivedGenre, albums), {
                 Classical: 5, Rock: 3, Jazz: 2, Broadway: 1, Folk: 1
             });
         });
 
-        it('should be automatically curried', function() {
+        it('is automatically curried', function() {
             var counter = R.countBy(R.prop('genre'));
             assert.deepEqual(counter(albums), {
                 Baroque: 2, Rock: 2, Jazz: 2, Romantic: 1, Metal: 1, Modern: 1, Broadway: 1, Folk: 1, Classical: 1
@@ -233,7 +233,7 @@ describe('differenceWith', function() {
     });
 
     describe('groupBy', function() {
-        it('should group by a simple property of the objects', function() {
+        it('groups by a simple property of the objects', function() {
             assert.deepEqual(R.groupBy(R.prop('genre'), albums), {
                 Baroque: [{title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'}, {title: 'Goldberg Variations', artist: 'Daniel Barenboim', genre: 'Baroque'}],
                 Rock: [{title: 'A Farewell to Kings', artist: 'Rush', genre: 'Rock'}, {title: 'Fly By Night', artist: 'Rush', genre: 'Rock'}],
@@ -247,7 +247,7 @@ describe('differenceWith', function() {
             });
         });
 
-        it('should group by a more complex function on the objects', function() {
+        it('groups by a more complex function on the objects', function() {
             assert.deepEqual(R.groupBy(derivedGenre, albums), {
                 Classical: [
                     {title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'},
@@ -267,7 +267,7 @@ describe('differenceWith', function() {
             });
         });
 
-        it('should be automatically curried', function() {
+        it('is automatically curried', function() {
             var grouper = R.groupBy(R.prop('genre'));
             assert.deepEqual(grouper(albums), {
                 Baroque: [{title: 'Art of the Fugue', artist: 'Glenn Gould', genre: 'Baroque'}, {title: 'Goldberg Variations', artist: 'Daniel Barenboim', genre: 'Baroque'}],

@@ -2,7 +2,7 @@ var assert = require('assert');
 var R = require('..');
 
 describe('or', function() {
-    it('should combine two boolean-returning functions into one', function() {
+    it('combines two boolean-returning functions into one', function() {
         var even = function(x) {return x % 2 === 0;};
         var gt10 = function(x) {return x > 10;};
         var f = R.or(even, gt10);
@@ -11,7 +11,7 @@ describe('or', function() {
         assert.equal(f(7), false);
     });
 
-    it('should accept functions that take multiple parameters', function() {
+    it('accepts functions that take multiple parameters', function() {
         var between = function(a, b, c) {return a < b && b < c;};
         var total20 = function(a, b, c) {return a + b + c === 20;};
         var f = R.or(between, total20);
@@ -43,7 +43,7 @@ describe('or', function() {
 });
 
 describe('and', function() {
-    it('should combine two boolean-returning functions into one', function() {
+    it('combines two boolean-returning functions into one', function() {
         var even = function(x) {return x % 2 === 0;};
         var gt10 = function(x) {return x > 10;};
         var f = R.and(even, gt10);
@@ -52,7 +52,7 @@ describe('and', function() {
         assert.equal(f(14), true);
     });
 
-    it('should accept functions that take multiple parameters', function() {
+    it('accepts functions that take multiple parameters', function() {
         var between = function(a, b, c) {return a < b && b < c;};
         var total20 = function(a, b, c) {return a + b + c === 20;};
         var f = R.and(between, total20);
@@ -84,14 +84,14 @@ describe('and', function() {
 });
 
 describe('not', function() {
-    it('should create boolean-returning function that reverses another', function() {
+    it('creates boolean-returning function that reverses another', function() {
         var even = function(x) {return x % 2 === 0;};
         var f = R.not(even);
         assert.equal(f(8), false);
         assert.equal(f(13), true);
     });
 
-    it('should accept a function that take multiple parameters', function() {
+    it('accepts a function that take multiple parameters', function() {
         var between = function(a, b, c) {return a < b && b < c;};
         var f = R.not(between);
         assert.equal(f(4, 5, 11), false);
@@ -105,7 +105,7 @@ describe('allPredicates', function() {
     var gt5 = function(n) {return n > 5;};
     var plusEq = function(w, x, y, z) { return w + x  === y + z; };
 
-    it('should report whether all predicates are satisfied by a given value', function() {
+    it('reports whether all predicates are satisfied by a given value', function() {
         var ok = R.allPredicates([odd, lt20, gt5]);
         assert.equal(ok(7), true);
         assert.equal(ok(9), true);
@@ -130,7 +130,7 @@ describe('anyPredicates', function() {
     var lt5 = function(n) {return n < 5;};
     var plusEq = function(w, x, y, z) { return w + x  === y + z; };
 
-    it('should report whether any predicates are satisfied by a given value', function() {
+    it('reports whether any predicates are satisfied by a given value', function() {
         var ok = R.anyPredicates([odd, gt20, lt5]);
         assert.equal(ok(7), true);
         assert.equal(ok(9), true);

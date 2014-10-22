@@ -16,7 +16,7 @@ describe('functionsIn', function() {
 
     var f = new F();
 
-    it('should return list of functions with prototype functions', function() {
+    it('returns list of functions with prototype functions', function() {
         assert.deepEqual(R.functionsIn(f).sort(), ['map', 'sort', 'x', 'y']);
         assert.equal(R.functionsIn(f).length, 4);
     });

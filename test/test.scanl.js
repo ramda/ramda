@@ -10,12 +10,12 @@ describe('scanl', function() {
         assert.deepEqual(R.scanl(mult, 1, [1, 2, 3, 4]), [1, 1, 2, 6, 24]);
     });
 
-    it('should return the accumulator for an empty array', function() {
+    it('returns the accumulator for an empty array', function() {
         assert.deepEqual(R.scanl(add, 0, []), [0]);
         assert.deepEqual(R.scanl(mult, 1, []), [1]);
     });
 
-    it('should be automatically curried', function() {
+    it('is automatically curried', function() {
         var addOrConcat = R.scanl(add);
         var sum = addOrConcat(0);
         var cat = addOrConcat('');
@@ -23,7 +23,7 @@ describe('scanl', function() {
         assert.deepEqual(cat(['1', '2', '3', '4']), ['', '1', '12', '123', '1234']);
     });
 
-    it('should correctly report the arity of curried versions', function() {
+    it('correctly reports the arity of curried versions', function() {
         var sum = R.scanl(add, 0);
         assert.equal(sum.length, 1);
     });
