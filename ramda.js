@@ -5228,7 +5228,7 @@
      * @sig String -> v -> {k: v} -> Boolean
      * @param {string} path The path of the nested property to use
      * @param {*} val The value to compare the nested property with
-     * @param {k: v} obj obj The object to check the nested property in
+     * @param {Object} obj The object to check the nested property in
      * @return {boolean} `true` if the value equals the nested object property,
      *     `false` otherwise.
      * @example
