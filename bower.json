@@ -1,7 +1,7 @@
 {
   "name": "ramda",
   "main": "ramda.js",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "homepage": "https://github.com/ramda/ramda",
   "authors": [
     "(Scott Sauyet <scott@sauyet.com>)",
