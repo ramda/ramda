@@ -34,7 +34,10 @@
      *
      * @namespace R
      */
-    var R = {version: '0.7.1'};
+    var R = {
+        version: '0.7.1',
+        string: {}
+    };
 
     // Internal Functions and Properties
     // ---------------------------------
@@ -984,6 +987,27 @@
 
 
     /**
+     * Returns the result of concatenating two strings.
+     *
+     * @func
+     * @memberOf R
+     * @category core
+     * @category string
+     * @sig String -> String -> String
+     * @param {String} str1 The first string.
+     * @param {String} str2 The second string.
+     * @return {Array} The result of concatenating the two strings.
+     * @example
+     *
+     *      R.string.concat('ABC', 'DEF'); // 'ABCDEF'
+     *      R.string.concat(1234, 5678); // '12345678'
+     */
+    R.string.concat = curry2(function(str1, str2) {
+        return '' + str1 + str2;
+    });
+
+
+    /**
      * A function that does nothing but return the parameter supplied to it. Good as a default
      * or placeholder function.
      *
@@ -1392,7 +1416,7 @@
      * @example
      *
      *      var slashify = R.wrap(R.flip(add)('/'), function(f, x) {
-     *        return R.match(/\/$/, x) ? x : f(x);
+     *        return R.string.match(/\/$/, x) ? x : f(x);
      *      });
      *
      *      slashify('a');  //=> 'a/'
@@ -4908,9 +4932,9 @@
      * @see R.invoker
      * @example
      *
-     *      R.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
+     *      R.string.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
      */
-    var substring = R.substring = invoker(String.prototype.substring);
+    var substring = R.string.substring = invoker(String.prototype.substring);
 
 
     /**
@@ -4926,9 +4950,9 @@
      * @see R.invoker
      * @example
      *
-     *      R.substringFrom(8, 'abcdefghijklm'); //=> 'ijklm'
+     *      R.string.substringFrom(8, 'abcdefghijklm'); //=> 'ijklm'
      */
-    R.substringFrom = flip(substring)(void 0);
+    R.string.substringFrom = flip(substring)(void 0);
 
 
     /**
@@ -4944,9 +4968,9 @@
      * @see R.invoker
      * @example
      *
-     *      R.substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
+     *      R.string.substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
      */
-    R.substringTo = substring(0);
+    R.string.substringTo = substring(0);
 
 
     /**
@@ -4962,9 +4986,9 @@
      * @see R.invoker
      * @example
      *
-     *      R.charAt(8, 'abcdefghijklm'); //=> 'i'
+     *      R.string.charAt(8, 'abcdefghijklm'); //=> 'i'
      */
-    R.charAt = invoker(String.prototype.charAt);
+    R.string.charAt = invoker(String.prototype.charAt);
 
 
     /**
@@ -4980,10 +5004,10 @@
      * @see R.invoker
      * @example
      *
-     *      R.charCodeAt(8, 'abcdefghijklm'); //=> 105
+     *      R.string.charCodeAt(8, 'abcdefghijklm'); //=> 105
      *      // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
      */
-    R.charCodeAt = invoker(String.prototype.charCodeAt);
+    R.string.charCodeAt = invoker(String.prototype.charCodeAt);
 
 
     /**
@@ -4999,9 +5023,9 @@
      * @see R.invoker
      * @example
      *
-     *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
+     *      R.string.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
      */
-    R.match = invoker(String.prototype.match);
+    R.string.match = invoker(String.prototype.match);
 
 
     /**
@@ -5041,9 +5065,9 @@
      * @see R.invoker
      * @example
      *
-     *      R.strIndexOf('c', 'abcdefg'); //=> 2
+     *      R.string.indexOf('c', 'abcdefg'); //=> 2
      */
-    R.strIndexOf = curry2(function _strIndexOf(c, str) {
+    R.string.indexOf = curry2(function _strIndexOf(c, str) {
         return str.indexOf(c);
     });
 
@@ -5062,9 +5086,9 @@
      * @see R.invoker
      * @example
      *
-     *      R.strLastIndexOf('a', 'banana split'); //=> 5
+     *      R.string.lastIndexOf('a', 'banana split'); //=> 5
      */
-    R.strLastIndexOf = curry2(function(c, str) {
+    R.string.lastIndexOf = curry2(function(c, str) {
         return str.lastIndexOf(c);
     });
 
@@ -5080,9 +5104,9 @@
      * @return {string} The upper case version of `str`.
      * @example
      *
-     *      R.toUpperCase('abc'); //=> 'ABC'
+     *      R.string.toUpperCase('abc'); //=> 'ABC'
      */
-    R.toUpperCase = invoker(String.prototype.toUpperCase);
+    R.string.toUpperCase = invoker(String.prototype.toUpperCase);
 
 
     /**
@@ -5096,9 +5120,9 @@
      * @return {string} The lower case version of `str`.
      * @example
      *
-     *      R.toLowerCase('XYZ'); //=> 'xyz'
+     *      R.string.toLowerCase('XYZ'); //=> 'xyz'
      */
-    R.toLowerCase = invoker(String.prototype.toLowerCase);
+    R.string.toLowerCase = invoker(String.prototype.toLowerCase);
 
 
     /**
@@ -5112,10 +5136,10 @@
      * @returns {String} Trimmed version of `str`.
      * @example
      *
-     *      R.trim('   xyz  '); //=> 'xyz'
-     *      R.map(R.trim, R.split(',', 'x, y, z')); //=> ['x', 'y', 'z']
+     *      R.string.trim('   xyz  '); //=> 'xyz'
+     *      R.map(R.string.trim, R.string.split(',', 'x, y, z')); //=> ['x', 'y', 'z']
      */
-    R.trim = (function() {
+    R.string.trim = (function() {
         var ws = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
             '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028' +
             '\u2029\uFEFF';
@@ -5145,12 +5169,12 @@
      * @return {Array} The array of strings from `str` separated by `str`.
      * @example
      *
-     *      var pathComponents = R.split('/');
+     *      var pathComponents = R.string.split('/');
      *      R.tail(pathComponents('/usr/local/bin/node')); //=> ['usr', 'local', 'bin', 'node']
      *
-     *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
+     *      R.string.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
      */
-    R.split = invokerN(1, String.prototype.split);
+    R.string.split = invokerN(1, String.prototype.split);
 
 
     /**
@@ -5546,7 +5570,7 @@
      * @example
      *
      *      var sortByFirstItem = R.sortBy(prop(0));
-     *      var sortByNameCaseInsensitive = R.sortBy(compose(R.toLowerCase, prop('name')));
+     *      var sortByNameCaseInsensitive = R.sortBy(compose(R.string.toLowerCase, prop('name')));
      *      var pairs = [[-1, 1], [-2, 2], [-3, 3]];
      *      sortByFirstItem(pairs); //=> [[-3, 3], [-2, 2], [-1, 1]]
      *      var alice = {
@@ -5586,9 +5610,9 @@
      * @example
      *
      *      var numbers = [1.0, 1.1, 1.2, 2.0, 3.0, 2.2];
-     *      var letters = R.split('', 'abcABCaaaBBc');
+     *      var letters = R.string.split('', 'abcABCaaaBBc');
      *      R.countBy(Math.floor)(numbers);    //=> {'1': 3, '2': 2, '3': 1}
-     *      R.countBy(R.toLowerCase)(letters);   //=> {'a': 5, 'b': 4, 'c': 3}
+     *      R.countBy(R.string.toLowerCase)(letters);   //=> {'a': 5, 'b': 4, 'c': 3}
      */
     R.countBy = curry2(function countBy(fn, list) {
         return foldl(function(counts, obj) {
