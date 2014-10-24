@@ -44,3 +44,62 @@ describe('internal curry', function() {
         R.concat([]);
     });
 });
+
+describe('op', function() {
+    function lt(a, b) { return a < b; }
+    var olt = R.op(lt);
+    var placeholder = R.__;
+
+    it('converts a binary function to enable infix-style behavior via placeholder', function() {
+        assert(typeof olt === 'function');
+    });
+
+    it('is curried', function() {
+        var colt = olt(10);
+        assert(typeof colt === 'function');
+        assert(colt(11));
+        assert(!colt(9));
+    });
+
+    it('can take a placeholder for the first arg', function() {
+        var lt100 = olt(placeholder, 100);
+        assert(typeof lt100 === 'function');
+        assert(lt100(99));
+    });
+
+    it('can take a placeholder for its only arg', function() {
+        var ltX = olt(placeholder);
+        var lt99 = ltX(99);
+        assert(typeof ltX === 'function');
+        assert(typeof lt99 === 'function');
+        assert(lt99(98));
+    });
+
+    it('returns functions with the correct arity', function() {
+        assert.equal(R.op(lt).length, 2);
+        assert.equal(R.op(lt)(placeholder).length, 2);
+        assert.equal(R.op(lt)(placeholder, 1000).length, 1);
+        assert.equal(R.op(lt)(1000).length, 1);
+    });
+
+    it('can work with methods that may take extra arguments', function() {
+        var items = [
+            {value: 1},
+            {value: 2},
+            {value: 3},
+            {value: 4},
+            {value: 5}
+        ];
+        var gt = R.op(function(a, b) { return a > b; });
+        assert.deepEqual(items.filter(R.where({value: gt(3)})), [{value: 1}, {value: 2}]);
+        assert.deepEqual(items.filter(R.where({value: gt(R.__, 3)})), [{value: 4}, {value: 5}]);
+        assert.deepEqual(items.filter(R.where({value: gt(R.__)(3)})), [{value: 4}, {value: 5}]);
+        assert(gt(R.__, 3)(4));
+        assert(gt(R.__, 3)(4, {}));
+    });
+
+    it('throws an exception given no arguments', function() {
+        assert.throws(R.op);
+        assert.throws(olt);
+    });
+});

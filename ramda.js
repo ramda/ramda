@@ -269,12 +269,12 @@
                 case 0: throw noArgsException();
                 case 1:
                     if (a === __) {
-                        return R.flip(_op);
+                        return R.binary(R.flip(_op));
                     }
-                    return R.lPartial(fn, a);
+                    return R.unary(R.lPartial(fn, a));
                 default:
                     if (a === __) {
-                        return R.rPartial(fn, b);
+                        return R.unary(R.rPartial(fn, b));
                     }
                     return fn(a, b);
             }
