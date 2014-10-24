@@ -103,9 +103,19 @@ describe('isArrayLike', function() {
         assert.equal(R.isArrayLike('abcdefg'), false);
     });
 
-    it('is true for arbitrary objects with numeric length', function() {
-        var obj = {length: 0};
-        assert(R.isArrayLike(obj));
+    it('is true for arbitrary objects with numeric length, if extreme indices are defined', function() {
+        var obj1 = {length: 0};
+        var obj2 = {0: 'something', length: 0};
+        var obj3 = {0: void 0, length: 0};
+        var obj4 = {0: 'zero', 1: 'one', length: 2};
+        var obj5 = {0: 'zero', length: 2};
+        var obj6 = {1: 'one', length: 2};
+        assert(R.isArrayLike(obj1));
+        assert(R.isArrayLike(obj2));
+        assert(R.isArrayLike(obj3));
+        assert(R.isArrayLike(obj4));
+        assert(!R.isArrayLike(obj5));
+        assert(!R.isArrayLike(obj6));
     });
 
     it('is false for everything else', function() {

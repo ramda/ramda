@@ -142,24 +142,26 @@
      * @category Type
      * @category List
      * @param {*} x The object to test.
-     * @return {boolean} `true` if `x` has a numeric length property; `false` otherwise.
+     * @return {boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
      * @example
      *
      *      R.isArrayLike([]); //=> true
      *      R.isArrayLike(true); //=> false
      *      R.isArrayLike({}); //=> false
-     *      R.isArrayLike({length: 10}); //=> true
+     *      R.isArrayLike({length: 10}); //=> false
+     *      R.isArrayLike({0: 'zero', 9: 'nine', length: 10}); //=> true
      */
     R.isArrayLike = function isArrayLike(x) {
-        return isArray(x) || (
-            !!x &&
-            typeof x === 'object' &&
-            !(x instanceof String) &&
-            (
-                !!(x.nodeType === 1 && x.length) ||
-                x.length >= 0
-            )
-        );
+        if (isArray(x)) { return true; }
+        if (!x) { return false; }
+        if (typeof x !== 'object') { return false; }
+        if (x instanceof String) { return false; }
+        if (x.nodeType === 1) { return !!x.length; }
+        if (x.length === 0) { return true; }
+        if (x.length > 0) {
+            return x.hasOwnProperty(0) && x.hasOwnProperty(x.length - 1);
+        }
+        return false;
     };
 
 
