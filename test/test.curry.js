@@ -91,9 +91,11 @@ describe('op', function() {
             {value: 5}
         ];
         var gt = R.op(function(a, b) { return a > b; });
-        assert.deepEqual(items.filter(R.where({value: gt(3)})), [{value: 1}, {value: 2}]);
-        assert.deepEqual(items.filter(R.where({value: gt(R.__, 3)})), [{value: 4}, {value: 5}]);
-        assert.deepEqual(items.filter(R.where({value: gt(R.__)(3)})), [{value: 4}, {value: 5}]);
+        if (Array.prototype.filter) {
+            assert.deepEqual(items.filter(R.where({value: gt(3)})), [{value: 1}, {value: 2}]);
+            assert.deepEqual(items.filter(R.where({value: gt(R.__, 3)})), [{value: 4}, {value: 5}]);
+            assert.deepEqual(items.filter(R.where({value: gt(R.__)(3)})), [{value: 4}, {value: 5}]);
+        }
         assert(gt(R.__, 3)(4));
         assert(gt(R.__, 3)(4, {}));
     });
