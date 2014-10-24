@@ -3019,6 +3019,16 @@
 
 
     /**
+     *
+     */
+    R.lens = curry2(function lens(get, set) {
+        var lns = function(a) { return get(a); };
+        lns.set = set;
+        lns.map = function(fn, a) { return set(fn(get(a)), a); };
+        return lns;
+    });
+
+    /**
      * Creates a new list out of the two supplied by applying the function
      * to each possible pair in the lists.
      *
