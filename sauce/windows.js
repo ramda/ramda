@@ -26,27 +26,12 @@ module.exports = [
   },
   {
     browserName: 'chrome',
-    version: '36',
-    platform: 'Windows 8.1'
-  },
-  {
-    browserName: 'chrome',
-    version: '35',
+    version: '38',
     platform: 'Windows 8.1'
   },
   {
     browserName: 'firefox',
-    version: '31',
-    platform: 'Windows 8.1'
-  },
-  {
-    browserName: 'firefox',
-    version: '30',
-    platform: 'Windows 8.1'
-  },
-  {
-    browserName: 'firefox',
-    version: '20',
+    version: '33',
     platform: 'Windows 8.1'
   }
 ];

@@ -6,12 +6,12 @@ module.exports = [
   },
   {
     browserName: 'safari',
-    version: '7',
-    platform: 'OS X 10.9'
+    version: '6',
+    platform: 'OS X 10.8'
   },
   {
     browserName: 'safari',
-    version: '6',
-    platform: 'OS X 10.8'
+    version: '7',
+    platform: 'OS X 10.9'
   }
 ];

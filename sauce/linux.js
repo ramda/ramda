@@ -1,12 +1,12 @@
 module.exports = [
   {
     browserName: 'firefox',
-    version: '31',
+    version: '33',
     platform: 'Linux'
   },
   {
     browserName: 'chrome',
-    version: '35',
+    version: '38',
     platform: 'Linux'
   }
 ];
