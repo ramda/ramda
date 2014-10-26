@@ -4102,29 +4102,29 @@
 
 
     /**
-     * Makes a shallow clone of an object, overriding the specified property
-     * with the given value.  Note that this copies and flattens prototype
-     * properties onto the new object as well.  All non-primitive properties
-     * are copied by reference.
+     * Makes a shallow clone of an object, setting or overriding the specified
+     * property with the given value.  Note that this copies and flattens
+     * prototype properties onto the new object as well.  All non-primitive
+     * properties are copied by reference.
      *
      * @func
      * @memberOf R
      * @category Object
-     * @sig String -> a -> {k: v} -> {k -> v}
+     * @sig String -> a -> {k: v} -> {k: v}
      * @param {String} prop the property name to set
      * @param {*} val the new value
      * @param {Object} obj the object to clone
      * @return {Object} a new object similar to the original except for the specified property
      * @example
      *
-     *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
-     *      var obj2 = R.setPath('f.g.i', {x: 42}, obj1);
-     *      //=>  {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
+     *      var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
+     *      var obj2 = R.assoc('e', {x: 42}, obj1);
+     *      //=>  {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5}
      *
-     *      // And moreover, obj2.a is a reference to obj1.a, similarly with obj2.f.g.j;
+     *      // And moreover, obj2.b is a reference to obj1.b
      *      // No unnecessary objects are created.
      */
-    var setProp = R.setProp = curry3(function(prop, val, obj) {
+    var assoc = R.assoc = curry3(function(prop, val, obj) {
         // rather than `clone` to get prototype props too, even though they're flattened
         return extend(fromPairs(keysIn(obj).map(function(key) {
             return [key, obj[key]];
@@ -4133,16 +4133,16 @@
 
 
     /**
-     * Makes a shallow clone of an object, overriding the nodes required to
-     * create the given path, and placing the specifiec value at the tail end
-     * of that path.  Note that this copies and flattens prototype
+     * Makes a shallow clone of an object, setting or overriding the nodes
+     * required to create the given path, and placing the specifiec value at the
+     * tail end of that path.  Note that this copies and flattens prototype
      * properties onto the new object as well.  All non-primitive properties
      * are copied by reference.
      *
      * @func
      * @memberOf R
      * @category Object
-     * @sig String -> a -> {k: v} -> {k -> v}
+     * @sig String -> a -> {k: v} -> {k: v}
      * @param {String} path the dot-delimited path to set
      * @param {*} val the new value
      * @param {Object} obj the object to clone
@@ -4150,20 +4150,35 @@
      * @example
      *
      *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
-     *      var obj2 = R.setPath('f.g.i', {x: 42}, obj1);
+     *      var obj2 = R.assocPath('f.g.i', {x: 42}, obj1);
      *      //=> {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
      */
-    R.setPath = (function() {
+    R.assocPath = (function() {
         var setParts = function(parts, val, obj) {
             // TODO: empty path
-            if (parts.length === 1) {return setProp(parts[0], val, obj);}
+            if (parts.length === 1) {return assoc(parts[0], val, obj);}
             var current = obj[parts[0]];
-            return setProp(parts[0], setParts(_slice(parts, 1), val, is(Object, current) ? current : {}), obj);
+            return assoc(parts[0], setParts(_slice(parts, 1), val, is(Object, current) ? current : {}), obj);
         };
-        return curry3(function(path, val, obj) {
+        return function(path, val, obj) {
+            var length = arguments.length;
+            if (length === 0) {
+                throw noArgsException();
+            }
             var parts = split('.', path);
-            return setParts(parts, val, obj);
-        });
+            switch (length) {
+                case 1:
+                    return curry2(function(val, obj) {
+                        return setParts(parts, val, obj);
+                    });
+                case 2:
+                    return function(obj) {
+                        return setParts(parts, val, obj);
+                    };
+                default:
+                    return setParts(parts, val, obj);
+            }
+        };
     }());
 
 
