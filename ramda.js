@@ -786,6 +786,81 @@
         return _slice(list);
     };
 
+
+    /**
+     * Creates a deep copy of the value which may contain (nested) `Array`s and
+     * `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s. `Function`s are
+     * not copied, but assigned by their reference.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig {*} -> {*}
+     * @param {*} value The object or array to clone
+     * @returns {*} A new object or array
+     * @example
+     *
+     *      var objects = [{}, {}, {}];
+     *      var objectsClone = R.cloneDeep(objects);
+     *      objects[0] === objectsClone[0]; //=> false
+     *
+     */
+    R.cloneDeep = function _cloneDeep(value) {
+        return baseCopy(value, [], []);
+    };
+
+    /**
+     * Private `baseCopy` function dispatches value copying to the `copyObj`
+     * function or creates a copy itself.
+     *
+     * @private
+     * @category Internal
+     * @param {*} value The value to be copied
+     * @param {Array} refFrom Array containing the source references
+     * @param {Array} refTo Array containing the copied source references
+     * @return {*} The copied value.
+     */
+    var baseCopy = function(value, refFrom, refTo) {
+        switch (toString.call(value)) {
+            case '[object Object]':   return copyObj(value, {}, refFrom, refTo);
+            case '[object Array]':    return copyObj(value, [], refFrom, refTo);
+            case '[object Function]': return value;
+            case '[object Date]':     return new Date(value);
+            default:
+                return value;
+        }
+    };
+
+    /**
+     * Private `copyObj` function creates a copy of the object or array provided by
+     * the `baseCopy` function.
+     * Circular or duplicate references are detected using the source references in
+     * refFrom and used to create the same circular or duplicate reference in the copy.
+     *
+     * @private
+     * @category Internal
+     * @param {*} value The value to be copied
+     * @param {*} copiedValue Empty object or array or aid copying
+     * @param {Array} refFrom Array containing the source references
+     * @param {Array} refTo Array containing the copied source references
+     * @return {*} The copied value.
+     */
+    var copyObj = function(value, copiedValue, refFrom, refTo) {
+        for (var idx = 0, len = refFrom.length; idx < len; idx++) {
+            if (value === refFrom[idx]) {
+                return refTo[idx];
+            }
+        }
+
+        refFrom.push(value);
+        refTo.push(copiedValue);
+        for (var key in value) {
+            copiedValue[key] = baseCopy(value[key], refFrom, refTo);
+        }
+        return copiedValue;
+    };
+
+
     // Core Functions
     // --------------
     //
