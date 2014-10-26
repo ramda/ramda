@@ -4186,9 +4186,9 @@
      */
     var assoc = R.assoc = curry3(function(prop, val, obj) {
         // rather than `clone` to get prototype props too, even though they're flattened
-        return extend(fromPairs(keysIn(obj).map(function(key) {
+        return extend(fromPairs(map(function(key) {
             return [key, obj[key]];
-        })), createMapEntry(prop, val));
+        }, keysIn(obj))), createMapEntry(prop, val));
     });
 
 
@@ -4214,6 +4214,7 @@
      *      //=> {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
      */
     R.assocPath = (function() {
+        // TODO: consider exposing this (with a better name.)
         var setParts = function(parts, val, obj) {
             // TODO: empty path
             if (parts.length === 1) {return assoc(parts[0], val, obj);}
@@ -4226,17 +4227,13 @@
                 throw noArgsException();
             }
             var parts = split('.', path);
+            var fn = curry2(function(val, obj) {
+                return setParts(parts, val, obj);
+            });
             switch (length) {
-                case 1:
-                    return curry2(function(val, obj) {
-                        return setParts(parts, val, obj);
-                    });
-                case 2:
-                    return function(obj) {
-                        return setParts(parts, val, obj);
-                    };
-                default:
-                    return setParts(parts, val, obj);
+                case 1: return fn;
+                case 2: return fn(val);
+                default: return fn(val, obj);
             }
         };
     }());
