@@ -445,3 +445,68 @@ describe('mixin', function() {
         assert.deepEqual(curried(b), {w: 1, x: 2, y: 3, z: 4});
     });
 });
+
+describe('assoc', function() {
+    it('makes a shallow clone of an object, overriding only the specified property', function() {
+        var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
+        var obj2 = R.assoc('e', {x: 42}, obj1);
+        assert.deepEqual(obj2, {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5});
+        // Note: reference equality below!
+        assert.equal(obj2.a, obj1.a);
+        assert.equal(obj2.b, obj1.b);
+        assert.equal(obj2.f, obj1.f);
+    });
+
+    it('is the equivalent of clone and set if the property is not on the original', function() {
+        var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
+        var obj2 = R.assoc('z', {x: 42}, obj1);
+        assert.deepEqual(obj2, {a: 1, b: {c: 2, d: 3}, e: 4, f: 5, z: {x: 42}});
+        // Note: reference equality below!
+        assert.equal(obj2.a, obj1.a);
+        assert.equal(obj2.b, obj1.b);
+        assert.equal(obj2.f, obj1.f);
+    });
+
+    it('is properly curried', function() {
+        var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
+        var expected = {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5};
+        var f = R.assoc('e');
+        var g = f({x: 42});
+        assert.deepEqual(f({x: 42}, obj1), expected);
+        assert.deepEqual(g(obj1), expected);
+    });
+});
+
+describe('assocPath', function() {
+    it('makes a shallow clone of an object, overriding only what is necessary for the path', function() {
+        var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
+        var obj2 = R.assocPath('f.g.i', {x: 42}, obj1);
+        assert.deepEqual(obj2,
+            {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
+        );
+        // Note: reference equality below!
+        assert.equal(obj2.a, obj1.a);
+        assert.equal(obj2.m, obj1.m);
+        assert.equal(obj2.f.g.h, obj1.f.g.h);
+        assert.equal(obj2.f.g.j, obj1.f.g.j);
+    });
+
+    it('is the equivalent of clone and setPath if the property is not on the original', function() {
+        var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
+        var obj2 = R.assocPath('x.y.z', {w: 42}, obj1);
+        assert.deepEqual(obj2, {a: 1, b: {c: 2, d: 3}, e: 4, f: 5, x: {y: {z: {w: 42}}}});
+        // Note: reference equality below!
+        assert.equal(obj2.a, obj1.a);
+        assert.equal(obj2.b, obj1.b);
+        assert.equal(obj2.f, obj1.f);
+    });
+
+    it('is properly curried', function() {
+        var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
+        var expected = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8};
+        var f = R.assocPath('f.g.i');
+        var g = f({x: 42});
+        assert.deepEqual(f({x: 42}, obj1), expected);
+        assert.deepEqual(g(obj1), expected);
+    });
+});
