@@ -3103,44 +3103,6 @@
         return lns;
     });
 
-    /**
-     * Creates a new list out of the two supplied by applying the function
-     * to each possible pair in the lists.
-     *
-     * @see R.xprod
-     * @func
-     * @memberOf R
-     * @category List
-     * @sig (a,b -> c) -> a -> b -> [c]
-     * @param {Function} fn The function to join pairs with.
-     * @param {Array} as The first list.
-     * @param {Array} bs The second list.
-     * @return {Array} The list made by combining each possible pair from
-     *         `as` and `bs` using `fn`.
-     * @example
-     *
-     *      var f = function(x, y) {
-     *        // ...
-     *      };
-     *      R.xprodWith(f, [1, 2], ['a', 'b']);
-     *      // [f(1, 'a'), f(1, 'b'), f(2, 'a'), f(2, 'b')];
-     */
-    R.xprodWith = curry3(function _xprodWith(fn, a, b) {
-        if (isEmpty(a) || isEmpty(b)) {
-            return [];
-        }
-        // Better to push them all or to do `new Array(ilen * jlen)` and
-        // calculate indices?
-        var idx = -1, ilen = a.length, j, jlen = b.length, result = [];
-        while (++idx < ilen) {
-            j = -1;
-            while (++j < jlen) {
-                result.push(fn(a[idx], b[j]));
-            }
-        }
-        return result;
-    });
-
 
     /**
      * Creates a new list out of the two supplied by creating each possible

@@ -23,29 +23,3 @@ describe('xprod', function() {
         assert.equal(something.length, 1);
     });
 });
-
-describe('xprodWith', function() {
-    var concat = function(x, y) {return '' + x + y;};
-    var a = [1, 2], b = ['a', 'b', 'c'];
-
-    it('returns an empty list if either input list is empty', function() {
-        assert.deepEqual(R.xprodWith(concat, [], [1, 2, 3]), []);
-        assert.deepEqual(R.xprodWith(concat, [1, 2, 3], []), []);
-    });
-
-    it('creates the collection of all cross-product pairs of its parameters', function() {
-        assert.deepEqual(R.xprodWith(concat, a, b), ['1a', '1b', '1c', '2a', '2b', '2c']);
-    });
-
-    it('is automatically curried', function() {
-        var f1 = R.xprodWith(concat);
-        assert.deepEqual(f1(b, a), ['a1', 'a2', 'b1', 'b2', 'c1', 'c2']);
-        var f2 = f1(a);
-        assert.deepEqual(f2(b), ['1a', '1b', '1c', '2a', '2b', '2c']);
-    });
-
-    it('correctly reports the arity of curried versions', function() {
-        var something = R.xprodWith(a);
-        assert.equal(something.length, 2);
-    });
-});
