@@ -1195,9 +1195,15 @@
      *      squareThenDouble(5); //≅ double(square(5)) => 50
      */
     function internalCompose(f, g) {
-        return function() {
-            return f.call(this, g.apply(this, arguments));
-        };
+        return arity(g.length, function() {
+            if (arguments.length < g.length) {
+                return internalCompose(f, g.apply(this, arguments));
+            } else {
+                var gArgs = _slice(arguments, 0, g.length);
+                var excessArgs = _slice(arguments, g.length);
+                return f.apply(this, [g.apply(this, gArgs)].concat(excessArgs));
+            }
+        });
     }
 
 
@@ -1235,11 +1241,11 @@
             case 0: throw noArgsException();
             case 1: return arguments[0];
             default:
-                var idx = arguments.length - 1, fn = arguments[idx], length = fn.length;
+                var idx = arguments.length - 1, fn = arguments[idx];
                 while (idx--) {
                     fn = internalCompose(arguments[idx], fn);
                 }
-                return arity(length, fn);
+                return fn;
         }
     };
 
