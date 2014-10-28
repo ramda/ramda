@@ -5,17 +5,32 @@ var R = require('../../..');
 var IO = require('../IO');
 
 describe('IO', function() {
-    var f1 = function() { console.log('IO 1'); return '1 '; };
-    var f2 = function(x) { console.log('IO 2'); return x + '2 '; };
-    var f3 = function(x) { console.log('IO 3'); return x + '3 '; };
+    var logger = (function() {
+        var results = [];
+        return {
+            log: function(str) {results.push(str);},
+            clear: function() {results = [];},
+            report: function() {return results.join(' ~ ');}
+        };
+    }());
+    var f1 = function() { logger.log('IO 1'); return '1 '; };
+    var f2 = function(x) { logger.log('IO 2'); return x + '2 '; };
+    var f3 = function(x) { logger.log('IO 3'); return x + '3 '; };
     var i1 = IO(f1);
     var i2 = IO(f2);
+
+    beforeEach(function() {
+        logger.clear();
+    });
 
     it('is a Functor', function() {
         var fTest = types.functor;
         assert.equal(true, fTest.iface(i1));
         assert.equal(true, fTest.id(i1));
+        assert.equal(logger.report(), 'IO 1 ~ IO 1');
+        logger.clear();
         assert.equal(true, fTest.compose(i1, f2, f3));
+        assert.equal(logger.report(), 'IO 1 ~ IO 3 ~ IO 2 ~ IO 1 ~ IO 3 ~ IO 2');
     });
 
     it('is an Apply', function() {
@@ -33,6 +48,7 @@ describe('IO', function() {
 
         assert.equal(true, aTest.iface(i1));
         assert.equal(true, aTest.id(IO, i2));
+        assert.equal(logger.report(), 'IO 2 ~ IO 2');
         assert.equal(true, aTest.homomorphic(i1, R.add(3), 46));
         assert.equal(true, aTest.interchange(
             IO(function() { return R.multiply(20); }),
