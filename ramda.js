@@ -821,7 +821,7 @@
      * @return {*} The copied value.
      */
     var baseCopy = function(value, refFrom, refTo) {
-        switch (toString.call(value)) {
+        switch (value && toString.call(value)) {
             case '[object Object]':   return copyObj(value, {}, refFrom, refTo);
             case '[object Array]':    return copyObj(value, [], refFrom, refTo);
             case '[object Function]': return value;
