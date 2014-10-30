@@ -8,7 +8,7 @@
     }
 }(function(R) {
 
-    /** Lazylist constructor
+    /** lazylist constructor
      *  @func
      *  @param {any} seed - initial seed for the list.
      *  @param {Function} current - function to calculate the head from the seed.
@@ -83,9 +83,9 @@
              * @func
              * @memberOf lazylist
              * @category lazylist
-             * @sig Number -> [a] -> [a]
+             * @sig Number -> lazylist a -> [a]
              * @param {number} n The number of elements to return.
-             * @return {lazylist} A new lazylist containing the taken elements.
+             * @return {array} A new array containing the taken elements.
              */
             take: function(n) {
                 var take = function(ctr, lz, ret) {
@@ -103,9 +103,9 @@
              * @func
              * @memberOf lazylist
              * @category lazylist
-             * @sig (a -> Boolean) -> [a] -> [a]
+             * @sig (a -> Boolean) -> lazylist a -> [a]
              * @param {Function} pred - The function called per iteration.
-             * @return {lazylist} A new lazylist containing the taken elements.
+             * @return {array} A new array containing the taken elements.
              * @example
              *
              *      var isNotFour = function(x) {
@@ -129,7 +129,7 @@
              * @func
              * @memberOf lazylist
              * @category lazylist
-             * @sig Number -> [a] -> [a]
+             * @sig Number -> lazylist a -> lazylist a
              * @param {number} n - The number of elements of `list` to skip.
              * @return {lazylist} The last `n` elements of `list`.
              * @example
@@ -150,7 +150,7 @@
              * @func
              * @memberOf lazylist
              * @category lazylist
-             * @sig (a -> b) -> [a] -> [b]
+             * @sig (a -> b) -> lazylist a -> lazylist b
              * @param {Function} fn The function to be called on every element of the input `list`.
              * @return {lazylist} The new list.
              * @example
@@ -178,7 +178,7 @@
              * @func
              * @memberOf lazylist
              * @category lazylist
-             * @sig (a -> Boolean) -> [a] -> [a]
+             * @sig (a -> Boolean) -> lazylist a -> lazylist a
              * @param {Function} fn The function called per iteration.
              * @return {lazylist} The new filtered lazylist.
              * @example
