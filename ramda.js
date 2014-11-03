@@ -4332,6 +4332,28 @@
         return val != null && val.constructor === Ctor || val instanceof Ctor;
     });
 
+    /**
+     * See an accurate string description of the type of object (`val`)
+     *
+     * @func
+     * @memberOf R
+     * @category type
+     * @sig (* -> {*}) -> String
+     * @param {*} val The value to test
+     * @return {String}
+     * @example
+     *
+     *      R.type({}); //=> "Object"
+     *      R.type(1); //=> "Number"
+     *      R.type(false); //=> "Boolean"
+     *      R.type('s'); //=> "String"
+     *      R.type(null); //=> "Null"
+     *      R.type([]); //=> "Array"
+     *      R.type(/[A-z]/); //=> "RegExp"
+     */
+    R.type = function(val) {
+        return ({}).toString.call(val).slice(8, -1);
+    };
 
     /**
      * A function that always returns `0`. Any passed in parameters are ignored.
