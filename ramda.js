@@ -4345,22 +4345,16 @@
      * @return {String}
      * @example
      *
-     *      R.type({}); //=> "Object"
-     *      R.type(1); //=> "Number"
-     *      R.type(false); //=> "Boolean"
-     *      R.type('s'); //=> "String"
-     *      R.type(null); //=> "Null"
-     *      R.type([]); //=> "Array"
-     *      R.type(/[A-z]/); //=> "RegExp"
+     *      R.typeof({}); //=> "Object"
+     *      R.typeof(1); //=> "Number"
+     *      R.typeof(false); //=> "Boolean"
+     *      R.typeof('s'); //=> "String"
+     *      R.typeof(null); //=> "Null"
+     *      R.typeof([]); //=> "Array"
+     *      R.typeof(/[A-z]/); //=> "RegExp"
      */
-    R.type = function(val) {
-
-        var description = toString.call(val).slice(8, -1);
-        if (description == 'Object') {
-            return val.constructor.name;
-        } else {
-            return description;
-        }
+    R.typeof = function(val) {
+        return toString.call(val).slice(8, -1);
     };
 
     /**
