@@ -4333,7 +4333,9 @@
     });
 
     /**
-     * See an accurate string description of the type of object (`val`)
+     * Gives a single-word string description of the (native) type of a value, returning such
+     * answers as 'Object', 'Number', 'Array', or 'Null'.  Does not attempt to distinguish user
+     * Object types any further, reporting them all as 'Object'.
      *
      * @func
      * @memberOf R
@@ -4352,7 +4354,13 @@
      *      R.type(/[A-z]/); //=> "RegExp"
      */
     R.type = function(val) {
-        return ({}).toString.call(val).slice(8, -1);
+
+        var description = toString.call(val).slice(8, -1);
+        if (description == 'Object') {
+            return val.constructor.name;
+        } else {
+            return description;
+        }
     };
 
     /**
