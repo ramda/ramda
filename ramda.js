@@ -3094,7 +3094,7 @@
 
 
     /**
-     *
+     * Creates a lens.  TODO.
      */
     R.lens = curry2(function lens(get, set) {
         var lns = function(a) { return get(a); };
