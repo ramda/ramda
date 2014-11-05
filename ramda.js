@@ -4353,23 +4353,13 @@
      *      R.typeof([]); //=> "Array"
      *      R.typeof(/[A-z]/); //=> "RegExp"
      */
-    R.typeof = (function() {
-        if (es5(null) === 'Null') {
-            return es5;
-        } else {
-            return es3;
-        }
-
-        function es5(val) {
+    R.typeof = toString.call(null) === '[object Null]' ?
+        function(val) { return toString.call(val).slice(8, -1); } :
+        function(val) {
+            if (val === null) { return 'Null'; }
+            if (val === undefined) { return 'Undefined'; }
             return toString.call(val).slice(8, -1);
-        }
-
-        function es3(val) {
-            return val === null && 'Null' ||
-                   val === undefined && 'Undefined' ||
-                   es5(val);
-        }
-    }());
+        };
 
     /**
      * A function that always returns `0`. Any passed in parameters are ignored.
