@@ -74,7 +74,7 @@
             case 1: return _slice(args, 0, args.length);
             case 2: return _slice(args, from, args.length);
             default:
-                var length = to - from, list = new Array(length), idx = -1;
+                var length = Math.max(0, to - from), list = new Array(length), idx = -1;
                 while (++idx < length) {
                     list[idx] = args[from + idx];
                 }
@@ -937,7 +937,7 @@
      *      R.nth(-1, list); //=> 'quux'
      *      R.nth(-99, list); //=> undefined
      */
-    R.nth = curry2(function nth(n, list) {
+    var nth = R.nth = curry2(function nth(n, list) {
         return n < 0 ? list[list.length + n] : list[n];
     });
 
@@ -957,10 +957,7 @@
      *
      *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
-    R.head = function head(list) {
-        list = list || [];
-        return list[0];
-    };
+    R.head = nth(0);
 
     /**
      * @func
@@ -984,10 +981,7 @@
      *
      *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
      */
-    R.last = function _last(list) {
-        list = list || [];
-        return list[list.length - 1];
-    };
+    R.last = nth(-1);
 
 
     /**
@@ -1007,8 +1001,7 @@
      *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
      */
     R.tail = checkForMethod('tail', function(list) {
-        list = list || [];
-        return (list.length > 1) ? _slice(list, 1) : [];
+        return _slice(list, 1);
     });
 
     /**
