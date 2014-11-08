@@ -359,6 +359,37 @@
 
 
     /**
+     * Returns a new function much like the supplied one, except that the first two arguments'
+     * order is reversed.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig (a -> b -> c -> ... -> z) -> (b -> a -> c -> ... -> z)
+     * @param {Function} fn The function to invoke with its first two parameters reversed.
+     * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
+     * @example
+     *
+     *      var mergeThree = function(a, b, c) {
+     *        return ([]).concat(a, b, c);
+     *      };
+     *
+     *      mergeThree(1, 2, 3); //=> [1, 2, 3]
+     *
+     *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
+     */
+    var flip = R.flip = function _flip(fn) {
+        return function(a, b) {
+            switch (arguments.length) {
+                case 0: throw noArgsException();
+                case 1: return function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); };
+                default: return fn.apply(this, concat([b, a], _slice(arguments, 2)));
+            }
+        };
+    };
+
+
+    /**
      * Private function that determines whether or not a provided object has a given method.
      * Does not ignore methods stored on the object's prototype chain. Used for dynamically
      * dispatching Ramda methods to non-Array objects.
@@ -905,7 +936,7 @@
      *
      *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
-    R.prepend = curry2(function prepend(el, list) {
+    var prepend = R.prepend = curry2(function prepend(el, list) {
         return concat([el], list);
     });
 
@@ -916,6 +947,24 @@
      * @see R.prepend
      */
     R.cons = R.prepend;
+
+
+    /**
+     * Flipped version of R.prepend.
+     *
+     * @func
+     * @memberOf R
+     * @category core
+     * @category List
+     * @sig [a] -> a -> [a]
+     * @param {Array} list
+     * @param {*} el
+     * @return {Array}
+     * @example
+     *
+     *      R.prependTo(['fi', 'fo', 'fum'], 'fee'); //=> ['fee', 'fi', 'fo', 'fum']
+     */
+    R.prependTo = flip(prepend);
 
 
     /**
@@ -1050,6 +1099,26 @@
      * @see R.append
      */
     R.push = R.append;
+
+
+    /**
+     * Flipped version of R.append.
+     *
+     * @func
+     * @memberOf R
+     * @category core
+     * @category List
+     * @sig [a] -> a -> [a]
+     * @param {Array} list
+     * @param {*} el
+     * @return {Array}
+     * @example
+     *
+     *      R.appendTo([], 1); //=> [1]
+     *      R.appendTo([1, 2, 3], 4); //=> [1, 2, 3, 4]
+     *      R.appendTo([1, 2, 3], [4, 5, 6]); //=> [1, 2, 3, [4, 5, 6]]
+     */
+    R.appendTo = flip(append);
 
 
     /**
@@ -1297,37 +1366,6 @@
      */
     R.pipe = function _pipe() {
         return compose.apply(this, R.reverse(arguments));
-    };
-
-
-    /**
-     * Returns a new function much like the supplied one, except that the first two arguments'
-     * order is reversed.
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig (a -> b -> c -> ... -> z) -> (b -> a -> c -> ... -> z)
-     * @param {Function} fn The function to invoke with its first two parameters reversed.
-     * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
-     * @example
-     *
-     *      var mergeThree = function(a, b, c) {
-     *        return ([]).concat(a, b, c);
-     *      };
-     *
-     *      mergeThree(1, 2, 3); //=> [1, 2, 3]
-     *
-     *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
-     */
-    var flip = R.flip = function _flip(fn) {
-        return function(a, b) {
-            switch (arguments.length) {
-                case 0: throw noArgsException();
-                case 1: return function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); };
-                default: return fn.apply(this, concat([b, a], _slice(arguments, 2)));
-            }
-        };
     };
 
 
