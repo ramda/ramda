@@ -3563,15 +3563,46 @@
      * @memberOf R
      * @see R.prop
      * @category Object
-     * @sig {s: a} -> s -> a
+     * @sig {k: v} -> k -> v
      * @param {Object} obj The object to query
-     * @param {String} prop The property name
+     * @param {String} p The property name
      * @return {*} The value at obj.p
      * @example
      *
-     *      R.props({x: 100}, 'x'); //=> 100
+     *      R.propOf({x: 100}, 'x'); //=> 100
      */
-    R.props = flip(R.prop);
+    R.propOf = flip(R.prop);
+
+
+    /**
+     * Acts as multiple `get`: array of keys in, array of values out. Preserves order.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig [k] -> {k: v} -> [v]
+     * @param {String[]} ps The property names to fetch
+     * @param {Object} obj The object to query
+     * @return {*[]|Function} The corresponding values or partially applied function
+     * @example
+     *
+     *      R.props(['x', 'y'], {x: 1, y: 2}); //=> [1, 2]
+     *      R.props(['c', 'a', 'b'], {b: 2, a: 1}); //=> [undefined, 1, 2]
+     *
+     *      var fullName = R.compose(R.join(' '), R.props(['first', 'last']));
+     *      fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'}); //=> 'Tony Bullet-Tooth'
+     */
+    R.props = curry2(function props(ps, obj) {
+        var len = ps.length,
+            out = new Array(len),
+            idx = -1;
+
+        while (++idx < len) {
+            out[idx] = obj[ps[idx]];
+        }
+
+        return out;
+    });
 
 
     /**
