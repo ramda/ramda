@@ -80,6 +80,9 @@ describe('concat', function() {
     });
     it('works on strings', function() {
         assert.equal(R.concat('foo', 'bar'), 'foobar');
+        assert.equal(R.concat('x', ''), 'x');
+        assert.equal(R.concat('', 'x'), 'x');
+        assert.equal(R.concat('', ''), '');
     });
     it('delegates to non-String object with a concat method, as second param', function() {
         assert.equal(R.concat(z1, z2), 'z1 z2');
