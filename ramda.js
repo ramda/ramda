@@ -21,7 +21,7 @@
     } else if (typeof define === 'function' && define.amd) {
         define(factory);
     } else {
-        this.R = this.ramda = factory(this);
+        this.R = factory(this);
     }
 }(function() {
 

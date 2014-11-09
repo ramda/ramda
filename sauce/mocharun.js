@@ -6,7 +6,7 @@ window.onload = function onload() {
     runner.on('end', function() {
         window.mochaResults = runner.stats;
         window.mochaResults.reports = failedTests;
-        window.ramda.installTo(window);  // for manual testing in the console.
+        window.R.installTo(window);  // for manual testing in the console.
     });
 
     runner.on('fail', logFailure);

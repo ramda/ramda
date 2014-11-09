@@ -1,4 +1,4 @@
-(function(root, factory) {
+(function(factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(factory);
@@ -8,10 +8,10 @@
         // like Node.
         module.exports = factory();
     } else {
-        // Browser globals (root is window)
-        root.returnExports = factory();
+        // Browser globals
+        this.returnExports = factory();
     }
-}(this, function() {
+}(function() {
     // `f` is a function that takes two function arguments: `reject` (failure) and `resolve` (success)
     function Future(f) {
         if (!(this instanceof Future)) {
