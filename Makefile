@@ -3,7 +3,6 @@ DEEDPOLL = node_modules/.bin/deedpoll \
 	--rename array:list \
 	--rename ctor:Ctor \
 	--rename fnArity:length \
-	--rename func:fn \
 	--rename i:idx \
 	--rename index:idx
 UGLIFY = node_modules/.bin/uglifyjs
