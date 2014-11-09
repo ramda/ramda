@@ -1,10 +1,20 @@
+var envvar = require('envvar');
 var sauceConf = require('./sauce/conf');
 var sauceSrv = require('./sauce/server');
+
+var ORCHESTRATE_API_KEY = envvar.string('ORCHESTRATE_API_KEY', '');
+var SAUCE_ACCESS_KEY    = envvar.string('SAUCE_ACCESS_KEY', '');
+var TRAVIS_BRANCH       = envvar.string('TRAVIS_BRANCH', '');
+var TRAVIS_BUILD_ID     = envvar.string('TRAVIS_BUILD_ID', '');
+var TRAVIS_COMMIT       = envvar.string('TRAVIS_COMMIT', '');
+var TRAVIS_COMMIT_RANGE = envvar.string('TRAVIS_COMMIT_RANGE', '');
+var TRAVIS_NODE_VERSION = envvar.string('TRAVIS_NODE_VERSION', process.versions.node);
+var TRAVIS_TAG          = envvar.string('TRAVIS_TAG', '');
 
 module.exports = function(grunt) {
     grunt.initConfig({
 
-        orchestrate_token: process.env.ORCHESTRATE_API_KEY,
+        orchestrate_token: ORCHESTRATE_API_KEY,
 
         mocha: {
             browser: ['test/**/*.html'],
@@ -72,12 +82,12 @@ module.exports = function(grunt) {
                 json.timestamp = timestamp;
                 json.datestamp = (new Date(+timestamp)).toISOString();
                 json.platform = {
-                    branch: process.env.TRAVIS_BRANCH,
-                    buildId: process.env.TRAVIS_BUILD_ID,
-                    commit: process.env.TRAVIS_COMMIT,
-                    commitRange: process.env.TRAVIS_COMMIT_RANGE,
-                    tag: process.env.TRAVIS_TAG,
-                    node: process.env.TRAVIS_NODE_VERSION || process.versions.node
+                    branch:       TRAVIS_BRANCH,
+                    buildId:      TRAVIS_BUILD_ID,
+                    commit:       TRAVIS_COMMIT,
+                    commitRange:  TRAVIS_COMMIT_RANGE,
+                    tag:          TRAVIS_TAG,
+                    node:         TRAVIS_NODE_VERSION
                 };
                 json.report = grunt.file.readJSON(abspath);
                 db.put('benchmarks', json.timestamp, json)
@@ -95,8 +105,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
-    grunt.registerTask('sauce', (function() {
-        return (typeof process.env.SAUCE_ACCESS_KEY === 'undefined') ? [] : ['connect', 'saucelabs-mocha'];
-    }()));
+    grunt.registerTask('sauce', SAUCE_ACCESS_KEY === '' ? [] : ['connect', 'saucelabs-mocha']);
     grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
 };
