@@ -117,17 +117,23 @@ describe('nth', function() {
     it('is curried', function() {
         assert.strictEqual(R.nth(0)(list), 'foo');
     });
+    it('throws if applied to null or undefined', function() {
+        assert.throws(function() { R.nth(0, null); }, TypeError);
+        assert.throws(function() { R.nth(0, undefined); }, TypeError);
+    });
 });
 
 describe('head', function() {
     it('returns undefined for an empty list', function() {
         assert.equal(typeof(R.head([])),  'undefined');
     });
-    it('returns undefined for no arguments', function() {
-        assert.equal(typeof(R.head()), 'undefined');
-    });
     it('returns the first element of a list', function() {
         assert.equal(R.head(['a', 'b', 'c', 'd']), 'a');
+    });
+    it('throws if applied to null or undefined', function() {
+        assert.throws(function() { R.head(null); }, TypeError);
+        assert.throws(function() { R.head(undefined); }, TypeError);
+        assert.throws(function() { R.head(); }, TypeError);
     });
 });
 
@@ -135,11 +141,13 @@ describe('last', function() {
     it('returns undefined for an empty list', function() {
         assert.equal(typeof(R.last([])),  'undefined');
     });
-    it('returns undefined for no arguments', function() {
-        assert.equal(typeof(R.last()), 'undefined');
-    });
     it('returns the first element of a list', function() {
         assert.equal(R.last(['a', 'b', 'c', 'd']), 'd');
+    });
+    it('throws if applied to null or undefined', function() {
+        assert.throws(function() { R.last(null); }, TypeError);
+        assert.throws(function() { R.last(undefined); }, TypeError);
+        assert.throws(function() { R.last(); }, TypeError);
     });
 });
 
@@ -147,11 +155,13 @@ describe('tail', function() {
     it('returns an empty list for an empty list', function() {
         assert.deepEqual(R.tail([]), []);
     });
-    it('returns an empty list for no arguments', function() {
-        assert.deepEqual(R.tail(), []);
-    });
     it('returns a new list containing all the elements after the first element of a list', function() {
         assert.deepEqual(['b', 'c', 'd'], R.tail(['a', 'b', 'c', 'd']));
+    });
+    it('throws if applied to null or undefined', function() {
+        assert.throws(function() { R.tail(null); }, TypeError);
+        assert.throws(function() { R.tail(undefined); }, TypeError);
+        assert.throws(function() { R.tail(); }, TypeError);
     });
 });
 
