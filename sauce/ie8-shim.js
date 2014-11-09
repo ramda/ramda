@@ -6,9 +6,9 @@ window.require = function require(path) {
         case 'assert':
             return window.assert;
         case '..':
-            return this.R ? this.R : this.ramda;
+            return this.R;
         case 'lazylist':
-            return this.R ? this.R.lazylist : this.ramda.lazylist;
+            return this.R.lazylist;
         default:
             throw new Error('Unexpected require path "' + path + '"');
     }

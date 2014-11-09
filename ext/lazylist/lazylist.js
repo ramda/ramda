@@ -4,7 +4,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory(require('../..'));
     } else {
-        this.lazylist = factory(this.ramda);
+        this.lazylist = factory(this.R);
     }
 }(function(R) {
 

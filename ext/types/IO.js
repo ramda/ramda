@@ -1,4 +1,4 @@
-(function(root, factory) {
+(function(factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['ramda'], factory);
@@ -8,10 +8,10 @@
         // like Node.
         module.exports = factory(require('../..'));
     } else {
-        // Browser globals (root is window)
-        root.returnExports = factory(root.ramda);
+        // Browser globals
+        this.returnExports = factory(this.R);
     }
-}(this, function(R) {
+}(function(R) {
     var compose = R.compose;
 
     function IO(fn) {

@@ -4,7 +4,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory(require('../..'));
     } else {
-        this.Random = factory(this.ramda);
+        this.Random = factory(this.R);
     }
 }(function(R) {
 
