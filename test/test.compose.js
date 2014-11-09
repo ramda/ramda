@@ -61,6 +61,15 @@ describe('compose', function() {
         assert.strictEqual(R.compose(f), f);
     });
 
+    it('forwards excess arguments', function() {
+        assert.strictEqual(R.compose(R.concat, R.I)('foo', 'bar', 'baz'), 'foobar');
+        function concat3(a, b, c) { return a + b + c; }
+        assert.strictEqual(R.compose(concat3, R.I)('foo', 'bar', 'baz'), 'foobarbaz');
+    });
+
+    it('preserves currying', function() {
+        assert.strictEqual(R.compose(Number, R.concat)('123')('456'), 123456);
+    });
 });
 
 describe('pipe', function() {
@@ -106,6 +115,16 @@ describe('pipe', function() {
     it('returns argument if given exactly one argument', function() {
         function f() {}
         assert.strictEqual(R.pipe(f), f);
+    });
+
+    it('forwards excess arguments', function() {
+        assert.strictEqual(R.pipe(R.I, R.concat)('foo', 'bar', 'baz'), 'foobar');
+        function concat3(a, b, c) { return a + b + c; }
+        assert.strictEqual(R.pipe(R.I, concat3)('foo', 'bar', 'baz'), 'foobarbaz');
+    });
+
+    it('preserves currying', function() {
+        assert.strictEqual(R.pipe(R.concat, Number)('123')('456'), 123456);
     });
 });
 

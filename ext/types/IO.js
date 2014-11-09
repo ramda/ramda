@@ -11,8 +11,7 @@
         // Browser globals (root is window)
         root.returnExports = factory(root.ramda);
     }
-}(this, function(R) {
-    var compose = R.compose;
+}(this, function() {
 
     function IO(fn) {
         if (!(this instanceof IO)) {
@@ -31,7 +30,9 @@
 
     IO.prototype.map = function(f) {
         var io = this;
-        return new IO(compose(f, io.fn));
+        return new IO(function() {
+            return f(io.fn.apply(io, arguments));
+        });
     };
 
     // `this` IO must wrap a function `f` that takes an IO (`thatIo`) as input
