@@ -377,7 +377,7 @@
      *      hasMethod('foo', person); //=> false
      */
     var hasMethod = function _hasMethod(methodName, obj) {
-        return obj && !isArray(obj) && typeof obj[methodName] === 'function';
+        return obj != null && !isArray(obj) && typeof obj[methodName] === 'function';
     };
 
 
