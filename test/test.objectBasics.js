@@ -166,14 +166,44 @@ describe('pluck', function() {
     });
 });
 
-describe('props', function() {
+describe('propOf', function() {
     var fred = {name: 'Fred', age: 23, feet: 'large'};
 
     it('returns a function that fetches the appropriate properties from the initially supplied object', function() {
-        var p = R.props(fred);
+        var p = R.propOf(fred);
+
         assert.equal(p('name'), 'Fred');
         assert.equal(p('age'), 23);
         assert.equal(p('feet'), 'large');
+        assert.equal(p('nonexistent'), undefined);
+    });
+});
+
+describe('props', function() {
+    var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
+
+    it('throws when called with no arguments', function() {
+        assert.throws(R.props, TypeError);
+    });
+
+    it('returns empty array if no properties requested', function() {
+        assert.deepEqual(R.props([], obj), []);
+    });
+
+    it('returns values for requested properties', function() {
+        assert.deepEqual(R.props(['a', 'e'], obj), [1, 5]);
+    });
+
+    it('preserves order', function() {
+        assert.deepEqual(R.props(['f', 'c', 'e'], obj), [6, 3, 5]);
+    });
+
+    it('returns undefined for nonexistent properties', function() {
+        assert.deepEqual(R.props(['a', 'nonexistent'], obj), [1, undefined]);
+    });
+
+    it('is automatically curried', function() {
+        assert.deepEqual(R.props(['a', 'b'])(obj), [1, 2]);
     });
 });
 
