@@ -126,11 +126,11 @@
      * @example
      *
      *      _isArray([]); //=> true
-     *      _isArray(true); //=> false
+     *      _isArray(null); //=> false
      *      _isArray({}); //=> false
      */
     var _isArray = Array.isArray || function isArray(val) {
-        return val && val.length >= 0 && toString.call(val) === '[object Array]';
+        return val != null && val.length >= 0 && toString.call(val) === '[object Array]';
     };
 
 
