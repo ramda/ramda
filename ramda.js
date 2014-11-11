@@ -576,61 +576,35 @@
 
 
     /**
-     * Turns a named method of an object (or object prototype) into a function
-     * that can be called directly.
+     * Turns a named method with a specified arity into a function
+     * that can be called directly supplied with arguments and a target object.
      *
-     * The returned function is curried and accepts `len + 1` parameters and
+     * The returned function is curried and accepts `len + 1` parameters where
      * the final parameter is the target object.
      *
      * @func
      * @memberOf R
      * @category Function
-     * @sig (Number, (a... -> b)) -> (a... -> c -> b)
+     * @sig (Number, String) -> (a... -> c -> b)
      * @param {number} len Number of arguments the returned function should take
      *        before the target object.
-     * @param {Function} method The method to wrap.
+     * @param {Function} method Name of the method to call.
      * @return {Function} A new curried function.
-     * @see R.invoker
      * @example
      *
-     *      var sliceFrom = R.invokerN(1, String.prototype.slice);
+     *      var sliceFrom = R.invokerN(1, 'slice');
      *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
+     *      var sliceFrom6 = R.invokerN(2, 'slice', 6);
+     *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
      */
-    var invokerN = R.invokerN = function invokerN(len, method) {
+    var invokerN = R.invokerN = function invokerN(arity, method) {
+        var initialArgs = Array.prototype.slice.call(arguments, 2, arguments.length);
+        var len = arity - initialArgs.length;
         return curryN(len + 1, function() {
             var target = arguments[len];
-            return method.apply(target,
-                Array.prototype.slice.call(arguments, 0, len));
+            var args = initialArgs.concat(Array.prototype.slice.call(arguments, 0, len));
+            return target[method].apply(target, args);
         });
-    };
-
-
-    /**
-     * Turns a named method of an object (or object prototype) into a function that can be
-     * called directly.
-     *
-     * The returned function is curried and accepts `method.length + 1` parameters
-     * and the final parameter is the target object.
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig (a... -> b) -> (a... -> c -> b)
-     * @param {Function} method The method to wrap.
-     * @return {Function} A new curried function.
-     * @see R.invokerN
-     * @example
-     *
-     *      var charAt = R.invoker(String.prototype.charAt);
-     *      charAt(6, 'abcdefghijklm'); //=> 'g'
-     *
-     *      var join = R.invoker(Array.prototype.join);
-     *      var firstChar = charAt(0);
-     *      join('', R.map(firstChar, ['light', 'ampliifed', 'stimulated', 'emission', 'radiation']));
-     *      //=> 'laser'
-     */
-    var invoker = R.invoker = function invoker(method) {
-        return invokerN(method.length, method);
     };
 
 
@@ -3261,7 +3235,7 @@
      *      spacer(['a', 2, 3.4]);   //=> 'a 2 3.4'
      *      R.join('|', [1, 2, 3]);    //=> '1|2|3'
      */
-    R.join = invoker(Array.prototype.join);
+    R.join = invokerN(1, 'join');
 
 
     /**
@@ -3280,7 +3254,7 @@
      *      var xs = R.range(0, 10);
      *      R.slice(2, 5)(xs); //=> [2, 3, 4]
      */
-    R.slice = invoker(Array.prototype.slice);
+    R.slice = invokerN(2, 'slice');
 
 
     /**
@@ -5131,12 +5105,12 @@
      * @param {Number} indexB An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
      * @return {String} the extracted substring
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
      */
-    var substring = R.substring = invoker(String.prototype.substring);
+    var substring = R.substring = invokerN(2, 'substring');
 
 
     /**
@@ -5149,7 +5123,7 @@
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
      * @return {String} the extracted substring
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.substringFrom(8, 'abcdefghijklm'); //=> 'ijklm'
@@ -5167,7 +5141,7 @@
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
      * @return {String} The extracted substring
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
@@ -5185,12 +5159,12 @@
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a char from
      * @return {String} the character at `index` of `str`
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.charAt(8, 'abcdefghijklm'); //=> 'i'
      */
-    R.charAt = invoker(String.prototype.charAt);
+    R.charAt = invokerN(1, 'charAt');
 
 
     /**
@@ -5203,13 +5177,13 @@
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a charCode from
      * @return {Number} the code of the character at `index` of `str`
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.charCodeAt(8, 'abcdefghijklm'); //=> 105
      *      // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
      */
-    R.charCodeAt = invoker(String.prototype.charCodeAt);
+    R.charCodeAt = invokerN(1, 'charCodeAt');
 
 
     /**
@@ -5222,12 +5196,12 @@
      * @param {RegExp} rx A regular expression.
      * @param {String} str The string to match against
      * @return {Array} The list of matches, or null if no matches found
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
      */
-    R.match = invoker(String.prototype.match);
+    R.match = invokerN(1, 'match');
 
 
     /**
@@ -5264,7 +5238,7 @@
      * @param {String} c A string to find.
      * @param {String} str The string to search in
      * @return {Number} The first index of `c` or -1 if not found
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.strIndexOf('c', 'abcdefg'); //=> 2
@@ -5285,7 +5259,7 @@
      * @param {String} c A string to find.
      * @param {String} str The string to search in
      * @return {Number} The last index of `c` or -1 if not found
-     * @see R.invoker
+     * @see R.invokerN
      * @example
      *
      *      R.strLastIndexOf('a', 'banana split'); //=> 5
@@ -5308,7 +5282,7 @@
      *
      *      R.toUpperCase('abc'); //=> 'ABC'
      */
-    R.toUpperCase = invoker(String.prototype.toUpperCase);
+    R.toUpperCase = invokerN(0, 'toUpperCase');
 
 
     /**
@@ -5324,7 +5298,7 @@
      *
      *      R.toLowerCase('XYZ'); //=> 'xyz'
      */
-    R.toLowerCase = invoker(String.prototype.toLowerCase);
+    R.toLowerCase = invokerN(0, 'toLowerCase');
 
 
     /**
@@ -5379,7 +5353,7 @@
      *
      *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
      */
-    var split = R.split = invokerN(1, String.prototype.split);
+    var split = R.split = invokerN(1, 'split');
 
 
     /**
