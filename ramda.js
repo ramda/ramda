@@ -4345,21 +4345,19 @@
      * @return {String}
      * @example
      *
-     *      R.typeof({}); //=> "Object"
-     *      R.typeof(1); //=> "Number"
-     *      R.typeof(false); //=> "Boolean"
-     *      R.typeof('s'); //=> "String"
-     *      R.typeof(null); //=> "Null"
-     *      R.typeof([]); //=> "Array"
-     *      R.typeof(/[A-z]/); //=> "RegExp"
+     *      R.type({}); //=> "Object"
+     *      R.type(1); //=> "Number"
+     *      R.type(false); //=> "Boolean"
+     *      R.type('s'); //=> "String"
+     *      R.type(null); //=> "Null"
+     *      R.type([]); //=> "Array"
+     *      R.type(/[A-z]/); //=> "RegExp"
      */
-    R.typeof = toString.call(null) === '[object Null]' ?
-        function(val) { return toString.call(val).slice(8, -1); } :
-        function(val) {
-            if (val === null) { return 'Null'; }
-            if (val === undefined) { return 'Undefined'; }
-            return toString.call(val).slice(8, -1);
-        };
+    R.type = function type(val) {
+        return val === null      ? 'Null'      :
+               val === undefined ? 'Undefined' :
+               toString.call(val).slice(8, -1);
+    };
 
     /**
      * A function that always returns `0`. Any passed in parameters are ignored.
