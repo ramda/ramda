@@ -24,11 +24,23 @@ module.exports = function(grunt) {
         },
 
         mochaTest: {
+            docs: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: ['test/test.examplesRunner.js']
+            },
             test: {
                 options: {
                     reporter: 'spec'
                 },
                 src: ['test/**/*.js', 'ext/**/test/*.js']
+            },
+            unit: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: ['test/**/*.js', '!test/test.examplesRunner.js', 'ext/**/test/*.js']
             }
         },
 
@@ -107,4 +119,6 @@ module.exports = function(grunt) {
     grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
     grunt.registerTask('sauce', SAUCE_ACCESS_KEY === '' ? [] : ['connect', 'saucelabs-mocha']);
     grunt.registerTask('test', ['jshint', 'jscs', 'mochaTest:test']);
+    grunt.registerTask('unittest', ['mochaTest:unit']);
+    grunt.registerTask('doctest', ['mochaTest:docs']);
 };
