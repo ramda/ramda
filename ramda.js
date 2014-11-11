@@ -598,11 +598,11 @@
      *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
      */
     var invokerN = R.invokerN = function invokerN(arity, method) {
-        var initialArgs = Array.prototype.slice.call(arguments, 2, arguments.length);
+        var initialArgs = _slice(arguments, 2);
         var len = arity - initialArgs.length;
         return curryN(len + 1, function() {
             var target = arguments[len];
-            var args = initialArgs.concat(Array.prototype.slice.call(arguments, 0, len));
+            var args = initialArgs.concat(_slice(arguments, 0, len));
             return target[method].apply(target, args);
         });
     };
