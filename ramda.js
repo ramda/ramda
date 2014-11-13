@@ -1246,6 +1246,39 @@
 
 
     /**
+     * Takes a function `fn`, which takes a single array argument, and returns
+     * a function which:
+     *
+     *   - takes any number of positional arguments;
+     *   - passes these arguments to `fn` as an array; and
+     *   - returns the result.
+     *
+     * In other words, R.unapply derives a variadic function from a function
+     * which takes an array. R.unapply is the inverse of R.apply.
+     *
+     * @func
+     * @memberOf R
+     * @category core
+     * @category Function
+     * @sig ([*...] -> a) -> (*... -> a)
+     * @param {Function} fn
+     * @return {Function}
+     * @see R.apply
+     * @example
+     *
+     *      R.unapply(JSON.stringify)(1, 2, 3); //=> '[1,2,3]'
+     */
+    R.unapply = function unapply(fn) {
+        if (arguments.length === 0) {
+            throw _noArgsException();
+        }
+        return function() {
+            return fn(_slice(arguments));
+        };
+    };
+
+
+    /**
      * Basic, right-associative composition function. Accepts two functions and returns the
      * composite function; this composite function represents the operation `var h = f(g(x))`,
      * where `f` is the first argument, `g` is the second argument, and `x` is whatever
