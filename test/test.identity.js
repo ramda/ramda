@@ -17,14 +17,14 @@ describe('identity', function() {
     });
 });
 
-describe('identityN', function() {
+describe('argN', function() {
     it('returns a function which returns its nth argument', function() {
-        assert.strictEqual(R.identityN(0)('foo', 'bar'), 'foo');
-        assert.strictEqual(R.identityN(1)('foo', 'bar'), 'bar');
-        assert.strictEqual(R.identityN(2)('foo', 'bar'), undefined);
+        assert.strictEqual(R.argN(0)('foo', 'bar'), 'foo');
+        assert.strictEqual(R.argN(1)('foo', 'bar'), 'bar');
+        assert.strictEqual(R.argN(2)('foo', 'bar'), undefined);
     });
 
     it('returns a function with length 0', function() {
-        assert.strictEqual(R.identityN(2).length, 0);
+        assert.strictEqual(R.argN(2).length, 0);
     });
 });

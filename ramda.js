@@ -1154,9 +1154,9 @@
      * @return {Function}
      * @example
      *
-     *      R.identityN(1)('a', 'b', 'c'); //=> 'b'
+     *      R.argN(1)('a', 'b', 'c'); //=> 'b'
      */
-    R.identityN = function identityN(n) {
+    R.argN = function argN(n) {
         return function() {
             return arguments[n];
         };
