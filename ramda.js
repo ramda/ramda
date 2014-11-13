@@ -4640,16 +4640,66 @@
      * @example
      *
      *      // Flatten all arrays in the list and return whatever is not an array
-     *      var flattenArrays = R.map(R.cond(Array.isArray, R.flatten, R.identity));
+     *      var flattenArrays = R.map(R.ifElse(Array.isArray, R.flatten, R.identity));
      *
      *      flattenArrays([[0], [[10], [8]], 1234, {}]); //=> [[0], [10, 8], 1234, {}]
      *      flattenArrays([[[10], 123], [8, [10]], "hello"]); //=> [[10, 123], [8, 10], "hello"]
      */
-    R.cond = _curry3(function cond(condition, onTrue, onFalse) {
-        return function _cond() {
+    var ifElse = R.ifElse = _curry3(function ifElse(condition, onTrue, onFalse) {
+        return function _ifElse() {
             return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
         };
     });
+
+    /**
+     * This function can safely be referenced as `R.if` in some environments
+     * (e.g. Node.js) or when writing code in a language which transcompiles
+     * to JavaScript. In such situations, `R.if` is the preferred name.
+     *
+     * @func
+     * @memberOf R
+     * @category Core
+     * @see R.ifElse
+     */
+    R['if'] = ifElse;
+
+
+    /**
+     * Returns a function, `fn`, which encapsulates if/else-if/else logic.
+     * Each argument to `R.cond` is a [predicate, transform] pair. All of
+     * the arguments to `fn` are applied to each of the predicates in turn
+     * until one returns a "truthy" value, at which point `fn` returns the
+     * result of applying its arguments to the corresponding transformer.
+     * If none of the predicates matches, `fn` returns undefined.
+     *
+     * @func
+     * @memberOf R
+     * @category logic
+     * @sig [(*... -> Boolean),(*... -> *)]... -> (*... -> *)
+     * @param {...Function} functions
+     * @returns {Function}
+     * @example
+     *
+     *      var fn = R.cond(
+     *          [R.eq(0),      R.always('water freezes at 0°C')],
+     *          [R.eq(100),    R.always('water boils at 100°C')],
+     *          [R.alwaysTrue, function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
+     *      );
+     *      fn(0); //=> 'water freezes at 0°C'
+     *      fn(50); //=> 'nothing special happens at 50°C'
+     *      fn(100); //=> 'water boils at 100°C'
+     */
+    R.cond = function cond() {
+        var pairs = arguments;
+        return function() {
+            var idx = -1;
+            while (++idx < pairs.length) {
+                if (pairs[idx][0].apply(this, arguments)) {
+                    return pairs[idx][1].apply(this, arguments);
+                }
+            }
+        };
+    };
 
 
     // Arithmetic Functions
