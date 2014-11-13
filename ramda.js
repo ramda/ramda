@@ -1144,6 +1144,26 @@
 
 
     /**
+     * Returns a function which returns its nth argument.
+     *
+     * @func
+     * @memberOf R
+     * @category Core
+     * @sig Number -> *... -> *
+     * @param {Number} n
+     * @return {Function}
+     * @example
+     *
+     *      R.identityN(1)('a', 'b', 'c'); //=> 'b'
+     */
+    R.identityN = function identityN(n) {
+        return function() {
+            return arguments[n];
+        };
+    };
+
+
+    /**
      * Calls an input function `n` times, returning an array containing the results of those
      * function calls.
      *
