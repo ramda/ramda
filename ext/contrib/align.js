@@ -19,6 +19,7 @@ var R = require('../..');
     
     
     // Example 2, key value via R.eq (equal)
+    // Also works with null or undefined return values (though in case of undefined it's created by the ifComparator)
     
     var keys   = ['cookie', 'house', 'police', 'bank', {maybe: 'maybe}];
     var values = ['eat', 'sleep', 911, null, undefined];
