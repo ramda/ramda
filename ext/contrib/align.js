@@ -3,6 +3,7 @@ var R = require('../..');
 
 /*  Returns a getter function that aligns two arrays as key->value via a match / comparator function
     A comparator function is supplied to extend flexibility for various use cases.
+    R.align(comparatorFunction, keyArray, valueArray) => returns a getter function 
 
     // Example 1, humanize numbers via R.lte (less than or equal)
     
