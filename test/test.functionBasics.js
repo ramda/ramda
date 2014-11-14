@@ -27,11 +27,13 @@ describe('unapply', function() {
     });
 
     it('forwards arguments to decorated function as an array', function() {
-        var fn = R.unapply(JSON.stringify);
-        assert.strictEqual(fn(), '[]');
-        assert.strictEqual(fn(2), '[2]');
-        assert.strictEqual(fn(2, 4), '[2,4]');
-        assert.strictEqual(fn(2, 4, 6), '[2,4,6]');
+        if (typeof JSON !== 'undefined') {
+            var fn = R.unapply(JSON.stringify);
+            assert.strictEqual(fn(), '[]');
+            assert.strictEqual(fn(2), '[2]');
+            assert.strictEqual(fn(2, 4), '[2,4]');
+            assert.strictEqual(fn(2, 4, 6), '[2,4,6]');
+        }
     });
 
     it('returns a function with length 0', function() {
