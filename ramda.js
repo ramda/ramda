@@ -1551,9 +1551,9 @@
      *      slashify('a/'); //=> 'a/'
      */
     R.wrap = function wrap(fn, wrapper) {
-        return function() {
+        return arity(fn.length, function() {
             return wrapper.apply(this, _concat([fn], arguments));
-        };
+        });
     };
 
 
