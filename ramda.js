@@ -1630,16 +1630,10 @@
 
 
     /**
-     * Accepts three functions and returns a new function. When invoked, this new function will
-     * invoke the first function, `after`, passing as its arguments the results of invoking the
-     * second and third functions with whatever arguments are passed to the new function.
-     *
-     * For example, a function produced by `converge` is equivalent to:
-     *
-     * ```javascript
-     *   var h = R.converge(e, f, g);
-     *   h(1, 2); //≅ e( f(1, 2), g(1, 2) )
-     * ```
+     * Accepts at least three functions and returns a new function. When invoked, this new
+     * function will invoke the first function, `after`, passing as its arguments the
+     * results of invoking the subsequent functions with whatever arguments are passed to
+     * the new function.
      *
      * @func
      * @memberOf R
@@ -1647,12 +1641,7 @@
      * @sig ((a, b -> c) -> (((* -> a), (* -> b), ...) -> c)
      * @param {Function} after A function. `after` will be invoked with the return values of
      *        `fn1` and `fn2` as its arguments.
-     * @param {Function} fn1 A function. It will be invoked with the arguments passed to the
-     *        returned function. Afterward, its resulting value will be passed to `after` as
-     *        its first argument.
-     * @param {Function} fn2 A function. It will be invoked with the arguments passed to the
-     *        returned function. Afterward, its resulting value will be passed to `after` as
-     *        its second argument.
+     * @param {...Function} functions A variable number of functions.
      * @return {Function} A new function.
      * @example
      *
@@ -1662,6 +1651,9 @@
      *
      *      //≅ multiply( add(1, 2), subtract(1, 2) );
      *      R.converge(multiply, add, subtract)(1, 2); //=> -3
+     *
+     *      var add3 = function(a, b, c) { return a + b + c; };
+     *      R.converge(add3, multiply, add, subtract)(1, 2); //=> 4
      */
     R.converge = function(after) {
         var fns = _slice(arguments, 1);
@@ -3633,9 +3625,9 @@
      * @memberOf R
      * @category Object
      * @sig [k] -> {k: v} -> [v]
-     * @param {String[]} ps The property names to fetch
+     * @param {Array} ps The property names to fetch
      * @param {Object} obj The object to query
-     * @return {*[]|Function} The corresponding values or partially applied function
+     * @return {Array} The corresponding values or partially applied function
      * @example
      *
      *      R.props(['x', 'y'], {x: 1, y: 2}); //=> [1, 2]
