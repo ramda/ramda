@@ -57,7 +57,7 @@ describe('unapply', function() {
             assert.strictEqual(f(a, b, c, d, e), g(a, b, c, d, e));
         }
 
-        if (JSON) { // not in IE7
+        if (typeof JSON !== 'undefined') { // not in IE7
             f = JSON.stringify;
             g = R.apply(R.unapply(f));
             idx = 100;
