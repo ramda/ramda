@@ -1,14 +1,16 @@
 /* jshint browser: true */
 
 // redefine `require` since old IE is too dumb to handle shadowing the `R` variable in the required modules.
+window.ramda = window.R;
+
 window.require = function require(path) {
     switch (path.substr(path.lastIndexOf('/') + 1)) {
         case 'assert':
             return window.assert;
         case '..':
-            return this.R;
+            return this.ramda;
         case 'lazylist':
-            return this.R.lazylist;
+            return this.ramda.lazylist;
         default:
             throw new Error('Unexpected require path "' + path + '"');
     }
