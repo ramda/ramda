@@ -199,7 +199,10 @@ describe('props', function() {
     });
 
     it('returns undefined for nonexistent properties', function() {
-        assert.deepEqual(R.props(['a', 'nonexistent'], obj), [1, undefined]);
+        var ps = R.props(['a', 'nonexistent'], obj);
+        assert.equal(ps.length, 2);
+        assert.equal(ps[0], 1);
+        assert.equal(ps[1], void 0);
     });
 
     it('is automatically curried', function() {
