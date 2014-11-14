@@ -40,36 +40,11 @@ var R = require('../..');
 
 
 
-R.align = function (compareFn, sourceArray, targetArray) {
-    
-  
-    // Second Identity function, to be replaced by R.argN(2)
-    function I2(x,y) { 
-        return y; // return second arg
-    };
-    
-    
-    // IfComparator function builder
-    //      Returns the value of 2nd array if comparator(*value of first array*) evaluates to true
-    //      Otherwise returns undefined
-         
-    function returnIf(comparator) {
-        return function(val) {
-            return R.cond(comparator(val), I2, R.always(undefined));
-        };
-    }
 
-    
-    return function (value) {
-        return(
-            R.head( // take first match
-                R.reject( // reject undefined
-                    R.eq(undefined),
-                    R.zipWith(returnIf(compareFn)(value), sourceArray, targetArray)
-                )
-            )
-        );
-    };
-};
+R.align = R.curryN(4, function (compareFn, sourceArray, targetArray, value) {
+    return R.prop(
+        R.findIndex(compareFn(value))(sourceArray)
+    )(targetArray);
+});
 
 
