@@ -8,9 +8,9 @@ var R = require('../..');
     // Example 1, humanize numbers via R.lte (less than or equal)
     
     var speeds = [30, 60, 90, 120, 150];
-    var excitements = ['slow', 'moderate', 'fast', 'very fast', 'insane'];
+    var translations = ['slow', 'moderate', 'fast', 'very fast', 'insane'];
     
-    var humanizeSpeed = R.align(R.lte, speeds, excitements);
+    var humanizeSpeed = R.align(R.lte, speeds, translations);
     
     humanizeSpeed(0)      // slow
     humanizeSpeed(33)     // moderate
