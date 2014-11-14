@@ -40,16 +40,17 @@ var R = require('../..');
 
 R.align = function (compareFn, sourceArray, targetArray) {
     
-    // Comparator function builder
-    //      Returns the value of 2nd array if comparator(value of first array) === true
-    //      Otherwise returns undefined
-    
-        
+  
     // Second Identity function, to be replaced by R.argN(2)
     function I2(x,y) { 
         return y; // return second arg
     };
     
+    
+    // IfComparator function builder
+    //      Returns the value of 2nd array if comparator(*value of first array*) evaluates to true
+    //      Otherwise returns undefined
+         
     function returnIf(comparator) {
         return function(val) {
             return R.cond(comparator(val), I2, R.always(undefined));
