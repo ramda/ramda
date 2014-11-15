@@ -56,8 +56,8 @@
      * @private
      * @category Internal
      * @param {Arguments|Array} args The array or arguments object to consider.
-     * @param {number} [from=0] The array index to slice from, inclusive.
-     * @param {number} [to=args.length] The array index to slice to, exclusive.
+     * @param {Number} [from=0] The array index to slice from, inclusive.
+     * @param {Number} [to=args.length] The array index to slice to, exclusive.
      * @return {Array} A new, sliced array.
      * @example
      *
@@ -122,7 +122,7 @@
      * @private
      * @category Internal
      * @param {*} val The object to test.
-     * @return {boolean} `true` if `val` is an array, `false` otherwise.
+     * @return {Boolean} `true` if `val` is an array, `false` otherwise.
      * @example
      *
      *      _isArray([]); //=> true
@@ -142,7 +142,7 @@
      * @category Type
      * @category List
      * @param {*} x The object to test.
-     * @return {boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
+     * @return {Boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
      * @example
      *
      *      R.isArrayLike([]); //=> true
@@ -246,8 +246,8 @@
      * @func
      * @memberOf R
      * @category Function
-     * @param {function} fn The binary operation to adjust
-     * @return {function} A new function that acts somewhat like an infix operator.
+     * @param {Function} fn The binary operation to adjust
+     * @return {Function} A new function that acts somewhat like an infix operator.
      * @example
      *
      *      var div = R.op(function (a, b) {
@@ -290,7 +290,7 @@
      * @category core
      * @category Function
      * @sig Number -> (* -> a) -> (* -> a)
-     * @param {number} fnArity The arity for the returned function.
+     * @param {Number} fnArity The arity for the returned function.
      * @param {Function} fn The function to curry.
      * @return {Function} A new, curried function.
      * @see R.curry
@@ -388,9 +388,9 @@
      *
      * @private
      * @category Internal
-     * @param {string} methodName The name of the method to check for.
+     * @param {String} methodName The name of the method to check for.
      * @param {Object} obj The object to test.
-     * @return {boolean} `true` has a given method, `false` otherwise.
+     * @return {Boolean} `true` has a given method, `false` otherwise.
      * @example
      *
      *      var person = { name: 'John' };
@@ -438,7 +438,7 @@
      * @memberOf R
      * @category Function
      * @sig Number -> (* -> a) -> (* -> a)
-     * @param {number} n The desired arity of the new function.
+     * @param {Number} n The desired arity of the new function.
      * @param {Function} fn The function to wrap.
      * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
      *         arity `n`.
@@ -540,7 +540,7 @@
      * @memberOf R
      * @sig (Number, (* -> *)) -> (* -> *)
      * @category Function
-     * @param {number} n The desired arity of the returned function.
+     * @param {Number} n The desired arity of the returned function.
      * @param {Function} fn The function to wrap.
      * @return {Function} A new function wrapping `fn`. The new function is
      *         guaranteed to be of arity `n`.
@@ -586,7 +586,7 @@
      * @memberOf R
      * @category Function
      * @sig (Number, String) -> (a... -> c -> b)
-     * @param {number} len Number of arguments the returned function should take
+     * @param {Number} len Number of arguments the returned function should take
      *        before the target object.
      * @param {Function} method Name of the method to call.
      * @return {Function} A new curried function.
@@ -871,7 +871,7 @@
      * @category List
      * @sig [a] -> Boolean
      * @param {Array} list The array to consider.
-     * @return {boolean} `true` if the `list` argument has a length of 0 or
+     * @return {Boolean} `true` if the `list` argument has a length of 0 or
      *         if `list` is a falsy value (e.g. undefined).
      * @example
      *
@@ -1175,7 +1175,7 @@
      * @category List
      * @sig (i -> a) -> i -> [a]
      * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
-     * @param {number} n A value between `0` and `n - 1`. Increments after each function call.
+     * @param {Number} n A value between `0` and `n - 1`. Increments after each function call.
      * @return {Array} An array containing the return values of all calls to `fn`.
      * @example
      *
@@ -1199,7 +1199,7 @@
      * @category List
      * @sig a -> n -> [a]
      * @param {*} value The value to repeat.
-     * @param {number} n The desired size of the output list.
+     * @param {Number} n The desired size of the output list.
      * @return {Array} A new array containing `n` `value`s.
      * @example
      *
@@ -1568,7 +1568,7 @@
      * @memberOf R
      * @category Function
      * @sig Number -> (* -> {*}) -> (* -> {*})
-     * @param {number} n The arity of the constructor function.
+     * @param {Number} n The arity of the constructor function.
      * @param {Function} Fn The constructor function to wrap.
      * @return {Function} A wrapped, curried constructor function.
      * @example
@@ -2233,7 +2233,7 @@
      * @category List
      * @sig [a] -> Number
      * @param {Array} list The array to inspect.
-     * @return {number} The size of the array.
+     * @return {Number} The size of the array.
      * @example
      *
      *      R.size([]); //=> 0
@@ -2405,7 +2405,7 @@
      * @memberOf R
      * @category List
      * @sig Number -> [a] -> [a]
-     * @param {number} n The number of elements to return.
+     * @param {Number} n The number of elements to return.
      * @param {Array} list The array to query.
      * @return {Array} A new array containing the first elements of `list`.
      */
@@ -2449,7 +2449,7 @@
      * @memberOf R
      * @category List
      * @sig Number -> [a] -> [a]
-     * @param {number} n The number of elements of `list` to skip.
+     * @param {Number} n The number of elements of `list` to skip.
      * @param {Array} list The array to consider.
      * @return {Array} The last `n` elements of `list`.
      * @example
@@ -2505,7 +2505,7 @@
      * @param {Function} fn The predicate function used to determine if the element is the
      * desired one.
      * @param {Array} list The array to consider.
-     * @return {number} The index of the element found, or `-1`.
+     * @return {Number} The index of the element found, or `-1`.
      * @example
      *
      *      var xs = [{a: 1}, {a: 2}, {a: 3}];
@@ -2563,7 +2563,7 @@
      * @param {Function} fn The predicate function used to determine if the element is the
      * desired one.
      * @param {Array} list The array to consider.
-     * @return {number} The index of the element found, or `-1`.
+     * @return {Number} The index of the element found, or `-1`.
      * @example
      *
      *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
@@ -2591,7 +2591,7 @@
      * @sig (a -> Boolean) -> [a] -> Boolean
      * @param {Function} fn The predicate function.
      * @param {Array} list The array to consider.
-     * @return {boolean} `true` if the predicate is satisfied by every element, `false`
+     * @return {Boolean} `true` if the predicate is satisfied by every element, `false`
      *         otherwise
      * @example
      *
@@ -2624,7 +2624,7 @@
      * @sig (a -> Boolean) -> [a] -> Boolean
      * @param {Function} fn The predicate function.
      * @param {Array} list The array to consider.
-     * @return {boolean} `true` if the predicate is satisfied by at least one element, `false`
+     * @return {Boolean} `true` if the predicate is satisfied by at least one element, `false`
      *         otherwise
      * @example
      *
@@ -2808,7 +2808,7 @@
      * @sig a -> [a] -> Boolean
      * @param {Object} a The item to compare against.
      * @param {Array} list The array to consider.
-     * @return {boolean} `true` if the item is in the list, `false` otherwise.
+     * @return {Boolean} `true` if the item is in the list, `false` otherwise.
      * @example
      *
      *      R.contains(3)([1, 2, 3]); //=> true
@@ -2894,7 +2894,7 @@
      * @category List
      * @sig [a] -> Boolean
      * @param {Array} list The array to consider.
-     * @return {boolean} `true` if all elements are unique, else `false`.
+     * @return {Boolean} `true` if all elements are unique, else `false`.
      * @example
      *
      *      R.isSet(['1', 1]); //=> true
@@ -2953,7 +2953,7 @@
      * @memberOf R
      * @category List
      * @sig String -> {*} -> [*]
-     * @param {string|number} key The key name to pluck off of each object.
+     * @param {Number|String} key The key name to pluck off of each object.
      * @param {Array} list The array to consider.
      * @return {Array} The list of values for the given key.
      * @example
@@ -3281,8 +3281,8 @@
      * @memberOf R
      * @category List
      * @sig Number -> Number -> [Number]
-     * @param {number} from The first number in the list.
-     * @param {number} to One more than the last number in the list.
+     * @param {Number} from The first number in the list.
+     * @param {Number} to One more than the last number in the list.
      * @return {Array} The list of numbers in tthe set `[a, b)`.
      * @example
      *
@@ -3309,9 +3309,9 @@
      * @memberOf R
      * @category List
      * @sig String -> [a] -> String
-     * @param {string|number} separator The string used to separate the elements.
+     * @param {Number|String} separator The string used to separate the elements.
      * @param {Array} xs The elements to join into a string.
-     * @return {string} str The string made by concatenating `xs` with `separator`.
+     * @return {String} str The string made by concatenating `xs` with `separator`.
      * @example
      *
      *      var spacer = R.join(' ');
@@ -3328,8 +3328,8 @@
      * @memberOf R
      * @category List
      * @sig Number -> Number -> [a] -> [a]
-     * @param {number} a The starting index.
-     * @param {number} b One more than the ending index.
+     * @param {Number} a The starting index.
+     * @param {Number} b One more than the ending index.
      * @param {Array} xs The list to take elements from.
      * @return {Array} The items from `a` to `b - 1` from `xs`.
      * @example
@@ -3347,7 +3347,7 @@
      * @memberOf R
      * @category List
      * @sig Number -> [a] -> [a]
-     * @param {number} a The starting index.
+     * @param {Number} a The starting index.
      * @param {Array} xs The list to take elements from.
      * @return {Array} The items from `a` to the end of `xs`.
      * @example
@@ -4780,9 +4780,9 @@
      * @category math
      * @sig Number -> Number -> Number
      * @sig String -> String -> String
-     * @param {number|string} a The first value.
-     * @param {number|string} b The second value.
-     * @return {number|string} The result of `a + b`.
+     * @param {Number|String} a The first value.
+     * @param {Number|String} b The second value.
+     * @return {Number|String} The result of `a + b`.
      * @example
      *
      *      var increment = R.add(1);
@@ -4803,9 +4803,9 @@
      * @memberOf R
      * @category math
      * @sig Number -> Number -> Number
-     * @param {number} a The first value.
-     * @param {number} b The second value.
-     * @return {number} The result of `a * b`.
+     * @param {Number} a The first value.
+     * @param {Number} b The second value.
+     * @return {Number} The result of `a * b`.
      * @example
      *
      *      var double = R.multiply(2);
@@ -4827,9 +4827,9 @@
      * @memberOf R
      * @category math
      * @sig Number -> Number -> Number
-     * @param {number} a The first value.
-     * @param {number} b The second value.
-     * @return {number} The result of `a - b`.
+     * @param {Number} a The first value.
+     * @param {Number} b The second value.
+     * @return {Number} The result of `a - b`.
      * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
      *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
@@ -4854,9 +4854,9 @@
      * @memberOf R
      * @category math
      * @sig Number -> Number -> Number
-     * @param {number} a The first value.
-     * @param {number} b The second value.
-     * @return {number} The result of `a / b`.
+     * @param {Number} a The first value.
+     * @param {Number} b The second value.
+     * @return {Number} The result of `a / b`.
      * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
      *                 be curried right by explicitly passing `undefined` for its first argument.
      * @example
@@ -4882,9 +4882,9 @@
      * @memberOf R
      * @category math
      * @sig Number -> Number -> Number
-     * @param {number} a The value to the divide.
-     * @param {number} b The pseudo-modulus
-     * @return {number} The result of `b % a`.
+     * @param {Number} a The value to the divide.
+     * @param {Number} b The pseudo-modulus
+     * @return {Number} The result of `b % a`.
      * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
      *                 be curried right by explicitly passing `undefined` for its first argument.
      * @see R.mathMod
@@ -4926,9 +4926,9 @@
      * @memberOf R
      * @category math
      * @sig Number -> Number -> Number
-     * @param {number} m The dividend.
-     * @param {number} p the modulus.
-     * @return {number} The result of `b mod a`.
+     * @param {Number} m The dividend.
+     * @param {Number} p the modulus.
+     * @return {Number} The result of `b mod a`.
      * @see R.moduloBy
      * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
      *                 be curried right by explicitly passing `undefined` for its first argument.
@@ -4966,7 +4966,7 @@
      * @category math
      * @sig [Number] -> Number
      * @param {Array} list An array of numbers
-     * @return {number} The sum of all the numbers in the list.
+     * @return {Number} The sum of all the numbers in the list.
      * @see reduce
      * @example
      *
@@ -4983,7 +4983,7 @@
      * @category math
      * @sig [Number] -> Number
      * @param {Array} list An array of numbers
-     * @return {number} The product of all the numbers in the list.
+     * @return {Number} The product of all the numbers in the list.
      * @see reduce
      * @example
      *
@@ -5409,8 +5409,8 @@
      * @memberOf R
      * @category string
      * @sig String -> String
-     * @param {string} str The string to upper case.
-     * @return {string} The upper case version of `str`.
+     * @param {String} str The string to upper case.
+     * @return {String} The upper case version of `str`.
      * @example
      *
      *      R.toUpperCase('abc'); //=> 'ABC'
@@ -5425,8 +5425,8 @@
      * @memberOf R
      * @category string
      * @sig String -> String
-     * @param {string} str The string to lower case.
-     * @return {string} The lower case version of `str`.
+     * @param {String} str The string to lower case.
+     * @return {String} The lower case version of `str`.
      * @example
      *
      *      R.toLowerCase('XYZ'); //=> 'xyz'
@@ -5476,8 +5476,8 @@
      * @memberOf R
      * @category string
      * @sig String -> String -> [String]
-     * @param {string} sep The separator string.
-     * @param {string} str The string to separate into an array.
+     * @param {String} sep The separator string.
+     * @param {String} str The string to separate into an array.
      * @return {Array} The array of strings from `str` separated by `str`.
      * @example
      *
@@ -5523,8 +5523,8 @@
      * @memberOf R
      * @category object
      * @sig String -> String -> {*} -> *
-     * @param {string} sep The separator to use in `path`.
-     * @param {string} path The path to use.
+     * @param {String} sep The separator to use in `path`.
+     * @param {String} path The path to use.
      * @return {*} The data at `path`.
      * @example
      *
@@ -5542,7 +5542,7 @@
      * @memberOf R
      * @category object
      * @sig String -> {*} -> *
-     * @param {string} path The dot path to use.
+     * @param {String} path The dot path to use.
      * @return {*} The data at `path`.
      * @example
      *
@@ -5560,10 +5560,10 @@
      * @memberOf R
      * @category relation
      * @sig String -> v -> {k: v} -> Boolean
-     * @param {string} path The path of the nested property to use
+     * @param {String} path The path of the nested property to use
      * @param {*} val The value to compare the nested property with
      * @param {Object} obj The object to check the nested property in
-     * @return {boolean} `true` if the value equals the nested object property,
+     * @return {Boolean} `true` if the value equals the nested object property,
      *     `false` otherwise.
      * @example
      *
@@ -5617,9 +5617,9 @@
      * @memberOf R
      * @category relation
      * @sig k -> v -> {k: v} -> Boolean
-     * @param {string|number} name The property name (or index) to use.
+     * @param {Number|String} name The property name (or index) to use.
      * @param {*} val The value to compare the property with.
-     * @return {boolean} `true` if the properties are equal, `false` otherwise.
+     * @return {Boolean} `true` if the properties are equal, `false` otherwise.
      * @example
      *
      *      var abby = {name: 'Abby', age: 7, hair: 'blond'};

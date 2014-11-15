@@ -10,7 +10,7 @@
 
     /** lazylist constructor
      *  @func
-     *  @param {any} seed - initial seed for the list.
+     *  @param {*} seed - initial seed for the list.
      *  @param {Function} current - function to calculate the head from the seed.
      *  @param {Function} step - function to calculate the next value of the list from the seed.
      *
@@ -84,8 +84,8 @@
              * @memberOf lazylist
              * @category lazylist
              * @sig Number -> lazylist a -> [a]
-             * @param {number} n The number of elements to return.
-             * @return {array} A new array containing the taken elements.
+             * @param {Number} n The number of elements to return.
+             * @return {Array} A new array containing the taken elements.
              */
             take: function(n) {
                 var take = function(ctr, lz, ret) {
@@ -105,7 +105,7 @@
              * @category lazylist
              * @sig (a -> Boolean) -> lazylist a -> [a]
              * @param {Function} pred - The function called per iteration.
-             * @return {array} A new array containing the taken elements.
+             * @return {Array} A new array containing the taken elements.
              * @example
              *
              *      var isNotFour = function(x) {
@@ -130,8 +130,8 @@
              * @memberOf lazylist
              * @category lazylist
              * @sig Number -> lazylist a -> lazylist a
-             * @param {number} n - The number of elements of `list` to skip.
-             * @return {lazylist} The last `n` elements of `list`.
+             * @param {Number} n - The number of elements of `list` to skip.
+             * @return {Lazylist} The last `n` elements of `list`.
              * @example
              *
              *     lazylist(1, R.identity, R.add(1)).skip(3); //=> [4,5,6,7...]
@@ -152,7 +152,7 @@
              * @category lazylist
              * @sig (a -> b) -> lazylist a -> lazylist b
              * @param {Function} fn The function to be called on every element of the input `list`.
-             * @return {lazylist} The new list.
+             * @return {Lazylist} The new list.
              * @example
              *
              *      var double = function(x) {
@@ -180,7 +180,7 @@
              * @category lazylist
              * @sig (a -> Boolean) -> lazylist a -> lazylist a
              * @param {Function} fn The function called per iteration.
-             * @return {lazylist} The new filtered lazylist.
+             * @return {Lazylist} The new filtered lazylist.
              * @example
              *
              *      var isEven = function(n) {
@@ -216,8 +216,8 @@
      * @memberOf R
      * @category lazylist
      * @sig a -> [a]
-     * @param {any} value to repeat indefinitely
-     * @return {lazylist} new lazylist
+     * @param {*} value to repeat indefinitely
+     * @return {Lazylist} new lazylist
      * @example
      *      R.repeat(1) //=> [1, 1, 1, ...]
      */
