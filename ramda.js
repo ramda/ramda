@@ -417,8 +417,8 @@
      */
     function _checkForMethod(methodname, fn) {
         return function(a, b, c) {
-            var length = arguments.length;
-            var obj = arguments[length - 1],
+            var length = arguments.length,
+                obj = arguments[length - 1],
                 callBound = obj && !_isArray(obj) && typeof obj[methodname] === 'function';
             switch (arguments.length) {
                 case 0: return fn();
@@ -598,11 +598,11 @@
      *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
      */
     var invokerN = R.invokerN = function invokerN(arity, method) {
-        var initialArgs = _slice(arguments, 2);
-        var len = arity - initialArgs.length;
+        var initialArgs = _slice(arguments, 2),
+            len = arity - initialArgs.length;
         return curryN(len + 1, function() {
-            var target = arguments[len];
-            var args = initialArgs.concat(_slice(arguments, 0, len));
+            var target = arguments[len],
+                args = initialArgs.concat(_slice(arguments, 0, len));
             return target[method].apply(target, args);
         });
     };
@@ -668,8 +668,8 @@
      *      addDoubleAndSquare(10, 5, 100); //=> 145
      */
     var useWith = R.useWith = function useWith(fn /*, transformers */) {
-        var transformers = _slice(arguments, 1);
-        var tlen = transformers.length;
+        var transformers = _slice(arguments, 1),
+            tlen = transformers.length;
         return curry(arity(tlen, function() {
             var args = [], idx = -1;
             while (++idx < tlen) {
@@ -1182,8 +1182,7 @@
      *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
      */
     var times = R.times = _curry2(function times(fn, n) {
-        var list = new Array(n);
-        var idx = -1;
+        var list = new Array(n), idx = -1;
         while (++idx < n) {
             list[idx] = fn(idx);
         }
@@ -1905,8 +1904,7 @@
      *      R.unfoldr(f, 10); //=> [-10, -20, -30, -40, -50]
      */
     R.unfoldr = _curry2(function unfoldr(fn, seed) {
-        var pair = fn(seed);
-        var result = [];
+        var pair = fn(seed), result = [];
         while (pair && pair.length) {
             result.push(pair[0]);
             pair = fn(pair[1]);
@@ -2484,8 +2482,7 @@
      *      R.find(R.propEq('a', 4))(xs); //=> undefined
      */
     R.find = _curry2(function find(fn, list) {
-        var idx = -1;
-        var len = list.length;
+        var idx = -1, len = list.length;
         while (++idx < len) {
             if (fn(list[idx])) {
                 return list[idx];
@@ -2513,8 +2510,7 @@
      *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
      */
     R.findIndex = _curry2(function findIndex(fn, list) {
-        var idx = -1;
-        var len = list.length;
+        var idx = -1, len = list.length;
         while (++idx < len) {
             if (fn(list[idx])) {
                 return idx;
@@ -2934,8 +2930,7 @@
      *      R.uniqWith(strEq)(['1', 1, 1]);    //=> ['1']
      */
     var uniqWith = R.uniqWith = _curry2(function uniqWith(pred, list) {
-        var idx = -1, len = list.length;
-        var result = [], item;
+        var idx = -1, len = list.length, result = [], item;
         while (++idx < len) {
             item = list[idx];
             if (!_containsWith(pred, item, result)) {
@@ -3078,9 +3073,7 @@
      *      R.zip([1, 2, 3], ['a', 'b', 'c']); //=> [[1, 'a'], [2, 'b'], [3, 'c']]
      */
     R.zip = _curry2(function zip(a, b) {
-        var rv = [];
-        var idx = -1;
-        var len = Math.min(a.length, b.length);
+        var rv = [], idx = -1, len = Math.min(a.length, b.length);
         while (++idx < len) {
             rv[idx] = [a[idx], b[idx]];
         }
@@ -3229,12 +3222,9 @@
         if (isEmpty(a) || isEmpty(b)) {
             return [];
         }
-        var idx = -1;
-        var ilen = a.length;
-        var j;
-        var jlen = b.length;
+        var idx = -1, ilen = a.length, j, jlen = b.length, result;
         // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
-        var result = [];
+        result = [];
         while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
@@ -3263,9 +3253,7 @@
      *      R.reverse([]);         //=> []
      */
     var reverse = R.reverse = function reverse(list) {
-        var idx = -1, length = list.length;
-        var pointer = length;
-        var result = new Array(length);
+        var idx = -1, length = list.length, pointer = length, result = new Array(length);
         while (++idx < length) {
             result[--pointer] = list[idx];
         }
@@ -3865,8 +3853,8 @@
      */
     var keys = R.keys = (function() {
         // cover IE < 9 keys issues
-        var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
-        var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
+        var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString'),
+            nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
                                   'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
 
         return function keys(obj) {
@@ -4388,8 +4376,8 @@
             if (length === 0) {
                 throw _noArgsException();
             }
-            var parts = split('.', path);
-            var fn = _curry2(function(val, obj) {
+            var parts = split('.', path),
+                fn = _curry2(function(val, obj) {
                 return setParts(parts, val, obj);
             });
             switch (length) {
@@ -5451,13 +5439,13 @@
     R.trim = (function() {
         var ws = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
             '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028' +
-            '\u2029\uFEFF';
-        var zeroWidth = '\u200b';
-        var hasProtoTrim = (typeof String.prototype.trim === 'function');
+            '\u2029\uFEFF',
+            zeroWidth = '\u200b',
+            hasProtoTrim = (typeof String.prototype.trim === 'function');
         if (!hasProtoTrim || (ws.trim() || !zeroWidth.trim())) {
             return function trim(str) {
-                var beginRx = new RegExp('^[' + ws + '][' + ws + ']*');
-                var endRx = new RegExp('[' + ws + '][' + ws + ']*$');
+                var beginRx = new RegExp('^[' + ws + '][' + ws + ']*'),
+                    endRx = new RegExp('[' + ws + '][' + ws + ']*$');
                 return str.replace(beginRx, '').replace(endRx, '');
             };
         } else {
@@ -5697,9 +5685,7 @@
      *      R.difference([7,6,5,4,3], [1,2,3,4]); //=> [7,6,5]
      */
     R.difference = _curry2(function difference(first, second) {
-        var out = [];
-        var idx = -1;
-        var firstLen = first.length;
+        var out = [], idx = -1, firstLen = first.length;
         while (++idx < firstLen) {
             if (_indexOf(second, first[idx]) === -1 && _indexOf(out, first[idx]) === -1) {
                 out.push(first[idx]);
@@ -5732,10 +5718,8 @@
      *
      */
     R.differenceWith = _curry3(function differenceWith(pred, first, second) {
-        var out = [];
-        var idx = -1;
-        var firstLen = first.length;
-        var containsPred = containsWith(pred);
+        var out = [], idx = -1, firstLen = first.length,
+            containsPred = containsWith(pred);
         while (++idx < firstLen) {
             if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
                 out.push(first[idx]);
