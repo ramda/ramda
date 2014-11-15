@@ -5462,7 +5462,7 @@
             };
         } else {
             return function trim(str) {
-                return str.trim(str);
+                return str.trim();
             };
         }
     }());
