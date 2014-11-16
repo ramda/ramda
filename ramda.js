@@ -885,6 +885,10 @@
     };
 
 
+    function _prepend(el, list) {
+        return _concat([el], list);
+    }
+
     /**
      * Returns a new list with the given element at the front, followed by the contents of the
      * list.
@@ -901,9 +905,6 @@
      *
      *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
-    function _prepend(el, list) {
-        return _concat([el], list);
-    }
     var prepend = R.prepend = _curry2(_prepend);
 
     /**
@@ -1028,6 +1029,10 @@
     R.cdr = tail;
 
 
+    function _append(el, list) {
+        return _concat(list, [el]);
+    }
+
     /**
      * Returns a new list containing the contents of the given list, followed by the given
      * element.
@@ -1047,9 +1052,6 @@
      *      R.append('tests', []); //=> ['tests']
      *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
      */
-    function _append(el, list) {
-        return _concat(list, [el]);
-    }
     var append = R.append = _curry2(_append);
 
     /**
@@ -1915,6 +1917,14 @@
     });
 
 
+    function _map(fn, list) {
+        var idx = -1, len = list.length, result = new Array(len);
+        while (++idx < len) {
+            result[idx] = fn(list[idx]);
+        }
+        return result;
+    }
+
     /**
      * Returns a new list, constructed by applying the supplied function to every element of the
      * supplied list.
@@ -1939,14 +1949,6 @@
      *
      *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
      */
-    function _map(fn, list) {
-        var idx = -1, len = list.length, result = new Array(len);
-        while (++idx < len) {
-            result[idx] = fn(list[idx]);
-        }
-        return result;
-    }
-
     var map = R.map = _curry2(_checkForMethod('map', _map));
 
 
@@ -2316,6 +2318,16 @@
     R.length = size;
 
 
+    function _filter(fn, list) {
+        var idx = -1, len = list.length, result = [];
+        while (++idx < len) {
+            if (fn(list[idx])) {
+                result.push(list[idx]);
+            }
+        }
+        return result;
+    }
+
     /**
      * Returns a new list containing only those items that match a given predicate function.
      * The predicate function is passed one argument: *(value)*.
@@ -2339,16 +2351,6 @@
      *      };
      *      R.filter(isEven, [1, 2, 3, 4]); //=> [2, 4]
      */
-    function _filter(fn, list) {
-        var idx = -1, len = list.length, result = [];
-        while (++idx < len) {
-            if (fn(list[idx])) {
-                result.push(list[idx]);
-            }
-        }
-        return result;
-    }
-
     R.filter = _curry2(_checkForMethod('filter', _filter));
 
 
