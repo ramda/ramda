@@ -1630,9 +1630,9 @@
 
 
     /**
-     * Accepts three functions and returns a new function. When invoked, this new function will
+     * Accepts two or more functions and returns a new function. When invoked, this new function will
      * invoke the first function, `after`, passing as its arguments the results of invoking the
-     * second and third functions with whatever arguments are passed to the new function.
+     * second, third, etc. functions with whatever arguments are passed to the new function.
      *
      * For example, a function produced by `converge` is equivalent to:
      *
@@ -1644,15 +1644,12 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig ((a, b -> c) -> (((* -> a), (* -> b), ...) -> c)
+     * @sig ((a, b, ... -> c) -> (((* -> a), (* -> b), ...) -> c)
      * @param {Function} after A function. `after` will be invoked with the return values of
      *        `fn1` and `fn2` as its arguments.
-     * @param {Function} fn1 A function. It will be invoked with the arguments passed to the
-     *        returned function. Afterward, its resulting value will be passed to `after` as
-     *        its first argument.
-     * @param {Function} fn2 A function. It will be invoked with the arguments passed to the
-     *        returned function. Afterward, its resulting value will be passed to `after` as
-     *        its second argument.
+     * @param {...Function} A variable number of functions. They will be invoked with their arguments passed to the
+     *        returned function. Afterward, their resulting values will be passed to `after` as
+     *        its nth argument.
      * @return {Function} A new function.
      * @example
      *
@@ -1663,16 +1660,19 @@
      *      //≅ multiply( add(1, 2), subtract(1, 2) );
      *      R.converge(multiply, add, subtract)(1, 2); //=> -3
      */
-    R.converge = function(after) {
+
+
+    R.converge = function(fn) {
         var fns = _slice(arguments, 1);
         return function() {
-            var args = arguments;
-            return after.apply(this, _map(function(fn) {
-                return fn.apply(this, args);
-            }, fns));
+            var appliedFns = new Array(fns.length);
+            var i = -1;
+            while (++i < fns.length) {
+                appliedFns[i] = fns[i].apply(this, arguments);
+            }
+            return fn.apply(this, appliedFns);
         };
     };
-
 
 
     // List Functions
