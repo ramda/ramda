@@ -92,6 +92,7 @@ function assertPairEqual(test_info) {
 
 function requireFromStr(src, filename) {
     var m = new module.constructor();
+    m.paths = module.paths;
     m._compile(src, filename);
     return m.exports;
 }
