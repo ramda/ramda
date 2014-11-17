@@ -1660,8 +1660,6 @@
      *      //≅ multiply( add(1, 2), subtract(1, 2) );
      *      R.converge(multiply, add, subtract)(1, 2); //=> -3
      */
-
-
     R.converge = function(fn) {
         var fns = _slice(arguments, 1);
         return function() {
