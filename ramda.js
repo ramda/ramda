@@ -1390,6 +1390,15 @@
     };
 
 
+    function _createPartialApplicator(concat) {
+        return function(fn) {
+            var args = _slice(arguments, 1);
+            return arity(Math.max(0, fn.length - args.length), function() {
+                return fn.apply(this, concat(args, arguments));
+            });
+        };
+    }
+
     /**
      * Accepts as its arguments a function and any number of values and returns a function that,
      * when invoked, calls the original function with all of the values prepended to the
@@ -1416,12 +1425,7 @@
      *      var sayHelloToMs = R.lPartial(sayHello, 'Ms.');
      *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
      */
-    var lPartial = R.lPartial = function lPartial(fn /*, args */) {
-        var args = _slice(arguments, 1);
-        return arity(Math.max(fn.length - args.length, 0), function() {
-            return fn.apply(this, _concat(args, arguments));
-        });
-    };
+    var lPartial = R.lPartial = _createPartialApplicator(_concat);
 
 
     /**
@@ -1449,12 +1453,7 @@
      *
      *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
      */
-    var rPartial = R.rPartial = function rPartial(fn) {
-        var args = _slice(arguments, 1);
-        return arity(Math.max(fn.length - args.length, 0), function() {
-            return fn.apply(this, _concat(arguments, args));
-        });
-    };
+    var rPartial = R.rPartial = _createPartialApplicator(flip(_concat));
 
 
     /**
