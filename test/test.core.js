@@ -13,35 +13,44 @@ describe('isEmpty', function() {
 
     it('returns true for empty string', function() {
         assert.strictEqual(R.isEmpty(''), true);
+        assert.strictEqual(R.isEmpty(' '), false);
     });
 
     it('returns true for empty array', function() {
         assert.strictEqual(R.isEmpty([]), true);
+        assert.strictEqual(R.isEmpty(['']), false);
+    });
+
+    it('returns true for empty object', function() {
+        assert.strictEqual(R.isEmpty({}), true);
+        assert.strictEqual(R.isEmpty({'': ''}), false);
     });
 
     it('returns true for empty arguments object', function() {
         assert.strictEqual(R.isEmpty((function() { return arguments; }())), true);
+        assert.strictEqual(R.isEmpty((function() { return arguments; }(''))), false);
     });
 
-    it('returns true for object with own length property whose value is 0', function() {
+    it('returns true for array-like with length 0', function() {
+        assert.strictEqual(R.isEmpty({length: 0}), true);
         assert.strictEqual(R.isEmpty({length: 0, x: 1, y: 2}), true);
+        assert.strictEqual(R.isEmpty({length: 1, 0: ''}), false);
+        assert.strictEqual(R.isEmpty({length: '0'}), false);
     });
 
-    it('returns true for object with inherited length property whose value is 0', function() {
-        function Empty() {}
-        Empty.prototype.length = 0;
-        assert.strictEqual(R.isEmpty(new Empty()), true);
+    it('returns true for object with inherited properties only', function() {
+        assert.strictEqual(R.isEmpty(new RegExp('x')), true);
     });
 
-    it('returns false for every other value', function() {
-        assert.strictEqual(R.isEmpty(0), false);
-        assert.strictEqual(R.isEmpty(NaN), false);
-        assert.strictEqual(R.isEmpty(['']), false);
-        assert.strictEqual(R.isEmpty({}), false);
-
-        function Nonempty() {}
-        Nonempty.prototype.length = 1;
-        assert.strictEqual(R.isEmpty(new Nonempty()), false);
+    it('returns true for number', function() {
+        assert.strictEqual(R.isEmpty(0), true);
+        assert.strictEqual(R.isEmpty(42), true);
+        assert.strictEqual(R.isEmpty(Infinity), true);
+        assert.strictEqual(R.isEmpty(-Infinity), true);
+        assert.strictEqual(R.isEmpty(NaN), true);
+        /* jshint -W053 */
+        assert.strictEqual(R.isEmpty(new Number(-1)), true);
+        /* jshint +W053 */
     });
 });
 
