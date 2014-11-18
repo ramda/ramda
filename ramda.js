@@ -2884,7 +2884,7 @@
      *      R.contains(obj)([{}, obj, {}]); //=> true
      */
     function _contains(a, list) {
-        return _indexOf(list, a) > -1;
+        return _indexOf(list, a) >= 0;
     }
 
     R.contains = _curry2(_contains);
@@ -5767,7 +5767,7 @@
         var idx = -1;
         var firstLen = first.length;
         while (++idx < firstLen) {
-            if (_indexOf(second, first[idx]) === -1 && _indexOf(out, first[idx]) === -1) {
+            if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
                 out.push(first[idx]);
             }
         }
