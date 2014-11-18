@@ -864,24 +864,25 @@
 
 
     /**
-     * Reports whether an array is empty.
+     * Reports whether a value is "empty".
+     * Empty values are null, undefined, "", and every object with a length
+     * property whose value is 0 (such as an empty array).
      *
      * @func
      * @memberOf R
-     * @category List
-     * @sig [a] -> Boolean
-     * @param {Array} list The array to consider.
-     * @return {Boolean} `true` if the `list` argument has a length of 0 or
-     *         if `list` is a falsy value (e.g. undefined).
+     * @category Core
+     * @sig * -> Boolean
+     * @param {*} val
+     * @return {Boolean}
      * @example
      *
      *      R.isEmpty([1, 2, 3]); //=> false
      *      R.isEmpty([]); //=> true
-     *      R.isEmpty(); //=> true
+     *      R.isEmpty(''); //=> true
      *      R.isEmpty(null); //=> true
      */
-    var isEmpty = R.isEmpty = function isEmpty(list) {
-        return !list || !list.length;
+    var isEmpty = R.isEmpty = function isEmpty(val) {
+        return val == null || val.length === 0;
     };
 
 
