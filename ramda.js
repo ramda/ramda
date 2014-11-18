@@ -1645,7 +1645,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig ((*... -> c) -> (((* -> a), (* -> b), ...) -> c)
+     * @sig ((*... -> c) -> (((* -> a), ...) -> c)
      * @param {Function} after A function. `after` will be invoked with the return values of
      *        `fn1` and `fn2` as its arguments.
      * @param {...Function} functions A variable number of functions.
