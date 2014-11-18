@@ -26,7 +26,9 @@
 
         var mash = function(data) {
             data = data.toString();
-            for (var idx = 0; idx < data.length; idx++) {
+            var len = data.length;
+            var idx = -1;
+            while (++idx < len) {
                 n += data.charCodeAt(idx);
                 var h = 0.02519603282416938 * n;
                 n = h >>> 0;
@@ -61,7 +63,9 @@
             s1 = mash(' ');
             s2 = mash(' ');
 
-            for (var idx = 0; idx < args.length; idx++) {
+            var len = args.length;
+            var idx = -1;
+            while (++idx < len) {
                 s0 -= mash(args[idx]);
                 if (s0 < 0) {
                     s0 += 1;

@@ -98,15 +98,18 @@
     function _concat(set1, set2) {
         set1 = set1 || [];
         set2 = set2 || [];
-        var length1 = set1.length,
-            length2 = set2.length,
-            result = new Array(length1 + length2);
+        var idx;
+        var len1 = set1.length;
+        var len2 = set2.length;
+        var result = new Array(len1 + len2);
 
-        for (var idx = 0; idx < length1; idx++) {
+        idx = -1;
+        while (++idx < len1) {
             result[idx] = set1[idx];
         }
-        for (idx = 0; idx < length2; idx++) {
-            result[idx + length1] = set2[idx];
+        idx = -1;
+        while (++idx < len2) {
+            result[len1 + idx] = set2[idx];
         }
         return result;
     }
@@ -843,7 +846,9 @@
      * @return {*} The copied value.
      */
     function _copyObj(value, copiedValue, refFrom, refTo) {
-        for (var idx = 0, len = refFrom.length; idx < len; idx++) {
+        var len = refFrom.length;
+        var idx = -1;
+        while (++idx < len) {
             if (value === refFrom[idx]) {
                 return refTo[idx];
             }
@@ -2728,14 +2733,15 @@
      *
      */
     function _indexOf(list, item, from) {
-        var idx = 0, length = list.length;
+        var idx = 0, len = list.length;
         if (typeof from == 'number') {
-            idx = from < 0 ? Math.max(0, length + from) : from;
+            idx = from < 0 ? Math.max(0, len + from) : from;
         }
-        for (; idx < length; idx++) {
+        while (idx < len) {
             if (list[idx] === item) {
                 return idx;
             }
+            ++idx;
         }
         return -1;
     }
@@ -3360,8 +3366,8 @@
             return [];
         }
         var idx = 0, result = new Array(Math.floor(to) - Math.ceil(from));
-        for (; from < to; idx++, from++) {
-            result[idx] = from;
+        while (from < to) {
+            result[idx++] = from++;
         }
         return result;
     });
@@ -4061,10 +4067,11 @@
      *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
      */
     R.values = function values(obj) {
-        var props = keys(obj),
-            length = props.length,
-            vals = new Array(length);
-        for (var idx = 0; idx < length; idx++) {
+        var props = keys(obj);
+        var len = props.length;
+        var vals = new Array(len);
+        var idx = -1;
+        while (++idx < len) {
             vals[idx] = obj[props[idx]];
         }
         return vals;
@@ -4107,13 +4114,15 @@
      */
     // TODO: document, even for internals...
     function _pickWith(test, obj) {
-        var copy = {},
-            props = keysIn(obj), prop, val;
-        for (var idx = 0, len = props.length; idx < len; idx++) {
+        var copy = {};
+        var prop;
+        var props = keysIn(obj);
+        var len = props.length;
+        var idx = -1;
+        while (++idx < len) {
             prop = props[idx];
-            val = obj[prop];
-            if (test(val, prop, obj)) {
-                copy[prop] = val;
+            if (test(obj[prop], prop, obj)) {
+                copy[prop] = obj[prop];
             }
         }
         return copy;
