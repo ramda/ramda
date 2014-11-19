@@ -870,8 +870,8 @@
 
     /**
      * Reports whether a value is "empty".
-     * Empty values are null, undefined, "", and every object with a length
-     * property whose value is 0 (such as an empty array).
+     * Empty values are null, undefined, "", array-likes with length 0,
+     * and objects with no enumerable own-properties.
      *
      * @func
      * @memberOf R
@@ -883,11 +883,23 @@
      *
      *      R.isEmpty([1, 2, 3]); //=> false
      *      R.isEmpty([]); //=> true
+     *      R.isEmpty({}); //=> true
      *      R.isEmpty(''); //=> true
      *      R.isEmpty(null); //=> true
      */
-    var isEmpty = R.isEmpty = function isEmpty(val) {
-        return val == null || val.length === 0;
+    R.isEmpty = function isEmpty(val) {
+        if (val == null) {
+            return true;
+        }
+        if (isArrayLike(val)) {
+            return val.length === 0;
+        }
+        for (var prop in val) {
+            if (_hasOwnProperty.call(val, prop)) {
+                return false;
+            }
+        }
+        return true;
     };
 
 
@@ -3428,7 +3440,7 @@
      *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
      */
     R.xprod = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
-        if (isEmpty(a) || isEmpty(b)) {
+        if (a.length === 0 || b.length === 0) {
             return [];
         }
         var idx = -1;
