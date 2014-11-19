@@ -1,7 +1,7 @@
 module.exports = [
     {
         browserName: 'ipad',
-        version: '8.0',
+        version: '8.1',
         'device-orientation': 'portrait',
         platform: 'OS X 10.9'
     },

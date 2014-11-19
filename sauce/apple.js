@@ -13,5 +13,10 @@ module.exports = [
         browserName: 'safari',
         version: '7',
         platform: 'OS X 10.9'
+    },
+    {
+        browserName: 'safari',
+        version: '8',
+        platform: 'OS X 10.10'
     }
 ];
