@@ -300,6 +300,22 @@ describe('max', function() {
         assert.equal(R.max([]), -Infinity);
     });
 
+    it('returns expected results for an entry that cannot be cast to number', function() {
+        assert.equal(R.max([{}]), -Infinity);
+        assert.equal(R.max([]), -Infinity);
+        assert.equal(R.max([[]]), 0);
+        assert.equal(R.max([undefined]), -Infinity);
+        assert.equal(R.max([null]), 0);
+        assert.equal(R.max(['a']), -Infinity);
+        assert.equal(R.max([/aeiou/]), -Infinity);
+        assert.equal(R.max([1,{}]), 1);
+        assert.equal(R.max([1,[]]), 1);
+        assert.equal(R.max([1,undefined]), 1);
+        assert.equal(R.max([1,null]), 1);
+        assert.equal(R.max([1, 'a']), 1);
+        assert.equal(R.max([1, /aeiou/]), 1);
+    });
+
     it('returns a number', function() {
         assert.equal(R.max(['4', '1', '100', '10', '2']), 100);
     });
@@ -325,6 +341,22 @@ describe('min', function() {
 
     it('returns Infinity for an empty list', function() {
         assert.equal(R.min([]), Infinity);
+    });
+
+    it('returns expected results for an entry that cannot be cast to number', function() {
+        assert.equal(R.min([{}]), Infinity);
+        assert.equal(R.min([]), Infinity);
+        assert.equal(R.min([[]]), 0);
+        assert.equal(R.min([undefined]), Infinity);
+        assert.equal(R.min([null]), 0);
+        assert.equal(R.min(['a']), Infinity);
+        assert.equal(R.min([/aeiou/]), Infinity);
+        assert.equal(R.min([1,{}]), 1);
+        assert.equal(R.min([1,[]]), 0);
+        assert.equal(R.min([1,undefined]), 1);
+        assert.equal(R.min([1,null]), 0);
+        assert.equal(R.min([1, 'a']), 1);
+        assert.equal(R.min([1, /aeiou/]), 1);
     });
 
     it('returns a number', function() {
