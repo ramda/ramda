@@ -2,13 +2,13 @@ var assert = require('assert');
 var R = require('..');
 
 describe('isEmpty', function() {
-    it('returns true for null', function() {
-        assert.strictEqual(R.isEmpty(null), true);
+    it('returns false for null', function() {
+        assert.strictEqual(R.isEmpty(null), false);
     });
 
-    it('returns true for undefined', function() {
-        assert.strictEqual(R.isEmpty(undefined), true);
-        assert.strictEqual(R.isEmpty(), true);
+    it('returns false for undefined', function() {
+        assert.strictEqual(R.isEmpty(undefined), false);
+        assert.strictEqual(R.isEmpty(), false);
     });
 
     it('returns true for empty string', function() {
