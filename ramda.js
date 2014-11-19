@@ -3033,7 +3033,7 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig (x, a -> Boolean) -> x -> [a] -> Boolean
+     * @sig (a, a -> Boolean) -> a -> [a] -> Boolean
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {*} x The item to find
      * @param {Array} list The list to iterate over
@@ -3123,13 +3123,13 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig (x, a -> Boolean) -> [a] -> [a]
+     * @sig (a, a -> Boolean) -> [a] -> [a]
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list The array to consider.
      * @return {Array} The list of unique items.
      * @example
      *
-     *      var strEq = function(a, b) { return ('' + a) === ('' + b) };
+     *      var strEq = function(a, b) { return String(a) === String(b); };
      *      R.uniqWith(strEq)([1, '1', 2, 1]); //=> [1, 2]
      *      R.uniqWith(strEq)([{}, {}]);       //=> [{}]
      *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]
@@ -4243,7 +4243,7 @@
      *
      */
     // TODO: document, even for internals...
-    function _pickWith(test, obj) {
+    function _pickBy(test, obj) {
         var copy = {};
         var prop;
         var props = keysIn(obj);
@@ -4276,7 +4276,7 @@
      *      R.pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1}
      */
     R.pick = _curry2(function pick(names, obj) {
-        return _pickWith(function(val, key) {
+        return _pickBy(function(val, key) {
             return _contains(key, names);
         }, obj);
     });
@@ -4297,7 +4297,7 @@
      *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
      */
     R.omit = _curry2(function omit(names, obj) {
-        return _pickWith(function(val, key) {
+        return _pickBy(function(val, key) {
             return !_contains(key, names);
         }, obj);
     });
@@ -4320,9 +4320,9 @@
      * @example
      *
      *      var isUpperCase = function(val, key) { return key.toUpperCase() === key; }
-     *      R.pickWith(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
+     *      R.pickBy(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
      */
-    R.pickWith = _curry2(_pickWith);
+    R.pickBy = _curry2(_pickBy);
 
 
     /**
@@ -4490,7 +4490,7 @@
      * the test object's value for the property in question, as well as the whole test object.
      *
      * `where` is well suited to declaratively expressing constraints for other functions, e.g.,
-     * `filter`, `find`, `pickWith`, etc.
+     * `filter`, `find`, `pickBy`, etc.
      *
      * @func
      * @memberOf R
@@ -5323,14 +5323,14 @@
     /**
      * Create a function which takes a comparator function and a list
      * and determines the winning value by a compatator. Used internally
-     * by `R.maxWith` and `R.minWith`
+     * by `R.maxBy` and `R.minBy`
      *
      * @private
      * @param {Function} compatator a function to compare two items
      * @category math
      * @return {Function}
      */
-    function _createMaxMinWith(comparator) {
+    function _createMaxMinBy(comparator) {
         return function(valueComputer, list) {
             if (!(list && list.length > 0)) {
                 return;
@@ -5357,7 +5357,7 @@
      * @memberOf R
      * @category math
      * @sig [Number] -> Number
-     * @see R.maxWith
+     * @see R.maxBy
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
      * @example
@@ -5382,9 +5382,9 @@
      *
      *      function cmp(obj) { return obj.x; }
      *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
-     *      R.maxWith(cmp, [a, b, c]); //=> {x: 3}
+     *      R.maxBy(cmp, [a, b, c]); //=> {x: 3}
      */
-    R.maxWith = _curry2(_createMaxMinWith(gt));
+    R.maxBy = _curry2(_createMaxMinBy(gt));
 
 
     /**
@@ -5396,7 +5396,7 @@
      * @sig [Number] -> Number
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
-     * @see R.minWith
+     * @see R.minBy
      * @example
      *
      *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
@@ -5419,9 +5419,9 @@
      *
      *      function cmp(obj) { return obj.x; }
      *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
-     *      R.minWith(cmp, [a, b, c]); //=> {x: 1}
+     *      R.minBy(cmp, [a, b, c]); //=> {x: 1}
      */
-    R.minWith = _curry2(_createMaxMinWith(lt));
+    R.minBy = _curry2(_createMaxMinBy(lt));
 
 
 
