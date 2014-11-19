@@ -4426,7 +4426,7 @@
 
 
     /**
-     * Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
+     * Reports whether two objects have the same value for the specified property.  Useful as a curried predicate.
      *
      * @func
      * @memberOf R
