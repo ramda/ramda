@@ -1,5 +1,6 @@
 var assert = require('assert');
 var R = require('..');
+var Q = require('q');
 
 describe('compose', function() {
     function a(x) {return x + 'A';}
@@ -63,6 +64,41 @@ describe('compose', function() {
 
 });
 
+describe('pCompose', function() {
+    function a(x) {return x + 'A';}
+    function b(x) {return x + 'B';}
+
+    it('handles promises', function() {
+        var timesTwo = function(a) {return a * 2;};
+        var multAsync = function(a, b) {return Q.when(a * b);};
+        return R.pCompose(timesTwo, multAsync)(2, 3)
+            .then(function(result) {
+                assert.equal(result, 12);
+            });
+    });
+
+    it('does not get tripped up by fake thennables', function() {
+        var timesTwo = function(a) {return a.then * 2;};
+        var multAsync = function(a, b) {return {then: a * b};};
+        assert.equal(R.pCompose(timesTwo, multAsync)(2, 3), 12);
+    });
+
+    it('returns a function with arity == rightmost argument', function() {
+        function a2(x, y) { void y; return 'A2'; }
+        function a3(x, y) { void y; return Q.when('A2'); }
+        function a4(x, y) { void y; return 'A2'; }
+
+        var f1 = R.compose(b, a);
+        assert.equal(f1.length, a.length);
+        var f2 = R.compose(b, a2);
+        assert.equal(f2.length, a2.length);
+        var f3 = R.compose(b, a3);
+        assert.equal(f3.length, a3.length);
+        var f4 = R.compose(b, a4);
+        assert.equal(f4.length, a4.length);
+    });
+});
+
 describe('pipe', function() {
     function a(x) {return x + 'A';}
     function b(x) {return x + 'B';}
@@ -106,6 +142,35 @@ describe('pipe', function() {
     it('returns argument if given exactly one argument', function() {
         function f() {}
         assert.strictEqual(R.pipe(f), f);
+    });
+});
+
+describe('pPipe', function() {
+    function a(x) {return x + 'A';}
+    function b(x) {return x + 'B';}
+
+    it('handles promises', function() {
+        var plusOne = function(a) {return a + 1;};
+        var multAsync = function(a, b) {return Q.when(a * b);};
+        return R.pPipe(multAsync, plusOne)(2, 3)
+            .then(function(result) {
+                assert.equal(result, 7);
+            });
+    });
+
+    it('returns a function with arity == leftmost argument', function() {
+        function a2(x, y) { void y; return 'A2'; }
+        function a3(x, y) { void y; return Q.when('A2'); }
+        function a4(x, y) { void y; return 'A2'; }
+
+        var f1 = R.pPipe(a, b);
+        assert.equal(f1.length, a.length);
+        var f2 = R.pPipe(a2, b);
+        assert.equal(f2.length, a2.length);
+        var f3 = R.pPipe(a3, b);
+        assert.equal(f3.length, a3.length);
+        var f4 = R.pPipe(a4, b);
+        assert.equal(f4.length, a4.length);
     });
 });
 
