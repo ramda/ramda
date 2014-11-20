@@ -5619,7 +5619,7 @@
 
 
     /**
-     * Removes whitespace from both ends of the string.
+     * Removes (strips) whitespace from both ends of the string.
      *
      * @func
      * @memberOf R
