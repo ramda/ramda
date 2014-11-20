@@ -27,13 +27,11 @@ describe('unapply', function() {
     });
 
     it('forwards arguments to decorated function as an array', function() {
-        if (typeof JSON !== 'undefined') {
-            var fn = R.unapply(JSON.stringify);
-            assert.strictEqual(fn(), '[]');
-            assert.strictEqual(fn(2), '[2]');
-            assert.strictEqual(fn(2, 4), '[2,4]');
-            assert.strictEqual(fn(2, 4, 6), '[2,4,6]');
-        }
+        var fn = R.unapply(function(xs) { return '[' + xs + ']'; });
+        assert.strictEqual(fn(), '[]');
+        assert.strictEqual(fn(2), '[2]');
+        assert.strictEqual(fn(2, 4), '[2,4]');
+        assert.strictEqual(fn(2, 4, 6), '[2,4,6]');
     });
 
     it('returns a function with length 0', function() {
@@ -59,14 +57,12 @@ describe('unapply', function() {
             assert.strictEqual(f(a, b, c, d, e), g(a, b, c, d, e));
         }
 
-        if (typeof JSON !== 'undefined') { // not in IE7
-            f = JSON.stringify;
-            g = R.apply(R.unapply(f));
-            idx = 100;
-            while (idx--) {
-                a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
-                assert.strictEqual(f([a, b, c, d, e]), g([a, b, c, d, e]));
-            }
+        f = function(xs) { return '[' + xs + ']'; };
+        g = R.apply(R.unapply(f));
+        idx = 100;
+        while (idx--) {
+            a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
+            assert.strictEqual(f([a, b, c, d, e]), g([a, b, c, d, e]));
         }
     });
 });

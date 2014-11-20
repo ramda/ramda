@@ -34,7 +34,7 @@
      *
      * @namespace R
      */
-    var R = {version: '0.7.2'};
+    var R = {version: '0.8.0'};
 
     // Internal Functions and Properties
     // ---------------------------------
@@ -869,25 +869,23 @@
 
 
     /**
-     * Reports whether a value is "empty".
-     * Empty values are null, undefined, "", and every object with a length
-     * property whose value is 0 (such as an empty array).
+     * Reports whether the list has zero elements.
      *
      * @func
      * @memberOf R
      * @category Core
-     * @sig * -> Boolean
-     * @param {*} val
+     * @sig [a] -> Boolean
+     * @param {Array} list
      * @return {Boolean}
      * @example
      *
      *      R.isEmpty([1, 2, 3]); //=> false
      *      R.isEmpty([]); //=> true
      *      R.isEmpty(''); //=> true
-     *      R.isEmpty(null); //=> true
+     *      R.isEmpty(null); //=> false
      */
-    var isEmpty = R.isEmpty = function isEmpty(val) {
-        return val == null || val.length === 0;
+    R.isEmpty = function isEmpty(list) {
+        return Object(list).length === 0;
     };
 
 
@@ -1316,6 +1314,73 @@
 
 
     /**
+     * A right-associative two-argument composition function like `_compose`
+     * but with automatic handling of promises (or, more precisely,
+     * "thennables"). This function is used to construct a more general
+     * `pCompose` function, which accepts any number of arguments.
+     *
+     * @private
+     * @category Function
+     * @param {Function} f A function.
+     * @param {Function} g A function.
+     * @return {Function} A new function that is the equivalent of `f(g(x))`.
+     * @example
+     *
+     *      var Q = require('q');
+     *      var double = function(x) { return x * 2; };
+     *      var squareAsync = function(x) { return Q.when(x * x); };
+     *      var squareAsyncThenDouble = _pCompose(double, squareAsync);
+     *
+     *      squareAsyncThenDouble(5)
+     *          .then(function(result) {
+     *            // the result is now 50.
+     *          });
+     */
+    function _pCompose(f, g) {
+        return function() {
+            var context = this;
+            var value = g.apply(this, arguments);
+            if (_isThennable(value)) {
+                return value.then(function(result) {
+                    return f.call(context, result);
+                });
+            } else {
+                return f.call(this, value);
+            }
+        };
+    }
+
+
+    /**
+     * Tests if a value is a thennable (promise).
+     */
+    function _isThennable(value) {
+        return (value != null) && (value === Object(value)) && value.then &&
+            typeof value.then === 'function';
+    }
+
+
+    /*
+     * Returns a function that makes a multi-argument version of compose from
+     * either _compose or _pCompose.
+     */
+    function _createComposer(composeFunction) {
+        return function() {
+            switch (arguments.length) {
+                case 0: throw _noArgsException();
+                case 1: return arguments[0];
+                default:
+                    var idx = arguments.length - 1, fn = arguments[idx], length = fn.length;
+                    while (idx--) {
+                        fn = composeFunction(arguments[idx], fn);
+                    }
+                    return arity(length, fn);
+            }
+        };
+    }
+
+
+    /**
      * Creates a new function that runs each of the functions supplied as parameters in turn,
      * passing the return value of each function invocation to the next function invocation,
      * beginning with whatever arguments were passed to the initial invocation.
@@ -1344,18 +1409,43 @@
      *      //≅ triple(double(square(5)))
      *      squareThenDoubleThenTriple(5); //=> 150
      */
-    var compose = R.compose = function compose() {
-        switch (arguments.length) {
-            case 0: throw _noArgsException();
-            case 1: return arguments[0];
-            default:
-                var idx = arguments.length - 1, fn = arguments[idx], length = fn.length;
-                while (idx--) {
-                    fn = _compose(arguments[idx], fn);
-                }
-                return arity(length, fn);
-        }
-    };
+    var compose = R.compose = _createComposer(_compose);
+
+
+    /**
+     * Similar to `compose` but with automatic handling of promises (or, more
+     * precisely, "thennables"). The behavior is identical  to that of
+     * compose() if all composed functions return something other than
+     * promises (i.e., objects with a .then() method). If one of the function
+     * returns a promise, however, then the next function in the composition
+     * is called asynchronously, in the success callback of the promise, using
+     * the resolved value as an input. Note that `pCompose` is a right-
+     * associative function, just like `compose`.
+     *
+     * @func
+     * @memberOf R
+     * @category core
+     * @category Function
+     * @sig ((y -> z), (x -> y), ..., (b -> c), (a... -> b)) -> (a... -> z)
+     * @param {...Function} functions A variable number of functions.
+     * @return {Function} A new function which represents the result of calling each of the
+     *         input `functions`, passing either the returned result or the asynchronously
+     *         resolved value) of each function call to the next, from right to left.
+     * @example
+     *
+     *      var Q = require('q');
+     *      var triple = function(x) { return x * 3; };
+     *      var double = function(x) { return x * 2; };
+     *      var squareAsync = function(x) { return Q.when(x * x); };
+     *      var squareAsyncThenDoubleThenTriple = R.pCompose(triple, double, squareAsync);
+     *
+     *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
+     *      squareAsyncThenDoubleThenTriple(5)
+     *          .then(function(result) {
+     *              // result is 150
+     *          });
+     */
+    var pCompose = R.pCompose = _createComposer(_pCompose);
 
 
     /**
@@ -1377,6 +1467,44 @@
      *         right to left.
      * @example
      *
+     *      var Q = require('q');
+     *      var triple = function(x) { return x * 3; };
+     *      var double = function(x) { return x * 2; };
+     *      var squareAsync = function(x) { return Q.when(x * x); };
+     *      var squareAsyncThenDoubleThenTriple = R.pPipe(squareAsync, double, triple);
+     *
+     *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
+     *      squareAsyncThenDoubleThenTriple(5)
+     *          .then(function(result) {
+     *              // result is 150
+     *          });
+     */
+    R.pipe = function pipe() {
+        return compose.apply(this, reverse(arguments));
+    };
+
+
+    /**
+     * Creates a new function that runs each of the functions supplied as parameters in turn,
+     * passing to the next function invocation either the value returned by the previous
+     * function or the resolved value if the returned value is a promise. In other words,
+     * if some of the functions in the sequence return promises, `pPipe` pipes the values
+     * asynchronously. If none of the functions return promises, the behavior is the same as
+     * that of `pipe`.
+     *
+     * `pPipe` is the mirror version of `pCompose`. `pPipe` is left-associative, which means that
+     * each of the functions provided is executed in order from left to right.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig ((a... -> b), (b -> c), ..., (x -> y), (y -> z)) -> (a... -> z)
+     * @param {...Function} functions A variable number of functions.
+     * @return {Function} A new function which represents the result of calling each of the
+     *         input `functions`, passing either the returned result or the asynchronously
+     *         resolved value) of each function call to the next, from left to right.
+     * @example
+     *
      *      var triple = function(x) { return x * 3; };
      *      var double = function(x) { return x * 2; };
      *      var square = function(x) { return x * x; };
@@ -1385,8 +1513,8 @@
      *      //≅ triple(double(square(5)))
      *      squareThenDoubleThenTriple(5); //=> 150
      */
-    R.pipe = function pipe() {
-        return compose.apply(this, reverse(arguments));
+    R.pPipe = function pPipe() {
+        return pCompose.apply(this, reverse(arguments));
     };
 
 
@@ -2304,23 +2432,15 @@
      * @category List
      * @sig [a] -> Number
      * @param {Array} list The array to inspect.
-     * @return {Number} The size of the array.
+     * @return {Number} The length of the array.
      * @example
      *
-     *      R.size([]); //=> 0
-     *      R.size([1, 2, 3]); //=> 3
+     *      R.length([]); //=> 0
+     *      R.length([1, 2, 3]); //=> 3
      */
-    var size = R.size = function size(list) {
-        return list.length;
+    R.length = function length(list) {
+        return list != null && is(Number, list.length) ? list.length : NaN;
     };
-
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.size
-     */
-    R.length = size;
 
 
     function _filter(fn, list) {
@@ -2870,6 +2990,9 @@
     });
 
 
+    function _contains(a, list) {
+        return _indexOf(list, a) >= 0;
+    }
     /**
      * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
      * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
@@ -2889,13 +3012,18 @@
      *      var obj = {};
      *      R.contains(obj)([{}, obj, {}]); //=> true
      */
-    function _contains(a, list) {
-        return _indexOf(list, a) >= 0;
-    }
-
     R.contains = _curry2(_contains);
 
 
+    function _containsWith(pred, x, list) {
+        var idx = -1, len = list.length;
+        while (++idx < len) {
+            if (pred(x, list[idx])) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Returns `true` if the `x` is found in the `list`, using `pred` as an
      * equality predicate for `x`.
@@ -2903,7 +3031,7 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig (x, a -> Boolean) -> x -> [a] -> Boolean
+     * @sig (a, a -> Boolean) -> a -> [a] -> Boolean
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {*} x The item to find
      * @param {Array} list The list to iterate over
@@ -2914,16 +3042,6 @@
      *     R.containsWith(function(a, b) { return a.x === b.x; }, {x: 10}, xs); //=> true
      *     R.containsWith(function(a, b) { return a.x === b.x; }, {x: 1}, xs); //=> false
      */
-    function _containsWith(pred, x, list) {
-        var idx = -1, len = list.length;
-        while (++idx < len) {
-            if (pred(x, list[idx])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     var containsWith = R.containsWith = _curry3(_containsWith);
 
 
@@ -2993,13 +3111,13 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig (x, a -> Boolean) -> [a] -> [a]
+     * @sig (a, a -> Boolean) -> [a] -> [a]
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list The array to consider.
      * @return {Array} The list of unique items.
      * @example
      *
-     *      var strEq = function(a, b) { return ('' + a) === ('' + b) };
+     *      var strEq = function(a, b) { return String(a) === String(b); };
      *      R.uniqWith(strEq)([1, '1', 2, 1]); //=> [1, 2]
      *      R.uniqWith(strEq)([{}, {}]);       //=> [{}]
      *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]
@@ -3298,9 +3416,6 @@
      *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
      */
     R.xprod = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
-        if (isEmpty(a) || isEmpty(b)) {
-            return [];
-        }
         var idx = -1;
         var ilen = a.length;
         var j;
@@ -3335,13 +3450,7 @@
      *      R.reverse([]);         //=> []
      */
     var reverse = R.reverse = function reverse(list) {
-        var idx = -1, length = list.length;
-        var pointer = length;
-        var result = new Array(length);
-        while (++idx < length) {
-            result[--pointer] = list[idx];
-        }
-        return result;
+        return _slice(list).reverse();
     };
 
 
@@ -4113,7 +4222,7 @@
      *
      */
     // TODO: document, even for internals...
-    function _pickWith(test, obj) {
+    function _pickBy(test, obj) {
         var copy = {};
         var prop;
         var props = keysIn(obj);
@@ -4146,7 +4255,7 @@
      *      R.pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1}
      */
     R.pick = _curry2(function pick(names, obj) {
-        return _pickWith(function(val, key) {
+        return _pickBy(function(val, key) {
             return _contains(key, names);
         }, obj);
     });
@@ -4167,7 +4276,7 @@
      *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
      */
     R.omit = _curry2(function omit(names, obj) {
-        return _pickWith(function(val, key) {
+        return _pickBy(function(val, key) {
             return !_contains(key, names);
         }, obj);
     });
@@ -4190,9 +4299,9 @@
      * @example
      *
      *      var isUpperCase = function(val, key) { return key.toUpperCase() === key; }
-     *      R.pickWith(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
+     *      R.pickBy(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
      */
-    R.pickWith = _curry2(_pickWith);
+    R.pickBy = _curry2(_pickBy);
 
 
     /**
@@ -4296,7 +4405,7 @@
 
 
     /**
-     * Reports whether two functions have the same value for the specified property.  Useful as a curried predicate.
+     * Reports whether two objects have the same value for the specified property.  Useful as a curried predicate.
      *
      * @func
      * @memberOf R
@@ -4360,7 +4469,7 @@
      * the test object's value for the property in question, as well as the whole test object.
      *
      * `where` is well suited to declaratively expressing constraints for other functions, e.g.,
-     * `filter`, `find`, `pickWith`, etc.
+     * `filter`, `find`, `pickBy`, etc.
      *
      * @func
      * @memberOf R
@@ -4847,6 +4956,9 @@
 
     // --------
 
+    function _add(a, b) {
+        return a + b;
+    }
     /**
      * Adds two numbers (or strings). Equivalent to `a + b` but curried.
      *
@@ -4865,12 +4977,12 @@
      *      R.add(2, 3);       //=>  5
      *      R.add(7)(10);      //=> 17
      */
-    function _add(a, b) {
-        return a + b;
-    }
     R.add = _curry2(_add);
 
 
+    function _multiply(a, b) {
+        return a * b;
+    }
     /**
      * Multiplies two numbers. Equivalent to `a * b` but curried.
      *
@@ -4889,9 +5001,6 @@
      *      triple(4);       //=> 12
      *      R.multiply(2, 5);  //=> 10
      */
-    function _multiply(a, b) {
-        return a * b;
-    }
     R.multiply = _curry2(_multiply);
 
 
@@ -5193,14 +5302,14 @@
     /**
      * Create a function which takes a comparator function and a list
      * and determines the winning value by a compatator. Used internally
-     * by `R.maxWith` and `R.minWith`
+     * by `R.maxBy` and `R.minBy`
      *
      * @private
      * @param {Function} compatator a function to compare two items
      * @category math
      * @return {Function}
      */
-    function _createMaxMinWith(comparator) {
+    function _createMaxMinBy(comparator) {
         return function(valueComputer, list) {
             if (!(list && list.length > 0)) {
                 return;
@@ -5227,7 +5336,7 @@
      * @memberOf R
      * @category math
      * @sig [Number] -> Number
-     * @see R.maxWith
+     * @see R.maxBy
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
      * @example
@@ -5252,9 +5361,9 @@
      *
      *      function cmp(obj) { return obj.x; }
      *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
-     *      R.maxWith(cmp, [a, b, c]); //=> {x: 3}
+     *      R.maxBy(cmp, [a, b, c]); //=> {x: 3}
      */
-    R.maxWith = _curry2(_createMaxMinWith(gt));
+    R.maxBy = _curry2(_createMaxMinBy(gt));
 
 
     /**
@@ -5266,7 +5375,7 @@
      * @sig [Number] -> Number
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list
-     * @see R.minWith
+     * @see R.minBy
      * @example
      *
      *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
@@ -5289,9 +5398,9 @@
      *
      *      function cmp(obj) { return obj.x; }
      *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
-     *      R.minWith(cmp, [a, b, c]); //=> {x: 1}
+     *      R.minBy(cmp, [a, b, c]); //=> {x: 1}
      */
-    R.minWith = _curry2(_createMaxMinWith(lt));
+    R.minBy = _curry2(_createMaxMinBy(lt));
 
 
 

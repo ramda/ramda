@@ -24,7 +24,7 @@
   ],
   "name": "ramda",
   "description": "A practical functional library for JavaScript programmers.",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "homepage": "https://www.github.com/ramda/ramda",
   "license": "MIT",
   "repository": {
@@ -54,8 +54,9 @@
     "grunt-saucelabs": "^8.3.1",
     "lodash": "latest",
     "orchestrate": "~0.3.4",
+    "q": "^1.1.1",
     "testem": "^0.6.18",
     "uglify-js": "2.4.x",
-    "xyz": "0.4.x"
+    "xyz": "0.5.x"
   }
 }

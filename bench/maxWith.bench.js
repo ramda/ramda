@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var R = require('..');
-var maxWith = R.maxWith;
+var maxBy = R.maxBy;
 
 var vals = _.chain(_.range(50, 500, 5))
             .shuffle()
@@ -9,19 +9,19 @@ var vals = _.chain(_.range(50, 500, 5))
             })
             .value();
 var computer = R.prop('val');
-var maxVal = maxWith(computer);
+var maxVal = maxBy(computer);
 
 module.exports = {
-    name: 'maxWith',
+    name: 'maxBy',
     tests: {
         '_.max': function() {
             _.max(vals, computer);
         },
-        'maxWith(computer, nums)': function() {
-            maxWith(computer, vals);
+        'maxBy(computer, nums)': function() {
+            maxBy(computer, vals);
         },
-        'maxWith(computer)(vals)': function() {
-            maxWith(computer)(vals);
+        'maxBy(computer)(vals)': function() {
+            maxBy(computer)(vals);
         },
         'maxVal(vals)': function() {
             maxVal(vals);
