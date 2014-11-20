@@ -174,7 +174,7 @@
      * @private
      * @category Function
      * @param {Function} fn The function to curry.
-     * @return {Function} curried function
+     * @return {Function} The curried function.
      * @example
      *
      *      var addTwo = function(a, b) {
@@ -205,7 +205,7 @@
      * @private
      * @category Function
      * @param {Function} fn The function to curry.
-     * @return {Function} curried function
+     * @return {Function} The curried function.
      * @example
      *
      *      var addThree = function(a, b, c) {
@@ -416,7 +416,7 @@
      * @category Internal
      * @param {Function} fn ramda implemtation
      * @param {String} methodname property to check for a custom implementation
-     * @return {Object} whatever the return value of the method is
+     * @return {Object} Whatever the return value of the method is.
      */
     function _checkForMethod(methodname, fn) {
         return function(a, b, c) {
@@ -797,7 +797,7 @@
      * @category Object
      * @sig {*} -> {*}
      * @param {*} value The object or array to clone
-     * @returns {*} A new object or array
+     * @return {*} A new object or array.
      * @example
      *
      *      var objects = [{}, {}, {}];
@@ -2135,7 +2135,7 @@
      * become a new property on the return object.
      * @param {Object} obj The object to iterate over.
      * @return {Object} A new object with the same keys as `obj` and values that are the result
-     * of running each property through `fn`.
+     *         of running each property through `fn`.
      * @example
      *
      *      var values = { x: 1, y: 2, z: 3 };
@@ -2195,7 +2195,7 @@
      *        current element from the array
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
-     * @return {Array} A list of all intermediately reduced values
+     * @return {Array} A list of all intermediately reduced values.
      * @example
      *
      *      var numbers = [1, 2, 3, 4];
@@ -2281,7 +2281,7 @@
      * @sig [f] -> [a] -> [f a]
      * @param {Array} fns An array of functions
      * @param {Array} vs An array of values
-     * @return the value of applying each the function `fns` to each value in `vs`
+     * @return {Array} The value of applying each the function `fns` to each value in `vs`.
      * @example
      *
      *      R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
@@ -2304,7 +2304,7 @@
      * @category Function
      * @sig a -> [a]
      * @param {*} x any value
-     * @return [x]
+     * @return {Array} An array wrapping `x`.
      * @example
      *
      *      R.of(1); //=> [1]
@@ -2324,7 +2324,7 @@
      * @memberOf R
      * @category Function
      * @sig * -> []
-     * @return {Array} an empty array
+     * @return {Array} An empty array.
      * @example
      *
      *      R.empty([1,2,3,4,5]); //=> []
@@ -2783,7 +2783,7 @@
      * @param {Function} fn The predicate function.
      * @param {Array} list The array to consider.
      * @return {Boolean} `true` if the predicate is satisfied by every element, `false`
-     *         otherwise
+     *         otherwise.
      * @example
      *
      *      var lessThan2 = R.flip(R.lt)(2);
@@ -2816,7 +2816,7 @@
      * @param {Function} fn The predicate function.
      * @param {Array} list The array to consider.
      * @return {Boolean} `true` if the predicate is satisfied by at least one element, `false`
-     *         otherwise
+     *         otherwise.
      * @example
      *
      *      var lessThan0 = R.flip(R.lt)(0);
@@ -2849,7 +2849,7 @@
      * @param {Array} list The array to search
      * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
-     * @return {Number} the index of the found item, or -1
+     * @return {Number} The index of the found item, or -1.
      *
      */
     function _indexOf(list, item, from) {
@@ -2878,7 +2878,7 @@
      * @param {Array} list The array to search
      * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
-     * @return {Number} the index of the found item, or -1
+     * @return {Number} The index of the found item, or -1.
      *
      */
     function _lastIndexOf(list, item, from) {
@@ -3035,7 +3035,7 @@
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {*} x The item to find
      * @param {Array} list The list to iterate over
-     * @return {Boolean} `true` if `x` is in `list`, else `false`
+     * @return {Boolean} `true` if `x` is in `list`, else `false`.
      * @example
      *
      *     var xs = [{x: 12}, {x: 11}, {x: 10}];
@@ -3232,7 +3232,7 @@
      * @param {Array} list1 The first array to consider.
      * @param {Array} list2 The second array to consider.
      * @return {Array} The list made by combining same-indexed elements of `list1` and `list2`
-     * using `fn`.
+     *         using `fn`.
      * @example
      *
      *      var f = function(x, y) {
@@ -3365,7 +3365,7 @@
      * @param {Function} get A function that gets a value by property name
      * @param {Function} set A function that gets a value by property name
      * @return {Function} the returned function has `set` and `map` properties that are
-     *     also functions.
+     *         also functions.
      * @example
      *
      *     var headLens = R.lens(
@@ -3410,7 +3410,7 @@
      * @param {Array} as The first list.
      * @param {Array} bs The second list.
      * @return {Array} The list made by combining each possible pair from
-     * `as` and `bs` into pairs (`[a, b]`).
+     *         `as` and `bs` into pairs (`[a, b]`).
      * @example
      *
      *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
@@ -3557,7 +3557,7 @@
      * @param {Number} start The position to start removing elements
      * @param {Number} count The number of elements to remove
      * @param {Array} list The list to remove from
-     * @return {Array} a new Array with `count` elements from `start` removed
+     * @return {Array} A new Array with `count` elements from `start` removed.
      * @example
      *
      *      R.remove(2, 3, [1,2,3,4,5,6,7,8]); //=> [1,2,6,7,8]
@@ -3580,7 +3580,7 @@
      * @param {Number} index The position to insert the element
      * @param {*} elt The element to insert into the Array
      * @param {Array} list The list to insert into
-     * @return {Array} a new Array with `elt` inserted at `index`
+     * @return {Array} A new Array with `elt` inserted at `index`.
      * @example
      *
      *      R.insert(2, 'x', [1,2,3,4]); //=> [1,2,'x',3,4]
@@ -3603,7 +3603,7 @@
      * @param {Number} index The position to insert the sub-list
      * @param {Array} elts The sub-list to insert into the Array
      * @param {Array} list The list to insert the sub-list into
-     * @return {Array} a new Array with `elts` inserted starting at `index`
+     * @return {Array} A new Array with `elts` inserted starting at `index`.
      * @example
      *
      *      R.insert.all(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
@@ -3622,7 +3622,7 @@
      * @category Function
      * @sig (a, b -> Boolean) -> (a, b -> Number)
      * @param {Function} pred A predicate function of arity two.
-     * @return {Function} a Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
+     * @return {Function} A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`.
      * @example
      *
      *      var cmp = R.comparator(function(a, b) {
@@ -3713,7 +3713,7 @@
      * @param {Function} pred A predicate to determine which array the element belongs to.
      * @param {Array} list The array to partition.
      * @return {Array} A nested array, containing first an array of elements that satisfied the predicate,
-     *                 and second an array of elements that did not satisfy.
+     *         and second an array of elements that did not satisfy.
      * @example
      *
      *      R.partition(R.contains('s'), ['sss', 'ttt', 'foo', 'bars']);
@@ -3747,7 +3747,7 @@
      * @sig (a -> *) -> a -> a
      * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
      * @param {*} x
-     * @return {*} x
+     * @return {*} `x`.
      * @example
      *
      *      var sayX = function(x) { console.log('x is ' + x); };
@@ -3791,7 +3791,7 @@
      * @sig s -> {s: a} -> a
      * @param {String} p The property name
      * @param {Object} obj The object to query
-     * @return {*} The value at obj.p
+     * @return {*} The value at `obj.p`.
      * @example
      *
      *      R.prop('x', {x: 100}); //=> 100
@@ -3829,7 +3829,7 @@
      * @sig {k: v} -> k -> v
      * @param {Object} obj The object to query
      * @param {String} p The property name
-     * @return {*} The value at obj.p
+     * @return {*} The value at `obj.p`.
      * @example
      *
      *      R.propOf({x: 100}, 'x'); //=> 100
@@ -3846,7 +3846,7 @@
      * @sig [k] -> {k: v} -> [v]
      * @param {Array} ps The property names to fetch
      * @param {Object} obj The object to query
-     * @return {Array} The corresponding values or partially applied function
+     * @return {Array} The corresponding values or partially applied function.
      * @example
      *
      *      R.props(['x', 'y'], {x: 1, y: 2}); //=> [1, 2]
@@ -3887,7 +3887,7 @@
      * @param {String} p The name of the property to return.
      * @param {*} val The default value.
      * @param {Object} obj The object to query.
-     * @returns {*} The value of given property or default value.
+     * @return {*} The value of given property or default value.
      * @example
      *
      *      var alice = {
@@ -3970,7 +3970,7 @@
      * @sig k -> {k : v} -> v(*)
      * @param {String} funcName The name of the property mapped to the function to invoke
      * @param {Object} obj The object
-     * @return {*} The value of invoking `obj.fn`
+     * @return {*} The value of invoking `obj.fn`.
      * @example
      *
      *      R.func('add', R, 1, 2); //=> 3
@@ -3995,7 +3995,7 @@
      * @category Function
      * @sig a -> (* -> a)
      * @param {*} val The value to wrap in a function
-     * @return {Function} A Function :: * -> val
+     * @return {Function} A Function :: * -> val.
      * @example
      *
      *      var t = R.always('Tee');
@@ -4020,7 +4020,7 @@
      * @sig (* -> *) -> {*} -> (* -> *)
      * @param {Function} fn The function to bind to context
      * @param {Object} thisObj The context to bind `fn` to
-     * @return {Function} A function that will execute in the context of `thisObj`
+     * @return {Function} A function that will execute in the context of `thisObj`.
      */
     R.bind = _curry2(function bind(fn, thisObj) {
         return function() {
@@ -4039,7 +4039,7 @@
      * @category Object
      * @sig {k: v} -> [k]
      * @param {Object} obj The object to extract properties from
-     * @return {Array} An array of the object's own properties
+     * @return {Array} An array of the object's own properties.
      * @example
      *
      *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
@@ -4088,7 +4088,7 @@
      * @category Object
      * @sig {k: v} -> [k]
      * @param {Object} obj The object to extract properties from
-     * @return {Array} An array of the object's own and prototype properties
+     * @return {Array} An array of the object's own and prototype properties.
      * @example
      *
      *      var F = function() { this.x = 'X'; };
@@ -4109,7 +4109,7 @@
      * @private
      * @param {Function} fn The strategy for extracting keys from an object
      * @return {Function} A function that takes an object and returns an array of
-     *                    key-value arrays.
+     *         key-value arrays.
      */
     function _pairWith(fn) {
         return function(obj) {
@@ -4129,7 +4129,7 @@
      * @category Object
      * @sig {k: v} -> [[k,v]]
      * @param {Object} obj The object to extract from
-     * @return {Array} An array of key, value arrays from the object's own properties
+     * @return {Array} An array of key, value arrays from the object's own properties.
      * @example
      *
      *      R.toPairs({a: 1, b: 2, c: 3}); //=> [['a', 1], ['b', 2], ['c', 3]]
@@ -4149,7 +4149,7 @@
      * @sig {k: v} -> [[k,v]]
      * @param {Object} obj The object to extract from
      * @return {Array} An array of key, value arrays from the object's own
-     *         and prototype properties
+     *         and prototype properties.
      * @example
      *
      *      var F = function() { this.x = 'X'; };
@@ -4170,7 +4170,7 @@
      * @category Object
      * @sig {k: v} -> [v]
      * @param {Object} obj The object to extract values from
-     * @return {Array} An array of the values of the object's own properties
+     * @return {Array} An array of the values of the object's own properties.
      * @example
      *
      *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
@@ -4198,7 +4198,7 @@
      * @category Object
      * @sig {k: v} -> [v]
      * @param {Object} obj The object to extract values from
-     * @return {Array} An array of the values of the object's own and prototype properties
+     * @return {Array} An array of the values of the object's own and prototype properties.
      * @example
      *
      *      var F = function() { this.x = 'X'; };
@@ -4348,7 +4348,7 @@
      * @category Object
      * @param {Object} destination The destination object.
      * @param {Object} other The other object to merge with destination.
-     * @returns {Object} Returns the destination object.
+     * @return {Object} The destination object.
      * @example
      *
      *      _extend({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
@@ -4375,7 +4375,7 @@
      * @sig {k: v} -> {k: v} -> {k: v}
      * @param {Object} a source object
      * @param {Object} b object with higher precedence in output
-     * @returns {Object} Returns the destination object.
+     * @return {Object} The destination object.
      * @example
      *
      *      R.mixin({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
@@ -4394,7 +4394,7 @@
      * @category Object
      * @sig {*} -> {*}
      * @param {Object} obj The object to clone
-     * @returns {Object} A new object
+     * @return {Object} A new object.
      * @example
      *
      *     R.cloneObj({a: 1, b: 2, c: [1, 2, 3]}); // {a: 1, b: 2, c: [1, 2, 3]}
@@ -4520,7 +4520,7 @@
      * @param {String} prop the property name to set
      * @param {*} val the new value
      * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original except for the specified property
+     * @return {Object} a new object similar to the original except for the specified property.
      * @example
      *
      *      var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
@@ -4552,7 +4552,7 @@
      * @param {String} path the dot-delimited path to set
      * @param {*} val the new value
      * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original except along the specified path
+     * @return {Object} a new object similar to the original except along the specified path.
      * @example
      *
      *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
@@ -4603,7 +4603,7 @@
      * @category Object
      * @sig -> {*} -> {*}
      * @param {Object} obj The object to attach ramda functions
-     * @return {Object} a reference to the mutated object
+     * @return {Object} a reference to the mutated object.
      * @example
      *
      *      var x = {}
@@ -4708,7 +4708,7 @@
      * @category function
      * @sig * -> true
      * @see R.always
-     * @return {Boolean} true
+     * @return {Boolean} `true`.
      * @example
      *
      *      R.alwaysTrue(); //=> true
@@ -4858,8 +4858,8 @@
      * @sig [(*... -> Boolean)] -> (*... -> Boolean)
      * @param {Array} list An array of predicate functions
      * @param {*} optional Any arguments to pass into the predicates
-     * @return {Function}  a function that applies its arguments to each of the predicates, returning
-     *                   `true` if all are satisfied..
+     * @return {Function} A function that applies its arguments to each of the predicates, returning
+     *         `true` if all are satisfied.
      * @example
      *
      *      var gt10 = function(x) { return x > 10; };
@@ -4882,8 +4882,8 @@
      * @param {Function} condition A condition function
      * @param {Function} onTrue A predicate to invoke when the condition evaluates to a truthy value
      * @param {Function} onFalse A predicate to invoke when the condition evaluates to a falsy value
-     * @returns {Function} a function that validates the arguments before executing "truthy"
-     *                     predicate or the the "falsey" predicate.
+     * @return {Function} A function that validates the arguments before executing "truthy"
+     *         predicate or the the "falsey" predicate.
      * @example
      *
      *      // Flatten all arrays in the list and return whatever is not an array
@@ -4924,7 +4924,7 @@
      * @category logic
      * @sig [(*... -> Boolean),(*... -> *)]... -> (*... -> *)
      * @param {...Function} functions
-     * @returns {Function}
+     * @return {Function}
      * @example
      *
      *      var fn = R.cond(
@@ -5338,7 +5338,7 @@
      * @sig [Number] -> Number
      * @see R.maxBy
      * @param {Array} list A list of numbers
-     * @return {Number} The greatest number in the list
+     * @return {Number} The greatest number in the list.
      * @example
      *
      *      R.max([7, 3, 9, 2, 4, 9, 3]); //=> 9
@@ -5374,7 +5374,7 @@
      * @category math
      * @sig [Number] -> Number
      * @param {Array} list A list of numbers
-     * @return {Number} The greatest number in the list
+     * @return {Number} The greatest number in the list.
      * @see R.minBy
      * @example
      *
@@ -5421,7 +5421,7 @@
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {Number} indexB An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
-     * @return {String} the extracted substring
+     * @return {String} The extracted substring.
      * @see R.invokerN
      * @example
      *
@@ -5439,7 +5439,7 @@
      * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
-     * @return {String} the extracted substring
+     * @return {String} The extracted substring.
      * @see R.invokerN
      * @example
      *
@@ -5457,7 +5457,7 @@
      * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
-     * @return {String} The extracted substring
+     * @return {String} The extracted substring.
      * @see R.invokerN
      * @example
      *
@@ -5475,7 +5475,7 @@
      * @sig Number -> String -> String
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a char from
-     * @return {String} the character at `index` of `str`
+     * @return {String} The character at `index` of `str`.
      * @see R.invokerN
      * @example
      *
@@ -5493,7 +5493,7 @@
      * @sig Number -> String -> Number
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a charCode from
-     * @return {Number} the code of the character at `index` of `str`
+     * @return {Number} The code of the character at `index` of `str`.
      * @see R.invokerN
      * @example
      *
@@ -5512,7 +5512,7 @@
      * @sig RegExp -> String -> [String] | null
      * @param {RegExp} rx A regular expression.
      * @param {String} str The string to match against
-     * @return {Array} The list of matches, or null if no matches found
+     * @return {Array} The list of matches, or null if no matches found.
      * @see R.invokerN
      * @example
      *
@@ -5554,7 +5554,7 @@
      * @sig String -> String -> Number
      * @param {String} c A string to find.
      * @param {String} str The string to search in
-     * @return {Number} The first index of `c` or -1 if not found
+     * @return {Number} The first index of `c` or -1 if not found.
      * @see R.invokerN
      * @example
      *
@@ -5575,7 +5575,7 @@
      * @sig String -> String -> Number
      * @param {String} c A string to find.
      * @param {String} str The string to search in
-     * @return {Number} The last index of `c` or -1 if not found
+     * @return {Number} The last index of `c` or -1 if not found.
      * @see R.invokerN
      * @example
      *
@@ -5626,7 +5626,7 @@
      * @category string
      * @sig String -> String
      * @param {String} str The string to trim.
-     * @returns {String} Trimmed version of `str`.
+     * @return {String} Trimmed version of `str`.
      * @example
      *
      *      R.trim('   xyz  '); //=> 'xyz'
@@ -5748,7 +5748,7 @@
      * @param {*} val The value to compare the nested property with
      * @param {Object} obj The object to check the nested property in
      * @return {Boolean} `true` if the value equals the nested object property,
-     *     `false` otherwise.
+     *         `false` otherwise.
      * @example
      *
      *     var user1 = { address: { zipCode: 90210 } };
@@ -5830,7 +5830,7 @@
      * @param {Array} as The first list.
      * @param {Array} bs The second list.
      * @return {Array} The first and second lists concatenated, with
-     * duplicates removed.
+     *         duplicates removed.
      * @example
      *
      *      R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
@@ -5873,7 +5873,7 @@
      * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
-     * @return {Array} The elements in `list1` that are not in `list2`
+     * @return {Array} The elements in `list1` that are not in `list2`.
      * @see R.differenceWith
      * @example
      *
@@ -5906,7 +5906,7 @@
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @see R.difference
-     * @return {Array} The elements in `list1` that are not in `list2`
+     * @return {Array} The elements in `list1` that are not in `list2`.
      * @example
      *
      *      function cmp(x, y) { return x.a === y.a; }
@@ -5939,7 +5939,7 @@
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
      * @see R.intersectionWith
-     * @return {Array} The list of elements found in both `list1` and `list2`
+     * @return {Array} The list of elements found in both `list1` and `list2`.
      * @example
      *
      *      R.intersection([1,2,3,4], [7,6,5,4,3]); //=> [4, 3]
@@ -6121,7 +6121,7 @@
     /**
      * @private
      * @param {Function} fn The strategy for extracting function names from an object
-     * @return {Function} A function that takes an object and returns an array of function names
+     * @return {Function} A function that takes an object and returns an array of function names.
      *
      */
     function _functionsWith(fn) {
@@ -6139,7 +6139,7 @@
      * @category Object
      * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
-     * @return {Array} returns a list of the object's own properties that map to functions
+     * @return {Array} A list of the object's own properties that map to functions.
      * @example
      *
      *      R.functions(R); // returns list of ramda's own function names
@@ -6160,8 +6160,8 @@
      * @category Object
      * @sig {*} -> [String]
      * @param {Object} obj The objects with functions in it
-     * @return {Array} returns a list of the object's own properties and prototype
-     *                 properties that map to functions
+     * @return {Array} A list of the object's own properties and prototype
+     *         properties that map to functions.
      * @example
      *
      *      R.functionsIn(R); // returns list of ramda's own and prototype function names
