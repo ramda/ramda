@@ -869,25 +869,23 @@
 
 
     /**
-     * Reports whether a value is "empty".
-     * Empty values are null, undefined, "", and every object with a length
-     * property whose value is 0 (such as an empty array).
+     * Reports whether the list has zero elements.
      *
      * @func
      * @memberOf R
      * @category Core
-     * @sig * -> Boolean
-     * @param {*} val
+     * @sig [a] -> Boolean
+     * @param {Array} list
      * @return {Boolean}
      * @example
      *
      *      R.isEmpty([1, 2, 3]); //=> false
      *      R.isEmpty([]); //=> true
      *      R.isEmpty(''); //=> true
-     *      R.isEmpty(null); //=> true
+     *      R.isEmpty(null); //=> false
      */
-    var isEmpty = R.isEmpty = function isEmpty(val) {
-        return val == null || val.length === 0;
+    R.isEmpty = function isEmpty(list) {
+        return Object(list).length === 0;
     };
 
 
@@ -3426,9 +3424,6 @@
      *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
      */
     R.xprod = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
-        if (isEmpty(a) || isEmpty(b)) {
-            return [];
-        }
         var idx = -1;
         var ilen = a.length;
         var j;
