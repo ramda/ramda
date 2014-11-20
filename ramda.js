@@ -2432,23 +2432,15 @@
      * @category List
      * @sig [a] -> Number
      * @param {Array} list The array to inspect.
-     * @return {Number} The size of the array.
+     * @return {Number} The length of the array.
      * @example
      *
-     *      R.size([]); //=> 0
-     *      R.size([1, 2, 3]); //=> 3
+     *      R.length([]); //=> 0
+     *      R.length([1, 2, 3]); //=> 3
      */
-    var size = R.size = function size(list) {
-        return list.length;
+    R.length = function length(list) {
+        return list != null && is(Number, list.length) ? list.length : NaN;
     };
-
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.size
-     */
-    R.length = size;
 
 
     function _filter(fn, list) {
