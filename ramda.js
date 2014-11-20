@@ -3000,6 +3000,9 @@
     });
 
 
+    function _contains(a, list) {
+        return _indexOf(list, a) >= 0;
+    }
     /**
      * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
      * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
@@ -3019,13 +3022,18 @@
      *      var obj = {};
      *      R.contains(obj)([{}, obj, {}]); //=> true
      */
-    function _contains(a, list) {
-        return _indexOf(list, a) >= 0;
-    }
-
     R.contains = _curry2(_contains);
 
 
+    function _containsWith(pred, x, list) {
+        var idx = -1, len = list.length;
+        while (++idx < len) {
+            if (pred(x, list[idx])) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Returns `true` if the `x` is found in the `list`, using `pred` as an
      * equality predicate for `x`.
@@ -3044,16 +3052,6 @@
      *     R.containsWith(function(a, b) { return a.x === b.x; }, {x: 10}, xs); //=> true
      *     R.containsWith(function(a, b) { return a.x === b.x; }, {x: 1}, xs); //=> false
      */
-    function _containsWith(pred, x, list) {
-        var idx = -1, len = list.length;
-        while (++idx < len) {
-            if (pred(x, list[idx])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     var containsWith = R.containsWith = _curry3(_containsWith);
 
 
@@ -4977,6 +4975,9 @@
 
     // --------
 
+    function _add(a, b) {
+        return a + b;
+    }
     /**
      * Adds two numbers (or strings). Equivalent to `a + b` but curried.
      *
@@ -4995,12 +4996,12 @@
      *      R.add(2, 3);       //=>  5
      *      R.add(7)(10);      //=> 17
      */
-    function _add(a, b) {
-        return a + b;
-    }
     R.add = _curry2(_add);
 
 
+    function _multiply(a, b) {
+        return a * b;
+    }
     /**
      * Multiplies two numbers. Equivalent to `a * b` but curried.
      *
@@ -5019,9 +5020,6 @@
      *      triple(4);       //=> 12
      *      R.multiply(2, 5);  //=> 10
      */
-    function _multiply(a, b) {
-        return a * b;
-    }
     R.multiply = _curry2(_multiply);
 
 
