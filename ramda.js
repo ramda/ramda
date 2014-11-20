@@ -1765,7 +1765,7 @@
 
 
     /**
-     * Accepts at least two functions and returns a new function. When invoked, this new
+     * Accepts at least three functions and returns a new function. When invoked, this new
      * function will invoke the first function, `after`, passing as its arguments the
      * results of invoking the subsequent functions with whatever arguments are passed to
      * the new function.
@@ -1773,7 +1773,7 @@
      * @func
      * @memberOf R
      * @category Function
-     * @sig ((*... -> c) -> (((* -> a), ...) -> c)
+     * @sig ((*... -> c) -> (((* -> a), (* -> b), ...) -> c)
      * @param {Function} after A function. `after` will be invoked with the return values of
      *        `fn1` and `fn2` as its arguments.
      * @param {...Function} functions A variable number of functions.
