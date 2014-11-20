@@ -3458,13 +3458,7 @@
      *      R.reverse([]);         //=> []
      */
     var reverse = R.reverse = function reverse(list) {
-        var idx = -1, length = list.length;
-        var pointer = length;
-        var result = new Array(length);
-        while (++idx < length) {
-            result[--pointer] = list[idx];
-        }
-        return result;
+        return _slice(list).reverse();
     };
 
 
