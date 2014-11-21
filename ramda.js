@@ -4905,7 +4905,7 @@
      *
      * @func
      * @memberOf R
-     * @category Core
+     * @category logic
      * @see R.ifElse
      */
     R['if'] = ifElse;
