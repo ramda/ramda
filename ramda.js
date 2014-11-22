@@ -1409,7 +1409,7 @@
      *      //≅ triple(double(square(5)))
      *      squareThenDoubleThenTriple(5); //=> 150
      */
-    var compose = R.compose = _createComposer(_compose);
+    var compose = R.compose = R.o = _createComposer(_compose);
 
 
     /**
