@@ -9,7 +9,7 @@
         module.exports = factory();
     } else {
         // Browser globals
-        this.returnExports = factory();
+        this.Future = factory();
     }
 }(function() {
     // `f` is a function that takes two function arguments: `reject` (failure) and `resolve` (success)

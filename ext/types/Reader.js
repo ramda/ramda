@@ -9,7 +9,7 @@
         module.exports = factory(require('../..'));
     } else {
         // Browser globals
-        this.returnExports = factory(this.R);
+        this.Reader = factory(this.R);
     }
 }(function() {
 
