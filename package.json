@@ -48,7 +48,6 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-docco": "latest",
     "grunt-jscs": "~0.7.0",
-    "grunt-jsdoc": "^0.6.0",
     "grunt-mocha": "~0.4.11",
     "grunt-mocha-test": "~0.11.0",
     "grunt-saucelabs": "^8.3.1",
