@@ -1925,9 +1925,9 @@
      *
      * The iterator function receives two values: *(acc, value)*
      *
-     * Note: `R.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.reduceRight` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
-     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
      *
      * @func
      * @memberOf R
@@ -1975,7 +1975,7 @@
      * Note: `R.reduceRight.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
-     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
      *
      * @func
      * @memberOf R
