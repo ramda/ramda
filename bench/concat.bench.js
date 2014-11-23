@@ -17,7 +17,7 @@ module.exports = {
         'concat(s1)(s2)': function() {
             concat(s1)(s2);
         },
-        'concatS1(s1)': function() {
+        'concatS1(s2)': function() {
             concatS1(s2);
         }
     }
