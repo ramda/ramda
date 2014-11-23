@@ -1316,7 +1316,7 @@
     /**
      * A right-associative two-argument composition function like `_compose`
      * but with automatic handling of promises (or, more precisely,
-     * "thennables"). This function is used to construct a more general
+     * "thenables"). This function is used to construct a more general
      * `pCompose` function, which accepts any number of arguments.
      *
      * @private
@@ -1340,7 +1340,7 @@
         return function() {
             var context = this;
             var value = g.apply(this, arguments);
-            if (_isThennable(value)) {
+            if (_isThenable(value)) {
                 return value.then(function(result) {
                     return f.call(context, result);
                 });
@@ -1352,11 +1352,10 @@
 
 
     /**
-     * Tests if a value is a thennable (promise).
+     * Tests if a value is a thenable (promise).
      */
-    function _isThennable(value) {
-        return (value != null) && (value === Object(value)) && value.then &&
-            typeof value.then === 'function';
+    function _isThenable(value) {
+        return (value != null) && (value === Object(value)) && typeof value.then === 'function';
     }
 
 
@@ -1414,7 +1413,7 @@
 
     /**
      * Similar to `compose` but with automatic handling of promises (or, more
-     * precisely, "thennables"). The behavior is identical  to that of
+     * precisely, "thenables"). The behavior is identical  to that of
      * compose() if all composed functions return something other than
      * promises (i.e., objects with a .then() method). If one of the function
      * returns a promise, however, then the next function in the composition

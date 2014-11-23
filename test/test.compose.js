@@ -77,7 +77,7 @@ describe('pCompose', function() {
             });
     });
 
-    it('does not get tripped up by fake thennables', function() {
+    it('does not get tripped up by fake thenables', function() {
         var timesTwo = function(a) {return a.then * 2;};
         var multAsync = function(a, b) {return {then: a * b};};
         assert.equal(R.pCompose(timesTwo, multAsync)(2, 3), 12);
