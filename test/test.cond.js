@@ -46,10 +46,6 @@ describe('ifElse', function() {
         assert.equal(ifIsNumber(t, identity)(15), 16);
         assert.equal(ifIsNumber(t, identity)('hello'), 'hello');
     });
-
-    it('is aliased by `if`', function() {
-        assert.strictEqual(R['if'], R.ifElse);
-    });
 });
 
 describe('cond', function() {

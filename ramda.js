@@ -4901,23 +4901,11 @@
      *      flattenArrays([[0], [[10], [8]], 1234, {}]); //=> [[0], [10, 8], 1234, {}]
      *      flattenArrays([[[10], 123], [8, [10]], "hello"]); //=> [[10, 123], [8, 10], "hello"]
      */
-    var ifElse = R.ifElse = _curry3(function ifElse(condition, onTrue, onFalse) {
+    R.ifElse = _curry3(function ifElse(condition, onTrue, onFalse) {
         return function _ifElse() {
             return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
         };
     });
-
-    /**
-     * This function can safely be referenced as `R.if` in some environments
-     * (e.g. Node.js) or when writing code in a language which transcompiles
-     * to JavaScript. In such situations, `R.if` is the preferred name.
-     *
-     * @func
-     * @memberOf R
-     * @category logic
-     * @see R.ifElse
-     */
-    R['if'] = ifElse;
 
 
     /**
