@@ -1015,7 +1015,7 @@
      * @sig [a] -> [a]
      * @param {Array} [list=[]] The array to consider.
      * @return {Array} A new array containing all but the first element of the input list, or an
-     *         empty list if the input list is a falsy value (e.g. `undefined`).
+     *         empty list if the input list is empty.
      * @example
      *
      *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
