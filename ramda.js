@@ -1476,17 +1476,13 @@
      *         left to right.
      * @example
      *
-     *      var Q = require('q');
      *      var triple = function(x) { return x * 3; };
      *      var double = function(x) { return x * 2; };
-     *      var squareAsync = function(x) { return Q.when(x * x); };
-     *      var squareAsyncThenDoubleThenTriple = R.pPipe(squareAsync, double, triple);
+     *      var square = function(x) { return x * x; };
+     *      var squareThenDoubleThenTriple = R.pipe(square, double, triple);
      *
-     *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
-     *      squareAsyncThenDoubleThenTriple(5)
-     *          .then(function(result) {
-     *              // result is 150
-     *          });
+     *      //≅ triple(double(square(5)))
+     *      squareThenDoubleThenTriple(5); //=> 150
      */
     R.pipe = function pipe() {
         return compose.apply(this, reverse(arguments));
@@ -1514,13 +1510,17 @@
      *         resolved value) of each function call to the next, from left to right.
      * @example
      *
+     *      var Q = require('q');
      *      var triple = function(x) { return x * 3; };
      *      var double = function(x) { return x * 2; };
-     *      var square = function(x) { return x * x; };
-     *      var squareThenDoubleThenTriple = R.pipe(square, double, triple);
+     *      var squareAsync = function(x) { return Q.when(x * x); };
+     *      var squareAsyncThenDoubleThenTriple = R.pPipe(squareAsync, double, triple);
      *
-     *      //≅ triple(double(square(5)))
-     *      squareThenDoubleThenTriple(5); //=> 150
+     *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
+     *      squareAsyncThenDoubleThenTriple(5)
+     *          .then(function(result) {
+     *              // result is 150
+     *          });
      */
     R.pPipe = function pPipe() {
         return pCompose.apply(this, reverse(arguments));
