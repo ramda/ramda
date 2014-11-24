@@ -1,0 +1,63 @@
+{
+  "author": "Scott Sauyet <scott@sauyet.com> (scott.sauyet.com)",
+  "contributors": [
+    {
+      "name": "Michael Hurley",
+      "email": "mh@buzzdecafe.com",
+      "web": "http://buzzdecafe.com"
+    },
+    {
+      "name": "Scott Sauyet",
+      "email": "scott@sauyet.com",
+      "web": "http://fr.umio.us"
+    },
+    {
+      "name": "David Chambers",
+      "email": "dc@davidchambers.me",
+      "web": "http://davidchambers.me"
+    },
+    {
+      "name": "Graeme Yeates",
+      "email": "yeatesgraeme@gmail.com",
+      "web": "https://github.com/megawac"
+    }
+  ],
+  "name": "ramda",
+  "description": "A practical functional library for JavaScript programmers.",
+  "version": "0.8.0",
+  "homepage": "https://www.github.com/ramda/ramda",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ramda/ramda.git"
+  },
+  "main": "ramda.js",
+  "scripts": {
+    "jshint": "grunt jshint",
+    "test": "grunt test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "benchmark": "~1.0.0",
+    "deedpoll": "0.2.x",
+    "dox": "latest",
+    "envvar": "1.x.x",
+    "grunt": "~0.4.5",
+    "grunt-benchmark": "https://github.com/buzzdecafe/grunt-benchmark/archive/09999a8c3fbfff04a1695846c1ccd0bd8a0ef5ab.tar.gz",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-connect": "^0.8.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-docco": "latest",
+    "grunt-jscs": "~0.7.0",
+    "grunt-jsdoc": "^0.6.0",
+    "grunt-mocha": "~0.4.11",
+    "grunt-mocha-test": "~0.11.0",
+    "grunt-saucelabs": "^8.3.1",
+    "lodash": "latest",
+    "orchestrate": "~0.3.4",
+    "q": "^1.1.1",
+    "testem": "^0.6.18",
+    "uglify-js": "2.4.x",
+    "xyz": "0.5.x"
+  }
+}

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+README="$(cat README.md)"
+README="${README//"$PREVIOUS_VERSION/ramda.min.js"/"$VERSION/ramda.min.js"}"
+README="${README//"${PREVIOUS_VERSION%.*}/ramda.min.js"/"${VERSION%.*}/ramda.min.js"}"
+echo "$README" >README.md
+git add README.md
+
+RAMDA="$(cat ramda.js)"
+RAMDA="${RAMDA//$PREVIOUS_VERSION/$VERSION}"
+echo "$RAMDA" >ramda.js
+git add ramda.js
+
+make ramda.min.js
+git add ramda.min.js
