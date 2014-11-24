@@ -912,15 +912,7 @@
      *
      *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
      */
-    var prepend = R.prepend = _curry2(_prepend);
-
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.prepend
-     */
-    R.cons = prepend;
+    R.prepend = _curry2(_prepend);
 
 
     /**
@@ -980,15 +972,7 @@
      *
      *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
      */
-    var head = R.head = nth(0);
-
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.head
-     */
-    R.car = head;
+    R.head = nth(0);
 
 
     /**
@@ -1023,17 +1007,9 @@
      *
      *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
      */
-    var tail = R.tail = _checkForMethod('tail', function(list) {
+    R.tail = _checkForMethod('tail', function(list) {
         return _slice(list, 1);
     });
-
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.tail
-     */
-    R.cdr = tail;
 
 
     function _append(el, list) {
