@@ -1167,9 +1167,10 @@
      *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
      */
     var times = R.times = _curry2(function times(fn, n) {
-        var list = new Array(n);
+        var list = new Array(Number(n));
+        var len = list.length;
         var idx = -1;
-        while (++idx < n) {
+        while (++idx < len) {
             list[idx] = fn(idx);
         }
         return list;
