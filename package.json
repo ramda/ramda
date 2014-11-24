@@ -33,6 +33,7 @@
   },
   "main": "ramda.js",
   "scripts": {
+    "jshint": "grunt jshint",
     "test": "grunt test"
   },
   "dependencies": {},
