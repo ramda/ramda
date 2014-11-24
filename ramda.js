@@ -615,7 +615,7 @@
      * Accepts a function `fn` and any number of transformer functions and returns a new
      * function. When the new function is invoked, it calls the function `fn` with parameters
      * consisting of the result of calling each supplied handler on successive arguments to the
-     * new function. For example:
+     * new function.
      *
      * If more arguments are passed to the returned function than transformer functions, those
      * arguments are passed directly to `fn` as additional parameters. If you expect additional
