@@ -2813,6 +2813,14 @@
     }
     R.every = _curry2(every);
 
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @see R.every
+     */
+    R.all = R.every;
+
 
     /**
      * Returns `true` if at least one of elements of the list match the predicate, `false`
@@ -2845,6 +2853,14 @@
         return false;
     }
     R.some = _curry2(some);
+
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @see R.some
+     */
+    R.any = R.some;
 
 
     /**
@@ -3022,6 +3038,36 @@
      *      R.contains(obj)([{}, obj, {}]); //=> true
      */
     R.contains = _curry2(_contains);
+
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @see R.contains
+     */
+    R.includes = R.contains;
+
+    /**
+     * Flipped version of R.contains.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig [a] -> a -> Boolean
+     * @param {Array} list The array to consider.
+     * @param {Object} a The item to compare against.
+     * @return {Boolean} `true` if the item is in the list, `false` otherwise.
+     * @see R.contains
+     */
+    R.containedIn = flip(R.contains);
+
+    /**
+     * @func
+     * @memberOf R
+     * @category List
+     * @see R.containedIn
+     */
+    R.includedIn = R.containedIn;
 
 
     function _containsWith(pred, x, list) {
@@ -6169,6 +6215,14 @@
      *      R.functionsIn(new F()); //=> ["x", "z"]
      */
     R.functionsIn = _functionsWith(keysIn);
+
+    /**
+     * @func
+     * @memberOf R
+     * @category Object
+     * @see R.functionsIn
+     */
+    R.methods = R.functionsIn;
 
 
     // All the functional goodness, wrapped in a nice little package, just for you!
