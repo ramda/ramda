@@ -9,7 +9,7 @@
         module.exports = factory();
     } else {
         // Browser globals
-        this.returnExports = factory();
+        this.Identity = factory();
     }
 }(function() {
 
