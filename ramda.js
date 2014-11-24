@@ -133,8 +133,8 @@
      *      _isArray({}); //=> false
      */
     var _isArray = Array.isArray || function isArray(val) {
-            return val != null && val.length >= 0 && toString.call(val) === '[object Array]';
-        };
+        return val != null && val.length >= 0 && toString.call(val) === '[object Array]';
+    };
 
 
     /**
@@ -2154,7 +2154,7 @@
      *
      *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
      */
-        // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
+    // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
     R.mapObj = _curry2(function mapObject(fn, obj) {
         return reduce(function(acc, key) {
             acc[key] = fn(obj[key]);
@@ -3573,7 +3573,7 @@
      */
     R.remove = _curry3(function remove(start, count, list) {
         return _concat(_slice(list, 0, Math.min(start, list.length)),
-            _slice(list, Math.min(list.length, start + count)));
+                       _slice(list, Math.min(list.length, start + count)));
     });
 
 
@@ -4828,10 +4828,10 @@
                 }, preds);
             };
             return arguments.length > 1 ?
-                // Call function immediately if given arguments
-                   predIterator.apply(null, _slice(arguments, 1)) :
-                // Return a function which will call the predicates with the provided arguments
-                   arity(max(pluck('length', preds)), predIterator);
+                    // Call function immediately if given arguments
+                    predIterator.apply(null, _slice(arguments, 1)) :
+                    // Return a function which will call the predicates with the provided arguments
+                    arity(max(pluck('length', preds)), predIterator);
         };
     }
 
@@ -5093,8 +5093,8 @@
      */
     // TODO: document, even for internals...
     var _isInteger = Number.isInteger || function isInteger(n) {
-            return (n << 0) === n;
-        };
+        return (n << 0) === n;
+    };
 
 
     /**
