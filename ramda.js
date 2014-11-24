@@ -617,21 +617,6 @@
      * consisting of the result of calling each supplied handler on successive arguments to the
      * new function. For example:
      *
-     * ```javascript
-     *
-     *   var between = R.useWith(R.and,R.lt,R.gt)
-     *
-     *   //This invocation
-     *   var isTeen = between(12,20)
-     *
-     *   //Is functionally equivalent to:
-     *   var isTeen = R.and(R.gt(12), R.lt(20))
-     *
-     *   isTeen(13) //=> true
-     *   isTeen(45) //=> false
-     *
-     * ```
-     *
      * If more arguments are passed to the returned function than transformer functions, those
      * arguments are passed directly to `fn` as additional parameters. If you expect additional
      * arguments that don't need to be transformed, although you can ignore them, it's best to
@@ -645,6 +630,24 @@
      * @param {...Function} transformers A variable number of transformer functions
      * @return {Function} The wrapped function.
      * @example
+     *
+     *      // Example 1:
+     *
+     *      // Number -> [Person] -> [Person]
+     *      var byAge = R.useWith(R.filter, R.propEq('age'), R.identity);
+     *
+     *      var kids = [
+     *          {name: 'Abbie', age: 6},
+     *          {name: 'Brian', age: 5},
+     *          {name: 'Chris', age: 6},
+     *          {name: 'David', age: 4},
+     *          {name: 'Ellie', age: 5}
+     *      ];
+     *
+     *      byAge(5, kids); //=> [{name: 'Brian', age: 5}, {name: 'Ellie', age: 5}]
+     *
+     *
+     *      // Example 2:
      *
      *      var double = function(y) { return y * 2; };
      *      var square = function(x) { return x * x; };
