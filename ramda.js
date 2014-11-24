@@ -679,7 +679,7 @@
         return curry(arity(tlen, function() {
             var args = [], idx = -1;
             while (++idx < tlen) {
-                args.push(transformers[idx](arguments[idx]));
+                args[args.length] = transformers[idx](arguments[idx]);
             }
             return fn.apply(this, args.concat(_slice(arguments, tlen)));
         }));
@@ -857,8 +857,8 @@
             }
         }
 
-        refFrom.push(value);
-        refTo.push(copiedValue);
+        refFrom[refFrom.length] = value;
+        refTo[refTo.length] = copiedValue;
         for (var key in value) {
             copiedValue[key] = _baseCopy(value[key], refFrom, refTo);
         }
@@ -2052,7 +2052,7 @@
         var pair = fn(seed);
         var result = [];
         while (pair && pair.length) {
-            result.push(pair[0]);
+            result[result.length] = pair[0];
             pair = fn(pair[1]);
         }
         return result;
@@ -2456,7 +2456,7 @@
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx])) {
-                result.push(list[idx]);
+                result[result.length] = list[idx];
             }
         }
         return result;
@@ -2512,7 +2512,7 @@
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx], idx, list)) {
-                result.push(list[idx]);
+                result[result.length] = list[idx];
             }
         }
         return result;
@@ -3077,7 +3077,7 @@
         while (++idx < len) {
             item = list[idx];
             if (!_contains(item, result)) {
-                result.push(item);
+                result[result.length] = item;
             }
         }
         return result;
@@ -3138,7 +3138,7 @@
         while (++idx < len) {
             item = list[idx];
             if (!_containsWith(pred, item, result)) {
-                result.push(item);
+                result[result.length] = item;
             }
         }
         return result;
@@ -3181,10 +3181,10 @@
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {
-                        result.push(value[j]);
+                        result[result.length] = value[j];
                     }
                 } else {
-                    result.push(list[idx]);
+                    result[result.length] = list[idx];
                 }
             }
             return result;
@@ -3434,7 +3434,7 @@
         while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
-                result.push([a[idx], b[j]]);
+                result[result.length] = [a[idx], b[j]];
             }
         }
         return result;
@@ -4069,7 +4069,7 @@
             var prop, ks = [], nIdx;
             for (prop in obj) {
                 if (_hasOwnProperty.call(obj, prop)) {
-                    ks.push(prop);
+                    ks[ks.length] = prop;
                 }
             }
             if (hasEnumBug) {
@@ -4077,7 +4077,7 @@
                 while (nIdx--) {
                     prop = nonEnumerableProps[nIdx];
                     if (_hasOwnProperty.call(obj, prop) && !_contains(prop, ks)) {
-                        ks.push(prop);
+                        ks[ks.length] = prop;
                     }
                 }
             }
@@ -4108,7 +4108,7 @@
     var keysIn = R.keysIn = function keysIn(obj) {
         var prop, ks = [];
         for (prop in obj) {
-            ks.push(prop);
+            ks[ks.length] = prop;
         }
         return ks;
     };
@@ -4218,7 +4218,7 @@
     R.valuesIn = function valuesIn(obj) {
         var prop, vs = [];
         for (prop in obj) {
-            vs.push(obj[prop]);
+            vs[vs.length] = obj[prop];
         }
         return vs;
     };
@@ -5883,7 +5883,7 @@
         var firstLen = first.length;
         while (++idx < firstLen) {
             if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
-                out.push(first[idx]);
+                out[out.length] = first[idx];
             }
         }
         return out;
@@ -5919,7 +5919,7 @@
         var containsPred = containsWith(pred);
         while (++idx < firstLen) {
             if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
-                out.push(first[idx]);
+                out[out.length] = first[idx];
             }
         }
         return out;
