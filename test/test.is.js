@@ -99,8 +99,8 @@ describe('isArrayLike', function() {
     });
 
     it('is false for Strings', function() {
-        assert.equal(R.isArrayLike(''), false);
-        assert.equal(R.isArrayLike('abcdefg'), false);
+        assert.strictEqual(R.isArrayLike(''), false);
+        assert.strictEqual(R.isArrayLike('abcdefg'), false);
     });
 
     it('is true for arbitrary objects with numeric length, if extreme indices are defined', function() {
@@ -119,10 +119,10 @@ describe('isArrayLike', function() {
     });
 
     it('is false for everything else', function() {
-        assert.equal(R.isArrayLike(), false);
-        assert.equal(R.isArrayLike(1), false);
-        assert.equal(R.isArrayLike({}), false);
-        assert.equal(R.isArrayLike(false), false);
-        assert.equal(R.isArrayLike(function() {}), false);
+        assert.strictEqual(R.isArrayLike(), false);
+        assert.strictEqual(R.isArrayLike(1), false);
+        assert.strictEqual(R.isArrayLike({}), false);
+        assert.strictEqual(R.isArrayLike(false), false);
+        assert.strictEqual(R.isArrayLike(function() {}), false);
     });
 });

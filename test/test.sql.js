@@ -45,15 +45,15 @@ describe('propEq', function() {
     var obj4 = {name: 'Alois', age: 15, disposition: 'surly'};
 
     it('determines whether a particular property matches a given value for a specific object', function() {
-        assert.equal(R.propEq('name', 'Abby', obj1), true);
-        assert.equal(R.propEq('hair', 'brown', obj2), true);
-        assert.equal(R.propEq('hair', 'blond', obj2), false);
+        assert.strictEqual(R.propEq('name', 'Abby', obj1), true);
+        assert.strictEqual(R.propEq('hair', 'brown', obj2), true);
+        assert.strictEqual(R.propEq('hair', 'blond', obj2), false);
     });
 
     it('is automatically curried', function() {
         var kids = [obj1, obj2, obj3, obj4];
         var hairMatch = R.propEq('hair');
-        assert.equal(typeof hairMatch, 'function');
+        assert.strictEqual(typeof hairMatch, 'function');
         var brunette = hairMatch('brown');
         assert.deepEqual(R.filter(brunette, kids), [obj2, obj3]);
         // more likely usage:
@@ -72,7 +72,7 @@ describe('union', function() {
     });
 
     it('does not work for non-primitives (use `unionWith`)', function() {
-        assert.equal(R.union(Mo, No).length, 8);
+        assert.strictEqual(R.union(Mo, No).length, 8);
     });
 });
 
@@ -101,7 +101,7 @@ describe('intersection', function() {
     });
 
     it('does not work for non-primitives (use `intersectionWith`)', function() {
-        assert.equal(R.intersection(Mo, No).length, 0);
+        assert.strictEqual(R.intersection(Mo, No).length, 0);
     });
 });
 
@@ -132,7 +132,7 @@ describe('difference', function() {
     });
 
     it('does not work for non-primitives (use `differenceWith`)', function() {
-        assert.equal(R.difference(Mo, No).length, 4);
+        assert.strictEqual(R.difference(Mo, No).length, 4);
     });
 
     it('works for arrays of different lengths', function() {
@@ -197,17 +197,17 @@ describe('differenceWith', function() {
     describe('sortBy', function() {
         it('sorts by a simple property of the objects', function() {
             var sortedAlbums = R.sortBy(R.prop('title'), albums);
-            assert.equal(sortedAlbums.length, albums.length);
-            assert.equal(sortedAlbums[0].title, 'A Farewell to Kings');
-            assert.equal(sortedAlbums[11].title, 'Timeout');
+            assert.strictEqual(sortedAlbums.length, albums.length);
+            assert.strictEqual(sortedAlbums[0].title, 'A Farewell to Kings');
+            assert.strictEqual(sortedAlbums[11].title, 'Timeout');
         });
 
         it('is automatically curried', function() {
             var sorter = R.sortBy(R.prop('title'));
             var sortedAlbums = sorter(albums);
-            assert.equal(sortedAlbums.length, albums.length);
-            assert.equal(sortedAlbums[0].title, 'A Farewell to Kings');
-            assert.equal(sortedAlbums[11].title, 'Timeout');
+            assert.strictEqual(sortedAlbums.length, albums.length);
+            assert.strictEqual(sortedAlbums[0].title, 'A Farewell to Kings');
+            assert.strictEqual(sortedAlbums[11].title, 'Timeout');
         });
     });
 

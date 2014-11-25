@@ -13,7 +13,7 @@ describe('forEach', function() {
     it('returns the original list', function() {
         var s = '';
         assert.deepEqual(R.forEach(function(obj) { s += obj.x; }, list), list);
-        assert.equal('1100300234', s);
+        assert.strictEqual('1100300234', s);
     });
 
     it('handles empty list', function() {
@@ -23,9 +23,9 @@ describe('forEach', function() {
     it('is curried', function() {
         var xStr = '';
         var xe = R.forEach(function(x) { xStr += (x + ' '); });
-        assert.equal(typeof xe, 'function');
+        assert.strictEqual(typeof xe, 'function');
         xe([1, 2, 4]);
-        assert.equal(xStr, '1 2 4 ');
+        assert.strictEqual(xStr, '1 2 4 ');
     });
 
     it('throws on zero arguments', function() {
@@ -45,7 +45,7 @@ describe('forEach.idx', function() {
     it('returns the original list', function() {
         var s = '';
         assert.deepEqual(R.forEach.idx(function(obj) { s += obj.x; }, list), list);
-        assert.equal('1100300234', s);
+        assert.strictEqual('1100300234', s);
     });
 
     it('handles empty list', function() {
@@ -55,9 +55,9 @@ describe('forEach.idx', function() {
     it('is curried', function() {
         var sum = 0;
         var xe = R.forEach.idx(function(x, idx) { sum += (x + idx); });
-        assert.equal(typeof xe, 'function');
+        assert.strictEqual(typeof xe, 'function');
         xe([1, 2, 4]);
-        assert.equal(sum, 10);
+        assert.strictEqual(sum, 10);
     });
 
     it('throws on zero arguments', function() {

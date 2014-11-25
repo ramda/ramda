@@ -18,7 +18,7 @@ describe('functionsIn', function() {
 
     it('returns list of functions with prototype functions', function() {
         assert.deepEqual(R.functionsIn(f).sort(), ['map', 'sort', 'x', 'y']);
-        assert.equal(R.functionsIn(f).length, 4);
+        assert.strictEqual(R.functionsIn(f).length, 4);
     });
 
     it('returns an empty array if there are no functions on the object or its prototype chain', function() {

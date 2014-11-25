@@ -3,21 +3,21 @@ var R = require('..');
 
 describe('deep clone integers, strings and booleans', function() {
     it('clone integers', function() {
-        assert.equal(R.cloneDeep(-4), -4);
-        assert.equal(R.cloneDeep(9007199254740991), 9007199254740991);
+        assert.strictEqual(R.cloneDeep(-4), -4);
+        assert.strictEqual(R.cloneDeep(9007199254740991), 9007199254740991);
     });
 
     it('clone floats', function() {
-        assert.equal(R.cloneDeep(-4.5), -4.5);
-        assert.equal(R.cloneDeep(0.0), 0.0);
+        assert.strictEqual(R.cloneDeep(-4.5), -4.5);
+        assert.strictEqual(R.cloneDeep(0.0), 0.0);
     });
 
     it('clone strings', function() {
-        assert.equal(R.cloneDeep('ramda'), 'ramda');
+        assert.strictEqual(R.cloneDeep('ramda'), 'ramda');
     });
 
     it('clone booleans', function() {
-        assert.equal(R.cloneDeep(true), true);
+        assert.strictEqual(R.cloneDeep(true), true);
     });
 });
 
@@ -70,16 +70,16 @@ describe('deep clone objects', function() {
         };
 
         var obj = new Obj(10);
-        assert.equal(obj.get(), 10);
+        assert.strictEqual(obj.get(), 10);
 
         var clone = R.cloneDeep(obj);
-        assert.equal(clone.get(), 10);
+        assert.strictEqual(clone.get(), 10);
 
         assert.ok(obj !== clone);
 
         obj.set(11);
-        assert.equal(obj.get(), 11);
-        assert.equal(clone.get(), 10);
+        assert.strictEqual(obj.get(), 11);
+        assert.strictEqual(clone.get(), 10);
     });
 });
 
@@ -110,7 +110,7 @@ describe('deep `clone` functions', function() {
 
         var clone = R.cloneDeep(list);
 
-        assert.equal(clone[0].a(10), 20);
+        assert.strictEqual(clone[0].a(10), 20);
         assert.ok(list[0].a === clone[0].a);
     });
 });
@@ -124,7 +124,7 @@ describe('deep clone Dates', function() {
         assert.ok(date !== clone);
         assert.deepEqual(clone.toString(), new Date(2014, 10, 14, 23, 59, 59, 999).toString());
 
-        assert.equal(clone.getDay(), 5); // friday
+        assert.strictEqual(clone.getDay(), 5); // friday
     });
 });
 

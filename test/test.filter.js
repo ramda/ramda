@@ -18,7 +18,7 @@ describe('filter', function() {
 
     it('dispatches to passed-in non-Array object with a `filter` method', function() {
         var f = {filter: function(f) { return f('called f.filter'); }};
-        assert.equal(R.filter(function(s) { return s; }, f), 'called f.filter');
+        assert.strictEqual(R.filter(function(s) { return s; }, f), 'called f.filter');
     });
 
     it('is automatically curried', function() {
@@ -200,10 +200,10 @@ describe('skipUntil', function() {
 
     it('starts at the right arg and acknowledges undefined', function() {
         var sublist = R.skipUntil(function(x) {return x === void 0;}, [1, 3, void 0, 5, 7]);
-        assert.equal(sublist.length, 3);
-        assert.equal(sublist[0], void 0);
-        assert.equal(sublist[1], 5);
-        assert.equal(sublist[2], 7);
+        assert.strictEqual(sublist.length, 3);
+        assert.strictEqual(sublist[0], void 0);
+        assert.strictEqual(sublist[1], 5);
+        assert.strictEqual(sublist[2], 7);
     });
 
     it('is automatically curried', function() {

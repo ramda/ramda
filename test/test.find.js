@@ -11,23 +11,23 @@ describe('find', function() {
     var xGt100 = function(o) { return o && o.x > 100; };
 
     it('returns the first element that satisfies the predicate', function() {
-        assert.equal(R.find(even, a), 10);
-        assert.equal(R.find(gt100, a), 200);
-        assert.equal(R.find(isStr, a), 'cow');
-        assert.equal(R.find(xGt100, a), obj2);
+        assert.strictEqual(R.find(even, a), 10);
+        assert.strictEqual(R.find(gt100, a), 200);
+        assert.strictEqual(R.find(isStr, a), 'cow');
+        assert.strictEqual(R.find(xGt100, a), obj2);
     });
 
     it('returns `undefined` when no element satisfies the predicate', function() {
-        assert.equal(R.find(even, ['zing']), undefined);
+        assert.strictEqual(R.find(even, ['zing']), undefined);
     });
 
     it('returns `undefined` when given an empty list', function() {
-        assert.equal(R.find(even, []), undefined);
+        assert.strictEqual(R.find(even, []), undefined);
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.find(even), 'function');
-        assert.equal(R.find(even)(a), 10);
+        assert.strictEqual(typeof R.find(even), 'function');
+        assert.strictEqual(R.find(even)(a), 10);
     });
 
     it('throws on zero arguments', function() {
@@ -45,20 +45,20 @@ describe('findIndex', function() {
     var xGt100 = function(o) { return o && o.x > 100; };
 
     it('returns the index of the first element that satisfies the predicate', function() {
-        assert.equal(R.findIndex(even, a), 1);
-        assert.equal(R.findIndex(gt100, a), 8);
-        assert.equal(R.findIndex(isStr, a), 3);
-        assert.equal(R.findIndex(xGt100, a), 10);
+        assert.strictEqual(R.findIndex(even, a), 1);
+        assert.strictEqual(R.findIndex(gt100, a), 8);
+        assert.strictEqual(R.findIndex(isStr, a), 3);
+        assert.strictEqual(R.findIndex(xGt100, a), 10);
     });
 
     it('returns -1 when no element satisfies the predicate', function() {
-        assert.equal(R.findIndex(even, ['zing']), -1);
-        assert.equal(R.findIndex(even, []), -1);
+        assert.strictEqual(R.findIndex(even, ['zing']), -1);
+        assert.strictEqual(R.findIndex(even, []), -1);
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.findIndex(even), 'function');
-        assert.equal(R.findIndex(even)(a), 1);
+        assert.strictEqual(typeof R.findIndex(even), 'function');
+        assert.strictEqual(R.findIndex(even)(a), 1);
     });
 
     it('throws on zero arguments', function() {
@@ -76,27 +76,27 @@ describe('findLast', function() {
     var xGt100 = function(o) { return o && o.x > 100; };
 
     it('returns the index of the last element that satisfies the predicate', function() {
-        assert.equal(R.findLast(even, a), 0);
-        assert.equal(R.findLast(gt100, a), 300);
-        assert.equal(R.findLast(isStr, a), 'cow');
-        assert.equal(R.findLast(xGt100, a), obj2);
+        assert.strictEqual(R.findLast(even, a), 0);
+        assert.strictEqual(R.findLast(gt100, a), 300);
+        assert.strictEqual(R.findLast(isStr, a), 'cow');
+        assert.strictEqual(R.findLast(xGt100, a), obj2);
     });
 
     it('returns `undefined` when no element satisfies the predicate', function() {
-        assert.equal(R.findLast(even, 'zing'), undefined);
+        assert.strictEqual(R.findLast(even, 'zing'), undefined);
     });
 
     it('works when the first element matches', function() {
-        assert.equal(R.findLast(even, [2, 3, 5]), 2);
+        assert.strictEqual(R.findLast(even, [2, 3, 5]), 2);
     });
 
     it('does not go into an infinite loop on an empty array', function() {
-        assert.equal(R.findLast(even, []), undefined);
+        assert.strictEqual(R.findLast(even, []), undefined);
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.findLast(even), 'function');
-        assert.equal(R.findLast(even)(a), 0);
+        assert.strictEqual(typeof R.findLast(even), 'function');
+        assert.strictEqual(R.findLast(even)(a), 0);
     });
 
     it('throws on zero arguments', function() {
@@ -114,27 +114,27 @@ describe('findLastIndex', function() {
     var xGt100 = function(o) { return o && o.x > 100; };
 
     it('returns the index of the last element that satisfies the predicate', function() {
-        assert.equal(R.findLastIndex(even, a), 15);
-        assert.equal(R.findLastIndex(gt100, a), 9);
-        assert.equal(R.findLastIndex(isStr, a), 3);
-        assert.equal(R.findLastIndex(xGt100, a), 10);
+        assert.strictEqual(R.findLastIndex(even, a), 15);
+        assert.strictEqual(R.findLastIndex(gt100, a), 9);
+        assert.strictEqual(R.findLastIndex(isStr, a), 3);
+        assert.strictEqual(R.findLastIndex(xGt100, a), 10);
     });
 
     it('returns -1 when no element satisfies the predicate', function() {
-        assert.equal(R.findLastIndex(even, 'zing'), -1);
+        assert.strictEqual(R.findLastIndex(even, 'zing'), -1);
     });
 
     it('works when the first element matches', function() {
-        assert.equal(R.findLastIndex(even, [2, 3, 5]), 0);
+        assert.strictEqual(R.findLastIndex(even, [2, 3, 5]), 0);
     });
 
     it('does not go into an infinite loop on an empty array', function() {
-        assert.equal(R.findLastIndex(even, []), -1);
+        assert.strictEqual(R.findLastIndex(even, []), -1);
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.findLastIndex(even), 'function');
-        assert.equal(R.findLastIndex(even)(a), 15);
+        assert.strictEqual(typeof R.findLastIndex(even), 'function');
+        assert.strictEqual(R.findLastIndex(even)(a), 15);
     });
 
     it('throws on zero arguments', function() {

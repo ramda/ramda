@@ -16,7 +16,7 @@ describe('map', function() {
 
     it('correctly reports the arity of curried versions', function() {
         var inc = R.map(add1);
-        assert.equal(inc.length, 1);
+        assert.strictEqual(inc.length, 1);
     });
 
 });

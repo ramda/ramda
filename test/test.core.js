@@ -56,7 +56,7 @@ describe('prepend', function() {
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.prepend(4), 'function');
+        assert.strictEqual(typeof R.prepend(4), 'function');
         assert.deepEqual(R.prepend(4)([3, 2, 1]), [4, 3, 2, 1]);
     });
 
@@ -76,7 +76,7 @@ describe('prependTo', function() {
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.prependTo([]), 'function');
+        assert.strictEqual(typeof R.prependTo([]), 'function');
         assert.deepEqual(R.prependTo([3, 2, 1])(4), [4, 3, 2, 1]);
     });
 
@@ -96,7 +96,7 @@ describe('append', function() {
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.append(4), 'function');
+        assert.strictEqual(typeof R.append(4), 'function');
         assert.deepEqual(R.append(1)([4, 3, 2]), [4, 3, 2, 1]);
     });
 
@@ -116,7 +116,7 @@ describe('appendTo', function() {
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.appendTo([]), 'function');
+        assert.strictEqual(typeof R.appendTo([]), 'function');
         assert.deepEqual(R.appendTo([4, 3, 2])(1), [4, 3, 2, 1]);
     });
 
@@ -144,13 +144,13 @@ describe('concat', function() {
         assert.deepEqual(R.concat([], ['c', 'd']), ['c', 'd']);
     });
     it('works on strings', function() {
-        assert.equal(R.concat('foo', 'bar'), 'foobar');
-        assert.equal(R.concat('x', ''), 'x');
-        assert.equal(R.concat('', 'x'), 'x');
-        assert.equal(R.concat('', ''), '');
+        assert.strictEqual(R.concat('foo', 'bar'), 'foobar');
+        assert.strictEqual(R.concat('x', ''), 'x');
+        assert.strictEqual(R.concat('', 'x'), 'x');
+        assert.strictEqual(R.concat('', ''), '');
     });
     it('delegates to non-String object with a concat method, as second param', function() {
-        assert.equal(R.concat(z1, z2), 'z1 z2');
+        assert.strictEqual(R.concat(z1, z2), 'z1 z2');
     });
     it('is curried', function() {
         var conc123 = R.concat([1, 2, 3]);
@@ -190,10 +190,10 @@ describe('nth', function() {
 
 describe('head', function() {
     it('returns undefined for an empty list', function() {
-        assert.equal(typeof(R.head([])),  'undefined');
+        assert.strictEqual(typeof(R.head([])),  'undefined');
     });
     it('returns the first element of a list', function() {
-        assert.equal(R.head(['a', 'b', 'c', 'd']), 'a');
+        assert.strictEqual(R.head(['a', 'b', 'c', 'd']), 'a');
     });
     it('throws if applied to null or undefined', function() {
         assert.throws(function() { R.head(null); }, TypeError);
@@ -204,10 +204,10 @@ describe('head', function() {
 
 describe('last', function() {
     it('returns undefined for an empty list', function() {
-        assert.equal(typeof(R.last([])),  'undefined');
+        assert.strictEqual(typeof(R.last([])),  'undefined');
     });
     it('returns the first element of a list', function() {
-        assert.equal(R.last(['a', 'b', 'c', 'd']), 'd');
+        assert.strictEqual(R.last(['a', 'b', 'c', 'd']), 'd');
     });
     it('throws if applied to null or undefined', function() {
         assert.throws(function() { R.last(null); }, TypeError);

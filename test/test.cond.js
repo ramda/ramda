@@ -8,12 +8,12 @@ describe('ifElse', function() {
 
     it('calls the truth case function if the validator returns a truthy value', function() {
         var v = function(a) { return typeof a === 'number'; };
-        assert.equal(R.ifElse(v, t, identity)(10), 11);
+        assert.strictEqual(R.ifElse(v, t, identity)(10), 11);
     });
 
     it('calls the false case function if the validator returns a falsey value', function() {
         var v = function(a) { return typeof a === 'number'; };
-        assert.equal(R.ifElse(v, t, identity)('hello'), 'hello');
+        assert.strictEqual(R.ifElse(v, t, identity)('hello'), 'hello');
     });
 
     it('calls the true case on array items and the false case on non array items', function() {
@@ -25,8 +25,8 @@ describe('ifElse', function() {
     it('passes the arguments to the true case function', function() {
         var v = function() { return true; };
         var onTrue = function(a, b) {
-            assert.equal(a, 123);
-            assert.equal(b, 'abc');
+            assert.strictEqual(a, 123);
+            assert.strictEqual(b, 'abc');
         };
         R.ifElse(v, onTrue, identity)(123, 'abc');
     });
@@ -34,8 +34,8 @@ describe('ifElse', function() {
     it('passes the arguments to the false case function', function() {
         var v = function() { return false; };
         var onFalse = function(a, b) {
-            assert.equal(a, 123);
-            assert.equal(b, 'abc');
+            assert.strictEqual(a, 123);
+            assert.strictEqual(b, 'abc');
         };
         R.ifElse(v, identity, onFalse)(123, 'abc');
     });
@@ -43,8 +43,8 @@ describe('ifElse', function() {
     it('returns a curried function', function() {
         var v = function(a) { return typeof a === 'number'; };
         var ifIsNumber = R.ifElse(v);
-        assert.equal(ifIsNumber(t, identity)(15), 16);
-        assert.equal(ifIsNumber(t, identity)('hello'), 'hello');
+        assert.strictEqual(ifIsNumber(t, identity)(15), 16);
+        assert.strictEqual(ifIsNumber(t, identity)('hello'), 'hello');
     });
 });
 
