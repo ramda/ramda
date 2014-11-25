@@ -4678,21 +4678,6 @@
                toString.call(val).slice(8, -1);
     };
 
-    /**
-     * A function that always returns `0`. Any passed in parameters are ignored.
-     *
-     * @func
-     * @memberOf R
-     * @category function
-     * @sig * -> 0
-     * @see R.always
-     * @return {Number} 0. Always zero.
-     * @example
-     *
-     *      R.alwaysZero(); //=> 0
-     */
-    R.alwaysZero = always(0);
-
 
     /**
      * A function that always returns `false`. Any passed in parameters are ignored.

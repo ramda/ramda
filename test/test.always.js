@@ -21,14 +21,6 @@ describe('always', function() {
     });
 });
 
-describe ('alwaysZero', function() {
-    it('always returns zero', function() {
-        assert.equal(R.alwaysZero(), 0);
-        assert.equal(R.alwaysZero(10), 0);
-        assert.equal(R.alwaysZero(false), 0);
-    });
-});
-
 describe ('alwaysFalse', function() {
     it('always returns false', function() {
         assert.equal(R.alwaysFalse(), false);
