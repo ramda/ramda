@@ -55,9 +55,9 @@ describe('cond', function() {
 
     it('returns a conditional function', function() {
         var fn = R.cond(
-            [R.eq(0),      R.always('water freezes at 0°C')],
-            [R.eq(100),    R.always('water boils at 100°C')],
-            [R.alwaysTrue, function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
+            [R.eq(0),   R.always('water freezes at 0°C')],
+            [R.eq(100), R.always('water boils at 100°C')],
+            [R.T,       function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
         );
         assert.strictEqual(fn(0), 'water freezes at 0°C');
         assert.strictEqual(fn(50), 'nothing special happens at 50°C');
@@ -74,9 +74,9 @@ describe('cond', function() {
 
     it('predicates are tested in order', function() {
         var fn = R.cond(
-            [R.alwaysTrue, R.always('foo')],
-            [R.alwaysTrue, R.always('bar')],
-            [R.alwaysTrue, R.always('baz')]
+            [R.T, R.always('foo')],
+            [R.T, R.always('bar')],
+            [R.T, R.always('baz')]
         );
         assert.strictEqual(fn(), 'foo');
     });
