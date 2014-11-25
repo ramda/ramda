@@ -4,21 +4,21 @@ var R = require('..');
 
 describe('contains', function() {
     it('returns true if an element is in a list', function() {
-        assert.equal(R.contains(7, [1, 2, 3, 9, 8, 7, 100, 200, 300]), true);
+        assert.strictEqual(R.contains(7, [1, 2, 3, 9, 8, 7, 100, 200, 300]), true);
     });
 
     it('returns false if an element is not in a list', function() {
-        assert.equal(R.contains(99, [1, 2, 3, 9, 8, 7, 100, 200, 300]), false);
+        assert.strictEqual(R.contains(99, [1, 2, 3, 9, 8, 7, 100, 200, 300]), false);
     });
 
     it('returns false for the empty list', function() {
-        assert.equal(R.contains(1, []), false);
+        assert.strictEqual(R.contains(1, []), false);
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.contains(7), 'function');
-        assert.equal(R.contains(7)([1, 2, 3]), false);
-        assert.equal(R.contains(7)([1, 2, 7, 3]), true);
+        assert.strictEqual(typeof R.contains(7), 'function');
+        assert.strictEqual(R.contains(7)([1, 2, 3]), false);
+        assert.strictEqual(R.contains(7)([1, 2, 7, 3]), true);
     });
 
     it('throws on zero arguments', function() {
@@ -62,7 +62,7 @@ describe('uniqWith', function() {
     });
 
     it('is curried', function() {
-        assert.equal(typeof R.uniqWith(eqI), 'function');
+        assert.strictEqual(typeof R.uniqWith(eqI), 'function');
         assert.deepEqual(R.uniqWith(eqI)(objs), objs);
         assert.deepEqual(R.uniqWith(eqI)(objs2), [{x: T, i: 0}, {x: F, i: 1}, {x: T, i: 2}, {x: T, i: 3}]);
     });
@@ -75,12 +75,12 @@ describe('uniqWith', function() {
 describe('isSet', function() {
     it('returns true if a list is composed of unique elements', function() {
         var list = [1, 2, 3, 1, 2, 3, 1, 2, 3];
-        assert.equal(R.isSet(list), false);
-        assert.equal(R.isSet([3, 1, 4, 2, 5, 7, 9]), true);
+        assert.strictEqual(R.isSet(list), false);
+        assert.strictEqual(R.isSet([3, 1, 4, 2, 5, 7, 9]), true);
     });
 
     it('returns true for an empty array', function() {
-        assert.equal(R.isSet([]), true);
+        assert.strictEqual(R.isSet([]), true);
     });
 
 });

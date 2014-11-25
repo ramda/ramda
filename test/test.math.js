@@ -3,12 +3,12 @@ var R = require('..');
 
 describe('add', function() {
     it('adds together two numbers', function() {
-        assert.equal(R.add(3, 7), 10);
+        assert.strictEqual(R.add(3, 7), 10);
     });
 
     it('is automatically curried', function() {
         var incr = R.add(1);
-        assert.equal(incr(42), 43);
+        assert.strictEqual(incr(42), 43);
     });
 
     it('throws if given no arguments', function() {
@@ -18,12 +18,12 @@ describe('add', function() {
 
 describe('multiply', function() {
     it('adds together two numbers', function() {
-        assert.equal(R.multiply(6, 7), 42);
+        assert.strictEqual(R.multiply(6, 7), 42);
     });
 
     it('is automatically curried', function() {
         var dbl = R.multiply(2);
-        assert.equal(dbl(15), 30);
+        assert.strictEqual(dbl(15), 30);
     });
 
     it('throws if given no arguments', function() {
@@ -33,17 +33,17 @@ describe('multiply', function() {
 
 describe('subtract', function() {
     it('subtracts two numbers', function() {
-        assert.equal(R.subtract(22, 7), 15);
+        assert.strictEqual(R.subtract(22, 7), 15);
     });
 
     it('is curried', function() {
         var ninesCompl = R.subtract(9);
-        assert.equal(ninesCompl(6), 3);
+        assert.strictEqual(ninesCompl(6), 3);
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
         var minus5 = R.subtract(void 0, 5);
-        assert.equal(minus5(17), 12);
+        assert.strictEqual(minus5(17), 12);
     });
 
     it('throws if given no arguments', function() {
@@ -54,17 +54,17 @@ describe('subtract', function() {
 
 describe('divide', function() {
     it('divides two numbers', function() {
-        assert.equal(R.divide(28, 7), 4);
+        assert.strictEqual(R.divide(28, 7), 4);
     });
 
     it('is curried', function() {
         var into28 = R.divide(28);
-        assert.equal(into28(7), 4);
+        assert.strictEqual(into28(7), 4);
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
         var half = R.divide(void 0, 2);
-        assert.equal(half(40), 20);
+        assert.strictEqual(half(40), 20);
     });
 
     it('throws if given no arguments', function() {
@@ -75,28 +75,28 @@ describe('divide', function() {
 
 describe('modulo', function() {
     it('divides the first param by the second and returns the remainder', function() {
-        assert.equal(R.modulo(100, 2), 0);
-        assert.equal(R.modulo(100, 3), 1);
-        assert.equal(R.modulo(100, 17), 15);
+        assert.strictEqual(R.modulo(100, 2), 0);
+        assert.strictEqual(R.modulo(100, 3), 1);
+        assert.strictEqual(R.modulo(100, 17), 15);
     });
 
     it('is curried', function() {
         var hundredMod = R.modulo(100);
-        assert.equal(typeof hundredMod, 'function');
-        assert.equal(hundredMod(2), 0);
-        assert.equal(hundredMod(3), 1);
-        assert.equal(hundredMod(17), 15);
+        assert.strictEqual(typeof hundredMod, 'function');
+        assert.strictEqual(hundredMod(2), 0);
+        assert.strictEqual(hundredMod(3), 1);
+        assert.strictEqual(hundredMod(17), 15);
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
         var isOdd = R.modulo(void 0, 2);
-        assert.equal(typeof isOdd, 'function');
-        assert.equal(isOdd(3), 1);
-        assert.equal(isOdd(198), 0);
+        assert.strictEqual(typeof isOdd, 'function');
+        assert.strictEqual(isOdd(3), 1);
+        assert.strictEqual(isOdd(198), 0);
     });
 
     it('preserves javascript-style modulo evaluation for negative numbers', function() {
-        assert.equal(R.modulo(-5, 4), -1);
+        assert.strictEqual(R.modulo(-5, 4), -1);
     });
 
     it('throws if given no arguments', function() {
@@ -107,36 +107,36 @@ describe('modulo', function() {
 
 describe('mathMod', function() {
     it('requires integer arguments', function() {
-        assert.notEqual(R.mathMod('s', 3), R.mathMod('s', 3));
-        assert.notEqual(R.mathMod(3, 's'), R.mathMod(3, 's'));
-        assert.notEqual(R.mathMod(12.2, 3), R.mathMod(12.2, 3));
-        assert.notEqual(R.mathMod(3, 12.2), R.mathMod(3, 12.2));
+        assert.notStrictEqual(R.mathMod('s', 3), R.mathMod('s', 3));
+        assert.notStrictEqual(R.mathMod(3, 's'), R.mathMod(3, 's'));
+        assert.notStrictEqual(R.mathMod(12.2, 3), R.mathMod(12.2, 3));
+        assert.notStrictEqual(R.mathMod(3, 12.2), R.mathMod(3, 12.2));
     });
 
     it('behaves differently than JS modulo', function() {
-        assert.notEqual(R.mathMod(-17, 5), -17 % 5);
-        assert.notEqual(R.mathMod(17.2, 5), 17.2 % 5);
-        assert.notEqual(R.mathMod(17, -5), 17 % -5);
+        assert.notStrictEqual(R.mathMod(-17, 5), -17 % 5);
+        assert.notStrictEqual(R.mathMod(17.2, 5), 17.2 % 5);
+        assert.notStrictEqual(R.mathMod(17, -5), 17 % -5);
     });
 
     it('computes the true modulo function', function() {
-        assert.equal(R.mathMod(-17, 5), 3);
-        assert.equal(isNaN(R.mathMod(17, -5)), true);
-        assert.equal(isNaN(R.mathMod(17, 0)), true);
-        assert.equal(isNaN(R.mathMod(17.2, 5)), true);
-        assert.equal(isNaN(R.mathMod(17, 5.5)), true);
+        assert.strictEqual(R.mathMod(-17, 5), 3);
+        assert.strictEqual(isNaN(R.mathMod(17, -5)), true);
+        assert.strictEqual(isNaN(R.mathMod(17, 0)), true);
+        assert.strictEqual(isNaN(R.mathMod(17.2, 5)), true);
+        assert.strictEqual(isNaN(R.mathMod(17, 5.5)), true);
     });
 
     it('is curried', function() {
         var f = R.mathMod(29);
-        assert.equal(f(6), 5);
+        assert.strictEqual(f(6), 5);
     });
 
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
         var mod5 = R.modulo(void 0, 5);
-        assert.equal(mod5(12), 2);
-        assert.equal(mod5(8), 3);
+        assert.strictEqual(mod5(12), 2);
+        assert.strictEqual(mod5(8), 3);
     });
 
     it('throws if given no arguments', function() {
@@ -146,19 +146,19 @@ describe('mathMod', function() {
 
 describe('sum', function() {
     it('adds together the array of numbers supplied', function() {
-        assert.equal(R.sum([1, 2, 3, 4]), 10);
+        assert.strictEqual(R.sum([1, 2, 3, 4]), 10);
     });
 
     it('does not save the state of the accumulator', function() {
-        assert.equal(R.sum([1, 2, 3, 4]), 10);
-        assert.equal(R.sum([1]), 1);
-        assert.equal(R.sum([5, 5, 5, 5, 5]), 25);
+        assert.strictEqual(R.sum([1, 2, 3, 4]), 10);
+        assert.strictEqual(R.sum([1]), 1);
+        assert.strictEqual(R.sum([5, 5, 5, 5, 5]), 25);
     });
 });
 
 describe('product', function() {
     it('multiplies together the array of numbers supplied', function() {
-        assert.equal(R.product([1, 2, 3, 4]), 24);
+        assert.strictEqual(R.product([1, 2, 3, 4]), 24);
     });
 });
 
@@ -280,55 +280,55 @@ describe('gte', function() {
 
 describe('max', function() {
     it('calculates the largest value of a list', function() {
-        assert.equal(R.max([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 9);
-        assert.equal(R.max([7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]), 52);
+        assert.strictEqual(R.max([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 9);
+        assert.strictEqual(R.max([7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]), 52);
     });
 
     it('accepts negative numbers, decimals, and even strings', function() {
-        assert.equal(R.max([-6, -2, -4.3, -1.1, -5]), -1.1);
-        assert.equal(R.max([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 52);
+        assert.strictEqual(R.max([-6, -2, -4.3, -1.1, -5]), -1.1);
+        assert.strictEqual(R.max([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 52);
     });
 
     it('finds max in any position', function() {
-        assert.equal(R.max([6, 2, 1, 3]), 6);
-        assert.equal(R.max([3, 6, 2, 1]), 6);
-        assert.equal(R.max([3, 1, 6, 2]), 6);
-        assert.equal(R.max([3, 1, 2, 6]), 6);
+        assert.strictEqual(R.max([6, 2, 1, 3]), 6);
+        assert.strictEqual(R.max([3, 6, 2, 1]), 6);
+        assert.strictEqual(R.max([3, 1, 6, 2]), 6);
+        assert.strictEqual(R.max([3, 1, 2, 6]), 6);
     });
 
     it('returns -Infinity for an empty list', function() {
-        assert.equal(R.max([]), -Infinity);
+        assert.strictEqual(R.max([]), -Infinity);
     });
 
     it('returns a number', function() {
-        assert.equal(R.max(['4', '1', '100', '10', '2']), 100);
+        assert.strictEqual(R.max(['4', '1', '100', '10', '2']), 100);
     });
 });
 
 describe('min', function() {
     it('calculates the smallest value of a list', function() {
-        assert.equal(R.min([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 0);
-        assert.equal(R.min([7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]), 1);
+        assert.strictEqual(R.min([2, 1, 2, 8, 6, 7, 5, 3, 0, 9]), 0);
+        assert.strictEqual(R.min([7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]), 1);
     });
 
     it('accepts negative numbers, decimals, and even strings', function() {
-        assert.equal(R.min([-6, -2, -4.3, -1.1, -5]), -6);
-        assert.equal(R.min([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 1);
+        assert.strictEqual(R.min([-6, -2, -4.3, -1.1, -5]), -6);
+        assert.strictEqual(R.min([7, '22', 11, 34, 17, '52', 26, 13, 40, 20, '10', 5, 16, 8, 4, '2', '1']), 1);
     });
 
     it('finds min in any position', function() {
-        assert.equal(R.min([0, 2, 1, 3]), 0);
-        assert.equal(R.min([3, 0, 2, 1]), 0);
-        assert.equal(R.min([3, 1, 0, 2]), 0);
-        assert.equal(R.min([3, 1, 2, 0]), 0);
+        assert.strictEqual(R.min([0, 2, 1, 3]), 0);
+        assert.strictEqual(R.min([3, 0, 2, 1]), 0);
+        assert.strictEqual(R.min([3, 1, 0, 2]), 0);
+        assert.strictEqual(R.min([3, 1, 2, 0]), 0);
     });
 
     it('returns Infinity for an empty list', function() {
-        assert.equal(R.min([]), Infinity);
+        assert.strictEqual(R.min([]), Infinity);
     });
 
     it('returns a number', function() {
-        assert.equal(R.min(['4', '1', '100', '10', '2']), 1);
+        assert.strictEqual(R.min(['4', '1', '100', '10', '2']), 1);
     });
 });
 
@@ -338,7 +338,7 @@ describe('maxBy', function() {
     });
 
     it('returns undefined for the empty list', function() {
-        assert.equal(R.maxBy(R.prop('x'), []), undefined);
+        assert.strictEqual(R.maxBy(R.prop('x'), []), undefined);
     });
 
     it('is properly curried', function() {
@@ -353,7 +353,7 @@ describe('minBy', function() {
     });
 
     it('returns null for the empty list', function() {
-        assert.equal(typeof(R.minBy(R.prop('x'), [])), 'undefined');
+        assert.strictEqual(typeof(R.minBy(R.prop('x'), [])), 'undefined');
     });
 
     it('is properly curried', function() {

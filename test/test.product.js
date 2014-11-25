@@ -20,6 +20,6 @@ describe('xprod', function() {
 
     it('correctly reports the arity of curried versions', function() {
         var something = R.xprod(a);
-        assert.equal(something.length, 1);
+        assert.deepEqual(something.length, 1);
     });
 });

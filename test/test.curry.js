@@ -7,11 +7,11 @@ describe('curry', function() {
     }
     var curried = R.curry(source);
     it('curries', function() {
-        assert.equal(curried(1)(2)(3), 6);
-        assert.equal(curried(1, 2)(3), 6);
-        assert.equal(curried(1)(2, 3), 6);
-        assert.equal(curried(1, 2, 3), 6);
-        assert.notEqual(curried, source);
+        assert.strictEqual(curried(1)(2)(3), 6);
+        assert.strictEqual(curried(1, 2)(3), 6);
+        assert.strictEqual(curried(1)(2, 3), 6);
+        assert.strictEqual(curried(1, 2, 3), 6);
+        assert.notStrictEqual(curried, source);
     });
 
     it('produces functions that throw when called with no arguments', function() {
@@ -29,10 +29,10 @@ describe('curryN', function() {
     }
     it('accepts an arity', function() {
         var curried = R.curryN(3, source);
-        assert.equal(curried(1)(2)(3), 6);
-        assert.equal(curried(1, 2)(3), 6);
-        assert.equal(curried(1)(2, 3), 6);
-        assert.equal(curried(1, 2, 3), 6);
+        assert.strictEqual(curried(1)(2)(3), 6);
+        assert.strictEqual(curried(1, 2)(3), 6);
+        assert.strictEqual(curried(1)(2, 3), 6);
+        assert.strictEqual(curried(1, 2, 3), 6);
     });
 });
 
@@ -76,10 +76,10 @@ describe('op', function() {
     });
 
     it('returns functions with the correct arity', function() {
-        assert.equal(R.op(lt).length, 2);
-        assert.equal(R.op(lt)(placeholder).length, 2);
-        assert.equal(R.op(lt)(placeholder, 1000).length, 1);
-        assert.equal(R.op(lt)(1000).length, 1);
+        assert.strictEqual(R.op(lt).length, 2);
+        assert.strictEqual(R.op(lt)(placeholder).length, 2);
+        assert.strictEqual(R.op(lt)(placeholder, 1000).length, 1);
+        assert.strictEqual(R.op(lt)(1000).length, 1);
     });
 
     it('can work with methods that may take extra arguments', function() {

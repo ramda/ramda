@@ -6,8 +6,8 @@ describe('prop', function() {
 
     it('returns a function that fetches the appropriate property', function() {
         var nm = R.prop('name');
-        assert.equal(typeof nm, 'function');
-        assert.equal(nm(fred), 'Fred');
+        assert.strictEqual(typeof nm, 'function');
+        assert.strictEqual(nm(fred), 'Fred');
     });
 
     it('is aliased by `get`', function() { // TODO: should it?
@@ -26,12 +26,12 @@ describe('propOr', function() {
     var nm = R.propOr('name', 'Unknown');
 
     it('returns a function that fetches the appropriate property', function() {
-        assert.equal(typeof nm, 'function');
-        assert.equal(nm(fred), 'Fred');
+        assert.strictEqual(typeof nm, 'function');
+        assert.strictEqual(nm(fred), 'Fred');
     });
 
     it('returns the default value when the property does not exist', function() {
-        assert.equal(nm(anon), 'Unknown');
+        assert.strictEqual(nm(anon), 'Unknown');
     });
 
     it('does not return properties from the prototype chain', function() {
@@ -39,7 +39,7 @@ describe('propOr', function() {
         Person.prototype.age = function() {};
 
         var bob = new Person();
-        assert.equal(R.propOr('age', 100, bob), 100);
+        assert.strictEqual(R.propOr('age', 100, bob), 100);
     });
 
     it('throws if given no arguments', function() {
@@ -53,9 +53,9 @@ describe('has', function() {
 
     it('returns a function that checks the appropriate property', function() {
         var nm = R.has('name');
-        assert.equal(typeof nm, 'function');
-        assert.equal(nm(fred), true);
-        assert.equal(nm(anon), false);
+        assert.strictEqual(typeof nm, 'function');
+        assert.strictEqual(nm(fred), true);
+        assert.strictEqual(nm(anon), false);
     });
 
     it('does not check properties from the prototype chain', function() {
@@ -63,12 +63,12 @@ describe('has', function() {
         Person.prototype.age = function() {};
 
         var bob = new Person();
-        assert.equal(R.has('age', bob), false);
+        assert.strictEqual(R.has('age', bob), false);
     });
 
     it('works properly when called with two arguments', function() {
-        assert.equal(R.has('name', fred), true);
-        assert.equal(R.has('name', anon), false);
+        assert.strictEqual(R.has('name', fred), true);
+        assert.strictEqual(R.has('name', anon), false);
     });
 
     it('throws if given no arguments', function() {
@@ -82,9 +82,9 @@ describe('hasIn', function() {
 
     it('returns a function that checks the appropriate property', function() {
         var nm = R.hasIn('name');
-        assert.equal(typeof nm, 'function');
-        assert.equal(nm(fred), true);
-        assert.equal(nm(anon), false);
+        assert.strictEqual(typeof nm, 'function');
+        assert.strictEqual(nm(fred), true);
+        assert.strictEqual(nm(anon), false);
     });
 
     it('checks properties from the prototype chain', function() {
@@ -92,12 +92,12 @@ describe('hasIn', function() {
         Person.prototype.age = function() {};
 
         var bob = new Person();
-        assert.equal(R.hasIn('age', bob), true);
+        assert.strictEqual(R.hasIn('age', bob), true);
     });
 
     it('works properly when called with two arguments', function() {
-        assert.equal(R.hasIn('name', fred), true);
-        assert.equal(R.hasIn('name', anon), false);
+        assert.strictEqual(R.hasIn('name', fred), true);
+        assert.strictEqual(R.hasIn('name', anon), false);
     });
 
     it('throws if given no arguments', function() {
@@ -114,18 +114,18 @@ describe('func', function() {
             return this.first + ' ' + this.last;
         }};
         var gName = R.func('getName');
-        assert.equal(typeof gName, 'function');
-        assert.equal(gName(fred), 'Fred Flintstone');
-        assert.equal(gName(barney), 'Barney Rubble');
+        assert.strictEqual(typeof gName, 'function');
+        assert.strictEqual(gName(fred), 'Fred Flintstone');
+        assert.strictEqual(gName(barney), 'Barney Rubble');
     });
 
     it('passes arguments appropriately when not curried', function() {
-        assert.equal(R.func('add', R, 3, 6), 9);
+        assert.strictEqual(R.func('add', R, 3, 6), 9);
     });
 
     it('invokes the function with no arguments when no extra params are supplied', function() {
         var obj = {f: function() { return 'called f'; }};
-        assert.equal(R.func('f', obj), 'called f');
+        assert.strictEqual(R.func('f', obj), 'called f');
     });
 
     it('applies additional arguments to the function', function() {
@@ -142,8 +142,8 @@ describe('func', function() {
 
         var moveBy = R.func('moveBy');
         moveBy(p1, 5, 7);
-        assert.equal(p1.x, 15);
-        assert.equal(p1.y, 27);
+        assert.strictEqual(p1.x, 15);
+        assert.strictEqual(p1.y, 27);
     });
 
     it('throws if given no arguments', function() {
@@ -161,7 +161,7 @@ describe('pluck', function() {
 
     it('returns a function that maps the appropriate property over an array', function() {
         var nm = R.pluck('name');
-        assert.equal(typeof nm, 'function');
+        assert.strictEqual(typeof nm, 'function');
         assert.deepEqual(nm(people), ['Fred', 'Wilma', 'Pebbles']);
     });
 });
@@ -172,10 +172,10 @@ describe('propOf', function() {
     it('returns a function that fetches the appropriate properties from the initially supplied object', function() {
         var p = R.propOf(fred);
 
-        assert.equal(p('name'), 'Fred');
-        assert.equal(p('age'), 23);
-        assert.equal(p('feet'), 'large');
-        assert.equal(p('nonexistent'), undefined);
+        assert.strictEqual(p('name'), 'Fred');
+        assert.strictEqual(p('age'), 23);
+        assert.strictEqual(p('feet'), 'large');
+        assert.strictEqual(p('nonexistent'), undefined);
     });
 });
 
@@ -200,9 +200,9 @@ describe('props', function() {
 
     it('returns undefined for nonexistent properties', function() {
         var ps = R.props(['a', 'nonexistent'], obj);
-        assert.equal(ps.length, 2);
-        assert.equal(ps[0], 1);
-        assert.equal(ps[1], void 0);
+        assert.strictEqual(ps.length, 2);
+        assert.strictEqual(ps[0], 1);
+        assert.strictEqual(ps[1], void 0);
     });
 
     it('is automatically curried', function() {
@@ -260,7 +260,7 @@ describe('pickBy', function() {
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
     it('creates a copy of the object', function() {
-        assert.notEqual(R.pickBy(R.always(true), obj), obj);
+        assert.notStrictEqual(R.pickBy(R.always(true), obj), obj);
     });
 
     it('when returning truthy, keeps the key', function() {
@@ -277,7 +277,7 @@ describe('pickBy', function() {
 
     it('is called with (val,key,obj)', function() {
         assert.deepEqual(R.pickBy(function(val, key, _obj) {
-            assert.equal(_obj, obj);
+            assert.strictEqual(_obj, obj);
             return key === 'd' && val === 4;
         }, obj), {d: 4});
     });
@@ -316,13 +316,13 @@ describe('pickAll', function() {
 
 describe('eqProps', function() {
     it('reports whether two objects have the same value for a given property', function() {
-        assert.equal(R.eqProps('name', {name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
-        assert.equal(R.eqProps('name', {name: 'fred', age: 10}, {name: 'franny', age: 10}), false);
+        assert.strictEqual(R.eqProps('name', {name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
+        assert.strictEqual(R.eqProps('name', {name: 'fred', age: 10}, {name: 'franny', age: 10}), false);
     });
 
     it('is automatically curried', function() {
         var sameName = R.eqProps('name');
-        assert.equal(sameName({name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
+        assert.strictEqual(sameName({name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
     });
 });
 
@@ -334,10 +334,10 @@ describe('where', function() {
         var test2 = {x: 0, y: 10};
         var test3 = {x: 1, y: 101};
         var test4 = {x: 1, y: 2};
-        assert.equal(R.where(spec, test1), false);
-        assert.equal(R.where(spec, test2), false);
-        assert.equal(R.where(spec, test3), false);
-        assert.equal(R.where(spec, test4), true);
+        assert.strictEqual(R.where(spec, test1), false);
+        assert.strictEqual(R.where(spec, test2), false);
+        assert.strictEqual(R.where(spec, test3), false);
+        assert.strictEqual(R.where(spec, test4), true);
     });
 
     it('calls any functions in the spec against the test object value for that property', function() {
@@ -357,10 +357,10 @@ describe('where', function() {
         var test3 = {a: 2, b: 8, c: 12};
         var test4 = {a: 3, b: 11, c: 5};
 
-        assert.equal(R.where(spec, test1), true);
-        assert.equal(R.where(spec, test2), true);
-        assert.equal(R.where(spec, test3), false);
-        assert.equal(R.where(spec, test4), false);
+        assert.strictEqual(R.where(spec, test1), true);
+        assert.strictEqual(R.where(spec, test2), true);
+        assert.strictEqual(R.where(spec, test3), false);
+        assert.strictEqual(R.where(spec, test4), false);
     });
 
     it('does not need the spec and the test object to have the same interface (the test object will have a superset of the specs properties)', function() {
@@ -368,8 +368,8 @@ describe('where', function() {
         var test1 = {x: 20, y: 100, z: 100};
         var test2 = {w: 1, x: 100, y: 100, z: 100};
 
-        assert.equal(R.where(spec, test1), false);
-        assert.equal(R.where(spec, test2), true);
+        assert.strictEqual(R.where(spec, test1), false);
+        assert.strictEqual(R.where(spec, test2), true);
     });
 
     it('is false if the test object is null-ish', function() {
@@ -377,9 +377,9 @@ describe('where', function() {
         var testN = null;
         var testU;
         var testF = false;
-        assert.equal(R.where(spec, testN), false);
-        assert.equal(R.where(spec, testU), false);
-        assert.equal(R.where(spec, testF), false);
+        assert.strictEqual(R.where(spec, testN), false);
+        assert.strictEqual(R.where(spec, testU), false);
+        assert.strictEqual(R.where(spec, testF), false);
     });
 
     it('matches specs that have undefined properties', function() {
@@ -388,25 +388,25 @@ describe('where', function() {
         var test2 = {x: null};
         var test3 = {x: undefined};
         var test4 = {x: 1};
-//      assert.equal(R.where(spec, test1), false);    // TODO: discuss Scott's objections
-        assert.equal(R.where(spec, test2), false);
-        assert.equal(R.where(spec, test3), true);
-        assert.equal(R.where(spec, test4), false);
+//      assert.strictEqual(R.where(spec, test1), false);    // TODO: discuss Scott's objections
+        assert.strictEqual(R.where(spec, test2), false);
+        assert.strictEqual(R.where(spec, test3), true);
+        assert.strictEqual(R.where(spec, test4), false);
     });
 
     it('is automatically curried', function() {
         var predicate = R.where({x: 1, y: 2});
-        assert.equal(predicate({x: 1, y: 2, z: 3}), true);
-        assert.equal(predicate({x: 3, y: 2, z: 1}), false);
+        assert.strictEqual(predicate({x: 1, y: 2, z: 3}), true);
+        assert.strictEqual(predicate({x: 3, y: 2, z: 1}), false);
     });
 
     it('is true for an empty spec', function() {
-        assert.equal(R.where({}, {a: 1}), true);
-        assert.equal(R.where(null, {a: 1}), true);
+        assert.strictEqual(R.where({}, {a: 1}), true);
+        assert.strictEqual(R.where(null, {a: 1}), true);
     });
 
     it('reports true when the object equals the spec', function() {
-        assert.equal(R.where(R, R), true);
+        assert.strictEqual(R.where(R, R), true);
     });
 
     function Parent() {
@@ -420,22 +420,22 @@ describe('where', function() {
         var spec = {
             toString: R.alwaysTrue
         };
-        assert.equal(R.where(spec, {}), true);
-        assert.equal(R.where(spec, {a: 1}), true);
-        assert.equal(R.where(spec, {toString: 1}), true);
-        assert.equal(R.where({a: R.alwaysTrue}, {x: 1}), false);
+        assert.strictEqual(R.where(spec, {}), true);
+        assert.strictEqual(R.where(spec, {a: 1}), true);
+        assert.strictEqual(R.where(spec, {toString: 1}), true);
+        assert.strictEqual(R.where({a: R.alwaysTrue}, {x: 1}), false);
     });
 
     it('matches inherited props', function() {
-        assert.equal(R.where({y: 6}, parent), true);
-        assert.equal(R.where({x: 5}, parent), true);
-        assert.equal(R.where({x: 5, y: 6}, parent), true);
-        assert.equal(R.where({x: 4, y: 6}, parent), false);
+        assert.strictEqual(R.where({y: 6}, parent), true);
+        assert.strictEqual(R.where({x: 5}, parent), true);
+        assert.strictEqual(R.where({x: 5, y: 6}, parent), true);
+        assert.strictEqual(R.where({x: 4, y: 6}, parent), false);
     });
 
     it('doesnt match inherited spec', function() {
-        assert.equal(R.where(parent, {y: 6}), true);
-        assert.equal(R.where(parent, {x: 5}), false);
+        assert.strictEqual(R.where(parent, {y: 6}), true);
+        assert.strictEqual(R.where(parent, {x: 5}), false);
     });
 
     it('throws if given no arguments', function() {
@@ -460,7 +460,7 @@ describe('mixin', function() {
     it('is not destructive', function() {
         var a = {w: 1, x: 2};
         var res = R.mixin(a, {x: 5});
-        assert.notEqual(a, res);
+        assert.notStrictEqual(a, res);
         assert.deepEqual(res, {w: 1, x: 5});
     });
 
@@ -485,9 +485,9 @@ describe('assoc', function() {
         var obj2 = R.assoc('e', {x: 42}, obj1);
         assert.deepEqual(obj2, {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5});
         // Note: reference equality below!
-        assert.equal(obj2.a, obj1.a);
-        assert.equal(obj2.b, obj1.b);
-        assert.equal(obj2.f, obj1.f);
+        assert.strictEqual(obj2.a, obj1.a);
+        assert.strictEqual(obj2.b, obj1.b);
+        assert.strictEqual(obj2.f, obj1.f);
     });
 
     it('is the equivalent of clone and set if the property is not on the original', function() {
@@ -495,9 +495,9 @@ describe('assoc', function() {
         var obj2 = R.assoc('z', {x: 42}, obj1);
         assert.deepEqual(obj2, {a: 1, b: {c: 2, d: 3}, e: 4, f: 5, z: {x: 42}});
         // Note: reference equality below!
-        assert.equal(obj2.a, obj1.a);
-        assert.equal(obj2.b, obj1.b);
-        assert.equal(obj2.f, obj1.f);
+        assert.strictEqual(obj2.a, obj1.a);
+        assert.strictEqual(obj2.b, obj1.b);
+        assert.strictEqual(obj2.f, obj1.f);
     });
 
     it('is properly curried', function() {
@@ -518,10 +518,10 @@ describe('assocPath', function() {
             {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
         );
         // Note: reference equality below!
-        assert.equal(obj2.a, obj1.a);
-        assert.equal(obj2.m, obj1.m);
-        assert.equal(obj2.f.g.h, obj1.f.g.h);
-        assert.equal(obj2.f.g.j, obj1.f.g.j);
+        assert.strictEqual(obj2.a, obj1.a);
+        assert.strictEqual(obj2.m, obj1.m);
+        assert.strictEqual(obj2.f.g.h, obj1.f.g.h);
+        assert.strictEqual(obj2.f.g.j, obj1.f.g.j);
     });
 
     it('is the equivalent of clone and setPath if the property is not on the original', function() {
@@ -529,9 +529,9 @@ describe('assocPath', function() {
         var obj2 = R.assocPath('x.y.z', {w: 42}, obj1);
         assert.deepEqual(obj2, {a: 1, b: {c: 2, d: 3}, e: 4, f: 5, x: {y: {z: {w: 42}}}});
         // Note: reference equality below!
-        assert.equal(obj2.a, obj1.a);
-        assert.equal(obj2.b, obj1.b);
-        assert.equal(obj2.f, obj1.f);
+        assert.strictEqual(obj2.a, obj1.a);
+        assert.strictEqual(obj2.b, obj1.b);
+        assert.strictEqual(obj2.f, obj1.f);
     });
 
     it('is properly curried', function() {

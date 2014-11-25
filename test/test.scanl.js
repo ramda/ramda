@@ -25,7 +25,7 @@ describe('scanl', function() {
 
     it('correctly reports the arity of curried versions', function() {
         var sum = R.scanl(add, 0);
-        assert.equal(sum.length, 1);
+        assert.strictEqual(sum.length, 1);
     });
 
     it('throws if called with no arguments', function() {

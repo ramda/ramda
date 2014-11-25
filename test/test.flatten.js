@@ -12,11 +12,11 @@ describe('flatten', function() {
 
     it('is not destructive', function() {
         var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];
-        assert.notEqual(R.flatten(nest), nest);
+        assert.notStrictEqual(R.flatten(nest), nest);
     });
 
     it('handles ridiculously large inputs', function() {
-        assert.equal(R.flatten([new Array(1000000), R.range(0, 56000), 5, 1, 3]).length, 1056003);
+        assert.strictEqual(R.flatten([new Array(1000000), R.range(0, 56000), 5, 1, 3]).length, 1056003);
     });
 
     it('handles array-like objects', function() {
@@ -45,7 +45,7 @@ describe('unnest', function() {
 
     it('is not destructive', function() {
         var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];
-        assert.notEqual(R.unnest(nest), nest);
+        assert.notStrictEqual(R.unnest(nest), nest);
     });
 
     it('handles array-like objects', function() {

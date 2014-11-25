@@ -32,8 +32,8 @@ describe('lens', function() {
     });
 
     it('retrieves values from inside an object as defined by the `getter` function', function() {
-        assert.equal(headOf([10, 20, 30, 40]), 10);
-        assert.equal(headOf(['a', 'b', 'c', 'd']), 'a');
+        assert.strictEqual(headOf([10, 20, 30, 40]), 10);
+        assert.strictEqual(headOf(['a', 'b', 'c', 'd']), 'a');
     });
 
     it('"sets" properties on an object and return the new object', function() {

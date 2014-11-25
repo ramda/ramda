@@ -30,8 +30,8 @@ describe('bind', function() {
             return this instanceof Foo;
         }
         var isFooBound = R.bind(isFoo, f);
-        assert.equal(isFoo(), false);
-        assert.equal(isFooBound(), true);
+        assert.strictEqual(isFoo(), false);
+        assert.strictEqual(isFooBound(), true);
     });
 
     it('works with built-in types', function() {
@@ -46,7 +46,7 @@ describe('bind', function() {
             return this.x;
         }
         var getXFooBound = R.bind(getX, f);
-        assert.equal(getXFooBound(), 12);
+        assert.strictEqual(getXFooBound(), 12);
     });
 
     it('works with plain objects', function() {
@@ -67,8 +67,8 @@ describe('bind', function() {
             return this.x;
         }
         var getXBarBound = R.bind(getX, b);
-        assert.equal(b.getX(), 'prototype getX');
-        assert.equal(getXBarBound(), 'a');
+        assert.strictEqual(b.getX(), 'prototype getX');
+        assert.strictEqual(getXBarBound(), 'a');
     });
 
     it('is curried', function() {

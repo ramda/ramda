@@ -95,14 +95,14 @@ describe('flip', function() {
     it('returns a function which inverts the first two arguments to the supplied function', function() {
         var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
         var g = R.flip(f);
-        assert.equal(f('a', 'b', 'c'), 'a b c');
-        assert.equal(g('a', 'b', 'c'), 'b a c');
+        assert.strictEqual(f('a', 'b', 'c'), 'a b c');
+        assert.strictEqual(g('a', 'b', 'c'), 'b a c');
     });
 
     it('returns a curried function', function() {
         var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
         var g = R.flip(f)('a');
-        assert.equal(g('b', 'c'), 'b a c');
+        assert.strictEqual(g('b', 'c'), 'b a c');
     });
 
     it('produces a function that throws if given no arguments', function() {
@@ -117,28 +117,28 @@ describe('once', function() {
         var ctr = 0;
         var fn = R.once(function() {ctr++;});
         fn();
-        assert.equal(ctr, 1);
+        assert.strictEqual(ctr, 1);
         fn();
-        assert.equal(ctr, 1);
+        assert.strictEqual(ctr, 1);
         fn();
-        assert.equal(ctr, 1);
+        assert.strictEqual(ctr, 1);
     });
 
     it('passes along arguments supplied', function() {
         var fn = R.once(function(a, b) {return a + b;});
         var result = fn(5, 10);
-        assert.equal(result, 15);
+        assert.strictEqual(result, 15);
     });
 
     it('retains and returns the first value calculated, even if different arguments are passed later', function() {
         var ctr = 0;
         var fn = R.once(function(a, b) {ctr++; return a + b;});
         var result = fn(5, 10);
-        assert.equal(result, 15);
-        assert.equal(ctr, 1);
+        assert.strictEqual(result, 15);
+        assert.strictEqual(ctr, 1);
         result = fn(20, 30);
-        assert.equal(result, 15);
-        assert.equal(ctr, 1);
+        assert.strictEqual(result, 15);
+        assert.strictEqual(ctr, 1);
     });
 });
 
@@ -147,21 +147,21 @@ describe('memoize', function() {
         var ctr = 0;
         var fib = R.memoize(function(n) {ctr++; return n < 2 ? n : fib(n - 2) + fib(n - 1);});
         var result = fib(10);
-        assert.equal(result, 55);
-        assert.equal(ctr, 11); // fib(0), fib(1), ... fib(10), no memoization would take 177 iterations.
+        assert.strictEqual(result, 55);
+        assert.strictEqual(ctr, 11); // fib(0), fib(1), ... fib(10), no memoization would take 177 iterations.
     });
 
     it('handles multiple parameters', function() {
         var f = R.memoize(function(a, b, c) {return a + ', ' + b + c;});
-        assert.equal(f('Hello', 'World' , '!'), 'Hello, World!');
-        assert.equal(f('Goodbye', 'Cruel World' , '!!!'), 'Goodbye, Cruel World!!!');
-        assert.equal(f('Hello', 'how are you' , '?'), 'Hello, how are you?');
-        assert.equal(f('Hello', 'World' , '!'), 'Hello, World!');
+        assert.strictEqual(f('Hello', 'World' , '!'), 'Hello, World!');
+        assert.strictEqual(f('Goodbye', 'Cruel World' , '!!!'), 'Goodbye, Cruel World!!!');
+        assert.strictEqual(f('Hello', 'how are you' , '?'), 'Hello, how are you?');
+        assert.strictEqual(f('Hello', 'World' , '!'), 'Hello, World!');
     });
 
     it('returns undefined if supplied no parameters for a positive arity function', function() {
         var fib = R.memoize(function(n) {return n < 2 ? n : fib(n - 2) + fib(n - 1);});
-        assert.equal(typeof fib(), 'undefined');
+        assert.strictEqual(typeof fib(), 'undefined');
     });
 });
 
@@ -173,14 +173,14 @@ describe('construct', function() {
         var rect = R.construct(Rectangle);
         var r1 = rect(3, 4);
         assert(r1 instanceof Rectangle);
-        assert.equal(r1.width, 3);
-        assert.equal(r1.area(), 12);
+        assert.strictEqual(r1.width, 3);
+        assert.strictEqual(r1.area(), 12);
 
         var regex = R.construct(RegExp);
         var word = regex('word', 'gi');
         assert(word instanceof RegExp);
-        assert.equal(word.source, 'word');
-        assert.equal(word.global, true);
+        assert.strictEqual(word.source, 'word');
+        assert.strictEqual(word.global, true);
     });
 
     it('returns a curried function', function() {
@@ -188,16 +188,16 @@ describe('construct', function() {
         var rect3 = rect(3);
         var r1 = rect3(4);
         assert(r1 instanceof Rectangle);
-        assert.equal(r1.width, 3);
-        assert.equal(r1.height, 4);
-        assert.equal(r1.area(), 12);
+        assert.strictEqual(r1.width, 3);
+        assert.strictEqual(r1.height, 4);
+        assert.strictEqual(r1.area(), 12);
 
         var regex = R.construct(RegExp);
         var word = regex('word');
         var complete = word('gi');
         assert(complete instanceof RegExp);
-        assert.equal(complete.source, 'word');
-        assert.equal(complete.global, true);
+        assert.strictEqual(complete.source, 'word');
+        assert.strictEqual(complete.global, true);
     });
 });
 
@@ -212,14 +212,14 @@ describe('constructN', function() {
         var circle = R.constructN(2, Circle);
         var c1 = circle(1, 'red');
         assert(c1 instanceof Circle);
-        assert.equal(c1.r, 1);
-        assert.equal(c1.area(), Math.PI);
+        assert.strictEqual(c1.r, 1);
+        assert.strictEqual(c1.area(), Math.PI);
         assert.deepEqual(c1.colors, ['red']);
 
         var regex = R.constructN(1, RegExp);
         var pattern = regex('[a-z]');
         assert(pattern instanceof RegExp);
-        assert.equal(pattern.source, '[a-z]');
+        assert.strictEqual(pattern.source, '[a-z]');
     });
 
     it('is curried', function() {
@@ -240,15 +240,15 @@ describe('constructN', function() {
 describe('unary', function() {
     it('turns multiple-argument function into unary one', function() {
         R.unary(function(x, y, z) {
-            assert.equal(arguments.length, 1);
-            assert.equal(typeof y, 'undefined');
-            assert.equal(typeof z, 'undefined');
+            assert.strictEqual(arguments.length, 1);
+            assert.strictEqual(typeof y, 'undefined');
+            assert.strictEqual(typeof z, 'undefined');
         })(10, 20, 30);
     });
 
     it('initial argument is passed through normally', function() {
         R.unary(function(x, y, z) {
-            assert.equal(x, 10);
+            assert.strictEqual(x, 10);
             void z;
         })(10, 20, 30);
     });
@@ -257,15 +257,15 @@ describe('unary', function() {
 describe('binary', function() {
     it('turns multiple-argument function into binary one', function() {
         R.binary(function(x, y, z) {
-            assert.equal(arguments.length, 2);
-            assert.equal(typeof z, 'undefined');
+            assert.strictEqual(arguments.length, 2);
+            assert.strictEqual(typeof z, 'undefined');
         })(10, 20, 30);
     });
 
     it('initial arguments are passed through normally', function() {
         R.binary(function(x, y, z) {
-            assert.equal(x, 10);
-            assert.equal(y, 20);
+            assert.strictEqual(x, 10);
+            assert.strictEqual(y, 20);
             void z;
         })(10, 20, 30);
     });
@@ -277,20 +277,20 @@ describe('nAry', function() {
 
     it('turns multiple-argument function into a nullary one', function() {
         var fn = R.nAry(0, function(x, y, z) { void z; return toArray(arguments); });
-        assert.equal(fn.length, 0);
+        assert.strictEqual(fn.length, 0);
         assert.deepEqual(fn(1, 2, 3), []);
     });
 
     it('turns multiple-argument function into a ternary one', function() {
         var fn = R.nAry(3, function(a, b, c, d) { void d; return toArray(arguments); });
-        assert.equal(fn.length, 3);
+        assert.strictEqual(fn.length, 3);
         assert.deepEqual(fn(1, 2, 3, 4), [1, 2, 3]);
         assert.deepEqual(fn(1), [1, undefined, undefined]);
     });
 
     it('creates functions of arbitrary arity', function() {
         var fn = R.nAry(10, function() { return toArray(arguments); });
-        assert.equal(fn.length, 10);
+        assert.strictEqual(fn.length, 10);
         assert.deepEqual(fn.apply(null, R.range(0, 25)), R.range(0, 10));
 
         var undefs = fn();
@@ -318,7 +318,7 @@ describe('ap', function() {
 
     it('is curried', function() {
         var val = R.ap([mult2, plus3]);
-        assert.equal(typeof val, 'function');
+        assert.strictEqual(typeof val, 'function');
         assert.deepEqual(val([1, 2, 3]), [2, 4, 6, 4, 5, 6]);
     });
 });
