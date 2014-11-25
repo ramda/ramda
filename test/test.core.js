@@ -221,7 +221,7 @@ describe('tail', function() {
         assert.deepEqual(R.tail([]), []);
     });
     it('returns a new list containing all the elements after the first element of a list', function() {
-        assert.deepEqual(['b', 'c', 'd'], R.tail(['a', 'b', 'c', 'd']));
+        assert.deepEqual(R.tail(['a', 'b', 'c', 'd']), ['b', 'c', 'd']);
     });
     it('throws if applied to null or undefined', function() {
         assert.throws(function() { R.tail(null); }, TypeError);

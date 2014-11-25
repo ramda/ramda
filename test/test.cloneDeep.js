@@ -3,21 +3,21 @@ var R = require('..');
 
 describe('deep clone integers, strings and booleans', function() {
     it('clone integers', function() {
-        assert.equal(-4, R.cloneDeep(-4));
-        assert.equal(9007199254740991, R.cloneDeep(9007199254740991));
+        assert.equal(R.cloneDeep(-4), -4);
+        assert.equal(R.cloneDeep(9007199254740991), 9007199254740991);
     });
 
     it('clone floats', function() {
-        assert.equal(-4.5, R.cloneDeep(-4.5));
-        assert.equal(0.0, R.cloneDeep(0.0));
+        assert.equal(R.cloneDeep(-4.5), -4.5);
+        assert.equal(R.cloneDeep(0.0), 0.0);
     });
 
     it('clone strings', function() {
-        assert.equal('ramda', R.cloneDeep('ramda'));
+        assert.equal(R.cloneDeep('ramda'), 'ramda');
     });
 
     it('clone booleans', function() {
-        assert.equal(true, R.cloneDeep(true));
+        assert.equal(R.cloneDeep(true), true);
     });
 });
 
@@ -27,14 +27,14 @@ describe('deep clone objects', function() {
         var clone = R.cloneDeep(obj);
         obj.c = false;
         obj.d.setDate(31);
-        assert.deepEqual({a: 1, b: 'ramda', c: true, d: new Date(2013, 11, 25)}, clone);
+        assert.deepEqual(clone, {a: 1, b: 'ramda', c: true, d: new Date(2013, 11, 25)});
     });
 
     it('clone deep object', function() {
         var obj = {a: {b: {c: 'ramda'}}};
         var clone = R.cloneDeep(obj);
         obj.a.b.c = null;
-        assert.deepEqual({a: {b: {c: 'ramda'}}}, clone);
+        assert.deepEqual(clone, {a: {b: {c: 'ramda'}}});
     });
 
     it('clone objects with circular references', function() {
@@ -48,14 +48,14 @@ describe('deep clone objects', function() {
         assert.ok(x.c.b !== clone.c.b);
         assert.ok(x.c.b.a !== clone.c.b.a);
         assert.ok(x.c.b.a.c !== clone.c.b.a.c);
-        assert.deepEqual(R.keys(x), R.keys(clone));
-        assert.deepEqual(R.keys(x.c), R.keys(clone.c));
-        assert.deepEqual(R.keys(x.c.b), R.keys(clone.c.b));
-        assert.deepEqual(R.keys(x.c.b.a), R.keys(clone.c.b.a));
-        assert.deepEqual(R.keys(x.c.b.a.c), R.keys(clone.c.b.a.c));
+        assert.deepEqual(R.keys(clone), R.keys(x));
+        assert.deepEqual(R.keys(clone.c), R.keys(x.c));
+        assert.deepEqual(R.keys(clone.c.b), R.keys(x.c.b));
+        assert.deepEqual(R.keys(clone.c.b.a), R.keys(x.c.b.a));
+        assert.deepEqual(R.keys(clone.c.b.a.c), R.keys(x.c.b.a.c));
 
         x.c.b = 1;
-        assert.notDeepEqual(R.keys(x.c.b), R.keys(clone.c.b));
+        assert.notDeepEqual(R.keys(clone.c.b), R.keys(x.c.b));
     });
 
     it('clone instances', function() {
@@ -88,7 +88,7 @@ describe('deep clone arrays', function() {
         var list = [1, 2, 3];
         var clone = R.cloneDeep(list);
         list.pop();
-        assert.deepEqual([1, 2, 3], clone);
+        assert.deepEqual(clone, [1, 2, 3]);
     });
 
     it('clone deep arrays', function() {
@@ -99,7 +99,7 @@ describe('deep clone arrays', function() {
         assert.ok(list[2] !== clone[2]);
         assert.ok(list[2][0] !== clone[2][0]);
 
-        assert.deepEqual([1, [1, 2, 3], [[[5]]]], clone);
+        assert.deepEqual(clone, [1, [1, 2, 3], [[[5]]]]);
     });
 });
 
@@ -122,9 +122,9 @@ describe('deep clone Dates', function() {
         var clone = R.cloneDeep(date);
 
         assert.ok(date !== clone);
-        assert.deepEqual(new Date(2014, 10, 14, 23, 59, 59, 999).toString(), clone.toString());
+        assert.deepEqual(clone.toString(), new Date(2014, 10, 14, 23, 59, 59, 999).toString());
 
-        assert.equal(5, clone.getDay()); // friday
+        assert.equal(clone.getDay(), 5); // friday
     });
 });
 
@@ -133,14 +133,14 @@ describe('deep clone deep nested mixed objects', function() {
         var list = [{a: {b: 1}}, [{c: {d: 1}}]];
         var clone = R.cloneDeep(list);
         list[1][0] = null;
-        assert.deepEqual([{a: {b: 1}}, [{c: {d: 1}}]], clone);
+        assert.deepEqual(clone, [{a: {b: 1}}, [{c: {d: 1}}]]);
     });
 
     it('clone array with arrays', function() {
         var list = [[1], [[3]]];
         var clone = R.cloneDeep(list);
         list[1][0] = null;
-        assert.deepEqual([[1], [[3]]], clone);
+        assert.deepEqual(clone, [[1], [[3]]]);
     });
 
     it('clone array with mutual ref object', function() {
@@ -170,9 +170,9 @@ describe('deep clone edge cases', function() {
         assert.notStrictEqual(R.cloneDeep(undefined), null);
 
         var obj = {};
-        assert.notStrictEqual(obj, R.cloneDeep(obj));
+        assert.notStrictEqual(R.cloneDeep(obj), obj);
 
         var list = [];
-        assert.notStrictEqual(list, R.cloneDeep(list));
+        assert.notStrictEqual(R.cloneDeep(list), list);
     });
 });

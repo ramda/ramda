@@ -3,12 +3,12 @@ var R = require('..');
 
 describe('add', function() {
     it('adds together two numbers', function() {
-        assert.equal(10, R.add(3, 7));
+        assert.equal(R.add(3, 7), 10);
     });
 
     it('is automatically curried', function() {
         var incr = R.add(1);
-        assert.equal(43, incr(42));
+        assert.equal(incr(42), 43);
     });
 
     it('throws if given no arguments', function() {
@@ -18,12 +18,12 @@ describe('add', function() {
 
 describe('multiply', function() {
     it('adds together two numbers', function() {
-        assert.equal(42, R.multiply(6, 7));
+        assert.equal(R.multiply(6, 7), 42);
     });
 
     it('is automatically curried', function() {
         var dbl = R.multiply(2);
-        assert.equal(30, dbl(15));
+        assert.equal(dbl(15), 30);
     });
 
     it('throws if given no arguments', function() {
@@ -33,17 +33,17 @@ describe('multiply', function() {
 
 describe('subtract', function() {
     it('subtracts two numbers', function() {
-        assert.equal(15, R.subtract(22, 7));
+        assert.equal(R.subtract(22, 7), 15);
     });
 
     it('is curried', function() {
         var ninesCompl = R.subtract(9);
-        assert.equal(3, ninesCompl(6));
+        assert.equal(ninesCompl(6), 3);
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
         var minus5 = R.subtract(void 0, 5);
-        assert.equal(12, minus5(17));
+        assert.equal(minus5(17), 12);
     });
 
     it('throws if given no arguments', function() {
@@ -54,17 +54,17 @@ describe('subtract', function() {
 
 describe('divide', function() {
     it('divides two numbers', function() {
-        assert.equal(4, R.divide(28, 7));
+        assert.equal(R.divide(28, 7), 4);
     });
 
     it('is curried', function() {
         var into28 = R.divide(28);
-        assert.equal(4, into28(7));
+        assert.equal(into28(7), 4);
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
         var half = R.divide(void 0, 2);
-        assert.equal(20, half(40));
+        assert.equal(half(40), 20);
     });
 
     it('throws if given no arguments', function() {
@@ -146,19 +146,19 @@ describe('mathMod', function() {
 
 describe('sum', function() {
     it('adds together the array of numbers supplied', function() {
-        assert.equal(10, R.sum([1, 2, 3, 4]));
+        assert.equal(R.sum([1, 2, 3, 4]), 10);
     });
 
     it('does not save the state of the accumulator', function() {
-        assert.equal(10, R.sum([1, 2, 3, 4]));
-        assert.equal(1, R.sum([1]));
-        assert.equal(25, R.sum([5, 5, 5, 5, 5]));
+        assert.equal(R.sum([1, 2, 3, 4]), 10);
+        assert.equal(R.sum([1]), 1);
+        assert.equal(R.sum([5, 5, 5, 5, 5]), 25);
     });
 });
 
 describe('product', function() {
     it('multiplies together the array of numbers supplied', function() {
-        assert.equal(24, R.product([1, 2, 3, 4]));
+        assert.equal(R.product([1, 2, 3, 4]), 24);
     });
 });
 
