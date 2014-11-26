@@ -9,13 +9,13 @@ describe('lazylist', function() {
     var lz = lazylist(0, I, inc);
 
     it('has a "0" property', function() {
-        assert.equal(lz[0], 0);
+        assert.strictEqual(lz[0], 0);
     });
     it('has a "tail" method', function() {
-        assert.equal(typeof lz.tail, 'function');
+        assert.strictEqual(typeof lz.tail, 'function');
     });
     it('has a "length" property equal to Infinity', function() {
-        assert.equal(lz.length, Infinity);
+        assert.strictEqual(lz.length, Infinity);
     });
 });
 
