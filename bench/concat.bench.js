@@ -8,8 +8,8 @@ var concatS1 = concat(s1);
 module.exports = {
     name: 'concat',
     tests: {
-        '_.concat': function() {
-            _.concat(s1, s2);
+        '_(s1).concat(s2)': function() {
+            _(s1).concat(s2);
         },
         'concat(s1, s2)': function() {
             concat(s1, s2);
