@@ -6,14 +6,15 @@
 
         $ git checkout -b <branch>
 
-3.  Make one or more atomic commits. Include unit tests if adding a function
-    or fixing a bug. Do not update __ramda.min.js__: this is done as part of
-    the release process. Each commit should have a descriptive commit message,
-    wrapped at 72 characters.
+3.  Make one or more atomic commits. Each commit should have a descriptive
+    commit message, wrapped at 72 characters. Include unit tests if adding
+    a function or fixing a bug. Update __dist/ramda.js__ with each commit:
+    on Unix-based platforms, run `make`; on Windows, write the output of
+    `scripts/build --complete` to a temporary file, then rename the file.
 
-4.  Run `npm test && make lint`, and address any errors. Preferably, fix
-    commits in place using `git rebase` or `git commit --amend` to make the
-    changes easier to review and to keep the history tidy.
+4.  Run `make test lint`, and address any errors. Preferably, fix commits
+    in place using `git rebase` or `git commit --amend` to make the changes
+    easier to review and to keep the history tidy.
 
 5.  Push to your fork:
 

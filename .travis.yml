@@ -9,7 +9,7 @@ env:
 before_script:
 - npm install -g grunt-cli
 script:
-- npm test && make lint
+- make test lint
 after_success:
 - grunt bench
 - grunt sauce

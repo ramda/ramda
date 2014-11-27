@@ -31,17 +31,20 @@
     "type": "git",
     "url": "git://github.com/ramda/ramda.git"
   },
-  "main": "ramda.js",
+  "main": "dist/ramda.js",
   "scripts": {
     "jshint": "grunt jshint",
     "test": "grunt test"
   },
   "dependencies": {},
   "devDependencies": {
+    "acorn": "0.9.x",
     "benchmark": "~1.0.0",
+    "commander": "2.5.x",
     "deedpoll": "0.2.x",
     "dox": "latest",
     "envvar": "1.x.x",
+    "escodegen": "1.4.x",
     "grunt": "~0.4.5",
     "grunt-benchmark": "https://github.com/buzzdecafe/grunt-benchmark/archive/09999a8c3fbfff04a1695846c1ccd0bd8a0ef5ab.tar.gz",
     "grunt-cli": "~0.1.13",

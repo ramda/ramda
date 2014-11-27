@@ -1,0 +1,174 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var assert = require('assert');
+var fs = require('fs');
+var path = require('path');
+
+var acorn = require('acorn');
+var program = require('commander');
+var envvar = require('envvar');
+var escodegen = require('escodegen');
+
+var R = require('..');
+
+
+//  template :: String
+var template = fs.readFileSync(path.join(__dirname, '..', 'template.js'),
+                               {encoding: 'utf8'});
+
+//  version :: String
+var version = require('../package.json').version;
+
+//  $pathEq = String -> a -> Object -> ()
+var $pathEq = R.curry(function(path, expected, obj) {
+    assert.strictEqual(R.path(path, obj), expected);
+});
+
+//  filenameToIdentifier :: String -> String
+var filenameToIdentifier =
+    R.pipe(R.split('/'),
+           R.last,
+           R.split('.'),
+           R.head);
+
+//  identifierToFilename :: String -> String
+var identifierToFilename =
+    R.pipe(R.ifElse(RegExp.prototype.test.bind(/^(?!__$)_/),
+                    R.lPartial(path.join, __dirname, '..', 'src', 'internal'),
+                    R.lPartial(path.join, __dirname, '..', 'src')),
+           R.rPartial(R.concat, '.js'));
+
+//  parse :: String -> AST
+var parse = R.memoize(R.pipe(fs.readFileSync, acorn.parse));
+
+// dependenciesOf :: String -> [String]
+//
+// Returns the names of the immediate dependencies of the function with
+// the given name.
+//
+// Assumes this format:
+//
+//     var _quux = require('./_quux');
+//     var bar = require('./bar');
+//     var baz = require('./baz');
+//     var foo = require('./foo');
+//
+// Requirements:
+//
+//   - one `var` per import;
+//   - argument to require must be a string literal; and
+//   - require path must match identifier.
+var dependenciesOf =
+    R.pipe(identifierToFilename,
+           parse,
+           R.prop('body'),
+           R.takeWhile(R.where({type: 'VariableDeclaration', kind: 'var'})),
+           R.pluck('declarations'),
+           R.map(R.tap($pathEq('length', 1))),
+           R.map(R.head),
+           R.map(R.tap($pathEq('init.type', 'CallExpression'))),
+           R.map(R.tap($pathEq('init.callee.type', 'Identifier'))),
+           R.map(R.tap($pathEq('init.callee.name', 'require'))),
+           R.map(R.tap($pathEq('init.arguments.length', 1))),
+           R.map(R.tap($pathEq('init.arguments.0.type', 'Literal'))),
+           R.tap(R.pipe(R.pluck('id'),
+                        R.pluck('name'),
+                        R.converge(assert.deepEqual,
+                                   R.I,
+                                   R.sortBy(R.I)))),
+           R.map(R.tap(R.converge(assert.strictEqual,
+                                  R.path('id.name'),
+                                  R.pipe(R.path('init.arguments.0.value'),
+                                         R.replace(/^[.][/]internal[/]/, './'),
+                                         R.replace(/^[.]{1,2}[/]/, ''),
+                                         R.replace(/[.]([a-z])/g,
+                                                   R.pipe(R.nthArg(1),
+                                                          R.toUpperCase)))))),
+           R.map(R.path('id.name')));
+
+//  createDependencyGraph :: [String] -> StrMap [String]
+var createDependencyGraph = function createDependencyGraph(identifiers) {
+    var graph = {};
+    var recur = function recur(identifier) {
+        if (!R.has(identifier, graph)) {
+            graph[identifier] = dependenciesOf(identifier);
+            graph[identifier].forEach(recur);
+        }
+    };
+    identifiers.forEach(recur);
+    return graph;
+};
+
+//  orderDependencies :: StrMap [String] -> [String]
+var orderDependencies = function orderDependencies(graph) {
+    var recur = function recur(ins, outs) {
+        if (R.isEmpty(ins)) {
+            return outs;
+        } else if (R.all(R.rPartial(R.contains, outs), graph[R.head(ins)])) {
+            return recur(R.tail(ins), R.append(R.head(ins), outs));
+        } else {
+            return recur(R.append(R.head(ins), R.tail(ins)), outs);
+        }
+    };
+    return recur(R.sortBy(R.I, R.keys(graph)), []);
+};
+
+//  getModifiedSource :: String -> String
+var getModifiedSource = function getModifiedSource(identifier) {
+    var ast = parse(identifierToFilename(identifier));
+    assert.notStrictEqual(ast.body.length, 0);
+    var last = R.last(ast.body);
+    $pathEq('type', 'ExpressionStatement', last);
+    $pathEq('expression.type', 'AssignmentExpression', last);
+    $pathEq('expression.operator', '=', last);
+    $pathEq('expression.left.type', 'MemberExpression', last);
+    $pathEq('expression.left.object.type', 'Identifier', last);
+    $pathEq('expression.left.object.name', 'module', last);
+    $pathEq('expression.left.property.type', 'Identifier', last);
+    $pathEq('expression.left.property.name', 'exports', last);
+    return escodegen.generate({
+        type: 'VariableDeclaration',
+        kind: 'var',
+        declarations: [
+            {
+                type: 'VariableDeclarator',
+                id: {type: 'Identifier', name: identifier},
+                init: last.expression.right
+            }
+        ]
+    });
+};
+
+//  build :: [String] -> String
+var build =
+    R.pipe(R.map(filenameToIdentifier),
+           R.converge(R.concat,
+                      R.pipe(createDependencyGraph,
+                             orderDependencies,
+                             R.map(getModifiedSource),
+                             R.join('\n\n')),
+                      R.pipe(R.map(R.converge(R.concat,
+                                              R.concat('\n    '),
+                                              R.concat(': '))),
+                             R.join(','),
+                             R.concat('\n\nvar R = {'),
+                             R.rPartial(R.concat, '\n};'))),
+           R.replace(/\n(?!$)/gm, '\n    '),
+           R.always,
+           R.flip(R.replace('/* global R */'))(template),
+           R.replace(/$/m, ' v' + envvar.string('VERSION', version)));
+
+program
+.version(version)
+.option('--complete', 'Include all Ramda functions')
+.parse(process.argv);
+
+//  filenames :: [String]
+var filenames = program.complete ?
+    R.filter(RegExp.prototype.test.bind(/(^|[/]).*[.]js$/),
+             fs.readdirSync(path.join(__dirname, '..', 'src'))) :
+    program.args;
+
+process.stdout.write(build(R.map(path.resolve, filenames)));
