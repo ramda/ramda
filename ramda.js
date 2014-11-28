@@ -1037,14 +1037,6 @@
      */
     var append = R.append = _curry2(_append);
 
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.append
-     */
-    R.push = append;
-
 
     /**
      * Flipped version of R.append.
