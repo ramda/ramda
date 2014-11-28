@@ -3532,29 +3532,6 @@
 
 
     /**
-     * Returns the elements from `xs` starting at `a` going to the end of `xs`.
-     *
-     * @func
-     * @memberOf R
-     * @category List
-     * @sig Number -> [a] -> [a]
-     * @param {Number} a The starting index.
-     * @param {Array} xs The list to take elements from.
-     * @return {Array} The items from `a` to the end of `xs`.
-     * @example
-     *
-     *      var xs = R.range(0, 10);
-     *      R.slice.from(2)(xs); //=> [2, 3, 4, 5, 6, 7, 8, 9]
-     *
-     *      var ys = R.range(4, 8);
-     *      var tail = R.slice.from(1);
-     *      tail(ys); //=> [5, 6, 7]
-     */
-    R.slice.from = _curry2(function(a, xs) {
-        return xs.slice(a, xs.length);
-    });
-
-    /**
      * Removes the sub-list of `list` starting at index `start` and containing
      * `count` elements.  _Note that this is not destructive_: it returns a
      * copy of the list with the changes.
