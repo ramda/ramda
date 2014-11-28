@@ -40,6 +40,7 @@
   "devDependencies": {
     "benchmark": "~1.0.0",
     "deedpoll": "0.2.x",
+    "doctrine": "~0.6.2",
     "dox": "latest",
     "envvar": "1.x.x",
     "grunt": "~0.4.5",
