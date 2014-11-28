@@ -1652,14 +1652,9 @@
      *      addOneOnce(addOneOnce(50)); //=> 11
      */
     R.once = function once(fn) {
-        var called = false, result;
+        var box = [];
         return function() {
-            if (called) {
-                return result;
-            }
-            called = true;
-            result = fn.apply(this, arguments);
-            return result;
+            return box.length ? box[0] : (box[0] = fn.apply(this, arguments));
         };
     };
 
