@@ -93,13 +93,6 @@ describe('slice', function() {
     // });
 });
 
-describe('slice.from', function() {
-    it('retrieves the proper suffix sublist of a list starting with the desired index', function() {
-        var list = [8, 6, 7, 5, 3, 0, 9];
-        assert.deepEqual(R.slice.from(2, list), [7, 5, 3, 0, 9]);
-    });
-});
-
 describe('times', function() {
     it('takes a map func', function() {
         assert.deepEqual(R.times(R.identity, 5), [0, 1, 2, 3, 4]);
