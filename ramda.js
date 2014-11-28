@@ -1622,9 +1622,6 @@
      *      numberOfCalls; //=> 3
      */
     R.memoize = function memoize(fn) {
-        if (!fn.length) {
-            return once(fn);
-        }
         var cache = {};
         return function() {
             if (!arguments.length) {return;}
@@ -1654,7 +1651,7 @@
      *      addOneOnce(10); //=> 11
      *      addOneOnce(addOneOnce(50)); //=> 11
      */
-    var once = R.once = function once(fn) {
+    R.once = function once(fn) {
         var called = false, result;
         return function() {
             if (called) {

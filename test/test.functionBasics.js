@@ -163,6 +163,12 @@ describe('memoize', function() {
         var fib = R.memoize(function(n) {return n < 2 ? n : fib(n - 2) + fib(n - 1);});
         assert.strictEqual(typeof fib(), 'undefined');
     });
+
+    it('does not rely on reported arity', function() {
+        var identity = R.memoize(function() { return arguments[0]; });
+        assert.strictEqual(identity('x'), 'x');
+        assert.strictEqual(identity('y'), 'y');
+    });
 });
 
 describe('construct', function() {
