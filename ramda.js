@@ -34,7 +34,7 @@
      *
      * @namespace R
      */
-    var R = {version: '0.8.0'};
+    var R = {};
 
     // Internal Functions and Properties
     // ---------------------------------
