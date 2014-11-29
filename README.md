@@ -205,7 +205,7 @@ The [eweda library](https://github.com/CrossEye/eweda) was written by
 the developers of this library, with similar goals.  But that one strove 
 more for implementation elegance than for practical capabilities.  Ramda 
 is all about giving users real-world tools.  Eweda can be seen more as 
-an academic excercise, mostly proving out what does and doesn't work, and 
+an academic exercise, mostly proving out what does and doesn't work, and 
 doing so as elegantly as possible.
 
 Acknowledgements
