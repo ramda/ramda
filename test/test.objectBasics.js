@@ -264,7 +264,7 @@ describe('pickBy', function() {
     });
 
     it('when returning truthy, keeps the key', function() {
-        assert.deepEqual(R.pickBy(R.alwaysTrue, obj), obj);
+        assert.deepEqual(R.pickBy(R.T, obj), obj);
         assert.deepEqual(R.pickBy(R.always({}), obj), obj);
         assert.deepEqual(R.pickBy(R.always(1), obj), obj);
     });
@@ -292,7 +292,7 @@ describe('pickBy', function() {
 
 
     it('is automatically curried', function() {
-        var copier = R.pickBy(R.alwaysTrue);
+        var copier = R.pickBy(R.T);
         assert.deepEqual(copier(obj), obj);
     });
 });
@@ -418,12 +418,12 @@ describe('where', function() {
 
     it('matches inherited functions', function() {
         var spec = {
-            toString: R.alwaysTrue
+            toString: R.T
         };
         assert.strictEqual(R.where(spec, {}), true);
         assert.strictEqual(R.where(spec, {a: 1}), true);
         assert.strictEqual(R.where(spec, {toString: 1}), true);
-        assert.strictEqual(R.where({a: R.alwaysTrue}, {x: 1}), false);
+        assert.strictEqual(R.where({a: R.T}, {x: 1}), false);
     });
 
     it('matches inherited props', function() {

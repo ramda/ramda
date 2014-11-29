@@ -21,18 +21,18 @@ describe('always', function() {
     });
 });
 
-describe ('alwaysFalse', function() {
+describe('F', function() {
     it('always returns false', function() {
-        assert.strictEqual(R.alwaysFalse(), false);
-        assert.strictEqual(R.alwaysFalse(10), false);
-        assert.strictEqual(R.alwaysFalse(true), false);
+        assert.strictEqual(R.F(), false);
+        assert.strictEqual(R.F(10), false);
+        assert.strictEqual(R.F(true), false);
     });
 });
 
-describe ('alwaysTrue', function() {
+describe('T', function() {
     it('always returns true', function() {
-        assert.strictEqual(R.alwaysTrue(), true);
-        assert.strictEqual(R.alwaysTrue(10), true);
-        assert.strictEqual(R.alwaysTrue(true), true);
+        assert.strictEqual(R.T(), true);
+        assert.strictEqual(R.T(10), true);
+        assert.strictEqual(R.T(true), true);
     });
 });

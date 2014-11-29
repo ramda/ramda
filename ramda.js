@@ -4656,9 +4656,9 @@
      * @return {Boolean} false
      * @example
      *
-     *      R.alwaysFalse(); //=> false
+     *      R.F(); //=> false
      */
-    R.alwaysFalse = always(false);
+    R.F = always(false);
 
 
     /**
@@ -4672,9 +4672,9 @@
      * @return {Boolean} `true`.
      * @example
      *
-     *      R.alwaysTrue(); //=> true
+     *      R.T(); //=> true
      */
-    R.alwaysTrue = always(true);
+    R.T = always(true);
 
 
 
@@ -4877,9 +4877,9 @@
      * @example
      *
      *      var fn = R.cond(
-     *          [R.eq(0),      R.always('water freezes at 0°C')],
-     *          [R.eq(100),    R.always('water boils at 100°C')],
-     *          [R.alwaysTrue, function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
+     *          [R.eq(0),   R.always('water freezes at 0°C')],
+     *          [R.eq(100), R.always('water boils at 100°C')],
+     *          [R.T,       function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
      *      );
      *      fn(0); //=> 'water freezes at 0°C'
      *      fn(50); //=> 'nothing special happens at 50°C'
