@@ -290,7 +290,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category Function
      * @sig Number -> (* -> a) -> (* -> a)
      * @param {Number} fnArity The arity for the returned function.
@@ -331,7 +330,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category Function
      * @sig (* -> a) -> (* -> a)
      * @param {Function} fn The function to curry.
@@ -769,8 +767,7 @@
      *
      * @func
      * @memberOf R
-     * @category core
-     * @category List
+     * @category Object
      * @sig [a] -> [a]
      * @param {Array} list The list to clone.
      * @return {Array} A new copy of the original list.
@@ -876,7 +873,7 @@
      *
      * @func
      * @memberOf R
-     * @category Core
+     * @category Logic
      * @sig [a] -> Boolean
      * @param {Array} list
      * @return {Boolean}
@@ -902,7 +899,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig a -> [a] -> [a]
      * @param {*} el The item to add to the head of the output list.
@@ -920,7 +916,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig [a] -> a -> [a]
      * @param {Array} list
@@ -939,7 +934,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig [a] -> a
      * @param {Number} idx
@@ -963,7 +957,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig [a] -> a
      * @param {Array} [list=[]] The array to consider.
@@ -997,7 +990,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig [a] -> [a]
      * @param {Array} [list=[]] The array to consider.
@@ -1022,7 +1014,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig a -> [a] -> [a]
      * @param {*} el The element to add to the end of the new list.
@@ -1043,7 +1034,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig [a] -> a -> [a]
      * @param {Array} list
@@ -1064,7 +1054,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list to merge.
@@ -1096,7 +1085,7 @@
      *
      * @func
      * @memberOf R
-     * @category Core
+     * @category Function
      * @sig a -> a
      * @param {*} x The value to return.
      * @return {*} The input value, `x`.
@@ -1114,7 +1103,7 @@
     /**
      * @func
      * @memberOf R
-     * @category Core
+     * @category Function
      * @see R.identity
      */
     R.I = identity;
@@ -1125,7 +1114,7 @@
      *
      * @func
      * @memberOf R
-     * @category Core
+     * @category Function
      * @sig Number -> *... -> *
      * @param {Number} n
      * @return {Function}
@@ -1238,7 +1227,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category Function
      * @sig (*... -> a) -> [*] -> a
      * @param {Function} fn
@@ -1267,7 +1255,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category Function
      * @sig ([*...] -> a) -> (*... -> a)
      * @param {Function} fn
@@ -1394,7 +1381,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category Function
      * @sig ((y -> z), (x -> y), ..., (b -> c), (a... -> b)) -> (a... -> z)
      * @param {...Function} functions A variable number of functions.
@@ -1426,7 +1412,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category Function
      * @sig ((y -> z), (x -> y), ..., (b -> c), (a... -> b)) -> (a... -> z)
      * @param {...Function} functions A variable number of functions.
@@ -1830,7 +1815,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a,b -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -1876,7 +1860,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a,b,i,[b] -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -1907,7 +1890,6 @@
     /**
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @alias foldl.idx
      * @see R.reduce.idx
@@ -1930,7 +1912,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a,b -> a) -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -1958,7 +1939,6 @@
     /**
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @see R.reduceRight
      */
@@ -1978,7 +1958,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a,b,i,[b] -> a -> [b] -> a
      * @param {Function} fn The iterator function. Receives four values: the accumulator, the
@@ -2067,7 +2046,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a -> b) -> [a] -> [b]
      * @param {Function} fn The function to be called on every element of the input `list`.
@@ -2094,7 +2072,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a,i,[b] -> b) -> [a] -> [b]
      * @param {Function} fn The function to be called on every element of the input `list`.
@@ -2462,7 +2439,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
@@ -2484,7 +2460,6 @@
      *
      * @func
      * @memberOf R
-     * @category core
      * @category List
      * @sig (a, i, [a] -> Boolean) -> [a] -> [a]
      * @param {Function} fn The function called per iteration.
@@ -4597,7 +4572,7 @@
      *
      * @func
      * @memberOf R
-     * @category type
+     * @category Type
      * @sig (* -> {*}) -> a -> Boolean
      * @param {Object} ctor A constructor
      * @param {*} val The value to test
@@ -4624,7 +4599,7 @@
      *
      * @func
      * @memberOf R
-     * @category type
+     * @category Type
      * @sig (* -> {*}) -> String
      * @param {*} val The value to test
      * @return {String}
@@ -4650,7 +4625,7 @@
      *
      * @func
      * @memberOf R
-     * @category function
+     * @category Function
      * @sig * -> false
      * @see R.always
      * @return {Boolean} false
@@ -4666,7 +4641,7 @@
      *
      * @func
      * @memberOf R
-     * @category function
+     * @category Function
      * @sig * -> true
      * @see R.always
      * @return {Boolean} `true`.
@@ -4694,7 +4669,7 @@
      *
      * @func
      * @memberOf R
-     * @category logic
+     * @category Logic
      * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
      * @param {Function} f a predicate
      * @param {Function} g another predicate
@@ -4721,7 +4696,7 @@
      *
      * @func
      * @memberOf R
-     * @category logic
+     * @category Logic
      * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
      * @param {Function} f a predicate
      * @param {Function} g another predicate
@@ -4747,7 +4722,7 @@
      *
      * @func
      * @memberOf R
-     * @category logic
+     * @category Logic
      * @sig (*... -> Boolean) -> (*... -> Boolean)
      * @param {Function} f a predicate
      * @return {Function} a function that applies its arguments to `f` and logically inverts its output.
@@ -4793,7 +4768,7 @@
      *
      * @func
      * @memberOf R
-     * @category logic
+     * @category Logic
      * @sig [(*... -> Boolean)] -> (*... -> Boolean)
      * @param {Array} list An array of predicate functions
      * @param {*} optional Any arguments to pass into the predicates
@@ -4815,7 +4790,7 @@
      *
      * @func
      * @memberOf R
-     * @category logic
+     * @category Logic
      * @sig [(*... -> Boolean)] -> (*... -> Boolean)
      * @param {Array} list An array of predicate functions
      * @param {*} optional Any arguments to pass into the predicates
@@ -4838,7 +4813,7 @@
      *
      * @func
      * @memberOf R
-     * @category logic
+     * @category Logic
      * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)
      * @param {Function} condition A condition function
      * @param {Function} onTrue A predicate to invoke when the condition evaluates to a truthy value
@@ -4870,7 +4845,7 @@
      *
      * @func
      * @memberOf R
-     * @category logic
+     * @category Logic
      * @sig [(*... -> Boolean),(*... -> *)]... -> (*... -> *)
      * @param {...Function} functions
      * @return {Function}
@@ -4913,7 +4888,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Number
      * @sig String -> String -> String
      * @param {Number|String} a The first value.
@@ -4937,7 +4912,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Number
      * @param {Number} a The first value.
      * @param {Number} b The second value.
@@ -4958,7 +4933,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Number
      * @param {Number} a The first value.
      * @param {Number} b The second value.
@@ -4985,7 +4960,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Number
      * @param {Number} a The first value.
      * @param {Number} b The second value.
@@ -5013,7 +4988,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Number
      * @param {Number} a The value to the divide.
      * @param {Number} b The pseudo-modulus
@@ -5040,7 +5015,7 @@
      *
      * @private
      * @param {*} n
-     * @category type
+     * @category Type
      * @return {Boolean}
      */
     // TODO: document, even for internals...
@@ -5057,7 +5032,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Number
      * @param {Number} m The dividend.
      * @param {Number} p the modulus.
@@ -5096,7 +5071,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig [Number] -> Number
      * @param {Array} list An array of numbers
      * @return {Number} The sum of all the numbers in the list.
@@ -5113,7 +5088,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig [Number] -> Number
      * @param {Array} list An array of numbers
      * @return {Number} The product of all the numbers in the list.
@@ -5130,7 +5105,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
@@ -5154,7 +5129,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
@@ -5178,7 +5153,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
@@ -5203,7 +5178,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig Number -> Number -> Boolean
      * @param {Number} a
      * @param {Number} b
@@ -5229,7 +5204,7 @@
      * @private
      * @param {Function} compatator a function to compare two items
      * @param {*} intialVal, default value if nothing else wins
-     * @category math
+     * @category Math
      * @return {Function}
      */
     function _createMaxMin(comparator, initialVal) {
@@ -5255,7 +5230,7 @@
      *
      * @private
      * @param {Function} compatator a function to compare two items
-     * @category math
+     * @category Math
      * @return {Function}
      */
     function _createMaxMinBy(comparator) {
@@ -5283,7 +5258,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig [Number] -> Number
      * @see R.maxBy
      * @param {Array} list A list of numbers
@@ -5300,7 +5275,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig (a -> Number) -> [a] -> a
      * @param {Function} keyFn A comparator function for elements in the list
      * @param {Array} list A list of comparable elements
@@ -5320,7 +5295,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig [Number] -> Number
      * @param {Array} list A list of numbers
      * @return {Number} The greatest number in the list.
@@ -5337,7 +5312,7 @@
      *
      * @func
      * @memberOf R
-     * @category math
+     * @category Math
      * @sig (a -> Number) -> [a] -> a
      * @param {Function} keyFn A comparator function for elements in the list
      * @param {Array} list A list of comparable elements
@@ -5365,7 +5340,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig Number -> Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {Number} indexB An integer between 0 and the length of the string.
@@ -5384,7 +5359,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
@@ -5402,7 +5377,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig Number -> String -> String
      * @param {Number} indexA An integer between 0 and the length of the string.
      * @param {String} str The string to extract from
@@ -5420,7 +5395,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig Number -> String -> String
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a char from
@@ -5438,7 +5413,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig Number -> String -> Number
      * @param {Number} index An integer between 0 and the length of the string.
      * @param {String} str The string to extract a charCode from
@@ -5457,7 +5432,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig RegExp -> String -> [String] | null
      * @param {RegExp} rx A regular expression.
      * @param {String} str The string to match against
@@ -5475,7 +5450,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig RegExp|String -> String -> String -> String
      * @param {RegExp|String} pattern A regular expression or a substring to match.
      * @param {String} replacement The string to replace the matches with.
@@ -5499,7 +5474,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig String -> String -> Number
      * @param {String} c A string to find.
      * @param {String} str The string to search in
@@ -5520,7 +5495,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig String -> String -> Number
      * @param {String} c A string to find.
      * @param {String} str The string to search in
@@ -5540,7 +5515,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig String -> String
      * @param {String} str The string to upper case.
      * @return {String} The upper case version of `str`.
@@ -5556,7 +5531,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig String -> String
      * @param {String} str The string to lower case.
      * @return {String} The lower case version of `str`.
@@ -5572,7 +5547,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig String -> String
      * @param {String} str The string to trim.
      * @return {String} Trimmed version of `str`.
@@ -5607,7 +5582,7 @@
      *
      * @func
      * @memberOf R
-     * @category string
+     * @category String
      * @sig String -> String -> [String]
      * @param {String} sep The separator string.
      * @param {String} str The string to separate into an array.
@@ -5629,7 +5604,7 @@
      *
      * @private
      * @memberOf R
-     * @category object
+     * @category Object
      * @param {Array} paths An array of strings to map to object properties
      * @param {Object} obj The object to find the path in
      * @return {Array} The value at the end of the path or `undefined`.
@@ -5654,7 +5629,7 @@
      *
      * @func
      * @memberOf R
-     * @category object
+     * @category Object
      * @sig String -> String -> {*} -> *
      * @param {String} sep The separator to use in `path`.
      * @param {String} path The path to use.
@@ -5673,7 +5648,7 @@
      *
      * @func
      * @memberOf R
-     * @category object
+     * @category Object
      * @sig String -> {*} -> *
      * @param {String} path The dot path to use.
      * @return {*} The data at `path`.
@@ -5691,7 +5666,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig String -> v -> {k: v} -> Boolean
      * @param {String} path The path of the nested property to use
      * @param {*} val The value to compare the nested property with
@@ -5725,8 +5700,8 @@
      *
      * @func
      * @memberOf R
-     * @category object
-     * @category relation
+     * @category Object
+     * @category Relation
      * @sig [k] -> [{k: v}] -> [{k: v}]
      * @param {Array} props The property names to project
      * @param {Array} objs The objects to query
@@ -5748,7 +5723,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig k -> v -> {k: v} -> Boolean
      * @param {Number|String} name The property name (or index) to use.
      * @param {*} val The value to compare the property with.
@@ -5774,7 +5749,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig [a] -> [a] -> [a]
      * @param {Array} as The first list.
      * @param {Array} bs The second list.
@@ -5793,7 +5768,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list1 The first list.
@@ -5818,7 +5793,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
@@ -5849,7 +5824,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list1 The first list.
@@ -5883,7 +5858,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig [a] -> [a] -> [a]
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
@@ -5906,7 +5881,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate function that determines whether
      *        the two supplied elements are equal.
@@ -5954,7 +5929,7 @@
      * @private
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @param {Function} fn An arbitrary unary function returning a potential
      *        object key.  Signature: Any -> String
      * @param {Array} list The list of items to process
@@ -5993,7 +5968,7 @@
      *
      * @private
      * @func
-     * @category relation
+     * @category Relation
      * @param {*} a
      * @param {*} b
      */
@@ -6007,7 +5982,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig (a -> String) -> [a] -> [a]
      * @param {Function} fn The function mapping `list` items to keys.
      * @param {Array} list The list to sort.
@@ -6047,7 +6022,7 @@
      *
      * @func
      * @memberOf R
-     * @category relation
+     * @category Relation
      * @sig (a -> String) -> [a] -> {*}
      * @param {Function} fn The function used to map values to keys.
      * @param {Array} list The list to count elements from.
