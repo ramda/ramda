@@ -3380,7 +3380,7 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig a -> b -> [[a,b]]
+     * @sig [a] -> [b] -> [[a,b]]
      * @param {Array} as The first list.
      * @param {Array} bs The second list.
      * @return {Array} The list made by combining each possible pair from
