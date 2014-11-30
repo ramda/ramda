@@ -24,10 +24,6 @@ describe('foldl', function() {
         assert.strictEqual(cat(['1', '2', '3', '4']), '1234');
     });
 
-    it('is aliased by `reduce`', function() {
-        assert.strictEqual(R.reduce, R.foldl);
-    });
-
     it('correctly reports the arity of curried versions', function() {
         var sum = R.foldl(add, 0);
         assert.strictEqual(sum.length, 1);
@@ -61,10 +57,6 @@ describe('foldr', function() {
         assert.strictEqual(rcat(['1', '2', '3', '4']), '4321');
     });
 
-    it('is aliased by `reduceRight`', function() {
-        assert.strictEqual(R.reduceRight, R.foldr);
-    });
-
     it('correctly reports the arity of curried versions', function() {
         var something = R.foldr(avg, 0);
         assert.strictEqual(something.length, 1);
@@ -83,10 +75,6 @@ describe('foldl.idx', function() {
     it('works just like normal foldl', function() {
         assert.strictEqual(R.foldl.idx(R.add, 0, [1, 2, 3, 4]), 10);
         assert.strictEqual(R.foldl.idx(R.multiply, 1, [1, 2, 3, 4]), 24);
-    });
-
-    it('is aliased by `reduceRight`', function() {
-        assert.strictEqual(R.reduceRight, R.foldr);
     });
 
     it('passes the index as a third parameter to the predicate', function() {
@@ -136,10 +124,6 @@ describe('foldr.idx', function() {
     it('is automatically curried', function() {
         var something = R.foldr.idx(function(acc, b, idx) { return acc += idx + b; }, 54);
         assert.strictEqual(something([12, 4, 10, 6]), 92);
-    });
-
-    it('is aliased by `reduceRight.idx`', function() {
-        assert.strictEqual(R.reduceRight.idx, R.foldr.idx);
     });
 
     it('correctly reports the arity of curried versions', function() {

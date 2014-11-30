@@ -652,7 +652,7 @@
      *      var add = function(a, b) { return a + b; };
      *      // Adds any number of arguments together
      *      var addAll = function() {
-     *        return R.reduce(add, 0, arguments);
+     *        return R.foldl(add, 0, arguments);
      *      };
      *
      *      // Basic example
@@ -1612,7 +1612,7 @@
         var cache = {};
         return function() {
             if (!arguments.length) {return;}
-            var position = reduce(function(cache, arg) {
+            var position = foldl(function(cache, arg) {
                 return cache[arg] || (cache[arg] = {});
             }, cache, _slice(arguments, 0, arguments.length - 1));
             var arg = arguments[arguments.length - 1];
@@ -1796,7 +1796,7 @@
     // list parameter off.  For instance:
     //
     //     // skip third parameter
-    //     var checkAllPredicates = reduce(andFn, alwaysTrue);
+    //     var checkAllPredicates = foldl(andFn, alwaysTrue);
     //     // ... given suitable definitions of odd, lt20, gt5
     //     var test = checkAllPredicates([odd, lt20, gt5]);
     //     // test(7) => true, test(9) => true, test(10) => false,
@@ -1811,7 +1811,7 @@
      *
      * The iterator function receives two values: *(acc, value)*
      *
-     * Note: `R.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.foldl` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
      *
@@ -1831,9 +1831,9 @@
      *        return a + b;
      *      };
      *
-     *      R.reduce(add, 10, numbers); //=> 16
+     *      R.foldl(add, 10, numbers); //=> 16
      */
-    var reduce = R.reduce = _curry3(function reduce(fn, acc, list) {
+    var foldl = R.foldl = _curry3(function foldl(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx]);
@@ -1841,21 +1841,13 @@
         return acc;
     });
 
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.reduce
-     */
-    R.foldl = reduce;
-
 
     /**
-     * Like `reduce`, but passes additional parameters to the predicate function.
+     * Like `foldl`, but passes additional parameters to the predicate function.
      *
      * The iterator function receives four values: *(acc, value, index, list)*
      *
-     * Note: `R.reduce.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.foldl.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
@@ -1869,7 +1861,6 @@
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
      * @return {*} The final, accumulated value.
-     * @alias reduce.idx
      * @example
      *
      *      var letters = ['a', 'b', 'c'];
@@ -1878,9 +1869,9 @@
      *        return accObject;
      *      };
      *
-     *      R.reduce.idx(objectify, {}, letters); //=> { 'a': 0, 'b': 1, 'c': 2 }
+     *      R.foldl.idx(objectify, {}, letters); //=> { 'a': 0, 'b': 1, 'c': 2 }
      */
-    R.reduce.idx = _curry3(function reduceIdx(fn, acc, list) {
+    R.foldl.idx = _curry3(function foldlIdx(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx], idx, list);
@@ -1890,25 +1881,15 @@
 
 
     /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @alias foldl.idx
-     * @see R.reduce.idx
-     */
-    R.foldl.idx = reduce.idx;
-
-
-    /**
      * Returns a single item by iterating through the list, successively calling the iterator
      * function and passing it an accumulator value and the current value from the array, and
      * then passing the result to the next call.
      *
-     * Similar to `reduce`, except moves through the input list from the right to the left.
+     * Similar to `foldl`, except moves through the input list from the right to the left.
      *
      * The iterator function receives two values: *(acc, value)*
      *
-     * Note: `R.reduceRight` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.foldr` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.reduce` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
      *
@@ -1928,9 +1909,9 @@
      *        return acc.concat(pair);
      *      };
      *
-     *      R.reduceRight(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
+     *      R.foldr(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
      */
-    var reduceRight = R.reduceRight = _curry3(function reduceRight(fn, acc, list) {
+    R.foldr = _curry3(function foldr(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx]);
@@ -1938,22 +1919,14 @@
         return acc;
     });
 
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @see R.reduceRight
-     */
-    R.foldr = reduceRight;
-
 
     /**
-     * Like `reduceRight`, but passes additional parameters to the predicate function. Moves through
+     * Like `foldr`, but passes additional parameters to the predicate function. Moves through
      * the input list from the right to the left.
      *
      * The iterator function receives four values: *(acc, value, index, list)*.
      *
-     * Note: `R.reduceRight.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.foldr.idx` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
@@ -1967,7 +1940,6 @@
      * @param {*} acc The accumulator value.
      * @param {Array} list The list to iterate over.
      * @return {*} The final, accumulated value.
-     * @alias reduceRight.idx
      * @example
      *
      *      var letters = ['a', 'b', 'c'];
@@ -1976,25 +1948,15 @@
      *        return accObject;
      *      };
      *
-     *      R.reduceRight.idx(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
+     *      R.foldr.idx(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
      */
-    R.reduceRight.idx = _curry3(function reduceRightIdx(fn, acc, list) {
+    R.foldr.idx = _curry3(function foldrIdx(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx], idx, list);
         }
         return acc;
     });
-
-
-    /**
-     * @func
-     * @memberOf R
-     * @category List
-     * @alias foldr.idx
-     * @see R.reduceRight.idx
-     */
-    R.foldr.idx = reduceRight.idx;
 
 
     /**
@@ -2125,7 +2087,7 @@
      */
     // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
     R.mapObj = _curry2(function mapObject(fn, obj) {
-        return reduce(function(acc, key) {
+        return foldl(function(acc, key) {
             acc[key] = fn(obj[key]);
             return acc;
         }, {}, keys(obj));
@@ -2156,14 +2118,14 @@
      *      R.mapObj.idx(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
      */
     R.mapObj.idx = _curry2(function mapObjectIdx(fn, obj) {
-        return reduce(function(acc, key) {
+        return foldl(function(acc, key) {
             acc[key] = fn(obj[key], key, obj);
             return acc;
         }, {}, keys(obj));
     });
 
     /**
-     * Scanl is similar to reduce, but returns a list of successively reduced values from the left
+     * Scanl is similar to foldl, but returns a list of successively reduced values from the left
      *
      * @func
      * @memberOf R
@@ -2214,7 +2176,7 @@
             throw _noArgsException();
         }
         return curryN(arity, function() {
-            return reduce(ap, _map(lifted, arguments[0]), _slice(arguments, 1));
+            return foldl(ap, _map(lifted, arguments[0]), _slice(arguments, 1));
         });
     });
 
@@ -2265,7 +2227,7 @@
      *      R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
      */
     var ap = R.ap = _curry2(function ap(fns, vs) {
-        return _hasMethod('ap', fns) ? fns.ap(vs) : reduce(function(acc, fn) {
+        return _hasMethod('ap', fns) ? fns.ap(vs) : foldl(function(acc, fn) {
             return _concat(acc, _map(fn, vs));
         },  [], fns);
     });
@@ -2371,7 +2333,7 @@
         function consF(acc, ftor) {
             return ap(map(append, fn(ftor)), acc);
         }
-        return reduce(consF, of([]), list);
+        return foldl(consF, of([]), list);
     });
 
     /**
@@ -3657,7 +3619,7 @@
      *     // }
      */
     var groupBy = R.groupBy = _curry2(function groupBy(fn, list) {
-        return reduce(function(acc, elt) {
+        return foldl(function(acc, elt) {
             var key = fn(elt);
             acc[key] = _append(elt, acc[key] || (acc[key] = []));
             return acc;
@@ -3683,7 +3645,7 @@
      *      //=> [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
      */
     R.partition = _curry2(function partition(pred, list) {
-        return reduce(function(acc, elt) {
+        return foldl(function(acc, elt) {
             acc[pred(elt) ? 0 : 1].push(elt);
             return acc;
         }, [[], []], list);
@@ -5087,12 +5049,12 @@
      * @sig [Number] -> Number
      * @param {Array} list An array of numbers
      * @return {Number} The sum of all the numbers in the list.
-     * @see reduce
+     * @see foldl
      * @example
      *
      *      R.sum([2,4,6,8,100,1]); //=> 121
      */
-    R.sum = reduce(_add, 0);
+    R.sum = foldl(_add, 0);
 
 
     /**
@@ -5104,12 +5066,12 @@
      * @sig [Number] -> Number
      * @param {Array} list An array of numbers
      * @return {Number} The product of all the numbers in the list.
-     * @see reduce
+     * @see foldl
      * @example
      *
      *      R.product([2,4,6,8,100,1]); //=> 38400
      */
-    R.product = reduce(_multiply, 1);
+    R.product = foldl(_multiply, 1);
 
 
     /**
@@ -6047,7 +6009,7 @@
      *      R.countBy(R.toLowerCase)(letters);   //=> {'a': 5, 'b': 4, 'c': 3}
      */
     R.countBy = _curry2(function countBy(fn, list) {
-        return reduce(function(counts, obj) {
+        return foldl(function(counts, obj) {
             counts[obj.key] = (counts[obj.key] || 0) + 1;
             return counts;
         }, {}, _keyValue(fn, list));
