@@ -1928,13 +1928,13 @@
      *
      *      R.reduceRight(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
      */
-    var reduceRight = R.reduceRight = _curry3(_checkForMethod('reduceRight', function reduceRight(fn, acc, list) {
+    var reduceRight = R.reduceRight = _curry3(function reduceRight(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx]);
         }
         return acc;
-    }));
+    });
 
     /**
      * @func
