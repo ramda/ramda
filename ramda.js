@@ -665,9 +665,11 @@
      *      //≅ addAll(double(10), square(5), 100);
      *      addDoubleAndSquare(10, 5, 100); //=> 145
      *
-     *      // But if you're expecting additional arguments that don't need transformation, it's best
-     *      // to pass transformer functions so the resulting function has the correct arity
+     *      // If there are extra _expected_ arguments that don't need to be transformed, although
+     *      // you can ignore them, it might be best to pass in the identity function so that the new
+     *      // function correctly reports arity.
      *      var addDoubleAndSquareWithExtraParams = R.useWith(addAll, double, square, R.identity);
+     *      // addDoubleAndSquareWithExtraParams.length //=> 3
      *      //≅ addAll(double(10), square(5), R.identity(100));
      *      addDoubleAndSquare(10, 5, 100); //=> 145
      */
