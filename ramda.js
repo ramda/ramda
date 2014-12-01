@@ -3492,8 +3492,23 @@
      *      var xs = R.range(0, 10);
      *      R.slice(2, 5)(xs); //=> [2, 3, 4]
      */
-    R.slice = invokerN(2, 'slice');
+    var slice = R.slice = invokerN(2, 'slice');
 
+    /**
+     * Returns all but the last element of a list.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig [a] -> [a]
+     * @param {Array} [list=[]] The array to consider.
+     * @return {Array} A new array containing all but the last element of the input list, or an
+     *         empty list if the input list is empty.
+     * @example
+     *
+     *      R.init(['fi', 'fo', 'fum']); //=> ['fi', 'fo']
+     */
+    R.init = slice(0, -1);
 
     /**
      * Removes the sub-list of `list` starting at index `start` and containing
