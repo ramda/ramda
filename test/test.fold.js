@@ -173,3 +173,74 @@ describe('foldr.idx', function() {
         assert.throws(R.foldr.idx(R.add), TypeError);
     });
 });
+
+describe('foldObj', function() {
+    var objA = {x: 'lc x', y: 'lc y', z: 'lc z', X: 'uc X', Y: 'uc Y', Z: 'uc Z'};
+    var objB = {X: 'uc X', Y: 'uc Y', Z: 'uc Z', x: 'lc x', y: 'lc y', z: 'lc z'};
+    var objC = {X: 'uc X', x: 'lc x', Y: 'uc Y', y: 'lc y', Z: 'uc Z', z: 'lc z'};
+
+    function cat(a, b) { return a + ' ' + b; }
+
+    it('folds an object in sorted-key order', function() {
+        assert.strictEqual(R.foldObj(cat, '', objA), ' uc X uc Y uc Z lc x lc y lc z');
+        assert.strictEqual(R.foldObj(cat, '', objA), R.foldObj(cat, '', objB));
+        assert.strictEqual(R.foldObj(cat, '', objA), R.foldObj(cat, '', objC));
+    });
+
+    it('returns the accumulator if the object has no enumerable own properties', function() {
+        assert.deepEqual(R.foldObj(cat, {}, {}), {});
+        assert.deepEqual(R.foldObj(cat, [], {}), []);
+        assert.deepEqual(R.foldObj(cat, 0, {}), 0);
+        assert.deepEqual(R.foldObj(cat, '', {}), '');
+    });
+
+    it('is curried', function() {
+        assert(typeof R.foldObj(cat) === 'function');
+        assert(typeof R.foldObj(cat)('') === 'function');
+        assert(R.foldObj(cat)('')({b: 'B', a: 'A'}) === ' A B');
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.foldObj, TypeError);
+    });
+});
+
+describe('foldObj.idx', function() {
+    var objA = {x: 'lc x', y: 'lc y', z: 'lc z', X: 'uc X', Y: 'uc Y', Z: 'uc Z'};
+    var objB = {X: 'uc X', Y: 'uc Y', Z: 'uc Z', x: 'lc x', y: 'lc y', z: 'lc z'};
+    var objC = {X: 'uc X', x: 'lc x', Y: 'uc Y', y: 'lc y', Z: 'uc Z', z: 'lc z'};
+
+    function catkv(a, v, k) { return a + ' ' + 'key: ' + k + ', ' + 'value: ' + v + ';' ; }
+    function catkvo(a, v, k, o) { return a + ' (' + k + ', ' + v + ') ' + o.Y; }
+
+
+    it('folds an object in sorted-key order', function() {
+        assert.strictEqual(R.foldObj.idx(catkv, '', objA),
+            ' key: X, value: uc X; key: Y, value: uc Y; key: Z, value: uc Z; key: x, value: lc x; key: y, value: lc y; key: z, value: lc z;');
+        assert.strictEqual(R.foldObj.idx(catkv, '', objA), R.foldObj.idx(catkv, '', objB));
+        assert.strictEqual(R.foldObj.idx(catkv, '', objA), R.foldObj.idx(catkv, '', objC));
+    });
+
+    it('may also pass the full object as the fourth parameter to the iterator function', function() {
+        assert.strictEqual(R.foldObj.idx(catkvo, '', {b: 'B', a: 'A', Y: 'Y'}), ' (Y, Y) Y (a, A) Y (b, B) Y');
+    });
+
+    it('returns the accumulator if the object has no enumerable own properties', function() {
+        assert.deepEqual(R.foldObj.idx(catkv, {}, {}), {});
+        assert.deepEqual(R.foldObj.idx(catkv, [], {}), []);
+        assert.deepEqual(R.foldObj.idx(catkv, 0, {}), 0);
+        assert.deepEqual(R.foldObj.idx(catkv, '', {}), '');
+    });
+
+    it('is curried', function() {
+        assert(typeof R.foldObj.idx(catkv) === 'function');
+        assert(typeof R.foldObj.idx(catkv)('') === 'function');
+        assert(R.foldObj.idx(catkv)('')({b: 'B', a: 'A'}) === ' key: a, value: A; key: b, value: B;');
+    });
+
+    it('throws on zero arguments', function() {
+        assert.throws(R.foldObj.idx, TypeError);
+    });
+
+});
+

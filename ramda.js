@@ -1996,6 +1996,80 @@
 
 
     /**
+     * Returns a single item by iterating ovar an object's keys _in sorted order_, successively calling the iterator
+     * function and passing it an accumulator value and the current value from the object, and
+     * then passing the result to the next call.
+     *
+     * The iterator function receives two values: *(acc, value)*
+     *
+     * Note: Since it sorts the object keys prior to iterating, `R.foldObj` will return consistent results
+     * even for cases where `Object.keys` would return different-ordered lists.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig (a,b -> a) -> a -> [b] -> a
+     * @param {Function} fn The iterator function. Receives two values, the accumulator and the
+     *        current value from the object.
+     * @param {*} acc The accumulator value.
+     * @param {Object} obj The object to iterate over.
+     * @return {*} The final, accumulated value.
+     * @example
+     *
+     *      var objA = {z: 'zzz', x: 'xxx', y: 'yyy', Z: 'ZZZ'};
+     *      var cat = function(a, b) {
+     *        return a + ' ' +  b;
+     *      };
+     *
+     *      R.foldObj(cat, '', objA); //=> ' ZZZ xxx yyy zzz'
+     */
+    R.foldObj = _curry3(function(fn, acc, obj) {
+        var ks = keys(obj).sort();
+        var len = ks.length;
+        var idx = -1;
+        while (++idx < len) {
+            acc = fn(acc, obj[ks[idx]]);
+        }
+        return acc;
+    });
+
+
+    /**
+     * Like `foldObj`, but passes additional parameters to the predicate function.
+     * The iterator function receives four values: *(acc, value, key, object)*
+     *
+     * Note: Since it sorts the object keys prior to iterating, `R.foldObj.idx` will return consistent results
+     * even for cases where `Object.keys` would return different-ordered lists.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig (a,b,i,[b] -> a) -> a -> [b] -> a
+     * @param {Function} fn The iterator function. Receives four values: the accumulator, the
+     *        current element from object, that element's key, and the entire object itself.
+     * @param {*} acc The accumulator value.
+     * @param {Object} obj The object to iterate over.
+     * @return {*} The final, accumulated value.
+     * @example
+     *
+     *     var obj = {a: 'aaa', Z: 'ZZZ', dot: '.'};
+     *     var catko = function(acc, v, k, o) {
+     *         return acc + ' ' + ([k, v, o.dot].join(', '));
+     *     };
+     *     R.foldObj.idx(catko, '', obj); //=> ' Z, ZZZ, . a, aaa, . dot, ., .'
+     */
+    R.foldObj.idx = _curry3(function(fn, acc, obj) {
+        var ks = keys(obj).sort();
+        var len = ks.length;
+        var idx = -1;
+        while (++idx < len) {
+            acc = fn(acc, obj[ks[idx]], ks[idx], obj);
+        }
+        return acc;
+    });
+
+
+    /**
      * Builds a list from a seed value. Accepts an iterator function, which returns either false
      * to stop iteration or an array of length 2 containing the value to add to the resulting
      * list and the seed to be used in the next call to the iterator function.
