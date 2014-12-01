@@ -71,6 +71,11 @@ describe('union', function() {
         assert.deepEqual(R.union(M, N), [1, 2, 3, 4, 5, 6]);
     });
 
+    it('is curried', function() {
+        assert(typeof R.union(M) === 'function');
+        assert.deepEqual(R.union(M)(N), [1, 2, 3, 4, 5, 6]);
+    });
+
     it('does not work for non-primitives (use `unionWith`)', function() {
         assert.strictEqual(R.union(Mo, No).length, 8);
     });

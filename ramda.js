@@ -5759,7 +5759,7 @@
      *
      *      R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
      */
-    R.union = compose(uniq, _concat);
+    R.union = _curry2(compose(uniq, _concat));
 
 
     /**
