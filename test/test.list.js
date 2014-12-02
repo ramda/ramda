@@ -114,16 +114,17 @@ describe('times', function() {
 
 describe('repeatN', function() {
     it('returns a lazy list of identical values', function() {
-        assert.deepEqual(R.repeatN(0, 5), [0, 0, 0, 0, 0]);
+        assert.deepEqual(R.repeatN(5, 0), [0, 0, 0, 0, 0]);
     });
 
     it('can accept any value, including `null`', function() {
-        assert.deepEqual(R.repeatN(null, 3), [null, null, null]);
+        assert.deepEqual(R.repeatN(3, null), [null, null, null]);
     });
 
     it('is automatically curried', function() {
-        var nTrues = R.repeatN(true);
-        assert.deepEqual(nTrues(4), [true, true, true, true]);
+        var thrice = R.repeatN(3);
+        assert.deepEqual(thrice('foo'), ['foo', 'foo', 'foo']);
+        assert.deepEqual(thrice('bar'), ['bar', 'bar', 'bar']);
     });
 });
 

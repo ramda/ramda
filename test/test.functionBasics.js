@@ -300,7 +300,7 @@ describe('nAry', function() {
         assert.deepEqual(fn.apply(null, R.range(0, 25)), R.range(0, 10));
 
         var undefs = fn();
-        var ns = R.repeatN(undefined, 10);
+        var ns = R.repeatN(10, undefined);
         assert(undefs.length === ns.length);
         var idx = undefs.length;
         while (--idx) {
