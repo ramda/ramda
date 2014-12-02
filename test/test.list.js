@@ -112,19 +112,19 @@ describe('times', function() {
     });
 });
 
-describe('repeatN', function() {
+describe('repeat', function() {
     it('returns a lazy list of identical values', function() {
-        assert.deepEqual(R.repeatN(5, 0), [0, 0, 0, 0, 0]);
+        assert.deepEqual(R.repeat(0, 5), [0, 0, 0, 0, 0]);
     });
 
     it('can accept any value, including `null`', function() {
-        assert.deepEqual(R.repeatN(3, null), [null, null, null]);
+        assert.deepEqual(R.repeat(null, 3), [null, null, null]);
     });
 
     it('is automatically curried', function() {
-        var thrice = R.repeatN(3);
-        assert.deepEqual(thrice('foo'), ['foo', 'foo', 'foo']);
-        assert.deepEqual(thrice('bar'), ['bar', 'bar', 'bar']);
+        var makeFoos = R.repeat('foo');
+        assert.deepEqual(makeFoos(0), []);
+        assert.deepEqual(makeFoos(3), ['foo', 'foo', 'foo']);
     });
 });
 

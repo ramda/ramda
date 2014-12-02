@@ -219,9 +219,9 @@
      * @param {*} value to repeat indefinitely
      * @return {Lazylist} new lazylist
      * @example
-     *      R.repeat(1) //=> [1, 1, 1, ...]
+     *      R.lazylist.repeat(1) //=> [1, 1, 1, ...]
      */
-    R.repeat = function(value) {
+    R.lazylist.repeat = function(value) {
         var fn = R.always(value);
         return lazylist(null, fn, fn);
     };
