@@ -1172,13 +1172,13 @@
      * @return {Array} A new array containing `n` `value`s.
      * @example
      *
-     *      R.repeatN('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
+     *      R.repeatN(5, 'hi'); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
      *
      *      var obj = {};
-     *      var repeatedObjs = R.repeatN(obj, 5); //=> [{}, {}, {}, {}, {}]
+     *      var repeatedObjs = R.repeatN(5, obj); //=> [{}, {}, {}, {}, {}]
      *      repeatedObjs[0] === repeatedObjs[1]; //=> true
      */
-    R.repeatN = _curry2(function repeatN(value, n) {
+    R.repeatN = _curry2(function repeatN(n, value) {
         return times(always(value), n);
     });
 

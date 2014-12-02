@@ -25,7 +25,7 @@ describe('keys', function() {
         var result = R.map(function(val) {
             return R.keys(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, R.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN(10, []));
     });
 
     it("does not include the given object's prototype properties", function() {
@@ -52,7 +52,7 @@ describe('keysIn', function() {
         var result = R.map(function(val) {
             return R.keys(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, R.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN(10, []));
     });
 });
 
@@ -90,7 +90,7 @@ describe('values', function() {
         var result = R.map(function(val) {
             return R.keys(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, R.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN(10, []));
     });
 });
 
@@ -125,6 +125,6 @@ describe('valuesIn', function() {
         var result = R.map(function(val) {
             return R.values(val);
         }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-        assert.deepEqual(result, R.repeatN([], 10));
+        assert.deepEqual(result, R.repeatN(10, []));
     });
 });
