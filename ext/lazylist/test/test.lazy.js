@@ -40,14 +40,14 @@ describe('takeWhile for a lazylist', function() {
     });
 });
 
-describe('skip for a lazylist', function() {
+describe('drop for a lazylist', function() {
     var lz;
     function I(x) { return x; }
     function inc(n) { return n + 1; }
     lz = lazylist(0, I, inc);
 
     it('skips the first n elements of an infinite sequence', function() {
-        assert.deepEqual(R.take(5, R.skip(10, lz)), [10, 11, 12, 13, 14]);
+        assert.deepEqual(R.take(5, R.drop(10, lz)), [10, 11, 12, 13, 14]);
     });
 });
 
