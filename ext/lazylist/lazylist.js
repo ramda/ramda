@@ -136,7 +136,7 @@
              *
              *     lazylist(1, R.identity, R.add(1)).skip(3); //=> [4,5,6,7...]
              */
-            skip: function(n) {
+            drop: function(n) {
                 var skip = function(ctr, lz) {
                     return (ctr <= 0) ? lz : skip(ctr - 1, lz.tail());
                 };

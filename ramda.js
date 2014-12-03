@@ -2583,9 +2583,8 @@
 
     /**
      * Returns a new list containing the last `n` elements of a given list, passing each value
-     * to the supplied predicate function, beginning when the predicate function returns
-     * `true`. Excludes the element that caused the predicate function to fail. The predicate
-     * function is passed one argument: *(value)*.
+     * to the supplied predicate function, skipping elements while the predicate function returns
+     * `true`. The predicate function is passed one argument: *(value)*.
      *
      * @func
      * @memberOf R
@@ -2596,15 +2595,15 @@
      * @return {Array} A new array.
      * @example
      *
-     *      var isTwo = function(x) {
-     *        return x === 2;
+     *      var lteTwo = function(x) {
+     *        return x <= 2;
      *      };
      *
-     *      R.skipUntil(isTwo, [1, 2, 3, 4]); //=> [2, 3, 4]
+     *      R.dropWhile(lteTwo, [1, 2, 3, 4]); //=> [3, 4]
      */
-    R.skipUntil = _curry2(function skipUntil(fn, list) {
+    R.dropWhile = _curry2(function dropWhile(pred, list) {
         var idx = -1, len = list.length;
-        while (++idx < len && !fn(list[idx])) {}
+        while (++idx < len && pred(list[idx])) {}
         return _slice(list, idx);
     });
 
@@ -2621,14 +2620,10 @@
      * @return {Array} The last `n` elements of `list`.
      * @example
      *
-     *     R.skip(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
+     *     R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
      */
-    R.skip = _curry2(_checkForMethod('skip', function skip(n, list) {
-        if (n < list.length) {
-            return _slice(list, n);
-        } else {
-            return [];
-        }
+    R.drop = _curry2(_checkForMethod('drop', function drop(n, list) {
+        return (n < list.length) ? _slice(list, n) : [];
     }));
 
 

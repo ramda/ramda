@@ -172,34 +172,34 @@ describe('takeWhile', function() {
     });
 });
 
-describe('skip', function() {
+describe('drop', function() {
     it('skips the first `n` elements from a list, returning the remainder', function() {
-        assert.deepEqual(R.skip(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g']);
+        assert.deepEqual(R.drop(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g']);
     });
 
     it('returns an empty array if `n` is too large', function() {
-        assert.deepEqual(R.skip(20, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), []);
+        assert.deepEqual(R.drop(20, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), []);
     });
 
     it('is automatically curried', function() {
-        var skip2 = R.skip(2);
-        assert.deepEqual(skip2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
-        assert.deepEqual(skip2(['x', 'y', 'z']), ['z']);
+        var drop2 = R.drop(2);
+        assert.deepEqual(drop2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
+        assert.deepEqual(drop2(['x', 'y', 'z']), ['z']);
     });
 });
 
-describe('skipUntil', function() {
-    it('continues taking elements while the function reports `true`', function() {
-        assert.deepEqual(R.skipUntil(function(x) {return x === 5;}, [1, 3, 5, 7, 9]), [5, 7, 9]);
+describe('dropWhile', function() {
+    it('skips elements while the function reports `true`', function() {
+        assert.deepEqual(R.dropWhile(function(x) {return x < 5;}, [1, 3, 5, 7, 9]), [5, 7, 9]);
     });
 
     it('returns an empty list for an ampty list', function() {
-        assert.deepEqual(R.skipUntil(function() { return false; }, []), []);
-        assert.deepEqual(R.skipUntil(function() { return true; }, []), []);
+        assert.deepEqual(R.dropWhile(function() { return false; }, []), []);
+        assert.deepEqual(R.dropWhile(function() { return true; }, []), []);
     });
 
     it('starts at the right arg and acknowledges undefined', function() {
-        var sublist = R.skipUntil(function(x) {return x === void 0;}, [1, 3, void 0, 5, 7]);
+        var sublist = R.dropWhile(function(x) {return x !== void 0;}, [1, 3, void 0, 5, 7]);
         assert.strictEqual(sublist.length, 3);
         assert.strictEqual(sublist[0], void 0);
         assert.strictEqual(sublist[1], 5);
@@ -207,8 +207,8 @@ describe('skipUntil', function() {
     });
 
     it('is automatically curried', function() {
-        var skipUntil7 = R.skipUntil(function(x) {return x === 7;});
-        assert.deepEqual(skipUntil7([1, 3, 5, 7, 9]), [7, 9]);
-        assert.deepEqual(skipUntil7([2, 4, 6, 8, 10]), []);
+        var dropLt7 = R.dropWhile(function(x) {return x < 7;});
+        assert.deepEqual(dropLt7([1, 3, 5, 7, 9]), [7, 9]);
+        assert.deepEqual(dropLt7([2, 4, 6, 8, 10]), [8, 10]);
     });
 });
