@@ -3519,9 +3519,9 @@
      * @return {Array} A new Array with `elts` inserted starting at `index`.
      * @example
      *
-     *      R.insert.all(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
+     *      R.insertAll(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
      */
-    R.insert.all = _curry3(function insertAll(idx, elts, list) {
+    R.insertAll = _curry3(function insertAll(idx, elts, list) {
         idx = idx < list.length && idx >= 0 ? idx : list.length;
         return _concat(_concat(_slice(list, 0, idx), elts), _slice(list, idx));
     });
