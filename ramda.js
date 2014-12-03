@@ -1122,11 +1122,12 @@
      * @return {Function}
      * @example
      *
-     *      R.argN(1)('a', 'b', 'c'); //=> 'b'
+     *      R.nthArg(1)('a', 'b', 'c'); //=> 'b'
+     *      R.nthArg(-1)('a', 'b', 'c'); //=> 'c'
      */
-    R.argN = function argN(n) {
+    R.nthArg = function nthArg(n) {
         return function() {
-            return arguments[n];
+            return nth(n, arguments);
         };
     };
 
