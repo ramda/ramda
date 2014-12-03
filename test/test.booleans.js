@@ -99,14 +99,14 @@ describe('not', function() {
     });
 });
 
-describe('allPredicates', function() {
+describe('allPass', function() {
     var odd = function(n) {return n % 2 !== 0;};
     var lt20 = function(n) {return n < 20;};
     var gt5 = function(n) {return n > 5;};
     var plusEq = function(w, x, y, z) { return w + x  === y + z; };
 
     it('reports whether all predicates are satisfied by a given value', function() {
-        var ok = R.allPredicates([odd, lt20, gt5]);
+        var ok = R.allPass([odd, lt20, gt5]);
         assert.strictEqual(ok(7), true);
         assert.strictEqual(ok(9), true);
         assert.strictEqual(ok(10), false);
@@ -115,23 +115,23 @@ describe('allPredicates', function() {
     });
 
     it('does not have to be curried', function() {
-        assert.strictEqual(R.allPredicates([odd, gt5], 3), false);
-        assert.strictEqual(R.allPredicates([odd, gt5], 7), true);
+        assert.strictEqual(R.allPass([odd, gt5], 3), false);
+        assert.strictEqual(R.allPass([odd, gt5], 7), true);
     });
 
     it('reports its arity as the longest predicate length', function() {
-        assert.strictEqual(R.allPredicates([odd, gt5, plusEq]).length, 4);
+        assert.strictEqual(R.allPass([odd, gt5, plusEq]).length, 4);
     });
 });
 
-describe('anyPredicates', function() {
+describe('anyPass', function() {
     var odd = function(n) {return n % 2 !== 0;};
     var gt20 = function(n) {return n > 20;};
     var lt5 = function(n) {return n < 5;};
     var plusEq = function(w, x, y, z) { return w + x  === y + z; };
 
     it('reports whether any predicates are satisfied by a given value', function() {
-        var ok = R.anyPredicates([odd, gt20, lt5]);
+        var ok = R.anyPass([odd, gt20, lt5]);
         assert.strictEqual(ok(7), true);
         assert.strictEqual(ok(9), true);
         assert.strictEqual(ok(10), false);
@@ -141,11 +141,11 @@ describe('anyPredicates', function() {
     });
 
     it('does not have to be curried', function() {
-        assert.strictEqual(R.anyPredicates([odd, lt5], 3), true);
-        assert.strictEqual(R.anyPredicates([odd, lt5], 22), false);
+        assert.strictEqual(R.anyPass([odd, lt5], 3), true);
+        assert.strictEqual(R.anyPass([odd, lt5], 22), false);
     });
 
     it('reports its arity as the longest predicate length', function() {
-        assert.strictEqual(R.anyPredicates([odd, lt5, plusEq]).length, 4);
+        assert.strictEqual(R.anyPass([odd, lt5, plusEq]).length, 4);
     });
 });
