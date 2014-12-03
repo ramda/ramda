@@ -4790,11 +4790,11 @@
      *
      *      var gt10 = function(x) { return x > 10; };
      *      var even = function(x) { return x % 2 === 0};
-     *      var f = R.allPredicates([gt10, even]);
+     *      var f = R.allPass([gt10, even]);
      *      f(11); //=> false
      *      f(12); //=> true
      */
-    R.allPredicates = _predicateWrap(every);
+    R.allPass = _predicateWrap(every);
 
 
     /**
@@ -4812,12 +4812,12 @@
      *
      *      var gt10 = function(x) { return x > 10; };
      *      var even = function(x) { return x % 2 === 0};
-     *      var f = R.anyPredicates([gt10, even]);
+     *      var f = R.anyPass([gt10, even]);
      *      f(11); //=> true
      *      f(8); //=> true
      *      f(9); //=> false
      */
-    R.anyPredicates = _predicateWrap(some);
+    R.anyPass = _predicateWrap(some);
 
     /**
      * Creates a function that will process either the `onTrue` or the `onFalse` function depending
