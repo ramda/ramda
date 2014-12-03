@@ -12,7 +12,7 @@ SRC = $(shell find . -name '*.js' -not -name '*.min.js' -not -path './lib/test/*
 
 
 ramda.min.js: ramda.js
-	$(UGLIFY) --compress --mangle --preamble '/*! ramda $(shell date '+%Y-%m-%d') */' <'$<' >'$@'
+	$(UGLIFY) --compress --mangle --preamble '/*! ramda $(shell date '+%Y-%m-%d') (c)$(shell git show -s --format=%ai | cut -d - -f 1) Scott Sauyet & Michael Hurley @license MIT */' <'$<' >'$@'
 
 
 .PHONY: lint
