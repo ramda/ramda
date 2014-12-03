@@ -8,7 +8,7 @@ interfaces.monad = R.uniq(interfaces.chain.concat(interfaces.applicative));
 
 function correctInterface(type) {
     return function(obj) {
-        return R.every(function(method) {
+        return R.all(function(method) {
             return obj[method] && typeof obj[method] === 'function';
         }, interfaces[type]);
     };

@@ -1,26 +1,26 @@
 var assert = require('assert');
 var R = require('..');
 
-describe('every', function() {
+describe('all', function() {
     var even = function(n) {return n % 2 === 0;};
     var T = function() {return true;};
 
     it('returns true if all elements satisfy the predicate', function() {
-        assert.strictEqual(R.every(even, [2, 4, 6, 8, 10, 12]), true);
+        assert.strictEqual(R.all(even, [2, 4, 6, 8, 10, 12]), true);
     });
 
     it('returns false if any element fails to satisfy the predicate', function() {
-        assert.strictEqual(R.every(even, [2, 4, 6, 8, 9, 10]), false);
+        assert.strictEqual(R.all(even, [2, 4, 6, 8, 9, 10]), false);
     });
 
     it('returns true for an empty list', function() {
-        assert.strictEqual(R.every(T, []), true);
+        assert.strictEqual(R.all(T, []), true);
     });
 
     it('short-circuits on first false value', function() {
         var count = 0;
         var test = function(n) {count++; return even(n);};
-        var result = R.every(test, [2, 4, 6, 7, 8, 10]);
+        var result = R.all(test, [2, 4, 6, 7, 8, 10]);
         assert(!result);
         assert.strictEqual(count, 4);
     });
@@ -29,56 +29,56 @@ describe('every', function() {
         var xs = [{x: 'abc'}, {x: 'ade'}, {x: 'fghiajk'}];
         function len3(o) { return o.x.length === 3; }
         function hasA(o) { return o.x.indexOf('a') > -1; }
-        assert.strictEqual(R.every(len3, xs), false);
-        assert.strictEqual(R.every(hasA, xs), true);
+        assert.strictEqual(R.all(len3, xs), false);
+        assert.strictEqual(R.all(hasA, xs), true);
     });
 
     it('is automatically curried', function() {
         var count = 0;
         var test = function(n) {count++; return even(n);};
-        assert(R.every(test)([2, 4, 6, 7, 8, 10]) === false);
+        assert(R.all(test)([2, 4, 6, 7, 8, 10]) === false);
     });
 
     it('throws on zero arguments', function() {
-        assert.throws(R.every, TypeError);
+        assert.throws(R.all, TypeError);
     });
 });
 
-describe('some', function() {
+describe('any', function() {
     var odd = function(n) {return n % 2 === 1;};
     var T = function() {return true;};
 
     it('returns true if any element satisfies the predicate', function() {
-        assert.strictEqual(R.some(odd, [2, 4, 6, 8, 10, 11, 12]), true);
+        assert.strictEqual(R.any(odd, [2, 4, 6, 8, 10, 11, 12]), true);
     });
 
     it('returns false if all elements fails to satisfy the predicate', function() {
-        assert.strictEqual(R.some(odd, [2, 4, 6, 8, 10, 12]), false);
+        assert.strictEqual(R.any(odd, [2, 4, 6, 8, 10, 12]), false);
     });
 
     it('works with more complex objects', function() {
         var people = [{first: 'Paul', last: 'Grenier'}, {first:'Mike', last: 'Hurley'}, {first: 'Will', last: 'Klein'}];
         var alliterative = function(person) {return person.first.charAt(0) === person.last.charAt(0);};
-        assert.strictEqual(R.some(alliterative, people), false);
+        assert.strictEqual(R.any(alliterative, people), false);
         people.push({first: 'Scott', last: 'Sauyet'});
-        assert.strictEqual(R.some(alliterative, people), true);
+        assert.strictEqual(R.any(alliterative, people), true);
     });
 
     it('can use a configurable function', function() {
         var teens = [{name: 'Alice', age: 14}, {name: 'Betty', age: 18}, {name: 'Cindy', age: 17}];
         var atLeast = function(age) {return function(person) {return person.age >= age;};};
-        assert.strictEqual(R.some(atLeast(16), teens), true, 'Some can legally drive');
-        assert.strictEqual(R.some(atLeast(21), teens), false, 'None can legally drink');
+        assert.strictEqual(R.any(atLeast(16), teens), true, 'Some can legally drive');
+        assert.strictEqual(R.any(atLeast(21), teens), false, 'None can legally drink');
     });
 
     it('returns false for an empty list', function() {
-        assert.strictEqual(R.some(T, []), false);
+        assert.strictEqual(R.any(T, []), false);
     });
 
     it('short-circuits on first true value', function() {
         var count = 0;
         var test = function(n) {count++; return odd(n);};
-        var result = R.some(test, [2, 4, 6, 7, 8, 10]);
+        var result = R.any(test, [2, 4, 6, 7, 8, 10]);
         assert(result);
         assert.strictEqual(count, 4);
     });
@@ -86,10 +86,10 @@ describe('some', function() {
     it('is automatically curried', function() {
         var count = 0;
         var test = function(n) {count++; return odd(n);};
-        assert(R.some(test)([2, 4, 6, 7, 8, 10]) === true);
+        assert(R.any(test)([2, 4, 6, 7, 8, 10]) === true);
     });
 
     it('throws on zero arguments', function() {
-        assert.throws(R.some, TypeError);
+        assert.throws(R.any, TypeError);
     });
 });

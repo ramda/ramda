@@ -2761,10 +2761,10 @@
      *      var lessThan3 = R.flip(R.lt)(3);
      *      var xs = R.range(1, 3);
      *      xs; //=> [1, 2]
-     *      R.every(lessThan2)(xs); //=> false
-     *      R.every(lessThan3)(xs); //=> true
+     *      R.all(lessThan2)(xs); //=> false
+     *      R.all(lessThan3)(xs); //=> true
      */
-    function every(fn, list) {
+    function all(fn, list) {
         var idx = -1;
         while (++idx < list.length) {
             if (!fn(list[idx])) {
@@ -2773,7 +2773,7 @@
         }
         return true;
     }
-    R.every = _curry2(every);
+    R.all = _curry2(all);
 
 
     /**
@@ -2794,10 +2794,10 @@
      *      var lessThan2 = R.flip(R.lt)(2);
      *      var xs = R.range(1, 3);
      *      xs; //=> [1, 2]
-     *      R.some(lessThan0)(xs); //=> false
-     *      R.some(lessThan2)(xs); //=> true
+     *      R.any(lessThan0)(xs); //=> false
+     *      R.any(lessThan2)(xs); //=> true
      */
-    function some(fn, list) {
+    function any(fn, list) {
         var idx = -1;
         while (++idx < list.length) {
             if (fn(list[idx])) {
@@ -2806,7 +2806,7 @@
         }
         return false;
     }
-    R.some = _curry2(some);
+    R.any = _curry2(any);
 
 
     /**
@@ -4754,8 +4754,8 @@
      * Create a predicate wrapper which will call a pick function (all/any) for each predicate
      *
      * @private
-     * @see R.every
-     * @see R.some
+     * @see R.all
+     * @see R.any
      */
     // TODO: document, even for internals...
     function _predicateWrap(predPicker) {
@@ -4794,7 +4794,7 @@
      *      f(11); //=> false
      *      f(12); //=> true
      */
-    R.allPass = _predicateWrap(every);
+    R.allPass = _predicateWrap(all);
 
 
     /**
@@ -4817,7 +4817,7 @@
      *      f(8); //=> true
      *      f(9); //=> false
      */
-    R.anyPass = _predicateWrap(some);
+    R.anyPass = _predicateWrap(any);
 
     /**
      * Creates a function that will process either the `onTrue` or the `onFalse` function depending

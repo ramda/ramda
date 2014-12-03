@@ -150,7 +150,7 @@ function tagListToMap(targets, list) {
 }
 
 var propIn = R.curry(function(prop_name, prop_vals, object) {
-    return R.some(R.I, R.ap(R.map(R.propEq(prop_name), prop_vals), [object]));
+    return R.any(R.I, R.ap(R.map(R.propEq(prop_name), prop_vals), [object]));
 });
 
 // create our example objects from dox
