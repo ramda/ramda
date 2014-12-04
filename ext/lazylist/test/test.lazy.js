@@ -78,20 +78,20 @@ describe('filter for a lazylist', function() {
     });
 });
 
-describe('repeat', function() {
+describe('lazylist.repeat', function() {
     it('returns a lazy list of identical values', function() {
-        assert.deepEqual(R.take(5, R.repeat(0)), [0, 0, 0, 0, 0]);
+        assert.deepEqual(R.take(5, R.lazylist.repeat(0)), [0, 0, 0, 0, 0]);
     });
 
     it('can accept any value, including `null`', function() {
-        assert.deepEqual(R.take(3, R.repeat(null)), [null, null, null]);
+        assert.deepEqual(R.take(3, R.lazylist.repeat(null)), [null, null, null]);
     });
 
     it('can accept any value, including `undefined`', function() {
-        assert.deepEqual(R.take(4, R.repeat(undefined)), [undefined, undefined, undefined, undefined]);
+        assert.deepEqual(R.take(4, R.lazylist.repeat(undefined)), [undefined, undefined, undefined, undefined]);
     });
 
     it('can accept any value, including an arbitrary object', function() {
-        assert.deepEqual(R.take(2, R.repeat({a: 10, b: {c: 20}})), [{a: 10, b: {c: 20}}, {a: 10, b: {c: 20}}]);
+        assert.deepEqual(R.take(2, R.lazylist.repeat({a: 10, b: {c: 20}})), [{a: 10, b: {c: 20}}, {a: 10, b: {c: 20}}]);
     });
 });
