@@ -21,27 +21,27 @@ describe('map', function() {
 
 });
 
-describe('map.idx', function() {
+describe('mapIndexed', function() {
     var times2 = function(x) {return x * 2;};
-    var addIdx = function(x, idx) {return x + idx;};
+    var addIndexed = function(x, idx) {return x + idx;};
     var squareEnds = function(x, idx, list) {
         return (idx === 0 || idx === list.length - 1) ? x * x : x;
     };
 
     it('works just like a normal map', function() {
-        assert.deepEqual(R.map.idx(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
+        assert.deepEqual(R.mapIndexed(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
     });
 
     it('passes the index as a second parameter to the callback', function() {
-        assert.deepEqual(R.map.idx(addIdx, [8, 6, 7, 5, 3, 0, 9]), [8 + 0, 6 + 1, 7 + 2, 5 + 3, 3 + 4, 0 + 5, 9 + 6]);
+        assert.deepEqual(R.mapIndexed(addIndexed, [8, 6, 7, 5, 3, 0, 9]), [8 + 0, 6 + 1, 7 + 2, 5 + 3, 3 + 4, 0 + 5, 9 + 6]);
     });
 
     it('passes the entire list as a third parameter to the callback', function() {
-        assert.deepEqual(R.map.idx(squareEnds, [8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
+        assert.deepEqual(R.mapIndexed(squareEnds, [8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
     });
 
     it('is automatically curried', function() {
-        var makeSquareEnds = R.map.idx(squareEnds);
+        var makeSquareEnds = R.mapIndexed(squareEnds);
         assert.deepEqual(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
     });
 });
@@ -55,30 +55,30 @@ describe('mapObj', function() {
     });
 });
 
-describe('mapObj.idx', function() {
+describe('mapObjIndexed', function() {
     var times2 = function(x) {return x * 2;};
-    var addIdx = function(x, key) {return x + key;};
+    var addIndexed = function(x, key) {return x + key;};
     var squareVowels = function(x, key) {
         var vowels = ['a', 'e', 'i', 'o', 'u'];
         return R.contains(key, vowels) ? x * x : x;
     };
 
     it('works just like a normal mapObj', function() {
-        assert.deepEqual(R.mapObj.idx(times2, {a: 1, b: 2, c: 3, d: 4}), {a: 2, b: 4, c: 6, d: 8});
+        assert.deepEqual(R.mapObjIndexed(times2, {a: 1, b: 2, c: 3, d: 4}), {a: 2, b: 4, c: 6, d: 8});
     });
 
     it('passes the index as a second parameter to the callback', function() {
-        assert.deepEqual(R.mapObj.idx(addIdx, {a: 8, b: 6, c: 7, d: 5, e: 3, f: 0, g: 9}),
+        assert.deepEqual(R.mapObjIndexed(addIndexed, {a: 8, b: 6, c: 7, d: 5, e: 3, f: 0, g: 9}),
           {a: '8a', b: '6b', c: '7c', d: '5d', e: '3e', f: '0f', g: '9g'});
     });
 
     it('passes the entire list as a third parameter to the callback', function() {
-        assert.deepEqual(R.mapObj.idx(squareVowels, {a: 8, b: 6, c: 7, d: 5, e: 3, f: 0, g: 9}),
+        assert.deepEqual(R.mapObjIndexed(squareVowels, {a: 8, b: 6, c: 7, d: 5, e: 3, f: 0, g: 9}),
           {a: 64, b: 6, c: 7, d: 5, e: 9, f: 0, g: 9});
     });
 
     it('is automatically curried', function() {
-        var makeSquareVowels = R.mapObj.idx(squareVowels);
+        var makeSquareVowels = R.mapObjIndexed(squareVowels);
         assert.deepEqual(makeSquareVowels({a: 8, b: 6, c: 7, d: 5, e: 3, f: 0, g: 9}),
           {a: 64, b: 6, c: 7, d: 5, e: 9, f: 0, g: 9});
     });
