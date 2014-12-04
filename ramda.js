@@ -307,7 +307,7 @@
      *      var g = f(3);
      *      g(4);//=> 10
      */
-    var curryN = R.curryN = function curryN(length, fn) {
+    var curryN = R.curryN = _curry2(function curryN(length, fn) {
         return (function recurry(args) {
             return arity(Math.max(length - (args && args.length || 0), 0), function() {
                 if (arguments.length === 0) { throw _noArgsException(); }
@@ -319,7 +319,7 @@
                 }
             });
         }([]));
-    };
+    });
 
 
     /**
