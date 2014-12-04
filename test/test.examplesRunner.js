@@ -172,7 +172,7 @@ var ramda_source = String(fs.readFileSync('./ramda.js'));
 var ramda_dox = dox.parseComments(ramda_source);
 
 // get our examples
-var examples = R.filter(R.not(R.eq(false)), R.map.idx(getExampleFromDox, ramda_dox));
+var examples = R.filter(R.not(R.eq(false)), R.mapIndexed(getExampleFromDox, ramda_dox));
 
 // prepare our source code to inject examples
 var source_for_compliation = splitAt(ramda_source, '// All the functional goodness, wrapped in a nice little package, just for you!');
@@ -181,5 +181,5 @@ var example_wrap = wrap('R.example_test = function(){\nvar _tests = [];\n', '\nr
 
 // process examples
 describe('example tests', function() {
-    R.forEach.idx(processExample, examples);
+    R.forEachIndexed(processExample, examples);
 });

@@ -730,7 +730,7 @@
      *
      * `fn` receives three arguments: *(value, index, list)*.
      *
-     * Note: `R.forEach.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.forEachIndexed` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.forEach` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Description
@@ -746,15 +746,14 @@
      *        (`value`, `index`, `list`).
      * @param {Array} list The list to iterate over.
      * @return {Array} The original list.
-     * @alias forEach.idx
      * @example
      *
      *      // Note that having access to the original `list` allows for
      *      // mutation. While you *can* do this, it's very un-functional behavior:
      *      var plusFive = function(num, idx, list) { list[idx] = num + 5 };
-     *      R.forEach.idx(plusFive, [1, 2, 3]); //=> [6, 7, 8]
+     *      R.forEachIndexed(plusFive, [1, 2, 3]); //=> [6, 7, 8]
      */
-    R.forEach.idx = _curry2(function forEachIdx(fn, list) {
+    R.forEachIndexed = _curry2(function forEachIndexed(fn, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             fn(list[idx], idx, list);
@@ -1848,7 +1847,7 @@
      *
      * The iterator function receives four values: *(acc, value, index, list)*
      *
-     * Note: `R.foldl.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.foldlIndexed` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
@@ -1870,9 +1869,9 @@
      *        return accObject;
      *      };
      *
-     *      R.foldl.idx(objectify, {}, letters); //=> { 'a': 0, 'b': 1, 'c': 2 }
+     *      R.foldlIndexed(objectify, {}, letters); //=> { 'a': 0, 'b': 1, 'c': 2 }
      */
-    R.foldl.idx = _curry3(function foldlIdx(fn, acc, list) {
+    R.foldlIndexed = _curry3(function foldlIndexed(fn, acc, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
             acc = fn(acc, list[idx], idx, list);
@@ -1927,7 +1926,7 @@
      *
      * The iterator function receives four values: *(acc, value, index, list)*.
      *
-     * Note: `R.foldr.idx` does not skip deleted or unassigned indices (sparse arrays),
+     * Note: `R.foldrIndexed` does not skip deleted or unassigned indices (sparse arrays),
      * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
      * see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
@@ -1949,9 +1948,9 @@
      *        return accObject;
      *      };
      *
-     *      R.foldr.idx(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
+     *      R.foldrIndexed(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
      */
-    R.foldr.idx = _curry3(function foldrIdx(fn, acc, list) {
+    R.foldrIndexed = _curry3(function foldrIndexed(fn, acc, list) {
         var idx = list.length;
         while (idx--) {
             acc = fn(acc, list[idx], idx, list);
@@ -2031,7 +2030,7 @@
      * Like `map`, but but passes additional parameters to the mapping function.
      * `fn` receives three arguments: *(value, index, list)*.
      *
-     * Note: `R.map.idx` does not skip deleted or unassigned indices (sparse arrays), unlike
+     * Note: `R.mapIndexed` does not skip deleted or unassigned indices (sparse arrays), unlike
      * the native `Array.prototype.map` method. For more details on this behavior, see:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
      *
@@ -2042,7 +2041,6 @@
      * @param {Function} fn The function to be called on every element of the input `list`.
      * @param {Array} list The list to be iterated over.
      * @return {Array} The new list.
-     * @alias map.idx
      * @example
      *
      *      var squareEnds = function(elt, idx, list) {
@@ -2052,9 +2050,9 @@
      *        return elt;
      *      };
      *
-     *      R.map.idx(squareEnds, [8, 5, 3, 0, 9]); //=> [64, 5, 3, 0, 81]
+     *      R.mapIndexed(squareEnds, [8, 5, 3, 0, 9]); //=> [64, 5, 3, 0, 81]
      */
-    R.map.idx = _curry2(function mapIdx(fn, list) {
+    R.mapIndexed = _curry2(function mapIndexed(fn, list) {
         var idx = -1, len = list.length, result = new Array(len);
         while (++idx < len) {
             result[idx] = fn(list[idx], idx, list);
@@ -2086,7 +2084,7 @@
      *
      *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
      */
-    // TODO: consider mapObj.key in parallel with mapObj.idx.  Also consider folding together with `map` implementation.
+    // TODO: consider mapObj.key in parallel with mapObjIndexed.  Also consider folding together with `map` implementation.
     R.mapObj = _curry2(function mapObject(fn, obj) {
         return foldl(function(acc, key) {
             acc[key] = fn(obj[key]);
@@ -2108,7 +2106,6 @@
      * @param {Object} obj The object to iterate over.
      * @return {Object} A new object with the same keys as `obj` and values that are the result
      *         of running each property through `fn`.
-     * @alias mapObj.idx
      * @example
      *
      *      var values = { x: 1, y: 2, z: 3 };
@@ -2116,9 +2113,9 @@
      *        return key + (num * 2);
      *      };
      *
-     *      R.mapObj.idx(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
+     *      R.mapObjIndexed(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
      */
-    R.mapObj.idx = _curry2(function mapObjectIdx(fn, obj) {
+    R.mapObjIndexed = _curry2(function mapObjectIndexed(fn, obj) {
         return foldl(function(acc, key) {
             acc[key] = fn(obj[key], key, obj);
             return acc;
@@ -2430,15 +2427,14 @@
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
-     * @alias filter.idx
      * @example
      *
      *      var lastTwo = function(val, idx, list) {
      *        return list.length - idx <= 2;
      *      };
-     *      R.filter.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [0, 9]
+     *      R.filterIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [0, 9]
      */
-    function filterIdx(fn, list) {
+    function filterIndexed(fn, list) {
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx], idx, list)) {
@@ -2447,7 +2443,7 @@
         }
         return result;
     }
-    R.filter.idx = _curry2(filterIdx);
+    R.filterIndexed = _curry2(filterIndexed);
 
 
     /**
@@ -2485,17 +2481,16 @@
      * @param {Function} fn The function called per iteration.
      * @param {Array} list The collection to iterate over.
      * @return {Array} The new filtered array.
-     * @alias reject.idx
      * @example
      *
      *      var lastTwo = function(val, idx, list) {
      *        return list.length - idx <= 2;
      *      };
      *
-     *      R.reject.idx(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
+     *      R.rejectIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
      */
-    R.reject.idx = _curry2(function rejectIdx(fn, list) {
-        return filterIdx(not(fn), list);
+    R.rejectIndexed = _curry2(function rejectIndexed(fn, list) {
+        return filterIndexed(not(fn), list);
     });
 
 
