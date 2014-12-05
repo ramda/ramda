@@ -1603,6 +1603,25 @@
         return uniqWith(pred, results);
     });
 
+    var invert = function invert(obj) {
+        var props = keys(obj), len = props.length, idx = -1, out = {};
+        while (++idx < len) {
+            var key = props[idx], val = obj[key];
+            out[val] = out[val] || [];
+            out[val].push(key);
+        }
+        return out;
+    };
+
+    var invertObj = function invertObj(obj) {
+        var props = keys(obj), len = props.length, idx = -1, out = {};
+        while (++idx < len) {
+            var key = props[idx];
+            out[obj[key]] = key;
+        }
+        return out;
+    };
+
     var last = nth(-1);
 
     var liftN = _curry2(function liftN(arity, fn) {
@@ -1806,6 +1825,8 @@
         installTo: installTo,
         intersection: intersection,
         intersectionWith: intersectionWith,
+        invert: invert,
+        invertObj: invertObj,
         invokerN: invokerN,
         is: is,
         isArrayLike: isArrayLike,
