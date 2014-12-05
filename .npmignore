@@ -12,4 +12,5 @@
 /Makefile
 /bower.json
 /npm-debug.log
+/ramda.js.tmp
 /testem.json

@@ -166,7 +166,7 @@ function getExampleFromDox(dox_info) {
 }
 
 // get ramda source
-var ramda_source = String(fs.readFileSync('./ramda.js'));
+var ramda_source = String(fs.readFileSync('./dist/ramda.js'));
 
 // build dox
 var ramda_dox = dox.parseComments(ramda_source);
