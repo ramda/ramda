@@ -353,7 +353,7 @@
                 return fn.apply(this, arguments);
             };
         default:
-            return fn;
+            throw new Error('First argument to arity must be a non-negative integer no greater than ten');
         }
     };
 
