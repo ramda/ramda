@@ -61,11 +61,11 @@ describe('where', function() {
 
     it('matches specs that have undefined properties', function() {
         var spec = {x: undefined};
-//      var test1 = {};
+        var test1 = {};
         var test2 = {x: null};
         var test3 = {x: undefined};
         var test4 = {x: 1};
-//      assert.strictEqual(R.where(spec, test1), false);    // TODO: discuss Scott's objections
+        assert.strictEqual(R.where(spec, test1), true);
         assert.strictEqual(R.where(spec, test2), false);
         assert.strictEqual(R.where(spec, test3), true);
         assert.strictEqual(R.where(spec, test4), false);

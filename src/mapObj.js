@@ -26,7 +26,6 @@ var keys = require('./keys');
  *
  *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
  */
-// TODO: consider mapObj.key in parallel with mapObjIndexed.  Also consider folding together with `map` implementation.
 module.exports = _curry2(function mapObject(fn, obj) {
     return _foldl(function(acc, key) {
         acc[key] = fn(obj[key]);

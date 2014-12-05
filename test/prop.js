@@ -12,7 +12,7 @@ describe('prop', function() {
         assert.strictEqual(nm(fred), 'Fred');
     });
 
-    it('is aliased by `get`', function() { // TODO: should it?
+    it('is aliased by `get`', function() {
         assert.strictEqual(R.get, R.prop);
     });
 
