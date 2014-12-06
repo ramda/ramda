@@ -917,6 +917,8 @@
         }([]);
     });
 
+    var dec = add(-1);
+
     var difference = _curry2(function difference(first, second) {
         var out = [];
         var idx = -1;
@@ -1072,6 +1074,8 @@
             return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
         };
     });
+
+    var inc = add(1);
 
     var indexOf = _curry2(function indexOf(target, list) {
         return _indexOf(list, target);
@@ -1783,6 +1787,7 @@
         createMapEntry: createMapEntry,
         curry: curry,
         curryN: curryN,
+        dec: dec,
         difference: difference,
         differenceWith: differenceWith,
         divide: divide,
@@ -1818,6 +1823,7 @@
         head: head,
         identity: identity,
         ifElse: ifElse,
+        inc: inc,
         indexOf: indexOf,
         init: init,
         insert: insert,
