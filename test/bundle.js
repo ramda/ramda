@@ -1604,6 +1604,25 @@
         return uniqWith(pred, results);
     });
 
+    var invert = function invert(obj) {
+        var props = keys(obj), len = props.length, idx = -1, out = {};
+        while (++idx < len) {
+            var key = props[idx], val = obj[key];
+            out[val] = out[val] || [];
+            out[val].push(key);
+        }
+        return out;
+    };
+
+    var invertObj = function invertObj(obj) {
+        var props = keys(obj), len = props.length, idx = -1, out = {};
+        while (++idx < len) {
+            var key = props[idx];
+            out[obj[key]] = key;
+        }
+        return out;
+    };
+
     var last = nth(-1);
 
     var liftN = _curry2(function liftN(arity, fn) {
@@ -1807,6 +1826,8 @@
         installTo: installTo,
         intersection: intersection,
         intersectionWith: intersectionWith,
+        invert: invert,
+        invertObj: invertObj,
         invokerN: invokerN,
         is: is,
         isArrayLike: isArrayLike,
@@ -7720,6 +7741,81 @@ describe('intersectionWith', function() {
 
 },{"..":1,"assert":2}],89:[function(require,module,exports){
 var assert = require('assert');
+var R = require('..');
+
+describe('invert', function() {
+
+    it('takes a list or object and returns an object of lists', function() {
+        assert.equal(typeof R.invert([]), 'object');
+        assert.equal(typeof R.invert({}), 'object');
+        assert.throws(R.invert(1));
+        assert.throws(R.invert('1'));
+        assert.throws(R.invert(null));
+        assert.throws(R.invert(undefined));
+
+        var inverted = R.invert([0]);
+        var keys = Object.keys(inverted);
+        assert(Array.isArray(inverted[keys.pop()]));
+    });
+
+    it('returns the input\'s values as keys, and keys as values of an array', function() {
+        assert.deepEqual(R.invert(['a', 'b', 'c']),       {a:['0'], b:['1'], c:['2']});
+        assert.deepEqual(R.invert({x:'a', y:'b', z:'c'}), {a:['x'], b:['y'], c:['z']});
+    });
+
+    it('puts keys that have the same value into the appropriate an array', function() {
+        assert.deepEqual(R.invert(['a', 'b', 'a']), {a:['0', '2'], b:['1']});
+
+        var inverted = R.invert({x:'a', y:'b', z:'a', _id:'a'});
+        assert(inverted.a.indexOf('x')   > -1);
+        assert(inverted.a.indexOf('z')   > -1);
+        assert(inverted.a.indexOf('_id') > -1);
+        assert.deepEqual(inverted.b, ['y']);
+    });
+
+    // this one is more of a sanity check
+    it('is not destructive', function() {
+        var input = {x:'a', y:'b', z:'a', _id:'a'};
+        R.invert(input);
+        assert.deepEqual(input, {x:'a', y:'b', z:'a', _id:'a'});
+    });
+});
+
+},{"..":1,"assert":2}],90:[function(require,module,exports){
+var assert = require('assert');
+var R = require('..');
+
+describe('invertObj', function() {
+
+    it('takes a list or object and returns an object', function() {
+        assert.equal(typeof R.invertObj([]), 'object');
+        assert.equal(typeof R.invertObj({}), 'object');
+        assert.throws(R.invertObj(1));
+        assert.throws(R.invertObj('1'));
+        assert.throws(R.invertObj(null));
+        assert.throws(R.invertObj(undefined));
+    });
+
+    it('returns the input\'s values as keys, and keys as values', function() {
+        assert.deepEqual(R.invertObj(['a', 'b', 'c']),       {a:'0', b:'1', c:'2'});
+        assert.deepEqual(R.invertObj({x:'a', y:'b', z:'c'}), {a:'x', b:'y', c:'z'});
+    });
+
+    it('prefers the last key found when handling keys with the same value', function() {
+        assert.deepEqual(R.invertObj(['a', 'b', 'a']), {a:'2', b:'1'});
+        assert.deepEqual(R.invertObj({x:'a', y:'b', z:'a', _id:'a'}), {a: '_id', b: 'y'});
+    });
+
+    // this one is more of a sanity check
+    it('is not destructive', function() {
+        var input = {x:'a', y:'b', z:'a', _id:'a'};
+        R.invertObj(input);
+        assert.deepEqual(input, {x:'a', y:'b', z:'a', _id:'a'});
+    });
+});
+
+},{"..":1,"assert":2}],91:[function(require,module,exports){
+var assert = require('assert');
 
 var R = require('..');
 
@@ -7750,7 +7846,7 @@ describe('invokerN', function() {
     });
 });
 
-},{"..":1,"assert":2}],90:[function(require,module,exports){
+},{"..":1,"assert":2}],92:[function(require,module,exports){
 /* jshint -W053 */
 
 var assert = require('assert');
@@ -7837,7 +7933,7 @@ describe('is', function() {
     });
 });
 
-},{"..":1,"assert":2}],91:[function(require,module,exports){
+},{"..":1,"assert":2}],93:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -7888,7 +7984,7 @@ describe('isArrayLike', function() {
     });
 });
 
-},{"..":1,"assert":2}],92:[function(require,module,exports){
+},{"..":1,"assert":2}],94:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -7938,7 +8034,7 @@ describe('isEmpty', function() {
     });
 });
 
-},{"..":1,"assert":2}],93:[function(require,module,exports){
+},{"..":1,"assert":2}],95:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -7957,7 +8053,7 @@ describe('isSet', function() {
 
 });
 
-},{"..":1,"assert":2}],94:[function(require,module,exports){
+},{"..":1,"assert":2}],96:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -7970,7 +8066,7 @@ describe('join', function() {
     });
 });
 
-},{"..":1,"assert":2}],95:[function(require,module,exports){
+},{"..":1,"assert":2}],97:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8007,7 +8103,7 @@ describe('keys', function() {
     });
 });
 
-},{"..":1,"assert":2}],96:[function(require,module,exports){
+},{"..":1,"assert":2}],98:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8036,7 +8132,7 @@ describe('keysIn', function() {
     });
 });
 
-},{"..":1,"assert":2}],97:[function(require,module,exports){
+},{"..":1,"assert":2}],99:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8062,7 +8158,7 @@ describe('lPartial', function() {
     });
 });
 
-},{"..":1,"assert":2}],98:[function(require,module,exports){
+},{"..":1,"assert":2}],100:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8082,7 +8178,7 @@ describe('last', function() {
     });
 });
 
-},{"..":1,"assert":2}],99:[function(require,module,exports){
+},{"..":1,"assert":2}],101:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8129,7 +8225,7 @@ describe('lastIndexOf', function() {
     });
 });
 
-},{"..":1,"assert":2}],100:[function(require,module,exports){
+},{"..":1,"assert":2}],102:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8175,7 +8271,7 @@ describe('length', function() {
     });
 });
 
-},{"..":1,"assert":2}],101:[function(require,module,exports){
+},{"..":1,"assert":2}],103:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8255,7 +8351,7 @@ describe('lens', function() {
     });
 });
 
-},{"..":1,"assert":2}],102:[function(require,module,exports){
+},{"..":1,"assert":2}],104:[function(require,module,exports){
 /* jshint -W053 */
 
 var assert = require('assert');
@@ -8300,7 +8396,7 @@ describe('lift', function() {
     });
 });
 
-},{"..":1,"assert":2}],103:[function(require,module,exports){
+},{"..":1,"assert":2}],105:[function(require,module,exports){
 /* jshint -W053 */
 
 var assert = require('assert');
@@ -8353,7 +8449,7 @@ describe('liftN', function() {
     });
 });
 
-},{"..":1,"assert":2}],104:[function(require,module,exports){
+},{"..":1,"assert":2}],106:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8388,7 +8484,7 @@ describe('lt', function() {
     });
 });
 
-},{"..":1,"assert":2}],105:[function(require,module,exports){
+},{"..":1,"assert":2}],107:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8423,7 +8519,7 @@ describe('lte', function() {
     });
 });
 
-},{"..":1,"assert":2}],106:[function(require,module,exports){
+},{"..":1,"assert":2}],108:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8449,7 +8545,7 @@ describe('map', function() {
 
 });
 
-},{"..":1,"assert":2}],107:[function(require,module,exports){
+},{"..":1,"assert":2}],109:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8480,7 +8576,7 @@ describe('mapIndexed', function() {
     });
 });
 
-},{"..":1,"assert":2}],108:[function(require,module,exports){
+},{"..":1,"assert":2}],110:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8495,7 +8591,7 @@ describe('mapObj', function() {
     });
 });
 
-},{"..":1,"assert":2}],109:[function(require,module,exports){
+},{"..":1,"assert":2}],111:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8530,7 +8626,7 @@ describe('mapObjIndexed', function() {
     });
 });
 
-},{"..":1,"assert":2}],110:[function(require,module,exports){
+},{"..":1,"assert":2}],112:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8551,7 +8647,7 @@ describe('match', function() {
     });
 });
 
-},{"..":1,"assert":2}],111:[function(require,module,exports){
+},{"..":1,"assert":2}],113:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8596,7 +8692,7 @@ describe('mathMod', function() {
     });
 });
 
-},{"..":1,"assert":2}],112:[function(require,module,exports){
+},{"..":1,"assert":2}],114:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8629,7 +8725,7 @@ describe('max', function() {
     });
 });
 
-},{"..":1,"assert":2}],113:[function(require,module,exports){
+},{"..":1,"assert":2}],115:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8650,7 +8746,7 @@ describe('maxBy', function() {
     });
 });
 
-},{"..":1,"assert":2}],114:[function(require,module,exports){
+},{"..":1,"assert":2}],116:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8685,7 +8781,7 @@ describe('memoize', function() {
     });
 });
 
-},{"..":1,"assert":2}],115:[function(require,module,exports){
+},{"..":1,"assert":2}],117:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8718,7 +8814,7 @@ describe('min', function() {
     });
 });
 
-},{"..":1,"assert":2}],116:[function(require,module,exports){
+},{"..":1,"assert":2}],118:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8739,7 +8835,7 @@ describe('minBy', function() {
     });
 });
 
-},{"..":1,"assert":2}],117:[function(require,module,exports){
+},{"..":1,"assert":2}],119:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8780,7 +8876,7 @@ describe('mixin', function() {
     });
 });
 
-},{"..":1,"assert":2}],118:[function(require,module,exports){
+},{"..":1,"assert":2}],120:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8817,7 +8913,7 @@ describe('modulo', function() {
     });
 });
 
-},{"..":1,"assert":2}],119:[function(require,module,exports){
+},{"..":1,"assert":2}],121:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8838,7 +8934,7 @@ describe('multiply', function() {
     });
 });
 
-},{"..":1,"assert":2}],120:[function(require,module,exports){
+},{"..":1,"assert":2}],122:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8886,7 +8982,7 @@ describe('nAry', function() {
 
 });
 
-},{"..":1,"assert":2}],121:[function(require,module,exports){
+},{"..":1,"assert":2}],123:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8908,7 +9004,7 @@ describe('not', function() {
     });
 });
 
-},{"..":1,"assert":2}],122:[function(require,module,exports){
+},{"..":1,"assert":2}],124:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8940,7 +9036,7 @@ describe('nth', function() {
     });
 });
 
-},{"..":1,"assert":2}],123:[function(require,module,exports){
+},{"..":1,"assert":2}],125:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8964,7 +9060,7 @@ describe('nthArg', function() {
     });
 });
 
-},{"..":1,"assert":2}],124:[function(require,module,exports){
+},{"..":1,"assert":2}],126:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -8980,7 +9076,7 @@ describe('of', function() {
     });
 });
 
-},{"..":1,"assert":2}],125:[function(require,module,exports){
+},{"..":1,"assert":2}],127:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9007,7 +9103,7 @@ describe('omit', function() {
     });
 });
 
-},{"..":1,"assert":2}],126:[function(require,module,exports){
+},{"..":1,"assert":2}],128:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9043,7 +9139,7 @@ describe('once', function() {
     });
 });
 
-},{"..":1,"assert":2}],127:[function(require,module,exports){
+},{"..":1,"assert":2}],129:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9110,7 +9206,7 @@ describe('op', function() {
     });
 });
 
-},{"..":1,"assert":2}],128:[function(require,module,exports){
+},{"..":1,"assert":2}],130:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9157,7 +9253,7 @@ describe('or', function() {
     });
 });
 
-},{"..":1,"assert":2}],129:[function(require,module,exports){
+},{"..":1,"assert":2}],131:[function(require,module,exports){
 var assert = require('assert');
 
 var Q = require('q');
@@ -9200,7 +9296,7 @@ describe('pCompose', function() {
     });
 });
 
-},{"..":1,"assert":2,"q":7}],130:[function(require,module,exports){
+},{"..":1,"assert":2,"q":7}],132:[function(require,module,exports){
 var assert = require('assert');
 
 var Q = require('q');
@@ -9237,7 +9333,7 @@ describe('pPipe', function() {
     });
 });
 
-},{"..":1,"assert":2,"q":7}],131:[function(require,module,exports){
+},{"..":1,"assert":2,"q":7}],133:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9258,7 +9354,7 @@ describe('partition', function() {
     });
 });
 
-},{"..":1,"assert":2}],132:[function(require,module,exports){
+},{"..":1,"assert":2}],134:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9314,7 +9410,7 @@ describe('path', function() {
     });
 });
 
-},{"..":1,"assert":2}],133:[function(require,module,exports){
+},{"..":1,"assert":2}],135:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9346,7 +9442,7 @@ describe('pathEq', function() {
 
 });
 
-},{"..":1,"assert":2}],134:[function(require,module,exports){
+},{"..":1,"assert":2}],136:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9384,7 +9480,7 @@ describe('pathOn', function() {
     });
 });
 
-},{"..":1,"assert":2}],135:[function(require,module,exports){
+},{"..":1,"assert":2}],137:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9415,7 +9511,7 @@ describe('pick', function() {
     });
 });
 
-},{"..":1,"assert":2}],136:[function(require,module,exports){
+},{"..":1,"assert":2}],138:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9437,7 +9533,7 @@ describe('pickAll', function() {
     });
 });
 
-},{"..":1,"assert":2}],137:[function(require,module,exports){
+},{"..":1,"assert":2}],139:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9484,7 +9580,7 @@ describe('pickBy', function() {
     });
 });
 
-},{"..":1,"assert":2}],138:[function(require,module,exports){
+},{"..":1,"assert":2}],140:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9536,7 +9632,7 @@ describe('pipe', function() {
     });
 });
 
-},{"..":1,"assert":2}],139:[function(require,module,exports){
+},{"..":1,"assert":2}],141:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9556,7 +9652,7 @@ describe('pluck', function() {
     });
 });
 
-},{"..":1,"assert":2}],140:[function(require,module,exports){
+},{"..":1,"assert":2}],142:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9582,7 +9678,7 @@ describe('prepend', function() {
     });
 });
 
-},{"..":1,"assert":2}],141:[function(require,module,exports){
+},{"..":1,"assert":2}],143:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9608,7 +9704,7 @@ describe('prependTo', function() {
     });
 });
 
-},{"..":1,"assert":2}],142:[function(require,module,exports){
+},{"..":1,"assert":2}],144:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9620,7 +9716,7 @@ describe('product', function() {
     });
 });
 
-},{"..":1,"assert":2}],143:[function(require,module,exports){
+},{"..":1,"assert":2}],145:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9663,7 +9759,7 @@ describe('project', function() {
     });
 });
 
-},{"..":1,"assert":2}],144:[function(require,module,exports){
+},{"..":1,"assert":2}],146:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9678,7 +9774,7 @@ describe('prop', function() {
         assert.strictEqual(nm(fred), 'Fred');
     });
 
-    it('is aliased by `get`', function() { // TODO: should it?
+    it('is aliased by `get`', function() {
         assert.strictEqual(R.get, R.prop);
     });
 
@@ -9687,7 +9783,7 @@ describe('prop', function() {
     });
 });
 
-},{"..":1,"assert":2}],145:[function(require,module,exports){
+},{"..":1,"assert":2}],147:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9717,7 +9813,7 @@ describe('propEq', function() {
 
 });
 
-},{"..":1,"assert":2}],146:[function(require,module,exports){
+},{"..":1,"assert":2}],148:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9736,7 +9832,7 @@ describe('propOf', function() {
     });
 });
 
-},{"..":1,"assert":2}],147:[function(require,module,exports){
+},{"..":1,"assert":2}],149:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9770,7 +9866,7 @@ describe('propOr', function() {
     });
 });
 
-},{"..":1,"assert":2}],148:[function(require,module,exports){
+},{"..":1,"assert":2}],150:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9807,7 +9903,7 @@ describe('props', function() {
     });
 });
 
-},{"..":1,"assert":2}],149:[function(require,module,exports){
+},{"..":1,"assert":2}],151:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9833,7 +9929,7 @@ describe('rPartial', function() {
     });
 });
 
-},{"..":1,"assert":2}],150:[function(require,module,exports){
+},{"..":1,"assert":2}],152:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9863,7 +9959,7 @@ describe('range', function() {
     });
 });
 
-},{"..":1,"assert":2}],151:[function(require,module,exports){
+},{"..":1,"assert":2}],153:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9902,7 +9998,7 @@ describe('reject', function() {
     });
 });
 
-},{"..":1,"assert":2}],152:[function(require,module,exports){
+},{"..":1,"assert":2}],154:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9943,7 +10039,7 @@ describe('rejectIndexed', function() {
     });
 });
 
-},{"..":1,"assert":2}],153:[function(require,module,exports){
+},{"..":1,"assert":2}],155:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -9979,7 +10075,7 @@ describe('remove', function() {
     });
 });
 
-},{"..":1,"assert":2}],154:[function(require,module,exports){
+},{"..":1,"assert":2}],156:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10001,7 +10097,7 @@ describe('repeat', function() {
     });
 });
 
-},{"..":1,"assert":2}],155:[function(require,module,exports){
+},{"..":1,"assert":2}],157:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10028,7 +10124,7 @@ describe('replace', function() {
 
 });
 
-},{"..":1,"assert":2}],156:[function(require,module,exports){
+},{"..":1,"assert":2}],158:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10045,7 +10141,7 @@ describe('reverse', function() {
 
 });
 
-},{"..":1,"assert":2}],157:[function(require,module,exports){
+},{"..":1,"assert":2}],159:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10087,7 +10183,7 @@ describe('scanl', function() {
     });
 });
 
-},{"..":1,"assert":2}],158:[function(require,module,exports){
+},{"..":1,"assert":2}],160:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10098,15 +10194,9 @@ describe('slice', function() {
         var list = [8, 6, 7, 5, 3, 0, 9];
         assert.deepEqual(R.slice(2, 5, list), [7, 5, 3]);
     });
-
-    // TODO
-    // it('retturn undefined if the paramters don't make sense', function() {
-    //   var list = [8, 6, 7, 5, 3, 0, 9];
-    //   assert.equal(typeof(R.slice(5, 2, list)), 'undefined');
-    // });
 });
 
-},{"..":1,"assert":2}],159:[function(require,module,exports){
+},{"..":1,"assert":2}],161:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10134,7 +10224,7 @@ describe('sort', function() {
     });
 });
 
-},{"..":1,"assert":2}],160:[function(require,module,exports){
+},{"..":1,"assert":2}],162:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10173,7 +10263,7 @@ describe('sortBy', function() {
     });
 });
 
-},{"..":1,"assert":2}],161:[function(require,module,exports){
+},{"..":1,"assert":2}],163:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10189,7 +10279,7 @@ describe('split', function() {
     });
 });
 
-},{"..":1,"assert":2}],162:[function(require,module,exports){
+},{"..":1,"assert":2}],164:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10210,7 +10300,7 @@ describe('strIndexOf', function() {
     });
 });
 
-},{"..":1,"assert":2}],163:[function(require,module,exports){
+},{"..":1,"assert":2}],165:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10231,7 +10321,7 @@ describe('strLastIndexOf', function() {
     });
 });
 
-},{"..":1,"assert":2}],164:[function(require,module,exports){
+},{"..":1,"assert":2}],166:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10250,7 +10340,7 @@ describe('substring', function() {
     });
 });
 
-},{"..":1,"assert":2}],165:[function(require,module,exports){
+},{"..":1,"assert":2}],167:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10267,7 +10357,7 @@ describe('substringFrom', function() {
     });
 });
 
-},{"..":1,"assert":2}],166:[function(require,module,exports){
+},{"..":1,"assert":2}],168:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10284,7 +10374,7 @@ describe('substringTo', function() {
     });
 });
 
-},{"..":1,"assert":2}],167:[function(require,module,exports){
+},{"..":1,"assert":2}],169:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10310,7 +10400,7 @@ describe('subtract', function() {
     });
 });
 
-},{"..":1,"assert":2}],168:[function(require,module,exports){
+},{"..":1,"assert":2}],170:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10328,7 +10418,7 @@ describe('sum', function() {
     });
 });
 
-},{"..":1,"assert":2}],169:[function(require,module,exports){
+},{"..":1,"assert":2}],171:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10348,7 +10438,7 @@ describe('tail', function() {
     });
 });
 
-},{"..":1,"assert":2}],170:[function(require,module,exports){
+},{"..":1,"assert":2}],172:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10375,7 +10465,7 @@ describe('take', function() {
     });
 });
 
-},{"..":1,"assert":2}],171:[function(require,module,exports){
+},{"..":1,"assert":2}],173:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10398,7 +10488,7 @@ describe('takeWhile', function() {
     });
 });
 
-},{"..":1,"assert":2}],172:[function(require,module,exports){
+},{"..":1,"assert":2}],174:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10421,7 +10511,7 @@ describe('tap', function() {
 
 });
 
-},{"..":1,"assert":2}],173:[function(require,module,exports){
+},{"..":1,"assert":2}],175:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10446,7 +10536,7 @@ describe('times', function() {
     });
 });
 
-},{"..":1,"assert":2}],174:[function(require,module,exports){
+},{"..":1,"assert":2}],176:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10458,7 +10548,7 @@ describe('toLowerCase', function() {
     });
 });
 
-},{"..":1,"assert":2}],175:[function(require,module,exports){
+},{"..":1,"assert":2}],177:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10479,7 +10569,7 @@ describe('toPairs', function() {
     });
 });
 
-},{"..":1,"assert":2}],176:[function(require,module,exports){
+},{"..":1,"assert":2}],178:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10503,7 +10593,7 @@ describe('toPairsIn', function() {
     });
 });
 
-},{"..":1,"assert":2}],177:[function(require,module,exports){
+},{"..":1,"assert":2}],179:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10515,7 +10605,7 @@ describe('toUpperCase', function() {
     });
 });
 
-},{"..":1,"assert":2}],178:[function(require,module,exports){
+},{"..":1,"assert":2}],180:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10549,7 +10639,7 @@ describe('trim', function() {
     }
 });
 
-},{"..":1,"assert":2}],179:[function(require,module,exports){
+},{"..":1,"assert":2}],181:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10600,7 +10690,7 @@ describe('type', function() {
     });
 });
 
-},{"..":1,"assert":2}],180:[function(require,module,exports){
+},{"..":1,"assert":2}],182:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10656,7 +10746,7 @@ describe('unapply', function() {
     });
 });
 
-},{"..":1,"assert":2}],181:[function(require,module,exports){
+},{"..":1,"assert":2}],183:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10679,7 +10769,7 @@ describe('unary', function() {
     });
 });
 
-},{"..":1,"assert":2}],182:[function(require,module,exports){
+},{"..":1,"assert":2}],184:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10697,7 +10787,7 @@ describe('unfoldr', function() {
 
 });
 
-},{"..":1,"assert":2}],183:[function(require,module,exports){
+},{"..":1,"assert":2}],185:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10722,7 +10812,7 @@ describe('union', function() {
     });
 });
 
-},{"..":1,"assert":2}],184:[function(require,module,exports){
+},{"..":1,"assert":2}],186:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10737,7 +10827,7 @@ describe('unionWith', function() {
     });
 });
 
-},{"..":1,"assert":2}],185:[function(require,module,exports){
+},{"..":1,"assert":2}],187:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10758,7 +10848,7 @@ describe('uniq', function() {
     });
 });
 
-},{"..":1,"assert":2}],186:[function(require,module,exports){
+},{"..":1,"assert":2}],188:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10799,7 +10889,7 @@ describe('uniqWith', function() {
     });
 });
 
-},{"..":1,"assert":2}],187:[function(require,module,exports){
+},{"..":1,"assert":2}],189:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10834,7 +10924,7 @@ describe('unnest', function() {
     });
 });
 
-},{"..":1,"assert":2}],188:[function(require,module,exports){
+},{"..":1,"assert":2}],190:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10868,7 +10958,7 @@ describe('useWith', function() {
 
 });
 
-},{"..":1,"assert":2}],189:[function(require,module,exports){
+},{"..":1,"assert":2}],191:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10911,7 +11001,7 @@ describe('values', function() {
     });
 });
 
-},{"..":1,"assert":2}],190:[function(require,module,exports){
+},{"..":1,"assert":2}],192:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -10952,7 +11042,7 @@ describe('valuesIn', function() {
     });
 });
 
-},{"..":1,"assert":2}],191:[function(require,module,exports){
+},{"..":1,"assert":2}],193:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -11016,11 +11106,11 @@ describe('where', function() {
 
     it('matches specs that have undefined properties', function() {
         var spec = {x: undefined};
-//      var test1 = {};
+        var test1 = {};
         var test2 = {x: null};
         var test3 = {x: undefined};
         var test4 = {x: 1};
-//      assert.strictEqual(R.where(spec, test1), false);    // TODO: discuss Scott's objections
+        assert.strictEqual(R.where(spec, test1), true);
         assert.strictEqual(R.where(spec, test2), false);
         assert.strictEqual(R.where(spec, test3), true);
         assert.strictEqual(R.where(spec, test4), false);
@@ -11076,7 +11166,7 @@ describe('where', function() {
 
 });
 
-},{"..":1,"assert":2}],192:[function(require,module,exports){
+},{"..":1,"assert":2}],194:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -11102,7 +11192,7 @@ describe('wrap', function() {
 
 });
 
-},{"..":1,"assert":2}],193:[function(require,module,exports){
+},{"..":1,"assert":2}],195:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -11131,7 +11221,7 @@ describe('xprod', function() {
     });
 });
 
-},{"..":1,"assert":2}],194:[function(require,module,exports){
+},{"..":1,"assert":2}],196:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -11150,7 +11240,7 @@ describe('zip', function() {
     });
 });
 
-},{"..":1,"assert":2}],195:[function(require,module,exports){
+},{"..":1,"assert":2}],197:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -11172,7 +11262,7 @@ describe('zipObj', function() {
     });
 });
 
-},{"..":1,"assert":2}],196:[function(require,module,exports){
+},{"..":1,"assert":2}],198:[function(require,module,exports){
 var assert = require('assert');
 
 var R = require('..');
@@ -11194,4 +11284,4 @@ describe('zipWith', function() {
     });
 });
 
-},{"..":1,"assert":2}]},{},[8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196]);
+},{"..":1,"assert":2}]},{},[8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198]);
