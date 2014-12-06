@@ -6,7 +6,7 @@ var R = require('..');
 
 
 var addN = function() {
-    return Array.prototype.reduce.call(arguments, function(a, b) { return a + b; }, 0);
+    return R.foldl(function(a, b) { return a + b; }, 0, arguments);
 };
 var add3 = R.curry(function add3(a, b, c) {
     return a + b + c;
