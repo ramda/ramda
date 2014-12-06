@@ -38,6 +38,6 @@ var _map = require('./_map');
  *      //    }
  *      // ];
  */
-module.exports = function _keyValue(fn, list) { // TODO: Should this be made public?
+module.exports = function _keyValue(fn, list) {
     return _map(function(item) {return {key: fn(item), val: item};}, list);
 };

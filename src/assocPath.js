@@ -28,9 +28,7 @@ var split = require('./split');
  *      //=> {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
  */
 module.exports = (function() {
-    // TODO: consider exposing this (with a better name.)
     var setParts = function(parts, val, obj) {
-        // TODO: empty path
         if (parts.length === 1) {return assoc(parts[0], val, obj);}
         var current = obj[parts[0]];
         return assoc(parts[0], setParts(_slice(parts, 1), val, is(Object, current) ? current : {}), obj);

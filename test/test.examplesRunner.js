@@ -123,14 +123,6 @@ function runExample(e) {
 
 function checkForAliasExample(e) {
     it(e.func_name + ' has example or is an alias for function that has example', function() {
-        // TODO: uncomment to enforce this
-      //   if (R.isEmpty(e.alias_of)) {
-      //       fail('undefined', 'example source', 'function has no example and no alias');
-      //   } else {
-      //       var alias_example = R.find(R.propEq('func_name', e.alias_of), examples);
-      //       assert(!R.isEmpty(alias_example), 'was able to find original function for alias');
-      //       assert(!R.isEmpty(alias_example.testable_source), 'original has a testable example');
-      //   }
     });
 }
 

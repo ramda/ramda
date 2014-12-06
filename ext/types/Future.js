@@ -56,7 +56,6 @@
     // equality method to enable testing
     Future.prototype.equals = function(that) {
         void that;
-        // TODO: how do you define equality for two Futures?
         return true;
     };
 
