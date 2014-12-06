@@ -1263,7 +1263,7 @@
         return obj[name] === val;
     });
 
-    var propOr = _curry3(function propOr(p, val, obj) {
+    var propOr = _curry3(function propOr(val, p, obj) {
         return has(p, obj) ? obj[p] : val;
     });
 
