@@ -12,8 +12,8 @@ describe('invert', function() {
         assert.throws(R.invert(undefined));
 
         var inverted = R.invert([0]);
-        var keys = Object.keys(inverted);
-        assert(Array.isArray(inverted[keys.pop()]));
+        var keys = R.keys(inverted);
+        assert(R.is(Array, inverted[keys.pop()]));
     });
 
     it('returns the input\'s values as keys, and keys as values of an array', function() {
@@ -25,9 +25,9 @@ describe('invert', function() {
         assert.deepEqual(R.invert(['a', 'b', 'a']), {a:['0', '2'], b:['1']});
 
         var inverted = R.invert({x:'a', y:'b', z:'a', _id:'a'});
-        assert(inverted.a.indexOf('x')   > -1);
-        assert(inverted.a.indexOf('z')   > -1);
-        assert(inverted.a.indexOf('_id') > -1);
+        assert(R.indexOf('x', inverted.a)   > -1);
+        assert(R.indexOf('z', inverted.a)   > -1);
+        assert(R.indexOf('_id', inverted.a) > -1);
         assert.deepEqual(inverted.b, ['y']);
     });
 
