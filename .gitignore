@@ -3,3 +3,4 @@
 /node_modules/
 /npm-debug.log
 /ramda.js.tmp
+/test/bundle.js
