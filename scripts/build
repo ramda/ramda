@@ -28,7 +28,7 @@ var $pathEq = R.curry(function(path, expected, obj) {
 
 //  filenameToIdentifier :: String -> String
 var filenameToIdentifier =
-    R.pipe(R.split('/'),
+    R.pipe(R.split(path.sep),
            R.last,
            R.split('.'),
            R.head);
