@@ -27,6 +27,6 @@ var has = require('./has');
  *      favorite(alice);  //=> undefined
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
-module.exports = _curry3(function propOr(p, val, obj) {
+module.exports = _curry3(function propOr(val, p, obj) {
     return has(p, obj) ? obj[p] : val;
 });

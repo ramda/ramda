@@ -7,7 +7,7 @@ describe('propOr', function() {
     var fred = {name: 'Fred', age: 23};
     var anon = {age: 99};
 
-    var nm = R.propOr('name', 'Unknown');
+    var nm = R.propOr('Unknown', 'name');
 
     it('returns a function that fetches the appropriate property', function() {
         assert.strictEqual(typeof nm, 'function');
@@ -23,7 +23,7 @@ describe('propOr', function() {
         Person.prototype.age = function() {};
 
         var bob = new Person();
-        assert.strictEqual(R.propOr('age', 100, bob), 100);
+        assert.strictEqual(R.propOr(100, 'age', bob), 100);
     });
 
     it('throws if given no arguments', function() {
