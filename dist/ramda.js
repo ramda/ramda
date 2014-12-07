@@ -150,10 +150,6 @@
         return val != null && val.length >= 0 && Object.prototype.toString.call(val) === '[object Array]';
     };
 
-    var _isInteger = Number.isInteger || function _isInteger(n) {
-        return n << 0 === n;
-    };
-
     var _isThenable = function _isThenable(value) {
         return value != null && value === Object(value) && typeof value.then === 'function';
     };
@@ -1663,6 +1659,12 @@
 
     var path = pathOn('.');
 
+    var rem = op(function rem(dividend, divisor) {
+        var a = +dividend;
+        var n = +divisor;
+        return isFinite(n) ? a % n : NaN;
+    });
+
     var repeat = _curry2(function repeat(value, n) {
         return times(always(value), n);
     });
@@ -1726,18 +1728,10 @@
         return a <= b;
     });
 
-    var mathMod = op(function mathMod(m, p) {
-        if (!_isInteger(m)) {
-            return NaN;
-        }
-        if (!_isInteger(p) || p < 1) {
-            return NaN;
-        }
-        return (m % p + p) % p;
-    });
-
-    var modulo = op(function modulo(a, b) {
-        return a % b;
+    var mod = op(function mod(dividend, divisor) {
+        var a = +dividend;
+        var n = +divisor;
+        return (a % n + n) % n;
     });
 
     var project = useWith(_map, pickAll, identity);
@@ -1857,14 +1851,13 @@
         mapObj: mapObj,
         mapObjIndexed: mapObjIndexed,
         match: match,
-        mathMod: mathMod,
         max: max,
         maxBy: maxBy,
         memoize: memoize,
         min: min,
         minBy: minBy,
         mixin: mixin,
-        modulo: modulo,
+        mod: mod,
         multiply: multiply,
         nAry: nAry,
         negate: negate,
@@ -1900,6 +1893,7 @@
         range: range,
         reject: reject,
         rejectIndexed: rejectIndexed,
+        rem: rem,
         remove: remove,
         repeat: repeat,
         replace: replace,
