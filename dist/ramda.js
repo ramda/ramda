@@ -1201,6 +1201,8 @@
 
     var multiply = _curry2(_multiply);
 
+    var negate = multiply(-1);
+
     var nth = _curry2(_nth);
 
     var of = function of(x, container) {
@@ -1865,6 +1867,7 @@
         modulo: modulo,
         multiply: multiply,
         nAry: nAry,
+        negate: negate,
         not: not,
         nth: nth,
         nthArg: nthArg,
