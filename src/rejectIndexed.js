@@ -1,6 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var _filterIndexed = require('./internal/_filterIndexed');
-var not = require('./not');
+var complement = require('./complement');
 
 
 /**
@@ -23,5 +23,5 @@ var not = require('./not');
  *      R.rejectIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
  */
 module.exports = _curry2(function rejectIndexed(fn, list) {
-    return _filterIndexed(not(fn), list);
+    return _filterIndexed(complement(fn), list);
 });

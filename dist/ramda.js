@@ -371,6 +371,12 @@
         };
     };
 
+    var complement = function complement(f) {
+        return function () {
+            return !f.apply(this, arguments);
+        };
+    };
+
     var cond = function cond() {
         var pairs = arguments;
         return function () {
@@ -552,12 +558,6 @@
         default:
             throw new Error('First argument to nAry must be a non-negative integer no greater than ten');
         }
-    };
-
-    var not = function not(f) {
-        return function () {
-            return !f.apply(this, arguments);
-        };
     };
 
     var nthArg = function nthArg(n) {
@@ -1295,11 +1295,11 @@
     });
 
     var reject = _curry2(function reject(fn, list) {
-        return _filter(not(fn), list);
+        return _filter(complement(fn), list);
     });
 
     var rejectIndexed = _curry2(function rejectIndexed(fn, list) {
-        return _filterIndexed(not(fn), list);
+        return _filterIndexed(complement(fn), list);
     });
 
     var remove = _curry3(function remove(start, count, list) {
@@ -1777,6 +1777,7 @@
         commute: commute,
         commuteMap: commuteMap,
         comparator: comparator,
+        complement: complement,
         compose: compose,
         concat: concat,
         cond: cond,
@@ -1868,7 +1869,6 @@
         multiply: multiply,
         nAry: nAry,
         negate: negate,
-        not: not,
         nth: nth,
         nthArg: nthArg,
         of: of,
