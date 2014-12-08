@@ -7,8 +7,11 @@
         $ git checkout -b <branch>
 
 3.  Add new functions as separate source files in src/. If the function is
-    used these functions elsewhere and in curried form, then place the
-    implementation in src/internal.
+    used by ramda functions elsewhere in uncurried form, then place the
+    implementation in src/internal (see src/internal/_map.js as an example).
+
+    NOTE: The file `dist/ramda.js` is **generated**.  Any changes to it will
+    be overridden.
 
 4.  Make one or more atomic commits. Each commit should have a descriptive
     commit message, wrapped at 72 characters. Include unit tests if adding
