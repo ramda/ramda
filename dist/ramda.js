@@ -1378,11 +1378,11 @@
         return list;
     });
 
-    var toLowerCase = invokerN(0, 'toLowerCase');
+    var toLower = invokerN(0, 'toLowerCase');
 
     var toPairs = _pairWith(keys);
 
-    var toUpperCase = invokerN(0, 'toUpperCase');
+    var toUpper = invokerN(0, 'toUpperCase');
 
     var unfoldr = _curry2(function unfoldr(fn, seed) {
         var pair = fn(seed);
@@ -1921,10 +1921,10 @@
         takeWhile: takeWhile,
         tap: tap,
         times: times,
-        toLowerCase: toLowerCase,
+        toLower: toLower,
         toPairs: toPairs,
         toPairsIn: toPairsIn,
-        toUpperCase: toUpperCase,
+        toUpper: toUpper,
         trim: trim,
         type: type,
         unapply: unapply,

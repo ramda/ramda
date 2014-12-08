@@ -81,7 +81,7 @@ var dependenciesOf =
                                          R.replace(/^[.]{1,2}[/]/, ''),
                                          R.replace(/[.]([a-z])/g,
                                                    R.pipe(R.nthArg(1),
-                                                          R.toUpperCase)))))),
+                                                          R.toUpper)))))),
            R.map(R.path('id.name')));
 
 //  createDependencyGraph :: [String] -> StrMap [String]

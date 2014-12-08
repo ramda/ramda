@@ -17,7 +17,7 @@ var _pluck = require('./internal/_pluck');
  * @example
  *
  *      var sortByFirstItem = R.sortBy(prop(0));
- *      var sortByNameCaseInsensitive = R.sortBy(compose(R.toLowerCase, prop('name')));
+ *      var sortByNameCaseInsensitive = R.sortBy(compose(R.toLower, prop('name')));
  *      var pairs = [[-1, 1], [-2, 2], [-3, 3]];
  *      sortByFirstItem(pairs); //=> [[-3, 3], [-2, 2], [-1, 1]]
  *      var alice = {

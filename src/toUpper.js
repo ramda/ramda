@@ -12,6 +12,6 @@ var invokerN = require('./invokerN');
  * @return {String} The upper case version of `str`.
  * @example
  *
- *      R.toUpperCase('abc'); //=> 'ABC'
+ *      R.toUpper('abc'); //=> 'ABC'
  */
 module.exports = invokerN(0, 'toUpperCase');
