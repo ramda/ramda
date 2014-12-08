@@ -11,10 +11,12 @@
  * @example
  *
  *      var gt10 = function(x) { return x > 10; };
- *      var f = R.not(gt10);
+ *      var f = R.complement(gt10);
  *      f(11); //=> false
  *      f(9); //=> true
  */
-module.exports = function not(f) {
-    return function() {return !f.apply(this, arguments);};
+module.exports = function complement(f) {
+    return function() {
+        return !f.apply(this, arguments);
+    };
 };
