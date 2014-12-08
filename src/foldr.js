@@ -6,7 +6,7 @@ var _curry3 = require('./internal/_curry3');
  * function and passing it an accumulator value and the current value from the array, and
  * then passing the result to the next call.
  *
- * Similar to `foldr`, except moves through the input list from the right to the left.
+ * Similar to `foldl`, except moves through the input list from the right to the left.
  *
  * The iterator function receives two values: *(acc, value)*
  *
