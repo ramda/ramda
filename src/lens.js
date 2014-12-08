@@ -40,7 +40,7 @@ var _curry2 = require('./internal/_curry2');
  *     phraseLens(obj1); // => 'Absolute filth . . . and I LOVED it!'
  *     phraseLens(obj2); // => "What's all this, then?"
  *     phraseLens.set('Ooh Betty', obj1); //=> { phrase: 'Ooh Betty'}
- *     phraseLens.map(R.toUpperCase, obj2); //=> { phrase: "WHAT'S ALL THIS, THEN?"}
+ *     phraseLens.map(R.toUpper, obj2); //=> { phrase: "WHAT'S ALL THIS, THEN?"}
  */
 module.exports = _curry2(function lens(get, set) {
     var lns = function(a) { return get(a); };

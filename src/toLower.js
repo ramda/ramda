@@ -12,6 +12,6 @@ var invokerN = require('./invokerN');
  * @return {String} The lower case version of `str`.
  * @example
  *
- *      R.toLowerCase('XYZ'); //=> 'xyz'
+ *      R.toLower('XYZ'); //=> 'xyz'
  */
 module.exports = invokerN(0, 'toLowerCase');
