@@ -361,10 +361,6 @@
         return fn.apply(this, _slice(arguments, 1));
     };
 
-    var clone = function clone(list) {
-        return _slice(list);
-    };
-
     var comparator = function comparator(pred) {
         return function (a, b) {
             return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
@@ -868,7 +864,7 @@
         };
     });
 
-    var cloneDeep = function cloneDeep(value) {
+    var clone = function clone(value) {
         return _baseCopy(value, [], []);
     };
 
@@ -1570,10 +1566,6 @@
 
     var charCodeAt = invokerN(1, 'charCodeAt');
 
-    var cloneObj = function (obj) {
-        return _extend({}, obj);
-    };
-
     var commuteMap = _curry3(function commuteMap(fn, of, list) {
         function consF(acc, ftor) {
             return _ap(_map(append, fn(ftor)), acc);
@@ -1772,8 +1764,6 @@
         charAt: charAt,
         charCodeAt: charCodeAt,
         clone: clone,
-        cloneDeep: cloneDeep,
-        cloneObj: cloneObj,
         commute: commute,
         commuteMap: commuteMap,
         comparator: comparator,
