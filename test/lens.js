@@ -18,7 +18,7 @@ describe('lens', function() {
     }
 
     function setPhrase(val, obj) {
-        var out = R.cloneObj(obj);
+        var out = R.clone(obj);
         out.catchphrase = val;
         return out;
     }

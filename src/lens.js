@@ -30,7 +30,7 @@ var _curry2 = require('./internal/_curry2');
  *     var phraseLens = R.lens(
  *         function get(obj) { return obj.phrase; },
  *         function set(val, obj) {
- *             var out = R.cloneObj(obj);
+ *             var out = R.clone(obj);
  *             out.phrase = val;
  *             return out;
  *         }

@@ -1,26 +1,24 @@
-var _slice = require('./internal/_slice');
+var _baseCopy = require('./internal/_baseCopy');
 
 
 /**
- * Creates a shallow copy of an array.
+ * Creates a deep copy of the value which may contain (nested) `Array`s and
+ * `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s. `Function`s are
+ * not copied, but assigned by their reference.
  *
  * @func
  * @memberOf R
  * @category Object
- * @sig [a] -> [a]
- * @param {Array} list The list to clone.
- * @return {Array} A new copy of the original list.
+ * @sig {*} -> {*}
+ * @param {*} value The object or array to clone
+ * @return {*} A new object or array.
  * @example
  *
- *      var numbers = [1, 2, 3];
- *      var numbersClone = R.clone(numbers); //=> [1, 2, 3]
- *      numbers === numbersClone; //=> false
- *
- *      // Note that this is a shallow clone--it does not clone complex values:
  *      var objects = [{}, {}, {}];
  *      var objectsClone = R.clone(objects);
- *      objects[0] === objectsClone[0]; //=> true
+ *      objects[0] === objectsClone[0]; //=> false
+ *
  */
-module.exports = function clone(list) {
-    return _slice(list);
+module.exports = function clone(value) {
+    return _baseCopy(value, [], []);
 };
