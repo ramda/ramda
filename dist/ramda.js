@@ -1577,6 +1577,12 @@
         return curryN(fn.length, fn);
     };
 
+    var evolve = _curry2(function evolve(transformations, object) {
+        return _extend(_extend({}, object), mapObjIndexed(function (fn, key) {
+            return fn(object[key]);
+        }, transformations));
+    });
+
     var functions = _functionsWith(keys);
 
     var head = nth(0);
@@ -1788,6 +1794,7 @@
         empty: empty,
         eq: eq,
         eqProps: eqProps,
+        evolve: evolve,
         filter: filter,
         filterIndexed: filterIndexed,
         find: find,
