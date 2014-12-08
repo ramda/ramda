@@ -1577,6 +1577,26 @@
         return curryN(fn.length, fn);
     };
 
+    var foldObj = _curry3(function foldObj(fn, acc, obj) {
+        var ks = keys(obj).sort();
+        var len = ks.length;
+        var idx = -1;
+        while (++idx < len) {
+            acc = fn(acc, obj[ks[idx]]);
+        }
+        return acc;
+    });
+
+    var foldObjIndexed = _curry3(function foldObjIndexed(fn, acc, obj) {
+        var ks = keys(obj).sort();
+        var len = ks.length;
+        var idx = -1;
+        while (++idx < len) {
+            acc = fn(acc, obj[ks[idx]], ks[idx], obj);
+        }
+        return acc;
+    });
+
     var functions = _functionsWith(keys);
 
     var head = nth(0);
@@ -1796,6 +1816,8 @@
         findLastIndex: findLastIndex,
         flatten: flatten,
         flip: flip,
+        foldObj: foldObj,
+        foldObjIndexed: foldObjIndexed,
         foldl: foldl,
         foldlIndexed: foldlIndexed,
         foldr: foldr,
