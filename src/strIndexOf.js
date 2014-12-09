@@ -11,7 +11,6 @@ var _curry2 = require('./internal/_curry2');
  * @param {String} c A string to find.
  * @param {String} str The string to search in
  * @return {Number} The first index of `c` or -1 if not found.
- * @see R.invokerN
  * @example
  *
  *      R.strIndexOf('c', 'abcdefg'); //=> 2

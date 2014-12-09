@@ -1,4 +1,4 @@
-var invokerN = require('./invokerN');
+var invoker = require('./invoker');
 
 
 /**
@@ -11,9 +11,9 @@ var invokerN = require('./invokerN');
  * @param {RegExp} rx A regular expression.
  * @param {String} str The string to match against
  * @return {Array} The list of matches, or null if no matches found.
- * @see R.invokerN
+ * @see R.invoker
  * @example
  *
  *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
  */
-module.exports = invokerN(1, 'match');
+module.exports = invoker(1, 'match');

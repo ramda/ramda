@@ -1,4 +1,4 @@
-var invokerN = require('./invokerN');
+var invoker = require('./invoker');
 
 
 /**
@@ -19,4 +19,4 @@ var invokerN = require('./invokerN');
  *
  *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
  */
-module.exports = invokerN(1, 'split');
+module.exports = invoker(1, 'split');

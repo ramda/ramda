@@ -11,7 +11,6 @@ var substring = require('./substring');
  * @param {Number} indexA An integer between 0 and the length of the string.
  * @param {String} str The string to extract from
  * @return {String} The extracted substring.
- * @see R.invokerN
  * @example
  *
  *      R.substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
