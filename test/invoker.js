@@ -3,8 +3,8 @@ var assert = require('assert');
 var R = require('..');
 
 
-describe('invokerN', function() {
-    var concat2 = R.invokerN(2, 'concat');
+describe('invoker', function() {
+    var concat2 = R.invoker(2, 'concat');
 
     it('returns a function with correct arity', function() {
         assert.strictEqual(concat2.length, 3);
@@ -21,10 +21,10 @@ describe('invokerN', function() {
     });
 
     it('returns a function with correct arity when additional parameters are given', function() {
-        assert.strictEqual(R.invokerN(2, 'concat', 'foo').length, 2);
+        assert.strictEqual(R.invoker(2, 'concat', 'foo').length, 2);
     });
 
     it('applies additional parameters to the method', function() {
-        assert.deepEqual(R.invokerN(2, 'concat', 2)(3, [1]), [1, 2, 3]);
+        assert.deepEqual(R.invoker(2, 'concat', 2)(3, [1]), [1, 2, 3]);
     });
 });

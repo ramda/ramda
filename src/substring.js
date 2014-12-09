@@ -1,4 +1,4 @@
-var invokerN = require('./invokerN');
+var invoker = require('./invoker');
 
 
 /**
@@ -12,9 +12,9 @@ var invokerN = require('./invokerN');
  * @param {Number} indexB An integer between 0 and the length of the string.
  * @param {String} str The string to extract from
  * @return {String} The extracted substring.
- * @see R.invokerN
+ * @see R.invoker
  * @example
  *
  *      R.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
  */
-module.exports = invokerN(2, 'substring');
+module.exports = invoker(2, 'substring');

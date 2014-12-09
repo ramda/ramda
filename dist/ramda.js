@@ -1087,7 +1087,7 @@
         return _concat(_concat(_slice(list, 0, idx), elts), _slice(list, idx));
     });
 
-    var invokerN = function invokerN(arity, method) {
+    var invoker = function invoker(arity, method) {
         var initialArgs = _slice(arguments, 2);
         var len = arity - initialArgs.length;
         return curryN(len + 1, function () {
@@ -1101,7 +1101,7 @@
         return val != null && val.constructor === Ctor || val instanceof Ctor;
     });
 
-    var join = invokerN(1, 'join');
+    var join = invoker(1, 'join');
 
     var keys = function () {
         var hasEnumBug = !{ toString: null }.propertyIsEnumerable('toString');
@@ -1185,7 +1185,7 @@
         }, {}, keys(obj));
     });
 
-    var match = invokerN(1, 'match');
+    var match = invoker(1, 'match');
 
     var max = _createMaxMin(_gt, -Infinity);
 
@@ -1316,7 +1316,7 @@
         return result;
     });
 
-    var slice = invokerN(2, 'slice');
+    var slice = invoker(2, 'slice');
 
     var sort = _curry2(function sort(comparator, list) {
         return clone(list).sort(comparator);
@@ -1326,7 +1326,7 @@
         return _pluck('val', _keyValue(fn, list).sort(_compareKeys));
     });
 
-    var split = invokerN(1, 'split');
+    var split = invoker(1, 'split');
 
     var strIndexOf = _curry2(function strIndexOf(c, str) {
         return str.indexOf(c);
@@ -1336,7 +1336,7 @@
         return str.lastIndexOf(c);
     });
 
-    var substring = invokerN(2, 'substring');
+    var substring = invoker(2, 'substring');
 
     var substringFrom = flip(substring)(void 0);
 
@@ -1374,11 +1374,11 @@
         return list;
     });
 
-    var toLower = invokerN(0, 'toLowerCase');
+    var toLower = invoker(0, 'toLowerCase');
 
     var toPairs = _pairWith(keys);
 
-    var toUpper = invokerN(0, 'toUpperCase');
+    var toUpper = invoker(0, 'toUpperCase');
 
     var unfoldr = _curry2(function unfoldr(fn, seed) {
         var pair = fn(seed);
@@ -1562,9 +1562,9 @@
         return unnest(_map(f, list));
     }));
 
-    var charAt = invokerN(1, 'charAt');
+    var charAt = invoker(1, 'charAt');
 
-    var charCodeAt = invokerN(1, 'charCodeAt');
+    var charCodeAt = invoker(1, 'charCodeAt');
 
     var commuteMap = _curry3(function commuteMap(fn, of, list) {
         function consF(acc, ftor) {
@@ -1832,7 +1832,7 @@
         intersectionWith: intersectionWith,
         invert: invert,
         invertObj: invertObj,
-        invokerN: invokerN,
+        invoker: invoker,
         is: is,
         isArrayLike: isArrayLike,
         isEmpty: isEmpty,

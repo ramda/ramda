@@ -19,12 +19,12 @@ var curryN = require('./curryN');
  * @return {Function} A new curried function.
  * @example
  *
- *      var sliceFrom = R.invokerN(1, 'slice');
+ *      var sliceFrom = R.invoker(1, 'slice');
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
- *      var sliceFrom6 = R.invokerN(2, 'slice', 6);
+ *      var sliceFrom6 = R.invoker(2, 'slice', 6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
  */
-module.exports = function invokerN(arity, method) {
+module.exports = function invoker(arity, method) {
     var initialArgs = _slice(arguments, 2);
     var len = arity - initialArgs.length;
     return curryN(len + 1, function() {

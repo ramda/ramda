@@ -1,4 +1,4 @@
-var invokerN = require('./invokerN');
+var invoker = require('./invoker');
 
 
 /**
@@ -11,9 +11,9 @@ var invokerN = require('./invokerN');
  * @param {Number} index An integer between 0 and the length of the string.
  * @param {String} str The string to extract a char from
  * @return {String} The character at `index` of `str`.
- * @see R.invokerN
+ * @see R.invoker
  * @example
  *
  *      R.charAt(8, 'abcdefghijklm'); //=> 'i'
  */
-module.exports = invokerN(1, 'charAt');
+module.exports = invoker(1, 'charAt');

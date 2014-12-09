@@ -1,4 +1,4 @@
-var invokerN = require('./invokerN');
+var invoker = require('./invoker');
 
 
 /**
@@ -11,10 +11,10 @@ var invokerN = require('./invokerN');
  * @param {Number} index An integer between 0 and the length of the string.
  * @param {String} str The string to extract a charCode from
  * @return {Number} The code of the character at `index` of `str`.
- * @see R.invokerN
+ * @see R.invoker
  * @example
  *
  *      R.charCodeAt(8, 'abcdefghijklm'); //=> 105
  *      // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
  */
-module.exports = invokerN(1, 'charCodeAt');
+module.exports = invoker(1, 'charCodeAt');

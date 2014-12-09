@@ -1,4 +1,4 @@
-var invokerN = require('./invokerN');
+var invoker = require('./invoker');
 
 
 /**
@@ -17,4 +17,4 @@ var invokerN = require('./invokerN');
  *      var xs = R.range(0, 10);
  *      R.slice(2, 5)(xs); //=> [2, 3, 4]
  */
-module.exports = invokerN(2, 'slice');
+module.exports = invoker(2, 'slice');
