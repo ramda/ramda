@@ -466,6 +466,10 @@
         return Object(list).length === 0;
     };
 
+    var isNil = function isNil(x) {
+        return x == null;
+    };
+
     var isSet = function isSet(list) {
         var len = list.length;
         var idx = -1;
@@ -1836,6 +1840,7 @@
         is: is,
         isArrayLike: isArrayLike,
         isEmpty: isEmpty,
+        isNil: isNil,
         isSet: isSet,
         join: join,
         keys: keys,
