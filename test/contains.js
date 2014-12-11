@@ -22,6 +22,15 @@ describe('contains', function() {
         assert.strictEqual(R.contains(7)([1, 2, 7, 3]), true);
     });
 
+    it('is curried like a binary operator, that accepts an inital placeholder', function() {
+        var fbb = ['foo', 'bar', 'baz'];
+        assert(typeof R.contains(R.__) === 'function');
+        assert(typeof R.contains(R.__)('bar') === 'function');
+        assert(R.contains(R.__)(fbb)('bar'));
+        assert(R.contains(R.__, fbb)('bar'));
+        assert(R.contains(R.__)(fbb, 'bar'));
+    });
+
     it('throws on zero arguments', function() {
         assert.throws(R.contains, TypeError);
     });
