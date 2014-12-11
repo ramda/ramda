@@ -874,18 +874,6 @@
 
     var compose = _createComposer(_compose);
 
-    var concat = _curry2(function (set1, set2) {
-        if (_isArray(set2)) {
-            return _concat(set1, set2);
-        } else if (_hasMethod('concat', set1)) {
-            return set1.concat(set2);
-        } else {
-            throw new TypeError('can\'t concat ' + typeof set1);
-        }
-    });
-
-    var contains = _curry2(_contains);
-
     var containsWith = _curry3(_containsWith);
 
     var countBy = _curry2(function countBy(fn, list) {
@@ -1693,6 +1681,16 @@
 
     var commute = commuteMap(map(identity));
 
+    var concat = op(function (set1, set2) {
+        if (_isArray(set2)) {
+            return _concat(set1, set2);
+        } else if (_hasMethod('concat', set1)) {
+            return set1.concat(set2);
+        } else {
+            throw new TypeError('can\'t concat ' + typeof set1);
+        }
+    });
+
     var constructN = _curry2(function constructN(n, Fn) {
         var f = function () {
             var Temp = function () {
@@ -1704,6 +1702,8 @@
         };
         return n > 1 ? curry(nAry(n, f)) : f;
     });
+
+    var contains = op(_contains);
 
     var divide = op(function divide(a, b) {
         return a / b;
