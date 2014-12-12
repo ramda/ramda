@@ -3,9 +3,8 @@ var has = require('./has');
 
 
 /**
- * If the given object has an own property with the specified name,
- * returns the value of that property.
- * Otherwise returns the provided default value.
+ * If the given, non-null object has an own property with the specified name,
+ * returns the value of that property. Otherwise returns the provided default value.
  *
  * @func
  * @memberOf R
