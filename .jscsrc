@@ -6,6 +6,7 @@
   "disallowSpaceAfterObjectKeys": true,
   "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~", "!"],
   "disallowSpaceBeforePostfixUnaryOperators": ["++", "--"],
+  "disallowSpacesInCallExpression": true,
   "disallowSpacesInFunction": {"beforeOpeningRoundBrace": true},
   "disallowSpacesInsideArrayBrackets": true,
   "disallowSpacesInsideObjectBrackets": true,
@@ -23,8 +24,8 @@
   "requireSpaceAfterLineComment": true,
   "requireSpaceBeforeBinaryOperators": ["+", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
   "requireSpaceBeforeBlockStatements": true,
+  "requireSpaceBeforeKeywords": ["else", "catch", "finally"],
   "requireSpacesInConditionalExpression": true,
   "requireSpacesInFunction": {"beforeOpeningCurlyBrace": true},
-  "validateIndentation": 4,
   "validateQuoteMarks": {"escape": true, "mark": "'"}
 }
