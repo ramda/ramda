@@ -1155,6 +1155,30 @@
 
     var map = _curry2(_checkForMethod('map', _map));
 
+    var mapAccumL = _curry3(function mapAccumL(fn, acc, list) {
+        var idx = -1, len = list.length, result = new Array(len), tuple = [acc];
+        while (++idx < len) {
+            tuple = fn(tuple[0], list[idx]);
+            result[idx] = tuple[1];
+        }
+        return [
+            tuple[0],
+            result
+        ];
+    });
+
+    var mapAccumR = _curry3(function mapAccumR(fn, acc, list) {
+        var idx = list.length, len = list.length, result = new Array(len), tuple = [acc];
+        while (idx--) {
+            tuple = fn(tuple[0], list[idx]);
+            result[idx] = tuple[1];
+        }
+        return [
+            tuple[0],
+            result
+        ];
+    });
+
     var mapIndexed = _curry2(function mapIndexed(fn, list) {
         var idx = -1, len = list.length, result = new Array(len);
         while (++idx < len) {
@@ -1855,6 +1879,8 @@
         lt: lt,
         lte: lte,
         map: map,
+        mapAccumL: mapAccumL,
+        mapAccumR: mapAccumR,
         mapIndexed: mapIndexed,
         mapObj: mapObj,
         mapObjIndexed: mapObjIndexed,
