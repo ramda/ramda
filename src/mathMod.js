@@ -1,9 +1,7 @@
-var _isInteger = require('./internal/_isInteger');
 var op = require('./op');
 
-
 /**
- * mathMod behaves like the modulo operator should mathematically, unlike the `%`
+ * mathMod behaves like the modulo operator should mathematically (euclidean), unlike the `%`
  * operator (and by extension, R.modulo). So while "-17 % 5" is -2,
  * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
  * when the modulus is zero or negative.
@@ -38,7 +36,6 @@ var op = require('./op');
  *      seventeenMod(10); //=> 7
  */
 module.exports = op(function mathMod(m, p) {
-    if (!_isInteger(m)) { return NaN; }
-    if (!_isInteger(p) || p < 1) { return NaN; }
-    return ((m % p) + p) % p;
+    var rem = m % p;
+    return rem < 0 ? rem + Math.abs(p) : rem;
 });
