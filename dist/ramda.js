@@ -2875,7 +2875,7 @@
      *          return [a + b, a + b];
      *      }
      *
-     *      R.mapAccumL(append, 0, digits); //=> ['1234', ['1', '12', '123', '1234']]
+     *      R.mapAccumL(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
      */
     var mapAccumL = _curry3(function mapAccumL(fn, acc, list) {
         var idx = -1, len = list.length, result = new Array(len), tuple = [acc];
@@ -2909,9 +2909,12 @@
      * @return {*} The final, accumulated value.
      * @example
      *
-     *      var odds = ['1', '2', '3', '4'];
+     *      var digits = ['1', '2', '3', '4'];
+     *      var append = function(a, b) {
+     *          return [a + b, a + b];
+     *      }
      *
-     *      R.mapAccumR(append, 0, digits); //=> ['4321', ['4321', '432', '43', '4']]
+     *      R.mapAccumR(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
      */
     var mapAccumR = _curry3(function mapAccumR(fn, acc, list) {
         var idx = list.length, len = list.length, result = new Array(len), tuple = [acc];
@@ -3561,7 +3564,7 @@
      *        age: 101
      *      };
      *      var favorite = R.prop('favoriteLibrary');
-     *      var favoriteWithDefault = R.propOr('favoriteLibrary', 'Ramda');
+     *      var favoriteWithDefault = R.propOr('Ramda', 'favoriteLibrary');
      *
      *      favorite(alice);  //=> undefined
      *      favoriteWithDefault(alice);  //=> 'Ramda'
@@ -4753,9 +4756,7 @@
      * @return {Object} The transformed object.
      * @example
      *
-     *      R.evolve({ elapsed: R.add(1), remaining: R.add(-1) },
-     *           { name: 'Tomato', elapsed: 100, remaining: 1400 });
-     *      //=> { name: 'Tomato', elapsed: 101, remaining: 1399 }
+     *      R.evolve({ elapsed: R.add(1), remaining: R.add(-1) }, { name: 'Tomato', elapsed: 100, remaining: 1400 }); //=> { name: 'Tomato', elapsed: 101, remaining: 1399 }
      */
     var evolve = _curry2(function evolve(transformations, object) {
         return _extend(_extend({}, object), mapObjIndexed(function (fn, key) {
@@ -4912,8 +4913,8 @@
      * @memberOf R
      * @category Object
      * @sig {s: x} -> {x: [ s, ... ]}
-     * @param {s: x} obj The object or array to invert
-     * @return {x: [ s, ... ]} out A new object with keys
+     * @param {Object} obj The object or array to invert
+     * @return {Object} out A new object with keys
      * in an array.
      * @example
      *
@@ -4944,8 +4945,8 @@
      * @memberOf R
      * @category Object
      * @sig {s: x} -> {x: s}
-     * @param {s: x} obj The object or array to invert
-     * @return {x: s} out A new object
+     * @param {Object} obj The object or array to invert
+     * @return {Object} out A new object
      * @example
      *
      *      var raceResults = {
@@ -5867,6 +5868,8 @@
         zipObj: zipObj,
         zipWith: zipWith
     };
+
+    /* TEST_ENTRY_POINT */
 
     if (typeof exports === 'object') {
         module.exports = R;

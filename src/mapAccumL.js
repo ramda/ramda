@@ -23,7 +23,7 @@ var _curry3 = require('./internal/_curry3');
  *          return [a + b, a + b];
  *      }
  *
- *      R.mapAccumL(append, 0, digits); //=> ['1234', ['1', '12', '123', '1234']]
+ *      R.mapAccumL(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
  */
 module.exports = _curry3(function mapAccumL(fn, acc, list) {
     var idx = -1, len = list.length, result = new Array(len), tuple = [acc];

@@ -8,8 +8,8 @@ var keys = require('./keys');
  * @memberOf R
  * @category Object
  * @sig {s: x} -> {x: s}
- * @param {s: x} obj The object or array to invert
- * @return {x: s} out A new object
+ * @param {Object} obj The object or array to invert
+ * @return {Object} out A new object
  * @example
  *
  *      var raceResults = {

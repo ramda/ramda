@@ -21,9 +21,12 @@ var _curry3 = require('./internal/_curry3');
  * @return {*} The final, accumulated value.
  * @example
  *
- *      var odds = ['1', '2', '3', '4'];
+ *      var digits = ['1', '2', '3', '4'];
+ *      var append = function(a, b) {
+ *          return [a + b, a + b];
+ *      }
  *
- *      R.mapAccumR(append, 0, digits); //=> ['4321', ['4321', '432', '43', '4']]
+ *      R.mapAccumR(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
  */
 module.exports = _curry3(function mapAccumR(fn, acc, list) {
     var idx = list.length, len = list.length, result = new Array(len), tuple = [acc];

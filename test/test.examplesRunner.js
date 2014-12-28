@@ -167,7 +167,7 @@ var ramda_dox = dox.parseComments(ramda_source);
 var examples = R.filter(R.not(R.eq(false)), R.mapIndexed(getExampleFromDox, ramda_dox));
 
 // prepare our source code to inject examples
-var source_for_compliation = splitAt(ramda_source, '// All the functional goodness, wrapped in a nice little package, just for you!');
+var source_for_compliation = splitAt(ramda_source, '/* TEST_ENTRY_POINT */');
 var ramda_wrap = wrap(source_for_compliation[0], source_for_compliation[1]);
 var example_wrap = wrap('R.example_test = function(){\nvar _tests = [];\n', '\nreturn _tests;\n};\n');
 
