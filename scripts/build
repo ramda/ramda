@@ -36,8 +36,20 @@ var identifierToFilename =
                     R.lPartial(path.join, __dirname, '..', 'src')),
            R.rPartial(R.concat, '.js'));
 
-//  parse :: String -> AST
-var parse = R.memoize(R.pipe(fs.readFileSync, acorn.parse));
+//  parse :: String -> {ast: AST, comments: [Comment], tokens: [Token]}
+var parse = R.memoize(function(filename) {
+    var comments = [];
+    var tokens = [];
+    return {
+        ast: acorn.parse(fs.readFileSync(filename), {
+            ranges: true,
+            onComment: comments,
+            onToken: tokens
+        }),
+        comments: comments,
+        tokens: tokens
+    };
+});
 
 // dependenciesOf :: String -> [String]
 //
@@ -59,6 +71,7 @@ var parse = R.memoize(R.pipe(fs.readFileSync, acorn.parse));
 var dependenciesOf =
     R.pipe(identifierToFilename,
            parse,
+           R.prop('ast'),
            R.prop('body'),
            R.takeWhile(R.where({type: 'VariableDeclaration', kind: 'var'})),
            R.pluck('declarations'),
@@ -113,9 +126,10 @@ var orderDependencies = function orderDependencies(graph) {
 
 //  getModifiedSource :: String -> String
 var getModifiedSource = function getModifiedSource(identifier) {
-    var ast = parse(identifierToFilename(identifier));
-    assert.notStrictEqual(ast.body.length, 0);
-    var last = R.last(ast.body);
+    var obj = parse(identifierToFilename(identifier));
+    escodegen.attachComments(obj.ast, obj.comments, obj.tokens);
+    assert.notStrictEqual(obj.ast.body.length, 0);
+    var last = R.last(obj.ast.body);
     $pathEq('type', 'ExpressionStatement', last);
     $pathEq('expression.type', 'AssignmentExpression', last);
     $pathEq('expression.operator', '=', last);
@@ -124,9 +138,13 @@ var getModifiedSource = function getModifiedSource(identifier) {
     $pathEq('expression.left.object.name', 'module', last);
     $pathEq('expression.left.property.type', 'Identifier', last);
     $pathEq('expression.left.property.name', 'exports', last);
-    return escodegen.generate({
+    var options = {
+        comment: true
+    };
+    var declarationAst = {
         type: 'VariableDeclaration',
         kind: 'var',
+        leadingComments: last.leadingComments,
         declarations: [
             {
                 type: 'VariableDeclarator',
@@ -134,7 +152,8 @@ var getModifiedSource = function getModifiedSource(identifier) {
                 init: last.expression.right
             }
         ]
-    });
+    };
+    return escodegen.generate(declarationAst, options);
 };
 
 //  build :: [String] -> String
