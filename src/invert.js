@@ -9,8 +9,8 @@ var keys = require('./keys');
  * @memberOf R
  * @category Object
  * @sig {s: x} -> {x: [ s, ... ]}
- * @param {s: x} obj The object or array to invert
- * @return {x: [ s, ... ]} out A new object with keys
+ * @param {Object} obj The object or array to invert
+ * @return {Object} out A new object with keys
  * in an array.
  * @example
  *

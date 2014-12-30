@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('bench', ['benchmark', 'uploadBenchmarks']);
     grunt.registerTask('sauce', SAUCE_ACCESS_KEY === '' ? [] : ['connect', 'saucelabs-mocha']);
-    grunt.registerTask('test', ['jshint', 'jscs', 'browserify:client', /* 'mochaTest:docs', */ 'mochaTest:unit']);
+    grunt.registerTask('test', ['jshint', 'jscs', 'browserify:client', 'mochaTest:docs', 'mochaTest:unit']);
     grunt.registerTask('unittest', ['browserify:client', 'mochaTest:unit']);
     grunt.registerTask('doctest', ['mochaTest:docs']);
 };

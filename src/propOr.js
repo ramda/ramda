@@ -22,7 +22,7 @@ var has = require('./has');
  *        age: 101
  *      };
  *      var favorite = R.prop('favoriteLibrary');
- *      var favoriteWithDefault = R.propOr('favoriteLibrary', 'Ramda');
+ *      var favoriteWithDefault = R.propOr('Ramda', 'favoriteLibrary');
  *
  *      favorite(alice);  //=> undefined
  *      favoriteWithDefault(alice);  //=> 'Ramda'
