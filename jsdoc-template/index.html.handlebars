@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html class="home-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ramda JS</title>
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <title>Ramda Documentation</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -13,7 +11,7 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="/">
                 <strong>Ramda</strong>
-                <span class="version">v0.8.0</span>
+                <span class="version">v{{version}}</span>
             </a>
         </div>
         <div class="navbar-left">
@@ -23,8 +21,8 @@
             </ul>
         </div>
     </header>
-    <main class="container-fluid">
-        TODO: PAGE INFORMATION
+    <main class="container">
+        <article>{{> readme}}</article>
     </main>
 </body>
 </html>

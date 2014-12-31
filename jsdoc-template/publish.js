@@ -3,6 +3,7 @@ var helper = require('jsdoc/util/templateHelper');
 
 var marked = require('marked');
 var hljs = require('highlight.js');
+var Handlebars = require('handlebars');
 
 var R = require('../dist/ramda');
 
@@ -28,8 +29,8 @@ var prettifySig = R.pipe(
 );
 
 var prettifyCode = R.pipe(
-    R.map(trimCode),
     R.join('\n'),
+    trimCode,
     R.lPartial(hljs.highlight, 'javascript'),
     R.prop('value')
 );
@@ -61,15 +62,54 @@ function simplifyData(d) {
     };
 }
 
+function embedData(d) {
+    return {
+        name: d.name,
+        category: d.category
+    };
+}
+
+// For embedding a JSON blob with documentation data inside the HTML.
+Handlebars.registerHelper('json', function(obj) {
+    var json = JSON.stringify(obj);
+    return new Handlebars.SafeString(json);
+});
+
+// For embedding README.md as the main page.
+Handlebars.registerPartial('readme', function(obj) {
+    return new Handlebars.SafeString(readme);
+});
+
+var readFile = R.rPartial(fs.readFileSync, 'utf-8');
+var writeFile = R.rPartial(fs.writeFileSync, 'utf-8');
+
+var loadTemplate = R.pipe(readFile, Handlebars.compile);
+var loadJson = R.pipe(readFile, JSON.parse);
+var loadMarkdown = R.pipe(readFile, marked);
+
+var docTmpl = loadTemplate('jsdoc-template/docs.html.handlebars');
+var indexTmpl = loadTemplate('jsdoc-template/index.html.handlebars');
+
+var pkg = loadJson('package.json');
+var readme = loadMarkdown('README.md');
+
 function publish(data, opts, tutorials) {
     data = helper.prune(data);
-    var obj = data()
+    var fullData = data()
         .order('name, version, since')
         .filter({ kind: 'function' })
         .map(simplifyData);
-    var json = JSON.stringify(obj);
-    var filename = 'docs/data.json';
-    fs.writeFileSync(filename, json, 'utf-8');
+    var embeddedData = fullData.map(embedData);
+    var docHtml = docTmpl({
+        version: pkg.version,
+        data: embeddedData,
+        docs: fullData
+    });
+    var indexHtml = indexTmpl({
+        version: pkg.version
+    });
+    writeFile('docs/index.html', docHtml);
+    writeFile('index.html', indexHtml);
     console.log('Finished writing documentation data to docs/data.json');
 }
 

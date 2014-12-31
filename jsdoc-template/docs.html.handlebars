@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="docs-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="/">
                 <strong>Ramda</strong>
-                <span class="version">v0.8.0</span>
+                <span class="version">v{{version}}</span>
             </a>
         </div>
         <div class="navbar-left">
@@ -47,69 +47,62 @@
         </ul>
     </aside>
     <main class="container-fluid">
-        <!-- ko foreach: docs -->
+        {{#each docs}}
         <section class="card">
             <h2>
-                <a class="name"
-                   data-bind="
-                       attr: {
-                           href: '#' + name,
-                           id: name
-                       },
-                       text: name
-                    "
-                ></a>
-                <span
-                    class="label label-primary"
-                    data-bind="text: category"
-                ></span>
+                <a class="name" href="#{{name}}" id="{{name}}">{{name}}</a>
+                <span class="label label-primary">{{category}}</span>
             </h2>
-            <div data-bind="if: sig.length">
+            {{#if sig}}
+            <div>
                 <button data-toggle="collapse"
                         class="sig btn btn-link"
-                        data-bind="attr: { 'data-target': '#_details_' + name }"
+                        data-target="#_details_{{name}}"
                 >
                     <span class="caret"></span>
-                    <span data-bind="text: sig"></span>
+                    {{sig}}
                 </button>
             </div>
+            {{/if}}
 
-            <div class="collapse details" data-bind="attr: { id: '_details_' + name }">
+            <div class="collapse details" id="_details_{{name}}">
                 <h3>Parameters</h3>
                 <ul class="params">
-                    <!-- ko foreach: params -->
+                    {{#each params}}
                     <li class="param">
-                        <span class="type" data-bind="text: type"></span>
-                        <span class="name" data-bind="text: name"></span>
-                        <span class="description" data-bind="html: description"></span>
+                        <span class="type">{{type}}</span>
+                        <span class="name">{{name}}</span>
+                        <span class="description">{{{description}}}</span>
                     </li>
-                    <!-- /ko -->
+                    {{/each}}
                 </ul>
 
                 <h3>Returns</h3>
-                <!-- ko with: returns -->
+                {{#with returns}}
                 <div class="returns">
-                    <span class="type" data-bind="text: type"></span>
-                    <span class="description" data-bind="html: description"></span>
+                    <span class="type">{{type}}</span>
+                    <span class="description">{{{description}}}</span>
                 </div>
-                <!-- /ko -->
+                {{/with}}
             </div>
 
-            <div class="description" data-bind="html: description"></div>
+            <div class="description">{{{description}}}</div>
 
-            <!-- ko if: see.length -->
+            {{#if see}}
             <div class="see">
-                See also
-                <a data-bind="attr: { href: '#' + see }, text: see"></a>.
+                See also <a href="#{{see}}">{{see}}</a>.
             </div>
-            <!-- /ko -->
+            {{/if}}
 
-            <!-- ko if: example.length -->
-            <pre><code class="hljs javascript" data-bind="html: example"></code></pre>
-            <!-- /ko -->
+            {{#if example}}
+            <pre><code class="hljs javascript">{{{example}}}</code></pre>
+            {{/if}}
         </section>
-        <!-- /ko -->
+        {{/each}}
     </main>
+    <script>
+        var DOC_DATA = {{json data}};
+    </script>
     <script src="main.js"></script>
 </body>
 </html>

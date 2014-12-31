@@ -1,19 +1,18 @@
 console.time('load');
 var root = {};
 root.filter = ko.observable('');
-root.docs = ko.observableArray();
+root.docs = this.DOC_DATA || {};
 root.filteredDocs = ko.computed(function() {
-    return root.docs().filter(function(d) {
-        var filter = root.filter().toLowerCase();
-        return d.name.toLowerCase().indexOf(filter) >= 0 ||
-            d.category.toLowerCase() === filter;
+    return root.docs.filter(function(d) {
+        return strIn(root.filter(), d.name);
     });
 });
 
-function start(data) {
-    root.docs(data);
-    ko.applyBindings(root);
-    console.timeEnd('load');
+function strIn(a, b) {
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+    return b.indexOf(a) >= 0;
 }
 
-$.getJSON('data.json').then(start);
+ko.applyBindings(root);
+console.timeEnd('load');
