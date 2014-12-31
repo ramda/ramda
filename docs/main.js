@@ -1,35 +1,19 @@
-ko.bindingHandlers.markdown = {
-    update: function(elem, get) {
-        $(elem).html(marked(get()));
-    }
-};
-
-ko.bindingHandlers.code = {
-    update: function(elem, get) {
-        $(elem).text(get());
-        hljs.highlightBlock(elem);
-    }
-};
-
-ko.bindingHandlers.signature = {
-    update: function(elem, get) {
-        $(elem).text(get().replace(/->/g, '\u2192'));
-    }
-};
-
+console.time('load');
 var root = {};
-root.version = '0.8.0';
 root.filter = ko.observable('');
 root.docs = ko.observableArray();
 root.filteredDocs = ko.computed(function() {
     return root.docs().filter(function(d) {
-        return d.name.indexOf(root.filter()) >= 0;
+        var filter = root.filter().toLowerCase();
+        return d.name.toLowerCase().indexOf(filter) >= 0 ||
+            d.category.toLowerCase() === filter;
     });
 });
 
 function start(data) {
     root.docs(data);
     ko.applyBindings(root);
+    console.timeEnd('load');
 }
 
 $.getJSON('data.json').then(start);
