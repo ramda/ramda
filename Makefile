@@ -46,6 +46,10 @@ setup:
 doc-blob:
 	./scripts/doc-blob
 
+.PHONY: real-docs
+real-docs:
+	jsdoc -t jsdoc-template dist/ramda.js
+
 
 .PHONY: test
 test: dist/ramda.js
