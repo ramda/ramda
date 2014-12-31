@@ -12,19 +12,23 @@
     }
 
     .toc {
-        margin: 0 -15px;
+        @padding: 5px;
+        @margin: 15px;
+
+        margin: 0 (-@margin);
         width: 100%;
         bottom: 0;
         top: 60px;
         background: #f8f8f8;
         border-top: @border;
         position: absolute;
-        padding-top: 5px;
+
+        padding: (3 * @padding) 0;
 
         overflow: auto;
 
         a {
-            padding: 4px 15px;
+            padding: @padding @margin;
             border-radius: 0;
 
             &:hover {

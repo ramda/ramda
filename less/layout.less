@@ -1,34 +1,55 @@
 @padding: 15px;
 @sidebar-width: 250px;
 
-main,
-header,
-aside {
-    position: fixed;
+.main-content() {
+    top: @navbar-height;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    padding-top: @padding;
 }
 
 header {
+    position: fixed;
     width: 100%;
     top: 0;
     right: 0;
 }
 
-aside {
-    left: 0;
-    top: @navbar-height;
-    bottom: 0;
-    width: @sidebar-width;
+html.docs-page {
+    aside {
+        position: fixed;
+        left: 0;
+        top: @navbar-height;
+        bottom: 0;
+        width: @sidebar-width;
+    }
+
+    main {
+        .main-content();
+        position: fixed;
+        left: @sidebar-width;
+    }
+
+    body {
+        background: #eee;
+    }
 }
 
-main.container-fluid {
-    left: @sidebar-width;
-    top: @navbar-height;
-    right: 0;
-    bottom: 0;
-    padding-top: @padding;
-    overflow: auto;
-}
+html.home-page {
+    body {
+        .main-content();
+        position: relative;
+        left: 0;
+        background: #eee;
+        margin: @padding;
+        margin-top: 0;
+    }
 
-body {
-    background: #eee;
+    main {
+        background: #fff;
+        border: 1px solid white;
+        box-shadow: 0 0 0 1px #ccc;
+        border-radius: @border-radius-base;
+    }
 }
