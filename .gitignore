@@ -4,3 +4,6 @@
 /npm-debug.log
 /ramda.js.tmp
 /test/bundle.js
+/bower_components/
+/style.css
+/docs/data.json

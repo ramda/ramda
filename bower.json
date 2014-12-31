@@ -25,5 +25,8 @@
     "tests",
     "examples",
     "logo"
-  ]
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.1"
+  }
 }

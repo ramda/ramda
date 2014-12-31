@@ -77,6 +77,14 @@ module.exports = function(grunt) {
             }
         },
 
+        less: {
+            ramda: {
+                files: {
+                    "style.css": "less/ramda.less"
+                }
+            }
+        },
+
         'saucelabs-mocha': sauceConf,
 
         connect: sauceSrv
@@ -85,6 +93,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-mocha-test');
