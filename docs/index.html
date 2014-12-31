@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ramda Documentation</title>
+    <script src="https:////cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="navbar navbar-fixed-top navbar-inverse container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <strong>Ramda</strong>
+                <span class="version">v0.8.0</span>
+            </a>
+        </div>
+        <div class="navbar-left">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="#">Documentation</a></li>
+            </ul>
+        </div>
+    </header>
+    <aside class="sidebar container-fluid">
+        <div class="form-group has-feedback filter">
+            <input class="form-control"
+                   placeholder="Filter"
+                   type="text"
+                   data-bind="textInput: filter"
+            >
+            <span class="form-control-feedback">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+        </div>
+        <ul class="nav nav-pills nav-stacked toc">
+            <!-- ko foreach: filteredDocs -->
+            <li>
+                <a data-bind="attr: { href: '#' + name }, text: name"></a>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </aside>
+    <main class="container-fluid">
+        <!-- ko foreach: docs -->
+        <section class="card">
+            <h2>
+                <a class="name"
+                   data-bind="
+                       attr: {
+                           href: '#' + name,
+                           id: name
+                       },
+                       text: name
+                    "
+                ></a>
+            </h2>
+            <div>
+                <span
+                    class="label label-primary"
+                    data-bind="text: category"
+                ></span>
+                <button data-toggle="collapse"
+                        class="sig btn btn-link"
+                        data-bind="attr: { 'data-target': '#_details_' + name }"
+                >
+                    <span class="caret"></span>
+                    <span data-bind="signature: sig"></span>
+                </button>
+            </div>
+
+            <div class="collapse details" data-bind="attr: { id: '_details_' + name }">
+                <h3>Parameters</h3>
+                <ul class="params">
+                    <!-- ko foreach: params -->
+                    <li class="param">
+                        <span class="type" data-bind="text: type"></span>
+                        <span class="name" data-bind="text: name"></span>
+                        <span class="description" data-bind="markdown: description"></span>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+
+                <h3>Returns</h3>
+                <!-- ko with: returns -->
+                <div class="returns">
+                    <span class="type" data-bind="text: type"></span>
+                    <span class="description" data-bind="markdown: description"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <div class="description" data-bind="markdown: description"></div>
+
+            <pre><code class="javascript" data-bind="code: example"></code></pre>
+        </section>
+        <!-- /ko -->
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>

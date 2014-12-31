@@ -1,0 +1,34 @@
+@padding: 15px;
+@sidebar-width: 200px;
+
+main,
+header,
+aside {
+    position: fixed;
+}
+
+header {
+    width: 100%;
+    top: 0;
+    right: 0;
+}
+
+aside {
+    left: 0;
+    top: @navbar-height;
+    bottom: 0;
+    width: @sidebar-width;
+}
+
+main.container-fluid {
+    left: @sidebar-width;
+    top: @navbar-height;
+    right: 0;
+    bottom: 0;
+    padding-top: @padding;
+    overflow: auto;
+}
+
+body {
+    background: #eee;
+}

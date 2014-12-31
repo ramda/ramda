@@ -1,0 +1,52 @@
+@padding: 15px;
+.card {
+    margin: 0 0 @padding 0;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #ccc;
+    padding: @padding;
+    background: #fff;
+    border-radius: 4px 4px 0 0;
+
+    pre {
+        margin: (-@padding);
+        margin-top: @padding;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+
+        code {
+            padding: @padding;
+            display: block;
+        }
+    }
+
+    .name {
+        font-family: @font-family-monospace;
+        color: inherit;
+    }
+
+    h2 .name {
+            font-weight: bold;
+    }
+
+    .description {
+        margin-top: @padding;
+    }
+
+    .sig {
+        font-family: Verdana, @font-family-sans-serif;
+        font-size: @font-size-large;
+    }
+
+    .details {
+        padding-left: (3 * @padding);
+
+        h3 {
+            font-size: 16px;
+        }
+    }
+
+    .type {
+        font-weight: bold;
+    }
+}
