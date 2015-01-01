@@ -1,11 +1,13 @@
 @padding: 15px;
+@radius: 2px;
 .card {
+
     margin: 0 0 @padding 0;
     border: 1px solid #fff;
     box-shadow: 0 0 0 1px #ccc;
     padding: @padding;
     background: #fff;
-    border-radius: 4px 4px 0 0;
+    border-radius: @radius;
 
     pre {
         margin: (-@padding);
@@ -35,6 +37,8 @@
 
     .sig {
         font-family: Verdana, @font-family-sans-serif;
+        white-space: normal;
+        text-align: left;
     }
 
     .details {

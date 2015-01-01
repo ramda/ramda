@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ramda Documentation</title>
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
     <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
@@ -27,6 +25,7 @@
     <aside class="sidebar container-fluid">
         <div class="form-group has-feedback filter">
             <input class="form-control"
+                   tabindex="1"
                    placeholder="Filter"
                    type="text"
                    data-bind="textInput: filter"
@@ -48,24 +47,21 @@
     </aside>
     <main class="container-fluid">
         {{#each docs}}
-        <section class="card">
+        <section class="card" id="{{name}}">
             <h2>
-                <a class="name" href="#{{name}}" id="{{name}}">{{name}}</a>
-                <span class="label label-primary">{{category}}</span>
+                <a tabindex="2" class="name" href="#{{name}}">{{name}}</a>
+                <span class="label label-primary pull-right">{{category}}</span>
             </h2>
             {{#if sig}}
             <div>
-                <button data-toggle="collapse"
-                        class="sig btn btn-link"
-                        data-target="#_details_{{name}}"
-                >
+                <a class="sig btn btn-link" data-collapser="#__details-{{name}}">
                     <span class="caret"></span>
                     {{sig}}
-                </button>
+                </a>
             </div>
             {{/if}}
 
-            <div class="collapse details" id="_details_{{name}}">
+            <div class="collapse details" id="__details-{{name}}">
                 <h3>Parameters</h3>
                 <ul class="params">
                     {{#each params}}
