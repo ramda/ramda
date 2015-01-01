@@ -1,3 +1,4 @@
+var path = require('jsdoc/path');
 var fs = require('jsdoc/fs');
 var helper = require('jsdoc/util/templateHelper');
 
@@ -69,6 +70,11 @@ function embedData(d) {
     };
 }
 
+var nonPrivateAccess = R.pipe(
+    R.prop('access'),
+    R.not(R.eq('private'))
+);
+
 // For embedding a JSON blob with documentation data inside the HTML.
 Handlebars.registerHelper('json', function(obj) {
     var json = JSON.stringify(obj);
@@ -98,6 +104,8 @@ function publish(data, opts, tutorials) {
     var fullData = data()
         .order('name, version, since')
         .filter({ kind: 'function' })
+        .get()
+        .filter(nonPrivateAccess)
         .map(simplifyData);
     var embeddedData = fullData.map(embedData);
     var docHtml = docTmpl({
@@ -108,9 +116,9 @@ function publish(data, opts, tutorials) {
     var indexHtml = indexTmpl({
         version: pkg.version
     });
-    writeFile('docs/index.html', docHtml);
-    writeFile('index.html', indexHtml);
-    console.log('Finished writing documentation data to docs/data.json');
+    fs.mkdirSync(path.resolve(opts.destination, 'docs'));
+    writeFile(path.resolve(opts.destination, 'index.html'), indexHtml);
+    writeFile(path.resolve(opts.destination, 'docs/index.html'), docHtml);
 }
 
 module.exports =  {
