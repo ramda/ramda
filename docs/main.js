@@ -1,4 +1,3 @@
-console.time('load');
 var root = {};
 root.filter = ko.observable('');
 root.docs = this.DOC_DATA || {};
@@ -15,4 +14,3 @@ function strIn(a, b) {
 }
 
 ko.applyBindings(root);
-console.timeEnd('load');

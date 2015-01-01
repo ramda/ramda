@@ -42,10 +42,6 @@ release-major release-minor release-patch:
 setup:
 	npm install
 
-.PHONY: doc-blob
-doc-blob:
-	./scripts/doc-blob
-
 .PHONY: real-docs
 real-docs:
 	jsdoc -t jsdoc-template dist/ramda.js

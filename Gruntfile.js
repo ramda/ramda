@@ -78,10 +78,40 @@ module.exports = function(grunt) {
         },
 
         less: {
-            ramda: {
+            'gh-pages': {
                 files: {
-                    "style.css": "less/ramda.less"
+                    "dist/gh-pages/style.css": "less/ramda.less"
                 }
+            }
+        },
+
+        jsdoc: {
+            'gh-pages': {
+                src: ['dist/ramda.js'],
+                options: {
+                    template: './jsdoc-template',
+                    destination: 'dist/gh-pages/'
+                }
+            }
+        },
+
+        clean: {
+            'gh-pages': [
+                'dist/gh-pages/**/*'
+            ]
+        },
+
+        copy: {
+            'gh-pages': {
+                files: [{
+                    expand: true,
+                    cwd: 'bower_components/bootstrap/',
+                    src: ['fonts/*'],
+                    dest: 'dist/gh-pages/'
+                }, {
+                    src: ['docs/main.js'],
+                    dest: 'dist/gh-pages/'
+                }]
             }
         },
 
@@ -94,11 +124,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-jscs');
+    grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-benchmark');
     grunt.loadNpmTasks('grunt-saucelabs');
+
+    grunt.loadTasks('tasks');
 
     grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
         // upload files in report dir to orchestrate
@@ -141,4 +176,10 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['jshint', 'jscs', 'browserify:client', 'mochaTest:docs', 'mochaTest:unit']);
     grunt.registerTask('unittest', ['browserify:client', 'mochaTest:unit']);
     grunt.registerTask('doctest', ['mochaTest:docs']);
+    grunt.registerTask('gh-pages', [
+        'clean:gh-pages',
+        'less:gh-pages',
+        'jsdoc:gh-pages',
+        'copy:gh-pages'
+    ]);
 };
