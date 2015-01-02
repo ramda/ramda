@@ -27,25 +27,35 @@ function scrollToTop() {
     main.scrollTop = 0;
 }
 
-function toggleCollapse(elem) {
-    var sel = elem.getAttribute('data-collapser');
+function tryToggleCollapse(elem) {
+    var sel = elem && elem.getAttribute('data-collapser');
+    if (!sel) {
+        return;
+    }
     document
         .querySelector(sel)
         .classList
         .toggle('in');
 }
 
+function isTopLink(elem) {
+    return elem.getAttribute('href') === '#';
+}
+
 function dispatchEvent(event) {
     var target = event.target;
-    if (target.tagName === 'A' && target.getAttribute('href') === '#') {
+    var parent = target.parentNode;
+    if (isTopLink(target)) {
         scrollToTop(target);
-    } else if (target.getAttribute('data-collapser')) {
-        toggleCollapse(target);
+    } else {
+        tryToggleCollapse(target);
+        tryToggleCollapse(parent);
     }
 }
 
 var nameFilter = document.getElementById('name-filter');
 var funcs = toArray(document.querySelectorAll('.toc .func'));
+filterToc();
 
 document.body.addEventListener('click', dispatchEvent, false);
 nameFilter.addEventListener('input', filterToc, false);

@@ -55,32 +55,30 @@
             </h2>
             {{#if sig}}
             <div>
-                <a class="sig btn btn-link" data-collapser="#__details-{{name}}">
+                <button class="sig btn btn-outline" data-collapser="#__details-{{name}}">
                     <span class="caret"></span>
                     {{sig}}
-                </a>
+                </button>
             </div>
             {{/if}}
 
-            <div class="collapse details" id="__details-{{name}}">
-                <h3>Parameters</h3>
-                <ul class="params">
+            <div class="details collapse panel panel-default" id="__details-{{name}}">
+                <table class="table table-condensed table-striped">
                     {{#each params}}
-                    <li class="param">
-                        <span class="type">{{type}}</span>
-                        <span class="name">{{name}}</span>
-                        <span class="description">{{{description}}}</span>
-                    </li>
+                    <tr>
+                        <td class="type">{{type}}</td>
+                        <td class="name">{{name}}</td>
+                        <td class="description">{{{description}}}</td>
+                    </tr>
                     {{/each}}
-                </ul>
-
-                <h3>Returns</h3>
-                {{#with returns}}
-                <div class="returns">
-                    <span class="type">{{type}}</span>
-                    <span class="description">{{{description}}}</span>
-                </div>
-                {{/with}}
+                    {{#with returns}}
+                    <tr>
+                        <td class="returns">Returns</td>
+                        <td class="type">{{type}}</td>
+                        <td class="description">{{{description}}}</td>
+                    </tr>
+                    {{/with}}
+                </table>
             </div>
 
             <div class="description">{{{description}}}</div>
