@@ -1,7 +1,7 @@
 Project Ramda
 =============
 
-Ramda is the Lego® of functional libraries for Javascript.
+Ramda is the simpler & more practical functional library for Javascript.
 
 [![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
@@ -15,38 +15,13 @@ Why Ramda?
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
      width="200" height="235" align="right" hspace="12" />
 
-Have you ever dreamed about snapping code together just like lego bricks ?
-You don't need to learn a functional programming language to reap the
-rewards of simpler code. Ramda makes it simple for you to build complex
-logic through functional composition (don't worry this only means sticking
-lego bricks together).
+Ramda makes it simple for you to build complex logic through
+functional composition. This means sticking simple functions together.
+It is designed to help you get you job more elegantly with simpler code.
+Ramda does not mutate your state. Any data you throw at Ramda is safe from
+hidden state changes, and this is a very powerful weapon to battle complexity.
 
-Because of design decisions that you don't need to worry about either, Ramda
-can get your job done more elegantly, more flexible and with less code.
-
-Compare
--------
-
-Let's compare the typical `LoDash` or `Underscore` chain style
-
-```js
-     var phonesSortedByName = function(users){
-          return _.chain(users)
-               .sortBy(function(user){
-                    return user.name;
-               })
-               .map(function(user){ return user.phone })
-               .value();
-     }
-```
-with Ramda's *list comes last* (Lego®) style
-
-```js
-     var phonesSortedByName = R.compose(
-               R.map(R.pluck('phone')),
-               R.sortBy(R.pluck('name'))
-     );
-```
+[Compare Ramda to other FP libraries](http://www.google.com)
 
 While LoDash or Underscore are great libraries, they sometimes introduce
 complexities in your code which Ramda avoids with a simpler design.
