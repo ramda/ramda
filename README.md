@@ -1,7 +1,7 @@
 Project Ramda
 =============
 
-A practical functional library for Javascript programmers.
+Ramda is the Lego® of functional libraries for Javascript.
 
 [![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
@@ -9,26 +9,67 @@ A practical functional library for Javascript programmers.
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-Goals
------
+Why Ramda?
+----------
 
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
-     width="200" height="235" align="left" hspace="12" />
-Using this library should feel as much like using Javascript as 
-possible.  Of course it's functional Javascript, but we're not 
-introducing lambda expressions in strings, we're not borrowing consed 
+     width="200" height="235" align="right" hspace="12" />
+
+Have you ever dreamed about snapping code together just like lego bricks ?
+You don't need to learn a functional programming language to reap the
+rewards of simpler code. Ramda makes it simple for you to build complex
+logic through functional composition (don't worry this only means sticking
+lego bricks together).
+
+Because of design decisions that you don't need to worry about either, Ramda
+can get your job done more elegantly, more flexible and with less code.
+
+Compare
+-------
+
+Let's compare the typical `LoDash` or `Underscore` chain style
+
+```js
+     var phonesSortedByName = function(users){
+          return _.chain(users)
+               .sortBy(function(user){
+                    return user.name;
+               })
+               .map(function(user){ return user.phone })
+               .value();
+     }
+```
+with Ramda's *list comes last* (Lego®) style
+
+```js
+     var phonesSortedByName = R.compose(
+               R.map(R.pluck('phone')),
+               R.sortBy(R.pluck('name'))
+     );
+```
+
+While LoDash or Underscore are great libraries, they sometimes introduce
+complexities in your code which Ramda avoids with a simpler design.
+Also see [Why Ramda?](http://fr.umio.us/why-ramda/) and [Hey Underscore](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop).
+
+
+Philosophy
+----------
+Using this library feels much like using Javascript, for good.
+Of course it's functional Javascript, but we're not introducing
+lambda expressions in strings, we're not borrowing consed 
 lists, we're not porting over all of the Clojure functions.
 
-Our basic data structures will be normal Javascript objects, and our 
-usual collections will be Javascript arrays.  We will not try to reach 
+Our basic data structures are normal Javascript objects, and our 
+usual collections are Javascript arrays.  We do not try to reach 
 the point where all the functions have only zero, one, or two arguments.
-We will certainly try to keep some of the normal features of Javascript 
+We certainly keep some of the normal features of Javascript 
 that seem to be unusual in functional languages, including variable 
 length function signatures and functions as objects with properties.
 
 Ramda will never be a drop-in replacement for Underscore (or LoDash, or 
 even a drop-in-and-mechanically-switch-the-parameter-order-everywhere 
-replacement.) It is intended to work with a different style of coding. 
+replacement.) Ramda is intended to work with a different style of coding. 
 Functional programming is in good part about immutable objects and 
 side-effect free functions. While Ramda does not expect to do anything to 
 *enforce* that style, its code should always work to make that style as 
