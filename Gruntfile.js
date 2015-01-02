@@ -11,6 +11,12 @@ var TRAVIS_COMMIT_RANGE = envvar.string('TRAVIS_COMMIT_RANGE', '');
 var TRAVIS_NODE_VERSION = envvar.string('TRAVIS_NODE_VERSION', process.versions.node);
 var TRAVIS_TAG          = envvar.string('TRAVIS_TAG', '');
 
+var jsFiles = [
+    'scripts/build',
+    '**/*.js',
+    '!{dist,lib/test,node_modules,bower_components}/**'
+];
+
 module.exports = function(grunt) {
     grunt.initConfig({
 
@@ -45,7 +51,7 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            files: ['scripts/build', '**/*.js', '!{dist,lib/test,node_modules}/**'],
+            files: jsFiles,
             options: {
                 config: '.jscsrc',
                 excludeFiles: ['**/*.min.js', 'test/bundle.js']
@@ -53,7 +59,7 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            files: ['scripts/build', '**/*.js', '!{lib/test,node_modules}/**'],
+            files: jsFiles,
             options: {
                 ignores: ['**/*.min.js', 'test/bundle.js'],
                 jshintrc: '.jshintrc'
@@ -80,7 +86,7 @@ module.exports = function(grunt) {
         less: {
             'gh-pages': {
                 files: {
-                    "dist/gh-pages/style.css": "less/ramda.less"
+                    'dist/gh-pages/style.css': 'less/ramda.less'
                 }
             }
         },
@@ -108,6 +114,9 @@ module.exports = function(grunt) {
                     cwd: 'bower_components/bootstrap/',
                     src: ['fonts/*'],
                     dest: 'dist/gh-pages/'
+                }, {
+                    src: ['dist/ramda.js'],
+                    dest: 'dist/gh-pages/docs/'
                 }, {
                     src: ['docs/main.js'],
                     dest: 'dist/gh-pages/'
@@ -181,5 +190,9 @@ module.exports = function(grunt) {
         'less:gh-pages',
         'jsdoc:gh-pages',
         'copy:gh-pages'
+    ]);
+    grunt.registerTask('publish-gh-pages', [
+        'gh-pages',
+        'push-gh-pages'
     ]);
 };

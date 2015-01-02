@@ -9,7 +9,7 @@ var Handlebars = require('handlebars');
 var R = require('../dist/ramda');
 
 function valueForTitle(t, xs) {
-    var data = R.find(R.where({ title: t }), xs);
+    var data = R.find(R.where({title: t}), xs);
     return (data && data.value) || '';
 }
 
@@ -41,7 +41,7 @@ function simplifyData(d) {
     var returns = (d.returns || [])[0];
     var see = d.see || [];
     var examples = prettifyCode(d.examples || []);
-    var sig = prettifySig(valueForTitle('sig', d.tags) || '')
+    var sig = prettifySig(valueForTitle('sig', d.tags) || '');
     return {
         name: d.name || '',
         sig: sig,
@@ -51,7 +51,7 @@ function simplifyData(d) {
                 type: p.type.names[0] || '',
                 description: marked(p.description || ''),
                 name: p.name || ''
-            }
+            };
         }),
         returns: {
             type: returns ? returns.type.names[0] : '',
@@ -82,7 +82,7 @@ Handlebars.registerHelper('json', function(obj) {
 });
 
 // For embedding README.md as the main page.
-Handlebars.registerPartial('readme', function(obj) {
+Handlebars.registerPartial('readme', function() {
     return new Handlebars.SafeString(readme);
 });
 
@@ -99,11 +99,11 @@ var indexTmpl = loadTemplate('jsdoc-template/index.html.handlebars');
 var pkg = loadJson('package.json');
 var readme = loadMarkdown('README.md');
 
-function publish(data, opts, tutorials) {
+function publish(data, opts) {
     data = helper.prune(data);
     var fullData = data()
         .order('name, version, since')
-        .filter({ kind: 'function' })
+        .filter({kind: 'function'})
         .get()
         .filter(nonPrivateAccess)
         .map(simplifyData);
