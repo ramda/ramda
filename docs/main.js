@@ -1,11 +1,20 @@
-var root = {};
-root.filter = ko.observable('');
-root.docs = this.DOC_DATA || {};
-root.filteredDocs = ko.computed(function() {
-    return root.docs.filter(function(d) {
-        return strIn(root.filter(), d.name);
-    });
-});
+/* global document */
+
+function toArray(xs) {
+    return Array.prototype.slice.call(xs);
+}
+
+function filterToc() {
+    var f = filterElement.bind(null, nameFilter.value, '');
+    funcs.forEach(f);
+}
+
+function filterElement(nameFilter, categoryFilter, elem) {
+    var name = elem.getAttribute('data-name');
+    var category = elem.getAttribute('data-category');
+    var matches = strIn(nameFilter, name) || category === categoryFilter;
+    elem.style.display = matches ? '' : 'none';
+}
 
 function strIn(a, b) {
     a = a.toLowerCase();
@@ -19,7 +28,7 @@ function scrollToTop() {
 }
 
 function toggleCollapse(elem) {
-    var sel = elem.getAttribute('data-collapser')
+    var sel = elem.getAttribute('data-collapser');
     document
         .querySelector(sel)
         .classList
@@ -35,5 +44,8 @@ function dispatchEvent(event) {
     }
 }
 
+var nameFilter = document.getElementById('name-filter');
+var funcs = toArray(document.querySelectorAll('.toc .func'));
+
 document.body.addEventListener('click', dispatchEvent, false);
-ko.applyBindings(root);
+nameFilter.addEventListener('input', filterToc, false);

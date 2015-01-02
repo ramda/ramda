@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ramda Documentation</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
     <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
@@ -26,6 +25,7 @@
         <div class="form-group has-feedback filter">
             <input class="form-control"
                    tabindex="1"
+                   id="name-filter"
                    placeholder="Filter"
                    type="text"
                    data-bind="textInput: filter"
@@ -35,14 +35,15 @@
             </span>
         </div>
         <ul class="nav nav-pills nav-stacked toc">
-            <!-- ko foreach: filteredDocs -->
-            <li>
-                <a data-bind="attr: { href: '#' + name }">
-                    <span data-bind="text: name"></span>
-                    <span class="label label-primary pull-right" data-bind="text: category"></span>
+            {{#each docs}}
+            <li class="func" data-name="{{name}}" data-category="{{category}}">
+                <a href="#{{name}}">
+                    {{name}}
+                    <span class="label label-primary pull-right"
+                    >{{category}}</span>
                 </a>
             </li>
-            <!-- /ko -->
+            {{/each}}
         </ul>
     </aside>
     <main class="container-fluid">
@@ -100,5 +101,6 @@
         var DOC_DATA = {{json data}};
     </script>
     <script src="main.js"></script>
+    <script src="dist/ramda.js"></script>
 </body>
 </html>
