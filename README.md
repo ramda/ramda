@@ -30,12 +30,13 @@ However, Ramda is significantly different from libraries like _Underscore_ and _
 
 The primary distinguishing features of Ramda are:
 
-1. Ramda emphasizes a purer functional style - where practical.
+1. Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions
+are at the heart of it's design philospohy.
 2. Ramda takes the function first, and the data last for effective currying. In a nutshell, the combination of currying and function-first enables the developer to compose functions with very little code (often in a “point-free” fashion), before finally passing in the data.
 3. Ramda methods are automatically curried. This auto-currying makes it easy to compose functions to create new functions. Because the API is function-first, data-last, you can continue composing and composing until you build up the function you need before dropping in the data.
 
 
-Also see [Why Ramda?](http://fr.umio.us/why-ramda/) and [Hey Underscore](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop).
+Also see [Why Ramda?](http://fr.umio.us/why-ramda/), [Why Curry Helps](http://hughfdjackson.com/javascript/why-curry-helps/) and [Hey Underscore](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop).
 
 
 Philosophy
