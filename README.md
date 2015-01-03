@@ -64,7 +64,7 @@ Though we aim for an implementation both clean and elegant, the API is king.
 We sacrifice a great deal of implementation elegance for even a slightly
 cleaner API.
 
-Last but not least, Ramda's strives for performance. A reliable and quick
+Last but not least, Ramda strives for performance. A reliable and quick
 implementation wins over any notions of functional purity.
 
 Installation
@@ -150,11 +150,11 @@ Structure
 
 ### Automatic Currying ###
 
-The functions included should automatically allow for partial 
+The functions included automatically allow for partial 
 application without an explicit call to lPartial.  Many of these operate 
 on lists.  A single list parameter should probably come last, which 
 might conflict with the design of other libraries that have strong 
-functional components (I'm looking at you Underscore!)
+functional components (I'm looking at you _Underscore_!)
 
 The idea is that, if foldl has this signature:
 
@@ -223,15 +223,6 @@ tests completely headlessly.
 
 
 
-So What's With Eweda?
----------------------
-
-The [eweda library](https://github.com/CrossEye/eweda) was written by 
-the developers of this library, with similar goals.  But that one strove 
-more for implementation elegance than for practical capabilities.  Ramda 
-is all about giving users real-world tools.  Eweda can be seen more as 
-an academic exercise, mostly proving out what does and doesn't work, and 
-doing so as elegantly as possible.
 
 Acknowledgements
 -----------------
