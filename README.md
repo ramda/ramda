@@ -13,7 +13,7 @@ Why Ramda?
 ----------
 
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
-     width="180" height="200" align="right" hspace="12" />
+     width="170" height="190" align="right" hspace="12" />
 
 Ramda makes it simple for you to build complex logic through
 functional composition. This means sticking simple functions together.
