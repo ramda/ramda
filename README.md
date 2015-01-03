@@ -21,7 +21,8 @@ It is designed to help you get you job more elegantly with simpler code.
 Ramda does not mutate your state. Any data you throw at Ramda is safe from
 hidden state changes, and this is a very powerful weapon to battle complexity.
 
-[Compare Ramda to other FP libraries](http://www.google.com)
+The Differences
+---------------
 
 There are already excellent libraries with functional flavor,
 such as _Underscore_ and _Lodash_. Ramda includes all of the favorite
