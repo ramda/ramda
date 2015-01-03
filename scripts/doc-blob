@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var YAML = require('js-yaml');
+
+var DOC_FILE = 'doc.yaml';
+var DATA_FILE = 'docs/data.json';
+
+var text = fs.readFileSync(DOC_FILE, 'utf-8');
+var docs = YAML.safeLoad(text);
+var data = JSON.stringify(docs, null, 4);
+
+fs.writeFileSync(DATA_FILE, data, 'utf-8');

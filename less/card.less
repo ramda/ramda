@@ -1,0 +1,72 @@
+@padding: 15px;
+@radius: 2px;
+
+.card {
+    font-size: ceil((@font-size-base + 2px));
+
+    margin: 0 0 @padding 0;
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px #ccc;
+    padding: @padding;
+    background: #fff;
+    border-radius: @radius;
+
+    pre {
+        margin: (-@padding);
+        margin-top: @padding;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+
+        font-size: @font-size-base;
+
+        code {
+            padding: @padding;
+            display: block;
+        }
+    }
+
+    .returns {
+        font-style: italic;
+    }
+
+    .name {
+        color: inherit;
+    }
+
+    h2 {
+        margin-top: 0;
+
+        .name {
+            font-weight: bold;
+        }
+    }
+
+    .description {
+        margin-top: @padding;
+        white-space: wrap;
+    }
+
+    .sig {
+        .caret {
+            margin-right: 1em;
+            transform: rotate(-90deg);
+        }
+
+        &.open .caret {
+            transform: none;
+        }
+
+        font-family: Verdana, @font-family-sans-serif;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .details {
+        margin-top: @padding-base-vertical;
+    }
+
+    .type {
+        font-weight: bold;
+    }
+}

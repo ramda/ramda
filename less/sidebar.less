@@ -1,0 +1,43 @@
+@border: 1px solid #ccc;
+
+.sidebar {
+    background: #f4f4f4;
+    border-right: @border;
+    font-family: @font-family-monospace;
+
+    .filter {
+        width: 100%;
+        margin: 15px 0;
+        height: 30px;
+    }
+
+    .toc {
+        @padding: 5px;
+        @margin: 15px;
+
+        margin: 0 (-@margin);
+        width: 100%;
+        bottom: 0;
+        top: 60px;
+        background: #f8f8f8;
+        border-top: @border;
+        position: absolute;
+
+        padding: (3 * @padding) 0;
+
+        overflow: auto;
+
+        li {
+            margin: 0;
+        }
+
+        a {
+            padding: @padding @margin;
+            border-radius: 0;
+
+            &:hover {
+                background: #e4e4e4;
+            }
+        }
+    }
+}

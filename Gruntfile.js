@@ -11,6 +11,12 @@ var TRAVIS_COMMIT_RANGE = envvar.string('TRAVIS_COMMIT_RANGE', '');
 var TRAVIS_NODE_VERSION = envvar.string('TRAVIS_NODE_VERSION', process.versions.node);
 var TRAVIS_TAG          = envvar.string('TRAVIS_TAG', '');
 
+var jsFiles = [
+    'scripts/build',
+    '**/*.js',
+    '!{dist,lib/test,node_modules,bower_components}/**'
+];
+
 module.exports = function(grunt) {
     grunt.initConfig({
 
@@ -45,7 +51,7 @@ module.exports = function(grunt) {
         },
 
         jscs: {
-            files: ['scripts/build', '**/*.js', '!{dist,lib/test,node_modules}/**'],
+            files: jsFiles,
             options: {
                 config: '.jscsrc',
                 excludeFiles: ['**/*.min.js', 'test/bundle.js']
@@ -53,7 +59,7 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            files: ['scripts/build', '**/*.js', '!{lib/test,node_modules}/**'],
+            files: jsFiles,
             options: {
                 ignores: ['**/*.min.js', 'test/bundle.js'],
                 jshintrc: '.jshintrc'
@@ -77,6 +83,47 @@ module.exports = function(grunt) {
             }
         },
 
+        less: {
+            'gh-pages': {
+                files: {
+                    'dist/gh-pages/style.css': 'less/ramda.less'
+                }
+            }
+        },
+
+        jsdoc: {
+            'gh-pages': {
+                src: ['dist/ramda.js'],
+                options: {
+                    template: './jsdoc-template',
+                    destination: 'dist/gh-pages/'
+                }
+            }
+        },
+
+        clean: {
+            'gh-pages': [
+                'dist/gh-pages/**/*'
+            ]
+        },
+
+        copy: {
+            'gh-pages': {
+                files: [{
+                    expand: true,
+                    cwd: 'bower_components/bootstrap/',
+                    src: ['fonts/*'],
+                    dest: 'dist/gh-pages/'
+                }, {
+                    src: ['dist/ramda.js'],
+                    dest: 'dist/gh-pages/docs/'
+                }, {
+                    src: ['docs/main.js'],
+                    dest: 'dist/gh-pages/'
+                }]
+            }
+        },
+
         'saucelabs-mocha': sauceConf,
 
         connect: sauceSrv
@@ -85,11 +132,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-jscs');
+    grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-benchmark');
     grunt.loadNpmTasks('grunt-saucelabs');
+
+    grunt.loadTasks('tasks');
 
     grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
         // upload files in report dir to orchestrate
@@ -132,4 +185,14 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['jshint', 'jscs', 'browserify:client', 'mochaTest:docs', 'mochaTest:unit']);
     grunt.registerTask('unittest', ['browserify:client', 'mochaTest:unit']);
     grunt.registerTask('doctest', ['mochaTest:docs']);
+    grunt.registerTask('gh-pages', [
+        'clean:gh-pages',
+        'less:gh-pages',
+        'jsdoc:gh-pages',
+        'copy:gh-pages'
+    ]);
+    grunt.registerTask('publish-gh-pages', [
+        'gh-pages',
+        'push-gh-pages'
+    ]);
 };
