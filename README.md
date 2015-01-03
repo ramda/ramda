@@ -15,19 +15,17 @@ Why Ramda?
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
      width="170" height="190" align="right" hspace="12" />
 
-Ramda makes it simple for you to build complex logic through
-functional composition. This means sticking simple functions together.
-It is designed to help you get you job more elegantly with simpler code.
-Ramda does not mutate your state. Any data you throw at Ramda is safe from
-hidden state changes, and this is a very powerful weapon to battle complexity.
+Many excellent libraries with functional flavor,
+such as _Underscore_ and _Lodash_ already exist. So why did we create Ramda?
+We need some high level philosphical reasons why you guys created ramda instead of using underscore and such.
+lorem
+lorem
+
 
 What's Different?
 -----------------
 
-There are already excellent libraries with functional flavor,
-such as _Underscore_ and _Lodash_. Ramda includes all of the favorite
-list-manipulation functions you expect, e.g. map, filter, reduce, find, and so forth.
-However, Ramda is significantly different from libraries like _Underscore_ and _Lodash_.
+While Ramda includes all of the favorite list-manipulation functions you expect, e.g. map, filter, reduce, find, and so forth, Ramda is also significantly different from libraries like _Underscore_ and _Lodash_.
 
 The primary distinguishing features of Ramda are:
 
