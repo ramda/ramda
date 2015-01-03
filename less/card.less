@@ -1,17 +1,6 @@
 @padding: 15px;
 @radius: 2px;
 
-.btn-outline() {
-    background: fade(@link-color, 10%);
-    border: 2px solid fade(@link-color, 30%);
-    color: @link-color;
-    border-radius: @border-radius-base;
-
-    &:hover {
-        background: fade(@link-color, 20%);
-    }
-}
-
 .card {
     font-size: ceil((@font-size-base + 2px));
 
@@ -59,11 +48,18 @@
     }
 
     .sig {
+        .caret {
+            margin-right: 1em;
+            transform: rotate(-90deg);
+        }
+
+        &.open .caret {
+            transform: none;
+        }
+
         font-family: Verdana, @font-family-sans-serif;
         white-space: normal;
         text-align: left;
-
-        .btn-outline();
     }
 
     .details {
