@@ -39,7 +39,7 @@
             <li class="func" data-name="{{name}}" data-category="{{category}}">
                 <a href="#{{name}}">
                     {{name}}
-                    <span class="label label-primary pull-right"
+                    <span class="label label-category pull-right"
                     >{{category}}</span>
                 </a>
             </li>
@@ -51,34 +51,34 @@
         <section class="card" id="{{name}}">
             <h2>
                 <a tabindex="2" class="name" href="#{{name}}">{{name}}</a>
-                <span class="label label-primary pull-right">{{category}}</span>
+                <span class="label label-category pull-right">{{category}}</span>
             </h2>
             {{#if sig}}
             <div>
-                <button class="sig btn btn-outline" data-collapser="#__details-{{name}}">
-                    <span class="caret"></span>
+                <button class="sig btn btn-link" data-collapser="#__details-{{name}}">
+                    <span class="caret rotated"></span>
                     {{sig}}
                 </button>
             </div>
             {{/if}}
 
             <div class="details collapse panel panel-default" id="__details-{{name}}">
-                <table class="table table-condensed table-striped">
+                <ul class="list-group">
                     {{#each params}}
-                    <tr>
-                        <td class="type">{{type}}</td>
-                        <td class="name">{{name}}</td>
-                        <td class="description">{{{description}}}</td>
-                    </tr>
+                    <li class="list-group-item">
+                        <span class="type">{{type}}</span>
+                        <span class="name">{{name}}</span>
+                        <span class="description">{{{description}}}</span>
+                    </li>
                     {{/each}}
+                </ul>
+                <div class="panel-body">
                     {{#with returns}}
-                    <tr>
-                        <td class="returns">Returns</td>
-                        <td class="type">{{type}}</td>
-                        <td class="description">{{{description}}}</td>
-                    </tr>
+                    <span class="returns">Returns</span>
+                    <span class="type">{{type}}</span>
+                    <span class="description">{{{description}}}</span>
                     {{/with}}
-                </table>
+                </div>
             </div>
 
             <div class="description">{{{description}}}</div>

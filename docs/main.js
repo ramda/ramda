@@ -29,9 +29,10 @@ function scrollToTop() {
 
 function tryToggleCollapse(elem) {
     var sel = elem && elem.getAttribute('data-collapser');
-    if (!sel) {
-        return;
-    }
+    if (!sel) { return; }
+    elem
+        .classList
+        .toggle('open');
     document
         .querySelector(sel)
         .classList
