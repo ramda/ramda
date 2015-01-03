@@ -31,7 +31,7 @@ However, Ramda is significantly different from libraries like _Underscore_ and _
 The primary distinguishing features of Ramda are:
 
 1. Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions
-are at the heart of it's design philospohy.
+are at the heart of it's design philospohy. This can help you get the job done with simple, elegant code.
 2. Ramda takes the function first, and the data last for effective currying. In a nutshell, the combination of currying and function-first enables the developer to compose functions with very little code (often in a “point-free” fashion), before finally passing in the data.
 3. Ramda methods are automatically curried. This auto-currying makes it easy to compose functions to create new functions. Because the API is function-first, data-last, you can continue composing and composing until you build up the function you need before dropping in the data.
 
@@ -47,10 +47,9 @@ lambda expressions in strings, we're not borrowing consed
 lists, we're not porting over all of the Clojure functions.
 
 Our basic data structures are plain Javascript objects, and our
-usual collections are Javascript arrays. We certainly keep some of
-the regular features of Javascript (that seem to be unusual in functional
-languages), including variable length (variadic) function signatures and
-functions as objects with properties.
+usual collections are Javascript arrays. We also keep other
+native features of Javascript, such as functions as objects
+with properties.
 
 While offering similar functionality, Ramda will never be a drop-in
 replacement for Underscore / LoDash. Ramda is intended to work with a
