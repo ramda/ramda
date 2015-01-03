@@ -18,8 +18,7 @@ Why Ramda?
 Many excellent libraries with functional flavor,
 such as _Underscore_ and _Lodash_ already exist. So why did we create Ramda?
 We need some high level philosphical reasons why you guys created ramda instead of using underscore and such.
-lorem
-lorem
+lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem 
 
 
 What's Different?
