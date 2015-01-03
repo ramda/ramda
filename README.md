@@ -1,7 +1,7 @@
-Project Ramda
+Ramda
 =============
 
-Ramda is the simpler & more practical functional library for Javascript.
+A practical functional library for Javascript.
 
 [![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
@@ -23,40 +23,48 @@ hidden state changes, and this is a very powerful weapon to battle complexity.
 
 [Compare Ramda to other FP libraries](http://www.google.com)
 
-While LoDash or Underscore are great libraries, they sometimes introduce
-complexities in your code which Ramda avoids with a simpler design.
+There are already some excellent libraries with a functional flavor,
+such as _Underscore_ and _Lodash_. Ramda includes all of the favorite
+list-manipulation functions you expect, e.g. map, filter, reduce, find, and so forth.
+However, Ramda is significantly different from libraries like _Underscore_ and _Lodash_.
+The primary distinguishing features of Ramda are:
+1. Ramda emphasizes a purer functional style - where practical.
+2. Ramda takes the function first, and the data last for effective currying.
+In a nutshell, the combination of currying and function-first enables the developer to compose functions with very little code (often in a “point-free” fashion), before finally passing in the data.
+3. Ramda methods are automatically curried.
+This auto-currying makes it easy to compose functions to create new functions. Because the API is function-first, data-last, you can continue composing and composing until you build up the function you need before dropping in the data.
+
+
 Also see [Why Ramda?](http://fr.umio.us/why-ramda/) and [Hey Underscore](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop).
 
 
 Philosophy
 ----------
 Using this library feels much like using Javascript, for good.
-Of course it's functional Javascript, but we're not introducing
+It is practical functional Javascript. We're not introducing
 lambda expressions in strings, we're not borrowing consed 
 lists, we're not porting over all of the Clojure functions.
 
-Our basic data structures are normal Javascript objects, and our 
-usual collections are Javascript arrays.  We do not try to reach 
-the point where all the functions have only zero, one, or two arguments.
-We certainly keep some of the normal features of Javascript 
-that seem to be unusual in functional languages, including variable 
-length function signatures and functions as objects with properties.
+Our basic data structures are plain Javascript objects, and our
+usual collections are Javascript arrays. We certainly keep some of
+the regular features of Javascript (that seem to be unusual in functional
+languages), including variable length (variadic) function signatures and
+functions as objects with properties.
 
-Ramda will never be a drop-in replacement for Underscore (or LoDash, or 
-even a drop-in-and-mechanically-switch-the-parameter-order-everywhere 
-replacement.) Ramda is intended to work with a different style of coding. 
+While offering similar functionality, Ramda will never be a drop-in
+replacement for Underscore / LoDash. Ramda is intended to work with a
+different style of coding. 
+
 Functional programming is in good part about immutable objects and 
-side-effect free functions. While Ramda does not expect to do anything to 
-*enforce* that style, its code should always work to make that style as 
-frictionless as possible.
+side-effect free functions. While Ramda does *enforce* this, it
+enables such style to be as frictionless as possible.
 
-As much as we can, we would like the implementation to be both clean and 
-elegant.  But the API is king: we will sacrifice a great deal of 
-implementation elegance for even a slightly cleaner API.
+Though we aim for an implementation both clean and elegant, the API is king.
+We sacrifice a great deal of implementation elegance for even a slightly
+cleaner API.
 
-Unlike the developers of that silly-named _Eweda_ project, though, this 
-one will focus also on performance, striving for a reliable and quick 
-implementation over any notions of functional purity.
+Last but not least, Ramda's strives for performance. A reliable and quick
+implementation wins over any notions of functional purity.
 
 Installation
 ------------
