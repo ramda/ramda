@@ -27,12 +27,14 @@ There are already excellent libraries with functional flavor,
 such as _Underscore_ and _Lodash_. Ramda includes all of the favorite
 list-manipulation functions you expect, e.g. map, filter, reduce, find, and so forth.
 However, Ramda is significantly different from libraries like _Underscore_ and _Lodash_.
+
 The primary distinguishing features of Ramda are:
+
 1. Ramda emphasizes a purer functional style - where practical.
 2. Ramda takes the function first, and the data last for effective currying.
-*In a nutshell, the combination of currying and function-first enables the developer to compose functions with very little code (often in a “point-free” fashion), before finally passing in the data.
+     *In a nutshell, the combination of currying and function-first enables the developer to compose functions with very little code (often in a “point-free” fashion), before finally passing in the data.
 3. Ramda methods are automatically curried.
-*This auto-currying makes it easy to compose functions to create new functions. Because the API is function-first, data-last, you can continue composing and composing until you build up the function you need before dropping in the data.
+     *This auto-currying makes it easy to compose functions to create new functions. Because the API is function-first, data-last, you can continue composing and composing until you build up the function you need before dropping in the data.
 
 
 Also see [Why Ramda?](http://fr.umio.us/why-ramda/) and [Hey Underscore](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop).
