@@ -13,7 +13,7 @@ Why Ramda?
 ----------
 
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
-     width="200" height="235" align="right" hspace="12" />
+     width="180" height="200" align="right" hspace="12" />
 
 Ramda makes it simple for you to build complex logic through
 functional composition. This means sticking simple functions together.
@@ -21,8 +21,8 @@ It is designed to help you get you job more elegantly with simpler code.
 Ramda does not mutate your state. Any data you throw at Ramda is safe from
 hidden state changes, and this is a very powerful weapon to battle complexity.
 
-The Differences
----------------
+What's Different?
+-----------------
 
 There are already excellent libraries with functional flavor,
 such as _Underscore_ and _Lodash_. Ramda includes all of the favorite
