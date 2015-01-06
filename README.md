@@ -51,7 +51,7 @@ native features of Javascript, such as functions as objects
 with properties.
 
 While offering similar functionality, Ramda will never be a drop-in
-replacement for Underscore / LoDash. Ramda is intended to work with a
+replacement for _Underscore_ / _Lo-Dash_. Ramda is intended to work with a
 different style of coding. 
 
 Functional programming is in good part about immutable objects and 
