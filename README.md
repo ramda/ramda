@@ -21,7 +21,7 @@ There are already several excellent libraries with a functional flavor such as _
 What's Different?
 -----------------
 
-While Ramda includes all of the favorite list-manipulation functions you expect, e.g. map, filter, reduce, find, and so forth, Ramda is also significantly different from libraries like _Underscore_ and _Lo-Dash_.
+While Ramda includes all of the favorite list-manipulation functions you expect, e.g. `map`, `filter`, `reduce`, `find`, and so forth, Ramda is also significantly different from libraries like _Underscore_ and _Lo-Dash_.
 
 The primary distinguishing features of Ramda are:
 
@@ -149,12 +149,12 @@ Structure
 ### Automatic Currying ###
 
 Ramda functions are curried by default to allow for partial 
-application without an explicit call to lPartial.  Many of these operate 
+application without an explicit call to `lPartial`.  Many of these operate 
 on lists.  A single list parameter should probably come last, which 
 might conflict with the design of other libraries that have strong 
 functional components (I'm looking at you _Underscore_!)
 
-The idea is that, if foldl has this signature:
+The idea is that, if `foldl` has this signature:
 
 
 ```javascript
@@ -167,7 +167,7 @@ and we have this simple function:
 var add = function(a, b) {return a + b;};
 ```
 
-then, instead of having to manually call lPartial like this:
+then, instead of having to manually call `lPartial` like this:
 
 ```javascript
 var sum = lPartial(foldl, add, 0);
@@ -214,7 +214,7 @@ test across different browsers (or even headlessly), with livereloading of
 tests too. Install testem (`npm install -g testem`) and run `testem`. Open the
 link provided in your browser and you will see the results in your terminal.
 
-If you have PhantomJS installed, you can run `testem -l phantomjs` to run the
+If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
 ![ramda on sauce labs](https://saucelabs.com/browser-matrix/ramda.svg)
