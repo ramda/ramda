@@ -15,23 +15,24 @@ Why Ramda?
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
      width="170" height="190" align="right" hspace="12" />
 
-Many excellent libraries with functional flavor,
-such as _Underscore_ and _Lodash_ already exist. So why did we create Ramda?
-We need some high level philosphical reasons why you guys created ramda instead of using underscore and such.
-lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem 
+There are already several excellent libraries with a functional flavor such as _Underscore_ and _Lo-Dash_. While they are meant to be general-purpose toolkits, suitable for working in multiple paradigms, we created Ramda differently. We wanted a library designed specifically for a functional programming style, one that made it easy to create functional pipelines, one that never mutated user data. 
 
 
 What's Different?
 -----------------
 
-While Ramda includes all of the favorite list-manipulation functions you expect, e.g. map, filter, reduce, find, and so forth, Ramda is also significantly different from libraries like _Underscore_ and _Lodash_.
+While Ramda includes all of the favorite list-manipulation functions you expect, e.g. map, filter, reduce, find, and so forth, Ramda is also significantly different from libraries like _Underscore_ and _Lo-Dash_.
 
 The primary distinguishing features of Ramda are:
 
-1. Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions
-are at the heart of it's design philospohy. This can help you get the job done with simple, elegant code.
-2. Ramda takes the function first, and the data last for effective currying. In a nutshell, the combination of currying and function-first enables the developer to compose functions with very little code (often in a “point-free” fashion), before finally passing in the data.
-3. Ramda methods are automatically curried. This auto-currying makes it easy to compose functions to create new functions. Because the API is function-first, data-last, you can continue composing and composing until you build up the function you need before dropping in the data.
+1. Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions are at the heart of its design philosophy. This can help you get the job done with simple, elegant code.
+
+2. Ramda functions are automatically curried. This allows you to easily build up new functions from old ones simply by not supplying the final parameters.
+
+3. The parameters to Ramda functions are arranged to make it convenient for currying. The data to be operated on is generally supplied last.
+
+The last two points together make it very easy to build functions as sequences of simpler functions, each of which transforms the data and passes it along to the next. That is the style coding Ramda is designed to support.
+
 
 
 Also see [Why Ramda?](http://fr.umio.us/why-ramda/), [Why Curry Helps](http://hughfdjackson.com/javascript/why-curry-helps/) and [Hey Underscore](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop).
@@ -54,10 +55,10 @@ replacement for Underscore / LoDash. Ramda is intended to work with a
 different style of coding. 
 
 Functional programming is in good part about immutable objects and 
-side-effect free functions. While Ramda does *enforce* this, it
+side-effect free functions. While Ramda does *not enforce* this, it
 enables such style to be as frictionless as possible.
 
-Though we aim for an implementation both clean and elegant, the API is king.
+We aim for an implementation both clean and elegant, but the API is king.
 We sacrifice a great deal of implementation elegance for even a slightly
 cleaner API.
 
@@ -147,7 +148,7 @@ Structure
 
 ### Automatic Currying ###
 
-The functions included automatically allow for partial 
+Ramda functions are curried by default to allow for partial 
 application without an explicit call to lPartial.  Many of these operate 
 on lists.  A single list parameter should probably come last, which 
 might conflict with the design of other libraries that have strong 
