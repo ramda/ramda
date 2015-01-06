@@ -25,11 +25,11 @@ While Ramda includes all of the favorite list-manipulation functions you expect,
 
 The primary distinguishing features of Ramda are:
 
-1. Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions are at the heart of its design philosophy. This can help you get the job done with simple, elegant code.
+* Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions are at the heart of its design philosophy. This can help you get the job done with simple, elegant code.
 
-2. Ramda functions are automatically curried. This allows you to easily build up new functions from old ones simply by not supplying the final parameters.
+* Ramda functions are automatically curried. This allows you to easily build up new functions from old ones simply by not supplying the final parameters.
 
-3. The parameters to Ramda functions are arranged to make it convenient for currying. The data to be operated on is generally supplied last.
+* The parameters to Ramda functions are arranged to make it convenient for currying. The data to be operated on is generally supplied last.
 
 The last two points together make it very easy to build functions as sequences of simpler functions, each of which transforms the data and passes it along to the next. Ramda is designed to support this style of coding.
 
@@ -142,44 +142,6 @@ speakers, lambs are baby sheep, ewes are female sheep, and rams are male
 sheep.  So perhaps ramda is a grown-up lambda... but probably not.
 
 
-
-Structure
----------
-
-### Automatic Currying ###
-
-Ramda functions are curried by default to allow for partial 
-application without an explicit call to `lPartial`.  Many of these operate 
-on lists.  A single list parameter should probably come last, which 
-might conflict with the design of other libraries that have strong 
-functional components (I'm looking at you _Underscore_!)
-
-The idea is that, if `foldl` has this signature:
-
-
-```javascript
-var foldl = function(fn, accum, arr) { /* ... */}
-```
-
-and we have this simple function:
-
-```javascript
-var add = function(a, b) {return a + b;};
-```
-
-then, instead of having to manually call `lPartial` like this:
-
-```javascript
-var sum = lPartial(foldl, add, 0);
-var total = sum([1, 2, 3, 4]);
-```
-
-with ramda, we can just do this:
-
-```javascript
-var sum = foldl(add, 0);
-var total = sum([1, 2, 3, 4]);
-```
 
 
 Running The Test Suite
