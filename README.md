@@ -1,4 +1,4 @@
-Project Ramda
+Ramda
 =============
 
 A practical functional library for Javascript programmers.
@@ -9,38 +9,61 @@ A practical functional library for Javascript programmers.
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-Goals
------
+Why Ramda?
+----------
 
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
-     width="200" height="235" align="left" hspace="12" />
-Using this library should feel as much like using Javascript as 
-possible.  Of course it's functional Javascript, but we're not 
-introducing lambda expressions in strings, we're not borrowing consed 
+     width="170" height="190" align="right" hspace="12" />
+
+There are already several excellent libraries with a functional flavor such as _Underscore_ and _Lo-Dash_. While they are meant to be general-purpose toolkits, suitable for working in multiple paradigms, we created Ramda differently. We wanted a library designed specifically for a functional programming style, one that made it easy to create functional pipelines, one that never mutated user data. 
+
+
+What's Different?
+-----------------
+
+While Ramda includes all of the favorite list-manipulation functions you expect, e.g. `map`, `filter`, `reduce`, `find`, and so forth, Ramda is also significantly different from libraries like _Underscore_ and _Lo-Dash_.
+
+The primary distinguishing features of Ramda are:
+
+* Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions are at the heart of its design philosophy. This can help you get the job done with simple, elegant code.
+
+* Ramda functions are automatically curried. This allows you to easily build up new functions from old ones simply by not supplying the final parameters.
+
+* The parameters to Ramda functions are arranged to make it convenient for currying. The data to be operated on is generally supplied last.
+
+The last two points together make it very easy to build functions as sequences of simpler functions, each of which transforms the data and passes it along to the next. Ramda is designed to support this style of coding.
+
+
+
+Also see [Why Ramda?](http://fr.umio.us/why-ramda/), [Why Curry Helps](http://hughfdjackson.com/javascript/why-curry-helps/) and [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop).
+
+
+Philosophy
+----------
+Using this library feels much like using Javascript, for good.
+It is practical functional Javascript. We're not introducing
+lambda expressions in strings, we're not borrowing consed 
 lists, we're not porting over all of the Clojure functions.
 
-Our basic data structures will be normal Javascript objects, and our 
-usual collections will be Javascript arrays.  We will not try to reach 
-the point where all the functions have only zero, one, or two arguments.
-We will certainly try to keep some of the normal features of Javascript 
-that seem to be unusual in functional languages, including variable 
-length function signatures and functions as objects with properties.
+Our basic data structures are plain Javascript objects, and our
+usual collections are Javascript arrays. We also keep other
+native features of Javascript, such as functions as objects
+with properties.
 
-Ramda will never be a drop-in replacement for Underscore (or LoDash, or 
-even a drop-in-and-mechanically-switch-the-parameter-order-everywhere 
-replacement.) It is intended to work with a different style of coding. 
+While offering similar functionality, Ramda will never be a drop-in
+replacement for _Underscore_ / _Lo-Dash_. Ramda is intended to work with a
+different style of coding. 
+
 Functional programming is in good part about immutable objects and 
-side-effect free functions. While Ramda does not expect to do anything to 
-*enforce* that style, its code should always work to make that style as 
-frictionless as possible.
+side-effect free functions. While Ramda does *not enforce* this, it
+enables such style to be as frictionless as possible.
 
-As much as we can, we would like the implementation to be both clean and 
-elegant.  But the API is king: we will sacrifice a great deal of 
-implementation elegance for even a slightly cleaner API.
+We aim for an implementation both clean and elegant, but the API is king.
+We sacrifice a great deal of implementation elegance for even a slightly
+cleaner API.
 
-Unlike the developers of that silly-named _Eweda_ project, though, this 
-one will focus also on performance, striving for a reliable and quick 
-implementation over any notions of functional purity.
+Last but not least, Ramda strives for performance. A reliable and quick
+implementation wins over any notions of functional purity.
 
 Installation
 ------------
@@ -120,44 +143,6 @@ sheep.  So perhaps ramda is a grown-up lambda... but probably not.
 
 
 
-Structure
----------
-
-### Automatic Currying ###
-
-The functions included should automatically allow for partial 
-application without an explicit call to lPartial.  Many of these operate 
-on lists.  A single list parameter should probably come last, which 
-might conflict with the design of other libraries that have strong 
-functional components (I'm looking at you Underscore!)
-
-The idea is that, if foldl has this signature:
-
-
-```javascript
-var foldl = function(fn, accum, arr) { /* ... */}
-```
-
-and we have this simple function:
-
-```javascript
-var add = function(a, b) {return a + b;};
-```
-
-then, instead of having to manually call lPartial like this:
-
-```javascript
-var sum = lPartial(foldl, add, 0);
-var total = sum([1, 2, 3, 4]);
-```
-
-with ramda, we can just do this:
-
-```javascript
-var sum = foldl(add, 0);
-var total = sum([1, 2, 3, 4]);
-```
-
 
 Running The Test Suite
 ----------------------
@@ -191,22 +176,13 @@ test across different browsers (or even headlessly), with livereloading of
 tests too. Install testem (`npm install -g testem`) and run `testem`. Open the
 link provided in your browser and you will see the results in your terminal.
 
-If you have PhantomJS installed, you can run `testem -l phantomjs` to run the
+If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
 ![ramda on sauce labs](https://saucelabs.com/browser-matrix/ramda.svg)
 
 
 
-So What's With Eweda?
----------------------
-
-The [eweda library](https://github.com/CrossEye/eweda) was written by 
-the developers of this library, with similar goals.  But that one strove 
-more for implementation elegance than for practical capabilities.  Ramda 
-is all about giving users real-world tools.  Eweda can be seen more as 
-an academic exercise, mostly proving out what does and doesn't work, and 
-doing so as elegantly as possible.
 
 Acknowledgements
 -----------------
