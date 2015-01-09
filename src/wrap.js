@@ -18,7 +18,7 @@ var arity = require('./arity');
  *      var greet = function(name) {return 'Hello ' + name;};
  *
  *      var shoutedGreet = R.wrap(greet, function(gr, name) {
- *          return gr.name().toUpperCase();
+ *          return gr(name).toUpperCase();
  *      });
  *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
  *
