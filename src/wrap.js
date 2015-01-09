@@ -9,18 +9,24 @@ var arity = require('./arity');
  * @func
  * @memberOf R
  * @category Function
- * @sig ((* -> *) -> ((* -> *), a...) -> (*, a... -> *)
+ * @sig (a... -> b) -> ((a... -> b) -> a... -> c) -> (a... -> c)
  * @param {Function} fn The function to wrap.
  * @param {Function} wrapper The wrapper function.
  * @return {Function} The wrapped function.
  * @example
  *
- *      var slashify = R.wrap(R.flip(R.add)('/'), function(f, x) {
- *        return R.match(/\/$/, x) ? x : f(x);
- *      });
+ *      var greet = function(name) {return 'Hello ' + name;};
  *
- *      slashify('a');  //=> 'a/'
- *      slashify('a/'); //=> 'a/'
+ *      var shoutedGreet = wrap(greet, function(greet, name) {
+ *          return greet.name().toUpperCase();
+ *      });
+ *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
+ *
+ *      var shortenedGreet = wrap(greet, function(greet, name) {
+ *          return greet(name.substring(0, 3);
+ *      });
+ *      shortenedGreet("Robert"); //=> "Hello Rob"
+ *
  */
 module.exports = function wrap(fn, wrapper) {
     return arity(fn.length, function() {
