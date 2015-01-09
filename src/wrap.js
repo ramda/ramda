@@ -23,7 +23,7 @@ var arity = require('./arity');
  *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
  *
  *      var shortenedGreet = wrap(greet, function(greet, name) {
- *          return greet(name.substring(0, 3);
+ *          return greet(name.substring(0, 3));
  *      });
  *      shortenedGreet("Robert"); //=> "Hello Rob"
  *
