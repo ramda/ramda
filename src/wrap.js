@@ -17,13 +17,13 @@ var arity = require('./arity');
  *
  *      var greet = function(name) {return 'Hello ' + name;};
  *
- *      var shoutedGreet = wrap(greet, function(greet, name) {
- *          return greet.name().toUpperCase();
+ *      var shoutedGreet = R.wrap(greet, function(gr, name) {
+ *          return gr.name().toUpperCase();
  *      });
  *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
  *
- *      var shortenedGreet = wrap(greet, function(greet, name) {
- *          return greet(name.substring(0, 3));
+ *      var shortenedGreet = R.wrap(greet, function(gr, name) {
+ *          return gr(name.substring(0, 3));
  *      });
  *      shortenedGreet("Robert"); //=> "Hello Rob"
  *
