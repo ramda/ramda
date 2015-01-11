@@ -59,6 +59,15 @@ describe('lens', function() {
         assert.deepEqual(obj, {x: 100, y: 200, catchphrase: 'zing!'});
     });
 
+    it('curries map and set and modifies with composed lens', function() {
+        var headPlus3 = R.compose(headOf.map(R.add(1)), headOf.map(R.add(2)));
+        assert.deepEqual(headPlus3([-2, 2, 3]), [1, 2, 3]);
+        var set0Plus1 = R.compose(headOf.map(R.add(1)), headOf.set(0));
+        assert.deepEqual(set0Plus1([-2, 2, 3]), [1, 2, 3]);
+        var mapHeadPlus3 = R.map(headPlus3);
+        assert.deepEqual(mapHeadPlus3([[-2, 2, 3], [-1, 2, 3]]), [[1, 2, 3], [2, 2, 3]]);
+    });
+
     it('is curried', function() {
         var get1 = function(x) { return x[1]; };
         var set1 = function(val, obj) {
@@ -74,5 +83,7 @@ describe('lens', function() {
         assert.deepEqual(partial(set1)([10, 20, 30]), 20);
         assert.deepEqual(partial(set1).set('zoom', [10, 20, 30]), [10, 'zoom', 30]);
         assert.deepEqual(partial(set1).map(x2, [10, 20, 30]), [10, 40, 30]);
+        assert.deepEqual(partial(set1).set('zoom')([10, 20, 30]), [10, 'zoom', 30]);
+        assert.deepEqual(partial(set1).map(x2)([10, 20, 30]), [10, 40, 30]);
     });
 });

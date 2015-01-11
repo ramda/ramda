@@ -7,7 +7,8 @@ var _curry2 = require('./internal/_curry2');
  * mutating the original object!) The lens is a function wrapped around the input `get`
  * function, with the `set` function attached as a property on the wrapper. A `map`
  * function is also attached to the returned function that takes a function to operate
- * on the specified (`get`) property, which is then `set` before returning.
+ * on the specified (`get`) property, which is then `set` before returning. The attached
+ * `set` and `map` functions are curried.
  *
  * @func
  * @memberOf R
@@ -16,7 +17,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} get A function that gets a value by property name
  * @param {Function} set A function that gets a value by property name
  * @return {Function} the returned function has `set` and `map` properties that are
- *         also functions.
+ *         also curried functions.
  * @example
  *
  *     var headLens = R.lens(
@@ -44,7 +45,7 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function lens(get, set) {
     var lns = function(a) { return get(a); };
-    lns.set = set;
-    lns.map = function(fn, a) { return set(fn(get(a)), a); };
+    lns.set = _curry2(set);
+    lns.map = _curry2(function(fn, a) { return set(fn(get(a)), a); });
     return lns;
 });
