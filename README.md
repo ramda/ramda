@@ -25,11 +25,15 @@ While Ramda includes all of the favorite list-manipulation functions you expect,
 
 The primary distinguishing features of Ramda are:
 
-* Ramda emphasizes a purer functional style where practical. Immutability and side-effect free functions are at the heart of its design philosophy. This can help you get the job done with simple, elegant code.
+* Ramda emphasizes a purer functional style. Immutability and side-effect free functions 
+  are at the heart of its design philosophy. This can help you get the job done with simple, 
+  elegant code.
 
-* Ramda functions are automatically curried. This allows you to easily build up new functions from old ones simply by not supplying the final parameters.
+* Ramda functions are automatically curried. This allows you to easily build up new functions 
+  from old ones simply by not supplying the final parameters.
 
-* The parameters to Ramda functions are arranged to make it convenient for currying. The data to be operated on is generally supplied last.
+* The parameters to Ramda functions are arranged to make it convenient for currying. The data 
+  to be operated on is generally supplied last.
 
 The last two points together make it very easy to build functions as sequences of simpler functions, each of which transforms the data and passes it along to the next. Ramda is designed to support this style of coding.
 
@@ -40,8 +44,8 @@ Also see [Why Ramda?](http://fr.umio.us/why-ramda/), [Why Curry Helps](http://hu
 
 Philosophy
 ----------
-Using this library feels much like using Javascript, for good.
-It is practical functional Javascript. We're not introducing
+Using Ramda should feel much like just using Javascript.
+It is practical, functional Javascript. We're not introducing
 lambda expressions in strings, we're not borrowing consed 
 lists, we're not porting over all of the Clojure functions.
 
