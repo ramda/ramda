@@ -8,7 +8,6 @@ var path = require('path');
 
 var acorn = require('acorn');
 var program = require('commander');
-var envvar = require('envvar');
 var escodegen = require('escodegen');
 
 var R = require('..');
@@ -172,8 +171,7 @@ var build =
                              R.rPartial(R.concat, '\n};'))),
            R.replace(/\n(?!$)/gm, '\n    '),
            R.always,
-           R.flip(R.replace('/* global R */'))(template),
-           R.replace(/$/m, ' v' + envvar.string('VERSION', version)));
+           R.flip(R.replace('/* global R */'))(template));
 
 program
 .version(version)

@@ -11,13 +11,15 @@ XYZ = node_modules/.bin/xyz --repo git@github.com:ramda/ramda.git --script scrip
 SRC = $(shell find src -name '*.js')
 
 
-dist/ramda.js: scripts/build template.js $(SRC)
+dist/ramda.js: scripts/build scripts/header template.js $(SRC)
 	git checkout -- '$@'
-	'$<' --complete >ramda.js.tmp
+	scripts/header >ramda.js.tmp
+	'$<' --complete >>ramda.js.tmp
 	mv ramda.js.tmp '$@'
 
-dist/ramda.min.js: dist/ramda.js
-	$(UGLIFY) --compress --mangle --preamble '/*! ramda $(shell date '+%Y-%m-%d') (c)$(shell git show -s --format=%ai | cut -d - -f 1) Scott Sauyet & Michael Hurley @license MIT */' <'$<' >'$@'
+dist/ramda.min.js: dist/ramda.js scripts/header
+	scripts/header >'$@'
+	$(UGLIFY) --compress --mangle <'$<' >>'$@'
 
 
 .PHONY: clean

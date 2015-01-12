@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+cat <<END
+//  Ramda v$(node -p 'require("envvar").string("VERSION", require("./package.json").version)')
+//  https://github.com/ramda/ramda
+//  (c) 2013-$(git show -s --format=%ai | cut -d - -f 1) Scott Sauyet and Michael Hurley
+//  Ramda may be freely distributed under the MIT license.
+
+END
