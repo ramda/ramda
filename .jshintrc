@@ -1,4 +1,5 @@
 {
+  "typed": true,
   "evil": true,
   "eqnull": true,
   "predef": ["beforeEach", "console", "define", "describe", "it", "module", "process", "require"],
