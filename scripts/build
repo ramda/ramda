@@ -137,13 +137,10 @@ var getModifiedSource = function getModifiedSource(identifier) {
     $pathEq('expression.left.object.name', 'module', last);
     $pathEq('expression.left.property.type', 'Identifier', last);
     $pathEq('expression.left.property.name', 'exports', last);
-    var options = {
-        comment: true
-    };
     var declarationAst = {
         type: 'VariableDeclaration',
         kind: 'var',
-        leadingComments: last.leadingComments,
+        leadingComments: obj.comments,
         declarations: [
             {
                 type: 'VariableDeclarator',
@@ -152,7 +149,7 @@ var getModifiedSource = function getModifiedSource(identifier) {
             }
         ]
     };
-    return escodegen.generate(declarationAst, options);
+    return escodegen.generate(declarationAst, {comment: true});
 };
 
 //  build :: [String] -> String

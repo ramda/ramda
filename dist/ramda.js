@@ -33,12 +33,45 @@
         return false;
     };
 
+    /**
+     * Basic, right-associative composition function. Accepts two functions and returns the
+     * composite function; this composite function represents the operation `var h = f(g(x))`,
+     * where `f` is the first argument, `g` is the second argument, and `x` is whatever
+     * argument(s) are passed to `h`.
+     *
+     * This function's main use is to build the more general `compose` function, which accepts
+     * any number of functions.
+     *
+     * @private
+     * @category Function
+     * @param {Function} f A function.
+     * @param {Function} g A function.
+     * @return {Function} A new function that is the equivalent of `f(g(x))`.
+     * @example
+     *
+     *      var double = function(x) { return x * 2; };
+     *      var square = function(x) { return x * x; };
+     *      var squareThenDouble = _compose(double, square);
+     *
+     *      squareThenDouble(5); //≅ double(square(5)) => 50
+     */
     var _compose = function _compose(f, g) {
         return function () {
             return f.call(this, g.apply(this, arguments));
         };
     };
 
+    /**
+     * Private `concat` function to merge two array-like objects.
+     *
+     * @private
+     * @param {Array|Arguments} [set1=[]] An array-like object.
+     * @param {Array|Arguments} [set2=[]] An array-like object.
+     * @return {Array} A new, merged array.
+     * @example
+     *
+     *      _concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+     */
     var _concat = function _concat(set1, set2) {
         set1 = set1 || [];
         set2 = set2 || [];
@@ -67,6 +100,16 @@
         return false;
     };
 
+    /**
+     * Create a function which takes a comparator function and a list
+     * and determines the winning value by a compatator. Used internally
+     * by `R.maxBy` and `R.minBy`
+     *
+     * @private
+     * @param {Function} compatator a function to compare two items
+     * @category Math
+     * @return {Function}
+     */
     var _createMaxMinBy = function _createMaxMinBy(comparator) {
         return function (valueComputer, list) {
             if (!(list && list.length > 0)) {
@@ -112,6 +155,7 @@
         return acc;
     };
 
+    // i can't bear not to return *something*
     var _forEach = function _forEach(fn, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
@@ -139,6 +183,19 @@
         return a > b;
     };
 
+    /**
+     * Internal implementation of `indexOf`.
+     * Returns the position of the first occurrence of an item in an array
+     * (by strict equality),
+     * or -1 if the item is not included in the array.
+     *
+     * @private
+     * @param {Array} list The array to search
+     * @param {*} item the item to find in the Array
+     * @param {Number} from (optional) the index to start searching the Array
+     * @return {Number} The index of the found item, or -1.
+     *
+     */
     var _indexOf = function _indexOf(list, item, from) {
         var idx = 0, len = list.length;
         if (typeof from == 'number') {
@@ -153,18 +210,54 @@
         return -1;
     };
 
+    /**
+     * Tests whether or not an object is an array.
+     *
+     * @private
+     * @param {*} val The object to test.
+     * @return {Boolean} `true` if `val` is an array, `false` otherwise.
+     * @example
+     *
+     *      _isArray([]); //=> true
+     *      _isArray(null); //=> false
+     *      _isArray({}); //=> false
+     */
     var _isArray = Array.isArray || function _isArray(val) {
         return val != null && val.length >= 0 && Object.prototype.toString.call(val) === '[object Array]';
     };
 
+    /**
+     * Determine if the passed argument is an integer.
+     *
+     * @private
+     * @param {*} n
+     * @category Type
+     * @return {Boolean}
+     */
     var _isInteger = Number.isInteger || function _isInteger(n) {
         return n << 0 === n;
     };
 
+    /**
+     * Tests if a value is a thenable (promise).
+     */
     var _isThenable = function _isThenable(value) {
         return value != null && value === Object(value) && typeof value.then === 'function';
     };
 
+    /**
+     * Internal implementation of `lastIndexOf`.
+     * Returns the position of the last occurrence of an item in an array
+     * (by strict equality),
+     * or -1 if the item is not included in the array.
+     *
+     * @private
+     * @param {Array} list The array to search
+     * @param {*} item the item to find in the Array
+     * @param {Number} from (optional) the index to start searching the Array
+     * @return {Number} The index of the found item, or -1.
+     *
+     */
     var _lastIndexOf = function _lastIndexOf(list, item, from) {
         var idx = list.length;
         if (typeof from == 'number') {
@@ -194,6 +287,12 @@
         return a * b;
     };
 
+    /**
+     * Creates an exception about calling a function with no arguments.
+     *
+     * @private
+     * @return {TypeError} A no arguments exception.
+     */
     var _noArgsException = function _noArgsException() {
         return new TypeError('Function called with no arguments');
     };
@@ -256,6 +355,21 @@
         };
     };
 
+    /**
+     * internal path function
+     * Takes an array, paths, indicating the deep set of keys
+     * to find.
+     *
+     * @private
+     * @memberOf R
+     * @category Object
+     * @param {Array} paths An array of strings to map to object properties
+     * @param {Object} obj The object to find the path in
+     * @return {Array} The value at the end of the path or `undefined`.
+     * @example
+     *
+     *      _path(['a', 'b'], {a: {b: 2}}); //=> 2
+     */
     var _path = function _path(paths, obj) {
         var idx = -1, length = paths.length, val;
         if (obj == null) {
@@ -286,6 +400,12 @@
         return _concat([el], list);
     };
 
+    /**
+     * internal helper for `where`
+     *
+     * @private
+     * @see R.where
+     */
     var _satisfiesSpec = function _satisfiesSpec(spec, parsedSpec, testObj) {
         if (spec === testObj) {
             return true;
@@ -349,12 +469,52 @@
         }
     };
 
+    /**
+     * Returns a function that always returns the given value.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig a -> (* -> a)
+     * @param {*} val The value to wrap in a function
+     * @return {Function} A Function :: * -> val.
+     * @example
+     *
+     *      var t = R.always('Tee');
+     *      t(); //=> 'Tee'
+     */
     var always = function always(val) {
         return function () {
             return val;
         };
     };
 
+    /**
+     * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
+     * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
+     * functions produced by `arity` will pass all provided arguments to the wrapped function.
+     *
+     * @func
+     * @memberOf R
+     * @sig (Number, (* -> *)) -> (* -> *)
+     * @category Function
+     * @param {Number} n The desired arity of the returned function.
+     * @param {Function} fn The function to wrap.
+     * @return {Function} A new function wrapping `fn`. The new function is
+     *         guaranteed to be of arity `n`.
+     * @example
+     *
+     *      var takesTwoArgs = function(a, b) {
+     *        return [a, b];
+     *      };
+     *      takesTwoArgs.length; //=> 2
+     *      takesTwoArgs(1, 2); //=> [1, 2]
+     *
+     *      var takesOneArg = R.arity(1, takesTwoArgs);
+     *      takesOneArg.length; //=> 1
+     *      // All arguments are passed through to the wrapped function
+     *      takesOneArg(1, 2); //=> [1, 2]
+     */
     var arity = function (n, fn) {
         switch (n) {
         case 0:
@@ -445,12 +605,56 @@
         return fn.apply(this, _slice(arguments, 1));
     };
 
+    /**
+     * Makes a comparator function out of a function that reports whether the first element is less than the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig (a, b -> Boolean) -> (a, b -> Number)
+     * @param {Function} pred A predicate function of arity two.
+     * @return {Function} A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`.
+     * @example
+     *
+     *      var cmp = R.comparator(function(a, b) {
+     *        return a.age < b.age;
+     *      });
+     *      var people = [
+     *        // ...
+     *      ];
+     *      R.sort(cmp, people);
+     */
     var comparator = function comparator(pred) {
         return function (a, b) {
             return pred(a, b) ? -1 : pred(b, a) ? 1 : 0;
         };
     };
 
+    /**
+     * Returns a function, `fn`, which encapsulates if/else-if/else logic.
+     * Each argument to `R.cond` is a [predicate, transform] pair. All of
+     * the arguments to `fn` are applied to each of the predicates in turn
+     * until one returns a "truthy" value, at which point `fn` returns the
+     * result of applying its arguments to the corresponding transformer.
+     * If none of the predicates matches, `fn` returns undefined.
+     *
+     * @func
+     * @memberOf R
+     * @category Logic
+     * @sig [(*... -> Boolean),(*... -> *)]... -> (*... -> *)
+     * @param {...Function} functions
+     * @return {Function}
+     * @example
+     *
+     *      var fn = R.cond(
+     *          [R.eq(0),   R.always('water freezes at 0°C')],
+     *          [R.eq(100), R.always('water boils at 100°C')],
+     *          [R.T,       function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
+     *      );
+     *      fn(0); //=> 'water freezes at 0°C'
+     *      fn(50); //=> 'nothing special happens at 50°C'
+     *      fn(100); //=> 'water boils at 100°C'
+     */
     var cond = function cond() {
         var pairs = arguments;
         return function () {
@@ -595,6 +799,23 @@
         }
     };
 
+    /**
+     * A function that does nothing but return the parameter supplied to it. Good as a default
+     * or placeholder function.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig a -> a
+     * @param {*} x The value to return.
+     * @return {*} The input value, `x`.
+     * @example
+     *
+     *      R.identity(1); //=> 1
+     *
+     *      var obj = {};
+     *      R.identity(obj) === obj; //=> true
+     */
     var identity = function identity(x) {
         return x;
     };
@@ -641,10 +862,42 @@
         return false;
     };
 
+    /**
+     * Reports whether the list has zero elements.
+     *
+     * @func
+     * @memberOf R
+     * @category Logic
+     * @sig [a] -> Boolean
+     * @param {Array} list
+     * @return {Boolean}
+     * @example
+     *
+     *      R.isEmpty([1, 2, 3]); //=> false
+     *      R.isEmpty([]); //=> true
+     *      R.isEmpty(''); //=> true
+     *      R.isEmpty(null); //=> false
+     */
     var isEmpty = function isEmpty(list) {
         return Object(list).length === 0;
     };
 
+    /**
+     * Checks if the input value is `null` or `undefined`.
+     *
+     * @func
+     * @memberOf R
+     * @category Type
+     * @sig * -> Boolean
+     * @param {*} x The value to test.
+     * @return {Boolean} `true` if `x` is `undefined` or `null`, otherwise `false`.
+     * @example
+     *
+     *     R.isNil(null); //=> true
+     *     R.isNil(undefined); //=> true
+     *     R.isNil(0); //=> false
+     *     R.isNil([]); //=> false
+     */
     var isNil = function isNil(x) {
         return x == null;
     };
@@ -676,6 +929,25 @@
         return true;
     };
 
+    /**
+     * Returns a list containing the names of all the
+     * properties of the supplied object, including prototype properties.
+     * Note that the order of the output array is not guaranteed to be
+     * consistent across different JS platforms.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig {k: v} -> [k]
+     * @param {Object} obj The object to extract properties from
+     * @return {Array} An array of the object's own and prototype properties.
+     * @example
+     *
+     *      var F = function() { this.x = 'X'; };
+     *      F.prototype.y = 'Y';
+     *      var f = new F();
+     *      R.keysIn(f); //=> ['x', 'y']
+     */
     var keysIn = function keysIn(obj) {
         var prop, ks = [];
         for (prop in obj) {
@@ -733,6 +1005,31 @@
         };
     };
 
+    /**
+     * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
+     * parameters. Any extraneous parameters will not be passed to the supplied function.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig Number -> (* -> a) -> (* -> a)
+     * @param {Number} n The desired arity of the new function.
+     * @param {Function} fn The function to wrap.
+     * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
+     *         arity `n`.
+     * @example
+     *
+     *      var takesTwoArgs = function(a, b) {
+     *        return [a, b];
+     *      };
+     *      takesTwoArgs.length; //=> 2
+     *      takesTwoArgs(1, 2); //=> [1, 2]
+     *
+     *      var takesOneArg = R.nAry(1, takesTwoArgs);
+     *      takesOneArg.length; //=> 1
+     *      // Only `n` arguments are passed to the wrapped function
+     *      takesOneArg(1, 2); //=> [1, undefined]
+     */
     var nAry = function (n, fn) {
         switch (n) {
         case 0:
@@ -784,6 +1081,23 @@
         }
     };
 
+    /**
+     * A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
+     * underlying function would return a false-y value, and `false` when it would return a truth-y one.
+     *
+     * @func
+     * @memberOf R
+     * @category Logic
+     * @sig (*... -> Boolean) -> (*... -> Boolean)
+     * @param {Function} f a predicate
+     * @return {Function} a function that applies its arguments to `f` and logically inverts its output.
+     * @example
+     *
+     *      var gt10 = function(x) { return x > 10; };
+     *      var f = R.not(gt10);
+     *      f(11); //=> false
+     *      f(9); //=> true
+     */
     var not = function not(f) {
         return function () {
             return !f.apply(this, arguments);
@@ -810,6 +1124,23 @@
         };
     };
 
+    /**
+     * Accepts a function `fn` and returns a function that guards invocation of `fn` such that
+     * `fn` can only ever be called once, no matter how many times the returned function is
+     * invoked.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig (a... -> b) -> (a... -> b)
+     * @param {Function} fn The function to wrap in a call-only-once wrapper.
+     * @return {Function} The wrapped function.
+     * @example
+     *
+     *      var addOneOnce = R.once(function(x){ return x + 1; });
+     *      addOneOnce(10); //=> 11
+     *      addOneOnce(addOneOnce(50)); //=> 11
+     */
     var once = function once(fn) {
         var called = false, result;
         return function () {
@@ -930,6 +1261,20 @@
      */
     var toPairsIn = _pairWith(keysIn);
 
+    /**
+     * Removes (strips) whitespace from both ends of the string.
+     *
+     * @func
+     * @memberOf R
+     * @category String
+     * @sig String -> String
+     * @param {String} str The string to trim.
+     * @return {String} Trimmed version of `str`.
+     * @example
+     *
+     *      R.trim('   xyz  '); //=> 'xyz'
+     *      R.map(R.trim, R.split(',', 'x, y, z')); //=> ['x', 'y', 'z']
+     */
     var trim = function () {
         var ws = '\t\n\x0B\f\r \xA0\u1680\u180E\u2000\u2001\u2002\u2003' + '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028' + '\u2029\uFEFF';
         var zeroWidth = '\u200B';
@@ -947,6 +1292,27 @@
         }
     }();
 
+    /**
+     * Gives a single-word string description of the (native) type of a value, returning such
+     * answers as 'Object', 'Number', 'Array', or 'Null'.  Does not attempt to distinguish user
+     * Object types any further, reporting them all as 'Object'.
+     *
+     * @func
+     * @memberOf R
+     * @category Type
+     * @sig (* -> {*}) -> String
+     * @param {*} val The value to test
+     * @return {String}
+     * @example
+     *
+     *      R.type({}); //=> "Object"
+     *      R.type(1); //=> "Number"
+     *      R.type(false); //=> "Boolean"
+     *      R.type('s'); //=> "String"
+     *      R.type(null); //=> "Null"
+     *      R.type([]); //=> "Array"
+     *      R.type(/[A-z]/); //=> "RegExp"
+     */
     var type = function type(val) {
         return val === null ? 'Null' : val === undefined ? 'Undefined' : Object.prototype.toString.call(val).slice(8, -1);
     };
@@ -1010,6 +1376,25 @@
         return nAry(1, fn);
     };
 
+    /**
+     * Returns a list of all the properties, including prototype properties,
+     * of the supplied object.
+     * Note that the order of the output array is not guaranteed to be
+     * consistent across different JS platforms.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig {k: v} -> [v]
+     * @param {Object} obj The object to extract values from
+     * @return {Array} An array of the values of the object's own and prototype properties.
+     * @example
+     *
+     *      var F = function() { this.x = 'X'; };
+     *      F.prototype.y = 'Y';
+     *      var f = new F();
+     *      R.valuesIn(f); //=> ['X', 'Y']
+     */
     var valuesIn = function valuesIn(obj) {
         var prop, vs = [];
         for (prop in obj) {
@@ -2344,6 +2729,7 @@
      *      var plusFive = function(num, idx, list) { list[idx] = num + 5 };
      *      R.forEachIndexed(plusFive, [1, 2, 3]); //=> [6, 7, 8]
      */
+    // i can't bear not to return *something*
     var forEachIndexed = _curry2(function forEachIndexed(fn, list) {
         var idx = -1, len = list.length;
         while (++idx < len) {
@@ -2677,6 +3063,7 @@
      *
      *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
      */
+    // cover IE < 9 keys issues
     var keys = function () {
         // cover IE < 9 keys issues
         var hasEnumBug = !{ toString: null }.propertyIsEnumerable('toString');
@@ -4332,6 +4719,8 @@
      *
      *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
      */
+    // = xprodWith(prepend); (takes about 3 times as long...)
+    // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
     var xprod = _curry2(function xprod(a, b) {
         // = xprodWith(prepend); (takes about 3 times as long...)
         var idx = -1;
@@ -4470,6 +4859,8 @@
      * @see R.all
      * @see R.any
      */
+    // Call function immediately if given arguments
+    // Return a function which will call the predicates with the provided arguments
     var _predicateWrap = function _predicateWrap(predPicker) {
         return function (preds) {
             var predIterator = function () {
@@ -4566,6 +4957,7 @@
      *      // And moreover, obj2.b is a reference to obj1.b
      *      // No unnecessary objects are created.
      */
+    // rather than `clone` to get prototype props too, even though they're flattened
     var assoc = _curry3(function (prop, val, obj) {
         // rather than `clone` to get prototype props too, even though they're flattened
         return _extend(fromPairs(_map(function (key) {
@@ -4823,6 +5215,7 @@
      */
     var init = slice(0, -1);
 
+    /* global R */
     /**
      * Expose the functions from ramda as properties of another object.
      * If the provided object is the global object then the ramda
@@ -5253,6 +5646,7 @@
      *      //≅ addAll(double(10), square(5), R.identity(100));
      *      addDoubleAndSquare(10, 5, 100); //=> 145
      */
+    /*, transformers */
     var useWith = function useWith(fn) {
         var transformers = _slice(arguments, 1);
         var tlen = transformers.length;
@@ -5642,6 +6036,7 @@
      *      var kids = [abby, fred];
      *      R.project(['name', 'grade'], kids); //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
      */
+    // passing `identity` gives correct arity
     var project = useWith(_map, pickAll, identity);
 
     /**
