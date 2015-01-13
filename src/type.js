@@ -11,13 +11,20 @@
  * @return {String}
  * @example
  *
- *      R.type({}); //=> "Object"
- *      R.type(1); //=> "Number"
- *      R.type(false); //=> "Boolean"
- *      R.type('s'); //=> "String"
- *      R.type(null); //=> "Null"
- *      R.type([]); //=> "Array"
- *      R.type(/[A-z]/); //=> "RegExp"
+ *      > R.type({})
+ *      'Object'
+ *      > R.type(1)
+ *      'Number'
+ *      > R.type(false)
+ *      'Boolean'
+ *      > R.type('s')
+ *      'String'
+ *      > R.type(null)
+ *      'Null'
+ *      > R.type([])
+ *      'Array'
+ *      > R.type(/[A-z]/)
+ *      'RegExp'
  */
 module.exports = function type(val) {
     return val === null      ? 'Null'      :

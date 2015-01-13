@@ -12,6 +12,7 @@ var pathOn = require('./pathOn');
  * @return {*} The data at `path`.
  * @example
  *
- *      R.path('a.b', {a: {b: 2}}); //=> 2
+ *      > R.path('a.b', {a: {b: 2}})
+ *      2
  */
 module.exports = pathOn('.');

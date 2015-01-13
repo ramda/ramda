@@ -12,6 +12,7 @@ var always = require('./always');
  * @return {Boolean} `true`.
  * @example
  *
- *      R.T(); //=> true
+ *      > R.T()
+ *      true
  */
 module.exports = always(true);

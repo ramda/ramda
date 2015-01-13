@@ -17,9 +17,12 @@ var keysIn = require('./keysIn');
  *         and prototype properties.
  * @example
  *
- *      var F = function() { this.x = 'X'; };
- *      F.prototype.y = 'Y';
- *      var f = new F();
- *      R.toPairsIn(f); //=> [['x','X'], ['y','Y']]
+ *      > (function() {
+ *      .   var F = function() { this.x = 'X'; };
+ *      .   F.prototype.y = 'Y';
+ *      .   var f = new F();
+ *      .   return R.toPairsIn(f);
+ *      . }())
+ *      [['x','X'], ['y','Y']]
  */
 module.exports = _pairWith(keysIn);

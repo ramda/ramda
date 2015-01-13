@@ -14,6 +14,7 @@ var substring = require('./substring');
  * @return {String} The extracted substring.
  * @example
  *
- *      R.substringFrom(8, 'abcdefghijklm'); //=> 'ijklm'
+ *      > R.substringFrom(8, 'abcdefghijklm')
+ *      'ijklm'
  */
 module.exports = flip(substring)(void 0);

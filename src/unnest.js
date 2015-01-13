@@ -13,7 +13,9 @@ var _makeFlat = require('./internal/_makeFlat');
  * @return {Array} The flattened list.
  * @example
  *
- *      R.unnest([1, [2], [[3]]]); //=> [1, 2, [3]]
- *      R.unnest([[1, 2], [3, 4], [5, 6]]); //=> [1, 2, 3, 4, 5, 6]
+ *      > R.unnest([1, [2], [[3]]])
+ *      [1, 2, [3]]
+ *      > R.unnest([[1, 2], [3, 4], [5, 6]])
+ *      [1, 2, 3, 4, 5, 6]
  */
 module.exports = _makeFlat(false);

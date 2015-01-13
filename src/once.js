@@ -11,9 +11,11 @@
  * @return {Function} The wrapped function.
  * @example
  *
- *      var addOneOnce = R.once(function(x){ return x + 1; });
- *      addOneOnce(10); //=> 11
- *      addOneOnce(addOneOnce(50)); //=> 11
+ *      > var addOneOnce = R.once(function(x) { return x + 1; })
+ *      > addOneOnce(10)
+ *      11
+ *      > addOneOnce(addOneOnce(50))
+ *      11
  */
 module.exports = function once(fn) {
     var called = false, result;

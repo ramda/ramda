@@ -16,10 +16,11 @@ var _slice = require('./internal/_slice');
  * @return {*} The value of invoking `obj.fn`.
  * @example
  *
- *      R.func('add', R, 1, 2); //=> 3
- *
- *      var obj = { f: function() { return 'f called'; } };
- *      R.func('f', obj); //=> 'f called'
+ *      > R.func('add', R, 1, 2)
+ *      3
+ *      > var obj = {f: function() { return 'f called'; }}
+ *      > R.func('f', obj)
+ *      'f called'
  */
 module.exports = function func(funcName, obj) {
     switch (arguments.length) {

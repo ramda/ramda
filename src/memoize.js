@@ -19,23 +19,31 @@ var _slice = require('./internal/_slice');
  * @return {Function}  Returns a memoized version of `fn`.
  * @example
  *
- *      var numberOfCalls = 0;
- *      var trackedAdd = function(a, b) {
- *        numberOfCalls += 1;
- *        return a + b;
- *      };
- *      var memoTrackedAdd = R.memoize(trackedAdd);
+ *      > var numberOfCalls = 0
+ *      > var trackedAdd = function(a, b) {
+ *      .     numberOfCalls += 1;
+ *      .     return a + b;
+ *      . }
+ *      > var memoTrackedAdd = R.memoize(trackedAdd)
+ *      > memoTrackedAdd(1, 2)
+ *      3
+ *      > numberOfCalls
+ *      1
+ *      > memoTrackedAdd(1, 2)
+ *      3
+ *      > numberOfCalls
+ *      1
+ *      > memoTrackedAdd(2, 3)
+ *      5
+ *      > numberOfCalls
+ *      2
  *
- *      memoTrackedAdd(1, 2); //=> 3
- *      numberOfCalls; //=> 1
- *      memoTrackedAdd(1, 2); //=> 3
- *      numberOfCalls; //=> 1
- *      memoTrackedAdd(2, 3); //=> 5
- *      numberOfCalls; //=> 2
+ *      Note that argument order matters:
  *
- *      // Note that argument order matters
- *      memoTrackedAdd(2, 1); //=> 3
- *      numberOfCalls; //=> 3
+ *      > memoTrackedAdd(2, 1)
+ *      3
+ *      > numberOfCalls
+ *      3
  */
 module.exports = function memoize(fn) {
     var cache = {};

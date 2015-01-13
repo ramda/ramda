@@ -14,7 +14,8 @@ var _curry2 = require('./internal/_curry2');
  * @return {Number} The last index of `c` or -1 if not found.
  * @example
  *
- *      R.strLastIndexOf('a', 'banana split'); //=> 5
+ *      > R.strLastIndexOf('a', 'banana split')
+ *      5
  */
 module.exports = _curry2(function(c, str) {
     return str.lastIndexOf(c);

@@ -10,10 +10,12 @@
  * @return {*} The input value, `x`.
  * @example
  *
- *      R.identity(1); //=> 1
+ *      > R.identity(1)
+ *      1
  *
- *      var obj = {};
- *      R.identity(obj) === obj; //=> true
+ *      > var obj = {}
+ *      > R.identity(obj) === obj
+ *      true
  */
 module.exports = function identity(x) {
     return x;

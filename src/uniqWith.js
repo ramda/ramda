@@ -16,11 +16,15 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The list of unique items.
  * @example
  *
- *      var strEq = function(a, b) { return String(a) === String(b); };
- *      R.uniqWith(strEq)([1, '1', 2, 1]); //=> [1, 2]
- *      R.uniqWith(strEq)([{}, {}]);       //=> [{}]
- *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]
- *      R.uniqWith(strEq)(['1', 1, 1]);    //=> ['1']
+ *      > var strEq = function(a, b) { return String(a) === String(b); }
+ *      > R.uniqWith(strEq)([1, '1', 2, 1])
+ *      [1, 2]
+ *      > R.uniqWith(strEq)([{}, {}])
+ *      [{}]
+ *      > R.uniqWith(strEq)([1, '1', 1])
+ *      [1]
+ *      > R.uniqWith(strEq)(['1', 1, 1])
+ *      ['1']
  */
 module.exports = _curry2(function uniqWith(pred, list) {
     var idx = -1, len = list.length;

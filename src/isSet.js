@@ -13,9 +13,12 @@ var _indexOf = require('./internal/_indexOf');
  * @return {Boolean} `true` if all elements are unique, else `false`.
  * @example
  *
- *      R.isSet(['1', 1]); //=> true
- *      R.isSet([1, 1]);   //=> false
- *      R.isSet([{}, {}]); //=> true
+ *      > R.isSet(['1', 1])
+ *      true
+ *      > R.isSet([1, 1])
+ *      false
+ *      > R.isSet([{}, {}])
+ *      true
  */
 module.exports = function isSet(list) {
     var len = list.length;

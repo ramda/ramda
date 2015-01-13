@@ -17,7 +17,8 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} An array containing the return values of all calls to `fn`.
  * @example
  *
- *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
+ *      > R.times(R.identity, 5)
+ *      [0, 1, 2, 3, 4]
  */
 module.exports = _curry2(function times(fn, n) {
     var list = new Array(Number(n));

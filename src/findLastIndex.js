@@ -15,9 +15,11 @@ var _curry2 = require('./internal/_curry2');
  * @return {Number} The index of the element found, or `-1`.
  * @example
  *
- *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
- *      R.findLastIndex(R.propEq('a', 1))(xs); //=> 1
- *      R.findLastIndex(R.propEq('a', 4))(xs); //=> -1
+ *      > var xs = [{a: 1, b: 0}, {a:1, b: 1}]
+ *      > R.findLastIndex(R.propEq('a', 1))(xs)
+ *      1
+ *      > R.findLastIndex(R.propEq('a', 4))(xs)
+ *      -1
  */
 module.exports = _curry2(function findLastIndex(fn, list) {
     var idx = list.length;

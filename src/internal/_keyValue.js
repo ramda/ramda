@@ -16,27 +16,18 @@ var _map = require('./_map');
  * @return {Array} A new list with the described structure.
  * @example
  *
- *      var people = [
- *         {first: 'Fred', last: 'Flintstone', age: 23},
- *         {first: 'Betty', last: 'Rubble', age: 21},
- *         {first: 'George', last: 'Jetson', age: 29}
- *      ];
- *
- *      var fullName = function(p) {return p.first + ' ' + p.last;};
- *
- *      _keyValue(fullName, people); //=>
- *      // [
- *      //     {
- *      //         key: 'Fred Flintstone',
- *      //         val: {first: 'Fred', last: 'Flintstone', age: 23}
- *      //     }, {
- *      //         key: 'Betty Rubble',
- *      //         val: {first: 'Betty', last: 'Rubble', age: 21}
- *      //    }, {
- *      //        key: 'George Jetson',
- *      //        val: {first: 'George', last: 'Jetson', age: 29}
- *      //    }
- *      // ];
+ *      > var people = [
+ *      .     {first: 'Fred', last: 'Flintstone', age: 23},
+ *      .     {first: 'Betty', last: 'Rubble', age: 21},
+ *      .     {first: 'George', last: 'Jetson', age: 29}
+ *      . ]
+ *      > _keyValue(function(p) { return p.first + ' ' + p.last; }, people)
+ *      [ { key: 'Fred Flintstone',
+ *      .   val: {first: 'Fred', last: 'Flintstone', age: 23} },
+ *      . { key: 'Betty Rubble',
+ *      .   val: {first: 'Betty', last: 'Rubble', age: 21} },
+ *      . { key: 'George Jetson',
+ *      .   val: {first: 'George', last: 'Jetson', age: 29} } ]
  */
 module.exports = function _keyValue(fn, list) {
     return _map(function(item) {return {key: fn(item), val: item};}, list);

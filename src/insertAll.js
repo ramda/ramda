@@ -18,7 +18,8 @@ var _slice = require('./internal/_slice');
  * @return {Array} A new Array with `elts` inserted starting at `index`.
  * @example
  *
- *      R.insertAll(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
+ *      > R.insertAll(2, ['x', 'y', 'z'], [1, 2, 3, 4])
+ *      [1, 2, 'x', 'y', 'z', 3, 4]
  */
 module.exports = _curry3(function insertAll(idx, elts, list) {
     idx = idx < list.length && idx >= 0 ? idx : list.length;

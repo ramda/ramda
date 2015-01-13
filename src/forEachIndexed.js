@@ -24,10 +24,12 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The original list.
  * @example
  *
- *      // Note that having access to the original `list` allows for
- *      // mutation. While you *can* do this, it's very un-functional behavior:
- *      var plusFive = function(num, idx, list) { list[idx] = num + 5 };
- *      R.forEachIndexed(plusFive, [1, 2, 3]); //=> [6, 7, 8]
+ *      Note that having access to the original `list` allows for mutation.
+ *      While you *can* do this, it's very un-functional behavior:
+ *
+ *      > var plusFive = function(num, idx, list) { list[idx] = num + 5; }
+ *      > R.forEachIndexed(plusFive, [1, 2, 3])
+ *      [6, 7, 8]
  */
 module.exports = _curry2(function forEachIndexed(fn, list) {
     var idx = -1, len = list.length;

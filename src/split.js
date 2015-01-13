@@ -14,9 +14,11 @@ var invoker = require('./invoker');
  * @return {Array} The array of strings from `str` separated by `str`.
  * @example
  *
- *      var pathComponents = R.split('/');
- *      R.tail(pathComponents('/usr/local/bin/node')); //=> ['usr', 'local', 'bin', 'node']
+ *      > var pathComponents = R.split('/')
+ *      > R.tail(pathComponents('/usr/local/bin/node'))
+ *      ['usr', 'local', 'bin', 'node']
  *
- *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']
+ *      > R.split('.', 'a.b.c.xyz.d')
+ *      ['a', 'b', 'c', 'xyz', 'd']
  */
 module.exports = invoker(1, 'split');

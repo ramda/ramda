@@ -14,7 +14,7 @@ var invoker = require('./invoker');
  * @see R.invoker
  * @example
  *
- *      R.charCodeAt(8, 'abcdefghijklm'); //=> 105
- *      // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
+ *      > R.charCodeAt(8, 'abcdefghijklm')
+ *      105  // (... 'a' ~ 97, 'b' ~ 98, ... 'i' ~ 105)
  */
 module.exports = invoker(1, 'charCodeAt');

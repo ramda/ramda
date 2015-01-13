@@ -17,15 +17,11 @@ var has = require('./has');
  * @return {*} The value of given property or default value.
  * @example
  *
- *      var alice = {
- *        name: 'ALICE',
- *        age: 101
- *      };
- *      var favorite = R.prop('favoriteLibrary');
- *      var favoriteWithDefault = R.propOr('Ramda', 'favoriteLibrary');
- *
- *      favorite(alice);  //=> undefined
- *      favoriteWithDefault(alice);  //=> 'Ramda'
+ *      > var getZ = R.propOr(0, 'z')
+ *      > getZ({x: 1, y: 2, z: 3})
+ *      3
+ *      > getZ({x: 1, y: 2})
+ *      0
  */
 module.exports = _curry3(function propOr(val, p, obj) {
     return has(p, obj) ? obj[p] : val;

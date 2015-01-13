@@ -13,9 +13,8 @@ var _curry2 = require('./internal/_curry2');
  * @return {*} `x`.
  * @example
  *
- *      var sayX = function(x) { console.log('x is ' + x); };
- *      R.tap(sayX, 100); //=> 100
- *      //-> 'x is 100')
+ *      > R.tap(console.log, 100)
+ *      100
  */
 module.exports = _curry2(function tap(fn, x) {
     fn(x);

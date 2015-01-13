@@ -14,6 +14,7 @@ var _lt = require('./internal/_lt');
  * @see R.minBy
  * @example
  *
- *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
+ *      > R.min([7, 3, 9, 2, 4, 9, 3])
+ *      2
  */
 module.exports = _createMaxMin(_lt, Infinity);

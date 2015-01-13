@@ -18,11 +18,11 @@ var containsWith = require('./containsWith');
  * @return {Array} The elements in `list1` that are not in `list2`.
  * @example
  *
- *      function cmp(x, y) { return x.a === y.a; }
- *      var l1 = [{a: 1}, {a: 2}, {a: 3}];
- *      var l2 = [{a: 3}, {a: 4}];
- *      R.differenceWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}]
- *
+ *      > var cmp = function(x, y) { return x.a === y.a; }
+ *      > var l1 = [{a: 1}, {a: 2}, {a: 3}]
+ *      > var l2 = [{a: 3}, {a: 4}]
+ *      > R.differenceWith(cmp, l1, l2)
+ *      [{a: 1}, {a: 2}]
  */
 module.exports = _curry3(function differenceWith(pred, first, second) {
     var out = [];

@@ -23,9 +23,9 @@ var split = require('./split');
  * @return {Object} a new object similar to the original except along the specified path.
  * @example
  *
- *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
- *      var obj2 = R.assocPath('f.g.i', {x: 42}, obj1);
- *      //=> {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
+ *      > var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8}
+ *      > var obj2 = R.assocPath('f.g.i', {x: 42}, obj1)
+ *      {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
  */
 module.exports = (function() {
     var setParts = function(parts, val, obj) {

@@ -16,8 +16,7 @@ var _gt = require('./internal/_gt');
  * @see R.max
  * @example
  *
- *      function cmp(obj) { return obj.x; }
- *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
- *      R.maxBy(cmp, [a, b, c]); //=> {x: 3}
+ *      > R.maxBy(function(obj) { return obj.x; }, [{x: 1}, {x: 2}, {x: 3}])
+ *      {x: 3}
  */
 module.exports = _curry2(_createMaxMinBy(_gt));

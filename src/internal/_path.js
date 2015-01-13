@@ -11,7 +11,8 @@
  * @return {Array} The value at the end of the path or `undefined`.
  * @example
  *
- *      _path(['a', 'b'], {a: {b: 2}}); //=> 2
+ *      > _path(['a', 'b'], {a: {b: 2}})
+ *      2
  */
 module.exports = function _path(paths, obj) {
     var idx = -1, length = paths.length, val;

@@ -16,8 +16,8 @@ var _extend = require('./internal/_extend');
  * @return {Object} The destination object.
  * @example
  *
- *      R.mixin({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
- *      //=> { 'name': 'fred', 'age': 40 }
+ *      > R.mixin({name: 'fred', age: 10}, {age: 40})
+ *      {name: 'fred', age: 40}
  */
 module.exports = _curry2(function mixin(a, b) {
     return _extend(_extend({}, a), b);

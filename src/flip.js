@@ -15,13 +15,11 @@ var _slice = require('./internal/_slice');
  * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
  * @example
  *
- *      var mergeThree = function(a, b, c) {
- *        return ([]).concat(a, b, c);
- *      };
- *
- *      mergeThree(1, 2, 3); //=> [1, 2, 3]
- *
- *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
+ *      > var mergeThree = function(a, b, c) { return [].concat(a, b, c); }
+ *      > mergeThree(1, 2, 3)
+ *      [1, 2, 3]
+ *      > R.flip(mergeThree)(1, 2, 3)
+ *      [2, 1, 3]
  */
 module.exports = function flip(fn) {
     return function(a, b) {

@@ -20,10 +20,11 @@ var curryN = require('./curryN');
  * @return {Function} The function `fn` applicable to mappable objects.
  * @example
  *
- *     var madd3 = R.liftN(3, R.curryN(3, function() {
- *         return R.foldl(R.add, 0, arguments);
- *     }));
- *     madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
+ *     > var madd3 = R.liftN(3, R.curryN(3, function() {
+ *     .     return R.foldl(R.add, 0, arguments);
+ *     . }))
+ *     > madd3([1, 2, 3], [1, 2, 3], [1])
+ *     [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
 module.exports = _curry2(function liftN(arity, fn) {
     var lifted = curryN(arity, fn);

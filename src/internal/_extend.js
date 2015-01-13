@@ -13,8 +13,8 @@ var keys = require('../keys');
  * @return {Object} The destination object.
  * @example
  *
- *      _extend({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
- *      //=> { 'name': 'fred', 'age': 40 }
+ *      > _extend({name: 'fred', age: 10}, {age: 40})
+ *      {name: 'fred', age: 40}
  */
 module.exports = function _extend(destination, other) {
     var props = keys(other),

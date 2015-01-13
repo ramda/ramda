@@ -16,6 +16,7 @@ var keys = require('./keys');
  * @return {Array} An array of key, value arrays from the object's own properties.
  * @example
  *
- *      R.toPairs({a: 1, b: 2, c: 3}); //=> [['a', 1], ['b', 2], ['c', 3]]
+ *      > R.toPairs({a: 1, b: 2, c: 3})
+ *      [['a', 1], ['b', 2], ['c', 3]]
  */
 module.exports = _pairWith(keys);

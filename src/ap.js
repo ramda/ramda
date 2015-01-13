@@ -14,6 +14,7 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The value of applying each the function `fns` to each value in `vs`.
  * @example
  *
- *      R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
+ *      > R.ap([R.multiply(2), R.add(3)], [1, 2, 3])
+ *      [2, 4, 6, 4, 5, 6]
  */
 module.exports = _curry2(_ap);

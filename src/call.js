@@ -16,15 +16,14 @@ var _slice = require('./internal/_slice');
  * @return {*}
  * @example
  *
- *      var indentN = R.pipe(R.times(R.always(' ')),
- *                           R.join(''),
- *                           R.replace(/^(?!$)/gm));
- *
- *      var format = R.converge(R.call,
- *                              R.pipe(R.prop('indent'), indentN),
- *                              R.prop('value'));
- *
- *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
+ *      > var indentN = R.pipe(R.times(R.always(' ')),
+ *      .                      R.join(''),
+ *      .                      R.replace(/^(?!$)/gm))
+ *      > var format = R.converge(R.call,
+ *      .                         R.pipe(R.prop('indent'), indentN),
+ *      .                         R.prop('value'))
+ *      > format({indent: 2, value: 'foo\nbar\nbaz\n'})
+ *      '  foo\n  bar\n  baz\n'
  */
 module.exports = function call(fn) {
     return fn.apply(this, _slice(arguments, 1));

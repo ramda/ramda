@@ -12,10 +12,13 @@
  * @return {Array} An array of the object's own and prototype properties.
  * @example
  *
- *      var F = function() { this.x = 'X'; };
- *      F.prototype.y = 'Y';
- *      var f = new F();
- *      R.keysIn(f); //=> ['x', 'y']
+ *      > (function() {
+ *      .     var F = function() { this.x = 'X'; };
+ *      .     F.prototype.y = 'Y';
+ *      .     var f = new F();
+ *      .     return R.keysIn(f);
+ *      . }())
+ *      ['x', 'y']
  */
 module.exports = function keysIn(obj) {
     var prop, ks = [];

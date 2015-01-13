@@ -13,6 +13,7 @@ var slice = require('./slice');
  *         empty list if the input list is empty.
  * @example
  *
- *      R.init(['fi', 'fo', 'fum']); //=> ['fi', 'fo']
+ *      > R.init(['fi', 'fo', 'fum'])
+ *      ['fi', 'fo']
  */
 module.exports = slice(0, -1);

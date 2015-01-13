@@ -23,13 +23,13 @@ var _curry3 = require('./internal/_curry3');
  * @return {*} The final, accumulated value.
  * @example
  *
- *      var letters = ['a', 'b', 'c'];
- *      var objectify = function(accObject, elem, idx, list) {
- *        accObject[elem] = idx;
- *        return accObject;
- *      };
- *
- *      R.foldrIndexed(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
+ *      > var letters = ['a', 'b', 'c']
+ *      > var objectify = function(accObject, elem, idx, list) {
+ *      .     accObject[elem] = idx;
+ *      .     return accObject;
+ *      . }
+ *      > R.foldrIndexed(objectify, {}, letters)
+ *      {c: 2, b: 1, a: 0}
  */
 module.exports = _curry3(function foldrIndexed(fn, acc, list) {
     var idx = list.length;

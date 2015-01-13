@@ -15,8 +15,8 @@ var _curry3 = require('./internal/_curry3');
  * @return {Array} A list of all intermediately reduced values.
  * @example
  *
- *      var numbers = [1, 2, 3, 4];
- *      var factorials = R.scanl(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
+ *      > R.scanl(R.multiply, 1, [1, 2, 3, 4])
+ *      [1, 1, 2, 6, 24]
  */
 module.exports = _curry3(function scanl(fn, acc, list) {
     var idx = 0, len = list.length + 1, result = new Array(len);

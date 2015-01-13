@@ -18,14 +18,11 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The new list.
  * @example
  *
- *      var squareEnds = function(elt, idx, list) {
- *        if (idx === 0 || idx === list.length - 1) {
- *          return elt * elt;
- *        }
- *        return elt;
- *      };
- *
- *      R.mapIndexed(squareEnds, [8, 5, 3, 0, 9]); //=> [64, 5, 3, 0, 81]
+ *      > var squareEnds = function(x, idx, list) {
+ *      .     return idx === 0 || idx === list.length - 1 ? x * x : x;
+ *      . }
+ *      > R.mapIndexed(squareEnds, [8, 5, 3, 0, 9])
+ *      [64, 5, 3, 0, 81]
  */
 module.exports = _curry2(function mapIndexed(fn, list) {
     var idx = -1, len = list.length, result = new Array(len);

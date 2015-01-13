@@ -17,8 +17,10 @@ var _indexOf = require('./internal/_indexOf');
  *
  * @example
  *
- *      R.indexOf(3, [1,2,3,4]); //=> 2
- *      R.indexOf(10, [1,2,3,4]); //=> -1
+ *      > R.indexOf(3, [1, 2, 3, 4])
+ *      2
+ *      > R.indexOf(10, [1, 2, 3, 4])
+ *      -1
  */
 module.exports = _curry2(function indexOf(target, list) {
     return _indexOf(list, target);

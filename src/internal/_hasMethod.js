@@ -12,11 +12,14 @@ var _isArray = require('./_isArray');
  * @return {Boolean} `true` has a given method, `false` otherwise.
  * @example
  *
- *      var person = { name: 'John' };
- *      person.shout = function() { alert(this.name); };
- *
- *      _hasMethod('shout', person); //=> true
- *      _hasMethod('foo', person); //=> false
+ *      > var person = {
+ *      .     name: 'John',
+ *      .     shout: function() { alert(this.name); }
+ *      . }
+ *      > _hasMethod('shout', person)
+ *      true
+ *      > _hasMethod('foo', person)
+ *      false
  */
 module.exports = function _hasMethod(methodName, obj) {
     return obj != null && !_isArray(obj) && typeof obj[methodName] === 'function';

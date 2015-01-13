@@ -14,11 +14,13 @@ var _curry3 = require('./internal/_curry3');
  * @return {String} A string with all the matches replaced.
  * @example
  *
- *      R.replace(/\d+/g, 'number', '1 2 three'); //=> 'number number three'
+ *      > R.replace(/\d+/g, 'number', '1 2 three')
+ *      'number number three'
  *
- *      var replaceSemicolon = R.replace(';');
- *      var removeSemicolon = replaceSemicolon('');
- *      removeSemicolon('return 42;'); //=> 'return 42'
+ *      > var replaceSemicolon = R.replace(';')
+ *      > var removeSemicolon = replaceSemicolon('')
+ *      > removeSemicolon('return 42;')
+ *      'return 42'
  */
 module.exports = _curry3(function replace(regex, replacement, str) {
     return str.replace(regex, replacement);

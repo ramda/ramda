@@ -14,6 +14,7 @@ var flip = require('./flip');
  * @return {Array}
  * @example
  *
- *      R.prependTo(['fi', 'fo', 'fum'], 'fee'); //=> ['fee', 'fi', 'fo', 'fum']
+ *      > R.prependTo(['fi', 'fo', 'fum'], 'fee')
+ *      ['fee', 'fi', 'fo', 'fum']
  */
 module.exports = flip(_prepend);

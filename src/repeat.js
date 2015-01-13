@@ -15,11 +15,14 @@ var times = require('./times');
  * @return {Array} A new array containing `n` `value`s.
  * @example
  *
- *      R.repeat('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
+ *      > R.repeat('hi', 5)
+ *      ['hi', 'hi', 'hi', 'hi', 'hi']
  *
- *      var obj = {};
- *      var repeatedObjs = R.repeat(obj, 5); //=> [{}, {}, {}, {}, {}]
- *      repeatedObjs[0] === repeatedObjs[1]; //=> true
+ *      > var obj = {}
+ *      > var repeatedObjs = R.repeat(obj, 5)
+ *      [{}, {}, {}, {}, {}]
+ *      > repeatedObjs[0] === repeatedObjs[1]
+ *      true
  */
 module.exports = _curry2(function repeat(value, n) {
     return times(always(value), n);

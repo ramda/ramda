@@ -12,11 +12,16 @@ var _isArray = require('./internal/_isArray');
  * @return {Boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
  * @example
  *
- *      R.isArrayLike([]); //=> true
- *      R.isArrayLike(true); //=> false
- *      R.isArrayLike({}); //=> false
- *      R.isArrayLike({length: 10}); //=> false
- *      R.isArrayLike({0: 'zero', 9: 'nine', length: 10}); //=> true
+ *      > R.isArrayLike([])
+ *      true
+ *      > R.isArrayLike(true)
+ *      false
+ *      > R.isArrayLike({})
+ *      false
+ *      > R.isArrayLike({length: 10})
+ *      false
+ *      > R.isArrayLike({0: 'zero', 9: 'nine', length: 10})
+ *      true
  */
 module.exports = function isArrayLike(x) {
     if (_isArray(x)) { return true; }

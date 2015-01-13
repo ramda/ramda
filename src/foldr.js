@@ -25,12 +25,10 @@ var _curry3 = require('./internal/_curry3');
  * @return {*} The final, accumulated value.
  * @example
  *
- *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
- *      var flattenPairs = function(acc, pair) {
- *        return acc.concat(pair);
- *      };
- *
- *      R.foldr(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
+ *      > var pairs = [['a', 1], ['b', 2], ['c', 3]]
+ *      > var flattenPairs = function(acc, pair) { return acc.concat(pair); }
+ *      > R.foldr(flattenPairs, [], pairs)
+ *      ['c', 3, 'b', 2, 'a', 1]
  */
 module.exports = _curry3(function foldr(fn, acc, list) {
     var idx = list.length;

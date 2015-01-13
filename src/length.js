@@ -12,8 +12,10 @@ var is = require('./is');
  * @return {Number} The length of the array.
  * @example
  *
- *      R.length([]); //=> 0
- *      R.length([1, 2, 3]); //=> 3
+ *      > R.length([])
+ *      0
+ *      > R.length([1, 2, 3])
+ *      3
  */
 module.exports = function length(list) {
     return list != null && is(Number, list.length) ? list.length : NaN;

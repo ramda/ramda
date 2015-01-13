@@ -15,11 +15,17 @@ var op = require('./op');
  *                 be curried right by explicitly passing `undefined` for its first argument.
  * @example
  *
- *      R.lte(2, 6); //=> true
- *      R.lte(2, 0); //=> false
- *      R.lte(2, 2); //=> true
- *      R.lte(__, 2)(1); //=> true
- *      R.lte(2)(10); //=> true
- *      R.lte(__)(5, 4) // => true
+ *      > R.lte(2, 6)
+ *      true
+ *      > R.lte(2, 0)
+ *      false
+ *      > R.lte(2, 2)
+ *      true
+ *      > R.lte(R.__, 2)(1)
+ *      true
+ *      > R.lte(2)(10)
+ *      true
+ *      > R.lte(R.__)(5, 4)
+ *      true
  */
 module.exports = op(function lte(a, b) { return a <= b; });

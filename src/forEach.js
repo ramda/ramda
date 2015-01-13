@@ -24,10 +24,10 @@ var _forEach = require('./internal/_forEach');
  * @return {Array} The original list.
  * @example
  *
- *      var printXPlusFive = function(x) { console.log(x + 5); };
- *      R.forEach(printXPlusFive, [1, 2, 3]); //=> [1, 2, 3]
- *      //-> 6
- *      //-> 7
- *      //-> 8
+ *      > var squares = []
+ *      > R.forEach(function(x) { squares.push(x * x); }, [1, 2, 3])
+ *      [1, 2, 3]
+ *      > squares
+ *      [1, 4, 9]
  */
 module.exports = _curry2(_forEach);

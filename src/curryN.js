@@ -25,14 +25,14 @@ var arity = require('./arity');
  * @see R.curry
  * @example
  *
- *      var addFourNumbers = function() {
- *        return R.sum([].slice.call(arguments, 0, 4));
- *      };
- *
- *      var curriedAddFourNumbers = R.curryN(4, addFourNumbers);
- *      var f = curriedAddFourNumbers(1, 2);
- *      var g = f(3);
- *      g(4);//=> 10
+ *      > var addFourNumbers = function() {
+ *      .     return R.sum([].slice.call(arguments, 0, 4));
+ *      . }
+ *      > var curriedAddFourNumbers = R.curryN(4, addFourNumbers)
+ *      > var f = curriedAddFourNumbers(1, 2)
+ *      > var g = f(3)
+ *      > g(4)
+ *      10
  */
 module.exports = _curry2(function curryN(length, fn) {
     return (function recurry(args) {

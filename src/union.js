@@ -18,6 +18,7 @@ var uniq = require('./uniq');
  *         duplicates removed.
  * @example
  *
- *      R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
+ *      > R.union([1, 2, 3], [2, 3, 4])
+ *      [1, 2, 3, 4]
  */
 module.exports = _curry2(compose(uniq, _concat));

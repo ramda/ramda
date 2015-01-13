@@ -15,7 +15,8 @@ var _slice = require('./internal/_slice');
  *         empty list if the input list is empty.
  * @example
  *
- *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
+ *      > R.tail(['fi', 'fo', 'fum'])
+ *      ['fo', 'fum']
  */
 module.exports = _checkForMethod('tail', function(list) {
     return _slice(list, 1);

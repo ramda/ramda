@@ -14,11 +14,15 @@ var keysIn = require('./keysIn');
  *         properties that map to functions.
  * @example
  *
- *      R.functionsIn(R); // returns list of ramda's own and prototype function names
- *
- *      var F = function() { this.x = function(){}; this.y = 1; }
- *      F.prototype.z = function() {};
- *      F.prototype.a = 100;
- *      R.functionsIn(new F()); //=> ["x", "z"]
+ *      > (function() {
+ *      .     var F = function() {
+ *      .         this.x = function() {};
+ *      .         this.y = 1;
+ *      .     };
+ *      .     F.prototype.z = function() {};
+ *      .     F.prototype.a = 100;
+ *      .     return R.functionsIn(new F());
+ *      . }())
+ *      ['x', 'z']
  */
 module.exports = _functionsWith(keysIn);

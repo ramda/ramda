@@ -16,8 +16,7 @@ var _lt = require('./internal/_lt');
  * @return {*} The greatest element in the list. `undefined` if the list is empty.
  * @example
  *
- *      function cmp(obj) { return obj.x; }
- *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
- *      R.minBy(cmp, [a, b, c]); //=> {x: 1}
+ *      > R.minBy(function(obj) { return obj.x; }, [{x: 1}, {x: 2}, {x: 3}])
+ *      {x: 1}
  */
 module.exports = _curry2(_createMaxMinBy(_lt));

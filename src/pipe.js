@@ -21,13 +21,12 @@ var reverse = require('./reverse');
  *         left to right.
  * @example
  *
- *      var triple = function(x) { return x * 3; };
- *      var double = function(x) { return x * 2; };
- *      var square = function(x) { return x * x; };
- *      var squareThenDoubleThenTriple = R.pipe(square, double, triple);
- *
- *      //≅ triple(double(square(5)))
- *      squareThenDoubleThenTriple(5); //=> 150
+ *      > var triple = function(x) { return x * 3; }
+ *      > var double = function(x) { return x * 2; }
+ *      > var square = function(x) { return x * x; }
+ *      > var squareThenDoubleThenTriple = R.pipe(square, double, triple)
+ *      > squareThenDoubleThenTriple(5)
+ *      150  // ≅ triple(double(square(5)))
  */
 module.exports = function pipe() {
     return compose.apply(this, reverse(arguments));

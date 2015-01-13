@@ -15,18 +15,20 @@ var arity = require('./arity');
  * @return {Function} The wrapped function.
  * @example
  *
- *      var greet = function(name) {return 'Hello ' + name;};
+ *      > var greet = function(name) {
+ *      .     return 'Hello ' + name;
+ *      . }
+ *      > var shoutedGreet = R.wrap(greet, function(gr, name) {
+ *      .     return gr(name).toUpperCase();
+ *      . })
+ *      > shoutedGreet('Kathy')
+ *      'HELLO KATHY'
  *
- *      var shoutedGreet = R.wrap(greet, function(gr, name) {
- *          return gr(name).toUpperCase();
- *      });
- *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
- *
- *      var shortenedGreet = R.wrap(greet, function(gr, name) {
- *          return gr(name.substring(0, 3));
- *      });
- *      shortenedGreet("Robert"); //=> "Hello Rob"
- *
+ *      > var shortenedGreet = R.wrap(greet, function(gr, name) {
+ *      .     return gr(name.substring(0, 3));
+ *      . })
+ *      > shortenedGreet('Robert')
+ *      'Hello Rob'
  */
 module.exports = function wrap(fn, wrapper) {
     return arity(fn.length, function() {

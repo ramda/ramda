@@ -15,9 +15,10 @@ var _filterIndexed = require('./internal/_filterIndexed');
  * @return {Array} The new filtered array.
  * @example
  *
- *      var lastTwo = function(val, idx, list) {
- *        return list.length - idx <= 2;
- *      };
- *      R.filterIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [0, 9]
+ *      > var lastTwo = function(val, idx, list) {
+ *      .     return list.length - idx <= 2;
+ *      . }
+ *      > R.filterIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9])
+ *      [0, 9]
  */
 module.exports = _curry2(_filterIndexed);

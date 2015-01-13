@@ -16,6 +16,7 @@ var prop = require('./prop');
  * @return {*} The value at `obj.p`.
  * @example
  *
- *      R.propOf({x: 100}, 'x'); //=> 100
+ *      > R.propOf({x: 100}, 'x')
+ *      100
  */
 module.exports = flip(prop);

@@ -14,6 +14,7 @@ var invoker = require('./invoker');
  * @see R.invoker
  * @example
  *
- *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
+ *      > R.match(/[a-z]a/g, 'bananas')
+ *      ['ba', 'na', 'na']
  */
 module.exports = invoker(1, 'match');

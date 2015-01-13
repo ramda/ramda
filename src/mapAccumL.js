@@ -18,12 +18,8 @@ var _curry3 = require('./internal/_curry3');
  * @return {*} The final, accumulated value.
  * @example
  *
- *      var digits = ['1', '2', '3', '4'];
- *      var append = function(a, b) {
- *          return [a + b, a + b];
- *      }
- *
- *      R.mapAccumL(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
+ *      > R.mapAccumL(function(acc, x) { return [acc + x, acc + x]; }, '', ['a', 'b', 'c', 'd'])
+ *      ['abcd', ['a', 'ab', 'abc', 'abcd']]
  */
 module.exports = _curry3(function mapAccumL(fn, acc, list) {
     var idx = -1, len = list.length, result = new Array(len), tuple = [acc];

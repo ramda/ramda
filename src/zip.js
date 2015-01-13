@@ -16,7 +16,8 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The list made by pairing up same-indexed elements of `list1` and `list2`.
  * @example
  *
- *      R.zip([1, 2, 3], ['a', 'b', 'c']); //=> [[1, 'a'], [2, 'b'], [3, 'c']]
+ *      > R.zip([1, 2, 3], ['a', 'b', 'c'])
+ *      [[1, 'a'], [2, 'b'], [3, 'c']]
  */
 module.exports = _curry2(function zip(a, b) {
     var rv = [];

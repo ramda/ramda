@@ -16,8 +16,11 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} A new list containing the contents of the old list followed by `el`.
  * @example
  *
- *      R.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
- *      R.append('tests', []); //=> ['tests']
- *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
+ *      > R.append('tests', ['write', 'more'])
+ *      ['write', 'more', 'tests']
+ *      > R.append('tests', [])
+ *      ['tests']
+ *      > R.append(['tests'], ['write', 'more'])
+ *      ['write', 'more', ['tests']]
  */
 module.exports = _curry2(_append);

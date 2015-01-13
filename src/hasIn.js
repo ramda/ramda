@@ -14,17 +14,21 @@ var _curry2 = require('./internal/_curry2');
  * @return {Boolean} Whether the property exists.
  * @example
  *
- *      function Rectangle(width, height) {
- *          this.width = width;
- *          this.height = height;
- *      }
- *      Rectangle.prototype.area = function() {
- *          return this.width * this.height;
- *      };
- *
- *      var square = new Rectangle(2, 2);
- *      R.hasIn('width', square);  //=> true
- *      R.hasIn('area', square);  //=> true
+ *      > var Rectangle = (function() {
+ *      .     var Rectangle = function(width, height) {
+ *      .         this.width = width;
+ *      .         this.height = height;
+ *      .     };
+ *      .     Rectangle.prototype.area = function() {
+ *      .         return this.width * this.height;
+ *      .     };
+ *      .     return Rectangle;
+ *      . }())
+ *      > var square = new Rectangle(2, 2)
+ *      > R.hasIn('width', square)
+ *      true
+ *      > R.hasIn('area', square)
+ *      true
  */
 module.exports = _curry2(function(prop, obj) {
     return prop in obj;

@@ -22,7 +22,8 @@ var _slice = require('./internal/_slice');
  * @see R.apply
  * @example
  *
- *      R.unapply(JSON.stringify)(1, 2, 3); //=> '[1,2,3]'
+ *      > R.unapply(JSON.stringify)(1, 2, 3)
+ *      '[1,2,3]'
  */
 module.exports = function unapply(fn) {
     if (arguments.length === 0) {

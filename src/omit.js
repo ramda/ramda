@@ -15,7 +15,8 @@ var _pickBy = require('./internal/_pickBy');
  * @return {Object} A new object with properties from `names` not on it.
  * @example
  *
- *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
+ *      > R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4})
+ *      {b: 2, c: 3}
  */
 module.exports = _curry2(function omit(names, obj) {
     return _pickBy(function(val, key) {
