@@ -2,16 +2,16 @@ var always = require('./always');
 
 
 /**
- * A function that always returns `true`. Any passed in parameters are ignored.
+ * A function that takes one argument and always returns `true`.
  *
  * @func
  * @memberOf R
  * @category Function
- * @sig * -> true
+ * @sig a -> Boolean
  * @see R.always
- * @return {Boolean} `true`.
+ * @return {Boolean} `true`
  * @example
  *
- *      R.T(); //=> true
+ *      R.T('xxx'); //=> true
  */
 module.exports = always(true);
