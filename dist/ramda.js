@@ -157,10 +157,6 @@
         return val != null && val.length >= 0 && Object.prototype.toString.call(val) === '[object Array]';
     };
 
-    var _isInteger = Number.isInteger || function _isInteger(n) {
-        return n << 0 === n;
-    };
-
     var _isThenable = function _isThenable(value) {
         return value != null && value === Object(value) && typeof value.then === 'function';
     };
@@ -5585,13 +5581,8 @@
      *      seventeenMod(10); //=> 7
      */
     var mathMod = op(function mathMod(m, p) {
-        if (!_isInteger(m)) {
-            return NaN;
-        }
-        if (!_isInteger(p) || p < 1) {
-            return NaN;
-        }
-        return (m % p + p) % p;
+        var rem = m % p;
+        return rem < 0 ? rem + Math.abs(p) : rem;
     });
 
     /**
