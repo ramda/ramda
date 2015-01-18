@@ -15,9 +15,11 @@ var _curry2 = require('./internal/_curry2');
  * @return {Object} The element found, or `undefined`.
  * @example
  *
- *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
- *      R.findLast(R.propEq('a', 1))(xs); //=> {a: 1, b: 1}
- *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
+ *      > var xs = [{a: 1, b: 0}, {a:1, b: 1}]
+ *      > R.findLast(R.propEq('a', 1))(xs)
+ *      {a: 1, b: 1}
+ *      > R.findLast(R.propEq('a', 4))(xs)
+ *      undefined
  */
 module.exports = _curry2(function findLast(fn, list) {
     var idx = list.length;

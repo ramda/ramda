@@ -42,7 +42,7 @@
     "benchmark": "~1.0.0",
     "commander": "2.5.x",
     "deedpoll": "0.2.x",
-    "dox": "latest",
+    "doctest": "0.7.x",
     "envvar": "1.x.x",
     "escodegen": "1.4.x",
     "gh-pages": "^0.2.0",

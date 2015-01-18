@@ -12,8 +12,10 @@ var _nth = require('./internal/_nth');
  * @return {Function}
  * @example
  *
- *      R.nthArg(1)('a', 'b', 'c'); //=> 'b'
- *      R.nthArg(-1)('a', 'b', 'c'); //=> 'c'
+ *      > R.nthArg(1)('a', 'b', 'c')
+ *      'b'
+ *      > R.nthArg(-1)('a', 'b', 'c')
+ *      'c'
  */
 module.exports = function nthArg(n) {
     return function() {

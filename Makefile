@@ -5,6 +5,7 @@ DEEDPOLL = node_modules/.bin/deedpoll \
 	--rename fnArity:length \
 	--rename i:idx \
 	--rename index:idx
+DOCTEST = node_modules/.bin/doctest
 UGLIFY = node_modules/.bin/uglifyjs
 XYZ = node_modules/.bin/xyz --repo git@github.com:ramda/ramda.git --script scripts/prepublish
 
@@ -48,3 +49,6 @@ setup:
 .PHONY: test
 test: dist/ramda.js
 	npm test
+	sed 's!> var \([^ ]*\) =!> global.\1 =!' '$<' >ramda.js.tmp
+	$(DOCTEST) --module commonjs --type js -- ramda.js.tmp
+	rm ramda.js.tmp

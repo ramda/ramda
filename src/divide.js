@@ -15,13 +15,15 @@ var op = require('./op');
  *                 be curried right by explicitly passing `undefined` for its first argument.
  * @example
  *
- *      R.divide(71, 100); //=> 0.71
+ *      > R.divide(71, 100)
+ *      0.71
  *
- *      // note: In this example, `__`  is just an `undefined` value.  You could use `void 0` instead
- *      var half = R.divide(__, 2);
- *      half(42); //=> 21
+ *      > var half = R.divide(R.__, 2)
+ *      > half(42)
+ *      21
  *
- *      var reciprocal = R.divide(1);
- *      reciprocal(4);   //=> 0.25
+ *      > var reciprocal = R.divide(1)
+ *      > reciprocal(4)
+ *      0.25
  */
 module.exports = op(function divide(a, b) { return a / b; });

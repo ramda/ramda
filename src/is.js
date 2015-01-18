@@ -14,14 +14,22 @@ var _curry2 = require('./internal/_curry2');
  * @return {Boolean}
  * @example
  *
- *      R.is(Object, {}); //=> true
- *      R.is(Number, 1); //=> true
- *      R.is(Object, 1); //=> false
- *      R.is(String, 's'); //=> true
- *      R.is(String, new String('')); //=> true
- *      R.is(Object, new String('')); //=> true
- *      R.is(Object, 's'); //=> false
- *      R.is(Number, {}); //=> false
+ *      > R.is(Object, {})
+ *      true
+ *      > R.is(Number, 1)
+ *      true
+ *      > R.is(Object, 1)
+ *      false
+ *      > R.is(String, 's')
+ *      true
+ *      > R.is(String, new String(''))
+ *      true
+ *      > R.is(Object, new String(''))
+ *      true
+ *      > R.is(Object, 's')
+ *      false
+ *      > R.is(Number, {})
+ *      false
  */
 module.exports = _curry2(function is(Ctor, val) {
     return val != null && val.constructor === Ctor || val instanceof Ctor;

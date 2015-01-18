@@ -24,11 +24,9 @@ var _foldl = require('./internal/_foldl');
  * @return {*} The final, accumulated value.
  * @example
  *
- *      var numbers = [1, 2, 3];
- *      var add = function(a, b) {
- *        return a + b;
- *      };
- *
- *      R.foldl(add, 10, numbers); //=> 16
+ *      > var numbers = [1, 2, 3]
+ *      > var add = function(a, b) { return a + b; }
+ *      > R.foldl(add, 10, numbers)
+ *      16
  */
 module.exports = _curry3(_foldl);

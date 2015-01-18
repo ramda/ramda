@@ -14,8 +14,10 @@ var invoker = require('./invoker');
  * @return {String} str The string made by concatenating `xs` with `separator`.
  * @example
  *
- *      var spacer = R.join(' ');
- *      spacer(['a', 2, 3.4]);   //=> 'a 2 3.4'
- *      R.join('|', [1, 2, 3]);    //=> '1|2|3'
+ *      > var spacer = R.join(' ')
+ *      > spacer(['a', 2, 3.4])
+ *      'a 2 3.4'
+ *      > R.join('|', [1, 2, 3])
+ *      '1|2|3'
  */
 module.exports = invoker(1, 'join');

@@ -14,7 +14,7 @@ var invoker = require('./invoker');
  * @return {Array} The items from `a` to `b - 1` from `xs`.
  * @example
  *
- *      var xs = R.range(0, 10);
- *      R.slice(2, 5)(xs); //=> [2, 3, 4]
+ *      > R.slice(2, 5, ['a', 'b', 'c', 'd', 'e', 'f'])
+ *      ['c', 'd', 'e']
  */
 module.exports = invoker(2, 'slice');

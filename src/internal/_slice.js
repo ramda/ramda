@@ -11,12 +11,14 @@ var _noArgsException = require('./_noArgsException');
  * @return {Array} A new, sliced array.
  * @example
  *
- *      _slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
+ *      > _slice([1, 2, 3, 4, 5], 1, 3)
+ *      [2, 3]
  *
- *      var firstThreeArgs = function(a, b, c, d) {
- *        return _slice(arguments, 0, 3);
- *      };
- *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
+ *      > var firstThreeArgs = function(a, b, c, d) {
+ *      .   return _slice(arguments, 0, 3);
+ *      . }
+ *      > firstThreeArgs(1, 2, 3, 4)
+ *      [1, 2, 3]
  */
 module.exports = function _slice(args, from, to) {
     switch (arguments.length) {

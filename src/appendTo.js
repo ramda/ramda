@@ -14,8 +14,11 @@ var flip = require('./flip');
  * @return {Array}
  * @example
  *
- *      R.appendTo([], 1); //=> [1]
- *      R.appendTo([1, 2, 3], 4); //=> [1, 2, 3, 4]
- *      R.appendTo([1, 2, 3], [4, 5, 6]); //=> [1, 2, 3, [4, 5, 6]]
+ *      > R.appendTo([], 1)
+ *      [1]
+ *      > R.appendTo([1, 2, 3], 4)
+ *      [1, 2, 3, 4]
+ *      > R.appendTo([1, 2, 3], [4, 5, 6])
+ *      [1, 2, 3, [4, 5, 6]]
  */
 module.exports = flip(_append);

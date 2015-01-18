@@ -14,14 +14,17 @@
  * @return {Function}
  * @example
  *
- *      var fn = R.cond(
- *          [R.eq(0),   R.always('water freezes at 0°C')],
- *          [R.eq(100), R.always('water boils at 100°C')],
- *          [R.T,       function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
- *      );
- *      fn(0); //=> 'water freezes at 0°C'
- *      fn(50); //=> 'nothing special happens at 50°C'
- *      fn(100); //=> 'water boils at 100°C'
+ *      > var fn = R.cond(
+ *      .     [R.eq(0),   R.always('water freezes at 0°C')],
+ *      .     [R.eq(100), R.always('water boils at 100°C')],
+ *      .     [R.T,       function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
+ *      . )
+ *      > fn(0)
+ *      'water freezes at 0°C'
+ *      > fn(50)
+ *      'nothing special happens at 50°C'
+ *      > fn(100)
+ *      'water boils at 100°C'
  */
 module.exports = function cond() {
     var pairs = arguments;

@@ -13,11 +13,15 @@ var keys = require('./keys');
  * @return {Array} A list of the object's own properties that map to functions.
  * @example
  *
- *      R.functions(R); // returns list of ramda's own function names
- *
- *      var F = function() { this.x = function(){}; this.y = 1; }
- *      F.prototype.z = function() {};
- *      F.prototype.a = 100;
- *      R.functions(new F()); //=> ["x"]
+ *      > (function() {
+ *      .     var F = function() {
+ *      .         this.x = function() {};
+ *      .         this.y = 1;
+ *      .     };
+ *      .     F.prototype.z = function() {};
+ *      .     F.prototype.a = 100;
+ *      .     return R.functions(new F());
+ *      . }())
+ *      ['x']
  */
 module.exports = _functionsWith(keys);

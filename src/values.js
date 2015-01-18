@@ -14,7 +14,8 @@ var keys = require('./keys');
  * @return {Array} An array of the values of the object's own properties.
  * @example
  *
- *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
+ *      > R.values({a: 1, b: 2, c: 3})
+ *      [1, 2, 3]
  */
 module.exports = function values(obj) {
     var props = keys(obj);

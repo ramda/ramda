@@ -16,7 +16,8 @@ var mapObjIndexed = require('./mapObjIndexed');
  * @return {Object} The transformed object.
  * @example
  *
- *      R.evolve({ elapsed: R.add(1), remaining: R.add(-1) }, { name: 'Tomato', elapsed: 100, remaining: 1400 }); //=> { name: 'Tomato', elapsed: 101, remaining: 1399 }
+ *      > R.evolve({elapsed: R.add(1), remaining: R.add(-1)}, {name: 'Tomato', elapsed: 100, remaining: 1400})
+ *      {name: 'Tomato', elapsed: 101, remaining: 1399}
  */
 module.exports = _curry2(function evolve(transformations, object) {
     return _extend(_extend({}, object), mapObjIndexed(function(fn, key) {

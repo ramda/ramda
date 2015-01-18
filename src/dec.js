@@ -12,6 +12,7 @@ var add = require('./add');
  * @return {Number}
  * @example
  *
- *      R.dec(42); //=> 41
+ *      > R.dec(42)
+ *      41
  */
 module.exports = add(-1);

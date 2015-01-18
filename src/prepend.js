@@ -15,6 +15,7 @@ var _prepend = require('./internal/_prepend');
  * @return {Array} A new array.
  * @example
  *
- *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
+ *      > R.prepend('fee', ['fi', 'fo', 'fum'])
+ *      ['fee', 'fi', 'fo', 'fum']
  */
 module.exports = _curry2(_prepend);

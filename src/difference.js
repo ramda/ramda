@@ -15,8 +15,10 @@ var _curry2 = require('./internal/_curry2');
  * @see R.differenceWith
  * @example
  *
- *      R.difference([1,2,3,4], [7,6,5,4,3]); //=> [1,2]
- *      R.difference([7,6,5,4,3], [1,2,3,4]); //=> [7,6,5]
+ *      > R.difference([1, 2, 3, 4], [7, 6, 5, 4, 3])
+ *      [1, 2]
+ *      > R.difference([7, 6, 5, 4, 3], [1, 2, 3, 4])
+ *      [7, 6, 5]
  */
 module.exports = _curry2(function difference(first, second) {
     var out = [];

@@ -14,6 +14,10 @@ var _slice = require('./internal/_slice');
  * @param {Number} n The number of elements to return.
  * @param {Array} list The array to query.
  * @return {Array} A new array containing the first elements of `list`.
+ * @example
+ *
+ *      > R.take(2, ['foo', 'bar', 'baz', 'quux'])
+ *      ['foo', 'bar']
  */
 module.exports = _curry2(_checkForMethod('take', function(n, list) {
     return _slice(list, 0, Math.min(n, list.length));

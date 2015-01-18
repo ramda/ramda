@@ -14,10 +14,13 @@ var _multiply = require('./internal/_multiply');
  * @return {Number} The result of `a * b`.
  * @example
  *
- *      var double = R.multiply(2);
- *      var triple = R.multiply(3);
- *      double(3);       //=>  6
- *      triple(4);       //=> 12
- *      R.multiply(2, 5);  //=> 10
+ *      > var double = R.multiply(2)
+ *      > var triple = R.multiply(3)
+ *      > double(3)
+ *      6
+ *      > triple(4)
+ *      12
+ *      > R.multiply(2, 5)
+ *      10
  */
 module.exports = _curry2(_multiply);

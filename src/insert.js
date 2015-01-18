@@ -19,7 +19,8 @@ var _slice = require('./internal/_slice');
  * @return {Array} A new Array with `elt` inserted at `index`.
  * @example
  *
- *      R.insert(2, 'x', [1,2,3,4]); //=> [1,2,'x',3,4]
+ *      > R.insert(2, 'x', [1, 2, 3, 4])
+ *      [1, 2, 'x', 3, 4]
  */
 module.exports = _curry3(function insert(idx, elt, list) {
     idx = idx < list.length && idx >= 0 ? idx : list.length;

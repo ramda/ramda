@@ -20,10 +20,8 @@ var _map = require('./internal/_map');
  * @return {Array} The new list.
  * @example
  *
- *      var double = function(x) {
- *        return x * 2;
- *      };
- *
- *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
+ *      > var double = function(x) { return x * 2; }
+ *      > R.map(double, [1, 2, 3])
+ *      [2, 4, 6]
  */
 module.exports = _curry2(_checkForMethod('map', _map));

@@ -16,8 +16,8 @@ var _foldl = require('./internal/_foldl');
  *         and second an array of elements that did not satisfy.
  * @example
  *
- *      R.partition(R.contains('s'), ['sss', 'ttt', 'foo', 'bars']);
- *      //=> [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
+ *      > R.partition(R.contains('s'), ['sss', 'ttt', 'foo', 'bars'])
+ *      [['sss', 'bars'], ['ttt', 'foo']]
  */
 module.exports = _curry2(function partition(pred, list) {
     return _foldl(function(acc, elt) {

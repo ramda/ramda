@@ -14,6 +14,7 @@ var _gt = require('./internal/_gt');
  * @return {Number} The greatest number in the list.
  * @example
  *
- *      R.max([7, 3, 9, 2, 4, 9, 3]); //=> 9
+ *      > R.max([7, 3, 9, 2, 4, 9, 3])
+ *      9
  */
 module.exports = _createMaxMin(_gt, -Infinity);

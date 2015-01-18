@@ -7,7 +7,8 @@
  * @return {Array} A new, merged array.
  * @example
  *
- *      _concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+ *      > _concat([4, 5, 6], [1, 2, 3])
+ *      [4, 5, 6, 1, 2, 3]
  */
 module.exports = function _concat(set1, set2) {
     set1 = set1 || [];

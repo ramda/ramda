@@ -12,17 +12,11 @@ var keys = require('./keys');
  * @return {Object} out A new object
  * @example
  *
- *      var raceResults = {
- *        first: 'alice',
- *        second: 'jake'
- *      };
- *      R.invertObj(raceResults);
- *      //=> { 'alice': 'first', 'jake':'second' }
+ *      > R.invertObj({first: 'alice', second: 'jake'})
+ *      {alice: 'first', jake: 'second'}
  *
- *      // Alternatively:
- *      var raceResults = ['alice', 'jake'];
- *      R.invertObj(raceResults);
- *      //=> { 'alice': '0', 'jake':'1' }
+ *      > R.invertObj(['alice', 'jake'])
+ *      {alice: '0', jake: '1'}
  */
 module.exports = function invertObj(obj) {
     var props = keys(obj),

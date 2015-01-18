@@ -22,12 +22,12 @@ var keysIn = require('./keysIn');
  * @return {Object} a new object similar to the original except for the specified property.
  * @example
  *
- *      var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
- *      var obj2 = R.assoc('e', {x: 42}, obj1);
- *      //=>  {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5}
+ *      > var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5}
+ *      > var obj2 = R.assoc('e', {x: 42}, obj1)
+ *      {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5}
  *
- *      // And moreover, obj2.b is a reference to obj1.b
- *      // No unnecessary objects are created.
+ *      And moreover, obj2.b is a reference to obj1.b.
+ *      No unnecessary objects are created.
  */
 module.exports = _curry3(function(prop, val, obj) {
     // rather than `clone` to get prototype props too, even though they're flattened

@@ -15,9 +15,12 @@ var _nth = require('./internal/_nth');
  * @return {*} The nth element of the list.
  * @example
  *
- *      var list = ['foo', 'bar', 'baz', 'quux'];
- *      R.nth(1, list); //=> 'bar'
- *      R.nth(-1, list); //=> 'quux'
- *      R.nth(-99, list); //=> undefined
+ *      > var list = ['foo', 'bar', 'baz', 'quux']
+ *      > R.nth(1, list)
+ *      'bar'
+ *      > R.nth(-1, list)
+ *      'quux'
+ *      > R.nth(-99, list)
+ *      undefined
  */
 module.exports = _curry2(_nth);

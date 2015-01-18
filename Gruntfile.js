@@ -30,23 +30,11 @@ module.exports = function(grunt) {
         },
 
         mochaTest: {
-            docs: {
-                options: {
-                    reporter: 'spec'
-                },
-                src: ['test/test.examplesRunner.js']
-            },
-            test: {
-                options: {
-                    reporter: 'spec'
-                },
-                src: ['test/**/*.js', '!{test/bundle.js}', 'ext/**/test/*.js']
-            },
             unit: {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/**/*.js', '!{test/test.examplesRunner.js,test/bundle.js}', 'ext/**/test/*.js']
+                src: ['test/**/*.js', '!{test/bundle.js}', 'ext/**/test/*.js']
             }
         },
 
@@ -75,7 +63,7 @@ module.exports = function(grunt) {
 
         browserify: {
             client: {
-                src: ['test/*.js', '!{test/test.examplesRunner.js,test/bundle.js}'],
+                src: ['test/*.js', '!{test/bundle.js}'],
                 dest: 'test/bundle.js',
                 options: {
                     external: ['R']
@@ -184,7 +172,6 @@ module.exports = function(grunt) {
     grunt.registerTask('sauce', SAUCE_ACCESS_KEY === '' ? [] : ['connect', 'saucelabs-mocha']);
     grunt.registerTask('test', ['jshint', 'jscs', 'browserify:client', 'mochaTest:unit']);
     grunt.registerTask('unittest', ['browserify:client', 'mochaTest:unit']);
-    grunt.registerTask('doctest', ['mochaTest:docs']);
     grunt.registerTask('gh-pages', [
         'clean:gh-pages',
         'less:gh-pages',

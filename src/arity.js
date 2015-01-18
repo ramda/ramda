@@ -13,16 +13,20 @@
  *         guaranteed to be of arity `n`.
  * @example
  *
- *      var takesTwoArgs = function(a, b) {
- *        return [a, b];
- *      };
- *      takesTwoArgs.length; //=> 2
- *      takesTwoArgs(1, 2); //=> [1, 2]
+ *      > var takesTwoArgs = function(a, b) { return [a, b]; }
+ *      > takesTwoArgs.length
+ *      2
+ *      > takesTwoArgs(1, 2)
+ *      [1, 2]
  *
- *      var takesOneArg = R.arity(1, takesTwoArgs);
- *      takesOneArg.length; //=> 1
- *      // All arguments are passed through to the wrapped function
- *      takesOneArg(1, 2); //=> [1, 2]
+ *      > var takesOneArg = R.arity(1, takesTwoArgs)
+ *      > takesOneArg.length
+ *      1
+ *
+ *      All arguments are passed through to the wrapped function:
+ *
+ *      > takesOneArg(1, 2)
+ *      [1, 2]
  */
 module.exports = function(n, fn) {
     switch (n) {

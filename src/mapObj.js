@@ -19,12 +19,8 @@ var keys = require('./keys');
  *         of running each property through `fn`.
  * @example
  *
- *      var values = { x: 1, y: 2, z: 3 };
- *      var double = function(num) {
- *        return num * 2;
- *      };
- *
- *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
+ *      > R.mapObj(function(num) { return num * 2; }, {x: 1, y: 2, z: 3})
+ *      {x: 2, y: 4, z: 6}
  */
 module.exports = _curry2(function mapObject(fn, obj) {
     return _foldl(function(acc, key) {

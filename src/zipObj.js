@@ -13,7 +13,8 @@ var _curry2 = require('./internal/_curry2');
  * @return {Object} The object made by pairing up same-indexed elements of `keys` and `values`.
  * @example
  *
- *      R.zipObj(['a', 'b', 'c'], [1, 2, 3]); //=> {a: 1, b: 2, c: 3}
+ *      > R.zipObj(['a', 'b', 'c'], [1, 2, 3])
+ *      {a: 1, b: 2, c: 3}
  */
 module.exports = _curry2(function zipObj(keys, values) {
     var idx = -1, len = keys.length, out = {};

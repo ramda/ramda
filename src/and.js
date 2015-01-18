@@ -16,11 +16,13 @@ var _curry2 = require('./internal/_curry2');
  * @return {Function} a function that applies its arguments to `f` and `g` and ANDs their outputs together.
  * @example
  *
- *      var gt10 = function(x) { return x > 10; };
- *      var even = function(x) { return x % 2 === 0 };
- *      var f = R.and(gt10, even);
- *      f(100); //=> true
- *      f(101); //=> false
+ *      > var gt10 = function(n) { return n > 10; }
+ *      > var even = function(n) { return n % 2 === 0; }
+ *      > var pred = R.and(gt10, even)
+ *      > pred(100)
+ *      true
+ *      > pred(101)
+ *      false
  */
 module.exports = _curry2(function and(f, g) {
     return function _and() {

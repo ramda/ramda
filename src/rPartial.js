@@ -21,11 +21,11 @@ var flip = require('./flip');
  *         `args` appended to `fn`'s arguments list.
  * @example
  *
- *      var greet = function(salutation, title, firstName, lastName) {
- *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
- *      };
- *      var greetMsJaneJones = R.rPartial(greet, 'Ms.', 'Jane', 'Jones');
- *
- *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
+ *      > var greet = function(salutation, title, firstName, lastName) {
+ *      .     return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+ *      . }
+ *      > var greetMsJaneJones = R.rPartial(greet, 'Ms.', 'Jane', 'Jones')
+ *      > greetMsJaneJones('Hello')
+ *      'Hello, Ms. Jane Jones!'
  */
 module.exports = _createPartialApplicator(flip(_concat));

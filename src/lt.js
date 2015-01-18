@@ -16,10 +16,15 @@ var op = require('./op');
  *                 be curried right by explicitly passing `undefined` for its first argument.
  * @example
  *
- *      R.lt(2, 6); //=> true
- *      R.lt(2, 0); //=> false
- *      R.lt(2, 2); //=> false
- *      R.lt(5)(10); //=> true
- *      R.lt(__, 5)(10); //=> false // right-sectioned currying
+ *      > R.lt(2, 6)
+ *      true
+ *      > R.lt(2, 0)
+ *      false
+ *      > R.lt(2, 2)
+ *      false
+ *      > R.lt(5)(10)
+ *      true
+ *      > R.lt(R.__, 5)(10)  // right-sectioned currying
+ *      false
  */
 module.exports = op(_lt);

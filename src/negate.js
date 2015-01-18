@@ -12,6 +12,7 @@ var multiply = require('./multiply');
  * @return {Number}
  * @example
  *
- *      R.negate(42); //=> -42
+ *      > R.negate(42)
+ *      -42
  */
 module.exports = multiply(-1);

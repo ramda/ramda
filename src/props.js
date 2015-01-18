@@ -13,11 +13,14 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The corresponding values or partially applied function.
  * @example
  *
- *      R.props(['x', 'y'], {x: 1, y: 2}); //=> [1, 2]
- *      R.props(['c', 'a', 'b'], {b: 2, a: 1}); //=> [undefined, 1, 2]
+ *      > R.props(['x', 'y'], {x: 1, y: 2})
+ *      [1, 2]
+ *      > R.props(['c', 'a', 'b'], {b: 2, a: 1})
+ *      [undefined, 1, 2]
  *
- *      var fullName = R.compose(R.join(' '), R.props(['first', 'last']));
- *      fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'}); //=> 'Tony Bullet-Tooth'
+ *      > var fullName = R.compose(R.join(' '), R.props(['first', 'last']))
+ *      > fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'})
+ *      'Tony Bullet-Tooth'
  */
 module.exports = _curry2(function props(ps, obj) {
     var len = ps.length,

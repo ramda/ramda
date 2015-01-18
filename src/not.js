@@ -10,10 +10,12 @@
  * @return {Function} a function that applies its arguments to `f` and logically inverts its output.
  * @example
  *
- *      var gt10 = function(x) { return x > 10; };
- *      var f = R.not(gt10);
- *      f(11); //=> false
- *      f(9); //=> true
+ *      > var gt10 = function(x) { return x > 10; }
+ *      > var f = R.not(gt10)
+ *      > f(11)
+ *      false
+ *      > f(9)
+ *      true
  */
 module.exports = function not(f) {
     return function() {return !f.apply(this, arguments);};

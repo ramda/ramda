@@ -16,8 +16,10 @@ var _pickBy = require('./internal/_pickBy');
  * @return {Object} A new object with only properties from `names` on it.
  * @example
  *
- *      R.pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, d: 4}
- *      R.pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1}
+ *      > R.pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4})
+ *      {a: 1, d: 4}
+ *      > R.pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4})
+ *      {a: 1}
  */
 module.exports = _curry2(function pick(names, obj) {
     return _pickBy(function(val, key) {

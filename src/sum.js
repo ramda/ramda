@@ -14,6 +14,7 @@ var foldl = require('./foldl');
  * @see foldl
  * @example
  *
- *      R.sum([2,4,6,8,100,1]); //=> 121
+ *      > R.sum([2, 4, 6, 8, 100, 1])
+ *      121
  */
 module.exports = foldl(_add, 0);

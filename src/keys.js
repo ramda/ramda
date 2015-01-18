@@ -16,7 +16,8 @@ var has = require('./has');
  * @return {Array} An array of the object's own properties.
  * @example
  *
- *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
+ *      > R.keys({a: 1, b: 2, c: 3})
+ *      ['a', 'b', 'c']
  */
 module.exports = (function() {
     // cover IE < 9 keys issues

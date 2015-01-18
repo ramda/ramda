@@ -15,10 +15,12 @@ var _curry3 = require('./internal/_curry3');
  *
  * @example
  *
- *      var o1 = { a: 1, b: 2, c: 3, d: 4 };
- *      var o2 = { a: 10, b: 20, c: 3, d: 40 };
- *      R.eqProps('a', o1, o2); //=> false
- *      R.eqProps('c', o1, o2); //=> true
+ *      > var o1 = {a: 1, b: 2, c: 3, d: 4}
+ *      > var o2 = {a: 10, b: 20, c: 3, d: 40}
+ *      > R.eqProps('a', o1, o2)
+ *      false
+ *      > R.eqProps('c', o1, o2)
+ *      true
  */
 module.exports = _curry3(function eqProps(prop, obj1, obj2) {
     return obj1[prop] === obj2[prop];

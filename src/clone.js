@@ -14,10 +14,10 @@ var _baseCopy = require('./internal/_baseCopy');
  * @return {*} A new object or array.
  * @example
  *
- *      var objects = [{}, {}, {}];
- *      var objectsClone = R.clone(objects);
- *      objects[0] === objectsClone[0]; //=> false
- *
+ *      > var objects = [{}, {}, {}]
+ *      > var objectsClone = R.clone(objects)
+ *      > objects[0] === objectsClone[0]
+ *      false
  */
 module.exports = function clone(value) {
     return _baseCopy(value, [], []);

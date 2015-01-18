@@ -18,15 +18,15 @@ var _slice = require('./internal/_slice');
  * @return {Function} A new function.
  * @example
  *
- *      var add = function(a, b) { return a + b; };
- *      var multiply = function(a, b) { return a * b; };
- *      var subtract = function(a, b) { return a - b; };
+ *      > var add = function(a, b) { return a + b; }
+ *      > var multiply = function(a, b) { return a * b; }
+ *      > var subtract = function(a, b) { return a - b; }
+ *      > R.converge(multiply, add, subtract)(1, 2)
+ *      -3  // ≅ multiply(add(1, 2), subtract(1, 2))
  *
- *      //≅ multiply( add(1, 2), subtract(1, 2) );
- *      R.converge(multiply, add, subtract)(1, 2); //=> -3
- *
- *      var add3 = function(a, b, c) { return a + b + c; };
- *      R.converge(add3, multiply, add, subtract)(1, 2); //=> 4
+ *      > var add3 = function(a, b, c) { return a + b + c; }
+ *      > R.converge(add3, multiply, add, subtract)(1, 2)
+ *      4
  */
 module.exports = function(after) {
     var fns = _slice(arguments, 1);

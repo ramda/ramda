@@ -14,11 +14,15 @@ var op = require('./op');
  * @note Operator: this is right-curried by default, but can be called via sections
  * @example
  *
- *      R.gte(2, 6); //=> false
- *      R.gte(2, 0); //=> true
- *      R.gte(2, 2); //=> true
- *      R.gte(__, 6)(2); //=> false
- *      R.gte(2)(0); //=> true
- *      R.gte(__)(1, 2); //=> true
+ *      > R.gte(2, 6)
+ *      false
+ *      > R.gte(2, 0)
+ *      true
+ *      > R.gte(2, 2)
+ *      true
+ *      > R.gte(R.__, 6)(2)
+ *      false
+ *      > R.gte(2)(0)
+ *      true
  */
 module.exports = op(function gte(a, b) { return a >= b; });

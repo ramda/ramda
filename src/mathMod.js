@@ -20,22 +20,32 @@ var op = require('./op');
  *                 be curried right by explicitly passing `undefined` for its first argument.
  * @example
  *
- *      R.mathMod(-17, 5);  //=> 3
- *      R.mathMod(17, 5);   //=> 2
- *      R.mathMod(17, -5);  //=> NaN
- *      R.mathMod(17, 0);   //=> NaN
- *      R.mathMod(17.2, 5); //=> NaN
- *      R.mathMod(17, 5.3); //=> NaN
+ *      > R.mathMod(-17, 5)
+ *      3
+ *      > R.mathMod(17, 5)
+ *      2
+ *      > R.mathMod(17, -5)
+ *      NaN
+ *      > R.mathMod(17, 0)
+ *      NaN
+ *      > R.mathMod(17.2, 5)
+ *      NaN
+ *      > R.mathMod(17, 5.3)
+ *      NaN
  *
- *      var clock = R.mathMod(__, 12);
- *      clock(15); //=> 3
- *      clock(24); //=> 0
+ *      > var clock = R.mathMod(R.__, 12)
+ *      > clock(15)
+ *      3
+ *      > clock(24)
+ *      0
  *
- *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
- *      var seventeenMod = R.mathMod(17);
- *      seventeenMod(3);  //=> 2
- *      seventeenMod(4);  //=> 1
- *      seventeenMod(10); //=> 7
+ *      > var seventeenMod = R.mathMod(17)
+ *      > seventeenMod(3)
+ *      2
+ *      > seventeenMod(4)
+ *      1
+ *      > seventeenMod(10)
+ *      7
  */
 module.exports = op(function mathMod(m, p) {
     if (!_isInteger(m)) { return NaN; }

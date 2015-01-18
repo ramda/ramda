@@ -19,11 +19,9 @@ var unnest = require('./unnest');
  * @return {Array}
  * @example
  *
- *      var duplicate = function(n) {
- *        return [n, n];
- *      };
- *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
- *
+ *      > var duplicate = function(n) { return [n, n]; }
+ *      > R.chain(duplicate, [1, 2, 3])
+ *      [1, 1, 2, 2, 3, 3]
  */
 module.exports = _curry2(_checkForMethod('chain', function chain(f, list) {
     return unnest(_map(f, list));

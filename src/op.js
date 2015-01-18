@@ -20,15 +20,13 @@ var unary = require('./unary');
  * @return {Function} A new function that acts somewhat like an infix operator.
  * @example
  *
- *      var div = R.op(function (a, b) {
- *          return a / b;
- *      });
- *
- *      div(6, 3); //=> 2
- *      div(6)(3); //=> 2
- *      div(__, 3)(6); //=> 2 // note: `__` here is just an `undefined` value.  You could use `void 0` instead
- *      div(__)(3, 6); //=> 2
- *      div(__)(3)(6); //=> 2
+ *      > var div = R.op(function(a, b) { return a / b; })
+ *      > div(6, 3)
+ *      2
+ *      > div(6)(3)
+ *      2
+ *      > div(R.__, 3)(6)
+ *      2
  */
 module.exports = function op(fn) {
     var length = fn.length;

@@ -22,12 +22,11 @@ var _createComposer = require('./internal/_createComposer');
  *         right to left.
  * @example
  *
- *      var triple = function(x) { return x * 3; };
- *      var double = function(x) { return x * 2; };
- *      var square = function(x) { return x * x; };
- *      var squareThenDoubleThenTriple = R.compose(triple, double, square);
- *
- *      //≅ triple(double(square(5)))
- *      squareThenDoubleThenTriple(5); //=> 150
+ *      > var triple = function(x) { return x * 3; }
+ *      > var double = function(x) { return x * 2; }
+ *      > var square = function(x) { return x * x; }
+ *      > var squareThenDoubleThenTriple = R.compose(triple, double, square)
+ *      > squareThenDoubleThenTriple(5)
+ *      150
  */
 module.exports = _createComposer(_compose);

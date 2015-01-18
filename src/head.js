@@ -13,6 +13,7 @@ var nth = require('./nth');
  * @return {*} The first element of the list, or `undefined` if the list is empty.
  * @example
  *
- *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
+ *      > R.head(['fi', 'fo', 'fum'])
+ *      'fi'
  */
 module.exports = nth(0);

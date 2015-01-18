@@ -16,11 +16,9 @@ var _curry2 = require('./internal/_curry2');
  *         otherwise.
  * @example
  *
- *      var lessThan0 = R.flip(R.lt)(0);
- *      var lessThan2 = R.flip(R.lt)(2);
- *      var xs = R.range(1, 3);
- *      xs; //=> [1, 2]
- *      R.any(lessThan0)(xs); //=> false
- *      R.any(lessThan2)(xs); //=> true
+ *      > R.any(function(n) { return n > 3; }, [1, 2, 3])
+ *      false
+ *      > R.any(function(n) { return n >= 3; }, [1, 2, 3])
+ *      true
  */
 module.exports = _curry2(_any);

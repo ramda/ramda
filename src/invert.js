@@ -14,14 +14,8 @@ var keys = require('./keys');
  * in an array.
  * @example
  *
- *      var raceResultsByFirstName = {
- *        first: 'alice',
- *        second: 'jake',
- *        third: 'alice',
- *      };
- *      R.invert(raceResultsByFirstName);
- *      //=> { 'alice': ['first', 'third'], 'jake':['second'] }
- *
+ *      > R.invert({first: 'alice', second: 'jake', third: 'alice'})
+ *      {alice: ['first', 'third'], jake: ['second']}
  */
 module.exports = function invert(obj) {
     var props = keys(obj),

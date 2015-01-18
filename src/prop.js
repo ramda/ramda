@@ -13,12 +13,14 @@ var _noArgsException = require('./internal/_noArgsException');
  * @return {*} The value at `obj.p`.
  * @example
  *
- *      R.prop('x', {x: 100}); //=> 100
- *      R.prop('x', {}); //=> undefined
+ *      > R.prop('x', {x: 100})
+ *      100
+ *      > R.prop('x', {})
+ *      undefined
  *
- *      var fifth = R.prop(4); // indexed from 0, remember
- *      fifth(['Bashful', 'Doc', 'Dopey', 'Grumpy', 'Happy', 'Sleepy', 'Sneezy']);
- *      //=> 'Happy'
+ *      > var fifth = R.prop(4)
+ *      > fifth(['Bashful', 'Doc', 'Dopey', 'Grumpy', 'Happy', 'Sleepy', 'Sneezy'])
+ *      'Happy'
  */
 module.exports = function prop(p, obj) {
     switch (arguments.length) {

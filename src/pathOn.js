@@ -15,7 +15,8 @@ var _path = require('./internal/_path');
  * @return {*} The data at `path`.
  * @example
  *
- *      R.pathOn('/', 'a/b/c', {a: {b: {c: 3}}}); //=> 3
+ *      > R.pathOn('/', 'a/b/c', {a: {b: {c: 3}}})
+ *      3
  */
 module.exports = _curry3(function pathOn(sep, str, obj) {
     return _path(str.split(sep), obj);

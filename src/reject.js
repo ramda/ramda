@@ -16,10 +16,8 @@ var not = require('./not');
  * @return {Array} The new filtered array.
  * @example
  *
- *      var isOdd = function(n) {
- *        return n % 2 === 1;
- *      };
- *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
+ *      > R.reject(function(n) { return n % 2 === 1; }, [1, 2, 3, 4])
+ *      [2, 4]
  */
 module.exports = _curry2(function reject(fn, list) {
     return _filter(not(fn), list);

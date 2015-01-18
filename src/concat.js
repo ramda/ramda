@@ -23,13 +23,17 @@ var op = require('./op');
  *
  * @example
  *
- *      R.concat([], []); //=> []
- *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
- *      R.concat('ABC', 'DEF'); // 'ABCDEF'
+ *      > R.concat([], [])
+ *      []
+ *      > R.concat([4, 5, 6], [1, 2, 3])
+ *      [4, 5, 6, 1, 2, 3]
+ *      > R.concat('ABC', 'DEF')
+ *      'ABCDEF'
  *
- *      // operator-style:
- *      R.concat(R.__)([4, 5, 6], [1, 2, 3]); //=> [1, 2, 3, 4, 5, 6]
+ *      Operator-style:
  *
+ *      > R.concat(R.__)([4, 5, 6], [1, 2, 3])
+ *      [1, 2, 3, 4, 5, 6]
  */
 module.exports = op(function(set1, set2) {
     if (_isArray(set2)) {

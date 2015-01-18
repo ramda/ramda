@@ -16,11 +16,13 @@ var _curry3 = require('./internal/_curry3');
  *         predicate or the the "falsey" predicate.
  * @example
  *
- *      // Flatten all arrays in the list and return whatever is not an array
- *      var flattenArrays = R.map(R.ifElse(Array.isArray, R.flatten, R.identity));
+ *      Flatten all arrays in the list and return whatever is not an array:
  *
- *      flattenArrays([[0], [[10], [8]], 1234, {}]); //=> [[0], [10, 8], 1234, {}]
- *      flattenArrays([[[10], 123], [8, [10]], "hello"]); //=> [[10, 123], [8, 10], "hello"]
+ *      > var flattenArrays = R.map(R.ifElse(Array.isArray, R.flatten, R.identity))
+ *      > flattenArrays([[0], [[10], [8]], 1234, {}])
+ *      [[0], [10, 8], 1234, {}]
+ *      > flattenArrays([[[10], 123], [8, [10]], 'hello'])
+ *      [[10, 123], [8, 10], 'hello']
  */
 module.exports = _curry3(function ifElse(condition, onTrue, onFalse) {
     return function _ifElse() {

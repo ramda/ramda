@@ -14,6 +14,7 @@ var foldl = require('./foldl');
  * @see foldl
  * @example
  *
- *      R.product([2,4,6,8,100,1]); //=> 38400
+ *      > R.product([2, 4, 6, 8, 100, 1])
+ *      38400
  */
 module.exports = foldl(_multiply, 1);

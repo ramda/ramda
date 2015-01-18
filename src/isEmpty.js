@@ -9,10 +9,14 @@
  * @return {Boolean}
  * @example
  *
- *      R.isEmpty([1, 2, 3]); //=> false
- *      R.isEmpty([]); //=> true
- *      R.isEmpty(''); //=> true
- *      R.isEmpty(null); //=> false
+ *      > R.isEmpty([1, 2, 3])
+ *      false
+ *      > R.isEmpty([])
+ *      true
+ *      > R.isEmpty('')
+ *      true
+ *      > R.isEmpty(null)
+ *      false
  */
 module.exports = function isEmpty(list) {
     return Object(list).length === 0;

@@ -12,7 +12,8 @@ var _isArray = require('./internal/_isArray');
  * @return {Object} The object made by pairing up `keys` and `values`.
  * @example
  *
- *      R.fromPairs([['a', 1], ['b', 2],  ['c', 3]]); //=> {a: 1, b: 2, c: 3}
+ *      > R.fromPairs([['a', 1], ['b', 2], ['c', 3]])
+ *      {a: 1, b: 2, c: 3}
  */
 module.exports = function fromPairs(pairs) {
     var idx = -1, len = pairs.length, out = {};

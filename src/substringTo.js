@@ -13,6 +13,7 @@ var substring = require('./substring');
  * @return {String} The extracted substring.
  * @example
  *
- *      R.substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
+ *      > R.substringTo(8, 'abcdefghijklm')
+ *      'abcdefgh'
  */
 module.exports = substring(0);

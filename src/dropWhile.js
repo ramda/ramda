@@ -16,11 +16,9 @@ var _slice = require('./internal/_slice');
  * @return {Array} A new array.
  * @example
  *
- *      var lteTwo = function(x) {
- *        return x <= 2;
- *      };
- *
- *      R.dropWhile(lteTwo, [1, 2, 3, 4]); //=> [3, 4]
+ *      > var lteTwo = function(x) { return x <= 2; }
+ *      > R.dropWhile(lteTwo, [1, 2, 3, 4])
+ *      [3, 4]
  */
 module.exports = _curry2(function dropWhile(pred, list) {
     var idx = -1, len = list.length;

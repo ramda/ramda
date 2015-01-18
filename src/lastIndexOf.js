@@ -16,8 +16,10 @@ var _lastIndexOf = require('./internal/_lastIndexOf');
  *
  * @example
  *
- *      R.lastIndexOf(3, [-1,3,3,0,1,2,3,4]); //=> 6
- *      R.lastIndexOf(10, [1,2,3,4]); //=> -1
+ *      > R.lastIndexOf(3, [-1, 3, 3, 0, 1, 2, 3, 4])
+ *      6
+ *      > R.lastIndexOf(10, [1, 2, 3, 4])
+ *      -1
  */
 module.exports = _curry2(function lastIndexOf(target, list) {
     return _lastIndexOf(list, target);

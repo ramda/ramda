@@ -14,9 +14,12 @@ var _contains = require('./internal/_contains');
  * @return {Array} The list of unique items.
  * @example
  *
- *      R.uniq([1, 1, 2, 1]); //=> [1, 2]
- *      R.uniq([{}, {}]);     //=> [{}, {}]
- *      R.uniq([1, '1']);     //=> [1, '1']
+ *      > R.uniq([1, 1, 2, 1])
+ *      [1, 2]
+ *      > R.uniq([{}, {}])
+ *      [{}, {}]
+ *      > R.uniq([1, '1'])
+ *      [1, '1']
  */
 module.exports = function uniq(list) {
     var idx = -1, len = list.length;

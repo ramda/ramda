@@ -21,24 +21,22 @@ var uniqWith = require('./uniqWith');
  * @return {Array} A new list containing those elements common to both lists.
  * @example
  *
- *      var buffaloSpringfield = [
- *        {id: 824, name: 'Richie Furay'},
- *        {id: 956, name: 'Dewey Martin'},
- *        {id: 313, name: 'Bruce Palmer'},
- *        {id: 456, name: 'Stephen Stills'},
- *        {id: 177, name: 'Neil Young'}
- *      ];
- *      var csny = [
- *        {id: 204, name: 'David Crosby'},
- *        {id: 456, name: 'Stephen Stills'},
- *        {id: 539, name: 'Graham Nash'},
- *        {id: 177, name: 'Neil Young'}
- *      ];
- *
- *      var sameId = function(o1, o2) {return o1.id === o2.id;};
- *
- *      R.intersectionWith(sameId, buffaloSpringfield, csny);
- *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
+ *      > var buffaloSpringfield = [
+ *      .     {id: 824, name: 'Richie Furay'},
+ *      .     {id: 956, name: 'Dewey Martin'},
+ *      .     {id: 313, name: 'Bruce Palmer'},
+ *      .     {id: 456, name: 'Stephen Stills'},
+ *      .     {id: 177, name: 'Neil Young'}
+ *      . ]
+ *      > var csny = [
+ *      .     {id: 204, name: 'David Crosby'},
+ *      .     {id: 456, name: 'Stephen Stills'},
+ *      .     {id: 539, name: 'Graham Nash'},
+ *      .     {id: 177, name: 'Neil Young'}
+ *      . ]
+ *      > var sameId = function(o1, o2) { return o1.id === o2.id; }
+ *      > R.intersectionWith(sameId, buffaloSpringfield, csny)
+ *      [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
 module.exports = _curry3(function intersectionWith(pred, list1, list2) {
     var results = [], idx = -1;

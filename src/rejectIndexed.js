@@ -16,11 +16,11 @@ var not = require('./not');
  * @return {Array} The new filtered array.
  * @example
  *
- *      var lastTwo = function(val, idx, list) {
- *        return list.length - idx <= 2;
- *      };
- *
- *      R.rejectIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
+ *      > var lastTwo = function(val, idx, list) {
+ *      .     return list.length - idx <= 2;
+ *      . }
+ *      > R.rejectIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9])
+ *      [8, 6, 7, 5, 3]
  */
 module.exports = _curry2(function rejectIndexed(fn, list) {
     return _filterIndexed(not(fn), list);

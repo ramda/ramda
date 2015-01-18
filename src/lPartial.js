@@ -17,15 +17,17 @@ var _createPartialApplicator = require('./internal/_createPartialApplicator');
  *         with `args` prepended to `fn`'s arguments list.
  * @example
  *
- *      var multiply = function(a, b) { return a * b; };
- *      var double = R.lPartial(multiply, 2);
- *      double(2); //=> 4
+ *      > var multiply = function(a, b) { return a * b; }
+ *      > var double = R.lPartial(multiply, 2)
+ *      > double(2)
+ *      4
  *
- *      var greet = function(salutation, title, firstName, lastName) {
- *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
- *      };
- *      var sayHello = R.lPartial(greet, 'Hello');
- *      var sayHelloToMs = R.lPartial(sayHello, 'Ms.');
- *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
+ *      > var greet = function(salutation, title, firstName, lastName) {
+ *      .     return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+ *      . }
+ *      > var sayHello = R.lPartial(greet, 'Hello')
+ *      > var sayHelloToMs = R.lPartial(sayHello, 'Ms.')
+ *      > sayHelloToMs('Jane', 'Jones')
+ *      'Hello, Ms. Jane Jones!'
  */
 module.exports = _createPartialApplicator(_concat);

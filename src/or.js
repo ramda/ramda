@@ -15,11 +15,13 @@ var _curry2 = require('./internal/_curry2');
  * @return {Function} a function that applies its arguments to `f` and `g` and ORs their outputs together.
  * @example
  *
- *      var gt10 = function(x) { return x > 10; };
- *      var even = function(x) { return x % 2 === 0 };
- *      var f = R.or(gt10, even);
- *      f(101); //=> true
- *      f(8); //=> true
+ *      > var gt10 = function(x) { return x > 10; }
+ *      > var even = function(x) { return x % 2 === 0; }
+ *      > var f = R.or(gt10, even)
+ *      > f(101)
+ *      true
+ *      > f(8)
+ *      true
  */
 module.exports = _curry2(function or(f, g) {
     return function _or() {

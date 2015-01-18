@@ -14,6 +14,7 @@ var invoker = require('./invoker');
  * @see R.invoker
  * @example
  *
- *      R.charAt(8, 'abcdefghijklm'); //=> 'i'
+ *      > R.charAt(8, 'abcdefghijklm')
+ *      'i'
  */
 module.exports = invoker(1, 'charAt');

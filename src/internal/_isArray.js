@@ -6,9 +6,12 @@
  * @return {Boolean} `true` if `val` is an array, `false` otherwise.
  * @example
  *
- *      _isArray([]); //=> true
- *      _isArray(null); //=> false
- *      _isArray({}); //=> false
+ *      > _isArray([])
+ *      true
+ *      > _isArray(null)
+ *      false
+ *      > _isArray({})
+ *      false
  */
 module.exports = Array.isArray || function _isArray(val) {
     return (val != null &&

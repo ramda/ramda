@@ -12,7 +12,8 @@ var _hasMethod = require('./internal/_hasMethod');
  * @return {Array} An empty array.
  * @example
  *
- *      R.empty([1,2,3,4,5]); //=> []
+ *      > R.empty([1, 2, 3, 4, 5])
+ *      []
  */
 module.exports = function empty(x) {
     return (_hasMethod('empty', x)) ? x.empty() : [];

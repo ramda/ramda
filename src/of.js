@@ -16,9 +16,12 @@ var _hasMethod = require('./internal/_hasMethod');
  * @return {Array} An array wrapping `x`.
  * @example
  *
- *      R.of(1); //=> [1]
- *      R.of([2]); //=> [[2]]
- *      R.of({}); //=> [{}]
+ *      > R.of(1)
+ *      [1]
+ *      > R.of([2])
+ *      [[2]]
+ *      > R.of({})
+ *      [{}]
  */
 module.exports = function of(x, container) {
     return (_hasMethod('of', container)) ? container.of(x) : [x];

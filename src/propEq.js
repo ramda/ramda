@@ -15,13 +15,12 @@ var _curry3 = require('./internal/_curry3');
  * @return {Boolean} `true` if the properties are equal, `false` otherwise.
  * @example
  *
- *      var abby = {name: 'Abby', age: 7, hair: 'blond'};
- *      var fred = {name: 'Fred', age: 12, hair: 'brown'};
- *      var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
- *      var alois = {name: 'Alois', age: 15, disposition: 'surly'};
- *      var kids = [abby, fred, rusty, alois];
- *      var hasBrownHair = R.propEq('hair', 'brown');
- *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
+ *      > var abby = {name: 'Abby', age: 7, hair: 'blond'}
+ *      > var fred = {name: 'Fred', age: 12, hair: 'brown'}
+ *      > var rusty = {name: 'Rusty', age: 10, hair: 'brown'}
+ *      > var alois = {name: 'Alois', age: 15, disposition: 'surly'}
+ *      > R.filter(R.propEq('hair', 'brown'), [abby, fred, rusty, alois])
+ *      [fred, rusty]
  */
 module.exports = _curry3(function propEq(name, val, obj) {
     return obj[name] === val;

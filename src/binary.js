@@ -14,16 +14,20 @@ var nAry = require('./nAry');
  *         arity 2.
  * @example
  *
- *      var takesThreeArgs = function(a, b, c) {
- *        return [a, b, c];
- *      };
- *      takesThreeArgs.length; //=> 3
- *      takesThreeArgs(1, 2, 3); //=> [1, 2, 3]
+ *      > var takesThreeArgs = function(a, b, c) { return [a, b, c]; }
+ *      > takesThreeArgs.length
+ *      3
+ *      > takesThreeArgs(1, 2, 3)
+ *      [1, 2, 3]
  *
- *      var takesTwoArgs = R.binary(takesThreeArgs);
- *      takesTwoArgs.length; //=> 2
- *      // Only 2 arguments are passed to the wrapped function
- *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
+ *      > var takesTwoArgs = R.binary(takesThreeArgs)
+ *      > takesTwoArgs.length
+ *      2
+ *
+ *      Only 2 arguments are passed to the wrapped function:
+ *
+ *      > takesTwoArgs(1, 2, 3)
+ *      [1, 2, undefined]
  */
 module.exports = function binary(fn) {
     return nAry(2, fn);

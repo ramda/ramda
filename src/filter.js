@@ -20,9 +20,8 @@ var _filter = require('./internal/_filter');
  * @return {Array} The new filtered array.
  * @example
  *
- *      var isEven = function(n) {
- *        return n % 2 === 0;
- *      };
- *      R.filter(isEven, [1, 2, 3, 4]); //=> [2, 4]
+ *      > var isEven = function(n) { return n % 2 === 0; }
+ *      > R.filter(isEven, [1, 2, 3, 4])
+ *      [2, 4]
  */
 module.exports = _curry2(_checkForMethod('filter', _filter));

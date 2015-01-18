@@ -15,6 +15,7 @@ var invoker = require('./invoker');
  * @see R.invoker
  * @example
  *
- *      R.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
+ *      > R.substring(2, 5, 'abcdefghijklm')
+ *      'cde'
  */
 module.exports = invoker(2, 'substring');

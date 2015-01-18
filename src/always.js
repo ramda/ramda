@@ -9,8 +9,9 @@
  * @return {Function} A Function :: * -> val.
  * @example
  *
- *      var t = R.always('Tee');
- *      t(); //=> 'Tee'
+ *      > var t = R.always('Tee')
+ *      > t()
+ *      'Tee'
  */
 module.exports = function always(val) {
     return function() {

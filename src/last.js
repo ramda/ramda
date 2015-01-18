@@ -12,6 +12,7 @@ var nth = require('./nth');
  * @return {*} The last element of the list, or `undefined` if the list is empty.
  * @example
  *
- *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
+ *      > R.last(['fi', 'fo', 'fum'])
+ *      'fum'
  */
 module.exports = nth(-1);

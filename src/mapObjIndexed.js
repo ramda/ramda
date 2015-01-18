@@ -18,12 +18,11 @@ var keys = require('./keys');
  *         of running each property through `fn`.
  * @example
  *
- *      var values = { x: 1, y: 2, z: 3 };
- *      var prependKeyAndDouble = function(num, key, obj) {
- *        return key + (num * 2);
- *      };
- *
- *      R.mapObjIndexed(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
+ *      > var prependKeyAndDouble = function(num, key, obj) {
+ *      .     return key + (num * 2);
+ *      . }
+ *      > R.mapObjIndexed(prependKeyAndDouble, {x: 1, y: 2, z: 3})
+ *      {x: 'x2', y: 'y4', z: 'z6'}
  */
 module.exports = _curry2(function mapObjectIndexed(fn, obj) {
     return _foldl(function(acc, key) {

@@ -14,10 +14,14 @@ var _curry2 = require('./internal/_curry2');
  * @return {Boolean}
  * @example
  *
- *      var o = {};
- *      R.eq(o, o); //=> true
- *      R.eq(o, {}); //=> false
- *      R.eq(1, 1); //=> true
- *      R.eq(1, '1'); //=> false
+ *      > var o = {}
+ *      > R.eq(o, o)
+ *      true
+ *      > R.eq(o, {})
+ *      false
+ *      > R.eq(1, 1)
+ *      true
+ *      > R.eq(1, '1')
+ *      false
  */
 module.exports = _curry2(function eq(a, b) { return a === b; });

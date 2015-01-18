@@ -15,11 +15,14 @@ var _predicateWrap = require('./internal/_predicateWrap');
  *         `true` if all are satisfied.
  * @example
  *
- *      var gt10 = function(x) { return x > 10; };
- *      var even = function(x) { return x % 2 === 0};
- *      var f = R.anyPass([gt10, even]);
- *      f(11); //=> true
- *      f(8); //=> true
- *      f(9); //=> false
+ *      > var gt10 = function(n) { return n > 10; }
+ *      > var even = function(n) { return n % 2 === 0; }
+ *      > var pred = R.anyPass([gt10, even])
+ *      > pred(11)
+ *      true
+ *      > pred(8)
+ *      true
+ *      > pred(9)
+ *      false
  */
 module.exports = _predicateWrap(_any);
