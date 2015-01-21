@@ -10,8 +10,8 @@ var _curry3 = require('./internal/_curry3');
  * @category Logic
  * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)
  * @param {Function} condition A predicate function
- * @param {Function} onTrue A function to invoke when the condition evaluates to a truthy value.
- * @param {Function} onFalse A function to invoke when the condition evaluates to a falsy value.
+ * @param {Function} onTrue A function to invoke when the `condition` evaluates to a truthy value.
+ * @param {Function} onFalse A function to invoke when the `condition` evaluates to a falsy value.
  * @return {Function} A new unary function that will process either the `onTrue` or the `onFalse` function 
  * depending upon the result of the `condition` predicate.
  * @example
