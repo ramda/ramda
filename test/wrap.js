@@ -35,4 +35,16 @@ describe('wrap', function() {
         assert.strictEqual(greet.length, extendedGreet.length);
     });
 
+    it('returns a curried function', function() {
+        var sideEffect;
+        var add = function(a, b) {return a + b;};
+        var wrappedAdd = R.wrap(add, function(plus, a, b) {
+            sideEffect = plus(a, b);
+            return sideEffect;
+        });
+        var add10 = wrappedAdd(10);
+        assert.equal(add10(5), 15);
+        assert.equal(sideEffect, 15);
+    });
+
 });
