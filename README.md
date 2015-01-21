@@ -1,6 +1,12 @@
 Ramda
 =============
 
+**PLEASE NOTE:** This is no longer the main development for Ramda.
+That has moved to https://github.com/ramda/ramda.  Please download
+and fork from there.  This is now CrossEye's personal fork of that
+group project, and subject to all sorts of weird changes you might
+not want.
+
 A practical functional library for Javascript programmers.
 
 [![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
