@@ -1,5 +1,5 @@
 var _concat = require('./internal/_concat');
-var arity = require('./arity');
+var curryN = require('./curryN');
 
 
 /**
@@ -29,7 +29,7 @@ var arity = require('./arity');
  *
  */
 module.exports = function wrap(fn, wrapper) {
-    return arity(fn.length, function() {
+    return curryN(fn.length, function() {
         return wrapper.apply(this, _concat([fn], arguments));
     });
 };
