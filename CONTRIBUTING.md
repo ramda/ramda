@@ -19,9 +19,9 @@
     on Unix-based platforms, run `make`; on Windows, write the output of
     `scripts/build --complete` to a temporary file, then rename the file.
 
-5.  Run `make test lint`, and address any errors. Preferably, fix commits
-    in place using `git rebase` or `git commit --amend` to make the changes
-    easier to review and to keep the history tidy.
+5.  Run `make test lint`, (or `grunt test`) and address any errors. Preferably,
+    fix commits in place using `git rebase` or `git commit --amend` to make the 
+    changes easier to review and to keep the history tidy.
 
 6.  Push to your fork:
 
