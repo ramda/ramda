@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
 var _extend = require('./internal/_extend');
+var op = require('./op');
 
 
 /**
@@ -18,7 +18,10 @@ var _extend = require('./internal/_extend');
  *
  *      R.mixin({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
  *      //=> { 'name': 'fred', 'age': 40 }
+ *
+ *      var resetToDefault = R.mixin(R.__, {x: 0});
+ *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
-module.exports = _curry2(function mixin(a, b) {
+module.exports = op(function mixin(a, b) {
     return _extend(_extend({}, a), b);
 });
