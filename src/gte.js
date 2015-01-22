@@ -17,8 +17,8 @@ var op = require('./op');
  *      R.gte(2, 6); //=> false
  *      R.gte(2, 0); //=> true
  *      R.gte(2, 2); //=> true
- *      R.gte(__, 6)(2); //=> false
+ *      R.gte(R.__, 6)(2); //=> false
  *      R.gte(2)(0); //=> true
- *      R.gte(__)(1, 2); //=> true
+ *      R.gte(R.__)(1, 2); //=> true
  */
 module.exports = op(function gte(a, b) { return a >= b; });

@@ -1,1 +1,1 @@
-module.exports = void 0;
+module.exports = {ramda: 'placeholder'};

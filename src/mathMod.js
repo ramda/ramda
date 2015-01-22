@@ -17,7 +17,7 @@ var op = require('./op');
  * @return {Number} The result of `b mod a`.
  * @see R.moduloBy
  * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *                 be curried right by explicitly passing `undefined` for its first argument.
+ *                 be curried right by explicitly passing `R.__` for its first argument.
  * @example
  *
  *      R.mathMod(-17, 5);  //=> 3
@@ -27,11 +27,10 @@ var op = require('./op');
  *      R.mathMod(17.2, 5); //=> NaN
  *      R.mathMod(17, 5.3); //=> NaN
  *
- *      var clock = R.mathMod(__, 12);
+ *      var clock = R.mathMod(R.__, 12);
  *      clock(15); //=> 3
  *      clock(24); //=> 0
  *
- *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
  *      var seventeenMod = R.mathMod(17);
  *      seventeenMod(3);  //=> 2
  *      seventeenMod(4);  //=> 1

@@ -19,8 +19,7 @@ var op = require('./op');
  *      R.gt(2, 6); //=> false
  *      R.gt(2, 0); //=> true
  *      R.gt(2, 2); //=> false
- *      R.gt(__, 2)(10); //=> true
+ *      R.gt(R.__, 2)(10); //=> true
  *      R.gt(2)(10); //=> false
- *      R.lte(__)(4, 5) // => true
  */
 module.exports = op(_gt);
