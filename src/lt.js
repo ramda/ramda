@@ -20,6 +20,6 @@ var op = require('./op');
  *      R.lt(2, 0); //=> false
  *      R.lt(2, 2); //=> false
  *      R.lt(5)(10); //=> true
- *      R.lt(__, 5)(10); //=> false // right-sectioned currying
+ *      R.lt(undefined, 5)(10); //=> false // right-sectioned currying
  */
 module.exports = op(_lt);

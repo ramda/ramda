@@ -14,7 +14,7 @@ describe('subtract', function() {
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
-        var minus5 = R.subtract(void 0, 5);
+        var minus5 = R.subtract(undefined, 5);
         assert.strictEqual(minus5(17), 12);
     });
 

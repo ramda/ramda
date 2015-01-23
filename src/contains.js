@@ -14,7 +14,7 @@ var op = require('./op');
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if the item is in the list, `false` otherwise.
  * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *       be curried right by explicitly passing `R.__` for its first argument.
+ *       be curried right by explicitly passing `undefined` for its first argument.
  *
  * @example
  *
@@ -25,7 +25,7 @@ var op = require('./op');
  *      R.contains(obj)([{}, obj, {}]); //=> true
  *
  *      // operator-style
- *      R.contains(R.__)([1, 2, 3], 3) //=> true
+ *      R.contains(undefined)([1, 2, 3], 3) //=> true
  *
  */
 module.exports = op(_contains);

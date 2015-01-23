@@ -19,7 +19,7 @@ var op = require('./op');
  *         object with a `concat` method on it, `concat` will call `list1.concat`
  *         and pass it the value of `list2`.
  * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *         be curried right by explicitly passing `R.__` for its first argument.
+ *         be curried right by explicitly passing `undefined` for its first argument.
  *
  * @example
  *
@@ -28,7 +28,7 @@ var op = require('./op');
  *      R.concat('ABC', 'DEF'); // 'ABCDEF'
  *
  *      // operator-style:
- *      R.concat(R.__)([4, 5, 6], [1, 2, 3]); //=> [1, 2, 3, 4, 5, 6]
+ *      R.concat(undefined)([4, 5, 6], [1, 2, 3]); //=> [1, 2, 3, 4, 5, 6]
  *
  */
 module.exports = op(function(set1, set2) {

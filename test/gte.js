@@ -20,8 +20,7 @@ describe('gte', function() {
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
-        var __ = void 0;
-        var gte20 = R.gte(__, 20);
+        var gte20 = R.gte(undefined, 20);
         assert(!gte20(10));
         assert(gte20(20));
         assert(gte20(25));

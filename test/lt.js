@@ -4,7 +4,6 @@ var R = require('..');
 
 
 describe('lt', function() {
-    var __ = void 0;
     it('reports whether one item is less than another', function() {
         assert(R.lt(3, 5));
         assert(!R.lt(6, 4));
@@ -21,7 +20,7 @@ describe('lt', function() {
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
-        var lt5 = R.lt(__, 5);
+        var lt5 = R.lt(undefined, 5);
         assert(!lt5(10));
         assert(!lt5(5));
         assert(lt5(3));

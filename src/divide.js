@@ -17,8 +17,7 @@ var op = require('./op');
  *
  *      R.divide(71, 100); //=> 0.71
  *
- *      // note: In this example, `__`  is just an `undefined` value.  You could use `void 0` instead
- *      var half = R.divide(__, 2);
+ *      var half = R.divide(undefined, 2);
  *      half(42); //=> 21
  *
  *      var reciprocal = R.divide(1);

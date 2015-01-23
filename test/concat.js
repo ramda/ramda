@@ -36,11 +36,11 @@ describe('concat', function() {
         assert.deepEqual(conc123(['a', 'b', 'c']), [1, 2, 3, 'a', 'b', 'c']);
     });
     it('is curried like a binary operator, that accepts an inital placeholder', function() {
-        assert(typeof R.concat(R.__) === 'function');
-        assert(typeof R.concat(R.__)('bar') === 'function');
-        assert(R.concat(R.__)('bar')('foo') === 'foobar');
-        assert(R.concat(R.__, 'bar')('foo') === 'foobar');
-        assert(R.concat(R.__)('bar', 'foo') === 'foobar');
+        assert(typeof R.concat(undefined) === 'function');
+        assert(typeof R.concat(undefined)('bar') === 'function');
+        assert(R.concat(undefined)('bar')('foo') === 'foobar');
+        assert(R.concat(undefined, 'bar')('foo') === 'foobar');
+        assert(R.concat(undefined)('bar', 'foo') === 'foobar');
     });
     it('throws if not an array, String, or object with a concat method', function() {
         assert.throws(function() { return R.concat({}, {}); }, TypeError);

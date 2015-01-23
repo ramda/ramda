@@ -19,7 +19,7 @@ describe('modulo', function() {
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
-        var isOdd = R.modulo(void 0, 2);
+        var isOdd = R.modulo(undefined, 2);
         assert.strictEqual(typeof isOdd, 'function');
         assert.strictEqual(isOdd(3), 1);
         assert.strictEqual(isOdd(198), 0);

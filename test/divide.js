@@ -14,7 +14,7 @@ describe('divide', function() {
     });
 
     it('behaves right curried when passed `undefined` for its first argument', function() {
-        var half = R.divide(void 0, 2);
+        var half = R.divide(undefined, 2);
         assert.strictEqual(half(40), 20);
     });
 
