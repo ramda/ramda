@@ -17,10 +17,9 @@ var op = require('./op');
  *
  *      R.subtract(10, 8); //=> 2
  *
- *      var minus5 = R.subtract(__, 5); // '__' stands for any `undefined` value
+ *      var minus5 = R.subtract(undefined, 5);
  *      minus5(17); //=> 12
  *
- *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
  *      var complementaryAngle = R.subtract(90);
  *      complementaryAngle(30); //=> 60
  *      complementaryAngle(72); //=> 18

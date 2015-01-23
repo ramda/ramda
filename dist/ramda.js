@@ -7,8 +7,6 @@
 
     'use strict';
 
-    var __ = void 0;
-
     var _add = function _add(a, b) {
         return a + b;
     };
@@ -3570,6 +3568,45 @@
     });
 
     /**
+     * Uses a placeholder to convert a binary function into something like an infix operation.
+     * When called with the `undefined` placeholder the second argument is applied to the
+     * second position, and it returns a function waiting for its first argument.
+     * This can allow for more natural processing of functions which are really binary operators.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @param {Function} fn The binary operation to adjust
+     * @return {Function} A new function that acts somewhat like an infix operator.
+     * @example
+     *
+     *      var div = R.op(function (a, b) {
+     *          return a / b;
+     *      });
+     *
+     *      div(6, 3); //=> 2
+     *      div(6)(3); //=> 2
+     *      div(undefined, 3)(6); //=> 2
+     *      div(undefined)(3, 6); //=> 2
+     *      div(undefined)(3)(6); //=> 2
+     */
+    var op = function op(fn) {
+        if (fn.length !== 2) {
+            throw new Error('Expected binary function.');
+        }
+        return function _op(a, b) {
+            switch (arguments.length) {
+            case 0:
+                throw _noArgsException();
+            case 1:
+                return a === void 0 ? flip(_op) : lPartial(fn, a);
+            default:
+                return a === void 0 ? flip(fn)(b) : fn(a, b);
+            }
+        };
+    };
+
+    /**
      * A function wrapping calls to the two functions in an `||` operation, returning the result of the first
      * function if it is truth-y and the result of the second function otherwise.  Note that this is
      * short-circuited, meaning that the second function will not be invoked if the first returns a truth-y
@@ -4314,6 +4351,33 @@
      *      R.substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
      */
     var substringTo = substring(0);
+
+    /**
+     * Subtracts two numbers. Equivalent to `a - b` but curried.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} a The first value.
+     * @param {Number} b The second value.
+     * @return {Number} The result of `a - b`.
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
+     * @example
+     *
+     *      R.subtract(10, 8); //=> 2
+     *
+     *      var minus5 = R.subtract(undefined, 5);
+     *      minus5(17); //=> 12
+     *
+     *      var complementaryAngle = R.subtract(90);
+     *      complementaryAngle(30); //=> 60
+     *      complementaryAngle(72); //=> 18
+     */
+    var subtract = op(function subtract(a, b) {
+        return a - b;
+    });
 
     /**
      * Adds together all the elements of a list.
@@ -5116,6 +5180,71 @@
     });
 
     /**
+     * Returns a new list consisting of the elements of the first list followed by the elements
+     * of the second.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig [a] -> [a] -> [a]
+     * @param {Array} list1 The first list to merge.
+     * @param {Array} list2 The second set to merge.
+     * @return {Array} A new array consisting of the contents of `list1` followed by the
+     *         contents of `list2`. If, instead of an Array for `list1`, you pass an
+     *         object with a `concat` method on it, `concat` will call `list1.concat`
+     *         and pass it the value of `list2`.
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *         be curried right by explicitly passing `undefined` for its first argument.
+     *
+     * @example
+     *
+     *      R.concat([], []); //=> []
+     *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+     *      R.concat('ABC', 'DEF'); // 'ABCDEF'
+     *
+     *      // operator-style:
+     *      R.concat(undefined)([4, 5, 6], [1, 2, 3]); //=> [1, 2, 3, 4, 5, 6]
+     *
+     */
+    var concat = op(function (set1, set2) {
+        if (_isArray(set2)) {
+            return _concat(set1, set2);
+        } else if (_hasMethod('concat', set1)) {
+            return set1.concat(set2);
+        } else {
+            throw new TypeError('can\'t concat ' + typeof set1);
+        }
+    });
+
+    /**
+     * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
+     * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig a -> [a] -> Boolean
+     * @param {Object} a The item to compare against.
+     * @param {Array} list The array to consider.
+     * @return {Boolean} `true` if the item is in the list, `false` otherwise.
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *       be curried right by explicitly passing `undefined` for its first argument.
+     *
+     * @example
+     *
+     *      R.contains(3)([1, 2, 3]); //=> true
+     *      R.contains(4)([1, 2, 3]); //=> false
+     *      R.contains({})([{}, {}]); //=> false
+     *      var obj = {};
+     *      R.contains(obj)([{}, obj, {}]); //=> true
+     *
+     *      // operator-style
+     *      R.contains(undefined)([1, 2, 3], 3) //=> true
+     *
+     */
+    var contains = op(_contains);
+
+    /**
      * Creates a new version of `fn` that, when invoked, will return either:
      * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
      * `fn`'s expected arguments have not yet been provided
@@ -5142,6 +5271,32 @@
     var curry = function curry(fn) {
         return curryN(fn.length, fn);
     };
+
+    /**
+     * Divides two numbers. Equivalent to `a / b`.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} a The first value.
+     * @param {Number} b The second value.
+     * @return {Number} The result of `a / b`.
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
+     * @example
+     *
+     *      R.divide(71, 100); //=> 0.71
+     *
+     *      var half = R.divide(undefined, 2);
+     *      half(42); //=> 21
+     *
+     *      var reciprocal = R.divide(1);
+     *      reciprocal(4);   //=> 0.25
+     */
+    var divide = op(function divide(a, b) {
+        return a / b;
+    });
 
     /**
      * Creates a new object by evolving a shallow copy of `object`, according to the
@@ -5184,6 +5339,52 @@
      *      R.functions(new F()); //=> ["x"]
      */
     var functions = _functionsWith(keys);
+
+    /**
+     * Returns true if the first parameter is greater than the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a > b
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
+     * @example
+     *
+     *      R.gt(2, 6); //=> false
+     *      R.gt(2, 0); //=> true
+     *      R.gt(2, 2); //=> false
+     *      R.gt(undefined, 2)(10); //=> true
+     *      R.gt(2)(10); //=> false
+     */
+    var gt = op(_gt);
+
+    /**
+     * Returns true if the first parameter is greater than or equal to the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a >= b
+     * @note Operator: this is right-curried by default, but can be called via sections
+     * @example
+     *
+     *      R.gte(2, 6); //=> false
+     *      R.gte(2, 0); //=> true
+     *      R.gte(2, 2); //=> true
+     *      R.gte(undefined, 6)(2); //=> false
+     *      R.gte(2)(0); //=> true
+     *      R.gte(undefined)(1, 2); //=> true
+     */
+    var gte = op(function gte(a, b) {
+        return a >= b;
+    });
 
     /**
      * Returns the first element in a list.
@@ -5416,6 +5617,97 @@
     });
 
     /**
+     * Returns true if the first parameter is less than the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a < b
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
+     * @example
+     *
+     *      R.lt(2, 6); //=> true
+     *      R.lt(2, 0); //=> false
+     *      R.lt(2, 2); //=> false
+     *      R.lt(5)(10); //=> true
+     *      R.lt(undefined, 5)(10); //=> false // right-sectioned currying
+     */
+    var lt = op(_lt);
+
+    /**
+     * Returns true if the first parameter is less than or equal to the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a <= b
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
+     * @example
+     *
+     *      R.lte(2, 6); //=> true
+     *      R.lte(2, 0); //=> false
+     *      R.lte(2, 2); //=> true
+     *      R.lte(undefined, 2)(1); //=> true
+     *      R.lte(2)(10); //=> true
+     *      R.lte(undefined)(5, 4) // => true
+     */
+    var lte = op(function lte(a, b) {
+        return a <= b;
+    });
+
+    /**
+     * mathMod behaves like the modulo operator should mathematically, unlike the `%`
+     * operator (and by extension, R.modulo). So while "-17 % 5" is -2,
+     * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
+     * when the modulus is zero or negative.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} m The dividend.
+     * @param {Number} p the modulus.
+     * @return {Number} The result of `b mod a`.
+     * @see R.moduloBy
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
+     * @example
+     *
+     *      R.mathMod(-17, 5);  //=> 3
+     *      R.mathMod(17, 5);   //=> 2
+     *      R.mathMod(17, -5);  //=> NaN
+     *      R.mathMod(17, 0);   //=> NaN
+     *      R.mathMod(17.2, 5); //=> NaN
+     *      R.mathMod(17, 5.3); //=> NaN
+     *
+     *      var clock = R.mathMod(undefined, 12);
+     *      clock(15); //=> 3
+     *      clock(24); //=> 0
+     *
+     *      var seventeenMod = R.mathMod(17);
+     *      seventeenMod(3);  //=> 2
+     *      seventeenMod(4);  //=> 1
+     *      seventeenMod(10); //=> 7
+     */
+    var mathMod = op(function mathMod(m, p) {
+        if (!_isInteger(m)) {
+            return NaN;
+        }
+        if (!_isInteger(p) || p < 1) {
+            return NaN;
+        }
+        return (m % p + p) % p;
+    });
+
+    /**
      * Create a new object with the own properties of a
      * merged with the own properties of object b.
      * This function will *not* mutate passed-in objects.
@@ -5437,44 +5729,34 @@
     });
 
     /**
-     * Uses a placeholder to convert a binary function into something like an infix operation.
-     * When called with an `undefined` placeholder (e.g. `R.__`) the second argument is applied to the
-     * second position, and it returns a function waiting for its first argument.
-     * This can allow for more natural processing of functions which are really binary operators.
+     * Divides the second parameter by the first and returns the remainder.
+     * Note that this functions preserves the JavaScript-style behavior for
+     * modulo. For mathematical modulo see `mathMod`
      *
      * @func
      * @memberOf R
-     * @category Function
-     * @param {Function} fn The binary operation to adjust
-     * @return {Function} A new function that acts somewhat like an infix operator.
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} a The value to the divide.
+     * @param {Number} b The pseudo-modulus
+     * @return {Number} The result of `b % a`.
+     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
+     *                 be curried right by explicitly passing `undefined` for its first argument.
+     * @see R.mathMod
      * @example
      *
-     *      var div = R.op(function (a, b) {
-     *          return a / b;
-     *      });
+     *      R.modulo(17, 3); //=> 2
+     *      // JS behavior:
+     *      R.modulo(-17, 3); //=> -2
+     *      R.modulo(17, -3); //=> 2
      *
-     *      div(6, 3); //=> 2
-     *      div(6)(3); //=> 2
-     *      div(__, 3)(6); //=> 2 // note: `__` here is just an `undefined` value.  You could use `void 0` instead
-     *      div(__)(3, 6); //=> 2
-     *      div(__)(3)(6); //=> 2
+     *      var isOdd = R.modulo(undefined, 2);
+     *      isOdd(42); //=> 0
+     *      isOdd(21); //=> 1
      */
-    var op = function op(fn) {
-        var length = fn.length;
-        if (length !== 2) {
-            throw new Error('Expected binary function.');
-        }
-        return function _op(a, b) {
-            switch (arguments.length) {
-            case 0:
-                throw _noArgsException();
-            case 1:
-                return a === __ ? binary(flip(_op)) : unary(lPartial(fn, a));
-            default:
-                return a === __ ? unary(rPartial(fn, b)) : fn(a, b);
-            }
-        };
-    };
+    var modulo = op(function modulo(a, b) {
+        return a % b;
+    });
 
     /**
      * Retrieve a nested path on an object separated by periods
@@ -5511,34 +5793,6 @@
      */
     var repeat = _curry2(function repeat(value, n) {
         return times(always(value), n);
-    });
-
-    /**
-     * Subtracts two numbers. Equivalent to `a - b` but curried.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} a The first value.
-     * @param {Number} b The second value.
-     * @return {Number} The result of `a - b`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.subtract(10, 8); //=> 2
-     *
-     *      var minus5 = R.subtract(__, 5); // '__' stands for any `undefined` value
-     *      minus5(17); //=> 12
-     *
-     *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
-     *      var complementaryAngle = R.subtract(90);
-     *      complementaryAngle(30); //=> 60
-     *      complementaryAngle(72); //=> 18
-     */
-    var subtract = op(function subtract(a, b) {
-        return a - b;
     });
 
     /**
@@ -5689,43 +5943,6 @@
     var commute = commuteMap(map(identity));
 
     /**
-     * Returns a new list consisting of the elements of the first list followed by the elements
-     * of the second.
-     *
-     * @func
-     * @memberOf R
-     * @category List
-     * @sig [a] -> [a] -> [a]
-     * @param {Array} list1 The first list to merge.
-     * @param {Array} list2 The second set to merge.
-     * @return {Array} A new array consisting of the contents of `list1` followed by the
-     *         contents of `list2`. If, instead of an Array for `list1`, you pass an
-     *         object with a `concat` method on it, `concat` will call `list1.concat`
-     *         and pass it the value of `list2`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *         be curried right by explicitly passing `R.__` for its first argument.
-     *
-     * @example
-     *
-     *      R.concat([], []); //=> []
-     *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
-     *      R.concat('ABC', 'DEF'); // 'ABCDEF'
-     *
-     *      // operator-style:
-     *      R.concat(R.__)([4, 5, 6], [1, 2, 3]); //=> [1, 2, 3, 4, 5, 6]
-     *
-     */
-    var concat = op(function (set1, set2) {
-        if (_isArray(set2)) {
-            return _concat(set1, set2);
-        } else if (_hasMethod('concat', set1)) {
-            return set1.concat(set2);
-        } else {
-            throw new TypeError('can\'t concat ' + typeof set1);
-        }
-    });
-
-    /**
      * Wraps a constructor function inside a curried function that can be called with the same
      * arguments and returns the same type. The arity of the function returned is specified
      * to allow using variadic constructor functions.
@@ -5767,108 +5984,6 @@
     });
 
     /**
-     * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
-     * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
-     *
-     * @func
-     * @memberOf R
-     * @category List
-     * @sig a -> [a] -> Boolean
-     * @param {Object} a The item to compare against.
-     * @param {Array} list The array to consider.
-     * @return {Boolean} `true` if the item is in the list, `false` otherwise.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *       be curried right by explicitly passing `R.__` for its first argument.
-     *
-     * @example
-     *
-     *      R.contains(3)([1, 2, 3]); //=> true
-     *      R.contains(4)([1, 2, 3]); //=> false
-     *      R.contains({})([{}, {}]); //=> false
-     *      var obj = {};
-     *      R.contains(obj)([{}, obj, {}]); //=> true
-     *
-     *      // operator-style
-     *      R.contains(R.__)([1, 2, 3], 3) //=> true
-     *
-     */
-    var contains = op(_contains);
-
-    /**
-     * Divides two numbers. Equivalent to `a / b`.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} a The first value.
-     * @param {Number} b The second value.
-     * @return {Number} The result of `a / b`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.divide(71, 100); //=> 0.71
-     *
-     *      // note: In this example, `__`  is just an `undefined` value.  You could use `void 0` instead
-     *      var half = R.divide(__, 2);
-     *      half(42); //=> 21
-     *
-     *      var reciprocal = R.divide(1);
-     *      reciprocal(4);   //=> 0.25
-     */
-    var divide = op(function divide(a, b) {
-        return a / b;
-    });
-
-    /**
-     * Returns true if the first parameter is greater than the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a > b
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.gt(2, 6); //=> false
-     *      R.gt(2, 0); //=> true
-     *      R.gt(2, 2); //=> false
-     *      R.gt(__, 2)(10); //=> true
-     *      R.gt(2)(10); //=> false
-     *      R.lte(__)(4, 5) // => true
-     */
-    var gt = op(_gt);
-
-    /**
-     * Returns true if the first parameter is greater than or equal to the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a >= b
-     * @note Operator: this is right-curried by default, but can be called via sections
-     * @example
-     *
-     *      R.gte(2, 6); //=> false
-     *      R.gte(2, 0); //=> true
-     *      R.gte(2, 2); //=> true
-     *      R.gte(__, 6)(2); //=> false
-     *      R.gte(2)(0); //=> true
-     *      R.gte(__)(1, 2); //=> true
-     */
-    var gte = op(function gte(a, b) {
-        return a >= b;
-    });
-
-    /**
      * "lifts" a function of arity > 1 so that it may "map over" an Array or
      * other Functor.
      *
@@ -5897,128 +6012,6 @@
         }
         return liftN(fn.length, fn);
     };
-
-    /**
-     * Returns true if the first parameter is less than the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a < b
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.lt(2, 6); //=> true
-     *      R.lt(2, 0); //=> false
-     *      R.lt(2, 2); //=> false
-     *      R.lt(5)(10); //=> true
-     *      R.lt(__, 5)(10); //=> false // right-sectioned currying
-     */
-    var lt = op(_lt);
-
-    /**
-     * Returns true if the first parameter is less than or equal to the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a <= b
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.lte(2, 6); //=> true
-     *      R.lte(2, 0); //=> false
-     *      R.lte(2, 2); //=> true
-     *      R.lte(__, 2)(1); //=> true
-     *      R.lte(2)(10); //=> true
-     *      R.lte(__)(5, 4) // => true
-     */
-    var lte = op(function lte(a, b) {
-        return a <= b;
-    });
-
-    /**
-     * mathMod behaves like the modulo operator should mathematically, unlike the `%`
-     * operator (and by extension, R.modulo). So while "-17 % 5" is -2,
-     * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
-     * when the modulus is zero or negative.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} m The dividend.
-     * @param {Number} p the modulus.
-     * @return {Number} The result of `b mod a`.
-     * @see R.moduloBy
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.mathMod(-17, 5);  //=> 3
-     *      R.mathMod(17, 5);   //=> 2
-     *      R.mathMod(17, -5);  //=> NaN
-     *      R.mathMod(17, 0);   //=> NaN
-     *      R.mathMod(17.2, 5); //=> NaN
-     *      R.mathMod(17, 5.3); //=> NaN
-     *
-     *      var clock = R.mathMod(__, 12);
-     *      clock(15); //=> 3
-     *      clock(24); //=> 0
-     *
-     *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
-     *      var seventeenMod = R.mathMod(17);
-     *      seventeenMod(3);  //=> 2
-     *      seventeenMod(4);  //=> 1
-     *      seventeenMod(10); //=> 7
-     */
-    var mathMod = op(function mathMod(m, p) {
-        if (!_isInteger(m)) {
-            return NaN;
-        }
-        if (!_isInteger(p) || p < 1) {
-            return NaN;
-        }
-        return (m % p + p) % p;
-    });
-
-    /**
-     * Divides the second parameter by the first and returns the remainder.
-     * Note that this functions preserves the JavaScript-style behavior for
-     * modulo. For mathematical modulo see `mathMod`
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} a The value to the divide.
-     * @param {Number} b The pseudo-modulus
-     * @return {Number} The result of `b % a`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @see R.mathMod
-     * @example
-     *
-     *      R.modulo(17, 3); //=> 2
-     *      // JS behavior:
-     *      R.modulo(-17, 3); //=> -2
-     *      R.modulo(17, -3); //=> 2
-     *
-     *      var isOdd = R.modulo(__, 2);
-     *      isOdd(42); //=> 0
-     *      isOdd(21); //=> 1
-     */
-    var modulo = op(function modulo(a, b) {
-        return a % b;
-    });
 
     /**
      * Reasonable analog to SQL `select` statement.
@@ -6075,7 +6068,6 @@
         F: F,
         I: I,
         T: T,
-        __: __,
         add: add,
         all: all,
         allPass: allPass,

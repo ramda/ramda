@@ -27,11 +27,10 @@ var op = require('./op');
  *      R.mathMod(17.2, 5); //=> NaN
  *      R.mathMod(17, 5.3); //=> NaN
  *
- *      var clock = R.mathMod(__, 12);
+ *      var clock = R.mathMod(undefined, 12);
  *      clock(15); //=> 3
  *      clock(24); //=> 0
  *
- *      // note: In this example, `_`  is just an `undefined` value.  You could use `void 0` instead
  *      var seventeenMod = R.mathMod(17);
  *      seventeenMod(3);  //=> 2
  *      seventeenMod(4);  //=> 1

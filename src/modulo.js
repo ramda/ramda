@@ -23,7 +23,7 @@ var op = require('./op');
  *      R.modulo(-17, 3); //=> -2
  *      R.modulo(17, -3); //=> 2
  *
- *      var isOdd = R.modulo(__, 2);
+ *      var isOdd = R.modulo(undefined, 2);
  *      isOdd(42); //=> 0
  *      isOdd(21); //=> 1
  */
