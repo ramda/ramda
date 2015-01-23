@@ -515,7 +515,9 @@
      *      // All arguments are passed through to the wrapped function
      *      takesOneArg(1, 2); //=> [1, 2]
      */
+    /*jshint unused:false */
     var arity = function (n, fn) {
+        /*jshint unused:false */
         switch (n) {
         case 0:
             return function () {
@@ -523,52 +525,42 @@
             };
         case 1:
             return function (a0) {
-                void a0;
                 return fn.apply(this, arguments);
             };
         case 2:
             return function (a0, a1) {
-                void a1;
                 return fn.apply(this, arguments);
             };
         case 3:
             return function (a0, a1, a2) {
-                void a2;
                 return fn.apply(this, arguments);
             };
         case 4:
             return function (a0, a1, a2, a3) {
-                void a3;
                 return fn.apply(this, arguments);
             };
         case 5:
             return function (a0, a1, a2, a3, a4) {
-                void a4;
                 return fn.apply(this, arguments);
             };
         case 6:
             return function (a0, a1, a2, a3, a4, a5) {
-                void a5;
                 return fn.apply(this, arguments);
             };
         case 7:
             return function (a0, a1, a2, a3, a4, a5, a6) {
-                void a6;
                 return fn.apply(this, arguments);
             };
         case 8:
             return function (a0, a1, a2, a3, a4, a5, a6, a7) {
-                void a7;
                 return fn.apply(this, arguments);
             };
         case 9:
             return function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
-                void a8;
                 return fn.apply(this, arguments);
             };
         case 10:
             return function (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
-                void a9;
                 return fn.apply(this, arguments);
             };
         default:
