@@ -33,7 +33,7 @@ describe('cond', function() {
             [R.T, R.always('bar')],
             [R.T, R.always('baz')]
         );
-        assert.strictEqual(fn(), 'foo');
+        assert.strictEqual(fn('xxx'), 'foo');
     });
 
     it('forwards all arguments to predicates and to transformers', function() {

@@ -2,16 +2,16 @@ var always = require('./always');
 
 
 /**
- * A function that always returns `false`. Any passed in parameters are ignored.
+ * A function that takes one argument and always returns `false`.
  *
  * @func
  * @memberOf R
  * @category Function
- * @sig * -> false
+ * @sig a -> Boolean
  * @see R.always
  * @return {Boolean} false
  * @example
  *
- *      R.F(); //=> false
+ *      R.F('xxx'); //=> false
  */
 module.exports = always(false);

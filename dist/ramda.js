@@ -470,26 +470,6 @@
     };
 
     /**
-     * Returns a function that always returns the given value.
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig a -> (* -> a)
-     * @param {*} val The value to wrap in a function
-     * @return {Function} A Function :: * -> val.
-     * @example
-     *
-     *      var t = R.always('Tee');
-     *      t(); //=> 'Tee'
-     */
-    var always = function always(val) {
-        return function () {
-            return val;
-        };
-    };
-
-    /**
      * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
      * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
      * functions produced by `arity` will pass all provided arguments to the wrapped function.
@@ -1404,42 +1384,12 @@
     };
 
     /**
-     * A function that always returns `false`. Any passed in parameters are ignored.
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig * -> false
-     * @see R.always
-     * @return {Boolean} false
-     * @example
-     *
-     *      R.F(); //=> false
-     */
-    var F = always(false);
-
-    /**
      * @func
      * @memberOf R
      * @category Function
      * @see R.identity
      */
     var I = identity;
-
-    /**
-     * A function that always returns `true`. Any passed in parameters are ignored.
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig * -> true
-     * @see R.always
-     * @return {Boolean} `true`.
-     * @example
-     *
-     *      R.T(); //=> true
-     */
-    var T = always(true);
 
     var _append = function _append(el, list) {
         return _concat(list, [el]);
@@ -1807,6 +1757,24 @@
      *      R.all(lessThan3)(xs); //=> true
      */
     var all = _curry2(_all);
+
+    /**
+     * Returns a function that always returns the given value.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig a -> (b -> a)
+     * @param {*} val The value to wrap in a function
+     * @return {Function} A Function :: * -> val.
+     * @example
+     *
+     *      var alwaysFoo = R.always('foo');
+     *      alwaysFoo('bar'); //=> 'foo'
+     */
+    var always = _curry2(function always(x) {
+        return x;
+    });
 
     /**
      *
@@ -4896,6 +4864,36 @@
         }
         return rv;
     });
+
+    /**
+     * A function that takes one argument and always returns `false`.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig a -> Boolean
+     * @see R.always
+     * @return {Boolean} false
+     * @example
+     *
+     *      R.F('xxx'); //=> false
+     */
+    var F = always(false);
+
+    /**
+     * A function that takes one argument and always returns `true`.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig a -> Boolean
+     * @see R.always
+     * @return {Boolean} `true`
+     * @example
+     *
+     *      R.T('xxx'); //=> true
+     */
+    var T = always(true);
 
     var _ap = function _ap(fns, vs) {
         return _hasMethod('ap', fns) ? fns.ap(vs) : _foldl(function (acc, fn) {
