@@ -4903,6 +4903,51 @@
         }, [], fns);
     };
 
+    // The algorithm used to handle cyclic structures is
+    // inspired by underscore's isEqual
+    // RegExp equality algorithm: http://stackoverflow.com/a/10776635
+    var _eqDeep = function _eqDeep(a, b, stackA, stackB) {
+        var typeA = type(a);
+        if (typeA !== type(b)) {
+            return false;
+        }
+        if (eq(a, b)) {
+            return true;
+        }
+        if (typeA == 'RegExp') {
+            // RegExp equality algorithm: http://stackoverflow.com/a/10776635
+            return a.source === b.source && a.global === b.global && a.ignoreCase === b.ignoreCase && a.multiline === b.multiline && a.sticky === b.sticky && a.unicode === b.unicode;
+        }
+        if (Object(a) === a) {
+            if (typeA === 'Date' && a.getTime() != b.getTime()) {
+                return false;
+            }
+            var keysA = keys(a);
+            if (keysA.length !== keys(b).length) {
+                return false;
+            }
+            var idx = stackA.length;
+            while (idx--) {
+                if (stackA[idx] === a) {
+                    return stackB[idx] === b;
+                }
+            }
+            stackA.push(a);
+            stackB.push(b);
+            idx = keysA.length;
+            while (idx--) {
+                var key = keysA[idx];
+                if (!has(key, b) || !_eqDeep(b[key], a[key], stackA, stackB)) {
+                    return false;
+                }
+            }
+            stackA.pop();
+            stackB.pop();
+            return true;
+        }
+        return false;
+    };
+
     /**
      * Assigns own enumerable properties of the other object to the destination
      * object preferring items in other.
@@ -5304,6 +5349,34 @@
      */
     var divide = op(function divide(a, b) {
         return a / b;
+    });
+
+    /**
+     * Performs a deep test on whether two items are equal.
+     * Equality implies the two items are semmatically equivalent.
+     * Cyclic structures are handled as expected
+     *
+     * @func
+     * @memberOf R
+     * @category Relation
+     * @sig a -> b -> Boolean
+     * @param {*} a
+     * @param {*} b
+     * @return {Boolean}
+     * @example
+     *
+     *      var o = {};
+     *      R.eqDeep(o, o); //=> true
+     *      R.eqDeep(o, {}); //=> true
+     *      R.eqDeep(1, 1); //=> true
+     *      R.eqDeep(1, '1'); //=> false
+     *
+     *      var a = {}; a.v = a;
+     *      var b = {}; b.v = b;
+     *      R.eqDeep(a, b); //=> true
+     */
+    var eqDeep = _curry2(function eqDeep(a, b) {
+        return _eqDeep(a, b, [], []);
     });
 
     /**
@@ -6121,6 +6194,7 @@
         dropWhile: dropWhile,
         empty: empty,
         eq: eq,
+        eqDeep: eqDeep,
         eqProps: eqProps,
         evolve: evolve,
         filter: filter,
