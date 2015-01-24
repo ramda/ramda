@@ -9,14 +9,14 @@ var _curry3 = require('./internal/_curry3');
  * @memberOf R
  * @category Logic
  * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)
- * @param {Function} condition A condition function
- * @param {Function} onTrue A predicate to invoke when the condition evaluates to a truthy value
- * @param {Function} onFalse A predicate to invoke when the condition evaluates to a falsy value
- * @return {Function} A function that validates the arguments before executing "truthy"
- *         predicate or the the "falsey" predicate.
+ * @param {Function} condition A predicate function
+ * @param {Function} onTrue A function to invoke when the `condition` evaluates to a truthy value.
+ * @param {Function} onFalse A function to invoke when the `condition` evaluates to a falsy value.
+ * @return {Function} A new unary function that will process either the `onTrue` or the `onFalse` function 
+ * depending upon the result of the `condition` predicate.
  * @example
  *
- *      // Flatten all arrays in the list and return whatever is not an array
+ *      // Flatten all arrays in the list but leave other values alone.
  *      var flattenArrays = R.map(R.ifElse(Array.isArray, R.flatten, R.identity));
  *
  *      flattenArrays([[0], [[10], [8]], 1234, {}]); //=> [[0], [10, 8], 1234, {}]
