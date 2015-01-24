@@ -31,8 +31,8 @@ describe('mathMod', function() {
     });
 
 
-    it('behaves right curried when passed `undefined` for its first argument', function() {
-        var mod5 = R.modulo(void 0, 5);
+    it('behaves right curried when passed `R.__` for its first argument', function() {
+        var mod5 = R.modulo(R.__, 5);
         assert.strictEqual(mod5(12), 2);
         assert.strictEqual(mod5(8), 3);
     });
