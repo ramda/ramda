@@ -7,5 +7,6 @@ README="${README//"${PREVIOUS_VERSION%.*}/ramda.min.js"/"${VERSION%.*}/ramda.min
 echo "$README" >README.md
 git add README.md
 
+rm -f dist/ramda{,.min}.js
 make dist/ramda{,.min}.js
 git add dist/ramda{,.min}.js
