@@ -9,8 +9,7 @@ var path = require('path');
 var acorn = require('acorn');
 var program = require('commander');
 var escodegen = require('escodegen');
-
-var R = require('..');
+var R = require('ramda');
 
 
 //  template :: String
