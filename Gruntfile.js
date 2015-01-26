@@ -141,8 +141,8 @@ module.exports = function(grunt) {
               docs: {
                 options: {
                   port: 9000,
-                  hostname: "0.0.0.0",
-                  bases: ['./dist/gh-pages'], 
+                  hostname: '0.0.0.0",
+                  bases: ['./dist/gh-pages'],
                   livereload: true
               }
           }
