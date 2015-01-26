@@ -1,7 +1,5 @@
-var _compareKeys = require('./internal/_compareKeys');
 var _curry2 = require('./internal/_curry2');
-var _keyValue = require('./internal/_keyValue');
-var _pluck = require('./internal/_pluck');
+var clone = require('./clone');
 
 
 /**
@@ -36,5 +34,9 @@ var _pluck = require('./internal/_pluck');
  *      sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
  */
 module.exports = _curry2(function sortBy(fn, list) {
-    return _pluck('val', _keyValue(fn, list).sort(_compareKeys));
+    return clone(list).sort(function(a, b) {
+        var aa = fn(a);
+        var bb = fn(b);
+        return aa < bb ? -1 : aa > bb ? 1 : 0;
+    });
 });

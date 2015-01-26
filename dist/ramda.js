@@ -1509,20 +1509,6 @@
         };
     };
 
-    /**
-     * Compare two items from a list generated from the `_keyValue`
-     * function. Used internally by sortBy.
-     *
-     * @private
-     * @func
-     * @category Relation
-     * @param {*} a
-     * @param {*} b
-     */
-    var _compareKeys = comparator(function (a, b) {
-        return a.key < b.key;
-    });
-
     var _contains = function _contains(a, list) {
         return _indexOf(list, a) >= 0;
     };
@@ -1667,52 +1653,6 @@
      */
     var _hasMethod = function _hasMethod(methodName, obj) {
         return obj != null && !_isArray(obj) && typeof obj[methodName] === 'function';
-    };
-
-    /**
-     * Creates a new list whose elements each have two properties: `val` is
-     * the value of the corresponding item in the list supplied, and `key`
-     * is the result of applying the supplied function to that item.
-     *
-     * @private
-     * @func
-     * @memberOf R
-     * @category Relation
-     * @param {Function} fn An arbitrary unary function returning a potential
-     *        object key.  Signature: Any -> String
-     * @param {Array} list The list of items to process
-     * @return {Array} A new list with the described structure.
-     * @example
-     *
-     *      var people = [
-     *         {first: 'Fred', last: 'Flintstone', age: 23},
-     *         {first: 'Betty', last: 'Rubble', age: 21},
-     *         {first: 'George', last: 'Jetson', age: 29}
-     *      ];
-     *
-     *      var fullName = function(p) {return p.first + ' ' + p.last;};
-     *
-     *      _keyValue(fullName, people); //=>
-     *      // [
-     *      //     {
-     *      //         key: 'Fred Flintstone',
-     *      //         val: {first: 'Fred', last: 'Flintstone', age: 23}
-     *      //     }, {
-     *      //         key: 'Betty Rubble',
-     *      //         val: {first: 'Betty', last: 'Rubble', age: 21}
-     *      //    }, {
-     *      //        key: 'George Jetson',
-     *      //        val: {first: 'George', last: 'Jetson', age: 29}
-     *      //    }
-     *      // ];
-     */
-    var _keyValue = function _keyValue(fn, list) {
-        return _map(function (item) {
-            return {
-                key: fn(item),
-                val: item
-            };
-        }, list);
     };
 
     /**
@@ -4222,7 +4162,11 @@
      *      sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
      */
     var sortBy = _curry2(function sortBy(fn, list) {
-        return _pluck('val', _keyValue(fn, list).sort(_compareKeys));
+        return clone(list).sort(function (a, b) {
+            var aa = fn(a);
+            var bb = fn(b);
+            return aa < bb ? -1 : aa > bb ? 1 : 0;
+        });
     });
 
     /**
