@@ -128,30 +128,30 @@ module.exports = function(grunt) {
 
         connect: sauceSrv,
 
-				watch: {
-					docs: {
-						files: ['./Gruntfile.js', './docs/*', './jsdoc-template/*'],
-						tasks: ['gh-pages'],
-						options: {
-							livereload: true
-						}
-					},
-				},
-				express: {
-							docs: {
-								options: {
-									port: 9000,
-									hostname: "0.0.0.0",
-									bases: ['./dist/gh-pages'], 
-									livereload: true
-							}
-					}
-				},
-				open: {
-					docs: {
-						path: 'http://localhost:<%= express.docs.options.port%>/docs'
-					}
-				}
+        watch: {
+          docs: {
+            files: ['./Gruntfile.js', './docs/*', './jsdoc-template/*'],
+            tasks: ['gh-pages'],
+            options: {
+              livereload: true
+            }
+          },
+        },
+        express: {
+              docs: {
+                options: {
+                  port: 9000,
+                  hostname: "0.0.0.0",
+                  bases: ['./dist/gh-pages'], 
+                  livereload: true
+              }
+          }
+        },
+        open: {
+          docs: {
+            path: 'http://localhost:<%= express.docs.options.port%>/docs'
+          }
+        }
     });
 
     grunt.loadNpmTasks('grunt-browserify');
@@ -225,7 +225,7 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('serve', [
         'express',
-				'open',
+        'open',
         'watch'
     ]);
 };
