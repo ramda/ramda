@@ -126,7 +126,32 @@ module.exports = function(grunt) {
 
         'saucelabs-mocha': sauceConf,
 
-        connect: sauceSrv
+        connect: sauceSrv,
+
+				watch: {
+					docs: {
+						files: ['./Gruntfile.js', './docs/*', './jsdoc-template/*'],
+						tasks: ['gh-pages'],
+						options: {
+							livereload: true
+						}
+					},
+				},
+				express: {
+							docs: {
+								options: {
+									port: 9000,
+									hostname: "0.0.0.0",
+									bases: ['./dist/gh-pages'], 
+									livereload: true
+							}
+					}
+				},
+				open: {
+					docs: {
+						path: 'http://localhost:<%= express.docs.options.port%>/docs'
+					}
+				}
     });
 
     grunt.loadNpmTasks('grunt-browserify');
@@ -141,6 +166,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-benchmark');
     grunt.loadNpmTasks('grunt-saucelabs');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-express');
+    grunt.loadNpmTasks('grunt-open');
 
     grunt.loadTasks('tasks');
 
@@ -194,5 +222,10 @@ module.exports = function(grunt) {
     grunt.registerTask('publish-gh-pages', [
         'gh-pages',
         'push-gh-pages'
+    ]);
+    grunt.registerTask('serve', [
+        'express',
+				'open',
+        'watch'
     ]);
 };
