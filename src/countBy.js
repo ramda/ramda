@@ -1,6 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var _foldl = require('./internal/_foldl');
-var _keyValue = require('./internal/_keyValue');
+var has = require('./has');
 
 
 /**
@@ -25,8 +24,12 @@ var _keyValue = require('./internal/_keyValue');
  *      R.countBy(R.toLower)(letters);   //=> {'a': 5, 'b': 4, 'c': 3}
  */
 module.exports = _curry2(function countBy(fn, list) {
-    return _foldl(function(counts, obj) {
-        counts[obj.key] = (counts[obj.key] || 0) + 1;
-        return counts;
-    }, {}, _keyValue(fn, list));
+    var counts = {};
+    var len = list.length;
+    var idx = -1;
+    while (++idx < len) {
+        var key = fn(list[idx]);
+        counts[key] = (has(key, counts) ? counts[key] : 0) + 1;
+    }
+    return counts;
 });
