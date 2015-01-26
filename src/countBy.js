@@ -28,5 +28,5 @@ module.exports = _curry2(function countBy(fn, list) {
     return _foldl(function(counts, obj) {
         counts[obj.key] = (counts[obj.key] || 0) + 1;
         return counts;
-    }, {}, _keyValue(fn, list));
+    }, Object.create(null), _keyValue(fn, list));
 });
