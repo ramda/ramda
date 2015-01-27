@@ -2127,8 +2127,13 @@
                     throw _noArgsException();
                 }
                 var newArgs = _concat(args, arguments);
+                var value;
                 if (newArgs.length >= length) {
-                    return fn.apply(this, newArgs);
+                    value = fn.apply(this, newArgs);
+                    if (typeof value === 'function') {
+                        return curryN(value.length, value);
+                    }
+                    return value;
                 } else {
                     return recurry(newArgs);
                 }
