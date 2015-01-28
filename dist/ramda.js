@@ -1183,10 +1183,6 @@
      *
      *      R.prop('x', {x: 100}); //=> 100
      *      R.prop('x', {}); //=> undefined
-     *
-     *      var fifth = R.prop(4); // indexed from 0, remember
-     *      fifth(['Bashful', 'Doc', 'Dopey', 'Grumpy', 'Happy', 'Sleepy', 'Sneezy']);
-     *      //=> 'Happy'
      */
     var prop = function prop(p, obj) {
         switch (arguments.length) {
