@@ -4,15 +4,20 @@ function toArray(xs) {
     return Array.prototype.slice.call(xs);
 }
 
+function filterTocType(category) {
+    nameFilter.value = category;
+    filterToc();
+}
+
 function filterToc() {
-    var f = filterElement.bind(null, nameFilter.value, '');
+    var f = filterElement.bind(null, nameFilter.value);
     funcs.forEach(f);
 }
 
-function filterElement(nameFilter, categoryFilter, elem) {
+function filterElement(nameFilter, elem) {
     var name = elem.getAttribute('data-name');
     var category = elem.getAttribute('data-category');
-    var matches = strIn(nameFilter, name) || category === categoryFilter;
+    var matches = strIn(nameFilter, name) || strIn(nameFilter, category);
     elem.style.display = matches ? '' : 'none';
 }
 
@@ -46,6 +51,10 @@ function isTopLink(elem) {
 function dispatchEvent(event) {
     var target = event.target;
     var parent = target.parentNode;
+    var category = target.getAttribute('data-category');
+    if (category) {
+        filterTocType(category);
+    }
     if (isTopLink(target)) {
         scrollToTop(target);
     } else {
