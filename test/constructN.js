@@ -24,6 +24,30 @@ describe('constructN', function() {
         assert.strictEqual(pattern.source, '[a-z]');
     });
 
+    it('can be used to create Date object', function() {
+        var date = R.constructN(3, Date)(1984, 3, 26);
+        assert(date instanceof Date);
+        assert.strictEqual(date.getFullYear(), 1984);
+    });
+
+    it('supports constructors with no arguments', function() {
+        function Foo() {}
+        var foo = R.constructN(0, Foo)();
+        assert(foo instanceof Foo);
+    });
+
+    it('does not support constructor with greater than ten arguments', function() {
+        assert.throws(function() {
+            function Foo($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) {
+                this.eleventh = $10;
+            }
+            R.constructN(11, Foo);
+        }, function(err) {
+            return (err instanceof Error &&
+                    err.message === 'Constructor with greater than ten arguments');
+        });
+    });
+
     it('is curried', function() {
         function G(a, b, c) { this.a = a; this.b = b; this.c = c; }
         var construct2 = R.constructN(2);
