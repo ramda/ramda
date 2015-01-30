@@ -5748,8 +5748,11 @@
      *
      *      R.mixin({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
      *      //=> { 'name': 'fred', 'age': 40 }
+     *
+     *      var resetToDefault = R.mixin(R.__, {x: 0});
+     *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
      */
-    var mixin = _curry2(function mixin(a, b) {
+    var mixin = op(function mixin(a, b) {
         return _extend(_extend({}, a), b);
     });
 
