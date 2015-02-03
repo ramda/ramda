@@ -39,8 +39,13 @@ module.exports = _curry2(function curryN(length, fn) {
         return arity(Math.max(length - (args && args.length || 0), 0), function() {
             if (arguments.length === 0) { throw _noArgsException(); }
             var newArgs = _concat(args, arguments);
+            var value;
             if (newArgs.length >= length) {
-                return fn.apply(this, newArgs);
+                value = fn.apply(this, newArgs);
+                if (typeof value === 'function' && value.length > 1) {
+                    return curryN(value.length, value);
+                }
+                return value;
             } else {
                 return recurry(newArgs);
             }
