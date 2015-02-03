@@ -3970,6 +3970,12 @@
         return result;
     });
 
+    // alias reduce -> foldl
+    var reduce = foldl;
+
+    // alias reduceRight -> foldr
+    var reduceRight = foldr;
+
     /**
      * Similar to `filter`, except that it keeps only values for which the given predicate
      * function returns falsy. The predicate function is passed one argument: *(value)*.
@@ -6266,6 +6272,8 @@
         props: props,
         rPartial: rPartial,
         range: range,
+        reduce: reduce,
+        reduceRight: reduceRight,
         reject: reject,
         rejectIndexed: rejectIndexed,
         remove: remove,
