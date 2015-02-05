@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var _foldl = require('./internal/_foldl');
+var _reduce = require('./internal/_reduce');
 var keys = require('./keys');
 
 
@@ -26,7 +26,7 @@ var keys = require('./keys');
  *      R.mapObjIndexed(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
  */
 module.exports = _curry2(function mapObjectIndexed(fn, obj) {
-    return _foldl(function(acc, key) {
+    return _reduce(function(acc, key) {
         acc[key] = fn(obj[key], key, obj);
         return acc;
     }, {}, keys(obj));

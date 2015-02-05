@@ -3,23 +3,23 @@ var assert = require('assert');
 var R = require('..');
 
 
-describe('foldl', function() {
+describe('reduce', function() {
     var add = function(a, b) {return a + b;};
     var mult = function(a, b) {return a * b;};
 
     it('folds simple functions over arrays with the supplied accumulator', function() {
-        assert.strictEqual(R.foldl(add, 0, [1, 2, 3, 4]), 10);
-        assert.strictEqual(R.foldl(mult, 1, [1, 2, 3, 4]), 24);
+        assert.strictEqual(R.reduce(add, 0, [1, 2, 3, 4]), 10);
+        assert.strictEqual(R.reduce(mult, 1, [1, 2, 3, 4]), 24);
     });
 
     it('returns the accumulator for an empty array', function() {
-        assert.strictEqual(R.foldl(add, 0, []), 0);
-        assert.strictEqual(R.foldl(mult, 1, []), 1);
-        assert.deepEqual(R.foldl(R.concat, [], []), []);
+        assert.strictEqual(R.reduce(add, 0, []), 0);
+        assert.strictEqual(R.reduce(mult, 1, []), 1);
+        assert.deepEqual(R.reduce(R.concat, [], []), []);
     });
 
     it('is automatically curried', function() {
-        var addOrConcat = R.foldl(add);
+        var addOrConcat = R.reduce(add);
         var sum = addOrConcat(0);
         var cat = addOrConcat('');
         assert.strictEqual(sum([1, 2, 3, 4]), 10);
@@ -27,12 +27,12 @@ describe('foldl', function() {
     });
 
     it('correctly reports the arity of curried versions', function() {
-        var sum = R.foldl(add, 0);
+        var sum = R.reduce(add, 0);
         assert.strictEqual(sum.length, 1);
     });
 
     it('throws on zero arguments', function() {
-        assert.throws(R.foldl, TypeError);
-        assert.throws(R.foldl(R.add), TypeError);
+        assert.throws(R.reduce, TypeError);
+        assert.throws(R.reduce(R.add), TypeError);
     });
 });

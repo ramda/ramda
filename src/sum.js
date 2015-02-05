@@ -1,5 +1,5 @@
 var _add = require('./internal/_add');
-var foldl = require('./foldl');
+var reduce = require('./reduce');
 
 
 /**
@@ -11,9 +11,9 @@ var foldl = require('./foldl');
  * @sig [Number] -> Number
  * @param {Array} list An array of numbers
  * @return {Number} The sum of all the numbers in the list.
- * @see foldl
+ * @see reduce
  * @example
  *
  *      R.sum([2,4,6,8,100,1]); //=> 121
  */
-module.exports = foldl(_add, 0);
+module.exports = reduce(_add, 0);

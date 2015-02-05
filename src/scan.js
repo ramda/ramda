@@ -2,7 +2,7 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Scanl is similar to foldl, but returns a list of successively reduced values from the left
+ * Scan is similar to reduce, but returns a list of successively reduced values from the left
  *
  * @func
  * @memberOf R
@@ -16,9 +16,9 @@ var _curry3 = require('./internal/_curry3');
  * @example
  *
  *      var numbers = [1, 2, 3, 4];
- *      var factorials = R.scanl(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
+ *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
  */
-module.exports = _curry3(function scanl(fn, acc, list) {
+module.exports = _curry3(function scan(fn, acc, list) {
     var idx = 0, len = list.length + 1, result = new Array(len);
     result[idx] = acc;
     while (++idx < len) {

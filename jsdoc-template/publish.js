@@ -5,8 +5,8 @@ var helper = require('jsdoc/util/templateHelper');
 var marked = require('marked');
 var hljs = require('highlight.js');
 var Handlebars = require('handlebars');
+var R = require('ramda');
 
-var R = require('../dist/ramda');
 
 function valueForTitle(t, xs) {
     var data = R.find(R.where({title: t}), xs);
