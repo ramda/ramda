@@ -2123,6 +2123,26 @@
     });
 
     /**
+     * Returns a new object that does not contain a `prop` property.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig String -> {k: v} -> {k: v}
+     * @param {String} prop the name of the property to dissociate
+     * @param {Object} obj the object to clone
+     * @return {Object} a new object similar to the original but without the specified property
+     * @example
+     *
+     *      R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
+     */
+    var dissoc = _curry2(function dissoc(prop, obj) {
+        return _pickBy(function (val, key) {
+            return key !== prop;
+        }, obj);
+    });
+
+    /**
      * Returns a new list containing all but the first `n` elements of the given `list`.
      *
      * @func
@@ -4995,7 +5015,7 @@
      *      // No unnecessary objects are created.
      */
     // rather than `clone` to get prototype props too, even though they're flattened
-    var assoc = _curry3(function (prop, val, obj) {
+    var assoc = _curry3(function assoc(prop, val, obj) {
         // rather than `clone` to get prototype props too, even though they're flattened
         return _extend(fromPairs(_map(function (key) {
             return [
@@ -6161,6 +6181,7 @@
         dec: dec,
         difference: difference,
         differenceWith: differenceWith,
+        dissoc: dissoc,
         divide: divide,
         drop: drop,
         dropWhile: dropWhile,
