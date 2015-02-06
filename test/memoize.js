@@ -30,4 +30,21 @@ describe('memoize', function() {
         assert.strictEqual(identity('x'), 'x');
         assert.strictEqual(identity('y'), 'y');
     });
+
+    it('can memoize falsy values', function() {
+        var ctr = 0;
+        var f = R.memoize(function(x) { ctr++; return '' + x; });
+        var values = [0, false, null, undefined, '', NaN];
+        checkFunctionIsIdentityOn(values);
+        // check function has been called once per value
+        assert.equal(values.length, ctr);
+        checkFunctionIsIdentityOn(values);
+        // check function has not been called again for any of the values
+        assert.equal(values.length, ctr);
+        function checkFunctionIsIdentityOn(values) {
+            for (var i = 0; i < values.length; i++) {
+                assert.equal('' + values[i], f(values[i]));
+            }
+        }
+    });
 });
