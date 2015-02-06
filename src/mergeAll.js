@@ -1,0 +1,20 @@
+var merge = require('./merge');
+var reduce = require('./reduce');
+
+
+/**
+ * Merges a list of objects together into one object.
+ *
+ * @func
+ * @memberOf R
+ * @category List
+ * @sig [{k: v}] -> {k: v}
+ * @param {Array} list An array of objects
+ * @return {Object} A merged object.
+ * @see reduce
+ * @example
+ *
+ *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
+ *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
+ */
+module.exports = reduce(merge, {});
