@@ -29,7 +29,7 @@ var keysIn = require('./keysIn');
  *      // And moreover, obj2.b is a reference to obj1.b
  *      // No unnecessary objects are created.
  */
-module.exports = _curry3(function(prop, val, obj) {
+module.exports = _curry3(function assoc(prop, val, obj) {
     // rather than `clone` to get prototype props too, even though they're flattened
     return _extend(fromPairs(_map(function(key) {
         return [key, obj[key]];
