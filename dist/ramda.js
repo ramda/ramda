@@ -5409,7 +5409,7 @@
             throw _noArgsException();
         }
         return curryN(arity, function () {
-            return _foldl(_ap, _map(lifted, arguments[0]), _slice(arguments, 1));
+            return _foldl(_ap, map(lifted, arguments[0]), _slice(arguments, 1));
         });
     });
 

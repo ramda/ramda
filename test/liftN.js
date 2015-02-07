@@ -3,6 +3,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var Maybe = require('./shared/Maybe');
 
 
 var addN = function() {
@@ -46,6 +47,11 @@ describe('liftN', function() {
     });
 
     it('throws on zero arguments', function() {
-        assert.throws(R.lift);
+        assert.throws(R.liftN);
+    });
+
+    it('works with other functors such as "Maybe"', function() {
+        var addM = R.liftN(2, R.add);
+        assert.deepEqual(addM(Maybe(3), Maybe(5)), Maybe(8));
     });
 });

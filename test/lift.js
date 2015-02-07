@@ -3,6 +3,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var Maybe = require('./shared/Maybe');
 
 
 var add3 = R.curry(function add3(a, b, c) {
@@ -40,4 +41,10 @@ describe('lift', function() {
     it('throws on zero arguments', function() {
         assert.throws(R.lift);
     });
+
+    it('works with other functors such as "Maybe"', function() {
+        var addM = R.lift(R.add);
+        assert.deepEqual(addM(Maybe(3), Maybe(5)), Maybe(8));
+    });
+
 });
