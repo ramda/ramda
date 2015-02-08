@@ -16,12 +16,12 @@ var op = require('./op');
  * @return {Object} The destination object.
  * @example
  *
- *      R.mixin({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+ *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
  *      //=> { 'name': 'fred', 'age': 40 }
  *
- *      var resetToDefault = R.mixin(R.__, {x: 0});
+ *      var resetToDefault = R.merge(R.__, {x: 0});
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
-module.exports = op(function mixin(a, b) {
+module.exports = op(function merge(a, b) {
     return _extend(_extend({}, a), b);
 });
