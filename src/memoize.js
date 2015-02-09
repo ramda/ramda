@@ -1,5 +1,6 @@
 var _reduce = require('./internal/_reduce');
-var _slice = require('./internal/_slice');
+var has = require('./has');
+var last = require('./last');
 
 
 /**
@@ -42,9 +43,9 @@ module.exports = function memoize(fn) {
     return function() {
         if (!arguments.length) {return;}
         var position = _reduce(function(cache, arg) {
-            return cache[arg] || (cache[arg] = {});
-        }, cache, _slice(arguments, 0, arguments.length - 1));
-        var arg = arguments[arguments.length - 1];
-        return (position[arg] || (position[arg] = fn.apply(this, arguments)));
+            return has(arg, cache) ? cache[arg] : (cache[arg] = {});
+        }, cache, arguments);
+        var arg = last(arguments);
+        return has(arg, position) ? position[arg] : (position[arg] = fn.apply(this, arguments));
     };
 };
