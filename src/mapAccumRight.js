@@ -2,11 +2,11 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * The mapAccumR function behaves like a combination of map and foldr; it applies a
+ * The mapAccumRight function behaves like a combination of map and reduce; it applies a
  * function to each element of a list, passing an accumulating parameter from right
  * to left, and returning a final value of this accumulator together with the new list.
  *
- * Similar to `mapAccumL`, except moves through the input list from the right to the
+ * Similar to `mapAccum`, except moves through the input list from the right to the
  * left.
  *
  * The iterator function receives two values: *(acc, value)*
@@ -26,9 +26,9 @@ var _curry3 = require('./internal/_curry3');
  *          return [a + b, a + b];
  *      }
  *
- *      R.mapAccumR(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
+ *      R.mapAccumRight(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
  */
-module.exports = _curry3(function mapAccumR(fn, acc, list) {
+module.exports = _curry3(function mapAccumRight(fn, acc, list) {
     var idx = list.length, len = list.length, result = new Array(len), tuple = [acc];
     while (idx--) {
         tuple = fn(tuple[0], list[idx]);

@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var _foldl = require('./internal/_foldl');
+var _reduce = require('./internal/_reduce');
 
 
 /**
@@ -20,7 +20,7 @@ var _foldl = require('./internal/_foldl');
  *      //=> [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
  */
 module.exports = _curry2(function partition(pred, list) {
-    return _foldl(function(acc, elt) {
+    return _reduce(function(acc, elt) {
         acc[pred(elt) ? 0 : 1].push(elt);
         return acc;
     }, [[], []], list);

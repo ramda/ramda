@@ -1,5 +1,5 @@
+var _composeP = require('./internal/_composeP');
 var _createComposer = require('./internal/_createComposer');
-var _pCompose = require('./internal/_pCompose');
 
 
 /**
@@ -9,7 +9,7 @@ var _pCompose = require('./internal/_pCompose');
  * promises (i.e., objects with a .then() method). If one of the function
  * returns a promise, however, then the next function in the composition
  * is called asynchronously, in the success callback of the promise, using
- * the resolved value as an input. Note that `pCompose` is a right-
+ * the resolved value as an input. Note that `composeP` is a right-
  * associative function, just like `compose`.
  *
  * @func
@@ -26,7 +26,7 @@ var _pCompose = require('./internal/_pCompose');
  *      var triple = function(x) { return x * 3; };
  *      var double = function(x) { return x * 2; };
  *      var squareAsync = function(x) { return Q.when(x * x); };
- *      var squareAsyncThenDoubleThenTriple = R.pCompose(triple, double, squareAsync);
+ *      var squareAsyncThenDoubleThenTriple = R.composeP(triple, double, squareAsync);
  *
  *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
  *      squareAsyncThenDoubleThenTriple(5)
@@ -34,4 +34,4 @@ var _pCompose = require('./internal/_pCompose');
  *              // result is 150
  *          });
  */
-module.exports = _createComposer(_pCompose);
+module.exports = _createComposer(_composeP);

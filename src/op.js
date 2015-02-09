@@ -1,7 +1,7 @@
 var __ = require('./__');
 var _noArgsException = require('./internal/_noArgsException');
 var flip = require('./flip');
-var lPartial = require('./lPartial');
+var partial = require('./partial');
 
 
 /**
@@ -34,7 +34,7 @@ module.exports = function op(fn) {
     return function _op(a, b) {
         switch (arguments.length) {
             case 0: throw _noArgsException();
-            case 1: return a === __ ? flip(_op) : lPartial(fn, a);
+            case 1: return a === __ ? flip(_op) : partial(fn, a);
             default: return a === __ ? flip(fn)(b) : fn(a, b);
         }
     };

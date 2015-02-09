@@ -1,4 +1,4 @@
-var _foldl = require('./internal/_foldl');
+var _reduce = require('./internal/_reduce');
 var _slice = require('./internal/_slice');
 
 
@@ -41,7 +41,7 @@ module.exports = function memoize(fn) {
     var cache = {};
     return function() {
         if (!arguments.length) {return;}
-        var position = _foldl(function(cache, arg) {
+        var position = _reduce(function(cache, arg) {
             return cache[arg] || (cache[arg] = {});
         }, cache, _slice(arguments, 0, arguments.length - 1));
         var arg = arguments[arguments.length - 1];

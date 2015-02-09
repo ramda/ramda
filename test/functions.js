@@ -21,7 +21,7 @@ describe('functions', function() {
     it('returns list of functions without prototype functions', function() {
         assert.deepEqual(R.functions(f).sort(), ['map', 'sort']);
         assert.strictEqual(R.functions(f).length, 2);
-        assert.deepEqual(R.functions({add: R.add, foldl: R.foldl}).sort(), ['add', 'foldl']);
+        assert.deepEqual(R.functions({add: R.add, reduce: R.reduce}).sort(), ['add', 'reduce']);
     });
 
     it('returns an empty array if there are no functions on the object or its prototype chain', function() {

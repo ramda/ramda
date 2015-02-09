@@ -46,7 +46,7 @@ var curry = require('./curry');
  *      var add = function(a, b) { return a + b; };
  *      // Adds any number of arguments together
  *      var addAll = function() {
- *        return R.foldl(add, 0, arguments);
+ *        return R.reduce(add, 0, arguments);
  *      };
  *
  *      // Basic example

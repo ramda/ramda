@@ -2,19 +2,20 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Like `foldl`, but passes additional parameters to the predicate function.
+ * Like `reduceRight`, but passes additional parameters to the predicate function. Moves through
+ * the input list from the right to the left.
  *
- * The iterator function receives four values: *(acc, value, index, list)*
+ * The iterator function receives four values: *(acc, value, index, list)*.
  *
- * Note: `R.foldlIndexed` does not skip deleted or unassigned indices (sparse arrays),
+ * Note: `R.reduceRightIndexed` does not skip deleted or unassigned indices (sparse arrays),
  * unlike the native `Array.prototype.reduce` method. For more details on this behavior,
  * see:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
  *
  * @func
  * @memberOf R
  * @category List
- * @sig (a,b,i,[b] -> a) -> a -> [b] -> a
+ * @sig (a,b,i,[b] -> a -> [b] -> a
  * @param {Function} fn The iterator function. Receives four values: the accumulator, the
  *        current element from `list`, that element's index, and the entire `list` itself.
  * @param {*} acc The accumulator value.
@@ -28,11 +29,11 @@ var _curry3 = require('./internal/_curry3');
  *        return accObject;
  *      };
  *
- *      R.foldlIndexed(objectify, {}, letters); //=> { 'a': 0, 'b': 1, 'c': 2 }
+ *      R.reduceRightIndexed(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
  */
-module.exports = _curry3(function foldlIndexed(fn, acc, list) {
-    var idx = -1, len = list.length;
-    while (++idx < len) {
+module.exports = _curry3(function reduceRightIndexed(fn, acc, list) {
+    var idx = list.length;
+    while (idx--) {
         acc = fn(acc, list[idx], idx, list);
     }
     return acc;

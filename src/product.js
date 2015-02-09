@@ -1,5 +1,5 @@
 var _multiply = require('./internal/_multiply');
-var foldl = require('./foldl');
+var reduce = require('./reduce');
 
 
 /**
@@ -11,9 +11,9 @@ var foldl = require('./foldl');
  * @sig [Number] -> Number
  * @param {Array} list An array of numbers
  * @return {Number} The product of all the numbers in the list.
- * @see foldl
+ * @see reduce
  * @example
  *
  *      R.product([2,4,6,8,100,1]); //=> 38400
  */
-module.exports = foldl(_multiply, 1);
+module.exports = reduce(_multiply, 1);

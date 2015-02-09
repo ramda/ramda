@@ -8,7 +8,7 @@ var flip = require('./flip');
  * when invoked, calls the original function with all of the values appended to the original
  * function's arguments list.
  *
- * Note that `rPartial` is the opposite of `lPartial`: `rPartial` fills `fn`'s arguments
+ * Note that `partialRight` is the opposite of `partial`: `partialRight` fills `fn`'s arguments
  * from the right to the left.  In some libraries this function is named `applyRight`.
  *
  * @func
@@ -24,7 +24,7 @@ var flip = require('./flip');
  *      var greet = function(salutation, title, firstName, lastName) {
  *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
  *      };
- *      var greetMsJaneJones = R.rPartial(greet, 'Ms.', 'Jane', 'Jones');
+ *      var greetMsJaneJones = R.partialRight(greet, 'Ms.', 'Jane', 'Jones');
  *
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  */
