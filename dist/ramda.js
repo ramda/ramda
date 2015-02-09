@@ -3183,6 +3183,76 @@
     var maxBy = _curry2(_createMaxMinBy(_gt));
 
     /**
+     * Creates a new function that, when invoked, caches the result of calling `fn` for a given
+     * argument set and returns the result. Subsequent calls to the memoized `fn` with the same
+     * argument set will not result in an additional call to `fn`; instead, the cached result
+     * for that set of arguments will be returned.
+     *
+     * Note that this version of `memoize` should not be applied to functions which
+     * take objects as arguments.
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig (*... -> a) -> (*... -> a)
+     * @param {Function} fn The function to memoize.
+     * @return {Function} Memoized version of `fn`.
+     * @example
+     *
+     *      var count = 0;
+     *      var factorial = R.memoize(function(n) {
+     *          count += 1;
+     *          return R.product(R.range(1, n + 1));
+     *      });
+     *      factorial(5); //=> 120
+     *      factorial(5); //=> 120
+     *      factorial(5); //=> 120
+     *      count; //=> 1
+     */
+    // Returns a string representation of the given value suitable for use as
+    // a property name.
+    //
+    // > repr(42)
+    // '42::[object Number]'
+    // Serializes an array-like object. The approach is similar to that taken
+    // by [CANON](https://github.com/davidchambers/CANON), though it does not
+    // differentiate between objects at all (!) and, since it is not applied
+    // recursively, does not distinguish between [[42]] and [['42']].
+    //
+    // > serialize(['foo', 42])
+    // '2:{foo::[object String],42::[object Number]}'
+    var memoize = function () {
+        // Returns a string representation of the given value suitable for use as
+        // a property name.
+        //
+        // > repr(42)
+        // '42::[object Number]'
+        var repr = function (x) {
+            return x + '::' + Object.prototype.toString.call(x);
+        };
+        // Serializes an array-like object. The approach is similar to that taken
+        // by [CANON](https://github.com/davidchambers/CANON), though it does not
+        // differentiate between objects at all (!) and, since it is not applied
+        // recursively, does not distinguish between [[42]] and [['42']].
+        //
+        // > serialize(['foo', 42])
+        // '2:{foo::[object String],42::[object Number]}'
+        var serialize = function (args) {
+            return args.length + ':{' + _map(repr, args).join(',') + '}';
+        };
+        return function memoize(fn) {
+            var cache = {};
+            return function () {
+                var key = serialize(arguments);
+                if (!has(key, cache)) {
+                    cache[key] = fn.apply(this, arguments);
+                }
+                return cache[key];
+            };
+        };
+    }();
+
+    /**
      * Determines the smallest of a list of numbers (or elements that can be cast to numbers)
      *
      * @func
@@ -5392,55 +5462,6 @@
             return _reduce(_ap, _map(lifted, arguments[0]), _slice(arguments, 1));
         });
     });
-
-    /**
-     * Creates a new function that, when invoked, caches the result of calling `fn` for a given
-     * argument set and returns the result. Subsequent calls to the memoized `fn` with the same
-     * argument set will not result in an additional call to `fn`; instead, the cached result
-     * for that set of arguments will be returned.
-     *
-     * Note that this version of `memoize` effectively handles only string and number
-     * parameters.  Also note that it does not work on variadic functions.
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig (a... -> b) -> (a... -> b)
-     * @param {Function} fn The function to be wrapped by `memoize`.
-     * @return {Function}  Returns a memoized version of `fn`.
-     * @example
-     *
-     *      var numberOfCalls = 0;
-     *      var trackedAdd = function(a, b) {
-     *        numberOfCalls += 1;
-     *        return a + b;
-     *      };
-     *      var memoTrackedAdd = R.memoize(trackedAdd);
-     *
-     *      memoTrackedAdd(1, 2); //=> 3
-     *      numberOfCalls; //=> 1
-     *      memoTrackedAdd(1, 2); //=> 3
-     *      numberOfCalls; //=> 1
-     *      memoTrackedAdd(2, 3); //=> 5
-     *      numberOfCalls; //=> 2
-     *
-     *      // Note that argument order matters
-     *      memoTrackedAdd(2, 1); //=> 3
-     *      numberOfCalls; //=> 3
-     */
-    var memoize = function memoize(fn) {
-        var cache = {};
-        return function () {
-            if (!arguments.length) {
-                return;
-            }
-            var position = _reduce(function (cache, arg) {
-                return has(arg, cache) ? cache[arg] : cache[arg] = {};
-            }, cache, arguments);
-            var arg = last(arguments);
-            return has(arg, position) ? position[arg] : position[arg] = fn.apply(this, arguments);
-        };
-    };
 
     /**
      * Uses a placeholder to convert a binary function into something like an infix operation.
