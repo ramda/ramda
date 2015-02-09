@@ -6103,6 +6103,42 @@
     // passing `identity` gives correct arity
     var project = useWith(_map, pickAll, identity);
 
+    var _deprecationWarning = function () {
+        var alreadyLogged = [];
+        function _addLogged(name) {
+            alreadyLogged = append(name, alreadyLogged);
+        }
+        function _isLogged(name) {
+            return contains(name, alreadyLogged);
+        }
+        function logMessage(opts) {
+            var message;
+            if (console) {
+                message = join('', [
+                    'R.',
+                    opts.oldName,
+                    ' has been deprecated. Please use R.',
+                    opts.newName,
+                    ' instead.'
+                ]);
+                if (opts.optionalMessage) {
+                    message = join(' ', [
+                        message,
+                        opts.optionalMessage
+                    ]);
+                }
+                console.warn(message);
+                _addLogged(opts.oldName);
+            }
+        }
+        return function _deprecationWarning(opts) {
+            if (!_isLogged(opts.oldName)) {
+                logMessage(opts);
+            }
+            return opts.fn;
+        };
+    }();
+
     /**
      * Wraps a constructor function inside a curried function that can be called with the same
      * arguments and returns the same type.
@@ -6130,6 +6166,13 @@
     var construct = function construct(Fn) {
         return constructN(Fn.length, Fn);
     };
+
+    var mixin = _deprecationWarning({
+        oldName: 'mixin',
+        newName: 'merge',
+        fn: merge,
+        optionalMessage: 'R.mixin will be removed in v1.0.0'
+    });
 
     var R = {
         F: F,
@@ -6249,6 +6292,7 @@
         merge: merge,
         min: min,
         minBy: minBy,
+        mixin: mixin,
         modulo: modulo,
         multiply: multiply,
         nAry: nAry,
