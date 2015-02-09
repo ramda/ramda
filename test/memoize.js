@@ -30,4 +30,16 @@ describe('memoize', function() {
         assert.strictEqual(identity('x'), 'x');
         assert.strictEqual(identity('y'), 'y');
     });
+
+    it('memoizes "false" values', function() {
+        var count = 0;
+        var inc = R.memoize(function(n) {
+            count += 1;
+            return n + 1;
+        });
+        assert.strictEqual(inc(-1), 0);
+        assert.strictEqual(inc(-1), 0);
+        assert.strictEqual(inc(-1), 0);
+        assert.strictEqual(count, 1);
+    });
 });
