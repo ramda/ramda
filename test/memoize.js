@@ -20,11 +20,6 @@ describe('memoize', function() {
         assert.strictEqual(f('Hello', 'World' , '!'), 'Hello, World!');
     });
 
-    it('returns undefined if supplied no parameters for a positive arity function', function() {
-        var fib = R.memoize(function(n) {return n < 2 ? n : fib(n - 2) + fib(n - 1);});
-        assert.strictEqual(typeof fib(), 'undefined');
-    });
-
     it('does not rely on reported arity', function() {
         var identity = R.memoize(function() { return arguments[0]; });
         assert.strictEqual(identity('x'), 'x');
@@ -41,5 +36,39 @@ describe('memoize', function() {
         assert.strictEqual(inc(-1), 0);
         assert.strictEqual(inc(-1), 0);
         assert.strictEqual(count, 1);
+    });
+
+    it('can be applied to nullary function', function() {
+        var count = 0;
+        var f = R.memoize(function() {
+            count += 1;
+            return 42;
+        });
+        assert.strictEqual(f(), 42);
+        assert.strictEqual(f(), 42);
+        assert.strictEqual(f(), 42);
+        assert.strictEqual(count, 1);
+    });
+
+    it('can be applied to function with optional arguments', function() {
+        var count = 0;
+        var f = R.memoize(function concat(a, b) {
+            count += 1;
+            switch (arguments.length) {
+                case 0: return concat('foo');
+                case 1: return concat(a, 'bar');
+                default: return a + b;
+            }
+        });
+        assert.strictEqual(f(), 'foobar');
+        assert.strictEqual(f(), 'foobar');
+        assert.strictEqual(f(), 'foobar');
+        assert.strictEqual(count, 3);
+    });
+
+    it('differentiates values with same string representation', function() {
+        var f = R.memoize(function(x) { return x; });
+        assert.strictEqual(f(42), 42);
+        assert.strictEqual(f('42'), '42');
     });
 });
