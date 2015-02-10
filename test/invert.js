@@ -6,14 +6,20 @@ describe('invert', function() {
     it('takes a list or object and returns an object of lists', function() {
         assert.equal(typeof R.invert([]), 'object');
         assert.equal(typeof R.invert({}), 'object');
-        assert.throws(R.invert(1));
-        assert.throws(R.invert('1'));
-        assert.throws(R.invert(null));
-        assert.throws(R.invert(undefined));
 
         var inverted = R.invert([0]);
         var keys = R.keys(inverted);
         assert(R.is(Array, inverted[keys.pop()]));
+    });
+
+    it('returns an empty object when applied to a primitive', function() {
+        assert.deepEqual(R.invert(42), {});
+        assert.deepEqual(R.invert('abc'), {});
+    });
+
+    it('returns an empty object when applied to null/undefined', function() {
+        assert.deepEqual(R.invert(null), {});
+        assert.deepEqual(R.invert(undefined), {});
     });
 
     it('returns the input\'s values as keys, and keys as values of an array', function() {
