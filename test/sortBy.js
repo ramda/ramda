@@ -34,4 +34,20 @@ describe('sortBy', function() {
         assert.strictEqual(sortedAlbums[0].title, 'A Farewell to Kings');
         assert.strictEqual(sortedAlbums[11].title, 'Timeout');
     });
+
+    it('preserves object identity', function() {
+        var a = {value: 'a'};
+        var b = {value: 'b'};
+        var result = R.sortBy(R.prop('value'), [b, a]);
+        assert.strictEqual(result[0], a);
+        assert.strictEqual(result[1], b);
+    });
+
+    it('sorts array-like object', function() {
+        var args = (function() { return arguments; }('c', 'a', 'b'));
+        var result = R.sortBy(R.identity, args);
+        assert.strictEqual(result[0], 'a');
+        assert.strictEqual(result[1], 'b');
+        assert.strictEqual(result[2], 'c');
+    });
 });

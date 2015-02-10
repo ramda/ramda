@@ -4074,7 +4074,7 @@
      *      sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
      */
     var sortBy = _curry2(function sortBy(fn, list) {
-        return clone(list).sort(function (a, b) {
+        return _slice(list).sort(function (a, b) {
             var aa = fn(a);
             var bb = fn(b);
             return aa < bb ? -1 : aa > bb ? 1 : 0;
