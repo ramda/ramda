@@ -6053,6 +6053,23 @@
     });
 
     /**
+     * Merges a list of objects together into one object.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig [{k: v}] -> {k: v}
+     * @param {Array} list An array of objects
+     * @return {Object} A merged object.
+     * @see reduce
+     * @example
+     *
+     *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
+     *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
+     */
+    var mergeAll = reduce(merge, {});
+
+    /**
      * Divides the second parameter by the first and returns the remainder.
      * Note that this functions preserves the JavaScript-style behavior for
      * modulo. For mathematical modulo see `mathMod`
@@ -6247,6 +6264,7 @@
         maxBy: maxBy,
         memoize: memoize,
         merge: merge,
+        mergeAll: mergeAll,
         min: min,
         minBy: minBy,
         modulo: modulo,
