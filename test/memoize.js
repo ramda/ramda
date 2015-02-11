@@ -26,7 +26,7 @@ describe('memoize', function() {
         assert.strictEqual(identity('y'), 'y');
     });
 
-    it('memoizes "false" values', function() {
+    it('memoizes "false" return values', function() {
         var count = 0;
         var inc = R.memoize(function(n) {
             count += 1;
@@ -55,15 +55,15 @@ describe('memoize', function() {
         var f = R.memoize(function concat(a, b) {
             count += 1;
             switch (arguments.length) {
-                case 0: return concat('foo');
-                case 1: return concat(a, 'bar');
-                default: return a + b;
+                case 0: a = 'foo';  // jshint ignore:line
+                case 1: b = 'bar';
             }
+            return a + b;
         });
         assert.strictEqual(f(), 'foobar');
         assert.strictEqual(f(), 'foobar');
         assert.strictEqual(f(), 'foobar');
-        assert.strictEqual(count, 3);
+        assert.strictEqual(count, 1);
     });
 
     it('differentiates values with same string representation', function() {
