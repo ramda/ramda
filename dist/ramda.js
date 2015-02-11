@@ -1039,6 +1039,27 @@
     };
 
     /**
+     * Returns a singleton array containing the value provided.
+     *
+     * Note this `of` is different from the ES6 `of`; See
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
+     *
+     * @func
+     * @memberOf R
+     * @category Function
+     * @sig a -> [a]
+     * @param {*} x any value
+     * @return {Array} An array wrapping `x`.
+     * @example
+     *
+     *      R.of(null); //=> [null]
+     *      R.of([42]); //=> [[42]]
+     */
+    var of = function of(x) {
+        return [x];
+    };
+
+    /**
      * Accepts a function `fn` and returns a function that guards invocation of `fn` such that
      * `fn` can only ever be called once, no matter how many times the returned function is
      * invoked.
@@ -3341,29 +3362,6 @@
      *      R.nth(-99, list); //=> undefined
      */
     var nth = _curry2(_nth);
-
-    /**
-     *
-     * `of` wraps any object in an Array. This implementation is compatible with the
-     * Fantasy-land Applicative spec, and will work with types that implement that spec.
-     * Note this `of` is different from the ES6 `of`; See
-     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
-     *
-     * @func
-     * @memberOf R
-     * @category Function
-     * @sig a -> [a]
-     * @param {*} x any value
-     * @return {Array} An array wrapping `x`.
-     * @example
-     *
-     *      R.of(1); //=> [1]
-     *      R.of([2]); //=> [[2]]
-     *      R.of({}); //=> [{}]
-     */
-    var of = function of(x, container) {
-        return _hasMethod('of', container) ? container.of(x) : [x];
-    };
 
     /**
      * Returns a partial copy of an object omitting the keys specified.
