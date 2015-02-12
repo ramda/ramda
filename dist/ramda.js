@@ -1,3 +1,8 @@
+//  Ramda v0.9.1
+//  https://github.com/ramda/ramda
+//  (c) 2013-2015 Scott Sauyet and Michael Hurley
+//  Ramda may be freely distributed under the MIT license.
+
 ;(function() {
 
     'use strict';
@@ -2059,6 +2064,29 @@
      *      R.dec(42); //=> 41
      */
     var dec = add(-1);
+
+    /**
+     * Returns the second argument if it is not null or undefined. If it is null
+     * or undefined, the first (default) argument is returned.
+     *
+     * @func
+     * @memberOf R
+     * @category Logic
+     * @sig a -> b -> a | b
+     * @param {a} val The default value.
+     * @param {b} val The value to return if it is not null or undefined
+     * @return {*} The the second value or the default value
+     * @example
+     *
+     *      var defaultTo42 = defaultTo(42);
+     *
+     *      defaultTo42(null);  //=> 42
+     *      defaultTo42(undefined);  //=> 42
+     *      defaultTo42('Ramda');  //=> 'Ramda'
+     */
+    var defaultTo = _curry2(function _defaultTo(d, v) {
+        return v == null ? d : v;
+    });
 
     /**
      * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
@@ -6163,6 +6191,10 @@
     };
 
     var R = {
+        F: F,
+        I: I,
+        T: T,
+        __: __,
         add: add,
         all: all,
         allPass: allPass,
@@ -6201,6 +6233,7 @@
         curry: curry,
         curryN: curryN,
         dec: dec,
+        defaultTo: defaultTo,
         difference: difference,
         differenceWith: differenceWith,
         dissoc: dissoc,
@@ -6212,7 +6245,6 @@
         eqDeep: eqDeep,
         eqProps: eqProps,
         evolve: evolve,
-        F: F,
         filter: filter,
         filterIndexed: filterIndexed,
         find: find,
@@ -6234,7 +6266,6 @@
         has: has,
         hasIn: hasIn,
         head: head,
-        I: I,
         identity: identity,
         ifElse: ifElse,
         inc: inc,
@@ -6335,7 +6366,6 @@
         substringTo: substringTo,
         subtract: subtract,
         sum: sum,
-        T: T,
         tail: tail,
         take: take,
         takeWhile: takeWhile,
@@ -6363,8 +6393,7 @@
         xprod: xprod,
         zip: zip,
         zipObj: zipObj,
-        zipWith: zipWith,
-        __: __
+        zipWith: zipWith
     };
 
     /* TEST_ENTRY_POINT */
