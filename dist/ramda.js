@@ -1,3 +1,8 @@
+//  Ramda v0.9.1
+//  https://github.com/ramda/ramda
+//  (c) 2013-2015 Scott Sauyet and Michael Hurley
+//  Ramda may be freely distributed under the MIT license.
+
 ;(function() {
 
     'use strict';
@@ -4026,14 +4031,14 @@
      * @param {RegExp|String} pattern A regular expression or a substring to match.
      * @param {String} replacement The string to replace the matches with.
      * @param {String} str The String to do the search and replacement in.
-     * @return {String} A string with all the matches replaced.
+     * @return {String} The result.
      * @example
      *
-     *      R.replace(/\d+/g, 'number', '1 2 three'); //=> 'number number three'
+     *      R.replace('foo', 'bar', 'foo foo foo'); //=> 'bar foo foo'
+     *      R.replace(/foo/, 'bar', 'foo foo foo'); //=> 'bar foo foo'
      *
-     *      var replaceSemicolon = R.replace(';');
-     *      var removeSemicolon = replaceSemicolon('');
-     *      removeSemicolon('return 42;'); //=> 'return 42'
+     *      // Use the "g" (global) flag to replace all occurrences:
+     *      R.replace(/foo/g, 'bar', 'foo foo foo'); //=> 'bar bar bar'
      */
     var replace = _curry3(function replace(regex, replacement, str) {
         return str.replace(regex, replacement);
@@ -6163,6 +6168,10 @@
     };
 
     var R = {
+        F: F,
+        I: I,
+        T: T,
+        __: __,
         add: add,
         all: all,
         allPass: allPass,
@@ -6212,7 +6221,6 @@
         eqDeep: eqDeep,
         eqProps: eqProps,
         evolve: evolve,
-        F: F,
         filter: filter,
         filterIndexed: filterIndexed,
         find: find,
@@ -6234,7 +6242,6 @@
         has: has,
         hasIn: hasIn,
         head: head,
-        I: I,
         identity: identity,
         ifElse: ifElse,
         inc: inc,
@@ -6335,7 +6342,6 @@
         substringTo: substringTo,
         subtract: subtract,
         sum: sum,
-        T: T,
         tail: tail,
         take: take,
         takeWhile: takeWhile,
@@ -6363,8 +6369,7 @@
         xprod: xprod,
         zip: zip,
         zipObj: zipObj,
-        zipWith: zipWith,
-        __: __
+        zipWith: zipWith
     };
 
     /* TEST_ENTRY_POINT */
