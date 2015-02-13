@@ -1,3 +1,8 @@
+//  Ramda v0.9.1
+//  https://github.com/ramda/ramda
+//  (c) 2013-2015 Scott Sauyet and Michael Hurley
+//  Ramda may be freely distributed under the MIT license.
+
 ;(function() {
 
     'use strict';
@@ -3968,7 +3973,7 @@
      *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
      */
     var reject = _curry2(function reject(fn, list) {
-        return _filter(not(fn), list);
+        return filter(not(fn), list);
     });
 
     /**
@@ -6163,6 +6168,10 @@
     };
 
     var R = {
+        F: F,
+        I: I,
+        T: T,
+        __: __,
         add: add,
         all: all,
         allPass: allPass,
@@ -6212,7 +6221,6 @@
         eqDeep: eqDeep,
         eqProps: eqProps,
         evolve: evolve,
-        F: F,
         filter: filter,
         filterIndexed: filterIndexed,
         find: find,
@@ -6234,7 +6242,6 @@
         has: has,
         hasIn: hasIn,
         head: head,
-        I: I,
         identity: identity,
         ifElse: ifElse,
         inc: inc,
@@ -6335,7 +6342,6 @@
         substringTo: substringTo,
         subtract: subtract,
         sum: sum,
-        T: T,
         tail: tail,
         take: take,
         takeWhile: takeWhile,
@@ -6363,8 +6369,7 @@
         xprod: xprod,
         zip: zip,
         zipObj: zipObj,
-        zipWith: zipWith,
-        __: __
+        zipWith: zipWith
     };
 
     /* TEST_ENTRY_POINT */

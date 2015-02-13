@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var _filter = require('./internal/_filter');
+var filter = require('./filter');
 var not = require('./not');
 
 
@@ -22,5 +22,5 @@ var not = require('./not');
  *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
  */
 module.exports = _curry2(function reject(fn, list) {
-    return _filter(not(fn), list);
+    return filter(not(fn), list);
 });
