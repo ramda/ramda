@@ -4054,14 +4054,14 @@
      * @param {RegExp|String} pattern A regular expression or a substring to match.
      * @param {String} replacement The string to replace the matches with.
      * @param {String} str The String to do the search and replacement in.
-     * @return {String} A string with all the matches replaced.
+     * @return {String} The result.
      * @example
      *
-     *      R.replace(/\d+/g, 'number', '1 2 three'); //=> 'number number three'
+     *      R.replace('foo', 'bar', 'foo foo foo'); //=> 'bar foo foo'
+     *      R.replace(/foo/, 'bar', 'foo foo foo'); //=> 'bar foo foo'
      *
-     *      var replaceSemicolon = R.replace(';');
-     *      var removeSemicolon = replaceSemicolon('');
-     *      removeSemicolon('return 42;'); //=> 'return 42'
+     *      // Use the "g" (global) flag to replace all occurrences:
+     *      R.replace(/foo/g, 'bar', 'foo foo foo'); //=> 'bar bar bar'
      */
     var replace = _curry3(function replace(regex, replacement, str) {
         return str.replace(regex, replacement);
