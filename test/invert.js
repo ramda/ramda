@@ -43,4 +43,12 @@ describe('invert', function() {
         R.invert(input);
         assert.deepEqual(input, {x:'a', y:'b', z:'a', _id:'a'});
     });
+
+    it('ignores inherited properties', function() {
+        assert.deepEqual(R.invert({x: 'hasOwnProperty'}), {
+            /* jshint -W001 */
+            hasOwnProperty: ['x']
+            /* jshint +W001 */
+        });
+    });
 });

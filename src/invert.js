@@ -1,3 +1,4 @@
+var has = require('./has');
 var keys = require('./keys');
 
 /**
@@ -24,18 +25,19 @@ var keys = require('./keys');
  *
  */
 module.exports = function invert(obj) {
-    var props = keys(obj),
-        len = props.length,
-        idx = -1,
-        out = {};
+    var props = keys(obj);
+    var len = props.length;
+    var idx = -1;
+    var out = {};
 
     while (++idx < len) {
-        var key = props[idx],
-            val = obj[key];
+        var key = props[idx];
+        var val = obj[key];
 
-        out[val] = out[val] || [];
+        if (!has(val, out)) {
+            out[val] = [];
+        }
         out[val].push(key);
     }
-
     return out;
 };

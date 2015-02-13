@@ -25,15 +25,14 @@ var keys = require('./keys');
  *      //=> { 'alice': '0', 'jake':'1' }
  */
 module.exports = function invertObj(obj) {
-    var props = keys(obj),
-        len = props.length,
-        idx = -1,
-        out = {};
+    var props = keys(obj);
+    var len = props.length;
+    var idx = -1;
+    var out = {};
 
     while (++idx < len) {
         var key = props[idx];
         out[obj[key]] = key;
     }
-
     return out;
 };
