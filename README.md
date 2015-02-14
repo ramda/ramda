@@ -123,7 +123,7 @@ javascript:(function(){var el=document.createElement('div'),b=document.getElemen
 Documentation
 -------------
 
-Please review the [API documentation](http://ramdajs.com/).
+Please review the [API documentation](http://ramdajs.com/docs/).
 
 
 
