@@ -24,7 +24,7 @@ dist/ramda.min.js: dist/ramda.js scripts/header
 
 .PHONY: clean
 clean:
-	rm -f -- dist/ramda.js dist/ramda.min.js ramda.js.tmp
+	rm -f -- dist/ramda.js ramda.js.tmp
 
 
 .PHONY: lint
