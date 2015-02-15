@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var has = require('./has');
+var _has = require('./_has');
 
 
 /**
@@ -29,7 +29,7 @@ module.exports = _curry2(function countBy(fn, list) {
     var idx = -1;
     while (++idx < len) {
         var key = fn(list[idx]);
-        counts[key] = (has(key, counts) ? counts[key] : 0) + 1;
+        counts[key] = (_has(key, counts) ? counts[key] : 0) + 1;
     }
     return counts;
 });

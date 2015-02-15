@@ -1,5 +1,5 @@
+var _has = require('../_has');
 var eq = require('../eq');
-var has = require('../has');
 var keys = require('../keys');
 var type = require('../type');
 
@@ -47,7 +47,7 @@ module.exports = function _eqDeep(a, b, stackA, stackB) {
         idx = keysA.length;
         while (idx--) {
             var key = keysA[idx];
-            if (!has(key, b) || !_eqDeep(b[key], a[key], stackA, stackB)) {
+            if (!_has(key, b) || !_eqDeep(b[key], a[key], stackA, stackB)) {
                 return false;
             }
         }

@@ -1,4 +1,5 @@
-var _curry2 = require('./internal/_curry2');
+var _has = require('./internal/_has');
+var op = require('./op');
 
 
 /**
@@ -14,15 +15,15 @@ var _curry2 = require('./internal/_curry2');
  * @return {Boolean} Whether the property exists.
  * @example
  *
- *      var obj = {
- *        foo: 1,
- *        bar: 2,
- *      };
- *      R.has('foo', obj);  //=> true
+ *      var hasName = R.has('name');
+ *      hasName({name: 'alice'});   //=> true
+ *      hasName({name: 'bob'});     //=> true
+ *      hasName({});                //=> false
  *
- *      var list = [{foo: 1}, {foo: 2}, {bar: 3}];
- *      R.filter(R.has('foo'), list);  //=> [{foo: 1}, {foo: 2}]
+ *      var point = {x: 0, y: 0};
+ *      var pointHas = R.has(R.__, point);
+ *      pointHas('x');  //=> true
+ *      pointHas('y');  //=> true
+ *      pointHas('z');  //=> false
  */
-module.exports = _curry2(function(prop, obj) {
-    return Object.prototype.hasOwnProperty.call(obj, prop);
-});
+module.exports = op(_has);
