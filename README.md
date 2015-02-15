@@ -122,7 +122,7 @@ javascript:(function(){var el=document.createElement('div'),b=document.getElemen
 
 ### Partial Builds
 
-It is possible to build Ramda with a subset of the functionality to reduce its file size. Ramda's build system supports this with command line flags. For example if you're using `R.compose`, `R.reduce` and `R.filter` you can create a partial build with:
+It is possible to build Ramda with a subset of the functionality to reduce its file size. Ramda's build system supports this with command line flags. For example if you're using `R.compose`, `R.reduce`, and `R.filter` you can create a partial build with:
 
     ./scripts/build -- src/compose.js src/reduce.js src/filter.js > dist/ramda.custom.js
 
