@@ -1,6 +1,6 @@
 {
   "name": "ramda",
-  "main": "ramda.js",
+  "main": "dist/ramda.js",
   "version": "0.9.1",
   "homepage": "https://github.com/ramda/ramda",
   "authors": [
