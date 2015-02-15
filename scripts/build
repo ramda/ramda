@@ -12,6 +12,8 @@ var escodegen = require('escodegen');
 var R = require('ramda');
 
 
+var _ = R.__;
+
 //  template :: String
 var template = fs.readFileSync(path.join(__dirname, '..', 'template.js'),
                                {encoding: 'utf8'});
@@ -25,14 +27,14 @@ var $pathEq = R.curry(function(path, expected, obj) {
 });
 
 //  filenameToIdentifier :: String -> String
-var filenameToIdentifier = R.rPartial(path.basename, '.js');
+var filenameToIdentifier = R.partialRight(path.basename, '.js');
 
 //  identifierToFilename :: String -> String
 var identifierToFilename =
     R.pipe(R.ifElse(RegExp.prototype.test.bind(/^(?!__$)_/),
-                    R.lPartial(path.join, __dirname, '..', 'src', 'internal'),
-                    R.lPartial(path.join, __dirname, '..', 'src')),
-           R.rPartial(R.concat, '.js'));
+                    R.partial(path.join, __dirname, '..', 'src', 'internal'),
+                    R.partial(path.join, __dirname, '..', 'src')),
+           R.concat(_, '.js'));
 
 //  parse :: String -> {ast: AST, comments: [Comment], tokens: [Token]}
 var parse = R.memoize(function(filename) {
@@ -113,7 +115,7 @@ var orderDependencies = function orderDependencies(graph) {
     var recur = function recur(ins, outs) {
         if (R.isEmpty(ins)) {
             return outs;
-        } else if (R.all(R.rPartial(R.contains, outs), graph[R.head(ins)])) {
+        } else if (R.all(R.contains(_, outs), graph[R.head(ins)])) {
             return recur(R.tail(ins), R.append(R.head(ins), outs));
         } else {
             return recur(R.append(R.head(ins), R.tail(ins)), outs);
@@ -164,7 +166,7 @@ var build =
                                               R.concat(': '))),
                              R.join(','),
                              R.concat('\n\nvar R = {'),
-                             R.rPartial(R.concat, '\n};'))),
+                             R.concat(_, '\n};'))),
            R.replace(/\n(?!$)/gm, '\n    '),
            R.always,
            R.flip(R.replace('/* global R */'))(template));
