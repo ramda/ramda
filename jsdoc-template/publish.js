@@ -32,7 +32,7 @@ var prettifySig = R.pipe(
 var prettifyCode = R.pipe(
     R.join('\n'),
     trimCode,
-    R.lPartial(hljs.highlight, 'javascript'),
+    R.partial(hljs.highlight, 'javascript'),
     R.prop('value')
 );
 
@@ -86,8 +86,8 @@ Handlebars.registerPartial('readme', function() {
     return new Handlebars.SafeString(readme);
 });
 
-var readFile = R.rPartial(fs.readFileSync, 'utf-8');
-var writeFile = R.rPartial(fs.writeFileSync, 'utf-8');
+var readFile = R.partialRight(fs.readFileSync, 'utf-8');
+var writeFile = R.partialRight(fs.writeFileSync, 'utf-8');
 
 var loadTemplate = R.pipe(readFile, Handlebars.compile);
 var loadJson = R.pipe(readFile, JSON.parse);
