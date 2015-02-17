@@ -15,7 +15,7 @@ var R = require('ramda');
 var _ = R.__;
 
 //  template :: String
-var template = fs.readFileSync(path.join(__dirname, '..', 'template.js'),
+var template = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'template.js'),
                                {encoding: 'utf8'});
 
 //  version :: String

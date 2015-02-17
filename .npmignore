@@ -1,12 +1,10 @@
-/bench/
 /bower_components/
 /dist/gh-pages/
-/docs/
-/jsdoc-template/
-/less/
-/sauce/
+/lib/bench/
+/lib/doc/
+/lib/sauce/
+/lib/grunt/
 /scripts/
-/tasks/
 **/test/
 /.editorconfig
 /.gitattributes
@@ -20,5 +18,4 @@
 /bower.json
 /npm-debug.log
 /ramda.js.tmp
-/template.js
 /testem.json

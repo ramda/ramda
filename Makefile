@@ -11,7 +11,7 @@ XYZ = node_modules/.bin/xyz --repo git@github.com:ramda/ramda.git --script scrip
 SRC = $(shell find src -name '*.js')
 
 
-dist/ramda.js: scripts/build scripts/header template.js $(SRC)
+dist/ramda.js: scripts/build scripts/header scripts/template.js $(SRC)
 	git checkout -- '$@'
 	scripts/header >ramda.js.tmp
 	'$<' --complete >>ramda.js.tmp

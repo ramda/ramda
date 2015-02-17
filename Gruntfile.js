@@ -1,6 +1,6 @@
 var envvar = require('envvar');
-var sauceConf = require('./sauce/conf');
-var sauceSrv = require('./sauce/server');
+var sauceConf = require('./lib/sauce/conf');
+var sauceSrv = require('./lib/sauce/server');
 
 var ORCHESTRATE_API_KEY = envvar.string('ORCHESTRATE_API_KEY', '');
 var SAUCE_ACCESS_KEY    = envvar.string('SAUCE_ACCESS_KEY', '');
@@ -68,8 +68,8 @@ module.exports = function(grunt) {
 
         benchmark: {
             all: {
-                src: ['bench/*.bench.js'],
-                dest: 'bench/report/bench.<%= (new Date()).getTime() %>.json'
+                src: ['lib/bench/*.bench.js'],
+                dest: 'lib/bench/report/bench.<%= (new Date()).getTime() %>.json'
             }
         },
 
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
         less: {
             'gh-pages': {
                 files: {
-                    'dist/gh-pages/style.css': 'less/ramda.less'
+                    'dist/gh-pages/style.css': 'lib/doc/less/ramda.less'
                 }
             }
         },
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
             'gh-pages': {
                 src: ['dist/ramda.js'],
                 options: {
-                    template: './jsdoc-template',
+                    template: './lib/doc/jsdoc-template',
                     destination: 'dist/gh-pages/'
                 }
             }
@@ -118,7 +118,7 @@ module.exports = function(grunt) {
                     src: ['dist/ramda.js'],
                     dest: 'dist/gh-pages/docs/'
                 }, {
-                    src: ['docs/main.js'],
+                    src: ['lib/doc/main.js'],
                     dest: 'dist/gh-pages/'
                 }]
             }
@@ -130,7 +130,7 @@ module.exports = function(grunt) {
 
         watch: {
           docs: {
-            files: ['./Gruntfile.js', './docs/*', './jsdoc-template/*'],
+            files: ['./Gruntfile.js', './lib/doc/*', './lib/doc/jsdoc-template/*'],
             tasks: ['gh-pages'],
             options: {
               livereload: true
@@ -170,12 +170,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-open');
 
-    grunt.loadTasks('tasks');
+    grunt.loadTasks('lib/grunt/tasks');
 
     grunt.registerTask('uploadBenchmarks', 'upload benchmark report to orchestrate', function() {
         // upload files in report dir to orchestrate
         var done = this.async();
-        var reportDir = 'bench/report/';
+        var reportDir = 'lib/bench/report/';
         var token = grunt.config.get('orchestrate_token');
         var db = require('orchestrate')(token);
 
