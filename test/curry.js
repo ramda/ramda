@@ -36,4 +36,57 @@ describe('curry', function() {
         assert.strictEqual(h.length, 2);
         assert.strictEqual(g(3, 6).length, 1);
     });
+
+    it('preserves context', function() {
+        var ctx = {x: 10};
+        var f = function(a, b) { return a + b * this.x; };
+        var g = R.curry(f);
+
+        assert.strictEqual(g.call(ctx, 2, 4), 42);
+        assert.strictEqual(g.call(ctx, 2).call(ctx, 4), 42);
+    });
+
+    it('supports R.__ placeholder', function() {
+        var f = function(a, b, c) { return [a, b, c]; };
+        var g = R.curry(f);
+        var _ = R.__;
+
+        assert.deepEqual(g(1)(2)(3), [1, 2, 3]);
+        assert.deepEqual(g(1)(2, 3), [1, 2, 3]);
+        assert.deepEqual(g(1, 2)(3), [1, 2, 3]);
+        assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
+
+        assert.deepEqual(g(_, 2, 3)(1), [1, 2, 3]);
+        assert.deepEqual(g(1, _, 3)(2), [1, 2, 3]);
+        assert.deepEqual(g(1, 2, _)(3), [1, 2, 3]);
+
+        assert.deepEqual(g(1, _, _)(2)(3), [1, 2, 3]);
+        assert.deepEqual(g(_, 2, _)(1)(3), [1, 2, 3]);
+        assert.deepEqual(g(_, _, 3)(1)(2), [1, 2, 3]);
+
+        assert.deepEqual(g(1, _, _)(2, 3), [1, 2, 3]);
+        assert.deepEqual(g(_, 2, _)(1, 3), [1, 2, 3]);
+        assert.deepEqual(g(_, _, 3)(1, 2), [1, 2, 3]);
+
+        assert.deepEqual(g(1, _, _)(_, 3)(2), [1, 2, 3]);
+        assert.deepEqual(g(_, 2, _)(_, 3)(1), [1, 2, 3]);
+        assert.deepEqual(g(_, _, 3)(_, 2)(1), [1, 2, 3]);
+
+        assert.deepEqual(g(_, _, _)(_, _)(_)(1, 2, 3), [1, 2, 3]);
+        assert.deepEqual(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
+    });
+
+    it('forwards extra arguments', function() {
+        var f = function(a, b, c) {
+            void c;
+            return Array.prototype.slice.call(arguments);
+        };
+        var g = R.curry(f);
+
+        assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
+        assert.deepEqual(g(1, 2, 3, 4), [1, 2, 3, 4]);
+        assert.deepEqual(g(1, 2)(3, 4), [1, 2, 3, 4]);
+        assert.deepEqual(g(1)(2, 3, 4), [1, 2, 3, 4]);
+        assert.deepEqual(g(1)(2)(3, 4), [1, 2, 3, 4]);
+    });
 });

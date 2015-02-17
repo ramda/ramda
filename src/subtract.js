@@ -1,4 +1,4 @@
-var op = require('./op');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
@@ -11,8 +11,6 @@ var op = require('./op');
  * @param {Number} a The first value.
  * @param {Number} b The second value.
  * @return {Number} The result of `a - b`.
- * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *                 be curried right by explicitly passing `R.__` for its first argument.
  * @example
  *
  *      R.subtract(10, 8); //=> 2
@@ -24,4 +22,4 @@ var op = require('./op');
  *      complementaryAngle(30); //=> 60
  *      complementaryAngle(72); //=> 18
  */
-module.exports = op(function subtract(a, b) { return a - b; });
+module.exports = _curry2(function subtract(a, b) { return a - b; });

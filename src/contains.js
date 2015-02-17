@@ -1,5 +1,5 @@
 var _contains = require('./internal/_contains');
-var op = require('./op');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
@@ -13,8 +13,6 @@ var op = require('./op');
  * @param {Object} a The item to compare against.
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if the item is in the list, `false` otherwise.
- * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *       be curried right by explicitly passing `R.__` for its first argument.
  *
  * @example
  *
@@ -23,9 +21,5 @@ var op = require('./op');
  *      R.contains({})([{}, {}]); //=> false
  *      var obj = {};
  *      R.contains(obj)([{}, obj, {}]); //=> true
- *
- *      // operator-style
- *      R.contains(R.__)([1, 2, 3], 3) //=> true
- *
  */
-module.exports = op(_contains);
+module.exports = _curry2(_contains);

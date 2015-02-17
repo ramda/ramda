@@ -1,6 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var _eqDeep = require('./internal/_eqDeep');
 
+
 /**
  * Performs a deep test on whether two items are equal.
  * Equality implies the two items are semmatically equivalent.

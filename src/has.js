@@ -1,5 +1,5 @@
+var _curry2 = require('./internal/_curry2');
 var _has = require('./internal/_has');
-var op = require('./op');
 
 
 /**
@@ -26,4 +26,4 @@ var op = require('./op');
  *      pointHas('y');  //=> true
  *      pointHas('z');  //=> false
  */
-module.exports = op(_has);
+module.exports = _curry2(_has);

@@ -1,3 +1,4 @@
+var __ = require('../__');
 var _noArgsException = require('./_noArgsException');
 
 
@@ -8,25 +9,24 @@ var _noArgsException = require('./_noArgsException');
  * @category Function
  * @param {Function} fn The function to curry.
  * @return {Function} The curried function.
- * @example
- *
- *      var addTwo = function(a, b) {
- *        return a + b;
- *      };
- *
- *      var curriedAddTwo = _curry2(addTwo);
  */
 module.exports = function _curry2(fn) {
-    return function(a, b) {
-        switch (arguments.length) {
-            case 0:
-                throw _noArgsException();
-            case 1:
-                return function(b) {
-                    return fn(a, b);
-                };
-            default:
-                return fn(a, b);
+    return function f2(a, b) {
+        var n = arguments.length;
+        if (n === 0) {
+            throw _noArgsException();
+        } else if (n === 1 && a === __) {
+            return f2;
+        } else if (n === 1) {
+            return function f1(b) { return b === __ ? f1 : fn(a, b); };
+        } else if (n === 2 && a === __ && b === __) {
+            return f2;
+        } else if (n === 2 && a === __) {
+            return function f1(a) { return a === __ ? f1 : fn(a, b); };
+        } else if (n === 2 && b === __) {
+            return function f1(b) { return b === __ ? f1 : fn(a, b); };
+        } else {
+            return fn(a, b);
         }
     };
 };

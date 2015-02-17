@@ -1,5 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 
+
 /**
  * Returns the second argument if it is not null or undefined. If it is null
  * or undefined, the first (default) argument is returned.
@@ -19,6 +20,6 @@ var _curry2 = require('./internal/_curry2');
  *      defaultTo42(undefined);  //=> 42
  *      defaultTo42('Ramda');  //=> 'Ramda'
  */
-module.exports = _curry2(function _defaultTo(d, v) {
+module.exports = _curry2(function defaultTo(d, v) {
    return v == null ? d : v;
 });

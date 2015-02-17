@@ -2,6 +2,7 @@ var _curry2 = require('./internal/_curry2');
 var _extend = require('./internal/_extend');
 var mapObjIndexed = require('./mapObjIndexed');
 
+
 /**
  * Creates a new object by evolving a shallow copy of `object`, according to the
  * `transformation` functions.  All non-primitive properties are copied by reference.

@@ -2,10 +2,28 @@ var curryN = require('./curryN');
 
 
 /**
- * Creates a new version of `fn` that, when invoked, will return either:
- * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
- * `fn`'s expected arguments have not yet been provided
- * - `fn`'s result if all of its expected arguments have been provided
+ * Returns a curried equivalent of the provided function. The curried
+ * function has two unusual capabilities. First, its arguments needn't
+ * be provided one at a time. If `f` is a ternary function and `g` is
+ * `R.curry(f)`, the following are equivalent:
+ *
+ *   - `g(1)(2)(3)`
+ *   - `g(1)(2, 3)`
+ *   - `g(1, 2)(3)`
+ *   - `g(1, 2, 3)`
+ *
+ * Secondly, the special placeholder value `R.__` may be used to specify
+ * "gaps", allowing partial application of any combination of arguments,
+ * regardless of their positions. If `g` is as above and `_` is `R.__`,
+ * the following are equivalent:
+ *
+ *   - `g(1, 2, 3)`
+ *   - `g(_, 2, 3)(1)`
+ *   - `g(_, _, 3)(1)(2)`
+ *   - `g(_, _, 3)(1, 2)`
+ *   - `g(_, 2)(1)(3)`
+ *   - `g(_, 2)(1, 3)`
+ *   - `g(_, 2)(_, 3)(1)`
  *
  * @func
  * @memberOf R
@@ -23,7 +41,7 @@ var curryN = require('./curryN');
  *      var curriedAddFourNumbers = R.curry(addFourNumbers);
  *      var f = curriedAddFourNumbers(1, 2);
  *      var g = f(3);
- *      g(4);//=> 10
+ *      g(4); //=> 10
  */
 module.exports = function curry(fn) {
     return curryN(fn.length, fn);
