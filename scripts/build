@@ -156,6 +156,7 @@ var getModifiedSource = function getModifiedSource(identifier) {
 //  build :: [String] -> String
 var build =
     R.pipe(R.map(filenameToIdentifier),
+           R.sortBy(R.I),
            R.converge(R.concat,
                       R.pipe(createDependencyGraph,
                              orderDependencies,
