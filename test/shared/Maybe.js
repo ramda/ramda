@@ -1,45 +1,78 @@
-module.exports = Maybe;
+var util = require('./internal/util.js');
 
 function Maybe(x) {
-    if (!(this instanceof Maybe)) {
-        return new Maybe(x);
-    }
-    this.value = x;
+    return x == null ? _nothing : Maybe.Just(x);
 }
 
-Maybe.of = function(x) {
-    return new Maybe(x);
+function _Just(x) {
+    this.value = x;
+}
+util.extend(_Just, Maybe);
+
+function _Nothing() {}
+util.extend(_Nothing, Maybe);
+
+var _nothing = new _Nothing();
+
+Maybe.Nothing = function() {
+    return _nothing;
 };
 
-// functor
-Maybe.prototype.map = function(f) {
-    return this.value == null ? this : new Maybe(f(this.value));
+Maybe.Just = function(x) {
+    return new _Just(x);
 };
+
+Maybe.of = Maybe.Just;
+
+Maybe.prototype.of = Maybe.Just;
+
+
+// functor
+_Just.prototype.map = function(f) {
+    return this.of(f(this.value));
+};
+
+_Nothing.prototype.map = util.returnThis;
 
 // apply
 // takes a Maybe that wraps a function (`app`) and applies its `map`
 // method to this Maybe's value, which must be a function.
-Maybe.prototype.ap = function(m) {
-    return typeof this.value !== 'function' ? new Maybe(null) : m.map(this.value);
+_Just.prototype.ap = function(m) {
+    return m.map(this.value);
 };
 
+_Nothing.prototype.ap = util.identity;
+
 // applicative
-Maybe.prototype.of = Maybe.of;
+// `of` inherited from `Maybe`
+
 
 // chain
 //  f must be a function which returns a value
 //  f must return a value of the same Chain
 //  chain must return a value of the same Chain
+_Just.prototype.chain = util.baseMap;
+
+_Nothing.prototype.chain = util.returnThis;
+
+
 //
-Maybe.prototype.chain = function(f) {
-    return this.value == null ? this : f(this.value);
-};
+_Just.prototype.datatype = _Just;
+
+_Nothing.prototype.datatype = _Nothing;
 
 // monad
 // A value that implements the Monad specification must also implement the Applicative and Chain specifications.
 // see above.
 
 // equality method to enable testing
-Maybe.prototype.equals = function(that) {
-    return this.value === that.value;
+_Just.prototype.equals = function(that) {
+    return that instanceof _Just && this.value === that.value;
 };
+
+_Nothing.prototype.equals = function(that) {
+    return that === _nothing;
+};
+
+
+module.exports = Maybe;
