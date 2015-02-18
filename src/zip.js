@@ -10,7 +10,7 @@ var _curry2 = require('./internal/_curry2');
  * @func
  * @memberOf R
  * @category List
- * @sig a -> b -> [[a,b]]
+ * @sig [a] -> [b] -> [[a,b]]
  * @param {Array} list1 The first array to consider.
  * @param {Array} list2 The second array to consider.
  * @return {Array} The list made by pairing up same-indexed elements of `list1` and `list2`.
