@@ -1869,9 +1869,9 @@
      * @return {Function} A function that will execute in the context of `thisObj`.
      */
     var bind = _curry2(function bind(fn, thisObj) {
-        return function () {
+        return arity(fn.length, function () {
             return fn.apply(thisObj, arguments);
-        };
+        });
     });
 
     /**
