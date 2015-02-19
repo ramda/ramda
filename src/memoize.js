@@ -1,5 +1,5 @@
+var _has = require('./_has');
 var _map = require('./internal/_map');
-var has = require('./has');
 
 
 /**
@@ -54,7 +54,7 @@ module.exports = (function() {
         var cache = {};
         return function() {
             var key = serialize(arguments);
-            if (!has(key, cache)) {
+            if (!_has(key, cache)) {
                 cache[key] = fn.apply(this, arguments);
             }
             return cache[key];
