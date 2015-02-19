@@ -81,4 +81,16 @@ describe('bind', function() {
     it('throws on zero arguments', function() {
         assert.throws(R.bind, TypeError);
     });
+
+    it('preserves arity', function() {
+        var f0 = function() { return 0; };
+        var f1 = function(a) { return a; };
+        var f2 = function(a, b) { return a + b; };
+        var f3 = function(a, b, c) { return a + b + c; };
+
+        assert.strictEqual(R.bind(f0, {}).length, 0);
+        assert.strictEqual(R.bind(f1, {}).length, 1);
+        assert.strictEqual(R.bind(f2, {}).length, 2);
+        assert.strictEqual(R.bind(f3, {}).length, 3);
+    });
 });

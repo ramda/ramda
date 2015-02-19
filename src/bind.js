@@ -1,4 +1,5 @@
 var _curry2 = require('./internal/_curry2');
+var arity = require('./arity');
 
 
 /**
@@ -16,7 +17,7 @@ var _curry2 = require('./internal/_curry2');
  * @return {Function} A function that will execute in the context of `thisObj`.
  */
 module.exports = _curry2(function bind(fn, thisObj) {
-    return function() {
+    return arity(fn.length, function() {
         return fn.apply(thisObj, arguments);
-    };
+    });
 });
