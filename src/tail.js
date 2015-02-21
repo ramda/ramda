@@ -10,7 +10,7 @@ var _slice = require('./internal/_slice');
  * @memberOf R
  * @category List
  * @sig [a] -> [a]
- * @param {Array} [list=[]] The array to consider.
+ * @param {Array} list The array to consider.
  * @return {Array} A new array containing all but the first element of the input list, or an
  *         empty list if the input list is empty.
  * @example
