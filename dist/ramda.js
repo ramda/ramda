@@ -4653,7 +4653,7 @@
      * @memberOf R
      * @category List
      * @sig [a] -> [a]
-     * @param {Array} [list=[]] The array to consider.
+     * @param {Array} list The array to consider.
      * @return {Array} A new array containing all but the first element of the input list, or an
      *         empty list if the input list is empty.
      * @example
@@ -5598,7 +5598,7 @@
      * @memberOf R
      * @category List
      * @sig [a] -> a
-     * @param {Array} [list=[]] The array to consider.
+     * @param {Array} list The array to consider.
      * @return {*} The first element of the list, or `undefined` if the list is empty.
      * @example
      *
@@ -5613,7 +5613,7 @@
      * @memberOf R
      * @category List
      * @sig [a] -> [a]
-     * @param {Array} [list=[]] The array to consider.
+     * @param {Array} list The array to consider.
      * @return {Array} A new array containing all but the last element of the input list, or an
      *         empty list if the input list is empty.
      * @example
@@ -5793,7 +5793,7 @@
      * @memberOf R
      * @category List
      * @sig [a] -> a
-     * @param {Array} [list=[]] The array to consider.
+     * @param {Array} list The array to consider.
      * @return {*} The last element of the list, or `undefined` if the list is empty.
      * @example
      *

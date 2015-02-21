@@ -9,7 +9,7 @@ var nth = require('./nth');
  * @memberOf R
  * @category List
  * @sig [a] -> a
- * @param {Array} [list=[]] The array to consider.
+ * @param {Array} list The array to consider.
  * @return {*} The first element of the list, or `undefined` if the list is empty.
  * @example
  *
