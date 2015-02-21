@@ -1,5 +1,5 @@
+var _curry2 = require('./internal/_curry2');
 var _extend = require('./internal/_extend');
-var op = require('./op');
 
 
 /**
@@ -22,6 +22,6 @@ var op = require('./op');
  *      var resetToDefault = R.merge(R.__, {x: 0});
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
-module.exports = op(function merge(a, b) {
+module.exports = _curry2(function merge(a, b) {
     return _extend(_extend({}, a), b);
 });

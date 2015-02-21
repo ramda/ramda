@@ -1,7 +1,7 @@
 var _concat = require('./internal/_concat');
+var _curry2 = require('./internal/_curry2');
 var _hasMethod = require('./internal/_hasMethod');
 var _isArray = require('./internal/_isArray');
-var op = require('./op');
 
 
 /**
@@ -18,20 +18,14 @@ var op = require('./op');
  *         contents of `list2`. If, instead of an Array for `list1`, you pass an
  *         object with a `concat` method on it, `concat` will call `list1.concat`
  *         and pass it the value of `list2`.
- * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *         be curried right by explicitly passing `R.__` for its first argument.
  *
  * @example
  *
  *      R.concat([], []); //=> []
  *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
  *      R.concat('ABC', 'DEF'); // 'ABCDEF'
- *
- *      // operator-style:
- *      R.concat(R.__)([4, 5, 6], [1, 2, 3]); //=> [1, 2, 3, 4, 5, 6]
- *
  */
-module.exports = op(function(set1, set2) {
+module.exports = _curry2(function(set1, set2) {
     if (_isArray(set2)) {
         return _concat(set1, set2);
     } else if (_hasMethod('concat', set1)) {

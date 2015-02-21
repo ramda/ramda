@@ -1498,19 +1498,13 @@
      * @return {Object} Whatever the return value of the method is.
      */
     var _checkForMethod = function _checkForMethod(methodname, fn) {
-        return function (a, b, c) {
+        return function () {
             var length = arguments.length;
-            var obj = arguments[length - 1], callBound = obj && !_isArray(obj) && typeof obj[methodname] === 'function';
-            switch (arguments.length) {
-            case 0:
+            if (length === 0) {
                 return fn();
-            case 1:
-                return callBound ? obj[methodname]() : fn(a);
-            case 2:
-                return callBound ? obj[methodname](a) : fn(a, b);
-            case 3:
-                return callBound ? obj[methodname](a, b) : fn(a, b, c);
             }
+            var obj = arguments[length - 1];
+            return _isArray(obj) || typeof obj[methodname] !== 'function' ? fn.apply(this, arguments) : obj[methodname].apply(obj, _slice(arguments, 0, length - 1));
         };
     };
 
@@ -1619,24 +1613,29 @@
      * @category Function
      * @param {Function} fn The function to curry.
      * @return {Function} The curried function.
-     * @example
-     *
-     *      var addTwo = function(a, b) {
-     *        return a + b;
-     *      };
-     *
-     *      var curriedAddTwo = _curry2(addTwo);
      */
     var _curry2 = function _curry2(fn) {
-        return function (a, b) {
-            switch (arguments.length) {
-            case 0:
+        return function f2(a, b) {
+            var n = arguments.length;
+            if (n === 0) {
                 throw _noArgsException();
-            case 1:
-                return function (b) {
-                    return fn(a, b);
+            } else if (n === 1 && a === __) {
+                return f2;
+            } else if (n === 1) {
+                return function f1(b) {
+                    return b === __ ? f1 : fn(a, b);
                 };
-            default:
+            } else if (n === 2 && a === __ && b === __) {
+                return f2;
+            } else if (n === 2 && a === __) {
+                return function f1(a) {
+                    return a === __ ? f1 : fn(a, b);
+                };
+            } else if (n === 2 && b === __) {
+                return function f1(b) {
+                    return b === __ ? f1 : fn(a, b);
+                };
+            } else {
                 return fn(a, b);
             }
         };
@@ -1649,28 +1648,59 @@
      * @category Function
      * @param {Function} fn The function to curry.
      * @return {Function} The curried function.
-     * @example
-     *
-     *      var addThree = function(a, b, c) {
-     *        return a + b + c;
-     *      };
-     *
-     *      var curriedAddThree = _curry3(addThree);
      */
     var _curry3 = function _curry3(fn) {
-        return function (a, b, c) {
-            switch (arguments.length) {
-            case 0:
+        return function f3(a, b, c) {
+            var n = arguments.length;
+            if (n === 0) {
                 throw _noArgsException();
-            case 1:
+            } else if (n === 1 && a === __) {
+                return f3;
+            } else if (n === 1) {
                 return _curry2(function (b, c) {
                     return fn(a, b, c);
                 });
-            case 2:
+            } else if (n === 2 && a === __ && b === __) {
+                return f3;
+            } else if (n === 2 && a === __) {
+                return _curry2(function (a, c) {
+                    return fn(a, b, c);
+                });
+            } else if (n === 2 && b === __) {
+                return _curry2(function (b, c) {
+                    return fn(a, b, c);
+                });
+            } else if (n === 2) {
                 return function (c) {
                     return fn(a, b, c);
                 };
-            default:
+            } else if (n === 3 && a === __ && b === __ && c === __) {
+                return f3;
+            } else if (n === 3 && a === __ && b === __) {
+                return _curry2(function (a, b) {
+                    return fn(a, b, c);
+                });
+            } else if (n === 3 && a === __ && c === __) {
+                return _curry2(function (a, c) {
+                    return fn(a, b, c);
+                });
+            } else if (n === 3 && b === __ && c === __) {
+                return _curry2(function (b, c) {
+                    return fn(a, b, c);
+                });
+            } else if (n === 3 && a === __) {
+                return function f1(a) {
+                    return a === __ ? f1 : fn(a, b, c);
+                };
+            } else if (n === 3 && b === __) {
+                return function f1(b) {
+                    return b === __ ? f1 : fn(a, b, c);
+                };
+            } else if (n === 3 && c === __) {
+                return function f1(c) {
+                    return c === __ ? f1 : fn(a, b, c);
+                };
+            } else {
                 return fn(a, b, c);
             }
         };
@@ -2035,6 +2065,59 @@
     var composeP = _createComposer(_composeP);
 
     /**
+     * Returns a new list consisting of the elements of the first list followed by the elements
+     * of the second.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig [a] -> [a] -> [a]
+     * @param {Array} list1 The first list to merge.
+     * @param {Array} list2 The second set to merge.
+     * @return {Array} A new array consisting of the contents of `list1` followed by the
+     *         contents of `list2`. If, instead of an Array for `list1`, you pass an
+     *         object with a `concat` method on it, `concat` will call `list1.concat`
+     *         and pass it the value of `list2`.
+     *
+     * @example
+     *
+     *      R.concat([], []); //=> []
+     *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+     *      R.concat('ABC', 'DEF'); // 'ABCDEF'
+     */
+    var concat = _curry2(function (set1, set2) {
+        if (_isArray(set2)) {
+            return _concat(set1, set2);
+        } else if (_hasMethod('concat', set1)) {
+            return set1.concat(set2);
+        } else {
+            throw new TypeError('can\'t concat ' + typeof set1);
+        }
+    });
+
+    /**
+     * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
+     * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig a -> [a] -> Boolean
+     * @param {Object} a The item to compare against.
+     * @param {Array} list The array to consider.
+     * @return {Boolean} `true` if the item is in the list, `false` otherwise.
+     *
+     * @example
+     *
+     *      R.contains(3)([1, 2, 3]); //=> true
+     *      R.contains(4)([1, 2, 3]); //=> false
+     *      R.contains({})([{}, {}]); //=> false
+     *      var obj = {};
+     *      R.contains(obj)([{}, obj, {}]); //=> true
+     */
+    var contains = _curry2(_contains);
+
+    /**
      * Returns `true` if the `x` is found in the `list`, using `pred` as an
      * equality predicate for `x`.
      *
@@ -2111,21 +2194,34 @@
     });
 
     /**
-     * Creates a new version of `fn` with given arity that, when invoked,
-     * will return either:
-     * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
-     * `fn`'s expected arguments have not yet been provided
-     * - `fn`'s result if all of its expected arguments have been provided
+     * Returns a curried equivalent of the provided function, with the
+     * specified arity. The curried function has two unusual capabilities.
+     * First, its arguments needn't be provided one at a time. If `g` is
+     * `R.curryN(3, f)`, the following are equivalent:
      *
-     * This function is useful in place of `curry`, when the arity of the
-     * function to curry cannot be determined from its signature, e.g. if it's
-     * a variadic function.
+     *   - `g(1)(2)(3)`
+     *   - `g(1)(2, 3)`
+     *   - `g(1, 2)(3)`
+     *   - `g(1, 2, 3)`
+     *
+     * Secondly, the special placeholder value `R.__` may be used to specify
+     * "gaps", allowing partial application of any combination of arguments,
+     * regardless of their positions. If `g` is as above and `_` is `R.__`,
+     * the following are equivalent:
+     *
+     *   - `g(1, 2, 3)`
+     *   - `g(_, 2, 3)(1)`
+     *   - `g(_, _, 3)(1)(2)`
+     *   - `g(_, _, 3)(1, 2)`
+     *   - `g(_, 2)(1)(3)`
+     *   - `g(_, 2)(1, 3)`
+     *   - `g(_, 2)(_, 3)(1)`
      *
      * @func
      * @memberOf R
      * @category Function
      * @sig Number -> (* -> a) -> (* -> a)
-     * @param {Number} fnArity The arity for the returned function.
+     * @param {Number} length The arity for the returned function.
      * @param {Function} fn The function to curry.
      * @return {Function} A new, curried function.
      * @see R.curry
@@ -2138,22 +2234,37 @@
      *      var curriedAddFourNumbers = R.curryN(4, addFourNumbers);
      *      var f = curriedAddFourNumbers(1, 2);
      *      var g = f(3);
-     *      g(4);//=> 10
+     *      g(4); //=> 10
      */
     var curryN = _curry2(function curryN(length, fn) {
-        return function recurry(args) {
-            return arity(Math.max(length - (args && args.length || 0), 0), function () {
-                if (arguments.length === 0) {
-                    throw _noArgsException();
+        return arity(length, function () {
+            var n = arguments.length;
+            if (n === 0) {
+                throw _noArgsException();
+            }
+            var shortfall = length - n;
+            var idx = n;
+            while (idx--) {
+                if (arguments[idx] === __) {
+                    shortfall += 1;
                 }
-                var newArgs = _concat(args, arguments);
-                if (newArgs.length >= length) {
-                    return fn.apply(this, newArgs);
-                } else {
-                    return recurry(newArgs);
-                }
-            });
-        }([]);
+            }
+            if (shortfall <= 0) {
+                return fn.apply(this, arguments);
+            } else {
+                var initialArgs = _slice(arguments);
+                return curryN(shortfall, function () {
+                    var currentArgs = _slice(arguments);
+                    var combinedArgs = [];
+                    var idx = -1;
+                    while (++idx < n) {
+                        var val = initialArgs[idx];
+                        combinedArgs[idx] = val === __ ? currentArgs.shift() : val;
+                    }
+                    return fn.apply(this, combinedArgs.concat(currentArgs));
+                });
+            }
+        });
     });
 
     /**
@@ -2190,7 +2301,7 @@
      *      defaultTo42(undefined);  //=> 42
      *      defaultTo42('Ramda');  //=> 'Ramda'
      */
-    var defaultTo = _curry2(function _defaultTo(d, v) {
+    var defaultTo = _curry2(function defaultTo(d, v) {
         return v == null ? d : v;
     });
 
@@ -2275,6 +2386,30 @@
         return _pickBy(function (val, key) {
             return key !== prop;
         }, obj);
+    });
+
+    /**
+     * Divides two numbers. Equivalent to `a / b`.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} a The first value.
+     * @param {Number} b The second value.
+     * @return {Number} The result of `a / b`.
+     * @example
+     *
+     *      R.divide(71, 100); //=> 0.71
+     *
+     *      var half = R.divide(R.__, 2);
+     *      half(42); //=> 21
+     *
+     *      var reciprocal = R.divide(1);
+     *      reciprocal(4);   //=> 0.25
+     */
+    var divide = _curry2(function divide(a, b) {
+        return a / b;
     });
 
     /**
@@ -2701,6 +2836,74 @@
     });
 
     /**
+     * Returns true if the first parameter is greater than the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a > b
+     * @example
+     *
+     *      R.gt(2, 6); //=> false
+     *      R.gt(2, 0); //=> true
+     *      R.gt(2, 2); //=> false
+     *      R.gt(R.__, 2)(10); //=> true
+     *      R.gt(2)(10); //=> false
+     */
+    var gt = _curry2(_gt);
+
+    /**
+     * Returns true if the first parameter is greater than or equal to the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a >= b
+     * @example
+     *
+     *      R.gte(2, 6); //=> false
+     *      R.gte(2, 0); //=> true
+     *      R.gte(2, 2); //=> true
+     *      R.gte(R.__, 6)(2); //=> false
+     *      R.gte(2)(0); //=> true
+     */
+    var gte = _curry2(function gte(a, b) {
+        return a >= b;
+    });
+
+    /**
+     * Returns whether or not an object has an own property with
+     * the specified name
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig s -> {s: x} -> Boolean
+     * @param {String} prop The name of the property to check for.
+     * @param {Object} obj The object to query.
+     * @return {Boolean} Whether the property exists.
+     * @example
+     *
+     *      var hasName = R.has('name');
+     *      hasName({name: 'alice'});   //=> true
+     *      hasName({name: 'bob'});     //=> true
+     *      hasName({});                //=> false
+     *
+     *      var point = {x: 0, y: 0};
+     *      var pointHas = R.has(R.__, point);
+     *      pointHas('x');  //=> true
+     *      pointHas('y');  //=> true
+     *      pointHas('z');  //=> false
+     */
+    var has = _curry2(_has);
+
+    /**
      * Returns whether or not an object or its prototype chain has
      * a property with the specified name
      *
@@ -3062,6 +3265,48 @@
     });
 
     /**
+     * Returns true if the first parameter is less than the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a < b
+     * @example
+     *
+     *      R.lt(2, 6); //=> true
+     *      R.lt(2, 0); //=> false
+     *      R.lt(2, 2); //=> false
+     *      R.lt(5)(10); //=> true
+     *      R.lt(R.__, 5)(10); //=> false // right-sectioned currying
+     */
+    var lt = _curry2(_lt);
+
+    /**
+     * Returns true if the first parameter is less than or equal to the second.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Boolean
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Boolean} a <= b
+     * @example
+     *
+     *      R.lte(2, 6); //=> true
+     *      R.lte(2, 0); //=> false
+     *      R.lte(2, 2); //=> true
+     *      R.lte(R.__, 2)(1); //=> true
+     *      R.lte(2)(10); //=> true
+     */
+    var lte = _curry2(function lte(a, b) {
+        return a <= b;
+    });
+
+    /**
      * Returns a new list, constructed by applying the supplied function to every element of the
      * supplied list.
      *
@@ -3272,6 +3517,48 @@
     var match = invoker(1, 'match');
 
     /**
+     * mathMod behaves like the modulo operator should mathematically, unlike the `%`
+     * operator (and by extension, R.modulo). So while "-17 % 5" is -2,
+     * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
+     * when the modulus is zero or negative.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} m The dividend.
+     * @param {Number} p the modulus.
+     * @return {Number} The result of `b mod a`.
+     * @see R.moduloBy
+     * @example
+     *
+     *      R.mathMod(-17, 5);  //=> 3
+     *      R.mathMod(17, 5);   //=> 2
+     *      R.mathMod(17, -5);  //=> NaN
+     *      R.mathMod(17, 0);   //=> NaN
+     *      R.mathMod(17.2, 5); //=> NaN
+     *      R.mathMod(17, 5.3); //=> NaN
+     *
+     *      var clock = R.mathMod(R.__, 12);
+     *      clock(15); //=> 3
+     *      clock(24); //=> 0
+     *
+     *      var seventeenMod = R.mathMod(17);
+     *      seventeenMod(3);  //=> 2
+     *      seventeenMod(4);  //=> 1
+     *      seventeenMod(10); //=> 7
+     */
+    var mathMod = _curry2(function mathMod(m, p) {
+        if (!_isInteger(m)) {
+            return NaN;
+        }
+        if (!_isInteger(p) || p < 1) {
+            return NaN;
+        }
+        return (m % p + p) % p;
+    });
+
+    /**
      * Determines the largest of a list of numbers (or elements that can be cast to numbers)
      *
      * @func
@@ -3340,6 +3627,34 @@
      *      R.minBy(cmp, [a, b, c]); //=> {x: 1}
      */
     var minBy = _curry2(_createMaxMinBy(_lt));
+
+    /**
+     * Divides the second parameter by the first and returns the remainder.
+     * Note that this functions preserves the JavaScript-style behavior for
+     * modulo. For mathematical modulo see `mathMod`
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} a The value to the divide.
+     * @param {Number} b The pseudo-modulus
+     * @return {Number} The result of `b % a`.
+     * @see R.mathMod
+     * @example
+     *
+     *      R.modulo(17, 3); //=> 2
+     *      // JS behavior:
+     *      R.modulo(-17, 3); //=> -2
+     *      R.modulo(17, -3); //=> 2
+     *
+     *      var isOdd = R.modulo(R.__, 2);
+     *      isOdd(42); //=> 0
+     *      isOdd(21); //=> 1
+     */
+    var modulo = _curry2(function modulo(a, b) {
+        return a % b;
+    });
 
     /**
      * Multiplies two numbers. Equivalent to `a * b` but curried.
@@ -4290,6 +4605,31 @@
     var substringTo = substring(0);
 
     /**
+     * Subtracts two numbers. Equivalent to `a - b` but curried.
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig Number -> Number -> Number
+     * @param {Number} a The first value.
+     * @param {Number} b The second value.
+     * @return {Number} The result of `a - b`.
+     * @example
+     *
+     *      R.subtract(10, 8); //=> 2
+     *
+     *      var minus5 = R.subtract(R.__, 5);
+     *      minus5(17); //=> 12
+     *
+     *      var complementaryAngle = R.subtract(90);
+     *      complementaryAngle(30); //=> 60
+     *      complementaryAngle(72); //=> 18
+     */
+    var subtract = _curry2(function subtract(a, b) {
+        return a - b;
+    });
+
+    /**
      * Adds together all the elements of a list.
      *
      * @func
@@ -5135,10 +5475,28 @@
     });
 
     /**
-     * Creates a new version of `fn` that, when invoked, will return either:
-     * - A new function ready to accept one or more of `fn`'s remaining arguments, if all of
-     * `fn`'s expected arguments have not yet been provided
-     * - `fn`'s result if all of its expected arguments have been provided
+     * Returns a curried equivalent of the provided function. The curried
+     * function has two unusual capabilities. First, its arguments needn't
+     * be provided one at a time. If `f` is a ternary function and `g` is
+     * `R.curry(f)`, the following are equivalent:
+     *
+     *   - `g(1)(2)(3)`
+     *   - `g(1)(2, 3)`
+     *   - `g(1, 2)(3)`
+     *   - `g(1, 2, 3)`
+     *
+     * Secondly, the special placeholder value `R.__` may be used to specify
+     * "gaps", allowing partial application of any combination of arguments,
+     * regardless of their positions. If `g` is as above and `_` is `R.__`,
+     * the following are equivalent:
+     *
+     *   - `g(1, 2, 3)`
+     *   - `g(_, 2, 3)(1)`
+     *   - `g(_, _, 3)(1)(2)`
+     *   - `g(_, _, 3)(1, 2)`
+     *   - `g(_, 2)(1)(3)`
+     *   - `g(_, 2)(1, 3)`
+     *   - `g(_, 2)(_, 3)(1)`
      *
      * @func
      * @memberOf R
@@ -5156,7 +5514,7 @@
      *      var curriedAddFourNumbers = R.curry(addFourNumbers);
      *      var f = curriedAddFourNumbers(1, 2);
      *      var g = f(3);
-     *      g(4);//=> 10
+     *      g(4); //=> 10
      */
     var curry = function curry(fn) {
         return curryN(fn.length, fn);
@@ -5472,43 +5830,45 @@
     });
 
     /**
-     * Uses a placeholder to convert a binary function into something like an infix operation.
-     * When called with the `R.__` placeholder the second argument is applied to the
-     * second position, and it returns a function waiting for its first argument.
-     * This can allow for more natural processing of functions which are really binary operators.
+     * Create a new object with the own properties of a
+     * merged with the own properties of object b.
+     * This function will *not* mutate passed-in objects.
      *
      * @func
      * @memberOf R
-     * @category Function
-     * @param {Function} fn The binary operation to adjust
-     * @return {Function} A new function that acts somewhat like an infix operator.
+     * @category Object
+     * @sig {k: v} -> {k: v} -> {k: v}
+     * @param {Object} a source object
+     * @param {Object} b object with higher precedence in output
+     * @return {Object} The destination object.
      * @example
      *
-     *      var div = R.op(function (a, b) {
-     *          return a / b;
-     *      });
+     *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+     *      //=> { 'name': 'fred', 'age': 40 }
      *
-     *      div(6, 3); //=> 2
-     *      div(6)(3); //=> 2
-     *      div(R.__, 3)(6); //=> 2
-     *      div(R.__)(3, 6); //=> 2
-     *      div(R.__)(3)(6); //=> 2
+     *      var resetToDefault = R.merge(R.__, {x: 0});
+     *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
      */
-    var op = function op(fn) {
-        if (fn.length !== 2) {
-            throw new Error('Expected binary function.');
-        }
-        return function _op(a, b) {
-            switch (arguments.length) {
-            case 0:
-                throw _noArgsException();
-            case 1:
-                return a === __ ? flip(_op) : partial(fn, a);
-            default:
-                return a === __ ? flip(fn)(b) : fn(a, b);
-            }
-        };
-    };
+    var merge = _curry2(function merge(a, b) {
+        return _extend(_extend({}, a), b);
+    });
+
+    /**
+     * Merges a list of objects together into one object.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig [{k: v}] -> {k: v}
+     * @param {Array} list An array of objects
+     * @return {Object} A merged object.
+     * @see reduce
+     * @example
+     *
+     *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
+     *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
+     */
+    var mergeAll = reduce(merge, {});
 
     /**
      * Retrieve a nested path on an object separated by periods
@@ -5561,33 +5921,6 @@
      */
     var repeat = _curry2(function repeat(value, n) {
         return times(always(value), n);
-    });
-
-    /**
-     * Subtracts two numbers. Equivalent to `a - b` but curried.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} a The first value.
-     * @param {Number} b The second value.
-     * @return {Number} The result of `a - b`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `R.__` for its first argument.
-     * @example
-     *
-     *      R.subtract(10, 8); //=> 2
-     *
-     *      var minus5 = R.subtract(R.__, 5);
-     *      minus5(17); //=> 12
-     *
-     *      var complementaryAngle = R.subtract(90);
-     *      complementaryAngle(30); //=> 60
-     *      complementaryAngle(72); //=> 18
-     */
-    var subtract = op(function subtract(a, b) {
-        return a - b;
     });
 
     /**
@@ -5738,43 +6071,6 @@
     var commute = commuteMap(map(identity));
 
     /**
-     * Returns a new list consisting of the elements of the first list followed by the elements
-     * of the second.
-     *
-     * @func
-     * @memberOf R
-     * @category List
-     * @sig [a] -> [a] -> [a]
-     * @param {Array} list1 The first list to merge.
-     * @param {Array} list2 The second set to merge.
-     * @return {Array} A new array consisting of the contents of `list1` followed by the
-     *         contents of `list2`. If, instead of an Array for `list1`, you pass an
-     *         object with a `concat` method on it, `concat` will call `list1.concat`
-     *         and pass it the value of `list2`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *         be curried right by explicitly passing `R.__` for its first argument.
-     *
-     * @example
-     *
-     *      R.concat([], []); //=> []
-     *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
-     *      R.concat('ABC', 'DEF'); // 'ABCDEF'
-     *
-     *      // operator-style:
-     *      R.concat(R.__)([4, 5, 6], [1, 2, 3]); //=> [1, 2, 3, 4, 5, 6]
-     *
-     */
-    var concat = op(function (set1, set2) {
-        if (_isArray(set2)) {
-            return _concat(set1, set2);
-        } else if (_hasMethod('concat', set1)) {
-            return set1.concat(set2);
-        } else {
-            throw new TypeError('can\'t concat ' + typeof set1);
-        }
-    });
-
-    /**
      * Wraps a constructor function inside a curried function that can be called with the same
      * arguments and returns the same type. The arity of the function returned is specified
      * to allow using variadic constructor functions.
@@ -5837,132 +6133,6 @@
     });
 
     /**
-     * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
-     * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
-     *
-     * @func
-     * @memberOf R
-     * @category List
-     * @sig a -> [a] -> Boolean
-     * @param {Object} a The item to compare against.
-     * @param {Array} list The array to consider.
-     * @return {Boolean} `true` if the item is in the list, `false` otherwise.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *       be curried right by explicitly passing `R.__` for its first argument.
-     *
-     * @example
-     *
-     *      R.contains(3)([1, 2, 3]); //=> true
-     *      R.contains(4)([1, 2, 3]); //=> false
-     *      R.contains({})([{}, {}]); //=> false
-     *      var obj = {};
-     *      R.contains(obj)([{}, obj, {}]); //=> true
-     *
-     *      // operator-style
-     *      R.contains(R.__)([1, 2, 3], 3) //=> true
-     *
-     */
-    var contains = op(_contains);
-
-    /**
-     * Divides two numbers. Equivalent to `a / b`.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} a The first value.
-     * @param {Number} b The second value.
-     * @return {Number} The result of `a / b`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.divide(71, 100); //=> 0.71
-     *
-     *      var half = R.divide(R.__, 2);
-     *      half(42); //=> 21
-     *
-     *      var reciprocal = R.divide(1);
-     *      reciprocal(4);   //=> 0.25
-     */
-    var divide = op(function divide(a, b) {
-        return a / b;
-    });
-
-    /**
-     * Returns true if the first parameter is greater than the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a > b
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.gt(2, 6); //=> false
-     *      R.gt(2, 0); //=> true
-     *      R.gt(2, 2); //=> false
-     *      R.gt(R.__, 2)(10); //=> true
-     *      R.gt(2)(10); //=> false
-     */
-    var gt = op(_gt);
-
-    /**
-     * Returns true if the first parameter is greater than or equal to the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a >= b
-     * @note Operator: this is right-curried by default, but can be called via sections
-     * @example
-     *
-     *      R.gte(2, 6); //=> false
-     *      R.gte(2, 0); //=> true
-     *      R.gte(2, 2); //=> true
-     *      R.gte(R.__, 6)(2); //=> false
-     *      R.gte(2)(0); //=> true
-     *      R.gte(R.__)(1, 2); //=> true
-     */
-    var gte = op(function gte(a, b) {
-        return a >= b;
-    });
-
-    /**
-     * Returns whether or not an object has an own property with
-     * the specified name
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig s -> {s: x} -> Boolean
-     * @param {String} prop The name of the property to check for.
-     * @param {Object} obj The object to query.
-     * @return {Boolean} Whether the property exists.
-     * @example
-     *
-     *      var hasName = R.has('name');
-     *      hasName({name: 'alice'});   //=> true
-     *      hasName({name: 'bob'});     //=> true
-     *      hasName({});                //=> false
-     *
-     *      var point = {x: 0, y: 0};
-     *      var pointHas = R.has(R.__, point);
-     *      pointHas('x');  //=> true
-     *      pointHas('y');  //=> true
-     *      pointHas('z');  //=> false
-     */
-    var has = op(_has);
-
-    /**
      * "lifts" a function of arity > 1 so that it may "map over" an Array or
      * other Functor.
      *
@@ -5975,12 +6145,12 @@
      * @return {Function} The function `fn` applicable to mappable objects.
      * @example
      *
-     *     var madd3 = R.lift(R.curryN(3, function(a, b, c) {
+     *     var madd3 = R.lift(R.curry(function(a, b, c) {
      *         return a + b + c;
      *     }));
      *     madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
      *
-     *     var madd5 = R.lift(R.curryN(5, function(a, b, c, d, e) {
+     *     var madd5 = R.lift(R.curry(function(a, b, c, d, e) {
      *         return a + b + c + d + e;
      *     }));
      *     madd5([1,2], [3], [4, 5], [6], [7, 8]); //=> [21, 22, 22, 23, 22, 23, 23, 24]
@@ -5991,168 +6161,6 @@
         }
         return liftN(fn.length, fn);
     };
-
-    /**
-     * Returns true if the first parameter is less than the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a < b
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `undefined` for its first argument.
-     * @example
-     *
-     *      R.lt(2, 6); //=> true
-     *      R.lt(2, 0); //=> false
-     *      R.lt(2, 2); //=> false
-     *      R.lt(5)(10); //=> true
-     *      R.lt(R.__, 5)(10); //=> false // right-sectioned currying
-     */
-    var lt = op(_lt);
-
-    /**
-     * Returns true if the first parameter is less than or equal to the second.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Boolean
-     * @param {Number} a
-     * @param {Number} b
-     * @return {Boolean} a <= b
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `R.__` for its first argument.
-     * @example
-     *
-     *      R.lte(2, 6); //=> true
-     *      R.lte(2, 0); //=> false
-     *      R.lte(2, 2); //=> true
-     *      R.lte(R.__, 2)(1); //=> true
-     *      R.lte(2)(10); //=> true
-     *      R.lte(R.__)(5, 4) // => true
-     */
-    var lte = op(function lte(a, b) {
-        return a <= b;
-    });
-
-    /**
-     * mathMod behaves like the modulo operator should mathematically, unlike the `%`
-     * operator (and by extension, R.modulo). So while "-17 % 5" is -2,
-     * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
-     * when the modulus is zero or negative.
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} m The dividend.
-     * @param {Number} p the modulus.
-     * @return {Number} The result of `b mod a`.
-     * @see R.moduloBy
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `R.__` for its first argument.
-     * @example
-     *
-     *      R.mathMod(-17, 5);  //=> 3
-     *      R.mathMod(17, 5);   //=> 2
-     *      R.mathMod(17, -5);  //=> NaN
-     *      R.mathMod(17, 0);   //=> NaN
-     *      R.mathMod(17.2, 5); //=> NaN
-     *      R.mathMod(17, 5.3); //=> NaN
-     *
-     *      var clock = R.mathMod(R.__, 12);
-     *      clock(15); //=> 3
-     *      clock(24); //=> 0
-     *
-     *      var seventeenMod = R.mathMod(17);
-     *      seventeenMod(3);  //=> 2
-     *      seventeenMod(4);  //=> 1
-     *      seventeenMod(10); //=> 7
-     */
-    var mathMod = op(function mathMod(m, p) {
-        if (!_isInteger(m)) {
-            return NaN;
-        }
-        if (!_isInteger(p) || p < 1) {
-            return NaN;
-        }
-        return (m % p + p) % p;
-    });
-
-    /**
-     * Create a new object with the own properties of a
-     * merged with the own properties of object b.
-     * This function will *not* mutate passed-in objects.
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig {k: v} -> {k: v} -> {k: v}
-     * @param {Object} a source object
-     * @param {Object} b object with higher precedence in output
-     * @return {Object} The destination object.
-     * @example
-     *
-     *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
-     *      //=> { 'name': 'fred', 'age': 40 }
-     *
-     *      var resetToDefault = R.merge(R.__, {x: 0});
-     *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
-     */
-    var merge = op(function merge(a, b) {
-        return _extend(_extend({}, a), b);
-    });
-
-    /**
-     * Merges a list of objects together into one object.
-     *
-     * @func
-     * @memberOf R
-     * @category List
-     * @sig [{k: v}] -> {k: v}
-     * @param {Array} list An array of objects
-     * @return {Object} A merged object.
-     * @see reduce
-     * @example
-     *
-     *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
-     *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
-     */
-    var mergeAll = reduce(merge, {});
-
-    /**
-     * Divides the second parameter by the first and returns the remainder.
-     * Note that this functions preserves the JavaScript-style behavior for
-     * modulo. For mathematical modulo see `mathMod`
-     *
-     * @func
-     * @memberOf R
-     * @category Math
-     * @sig Number -> Number -> Number
-     * @param {Number} a The value to the divide.
-     * @param {Number} b The pseudo-modulus
-     * @return {Number} The result of `b % a`.
-     * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
-     *                 be curried right by explicitly passing `R.__` for its first argument.
-     * @see R.mathMod
-     * @example
-     *
-     *      R.modulo(17, 3); //=> 2
-     *      // JS behavior:
-     *      R.modulo(-17, 3); //=> -2
-     *      R.modulo(17, -3); //=> 2
-     *
-     *      var isOdd = R.modulo(R.__, 2);
-     *      isOdd(42); //=> 0
-     *      isOdd(21); //=> 1
-     */
-    var modulo = op(function modulo(a, b) {
-        return a % b;
-    });
 
     /**
      * Reasonable analog to SQL `select` statement.
@@ -6333,7 +6341,6 @@
         of: of,
         omit: omit,
         once: once,
-        op: op,
         or: or,
         partial: partial,
         partialRight: partialRight,

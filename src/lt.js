@@ -1,5 +1,5 @@
+var _curry2 = require('./internal/_curry2');
 var _lt = require('./internal/_lt');
-var op = require('./op');
 
 
 /**
@@ -12,8 +12,6 @@ var op = require('./op');
  * @param {Number} a
  * @param {Number} b
  * @return {Boolean} a < b
- * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *                 be curried right by explicitly passing `undefined` for its first argument.
  * @example
  *
  *      R.lt(2, 6); //=> true
@@ -22,4 +20,4 @@ var op = require('./op');
  *      R.lt(5)(10); //=> true
  *      R.lt(R.__, 5)(10); //=> false // right-sectioned currying
  */
-module.exports = op(_lt);
+module.exports = _curry2(_lt);

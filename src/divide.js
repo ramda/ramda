@@ -1,4 +1,4 @@
-var op = require('./op');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
@@ -11,8 +11,6 @@ var op = require('./op');
  * @param {Number} a The first value.
  * @param {Number} b The second value.
  * @return {Number} The result of `a / b`.
- * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *                 be curried right by explicitly passing `undefined` for its first argument.
  * @example
  *
  *      R.divide(71, 100); //=> 0.71
@@ -23,4 +21,4 @@ var op = require('./op');
  *      var reciprocal = R.divide(1);
  *      reciprocal(4);   //=> 0.25
  */
-module.exports = op(function divide(a, b) { return a / b; });
+module.exports = _curry2(function divide(a, b) { return a / b; });

@@ -1,4 +1,5 @@
 var _isArray = require('./_isArray');
+var _slice = require('./_slice');
 
 
 /**
@@ -12,15 +13,14 @@ var _isArray = require('./_isArray');
  * @return {Object} Whatever the return value of the method is.
  */
 module.exports = function _checkForMethod(methodname, fn) {
-    return function(a, b, c) {
+    return function() {
         var length = arguments.length;
-        var obj = arguments[length - 1],
-            callBound = obj && !_isArray(obj) && typeof obj[methodname] === 'function';
-        switch (arguments.length) {
-            case 0: return fn();
-            case 1: return callBound ? obj[methodname]() : fn(a);
-            case 2: return callBound ? obj[methodname](a) : fn(a, b);
-            case 3: return callBound ? obj[methodname](a, b) : fn(a, b, c);
+        if (length === 0) {
+            return fn();
         }
+        var obj = arguments[length - 1];
+        return (_isArray(obj) || typeof obj[methodname] !== 'function') ?
+            fn.apply(this, arguments) :
+            obj[methodname].apply(obj, _slice(arguments, 0, length - 1));
     };
 };

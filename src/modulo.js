@@ -1,4 +1,4 @@
-var op = require('./op');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
@@ -13,8 +13,6 @@ var op = require('./op');
  * @param {Number} a The value to the divide.
  * @param {Number} b The pseudo-modulus
  * @return {Number} The result of `b % a`.
- * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *                 be curried right by explicitly passing `R.__` for its first argument.
  * @see R.mathMod
  * @example
  *
@@ -27,4 +25,4 @@ var op = require('./op');
  *      isOdd(42); //=> 0
  *      isOdd(21); //=> 1
  */
-module.exports = op(function modulo(a, b) { return a % b; });
+module.exports = _curry2(function modulo(a, b) { return a % b; });

@@ -1,5 +1,5 @@
+var _curry2 = require('./internal/_curry2');
 var _isInteger = require('./internal/_isInteger');
-var op = require('./op');
 
 
 /**
@@ -16,8 +16,6 @@ var op = require('./op');
  * @param {Number} p the modulus.
  * @return {Number} The result of `b mod a`.
  * @see R.moduloBy
- * @note Operator: Since this is a non-commutative infix operator converted to prefix, it can
- *                 be curried right by explicitly passing `R.__` for its first argument.
  * @example
  *
  *      R.mathMod(-17, 5);  //=> 3
@@ -36,7 +34,7 @@ var op = require('./op');
  *      seventeenMod(4);  //=> 1
  *      seventeenMod(10); //=> 7
  */
-module.exports = op(function mathMod(m, p) {
+module.exports = _curry2(function mathMod(m, p) {
     if (!_isInteger(m)) { return NaN; }
     if (!_isInteger(p) || p < 1) { return NaN; }
     return ((m % p) + p) % p;

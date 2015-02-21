@@ -1,4 +1,4 @@
-var op = require('./op');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
@@ -11,7 +11,6 @@ var op = require('./op');
  * @param {Number} a
  * @param {Number} b
  * @return {Boolean} a >= b
- * @note Operator: this is right-curried by default, but can be called via sections
  * @example
  *
  *      R.gte(2, 6); //=> false
@@ -19,6 +18,5 @@ var op = require('./op');
  *      R.gte(2, 2); //=> true
  *      R.gte(R.__, 6)(2); //=> false
  *      R.gte(2)(0); //=> true
- *      R.gte(R.__)(1, 2); //=> true
  */
-module.exports = op(function gte(a, b) { return a >= b; });
+module.exports = _curry2(function gte(a, b) { return a >= b; });
