@@ -1,4 +1,4 @@
-var _has = require('../_has');
+var _has = require('./_has');
 var eq = require('../eq');
 var keys = require('../keys');
 var type = require('../type');

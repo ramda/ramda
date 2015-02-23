@@ -69,6 +69,7 @@
     "js-yaml": "^3.2.5",
     "lodash": "latest",
     "marked": "^0.3.2",
+    "mocha": "2.x.x",
     "orchestrate": "~0.3.4",
     "q": "^1.1.1",
     "ramda": "0.10.0",

@@ -1,5 +1,5 @@
 var _contains = require('./internal/_contains');
-var _has = require('./_has');
+var _has = require('./internal/_has');
 
 
 /**
