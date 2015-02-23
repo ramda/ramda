@@ -50,6 +50,6 @@ test: dist/ramda.js
 	| sed 's:src/\(.*\)[.]js:exports.\1 = require("./src/\1");:' >index.js
 	sed '/"main":/d' package.json >tmp
 	mv tmp package.json
-	$(MOCHA) -- $(shell find test -name '*.js' -not -name 'installTo.js' -not -name 'test.examplesRunner.js' -not -path 'test/helpers/*')
+	$(MOCHA) -- $(shell find test -name '*.js' -not -name 'test.examplesRunner.js' -not -path 'test/helpers/*')
 	git checkout -- package.json
 	rm index.js
