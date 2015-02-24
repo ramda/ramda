@@ -1,3 +1,4 @@
+var _curry1 = require('./internal/_curry1');
 var merge = require('./merge');
 var reduce = require('./reduce');
 
@@ -17,4 +18,6 @@ var reduce = require('./reduce');
  *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
  *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
  */
-module.exports = reduce(merge, {});
+module.exports = _curry1(function mergeAll(list) {
+    return reduce(merge, {}, list);
+});

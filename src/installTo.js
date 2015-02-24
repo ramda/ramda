@@ -1,5 +1,6 @@
 /* global R */
 
+var _curry1 = require('./internal/_curry1');
 var _extend = require('./internal/_extend');
 
 
@@ -21,6 +22,6 @@ var _extend = require('./internal/_extend');
  *      R.installTo(x); // x now contains ramda functions
  *      R.installTo(this); // add ramda functions to `this` object
  */
-module.exports = function(obj) {
+module.exports = _curry1(function(obj) {
     return _extend(obj, R);
-};
+});

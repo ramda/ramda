@@ -1,3 +1,4 @@
+var _curry1 = require('./internal/_curry1');
 var _makeFlat = require('./internal/_makeFlat');
 
 
@@ -16,4 +17,4 @@ var _makeFlat = require('./internal/_makeFlat');
  *      R.unnest([1, [2], [[3]]]); //=> [1, 2, [3]]
  *      R.unnest([[1, 2], [3, 4], [5, 6]]); //=> [1, 2, 3, 4, 5, 6]
  */
-module.exports = _makeFlat(false);
+module.exports = _curry1(_makeFlat(false));

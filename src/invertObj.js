@@ -1,4 +1,6 @@
+var _curry1 = require('./internal/_curry1');
 var keys = require('./keys');
+
 
 /**
  * Returns a new object with the keys of the given object
@@ -24,7 +26,7 @@ var keys = require('./keys');
  *      R.invertObj(raceResults);
  *      //=> { 'alice': '0', 'jake':'1' }
  */
-module.exports = function invertObj(obj) {
+module.exports = _curry1(function invertObj(obj) {
     var props = keys(obj);
     var len = props.length;
     var idx = -1;
@@ -35,4 +37,4 @@ module.exports = function invertObj(obj) {
         out[obj[key]] = key;
     }
     return out;
-};
+});

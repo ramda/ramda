@@ -1,4 +1,4 @@
-var _noArgsException = require('./internal/_noArgsException');
+var _curry1 = require('./internal/_curry1');
 var liftN = require('./liftN');
 
 
@@ -25,9 +25,6 @@ var liftN = require('./liftN');
  *     }));
  *     madd5([1,2], [3], [4, 5], [6], [7, 8]); //=> [21, 22, 22, 23, 22, 23, 23, 24]
  */
-module.exports = function lift(fn) {
-    if (arguments.length === 0) {
-        throw _noArgsException();
-    }
+module.exports = _curry1(function lift(fn) {
     return liftN(fn.length, fn);
-};
+});

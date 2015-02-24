@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Gives a single-word string description of the (native) type of a value, returning such
  * answers as 'Object', 'Number', 'Array', or 'Null'.  Does not attempt to distinguish user
@@ -19,8 +22,8 @@
  *      R.type([]); //=> "Array"
  *      R.type(/[A-z]/); //=> "RegExp"
  */
-module.exports = function type(val) {
+module.exports = _curry1(function type(val) {
     return val === null      ? 'Null'      :
            val === undefined ? 'Undefined' :
            Object.prototype.toString.call(val).slice(8, -1);
-};
+});

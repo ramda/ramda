@@ -1,4 +1,5 @@
 var _slice = require('./internal/_slice');
+var curry = require('./curry');
 var curryN = require('./curryN');
 
 
@@ -24,7 +25,7 @@ var curryN = require('./curryN');
  *      var sliceFrom6 = R.invoker(2, 'slice', 6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
  */
-module.exports = function invoker(arity, method) {
+module.exports = curry(function invoker(arity, method) {
     var initialArgs = _slice(arguments, 2);
     var len = arity - initialArgs.length;
     return curryN(len + 1, function() {
@@ -32,4 +33,4 @@ module.exports = function invoker(arity, method) {
         var args = initialArgs.concat(_slice(arguments, 0, len));
         return target[method].apply(target, args);
     });
-};
+});

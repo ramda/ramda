@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Returns a list of all the properties, including prototype properties,
  * of the supplied object.
@@ -17,10 +20,10 @@
  *      var f = new F();
  *      R.valuesIn(f); //=> ['X', 'Y']
  */
-module.exports = function valuesIn(obj) {
+module.exports = _curry1(function valuesIn(obj) {
     var prop, vs = [];
     for (prop in obj) {
         vs[vs.length] = obj[prop];
     }
     return vs;
-};
+});

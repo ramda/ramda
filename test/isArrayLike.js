@@ -40,7 +40,7 @@ describe('isArrayLike', function() {
     });
 
     it('is false for everything else', function() {
-        assert.strictEqual(R.isArrayLike(), false);
+        assert.strictEqual(R.isArrayLike(undefined), false);
         assert.strictEqual(R.isArrayLike(1), false);
         assert.strictEqual(R.isArrayLike({}), false);
         assert.strictEqual(R.isArrayLike(false), false);

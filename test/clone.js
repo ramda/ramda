@@ -168,7 +168,6 @@ describe('deep clone edge cases', function() {
     it('nulls, undefineds and empty objects and arrays', function() {
         assert.strictEqual(R.clone(null), null);
         assert.strictEqual(R.clone(undefined), undefined);
-        assert.strictEqual(R.clone(), undefined);
         assert.notStrictEqual(R.clone(undefined), null);
 
         var obj = {};

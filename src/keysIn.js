@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Returns a list containing the names of all the
  * properties of the supplied object, including prototype properties.
@@ -17,10 +20,10 @@
  *      var f = new F();
  *      R.keysIn(f); //=> ['x', 'y']
  */
-module.exports = function keysIn(obj) {
+module.exports = _curry1(function keysIn(obj) {
     var prop, ks = [];
     for (prop in obj) {
         ks[ks.length] = prop;
     }
     return ks;
-};
+});

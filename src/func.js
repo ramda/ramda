@@ -1,5 +1,5 @@
-var _noArgsException = require('./internal/_noArgsException');
 var _slice = require('./internal/_slice');
+var curry = require('./curry');
 
 
 /**
@@ -21,10 +21,6 @@ var _slice = require('./internal/_slice');
  *      var obj = { f: function() { return 'f called'; } };
  *      R.func('f', obj); //=> 'f called'
  */
-module.exports = function func(funcName, obj) {
-    switch (arguments.length) {
-        case 0: throw _noArgsException();
-        case 1: return function(obj) { return obj[funcName].apply(obj, _slice(arguments, 1)); };
-        default: return obj[funcName].apply(obj, _slice(arguments, 2));
-    }
-};
+module.exports = curry(function func(funcName, obj) {
+    return obj[funcName].apply(obj, _slice(arguments, 2));
+});

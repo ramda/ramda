@@ -1,6 +1,3 @@
-var _noArgsException = require('./_noArgsException');
-
-
 /**
  * An optimized, private array `slice` implementation.
  *
@@ -20,7 +17,6 @@ var _noArgsException = require('./_noArgsException');
  */
 module.exports = function _slice(args, from, to) {
     switch (arguments.length) {
-        case 0: throw _noArgsException();
         case 1: return _slice(args, 0, args.length);
         case 2: return _slice(args, from, args.length);
         default:

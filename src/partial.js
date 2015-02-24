@@ -1,5 +1,6 @@
 var _concat = require('./internal/_concat');
 var _createPartialApplicator = require('./internal/_createPartialApplicator');
+var curry = require('./curry');
 
 
 /**
@@ -28,4 +29,4 @@ var _createPartialApplicator = require('./internal/_createPartialApplicator');
  *      var sayHelloToMs = R.partial(sayHello, 'Ms.');
  *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
  */
-module.exports = _createPartialApplicator(_concat);
+module.exports = curry(_createPartialApplicator(_concat));

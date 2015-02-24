@@ -1,3 +1,4 @@
+var _curry1 = require('./internal/_curry1');
 var _multiply = require('./internal/_multiply');
 var reduce = require('./reduce');
 
@@ -16,4 +17,4 @@ var reduce = require('./reduce');
  *
  *      R.product([2,4,6,8,100,1]); //=> 38400
  */
-module.exports = reduce(_multiply, 1);
+module.exports = _curry1(reduce(_multiply, 1));

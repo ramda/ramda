@@ -1,5 +1,6 @@
 var _all = require('./internal/_all');
 var _predicateWrap = require('./internal/_predicateWrap');
+var curry = require('./curry');
 
 
 /**
@@ -21,4 +22,4 @@ var _predicateWrap = require('./internal/_predicateWrap');
  *      f(11); //=> false
  *      f(12); //=> true
  */
-module.exports = _predicateWrap(_all);
+module.exports = curry(_predicateWrap(_all));

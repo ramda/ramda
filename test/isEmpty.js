@@ -10,7 +10,6 @@ describe('isEmpty', function() {
 
     it('returns false for undefined', function() {
         assert.strictEqual(R.isEmpty(undefined), false);
-        assert.strictEqual(R.isEmpty(), false);
     });
 
     it('returns true for empty string', function() {

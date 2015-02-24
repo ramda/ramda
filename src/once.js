@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Accepts a function `fn` and returns a function that guards invocation of `fn` such that
  * `fn` can only ever be called once, no matter how many times the returned function is
@@ -15,7 +18,7 @@
  *      addOneOnce(10); //=> 11
  *      addOneOnce(addOneOnce(50)); //=> 11
  */
-module.exports = function once(fn) {
+module.exports = _curry1(function once(fn) {
     var called = false, result;
     return function() {
         if (called) {
@@ -25,4 +28,4 @@ module.exports = function once(fn) {
         result = fn.apply(this, arguments);
         return result;
     };
-};
+});

@@ -1,9 +1,9 @@
-var _noArgsException = require('./_noArgsException');
+var _curry1 = require('./_curry1');
 
 
 /**
- * Create a function which takes a a list
- * and determines the winning value by a compatator. Used internally
+ * Create a function which takes a list
+ * and determines the winning value by a comparator. Used internally
  * by `R.max` and `R.min`
  *
  * @private
@@ -13,10 +13,7 @@ var _noArgsException = require('./_noArgsException');
  * @return {Function}
  */
 module.exports = function _createMaxMin(comparator, initialVal) {
-    return function(list) {
-        if (arguments.length === 0) {
-            throw _noArgsException();
-        }
+    return _curry1(function(list) {
         var idx = -1, winner = initialVal, computed;
         while (++idx < list.length) {
             computed = +list[idx];
@@ -25,5 +22,5 @@ module.exports = function _createMaxMin(comparator, initialVal) {
             }
         }
         return winner;
-    };
+    });
 };

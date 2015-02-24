@@ -1,6 +1,6 @@
-var _concat = require('./internal/_concat');
-var _noArgsException = require('./internal/_noArgsException');
+var _curry1 = require('./internal/_curry1');
 var _slice = require('./internal/_slice');
+var curry = require('./curry');
 
 
 /**
@@ -23,12 +23,11 @@ var _slice = require('./internal/_slice');
  *
  *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
  */
-module.exports = function flip(fn) {
-    return function(a, b) {
-        switch (arguments.length) {
-            case 0: throw _noArgsException();
-            case 1: return function(b) { return fn.apply(this, [b, a].concat(_slice(arguments, 1))); };
-            default: return fn.apply(this, _concat([b, a], _slice(arguments, 2)));
-        }
-    };
-};
+module.exports = _curry1(function flip(fn) {
+    return curry(function(a, b) {
+        var args = _slice(arguments);
+        args[0] = b;
+        args[1] = a;
+        return fn.apply(this, args);
+    });
+});

@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Removes (strips) whitespace from both ends of the string.
  *
@@ -19,14 +22,14 @@ module.exports = (function() {
     var zeroWidth = '\u200b';
     var hasProtoTrim = (typeof String.prototype.trim === 'function');
     if (!hasProtoTrim || (ws.trim() || !zeroWidth.trim())) {
-        return function trim(str) {
+        return _curry1(function trim(str) {
             var beginRx = new RegExp('^[' + ws + '][' + ws + ']*');
             var endRx = new RegExp('[' + ws + '][' + ws + ']*$');
             return str.replace(beginRx, '').replace(endRx, '');
-        };
+        });
     } else {
-        return function trim(str) {
+        return _curry1(function trim(str) {
             return str.trim();
-        };
+        });
     }
 }());

@@ -67,7 +67,7 @@ var curry = require('./curry');
  *      //≅ addAll(double(10), square(5), R.identity(100));
  *      addDoubleAndSquare(10, 5, 100); //=> 145
  */
-module.exports = function useWith(fn /*, transformers */) {
+module.exports = curry(function useWith(fn /*, transformers */) {
     var transformers = _slice(arguments, 1);
     var tlen = transformers.length;
     return curry(arity(tlen, function() {
@@ -77,4 +77,4 @@ module.exports = function useWith(fn /*, transformers */) {
         }
         return fn.apply(this, args.concat(_slice(arguments, tlen)));
     }));
-};
+});

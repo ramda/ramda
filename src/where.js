@@ -1,4 +1,4 @@
-var _noArgsException = require('./internal/_noArgsException');
+var _curry2 = require('./internal/_curry2');
 var _satisfiesSpec = require('./internal/_satisfiesSpec');
 var groupBy = require('./groupBy');
 var keys = require('./keys');
@@ -35,17 +35,10 @@ var keys = require('./keys');
  *      var xs = [{x: 2, y: 1}, {x: 10, y: 2}, {x: 8, y: 3}, {x: 10, y: 4}];
  *      R.filter(R.where({x: 10}), xs); // ==> [{x: 10, y: 2}, {x: 10, y: 4}]
  */
-module.exports = function where(spec, testObj) {
+module.exports = _curry2(function where(spec, testObj) {
     var parsedSpec = groupBy(function(key) {
         return typeof spec[key] === 'function' ? 'fn' : 'obj';
     }, keys(spec));
 
-    switch (arguments.length) {
-        case 0: throw _noArgsException();
-        case 1:
-            return function(testObj) {
-                return _satisfiesSpec(spec, parsedSpec, testObj);
-            };
-    }
     return _satisfiesSpec(spec, parsedSpec, testObj);
-};
+});

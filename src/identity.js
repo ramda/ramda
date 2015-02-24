@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * A function that does nothing but return the parameter supplied to it. Good as a default
  * or placeholder function.
@@ -15,6 +18,4 @@
  *      var obj = {};
  *      R.identity(obj) === obj; //=> true
  */
-module.exports = function identity(x) {
-    return x;
-};
+module.exports = _curry1(function identity(x) { return x; });

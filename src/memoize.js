@@ -1,3 +1,4 @@
+var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
 var _map = require('./internal/_map');
 
@@ -50,7 +51,7 @@ module.exports = (function() {
         return args.length + ':{' + _map(repr, args).join(',') + '}';
     };
 
-    return function memoize(fn) {
+    return _curry1(function memoize(fn) {
         var cache = {};
         return function() {
             var key = serialize(arguments);
@@ -59,5 +60,5 @@ module.exports = (function() {
             }
             return cache[key];
         };
-    };
+    });
 }());
