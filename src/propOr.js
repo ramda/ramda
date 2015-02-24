@@ -1,5 +1,5 @@
 var _curry3 = require('./internal/_curry3');
-var _has = require('./_has');
+var _has = require('./internal/_has');
 
 
 /**

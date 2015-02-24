@@ -1,4 +1,4 @@
-var _has = require('./_has');
+var _has = require('./internal/_has');
 var keys = require('./keys');
 
 /**

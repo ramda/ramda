@@ -1,4 +1,4 @@
-var __ = require('../__');
+var __ = require('./__');
 var _curry2 = require('./internal/_curry2');
 var _noArgsException = require('./internal/_noArgsException');
 var _slice = require('./internal/_slice');
