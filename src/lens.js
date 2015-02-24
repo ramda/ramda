@@ -15,7 +15,7 @@ var _curry2 = require('./internal/_curry2');
  * @category Object
  * @sig (k -> v) -> (v -> a -> *) -> (a -> b)
  * @param {Function} get A function that gets a value by property name
- * @param {Function} set A function that gets a value by property name
+ * @param {Function} set A function that sets a value by property name
  * @return {Function} the returned function has `set` and `map` properties that are
  *         also curried functions.
  * @example
