@@ -3698,7 +3698,7 @@
      * @func
      * @memberOf R
      * @category List
-     * @sig [a] -> a
+     * @sig Number -> [a] -> a
      * @param {Number} idx
      * @param {Array} list
      * @return {*} The nth element of the list.
