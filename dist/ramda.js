@@ -5288,7 +5288,7 @@
      * @sig [f] -> [a] -> [f a]
      * @param {Array} fns An array of functions
      * @param {Array} vs An array of values
-     * @return {Array} The value of applying each the function `fns` to each value in `vs`.
+     * @return {Array} An array of results of applying each of `fns` to all of `vs` in turn.
      * @example
      *
      *      R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
