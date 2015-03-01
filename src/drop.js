@@ -18,5 +18,5 @@ var _slice = require('./internal/_slice');
  *     R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
  */
 module.exports = _curry2(_checkForMethod('drop', function drop(n, list) {
-    return (n < list.length) ? _slice(list, n) : [];
+    return n < list.length ? _slice(list, n) : [];
 }));

@@ -19,8 +19,10 @@ var _reduce = require('./internal/_reduce');
  *
  *     var byGrade = R.groupBy(function(student) {
  *       var score = student.score;
- *       return (score < 65) ? 'F' : (score < 70) ? 'D' :
- *              (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
+ *       return score < 65 ? 'F' :
+ *              score < 70 ? 'D' :
+ *              score < 80 ? 'C' :
+ *              score < 90 ? 'B' : 'A';
  *     });
  *     var students = [{name: 'Abby', score: 84},
  *                     {name: 'Eddy', score: 58},
