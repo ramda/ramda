@@ -4420,22 +4420,25 @@
     });
 
     /**
-     * Returns the elements from `xs` starting at `a` and ending at `b - 1`.
+     * Returns a list containing the elements of `xs` from `fromIndex` (inclusive)
+     * to `toIndex` (exclusive).
      *
      * @func
      * @memberOf R
      * @category List
      * @sig Number -> Number -> [a] -> [a]
-     * @param {Number} a The starting index.
-     * @param {Number} b One more than the ending index.
+     * @param {Number} fromIndex The start index (inclusive).
+     * @param {Number} toIndex The end index (exclusive).
      * @param {Array} xs The list to take elements from.
-     * @return {Array} The items from `a` to `b - 1` from `xs`.
+     * @return {Array} The slice of `xs` from `fromIndex` to `toIndex`.
      * @example
      *
      *      var xs = R.range(0, 10);
      *      R.slice(2, 5)(xs); //=> [2, 3, 4]
      */
-    var slice = invoker(2, 'slice');
+    var slice = _curry3(_checkForMethod('slice', function slice(fromIndex, toIndex, xs) {
+        return Array.prototype.slice.call(xs, fromIndex, toIndex);
+    }));
 
     /**
      * Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
