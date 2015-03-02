@@ -18,11 +18,4 @@ describe('lt', function() {
         assert(!gt5(5));
         assert(!gt5(3));
     });
-
-    it('behaves right curried when passed `R.__` for its first argument', function() {
-        var lt5 = R.lt(R.__, 5);
-        assert(!lt5(10));
-        assert(!lt5(5));
-        assert(lt5(3));
-    });
 });

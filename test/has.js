@@ -23,15 +23,9 @@ describe('has', function() {
         assert.strictEqual(R.has('age', bob), false);
     });
 
-    it('is curried, op-style', function() {
+    it('is curried', function() {
         var hasName = R.has('name');
         assert.strictEqual(hasName(fred), true);
         assert.strictEqual(hasName(anon), false);
-
-        var point = {x: 0, y: 0};
-        var pointHas = R.has(R.__, point);
-        assert.strictEqual(pointHas('x'), true);
-        assert.strictEqual(pointHas('y'), true);
-        assert.strictEqual(pointHas('z'), false);
     });
 });

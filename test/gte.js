@@ -18,11 +18,4 @@ describe('gte', function() {
         assert(lte20(20));
         assert(!lte20(25));
     });
-
-    it('behaves right curried when passed `R.__` for its first argument', function() {
-        var gte20 = R.gte(R.__, 20);
-        assert(!gte20(10));
-        assert(gte20(20));
-        assert(gte20(25));
-    });
 });

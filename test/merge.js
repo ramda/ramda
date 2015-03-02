@@ -36,9 +36,4 @@ describe('merge', function() {
         var b = {y: 3, z: 4};
         assert.deepEqual(curried(b), {w: 1, x: 2, y: 3, z: 4});
     });
-
-    it('is curried', function() {
-        var curried = R.merge(R.__, {w: 1, x: 2});
-        assert.deepEqual(curried({x: 3, y: 4}), {w: 1, x: 2, y: 4});
-    });
 });
