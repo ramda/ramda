@@ -1,4 +1,4 @@
-var _noArgsException = require('./internal/_noArgsException');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
@@ -16,10 +16,4 @@ var _noArgsException = require('./internal/_noArgsException');
  *      R.prop('x', {x: 100}); //=> 100
  *      R.prop('x', {}); //=> undefined
  */
-module.exports = function prop(p, obj) {
-    switch (arguments.length) {
-        case 0: throw _noArgsException();
-        case 1: return function _prop(obj) { return obj[p]; };
-    }
-    return obj[p];
-};
+module.exports = _curry2(function prop(p, obj) { return obj[p]; });

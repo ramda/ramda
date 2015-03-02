@@ -1,3 +1,4 @@
+var _curry1 = require('./internal/_curry1');
 var nAry = require('./nAry');
 
 
@@ -25,6 +26,6 @@ var nAry = require('./nAry');
  *      // Only 2 arguments are passed to the wrapped function
  *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
  */
-module.exports = function binary(fn) {
+module.exports = _curry1(function binary(fn) {
     return nAry(2, fn);
-};
+});

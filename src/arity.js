@@ -1,3 +1,6 @@
+var _curry2 = require('./internal/_curry2');
+
+
 /**
  * Wraps a function of any arity (including nullary) in a function that accepts exactly `n`
  * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
@@ -24,7 +27,7 @@
  *      // All arguments are passed through to the wrapped function
  *      takesOneArg(1, 2); //=> [1, 2]
  */
-module.exports = function(n, fn) {
+module.exports = _curry2(function(n, fn) {
     switch (n) {
         case 0: return function() {return fn.apply(this, arguments);};
         case 1: return function(a0) {void a0; return fn.apply(this, arguments);};
@@ -39,4 +42,4 @@ module.exports = function(n, fn) {
         case 10: return function(a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {void a9; return fn.apply(this, arguments);};
         default: throw new Error('First argument to arity must be a non-negative integer no greater than ten');
     }
-};
+});

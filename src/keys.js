@@ -1,4 +1,5 @@
 var _contains = require('./internal/_contains');
+var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
 
 
@@ -24,7 +25,7 @@ module.exports = (function() {
     var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
                               'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
 
-    return function keys(obj) {
+    return _curry1(function keys(obj) {
         if (Object(obj) !== obj) {
             return [];
         }
@@ -47,5 +48,5 @@ module.exports = (function() {
             }
         }
         return ks;
-    };
+    });
 }());

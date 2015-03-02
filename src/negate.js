@@ -1,4 +1,4 @@
-var multiply = require('./multiply');
+var _curry1 = require('./internal/_curry1');
 
 
 /**
@@ -14,4 +14,4 @@ var multiply = require('./multiply');
  *
  *      R.negate(42); //=> -42
  */
-module.exports = multiply(-1);
+module.exports = _curry1(function negate(n) { return -n; });

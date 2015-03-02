@@ -1,4 +1,5 @@
 var _slice = require('./internal/_slice');
+var curry = require('./curry');
 
 
 /**
@@ -26,6 +27,6 @@ var _slice = require('./internal/_slice');
  *
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  */
-module.exports = function call(fn) {
+module.exports = curry(function call(fn) {
     return fn.apply(this, _slice(arguments, 1));
-};
+});

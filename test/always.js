@@ -19,6 +19,6 @@ describe('always', function() {
         assert.strictEqual(R.always(obj)(), obj);
         var now = new Date(1776, 6, 4);
         assert.deepEqual(R.always(now)(), new Date(1776, 6, 4));
-        assert.strictEqual(R.always()(), undefined);
+        assert.strictEqual(R.always(undefined)(), undefined);
     });
 });

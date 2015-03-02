@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * A function wrapping a call to the given function in a `!` operation.  It will return `true` when the
  * underlying function would return a false-y value, and `false` when it would return a truth-y one.
@@ -15,6 +18,6 @@
  *      f(11); //=> false
  *      f(9); //=> true
  */
-module.exports = function not(f) {
+module.exports = _curry1(function not(f) {
     return function() {return !f.apply(this, arguments);};
-};
+});

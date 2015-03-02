@@ -58,9 +58,11 @@ describe('compose', function() {
         assert.throws(function() { R.compose(); });
     });
 
-    it('returns argument if given exactly one argument', function() {
-        function f() {}
-        assert.strictEqual(R.compose(f), f);
+    it('can be applied to one argument', function() {
+        var f = function(a, b, c) { return [a, b, c]; };
+        var g = R.compose(f);
+        assert.strictEqual(g.length, 3);
+        assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
     });
 
 });

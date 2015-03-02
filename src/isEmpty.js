@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Reports whether the list has zero elements.
  *
@@ -14,6 +17,6 @@
  *      R.isEmpty(''); //=> true
  *      R.isEmpty(null); //=> false
  */
-module.exports = function isEmpty(list) {
+module.exports = _curry1(function isEmpty(list) {
     return Object(list).length === 0;
-};
+});

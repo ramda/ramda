@@ -1,3 +1,4 @@
+var _curry1 = require('./internal/_curry1');
 var _indexOf = require('./internal/_indexOf');
 
 
@@ -17,7 +18,7 @@ var _indexOf = require('./internal/_indexOf');
  *      R.isSet([1, 1]);   //=> false
  *      R.isSet([{}, {}]); //=> true
  */
-module.exports = function isSet(list) {
+module.exports = _curry1(function isSet(list) {
     var len = list.length;
     var idx = -1;
     while (++idx < len) {
@@ -26,4 +27,4 @@ module.exports = function isSet(list) {
         }
     }
     return true;
-};
+});

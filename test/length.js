@@ -30,7 +30,6 @@ describe('length', function() {
         assert(isNaN_(R.length({})));
         assert(isNaN_(R.length(null)));
         assert(isNaN_(R.length(undefined)));
-        assert(isNaN_(R.length()));
     });
 
     it('returns NaN for length property of unexpected type', function() {

@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Returns a function that always returns the given value.
  *
@@ -12,8 +15,8 @@
  *      var t = R.always('Tee');
  *      t(); //=> 'Tee'
  */
-module.exports = function always(val) {
+module.exports = _curry1(function always(val) {
     return function() {
         return val;
     };
-};
+});

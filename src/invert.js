@@ -1,5 +1,7 @@
+var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
 var keys = require('./keys');
+
 
 /**
  * Same as R.invertObj, however this accounts for objects
@@ -24,7 +26,7 @@ var keys = require('./keys');
  *      //=> { 'alice': ['first', 'third'], 'jake':['second'] }
  *
  */
-module.exports = function invert(obj) {
+module.exports = _curry1(function invert(obj) {
     var props = keys(obj);
     var len = props.length;
     var idx = -1;
@@ -40,4 +42,4 @@ module.exports = function invert(obj) {
         out[val].push(key);
     }
     return out;
-};
+});

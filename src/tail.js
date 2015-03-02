@@ -1,4 +1,5 @@
 var _checkForMethod = require('./internal/_checkForMethod');
+var _curry1 = require('./internal/_curry1');
 var _slice = require('./internal/_slice');
 
 
@@ -17,6 +18,6 @@ var _slice = require('./internal/_slice');
  *
  *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
  */
-module.exports = _checkForMethod('tail', function(list) {
+module.exports = _curry1(_checkForMethod('tail', function(list) {
     return _slice(list, 1);
-});
+}));

@@ -1,3 +1,6 @@
+var _curry1 = require('./internal/_curry1');
+
+
 /**
  * Returns a singleton array containing the value provided.
  *
@@ -15,4 +18,4 @@
  *      R.of(null); //=> [null]
  *      R.of([42]); //=> [[42]]
  */
-module.exports = function of(x) { return [x]; };
+module.exports = _curry1(function of(x) { return [x]; });

@@ -1,4 +1,5 @@
 var _contains = require('./internal/_contains');
+var _curry1 = require('./internal/_curry1');
 
 
 /**
@@ -18,7 +19,7 @@ var _contains = require('./internal/_contains');
  *      R.uniq([{}, {}]);     //=> [{}, {}]
  *      R.uniq([1, '1']);     //=> [1, '1']
  */
-module.exports = function uniq(list) {
+module.exports = _curry1(function uniq(list) {
     var idx = -1, len = list.length;
     var result = [], item;
     while (++idx < len) {
@@ -28,4 +29,4 @@ module.exports = function uniq(list) {
         }
     }
     return result;
-};
+});

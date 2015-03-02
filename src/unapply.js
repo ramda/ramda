@@ -1,4 +1,4 @@
-var _noArgsException = require('./internal/_noArgsException');
+var _curry1 = require('./internal/_curry1');
 var _slice = require('./internal/_slice');
 
 
@@ -24,11 +24,8 @@ var _slice = require('./internal/_slice');
  *
  *      R.unapply(JSON.stringify)(1, 2, 3); //=> '[1,2,3]'
  */
-module.exports = function unapply(fn) {
-    if (arguments.length === 0) {
-        throw _noArgsException();
-    }
+module.exports = _curry1(function unapply(fn) {
     return function() {
         return fn(_slice(arguments));
     };
-};
+});
