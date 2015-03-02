@@ -7,7 +7,7 @@ describe('invariants', function() {
 
     it('-- applying function f with length n (where n > 0) to no arguments gives function with length n', function() {
         for (var prop in R) {
-            if (prop !== 'lazylist' && typeof R[prop] === 'function' && R[prop].length > 0) {
+            if (typeof R[prop] === 'function' && R[prop].length > 0) {
                 var result = R[prop]();
                 assert.strictEqual(typeof result, 'function');
                 assert.strictEqual(result.length, R[prop].length);
@@ -17,7 +17,7 @@ describe('invariants', function() {
 
     it('-- applying function f with length n (where n > 0) to R.__ gives function with length n', function() {
         for (var prop in R) {
-            if (prop !== 'lazylist' && typeof R[prop] === 'function' && R[prop].length > 0) {
+            if (typeof R[prop] === 'function' && R[prop].length > 0) {
                 var result = R[prop](R.__);
                 assert.strictEqual(typeof result, 'function');
                 assert.strictEqual(result.length, R[prop].length);
@@ -36,7 +36,7 @@ describe('invariants', function() {
         };
 
         for (var prop in R) {
-            if (prop !== 'lazylist' && typeof R[prop] === 'function') {
+            if (typeof R[prop] === 'function') {
                 testPartialApplication(R[prop], prop);
             }
         }
