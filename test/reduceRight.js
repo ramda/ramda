@@ -29,9 +29,4 @@ describe('reduceRight', function() {
         var something = R.reduceRight(avg, 0);
         assert.strictEqual(something.length, 1);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.reduceRight, TypeError);
-        assert.throws(R.reduceRight(R.add), TypeError);
-    });
 });

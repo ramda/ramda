@@ -25,8 +25,4 @@ describe('lt', function() {
         assert(!lt5(5));
         assert(lt5(3));
     });
-
-    it('throws when given no arguments', function() {
-        assert.throws(R.lt, TypeError);
-    });
 });

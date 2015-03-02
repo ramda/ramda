@@ -26,8 +26,4 @@ describe('unnest', function() {
         assert.deepEqual(R.unnest([[], [], []]), []);
         assert.deepEqual(R.unnest([]), []);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.unnest, TypeError);
-    });
 });

@@ -78,10 +78,6 @@ describe('bind', function() {
         assert(R.bind(add)(f)(10) === 11);
     });
 
-    it('throws on zero arguments', function() {
-        assert.throws(R.bind, TypeError);
-    });
-
     it('preserves arity', function() {
         var f0 = function() { return 0; };
         var f1 = function(a) { return a; };

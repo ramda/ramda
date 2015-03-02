@@ -26,8 +26,4 @@ describe('hasIn', function() {
         assert.strictEqual(R.hasIn('name', fred), true);
         assert.strictEqual(R.hasIn('name', anon), false);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.hasIn, TypeError);
-    });
 });

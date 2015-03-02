@@ -29,8 +29,4 @@ describe('contains', function() {
         assert.strictEqual(isDigit('1'), true);
         assert.strictEqual(isDigit('x'), false);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.contains, TypeError);
-    });
 });

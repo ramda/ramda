@@ -78,8 +78,4 @@ describe('is', function() {
         assert(typeof R.is(String) === 'function');
         assert(R.is(String)('s'));
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.is, TypeError);
-    });
 });

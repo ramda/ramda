@@ -30,8 +30,4 @@ describe('flatten', function() {
         assert.deepEqual(R.flatten([[], [], []]), []);
         assert.deepEqual(R.flatten([]), []);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.flatten, TypeError);
-    });
 });

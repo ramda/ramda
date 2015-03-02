@@ -29,12 +29,4 @@ describe('scan', function() {
         var sum = R.scan(add, 0);
         assert.strictEqual(sum.length, 1);
     });
-
-    it('throws if called with no arguments', function() {
-        assert.throws(R.scan, TypeError);
-    });
-
-    it('returns a function which throws if called with no arguments', function() {
-        assert.throws(R.scan(R.add), TypeError);
-    });
 });

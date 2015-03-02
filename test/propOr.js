@@ -25,8 +25,4 @@ describe('propOr', function() {
         var bob = new Person();
         assert.strictEqual(R.propOr(100, 'age', bob), 100);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.propOr, TypeError);
-    });
 });

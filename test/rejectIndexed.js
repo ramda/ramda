@@ -32,8 +32,4 @@ describe('rejectIndexed', function() {
         var everyOtherPosition = R.rejectIndexed(everyOther);
         assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [6, 5, 0]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.rejectIndexed, TypeError);
-    });
 });

@@ -23,10 +23,6 @@ describe('has', function() {
         assert.strictEqual(R.has('age', bob), false);
     });
 
-    it('throws if given no arguments', function() {
-        assert.throws(R.has, TypeError);
-    });
-
     it('is curried, op-style', function() {
         var hasName = R.has('name');
         assert.strictEqual(hasName(fred), true);

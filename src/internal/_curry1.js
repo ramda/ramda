@@ -1,5 +1,4 @@
 var __ = require('../__');
-var _noArgsException = require('./_noArgsException');
 
 
 /**
@@ -13,7 +12,7 @@ var _noArgsException = require('./_noArgsException');
 module.exports = function _curry1(fn) {
     return function f1(a) {
         if (arguments.length === 0) {
-            throw _noArgsException();
+            return f1;
         } else if (a === __) {
             return f1;
         } else {

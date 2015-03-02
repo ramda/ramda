@@ -17,8 +17,4 @@ describe('append', function() {
         assert.strictEqual(typeof R.append(4), 'function');
         assert.deepEqual(R.append(1)([4, 3, 2]), [4, 3, 2, 1]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.append, TypeError);
-    });
 });

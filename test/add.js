@@ -12,8 +12,4 @@ describe('add', function() {
         var incr = R.add(1);
         assert.strictEqual(incr(42), 43);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.add, TypeError);
-    });
 });

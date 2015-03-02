@@ -5,17 +5,12 @@ var R = require('..');
 
 describe('invariants', function() {
 
-    it('-- every non-nullary function throws if given no arguments', function() {
-        var isNoArgsException = function(err) {
-            return (
-                err.constructor === TypeError &&
-                err.message === 'Function called with no arguments'
-            );
-        };
-
+    it('-- applying function f with length n (where n > 0) to no arguments gives function with length n', function() {
         for (var prop in R) {
             if (prop !== 'lazylist' && typeof R[prop] === 'function' && R[prop].length > 0) {
-                assert.throws(R[prop], isNoArgsException);
+                var result = R[prop]();
+                assert.strictEqual(typeof result, 'function');
+                assert.strictEqual(result.length, R[prop].length);
             }
         }
     });

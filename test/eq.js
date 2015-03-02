@@ -22,8 +22,4 @@ describe('eq', function() {
         var isA = R.eq(a);
         assert.strictEqual(isA([]), false);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.eq, TypeError);
-    });
 });

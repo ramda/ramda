@@ -36,8 +36,4 @@ describe('mathMod', function() {
         assert.strictEqual(mod5(12), 2);
         assert.strictEqual(mod5(8), 3);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.mathMod);
-    });
 });

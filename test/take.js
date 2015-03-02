@@ -18,8 +18,4 @@ describe('take', function() {
         assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
         assert.deepEqual(take3(['w', 'x', 'y', 'z']), ['w', 'x', 'y']);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.take, TypeError);
-    });
 });

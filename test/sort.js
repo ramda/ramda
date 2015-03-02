@@ -19,8 +19,4 @@ describe('sort', function() {
         assert.deepEqual(sortByLength(['one', 'two', 'three', 'four', 'five', 'six']),
                                       ['one', 'two', 'six', 'four', 'five', 'three']);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.sort, TypeError);
-    });
 });

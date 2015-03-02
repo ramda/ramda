@@ -17,8 +17,4 @@ describe('containsWith', function() {
         assert.strictEqual(typeof R.containsWith(eqA)({a: 3}), 'function');
         assert(R.containsWith(eqA)({a: 3})(Ro));
     });
-    it('throws on zero arguments', function() {
-        assert.throws(R.containsWith, TypeError);
-        assert.throws(R.containsWith(eqA), TypeError);
-    });
 });

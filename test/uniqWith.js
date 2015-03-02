@@ -32,8 +32,4 @@ describe('uniqWith', function() {
         assert.deepEqual(R.uniqWith(eqI)(objs), objs);
         assert.deepEqual(R.uniqWith(eqI)(objs2), [{x: R.T, i: 0}, {x: R.F, i: 1}, {x: R.T, i: 2}, {x: R.T, i: 3}]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.uniqWith, TypeError);
-    });
 });

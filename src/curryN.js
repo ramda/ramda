@@ -1,6 +1,5 @@
 var __ = require('./__');
 var _curry2 = require('./internal/_curry2');
-var _noArgsException = require('./internal/_noArgsException');
 var _slice = require('./internal/_slice');
 var arity = require('./arity');
 
@@ -51,9 +50,6 @@ var arity = require('./arity');
 module.exports = _curry2(function curryN(length, fn) {
     return arity(length, function() {
         var n = arguments.length;
-        if (n === 0) {
-            throw _noArgsException();
-        }
         var shortfall = length - n;
         var idx = n;
         while (idx--) {

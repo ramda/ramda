@@ -25,10 +25,6 @@ describe('unapply', function() {
         assert.strictEqual(fn.length, 0);
     });
 
-    it('throws on zero arguments', function() {
-        assert.throws(R.unapply, TypeError);
-    });
-
     it('is the inverse of R.apply', function() {
         var a, b, c, d, e, f, g, idx;
         var rand = function() {

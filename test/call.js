@@ -8,10 +8,6 @@ describe('call', function() {
         assert.strictEqual(R.call(Math.max, 1, 2, 3, -99, 42, 6, 7), 42);
     });
 
-    it('throws on zero arguments', function() {
-        assert.throws(R.call, TypeError);
-    });
-
     it('accepts one or more arguments', function() {
         var fn = function() { return arguments.length; };
         assert.strictEqual(R.call(fn), 0);

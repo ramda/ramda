@@ -1,5 +1,4 @@
 var _add = require('./internal/_add');
-var _curry1 = require('./internal/_curry1');
 var reduce = require('./reduce');
 
 
@@ -17,4 +16,4 @@ var reduce = require('./reduce');
  *
  *      R.sum([2,4,6,8,100,1]); //=> 121
  */
-module.exports = _curry1(reduce(_add, 0));
+module.exports = reduce(_add, 0);

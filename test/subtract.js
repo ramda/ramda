@@ -17,8 +17,4 @@ describe('subtract', function() {
         var minus5 = R.subtract(R.__, 5);
         assert.strictEqual(minus5(17), 12);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.subtract, TypeError);
-    });
 });

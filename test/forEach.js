@@ -29,8 +29,4 @@ describe('forEach', function() {
         xe([1, 2, 4]);
         assert.strictEqual(xStr, '1 2 4 ');
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.forEach, TypeError);
-    });
 });

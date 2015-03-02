@@ -30,9 +30,4 @@ describe('mapAccumRight', function() {
         var sum = R.mapAccumRight(add, 0);
         assert.strictEqual(sum.length, 1);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.mapAccumRight, TypeError);
-        assert.throws(R.mapAccumRight(add), TypeError);
-    });
 });

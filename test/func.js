@@ -43,8 +43,4 @@ describe('func', function() {
         assert.strictEqual(p1.x, 15);
         assert.strictEqual(p1.y, 27);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(function() { R.func(); });
-    });
 });

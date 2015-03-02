@@ -6,10 +6,6 @@ var R = require('..');
 describe('props', function() {
     var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
 
-    it('throws when called with no arguments', function() {
-        assert.throws(R.props, TypeError);
-    });
-
     it('returns empty array if no properties requested', function() {
         assert.deepEqual(R.props([], obj), []);
     });

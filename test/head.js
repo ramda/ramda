@@ -13,6 +13,5 @@ describe('head', function() {
     it('throws if applied to null or undefined', function() {
         assert.throws(function() { R.head(null); }, TypeError);
         assert.throws(function() { R.head(undefined); }, TypeError);
-        assert.throws(function() { R.head(); }, TypeError);
     });
 });

@@ -13,6 +13,5 @@ describe('last', function() {
     it('throws if applied to null or undefined', function() {
         assert.throws(function() { R.last(null); }, TypeError);
         assert.throws(function() { R.last(undefined); }, TypeError);
-        assert.throws(function() { R.last(); }, TypeError);
     });
 });

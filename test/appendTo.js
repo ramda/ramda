@@ -17,8 +17,4 @@ describe('appendTo', function() {
         assert.strictEqual(typeof R.appendTo([]), 'function');
         assert.deepEqual(R.appendTo([4, 3, 2])(1), [4, 3, 2, 1]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.appendTo, TypeError);
-    });
 });
