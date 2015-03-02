@@ -35,8 +35,4 @@ describe('findLast', function() {
         assert.strictEqual(typeof R.findLast(even), 'function');
         assert.strictEqual(R.findLast(even)(a), 0);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.findLast, TypeError);
-    });
 });

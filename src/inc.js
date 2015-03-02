@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var add = require('./add');
 
 
@@ -15,4 +14,4 @@ var add = require('./add');
  *
  *      R.inc(42); //=> 43
  */
-module.exports = _curry1(add(1));
+module.exports = add(1);

@@ -12,8 +12,4 @@ describe('multiply', function() {
         var dbl = R.multiply(2);
         assert.strictEqual(dbl(15), 30);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.multiply, TypeError);
-    });
 });

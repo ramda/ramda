@@ -38,8 +38,4 @@ describe('and', function() {
         assert.strictEqual(evenAnd(gt10)(11), false);
         assert.strictEqual(evenAnd(gt10)(12), true);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.and, TypeError);
-    });
 });

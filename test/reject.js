@@ -49,8 +49,4 @@ describe('reject', function() {
         var odd = R.reject(even);
         assert.deepEqual(odd([1, 2, 3, 4, 5, 6, 7]), [1, 3, 5, 7]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.rejectIndexed, TypeError);
-    });
 });

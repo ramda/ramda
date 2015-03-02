@@ -31,8 +31,4 @@ describe('find', function() {
         assert.strictEqual(typeof R.find(even), 'function');
         assert.strictEqual(R.find(even)(a), 10);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.find, TypeError);
-    });
 });

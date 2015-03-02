@@ -115,8 +115,4 @@ describe('where', function() {
         assert.strictEqual(R.where(parent, {x: 5}), false);
     });
 
-    it('throws if given no arguments', function() {
-        assert.throws(R.where, TypeError);
-    });
-
 });

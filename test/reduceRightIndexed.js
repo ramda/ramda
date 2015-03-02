@@ -50,9 +50,4 @@ describe('reduceRightIndexed', function() {
         assert.strictEqual(sum([1, 2, 3, 4]), 10);
         assert.strictEqual(cat(['1', '2', '3', '4']), '4321');
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.reduceRightIndexed, TypeError);
-        assert.throws(R.reduceRightIndexed(R.add), TypeError);
-    });
 });

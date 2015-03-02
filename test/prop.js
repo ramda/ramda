@@ -15,8 +15,4 @@ describe('prop', function() {
     it('is aliased by `get`', function() {
         assert.strictEqual(R.get, R.prop);
     });
-
-    it('throws when called with no arguments', function() {
-        assert.throws(R.prop, TypeError);
-    });
 });

@@ -38,10 +38,6 @@ describe('lift', function() {
         assert.deepEqual(madd5([1, 10], [2], [3], [40], [500, 1000]), [546, 1046, 555, 1055]);
     });
 
-    it('throws on zero arguments', function() {
-        assert.throws(R.lift);
-    });
-
     it('works with other functors such as "Maybe"', function() {
         var addM = R.lift(R.add);
         assert.deepEqual(addM(Maybe(3), Maybe(5)), Maybe(8));

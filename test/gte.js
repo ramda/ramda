@@ -25,8 +25,4 @@ describe('gte', function() {
         assert(gte20(20));
         assert(gte20(25));
     });
-
-    it('throws when given no arguments', function() {
-        assert.throws(R.gte, TypeError);
-    });
 });

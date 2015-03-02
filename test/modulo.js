@@ -28,8 +28,4 @@ describe('modulo', function() {
     it('preserves javascript-style modulo evaluation for negative numbers', function() {
         assert.strictEqual(R.modulo(-5, 4), -1);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.modulo, TypeError);
-    });
 });

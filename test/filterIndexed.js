@@ -32,8 +32,4 @@ describe('filterIndexed', function() {
         var everyOtherPosition = R.filterIndexed(everyOther);
         assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [8, 7, 3, 9]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.filterIndexed, TypeError);
-    });
 });

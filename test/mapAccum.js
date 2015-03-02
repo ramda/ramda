@@ -31,9 +31,4 @@ describe('mapAccum', function() {
         var sum = R.mapAccum(add, 0);
         assert.strictEqual(sum.length, 1);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.mapAccum, TypeError);
-        assert.throws(R.mapAccum(add), TypeError);
-    });
 });

@@ -25,8 +25,4 @@ describe('lte', function() {
         assert(upTo20(20));
         assert(!upTo20(25));
     });
-
-    it('throws when given no arguments', function() {
-        assert.throws(R.lte, TypeError);
-    });
 });

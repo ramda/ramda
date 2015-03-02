@@ -57,8 +57,4 @@ describe('constructN', function() {
         assert(g2('a', 'b') instanceof G);
         assert(g2('a')('b') instanceof G);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.constructN, TypeError);
-    });
 });

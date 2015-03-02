@@ -97,8 +97,4 @@ describe('eqDeep', function() {
         var isA = R.eqDeep(a);
         assert.strictEqual(isA([]), true);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.eqDeep, TypeError);
-    });
 });

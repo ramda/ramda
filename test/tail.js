@@ -13,6 +13,5 @@ describe('tail', function() {
     it('throws if applied to null or undefined', function() {
         assert.throws(function() { R.tail(null); }, TypeError);
         assert.throws(function() { R.tail(undefined); }, TypeError);
-        assert.throws(function() { R.tail(); }, TypeError);
     });
 });

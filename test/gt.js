@@ -25,8 +25,4 @@ describe('gt', function() {
         assert(!gt20(20));
         assert(gt20(25));
     });
-
-    it('throws when given no arguments', function() {
-        assert.throws(R.gt, TypeError);
-    });
 });

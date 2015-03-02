@@ -38,8 +38,4 @@ describe('or', function() {
         assert.strictEqual(evenOr(gt10)(11), true);
         assert.strictEqual(evenOr(gt10)(9), false);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.or, TypeError);
-    });
 });

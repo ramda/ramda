@@ -17,8 +17,4 @@ describe('prepend', function() {
         assert.strictEqual(typeof R.prepend(4), 'function');
         assert.deepEqual(R.prepend(4)([3, 2, 1]), [4, 3, 2, 1]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.prepend, TypeError);
-    });
 });

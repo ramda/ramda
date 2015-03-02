@@ -27,8 +27,4 @@ describe('filter', function() {
         var onlyEven = R.filter(even);
         assert.deepEqual(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.filter, TypeError);
-    });
 });

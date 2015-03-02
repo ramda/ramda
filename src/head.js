@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var nth = require('./nth');
 
 
@@ -16,4 +15,4 @@ var nth = require('./nth');
  *
  *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
  */
-module.exports = _curry1(nth(0));
+module.exports = nth(0);

@@ -35,8 +35,4 @@ describe('findLastIndex', function() {
         assert.strictEqual(typeof R.findLastIndex(even), 'function');
         assert.strictEqual(R.findLastIndex(even)(a), 15);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.findLastIndex, TypeError);
-    });
 });

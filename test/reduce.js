@@ -30,9 +30,4 @@ describe('reduce', function() {
         var sum = R.reduce(add, 0);
         assert.strictEqual(sum.length, 1);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.reduce, TypeError);
-        assert.throws(R.reduce(R.add), TypeError);
-    });
 });

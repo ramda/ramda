@@ -17,8 +17,4 @@ describe('divide', function() {
         var half = R.divide(R.__, 2);
         assert.strictEqual(half(40), 20);
     });
-
-    it('throws if given no arguments', function() {
-        assert.throws(R.divide, TypeError);
-    });
 });

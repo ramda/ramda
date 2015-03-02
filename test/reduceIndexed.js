@@ -32,9 +32,4 @@ describe('reduceIndexed', function() {
         assert.strictEqual(sum([1, 2, 3, 4]), 10);
         assert.strictEqual(cat(['1', '2', '3', '4']), '1234');
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.reduceIndexed, TypeError);
-        assert.throws(R.reduceIndexed(R.add), TypeError);
-    });
 });

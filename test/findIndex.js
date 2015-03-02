@@ -28,8 +28,4 @@ describe('findIndex', function() {
         assert.strictEqual(typeof R.findIndex(even), 'function');
         assert.strictEqual(R.findIndex(even)(a), 1);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.findIndex, TypeError);
-    });
 });

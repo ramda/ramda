@@ -29,8 +29,4 @@ describe('forEachIndexed', function() {
         xe([1, 2, 4]);
         assert.strictEqual(sum, 10);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.forEachIndexed, TypeError);
-    });
 });

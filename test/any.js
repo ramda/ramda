@@ -47,8 +47,4 @@ describe('any', function() {
         var test = function(n) {count++; return odd(n);};
         assert(R.any(test)([2, 4, 6, 7, 8, 10]) === true);
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.any, TypeError);
-    });
 });

@@ -49,8 +49,4 @@ describe('groupBy', function() {
     it('returns an empty object if given an empty array', function() {
         assert.deepEqual(R.groupBy(R.prop('x'), []), {});
     });
-
-    it('throws on zero arguments', function() {
-        assert.throws(R.groupBy, TypeError);
-    });
 });

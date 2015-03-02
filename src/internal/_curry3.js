@@ -1,7 +1,6 @@
 var __ = require('../__');
 var _curry1 = require('./_curry1');
 var _curry2 = require('./_curry2');
-var _noArgsException = require('./_noArgsException');
 
 
 /**
@@ -16,7 +15,7 @@ module.exports = function _curry3(fn) {
     return function f3(a, b, c) {
         var n = arguments.length;
         if (n === 0) {
-            throw _noArgsException();
+            return f3;
         } else if (n === 1 && a === __) {
             return f3;
         } else if (n === 1) {
