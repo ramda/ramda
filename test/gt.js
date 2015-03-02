@@ -18,11 +18,4 @@ describe('gt', function() {
         assert(!lt20(20));
         assert(!lt20(25));
     });
-
-    it('behaves right curried when passed `R.__` for its first argument', function() {
-        var gt20 = R.gt(R.__, 20);
-        assert(!gt20(10));
-        assert(!gt20(20));
-        assert(gt20(25));
-    });
 });

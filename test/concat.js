@@ -35,11 +35,6 @@ describe('concat', function() {
         assert.deepEqual(conc123([4, 5, 6]), [1, 2, 3, 4, 5, 6]);
         assert.deepEqual(conc123(['a', 'b', 'c']), [1, 2, 3, 'a', 'b', 'c']);
     });
-    it('is curried like a binary operator, that accepts an inital placeholder', function() {
-        var appendBar = R.concat(R.__, 'bar');
-        assert.strictEqual(typeof appendBar, 'function');
-        assert.strictEqual(appendBar('foo'), 'foobar');
-    });
     it('throws if not an array, String, or object with a concat method', function() {
         assert.throws(function() { return R.concat({}, {}); }, TypeError);
     });

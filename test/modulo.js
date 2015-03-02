@@ -18,13 +18,6 @@ describe('modulo', function() {
         assert.strictEqual(hundredMod(17), 15);
     });
 
-    it('behaves right curried when passed `R.__` for its first argument', function() {
-        var isOdd = R.modulo(R.__, 2);
-        assert.strictEqual(typeof isOdd, 'function');
-        assert.strictEqual(isOdd(3), 1);
-        assert.strictEqual(isOdd(198), 0);
-    });
-
     it('preserves javascript-style modulo evaluation for negative numbers', function() {
         assert.strictEqual(R.modulo(-5, 4), -1);
     });

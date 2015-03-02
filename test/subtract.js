@@ -12,9 +12,4 @@ describe('subtract', function() {
         var ninesCompl = R.subtract(9);
         assert.strictEqual(ninesCompl(6), 3);
     });
-
-    it('behaves right curried when passed `R.__` for its first argument', function() {
-        var minus5 = R.subtract(R.__, 5);
-        assert.strictEqual(minus5(17), 12);
-    });
 });
