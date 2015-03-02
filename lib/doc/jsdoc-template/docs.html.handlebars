@@ -55,6 +55,13 @@
                 <a tabindex="2" class="name" href="#{{name}}">{{name}}</a>
                 <span class="label label-category pull-right">{{category}}</span>
             </h2>
+
+            {{#if deprecated}}
+            <div class="deprecated">
+                Deprecated {{deprecated}}
+            </div>
+            {{/if}}
+
             {{#if sig}}
             <div>
                 <button class="sig btn btn-link" data-collapser="#__details-{{name}}">
