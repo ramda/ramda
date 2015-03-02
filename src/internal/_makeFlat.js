@@ -12,7 +12,7 @@ module.exports = function _makeFlat(recursive) {
         var value, result = [], idx = -1, j, ilen = list.length, jlen;
         while (++idx < ilen) {
             if (isArrayLike(list[idx])) {
-                value = (recursive) ? flatt(list[idx]) : list[idx];
+                value = recursive ? flatt(list[idx]) : list[idx];
                 j = -1;
                 jlen = value.length;
                 while (++j < jlen) {
