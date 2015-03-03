@@ -5,6 +5,7 @@ var flip = require('./flip');
 /**
  * Flipped version of R.prepend.
  *
+ * @deprecated since v0.11.0
  * @func
  * @memberOf R
  * @category List
