@@ -4201,6 +4201,7 @@
     var functionsIn = _curry1(_functionsWith(keysIn));
 
     /**
+     * @deprecated since v0.11.0
      * @func
      * @memberOf R
      * @category Object
