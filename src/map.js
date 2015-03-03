@@ -26,4 +26,8 @@ var _map = require('./internal/_map');
  *
  *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
  */
-module.exports = _curry2(_checkForMethod('map', _map));
+module.exports = _map;
+// function(){
+//     var fn = _checkForMethod('map', _map);
+//     return fn === _map ? fn : _curry2(fn);
+// }();

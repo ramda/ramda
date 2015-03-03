@@ -1,5 +1,11 @@
-var compose = require('./compose');
-var reverse = require('./reverse');
+var _isTransientXf = require('./internal/_isTransientXf');
+var _pipeWrapper = require('./internal/_pipeWrapper');
+var _slice = require('./internal/_slice');
+var _xfComposeConsecutive = require('./internal/_xfComposeConsecutive');
+var _xfComposeDispatch = require('./internal/_xfComposeDispatch');
+var head = require('./head');
+var mapcat = require('./mapcat');
+var partitionBy = require('./partitionBy');
 
 
 /**
@@ -30,5 +36,34 @@ var reverse = require('./reverse');
  *      squareThenDoubleThenTriple(5); //=> 150
  */
 module.exports = function pipe() {
-    return compose.apply(this, reverse(arguments));
+    if (arguments.length === 1) {
+        return arguments[0];
+    }
+    else {
+        var fnGroups = partitionBy(_isTransientXf, _slice(arguments));
+        var isOnlyXf = false;
+        var fns;
+
+        // only 1 group, either all xf or all not
+        if (fnGroups.length === 1) {
+            fns = head(fnGroups);
+            // if first is xf, all are xf
+            if (_isTransientXf(head(fns))) {
+                isOnlyXf = true;
+            }
+        }
+        // some xf, some not
+        else {
+            // compose consectuive transducers so they are atually transduced
+            // rather than run serially
+            fns = mapcat(_xfComposeConsecutive, fnGroups);
+        }
+
+        if (isOnlyXf) {
+            return _xfComposeDispatch(fns);
+        }
+        else {
+            return _pipeWrapper(fns);
+        }
+    }
 };

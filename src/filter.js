@@ -25,4 +25,4 @@ var _filter = require('./internal/_filter');
  *      };
  *      R.filter(isEven, [1, 2, 3, 4]); //=> [2, 4]
  */
-module.exports = _curry2(_checkForMethod('filter', _filter));
+module.exports = _filter;

@@ -68,6 +68,8 @@
     "highlight.js": "^8.4.0",
     "js-yaml": "^3.2.5",
     "lodash": "latest",
+    "immutable": "latest",
+    "transducers-js": "latest",
     "marked": "^0.3.2",
     "mocha": "2.x.x",
     "orchestrate": "~0.3.4",

@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<script src="ramda.js"></script>
+<script src="eg.js"></script>
+<script>
+var lists = [
+    R.range(0, 5),
+    R.range(5, 10)
+];
+debugger;
+var filterEven = R.filter(even);
+var mapFilter = R.map(filterEven);
+var r = mapFilter(lists);
+console.log(r);
+</script>
+</head>
+<body>
+</body>
+</html>
