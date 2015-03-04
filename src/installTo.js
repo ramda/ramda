@@ -10,6 +10,7 @@ var _extend = require('./internal/_extend');
  * functions become global functions.
  * Warning: This function *will* mutate the object provided.
  *
+ * @deprecated since v0.11.0
  * @func
  * @memberOf R
  * @category Object
