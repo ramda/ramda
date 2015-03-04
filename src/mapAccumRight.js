@@ -9,7 +9,8 @@ var _curry3 = require('./internal/_curry3');
  * Similar to `mapAccum`, except moves through the input list from the right to the
  * left.
  *
- * The iterator function receives two values: *(acc, value)*
+ * The iterator function receives two arguments, *acc* and *value*, and should return
+ * a tuple *[acc, value]*.
  *
  * @func
  * @memberOf R
