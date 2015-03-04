@@ -1934,7 +1934,8 @@
      * function to each element of a list, passing an accumulating parameter from left to
      * right, and returning a final value of this accumulator together with the new list.
      *
-     * The iterator function receives two values: *(acc, value)*
+     * The iterator function receives two arguments: *acc* and *value*, and should return
+     * a tuple *[acc, value]*.
      *
      * @func
      * @memberOf R
@@ -1973,7 +1974,8 @@
      * Similar to `mapAccum`, except moves through the input list from the right to the
      * left.
      *
-     * The iterator function receives two values: *(acc, value)*
+     * The iterator function receives two arguments: *acc* and *value*, and should return
+     * a tuple *[acc, value]*.
      *
      * @func
      * @memberOf R
