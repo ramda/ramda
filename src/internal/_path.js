@@ -14,11 +14,13 @@
  *      _path(['a', 'b'], {a: {b: 2}}); //=> 2
  */
 module.exports = function _path(paths, obj) {
-    var idx = -1, length = paths.length, val;
-    if (obj == null) { return; }
-    val = obj;
-    while (val != null && ++idx < length) {
-        val = val[paths[idx]];
+    if (obj == null || paths.length === 0) {
+        return;
+    } else {
+        var val = obj;
+        for (var idx = 0, len = paths.length; idx < len && val != null; idx += 1) {
+            val = val[paths[idx]];
+        }
+        return val;
     }
-    return val;
 };

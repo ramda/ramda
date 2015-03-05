@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _pickBy = require('./internal/_pickBy');
 
 
 /**
@@ -21,4 +20,12 @@ var _pickBy = require('./internal/_pickBy');
  *      var isUpperCase = function(val, key) { return key.toUpperCase() === key; }
  *      R.pickBy(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
  */
-module.exports = _curry2(_pickBy);
+module.exports = _curry2(function pickBy(test, obj) {
+    var result = {};
+    for (var prop in obj) {
+        if (test(obj[prop], prop, obj)) {
+            result[prop] = obj[prop];
+        }
+    }
+    return result;
+});

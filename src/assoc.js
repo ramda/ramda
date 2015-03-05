@@ -1,9 +1,5 @@
+var _assoc = require('./internal/_assoc');
 var _curry3 = require('./internal/_curry3');
-var _extend = require('./internal/_extend');
-var _map = require('./internal/_map');
-var createMapEntry = require('./createMapEntry');
-var fromPairs = require('./fromPairs');
-var keysIn = require('./keysIn');
 
 
 /**
@@ -22,16 +18,6 @@ var keysIn = require('./keysIn');
  * @return {Object} a new object similar to the original except for the specified property.
  * @example
  *
- *      var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
- *      var obj2 = R.assoc('e', {x: 42}, obj1);
- *      //=>  {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5}
- *
- *      // And moreover, obj2.b is a reference to obj1.b
- *      // No unnecessary objects are created.
+ *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
  */
-module.exports = _curry3(function assoc(prop, val, obj) {
-    // rather than `clone` to get prototype props too, even though they're flattened
-    return _extend(fromPairs(_map(function(key) {
-        return [key, obj[key]];
-    }, keysIn(obj))), createMapEntry(prop, val));
-});
+module.exports = _curry3(_assoc);

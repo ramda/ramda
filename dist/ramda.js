@@ -33,6 +33,15 @@
         return false;
     };
 
+    var _assoc = function _assoc(prop, val, obj) {
+        var result = {};
+        for (var p in obj) {
+            result[p] = obj[p];
+        }
+        result[prop] = val;
+        return result;
+    };
+
     /**
      * Basic, right-associative composition function. Accepts two functions and returns the
      * composite function; this composite function represents the operation `var h = f(g(x))`,
@@ -247,6 +256,16 @@
         };
     };
 
+    var _dissoc = function _dissoc(prop, obj) {
+        var result = {};
+        for (var p in obj) {
+            if (p !== prop) {
+                result[p] = obj[p];
+            }
+        }
+        return result;
+    };
+
     var _filter = function _filter(fn, list) {
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
@@ -440,15 +459,15 @@
      *      _path(['a', 'b'], {a: {b: 2}}); //=> 2
      */
     var _path = function _path(paths, obj) {
-        var idx = -1, length = paths.length, val;
-        if (obj == null) {
+        if (obj == null || paths.length === 0) {
             return;
+        } else {
+            var val = obj;
+            for (var idx = 0, len = paths.length; idx < len && val != null; idx += 1) {
+                val = val[paths[idx]];
+            }
+            return val;
         }
-        val = obj;
-        while (val != null && ++idx < length) {
-            val = val[paths[idx]];
-        }
-        return val;
     };
 
     /**
@@ -767,6 +786,26 @@
     });
 
     /**
+     * Makes a shallow clone of an object, setting or overriding the specified
+     * property with the given value.  Note that this copies and flattens
+     * prototype properties onto the new object as well.  All non-primitive
+     * properties are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig String -> a -> {k: v} -> {k: v}
+     * @param {String} prop the property name to set
+     * @param {*} val the new value
+     * @param {Object} obj the object to clone
+     * @return {Object} a new object similar to the original except for the specified property.
+     * @example
+     *
+     *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
+     */
+    var assoc = _curry3(_assoc);
+
+    /**
      * Creates a function that is bound to a context.
      * Note: `R.bind` does not provide the additional argument-binding capabilities of
      * [Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
@@ -1067,6 +1106,22 @@
         }
         return out;
     });
+
+    /**
+     * Returns a new object that does not contain a `prop` property.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig String -> {k: v} -> {k: v}
+     * @param {String} prop the name of the property to dissociate
+     * @param {Object} obj the object to clone
+     * @return {Object} a new object similar to the original but without the specified property
+     * @example
+     *
+     *      R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
+     */
+    var dissoc = _curry2(_dissoc);
 
     /**
      * Divides two numbers. Equivalent to `a / b`.
@@ -2521,6 +2576,21 @@
     });
 
     /**
+     * Retrieve the value at a given path.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig [String] -> {*} -> *
+     * @param {Array} path The path to use.
+     * @return {*} The data at `path`.
+     * @example
+     *
+     *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
+     */
+    var path = _curry2(_path);
+
+    /**
      * Determines whether a nested path on an object, seperated by periods,
      * has a specific value according to strict equality ('==='). Most
      * likely used to filter a list:
@@ -2528,8 +2598,8 @@
      * @func
      * @memberOf R
      * @category Relation
-     * @sig String -> v -> {k: v} -> Boolean
-     * @param {String} path The path of the nested property to use
+     * @sig [String] -> * -> {String: *} -> Boolean
+     * @param {Array} path The path of the nested property to use
      * @param {*} val The value to compare the nested property with
      * @param {Object} obj The object to check the nested property in
      * @return {Boolean} `true` if the value equals the nested object property,
@@ -2539,31 +2609,12 @@
      *     var user1 = { address: { zipCode: 90210 } };
      *     var user2 = { address: { zipCode: 55555 } };
      *     var user3 = { name: 'Bob' };
-     *     var users = [ user1, user2, user3 ]
-     *     var isFamous = R.pathEq('address.zipCode', 90210);
+     *     var users = [ user1, user2, user3 ];
+     *     var isFamous = R.pathEq(['address', 'zipCode'], 90210);
      *     R.filter(isFamous, users); //=> [ user1 ]
      */
-    var pathEq = _curry3(function (path, val, obj) {
-        return _path(path.split('.'), obj) === val;
-    });
-
-    /**
-     * Retrieve a nested path on an object separated by the specified
-     * separator value.
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig String -> String -> {*} -> *
-     * @param {String} sep The separator to use in `path`.
-     * @param {String} path The path to use.
-     * @return {*} The data at `path`.
-     * @example
-     *
-     *      R.pathOn('/', 'a/b/c', {a: {b: {c: 3}}}); //=> 3
-     */
-    var pathOn = _curry3(function pathOn(sep, str, obj) {
-        return _path(str.split(sep), obj);
+    var pathEq = _curry3(function pathEq(path, val, obj) {
+        return _path(path, obj) === val;
     });
 
     /**
@@ -2609,6 +2660,35 @@
      *      R.pickAll(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, e: undefined, f: undefined}
      */
     var pickAll = _curry2(_pickAll);
+
+    /**
+     * Returns a partial copy of an object containing only the keys that
+     * satisfy the supplied predicate.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig (v, k -> Boolean) -> {k: v} -> {k: v}
+     * @param {Function} pred A predicate to determine whether or not a key
+     *        should be included on the output object.
+     * @param {Object} obj The object to copy from
+     * @return {Object} A new object with only properties that satisfy `pred`
+     *         on it.
+     * @see R.pick
+     * @example
+     *
+     *      var isUpperCase = function(val, key) { return key.toUpperCase() === key; }
+     *      R.pickBy(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
+     */
+    var pickBy = _curry2(function pickBy(test, obj) {
+        var result = {};
+        for (var prop in obj) {
+            if (test(obj[prop], prop, obj)) {
+                result[prop] = obj[prop];
+            }
+        }
+        return result;
+    });
 
     /**
      * Returns a new list with the given element at the front, followed by the contents of the
@@ -3600,6 +3680,17 @@
         return _concat(list, [el]);
     };
 
+    var _assocPath = function _assocPath(path, val, obj) {
+        switch (path.length) {
+        case 0:
+            return obj;
+        case 1:
+            return _assoc(path[0], val, obj);
+        default:
+            return _assoc(path[0], _assocPath(_slice(path, 1), val, Object(obj[path[0]])), obj);
+        }
+    };
+
     /**
      * Copies an object.
      *
@@ -3748,6 +3839,19 @@
         };
     };
 
+    var _dissocPath = function _dissocPath(path, obj) {
+        switch (path.length) {
+        case 0:
+            return obj;
+        case 1:
+            return _dissoc(path[0], obj);
+        default:
+            var head = path[0];
+            var tail = _slice(path, 1);
+            return obj[head] == null ? obj : _assoc(head, _dissocPath(tail, obj[head]), obj);
+        }
+    };
+
     /**
      * Private function that determines whether or not a provided object has a given method.
      * Does not ignore methods stored on the object's prototype chain. Used for dynamically
@@ -3794,27 +3898,6 @@
         };
     };
 
-    /**
-     * Internal helper function for making a partial copy of an object
-     *
-     * @private
-     *
-     */
-    var _pickBy = function _pickBy(test, obj) {
-        var copy = {};
-        var prop;
-        var props = keysIn(obj);
-        var len = props.length;
-        var idx = -1;
-        while (++idx < len) {
-            prop = props[idx];
-            if (test(obj[prop], prop, obj)) {
-                copy[prop] = obj[prop];
-            }
-        }
-        return copy;
-    };
-
     var _pluck = function _pluck(p, list) {
         return _map(prop(p), list);
     };
@@ -3838,6 +3921,27 @@
      *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
      */
     var append = _curry2(_append);
+
+    /**
+     * Makes a shallow clone of an object, setting or overriding the nodes
+     * required to create the given path, and placing the specific value at the
+     * tail end of that path.  Note that this copies and flattens prototype
+     * properties onto the new object as well.  All non-primitive properties
+     * are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig [String] -> a -> {k: v} -> {k: v}
+     * @param {Array} path the path to set
+     * @param {*} val the new value
+     * @param {Object} obj the object to clone
+     * @return {Object} a new object similar to the original except along the specified path.
+     * @example
+     *
+     *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
+     */
+    var assocPath = _curry3(_assocPath);
 
     /**
      * Wraps a function of any arity (including nullary) in a function that accepts exactly 2
@@ -4117,24 +4221,23 @@
     });
 
     /**
-     * Returns a new object that does not contain a `prop` property.
+     * Makes a shallow clone of an object, omitting the property at the
+     * given path. Note that this copies and flattens prototype properties
+     * onto the new object as well.  All non-primitive properties are copied
+     * by reference.
      *
      * @func
      * @memberOf R
      * @category Object
-     * @sig String -> {k: v} -> {k: v}
-     * @param {String} prop the name of the property to dissociate
+     * @sig [String] -> {k: v} -> {k: v}
+     * @param {Array} path the path to set
      * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original but without the specified property
+     * @return {Object} a new object without the property at path
      * @example
      *
-     *      R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
+     *      R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
      */
-    var dissoc = _curry2(function dissoc(prop, obj) {
-        return _pickBy(function (val, key) {
-            return key !== prop;
-        }, obj);
-    });
+    var dissocPath = _curry2(_dissocPath);
 
     /**
      * Returns a new list containing all but the first `n` elements of the given `list`.
@@ -4728,42 +4831,6 @@
      *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
      */
     var partialRight = curry(_createPartialApplicator(flip(_concat)));
-
-    /**
-     * Retrieve a nested path on an object separated by periods
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig String -> {*} -> *
-     * @param {String} path The dot path to use.
-     * @return {*} The data at `path`.
-     * @example
-     *
-     *      R.path('a.b', {a: {b: 2}}); //=> 2
-     */
-    var path = pathOn('.');
-
-    /**
-     * Returns a partial copy of an object containing only the keys that
-     * satisfy the supplied predicate.
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig (v, k -> Boolean) -> {k: v} -> {k: v}
-     * @param {Function} pred A predicate to determine whether or not a key
-     *        should be included on the output object.
-     * @param {Object} obj The object to copy from
-     * @return {Object} A new object with only properties that satisfy `pred`
-     *         on it.
-     * @see R.pick
-     * @example
-     *
-     *      var isUpperCase = function(val, key) { return key.toUpperCase() === key; }
-     *      R.pickBy(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
-     */
-    var pickBy = _curry2(_pickBy);
 
     /**
      * Creates a new function that runs each of the functions supplied as parameters in turn,
@@ -5557,74 +5624,6 @@
     var appendTo = flip(_append);
 
     /**
-     * Makes a shallow clone of an object, setting or overriding the specified
-     * property with the given value.  Note that this copies and flattens
-     * prototype properties onto the new object as well.  All non-primitive
-     * properties are copied by reference.
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig String -> a -> {k: v} -> {k: v}
-     * @param {String} prop the property name to set
-     * @param {*} val the new value
-     * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original except for the specified property.
-     * @example
-     *
-     *      var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
-     *      var obj2 = R.assoc('e', {x: 42}, obj1);
-     *      //=>  {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5}
-     *
-     *      // And moreover, obj2.b is a reference to obj1.b
-     *      // No unnecessary objects are created.
-     */
-    // rather than `clone` to get prototype props too, even though they're flattened
-    var assoc = _curry3(function assoc(prop, val, obj) {
-        // rather than `clone` to get prototype props too, even though they're flattened
-        return _extend(fromPairs(_map(function (key) {
-            return [
-                key,
-                obj[key]
-            ];
-        }, keysIn(obj))), createMapEntry(prop, val));
-    });
-
-    /**
-     * Makes a shallow clone of an object, setting or overriding the nodes
-     * required to create the given path, and placing the specifiec value at the
-     * tail end of that path.  Note that this copies and flattens prototype
-     * properties onto the new object as well.  All non-primitive properties
-     * are copied by reference.
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig String -> a -> {k: v} -> {k: v}
-     * @param {String} path the dot-delimited path to set
-     * @param {*} val the new value
-     * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original except along the specified path.
-     * @example
-     *
-     *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
-     *      var obj2 = R.assocPath('f.g.i', {x: 42}, obj1);
-     *      //=> {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
-     */
-    var assocPath = function () {
-        var setParts = function (parts, val, obj) {
-            if (parts.length === 1) {
-                return assoc(parts[0], val, obj);
-            }
-            var current = obj[parts[0]];
-            return assoc(parts[0], setParts(_slice(parts, 1), val, is(Object, current) ? current : {}), obj);
-        };
-        return _curry3(function (path, val, obj) {
-            return setParts(split('.', path), val, obj);
-        });
-    }();
-
-    /**
      * Returns the result of calling its first argument with the remaining
      * arguments. This is occasionally useful as a converging function for
      * `R.converge`: the left branch can produce a function while the right
@@ -5810,38 +5809,6 @@
             }
         }));
     });
-
-    /**
-     * Makes a shallow clone of an object, omitting the property at the
-     * given path. Note that this copies and flattens prototype properties
-     * onto the new object as well.  All non-primitive properties are copied
-     * by reference.
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig String -> {k: v} -> {k: v}
-     * @param {String} path the dot-delimited path to set
-     * @param {Object} obj the object to clone
-     * @return {Object} a new object without the property at path
-     * @example
-     *
-     *      var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4};
-     *      var obj2 = R.dissocPath('b.c', obj1);
-     *      //=> {a: 1, b: {d: 3}, e: 4}
-     */
-    var dissocPath = function () {
-        function dissocPath(parts, obj) {
-            if (parts.length === 1) {
-                return dissoc(parts[0], obj);
-            }
-            var current = obj[parts[0]];
-            return is(Object, current) ? assoc(parts[0], dissocPath(_slice(parts, 1), current), obj) : obj;
-        }
-        return _curry2(function (path, obj) {
-            return dissocPath(split('.', path), obj);
-        });
-    }();
 
     /**
      * Performs a deep test on whether two items are equal.
@@ -6374,7 +6341,6 @@
         partition: partition,
         path: path,
         pathEq: pathEq,
-        pathOn: pathOn,
         pick: pick,
         pickAll: pickAll,
         pickBy: pickBy,
