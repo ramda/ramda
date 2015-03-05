@@ -6,6 +6,7 @@ var prop = require('./prop');
  * Returns the value at the specified property.
  * The only difference from `prop` is the parameter order.
  *
+ * @deprecated since v0.11.0
  * @func
  * @memberOf R
  * @see R.prop
