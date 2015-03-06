@@ -2414,6 +2414,30 @@
     });
 
     /**
+     * Returns a partial copy of an object omitting the keys specified.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig [String] -> {String: *} -> {String: *}
+     * @param {Array} names an array of String property names to omit from the new object
+     * @param {Object} obj The object to copy from
+     * @return {Object} A new object with properties from `names` not on it.
+     * @example
+     *
+     *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
+     */
+    var omit = _curry2(function omit(names, obj) {
+        var result = {};
+        for (var prop in obj) {
+            if (_indexOf(names, prop) < 0) {
+                result[prop] = obj[prop];
+            }
+        }
+        return result;
+    });
+
+    /**
      * Accepts a function `fn` and returns a function that guards invocation of `fn` such that
      * `fn` can only ever be called once, no matter how many times the returned function is
      * invoked.
@@ -4623,26 +4647,6 @@
      *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
      */
     var min = _createMaxMin(_lt, Infinity);
-
-    /**
-     * Returns a partial copy of an object omitting the keys specified.
-     *
-     * @func
-     * @memberOf R
-     * @category Object
-     * @sig [k] -> {k: v} -> {k: v}
-     * @param {Array} names an array of String property names to omit from the new object
-     * @param {Object} obj The object to copy from
-     * @return {Object} A new object with properties from `names` not on it.
-     * @example
-     *
-     *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
-     */
-    var omit = _curry2(function omit(names, obj) {
-        return _pickBy(function (val, key) {
-            return !_contains(key, names);
-        }, obj);
-    });
 
     /**
      * Accepts as its arguments a function and any number of values and returns a function that,
