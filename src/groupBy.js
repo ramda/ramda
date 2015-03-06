@@ -1,11 +1,16 @@
 var _append = require('./internal/_append');
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
 var _reduce = require('./internal/_reduce');
+var _xgroupBy = require('./internal/_xgroupBy');
 
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of calling a String-returning function
  * on each element, and grouping the results according to values returned.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -36,10 +41,10 @@ var _reduce = require('./internal/_reduce');
  *     //   'F': [{name: 'Eddy', score: 58}]
  *     // }
  */
-module.exports = _curry2(function groupBy(fn, list) {
+module.exports = _curry2(_dispatchable('groupBy', _xgroupBy, function groupBy(fn, list) {
     return _reduce(function(acc, elt) {
         var key = fn(elt);
         acc[key] = _append(elt, acc[key] || (acc[key] = []));
         return acc;
     }, {}, list);
-});
+}));

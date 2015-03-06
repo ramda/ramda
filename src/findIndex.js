@@ -1,9 +1,14 @@
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
+var _xfindIndex = require('./internal/_xfindIndex');
 
 
 /**
  * Returns the index of the first element of the list which matches the predicate, or `-1`
  * if no element matches.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -19,7 +24,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.findIndex(R.propEq('a', 2))(xs); //=> 1
  *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
  */
-module.exports = _curry2(function findIndex(fn, list) {
+module.exports = _curry2(_dispatchable('findIndex', _xfindIndex, function findIndex(fn, list) {
     var idx = -1;
     var len = list.length;
     while (++idx < len) {
@@ -28,4 +33,4 @@ module.exports = _curry2(function findIndex(fn, list) {
         }
     }
     return -1;
-});
+}));

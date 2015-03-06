@@ -11,6 +11,7 @@ describe('findLast', function() {
     var gt100 = function(x) { return x > 100; };
     var isStr = function(x) { return typeof x === 'string'; };
     var xGt100 = function(o) { return o && o.x > 100; };
+    var intoArray = R.into([]);
 
     it('returns the index of the last element that satisfies the predicate', function() {
         assert.strictEqual(R.findLast(even, a), 0);
@@ -19,8 +20,19 @@ describe('findLast', function() {
         assert.strictEqual(R.findLast(xGt100, a), obj2);
     });
 
+    it('returns the index of the last element that satisfies the predicate into an array', function() {
+        assert.deepEqual(intoArray(R.findLast(even), a), [0]);
+        assert.deepEqual(intoArray(R.findLast(gt100), a), [300]);
+        assert.deepEqual(intoArray(R.findLast(isStr), a), ['cow']);
+        assert.deepEqual(intoArray(R.findLast(xGt100), a), [obj2]);
+    });
+
     it('returns `undefined` when no element satisfies the predicate', function() {
-        assert.strictEqual(R.findLast(even, 'zing'), undefined);
+        assert.strictEqual(R.findLast(even, ['zing']), undefined);
+    });
+
+    it('returns `undefined` into an array when no element satisfies the predicate', function() {
+        assert.deepEqual(intoArray(R.findLast(even), ['zing']), [undefined]);
     });
 
     it('works when the first element matches', function() {

@@ -1,6 +1,7 @@
-var _checkForMethod = require('./internal/_checkForMethod');
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
 var _slice = require('./internal/_slice');
+var _xtakeWhile = require('./internal/_xtakeWhile');
 
 
 /**
@@ -8,6 +9,9 @@ var _slice = require('./internal/_slice');
  * to the supplied predicate function, and terminating when the predicate function returns
  * `false`. Excludes the element that caused the predicate function to fail. The predicate
  * function is passed one argument: *(value)*.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -24,7 +28,7 @@ var _slice = require('./internal/_slice');
  *
  *      R.takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
  */
-module.exports = _curry2(_checkForMethod('takeWhile', function(fn, list) {
+module.exports = _curry2(_dispatchable('takeWhile', _xtakeWhile, function takeWhile(fn, list) {
     var idx = -1, len = list.length;
     while (++idx < len && fn(list[idx])) {}
     return _slice(list, 0, idx);
