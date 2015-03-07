@@ -25,6 +25,7 @@
   "requireSpaceBeforeBinaryOperators": ["+", "-", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
   "requireSpaceBeforeBlockStatements": true,
   "requireSpaceBeforeKeywords": ["else", "catch", "finally"],
+  "requireSpaceBetweenArguments": true,
   "requireSpacesInConditionalExpression": true,
   "requireSpacesInFunction": {"beforeOpeningCurlyBrace": true},
   "validateQuoteMarks": {"escape": true, "mark": "'"}
