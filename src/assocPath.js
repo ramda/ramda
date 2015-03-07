@@ -1,13 +1,10 @@
+var _assocPath = require('./internal/_assocPath');
 var _curry3 = require('./internal/_curry3');
-var _slice = require('./internal/_slice');
-var assoc = require('./assoc');
-var is = require('./is');
-var split = require('./split');
 
 
 /**
  * Makes a shallow clone of an object, setting or overriding the nodes
- * required to create the given path, and placing the specifiec value at the
+ * required to create the given path, and placing the specific value at the
  * tail end of that path.  Note that this copies and flattens prototype
  * properties onto the new object as well.  All non-primitive properties
  * are copied by reference.
@@ -15,24 +12,13 @@ var split = require('./split');
  * @func
  * @memberOf R
  * @category Object
- * @sig String -> a -> {k: v} -> {k: v}
- * @param {String} path the dot-delimited path to set
+ * @sig [String] -> a -> {k: v} -> {k: v}
+ * @param {Array} path the path to set
  * @param {*} val the new value
  * @param {Object} obj the object to clone
  * @return {Object} a new object similar to the original except along the specified path.
  * @example
  *
- *      var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
- *      var obj2 = R.assocPath('f.g.i', {x: 42}, obj1);
- *      //=> {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8}
+ *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
  */
-module.exports = (function() {
-    var setParts = function(parts, val, obj) {
-        if (parts.length === 1) {return assoc(parts[0], val, obj);}
-        var current = obj[parts[0]];
-        return assoc(parts[0], setParts(_slice(parts, 1), val, is(Object, current) ? current : {}), obj);
-    };
-    return _curry3(function(path, val, obj) {
-        return setParts(split('.', path), val, obj);
-    });
-}());
+module.exports = _curry3(_assocPath);

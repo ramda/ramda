@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var _pickBy = require('./internal/_pickBy');
+var _dissoc = require('./internal/_dissoc');
 
 
 /**
@@ -16,6 +16,4 @@ var _pickBy = require('./internal/_pickBy');
  *
  *      R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
  */
-module.exports = _curry2(function dissoc(prop, obj) {
-    return _pickBy(function(val, key) { return key !== prop; }, obj);
-});
+module.exports = _curry2(_dissoc);
