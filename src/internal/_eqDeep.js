@@ -42,8 +42,8 @@ module.exports = function _eqDeep(a, b, stackA, stackB) {
             }
         }
 
-        stackA.push(a);
-        stackB.push(b);
+        stackA[stackA.length] = a;
+        stackB[stackB.length] = b;
         idx = keysA.length;
         while (idx--) {
             var key = keysA[idx];

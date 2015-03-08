@@ -19,11 +19,10 @@ var _curry3 = require('./internal/_curry3');
  *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
  */
 module.exports = _curry3(function scan(fn, acc, list) {
-    var idx = 0, len = list.length + 1, result = [];
-    result.push(acc);
+    var idx = 0, len = list.length + 1, result = [acc];
     while (++idx < len) {
         acc = fn(acc, list[idx - 1]);
-        result.push(acc);
+        result[idx] = acc;
     }
     return result;
 });

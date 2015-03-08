@@ -24,7 +24,7 @@ module.exports = _curry2(function difference(first, second) {
     var firstLen = first.length;
     while (++idx < firstLen) {
         if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
-            out.push(first[idx]);
+            out[out.length] = first[idx];
         }
     }
     return out;

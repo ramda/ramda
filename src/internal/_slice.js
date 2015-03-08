@@ -22,7 +22,7 @@ module.exports = function _slice(args, from, to) {
         default:
             var length = Math.max(0, to - from), list = [], idx = -1;
             while (++idx < length) {
-                list.push(args[from + idx]);
+                list[idx] = args[from + idx];
             }
             return list;
     }

@@ -26,7 +26,7 @@ module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes 
     while (++idx < ilen) {
         j = -1;
         while (++j < jlen) {
-            result.push([a[idx], b[j]]);
+            result[result.length] = [a[idx], b[j]];
         }
     }
     return result;

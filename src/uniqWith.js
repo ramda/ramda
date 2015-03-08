@@ -28,7 +28,7 @@ module.exports = _curry2(function uniqWith(pred, list) {
     while (++idx < len) {
         item = list[idx];
         if (!_containsWith(pred, item, result)) {
-            result.push(item);
+            result[result.length] = item;
         }
     }
     return result;

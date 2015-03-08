@@ -23,7 +23,7 @@ module.exports = _curry2(function range(from, to) {
     }
     var idx = 0, result = [];
     while (from < to) {
-        result.push(from++);
+        result[idx] = from++;
         idx += 1;
     }
     return result;
