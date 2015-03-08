@@ -1,6 +1,5 @@
 var _append = require('./_append');
 var _curry2 = require('./_curry2');
-var _has = require('./_has');
 
 
 module.exports = (function() {
@@ -15,7 +14,7 @@ module.exports = (function() {
     XGroupBy.prototype.result = function(result) {
         var key;
         for (key in this.inputs) {
-            if (_has(key, this.inputs)) {
+            if (Object.prototype.hasOwnProperty.call(this.inputs, key)) {
                 result = this.xf.step(result, this.inputs[key]);
                 if (result.__transducers_reduced__) {
                     result = result.value;

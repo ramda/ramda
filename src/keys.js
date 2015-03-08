@@ -1,6 +1,5 @@
 var _contains = require('./internal/_contains');
 var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
 
 
 /**
@@ -34,7 +33,7 @@ module.exports = (function() {
         }
         var prop, ks = [], nIdx;
         for (prop in obj) {
-            if (_has(prop, obj)) {
+            if (Object.prototype.hasOwnProperty.call(obj, prop)) {
                 ks[ks.length] = prop;
             }
         }
@@ -42,7 +41,7 @@ module.exports = (function() {
             nIdx = nonEnumerableProps.length;
             while (nIdx--) {
                 prop = nonEnumerableProps[nIdx];
-                if (_has(prop, obj) && !_contains(prop, ks)) {
+                if (Object.prototype.hasOwnProperty.call(obj, prop) && !_contains(prop, ks)) {
                     ks[ks.length] = prop;
                 }
             }
