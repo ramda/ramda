@@ -119,7 +119,7 @@ module.exports = function(grunt) {
                     dest: 'dist/gh-pages/docs/'
                 }, {
                     src: ['lib/doc/main.js'],
-                    dest: 'dist/gh-pages/'
+                    dest: 'dist/gh-pages/docs/main.js'
                 }]
             }
         },
