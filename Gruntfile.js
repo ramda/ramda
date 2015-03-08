@@ -40,13 +40,13 @@ module.exports = function(grunt) {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/**/*.js', '!{test/bundle.js}', 'ext/**/test/*.js']
+                src: ['test/**/*.js', '!{test/bundle.js}']
             },
             unit: {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/**/*.js', '!{test/test.examplesRunner.js,test/bundle.js}', 'ext/**/test/*.js']
+                src: ['test/**/*.js', '!{test/test.examplesRunner.js,test/bundle.js}']
             }
         },
 
