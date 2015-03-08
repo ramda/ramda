@@ -3227,7 +3227,7 @@
      *
      *      var sayX = function(x) { console.log('x is ' + x); };
      *      R.tap(sayX, 100); //=> 100
-     *      //-> 'x is 100')
+     *      //-> 'x is 100'
      */
     var tap = _curry2(function tap(fn, x) {
         fn(x);
