@@ -7,10 +7,9 @@ var arity = require('../arity');
  */
 module.exports = function _createComposer(composeFunction) {
     return function() {
-        var idx = arguments.length - 1;
-        var fn = arguments[idx];
+        var fn = arguments[arguments.length - 1];
         var length = fn.length;
-        while (idx--) {
+        for (var idx = arguments.length - 2; idx >= 0; idx -= 1) {
             fn = composeFunction(arguments[idx], fn);
         }
         return arity(length, fn);

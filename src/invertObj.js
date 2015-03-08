@@ -27,14 +27,10 @@ var keys = require('./keys');
  *      //=> { 'alice': '0', 'jake':'1' }
  */
 module.exports = _curry1(function invertObj(obj) {
+    var result = {};
     var props = keys(obj);
-    var len = props.length;
-    var idx = -1;
-    var out = {};
-
-    while (++idx < len) {
-        var key = props[idx];
-        out[obj[key]] = key;
+    for (var idx = 0, len = props.length; idx < len; idx += 1) {
+        result[obj[props[idx]]] = props[idx];
     }
-    return out;
+    return result;
 });

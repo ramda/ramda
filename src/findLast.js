@@ -20,8 +20,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
  */
 module.exports = _curry2(function findLast(fn, list) {
-    var idx = list.length;
-    while (idx--) {
+    for (var idx = list.length; idx >= 0; idx -= 1) {
         if (fn(list[idx])) {
             return list[idx];
         }

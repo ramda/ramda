@@ -20,9 +20,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
  */
 module.exports = _curry2(function findIndex(fn, list) {
-    var idx = -1;
-    var len = list.length;
-    while (++idx < len) {
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
         if (fn(list[idx])) {
             return idx;
         }

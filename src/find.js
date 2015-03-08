@@ -20,9 +20,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.find(R.propEq('a', 4))(xs); //=> undefined
  */
 module.exports = _curry2(function find(fn, list) {
-    var idx = -1;
-    var len = list.length;
-    while (++idx < len) {
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
         if (fn(list[idx])) {
             return list[idx];
         }

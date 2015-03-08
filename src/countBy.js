@@ -25,9 +25,7 @@ var _has = require('./internal/_has');
  */
 module.exports = _curry2(function countBy(fn, list) {
     var counts = {};
-    var len = list.length;
-    var idx = -1;
-    while (++idx < len) {
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
         var key = fn(list[idx]);
         counts[key] = (_has(key, counts) ? counts[key] : 0) + 1;
     }

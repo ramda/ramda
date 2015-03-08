@@ -9,8 +9,8 @@ module.exports = function _satisfiesSpec(spec, parsedSpec, testObj) {
     if (testObj == null) { return false; }
     parsedSpec.fn = parsedSpec.fn || [];
     parsedSpec.obj = parsedSpec.obj || [];
-    var key, val, idx = -1, fnLen = parsedSpec.fn.length, j = -1, objLen = parsedSpec.obj.length;
-    while (++idx < fnLen) {
+    var key, val;
+    for (var idx = 0, len = parsedSpec.fn.length; idx < len; idx += 1) {
         key = parsedSpec.fn[idx];
         val = spec[key];
         if (!(key in testObj)) {
@@ -20,8 +20,8 @@ module.exports = function _satisfiesSpec(spec, parsedSpec, testObj) {
             return false;
         }
     }
-    while (++j < objLen) {
-        key = parsedSpec.obj[j];
+    for (idx = 0, len = parsedSpec.obj.length; idx < len; idx += 1) {
+        key = parsedSpec.obj[idx];
         if (spec[key] !== testObj[key]) {
             return false;
         }

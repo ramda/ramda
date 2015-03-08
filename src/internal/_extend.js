@@ -17,9 +17,8 @@ var keys = require('../keys');
  *      //=> { 'name': 'fred', 'age': 40 }
  */
 module.exports = function _extend(destination, other) {
-    var props = keys(other),
-        idx = -1, length = props.length;
-    while (++idx < length) {
+    var props = keys(other);
+    for (var idx = 0, len = props.length; idx < len; idx += 1) {
         destination[props[idx]] = other[props[idx]];
     }
     return destination;

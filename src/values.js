@@ -18,12 +18,10 @@ var keys = require('./keys');
  *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
  */
 module.exports = _curry1(function values(obj) {
+    var result = [];
     var props = keys(obj);
-    var len = props.length;
-    var vals = [];
-    var idx = -1;
-    while (++idx < len) {
-        vals.push(obj[props[idx]]);
+    for (var idx = 0, len = props.length; idx < len; idx += 1) {
+        result.push(obj[props[idx]]);
     }
-    return vals;
+    return result;
 });

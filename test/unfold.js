@@ -9,7 +9,15 @@ describe('unfold', function() {
     });
 
     it('is cool!', function() {
-        var fib = function(n) {var count = 0; return function(pair) {if (count++ < n) {return [pair[0], [pair[1], pair[0] + pair[1]]];}};};
+        var fib = function(n) {
+            var count = 0;
+            return function(pair) {
+                count += 1;
+                if (count <= n) {
+                    return [pair[0], [pair[1], pair[0] + pair[1]]];
+                }
+            };
+        };
         assert.deepEqual(R.unfold(fib(10), [0, 1]), [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]);
     });
 

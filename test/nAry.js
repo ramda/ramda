@@ -27,10 +27,9 @@ describe('nAry', function() {
 
         var undefs = fn();
         var ns = R.repeat(undefined, 10);
-        assert(undefs.length === ns.length);
-        var idx = undefs.length;
-        while (--idx) {
-            assert(undefs[idx] === ns[idx]);
+        assert.strictEqual(undefs.length, ns.length);
+        for (var idx = 0; idx < undefs.length; idx += 1) {
+            assert.strictEqual(undefs[idx], ns[idx]);
         }
     });
 

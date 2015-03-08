@@ -36,7 +36,7 @@ describe('any', function() {
 
     it('short-circuits on first true value', function() {
         var count = 0;
-        var test = function(n) {count++; return odd(n);};
+        var test = function(n) {count += 1; return odd(n);};
         var result = R.any(test, [2, 4, 6, 7, 8, 10]);
         assert(result);
         assert.strictEqual(count, 4);
@@ -44,7 +44,7 @@ describe('any', function() {
 
     it('is automatically curried', function() {
         var count = 0;
-        var test = function(n) {count++; return odd(n);};
+        var test = function(n) {count += 1; return odd(n);};
         assert(R.any(test)([2, 4, 6, 7, 8, 10]) === true);
     });
 });
