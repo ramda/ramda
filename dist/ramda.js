@@ -3654,6 +3654,7 @@
     var F = always(false);
 
     /**
+     * @deprecated since v0.11.0
      * @func
      * @memberOf R
      * @category Function
