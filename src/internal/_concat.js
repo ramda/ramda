@@ -15,15 +15,15 @@ module.exports = function _concat(set1, set2) {
     var idx;
     var len1 = set1.length;
     var len2 = set2.length;
-    var result = new Array(len1 + len2);
+    var result = [];
 
     idx = -1;
     while (++idx < len1) {
-        result[idx] = set1[idx];
+        result.push(set1[idx]);
     }
     idx = -1;
     while (++idx < len2) {
-        result[len1 + idx] = set2[idx];
+        result.push(set2[idx]);
     }
     return result;
 };

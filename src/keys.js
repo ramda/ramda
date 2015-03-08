@@ -35,7 +35,7 @@ module.exports = (function() {
         var prop, ks = [], nIdx;
         for (prop in obj) {
             if (_has(prop, obj)) {
-                ks[ks.length] = prop;
+                ks.push(prop);
             }
         }
         if (hasEnumBug) {
@@ -43,7 +43,7 @@ module.exports = (function() {
             while (nIdx--) {
                 prop = nonEnumerableProps[nIdx];
                 if (_has(prop, obj) && !_contains(prop, ks)) {
-                    ks[ks.length] = prop;
+                    ks.push(prop);
                 }
             }
         }

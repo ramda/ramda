@@ -29,7 +29,7 @@ var _curry3 = require('./internal/_curry3');
  *      R.mapAccumRight(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
  */
 module.exports = _curry3(function mapAccumRight(fn, acc, list) {
-    var idx = list.length, len = list.length, result = new Array(len), tuple = [acc];
+    var idx = list.length, result = [], tuple = [acc];
     while (idx--) {
         tuple = fn(tuple[0], list[idx]);
         result[idx] = tuple[1];

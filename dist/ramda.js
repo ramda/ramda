@@ -87,14 +87,14 @@
         var idx;
         var len1 = set1.length;
         var len2 = set2.length;
-        var result = new Array(len1 + len2);
+        var result = [];
         idx = -1;
         while (++idx < len1) {
-            result[idx] = set1[idx];
+            result.push(set1[idx]);
         }
         idx = -1;
         while (++idx < len2) {
-            result[len1 + idx] = set2[idx];
+            result.push(set2[idx]);
         }
         return result;
     };
@@ -270,7 +270,7 @@
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx])) {
-                result[result.length] = list[idx];
+                result.push(list[idx]);
             }
         }
         return result;
@@ -280,7 +280,7 @@
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx], idx, list)) {
-                result[result.length] = list[idx];
+                result.push(list[idx]);
             }
         }
         return result;
@@ -411,9 +411,9 @@
     };
 
     var _map = function _map(fn, list) {
-        var idx = -1, len = list.length, result = new Array(len);
+        var idx = -1, len = list.length, result = [];
         while (++idx < len) {
-            result[idx] = fn(list[idx]);
+            result.push(fn(list[idx]));
         }
         return result;
     };
@@ -555,9 +555,9 @@
         case 2:
             return _slice(args, from, args.length);
         default:
-            var length = Math.max(0, to - from), list = new Array(length), idx = -1;
+            var length = Math.max(0, to - from), list = [], idx = -1;
             while (++idx < length) {
-                list[idx] = args[from + idx];
+                list.push(args[from + idx]);
             }
             return list;
         }
@@ -1026,7 +1026,7 @@
                     var idx = -1;
                     while (++idx < n) {
                         var val = initialArgs[idx];
-                        combinedArgs[idx] = val === __ ? currentArgs.shift() : val;
+                        combinedArgs.push(val === __ ? currentArgs.shift() : val);
                     }
                     return fn.apply(this, combinedArgs.concat(currentArgs));
                 });
@@ -1101,7 +1101,7 @@
         var containsPred = containsWith(pred);
         while (++idx < firstLen) {
             if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
-                out[out.length] = first[idx];
+                out.push(first[idx]);
             }
         }
         return out;
@@ -1810,7 +1810,7 @@
     var keysIn = _curry1(function keysIn(obj) {
         var prop, ks = [];
         for (prop in obj) {
-            ks[ks.length] = prop;
+            ks.push(prop);
         }
         return ks;
     });
@@ -2009,10 +2009,10 @@
      *      R.mapAccum(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
      */
     var mapAccum = _curry3(function mapAccum(fn, acc, list) {
-        var idx = -1, len = list.length, result = new Array(len), tuple = [acc];
+        var idx = -1, len = list.length, result = [], tuple = [acc];
         while (++idx < len) {
             tuple = fn(tuple[0], list[idx]);
-            result[idx] = tuple[1];
+            result.push(tuple[1]);
         }
         return [
             tuple[0],
@@ -2048,7 +2048,7 @@
      *      R.mapAccumRight(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
      */
     var mapAccumRight = _curry3(function mapAccumRight(fn, acc, list) {
-        var idx = list.length, len = list.length, result = new Array(len), tuple = [acc];
+        var idx = list.length, result = [], tuple = [acc];
         while (idx--) {
             tuple = fn(tuple[0], list[idx]);
             result[idx] = tuple[1];
@@ -2086,9 +2086,9 @@
      *      R.mapIndexed(squareEnds, [8, 5, 3, 0, 9]); //=> [64, 5, 3, 0, 81]
      */
     var mapIndexed = _curry2(function mapIndexed(fn, list) {
-        var idx = -1, len = list.length, result = new Array(len);
+        var idx = -1, len = list.length, result = [];
         while (++idx < len) {
-            result[idx] = fn(list[idx], idx, list);
+            result.push(fn(list[idx], idx, list));
         }
         return result;
     });
@@ -2800,9 +2800,9 @@
      *      fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'}); //=> 'Tony Bullet-Tooth'
      */
     var props = _curry2(function props(ps, obj) {
-        var len = ps.length, out = new Array(len), idx = -1;
+        var len = ps.length, out = [], idx = -1;
         while (++idx < len) {
-            out[idx] = obj[ps[idx]];
+            out.push(obj[ps[idx]]);
         }
         return out;
     });
@@ -2827,9 +2827,10 @@
         if (from >= to) {
             return [];
         }
-        var idx = 0, result = new Array(Math.floor(to) - Math.ceil(from));
+        var idx = 0, result = [];
         while (from < to) {
-            result[idx++] = from++;
+            result.push(from++);
+            idx += 1;
         }
         return result;
     });
@@ -3086,11 +3087,11 @@
      *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
      */
     var scan = _curry3(function scan(fn, acc, list) {
-        var idx = 0, len = list.length + 1, result = new Array(len);
-        result[idx] = acc;
+        var idx = 0, len = list.length + 1, result = [];
+        result.push(acc);
         while (++idx < len) {
             acc = fn(acc, list[idx - 1]);
-            result[idx] = acc;
+            result.push(acc);
         }
         return result;
     });
@@ -3252,11 +3253,12 @@
      *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
      */
     var times = _curry2(function times(fn, n) {
-        var list = new Array(Number(n));
-        var len = list.length;
-        var idx = -1;
-        while (++idx < len) {
+        var len = Number(n);
+        var list = new Array(len);
+        var idx = 0;
+        while (idx < len) {
             list[idx] = fn(idx);
+            idx += 1;
         }
         return list;
     });
@@ -3421,7 +3423,7 @@
         var pair = fn(seed);
         var result = [];
         while (pair && pair.length) {
-            result[result.length] = pair[0];
+            result.push(pair[0]);
             pair = fn(pair[1]);
         }
         return result;
@@ -3453,7 +3455,7 @@
         while (++idx < len) {
             item = list[idx];
             if (!_containsWith(pred, item, result)) {
-                result[result.length] = item;
+                result.push(item);
             }
         }
         return result;
@@ -3481,7 +3483,7 @@
     var valuesIn = _curry1(function valuesIn(obj) {
         var prop, vs = [];
         for (prop in obj) {
-            vs[vs.length] = obj[prop];
+            vs.push(obj[prop]);
         }
         return vs;
     });
@@ -3535,22 +3537,20 @@
      *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
      */
     // = xprodWith(prepend); (takes about 3 times as long...)
-    // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
     var xprod = _curry2(function xprod(a, b) {
         // = xprodWith(prepend); (takes about 3 times as long...)
         var idx = -1;
         var ilen = a.length;
         var j;
         var jlen = b.length;
-        // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
         var result = [];
         while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
-                result[result.length] = [
+                result.push([
                     a[idx],
                     b[j]
-                ];
+                ]);
             }
         }
         return result;
@@ -3578,10 +3578,10 @@
         var idx = -1;
         var len = Math.min(a.length, b.length);
         while (++idx < len) {
-            rv[idx] = [
+            rv.push([
                 a[idx],
                 b[idx]
-            ];
+            ]);
         }
         return rv;
     });
@@ -3633,7 +3633,7 @@
     var zipWith = _curry3(function zipWith(fn, a, b) {
         var rv = [], idx = -1, len = Math.min(a.length, b.length);
         while (++idx < len) {
-            rv[idx] = fn(a[idx], b[idx]);
+            rv.push(fn(a[idx], b[idx]));
         }
         return rv;
     });
@@ -3709,8 +3709,8 @@
                     return refTo[idx];
                 }
             }
-            refFrom[refFrom.length] = value;
-            refTo[refTo.length] = copiedValue;
+            refFrom.push(value);
+            refTo.push(copiedValue);
             for (var key in value) {
                 copiedValue[key] = _baseCopy(value[key], refFrom, refTo);
             }
@@ -3888,10 +3888,10 @@
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {
-                        result[result.length] = value[j];
+                        result.push(value[j]);
                     }
                 } else {
-                    result[result.length] = list[idx];
+                    result.push(list[idx]);
                 }
             }
             return result;
@@ -4214,7 +4214,7 @@
         var firstLen = first.length;
         while (++idx < firstLen) {
             if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
-                out[out.length] = first[idx];
+                out.push(first[idx]);
             }
         }
         return out;
@@ -4517,7 +4517,7 @@
         var results = [], idx = -1;
         while (++idx < list1.length) {
             if (_containsWith(pred, list1[idx], list2)) {
-                results[results.length] = list1[idx];
+                results.push(list1[idx]);
             }
         }
         return uniqWith(pred, results);
@@ -4613,7 +4613,7 @@
             var prop, ks = [], nIdx;
             for (prop in obj) {
                 if (_has(prop, obj)) {
-                    ks[ks.length] = prop;
+                    ks.push(prop);
                 }
             }
             if (hasEnumBug) {
@@ -4621,7 +4621,7 @@
                 while (nIdx--) {
                     prop = nonEnumerableProps[nIdx];
                     if (_has(prop, obj) && !_contains(prop, ks)) {
-                        ks[ks.length] = prop;
+                        ks.push(prop);
                     }
                 }
             }
@@ -5284,7 +5284,7 @@
         while (++idx < len) {
             item = list[idx];
             if (!_contains(item, result)) {
-                result[result.length] = item;
+                result.push(item);
             }
         }
         return result;
@@ -5378,7 +5378,7 @@
         return curry(arity(tlen, function () {
             var args = [], idx = -1;
             while (++idx < tlen) {
-                args[args.length] = transformers[idx](arguments[idx]);
+                args.push(transformers[idx](arguments[idx]));
             }
             return fn.apply(this, args.concat(_slice(arguments, tlen)));
         }));
@@ -5402,10 +5402,10 @@
     var values = _curry1(function values(obj) {
         var props = keys(obj);
         var len = props.length;
-        var vals = new Array(len);
+        var vals = [];
         var idx = -1;
         while (++idx < len) {
-            vals[idx] = obj[props[idx]];
+            vals.push(obj[props[idx]]);
         }
         return vals;
     });

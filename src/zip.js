@@ -23,7 +23,7 @@ module.exports = _curry2(function zip(a, b) {
     var idx = -1;
     var len = Math.min(a.length, b.length);
     while (++idx < len) {
-        rv[idx] = [a[idx], b[idx]];
+        rv.push([a[idx], b[idx]]);
     }
     return rv;
 });

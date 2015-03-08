@@ -22,12 +22,11 @@ module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes 
     var ilen = a.length;
     var j;
     var jlen = b.length;
-    // Better to push them all or to do `new Array(ilen * jlen)` and calculate indices?
     var result = [];
     while (++idx < ilen) {
         j = -1;
         while (++j < jlen) {
-            result[result.length] = [a[idx], b[j]];
+            result.push([a[idx], b[j]]);
         }
     }
     return result;

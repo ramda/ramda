@@ -67,7 +67,7 @@ module.exports = _curry2(function curryN(length, fn) {
                 var idx = -1;
                 while (++idx < n) {
                     var val = initialArgs[idx];
-                    combinedArgs[idx] = val === __ ? currentArgs.shift() : val;
+                    combinedArgs.push(val === __ ? currentArgs.shift() : val);
                 }
                 return fn.apply(this, combinedArgs.concat(currentArgs));
             });
