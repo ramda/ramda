@@ -90,11 +90,11 @@
         var result = [];
         idx = -1;
         while (++idx < len1) {
-            result.push(set1[idx]);
+            result[result.length] = set1[idx];
         }
         idx = -1;
         while (++idx < len2) {
-            result.push(set2[idx]);
+            result[result.length] = set2[idx];
         }
         return result;
     };
@@ -270,7 +270,7 @@
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx])) {
-                result.push(list[idx]);
+                result[result.length] = list[idx];
             }
         }
         return result;
@@ -280,7 +280,7 @@
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
             if (fn(list[idx], idx, list)) {
-                result.push(list[idx]);
+                result[result.length] = list[idx];
             }
         }
         return result;
@@ -413,7 +413,7 @@
     var _map = function _map(fn, list) {
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
-            result.push(fn(list[idx]));
+            result[idx] = fn(list[idx]);
         }
         return result;
     };
@@ -557,7 +557,7 @@
         default:
             var length = Math.max(0, to - from), list = [], idx = -1;
             while (++idx < length) {
-                list.push(args[from + idx]);
+                list[idx] = args[from + idx];
             }
             return list;
         }
@@ -1026,7 +1026,7 @@
                     var idx = -1;
                     while (++idx < n) {
                         var val = initialArgs[idx];
-                        combinedArgs.push(val === __ ? currentArgs.shift() : val);
+                        combinedArgs[idx] = val === __ ? currentArgs.shift() : val;
                     }
                     return fn.apply(this, combinedArgs.concat(currentArgs));
                 });
@@ -1101,7 +1101,7 @@
         var containsPred = containsWith(pred);
         while (++idx < firstLen) {
             if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
-                out.push(first[idx]);
+                out[idx] = first[idx];
             }
         }
         return out;
@@ -1810,7 +1810,7 @@
     var keysIn = _curry1(function keysIn(obj) {
         var prop, ks = [];
         for (prop in obj) {
-            ks.push(prop);
+            ks[ks.length] = prop;
         }
         return ks;
     });
@@ -2012,7 +2012,7 @@
         var idx = -1, len = list.length, result = [], tuple = [acc];
         while (++idx < len) {
             tuple = fn(tuple[0], list[idx]);
-            result.push(tuple[1]);
+            result[idx] = tuple[1];
         }
         return [
             tuple[0],
@@ -2088,7 +2088,7 @@
     var mapIndexed = _curry2(function mapIndexed(fn, list) {
         var idx = -1, len = list.length, result = [];
         while (++idx < len) {
-            result.push(fn(list[idx], idx, list));
+            result[idx] = fn(list[idx], idx, list);
         }
         return result;
     });
@@ -2567,7 +2567,8 @@
      */
     var partition = _curry2(function partition(pred, list) {
         return _reduce(function (acc, elt) {
-            acc[pred(elt) ? 0 : 1].push(elt);
+            var xs = acc[pred(elt) ? 0 : 1];
+            xs[xs.length] = elt;
             return acc;
         }, [
             [],
@@ -2802,7 +2803,7 @@
     var props = _curry2(function props(ps, obj) {
         var len = ps.length, out = [], idx = -1;
         while (++idx < len) {
-            out.push(obj[ps[idx]]);
+            out[idx] = obj[ps[idx]];
         }
         return out;
     });
@@ -2829,7 +2830,7 @@
         }
         var idx = 0, result = [];
         while (from < to) {
-            result.push(from++);
+            result[idx] = from++;
             idx += 1;
         }
         return result;
@@ -3087,11 +3088,10 @@
      *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
      */
     var scan = _curry3(function scan(fn, acc, list) {
-        var idx = 0, len = list.length + 1, result = [];
-        result.push(acc);
+        var idx = 0, len = list.length + 1, result = [acc];
         while (++idx < len) {
             acc = fn(acc, list[idx - 1]);
-            result.push(acc);
+            result[idx] = acc;
         }
         return result;
     });
@@ -3423,7 +3423,7 @@
         var pair = fn(seed);
         var result = [];
         while (pair && pair.length) {
-            result.push(pair[0]);
+            result[result.length] = pair[0];
             pair = fn(pair[1]);
         }
         return result;
@@ -3455,7 +3455,7 @@
         while (++idx < len) {
             item = list[idx];
             if (!_containsWith(pred, item, result)) {
-                result.push(item);
+                result[result.length] = item;
             }
         }
         return result;
@@ -3483,7 +3483,7 @@
     var valuesIn = _curry1(function valuesIn(obj) {
         var prop, vs = [];
         for (prop in obj) {
-            vs.push(obj[prop]);
+            vs[vs.length] = obj[prop];
         }
         return vs;
     });
@@ -3547,10 +3547,10 @@
         while (++idx < ilen) {
             j = -1;
             while (++j < jlen) {
-                result.push([
+                result[result.length] = [
                     a[idx],
                     b[j]
-                ]);
+                ];
             }
         }
         return result;
@@ -3578,10 +3578,10 @@
         var idx = -1;
         var len = Math.min(a.length, b.length);
         while (++idx < len) {
-            rv.push([
+            rv[idx] = [
                 a[idx],
                 b[idx]
-            ]);
+            ];
         }
         return rv;
     });
@@ -3633,7 +3633,7 @@
     var zipWith = _curry3(function zipWith(fn, a, b) {
         var rv = [], idx = -1, len = Math.min(a.length, b.length);
         while (++idx < len) {
-            rv.push(fn(a[idx], b[idx]));
+            rv[idx] = fn(a[idx], b[idx]);
         }
         return rv;
     });
@@ -3709,8 +3709,8 @@
                     return refTo[idx];
                 }
             }
-            refFrom.push(value);
-            refTo.push(copiedValue);
+            refFrom[idx + 1] = value;
+            refTo[idx + 1] = copiedValue;
             for (var key in value) {
                 copiedValue[key] = _baseCopy(value[key], refFrom, refTo);
             }
@@ -3888,10 +3888,10 @@
                     j = -1;
                     jlen = value.length;
                     while (++j < jlen) {
-                        result.push(value[j]);
+                        result[result.length] = value[j];
                     }
                 } else {
-                    result.push(list[idx]);
+                    result[result.length] = list[idx];
                 }
             }
             return result;
@@ -4214,7 +4214,7 @@
         var firstLen = first.length;
         while (++idx < firstLen) {
             if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
-                out.push(first[idx]);
+                out[out.length] = first[idx];
             }
         }
         return out;
@@ -4517,7 +4517,7 @@
         var results = [], idx = -1;
         while (++idx < list1.length) {
             if (_containsWith(pred, list1[idx], list2)) {
-                results.push(list1[idx]);
+                results[results.length] = list1[idx];
             }
         }
         return uniqWith(pred, results);
@@ -4613,7 +4613,7 @@
             var prop, ks = [], nIdx;
             for (prop in obj) {
                 if (_has(prop, obj)) {
-                    ks.push(prop);
+                    ks[ks.length] = prop;
                 }
             }
             if (hasEnumBug) {
@@ -4621,7 +4621,7 @@
                 while (nIdx--) {
                     prop = nonEnumerableProps[nIdx];
                     if (_has(prop, obj) && !_contains(prop, ks)) {
-                        ks.push(prop);
+                        ks[ks.length] = prop;
                     }
                 }
             }
@@ -5284,7 +5284,7 @@
         while (++idx < len) {
             item = list[idx];
             if (!_contains(item, result)) {
-                result.push(item);
+                result[result.length] = item;
             }
         }
         return result;
@@ -5378,7 +5378,7 @@
         return curry(arity(tlen, function () {
             var args = [], idx = -1;
             while (++idx < tlen) {
-                args.push(transformers[idx](arguments[idx]));
+                args[idx] = transformers[idx](arguments[idx]);
             }
             return fn.apply(this, args.concat(_slice(arguments, tlen)));
         }));
@@ -5405,7 +5405,7 @@
         var vals = [];
         var idx = -1;
         while (++idx < len) {
-            vals.push(obj[props[idx]]);
+            vals[idx] = obj[props[idx]];
         }
         return vals;
     });
@@ -5483,8 +5483,8 @@
                     return stackB[idx] === b;
                 }
             }
-            stackA.push(a);
-            stackB.push(b);
+            stackA[stackA.length] = a;
+            stackB[stackB.length] = b;
             idx = keysA.length;
             while (idx--) {
                 var key = keysA[idx];
@@ -5970,10 +5970,8 @@
         while (++idx < len) {
             var key = props[idx];
             var val = obj[key];
-            if (!_has(val, out)) {
-                out[val] = [];
-            }
-            out[val].push(key);
+            var list = _has(val, out) ? out[val] : out[val] = [];
+            list[list.length] = key;
         }
         return out;
     });

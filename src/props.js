@@ -25,7 +25,7 @@ module.exports = _curry2(function props(ps, obj) {
         idx = -1;
 
     while (++idx < len) {
-        out.push(obj[ps[idx]]);
+        out[idx] = obj[ps[idx]];
     }
 
     return out;

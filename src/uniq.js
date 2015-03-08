@@ -25,7 +25,7 @@ module.exports = _curry1(function uniq(list) {
     while (++idx < len) {
         item = list[idx];
         if (!_contains(item, result)) {
-            result.push(item);
+            result[result.length] = item;
         }
     }
     return result;

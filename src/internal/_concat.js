@@ -19,11 +19,11 @@ module.exports = function _concat(set1, set2) {
 
     idx = -1;
     while (++idx < len1) {
-        result.push(set1[idx]);
+        result[result.length] = set1[idx];
     }
     idx = -1;
     while (++idx < len2) {
-        result.push(set2[idx]);
+        result[result.length] = set2[idx];
     }
     return result;
 };

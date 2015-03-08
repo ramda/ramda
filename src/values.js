@@ -23,7 +23,7 @@ module.exports = _curry1(function values(obj) {
     var vals = [];
     var idx = -1;
     while (++idx < len) {
-        vals.push(obj[props[idx]]);
+        vals[idx] = obj[props[idx]];
     }
     return vals;
 });

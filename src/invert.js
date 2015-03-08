@@ -35,11 +35,8 @@ module.exports = _curry1(function invert(obj) {
     while (++idx < len) {
         var key = props[idx];
         var val = obj[key];
-
-        if (!_has(val, out)) {
-            out[val] = [];
-        }
-        out[val].push(key);
+        var list = _has(val, out) ? out[val] : (out[val] = []);
+        list[list.length] = key;
     }
     return out;
 });
