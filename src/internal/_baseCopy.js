@@ -19,8 +19,8 @@ module.exports = function _baseCopy(value, refFrom, refTo) {
                 return refTo[idx];
             }
         }
-        refFrom[refFrom.length] = value;
-        refTo[refTo.length] = copiedValue;
+        refFrom.push(value);
+        refTo.push(copiedValue);
         for (var key in value) {
             copiedValue[key] = _baseCopy(value[key], refFrom, refTo);
         }

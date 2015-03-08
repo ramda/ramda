@@ -16,10 +16,10 @@ module.exports = function _makeFlat(recursive) {
                 j = -1;
                 jlen = value.length;
                 while (++j < jlen) {
-                    result[result.length] = value[j];
+                    result.push(value[j]);
                 }
             } else {
-                result[result.length] = list[idx];
+                result.push(list[idx]);
             }
         }
         return result;
