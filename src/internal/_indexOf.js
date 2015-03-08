@@ -16,11 +16,10 @@ module.exports = function _indexOf(list, item, from) {
     if (typeof from == 'number') {
         idx = from < 0 ? Math.max(0, len + from) : from;
     }
-    while (idx < len) {
+    for (; idx < len; idx += 1) {
         if (list[idx] === item) {
             return idx;
         }
-        ++idx;
     }
     return -1;
 };

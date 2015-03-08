@@ -26,8 +26,9 @@ var _curry3 = require('./internal/_curry3');
  *      R.mapAccum(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
  */
 module.exports = _curry3(function mapAccum(fn, acc, list) {
-    var idx = -1, len = list.length, result = [], tuple = [acc];
-    while (++idx < len) {
+    var result = [];
+    var tuple = [acc];
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
         tuple = fn(tuple[0], list[idx]);
         result.push(tuple[1]);
     }

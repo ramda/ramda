@@ -21,10 +21,9 @@ module.exports = _curry2(function range(from, to) {
     if (from >= to) {
         return [];
     }
-    var idx = 0, result = [];
-    while (from < to) {
-        result.push(from++);
-        idx += 1;
+    var result = [];
+    for (var idx = 0; from < to; idx += 1, from += 1) {
+        result.push(from);
     }
     return result;
 });

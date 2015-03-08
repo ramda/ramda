@@ -30,10 +30,8 @@ var _curry2 = require('./internal/_curry2');
  *      R.forEachIndexed(plusFive, [1, 2, 3]); //=> [6, 7, 8]
  */
 module.exports = _curry2(function forEachIndexed(fn, list) {
-    var idx = -1, len = list.length;
-    while (++idx < len) {
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
         fn(list[idx], idx, list);
     }
-    // i can't bear not to return *something*
     return list;
 });

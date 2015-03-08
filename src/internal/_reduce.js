@@ -1,7 +1,7 @@
 module.exports = function _reduce(fn, acc, list) {
-    var idx = -1, len = list.length;
-    while (++idx < len) {
-        acc = fn(acc, list[idx]);
+    var result = acc;
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
+        result = fn(result, list[idx]);
     }
-    return acc;
+    return result;
 };

@@ -28,8 +28,8 @@ var _curry2 = require('./internal/_curry2');
  *      R.mapIndexed(squareEnds, [8, 5, 3, 0, 9]); //=> [64, 5, 3, 0, 81]
  */
 module.exports = _curry2(function mapIndexed(fn, list) {
-    var idx = -1, len = list.length, result = [];
-    while (++idx < len) {
+    var result = [];
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
         result.push(fn(list[idx], idx, list));
     }
     return result;

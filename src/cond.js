@@ -26,8 +26,7 @@
 module.exports = function cond() {
     var pairs = arguments;
     return function() {
-        var idx = -1;
-        while (++idx < pairs.length) {
+        for (var idx = 0, len = pairs.length; idx < len; idx += 1) {
             if (pairs[idx][0].apply(this, arguments)) {
                 return pairs[idx][1].apply(this, arguments);
             }

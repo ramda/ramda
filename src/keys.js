@@ -32,16 +32,15 @@ module.exports = (function() {
         if (Object.keys) {
             return Object.keys(obj);
         }
-        var prop, ks = [], nIdx;
+        var prop, ks = [];
         for (prop in obj) {
             if (_has(prop, obj)) {
                 ks.push(prop);
             }
         }
         if (hasEnumBug) {
-            nIdx = nonEnumerableProps.length;
-            while (nIdx--) {
-                prop = nonEnumerableProps[nIdx];
+            for (var idx = 0, len = nonEnumerableProps.length; idx < len; idx += 1) {
+                prop = nonEnumerableProps[idx];
                 if (_has(prop, obj) && !_contains(prop, ks)) {
                     ks.push(prop);
                 }

@@ -9,14 +9,12 @@ var isArrayLike = require('../isArrayLike');
  */
 module.exports = function _makeFlat(recursive) {
     return function flatt(list) {
-        var value, result = [], idx = -1, j, ilen = list.length, jlen;
-        while (++idx < ilen) {
+        var result = [];
+        for (var idx = 0, len = list.length; idx < len; idx += 1) {
             if (isArrayLike(list[idx])) {
-                value = recursive ? flatt(list[idx]) : list[idx];
-                j = -1;
-                jlen = value.length;
-                while (++j < jlen) {
-                    result.push(value[j]);
+                var value = recursive ? flatt(list[idx]) : list[idx];
+                for (var idx2 = 0, len2 = value.length; idx2 < len2; idx2 += 1) {
+                    result.push(value[idx2]);
                 }
             } else {
                 result.push(list[idx]);

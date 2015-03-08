@@ -16,7 +16,7 @@ module.exports = function _lastIndexOf(list, item, from) {
     if (typeof from == 'number') {
         idx = from < 0 ? idx + from + 1 : Math.min(idx, from + 1);
     }
-    while (--idx >= 0) {
+    for (; idx >= 0; idx -= 1) {
         if (list[idx] === item) {
             return idx;
         }

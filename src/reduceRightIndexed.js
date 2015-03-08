@@ -32,9 +32,9 @@ var _curry3 = require('./internal/_curry3');
  *      R.reduceRightIndexed(objectify, {}, letters); //=> { 'c': 2, 'b': 1, 'a': 0 }
  */
 module.exports = _curry3(function reduceRightIndexed(fn, acc, list) {
-    var idx = list.length;
-    while (idx--) {
-        acc = fn(acc, list[idx], idx, list);
+    var result = acc;
+    for (var idx = list.length - 1; idx >= 0; idx -= 1) {
+        result = fn(result, list[idx], idx, list);
     }
-    return acc;
+    return result;
 });

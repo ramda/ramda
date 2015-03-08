@@ -25,7 +25,7 @@ var _slice = require('./internal/_slice');
  *      R.takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
  */
 module.exports = _curry2(_checkForMethod('takeWhile', function(fn, list) {
-    var idx = -1, len = list.length;
-    while (++idx < len && fn(list[idx])) {}
+    var idx = 0;
+    for (var len = list.length; idx < len && fn(list[idx]); idx += 1) {}
     return _slice(list, 0, idx);
 }));

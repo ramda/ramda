@@ -16,9 +16,9 @@ var _curry2 = require('./internal/_curry2');
  *      R.zipObj(['a', 'b', 'c'], [1, 2, 3]); //=> {a: 1, b: 2, c: 3}
  */
 module.exports = _curry2(function zipObj(keys, values) {
-    var idx = -1, len = keys.length, out = {};
-    while (++idx < len) {
-        out[keys[idx]] = values[idx];
+    var result = {};
+    for (var idx = 0, len = keys.length; idx < len; idx += 1) {
+        result[keys[idx]] = values[idx];
     }
-    return out;
+    return result;
 });

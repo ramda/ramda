@@ -20,12 +20,10 @@ var _curry1 = require('./internal/_curry1');
  *      R.uniq([1, '1']);     //=> [1, '1']
  */
 module.exports = _curry1(function uniq(list) {
-    var idx = -1, len = list.length;
-    var result = [], item;
-    while (++idx < len) {
-        item = list[idx];
-        if (!_contains(item, result)) {
-            result.push(item);
+    var result = [];
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
+        if (!_contains(list[idx], result)) {
+            result.push(list[idx]);
         }
     }
     return result;

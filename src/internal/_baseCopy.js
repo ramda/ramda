@@ -12,9 +12,7 @@ var type = require('../type');
  */
 module.exports = function _baseCopy(value, refFrom, refTo) {
     var copy = function copy(copiedValue) {
-        var len = refFrom.length;
-        var idx = -1;
-        while (++idx < len) {
+        for (var idx = 0, len = refFrom.length; idx < len; idx += 1) {
             if (value === refFrom[idx]) {
                 return refTo[idx];
             }

@@ -20,13 +20,9 @@ var _curry2 = require('./internal/_curry2');
  *      fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'}); //=> 'Tony Bullet-Tooth'
  */
 module.exports = _curry2(function props(ps, obj) {
-    var len = ps.length,
-        out = [],
-        idx = -1;
-
-    while (++idx < len) {
-        out.push(obj[ps[idx]]);
+    var result = [];
+    for (var idx = 0, len = ps.length; idx < len; idx += 1) {
+        result.push(obj[ps[idx]]);
     }
-
-    return out;
+    return result;
 });

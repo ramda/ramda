@@ -23,7 +23,7 @@ var _slice = require('./internal/_slice');
  *      R.dropWhile(lteTwo, [1, 2, 3, 4]); //=> [3, 4]
  */
 module.exports = _curry2(function dropWhile(pred, list) {
-    var idx = -1, len = list.length;
-    while (++idx < len && pred(list[idx])) {}
+    var idx = 0;
+    for (var len = list.length; idx < len && pred(list[idx]); idx += 1) {}
     return _slice(list, idx);
 });

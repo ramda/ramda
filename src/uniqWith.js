@@ -23,12 +23,10 @@ var _curry2 = require('./internal/_curry2');
  *      R.uniqWith(strEq)(['1', 1, 1]);    //=> ['1']
  */
 module.exports = _curry2(function uniqWith(pred, list) {
-    var idx = -1, len = list.length;
-    var result = [], item;
-    while (++idx < len) {
-        item = list[idx];
-        if (!_containsWith(pred, item, result)) {
-            result.push(item);
+    var result = [];
+    for (var idx = 0, len = list.length; idx < len; idx += 1) {
+        if (!_containsWith(pred, list[idx], result)) {
+            result.push(list[idx]);
         }
     }
     return result;
