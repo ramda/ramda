@@ -31,9 +31,6 @@ clean:
 .PHONY: lint
 lint:
 	@$(DEEDPOLL) -- $(SRC)
-	rm dist/ramda.js
-	make dist/ramda.js
-	git diff --exit-code
 
 
 .PHONY: release-major release-minor release-patch
