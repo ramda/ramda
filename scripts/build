@@ -21,7 +21,7 @@ var template = fs.readFileSync(path.join(__dirname, 'template.js'),
 //  version :: String
 var version = require('../package.json').version;
 
-//  $pathEq = String -> a -> Object -> ()
+//  $pathEq = [String] -> a -> Object -> ()
 var $pathEq = R.curry(function(path, expected, obj) {
     assert.strictEqual(R.path(path, obj), expected);
 });
@@ -75,27 +75,30 @@ var dependenciesOf =
            R.prop('body'),
            R.takeWhile(R.where({type: 'VariableDeclaration', kind: 'var'})),
            R.pluck('declarations'),
-           R.map(R.tap($pathEq('length', 1))),
+           R.map(R.tap($pathEq(['length'], 1))),
            R.map(R.head),
-           R.map(R.tap($pathEq('init.type', 'CallExpression'))),
-           R.map(R.tap($pathEq('init.callee.type', 'Identifier'))),
-           R.map(R.tap($pathEq('init.callee.name', 'require'))),
-           R.map(R.tap($pathEq('init.arguments.length', 1))),
-           R.map(R.tap($pathEq('init.arguments.0.type', 'Literal'))),
+           R.map(R.tap($pathEq(['init', 'type'], 'CallExpression'))),
+           R.map(R.tap($pathEq(['init', 'callee', 'type'], 'Identifier'))),
+           R.map(R.tap($pathEq(['init', 'callee', 'name'], 'require'))),
+           R.map(R.tap($pathEq(['init', 'arguments', 'length'], 1))),
+           R.map(R.tap($pathEq(['init', 'arguments', '0', 'type'], 'Literal'))),
            R.tap(R.pipe(R.pluck('id'),
                         R.pluck('name'),
                         R.converge(assert.deepEqual,
-                                   R.I,
-                                   R.sortBy(R.I)))),
+                                   R.identity,
+                                   R.sortBy(R.identity)))),
            R.map(R.tap(R.converge(assert.strictEqual,
-                                  R.path('id.name'),
-                                  R.pipe(R.path('init.arguments.0.value'),
+                                  R.path(['id', 'name']),
+                                  R.pipe(R.path(['init',
+                                                 'arguments',
+                                                 '0',
+                                                 'value']),
                                          R.replace(/^[.][/]internal[/]/, './'),
                                          R.replace(/^[.]{1,2}[/]/, ''),
                                          R.replace(/[.]([a-z])/g,
                                                    R.pipe(R.nthArg(1),
                                                           R.toUpper)))))),
-           R.map(R.path('id.name')));
+           R.map(R.path(['id', 'name'])));
 
 //  createDependencyGraph :: [String] -> StrMap [String]
 var createDependencyGraph = function createDependencyGraph(identifiers) {
@@ -121,7 +124,7 @@ var orderDependencies = function orderDependencies(graph) {
             return recur(R.append(R.head(ins), R.tail(ins)), outs);
         }
     };
-    return recur(R.sortBy(R.I, R.keys(graph)), []);
+    return recur(R.sortBy(R.identity, R.keys(graph)), []);
 };
 
 //  getModifiedSource :: String -> String
@@ -130,14 +133,14 @@ var getModifiedSource = function getModifiedSource(identifier) {
     escodegen.attachComments(obj.ast, obj.comments, obj.tokens);
     assert.notStrictEqual(obj.ast.body.length, 0);
     var last = R.last(obj.ast.body);
-    $pathEq('type', 'ExpressionStatement', last);
-    $pathEq('expression.type', 'AssignmentExpression', last);
-    $pathEq('expression.operator', '=', last);
-    $pathEq('expression.left.type', 'MemberExpression', last);
-    $pathEq('expression.left.object.type', 'Identifier', last);
-    $pathEq('expression.left.object.name', 'module', last);
-    $pathEq('expression.left.property.type', 'Identifier', last);
-    $pathEq('expression.left.property.name', 'exports', last);
+    $pathEq(['type'], 'ExpressionStatement', last);
+    $pathEq(['expression', 'type'], 'AssignmentExpression', last);
+    $pathEq(['expression', 'operator'], '=', last);
+    $pathEq(['expression', 'left', 'type'], 'MemberExpression', last);
+    $pathEq(['expression', 'left', 'object', 'type'], 'Identifier', last);
+    $pathEq(['expression', 'left', 'object', 'name'], 'module', last);
+    $pathEq(['expression', 'left', 'property', 'type'], 'Identifier', last);
+    $pathEq(['expression', 'left', 'property', 'name'], 'exports', last);
     var declarationAst = {
         type: 'VariableDeclaration',
         kind: 'var',
@@ -156,7 +159,7 @@ var getModifiedSource = function getModifiedSource(identifier) {
 //  build :: [String] -> String
 var build =
     R.pipe(R.map(filenameToIdentifier),
-           R.sortBy(R.I),
+           R.sortBy(R.identity),
            R.converge(R.concat,
                       R.pipe(createDependencyGraph,
                              orderDependencies,
@@ -170,7 +173,7 @@ var build =
                              R.concat(_, '\n};'))),
            R.replace(/\n(?!$)/gm, '\n    '),
            R.always,
-           R.flip(R.replace('/* global R */'))(template));
+           R.replace('/* global R */', _, template));
 
 program
 .version(version)
