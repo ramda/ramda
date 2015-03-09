@@ -6,18 +6,13 @@
 
         $ git checkout -b <branch>
 
-3.  Add new functions as separate source files in src/. If the function is
-    used by ramda functions elsewhere in uncurried form, then place the
-    implementation in src/internal (see src/internal/_map.js as an example).
-
-    NOTE: The file `dist/ramda.js` is **generated**.  Any changes to it will
-    be overridden.
+3.  If adding a function `R.foo`, define it in __src/foo.js__ and include unit
+    tests in __test/foo.js__. If adding an internal function `_foo`, define it
+    in __src/internal/_foo.js__.
 
 4.  Make one or more atomic commits. Each commit should have a descriptive
-    commit message, wrapped at 72 characters. Include unit tests if adding
-    a function or fixing a bug. Update __dist/ramda.js__ with each commit:
-    on Unix-based platforms, run `make`; on Windows, write the output of
-    `scripts/build --complete` to a temporary file, then rename the file.
+    commit message, wrapped at 72 characters. Do not commit changes to
+    __dist/ramda.js__.
 
 5.  Run `make test lint`, (or `grunt test`) and address any errors. Preferably,
     fix commits in place using `git rebase` or `git commit --amend` to make the
