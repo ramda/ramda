@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _pickAll = require('./internal/_pickAll');
 
 
 /**
@@ -18,4 +17,13 @@ var _pickAll = require('./internal/_pickAll');
  *      R.pickAll(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, d: 4}
  *      R.pickAll(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, e: undefined, f: undefined}
  */
-module.exports = _curry2(_pickAll);
+module.exports = _curry2(function pickAll(names, obj) {
+    var result = {};
+    var idx = -1;
+    var len = names.length;
+    while (++idx < len) {
+        var name = names[idx];
+        result[name] = obj[name];
+    }
+    return result;
+});
