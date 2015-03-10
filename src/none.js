@@ -1,7 +1,7 @@
 var _any = require('./internal/_any');
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
-var _not = require('./internal/_not');
+var _nix = require('./internal/_nix');
 var _xany = require('./internal/_xany');
 
 
@@ -21,4 +21,4 @@ var _xany = require('./internal/_xany');
  *      R.none(isNaN, [1, 2, 3]); //=> true
  *      R.none(isNaN, [1, 2, 3, NaN]); //=> false
  */
-module.exports = _curry2(_not(_dispatchable('any', _xany, _any)));
+module.exports = _curry2(_nix(_dispatchable('any', _xany, _any)));
