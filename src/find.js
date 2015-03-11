@@ -1,9 +1,14 @@
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
+var _xfind = require('./internal/_xfind');
 
 
 /**
  * Returns the first element of the list which matches the predicate, or `undefined` if no
  * element matches.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -19,7 +24,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
  *      R.find(R.propEq('a', 4))(xs); //=> undefined
  */
-module.exports = _curry2(function find(fn, list) {
+module.exports = _curry2(_dispatchable('find', _xfind, function find(fn, list) {
     var idx = -1;
     var len = list.length;
     while (++idx < len) {
@@ -27,4 +32,4 @@ module.exports = _curry2(function find(fn, list) {
             return list[idx];
         }
     }
-});
+}));

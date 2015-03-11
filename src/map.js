@@ -1,6 +1,7 @@
-var _checkForMethod = require('./internal/_checkForMethod');
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
 var _map = require('./internal/_map');
+var _xmap = require('./internal/_xmap');
 
 
 /**
@@ -10,6 +11,9 @@ var _map = require('./internal/_map');
  * Note: `R.map` does not skip deleted or unassigned indices (sparse arrays), unlike the
  * native `Array.prototype.map` method. For more details on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -26,4 +30,4 @@ var _map = require('./internal/_map');
  *
  *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
  */
-module.exports = _curry2(_checkForMethod('map', _map));
+module.exports = _curry2(_dispatchable('map', _xmap, _map));

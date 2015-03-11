@@ -1,10 +1,15 @@
 var _any = require('./internal/_any');
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
+var _xany = require('./internal/_xany');
 
 
 /**
  * Returns `true` if at least one of elements of the list match the predicate, `false`
  * otherwise.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -23,4 +28,4 @@ var _curry2 = require('./internal/_curry2');
  *      R.any(lessThan0)(xs); //=> false
  *      R.any(lessThan2)(xs); //=> true
  */
-module.exports = _curry2(_any);
+module.exports = _curry2(_dispatchable('any', _xany, _any));

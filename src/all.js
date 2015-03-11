@@ -1,10 +1,15 @@
 var _all = require('./internal/_all');
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
+var _xall = require('./internal/_xall');
 
 
 /**
  * Returns `true` if all elements of the list match the predicate, `false` if there are any
  * that don't.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -23,4 +28,4 @@ var _curry2 = require('./internal/_curry2');
  *      R.all(lessThan2)(xs); //=> false
  *      R.all(lessThan3)(xs); //=> true
  */
-module.exports = _curry2(_all);
+module.exports = _curry2(_dispatchable('all', _xall, _all));

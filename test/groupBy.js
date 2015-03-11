@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var _isTransformer = require('../src/internal/_isTransformer');
 
 
 describe('groupBy', function() {
@@ -48,5 +49,15 @@ describe('groupBy', function() {
 
     it('returns an empty object if given an empty array', function() {
         assert.deepEqual(R.groupBy(R.prop('x'), []), {});
+    });
+
+    it('dispatches on transformer objects in list position', function() {
+        var byType = R.prop('type');
+        var xf = {
+            init: function() { return {}; },
+            result: function(x) { return x; },
+            step: R.merge
+        };
+        assert(_isTransformer(R.groupBy(byType, xf)));
     });
 });
