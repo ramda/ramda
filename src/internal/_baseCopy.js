@@ -1,3 +1,4 @@
+var _cloneRegExp = require('./_cloneRegExp');
 var type = require('../type');
 
 
@@ -30,6 +31,7 @@ module.exports = function _baseCopy(value, refFrom, refTo) {
         case 'Object':  return copy({});
         case 'Array':   return copy([]);
         case 'Date':    return new Date(value);
+        case 'RegExp':  return _cloneRegExp(value);
         default:        return value;
     }
 };
