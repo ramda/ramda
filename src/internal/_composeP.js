@@ -1,5 +1,5 @@
 var _isThenable = require('./_isThenable');
-
+var _meta = require('./_meta');
 
 /**
  * A right-associative two-argument composition function like `_compose`
@@ -25,7 +25,7 @@ var _isThenable = require('./_isThenable');
  *          });
  */
 module.exports = function _composeP(f, g) {
-    return function() {
+    return _meta.set(function() {
         var context = this;
         var value = g.apply(this, arguments);
         if (_isThenable(value)) {
@@ -35,5 +35,5 @@ module.exports = function _composeP(f, g) {
         } else {
             return f.call(this, value);
         }
-    };
+    }, g);
 };

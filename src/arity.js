@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  * parameters. Unlike `nAry`, which passes only `n` arguments to the wrapped function,
  * functions produced by `arity` will pass all provided arguments to the wrapped function.
  *
+ * @deprecated since v0.12.0
  * @func
  * @memberOf R
  * @sig (Number, (* -> *)) -> (* -> *)

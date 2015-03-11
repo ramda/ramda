@@ -1,7 +1,7 @@
 var __ = require('./__');
 var _curry2 = require('./internal/_curry2');
+var _meta = require('./internal/_meta');
 var _slice = require('./internal/_slice');
-var arity = require('./arity');
 
 
 /**
@@ -48,7 +48,7 @@ var arity = require('./arity');
  *      g(4); //=> 10
  */
 module.exports = _curry2(function curryN(length, fn) {
-    return arity(length, function() {
+    return _meta.set(function() {
         var n = arguments.length;
         var shortfall = length - n;
         var idx = n;
@@ -72,5 +72,5 @@ module.exports = _curry2(function curryN(length, fn) {
                 return fn.apply(this, combinedArgs.concat(currentArgs));
             });
         }
-    });
+    }, fn, length);
 });

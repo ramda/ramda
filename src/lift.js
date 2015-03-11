@@ -1,4 +1,5 @@
 var _curry1 = require('./internal/_curry1');
+var _meta = require('./internal/_meta');
 var liftN = require('./liftN');
 
 
@@ -26,5 +27,5 @@ var liftN = require('./liftN');
  *     madd5([1,2], [3], [4, 5], [6], [7, 8]); //=> [21, 22, 22, 23, 22, 23, 23, 24]
  */
 module.exports = _curry1(function lift(fn) {
-    return liftN(fn.length, fn);
+    return liftN(_meta.arity(fn), fn);
 });

@@ -1,4 +1,5 @@
 var _curry1 = require('./internal/_curry1');
+var _meta = require('./internal/_meta');
 var curryN = require('./curryN');
 
 
@@ -45,5 +46,5 @@ var curryN = require('./curryN');
  *      g(4); //=> 10
  */
 module.exports = _curry1(function curry(fn) {
-    return curryN(fn.length, fn);
+    return curryN(_meta.arity(fn), fn);
 });
