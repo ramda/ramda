@@ -117,8 +117,8 @@ describe('deep `clone` functions', function() {
     });
 });
 
-describe('deep clone Dates', function() {
-    it('clone date', function() {
+describe('built-in types', function() {
+    it('clones Date object', function() {
         var date = new Date(2014, 10, 14, 23, 59, 59, 999);
 
         var clone = R.clone(date);
@@ -127,6 +127,18 @@ describe('deep clone Dates', function() {
         assert.deepEqual(clone.toString(), new Date(2014, 10, 14, 23, 59, 59, 999).toString());
 
         assert.strictEqual(clone.getDay(), 5); // friday
+    });
+
+    it('clones RegExp object', function() {
+        R.forEach(function(pattern) {
+            var clone = R.clone(pattern);
+            assert.notStrictEqual(clone, pattern);
+            assert.strictEqual(clone.constructor, RegExp);
+            assert.strictEqual(clone.source, pattern.source);
+            assert.strictEqual(clone.global, pattern.global);
+            assert.strictEqual(clone.ignoreCase, pattern.ignoreCase);
+            assert.strictEqual(clone.multiline, pattern.multiline);
+        }, [/x/, /x/g, /x/i, /x/m, /x/gi, /x/gm, /x/im, /x/gim]);
     });
 });
 
