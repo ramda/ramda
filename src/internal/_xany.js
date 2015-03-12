@@ -19,8 +19,8 @@ module.exports = (function() {
     };
     XAny.prototype.step = function(result, input) {
         if (this.f(input)) {
-          this.any = true;
-          result = _reduced(this.xf.step(result, true));
+            this.any = true;
+            result = _reduced(this.xf.step(result, true));
         }
         return result;
     };

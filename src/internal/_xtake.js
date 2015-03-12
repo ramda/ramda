@@ -14,8 +14,8 @@ module.exports = (function() {
         return this.xf.result(result);
     };
     XTake.prototype.step = function(result, input) {
-      this.n -= 1;
-      return this.n >= 0 ? this.xf.step(result, input) : _reduced(result);
+        this.n -= 1;
+        return this.n >= 0 ? this.xf.step(result, input) : _reduced(result);
     };
 
     return _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
