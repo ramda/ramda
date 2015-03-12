@@ -1,4 +1,5 @@
 var _curry1 = require('./internal/_curry1');
+var _not = require('./internal/_not');
 
 
 /**
@@ -18,6 +19,4 @@ var _curry1 = require('./internal/_curry1');
  *      f(11); //=> false
  *      f(9); //=> true
  */
-module.exports = _curry1(function not(f) {
-    return function() {return !f.apply(this, arguments);};
-});
+module.exports = _curry1(_not);
