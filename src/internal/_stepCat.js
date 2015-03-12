@@ -1,5 +1,7 @@
 var _add = require('./_add');
 var _appendTo = require('./_appendTo');
+var _createMapEntry = require('./_createMapEntry');
+var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');
 var _symTransformer = require('./_symTransformer');
 var isArrayLike = require('../isArrayLike');
@@ -7,33 +9,25 @@ var merge = require('../merge');
 
 
 module.exports = (function() {
-    var _result = function(result) { return result; };
     var _stepCatArray = {
         init: Array,
         step: _appendTo,
-        result: _result
+        result: _identity
     };
     var _stepCatString = {
         init: String,
         step: _add,
-        result: _result
+        result: _identity
     };
     var _stepCatObject = {
         init: Object,
         step: function(result, input) {
-            var key;
-            var vals;
-            var stepObj = {};
-            if (isArrayLike(input)) {
-                key = input[0];
-                vals = input[1];
-                stepObj[key] = vals;
-            } else {
-                stepObj = input;
-            }
-            return merge(result, stepObj);
+            return merge(
+                result,
+                isArrayLike(input) ? _createMapEntry(input[0], input[1]) : input
+            );
         },
-        result: _result
+        result: _identity
     };
 
     return function _stepCat(obj) {
