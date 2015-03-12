@@ -3,7 +3,6 @@ var _appendTo = require('./_appendTo');
 var _createMapEntry = require('./_createMapEntry');
 var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');
-var _symTransformer = require('./_symTransformer');
 var isArrayLike = require('../isArrayLike');
 var merge = require('../merge');
 
@@ -32,7 +31,7 @@ module.exports = (function() {
 
     return function _stepCat(obj) {
         if (_isTransformer(obj)) {
-            return obj[_symTransformer] || obj;
+            return obj;
         }
         if (isArrayLike(obj)) {
             return _stepCatArray;
