@@ -13,7 +13,7 @@ module.exports = (function() {
     };
     XAll.prototype.result = function(result) {
         if (this.all) {
-          result = this.xf.step(result, true);
+            result = this.xf.step(result, true);
         }
         return this.xf.result(result);
     };

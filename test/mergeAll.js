@@ -13,10 +13,10 @@ describe('mergeAll', function() {
     });
 
     it('ignores inherited properties', function() {
-      function Foo() {}
-      Foo.prototype.bar = 42;
-      var foo = new Foo();
-      var res = R.mergeAll([foo, {fizz: 'buzz'}]);
-      assert.deepEqual(res, {fizz: 'buzz'});
+        function Foo() {}
+        Foo.prototype.bar = 42;
+        var foo = new Foo();
+        var res = R.mergeAll([foo, {fizz: 'buzz'}]);
+        assert.deepEqual(res, {fizz: 'buzz'});
     });
 });

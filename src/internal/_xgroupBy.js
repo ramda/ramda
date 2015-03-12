@@ -18,8 +18,8 @@ module.exports = (function() {
             if (_has(key, this.inputs)) {
                 result = this.xf.step(result, this.inputs[key]);
                 if (result.__transducers_reduced__) {
-                     result = result.value;
-                     break;
+                    result = result.value;
+                    break;
                 }
             }
         }
