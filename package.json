@@ -41,7 +41,6 @@
     "acorn": "0.9.x",
     "benchmark": "~1.0.0",
     "commander": "2.5.x",
-    "deedpoll": "0.2.x",
     "dox": "latest",
     "envvar": "1.x.x",
     "escodegen": "1.4.x",
