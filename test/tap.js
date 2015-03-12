@@ -5,7 +5,7 @@ var R = require('..');
 
 describe('tap', function() {
     it('returns a function that always returns its argument', function() {
-        var f = R.tap(R.I);
+        var f = R.tap(R.identity);
         assert.strictEqual(typeof f, 'function');
         assert.strictEqual(f(100), 100);
     });
