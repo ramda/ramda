@@ -36,14 +36,6 @@ describe('all', function() {
         assert.deepEqual(intoArray(R.all(T), []), [true]);
     });
 
-    it('short-circuits on first false value', function() {
-        var count = 0;
-        var test = function(n) {count++; return even(n);};
-        var result = R.all(test, [2, 4, 6, 7, 8, 10]);
-        assert(!result);
-        assert.strictEqual(count, 4);
-    });
-
     it('works with more complex objects', function() {
         var xs = [{x: 'abc'}, {x: 'ade'}, {x: 'fghiajk'}];
         function len3(o) { return o.x.length === 3; }

@@ -48,14 +48,6 @@ describe('any', function() {
         assert.deepEqual(intoArray(R.any(T), []), [false]);
     });
 
-    it('short-circuits on first true value', function() {
-        var count = 0;
-        var test = function(n) {count++; return odd(n);};
-        var result = R.any(test, [2, 4, 6, 7, 8, 10]);
-        assert(result);
-        assert.strictEqual(count, 4);
-    });
-
     it('dispatches when given a transformer in list position', function() {
         assert.deepEqual(R.any(odd, listXf), {
             any: false,
