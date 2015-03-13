@@ -1,5 +1,5 @@
 var _add = require('./_add');
-var _appendTo = require('./_appendTo');
+var _concat = require('./_concat');
 var _createMapEntry = require('./_createMapEntry');
 var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');
@@ -10,7 +10,7 @@ var merge = require('../merge');
 module.exports = (function() {
     var _stepCatArray = {
         init: Array,
-        step: _appendTo,
+        step: function(xs, x) { return _concat(xs, [x]); },
         result: _identity
     };
     var _stepCatString = {

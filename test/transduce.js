@@ -37,9 +37,9 @@ describe('transduce', function() {
     };
 
     it('transduces into arrays', function() {
-        assert.deepEqual(R.transduce(R.map(add(1)), R.appendTo, [], [1, 2, 3, 4]), [2, 3, 4, 5]);
-        assert.deepEqual(R.transduce(R.filter(isOdd), R.appendTo, [],  [1, 2, 3, 4]), [1, 3]);
-        assert.deepEqual(R.transduce(R.compose(R.map(add(1)), R.take(2)), R.appendTo, [],  [1, 2, 3, 4]), [2, 3]);
+        assert.deepEqual(R.transduce(R.map(add(1)), R.flip(R.append), [], [1, 2, 3, 4]), [2, 3, 4, 5]);
+        assert.deepEqual(R.transduce(R.filter(isOdd), R.flip(R.append), [],  [1, 2, 3, 4]), [1, 3]);
+        assert.deepEqual(R.transduce(R.compose(R.map(add(1)), R.take(2)), R.flip(R.append), [],  [1, 2, 3, 4]), [2, 3]);
     });
 
     it('transduces into strings', function() {
