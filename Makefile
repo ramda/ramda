@@ -1,10 +1,3 @@
-DEEDPOLL = node_modules/.bin/deedpoll \
-	--rename arr:list \
-	--rename array:list \
-	--rename ctor:Ctor \
-	--rename fnArity:length \
-	--rename i:idx \
-	--rename index:idx
 MOCHA = node_modules/.bin/mocha
 UGLIFY = node_modules/.bin/uglifyjs
 XYZ = node_modules/.bin/xyz --repo git@github.com:ramda/ramda.git --script scripts/prepublish
@@ -30,7 +23,6 @@ clean:
 
 .PHONY: lint
 lint:
-	@$(DEEDPOLL) -- $(SRC)
 
 
 .PHONY: release-major release-minor release-patch
