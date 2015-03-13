@@ -9,7 +9,7 @@ describe('into', function() {
     var addXf = {
         step: add,
         init: R.always(0),
-        result: R.I
+        result: R.identity
     };
 
     it('transduces into arrays', function() {
