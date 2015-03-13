@@ -3,9 +3,8 @@ var _path = require('./internal/_path');
 
 
 /**
- * Determines whether a nested path on an object, seperated by periods,
- * has a specific value according to strict equality ('==='). Most
- * likely used to filter a list:
+ * Determines whether a nested path on an object has a specific value
+ * according to strict equality ('==='). Most likely used to filter a list:
  *
  * @func
  * @memberOf R
