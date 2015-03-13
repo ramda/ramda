@@ -1,30 +1,23 @@
 var _curry2 = require('./internal/_curry2');
 
-
 /**
- *
- * A function wrapping calls to the two functions in an `&&` operation, returning the result of the first
- * function if it is false-y and the result of the second function otherwise.  Note that this is
- * short-circuited, meaning that the second function will not be invoked if the first returns a false-y
- * value.
+ * A function that returns the first argument if it's falsy otherwise the second
+ * argument. Note that this is NOT short-circuited, meaning that if expressions
+ * are passed they are both evaluated.
  *
  * @func
  * @memberOf R
  * @category Logic
- * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
- * @param {Function} f a predicate
- * @param {Function} g another predicate
- * @return {Function} a function that applies its arguments to `f` and `g` and ANDs their outputs together.
+ * @sig * -> * -> *
+ * @param {*} a any value
+ * @param {*} b any other value
+ * @return {*} the first argument if falsy otherwise the second argument.
  * @example
  *
- *      var gt10 = function(x) { return x > 10; };
- *      var even = function(x) { return x % 2 === 0 };
- *      var f = R.and(gt10, even);
- *      f(100); //=> true
- *      f(101); //=> false
+ *      R.and(false, true); //=> true
+ *      R.and(0, []); //=> []
+ *      R.and(null, ''); => false
  */
-module.exports = _curry2(function and(f, g) {
-    return function _and() {
-        return f.apply(this, arguments) && g.apply(this, arguments);
-    };
+module.exports = _curry2(function and(a, b) {
+    return a && b;
 });
