@@ -7,6 +7,7 @@ var curry = require('./curry');
  * after `fn` and `obj` are passed in to `fn`. If no additional arguments are passed to `func`,
  * `fn` is invoked with no arguments.
  *
+ * @deprecated since v0.12.0
  * @func
  * @memberOf R
  * @category Object
@@ -14,6 +15,7 @@ var curry = require('./curry');
  * @param {String} funcName The name of the property mapped to the function to invoke
  * @param {Object} obj The object
  * @return {*} The value of invoking `obj.fn`.
+ * @see R.invoke
  * @example
  *
  *      R.func('add', R, 1, 2); //=> 3
