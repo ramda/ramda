@@ -1,4 +1,5 @@
 var assert = require('assert');
+var lodash = require('lodash');
 
 var R = require('..');
 
@@ -58,6 +59,12 @@ describe('transduce', function() {
         assert.deepEqual(R.transduce(toxf(R.concat), listxf, [0], [1, 2, 3, 4]), [0, 1, 2, 3, 4]);
         assert.strictEqual(R.transduce(toxf(add), add, 0, [1, 2, 3, 4]), 10);
         assert.strictEqual(R.transduce(toxf(mult), mult, 1, [1, 2, 3, 4]), 24);
+    });
+
+    it('dispatches to objects that implement `reduce`', function() {
+        var obj = {x: [1, 2, 3], reduce: function(f, acc) { return lodash.reduce(this.x, f, acc); }};
+        assert.strictEqual(R.transduce(R.map(add(1)), add, 0, obj), 9);
+        assert.strictEqual(R.transduce(R.map(add(1)), add, 10, obj), 19);
     });
 
     it('returns the accumulator for an empty collection', function() {

@@ -1,4 +1,5 @@
 var _xwrap = require('./_xwrap');
+var bind = require('../bind');
 var isArrayLike = require('../isArrayLike');
 
 
@@ -28,6 +29,10 @@ module.exports = (function() {
         return xf.result(acc);
     }
 
+    function _methodReduce(xf, acc, obj) {
+        return xf.result(obj.reduce(bind(xf.step, xf), acc));
+    }
+
     var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
     return function _reduce(fn, acc, list) {
         if (typeof fn === 'function') {
@@ -35,6 +40,9 @@ module.exports = (function() {
         }
         if (isArrayLike(list)) {
             return _arrayReduce(fn, acc, list);
+        }
+        if (typeof list.reduce === 'function') {
+            return _methodReduce(fn, acc, list);
         }
         if (list[symIterator] != null) {
             return _iterableReduce(fn, acc, list[symIterator]());
