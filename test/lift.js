@@ -40,7 +40,7 @@ describe('lift', function() {
 
     it('works with other functors such as "Maybe"', function() {
         var addM = R.lift(R.add);
-        assert.deepEqual(addM(Maybe(3), Maybe(5)), Maybe(8));
+        assert.deepEqual(addM(Maybe.of(3), Maybe.of(5)), Maybe.of(8));
     });
 
 });
