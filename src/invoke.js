@@ -1,24 +1,25 @@
-var _slice = require('./internal/_slice');
 var curry = require('./curry');
 
 
 /**
- * Returns the result of invoking `obj[methodName]` with the zero or more
- * positional arguments following `methodName` and `obj`.
+ * Returns the result of applying `obj[methodName]` to `args`.
  *
  * @func
  * @memberOf R
  * @category Object
- * @sig String -> Object -> *
+ * @sig String -> Object -> [*] -> *
  * @param {String} methodName
  * @param {Object} obj
+ * @param {Array} args
  * @return {*}
  * @example
  *
- *      R.invoke('add', R, 1, 2); //=> 3
+ *      //  toBinary :: Number -> String
+ *      var toBinary = R.invoke('toString', R.__, [2])
  *
- *      R.invoke('f', {f: function() { return 'f called'; }}); //=> 'f called'
+ *      toBinary(42); //=> '101010'
+ *      toBinary(63); //=> '111111'
  */
-module.exports = curry(function invoke(methodName, obj) {
-    return obj[methodName].apply(obj, _slice(arguments, 2));
+module.exports = curry(function invoke(methodName, obj, args) {
+    return obj[methodName].apply(obj, args);
 });
