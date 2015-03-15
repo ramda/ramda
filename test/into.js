@@ -12,6 +12,9 @@ describe('into', function() {
         init: R.always(0),
         result: R.identity
     };
+    var addToValue = R.curry(function(x, pair) {
+        return [pair[0], x + pair[1]];
+    });
 
     it('transduces into arrays', function() {
         assert.deepEqual(R.into([], R.map(add(1)), [1, 2, 3, 4]), [2, 3, 4, 5]);
@@ -26,8 +29,12 @@ describe('into', function() {
     });
 
     it('transduces into objects', function() {
+        assert.deepEqual(R.into({}, R.identity, {a: 1, b: 2, c: 3}), {a: 1, b: 2, c: 3});
         assert.deepEqual(R.into({}, R.identity, [['a', 1], ['b', 2]]), {a: 1, b: 2});
         assert.deepEqual(R.into({}, R.identity, [{a: 1}, {b: 2, c: 3}]), {a: 1, b: 2, c: 3});
+
+        assert.deepEqual(R.into({}, R.map(addToValue(1)), {a: 1, b: 2, c: 3}), {a: 2, b: 3, c: 4});
+        assert.deepEqual(R.into({}, R.map(addToValue(2)), [['a', 1], ['b', 2]]), {a: 3, b: 4});
     });
 
     it('dispatches to objects that implement `reduce`', function() {

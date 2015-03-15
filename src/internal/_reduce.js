@@ -1,3 +1,5 @@
+var _iterable = require('./_iterable');
+var _symbolIterator = require('./_symbolIterator');
 var _xwrap = require('./_xwrap');
 var bind = require('../bind');
 var isArrayLike = require('../isArrayLike');
@@ -33,7 +35,6 @@ module.exports = (function() {
         return xf.result(obj.reduce(bind(xf.step, xf), acc));
     }
 
-    var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
     return function _reduce(fn, acc, list) {
         if (typeof fn === 'function') {
             fn = _xwrap(fn);
@@ -44,12 +45,6 @@ module.exports = (function() {
         if (typeof list.reduce === 'function') {
             return _methodReduce(fn, acc, list);
         }
-        if (list[symIterator] != null) {
-            return _iterableReduce(fn, acc, list[symIterator]());
-        }
-        if (typeof list.next === 'function') {
-            return _iterableReduce(fn, acc, list);
-        }
-        throw new TypeError('reduce: list must be array or iterable');
+        return _iterableReduce(fn, acc, _iterable(list)[_symbolIterator]());
     };
 })();
