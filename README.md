@@ -191,8 +191,6 @@ link provided in your browser and you will see the results in your terminal.
 If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
-![ramda on sauce labs](https://saucelabs.com/browser-matrix/ramda.svg)
-
 
 
 
