@@ -1,0 +1,166 @@
+var assert = require('assert');
+
+var R = require('..');
+
+
+describe('toString', function() {
+
+  it('returns the string representation of null', function() {
+    assert.strictEqual(R.toString(null), 'null');
+  });
+
+  it('returns the string representation of undefined', function() {
+    assert.strictEqual(R.toString(undefined), 'undefined');
+  });
+
+  it('returns the string representation of a Boolean primitive', function() {
+    assert.strictEqual(R.toString(true), 'true');
+    assert.strictEqual(R.toString(false), 'false');
+  });
+
+  it('returns the string representation of a number primitive', function() {
+    assert.strictEqual(R.toString(0), '0');
+    assert.strictEqual(R.toString(-0), '-0');
+    assert.strictEqual(R.toString(1.23), '1.23');
+    assert.strictEqual(R.toString(-1.23), '-1.23');
+    assert.strictEqual(R.toString(1e+23), '1e+23');
+    assert.strictEqual(R.toString(-1e+23), '-1e+23');
+    assert.strictEqual(R.toString(1e-23), '1e-23');
+    assert.strictEqual(R.toString(-1e-23), '-1e-23');
+    assert.strictEqual(R.toString(Infinity), 'Infinity');
+    assert.strictEqual(R.toString(-Infinity), '-Infinity');
+    assert.strictEqual(R.toString(NaN), 'NaN');
+  });
+
+  it('returns the string representation of a string primitive', function() {
+    assert.strictEqual(R.toString('abc'), '"abc"');
+    assert.strictEqual(R.toString('x "y" z'), '"x \\"y\\" z"');
+  });
+
+  it('returns the string representation of a Boolean object', function() {
+    /* jshint -W053 */
+    assert.strictEqual(R.toString(new Boolean(true)), 'new Boolean(true)');
+    assert.strictEqual(R.toString(new Boolean(false)), 'new Boolean(false)');
+    /* jshint +W053 */
+  });
+
+  it('returns the string representation of a Number object', function() {
+    /* jshint -W053 */
+    assert.strictEqual(R.toString(new Number(0)), 'new Number(0)');
+    assert.strictEqual(R.toString(new Number(-0)), 'new Number(-0)');
+    /* jshint +W053 */
+  });
+
+  it('returns the string representation of a String object', function() {
+    /* jshint -W053 */
+    assert.strictEqual(R.toString(new String('abc')), 'new String("abc")');
+    assert.strictEqual(R.toString(new String('x "y" z')), 'new String("x \\"y\\" z")');
+    /* jshint +W053 */
+  });
+
+  it('returns the string representation of a Date object', function() {
+    assert.strictEqual(R.toString(new Date('2001-02-03T04:05:06.000Z')), 'new Date("2001-02-03T04:05:06.000Z")');
+  });
+
+  it('returns the string representation of a RegExp object', function() {
+    assert.strictEqual(R.toString(/(?:)/), '/(?:)/');
+    assert.strictEqual(R.toString(/\//g), '/\\//g');
+  });
+
+  it('returns the string representation of a function', function() {
+    assert.strictEqual(R.toString(function add(a, b) { return a + b; }), 'function add(a, b) { return a + b; }');
+  });
+
+  it('returns the string representation of an array', function() {
+    assert.strictEqual(R.toString([]), '[]');
+    assert.strictEqual(R.toString([1, 2, 3]), '[1, 2, 3]');
+    assert.strictEqual(R.toString([1, [2, [3]]]), '[1, [2, [3]]]');
+    assert.strictEqual(R.toString(['x', 'y']), '["x", "y"]');
+  });
+
+  it('returns the string representation of an arguments object', function() {
+    assert.strictEqual(R.toString((function() { return arguments; }())), '(function() { return arguments; }())');
+    assert.strictEqual(R.toString((function() { return arguments; }(1, 2, 3))), '(function() { return arguments; }(1, 2, 3))');
+    assert.strictEqual(R.toString((function() { return arguments; }(['x', 'y']))), '(function() { return arguments; }(["x", "y"]))');
+  });
+
+  it('returns the string representation of a plain object', function() {
+    assert.strictEqual(R.toString({}), '{}');
+    assert.strictEqual(R.toString({foo: 1, bar: 2, baz: 3}), '{"bar": 2, "baz": 3, "foo": 1}');
+    assert.strictEqual(R.toString({'"quoted"': true}), '{"\\"quoted\\"": true}');
+    assert.strictEqual(R.toString({a: {b: {c: {}}}}), '{"a": {"b": {"c": {}}}}');
+  });
+
+  it('treats instance without custom `toString` method as plain object', function() {
+    function Point(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+    assert.strictEqual(R.toString(new Point(1, 2)), '{"x": 1, "y": 2}');
+  });
+
+  it('dispatches to custom `toString` method', function() {
+    function Point(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+    Point.prototype.toString = function() {
+      return 'new Point(' + this.x + ', ' + this.y + ')';
+    };
+    assert.strictEqual(R.toString(new Point(1, 2)), 'new Point(1, 2)');
+
+    function Just(x) {
+      if (!(this instanceof Just)) {
+        return new Just(x);
+      }
+      this.value = x;
+    }
+    Just.prototype.toString = function() {
+      return 'Just(' + R.toString(this.value) + ')';
+    };
+    assert.strictEqual(R.toString(Just(42)), 'Just(42)');
+    assert.strictEqual(R.toString(Just([1, 2, 3])), 'Just([1, 2, 3])');
+    assert.strictEqual(R.toString(Just(Just(Just('')))), 'Just(Just(Just("")))');
+  });
+
+  it('handles object with no `toString` method', function() {
+    if (typeof Object.create === 'function') {
+      var a = Object.create(null);
+      var b = Object.create(null); b.x = 1; b.y = 2;
+      assert.strictEqual(R.toString(a), '{}');
+      assert.strictEqual(R.toString(b), '{"x": 1, "y": 2}');
+    }
+  });
+
+  it('handles circular references', function() {
+    var a = [];
+    a[0] = a;
+    assert.strictEqual(R.toString(a), '[<Circular>]');
+
+    var o = {};
+    o.o = o;
+    assert.strictEqual(R.toString(o), '{"o": <Circular>}');
+
+    var b = ['bee'];
+    var c = ['see'];
+    b[1] = c;
+    c[1] = b;
+    assert.strictEqual(R.toString(b), '["bee", ["see", <Circular>]]');
+    assert.strictEqual(R.toString(c), '["see", ["bee", <Circular>]]');
+
+    var p = {};
+    var q = {};
+    p.q = q;
+    q.p = p;
+    assert.strictEqual(R.toString(p), '{"q": {"p": <Circular>}}');
+    assert.strictEqual(R.toString(q), '{"p": {"q": <Circular>}}');
+
+    var x = [];
+    var y = {};
+    x[0] = y;
+    y.x = x;
+    assert.strictEqual(R.toString(x), '[{"x": <Circular>}]');
+    assert.strictEqual(R.toString(y), '{"x": [<Circular>]}');
+  });
+
+});
