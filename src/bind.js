@@ -11,6 +11,7 @@ var arity = require('./arity');
  * @memberOf R
  * @category Function
  * @category Object
+ * @see R.partial
  * @sig (* -> *) -> {*} -> (* -> *)
  * @param {Function} fn The function to bind to context
  * @param {Object} thisObj The context to bind `fn` to
