@@ -1,6 +1,6 @@
+var _complement = require('./internal/_complement');
 var _curry2 = require('./internal/_curry2');
 var _filterIndexed = require('./internal/_filterIndexed');
-var nix = require('./nix');
 
 
 /**
@@ -23,5 +23,5 @@ var nix = require('./nix');
  *      R.rejectIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
  */
 module.exports = _curry2(function rejectIndexed(fn, list) {
-    return _filterIndexed(nix(fn), list);
+    return _filterIndexed(_complement(fn), list);
 });
