@@ -15,13 +15,11 @@ Why Ramda?
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
      width="170" height="190" align="right" hspace="12" />
 
-There are already several excellent libraries with a functional flavor such as _Underscore_ and _Lo-Dash_. While they are meant to be general-purpose toolkits, suitable for working in multiple paradigms, we created Ramda differently. We wanted a library designed specifically for a functional programming style, one that made it easy to create functional pipelines, one that never mutated user data. 
+There are already several excellent libraries with a functional flavor. Typically, they are meant to be general-purpose toolkits, suitable for working in multiple paradigms. Ramda has a more focused goal. We wanted a library designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. 
 
 
 What's Different?
 -----------------
-
-While Ramda includes all of the favorite list-manipulation functions you expect, e.g. `map`, `filter`, `reduce`, `find`, and so forth, Ramda is also significantly different from libraries like _Underscore_ and _Lo-Dash_.
 
 The primary distinguishing features of Ramda are:
 
@@ -54,12 +52,8 @@ usual collections are Javascript arrays. We also keep other
 native features of Javascript, such as functions as objects
 with properties.
 
-While offering similar functionality, Ramda will never be a drop-in
-replacement for _Underscore_ / _Lo-Dash_. Ramda is intended to work with a
-different style of coding. 
-
 Functional programming is in good part about immutable objects and 
-side-effect free functions. While Ramda does *not enforce* this, it
+side-effect free functions. While Ramda does not *enforce* this, it
 enables such style to be as frictionless as possible.
 
 We aim for an implementation both clean and elegant, but the API is king.
@@ -81,7 +75,7 @@ $ npm install ramda
 Then in the console:
 
 ```javascript
-var ramda = require('ramda');
+var R = require('ramda');
 ```
 
 To use directly in the browser:
