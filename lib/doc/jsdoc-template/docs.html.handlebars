@@ -31,6 +31,7 @@
                    placeholder="Filter"
                    type="text"
                    data-bind="textInput: filter"
+                   autofocus
             >
             <span class="form-control-feedback">
                 <span class="glyphicon glyphicon-search"></span>
@@ -107,7 +108,7 @@
     <script>
         var DOC_DATA = {{json data}};
     </script>
-    <script src="main.js"></script>
     <script src="dist/ramda.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
