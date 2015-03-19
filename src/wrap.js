@@ -1,6 +1,7 @@
 var _concat = require('./internal/_concat');
 var _curry2 = require('./internal/_curry2');
-var curryN = require('./curryN');
+var _meta = require('./internal/_meta');
+var curry = require('./curry');
 
 
 /**
@@ -30,7 +31,7 @@ var curryN = require('./curryN');
  *
  */
 module.exports = _curry2(function wrap(fn, wrapper) {
-    return curryN(fn.length, function() {
+    return curry(_meta.set(function() {
         return wrapper.apply(this, _concat([fn], arguments));
-    });
+    }, fn));
 });

@@ -1,3 +1,5 @@
+var _meta = require('./_meta');
+
 /**
  * Basic, right-associative composition function. Accepts two functions and returns the
  * composite function; this composite function represents the operation `var h = f(g(x))`,
@@ -21,7 +23,7 @@
  *      squareThenDouble(5); //≅ double(square(5)) => 50
  */
 module.exports = function _compose(f, g) {
-    return function() {
+    return _meta.set(function() {
         return f.call(this, g.apply(this, arguments));
-    };
+    }, g);
 };
