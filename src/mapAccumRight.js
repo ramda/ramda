@@ -31,7 +31,7 @@ var _curry3 = require('./internal/_curry3');
  */
 module.exports = _curry3(function mapAccumRight(fn, acc, list) {
     var idx = list.length, result = [], tuple = [acc];
-    while (idx--) {
+    while (--idx >= 0) {
         tuple = fn(tuple[0], list[idx]);
         result[idx] = tuple[1];
     }

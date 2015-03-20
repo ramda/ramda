@@ -26,7 +26,7 @@ var _xfindLast = require('./internal/_xfindLast');
  */
 module.exports = _curry2(_dispatchable('findLast', _xfindLast, function findLast(fn, list) {
     var idx = list.length;
-    while (idx--) {
+    while (--idx >= 0) {
         if (fn(list[idx])) {
             return list[idx];
         }
