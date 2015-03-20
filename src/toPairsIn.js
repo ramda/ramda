@@ -1,6 +1,4 @@
 var _curry1 = require('./internal/_curry1');
-var _pairWith = require('./internal/_pairWith');
-var keysIn = require('./keysIn');
 
 
 /**
@@ -12,7 +10,7 @@ var keysIn = require('./keysIn');
  * @func
  * @memberOf R
  * @category Object
- * @sig {k: v} -> [[k,v]]
+ * @sig {String: *} -> [[String,*]]
  * @param {Object} obj The object to extract from
  * @return {Array} An array of key, value arrays from the object's own
  *         and prototype properties.
@@ -23,4 +21,10 @@ var keysIn = require('./keysIn');
  *      var f = new F();
  *      R.toPairsIn(f); //=> [['x','X'], ['y','Y']]
  */
-module.exports = _curry1(_pairWith(keysIn));
+module.exports = _curry1(function toPairsIn(obj) {
+    var pairs = [];
+    for (var prop in obj) {
+        pairs[pairs.length] = [prop, obj[prop]];
+    }
+    return pairs;
+});
