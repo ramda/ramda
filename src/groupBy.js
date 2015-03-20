@@ -15,7 +15,7 @@ var _xgroupBy = require('./internal/_xgroupBy');
  * @func
  * @memberOf R
  * @category List
- * @sig (a -> s) -> [a] -> {s: a}
+ * @sig (a -> String) -> [a] -> {String: [a]}
  * @param {Function} fn Function :: a -> String
  * @param {Array} list The array to group
  * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
