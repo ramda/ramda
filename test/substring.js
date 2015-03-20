@@ -8,6 +8,12 @@ describe('substring', function() {
         assert.strictEqual(R.substring(2, 5, 'abcdefghijklm'), 'cde');
     });
 
+    it('accepts negative offsets', function() {
+        assert.strictEqual(R.substring(0, -2, 'Ramda'), 'Ram');
+        assert.strictEqual(R.substring(-4, 3, 'Ramda'), 'am');
+        assert.strictEqual(R.substring(-4, -2, 'Ramda'), 'am');
+    });
+
     it('is automatically curried', function() {
         var from2 = R.substring(2);
         assert.strictEqual(from2(5, 'abcdefghijklm'), 'cde');

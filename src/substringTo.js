@@ -2,17 +2,18 @@ var substring = require('./substring');
 
 
 /**
- * The leading substring of a String ending before the nth character:
+ * Returns a string containing the first `toIndex` characters of `str`.
  *
  * @func
  * @memberOf R
  * @category String
  * @sig Number -> String -> String
- * @param {Number} indexA An integer between 0 and the length of the string.
- * @param {String} str The string to extract from
- * @return {String} The extracted substring.
+ * @param {Number} toIndex
+ * @param {String} str
+ * @return {String}
  * @example
  *
- *      R.substringTo(8, 'abcdefghijklm'); //=> 'abcdefgh'
+ *      R.substringTo(3, 'Ramda'); //=> 'Ram'
+ *      R.substringTo(-2, 'Ramda'); //=> 'Ram'
  */
 module.exports = substring(0);

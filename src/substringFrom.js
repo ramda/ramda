@@ -1,19 +1,21 @@
-var flip = require('./flip');
+var __ = require('./__');
 var substring = require('./substring');
 
 
 /**
- * The trailing substring of a String starting with the nth character:
+ * Returns a string containing the characters of `str` from `fromIndex`
+ * (inclusive) to the end of `str`.
  *
  * @func
  * @memberOf R
  * @category String
  * @sig Number -> String -> String
- * @param {Number} indexA An integer between 0 and the length of the string.
- * @param {String} str The string to extract from
- * @return {String} The extracted substring.
+ * @param {Number} fromIndex
+ * @param {String} str
+ * @return {String}
  * @example
  *
- *      R.substringFrom(8, 'abcdefghijklm'); //=> 'ijklm'
+ *      R.substringFrom(3, 'Ramda'); //=> 'da'
+ *      R.substringFrom(-2, 'Ramda'); //=> 'da'
  */
-module.exports = flip(substring)(void 0);
+module.exports = substring(__, Infinity);
