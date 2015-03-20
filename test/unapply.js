@@ -26,23 +26,23 @@ describe('unapply', function() {
     });
 
     it('is the inverse of R.apply', function() {
-        var a, b, c, d, e, f, g, idx;
+        var a, b, c, d, e, f, g, n;
         var rand = function() {
             return Math.floor(200 * Math.random()) - 100;
         };
 
         f = Math.max;
         g = R.unapply(R.apply(f));
-        idx = 100;
-        while (idx--) {
+        n = 0;
+        while (++n <= 100) {
             a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
             assert.strictEqual(f(a, b, c, d, e), g(a, b, c, d, e));
         }
 
         f = function(xs) { return '[' + xs + ']'; };
         g = R.apply(R.unapply(f));
-        idx = 100;
-        while (idx--) {
+        n = 0;
+        while (++n <= 100) {
             a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
             assert.strictEqual(f([a, b, c, d, e]), g([a, b, c, d, e]));
         }

@@ -52,7 +52,7 @@ module.exports = _curry2(function curryN(length, fn) {
         var n = arguments.length;
         var shortfall = length - n;
         var idx = n;
-        while (idx--) {
+        while (--idx >= 0) {
             if (arguments[idx] === __) {
                 shortfall += 1;
             }

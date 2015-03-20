@@ -6,7 +6,7 @@ var R = require('..');
 describe('memoize', function() {
     it('calculates the value for a given input only once', function() {
         var ctr = 0;
-        var fib = R.memoize(function(n) {ctr++; return n < 2 ? n : fib(n - 2) + fib(n - 1);});
+        var fib = R.memoize(function(n) {ctr += 1; return n < 2 ? n : fib(n - 2) + fib(n - 1);});
         var result = fib(10);
         assert.strictEqual(result, 55);
         assert.strictEqual(ctr, 11); // fib(0), fib(1), ... fib(10), no memoization would take 177 iterations.

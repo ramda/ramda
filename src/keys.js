@@ -40,7 +40,7 @@ module.exports = (function() {
         }
         if (hasEnumBug) {
             nIdx = nonEnumerableProps.length;
-            while (nIdx--) {
+            while (--nIdx >= 0) {
                 prop = nonEnumerableProps[nIdx];
                 if (_has(prop, obj) && !_contains(prop, ks)) {
                     ks[ks.length] = prop;

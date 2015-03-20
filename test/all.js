@@ -54,7 +54,7 @@ describe('all', function() {
 
     it('is automatically curried', function() {
         var count = 0;
-        var test = function(n) {count++; return even(n);};
+        var test = function(n) {count += 1; return even(n);};
         assert(R.all(test)([2, 4, 6, 7, 8, 10]) === false);
     });
 });

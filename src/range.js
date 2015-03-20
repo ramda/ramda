@@ -18,13 +18,11 @@ var _curry2 = require('./internal/_curry2');
  *      R.range(50, 53);  //=> [50, 51, 52]
  */
 module.exports = _curry2(function range(from, to) {
-    if (from >= to) {
-        return [];
-    }
-    var idx = 0, result = [];
-    while (from < to) {
-        result[idx] = from++;
-        idx += 1;
+    var result = [];
+    var n = from;
+    while (n < to) {
+        result[result.length] = n;
+        n += 1;
     }
     return result;
 });
