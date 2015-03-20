@@ -1,6 +1,6 @@
+var _complement = require('./internal/_complement');
 var _curry2 = require('./internal/_curry2');
 var filter = require('./filter');
-var nix = require('./nix');
 
 
 /**
@@ -22,5 +22,5 @@ var nix = require('./nix');
  *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
  */
 module.exports = _curry2(function reject(fn, list) {
-    return filter(nix(fn), list);
+    return filter(_complement(fn), list);
 });
