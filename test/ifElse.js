@@ -42,10 +42,29 @@ describe('ifElse', function() {
         R.ifElse(v, identity, onFalse)(123, 'abc');
     });
 
+    it('returns a function whose arity equals the max arity of the three arguments to `ifElse`', function() {
+        function a0() { return 0; }
+        function a1(x) { return x; }
+        function a2(x, y) { return x + y; }
+
+        assert.strictEqual(R.ifElse(a0, a1, a2).length, 2);
+        assert.strictEqual(R.ifElse(a0, a2, a1).length, 2);
+        assert.strictEqual(R.ifElse(a1, a0, a2).length, 2);
+        assert.strictEqual(R.ifElse(a1, a2, a0).length, 2);
+        assert.strictEqual(R.ifElse(a2, a0, a1).length, 2);
+        assert.strictEqual(R.ifElse(a2, a1, a0).length, 2);
+    });
+
     it('returns a curried function', function() {
         var v = function(a) { return typeof a === 'number'; };
         var ifIsNumber = R.ifElse(v);
         assert.strictEqual(ifIsNumber(t, identity)(15), 16);
         assert.strictEqual(ifIsNumber(t, identity)('hello'), 'hello');
+
+        var fn = R.ifElse(R.gt, R.subtract, R.add);
+        assert.strictEqual(fn(2)(7), 9);
+        assert.strictEqual(fn(2, 7), 9);
+        assert.strictEqual(fn(7)(2), 5);
+        assert.strictEqual(fn(7, 2), 5);
     });
 });
