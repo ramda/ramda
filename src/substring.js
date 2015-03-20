@@ -1,20 +1,21 @@
-var invoker = require('./invoker');
+var slice = require('./slice');
 
 
 /**
- * returns a subset of a string between one index and another.
+ * Returns a string containing the characters of `str` from `fromIndex`
+ * (inclusive) to `toIndex` (exclusive).
  *
  * @func
  * @memberOf R
  * @category String
  * @sig Number -> Number -> String -> String
- * @param {Number} indexA An integer between 0 and the length of the string.
- * @param {Number} indexB An integer between 0 and the length of the string.
- * @param {String} str The string to extract from
- * @return {String} The extracted substring.
- * @see R.invoker
+ * @param {Number} fromIndex The start index (inclusive).
+ * @param {Number} toIndex The end index (exclusive).
+ * @param {String} str The string to slice.
+ * @return {String}
+ * @see R.slice
  * @example
  *
  *      R.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
  */
-module.exports = invoker(2, 'substring');
+module.exports = slice;
