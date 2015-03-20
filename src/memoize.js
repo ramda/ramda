@@ -1,5 +1,4 @@
 var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
 var _map = require('./internal/_map');
 
 
@@ -55,7 +54,7 @@ module.exports = (function() {
         var cache = {};
         return function() {
             var key = serialize(arguments);
-            if (!_has(key, cache)) {
+            if (!Object.prototype.hasOwnProperty.call(cache, key)) {
                 cache[key] = fn.apply(this, arguments);
             }
             return cache[key];

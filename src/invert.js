@@ -1,5 +1,4 @@
 var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
 var keys = require('./keys');
 
 
@@ -35,7 +34,7 @@ module.exports = _curry1(function invert(obj) {
     while (++idx < len) {
         var key = props[idx];
         var val = obj[key];
-        var list = _has(val, out) ? out[val] : (out[val] = []);
+        var list = Object.prototype.hasOwnProperty.call(out, val) ? out[val] : (out[val] = []);
         list[list.length] = key;
     }
     return out;

@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
 
 
 /**
@@ -9,7 +8,7 @@ var _has = require('./internal/_has');
  * @func
  * @memberOf R
  * @category Object
- * @sig s -> {s: x} -> Boolean
+ * @sig String -> {String: *} -> Boolean
  * @param {String} prop The name of the property to check for.
  * @param {Object} obj The object to query.
  * @return {Boolean} Whether the property exists.
@@ -26,4 +25,6 @@ var _has = require('./internal/_has');
  *      pointHas('y');  //=> true
  *      pointHas('z');  //=> false
  */
-module.exports = _curry2(_has);
+module.exports = _curry2(function has(prop, obj) {
+    return Object.prototype.hasOwnProperty.call(obj, prop);
+});

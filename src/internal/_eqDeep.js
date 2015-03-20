@@ -1,4 +1,3 @@
-var _has = require('./_has');
 var eq = require('../eq');
 var keys = require('../keys');
 var type = require('../type');
@@ -47,7 +46,7 @@ module.exports = function _eqDeep(a, b, stackA, stackB) {
         idx = keysA.length;
         while (--idx >= 0) {
             var key = keysA[idx];
-            if (!_has(key, b) || !_eqDeep(b[key], a[key], stackA, stackB)) {
+            if (!Object.prototype.hasOwnProperty.call(b, key) || !_eqDeep(b[key], a[key], stackA, stackB)) {
                 return false;
             }
         }
