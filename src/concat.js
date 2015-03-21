@@ -26,11 +26,11 @@ var _isArray = require('./internal/_isArray');
  *      R.concat('ABC', 'DEF'); // 'ABCDEF'
  */
 module.exports = _curry2(function(set1, set2) {
-    if (_isArray(set2)) {
-        return _concat(set1, set2);
-    } else if (_hasMethod('concat', set1)) {
-        return set1.concat(set2);
-    } else {
-        throw new TypeError("can't concat " + typeof set1);
-    }
+  if (_isArray(set2)) {
+    return _concat(set1, set2);
+  } else if (_hasMethod('concat', set1)) {
+    return set1.concat(set2);
+  } else {
+    throw new TypeError("can't concat " + typeof set1);
+  }
 });

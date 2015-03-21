@@ -10,8 +10,12 @@ trim_trailing_whitespace = true
 
 [*.js]
 indent_style = space
-indent_size = 4
+indent_size = 2
 max_line_length = 100
+
+[*.json]
+indent_style = space
+indent_size = 2
 
 [*.md]
 # Two trailing spaces => newline in GitHub-flavored markdown

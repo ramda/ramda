@@ -20,5 +20,5 @@ var clone = require('./clone');
  *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
  */
 module.exports = _curry2(function sort(comparator, list) {
-    return clone(list).sort(comparator);
+  return clone(list).sort(comparator);
 });

@@ -27,5 +27,5 @@ var nAry = require('./nAry');
  *      takesOneArg(1, 2); //=> [1, undefined]
  */
 module.exports = _curry1(function unary(fn) {
-    return nAry(1, fn);
+  return nAry(1, fn);
 });

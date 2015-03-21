@@ -19,12 +19,12 @@ var _indexOf = require('./internal/_indexOf');
  *      R.isSet([{}, {}]); //=> true
  */
 module.exports = _curry1(function isSet(list) {
-    var len = list.length;
-    var idx = -1;
-    while (++idx < len) {
-        if (_indexOf(list, list[idx], idx + 1) >= 0) {
-            return false;
-        }
+  var len = list.length;
+  var idx = -1;
+  while (++idx < len) {
+    if (_indexOf(list, list[idx], idx + 1) >= 0) {
+      return false;
     }
-    return true;
+  }
+  return true;
 });

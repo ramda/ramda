@@ -21,5 +21,5 @@ var uniq = require('./uniq');
  *      R.intersection([1,2,3,4], [7,6,5,4,3]); //=> [4, 3]
  */
 module.exports = _curry2(function intersection(list1, list2) {
-    return uniq(_filter(flip(_contains)(list1), list2));
+  return uniq(_filter(flip(_contains)(list1), list2));
 });

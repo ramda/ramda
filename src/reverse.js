@@ -20,5 +20,5 @@ var _slice = require('./internal/_slice');
  *      R.reverse([]);         //=> []
  */
 module.exports = _curry1(function reverse(list) {
-    return _slice(list).reverse();
+  return _slice(list).reverse();
 });

@@ -19,11 +19,11 @@ var _indexOf = require('./internal/_indexOf');
  *      R.pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1}
  */
 module.exports = _curry2(function pick(names, obj) {
-    var result = {};
-    for (var prop in obj) {
-        if (_indexOf(names, prop) >= 0) {
-            result[prop] = obj[prop];
-        }
+  var result = {};
+  for (var prop in obj) {
+    if (_indexOf(names, prop) >= 0) {
+      result[prop] = obj[prop];
     }
-    return result;
+  }
+  return result;
 });

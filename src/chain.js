@@ -26,5 +26,5 @@ var unnest = require('./unnest');
  *
  */
 module.exports = _curry2(_checkForMethod('chain', function chain(f, list) {
-    return unnest(_map(f, list));
+  return unnest(_map(f, list));
 }));

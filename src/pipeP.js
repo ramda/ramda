@@ -36,5 +36,5 @@ var reverse = require('./reverse');
  *          });
  */
 module.exports = function pipeP() {
-    return composeP.apply(this, reverse(arguments));
+  return composeP.apply(this, reverse(arguments));
 };

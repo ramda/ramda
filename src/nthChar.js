@@ -17,5 +17,5 @@ var _curry2 = require('./internal/_curry2');
  *      R.nthChar(-2, 'Ramda'); //=> 'd'
  */
 module.exports = _curry2(function nthChar(n, str) {
-    return str.charAt(n < 0 ? str.length + n : n);
+  return str.charAt(n < 0 ? str.length + n : n);
 });

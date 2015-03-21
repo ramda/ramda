@@ -19,11 +19,11 @@ var _curry2 = require('./internal/_curry2');
  *      R.zip([1, 2, 3], ['a', 'b', 'c']); //=> [[1, 'a'], [2, 'b'], [3, 'c']]
  */
 module.exports = _curry2(function zip(a, b) {
-    var rv = [];
-    var idx = -1;
-    var len = Math.min(a.length, b.length);
-    while (++idx < len) {
-        rv[idx] = [a[idx], b[idx]];
-    }
-    return rv;
+  var rv = [];
+  var idx = -1;
+  var len = Math.min(a.length, b.length);
+  while (++idx < len) {
+    rv[idx] = [a[idx], b[idx]];
+  }
+  return rv;
 });

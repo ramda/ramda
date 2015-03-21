@@ -19,5 +19,5 @@ var _isArray = require('./_isArray');
  *      _hasMethod('foo', person); //=> false
  */
 module.exports = function _hasMethod(methodName, obj) {
-    return obj != null && !_isArray(obj) && typeof obj[methodName] === 'function';
+  return obj != null && !_isArray(obj) && typeof obj[methodName] === 'function';
 };

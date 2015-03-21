@@ -23,5 +23,5 @@ var _extend = require('./internal/_extend');
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
 module.exports = _curry2(function merge(a, b) {
-    return _extend(_extend({}, a), b);
+  return _extend(_extend({}, a), b);
 });

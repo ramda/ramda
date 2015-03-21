@@ -21,7 +21,7 @@
  *      squareThenDouble(5); //≅ double(square(5)) => 50
  */
 module.exports = function _compose(f, g) {
-    return function() {
-        return f.call(this, g.apply(this, arguments));
-    };
+  return function() {
+    return f.call(this, g.apply(this, arguments));
+  };
 };

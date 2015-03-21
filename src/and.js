@@ -19,5 +19,5 @@ var _curry2 = require('./internal/_curry2');
  *      R.and(null, ''); => false
  */
 module.exports = _curry2(function and(a, b) {
-    return a && b;
+  return a && b;
 });

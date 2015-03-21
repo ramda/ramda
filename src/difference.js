@@ -19,13 +19,13 @@ var _curry2 = require('./internal/_curry2');
  *      R.difference([7,6,5,4,3], [1,2,3,4]); //=> [7,6,5]
  */
 module.exports = _curry2(function difference(first, second) {
-    var out = [];
-    var idx = -1;
-    var firstLen = first.length;
-    while (++idx < firstLen) {
-        if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
-            out[out.length] = first[idx];
-        }
+  var out = [];
+  var idx = -1;
+  var firstLen = first.length;
+  while (++idx < firstLen) {
+    if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
+      out[out.length] = first[idx];
     }
-    return out;
+  }
+  return out;
 });

@@ -19,11 +19,11 @@ var _slice = require('./internal/_slice');
  *      R.aperture(7, [1, 2, 3, 4, 5]); //=> []
  */
 module.exports = _curry2(function aperture(n, list) {
-    var idx = -1;
-    var limit = list.length - (n - 1);
-    var acc = new Array(limit >= 0 ? limit : 0);
-    while (++idx < limit) {
-        acc[idx] = _slice(list, idx, idx + n);
-    }
-    return acc;
+  var idx = -1;
+  var limit = list.length - (n - 1);
+  var acc = new Array(limit >= 0 ? limit : 0);
+  while (++idx < limit) {
+    acc[idx] = _slice(list, idx, idx + n);
+  }
+  return acc;
 });

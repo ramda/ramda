@@ -31,34 +31,34 @@ var _map = require('./internal/_map');
  *      count; //=> 1
  */
 module.exports = (function() {
-    // Returns a string representation of the given value suitable for use as
-    // a property name.
-    //
-    // > repr(42)
-    // '42::[object Number]'
-    var repr = function(x) {
-        return x + '::' + Object.prototype.toString.call(x);
-    };
+  // Returns a string representation of the given value suitable for use as
+  // a property name.
+  //
+  // > repr(42)
+  // '42::[object Number]'
+  var repr = function(x) {
+    return x + '::' + Object.prototype.toString.call(x);
+  };
 
-    // Serializes an array-like object. The approach is similar to that taken
-    // by [CANON](https://github.com/davidchambers/CANON), though it does not
-    // differentiate between objects at all (!) and, since it is not applied
-    // recursively, does not distinguish between [[42]] and [['42']].
-    //
-    // > serialize(['foo', 42])
-    // '2:{foo::[object String],42::[object Number]}'
-    var serialize = function(args) {
-        return args.length + ':{' + _map(repr, args).join(',') + '}';
-    };
+  // Serializes an array-like object. The approach is similar to that taken
+  // by [CANON](https://github.com/davidchambers/CANON), though it does not
+  // differentiate between objects at all (!) and, since it is not applied
+  // recursively, does not distinguish between [[42]] and [['42']].
+  //
+  // > serialize(['foo', 42])
+  // '2:{foo::[object String],42::[object Number]}'
+  var serialize = function(args) {
+    return args.length + ':{' + _map(repr, args).join(',') + '}';
+  };
 
-    return _curry1(function memoize(fn) {
-        var cache = {};
-        return function() {
-            var key = serialize(arguments);
-            if (!_has(key, cache)) {
-                cache[key] = fn.apply(this, arguments);
-            }
-            return cache[key];
-        };
-    });
+  return _curry1(function memoize(fn) {
+    var cache = {};
+    return function() {
+      var key = serialize(arguments);
+      if (!_has(key, cache)) {
+        cache[key] = fn.apply(this, arguments);
+      }
+      return cache[key];
+    };
+  });
 }());

@@ -24,12 +24,12 @@ var _has = require('./internal/_has');
  *      R.countBy(R.toLower)(letters);   //=> {'a': 5, 'b': 4, 'c': 3}
  */
 module.exports = _curry2(function countBy(fn, list) {
-    var counts = {};
-    var len = list.length;
-    var idx = -1;
-    while (++idx < len) {
-        var key = fn(list[idx]);
-        counts[key] = (_has(key, counts) ? counts[key] : 0) + 1;
-    }
-    return counts;
+  var counts = {};
+  var len = list.length;
+  var idx = -1;
+  while (++idx < len) {
+    var key = fn(list[idx]);
+    counts[key] = (_has(key, counts) ? counts[key] : 0) + 1;
+  }
+  return counts;
 });

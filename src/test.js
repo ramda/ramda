@@ -18,5 +18,5 @@ var _curry2 = require('./internal/_curry2');
  *      R.test(/^y/, 'xyz'); //=> false
  */
 module.exports = _curry2(function test(pattern, str) {
-    return _cloneRegExp(pattern).test(str);
+  return _cloneRegExp(pattern).test(str);
 });

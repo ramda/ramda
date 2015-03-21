@@ -9,21 +9,21 @@
  * @return {Function}
  */
 module.exports = function _createMaxMinBy(comparator) {
-    return function(valueComputer, list) {
-        if (!(list && list.length > 0)) {
-            return;
-        }
-        var idx = 0,
-            winner = list[idx],
-            computedWinner = valueComputer(winner),
-            computedCurrent;
-        while (++idx < list.length) {
-            computedCurrent = valueComputer(list[idx]);
-            if (comparator(computedCurrent, computedWinner)) {
-                computedWinner = computedCurrent;
-                winner = list[idx];
-            }
-        }
-        return winner;
-    };
+  return function(valueComputer, list) {
+    if (!(list && list.length > 0)) {
+      return;
+    }
+    var idx = 0;
+    var winner = list[idx];
+    var computedWinner = valueComputer(winner);
+    var computedCurrent;
+    while (++idx < list.length) {
+      computedCurrent = valueComputer(list[idx]);
+      if (comparator(computedCurrent, computedWinner)) {
+        computedWinner = computedCurrent;
+        winner = list[idx];
+      }
+    }
+    return winner;
+  };
 };

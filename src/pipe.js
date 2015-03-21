@@ -30,5 +30,5 @@ var reverse = require('./reverse');
  *      squareThenDoubleThenTriple(5); //=> 150
  */
 module.exports = function pipe() {
-    return compose.apply(this, reverse(arguments));
+  return compose.apply(this, reverse(arguments));
 };

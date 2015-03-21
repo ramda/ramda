@@ -27,5 +27,5 @@ var _curry2 = require('./internal/_curry2');
  *      R.hasIn('area', square);  //=> true
  */
 module.exports = _curry2(function(prop, obj) {
-    return prop in obj;
+  return prop in obj;
 });

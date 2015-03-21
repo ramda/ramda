@@ -28,5 +28,5 @@ var curry = require('./curry');
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  */
 module.exports = curry(function call(fn) {
-    return fn.apply(this, _slice(arguments, 1));
+  return fn.apply(this, _slice(arguments, 1));
 });

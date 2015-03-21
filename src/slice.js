@@ -20,5 +20,5 @@ var _curry3 = require('./internal/_curry3');
  *      R.slice(2, 5)(xs); //=> [2, 3, 4]
  */
 module.exports = _curry3(_checkForMethod('slice', function slice(fromIndex, toIndex, xs) {
-    return Array.prototype.slice.call(xs, fromIndex, toIndex);
+  return Array.prototype.slice.call(xs, fromIndex, toIndex);
 }));

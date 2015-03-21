@@ -18,5 +18,5 @@ var _slice = require('./internal/_slice');
  *      R.tail(['fi', 'fo', 'fum']); //=> ['fo', 'fum']
  */
 module.exports = _checkForMethod('tail', function(list) {
-    return _slice(list, 1);
+  return _slice(list, 1);
 });

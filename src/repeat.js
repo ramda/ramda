@@ -22,5 +22,5 @@ var times = require('./times');
  *      repeatedObjs[0] === repeatedObjs[1]; //=> true
  */
 module.exports = _curry2(function repeat(value, n) {
-    return times(always(value), n);
+  return times(always(value), n);
 });

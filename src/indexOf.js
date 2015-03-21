@@ -21,5 +21,5 @@ var _indexOf = require('./internal/_indexOf');
  *      R.indexOf(10, [1,2,3,4]); //=> -1
  */
 module.exports = _curry2(function indexOf(target, list) {
-    return _indexOf(list, target);
+  return _indexOf(list, target);
 });

@@ -30,7 +30,7 @@ var curryN = require('./curryN');
  *
  */
 module.exports = _curry2(function wrap(fn, wrapper) {
-    return curryN(fn.length, function() {
-        return wrapper.apply(this, _concat([fn], arguments));
-    });
+  return curryN(fn.length, function() {
+    return wrapper.apply(this, _concat([fn], arguments));
+  });
 });

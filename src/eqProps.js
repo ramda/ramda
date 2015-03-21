@@ -21,5 +21,5 @@ var _curry3 = require('./internal/_curry3');
  *      R.eqProps('c', o1, o2); //=> true
  */
 module.exports = _curry3(function eqProps(prop, obj1, obj2) {
-    return obj1[prop] === obj2[prop];
+  return obj1[prop] === obj2[prop];
 });

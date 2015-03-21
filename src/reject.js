@@ -22,5 +22,5 @@ var filter = require('./filter');
  *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
  */
 module.exports = _curry2(function reject(fn, list) {
-    return filter(_complement(fn), list);
+  return filter(_complement(fn), list);
 });

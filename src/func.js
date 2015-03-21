@@ -24,5 +24,5 @@ var curry = require('./curry');
  *      R.func('f', obj); //=> 'f called'
  */
 module.exports = curry(function func(funcName, obj) {
-    return obj[funcName].apply(obj, _slice(arguments, 2));
+  return obj[funcName].apply(obj, _slice(arguments, 2));
 });
