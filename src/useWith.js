@@ -29,11 +29,11 @@ var curry = require('./curry');
  *      var byAge = R.useWith(R.filter, R.propEq('age'), R.identity);
  *
  *      var kids = [
- *          {name: 'Abbie', age: 6},
- *          {name: 'Brian', age: 5},
- *          {name: 'Chris', age: 6},
- *          {name: 'David', age: 4},
- *          {name: 'Ellie', age: 5}
+ *        {name: 'Abbie', age: 6},
+ *        {name: 'Brian', age: 5},
+ *        {name: 'Chris', age: 6},
+ *        {name: 'David', age: 4},
+ *        {name: 'Ellie', age: 5}
  *      ];
  *
  *      byAge(5, kids); //=> [{name: 'Brian', age: 5}, {name: 'Ellie', age: 5}]

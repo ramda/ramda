@@ -21,7 +21,7 @@ var _curry3 = require('./internal/_curry3');
  *
  *      var digits = ['1', '2', '3', '4'];
  *      var append = function(a, b) {
- *          return [a + b, a + b];
+ *        return [a + b, a + b];
  *      }
  *
  *      R.mapAccum(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]

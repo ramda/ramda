@@ -31,9 +31,9 @@ var reverse = require('./reverse');
  *
  *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
  *      squareAsyncThenDoubleThenTriple(5)
- *          .then(function(result) {
- *              // result is 150
- *          });
+ *        .then(function(result) {
+ *          // result is 150
+ *        });
  */
 module.exports = function pipeP() {
   return composeP.apply(this, reverse(arguments));

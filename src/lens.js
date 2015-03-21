@@ -21,20 +21,20 @@ var _curry2 = require('./internal/_curry2');
  * @example
  *
  *     var headLens = R.lens(
- *         function get(arr) { return arr[0]; },
- *         function set(val, arr) { return [val].concat(arr.slice(1)); }
+ *       function get(arr) { return arr[0]; },
+ *       function set(val, arr) { return [val].concat(arr.slice(1)); }
  *     );
  *     headLens([10, 20, 30, 40]); //=> 10
  *     headLens.set('mu', [10, 20, 30, 40]); //=> ['mu', 20, 30, 40]
  *     headLens.map(function(x) { return x + 1; }, [10, 20, 30, 40]); //=> [11, 20, 30, 40]
  *
  *     var phraseLens = R.lens(
- *         function get(obj) { return obj.phrase; },
- *         function set(val, obj) {
- *             var out = R.clone(obj);
- *             out.phrase = val;
- *             return out;
- *         }
+ *       function get(obj) { return obj.phrase; },
+ *       function set(val, obj) {
+ *         var out = R.clone(obj);
+ *         out.phrase = val;
+ *         return out;
+ *       }
  *     );
  *     var obj1 = { phrase: 'Absolute filth . . . and I LOVED it!'};
  *     var obj2 = { phrase: "What's all this, then?"};

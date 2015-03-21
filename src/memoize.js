@@ -22,8 +22,8 @@ var _map = require('./internal/_map');
  *
  *      var count = 0;
  *      var factorial = R.memoize(function(n) {
- *          count += 1;
- *          return R.product(R.range(1, n + 1));
+ *        count += 1;
+ *        return R.product(R.range(1, n + 1));
  *      });
  *      factorial(5); //=> 120
  *      factorial(5); //=> 120

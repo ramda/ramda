@@ -15,11 +15,11 @@ var _curry2 = require('./internal/_curry2');
  * @example
  *
  *      function Rectangle(width, height) {
- *          this.width = width;
- *          this.height = height;
+ *        this.width = width;
+ *        this.height = height;
  *      }
  *      Rectangle.prototype.area = function() {
- *          return this.width * this.height;
+ *        return this.width * this.height;
  *      };
  *
  *      var square = new Rectangle(2, 2);
