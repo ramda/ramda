@@ -9,7 +9,7 @@ describe('invert', function() {
 
     var inverted = R.invert([0]);
     var keys = R.keys(inverted);
-    assert(R.is(Array, inverted[keys.pop()]));
+    assert.strictEqual(R.is(Array, inverted[keys.pop()]), true);
   });
 
   it('returns an empty object when applied to a primitive', function() {
@@ -31,9 +31,9 @@ describe('invert', function() {
     assert.deepEqual(R.invert(['a', 'b', 'a']), {a:['0', '2'], b:['1']});
 
     var inverted = R.invert({x:'a', y:'b', z:'a', _id:'a'});
-    assert(R.indexOf('x', inverted.a)   > -1);
-    assert(R.indexOf('z', inverted.a)   > -1);
-    assert(R.indexOf('_id', inverted.a) > -1);
+    assert.strictEqual(R.indexOf('x', inverted.a) >= 0, true);
+    assert.strictEqual(R.indexOf('z', inverted.a) >= 0, true);
+    assert.strictEqual(R.indexOf('_id', inverted.a) >= 0, true);
     assert.deepEqual(inverted.b, ['y']);
   });
 

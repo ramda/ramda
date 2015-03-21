@@ -21,7 +21,7 @@ describe('liftN', function() {
   var addN5 = R.liftN(5, addN);
 
   it('returns a function', function() {
-    assert(typeof R.liftN(3, add3) === 'function');
+    assert.strictEqual(typeof R.liftN(3, add3), 'function');
   });
 
   it('limits a variadic function to the specified arity', function() {
@@ -42,7 +42,7 @@ describe('liftN', function() {
 
   it('is curried', function() {
     var f4 = R.liftN(4);
-    assert(typeof f4 === 'function');
+    assert.strictEqual(typeof f4, 'function');
     assert.deepEqual(f4(addN)([1], [2], [3], [4, 5]), [10, 11]);
   });
 

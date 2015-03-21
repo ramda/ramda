@@ -12,7 +12,7 @@ describe('all', function() {
 
   it('returns true if all elements satisfy the predicate', function() {
     assert.strictEqual(R.all(even, [2, 4, 6, 8, 10, 12]), true);
-    assert(R.all(isFalse, [false, false, false]));
+    assert.strictEqual(R.all(isFalse, [false, false, false]), true);
   });
 
   it('returns false if any element fails to satisfy the predicate', function() {
@@ -55,6 +55,6 @@ describe('all', function() {
   it('is automatically curried', function() {
     var count = 0;
     var test = function(n) {count += 1; return even(n);};
-    assert(R.all(test)([2, 4, 6, 7, 8, 10]) === false);
+    assert.strictEqual(R.all(test)([2, 4, 6, 7, 8, 10]), false);
   });
 });

@@ -9,7 +9,7 @@ describe('takeWhile', function() {
   });
 
   it('starts at the right arg and acknowledges undefined', function() {
-    assert.deepEqual(R.takeWhile(function() { assert.ok(false); }, []), []);
+    assert.deepEqual(R.takeWhile(function() { assert(false); }, []), []);
     assert.deepEqual(R.takeWhile(function(x) {return x !== void 0;}, [1, 3, void 0, 5, 7]), [1, 3]);
   });
 

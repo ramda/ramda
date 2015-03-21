@@ -27,9 +27,9 @@ describe('lens', function() {
   var phraseLens = R.lens(getPhrase, setPhrase);
 
   it('returns a function with `set` and `map` properties', function() {
-    assert(typeof phraseLens === 'function');
-    assert(typeof phraseLens.set === 'function');
-    assert(typeof phraseLens.map === 'function');
+    assert.strictEqual(typeof phraseLens, 'function');
+    assert.strictEqual(typeof phraseLens.set, 'function');
+    assert.strictEqual(typeof phraseLens.map, 'function');
   });
 
   it('retrieves values from inside an object as defined by the `getter` function', function() {
@@ -77,8 +77,8 @@ describe('lens', function() {
     };
     var x2 = function(x) { return x * 2; };
     var partial = R.lens(get1);
-    assert(typeof partial === 'function');
-    assert(typeof partial(set1) === 'function');
+    assert.strictEqual(typeof partial, 'function');
+    assert.strictEqual(typeof partial(set1), 'function');
     assert.deepEqual(partial(set1)(['zeroth', 'first', 'second']), 'first');
     assert.deepEqual(partial(set1)([10, 20, 30]), 20);
     assert.deepEqual(partial(set1).set('zoom', [10, 20, 30]), [10, 'zoom', 30]);

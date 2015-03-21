@@ -14,8 +14,8 @@ describe('replace', function() {
   });
 
   it('is curried up to 3 arguments', function() {
-    assert(R.replace(null) instanceof Function);
-    assert(R.replace(null, null) instanceof Function);
+    assert.strictEqual(R.replace(null).constructor, Function);
+    assert.strictEqual(R.replace(null, null).constructor, Function);
 
     var replaceSemicolon = R.replace(';');
     var removeSemicolon = replaceSemicolon('');

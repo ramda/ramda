@@ -36,7 +36,7 @@ describe('difference', function() {
   });
 
   it('is curried', function() {
-    assert(typeof R.difference([1, 2, 3]) === 'function');
+    assert.strictEqual(typeof R.difference([1, 2, 3]), 'function');
     assert.deepEqual(R.difference([1, 2, 3])([1, 3]), [2]);
   });
 });

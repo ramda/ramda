@@ -13,7 +13,7 @@ describe('union', function() {
   });
 
   it('is curried', function() {
-    assert(typeof R.union(M) === 'function');
+    assert.strictEqual(typeof R.union(M), 'function');
     assert.deepEqual(R.union(M)(N), [1, 2, 3, 4, 5, 6]);
   });
 

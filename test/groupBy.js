@@ -58,6 +58,6 @@ describe('groupBy', function() {
       result: function(x) { return x; },
       step: R.merge
     };
-    assert(_isTransformer(R.groupBy(byType, xf)));
+    assert.strictEqual(_isTransformer(R.groupBy(byType, xf)), true);
   });
 });
