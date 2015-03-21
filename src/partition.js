@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
 
 
 /**
@@ -20,9 +19,13 @@ var _reduce = require('./internal/_reduce');
  *      //=> [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
  */
 module.exports = _curry2(function partition(pred, list) {
-  return _reduce(function(acc, elt) {
-    var xs = acc[pred(elt) ? 0 : 1];
-    xs[xs.length] = elt;
-    return acc;
-  }, [[], []], list);
+  var pass = [];
+  var fail = [];
+  var idx = -1;
+  var len = list.length;
+  while (++idx < len) {
+    var val = list[idx];
+    (pred(val) ? pass : fail).push(val);
+  }
+  return [pass, fail];
 });
