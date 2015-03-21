@@ -34,9 +34,9 @@ var _slice = require('./internal/_slice');
  *      sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
  */
 module.exports = _curry2(function sortBy(fn, list) {
-    return _slice(list).sort(function(a, b) {
-        var aa = fn(a);
-        var bb = fn(b);
-        return aa < bb ? -1 : aa > bb ? 1 : 0;
-    });
+  return _slice(list).sort(function(a, b) {
+    var aa = fn(a);
+    var bb = fn(b);
+    return aa < bb ? -1 : aa > bb ? 1 : 0;
+  });
 });

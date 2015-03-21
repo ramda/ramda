@@ -27,5 +27,5 @@ var constructN = require('./constructN');
  *      R.map(R.construct(Widget), allConfigs); // a list of Widgets
  */
 module.exports = _curry1(function construct(Fn) {
-    return constructN(Fn.length, Fn);
+  return constructN(Fn.length, Fn);
 });

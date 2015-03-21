@@ -7,5 +7,5 @@
  * @return {Boolean}
  */
 module.exports = Number.isInteger || function _isInteger(n) {
-    return (n << 0) === n;
+  return (n << 0) === n;
 };

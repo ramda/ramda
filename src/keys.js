@@ -20,33 +20,33 @@ var _has = require('./internal/_has');
  *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
  */
 module.exports = (function() {
-    // cover IE < 9 keys issues
-    var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
-    var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
-                              'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+  // cover IE < 9 keys issues
+  var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
+  var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
+                            'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
 
-    return _curry1(function keys(obj) {
-        if (Object(obj) !== obj) {
-            return [];
+  return _curry1(function keys(obj) {
+    if (Object(obj) !== obj) {
+      return [];
+    }
+    if (Object.keys) {
+      return Object.keys(obj);
+    }
+    var prop, ks = [], nIdx;
+    for (prop in obj) {
+      if (_has(prop, obj)) {
+        ks[ks.length] = prop;
+      }
+    }
+    if (hasEnumBug) {
+      nIdx = nonEnumerableProps.length;
+      while (--nIdx >= 0) {
+        prop = nonEnumerableProps[nIdx];
+        if (_has(prop, obj) && !_contains(prop, ks)) {
+          ks[ks.length] = prop;
         }
-        if (Object.keys) {
-            return Object.keys(obj);
-        }
-        var prop, ks = [], nIdx;
-        for (prop in obj) {
-            if (_has(prop, obj)) {
-                ks[ks.length] = prop;
-            }
-        }
-        if (hasEnumBug) {
-            nIdx = nonEnumerableProps.length;
-            while (--nIdx >= 0) {
-                prop = nonEnumerableProps[nIdx];
-                if (_has(prop, obj) && !_contains(prop, ks)) {
-                    ks[ks.length] = prop;
-                }
-            }
-        }
-        return ks;
-    });
+      }
+    }
+    return ks;
+  });
 }());

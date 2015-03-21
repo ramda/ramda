@@ -17,11 +17,11 @@ var _indexOf = require('./internal/_indexOf');
  *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
  */
 module.exports = _curry2(function omit(names, obj) {
-    var result = {};
-    for (var prop in obj) {
-        if (_indexOf(names, prop) < 0) {
-            result[prop] = obj[prop];
-        }
+  var result = {};
+  for (var prop in obj) {
+    if (_indexOf(names, prop) < 0) {
+      result[prop] = obj[prop];
     }
-    return result;
+  }
+  return result;
 });

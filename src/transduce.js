@@ -44,5 +44,5 @@ var curryN = require('./curryN');
  *      R.transduce(transducer, R.flip(R.append), [], numbers); //=> [2, 3]
  */
 module.exports = curryN(4, function(xf, fn, acc, list) {
-    return _reduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
+  return _reduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
 });

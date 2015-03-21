@@ -25,5 +25,5 @@ var _path = require('./internal/_path');
  *     R.filter(isFamous, users); //=> [ user1 ]
  */
 module.exports = _curry3(function pathEq(path, val, obj) {
-    return _path(path, obj) === val;
+  return _path(path, obj) === val;
 });

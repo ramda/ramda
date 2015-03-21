@@ -24,5 +24,5 @@ var _curry3 = require('./internal/_curry3');
  *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
  */
 module.exports = _curry3(function propEq(name, val, obj) {
-    return obj[name] === val;
+  return obj[name] === val;
 });

@@ -33,9 +33,9 @@ var _curry3 = require('./internal/_curry3');
  *      R.reduceRight(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
  */
 module.exports = _curry3(function reduceRight(fn, acc, list) {
-    var idx = list.length;
-    while (--idx >= 0) {
-        acc = fn(acc, list[idx]);
-    }
-    return acc;
+  var idx = list.length;
+  while (--idx >= 0) {
+    acc = fn(acc, list[idx]);
+  }
+  return acc;
 });

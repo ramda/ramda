@@ -28,6 +28,6 @@
   "requireSpaceBetweenArguments": true,
   "requireSpacesInConditionalExpression": true,
   "requireSpacesInFunction": {"beforeOpeningCurlyBrace": true},
-  "validateIndentation": 4,
+  "validateIndentation": 2,
   "validateQuoteMarks": {"escape": true, "mark": "'"}
 }

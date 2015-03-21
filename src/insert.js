@@ -22,6 +22,6 @@ var _slice = require('./internal/_slice');
  *      R.insert(2, 'x', [1,2,3,4]); //=> [1,2,'x',3,4]
  */
 module.exports = _curry3(function insert(idx, elt, list) {
-    idx = idx < list.length && idx >= 0 ? idx : list.length;
-    return _concat(_append(elt, _slice(list, 0, idx)), _slice(list, idx));
+  idx = idx < list.length && idx >= 0 ? idx : list.length;
+  return _concat(_append(elt, _slice(list, 0, idx)), _slice(list, idx));
 });

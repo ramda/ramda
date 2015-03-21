@@ -21,5 +21,5 @@ var curry = require('./curry');
  *      toBinary(63); //=> '111111'
  */
 module.exports = curry(function invoke(methodName, obj, args) {
-    return obj[methodName].apply(obj, args);
+  return obj[methodName].apply(obj, args);
 });

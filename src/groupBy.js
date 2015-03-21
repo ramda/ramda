@@ -42,9 +42,9 @@ var _xgroupBy = require('./internal/_xgroupBy');
  *     // }
  */
 module.exports = _curry2(_dispatchable('groupBy', _xgroupBy, function groupBy(fn, list) {
-    return _reduce(function(acc, elt) {
-        var key = fn(elt);
-        acc[key] = _append(elt, acc[key] || (acc[key] = []));
-        return acc;
-    }, {}, list);
+  return _reduce(function(acc, elt) {
+    var key = fn(elt);
+    acc[key] = _append(elt, acc[key] || (acc[key] = []));
+    return acc;
+  }, {}, list);
 }));

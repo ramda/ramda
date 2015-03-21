@@ -17,5 +17,5 @@ var is = require('./is');
  *      R.length([1, 2, 3]); //=> 3
  */
 module.exports = _curry1(function length(list) {
-    return list != null && is(Number, list.length) ? list.length : NaN;
+  return list != null && is(Number, list.length) ? list.length : NaN;
 });

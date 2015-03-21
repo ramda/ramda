@@ -25,8 +25,8 @@ var map = require('./map');
  *     madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
 module.exports = _curry2(function liftN(arity, fn) {
-    var lifted = curryN(arity, fn);
-    return curryN(arity, function() {
-        return _reduce(ap, map(lifted, arguments[0]), _slice(arguments, 1));
-    });
+  var lifted = curryN(arity, fn);
+  return curryN(arity, function() {
+    return _reduce(ap, map(lifted, arguments[0]), _slice(arguments, 1));
+  });
 });

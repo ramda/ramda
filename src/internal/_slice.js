@@ -16,14 +16,14 @@
  *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
  */
 module.exports = function _slice(args, from, to) {
-    switch (arguments.length) {
-        case 1: return _slice(args, 0, args.length);
-        case 2: return _slice(args, from, args.length);
-        default:
-            var length = Math.max(0, to - from), list = [], idx = -1;
-            while (++idx < length) {
-                list[idx] = args[from + idx];
-            }
-            return list;
-    }
+  switch (arguments.length) {
+    case 1: return _slice(args, 0, args.length);
+    case 2: return _slice(args, from, args.length);
+    default:
+      var length = Math.max(0, to - from), list = [], idx = -1;
+      while (++idx < length) {
+        list[idx] = args[from + idx];
+      }
+      return list;
+  }
 };

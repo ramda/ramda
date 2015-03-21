@@ -16,5 +16,5 @@ var _hasMethod = require('./internal/_hasMethod');
  *      R.empty([1,2,3,4,5]); //=> []
  */
 module.exports = _curry1(function empty(x) {
-    return _hasMethod('empty', x) ? x.empty() : [];
+  return _hasMethod('empty', x) ? x.empty() : [];
 });

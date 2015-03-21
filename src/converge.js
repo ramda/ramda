@@ -30,11 +30,11 @@ var curryN = require('./curryN');
  *      R.converge(add3, multiply, add, subtract)(1, 2); //=> 4
  */
 module.exports = curryN(3, function(after) {
-    var fns = _slice(arguments, 1);
-    return function() {
-        var args = arguments;
-        return after.apply(this, _map(function(fn) {
-            return fn.apply(this, args);
-        }, fns));
-    };
+  var fns = _slice(arguments, 1);
+  return function() {
+    var args = arguments;
+    return after.apply(this, _map(function(fn) {
+      return fn.apply(this, args);
+    }, fns));
+  };
 });

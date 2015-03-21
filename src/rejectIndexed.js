@@ -23,5 +23,5 @@ var _filterIndexed = require('./internal/_filterIndexed');
  *      R.rejectIndexed(lastTwo, [8, 6, 7, 5, 3, 0, 9]); //=> [8, 6, 7, 5, 3]
  */
 module.exports = _curry2(function rejectIndexed(fn, list) {
-    return _filterIndexed(_complement(fn), list);
+  return _filterIndexed(_complement(fn), list);
 });

@@ -36,9 +36,9 @@ var keys = require('./keys');
  *      R.filter(R.where({x: 10}), xs); // ==> [{x: 10, y: 2}, {x: 10, y: 4}]
  */
 module.exports = _curry2(function where(spec, testObj) {
-    var parsedSpec = groupBy(function(key) {
-        return typeof spec[key] === 'function' ? 'fn' : 'obj';
-    }, keys(spec));
+  var parsedSpec = groupBy(function(key) {
+    return typeof spec[key] === 'function' ? 'fn' : 'obj';
+  }, keys(spec));
 
-    return _satisfiesSpec(spec, parsedSpec, testObj);
+  return _satisfiesSpec(spec, parsedSpec, testObj);
 });

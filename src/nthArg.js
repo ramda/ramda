@@ -17,7 +17,7 @@ var _nth = require('./internal/_nth');
  *      R.nthArg(-1)('a', 'b', 'c'); //=> 'c'
  */
 module.exports = _curry1(function nthArg(n) {
-    return function() {
-        return _nth(n, arguments);
-    };
+  return function() {
+    return _nth(n, arguments);
+  };
 });

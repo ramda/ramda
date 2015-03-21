@@ -19,5 +19,5 @@ var reduce = require('./reduce');
  *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
  */
 module.exports = _curry1(function mergeAll(list) {
-    return reduce(merge, {}, list);
+  return reduce(merge, {}, list);
 });

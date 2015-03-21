@@ -22,5 +22,5 @@ var _xdrop = require('./internal/_xdrop');
  *     R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
  */
 module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, list) {
-    return n < list.length ? _slice(list, n) : [];
+  return n < list.length ? _slice(list, n) : [];
 }));

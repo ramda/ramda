@@ -17,10 +17,10 @@ var keys = require('../keys');
  *      //=> { 'name': 'fred', 'age': 40 }
  */
 module.exports = function _extend(destination, other) {
-    var props = keys(other),
-        idx = -1, length = props.length;
-    while (++idx < length) {
-        destination[props[idx]] = other[props[idx]];
-    }
-    return destination;
+  var props = keys(other);
+  var idx = -1, length = props.length;
+  while (++idx < length) {
+    destination[props[idx]] = other[props[idx]];
+  }
+  return destination;
 };

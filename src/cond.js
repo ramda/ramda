@@ -24,13 +24,13 @@
  *      fn(100); //=> 'water boils at 100°C'
  */
 module.exports = function cond() {
-    var pairs = arguments;
-    return function() {
-        var idx = -1;
-        while (++idx < pairs.length) {
-            if (pairs[idx][0].apply(this, arguments)) {
-                return pairs[idx][1].apply(this, arguments);
-            }
-        }
-    };
+  var pairs = arguments;
+  return function() {
+    var idx = -1;
+    while (++idx < pairs.length) {
+      if (pairs[idx][0].apply(this, arguments)) {
+        return pairs[idx][1].apply(this, arguments);
+      }
+    }
+  };
 };

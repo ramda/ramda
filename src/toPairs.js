@@ -19,11 +19,11 @@ var _has = require('./internal/_has');
  *      R.toPairs({a: 1, b: 2, c: 3}); //=> [['a', 1], ['b', 2], ['c', 3]]
  */
 module.exports = _curry1(function toPairs(obj) {
-    var pairs = [];
-    for (var prop in obj) {
-        if (_has(prop, obj)) {
-            pairs[pairs.length] = [prop, obj[prop]];
-        }
+  var pairs = [];
+  for (var prop in obj) {
+    if (_has(prop, obj)) {
+      pairs[pairs.length] = [prop, obj[prop]];
     }
-    return pairs;
+  }
+  return pairs;
 });

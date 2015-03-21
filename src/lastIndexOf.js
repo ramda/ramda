@@ -20,5 +20,5 @@ var _lastIndexOf = require('./internal/_lastIndexOf');
  *      R.lastIndexOf(10, [1,2,3,4]); //=> -1
  */
 module.exports = _curry2(function lastIndexOf(target, list) {
-    return _lastIndexOf(list, target);
+  return _lastIndexOf(list, target);
 });

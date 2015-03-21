@@ -27,8 +27,8 @@ var keys = require('./keys');
  *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
  */
 module.exports = _curry2(function mapObject(fn, obj) {
-    return _reduce(function(acc, key) {
-        acc[key] = fn(obj[key]);
-        return acc;
-    }, {}, keys(obj));
+  return _reduce(function(acc, key) {
+    acc[key] = fn(obj[key]);
+    return acc;
+  }, {}, keys(obj));
 });
