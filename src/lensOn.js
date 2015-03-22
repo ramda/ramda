@@ -4,7 +4,6 @@ var _curry3 = require('./internal/_curry3');
 /**
  * Returns a lens associated with the provided object.
  *
- *
  * @func
  * @memberOf R
  * @category Object
@@ -23,7 +22,6 @@ var _curry3 = require('./internal/_curry3');
  *     xoLens(); //=> 1
  *     xoLens.set(1000); //=> {x: 1000}
  *     xoLens.map(R.add(1)); //=> {x: 2}
- *
  */
 module.exports = _curry3(function lensOn(get, set, obj) {
   var lns = function() { return get(obj); };

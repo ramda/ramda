@@ -32,7 +32,6 @@ var map = require('./map');
  *
  *     var cs = [[1, 2], [3, 4]];
  *     R.commuteMap(plus10map, R.of, cs); //=> [[11, 13], [12, 13], [11, 14], [12, 14]]
- *
  */
 module.exports = _curry3(function commuteMap(fn, of, list) {
   function consF(acc, ftor) {
