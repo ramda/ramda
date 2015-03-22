@@ -23,7 +23,7 @@ var madd5 = R.lift(add5);
 describe('lift', function() {
 
   it('returns a function if called with just a function', function() {
-    assert(typeof R.lift(R.add) === 'function');
+    assert.strictEqual(typeof R.lift(R.add), 'function');
   });
 
   it('produces a cross-product of array values', function() {

@@ -23,7 +23,7 @@ describe('bind', function() {
   };
 
   it('returns a function', function() {
-    assert(typeof R.bind(add, Foo) === 'function');
+    assert.strictEqual(typeof R.bind(add, Foo), 'function');
   });
 
   it('returns a function bound to the specified context object', function() {
@@ -38,8 +38,8 @@ describe('bind', function() {
 
   it('works with built-in types', function() {
     var abc = R.bind(String.prototype.toLowerCase, 'ABCDEFG');
-    assert(typeof abc === 'function');
-    assert(abc() === 'abcdefg');
+    assert.strictEqual(typeof abc, 'function');
+    assert.strictEqual(abc(), 'abcdefg');
   });
 
   it('works with user-defined types', function() {
@@ -59,8 +59,8 @@ describe('bind', function() {
       return this.x + 1;
     }
     var incPojso = R.bind(incThis, pojso);
-    assert(typeof incPojso === 'function');
-    assert(incPojso() === 101);
+    assert.strictEqual(typeof incPojso, 'function');
+    assert.strictEqual(incPojso(), 101);
   });
 
   it('does not interefere with existing object methods', function() {
@@ -75,7 +75,7 @@ describe('bind', function() {
 
   it('is curried', function() {
     var f = new Foo(1);
-    assert(R.bind(add)(f)(10) === 11);
+    assert.strictEqual(R.bind(add)(f)(10), 11);
   });
 
   it('preserves arity', function() {

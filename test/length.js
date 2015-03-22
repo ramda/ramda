@@ -26,18 +26,18 @@ describe('length', function() {
 
   it('returns NaN for value of unexpected type', function() {
     function isNaN_(x) { return x !== x; }
-    assert(isNaN_(R.length(0)));
-    assert(isNaN_(R.length({})));
-    assert(isNaN_(R.length(null)));
-    assert(isNaN_(R.length(undefined)));
+    assert.strictEqual(isNaN_(R.length(0)), true);
+    assert.strictEqual(isNaN_(R.length({})), true);
+    assert.strictEqual(isNaN_(R.length(null)), true);
+    assert.strictEqual(isNaN_(R.length(undefined)), true);
   });
 
   it('returns NaN for length property of unexpected type', function() {
     function isNaN_(x) { return x !== x; }
-    assert(isNaN_(R.length({length: ''})));
-    assert(isNaN_(R.length({length: '1.23'})));
-    assert(isNaN_(R.length({length: null})));
-    assert(isNaN_(R.length({length: undefined})));
-    assert(isNaN_(R.length({})));
+    assert.strictEqual(isNaN_(R.length({length: ''})), true);
+    assert.strictEqual(isNaN_(R.length({length: '1.23'})), true);
+    assert.strictEqual(isNaN_(R.length({length: null})), true);
+    assert.strictEqual(isNaN_(R.length({length: undefined})), true);
+    assert.strictEqual(isNaN_(R.length({})), true);
   });
 });

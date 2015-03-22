@@ -36,9 +36,9 @@ describe('lensOn', function() {
     var x2 = function(x) { return x * 2; };
     var partial1 = R.lensOn(getX);
     var partial2 = partial1(setX);
-    assert(typeof partial1 === 'function');
-    assert(typeof partial2 === 'function');
-    assert(typeof partial2({x: 1}) === 'function');
+    assert.strictEqual(typeof partial1, 'function');
+    assert.strictEqual(typeof partial2, 'function');
+    assert.strictEqual(typeof partial2({x: 1}), 'function');
     assert.deepEqual(partial2({x: 'cow'}).set('moo'), {x: 'moo'});
     assert.deepEqual(partial2({x: 100}).map(x2), {x: 200});
   });

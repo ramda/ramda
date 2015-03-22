@@ -45,11 +45,11 @@ describe('deep clone objects', function() {
     var z = {b: y};
     x.c = z;
     var clone = R.clone(x);
-    assert.ok(x !== clone);
-    assert.ok(x.c !== clone.c);
-    assert.ok(x.c.b !== clone.c.b);
-    assert.ok(x.c.b.a !== clone.c.b.a);
-    assert.ok(x.c.b.a.c !== clone.c.b.a.c);
+    assert.notStrictEqual(x, clone);
+    assert.notStrictEqual(x.c, clone.c);
+    assert.notStrictEqual(x.c.b, clone.c.b);
+    assert.notStrictEqual(x.c.b.a, clone.c.b.a);
+    assert.notStrictEqual(x.c.b.a.c, clone.c.b.a.c);
     assert.deepEqual(R.keys(clone), R.keys(x));
     assert.deepEqual(R.keys(clone.c), R.keys(x.c));
     assert.deepEqual(R.keys(clone.c.b), R.keys(x.c.b));
@@ -77,7 +77,7 @@ describe('deep clone objects', function() {
     var clone = R.clone(obj);
     assert.strictEqual(clone.get(), 10);
 
-    assert.ok(obj !== clone);
+    assert.notStrictEqual(obj, clone);
 
     obj.set(11);
     assert.strictEqual(obj.get(), 11);
@@ -97,9 +97,9 @@ describe('deep clone arrays', function() {
     var list = [1, [1, 2, 3], [[[5]]]];
     var clone = R.clone(list);
 
-    assert.ok(list !== clone);
-    assert.ok(list[2] !== clone[2]);
-    assert.ok(list[2][0] !== clone[2][0]);
+    assert.notStrictEqual(list, clone);
+    assert.notStrictEqual(list[2], clone[2]);
+    assert.notStrictEqual(list[2][0], clone[2][0]);
 
     assert.deepEqual(clone, [1, [1, 2, 3], [[[5]]]]);
   });
@@ -113,7 +113,7 @@ describe('deep `clone` functions', function() {
     var clone = R.clone(list);
 
     assert.strictEqual(clone[0].a(10), 20);
-    assert.ok(list[0].a === clone[0].a);
+    assert.strictEqual(list[0].a, clone[0].a);
   });
 });
 
@@ -123,7 +123,7 @@ describe('built-in types', function() {
 
     var clone = R.clone(date);
 
-    assert.ok(date !== clone);
+    assert.notStrictEqual(date, clone);
     assert.deepEqual(clone.toString(), new Date(2014, 10, 14, 23, 59, 59, 999).toString());
 
     assert.strictEqual(clone.getDay(), 5); // friday
@@ -162,10 +162,10 @@ describe('deep clone deep nested mixed objects', function() {
     var list = [{b: obj}, {b: obj}];
     var clone = R.clone(list);
 
-    assert.ok(list[0].b === list[1].b);
-    assert.ok(clone[0].b === clone[1].b);
-    assert.ok(clone[0].b !== list[0].b);
-    assert.ok(clone[1].b !== list[1].b);
+    assert.strictEqual(list[0].b, list[1].b);
+    assert.strictEqual(clone[0].b, clone[1].b);
+    assert.notStrictEqual(clone[0].b, list[0].b);
+    assert.notStrictEqual(clone[1].b, list[1].b);
 
     assert.deepEqual(clone[0].b, {a:1});
     assert.deepEqual(clone[1].b, {a:1});

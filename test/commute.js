@@ -22,7 +22,7 @@ describe('commute', function() {
 
   it('is curried', function() {
     var cmtArr = R.commute(R.of);
-    assert(typeof cmtArr === 'function');
+    assert.strictEqual(typeof cmtArr, 'function');
     assert.deepEqual(cmtArr(as), [[1, 3], [1, 4]]);
     assert.deepEqual(cmtArr(bs), [[1, 3], [2, 3]]);
     assert.deepEqual(cmtArr(cs), [[1, 3], [2, 3], [1, 4], [2, 4]]);

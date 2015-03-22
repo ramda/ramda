@@ -23,10 +23,10 @@ describe('commuteMap', function() {
 
   it('is curried', function() {
     var cmtPlus10 = R.commuteMap(plus10map);
-    assert(typeof cmtPlus10 === 'function');
+    assert.strictEqual(typeof cmtPlus10, 'function');
 
     var cmtmArr = cmtPlus10(R.of);
-    assert(typeof cmtmArr === 'function');
+    assert.strictEqual(typeof cmtmArr, 'function');
     assert.deepEqual(cmtmArr(as), [[11, 13], [11, 14]]);
     assert.deepEqual(cmtmArr(bs), [[11, 13], [12, 13]]);
     assert.deepEqual(cmtmArr(cs), [[11, 13], [12, 13], [11, 14], [12, 14]]);

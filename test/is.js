@@ -75,7 +75,7 @@ describe('is', function() {
   });
 
   it('is curried', function() {
-    assert(typeof R.is(String) === 'function');
-    assert(R.is(String)('s'));
+    assert.strictEqual(typeof R.is(String), 'function');
+    assert.strictEqual(R.is(String)('s'), true);
   });
 });

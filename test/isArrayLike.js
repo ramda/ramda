@@ -5,18 +5,18 @@ var R = require('..');
 
 describe('isArrayLike', function() {
   it('is true for Arrays', function() {
-    assert(R.isArrayLike([]));
-    assert(R.isArrayLike([1, 2, 3, 4]));
-    assert(R.isArrayLike([null]));
+    assert.strictEqual(R.isArrayLike([]), true);
+    assert.strictEqual(R.isArrayLike([1, 2, 3, 4]), true);
+    assert.strictEqual(R.isArrayLike([null]), true);
   });
 
   it('is true for arguments', function() {
     function test() {
       return R.isArrayLike(arguments);
     }
-    assert(test());
-    assert(test(1, 2, 3));
-    assert(test(null));
+    assert.strictEqual(test(), true);
+    assert.strictEqual(test(1, 2, 3), true);
+    assert.strictEqual(test(null), true);
   });
 
   it('is false for Strings', function() {
@@ -31,12 +31,12 @@ describe('isArrayLike', function() {
     var obj4 = {0: 'zero', 1: 'one', length: 2};
     var obj5 = {0: 'zero', length: 2};
     var obj6 = {1: 'one', length: 2};
-    assert(R.isArrayLike(obj1));
-    assert(R.isArrayLike(obj2));
-    assert(R.isArrayLike(obj3));
-    assert(R.isArrayLike(obj4));
-    assert(!R.isArrayLike(obj5));
-    assert(!R.isArrayLike(obj6));
+    assert.strictEqual(R.isArrayLike(obj1), true);
+    assert.strictEqual(R.isArrayLike(obj2), true);
+    assert.strictEqual(R.isArrayLike(obj3), true);
+    assert.strictEqual(R.isArrayLike(obj4), true);
+    assert.strictEqual(R.isArrayLike(obj5), false);
+    assert.strictEqual(R.isArrayLike(obj6), false);
   });
 
   it('is false for everything else', function() {
