@@ -25,19 +25,17 @@ describe('length', function() {
   });
 
   it('returns NaN for value of unexpected type', function() {
-    function isNaN_(x) { return x !== x; }
-    assert.strictEqual(isNaN_(R.length(0)), true);
-    assert.strictEqual(isNaN_(R.length({})), true);
-    assert.strictEqual(isNaN_(R.length(null)), true);
-    assert.strictEqual(isNaN_(R.length(undefined)), true);
+    assert.strictEqual(R.isNaN(R.length(0)), true);
+    assert.strictEqual(R.isNaN(R.length({})), true);
+    assert.strictEqual(R.isNaN(R.length(null)), true);
+    assert.strictEqual(R.isNaN(R.length(undefined)), true);
   });
 
   it('returns NaN for length property of unexpected type', function() {
-    function isNaN_(x) { return x !== x; }
-    assert.strictEqual(isNaN_(R.length({length: ''})), true);
-    assert.strictEqual(isNaN_(R.length({length: '1.23'})), true);
-    assert.strictEqual(isNaN_(R.length({length: null})), true);
-    assert.strictEqual(isNaN_(R.length({length: undefined})), true);
-    assert.strictEqual(isNaN_(R.length({})), true);
+    assert.strictEqual(R.isNaN(R.length({length: ''})), true);
+    assert.strictEqual(R.isNaN(R.length({length: '1.23'})), true);
+    assert.strictEqual(R.isNaN(R.length({length: null})), true);
+    assert.strictEqual(R.isNaN(R.length({length: undefined})), true);
+    assert.strictEqual(R.isNaN(R.length({})), true);
   });
 });
