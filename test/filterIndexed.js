@@ -28,7 +28,7 @@ describe('filterIndexed', function() {
     assert.deepEqual(R.filterIndexed(function(x) { return x > 100; }, []), []);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var everyOtherPosition = R.filterIndexed(everyOther);
     assert.deepEqual(everyOtherPosition([8, 6, 7, 5, 3, 0, 9]), [8, 7, 3, 9]);
   });

@@ -52,7 +52,7 @@ describe('all', function() {
     });
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var count = 0;
     var test = function(n) {count += 1; return even(n);};
     assert.strictEqual(R.all(test)([2, 4, 6, 7, 8, 10]), false);

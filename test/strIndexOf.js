@@ -12,7 +12,7 @@ describe('strIndexOf', function() {
     assert.strictEqual(R.strIndexOf('x', 'abcdefg'), -1);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var findD = R.strIndexOf('d');
     assert.strictEqual(findD('abcdefg'), 3);
   });

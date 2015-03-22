@@ -25,7 +25,7 @@ describe('reduceIndexed', function() {
     }, 0, list);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var addOrConcat = R.reduceIndexed(R.add);
     var sum = addOrConcat(0);
     var cat = addOrConcat('');

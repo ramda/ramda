@@ -8,7 +8,7 @@ describe('createMapEntry', function() {
     assert.deepEqual(R.createMapEntry('foo', 42), {foo: 42});
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     assert.deepEqual(R.createMapEntry('foo')(42), {foo: 42});
   });
 });

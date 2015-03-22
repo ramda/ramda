@@ -15,7 +15,7 @@ describe('propEq', function() {
     assert.strictEqual(R.propEq('hair', 'blond', obj2), false);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var kids = [obj1, obj2, obj3, obj4];
     var hairMatch = R.propEq('hair');
     assert.strictEqual(typeof hairMatch, 'function');

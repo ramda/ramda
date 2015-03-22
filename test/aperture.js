@@ -17,7 +17,7 @@ describe('aperture', function() {
     assert.deepEqual(R.aperture(1, []), []);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var pairwise = R.aperture(2);
     assert.deepEqual(pairwise(sevenLs), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]]);
   });

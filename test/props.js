@@ -25,7 +25,7 @@ describe('props', function() {
     assert.strictEqual(ps[1], void 0);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     assert.deepEqual(R.props(['a', 'b'])(obj), [1, 2]);
   });
 });

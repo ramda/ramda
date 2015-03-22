@@ -13,7 +13,7 @@ describe('pickAll', function() {
     assert.deepEqual(R.pickAll(['a', 'c', 'g'], obj), {a: 1, c: 3, g: undefined});
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var copyAB = R.pickAll(['a', 'b']);
     assert.deepEqual(copyAB(obj), {a: 1, b: 2});
   });

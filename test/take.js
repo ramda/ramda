@@ -13,7 +13,7 @@ describe('take', function() {
     assert.deepEqual(R.take(3, []), []);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var take3 = R.take(3);
     assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
     assert.deepEqual(take3(['w', 'x', 'y', 'z']), ['w', 'x', 'y']);

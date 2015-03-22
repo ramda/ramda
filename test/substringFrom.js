@@ -12,7 +12,7 @@ describe('substringFrom', function() {
     assert.strictEqual(R.substringFrom(-2, 'Ramda'), 'da');
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var after8 = R.substringFrom(8);
     assert.strictEqual(after8('abcdefghijklm'), 'ijklm');
   });

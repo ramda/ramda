@@ -8,7 +8,7 @@ describe('apply', function() {
     assert.strictEqual(R.apply(Math.max, [1, 2, 3, -99, 42, 6, 7]), 42);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     assert.strictEqual(R.apply(Math.max)([1, 2, 3, -99, 42, 6, 7]), 42);
   });
 

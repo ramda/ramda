@@ -23,7 +23,7 @@ describe('filter', function() {
     assert.strictEqual(R.filter(function(s) { return s; }, f), 'called f.filter');
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var onlyEven = R.filter(even);
     assert.deepEqual(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
   });

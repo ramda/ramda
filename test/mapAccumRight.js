@@ -18,7 +18,7 @@ describe('mapAccumRight', function() {
     assert.deepEqual(R.mapAccumRight(R.concat, [], []), [[], []]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var addOrConcat = R.mapAccumRight(add);
     var sum = addOrConcat(0);
     var cat = addOrConcat('');

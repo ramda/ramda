@@ -56,7 +56,7 @@ describe('any', function() {
     });
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var count = 0;
     var test = function(n) {count += 1; return odd(n);};
     assert.strictEqual(R.any(test)([2, 4, 6, 7, 8, 10]), true);

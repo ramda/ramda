@@ -73,7 +73,7 @@ describe('transduce', function() {
     assert.deepEqual(R.transduce(toxf(R.concat), listxf, [], []), []);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var addOrCat1 = R.transduce(toxf(add));
     var addOrCat2 = addOrCat1(addxf);
     var sum = addOrCat2(0);

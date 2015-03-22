@@ -8,7 +8,7 @@ describe('add', function() {
     assert.strictEqual(R.add(3, 7), 10);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var incr = R.add(1);
     assert.strictEqual(incr(42), 43);
   });

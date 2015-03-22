@@ -11,7 +11,7 @@ describe('match', function() {
     assert.strictEqual(R.match(re, 'B1-afn'), null);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var format = R.match(re);
     assert.strictEqual(format('B17-afn').length, 1);
     assert.strictEqual(format('B1-afn'), null);

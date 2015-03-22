@@ -25,7 +25,7 @@ describe('reduce', function() {
     assert.deepEqual(R.reduce(R.concat, [], []), []);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var addOrConcat = R.reduce(add);
     var sum = addOrConcat(0);
     var cat = addOrConcat('');

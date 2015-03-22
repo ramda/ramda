@@ -31,7 +31,7 @@ describe('groupBy', function() {
     });
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var splitByType = R.groupBy(R.prop('type'));
     assert.deepEqual(splitByType([
       {type: 'A', val: 10},

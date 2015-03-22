@@ -14,7 +14,7 @@ describe('substring', function() {
     assert.strictEqual(R.substring(-4, -2, 'Ramda'), 'am');
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var from2 = R.substring(2);
     assert.strictEqual(from2(5, 'abcdefghijklm'), 'cde');
     var from2to5 = R.substring(2, 5);

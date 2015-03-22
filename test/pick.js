@@ -22,7 +22,7 @@ describe('pick', function() {
     assert.deepEqual(R.pick(['w', 'x', 'y'], obj), {w: 20, x: 30, y: 40});
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var copyAB = R.pick(['a', 'b']);
     assert.deepEqual(copyAB(obj), {a: 1, b: 2});
   });
