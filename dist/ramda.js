@@ -1,4 +1,4 @@
-//  Ramda v0.12.0
+//  Ramda v0.13.0
 //  https://github.com/ramda/ramda
 //  (c) 2013-2015 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -343,7 +343,6 @@
      * @private
      * @param {Function} fn The strategy for extracting function names from an object
      * @return {Function} A function that takes an object and returns an array of function names.
-     *
      */
     var _functionsWith = function _functionsWith(fn) {
         return function (obj) {
@@ -376,7 +375,6 @@
      * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
      * @return {Number} The index of the found item, or -1.
-     *
      */
     var _indexOf = function _indexOf(list, item, from) {
         var idx = 0, len = list.length;
@@ -442,7 +440,6 @@
      * @param {*} item the item to find in the Array
      * @param {Number} from (optional) the index to start searching the Array
      * @return {Number} The index of the found item, or -1.
-     *
      */
     var _lastIndexOf = function _lastIndexOf(list, item, from) {
         var idx = list.length;
@@ -895,8 +892,6 @@
      * @return {Number|String} The result of `a + b`.
      * @example
      *
-     *      var increment = R.add(1);
-     *      increment(10);   //=> 11
      *      R.add(2, 3);       //=>  5
      *      R.add(7)(10);      //=> 17
      */
@@ -1122,7 +1117,6 @@
     });
 
     /**
-     *
      * A function wrapping calls to the two functions in an `&&` operation, returning the result of the first
      * function if it is false-y and the result of the second function otherwise.  Note that this is
      * short-circuited, meaning that the second function will not be invoked if the first returns a false-y
@@ -1215,9 +1209,9 @@
      * @example
      *
      *      var fn = R.cond(
-     *          [R.eq(0),   R.always('water freezes at 0°C')],
-     *          [R.eq(100), R.always('water boils at 100°C')],
-     *          [R.T,       function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
+     *        [R.eq(0),   R.always('water freezes at 0°C')],
+     *        [R.eq(100), R.always('water boils at 100°C')],
+     *        [R.T,       function(temp) { return 'nothing special happens at ' + temp + '°C'; }]
      *      );
      *      fn(0); //=> 'water freezes at 0°C'
      *      fn(50); //=> 'nothing special happens at 50°C'
@@ -1300,8 +1294,8 @@
      * @example
      *
      *      var matchPhrases = R.compose(
-     *          R.createMapEntry('must'),
-     *          R.map(R.createMapEntry('match_phrase'))
+     *        R.createMapEntry('must'),
+     *        R.map(R.createMapEntry('match_phrase'))
      *      );
      *      matchPhrases(['foo', 'bar', 'baz']); //=> {must: [{match_phrase: 'foo'}, {match_phrase: 'bar'}, {match_phrase: 'baz'}]}
      */
@@ -1436,7 +1430,6 @@
      *      var l1 = [{a: 1}, {a: 2}, {a: 3}];
      *      var l2 = [{a: 3}, {a: 4}];
      *      R.differenceWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}]
-     *
      */
     var differenceWith = _curry3(function differenceWith(pred, first, second) {
         var out = [];
@@ -1763,11 +1756,11 @@
      * @example
      *
      *      function Rectangle(width, height) {
-     *          this.width = width;
-     *          this.height = height;
+     *        this.width = width;
+     *        this.height = height;
      *      }
      *      Rectangle.prototype.area = function() {
-     *          return this.width * this.height;
+     *        return this.width * this.height;
      *      };
      *
      *      var square = new Rectangle(2, 2);
@@ -1972,6 +1965,27 @@
     });
 
     /**
+     * Returns `true` if the input value is `NaN`.
+     *
+     * Equivalent to ES6's [`Number.isNaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN).
+     *
+     * @func
+     * @memberOf R
+     * @category Math
+     * @sig * -> Boolean
+     * @param {*} x
+     * @return {Boolean}
+     * @example
+     *
+     *     R.isNaN(NaN);        //=> true
+     *     R.isNaN(undefined);  //=> false
+     *     R.isNaN({});         //=> false
+     */
+    var isNaN = _curry1(function isNaN(x) {
+        return typeof x === 'number' && x !== x;
+    });
+
+    /**
      * Checks if the input value is `null` or `undefined`.
      *
      * @func
@@ -2104,20 +2118,20 @@
      * @example
      *
      *     var headLens = R.lens(
-     *         function get(arr) { return arr[0]; },
-     *         function set(val, arr) { return [val].concat(arr.slice(1)); }
+     *       function get(arr) { return arr[0]; },
+     *       function set(val, arr) { return [val].concat(arr.slice(1)); }
      *     );
      *     headLens([10, 20, 30, 40]); //=> 10
      *     headLens.set('mu', [10, 20, 30, 40]); //=> ['mu', 20, 30, 40]
      *     headLens.map(function(x) { return x + 1; }, [10, 20, 30, 40]); //=> [11, 20, 30, 40]
      *
      *     var phraseLens = R.lens(
-     *         function get(obj) { return obj.phrase; },
-     *         function set(val, obj) {
-     *             var out = R.clone(obj);
-     *             out.phrase = val;
-     *             return out;
-     *         }
+     *       function get(obj) { return obj.phrase; },
+     *       function set(val, obj) {
+     *         var out = R.clone(obj);
+     *         out.phrase = val;
+     *         return out;
+     *       }
      *     );
      *     var obj1 = { phrase: 'Absolute filth . . . and I LOVED it!'};
      *     var obj2 = { phrase: "What's all this, then?"};
@@ -2140,7 +2154,6 @@
     /**
      * Returns a lens associated with the provided object.
      *
-     *
      * @func
      * @memberOf R
      * @category Object
@@ -2159,7 +2172,6 @@
      *     xoLens(); //=> 1
      *     xoLens.set(1000); //=> {x: 1000}
      *     xoLens.map(R.add(1)); //=> {x: 2}
-     *
      */
     var lensOn = _curry3(function lensOn(get, set, obj) {
         var lns = function () {
@@ -2234,7 +2246,7 @@
      *
      *      var digits = ['1', '2', '3', '4'];
      *      var append = function(a, b) {
-     *          return [a + b, a + b];
+     *        return [a + b, a + b];
      *      }
      *
      *      R.mapAccum(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
@@ -2274,7 +2286,7 @@
      *
      *      var digits = ['1', '2', '3', '4'];
      *      var append = function(a, b) {
-     *          return [a + b, a + b];
+     *        return [a + b, a + b];
      *      }
      *
      *      R.mapAccumRight(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
@@ -2405,8 +2417,8 @@
      *
      *      var count = 0;
      *      var factorial = R.memoize(function(n) {
-     *          count += 1;
-     *          return R.product(R.range(1, n + 1));
+     *        count += 1;
+     *        return R.product(R.range(1, n + 1));
      *      });
      *      factorial(5); //=> 120
      *      factorial(5); //=> 120
@@ -3324,11 +3336,11 @@
      *      var pairs = [[-1, 1], [-2, 2], [-3, 3]];
      *      sortByFirstItem(pairs); //=> [[-3, 3], [-2, 2], [-1, 1]]
      *      var alice = {
-     *         name: 'ALICE',
-     *         age: 101
+     *        name: 'ALICE',
+     *        age: 101
      *      };
      *      var bob = {
-     *         name: 'Bob',
+     *        name: 'Bob',
      *        age: -10
      *      };
      *      var clara = {
@@ -3756,15 +3768,14 @@
      *      var greet = function(name) {return 'Hello ' + name;};
      *
      *      var shoutedGreet = R.wrap(greet, function(gr, name) {
-     *          return gr(name).toUpperCase();
+     *        return gr(name).toUpperCase();
      *      });
      *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
      *
      *      var shortenedGreet = R.wrap(greet, function(gr, name) {
-     *          return gr(name.substring(0, 3));
+     *        return gr(name.substring(0, 3));
      *      });
      *      shortenedGreet("Robert"); //=> "Hello Rob"
-     *
      */
     var wrap = _curry2(function wrap(fn, wrapper) {
         return curryN(fn.length, function () {
@@ -4014,9 +4025,9 @@
      *      var squareAsyncThenDouble = _composeP(double, squareAsync);
      *
      *      squareAsyncThenDouble(5)
-     *          .then(function(result) {
-     *            // the result is now 50.
-     *          });
+     *        .then(function(result) {
+     *          // the result is now 50.
+     *        });
      */
     var _composeP = function _composeP(f, g) {
         return function () {
@@ -4286,10 +4297,8 @@
      *
      *      var lessThan2 = R.flip(R.lt)(2);
      *      var lessThan3 = R.flip(R.lt)(3);
-     *      var xs = R.range(1, 3);
-     *      xs; //=> [1, 2]
-     *      R.all(lessThan2)(xs); //=> false
-     *      R.all(lessThan3)(xs); //=> true
+     *      R.all(lessThan2)([1, 2]); //=> false
+     *      R.all(lessThan3)([1, 2]); //=> true
      */
     var all = _curry2(_dispatchable('all', _xall, _all));
 
@@ -4312,10 +4321,8 @@
      *
      *      var lessThan0 = R.flip(R.lt)(0);
      *      var lessThan2 = R.flip(R.lt)(2);
-     *      var xs = R.range(1, 3);
-     *      xs; //=> [1, 2]
-     *      R.any(lessThan0)(xs); //=> false
-     *      R.any(lessThan2)(xs); //=> true
+     *      R.any(lessThan0)([1, 2]); //=> false
+     *      R.any(lessThan2)([1, 2]); //=> true
      */
     var any = _curry2(_dispatchable('any', _xany, _any));
 
@@ -4404,7 +4411,6 @@
      *      var objects = [{}, {}, {}];
      *      var objectsClone = R.clone(objects);
      *      objects[0] === objectsClone[0]; //=> false
-     *
      */
     var clone = _curry1(function clone(value) {
         return _baseCopy(value, [], []);
@@ -4468,9 +4474,9 @@
      *
      *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
      *      squareAsyncThenDoubleThenTriple(5)
-     *          .then(function(result) {
-     *              // result is 150
-     *          });
+     *        .then(function(result) {
+     *          // result is 150
+     *        });
      */
     var composeP = _createComposer(_composeP);
 
@@ -5102,20 +5108,20 @@
      * @func
      * @memberOf R
      * @category Object
-     * @sig String -> Object -> [*] -> *
+     * @sig String -> [*] -> Object -> *
      * @param {String} methodName
-     * @param {Object} obj
      * @param {Array} args
+     * @param {Object} obj
      * @return {*}
      * @example
      *
      *      //  toBinary :: Number -> String
-     *      var toBinary = R.invoke('toString', R.__, [2])
+     *      var toBinary = R.invoke('toString', [2])
      *
      *      toBinary(42); //=> '101010'
      *      toBinary(63); //=> '111111'
      */
-    var invoke = curry(function invoke(methodName, obj, args) {
+    var invoke = curry(function invoke(methodName, args, obj) {
         return obj[methodName].apply(obj, args);
     });
 
@@ -5389,8 +5395,8 @@
      * @return {Boolean} `true` if the predicate is not satisfied by every element, `false` otherwise.
      * @example
      *
-     *      R.none(isNaN, [1, 2, 3]); //=> true
-     *      R.none(isNaN, [1, 2, 3, NaN]); //=> false
+     *      R.none(R.isNaN, [1, 2, 3]); //=> true
+     *      R.none(R.isNaN, [1, 2, 3, NaN]); //=> false
      */
     var none = _curry2(_complement(_dispatchable('any', _xany, _any)));
 
@@ -5537,9 +5543,9 @@
      *
      *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
      *      squareAsyncThenDoubleThenTriple(5)
-     *          .then(function(result) {
-     *              // result is 150
-     *          });
+     *        .then(function(result) {
+     *          // result is 150
+     *        });
      */
     var pipeP = function pipeP() {
         return composeP.apply(this, reverse(arguments));
@@ -6018,15 +6024,14 @@
      *      var byAge = R.useWith(R.filter, R.propEq('age'), R.identity);
      *
      *      var kids = [
-     *          {name: 'Abbie', age: 6},
-     *          {name: 'Brian', age: 5},
-     *          {name: 'Chris', age: 6},
-     *          {name: 'David', age: 4},
-     *          {name: 'Ellie', age: 5}
+     *        {name: 'Abbie', age: 6},
+     *        {name: 'Brian', age: 5},
+     *        {name: 'Chris', age: 6},
+     *        {name: 'David', age: 4},
+     *        {name: 'Ellie', age: 5}
      *      ];
      *
      *      byAge(5, kids); //=> [{name: 'Brian', age: 5}, {name: 'Ellie', age: 5}]
-     *
      *
      *      // Example 2:
      *
@@ -6336,7 +6341,6 @@
      *        return [n, n];
      *      };
      *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
-     *
      */
     var chain = _curry2(_checkForMethod('chain', function chain(f, list) {
         return unnest(_map(f, list));
@@ -6406,7 +6410,6 @@
      *
      *     var cs = [[1, 2], [3, 4]];
      *     R.commuteMap(plus10map, R.of, cs); //=> [[11, 13], [12, 13], [11, 14], [12, 14]]
-     *
      */
     var commuteMap = _curry3(function commuteMap(fn, of, list) {
         function consF(acc, ftor) {
@@ -6603,7 +6606,6 @@
      *      };
      *      R.invert(raceResultsByFirstName);
      *      //=> { 'alice': ['first', 'third'], 'jake':['second'] }
-     *
      */
     var invert = _curry1(function invert(obj) {
         var props = keys(obj);
@@ -6669,7 +6671,7 @@
      * @example
      *
      *     var madd3 = R.liftN(3, R.curryN(3, function() {
-     *         return R.reduce(R.add, 0, arguments);
+     *       return R.reduce(R.add, 0, arguments);
      *     }));
      *     madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
      */
@@ -6922,12 +6924,12 @@
      * @example
      *
      *     var madd3 = R.lift(R.curry(function(a, b, c) {
-     *         return a + b + c;
+     *       return a + b + c;
      *     }));
      *     madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
      *
      *     var madd5 = R.lift(R.curry(function(a, b, c, d, e) {
-     *         return a + b + c + d + e;
+     *       return a + b + c + d + e;
      *     }));
      *     madd5([1,2], [3], [4, 5], [6], [7, 8]); //=> [21, 22, 22, 23, 22, 23, 23, 24]
      */
@@ -7030,6 +7032,7 @@
         is: is,
         isArrayLike: isArrayLike,
         isEmpty: isEmpty,
+        isNaN: isNaN,
         isNil: isNil,
         isSet: isSet,
         join: join,
