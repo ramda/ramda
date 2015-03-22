@@ -30,8 +30,8 @@ var _createComposer = require('./internal/_createComposer');
  *
  *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
  *      squareAsyncThenDoubleThenTriple(5)
- *          .then(function(result) {
- *              // result is 150
- *          });
+ *        .then(function(result) {
+ *          // result is 150
+ *        });
  */
 module.exports = _createComposer(_composeP);

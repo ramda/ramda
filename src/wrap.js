@@ -19,12 +19,12 @@ var curryN = require('./curryN');
  *      var greet = function(name) {return 'Hello ' + name;};
  *
  *      var shoutedGreet = R.wrap(greet, function(gr, name) {
- *          return gr(name).toUpperCase();
+ *        return gr(name).toUpperCase();
  *      });
  *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
  *
  *      var shortenedGreet = R.wrap(greet, function(gr, name) {
- *          return gr(name.substring(0, 3));
+ *        return gr(name.substring(0, 3));
  *      });
  *      shortenedGreet("Robert"); //=> "Hello Rob"
  *

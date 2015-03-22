@@ -15,8 +15,8 @@ var _curry2 = require('./internal/_curry2');
  * @example
  *
  *      var matchPhrases = R.compose(
- *          R.createMapEntry('must'),
- *          R.map(R.createMapEntry('match_phrase'))
+ *        R.createMapEntry('must'),
+ *        R.map(R.createMapEntry('match_phrase'))
  *      );
  *      matchPhrases(['foo', 'bar', 'baz']); //=> {must: [{match_phrase: 'foo'}, {match_phrase: 'bar'}, {match_phrase: 'baz'}]}
  */

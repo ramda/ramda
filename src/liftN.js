@@ -20,7 +20,7 @@ var map = require('./map');
  * @example
  *
  *     var madd3 = R.liftN(3, R.curryN(3, function() {
- *         return R.reduce(R.add, 0, arguments);
+ *       return R.reduce(R.add, 0, arguments);
  *     }));
  *     madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */

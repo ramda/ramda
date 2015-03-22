@@ -19,11 +19,11 @@ var _slice = require('./internal/_slice');
  *      var pairs = [[-1, 1], [-2, 2], [-3, 3]];
  *      sortByFirstItem(pairs); //=> [[-3, 3], [-2, 2], [-1, 1]]
  *      var alice = {
- *         name: 'ALICE',
- *         age: 101
+ *        name: 'ALICE',
+ *        age: 101
  *      };
  *      var bob = {
- *         name: 'Bob',
+ *        name: 'Bob',
  *        age: -10
  *      };
  *      var clara = {

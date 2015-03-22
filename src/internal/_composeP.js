@@ -20,9 +20,9 @@ var _isThenable = require('./_isThenable');
  *      var squareAsyncThenDouble = _composeP(double, squareAsync);
  *
  *      squareAsyncThenDouble(5)
- *          .then(function(result) {
- *            // the result is now 50.
- *          });
+ *        .then(function(result) {
+ *          // the result is now 50.
+ *        });
  */
 module.exports = function _composeP(f, g) {
   return function() {

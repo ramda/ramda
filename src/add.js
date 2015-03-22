@@ -15,8 +15,6 @@ var _curry2 = require('./internal/_curry2');
  * @return {Number|String} The result of `a + b`.
  * @example
  *
- *      var increment = R.add(1);
- *      increment(10);   //=> 11
  *      R.add(2, 3);       //=>  5
  *      R.add(7)(10);      //=> 17
  */
