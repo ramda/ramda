@@ -7,19 +7,19 @@ var curry = require('./curry');
  * @func
  * @memberOf R
  * @category Object
- * @sig String -> Object -> [*] -> *
+ * @sig String -> [*] -> Object -> *
  * @param {String} methodName
- * @param {Object} obj
  * @param {Array} args
+ * @param {Object} obj
  * @return {*}
  * @example
  *
  *      //  toBinary :: Number -> String
- *      var toBinary = R.invoke('toString', R.__, [2])
+ *      var toBinary = R.invoke('toString', [2])
  *
  *      toBinary(42); //=> '101010'
  *      toBinary(63); //=> '111111'
  */
-module.exports = curry(function invoke(methodName, obj, args) {
+module.exports = curry(function invoke(methodName, args, obj) {
   return obj[methodName].apply(obj, args);
 });
