@@ -27,7 +27,6 @@ var curryN = require('./curryN');
  *        return gr(name.substring(0, 3));
  *      });
  *      shortenedGreet("Robert"); //=> "Hello Rob"
- *
  */
 module.exports = _curry2(function wrap(fn, wrapper) {
   return curryN(fn.length, function() {

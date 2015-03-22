@@ -9,7 +9,6 @@
  * @param {*} item the item to find in the Array
  * @param {Number} from (optional) the index to start searching the Array
  * @return {Number} The index of the found item, or -1.
- *
  */
 module.exports = function _indexOf(list, item, from) {
   var idx = 0, len = list.length;

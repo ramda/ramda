@@ -38,7 +38,6 @@ var curry = require('./curry');
  *
  *      byAge(5, kids); //=> [{name: 'Brian', age: 5}, {name: 'Ellie', age: 5}]
  *
- *
  *      // Example 2:
  *
  *      var double = function(y) { return y * 2; };

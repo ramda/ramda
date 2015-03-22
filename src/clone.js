@@ -18,7 +18,6 @@ var _curry1 = require('./internal/_curry1');
  *      var objects = [{}, {}, {}];
  *      var objectsClone = R.clone(objects);
  *      objects[0] === objectsClone[0]; //=> false
- *
  */
 module.exports = _curry1(function clone(value) {
   return _baseCopy(value, [], []);
