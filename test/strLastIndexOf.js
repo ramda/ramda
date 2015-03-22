@@ -12,7 +12,7 @@ describe('strLastIndexOf', function() {
     assert.strictEqual(R.strLastIndexOf('x', 'abcdefg'), -1);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var findA = R.strLastIndexOf('a');
     assert.strictEqual(findA('banana split'), 5);
   });

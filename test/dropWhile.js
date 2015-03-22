@@ -21,7 +21,7 @@ describe('dropWhile', function() {
     assert.strictEqual(sublist[2], 7);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var dropLt7 = R.dropWhile(function(x) {return x < 7;});
     assert.deepEqual(dropLt7([1, 3, 5, 7, 9]), [7, 9]);
     assert.deepEqual(dropLt7([2, 4, 6, 8, 10]), [8, 10]);

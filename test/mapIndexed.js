@@ -22,7 +22,7 @@ describe('mapIndexed', function() {
     assert.deepEqual(R.mapIndexed(squareEnds, [8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var makeSquareEnds = R.mapIndexed(squareEnds);
     assert.deepEqual(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
   });

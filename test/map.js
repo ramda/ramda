@@ -44,7 +44,7 @@ describe('map', function() {
     assert.strictEqual(xcomp.f, dec);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var inc = R.map(add1);
     assert.deepEqual(inc([1, 2, 3]), [2, 3, 4]);
   });

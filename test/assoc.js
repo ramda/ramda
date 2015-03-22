@@ -24,7 +24,7 @@ describe('assoc', function() {
     assert.strictEqual(obj2.f, obj1.f);
   });
 
-  it('is properly curried', function() {
+  it('is curried', function() {
     var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
     var expected = {a: 1, b: {c: 2, d: 3}, e: {x: 42}, f: 5};
     var f = R.assoc('e');

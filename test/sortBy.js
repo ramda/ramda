@@ -27,7 +27,7 @@ describe('sortBy', function() {
     assert.strictEqual(sortedAlbums[11].title, 'Timeout');
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var sorter = R.sortBy(R.prop('title'));
     var sortedAlbums = sorter(albums);
     assert.strictEqual(sortedAlbums.length, albums.length);

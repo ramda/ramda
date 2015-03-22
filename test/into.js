@@ -36,7 +36,7 @@ describe('into', function() {
     assert.deepEqual(R.into([], R.filter(isOdd), obj), [1, 3]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var intoArray = R.into([]);
     var add2 = R.map(add(2));
     var result = intoArray(add2);

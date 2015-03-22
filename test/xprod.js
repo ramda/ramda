@@ -15,7 +15,7 @@ describe('xprod', function() {
     assert.deepEqual(R.xprod(a, b), [[1, 'a'], [1, 'b'], [1, 'c'], [2, 'a'], [2, 'b'], [2, 'c']]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var something = R.xprod(b);
     assert.deepEqual(something(a), [['a', 1], ['a', 2], ['b', 1], ['b', 2], ['c', 1], ['c', 2]]);
   });

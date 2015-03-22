@@ -18,7 +18,7 @@ describe('reduceRight', function() {
     assert.strictEqual(R.reduceRight(avg, 0, []), 0);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var something = R.reduceRight(avg, 54);
     var rcat = R.reduceRight(R.add, '');
     assert.strictEqual(something([12, 4, 10, 6]), 12);

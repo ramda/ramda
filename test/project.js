@@ -29,7 +29,7 @@ describe('project', function() {
     ]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var myFields = R.project(['name', 'age']);
     assert.deepEqual(myFields(kids), [
       {name: 'Abby', age: 7},

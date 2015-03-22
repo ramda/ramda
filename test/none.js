@@ -27,7 +27,7 @@ describe('none', function() {
     assert.strictEqual(R.none(hasA, xs), false);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     assert.strictEqual(R.none(even)([1, 3, 5, 6, 7, 9]), false);
   });
 });

@@ -18,7 +18,7 @@ describe('omit', function() {
     assert.deepEqual(R.omit(['w', 'x', 'y'], obj), {v: 10, z: 50});
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var skipAB = R.omit(['a', 'b']);
     assert.deepEqual(skipAB(obj), {c: 3, d: 4, e: 5, f: 6});
   });

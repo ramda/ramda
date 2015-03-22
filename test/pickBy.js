@@ -38,7 +38,7 @@ describe('pickBy', function() {
   });
 
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var copier = R.pickBy(R.T);
     assert.deepEqual(copier(obj), obj);
   });

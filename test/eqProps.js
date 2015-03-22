@@ -9,7 +9,7 @@ describe('eqProps', function() {
     assert.strictEqual(R.eqProps('name', {name: 'fred', age: 10}, {name: 'franny', age: 10}), false);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var sameName = R.eqProps('name');
     assert.strictEqual(sameName({name: 'fred', age: 10}, {name: 'fred', age: 12}), true);
   });

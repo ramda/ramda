@@ -17,7 +17,7 @@ describe('scan', function() {
     assert.deepEqual(R.scan(mult, 1, []), [1]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var addOrConcat = R.scan(add);
     var sum = addOrConcat(0);
     var cat = addOrConcat('');

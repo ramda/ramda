@@ -27,7 +27,7 @@ describe('assocPath', function() {
     assert.strictEqual(obj2.f, obj1.f);
   });
 
-  it('is properly curried', function() {
+  it('is curried', function() {
     var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
     var expected = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8};
     var f = R.assocPath(['f', 'g', 'i']);

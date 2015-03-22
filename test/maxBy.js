@@ -12,7 +12,7 @@ describe('maxBy', function() {
     assert.strictEqual(R.maxBy(R.prop('x'), []), undefined);
   });
 
-  it('is properly curried', function() {
+  it('is curried', function() {
     var highestX = R.maxBy(R.prop('x'));
     assert.deepEqual(highestX([{x: 3, y: 1}, {x: 5, y: 10}, {x: -2, y: 0}]), {x: 5, y: 10});
   });

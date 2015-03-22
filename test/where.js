@@ -71,7 +71,7 @@ describe('where', function() {
     assert.strictEqual(R.where(spec, test4), false);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var predicate = R.where({x: 1, y: 2});
     assert.strictEqual(predicate({x: 1, y: 2, z: 3}), true);
     assert.strictEqual(predicate({x: 3, y: 2, z: 1}), false);

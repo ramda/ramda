@@ -45,7 +45,7 @@ describe('reject', function() {
     assert.strictEqual(R.reject(R.F, m), m);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var odd = R.reject(even);
     assert.deepEqual(odd([1, 2, 3, 4, 5, 6, 7]), [1, 3, 5, 7]);
   });

@@ -20,7 +20,7 @@ describe('reduceRightIndexed', function() {
     assert.strictEqual(R.reduceRightIndexed(function(a, n, idx) { return a.concat(idx); }, memo, []), memo);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var something = R.reduceRightIndexed(function(acc, b, idx) { return acc += idx + b; }, 54);
     assert.strictEqual(something([12, 4, 10, 6]), 92);
   });
@@ -43,7 +43,7 @@ describe('reduceRightIndexed', function() {
     }, 0, list);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var addOrConcat = R.reduceRightIndexed(R.add);
     var sum = addOrConcat(0);
     var cat = addOrConcat('');

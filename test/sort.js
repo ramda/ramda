@@ -14,7 +14,7 @@ describe('sort', function() {
     assert.deepEqual(list, [3, 1, 8, 1, 2, 5]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var sortByLength = R.sort(function(a, b) {return a.length - b.length;});
     assert.deepEqual(sortByLength(['one', 'two', 'three', 'four', 'five', 'six']),
                      ['one', 'two', 'six', 'four', 'five', 'three']);

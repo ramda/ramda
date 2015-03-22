@@ -19,7 +19,7 @@ describe('mapAccum', function() {
     assert.deepEqual(R.mapAccum(concat, [], []), [[], []]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var addOrConcat = R.mapAccum(add);
     var sum = addOrConcat(0);
     var cat = addOrConcat('');

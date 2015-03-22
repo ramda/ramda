@@ -44,7 +44,7 @@ describe('countBy', function() {
     });
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var counter = R.countBy(R.prop('genre'));
     assert.deepEqual(counter(albums), {
       Baroque: 2, Rock: 2, Jazz: 2, Romantic: 1, Metal: 1, Modern: 1, Broadway: 1, Folk: 1, Classical: 1

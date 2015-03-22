@@ -12,7 +12,7 @@ describe('repeat', function() {
     assert.deepEqual(R.repeat(null, 3), [null, null, null]);
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var makeFoos = R.repeat('foo');
     assert.deepEqual(makeFoos(0), []);
     assert.deepEqual(makeFoos(3), ['foo', 'foo', 'foo']);

@@ -8,7 +8,7 @@ describe('charAt', function() {
     assert.strictEqual(R.charAt(8, 'abcdefghijklm'), 'i');
   });
 
-  it('is automatically curried', function() {
+  it('is curried', function() {
     var at8 = R.charAt(8);
     assert.strictEqual(at8('abcdefghijklm'), 'i');
   });
