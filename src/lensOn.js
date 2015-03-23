@@ -15,13 +15,13 @@ var _curry3 = require('./internal/_curry3');
  *         also curried functions.
  * @example
  *
- *     var xo = {x: 1};
- *     var xoLens = R.lensOn(xo,
- *                           function get(o) { return o.x; },
- *                           function set(v) { return {x: v}; });
- *     xoLens(); //=> 1
- *     xoLens.set(1000); //=> {x: 1000}
- *     xoLens.map(R.add(1)); //=> {x: 2}
+ *      var xo = {x: 1};
+ *      var xoLens = R.lensOn(xo,
+ *                            function get(o) { return o.x; },
+ *                            function set(v) { return {x: v}; });
+ *      xoLens(); //=> 1
+ *      xoLens.set(1000); //=> {x: 1000}
+ *      xoLens.map(R.add(1)); //=> {x: 2}
  */
 module.exports = _curry3(function lensOn(get, set, obj) {
   var lns = function() { return get(obj); };

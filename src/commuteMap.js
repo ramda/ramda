@@ -23,15 +23,15 @@ var map = require('./map');
  * @return {Array}
  * @example
  *
- *     var plus10map = R.map(function(x) { return x + 10; });
- *     var as = [[1], [3, 4]];
- *     R.commuteMap(R.map(function(x) { return x + 10; }), R.of, as); //=> [[11, 13], [11, 14]]
+ *      var plus10map = R.map(function(x) { return x + 10; });
+ *      var as = [[1], [3, 4]];
+ *      R.commuteMap(R.map(function(x) { return x + 10; }), R.of, as); //=> [[11, 13], [11, 14]]
  *
- *     var bs = [[1, 2], [3]];
- *     R.commuteMap(plus10map, R.of, bs); //=> [[11, 13], [12, 13]]
+ *      var bs = [[1, 2], [3]];
+ *      R.commuteMap(plus10map, R.of, bs); //=> [[11, 13], [12, 13]]
  *
- *     var cs = [[1, 2], [3, 4]];
- *     R.commuteMap(plus10map, R.of, cs); //=> [[11, 13], [12, 13], [11, 14], [12, 14]]
+ *      var cs = [[1, 2], [3, 4]];
+ *      R.commuteMap(plus10map, R.of, cs); //=> [[11, 13], [12, 13], [11, 14], [12, 14]]
  */
 module.exports = _curry3(function commuteMap(fn, of, list) {
   function consF(acc, ftor) {
