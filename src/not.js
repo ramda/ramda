@@ -13,9 +13,10 @@ var _curry1 = require('./internal/_curry1');
  * @return {Boolean} the logical inverse of passed argument.
  * @example
  *
- *      R.and(false, true); //=> true
- *      R.and(0, []); //=> []
- *      R.and(null, ''); => false
+ *      R.not(true); //=> false
+ *      R.not(false); //=> true
+ *      R.not(0); => true
+ *      R.not(1); => false
  */
 module.exports = _curry1(function not(a) {
   return !a;
