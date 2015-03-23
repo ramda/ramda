@@ -14,9 +14,9 @@ var _curry1 = require('./internal/_curry1');
  * @return {Boolean}
  * @example
  *
- *     R.isNaN(NaN);        //=> true
- *     R.isNaN(undefined);  //=> false
- *     R.isNaN({});         //=> false
+ *      R.isNaN(NaN);        //=> true
+ *      R.isNaN(undefined);  //=> false
+ *      R.isNaN({});         //=> false
  */
 module.exports = _curry1(function isNaN(x) {
   return typeof x === 'number' && x !== x;

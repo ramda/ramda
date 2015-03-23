@@ -20,28 +20,28 @@ var _curry2 = require('./internal/_curry2');
  *         also curried functions.
  * @example
  *
- *     var headLens = R.lens(
- *       function get(arr) { return arr[0]; },
- *       function set(val, arr) { return [val].concat(arr.slice(1)); }
- *     );
- *     headLens([10, 20, 30, 40]); //=> 10
- *     headLens.set('mu', [10, 20, 30, 40]); //=> ['mu', 20, 30, 40]
- *     headLens.map(function(x) { return x + 1; }, [10, 20, 30, 40]); //=> [11, 20, 30, 40]
+ *      var headLens = R.lens(
+ *        function get(arr) { return arr[0]; },
+ *        function set(val, arr) { return [val].concat(arr.slice(1)); }
+ *      );
+ *      headLens([10, 20, 30, 40]); //=> 10
+ *      headLens.set('mu', [10, 20, 30, 40]); //=> ['mu', 20, 30, 40]
+ *      headLens.map(function(x) { return x + 1; }, [10, 20, 30, 40]); //=> [11, 20, 30, 40]
  *
- *     var phraseLens = R.lens(
- *       function get(obj) { return obj.phrase; },
- *       function set(val, obj) {
- *         var out = R.clone(obj);
- *         out.phrase = val;
- *         return out;
- *       }
- *     );
- *     var obj1 = { phrase: 'Absolute filth . . . and I LOVED it!'};
- *     var obj2 = { phrase: "What's all this, then?"};
- *     phraseLens(obj1); // => 'Absolute filth . . . and I LOVED it!'
- *     phraseLens(obj2); // => "What's all this, then?"
- *     phraseLens.set('Ooh Betty', obj1); //=> { phrase: 'Ooh Betty'}
- *     phraseLens.map(R.toUpper, obj2); //=> { phrase: "WHAT'S ALL THIS, THEN?"}
+ *      var phraseLens = R.lens(
+ *        function get(obj) { return obj.phrase; },
+ *        function set(val, obj) {
+ *          var out = R.clone(obj);
+ *          out.phrase = val;
+ *          return out;
+ *        }
+ *      );
+ *      var obj1 = { phrase: 'Absolute filth . . . and I LOVED it!'};
+ *      var obj2 = { phrase: "What's all this, then?"};
+ *      phraseLens(obj1); // => 'Absolute filth . . . and I LOVED it!'
+ *      phraseLens(obj2); // => "What's all this, then?"
+ *      phraseLens.set('Ooh Betty', obj1); //=> { phrase: 'Ooh Betty'}
+ *      phraseLens.map(R.toUpper, obj2); //=> { phrase: "WHAT'S ALL THIS, THEN?"}
  */
 module.exports = _curry2(function lens(get, set) {
   var lns = function(a) { return get(a); };

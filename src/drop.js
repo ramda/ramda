@@ -19,7 +19,7 @@ var _xdrop = require('./internal/_xdrop');
  * @return {Array} The last `n` elements of `list`.
  * @example
  *
- *     R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
+ *      R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
  */
 module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, list) {
   return n < list.length ? _slice(list, n) : [];
