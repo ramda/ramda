@@ -14,9 +14,9 @@ var _curry2 = require('./internal/_curry2');
  * @return {*} the first argument if falsy otherwise the second argument.
  * @example
  *
- *      R.and(false, true); //=> true
- *      R.and(0, []); //=> []
- *      R.and(null, ''); => false
+ *      R.and(false, true); //=> false
+ *      R.and(0, []); //=> 0
+ *      R.and(null, ''); => null
  */
 module.exports = _curry2(function and(a, b) {
   return a && b;
