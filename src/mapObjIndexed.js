@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
 var keys = require('./keys');
 
 
@@ -26,8 +25,13 @@ var keys = require('./keys');
  *      R.mapObjIndexed(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
  */
 module.exports = _curry2(function mapObjectIndexed(fn, obj) {
-  return _reduce(function(acc, key) {
-    acc[key] = fn(obj[key], key, obj);
-    return acc;
-  }, {}, keys(obj));
+  var result = {};
+  var props = keys(obj);
+  var idx = -1;
+  var len = props.length;
+  while (++idx < len) {
+    var prop = props[idx];
+    result[prop] = fn(obj[prop], prop, obj);
+  }
+  return result;
 });
