@@ -18,7 +18,7 @@ var _xany = require('./internal/_xany');
  * @return {Boolean} `true` if the predicate is not satisfied by every element, `false` otherwise.
  * @example
  *
- *      R.none(R.isNaN, [1, 2, 3]); //=> true
- *      R.none(R.isNaN, [1, 2, 3, NaN]); //=> false
+ *      R.none(R.eqNaN, [1, 2, 3]); //=> true
+ *      R.none(R.eqNaN, [1, 2, 3, NaN]); //=> false
  */
 module.exports = _curry2(_complement(_dispatchable('any', _xany, _any)));
