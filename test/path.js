@@ -22,7 +22,7 @@ describe('path', function() {
       j: ['J']
     };
     assert.strictEqual(R.path(['a', 'b', 'c'], obj), 100);
-    assert.strictEqual(R.path([], obj), undefined);
+    assert.strictEqual(R.path([], obj), obj);
     assert.strictEqual(R.path(['a', 'e', 'f', '1'], obj), 101);
     assert.strictEqual(R.path(['j', '0'], obj), 'J');
     assert.strictEqual(R.path(['j', '1'], obj), undefined);
