@@ -30,12 +30,18 @@ describe('lastIndexOf', function() {
   it('does not find c', function() {
     assert.strictEqual(R.lastIndexOf('c', list), -1);
   });
-  it('Uses strict equality', function() {
+  it('does not consider "1" equal to 1', function() {
     assert.strictEqual(R.lastIndexOf('1', list), -1);
   });
   it('returns -1 for an empty array', function() {
     assert.strictEqual(R.lastIndexOf('x', 2, []), -1);
     assert.strictEqual(R.lastIndexOf('x', -5, []), -1);
+  });
+
+  it('has Object.is semantics', function() {
+    assert.strictEqual(R.lastIndexOf(-0, [0]), -1);
+    assert.strictEqual(R.lastIndexOf(0, [-0]), -1);
+    assert.strictEqual(R.lastIndexOf(NaN, [NaN]), 0);
   });
 
   it('is curried', function() {

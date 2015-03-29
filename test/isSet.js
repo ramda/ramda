@@ -14,4 +14,10 @@ describe('isSet', function() {
     assert.strictEqual(R.isSet([]), true);
   });
 
+  it('has Object.is semantics', function() {
+    assert.strictEqual(R.isSet([0, -0]), true);
+    assert.strictEqual(R.isSet([-0, 0]), true);
+    assert.strictEqual(R.isSet([NaN, NaN]), false);
+  });
+
 });

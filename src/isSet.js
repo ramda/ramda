@@ -4,7 +4,9 @@ var _indexOf = require('./internal/_indexOf');
 
 /**
  * Returns `true` if all elements are unique, otherwise `false`.
- * Uniqueness is determined using strict equality (`===`).
+ *
+ * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
+ * are not considered equal.
  *
  * @func
  * @memberOf R

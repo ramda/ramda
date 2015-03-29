@@ -15,6 +15,12 @@ describe('propEq', function() {
     assert.strictEqual(R.propEq('hair', 'blond', obj2), false);
   });
 
+  it('has Object.is semantics', function() {
+    assert.strictEqual(R.propEq('value', -0, {value: 0}), false);
+    assert.strictEqual(R.propEq('value', 0, {value: -0}), false);
+    assert.strictEqual(R.propEq('value', NaN, {value: NaN}), true);
+  });
+
   it('is curried', function() {
     var kids = [obj1, obj2, obj3, obj4];
     var hairMatch = R.propEq('hair');

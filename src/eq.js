@@ -1,14 +1,18 @@
 var _curry2 = require('./internal/_curry2');
+var _eq = require('./internal/_eq');
 
 
 /**
  * Tests if two items are equal.  Equality is strict here, meaning reference equality for objects and
  * non-coercing equality for primitives.
  *
+ * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
+ * are not considered equal.
+ *
  * @func
  * @memberOf R
  * @category Relation
- * @sig a -> b -> Boolean
+ * @sig a -> a -> Boolean
  * @param {*} a
  * @param {*} b
  * @return {Boolean}
@@ -22,10 +26,4 @@ var _curry2 = require('./internal/_curry2');
  *      R.eq(0, -0); //=> false
  *      R.eq(NaN, NaN); //=> true
  */
-module.exports = _curry2(function eq(a, b) {
-  if (a === 0) {
-    return 1 / a === 1 / b;
-  } else {
-    return a === b || (a !== a && b !== b);
-  }
-});
+module.exports = _curry2(_eq);
