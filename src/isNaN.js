@@ -6,6 +6,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * Equivalent to ES6's [`Number.isNaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN).
  *
+ * @deprecated since v0.14.0
  * @func
  * @memberOf R
  * @category Math
