@@ -14,7 +14,7 @@
  *      _path(['a', 'b'], {a: {b: 2}}); //=> 2
  */
 module.exports = function _path(paths, obj) {
-  if (obj == null || paths.length === 0) {
+  if (obj == null) {
     return;
   } else {
     var val = obj;
