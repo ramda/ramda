@@ -30,7 +30,7 @@ module.exports = _curry3(function differenceWith(pred, first, second) {
   var containsPred = containsWith(pred);
   while (++idx < firstLen) {
     if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
-      out[idx] = first[idx];
+      out[out.length] = first[idx];
     }
   }
   return out;
