@@ -4,7 +4,10 @@ var _curry2 = require('./internal/_curry2');
 
 /**
  * Returns `true` if the specified item is somewhere in the list, `false` otherwise.
- * Equivalent to `indexOf(a)(list) > -1`. Uses strict (`===`) equality checking.
+ * Equivalent to `indexOf(a, list) >= 0`.
+ *
+ * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
+ * are not considered equal.
  *
  * @func
  * @memberOf R

@@ -3,9 +3,11 @@ var _indexOf = require('./internal/_indexOf');
 
 
 /**
- * Returns the position of the first occurrence of an item in an array
- * (by strict equality),
+ * Returns the position of the first occurrence of an item in an array,
  * or -1 if the item is not included in the array.
+ *
+ * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
+ * are not considered equal.
  *
  * @func
  * @memberOf R

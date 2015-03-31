@@ -16,6 +16,12 @@ describe('contains', function() {
     assert.strictEqual(R.contains(1, []), false);
   });
 
+  it('has Object.is semantics', function() {
+    assert.strictEqual(R.contains(-0, [0]), false);
+    assert.strictEqual(R.contains(0, [-0]), false);
+    assert.strictEqual(R.contains(NaN, [NaN]), true);
+  });
+
   it('is curried', function() {
     assert.strictEqual(typeof R.contains(7), 'function');
     assert.strictEqual(R.contains(7)([1, 2, 3]), false);
