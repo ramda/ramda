@@ -5,6 +5,7 @@ var _curry2 = require('./internal/_curry2');
  * Returns a partial copy of an object containing only the keys that
  * satisfy the supplied predicate.
  *
+ * @deprecated since v0.14.0
  * @func
  * @memberOf R
  * @category Object
