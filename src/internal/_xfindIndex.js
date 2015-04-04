@@ -9,20 +9,20 @@ module.exports = (function() {
     this.idx = -1;
     this.found = false;
   }
-  XFindIndex.prototype.init = function() {
-    return this.xf.init();
+  XFindIndex.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XFindIndex.prototype.result = function(result) {
+  XFindIndex.prototype['@@transducer/result'] = function(result) {
     if (!this.found) {
-      result = this.xf.step(result, -1);
+      result = this.xf['@@transducer/step'](result, -1);
     }
-    return this.xf.result(result);
+    return this.xf['@@transducer/result'](result);
   };
-  XFindIndex.prototype.step = function(result, input) {
+  XFindIndex.prototype['@@transducer/step'] = function(result, input) {
     this.idx += 1;
     if (this.f(input)) {
       this.found = true;
-      result = _reduced(this.xf.step(result, this.idx));
+      result = _reduced(this.xf['@@transducer/step'](result, this.idx));
     }
     return result;
   };

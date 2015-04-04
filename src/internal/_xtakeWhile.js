@@ -7,14 +7,14 @@ module.exports = (function() {
     this.xf = xf;
     this.f = f;
   }
-  XTakeWhile.prototype.init = function() {
-    return this.xf.init();
+  XTakeWhile.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XTakeWhile.prototype.result = function(result) {
-    return this.xf.result(result);
+  XTakeWhile.prototype['@@transducer/result'] = function(result) {
+    return this.xf['@@transducer/result'](result);
   };
-  XTakeWhile.prototype.step = function(result, input) {
-    return this.f(input) ? this.xf.step(result, input) : _reduced(result);
+  XTakeWhile.prototype['@@transducer/step'] = function(result, input) {
+    return this.f(input) ? this.xf['@@transducer/step'](result, input) : _reduced(result);
   };
 
   return _curry2(function _xtakeWhile(f, xf) { return new XTakeWhile(f, xf); });

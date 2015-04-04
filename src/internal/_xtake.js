@@ -7,16 +7,16 @@ module.exports = (function() {
     this.xf = xf;
     this.n = n;
   }
-  XTake.prototype.init = function() {
-    return this.xf.init();
+  XTake.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XTake.prototype.result = function(result) {
-    return this.xf.result(result);
+  XTake.prototype['@@transducer/result'] = function(result) {
+    return this.xf['@@transducer/result'](result);
   };
-  XTake.prototype.step = function(result, input) {
+  XTake.prototype['@@transducer/step'] = function(result, input) {
     this.n -= 1;
-    return this.n === 0 ? _reduced(this.xf.step(result, input))
-                        : this.xf.step(result, input);
+    return this.n === 0 ? _reduced(this.xf['@@transducer/step'](result, input))
+                        : this.xf['@@transducer/step'](result, input);
   };
 
   return _curry2(function _xtake(n, xf) { return new XTake(n, xf); });

@@ -8,19 +8,19 @@ module.exports = (function() {
     this.f = f;
     this.any = false;
   }
-  XAny.prototype.init = function() {
-    return this.xf.init();
+  XAny.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XAny.prototype.result = function(result) {
+  XAny.prototype['@@transducer/result'] = function(result) {
     if (!this.any) {
-      result = this.xf.step(result, false);
+      result = this.xf['@@transducer/step'](result, false);
     }
-    return this.xf.result(result);
+    return this.xf['@@transducer/result'](result);
   };
-  XAny.prototype.step = function(result, input) {
+  XAny.prototype['@@transducer/step'] = function(result, input) {
     if (this.f(input)) {
       this.any = true;
-      result = _reduced(this.xf.step(result, true));
+      result = _reduced(this.xf['@@transducer/step'](result, true));
     }
     return result;
   };

@@ -8,9 +8,9 @@ describe('into', function() {
   var add = R.add;
   var isOdd = function(b) {return b % 2 === 1;};
   var addXf = {
-    step: add,
-    init: R.always(0),
-    result: R.identity
+    '@@transducer/step': add,
+    '@@transducer/init': R.always(0),
+    '@@transducer/result': R.identity
   };
 
   it('transduces into arrays', function() {
