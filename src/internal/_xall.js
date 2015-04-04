@@ -8,19 +8,19 @@ module.exports = (function() {
     this.f = f;
     this.all = true;
   }
-  XAll.prototype.init = function() {
-    return this.xf.init();
+  XAll.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XAll.prototype.result = function(result) {
+  XAll.prototype['@@transducer/result'] = function(result) {
     if (this.all) {
-      result = this.xf.step(result, true);
+      result = this.xf['@@transducer/step'](result, true);
     }
-    return this.xf.result(result);
+    return this.xf['@@transducer/result'](result);
   };
-  XAll.prototype.step = function(result, input) {
+  XAll.prototype['@@transducer/step'] = function(result, input) {
     if (!this.f(input)) {
       this.all = false;
-      result = _reduced(this.xf.step(result, false));
+      result = _reduced(this.xf['@@transducer/step'](result, false));
     }
     return result;
   };

@@ -9,24 +9,24 @@ var merge = require('../merge');
 
 module.exports = (function() {
   var _stepCatArray = {
-    init: Array,
-    step: function(xs, x) { return _concat(xs, [x]); },
-    result: _identity
+    '@@transducer/init': Array,
+    '@@transducer/step': function(xs, x) { return _concat(xs, [x]); },
+    '@@transducer/result': _identity
   };
   var _stepCatString = {
-    init: String,
-    step: _add,
-    result: _identity
+    '@@transducer/init': String,
+    '@@transducer/step': _add,
+    '@@transducer/result': _identity
   };
   var _stepCatObject = {
-    init: Object,
-    step: function(result, input) {
+    '@@transducer/init': Object,
+    '@@transducer/step': function(result, input) {
       return merge(
         result,
         isArrayLike(input) ? _createMapEntry(input[0], input[1]) : input
       );
     },
-    result: _identity
+    '@@transducer/result': _identity
   };
 
   return function _stepCat(obj) {

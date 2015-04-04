@@ -9,23 +9,23 @@ module.exports = (function() {
     this.f = f;
     this.inputs = {};
   }
-  XGroupBy.prototype.init = function() {
-    return this.xf.init();
+  XGroupBy.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XGroupBy.prototype.result = function(result) {
+  XGroupBy.prototype['@@transducer/result'] = function(result) {
     var key;
     for (key in this.inputs) {
       if (_has(key, this.inputs)) {
-        result = this.xf.step(result, this.inputs[key]);
-        if (result.__transducers_reduced__) {
-          result = result.value;
+        result = this.xf['@@transducer/step'](result, this.inputs[key]);
+        if (result['@@transducer/reduced']) {
+          result = result['@@transducer/value'];
           break;
         }
       }
     }
-    return this.xf.result(result);
+    return this.xf['@@transducer/result'](result);
   };
-  XGroupBy.prototype.step = function(result, input) {
+  XGroupBy.prototype['@@transducer/step'] = function(result, input) {
     var key = this.f(input);
     this.inputs[key] = this.inputs[key] || [key, []];
     this.inputs[key][1] = _append(input, this.inputs[key][1]);

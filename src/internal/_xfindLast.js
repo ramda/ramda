@@ -6,13 +6,13 @@ module.exports = (function() {
     this.xf = xf;
     this.f = f;
   }
-  XFindLast.prototype.init = function() {
-    return this.xf.init();
+  XFindLast.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XFindLast.prototype.result = function(result) {
-    return this.xf.result(this.xf.step(result, this.last));
+  XFindLast.prototype['@@transducer/result'] = function(result) {
+    return this.xf['@@transducer/result'](this.xf['@@transducer/step'](result, this.last));
   };
-  XFindLast.prototype.step = function(result, input) {
+  XFindLast.prototype['@@transducer/step'] = function(result, input) {
     if (this.f(input)) {
       this.last = input;
     }

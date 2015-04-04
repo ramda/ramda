@@ -54,9 +54,9 @@ describe('groupBy', function() {
   it('dispatches on transformer objects in list position', function() {
     var byType = R.prop('type');
     var xf = {
-      init: function() { return {}; },
-      result: function(x) { return x; },
-      step: R.merge
+      '@@transducer/init': function() { return {}; },
+      '@@transducer/result': function(x) { return x; },
+      '@@transducer/step': R.merge
     };
     assert.strictEqual(_isTransformer(R.groupBy(byType, xf)), true);
   });

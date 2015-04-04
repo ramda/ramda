@@ -9,29 +9,29 @@ describe('transduce', function() {
   var mult = function(a, b) {return a * b;};
   var isOdd = function(b) {return b % 2 === 1;};
   var addxf = {
-    step: function(acc, x) { return acc + x; },
-    init: function() { return 0; },
-    result: function(x) { return x; }
+    '@@transducer/step': function(acc, x) { return acc + x; },
+    '@@transducer/init': function() { return 0; },
+    '@@transducer/result': function(x) { return x; }
   };
 
   var listxf = {
-    step: function(acc, x) { return acc.concat([x]); },
-    init: function() { return []; },
-    result: function(x) { return x; }
+    '@@transducer/step': function(acc, x) { return acc.concat([x]); },
+    '@@transducer/init': function() { return []; },
+    '@@transducer/result': function(x) { return x; }
   };
 
   var multxf = {
-    step: function(acc, x) { return acc * x; },
-    init: function() { return 1; },
-    result: function(x) { return x; }
+    '@@transducer/step': function(acc, x) { return acc * x; },
+    '@@transducer/init': function() { return 1; },
+    '@@transducer/result': function(x) { return x; }
   };
 
   var toxf = function(fn) {
     return function(xf) {
       return {
         f: fn,
-        step: xf.step,
-        result: xf.result,
+        '@@transducer/step': xf['@@transducer/step'],
+        '@@transducer/result': xf['@@transducer/result'],
         xf: xf
       };
     };
