@@ -39,6 +39,6 @@ var _stepCat = require('./internal/_stepCat');
  *      intoArray(transducer, numbers); //=> [2, 3]
  */
 module.exports = _curry3(function into(acc, xf, list) {
-  return _isTransformer(acc) ? _reduce(xf(acc), acc.init(), list)
+  return _isTransformer(acc) ? _reduce(xf(acc), acc['@@transducer/init'](), list)
                              : _reduce(xf(_stepCat(acc)), acc, list);
 });

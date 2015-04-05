@@ -2,11 +2,11 @@ module.exports = (function() {
   function XWrap(fn) {
     this.f = fn;
   }
-  XWrap.prototype.init = function() {
+  XWrap.prototype['@@transducer/init'] = function() {
     throw new Error('init not implemented on XWrap');
   };
-  XWrap.prototype.result = function(acc) { return acc; };
-  XWrap.prototype.step = function(acc, x) {
+  XWrap.prototype['@@transducer/result'] = function(acc) { return acc; };
+  XWrap.prototype['@@transducer/step'] = function(acc, x) {
     return this.f(acc, x);
   };
 

@@ -6,20 +6,20 @@ module.exports = (function() {
     this.xf = xf;
     this.f = f;
   }
-  XDropWhile.prototype.init = function() {
-    return this.xf.init();
+  XDropWhile.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
   XDropWhile.prototype.result = function(result) {
-    return this.xf.result(result);
+    return this.xf['@@transducer/result'](result);
   };
-  XDropWhile.prototype.step = function(result, input) {
+  XDropWhile.prototype['@@transducer/step'] = function(result, input) {
     if (this.f) {
       if (this.f(input)) {
         return result;
       }
       this.f = null;
     }
-    return this.xf.step(result, input);
+    return this.xf['@@transducer/step'](result, input);
   };
 
   return _curry2(function _xdropWhile(f, xf) { return new XDropWhile(f, xf); });

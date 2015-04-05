@@ -8,13 +8,13 @@ module.exports = (function() {
     this.idx = -1;
     this.lastIdx = -1;
   }
-  XFindLastIndex.prototype.init = function() {
-    return this.xf.init();
+  XFindLastIndex.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XFindLastIndex.prototype.result = function(result) {
-    return this.xf.result(this.xf.step(result, this.lastIdx));
+  XFindLastIndex.prototype['@@transducer/result'] = function(result) {
+    return this.xf['@@transducer/result'](this.xf['@@transducer/step'](result, this.lastIdx));
   };
-  XFindLastIndex.prototype.step = function(result, input) {
+  XFindLastIndex.prototype['@@transducer/step'] = function(result, input) {
     this.idx += 1;
     if (this.f(input)) {
       this.lastIdx = this.idx;

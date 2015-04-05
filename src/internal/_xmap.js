@@ -6,14 +6,14 @@ module.exports = (function() {
     this.xf = xf;
     this.f = f;
   }
-  XMap.prototype.init = function() {
-    return this.xf.init();
+  XMap.prototype['@@transducer/init'] = function() {
+    return this.xf['@@transducer/init']();
   };
-  XMap.prototype.result = function(result) {
-    return this.xf.result(result);
+  XMap.prototype['@@transducer/result'] = function(result) {
+    return this.xf['@@transducer/result'](result);
   };
-  XMap.prototype.step = function(result, input) {
-    return this.xf.step(result, this.f(input));
+  XMap.prototype['@@transducer/step'] = function(result, input) {
+    return this.xf['@@transducer/step'](result, this.f(input));
   };
 
   return _curry2(function _xmap(f, xf) { return new XMap(f, xf); });

@@ -7,30 +7,30 @@ module.exports = (function() {
   function _arrayReduce(xf, acc, list) {
     var idx = -1, len = list.length;
     while (++idx < len) {
-      acc = xf.step(acc, list[idx]);
-      if (acc && acc.__transducers_reduced__) {
-        acc = acc.value;
+      acc = xf['@@transducer/step'](acc, list[idx]);
+      if (acc && acc['@@transducer/reduced']) {
+        acc = acc['@@transducer/value'];
         break;
       }
     }
-    return xf.result(acc);
+    return xf['@@transducer/result'](acc);
   }
 
   function _iterableReduce(xf, acc, iter) {
     var step = iter.next();
     while (!step.done) {
-      acc = xf.step(acc, step.value);
-      if (acc && acc.__transducers_reduced__) {
-        acc = acc.value;
+      acc = xf['@@transducer/step'](acc, step.value);
+      if (acc && acc['@@transducer/reduced']) {
+        acc = acc['@@transducer/value'];
         break;
       }
       step = iter.next();
     }
-    return xf.result(acc);
+    return xf['@@transducer/result'](acc);
   }
 
   function _methodReduce(xf, acc, obj) {
-    return xf.result(obj.reduce(bind(xf.step, xf), acc));
+    return xf['@@transducer/result'](obj.reduce(bind(xf['@@transducer/step'], xf), acc));
   }
 
   var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
