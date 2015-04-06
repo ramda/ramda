@@ -34,7 +34,7 @@
   "main": "dist/ramda.js",
   "scripts": {
     "jshint": "grunt jshint",
-    "test": "grunt test"
+    "test": "grunt jshint && grunt jscs && grunt browserify:client && grunt mochaTest:unit"
   },
   "dependencies": {},
   "devDependencies": {
