@@ -29,6 +29,10 @@ describe('difference', function() {
     assert.deepEqual(R.difference(Z2, Z), [1, 2, 7, 8]);
   });
 
+  it('will not create a "sparse" array', function() {
+    assert.strictEqual(R.difference(M2, [3]).length, 3);
+  });
+
   it('returns an empty array if there are no different elements', function() {
     assert.deepEqual(R.difference(M2, M), []);
     assert.deepEqual(R.difference(M, M2), []);
