@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var clone = require('./clone');
+var _slice = require('./internal/_slice');
 
 
 /**
@@ -20,5 +20,5 @@ var clone = require('./clone');
  *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
  */
 module.exports = _curry2(function sort(comparator, list) {
-  return clone(list).sort(comparator);
+  return _slice(list).sort(comparator);
 });
