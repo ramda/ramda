@@ -18,6 +18,11 @@ describe('propOr', function() {
     assert.strictEqual(nm(anon), 'Unknown');
   });
 
+  it('returns the default value when the object is nil', function() {
+    assert.strictEqual(nm(null), 'Unknown');
+    assert.strictEqual(nm(void 0), 'Unknown');
+  });
+
   it('does not return properties from the prototype chain', function() {
     var Person = function() {};
     Person.prototype.age = function() {};
