@@ -1,5 +1,6 @@
 var _curry2 = require('./_curry2');
 var _reduced = require('./_reduced');
+var _xfBase = require('./_xfBase');
 
 
 module.exports = (function() {
@@ -7,12 +8,8 @@ module.exports = (function() {
     this.xf = xf;
     this.n = n;
   }
-  XTake.prototype['@@transducer/init'] = function() {
-    return this.xf['@@transducer/init']();
-  };
-  XTake.prototype['@@transducer/result'] = function(result) {
-    return this.xf['@@transducer/result'](result);
-  };
+  XTake.prototype['@@transducer/init'] = _xfBase.init;
+  XTake.prototype['@@transducer/result'] = _xfBase.result;
   XTake.prototype['@@transducer/step'] = function(result, input) {
     this.n -= 1;
     return this.n === 0 ? _reduced(this.xf['@@transducer/step'](result, input))

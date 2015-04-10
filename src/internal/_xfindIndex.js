@@ -1,5 +1,6 @@
 var _curry2 = require('./_curry2');
 var _reduced = require('./_reduced');
+var _xfBase = require('./_xfBase');
 
 
 module.exports = (function() {
@@ -9,9 +10,7 @@ module.exports = (function() {
     this.idx = -1;
     this.found = false;
   }
-  XFindIndex.prototype['@@transducer/init'] = function() {
-    return this.xf['@@transducer/init']();
-  };
+  XFindIndex.prototype['@@transducer/init'] = _xfBase.init;
   XFindIndex.prototype['@@transducer/result'] = function(result) {
     if (!this.found) {
       result = this.xf['@@transducer/step'](result, -1);
