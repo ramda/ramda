@@ -9,7 +9,7 @@ module.exports = (function() {
     this.found = false;
   }
   XFind.prototype['@@transducer/init'] = function() {
-    return this.xf.init();
+    return this.xf['@@transducer/init']();
   };
   XFind.prototype['@@transducer/result'] = function(result) {
     if (!this.found) {
