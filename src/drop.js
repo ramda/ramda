@@ -5,7 +5,7 @@ var _xdrop = require('./internal/_xdrop');
 
 
 /**
- * Returns a new list containing all but the first `n` elements of the given `list`.
+ * Returns a list containing all but the first `n` elements of the given `list`.
  *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
@@ -22,5 +22,5 @@ var _xdrop = require('./internal/_xdrop');
  *      R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
  */
 module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, list) {
-  return n < list.length ? _slice(list, n) : [];
+  return n <= 0 ? list : _slice(list, n);
 }));
