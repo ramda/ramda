@@ -34,8 +34,8 @@ describe('pathEq', function() {
 
   it('has Object.is semantics', function() {
     assert.strictEqual(R.pathEq(['value'], -0, {value: 0}), false);
-    assert.strictEqual(R.propEq(['value'], 0, {value: -0}), false);
-    assert.strictEqual(R.propEq(['value'], NaN, {value: NaN}), true);
+    assert.strictEqual(R.pathEq(['value'], 0, {value: -0}), false);
+    assert.strictEqual(R.pathEq(['value'], NaN, {value: NaN}), true);
   });
 
 });
