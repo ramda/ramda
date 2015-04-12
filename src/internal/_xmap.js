@@ -1,4 +1,5 @@
 var _curry2 = require('./_curry2');
+var _xfBase = require('./_xfBase');
 
 
 module.exports = (function() {
@@ -6,12 +7,8 @@ module.exports = (function() {
     this.xf = xf;
     this.f = f;
   }
-  XMap.prototype['@@transducer/init'] = function() {
-    return this.xf['@@transducer/init']();
-  };
-  XMap.prototype['@@transducer/result'] = function(result) {
-    return this.xf['@@transducer/result'](result);
-  };
+  XMap.prototype['@@transducer/init'] = _xfBase.init;
+  XMap.prototype['@@transducer/result'] = _xfBase.result;
   XMap.prototype['@@transducer/step'] = function(result, input) {
     return this.xf['@@transducer/step'](result, this.f(input));
   };
