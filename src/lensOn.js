@@ -7,18 +7,19 @@ var _curry3 = require('./internal/_curry3');
  * @func
  * @memberOf R
  * @category Object
- * @sig {} -> ({} -> v) -> (v -> a -> *) -> (a -> b)
+ * @sig ({} -> v) -> (v -> a -> *) -> {} -> (a -> b)
  * @see R.lens
  * @param {Function} get A function that gets a value by property name
  * @param {Function} set A function that sets a value by property name
+ * @param {Object} the actual object of interest
  * @return {Function} the returned function has `set` and `map` properties that are
  *         also curried functions.
  * @example
  *
  *      var xo = {x: 1};
- *      var xoLens = R.lensOn(xo,
- *                            function get(o) { return o.x; },
- *                            function set(v) { return {x: v}; });
+ *      var xoLens = R.lensOn(function get(o) { return o.x; },
+ *                            function set(v) { return {x: v}; },
+ *                            xo);
  *      xoLens(); //=> 1
  *      xoLens.set(1000); //=> {x: 1000}
  *      xoLens.map(R.add(1)); //=> {x: 2}
