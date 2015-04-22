@@ -17,7 +17,7 @@ var curry = require('./curry');
  * @func
  * @memberOf R
  * @category Function
- * @sig ((* -> *), (* -> *)...) -> (* -> *)
+ * @sig (x1 -> x2 -> ... -> z) -> ((a -> x1), (b -> x2), ...) -> (a -> b -> ... -> z)
  * @param {Function} fn The function to wrap.
  * @param {...Function} transformers A variable number of transformer functions
  * @return {Function} The wrapped function.

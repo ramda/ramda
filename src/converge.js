@@ -14,7 +14,7 @@ var pluck = require('./pluck');
  * @func
  * @memberOf R
  * @category Function
- * @sig ((*... -> c) -> (((* -> a), (* -> b), ...) -> c)
+ * @sig (x1 -> x2 -> ... -> z) -> ((a -> b -> ... -> x1), (a -> b -> ... -> x2), ...) -> (a -> b -> ... -> z)
  * @param {Function} after A function. `after` will be invoked with the return values of
  *        `fn1` and `fn2` as its arguments.
  * @param {...Function} functions A variable number of functions.
