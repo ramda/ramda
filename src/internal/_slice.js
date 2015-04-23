@@ -20,8 +20,10 @@ module.exports = function _slice(args, from, to) {
     case 1: return _slice(args, 0, args.length);
     case 2: return _slice(args, from, args.length);
     default:
-      var length = Math.max(0, to - from), list = [], idx = -1;
-      while (++idx < length) {
+      var list = [];
+      var idx = -1;
+      var len = Math.max(0, Math.min(args.length, to) - from);
+      while (++idx < len) {
         list[idx] = args[from + idx];
       }
       return list;
