@@ -67,8 +67,22 @@ describe('memoize', function() {
   });
 
   it('differentiates values with same string representation', function() {
-    var f = R.memoize(function(x) { return x; });
-    assert.strictEqual(f(42), 42);
-    assert.strictEqual(f('42'), '42');
+    var f = R.memoize(R.toString);
+    assert.strictEqual(f(42), '42');
+    assert.strictEqual(f('42'), '"42"');
+    assert.strictEqual(f([[42]]), '[[42]]');
+    assert.strictEqual(f([['42']]), '[["42"]]');
+  });
+
+  it('respects object equivalence', function() {
+    var count = 0;
+    var f = R.memoize(function(x) {
+      count += 1;
+      return R.toString(x);
+    });
+    assert.strictEqual(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
+    assert.strictEqual(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
+    assert.strictEqual(f({y: 2, x: 1}), '{"x": 1, "y": 2}');
+    assert.strictEqual(count, 1);
   });
 });
