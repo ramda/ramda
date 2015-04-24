@@ -29,5 +29,5 @@ var _xtake = require('./internal/_xtake');
  *      takeFive(members); //=> ["Paul Desmond","Bob Bates","Joe Dodge","Ron Crotty","Lloyd Davis"]
  */
 module.exports = _curry2(_dispatchable('take', _xtake, function take(n, list) {
-  return _slice(list, 0, Math.min(n, list.length));
+  return _slice(list, 0, n);
 }));
