@@ -12,7 +12,7 @@ var TRAVIS_NODE_VERSION = envvar.string('TRAVIS_NODE_VERSION', process.versions.
 var TRAVIS_TAG          = envvar.string('TRAVIS_TAG', '');
 
 var jsFiles = [
-  'scripts/build',
+  'bin/build',
   '**/*.js',
   '!{dist,lib/test,node_modules,bower_components}/**'
 ];
