@@ -38,4 +38,21 @@ describe('values', function() {
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
     assert.deepEqual(result, R.repeat([], 10));
   });
+
+  if (typeof Map === 'function') {
+
+    it('supports Map objects', function() {
+      var k1 = R.values(new Map());
+      assert.strictEqual(k1.constructor, Array);
+      assert.strictEqual(k1.length, 0);
+
+      var k2 = R.values(new Map([[3, 'c'], [2, 'b'], [1, 'a']]));
+      assert.strictEqual(k2.constructor, Array);
+      assert.strictEqual(k2.length, 3);
+      assert.strictEqual(k2[0], 'c');
+      assert.strictEqual(k2[1], 'b');
+      assert.strictEqual(k2[2], 'a');
+    });
+
+  }
 });

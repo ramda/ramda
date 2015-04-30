@@ -23,6 +23,17 @@ describe('has', function() {
     assert.strictEqual(R.has('age', bob), false);
   });
 
+  if (typeof Map === 'function') {
+
+    it('supports Map objects', function() {
+      var map = new Map([[1, 'one'], [2, 'two'], [3, 'three']]);
+      assert.strictEqual(R.has(1, map), true);
+      assert.strictEqual(R.has(0, map), false);
+      assert.strictEqual(R.has('one', map), false);
+    });
+
+  }
+
   it('is curried, op-style', function() {
     var hasName = R.has('name');
     assert.strictEqual(hasName(fred), true);

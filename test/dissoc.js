@@ -24,6 +24,17 @@ describe('dissoc', function() {
     assert.deepEqual(R.dissoc('depth', rect), {width: 7, height: 6, area: area});
   });
 
+  if (typeof Map === 'function') {
+
+    it('supports Map objects', function() {
+      var m = R.dissoc('z', new Map([['x', 1], ['y', 2], ['z', 3]]));
+      assert.strictEqual(m.constructor, Map);
+      assert.strictEqual(m.size, 2);
+      assert.strictEqual(m.get('z'), undefined);
+    });
+
+  }
+
   it('is curried', function() {
     assert.deepEqual(R.dissoc('b')({a: 1, b: 2, c: 3}), {a: 1, c: 3});
   });
