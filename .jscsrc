@@ -13,6 +13,14 @@
   "disallowSpacesInsideParentheses": true,
   "disallowTrailingWhitespace": true,
   "disallowYodaConditions": true,
+  "excludeFiles": [
+    "dist/**", 
+    "lib/test/**", 
+    "node_modules/**", 
+    "bower_components/**", 
+    "test/bundle.js", 
+    "**/*.min.js"
+  ],
   "requireCapitalizedConstructors": true,
   "requireCommaBeforeLineBreak": true,
   "requireCurlyBraces": ["if", "else", "for", "while", "do", "try", "catch", "finally"],
