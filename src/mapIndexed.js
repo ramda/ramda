@@ -16,6 +16,8 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {Array} list The list to be iterated over.
  * @return {Array} The new list.
+ * @deprecated since v0.14.0
+ * @see R.addIndex
  * @example
  *
  *      var squareEnds = function(elt, idx, list) {

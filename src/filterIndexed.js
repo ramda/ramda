@@ -13,6 +13,8 @@ var _filterIndexed = require('./internal/_filterIndexed');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} The new filtered array.
+ * @deprecated since v0.14.0
+ * @see R.addIndex
  * @example
  *
  *      var lastTwo = function(val, idx, list) {
