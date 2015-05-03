@@ -49,4 +49,11 @@ describe('pipe', function() {
     assert.strictEqual(g.length, 3);
     assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
   });
+
+  it('should return curried function with same arity as its first argument', function() {
+    var concatAndJoin = R.pipe(R.concat, R.join(','));
+    assert.strictEqual(concatAndJoin([1], [2]), '1,2');
+    assert.strictEqual(concatAndJoin.length, 2);
+    assert.strictEqual(concatAndJoin([1])([2]), '1,2');
+  });
 });
