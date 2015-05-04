@@ -35,8 +35,9 @@ module.exports = curryN(3, function(after) {
   var fns = _slice(arguments, 1);
   return curryN(max(pluck('length', fns)), function() {
     var args = arguments;
-    return after.apply(this, _map(function(fn) {
-      return fn.apply(this, args);
+    var context = this;
+    return after.apply(context, _map(function(fn) {
+      return fn.apply(context, args);
     }, fns));
   });
 });
