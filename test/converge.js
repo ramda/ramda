@@ -26,6 +26,17 @@ describe('converge', function() {
     assert.strictEqual(f3.length, 3);
   });
 
+  it('passes context to its functions', function() {
+    var a = function(x) { return this.f1(x); };
+    var b = function(x) { return this.f2(x); };
+    var c = function(x, y) { return this.f3(x, y); };
+    var d = R.converge(c, a, b);
+    var context = {f1: R.add(1), f2: R.add(2), f3: R.add};
+    assert.equal(a.call(context, 1), 2);
+    assert.equal(b.call(context, 1), 3);
+    assert.equal(d.call(context, 1), 5);
+  });
+
   it('returns a curried function', function() {
     assert.strictEqual(f2(6)(7), 42);
     assert.strictEqual(f3(R.__).length, 3);
