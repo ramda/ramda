@@ -17,29 +17,6 @@ describe('where', function() {
     assert.strictEqual(R.where(spec, test4), true);
   });
 
-  it('calls any functions in the spec against the test object value for that property', function() {
-    var spec = {
-      a: function(a, obj) {
-        return a < obj.b + obj.c;
-      },
-      b: function(b, obj) {
-        return b < obj.a + obj.c;
-      },
-      c: function(c, obj) {
-        return c < obj.a + obj.b;
-      }
-    };
-    var test1 = {a: 3, b: 4, c: 5};
-    var test2 = {a: 6, b: 8, c: 9};
-    var test3 = {a: 2, b: 8, c: 12};
-    var test4 = {a: 3, b: 11, c: 5};
-
-    assert.strictEqual(R.where(spec, test1), true);
-    assert.strictEqual(R.where(spec, test2), true);
-    assert.strictEqual(R.where(spec, test3), false);
-    assert.strictEqual(R.where(spec, test4), false);
-  });
-
   it('does not need the spec and the test object to have the same interface (the test object will have a superset of the specs properties)', function() {
     var spec = {x: 100};
     var test1 = {x: 20, y: 100, z: 100};
@@ -71,6 +48,12 @@ describe('where', function() {
     assert.strictEqual(R.where(spec, test4), false);
   });
 
+  it('has Object.is semantics', function() {
+    assert.strictEqual(R.where({value: -0}, {value: 0}), false);
+    assert.strictEqual(R.where({value: 0}, {value: -0}), false);
+    assert.strictEqual(R.where({value: NaN}, {value: NaN}), true);
+  });
+
   it('is curried', function() {
     var predicate = R.where({x: 1, y: 2});
     assert.strictEqual(predicate({x: 1, y: 2, z: 3}), true);
@@ -95,12 +78,9 @@ describe('where', function() {
 
   it('matches inherited functions', function() {
     var spec = {
-      toString: R.T
+      toString: Object.prototype.toString
     };
     assert.strictEqual(R.where(spec, {}), true);
-    assert.strictEqual(R.where(spec, {a: 1}), true);
-    assert.strictEqual(R.where(spec, {toString: 1}), true);
-    assert.strictEqual(R.where({a: R.T}, {x: 1}), false);
   });
 
   it('matches inherited props', function() {
