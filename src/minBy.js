@@ -5,6 +5,7 @@ var _lt = require('./internal/_lt');
 
 /**
  * Determines the smallest of a list of items as determined by pairwise comparisons from the supplied comparator
+ * Note that this will return undefined if supplied an empty list.
  *
  * @func
  * @memberOf R
