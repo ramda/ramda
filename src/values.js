@@ -1,5 +1,5 @@
 var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+var _dispatchToMapMethod = require('./internal/_dispatchToMapMethod');
 
 
 /**
@@ -17,13 +17,4 @@ var keys = require('./keys');
  *
  *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
  */
-module.exports = _curry1(function values(obj) {
-  var props = keys(obj);
-  var len = props.length;
-  var vals = [];
-  var idx = -1;
-  while (++idx < len) {
-    vals[idx] = obj[props[idx]];
-  }
-  return vals;
-});
+module.exports = _curry1(_dispatchToMapMethod('values'));

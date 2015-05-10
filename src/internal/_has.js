@@ -1,3 +1,4 @@
-module.exports = function _has(prop, obj) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-};
+var _dispatchToMapMethod = require('./_dispatchToMapMethod');
+
+
+module.exports = _dispatchToMapMethod('has');

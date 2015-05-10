@@ -1,9 +1,4 @@
-module.exports = function _dissoc(prop, obj) {
-  var result = {};
-  for (var p in obj) {
-    if (p !== prop) {
-      result[p] = obj[p];
-    }
-  }
-  return result;
-};
+var _dispatchToMapMethod = require('./_dispatchToMapMethod');
+
+
+module.exports = _dispatchToMapMethod('dissoc');

@@ -32,4 +32,21 @@ describe('keys', function() {
   it("does not include the given object's prototype properties", function() {
     assert.deepEqual(R.keys(cobj).sort(), ['a', 'b']);
   });
+
+  if (typeof Map === 'function') {
+
+    it('supports Map objects', function() {
+      var k1 = R.keys(new Map());
+      assert.strictEqual(k1.constructor, Array);
+      assert.strictEqual(k1.length, 0);
+
+      var k2 = R.keys(new Map([[3, 'c'], [2, 'b'], [1, 'a']]));
+      assert.strictEqual(k2.constructor, Array);
+      assert.strictEqual(k2.length, 3);
+      assert.strictEqual(k2[0], 3);
+      assert.strictEqual(k2[1], 2);
+      assert.strictEqual(k2[2], 1);
+    });
+
+  }
 });
