@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var fs = require('fs');
+var path = require('path');
+var R = require('ramda');
+
+
+R.pipe(
+  fs.readdirSync,
+  R.filter(R.test(/[.]js$/)),
+  R.reject(R.eq('bundle.js')),
+  R.reject(R.eq('test.examplesRunner.js')),
+  R.map(R.partial(path.resolve, 'test')),
+  R.join('\n'),
+  console.log
+)('test');

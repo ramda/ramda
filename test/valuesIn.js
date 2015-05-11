@@ -31,6 +31,7 @@ describe('valuesIn', function() {
   });
 
   it('works for primitives', function() {
+    /* jshint elision: true */
     var result = R.map(function(val) {
       return R.values(val);
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
