@@ -1,7 +1,5 @@
 var _concat = require('./internal/_concat');
 var _curry3 = require('./internal/_curry3');
-var _eq = require('./internal/_eq');
-
 
 /**
  * Applies a function to the value at the given index of an array,
@@ -25,21 +23,12 @@ var _eq = require('./internal/_eq');
  *      R.adjust(R.add(10))(1)([0, 1, 2]);     //=> [0, 11, 2]
  */
 module.exports = _curry3(function(fn, idx, list) {
-  var oldVal, newVal, _idx, _list;
-
   if (idx >= list.length || idx < -list.length) {
     return list;
   }
-
-  _idx = idx < 0 ? idx + list.length : idx;
-  oldVal = list[_idx];
-  newVal = fn(oldVal);
-
-  if (_eq(oldVal, newVal)) {
-    return list;
-  } else {
-    _list = _concat(list);
-    _list[_idx] = fn(list[_idx]);
-    return _list;
-  }
+  var start = idx < 0 ? list.length : 0;
+  var _idx = start + idx;
+  var _list = _concat(list);
+  _list[_idx] = fn(list[_idx]);
+  return _list;
 });
