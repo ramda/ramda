@@ -17,6 +17,7 @@ var map = require('./map');
  * @sig Number -> (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The function `fn` applicable to mappable objects.
+ * @deprecated since v0.14.0
  * @example
  *
  *      var madd3 = R.liftN(3, R.curryN(3, function() {
