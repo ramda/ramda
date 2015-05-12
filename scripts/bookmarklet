@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var Handlebars      = require('handlebars');
+var UglifyJS        = require('uglify-js');
+var fs              = require('fs');
+var path            = require('path');
+var pkg             = require('../package.json');
+
+var markletTmplPath = path.join(__dirname, 'bookmarklet.tmpl.js');
+var ramdaScriptPath = path.join(__dirname, '..', 'dist', 'ramda.js');
+var mdTmplPath      = path.join(__dirname, 'BOOKMARKLET.tmpl.md');
+var mdPath          = path.join(__dirname, '..', 'BOOKMARKLET.md');
+
+var markletTmpl     = fs.readFileSync(markletTmplPath, 'utf8');
+var ramdaScript     = fs.readFileSync(ramdaScriptPath, 'utf8');
+var mdTmpl          = fs.readFileSync(mdTmplPath, 'utf8');
+
+var markletData     = {ramda: ramdaScript, version: pkg.version};
+
+var markletScript   = Handlebars.compile(markletTmpl)(markletData);
+var uglyMarklet     = UglifyJS.minify(markletScript , {fromString:true}).code;
+var builtMD         = Handlebars.compile(mdTmpl)({bookmarklet:uglyMarklet});
+
+fs.writeFileSync(mdPath, builtMD);
