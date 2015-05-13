@@ -108,11 +108,7 @@ or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 These script tags add the variable `ramda` on the browser's global scope.
 
-Or you can inject ramda into virtually any unsuspecting web site using this bookmarklet:
-
-```javascript
-javascript:(function(){var el=document.createElement('div'),b=document.getElementsByTagName('body')[0];msg='';el.style.position='fixed';el.style.height='32px';el.style.width='220px';el.style.marginLeft='-110px';el.style.top='0';el.style.left='50%';el.style.padding='5px 10px';el.style.zIndex=1001;el.style.fontSize='12px';el.style.color='#222';el.style.backgroundColor='#f99';if(typeof ramda!='undefined'){msg='This page already using ramda v'+ramda.version;return showMsg()}function getScript(url,success){var script=document.createElement('script');script.src=url;var head=document.getElementsByTagName('head')[0],done=false;script.onload=script.onreadystatechange=function(){if(!done&&(!this.readyState||this.readyState=='loaded'||this.readyState=='complete')){done=true;success();script.onload=script.onreadystatechange=null;head.removeChild(script)}};head.appendChild(script)}getScript('http://cdn.jsdelivr.net/ramda/latest/ramda.min.js',function(){if(typeof ramda=='undefined'){msg='Sorry, but Ramda wasn\'t able to load'}else{msg='This page is now Ramda-fied with v'+ramda.version}return showMsg()});function showMsg(){el.innerHTML=msg;b.appendChild(el);window.setTimeout(function(){if(typeof jQuery=='undefined'){b.removeChild(el)}else{jQuery(el).fadeOut('slow',function(){jQuery(this).remove()})}},2500)}})();
-```
+Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](BOOKMARKLET.md).
 
 ### Partial Builds
 

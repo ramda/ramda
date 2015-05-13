@@ -10,3 +10,6 @@ git add README.md
 rm -f dist/ramda{,.min}.js
 make dist/ramda{,.min}.js
 git add dist/ramda{,.min}.js
+
+npm run bookmarklet
+git add BOOKMARKLET.md
