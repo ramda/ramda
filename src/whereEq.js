@@ -23,7 +23,7 @@ var where = require('./where');
  * @example
  *
  *      // pred :: Object -> Boolean
- *      var pred = R.where({a: 1, b: 2});
+ *      var pred = R.whereEq({a: 1, b: 2});
  *
  *      pred({a: 1});              //=> false
  *      pred({a: 1, b: 2});        //=> true
