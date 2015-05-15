@@ -5,7 +5,8 @@
   "homepage": "https://github.com/ramda/ramda",
   "authors": [
     "(Scott Sauyet <scott@sauyet.com>)",
-    "(buzzdecafe <mh@buzzdecafe.com>)"
+    "(Michael Hurley <mh@buzzdecafe.com>)",
+    "(David Chambers <dc@davidchambers.me>)"
   ],
   "description": "A practical functional library for Javascript programmers.",
   "moduleType": [
@@ -25,8 +26,5 @@
     "tests",
     "examples",
     "logo"
-  ],
-  "devDependencies": {
-    "bootstrap": "~3.3.1"
-  }
+  ]
 }

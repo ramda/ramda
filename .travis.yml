@@ -4,5 +4,4 @@ node_js:
 - '0.12'
 - 'iojs-v1.5.1'
 before_script:
-- npm install -g grunt-cli
 - make clean && make dist/ramda.js
