@@ -14,6 +14,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} fn The function to wrap.
  * @return {Function} A new function wrapping `fn`. The new function is
  *         guaranteed to be of arity `n`.
+ * @deprecated since v0.15.0
  * @example
  *
  *      var takesTwoArgs = function(a, b) {
