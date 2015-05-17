@@ -1,7 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
-var _slice = require('./internal/_slice');
 var _xdrop = require('./internal/_xdrop');
+var slice = require('./slice');
 
 
 /**
@@ -14,13 +14,13 @@ var _xdrop = require('./internal/_xdrop');
  * @memberOf R
  * @category List
  * @sig Number -> [a] -> [a]
- * @param {Number} n The number of elements of `list` to skip.
- * @param {Array} list The array to consider.
- * @return {Array} The last `n` elements of `list`.
+ * @param {Number} n The number of elements of `xs` to skip.
+ * @param {Array} xs The collection to consider.
+ * @return {Array}
  * @example
  *
  *      R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
  */
-module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, list) {
-  return n <= 0 ? list : _slice(list, n);
+module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, xs) {
+  return slice(Math.max(0, n), Infinity, xs);
 }));
