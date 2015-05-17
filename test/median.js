@@ -16,7 +16,7 @@ describe('median', function() {
   });
 
   it('returns NaN for an empty list', function() {
-    assert.strictEqual(R.isNaN(R.median([])), true);
+    assert.strictEqual(R.identical(NaN, R.median([])), true);
   });
 
   it('handles array-like object', function() {

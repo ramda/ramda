@@ -13,7 +13,7 @@ describe('mean', function() {
   });
 
   it('returns NaN for an empty list', function() {
-    assert.strictEqual(R.isNaN(R.mean([])), true);
+    assert.strictEqual(R.identical(NaN, R.mean([])), true);
   });
 
   it('handles array-like object', function() {
