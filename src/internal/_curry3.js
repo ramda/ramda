@@ -1,4 +1,3 @@
-var __ = require('../__');
 var _curry1 = require('./_curry1');
 var _curry2 = require('./_curry2');
 
@@ -16,31 +15,37 @@ module.exports = function _curry3(fn) {
     var n = arguments.length;
     if (n === 0) {
       return f3;
-    } else if (n === 1 && a === __) {
+    } else if (n === 1 && a != null && a['@@functional/placeholder'] === true) {
       return f3;
     } else if (n === 1) {
       return _curry2(function(b, c) { return fn(a, b, c); });
-    } else if (n === 2 && a === __ && b === __) {
+    } else if (n === 2 && a != null && a['@@functional/placeholder'] === true &&
+                          b != null && b['@@functional/placeholder'] === true) {
       return f3;
-    } else if (n === 2 && a === __) {
+    } else if (n === 2 && a != null && a['@@functional/placeholder'] === true) {
       return _curry2(function(a, c) { return fn(a, b, c); });
-    } else if (n === 2 && b === __) {
+    } else if (n === 2 && b != null && b['@@functional/placeholder'] === true) {
       return _curry2(function(b, c) { return fn(a, b, c); });
     } else if (n === 2) {
       return _curry1(function(c) { return fn(a, b, c); });
-    } else if (n === 3 && a === __ && b === __ && c === __) {
+    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true &&
+                          b != null && b['@@functional/placeholder'] === true &&
+                          c != null && c['@@functional/placeholder'] === true) {
       return f3;
-    } else if (n === 3 && a === __ && b === __) {
+    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true &&
+                          b != null && b['@@functional/placeholder'] === true) {
       return _curry2(function(a, b) { return fn(a, b, c); });
-    } else if (n === 3 && a === __ && c === __) {
+    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true &&
+                          c != null && c['@@functional/placeholder'] === true) {
       return _curry2(function(a, c) { return fn(a, b, c); });
-    } else if (n === 3 && b === __ && c === __) {
+    } else if (n === 3 && b != null && b['@@functional/placeholder'] === true &&
+                          c != null && c['@@functional/placeholder'] === true) {
       return _curry2(function(b, c) { return fn(a, b, c); });
-    } else if (n === 3 && a === __) {
+    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true) {
       return _curry1(function(a) { return fn(a, b, c); });
-    } else if (n === 3 && b === __) {
+    } else if (n === 3 && b != null && b['@@functional/placeholder'] === true) {
       return _curry1(function(b) { return fn(a, b, c); });
-    } else if (n === 3 && c === __) {
+    } else if (n === 3 && c != null && c['@@functional/placeholder'] === true) {
       return _curry1(function(c) { return fn(a, b, c); });
     } else {
       return fn(a, b, c);
