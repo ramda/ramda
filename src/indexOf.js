@@ -1,4 +1,5 @@
 var _curry2 = require('./internal/_curry2');
+var _hasMethod = require('./internal/_hasMethod');
 var _indexOf = require('./internal/_indexOf');
 
 
@@ -12,7 +13,7 @@ var _indexOf = require('./internal/_indexOf');
  * @category List
  * @sig a -> [a] -> Number
  * @param {*} target The item to find.
- * @param {Array} list The array to search in.
+ * @param {Array} xs The array to search in.
  * @return {Number} the index of the target, or -1 if the target is not found.
  *
  * @example
@@ -20,6 +21,6 @@ var _indexOf = require('./internal/_indexOf');
  *      R.indexOf(3, [1,2,3,4]); //=> 2
  *      R.indexOf(10, [1,2,3,4]); //=> -1
  */
-module.exports = _curry2(function indexOf(target, list) {
-  return _indexOf(list, target);
+module.exports = _curry2(function indexOf(target, xs) {
+  return _hasMethod('indexOf', xs) ? xs.indexOf(target) : _indexOf(xs, target);
 });

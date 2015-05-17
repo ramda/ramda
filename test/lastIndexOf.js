@@ -50,6 +50,33 @@ describe('lastIndexOf', function() {
     assert.strictEqual(R.lastIndexOf(new Just([42]), [new Just([42])]), 0);
   });
 
+  it('dispatches to `lastIndexOf` method', function() {
+    function Empty() {}
+    Empty.prototype.lastIndexOf = R.always(-1);
+
+    function List(head, tail) {
+      this.head = head;
+      this.tail = tail;
+    }
+    List.prototype.lastIndexOf = function(x) {
+      var idx = this.tail.lastIndexOf(x);
+      return idx >= 0 ? 1 + idx : this.head === x ? 0 : -1;
+    };
+
+    var list = new List('b',
+               new List('a',
+               new List('n',
+               new List('a',
+               new List('n',
+               new List('a',
+               new Empty()))))));
+
+    assert.strictEqual(R.lastIndexOf('a', 'banana'), 5);
+    assert.strictEqual(R.lastIndexOf('x', 'banana'), -1);
+    assert.strictEqual(R.lastIndexOf('a', list), 5);
+    assert.strictEqual(R.lastIndexOf('x', list), -1);
+  });
+
   it('is curried', function() {
     var curried = R.lastIndexOf('a');
     assert.strictEqual(curried(list), 2);
