@@ -1,6 +1,6 @@
 var _map = require('./internal/_map');
 var _slice = require('./internal/_slice');
-var curryN = require('./curryN');
+var curryMinMax = require('./curryMinMax');
 var max = require('./max');
 var pluck = require('./pluck');
 
@@ -31,9 +31,9 @@ var pluck = require('./pluck');
  *      var add3 = function(a, b, c) { return a + b + c; };
  *      R.converge(add3, multiply, add, subtract)(1, 2); //=> 4
  */
-module.exports = curryN(3, function(after) {
+module.exports = curryMinMax(3, Infinity, function(after) {
   var fns = _slice(arguments, 1);
-  return curryN(max(pluck('length', fns)), function() {
+  return curryMinMax(max(pluck('length', fns)), Infinity, function() {
     var args = arguments;
     var context = this;
     return after.apply(context, _map(function(fn) {

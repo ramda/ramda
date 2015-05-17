@@ -1,6 +1,6 @@
 var _reduce = require('./internal/_reduce');
 var _xwrap = require('./internal/_xwrap');
-var curryN = require('./curryN');
+var curry = require('./curry');
 
 
 /**
@@ -46,6 +46,6 @@ var curryN = require('./curryN');
  *
  *      R.transduce(transducer, R.flip(R.append), [], numbers); //=> [2, 3]
  */
-module.exports = curryN(4, function(xf, fn, acc, list) {
+module.exports = curry(function(xf, fn, acc, list) {
   return _reduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
 });

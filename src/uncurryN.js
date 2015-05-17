@@ -1,6 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var _slice = require('./internal/_slice');
-var curryN = require('./curryN');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -26,11 +26,11 @@ var curryN = require('./curryN');
  *        };
  *      };
  *
- *      var uncurriedAddFour = R.uncurryN(4, addFour);
+ *      var uncurriedAddFour = R.uncurryMinMax(4, addFour);
  *      curriedAddFour(1, 2, 3, 4); //=> 10
  */
-module.exports = _curry2(function uncurryN(depth, fn) {
-  return curryN(depth, function() {
+module.exports = _curry2(function uncurryMinMax(depth, fn) {
+  return curryMinMax(depth, Infinity, function() {
     var currentDepth = 1;
     var value = fn;
     var idx = 0;
