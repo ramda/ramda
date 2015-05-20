@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var eq = require('./eq');
+var equals = require('./equals');
 var mapObj = require('./mapObj');
 var where = require('./where');
 
@@ -8,7 +8,7 @@ var where = require('./where');
  * Takes a spec object and a test object; returns true if the test satisfies
  * the spec, false otherwise. An object satisfies the spec if, for each of the
  * spec's own properties, accessing that property of the object gives the same
- * value (in `R.eq` terms) as accessing that property of the spec.
+ * value (in `R.equals` terms) as accessing that property of the spec.
  *
  * `whereEq` is a specialization of [`where`](#where).
  *
@@ -31,5 +31,5 @@ var where = require('./where');
  *      pred({a: 1, b: 1});        //=> false
  */
 module.exports = _curry2(function whereEq(spec, testObj) {
-  return where(mapObj(eq, spec), testObj);
+  return where(mapObj(equals, spec), testObj);
 });

@@ -16,10 +16,16 @@ describe('contains', function() {
     assert.strictEqual(R.contains(1, []), false);
   });
 
-  it('has Object.is semantics', function() {
-    assert.strictEqual(R.contains(-0, [0]), false);
+  it('has R.equals semantics', function() {
+    function Just(x) { this.value = x; }
+    Just.prototype.equals = function(x) {
+      return x instanceof Just && R.equals(x.value, this.value);
+    };
+
     assert.strictEqual(R.contains(0, [-0]), false);
+    assert.strictEqual(R.contains(-0, [0]), false);
     assert.strictEqual(R.contains(NaN, [NaN]), true);
+    assert.strictEqual(R.contains(new Just([42]), [new Just([42])]), true);
   });
 
   it('is curried', function() {

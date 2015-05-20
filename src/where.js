@@ -23,8 +23,8 @@ var _has = require('./internal/_has');
  *
  *      // pred :: Object -> Boolean
  *      var pred = R.where({
- *        a: R.eq('foo'),
- *        b: R.complement(R.eq('bar')),
+ *        a: R.equals('foo'),
+ *        b: R.complement(R.equals('bar')),
  *        x: R.gt(_, 10),
  *        y: R.lt(_, 20)
  *      });

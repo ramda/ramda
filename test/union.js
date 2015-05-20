@@ -6,8 +6,6 @@ var R = require('..');
 describe('union', function() {
   var M = [1, 2, 3, 4];
   var N = [3, 4, 5, 6];
-  var Mo = [{a: 1}, {a: 2}, {a: 3}, {a: 4}];
-  var No = [{a: 3}, {a: 4}, {a: 5}, {a: 6}];
   it('combines two lists into the set of all their elements', function() {
     assert.deepEqual(R.union(M, N), [1, 2, 3, 4, 5, 6]);
   });
@@ -17,7 +15,15 @@ describe('union', function() {
     assert.deepEqual(R.union(M)(N), [1, 2, 3, 4, 5, 6]);
   });
 
-  it('does not work for non-primitives (use `unionWith`)', function() {
-    assert.strictEqual(R.union(Mo, No).length, 8);
+  it('has R.equals semantics', function() {
+    function Just(x) { this.value = x; }
+    Just.prototype.equals = function(x) {
+      return x instanceof Just && R.equals(x.value, this.value);
+    };
+
+    assert.strictEqual(R.union([0], [-0]).length, 2);
+    assert.strictEqual(R.union([-0], [0]).length, 2);
+    assert.strictEqual(R.union([NaN], [NaN]).length, 1);
+    assert.strictEqual(R.union([new Just([42])], [new Just([42])]).length, 1);
   });
 });

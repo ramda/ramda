@@ -8,8 +8,6 @@ describe('intersection', function() {
   var M2 = [1, 2, 3, 4, 1, 2, 3, 4];
   var N = [3, 4, 5, 6];
   var N2 = [3, 3, 4, 4, 5, 5, 6, 6];
-  var Mo = [{a: 1}, {a: 2}, {a: 3}, {a: 4}];
-  var No = [{a: 3}, {a: 4}, {a: 5}, {a: 6}];
   it('combines two lists into the set of common elements', function() {
     assert.deepEqual(R.intersection(M, N), [3, 4]);
   });
@@ -18,7 +16,15 @@ describe('intersection', function() {
     assert.deepEqual(R.intersection(M2, N2), [3, 4]);
   });
 
-  it('does not work for non-primitives (use `intersectionWith`)', function() {
-    assert.strictEqual(R.intersection(Mo, No).length, 0);
+  it('has R.equals semantics', function() {
+    function Just(x) { this.value = x; }
+    Just.prototype.equals = function(x) {
+      return x instanceof Just && R.equals(x.value, this.value);
+    };
+
+    assert.strictEqual(R.intersection([0], [-0]).length, 0);
+    assert.strictEqual(R.intersection([-0], [0]).length, 0);
+    assert.strictEqual(R.intersection([NaN], [NaN]).length, 1);
+    assert.strictEqual(R.intersection([new Just([42])], [new Just([42])]).length, 1);
   });
 });

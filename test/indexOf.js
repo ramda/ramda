@@ -41,10 +41,16 @@ describe('indexOf', function() {
     assert.strictEqual(R.indexOf('x', []), -1);
   });
 
-  it('has Object.is semantics', function() {
-    assert.strictEqual(R.indexOf(-0, [0]), -1);
+  it('has R.equals semantics', function() {
+    function Just(x) { this.value = x; }
+    Just.prototype.equals = function(x) {
+      return x instanceof Just && R.equals(x.value, this.value);
+    };
+
     assert.strictEqual(R.indexOf(0, [-0]), -1);
+    assert.strictEqual(R.indexOf(-0, [0]), -1);
     assert.strictEqual(R.indexOf(NaN, [NaN]), 0);
+    assert.strictEqual(R.indexOf(new Just([42]), [new Just([42])]), 0);
   });
 
   it('is curried', function() {

@@ -16,4 +16,15 @@ describe('uniq', function() {
   it('returns an empty array for an empty array', function() {
     assert.deepEqual(R.uniq([]), []);
   });
+
+  it('has R.equals semantics', function() {
+    function Just(x) { this.value = x; }
+    Just.prototype.equals = function(x) {
+      return x instanceof Just && R.equals(x.value, this.value);
+    };
+
+    assert.strictEqual(R.uniq([0, -0]).length, 2);
+    assert.strictEqual(R.uniq([NaN, NaN]).length, 1);
+    assert.strictEqual(R.uniq([new Just([42]), new Just([42])]).length, 1);
+  });
 });

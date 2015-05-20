@@ -15,10 +15,16 @@ describe('propEq', function() {
     assert.strictEqual(R.propEq('hair', 'blond', obj2), false);
   });
 
-  it('has Object.is semantics', function() {
-    assert.strictEqual(R.propEq('value', -0, {value: 0}), false);
+  it('has R.equals semantics', function() {
+    function Just(x) { this.value = x; }
+    Just.prototype.equals = function(x) {
+      return x instanceof Just && R.equals(x.value, this.value);
+    };
+
     assert.strictEqual(R.propEq('value', 0, {value: -0}), false);
+    assert.strictEqual(R.propEq('value', -0, {value: 0}), false);
     assert.strictEqual(R.propEq('value', NaN, {value: NaN}), true);
+    assert.strictEqual(R.propEq('value', new Just([42]), {value: new Just([42])}), true);
   });
 
   it('is curried', function() {
