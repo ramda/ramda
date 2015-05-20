@@ -8,7 +8,7 @@ var _pluck = require('./internal/_pluck');
  * @func
  * @memberOf R
  * @category List
- * @sig String -> {*} -> [*]
+ * @sig k -> [{k: v}] -> [v]
  * @param {Number|String} key The key name to pluck off of each object.
  * @param {Array} list The array to consider.
  * @return {Array} The list of values for the given key.
