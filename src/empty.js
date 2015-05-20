@@ -3,8 +3,9 @@ var _hasMethod = require('./internal/_hasMethod');
 
 
 /**
- * `empty` wraps any object in an array. This implementation is compatible with the
- * Fantasy-land Monoid spec, and will work with types that implement that spec.
+ * `empty` returns an empty list for any argument, except when the argument satisfies the
+ * Fantasy-land Monoid spec. In that case, this function will return the result of invoking
+ * `empty` on that Monoid.
  *
  * @func
  * @memberOf R
