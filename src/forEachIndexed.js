@@ -22,7 +22,7 @@ var _curry2 = require('./internal/_curry2');
  *        (`value`, `index`, `list`).
  * @param {Array} list The list to iterate over.
  * @return {Array} The original list.
- * @deprecated since v0.14.0
+ * @deprecated since v0.15.0
  * @see R.addIndex
  * @example
  *
