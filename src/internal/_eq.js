@@ -6,6 +6,6 @@ module.exports = function _eq(x, y) {
     return x !== 0 || 1 / x === 1 / y;
   } else {
     // Step 6.a: NaN == NaN
-    return x !== x;
+    return x !== x && y !== y;
   }
 };
