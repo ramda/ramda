@@ -38,7 +38,7 @@ describe('cond', function() {
 
   it('forwards all arguments to predicates and to transformers', function() {
     var fn = R.cond(
-      [function(_, x) { return x == 42; }, function() { return arguments.length; }]
+      [function(_, x) { return x === 42; }, function() { return arguments.length; }]
     );
     assert.strictEqual(fn(21, 42, 84), 3);
   });

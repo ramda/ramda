@@ -2,7 +2,7 @@
 (function(window, document) {
   var version = '???';
 
-  if (typeof window.R != 'undefined') {
+  if (typeof window.R !== 'undefined') {
     return showMsg('This page already using ramda');
   }
   // jscs:disable
