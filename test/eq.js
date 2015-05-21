@@ -19,6 +19,9 @@ describe('eq', function() {
     assert.strictEqual(R.eq(0, -0), false);
     assert.strictEqual(R.eq(NaN, NaN), true);
 
+    assert.strictEqual(R.eq(NaN, 42), false);
+    assert.strictEqual(R.eq(42, NaN), false);
+
     /* jshint -W053 */
     assert.strictEqual(R.eq(0, new Number(0)), false);
     assert.strictEqual(R.eq(new Number(0), 0), false);
