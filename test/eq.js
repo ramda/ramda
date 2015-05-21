@@ -18,6 +18,12 @@ describe('eq', function() {
     assert.strictEqual(R.eq(-0, 0), false);
     assert.strictEqual(R.eq(0, -0), false);
     assert.strictEqual(R.eq(NaN, NaN), true);
+
+    /* jshint -W053 */
+    assert.strictEqual(R.eq(0, new Number(0)), false);
+    assert.strictEqual(R.eq(new Number(0), 0), false);
+    assert.strictEqual(R.eq(new Number(0), new Number(0)), false);
+    /* jshint +W053 */
   });
 
   it('is curried', function() {
