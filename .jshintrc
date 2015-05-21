@@ -1,5 +1,6 @@
 {
   "evil": true,
+  "eqeqeq": true,
   "eqnull": true,
   "globals": {
     "Symbol": true

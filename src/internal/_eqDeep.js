@@ -15,7 +15,7 @@ module.exports = function _eqDeep(a, b, stackA, stackB) {
     return true;
   }
 
-  if (typeA == 'RegExp') {
+  if (typeA === 'RegExp') {
     // RegExp equality algorithm: http://stackoverflow.com/a/10776635
     return (a.source === b.source) &&
            (a.global === b.global) &&
@@ -26,7 +26,7 @@ module.exports = function _eqDeep(a, b, stackA, stackB) {
   }
 
   if (Object(a) === a) {
-    if (typeA === 'Date' && a.getTime() != b.getTime()) {
+    if (typeA === 'Date' && a.getTime() !== b.getTime()) {
       return false;
     }
 
