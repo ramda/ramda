@@ -36,8 +36,8 @@
     "browserify": "node_modules/browserify/bin/cmd.js test/*.js --outfile lib/test/bundle.js",
     "bookmarklet": "scripts/bookmarklet",
     "clean": "rimraf dist",
-    "jscs": "jscs scripts/bookmarklet scripts/build **/*.js",
-    "jshint": "jshint scripts/bookmarklet scripts/build **/*.js",
+    "jscs": "jscs scripts/bookmarklet scripts/build **/*.js **/**/*.js",
+    "jshint": "jshint scripts/bookmarklet scripts/build **/*.js **/**/*.js",
     "pretest": "npm run jshint && npm run jscs",
     "test": "node scripts/testfiles | node_modules/.bin/mocha --reporter spec"
   },
