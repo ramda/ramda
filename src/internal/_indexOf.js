@@ -1,4 +1,4 @@
-var _eq = require('./_eq');
+var equals = require('../equals');
 
 
 module.exports = function _indexOf(list, item, from) {
@@ -7,7 +7,7 @@ module.exports = function _indexOf(list, item, from) {
     idx = from < 0 ? Math.max(0, len + from) : from;
   }
   while (idx < len) {
-    if (_eq(list[idx], item)) {
+    if (equals(list[idx], item)) {
       return idx;
     }
     ++idx;

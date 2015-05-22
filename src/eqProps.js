@@ -1,12 +1,10 @@
 var _curry3 = require('./internal/_curry3');
-var _eq = require('./internal/_eq');
+var equals = require('./equals');
 
 
 /**
- * Reports whether two objects have the same value for the specified property.  Useful as a curried predicate.
- *
- * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
- * are not considered equal.
+ * Reports whether two objects have the same value, in `R.equals` terms,
+ * for the specified property. Useful as a curried predicate.
  *
  * @func
  * @memberOf R
@@ -25,5 +23,5 @@ var _eq = require('./internal/_eq');
  *      R.eqProps('c', o1, o2); //=> true
  */
 module.exports = _curry3(function eqProps(prop, obj1, obj2) {
-  return _eq(obj1[prop], obj2[prop]);
+  return equals(obj1[prop], obj2[prop]);
 });

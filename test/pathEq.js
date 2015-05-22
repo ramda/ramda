@@ -32,10 +32,16 @@ describe('pathEq', function() {
     assert.strictEqual(R.pathEq([], obj, obj), true);
   });
 
-  it('has Object.is semantics', function() {
-    assert.strictEqual(R.pathEq(['value'], -0, {value: 0}), false);
+  it('has R.equals semantics', function() {
+    function Just(x) { this.value = x; }
+    Just.prototype.equals = function(x) {
+      return x instanceof Just && R.equals(x.value, this.value);
+    };
+
     assert.strictEqual(R.pathEq(['value'], 0, {value: -0}), false);
+    assert.strictEqual(R.pathEq(['value'], -0, {value: 0}), false);
     assert.strictEqual(R.pathEq(['value'], NaN, {value: NaN}), true);
+    assert.strictEqual(R.pathEq(['value'], new Just([42]), {value: new Just([42])}), true);
   });
 
 });

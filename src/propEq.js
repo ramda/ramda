@@ -1,13 +1,10 @@
 var _curry3 = require('./internal/_curry3');
-var _eq = require('./internal/_eq');
+var equals = require('./equals');
 
 
 /**
- * Determines whether the given property of an object has a specific value.
- * Most likely used to filter a list.
- *
- * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
- * are not considered equal.
+ * Determines whether the given property of an object has a specific value,
+ * in `R.equals` terms. Most likely used to filter a list.
  *
  * @func
  * @memberOf R
@@ -27,5 +24,5 @@ var _eq = require('./internal/_eq');
  *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
  */
 module.exports = _curry3(function propEq(name, val, obj) {
-  return _eq(obj[name], val);
+  return equals(obj[name], val);
 });

@@ -3,10 +3,8 @@ var _indexOf = require('./internal/_indexOf');
 
 
 /**
- * Returns `true` if all elements are unique, otherwise `false`.
- *
- * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
- * are not considered equal.
+ * Returns `true` if all elements are unique, in `R.equals` terms,
+ * otherwise `false`.
  *
  * @func
  * @memberOf R
@@ -18,7 +16,7 @@ var _indexOf = require('./internal/_indexOf');
  *
  *      R.isSet(['1', 1]); //=> true
  *      R.isSet([1, 1]);   //=> false
- *      R.isSet([{}, {}]); //=> true
+ *      R.isSet([[42], [42]]); //=> false
  */
 module.exports = _curry1(function isSet(list) {
   var len = list.length;

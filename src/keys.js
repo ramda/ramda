@@ -1,4 +1,3 @@
-var _contains = require('./internal/_contains');
 var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
 
@@ -25,6 +24,16 @@ module.exports = (function() {
   var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
                             'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
 
+  var contains = function contains(list, item) {
+    var idx = -1;
+    while (++idx < list.length) {
+      if (list[idx] === item) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   return _curry1(function keys(obj) {
     if (Object(obj) !== obj) {
       return [];
@@ -42,7 +51,7 @@ module.exports = (function() {
       nIdx = nonEnumerableProps.length;
       while (--nIdx >= 0) {
         prop = nonEnumerableProps[nIdx];
-        if (_has(prop, obj) && !_contains(prop, ks)) {
+        if (_has(prop, obj) && !contains(ks, prop)) {
           ks[ks.length] = prop;
         }
       }

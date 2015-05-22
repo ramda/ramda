@@ -1,5 +1,5 @@
 var _has = require('./_has');
-var eq = require('../eq');
+var identical = require('../identical');
 var keys = require('../keys');
 var type = require('../type');
 
@@ -11,7 +11,13 @@ module.exports = function _eqDeep(a, b, stackA, stackB) {
     return false;
   }
 
-  if (eq(a, b)) {
+  if (typeA === 'Boolean' || typeA === 'Number' || typeA === 'String') {
+    return typeof a === 'object' ?
+      typeof b === 'object' && identical(a.valueOf(), b.valueOf()) :
+      identical(a, b);
+  }
+
+  if (identical(a, b)) {
     return true;
   }
 

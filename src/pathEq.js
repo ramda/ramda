@@ -1,14 +1,11 @@
 var _curry3 = require('./internal/_curry3');
-var _eq = require('./internal/_eq');
 var _path = require('./internal/_path');
+var equals = require('./equals');
 
 
 /**
- * Determines whether a nested path on an object has a specific value.
- * Most likely used to filter a list.
- *
- * Has `Object.is` semantics: `NaN` is considered equal to `NaN`; `0` and `-0`
- * are not considered equal.
+ * Determines whether a nested path on an object has a specific value,
+ * in `R.equals` terms. Most likely used to filter a list.
  *
  * @func
  * @memberOf R
@@ -29,5 +26,5 @@ var _path = require('./internal/_path');
  *      R.filter(isFamous, users); //=> [ user1 ]
  */
 module.exports = _curry3(function pathEq(path, val, obj) {
-  return _eq(_path(path, obj), val);
+  return equals(_path(path, obj), val);
 });
