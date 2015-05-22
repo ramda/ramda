@@ -20,7 +20,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @deprecated since v0.14.0
+ * @deprecated since v0.15.0
  * @see R.addIndex
  * @example
  *
