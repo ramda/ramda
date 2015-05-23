@@ -1,8 +1,7 @@
-var _checkForMethod = require('./internal/_checkForMethod');
+var _chain = require('./internal/_chain');
 var _curry2 = require('./internal/_curry2');
-var _map = require('./internal/_map');
-var unnest = require('./unnest');
-
+var _dispatchable = require('./internal/_dispatchable');
+var _xchain = require('./internal/_xchain');
 
 /**
  * `chain` maps a function over a list and concatenates the results.
@@ -24,6 +23,4 @@ var unnest = require('./unnest');
  *      };
  *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
  */
-module.exports = _curry2(_checkForMethod('chain', function chain(f, list) {
-  return unnest(_map(f, list));
-}));
+module.exports = _curry2(_dispatchable('chain', _xchain, _chain));
