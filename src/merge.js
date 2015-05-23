@@ -14,6 +14,8 @@ var _extend = require('./internal/_extend');
  * @param {Object} a source object
  * @param {Object} b object with higher precedence in output
  * @return {Object} The destination object.
+ * @deprecated since v0.15.0
+ * @see R.set
  * @example
  *
  *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
