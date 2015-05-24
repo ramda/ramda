@@ -65,11 +65,15 @@ module.exports = _curry2(function curryN(length, fn) {
         var currentArgs = _slice(arguments);
         var combinedArgs = [];
         var idx = -1;
+        var currentArgsIdx = 0;
         while (++idx < n) {
           var val = initialArgs[idx];
-          combinedArgs[idx] = (val === __ ? currentArgs.shift() : val);
+          combinedArgs[idx] = (val === __ ? currentArgs[currentArgsIdx++] : val);
         }
-        return fn.apply(this, combinedArgs.concat(currentArgs));
+        while (currentArgsIdx < currentArgs.length) {
+          combinedArgs[idx++] = currentArgs[currentArgsIdx++];
+        }
+        return fn.apply(this, combinedArgs);
       });
     }
   });
