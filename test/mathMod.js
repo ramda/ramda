@@ -19,10 +19,10 @@ describe('mathMod', function() {
 
   it('computes the true modulo function', function() {
     assert.strictEqual(R.mathMod(-17, 5), 3);
-    assert.strictEqual(R.isNaN(R.mathMod(17, -5)), true);
-    assert.strictEqual(R.isNaN(R.mathMod(17, 0)), true);
-    assert.strictEqual(R.isNaN(R.mathMod(17.2, 5)), true);
-    assert.strictEqual(R.isNaN(R.mathMod(17, 5.5)), true);
+    assert.strictEqual(R.identical(NaN, R.mathMod(17, -5)), true);
+    assert.strictEqual(R.identical(NaN, R.mathMod(17, 0)), true);
+    assert.strictEqual(R.identical(NaN, R.mathMod(17.2, 5)), true);
+    assert.strictEqual(R.identical(NaN, R.mathMod(17, 5.5)), true);
   });
 
   it('is curried', function() {
