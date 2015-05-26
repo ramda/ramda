@@ -33,6 +33,7 @@
   },
   "main": "dist/ramda.js",
   "scripts": {
+    "bench": "scripts/benchRunner",
     "browserify": "node_modules/browserify/bin/cmd.js test/*.js --outfile lib/test/bundle.js",
     "bookmarklet": "scripts/bookmarklet",
     "clean": "rimraf dist",
@@ -46,6 +47,7 @@
     "acorn": "0.9.x",
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
+    "cli-table": "0.3.x",
     "commander": "2.5.x",
     "dox": "latest",
     "envvar": "1.x.x",
