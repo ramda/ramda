@@ -12,7 +12,7 @@ var reduce = require('./reduce');
  * @sig [{k: v}] -> {k: v}
  * @param {Array} list An array of objects
  * @return {Object} A merged object.
- * @see reduce
+ * @see R.reduce
  * @example
  *
  *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
