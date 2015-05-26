@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+var Benchmark = require('benchmark');
+var Table = require('cli-table');
+var fs = require('fs');
+var isBench = /\.bench\.js$/;
+
+function getTable(name) {
+  return new Table({
+    head: [name, 'Count', 'Hertz'],
+    colWidths: [24, 10, 24]
+  });
+}
+
+fs.readdirSync('./lib/bench').forEach(function(file) {
+  var test, table;
+  if (isBench.test(file)) { 
+    test = require('../lib/bench/' + file);
+    table = getTable(test.name);
+    var suite = Benchmark.Suite(test.name, {
+      onComplete: function() { console.log(table.toString()); } 
+    });
+    Object.keys(test.tests).forEach(function(k) {
+      suite.add(k, test.tests[k], {
+        onComplete: function(vo) {
+          table.push([vo.target.name, vo.target.count, vo.target.hz]);
+        }
+      });
+    });
+    suite.run();
+  }
+});
+
