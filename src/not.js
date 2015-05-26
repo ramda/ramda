@@ -11,7 +11,7 @@ var _curry1 = require('./internal/_curry1');
  * @sig * -> Boolean
  * @param {*} a any value
  * @return {Boolean} the logical inverse of passed argument.
- * @see complement
+ * @see R.complement
  * @example
  *
  *      R.not(true); //=> false
