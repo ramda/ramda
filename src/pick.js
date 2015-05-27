@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _indexOf = require('./internal/_indexOf');
 
 
 /**
@@ -9,7 +8,7 @@ var _indexOf = require('./internal/_indexOf');
  * @func
  * @memberOf R
  * @category Object
- * @sig [String] -> {String: *} -> {String: *}
+ * @sig [k] -> {k: v} -> {k: v}
  * @param {Array} names an array of String property names to copy onto a new object
  * @param {Object} obj The object to copy from
  * @return {Object} A new object with only properties from `names` on it.
@@ -20,9 +19,10 @@ var _indexOf = require('./internal/_indexOf');
  */
 module.exports = _curry2(function pick(names, obj) {
   var result = {};
-  for (var prop in obj) {
-    if (_indexOf(names, prop) >= 0) {
-      result[prop] = obj[prop];
+  var idx = -1;
+  while (++idx < names.length) {
+    if (names[idx] in obj) {
+      result[names[idx]] = obj[names[idx]];
     }
   }
   return result;

@@ -4,10 +4,14 @@ var R = require('..');
 
 
 describe('pick', function() {
-  var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6};
+  var obj = {a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, 1: 7};
 
   it('copies the named properties of an object to the new object', function() {
     assert.deepEqual(R.pick(['a', 'c', 'f'], obj), {a: 1, c: 3, f: 6});
+  });
+
+  it('handles numbers as properties', function() {
+    assert.deepEqual(R.pick([1], obj), {1: 7});
   });
 
   it('ignores properties not included', function() {
