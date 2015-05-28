@@ -25,7 +25,7 @@ var _xdropWhile = require('./internal/_xdropWhile');
  *        return x <= 2;
  *      };
  *
- *      R.dropWhile(lteTwo, [1, 2, 3, 4]); //=> [3, 4]
+ *      R.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
  */
 module.exports = _curry2(_dispatchable('dropWhile', _xdropWhile, function dropWhile(pred, list) {
   var idx = -1, len = list.length;
