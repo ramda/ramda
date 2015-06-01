@@ -110,7 +110,12 @@ These script tags add the variable `ramda` on the browser's global scope.
 
 Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](BOOKMARKLET.md).
 
-### Partial Builds
+### Build
+
+* on Unix-based platforms, `npm run build` updates __dist/ramda.js__ and __dist/ramda.min.js__
+* on Windows, write the output of `scripts/build --complete` to a temporary file, then rename the temporary file __dist/ramda.js__.
+
+#### Partial Builds
 
 It is possible to build Ramda with a subset of the functionality to reduce its file size. Ramda's build system supports this with command line flags. For example if you're using `R.compose`, `R.reduce`, and `R.filter` you can create a partial build with:
 
