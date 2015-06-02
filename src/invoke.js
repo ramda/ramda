@@ -12,6 +12,7 @@ var curry = require('./curry');
  * @param {Array} args
  * @param {Object} obj
  * @return {*}
+ * @deprecated since v0.15.0
  * @example
  *
  *      //  toBinary :: Number -> String
