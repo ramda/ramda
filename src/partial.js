@@ -1,6 +1,6 @@
 var _concat = require('./internal/_concat');
 var _createPartialApplicator = require('./internal/_createPartialApplicator');
-var curry = require('./curry');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -29,4 +29,4 @@ var curry = require('./curry');
  *      var sayHelloToMs = R.partial(sayHello, 'Ms.');
  *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
  */
-module.exports = curry(_createPartialApplicator(_concat));
+module.exports = curryMinMax(1, Infinity, _createPartialApplicator(_concat));

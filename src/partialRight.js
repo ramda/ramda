@@ -1,6 +1,6 @@
 var _concat = require('./internal/_concat');
 var _createPartialApplicator = require('./internal/_createPartialApplicator');
-var curry = require('./curry');
+var curryMinMax = require('./curryMinMax');
 var flip = require('./flip');
 
 
@@ -29,4 +29,4 @@ var flip = require('./flip');
  *
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  */
-module.exports = curry(_createPartialApplicator(flip(_concat)));
+module.exports = curryMinMax(1, Infinity, _createPartialApplicator(flip(_concat)));

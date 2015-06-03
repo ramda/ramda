@@ -1,5 +1,5 @@
 var _slice = require('./internal/_slice');
-var curry = require('./curry');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -27,6 +27,6 @@ var curry = require('./curry');
  *
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  */
-module.exports = curry(function call(fn) {
+module.exports = curryMinMax(1, Infinity, function call(fn) {
   return fn.apply(this, _slice(arguments, 1));
 });

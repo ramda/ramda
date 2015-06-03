@@ -1,6 +1,5 @@
 var _slice = require('./internal/_slice');
-var arity = require('./arity');
-var curry = require('./curry');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -66,14 +65,14 @@ var curry = require('./curry');
  *      //≅ addAll(double(10), square(5), R.identity(100));
  *      addDoubleAndSquare(10, 5, 100); //=> 145
  */
-module.exports = curry(function useWith(fn /*, transformers */) {
+module.exports = curryMinMax(1, Infinity, function useWith(fn /*, transformers */) {
   var transformers = _slice(arguments, 1);
   var tlen = transformers.length;
-  return curry(arity(tlen, function() {
+  return curryMinMax(tlen, Infinity, function() {
     var args = [], idx = -1;
     while (++idx < tlen) {
       args[idx] = transformers[idx](arguments[idx]);
     }
     return fn.apply(this, args.concat(_slice(arguments, tlen)));
-  }));
+  });
 });

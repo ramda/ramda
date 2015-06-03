@@ -1,14 +1,14 @@
 var __ = require('./__');
-var _curry2 = require('./internal/_curry2');
+var _arity = require('./internal/_arity');
+var _curry3 = require('./internal/_curry3');
 var _slice = require('./internal/_slice');
-var arity = require('./arity');
 
 
 /**
  * Returns a curried equivalent of the provided function, with the
  * specified arity. The curried function has two unusual capabilities.
  * First, its arguments needn't be provided one at a time. If `g` is
- * `R.curryN(3, f)`, the following are equivalent:
+ * `R.curryMinMax(3, 3, f)`, the following are equivalent:
  *
  *   - `g(1)(2)(3)`
  *   - `g(1)(2, 3)`
@@ -31,38 +31,41 @@ var arity = require('./arity');
  * @func
  * @memberOf R
  * @category Function
- * @sig Number -> (* -> a) -> (* -> a)
- * @param {Number} length The arity for the returned function.
+ * @sig Number -> Number -> (* -> a) -> (* -> a)
+ * @param {Number} min The minimum number of arguments to which `fn` may be applied.
+ * @param {Number} max The maximum number of arguments to which `fn` may be applied.
  * @param {Function} fn The function to curry.
  * @return {Function} A new, curried function.
  * @see R.curry
- * @deprecated since v0.15.0
  * @example
  *
  *      var addFourNumbers = function() {
  *        return R.sum([].slice.call(arguments, 0, 4));
  *      };
  *
- *      var curriedAddFourNumbers = R.curryN(4, addFourNumbers);
+ *      var curriedAddFourNumbers = R.curryMinMax(4, 4, addFourNumbers);
  *      var f = curriedAddFourNumbers(1, 2);
  *      var g = f(3);
  *      g(4); //=> 10
  */
-module.exports = _curry2(function curryN(length, fn) {
-  return arity(length, function() {
+module.exports = _curry3(function curryMinMax(min, max, fn) {
+  return _arity(min, function() {
     var n = arguments.length;
-    var shortfall = length - n;
+    if (n > max) {
+      throw new Error('Too many arguments (expected at most ' + max + '; received ' + n + ')');
+    }
+    var placeholders = 0;
     var idx = n;
     while (--idx >= 0) {
       if (arguments[idx] === __) {
-        shortfall += 1;
+        placeholders += 1;
       }
     }
-    if (shortfall <= 0) {
-      return fn.apply(this, arguments);
+    if (placeholders === 0 && n >= min) {
+      return fn.apply(this, _slice(arguments, 0, max));
     } else {
       var initialArgs = _slice(arguments);
-      return curryN(shortfall, function() {
+      return curryMinMax(min - n + placeholders, max - n + placeholders, function() {
         var currentArgs = _slice(arguments);
         var combinedArgs = [];
         var idx = -1;

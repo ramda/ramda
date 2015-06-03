@@ -1,5 +1,5 @@
 var _curry3 = require('./internal/_curry3');
-var curryN = require('./curryN');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -24,9 +24,8 @@ var curryN = require('./curryN');
  *      flattenArrays([[[10], 123], [8, [10]], "hello"]); //=> [[10, 123], [8, 10], "hello"]
  */
 module.exports = _curry3(function ifElse(condition, onTrue, onFalse) {
-  return curryN(Math.max(condition.length, onTrue.length, onFalse.length),
-    function _ifElse() {
-      return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
-    }
-  );
+  var n = Math.max(condition.length, onTrue.length, onFalse.length);
+  return curryMinMax(n, n, function _ifElse() {
+    return condition.apply(this, arguments) ? onTrue.apply(this, arguments) : onFalse.apply(this, arguments);
+  });
 });

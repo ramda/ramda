@@ -1,6 +1,6 @@
 var _concat = require('./internal/_concat');
 var _curry2 = require('./internal/_curry2');
-var curryN = require('./curryN');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -29,7 +29,7 @@ var curryN = require('./curryN');
  *      shortenedGreet("Robert"); //=> "Hello Rob"
  */
 module.exports = _curry2(function wrap(fn, wrapper) {
-  return curryN(fn.length, function() {
+  return curryMinMax(fn.length, fn.length, function() {
     return wrapper.apply(this, _concat([fn], arguments));
   });
 });

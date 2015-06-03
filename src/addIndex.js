@@ -2,7 +2,7 @@ var _concat = require('./internal/_concat');
 var _curry1 = require('./internal/_curry1');
 var _prepend = require('./internal/_prepend');
 var _slice = require('./internal/_slice');
-var curryN = require('./curryN');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -28,7 +28,7 @@ var curryN = require('./curryN');
  *      //=> ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
 module.exports = _curry1(function(fn) {
-  return curryN(fn.length, function() {
+  return curryMinMax(fn.length, fn.length, function() {
     var idx = -1;
     var origFn = arguments[0];
     var list = arguments[arguments.length - 1];

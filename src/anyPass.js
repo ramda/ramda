@@ -1,6 +1,6 @@
 var _any = require('./internal/_any');
 var _predicateWrap = require('./internal/_predicateWrap');
-var curry = require('./curry');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -23,4 +23,4 @@ var curry = require('./curry');
  *      f(8); //=> true
  *      f(9); //=> false
  */
-module.exports = curry(_predicateWrap(_any));
+module.exports = curryMinMax(1, Infinity, _predicateWrap(_any));

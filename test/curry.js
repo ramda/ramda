@@ -76,7 +76,7 @@ describe('curry', function() {
     assert.deepEqual(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
   });
 
-  it('forwards extra arguments', function() {
+  it('throws if given too many arguments', function() {
     var f = function(a, b, c) {
       void c;
       return Array.prototype.slice.call(arguments);
@@ -84,9 +84,22 @@ describe('curry', function() {
     var g = R.curry(f);
 
     assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
-    assert.deepEqual(g(1, 2, 3, 4), [1, 2, 3, 4]);
-    assert.deepEqual(g(1, 2)(3, 4), [1, 2, 3, 4]);
-    assert.deepEqual(g(1)(2, 3, 4), [1, 2, 3, 4]);
-    assert.deepEqual(g(1)(2)(3, 4), [1, 2, 3, 4]);
+
+    assert.throws(function() { g(1, 2, 3, 4); }, R.both(
+      R.propEq('constructor', Error),
+      R.propEq('message', 'Too many arguments (expected at most 3; received 4)')
+    ));
+    assert.throws(function() { g(1)(2, 3, 4); }, R.both(
+      R.propEq('constructor', Error),
+      R.propEq('message', 'Too many arguments (expected at most 2; received 3)')
+    ));
+    assert.throws(function() { g(1, 2)(3, 4); }, R.both(
+      R.propEq('constructor', Error),
+      R.propEq('message', 'Too many arguments (expected at most 1; received 2)')
+    ));
+    assert.throws(function() { g(1)(2)(3, 4); }, R.both(
+      R.propEq('constructor', Error),
+      R.propEq('message', 'Too many arguments (expected at most 1; received 2)')
+    ));
   });
 });

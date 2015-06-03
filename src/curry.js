@@ -1,5 +1,5 @@
 var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -32,7 +32,7 @@ var curryN = require('./curryN');
  * @sig (* -> a) -> (* -> a)
  * @param {Function} fn The function to curry.
  * @return {Function} A new, curried function.
- * @see R.curryN
+ * @see R.curryMinMax
  * @example
  *
  *      var addFourNumbers = function(a, b, c, d) {
@@ -45,5 +45,5 @@ var curryN = require('./curryN');
  *      g(4); //=> 10
  */
 module.exports = _curry1(function curry(fn) {
-  return curryN(fn.length, fn);
+  return curryMinMax(fn.length, fn.length, fn);
 });

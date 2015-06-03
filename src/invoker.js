@@ -1,6 +1,5 @@
 var _slice = require('./internal/_slice');
-var curry = require('./curry');
-var curryN = require('./curryN');
+var curryMinMax = require('./curryMinMax');
 
 
 /**
@@ -25,10 +24,10 @@ var curryN = require('./curryN');
  *      var sliceFrom6 = R.invoker(2, 'slice', 6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
  */
-module.exports = curry(function invoker(arity, method) {
+module.exports = curryMinMax(2, Infinity, function invoker(arity, method) {
   var initialArgs = _slice(arguments, 2);
   var len = arity - initialArgs.length;
-  return curryN(len + 1, function() {
+  return curryMinMax(len + 1, Infinity, function() {
     var target = arguments[len];
     var args = initialArgs.concat(_slice(arguments, 0, len));
     return target[method].apply(target, args);
