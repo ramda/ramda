@@ -1,6 +1,5 @@
 var _curry3 = require('./internal/_curry3');
 var _has = require('./internal/_has');
-var isNil = require('./isNil');
 
 
 /**
@@ -29,5 +28,5 @@ var isNil = require('./isNil');
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
 module.exports = _curry3(function propOr(val, p, obj) {
-  return (!isNil(obj) && _has(p, obj)) ? obj[p] : val;
+  return (obj != null && _has(p, obj)) ? obj[p] : val;
 });
