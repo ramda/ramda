@@ -22,6 +22,18 @@ describe('forEach', function() {
     assert.deepEqual(R.forEach(function(x) { return x * x; }, []), []);
   });
 
+  it('dispatches to `forEach` method', function() {
+    var dispatched = false;
+    var fn = function() {};
+    function DummyList() {}
+    DummyList.prototype.forEach = function(callback) {
+      dispatched = true;
+      assert.strictEqual(callback, fn);
+    };
+    R.forEach(fn, new DummyList());
+    assert.strictEqual(dispatched, true);
+  });
+
   it('is curried', function() {
     var xStr = '';
     var xe = R.forEach(function(x) { xStr += (x + ' '); });
