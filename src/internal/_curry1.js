@@ -13,7 +13,7 @@ module.exports = function _curry1(fn) {
     } else if (a != null && a['@@functional/placeholder'] === true) {
       return f1;
     } else {
-      return fn(a);
+      return fn.apply(this, arguments);
     }
   };
 };
