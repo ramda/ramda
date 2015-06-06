@@ -37,11 +37,12 @@
     "browserify": "node_modules/browserify/bin/cmd.js test/*.js --outfile lib/test/bundle.js",
     "bookmarklet": "scripts/bookmarklet",
     "build": "make && make dist/ramda.min.js",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist/*",
     "jscs": "jscs scripts/bookmarklet scripts/build **/*.js **/**/*.js",
     "jshint": "jshint scripts/bookmarklet scripts/build **/*.js **/**/*.js",
-    "pretest": "npm run jshint && npm run jscs",
-    "test": "node scripts/testfiles | node_modules/.bin/mocha --reporter spec"
+    "pretest": "npm run jshint && npm run jscs && npm run clean && npm run build",
+    "test": "node scripts/testfiles | node_modules/.bin/mocha --reporter spec",
+    "posttest": "git checkout -- dist"
   },
   "dependencies": {},
   "devDependencies": {
