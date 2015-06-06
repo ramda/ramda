@@ -13,6 +13,7 @@ var substring = require('./substring');
  * @param {Number} fromIndex
  * @param {String} str
  * @return {String}
+ * @deprecated since v0.15.0
  * @example
  *
  *      R.substringFrom(3, 'Ramda'); //=> 'da'

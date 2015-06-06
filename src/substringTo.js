@@ -11,6 +11,7 @@ var substring = require('./substring');
  * @param {Number} toIndex
  * @param {String} str
  * @return {String}
+ * @deprecated since v0.15.0
  * @example
  *
  *      R.substringTo(3, 'Ramda'); //=> 'Ram'

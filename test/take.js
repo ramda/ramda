@@ -13,6 +13,26 @@ describe('take', function() {
     assert.deepEqual(R.take(3, []), []);
   });
 
+  it('returns an equivalent list if `n` is < 0', function() {
+    assert.deepEqual(R.take(-1, [1, 2, 3]), [1, 2, 3]);
+    assert.deepEqual(R.take(-Infinity, [1, 2, 3]), [1, 2, 3]);
+  });
+
+  it('never returns the input array', function() {
+    var xs = [1, 2, 3];
+
+    assert.notStrictEqual(R.take(3, xs), xs);
+    assert.notStrictEqual(R.take(Infinity, xs), xs);
+    assert.notStrictEqual(R.take(-1, xs), xs);
+  });
+
+  it('dispatches to `slice` method', function() {
+    var o = {slice: function(a, b) { return '[' + a + ':' + b + ']'; }};
+
+    assert.strictEqual(R.take(3, 'Ramda'), 'Ram');
+    assert.strictEqual(R.take(3, o), '[0:3]');
+  });
+
   it('is curried', function() {
     var take3 = R.take(3);
     assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);

@@ -18,6 +18,20 @@ describe('drop', function() {
     assert.deepEqual(R.drop(-Infinity, [1, 2, 3]), [1, 2, 3]);
   });
 
+  it('never returns the input array', function() {
+    var xs = [1, 2, 3];
+
+    assert.notStrictEqual(R.drop(0, xs), xs);
+    assert.notStrictEqual(R.drop(-1, xs), xs);
+  });
+
+  it('dispatches to `slice` method', function() {
+    var o = {slice: function(a, b) { return '[' + a + ':' + b + ']'; }};
+
+    assert.strictEqual(R.drop(3, 'Ramda'), 'da');
+    assert.strictEqual(R.drop(3, o), '[3:Infinity]');
+  });
+
   it('is curried', function() {
     var drop2 = R.drop(2);
     assert.deepEqual(drop2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
