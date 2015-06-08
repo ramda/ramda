@@ -29,10 +29,14 @@ var curryN = require('./curryN');
  */
 module.exports = _curry1(function(fn) {
   return curryN(fn.length, function() {
-    var idx = -1;
+    var idx = 0;
     var origFn = arguments[0];
     var list = arguments[arguments.length - 1];
-    var indexedFn = function() {return origFn.apply(this, _concat(arguments, [++idx, list]));};
+    var indexedFn = function() {
+      var result = origFn.apply(this, _concat(arguments, [idx, list]));
+      idx += 1;
+      return result;
+    };
 
     return fn.apply(this, _prepend(indexedFn, _slice(arguments, 1)));
   });

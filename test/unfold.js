@@ -12,7 +12,8 @@ describe('unfold', function() {
     var fib = function(n) {
       var count = 0;
       return function(pair) {
-        if (++count <= n) {
+        count += 1;
+        if (count <= n) {
           return [pair[0], [pair[1], pair[0] + pair[1]]];
         }
       };

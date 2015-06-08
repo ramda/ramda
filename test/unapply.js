@@ -33,18 +33,20 @@ describe('unapply', function() {
 
     f = Math.max;
     g = R.unapply(R.apply(f));
-    n = 0;
-    while (++n <= 100) {
+    n = 1;
+    while (n <= 100) {
       a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
       assert.strictEqual(f(a, b, c, d, e), g(a, b, c, d, e));
+      n += 1;
     }
 
     f = function(xs) { return '[' + xs + ']'; };
     g = R.apply(R.unapply(f));
-    n = 0;
-    while (++n <= 100) {
+    n = 1;
+    while (n <= 100) {
       a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
       assert.strictEqual(f([a, b, c, d, e]), g([a, b, c, d, e]));
+      n += 1;
     }
   });
 });

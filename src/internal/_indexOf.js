@@ -10,7 +10,7 @@ module.exports = function _indexOf(list, item, from) {
     if (equals(list[idx], item)) {
       return idx;
     }
-    ++idx;
+    idx += 1;
   }
   return -1;
 };

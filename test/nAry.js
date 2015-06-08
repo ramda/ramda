@@ -28,9 +28,10 @@ describe('nAry', function() {
     var undefs = fn();
     var ns = R.repeat(undefined, 10);
     assert.strictEqual(undefs.length, ns.length);
-    var idx = undefs.length;
-    while (--idx) {
+    var idx = undefs.length - 1;
+    while (idx >= 0) {
       assert.strictEqual(undefs[idx], ns[idx]);
+      idx -= 1;
     }
   });
 

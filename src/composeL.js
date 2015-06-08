@@ -28,10 +28,11 @@ var _composeL = require('./internal/_composeL');
  *      secondOfXOfHeadLens.set(123, source); //=> [{x: [0, 123], y: [2, 3]}, {x: [4, 5], y: [6, 7]}]
  */
 module.exports = function() {
-  var idx = arguments.length - 1;
-  var fn = arguments[idx];
-  while (--idx >= 0) {
+  var fn = arguments[arguments.length - 1];
+  var idx = arguments.length - 2;
+  while (idx >= 0) {
     fn = _composeL(arguments[idx], fn);
+    idx -= 1;
   }
   return fn;
 };

@@ -38,10 +38,11 @@ module.exports = _curry2(function set(update, original) {
     return update;
   }
   var result = _extend({}, original);
-  var key, idx = -1, length = updateKeys.length;
-  while (++idx < length) {
+  var key, idx = 0, length = updateKeys.length;
+  while (idx < length) {
     key = updateKeys[idx];
     result[key] = _has(key, original) ? set(update[key], original[key]) : update[key];
+    idx += 1;
   }
   return result;
 });
