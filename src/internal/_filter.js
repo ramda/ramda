@@ -1,6 +1,6 @@
 module.exports = function _filter(fn, list) {
-  var idx = 0, len = list.length, result = [];
-  while (idx < len) {
+  var idx = 0, result = [];
+  while (idx < list.length) {
     if (fn(list[idx])) {
       result[result.length] = list[idx];
     }

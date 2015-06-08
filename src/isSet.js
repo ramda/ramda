@@ -19,9 +19,8 @@ var _indexOf = require('./internal/_indexOf');
  *      R.isSet([[42], [42]]); //=> false
  */
 module.exports = _curry1(function isSet(list) {
-  var len = list.length;
   var idx = 0;
-  while (idx < len) {
+  while (idx < list.length) {
     if (_indexOf(list, list[idx], idx + 1) >= 0) {
       return false;
     }

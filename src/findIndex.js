@@ -26,8 +26,7 @@ var _xfindIndex = require('./internal/_xfindIndex');
  */
 module.exports = _curry2(_dispatchable('findIndex', _xfindIndex, function findIndex(fn, list) {
   var idx = 0;
-  var len = list.length;
-  while (idx < len) {
+  while (idx < list.length) {
     if (fn(list[idx])) {
       return idx;
     }

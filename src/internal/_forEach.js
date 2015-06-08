@@ -1,6 +1,6 @@
 module.exports = function _forEach(fn, list) {
-  var idx = 0, len = list.length;
-  while (idx < len) {
+  var idx = 0;
+  while (idx < list.length) {
     fn(list[idx]);
     idx += 1;
   }
