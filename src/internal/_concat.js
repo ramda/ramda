@@ -17,13 +17,15 @@ module.exports = function _concat(set1, set2) {
   var len2 = set2.length;
   var result = [];
 
-  idx = -1;
-  while (++idx < len1) {
+  idx = 0;
+  while (idx < len1) {
     result[result.length] = set1[idx];
+    idx += 1;
   }
-  idx = -1;
-  while (++idx < len2) {
+  idx = 0;
+  while (idx < len2) {
     result[result.length] = set2[idx];
+    idx += 1;
   }
   return result;
 };

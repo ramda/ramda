@@ -5,13 +5,14 @@ var isArrayLike = require('../isArrayLike');
 
 module.exports = (function() {
   function _arrayReduce(xf, acc, list) {
-    var idx = -1, len = list.length;
-    while (++idx < len) {
+    var idx = 0, len = list.length;
+    while (idx < len) {
       acc = xf['@@transducer/step'](acc, list[idx]);
       if (acc && acc['@@transducer/reduced']) {
         acc = acc['@@transducer/value'];
         break;
       }
+      idx += 1;
     }
     return xf['@@transducer/result'](acc);
   }

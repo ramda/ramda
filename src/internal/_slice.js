@@ -21,10 +21,11 @@ module.exports = function _slice(args, from, to) {
     case 2: return _slice(args, from, args.length);
     default:
       var list = [];
-      var idx = -1;
+      var idx = 0;
       var len = Math.max(0, Math.min(args.length, to) - from);
-      while (++idx < len) {
+      while (idx < len) {
         list[idx] = args[from + idx];
+        idx += 1;
       }
       return list;
   }

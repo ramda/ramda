@@ -51,11 +51,12 @@ module.exports = _curry2(function curryN(length, fn) {
   return arity(length, function() {
     var n = arguments.length;
     var shortfall = length - n;
-    var idx = n;
-    while (--idx >= 0) {
+    var idx = n - 1;
+    while (idx >= 0) {
       if (arguments[idx] === __) {
         shortfall += 1;
       }
+      idx -= 1;
     }
     if (shortfall <= 0) {
       return fn.apply(this, arguments);
@@ -64,14 +65,22 @@ module.exports = _curry2(function curryN(length, fn) {
       return curryN(shortfall, function() {
         var currentArgs = _slice(arguments);
         var combinedArgs = [];
-        var idx = -1;
+        var idx = 0;
         var currentArgsIdx = 0;
-        while (++idx < n) {
+        while (idx < n) {
           var val = initialArgs[idx];
-          combinedArgs[idx] = (val === __ ? currentArgs[currentArgsIdx++] : val);
+          if (val === __) {
+            combinedArgs[idx] = currentArgs[currentArgsIdx];
+            currentArgsIdx += 1;
+          } else {
+            combinedArgs[idx] = val;
+          }
+          idx += 1;
         }
         while (currentArgsIdx < currentArgs.length) {
-          combinedArgs[idx++] = currentArgs[currentArgsIdx++];
+          combinedArgs[idx] = currentArgs[currentArgsIdx];
+          idx += 1;
+          currentArgsIdx += 1;
         }
         return fn.apply(this, combinedArgs);
       });

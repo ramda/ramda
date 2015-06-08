@@ -25,11 +25,12 @@ module.exports = (function() {
                             'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
 
   var contains = function contains(list, item) {
-    var idx = -1;
-    while (++idx < list.length) {
+    var idx = 0;
+    while (idx < list.length) {
       if (list[idx] === item) {
         return true;
       }
+      idx += 1;
     }
     return false;
   };
@@ -48,12 +49,13 @@ module.exports = (function() {
       }
     }
     if (hasEnumBug) {
-      nIdx = nonEnumerableProps.length;
-      while (--nIdx >= 0) {
+      nIdx = nonEnumerableProps.length - 1;
+      while (nIdx >= 0) {
         prop = nonEnumerableProps[nIdx];
         if (_has(prop, obj) && !contains(ks, prop)) {
           ks[ks.length] = prop;
         }
+        nIdx -= 1;
       }
     }
     return ks;

@@ -13,16 +13,17 @@ module.exports = function _createMaxMinBy(comparator) {
     if (!(list && list.length > 0)) {
       return;
     }
-    var idx = 0;
+    var idx = 1;
     var winner = list[idx];
     var computedWinner = valueComputer(winner);
     var computedCurrent;
-    while (++idx < list.length) {
+    while (idx < list.length) {
       computedCurrent = valueComputer(list[idx]);
       if (comparator(computedCurrent, computedWinner)) {
         computedWinner = computedCurrent;
         winner = list[idx];
       }
+      idx += 1;
     }
     return winner;
   };

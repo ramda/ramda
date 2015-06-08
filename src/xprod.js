@@ -18,16 +18,18 @@ var _curry2 = require('./internal/_curry2');
  *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
  */
 module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
-  var idx = -1;
+  var idx = 0;
   var ilen = a.length;
   var j;
   var jlen = b.length;
   var result = [];
-  while (++idx < ilen) {
-    j = -1;
-    while (++j < jlen) {
+  while (idx < ilen) {
+    j = 0;
+    while (j < jlen) {
       result[result.length] = [a[idx], b[j]];
+      j += 1;
     }
+    idx += 1;
   }
   return result;
 });

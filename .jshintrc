@@ -6,6 +6,7 @@
     "Symbol": true
   },
   "newcap": false,
+  "plusplus": true,
   "predef": ["beforeEach", "console", "define", "describe", "it", "module", "process", "require"],
   "undef": true,
   "unused": true
