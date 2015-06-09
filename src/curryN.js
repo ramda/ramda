@@ -1,4 +1,3 @@
-var __ = require('./__');
 var _curry2 = require('./internal/_curry2');
 var _slice = require('./internal/_slice');
 var arity = require('./arity');
@@ -53,7 +52,8 @@ module.exports = _curry2(function curryN(length, fn) {
     var shortfall = length - n;
     var idx = n - 1;
     while (idx >= 0) {
-      if (arguments[idx] === __) {
+      if (arguments[idx] != null &&
+          arguments[idx]['@@functional/placeholder'] === true) {
         shortfall += 1;
       }
       idx -= 1;
@@ -69,7 +69,7 @@ module.exports = _curry2(function curryN(length, fn) {
         var currentArgsIdx = 0;
         while (idx < n) {
           var val = initialArgs[idx];
-          if (val === __) {
+          if (val != null && val['@@functional/placeholder'] === true) {
             combinedArgs[idx] = currentArgs[currentArgsIdx];
             currentArgsIdx += 1;
           } else {

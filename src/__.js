@@ -22,4 +22,4 @@
  *      var greet = R.replace('{name}', R.__, 'Hello, {name}!');
  *      greet('Alice'); //=> 'Hello, Alice!'
  */
-module.exports = {ramda: 'placeholder'};
+module.exports = {'@@functional/placeholder': true};
