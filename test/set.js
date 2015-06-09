@@ -22,6 +22,22 @@ describe('set', function() {
     assert.deepEqual(b, {w: 1, x: {a: 5, b: 2, c: 3}, z: 4});
   });
 
+  it('handles empty object', function() {
+    var a = {w: 1, x: {a: 1, b: 2, c: 3}, z: 4};
+    var b = R.set({}, a);
+    assert.deepEqual(b, a);
+  });
+
+  it('handles nested empty object', function() {
+    var a = {w: 1, x: {a: 1, b: 2, c: 3}, z: 4};
+    var b = R.set({w: 0, x: {}, z: 3}, a);
+    assert.deepEqual(b, {w: 0, x: {a: 1, b: 2, c: 3}, z: 3});
+  });
+
+  it('ignores `null`', function() {
+    assert.deepEqual(R.set(null, {a: 1}), {a: 1});
+  });
+
   it('swallow copies when possible', function() {
     var a = {w: 1, x: {a: 1, b: 2, c: 3}, z: 4};
     var b = R.set({z: 5}, a);

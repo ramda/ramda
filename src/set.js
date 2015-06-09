@@ -22,7 +22,7 @@ var keys = require('./keys');
  * @return {Object} The merged object.
  * @example
  *
- *      R.set({age: 40, {name: 'fred', age: 10});
+ *      R.set({age: 40}, {name: 'fred', age: 10});
  *      //=> {'name': 'fred', 'age': 40}
  *
  *      R.set({parent: {age: 40}}, {name: 'fred', age: 10, parent: {age: 39}});
@@ -34,7 +34,7 @@ module.exports = _curry2(function set(update, original) {
   }
   var updateKeys = keys(update);
   var originalKeys = keys(original);
-  if (isEmpty(updateKeys) || isEmpty(originalKeys)) {
+  if (isEmpty(updateKeys) && isEmpty(originalKeys)) {
     return update;
   }
   var result = _extend({}, original);
