@@ -35,29 +35,30 @@ module.exports = (function() {
     return false;
   };
 
-  return _curry1(function keys(obj) {
-    if (Object(obj) !== obj) {
-      return [];
-    }
-    if (Object.keys) {
-      return Object.keys(obj);
-    }
-    var prop, ks = [], nIdx;
-    for (prop in obj) {
-      if (_has(prop, obj)) {
-        ks[ks.length] = prop;
+  return typeof Object.keys === 'function' ?
+    _curry1(function keys(obj) {
+      return Object(obj) !== obj ? [] : Object.keys(obj);
+    }) :
+    _curry1(function keys(obj) {
+      if (Object(obj) !== obj) {
+        return [];
       }
-    }
-    if (hasEnumBug) {
-      nIdx = nonEnumerableProps.length - 1;
-      while (nIdx >= 0) {
-        prop = nonEnumerableProps[nIdx];
-        if (_has(prop, obj) && !contains(ks, prop)) {
+      var prop, ks = [], nIdx;
+      for (prop in obj) {
+        if (_has(prop, obj)) {
           ks[ks.length] = prop;
         }
-        nIdx -= 1;
       }
-    }
-    return ks;
-  });
+      if (hasEnumBug) {
+        nIdx = nonEnumerableProps.length - 1;
+        while (nIdx >= 0) {
+          prop = nonEnumerableProps[nIdx];
+          if (_has(prop, obj) && !contains(ks, prop)) {
+            ks[ks.length] = prop;
+          }
+          nIdx -= 1;
+        }
+      }
+      return ks;
+    });
 }());
