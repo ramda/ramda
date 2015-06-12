@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
 var arity = require('./arity');
 
 
@@ -48,42 +47,21 @@ var arity = require('./arity');
  */
 module.exports = _curry2(function curryN(length, fn) {
   return arity(length, function() {
-    var n = arguments.length;
-    var shortfall = length - n;
-    var idx = n - 1;
-    while (idx >= 0) {
-      if (arguments[idx] != null &&
-          arguments[idx]['@@functional/placeholder'] === true) {
+    var args = arguments;
+    var shortfall = length - args.length;
+    for (var idx = 0; idx < args.length; idx += 1) {
+      if (args[idx] != null && args[idx]['@@functional/placeholder'] === true) {
         shortfall += 1;
       }
-      idx -= 1;
     }
-    if (shortfall <= 0) {
-      return fn.apply(this, arguments);
-    } else {
-      var initialArgs = _slice(arguments);
-      return curryN(shortfall, function() {
-        var currentArgs = _slice(arguments);
-        var combinedArgs = [];
-        var idx = 0;
-        var currentArgsIdx = 0;
-        while (idx < n) {
-          var val = initialArgs[idx];
-          if (val != null && val['@@functional/placeholder'] === true) {
-            combinedArgs[idx] = currentArgs[currentArgsIdx];
-            currentArgsIdx += 1;
-          } else {
-            combinedArgs[idx] = val;
-          }
-          idx += 1;
-        }
-        while (currentArgsIdx < currentArgs.length) {
-          combinedArgs[idx] = currentArgs[currentArgsIdx];
-          idx += 1;
-          currentArgsIdx += 1;
-        }
-        return fn.apply(this, combinedArgs);
-      });
-    }
+    return shortfall <= 0 ? fn.apply(this, args) : curryN(shortfall, function() {
+      var ys = Array.prototype.slice.call(arguments);
+      var xs = [];
+      for (var idx = 0; idx < args.length; idx += 1) {
+        var x = args[idx];
+        xs.push(x != null && x['@@functional/placeholder'] === true ? ys.shift() : x);
+      }
+      return fn.apply(this, xs.concat(ys));
+    });
   });
 });
