@@ -23,11 +23,3 @@
         $ git push origin <branch>
 
 7.  Open a pull request.
-
-### Conventions
-
-  - Do not use `Array.prototype.push`. Use `xs[idx] = x` or `xs[xs.length] = x`
-    rather than `xs.push(x)`. See [#890][1] for links to related pull requests.
-
-
-[1]: https://github.com/ramda/ramda/issues/890
