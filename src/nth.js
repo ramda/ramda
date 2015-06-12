@@ -9,7 +9,7 @@ var _nth = require('./internal/_nth');
  * @func
  * @memberOf R
  * @category List
- * @sig Number -> [a] -> a
+ * @sig Number -> [a] -> a | Undefined
  * @param {Number} idx
  * @param {Array} list
  * @return {*} The nth element of the list.

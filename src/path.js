@@ -8,11 +8,12 @@ var _path = require('./internal/_path');
  * @func
  * @memberOf R
  * @category Object
- * @sig [String] -> {*} -> *
+ * @sig [String] -> {k: v} -> v | Undefined
  * @param {Array} path The path to use.
  * @return {*} The data at `path`.
  * @example
  *
  *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
+ *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
  */
 module.exports = _curry2(_path);

@@ -7,7 +7,7 @@ var _curry2 = require('./internal/_curry2');
  * @func
  * @memberOf R
  * @category Object
- * @sig s -> {s: a} -> a
+ * @sig s -> {s: a} -> a | Undefined
  * @param {String} p The property name
  * @param {Object} obj The object to query
  * @return {*} The value at `obj.p`.
