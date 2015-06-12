@@ -27,4 +27,8 @@ describe('uniq', function() {
     assert.strictEqual(R.uniq([NaN, NaN]).length, 1);
     assert.strictEqual(R.uniq([new Just([42]), new Just([42])]).length, 1);
   });
+
+  it('handles null and undefined elements', function() {
+    assert.deepEqual(R.uniq([void 0, null, void 0, null]), [void 0, null]);
+  });
 });
