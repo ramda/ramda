@@ -31,12 +31,12 @@ module.exports = (function() {
     /* global Set */
     var item,
         set = new Set(),
-        idx = -1,
+        idx = 0,
         len = list.length,
         items = [],
         uniqs = [];
 
-    while (++idx < len) {
+    while (idx < len) {
       item = list[idx];
       // `_contains` is also used to differentiate between
       // +0 and -0, as the native Set does not.
@@ -50,6 +50,7 @@ module.exports = (function() {
           uniqs.push(item);
         }
       }
+      idx += 1;
     }
     return uniqs;
   }
