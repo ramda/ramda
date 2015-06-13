@@ -21,9 +21,9 @@ var constructN = require('./constructN');
  *      Widget.prototype = {
  *        // ...
  *      };
- *      var allConfigs = {
+ *      var allConfigs = [
  *        // ...
- *      };
+ *      ];
  *      R.map(R.construct(Widget), allConfigs); // a list of Widgets
  */
 module.exports = _curry1(function construct(Fn) {
