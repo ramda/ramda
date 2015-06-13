@@ -25,9 +25,9 @@ var nAry = require('./nAry');
  *      Widget.prototype = {
  *        // ...
  *      };
- *      var allConfigs = {
+ *      var allConfigs = [
  *        // ...
- *      };
+ *      ];
  *      R.map(R.constructN(1, Widget), allConfigs); // a list of Widgets
  */
 module.exports = _curry2(function constructN(n, Fn) {
