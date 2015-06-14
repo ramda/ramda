@@ -54,6 +54,7 @@
     "dox": "latest",
     "envvar": "1.x.x",
     "escodegen": "1.4.x",
+    "handlebars": "3.0.x",
     "js-yaml": "^3.2.5",
     "jscs": "1.13.x",
     "jshint": "2.7.x",
