@@ -2,10 +2,12 @@
 
 'use strict';
 
-var Handlebars      = require('handlebars');
-var UglifyJS        = require('uglify-js');
 var fs              = require('fs');
 var path            = require('path');
+
+var Handlebars      = require('handlebars');
+var UglifyJS        = require('uglify-js');
+
 var pkg             = require('../package.json');
 
 var markletTmplPath = path.join(__dirname, 'bookmarklet.tmpl.js');
