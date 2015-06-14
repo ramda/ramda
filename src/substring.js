@@ -14,6 +14,7 @@ var slice = require('./slice');
  * @param {String} str The string to slice.
  * @return {String}
  * @see R.slice
+ * @deprecated since v0.15.0
  * @example
  *
  *      R.substring(2, 5, 'abcdefghijklm'); //=> 'cde'
