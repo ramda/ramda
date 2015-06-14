@@ -19,8 +19,8 @@ var _curry3 = require('./internal/_curry3');
  *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
  */
 module.exports = _curry3(function scan(fn, acc, list) {
-  var idx = 0, len = list.length, result = [acc];
-  while (idx < len) {
+  var idx = 0, result = [acc];
+  while (idx < list.length) {
     acc = fn(acc, list[idx]);
     result[idx + 1] = acc;
     idx += 1;

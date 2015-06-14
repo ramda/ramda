@@ -26,8 +26,7 @@ var _xfind = require('./internal/_xfind');
  */
 module.exports = _curry2(_dispatchable('find', _xfind, function find(fn, list) {
   var idx = 0;
-  var len = list.length;
-  while (idx < len) {
+  while (idx < list.length) {
     if (fn(list[idx])) {
       return list[idx];
     }

@@ -68,13 +68,12 @@ var curry = require('./curry');
  */
 module.exports = curry(function useWith(fn /*, transformers */) {
   var transformers = _slice(arguments, 1);
-  var tlen = transformers.length;
-  return curry(arity(tlen, function() {
+  return curry(arity(transformers.length, function() {
     var args = [], idx = 0;
-    while (idx < tlen) {
+    while (idx < transformers.length) {
       args[idx] = transformers[idx](arguments[idx]);
       idx += 1;
     }
-    return fn.apply(this, args.concat(_slice(arguments, tlen)));
+    return fn.apply(this, args.concat(_slice(arguments, transformers.length)));
   }));
 });

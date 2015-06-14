@@ -26,9 +26,8 @@ var containsWith = require('./containsWith');
 module.exports = _curry3(function differenceWith(pred, first, second) {
   var out = [];
   var idx = 0;
-  var firstLen = first.length;
   var containsPred = containsWith(pred);
-  while (idx < firstLen) {
+  while (idx < first.length) {
     if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
       out[out.length] = first[idx];
     }

@@ -5,8 +5,8 @@ var isArrayLike = require('../isArrayLike');
 
 module.exports = (function() {
   function _arrayReduce(xf, acc, list) {
-    var idx = 0, len = list.length;
-    while (idx < len) {
+    var idx = 0;
+    while (idx < list.length) {
       acc = xf['@@transducer/step'](acc, list[idx]);
       if (acc && acc['@@transducer/reduced']) {
         acc = acc['@@transducer/value'];

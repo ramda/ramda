@@ -19,10 +19,9 @@ var keys = require('./keys');
  */
 module.exports = _curry1(function values(obj) {
   var props = keys(obj);
-  var len = props.length;
   var vals = [];
   var idx = 0;
-  while (idx < len) {
+  while (idx < props.length) {
     vals[idx] = obj[props[idx]];
     idx += 1;
   }
