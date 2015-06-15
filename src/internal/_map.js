@@ -1,6 +1,6 @@
 module.exports = function _map(fn, list) {
-  var idx = 0, result = [];
-  while (idx < list.length) {
+  var idx = 0, len = list.length, result = [];
+  while (idx < len) {
     result[idx] = fn(list[idx]);
     idx += 1;
   }

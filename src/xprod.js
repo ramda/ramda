@@ -19,11 +19,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
   var idx = 0;
+  var ilen = a.length;
   var j;
+  var jlen = b.length;
   var result = [];
-  while (idx < a.length) {
+  while (idx < ilen) {
     j = 0;
-    while (j < b.length) {
+    while (j < jlen) {
       result[result.length] = [a[idx], b[j]];
       j += 1;
     }

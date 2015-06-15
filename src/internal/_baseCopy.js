@@ -13,8 +13,9 @@ var type = require('../type');
  */
 module.exports = function _baseCopy(value, refFrom, refTo) {
   var copy = function copy(copiedValue) {
+    var len = refFrom.length;
     var idx = 0;
-    while (idx < refFrom.length) {
+    while (idx < len) {
       if (value === refFrom[idx]) {
         return refTo[idx];
       }

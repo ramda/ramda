@@ -21,7 +21,8 @@ var _curry2 = require('./internal/_curry2');
 module.exports = _curry2(function difference(first, second) {
   var out = [];
   var idx = 0;
-  while (idx < first.length) {
+  var firstLen = first.length;
+  while (idx < firstLen) {
     if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
       out[out.length] = first[idx];
     }
