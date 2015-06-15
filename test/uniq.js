@@ -25,6 +25,7 @@ describe('uniq', function() {
 
     assert.strictEqual(R.uniq([0, -0]).length, 2);
     assert.strictEqual(R.uniq([NaN, NaN]).length, 1);
+    assert.strictEqual(R.uniq([[1], [1]]).length, 1);
     assert.strictEqual(R.uniq([new Just([42]), new Just([42])]).length, 1);
   });
 
