@@ -1,6 +1,8 @@
+var _curry1 = require('./internal/_curry1');
 var assoc = require('./assoc');
 var lens = require('./lens');
 var prop = require('./prop');
+
 
 /**
  * Creates a lens that will focus on property `k` of the source object.
@@ -23,7 +25,6 @@ var prop = require('./prop');
  *     phraseLens.set('Ooh Betty', obj1); //=> { phrase: 'Ooh Betty'}
  *     phraseLens.map(R.toUpper, obj2); //=> { phrase: "WHAT'S ALL THIS, THEN?"}
  */
-module.exports = function(k) {
+module.exports = _curry1(function lensProp(k) {
   return lens(prop(k), assoc(k));
-};
-
+});

@@ -1,6 +1,8 @@
-var _slice = require('./internal/_slice');
+var _curry1 = require('./internal/_curry1');
 var lens = require('./lens');
 var nth = require('./nth');
+var update = require('./update');
+
 
 /**
  * Creates a lens that will focus on index `n` of the source array.
@@ -20,8 +22,6 @@ var nth = require('./nth');
  *     headLens.set('mu', [10, 20, 30, 40]); //=> ['mu', 20, 30, 40]
  *     headLens.map(function(x) { return x + 1; }, [10, 20, 30, 40]); //=> [11, 20, 30, 40]
  */
-module.exports = function lensIndex(n) {
-  return lens(nth(n), function(x, xs) {
-    return _slice(xs, 0, n).concat([x], _slice(xs, n + 1));
-  });
-};
+module.exports = _curry1(function lensIndex(n) {
+  return lens(nth(n), update(n));
+});
