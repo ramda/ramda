@@ -28,9 +28,10 @@ var last = require('./last');
 module.exports = _curry2(_dispatchable('dropRepeatsWith', _xdropRepeatsWith, function dropRepeatsWith(pred, list) {
   var result = [];
   var idx = 1;
-  if (list.length > 0) {
+  var len = list.length;
+  if (len !== 0) {
     result[0] = list[0];
-    while (idx < list.length) {
+    while (idx < len) {
       if (!pred(last(result), list[idx])) {
         result[result.length] = list[idx];
       }

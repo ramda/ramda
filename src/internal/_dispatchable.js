@@ -19,12 +19,13 @@ var _slice = require('./_slice');
  */
 module.exports = function _dispatchable(methodname, xf, fn) {
   return function() {
-    if (arguments.length === 0) {
+    var length = arguments.length;
+    if (length === 0) {
       return fn();
     }
-    var obj = arguments[arguments.length - 1];
+    var obj = arguments[length - 1];
     if (!_isArray(obj)) {
-      var args = _slice(arguments, 0, arguments.length - 1);
+      var args = _slice(arguments, 0, length - 1);
       if (typeof obj[methodname] === 'function') {
         return obj[methodname].apply(obj, args);
       }

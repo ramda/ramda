@@ -18,7 +18,7 @@ module.exports = function _path(paths, obj) {
     return;
   } else {
     var val = obj;
-    for (var idx = 0; idx < paths.length && val != null; idx += 1) {
+    for (var idx = 0, len = paths.length; idx < len && val != null; idx += 1) {
       val = val[paths[idx]];
     }
     return val;
