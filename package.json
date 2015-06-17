@@ -58,7 +58,6 @@
     "js-yaml": "^3.2.5",
     "jscs": "1.13.x",
     "jshint": "2.7.x",
-    "lodash": "latest",
     "mocha": "2.x.x",
     "q": "^1.1.1",
     "ramda": "0.13.0",
