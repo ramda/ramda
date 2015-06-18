@@ -65,4 +65,10 @@ describe('compose', function() {
     assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
   });
 
+  it('should return curried function with same arity as it last argument', function() {
+    var concatAndJoin = R.compose(R.join(','), R.concat);
+    assert.strictEqual(concatAndJoin([1], [2]), '1,2');
+    assert.strictEqual(concatAndJoin.length, 2);
+    assert.strictEqual(concatAndJoin([1])([2]), '1,2');
+  });
 });
