@@ -7,9 +7,17 @@ var isBench = /\.bench\.js$/;
 
 function getTable(name) {
   return new Table({
-    head: [name, 'Count', 'Hertz'],
-    colWidths: [24, 10, 24]
+    head: [name, 'Hertz', 'Margin of Error'],
+    colWidths: [24, 24, 24]
   });
+}
+
+function prettyHz(hz) {
+  return Benchmark.formatNumber(hz.toFixed(hz < 100 ? 2 : 0));
+}
+
+function prettyMoe(moe) {
+  return moe.toFixed(2) + '%';
 }
 
 fs.readdirSync('./lib/bench').forEach(function(file) {
@@ -23,7 +31,11 @@ fs.readdirSync('./lib/bench').forEach(function(file) {
     Object.keys(test.tests).forEach(function(k) {
       suite.add(k, test.tests[k], {
         onComplete: function(vo) {
-          table.push([vo.target.name, vo.target.count, vo.target.hz]);
+          table.push([
+            vo.target.name, 
+            prettyHz(vo.target.hz),
+            prettyMoe(vo.target.stats.rme)
+          ]);
         }
       });
     });

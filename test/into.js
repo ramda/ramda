@@ -1,5 +1,4 @@
 var assert = require('assert');
-var lodash = require('lodash');
 
 var R = require('..');
 
@@ -31,9 +30,9 @@ describe('into', function() {
   });
 
   it('dispatches to objects that implement `reduce`', function() {
-    var obj = {x: [1, 2, 3], reduce: function(f, acc) { return lodash.reduce(this.x, f, acc); }};
-    assert.deepEqual(R.into([], R.map(add(1)), obj), [2, 3, 4]);
-    assert.deepEqual(R.into([], R.filter(isOdd), obj), [1, 3]);
+    var obj = {x: [1, 2, 3], reduce: function() { return 'override'; }};
+    assert.deepEqual(R.into([], R.map(add(1)), obj), 'override');
+    assert.deepEqual(R.into([], R.filter(isOdd), obj), 'override');
   });
 
   it('is curried', function() {
