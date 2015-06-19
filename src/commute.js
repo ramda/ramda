@@ -6,26 +6,20 @@ var map = require('./map');
 /**
  * Turns a list of Functors into a Functor of a list.
  *
- * Note: `commute` may be more useful to convert a list of non-Array Functors (e.g.
- * Maybe, Either, etc.) to Functor of a list.
- *
  * @func
  * @memberOf R
  * @category List
  * @see R.commuteMap
- * @sig (x -> [x]) -> [[*]...]
+ * @sig Functor f => (x -> f x) -> [f a] -> f [a]
  * @param {Function} of A function that returns the data type to return
- * @param {Array} list An Array (or other Functor) of Arrays (or other Functors)
- * @return {Array}
+ * @param {Array} list An array of functors of the same type
+ * @return {*}
  * @example
  *
- *      var as = [[1], [3, 4]];
- *      R.commute(R.of, as); //=> [[1, 3], [1, 4]]
- *
- *      var bs = [[1, 2], [3]];
- *      R.commute(R.of, bs); //=> [[1, 3], [2, 3]]
- *
- *      var cs = [[1, 2], [3, 4]];
- *      R.commute(R.of, cs); //=> [[1, 3], [2, 3], [1, 4], [2, 4]]
+ *      R.commute(R.of, [[1], [2, 3]]);   //=> [[1, 2], [1, 3]]
+ *      R.commute(R.of, [[1, 2], [3]]);   //=> [[1, 3], [2, 3]]
+ *      R.commute(R.of, [[1], [2], [3]]); //=> [[1, 2, 3]]
+ *      R.commute(Maybe.of, [Just(1), Just(2), Just(3)]);   //=> Just([1, 2, 3])
+ *      R.commute(Maybe.of, [Just(1), Just(2), Nothing()]); //=> Nothing()
  */
 module.exports = commuteMap(map(identity));

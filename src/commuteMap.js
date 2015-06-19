@@ -9,29 +9,22 @@ var map = require('./map');
  * Turns a list of Functors into a Functor of a list, applying
  * a mapping function to the elements of the list along the way.
  *
- * Note: `commuteMap` may be more useful to convert a list of non-Array Functors (e.g.
- * Maybe, Either, etc.) to Functor of a list.
- *
  * @func
  * @memberOf R
  * @category List
  * @see R.commute
- * @sig (a -> (b -> c)) -> (x -> [x]) -> [[*]...]
+ * @sig Functor f => (f a -> f b) -> (x -> f x) -> [f a] -> f [b]
  * @param {Function} fn The transformation function
  * @param {Function} of A function that returns the data type to return
- * @param {Array} list An Array (or other Functor) of Arrays (or other Functors)
- * @return {Array}
+ * @param {Array} list An array of functors of the same type
+ * @return {*}
  * @example
  *
- *      var plus10map = R.map(function(x) { return x + 10; });
- *      var as = [[1], [3, 4]];
- *      R.commuteMap(R.map(function(x) { return x + 10; }), R.of, as); //=> [[11, 13], [11, 14]]
- *
- *      var bs = [[1, 2], [3]];
- *      R.commuteMap(plus10map, R.of, bs); //=> [[11, 13], [12, 13]]
- *
- *      var cs = [[1, 2], [3, 4]];
- *      R.commuteMap(plus10map, R.of, cs); //=> [[11, 13], [12, 13], [11, 14], [12, 14]]
+ *      R.commuteMap(R.map(R.add(10)), R.of, [[1], [2, 3]]);   //=> [[11, 12], [11, 13]]
+ *      R.commuteMap(R.map(R.add(10)), R.of, [[1, 2], [3]]);   //=> [[11, 13], [12, 13]]
+ *      R.commuteMap(R.map(R.add(10)), R.of, [[1], [2], [3]]); //=> [[11, 12, 13]]
+ *      R.commuteMap(R.map(R.add(10)), Maybe.of, [Just(1), Just(2), Just(3)]);   //=> Just([11, 12, 13])
+ *      R.commuteMap(R.map(R.add(10)), Maybe.of, [Just(1), Just(2), Nothing()]); //=> Nothing()
  */
 module.exports = _curry3(function commuteMap(fn, of, list) {
   function consF(acc, ftor) {
