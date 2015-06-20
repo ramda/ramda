@@ -1,51 +1,31 @@
 var _curry2 = require('./internal/_curry2');
+var map = require('./map');
 
 
 /**
- * Creates a lens. Supply a function to `get` values from inside an object, and a `set`
- * function to change values on an object. (n.b.: This can, and should, be done without
- * mutating the original object!) The lens is a function wrapped around the input `get`
- * function, with the `set` function attached as a property on the wrapper. A `map`
- * function is also attached to the returned function that takes a function to operate
- * on the specified (`get`) property, which is then `set` before returning. The attached
- * `set` and `map` functions are curried.
+ * Returns a lens for the given getter and setter functions. The getter "gets"
+ * the value of the focus; the setter "sets" the value of the focus. The setter
+ * should not mutate the data structure.
  *
  * @func
  * @memberOf R
  * @category Object
- * @sig (k -> v) -> (v -> a -> *) -> (a -> b)
- * @param {Function} get A function that gets a value by property name
- * @param {Function} set A function that sets a value by property name
- * @return {Function} the returned function has `set` and `map` properties that are
- *         also curried functions.
+ * @typedef Lens s a = Functor f => (a -> f a) -> s -> f s
+ * @sig (s -> a) -> ((a, s) -> s) -> Lens s a
+ * @param {Function} getter
+ * @param {Function} setter
+ * @return {Lens}
+ * @see R.view, R.set, R.over, R.lensIndex, R.lensProp
  * @example
  *
- *      var headLens = R.lens(
- *        function get(arr) { return arr[0]; },
- *        function set(val, arr) { return [val].concat(arr.slice(1)); }
- *      );
- *      headLens([10, 20, 30, 40]); //=> 10
- *      headLens.set('mu', [10, 20, 30, 40]); //=> ['mu', 20, 30, 40]
- *      headLens.map(function(x) { return x + 1; }, [10, 20, 30, 40]); //=> [11, 20, 30, 40]
+ *      var xLens = R.lens(R.prop('x'), R.assoc('x'));
  *
- *      var phraseLens = R.lens(
- *        function get(obj) { return obj.phrase; },
- *        function set(val, obj) {
- *          var out = R.clone(obj);
- *          out.phrase = val;
- *          return out;
- *        }
- *      );
- *      var obj1 = { phrase: 'Absolute filth . . . and I LOVED it!'};
- *      var obj2 = { phrase: "What's all this, then?"};
- *      phraseLens(obj1); // => 'Absolute filth . . . and I LOVED it!'
- *      phraseLens(obj2); // => "What's all this, then?"
- *      phraseLens.set('Ooh Betty', obj1); //=> { phrase: 'Ooh Betty'}
- *      phraseLens.map(R.toUpper, obj2); //=> { phrase: "WHAT'S ALL THIS, THEN?"}
+ *      R.view(xLens, {x: 1, y: 2});            //=> 1
+ *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}
+ *      R.over(xLens, R.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
  */
-module.exports = _curry2(function lens(get, set) {
-  var lns = function(a) { return get(a); };
-  lns.set = _curry2(set);
-  lns.map = _curry2(function(fn, a) { return set(fn(get(a)), a); });
-  return lns;
+module.exports = _curry2(function lens(getter, setter) {
+  return _curry2(function(f, s) {
+    return map(function(v) { return setter(v, s); }, f(getter(s)));
+  });
 });
