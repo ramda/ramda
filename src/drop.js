@@ -10,6 +10,9 @@ var slice = require('./slice');
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *
+ * Dispatches to its second argument's `slice` method if present. As a
+ * result, one may replace `[a]` with `String` in the type signature.
+ *
  * @func
  * @memberOf R
  * @category List
@@ -19,7 +22,11 @@ var slice = require('./slice');
  * @return {Array}
  * @example
  *
- *      R.drop(3, [1,2,3,4,5,6,7]); //=> [4,5,6,7]
+ *      R.drop(1, ['foo', 'bar', 'baz']); //=> ['bar', 'baz']
+ *      R.drop(2, ['foo', 'bar', 'baz']); //=> ['baz']
+ *      R.drop(3, ['foo', 'bar', 'baz']); //=> []
+ *      R.drop(4, ['foo', 'bar', 'baz']); //=> []
+ *      R.drop(3, 'ramda');               //=> 'da'
  */
 module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, xs) {
   return slice(Math.max(0, n), Infinity, xs);
