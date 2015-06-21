@@ -9,7 +9,7 @@ module.exports = (function() {
   }
   XDrop.prototype['@@transducer/init'] = _xfBase.init;
   XDrop.prototype['@@transducer/result'] = _xfBase.result;
-  XDrop.prototype.step = function(result, input) {
+  XDrop.prototype['@@transducer/step'] = function(result, input) {
     if (this.n > 0) {
       this.n -= 1;
       return result;
