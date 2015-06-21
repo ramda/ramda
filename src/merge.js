@@ -3,8 +3,8 @@ var _extend = require('./internal/_extend');
 
 
 /**
- * Create a new object with the own properties of a
- * merged with the own properties of object b.
+ * Create a new object with the own properties of `a`
+ * merged with the own properties of object `b`.
  * This function will *not* mutate passed-in objects.
  *
  * @func
