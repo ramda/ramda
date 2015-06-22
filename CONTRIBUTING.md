@@ -14,7 +14,7 @@
     commit message, wrapped at 72 characters. Do not commit changes to
     __dist/ramda.js__.
 
-5.  Run `make test lint`, (or `grunt test`) and address any errors. Preferably,
+5.  Run `npm test` (or `make test lint`) and address any errors. Preferably,
     fix commits in place using `git rebase` or `git commit --amend` to make the
     changes easier to review and to keep the history tidy.
 

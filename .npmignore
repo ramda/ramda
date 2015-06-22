@@ -3,7 +3,6 @@
 /lib/bench/
 /lib/doc/
 /lib/sauce/
-/lib/grunt/
 /scripts/
 **/test/
 /.editorconfig
@@ -13,7 +12,6 @@
 /.jscsrc
 /.jshintrc
 /CONTRIBUTING.md
-/Gruntfile.js
 /Makefile
 /bower.json
 /index.js
