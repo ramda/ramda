@@ -1,7 +1,5 @@
-var chain = require('./chain');
-var compose = require('./compose');
-var map = require('./map');
-
+var composeK = require('./composeK');
+var reverse = require('./reverse');
 
 /**
  * Returns the left-to-right Kleisli composition of the provided functions,
@@ -36,7 +34,5 @@ var map = require('./map');
  *      //=> Nothing()
  */
 module.exports = function pipeK() {
-  var fs = map(chain, arguments);
-  fs.reverse();
-  return compose.apply(this, fs);
+  return composeK.apply(this, reverse(arguments));
 };
