@@ -1,6 +1,6 @@
+var _arity = require('./internal/_arity');
 var _curry2 = require('./internal/_curry2');
 var _curryN = require('./internal/_curryN');
-var arity = require('./arity');
 
 
 /**
@@ -47,5 +47,5 @@ var arity = require('./arity');
  *      g(4); //=> 10
  */
 module.exports = _curry2(function curryN(length, fn) {
-  return arity(length, _curryN(length, [], fn));
+  return _arity(length, _curryN(length, [], fn));
 });
