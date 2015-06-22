@@ -4,6 +4,7 @@ var R = require('..');
 
 
 describe('drop', function() {
+
   it('skips the first `n` elements from a list, returning the remainder', function() {
     assert.deepEqual(R.drop(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g']);
   });
@@ -25,16 +26,10 @@ describe('drop', function() {
     assert.notStrictEqual(R.drop(-1, xs), xs);
   });
 
-  it('dispatches to `slice` method', function() {
-    var o = {slice: function(a, b) { return '[' + a + ':' + b + ']'; }};
-
-    assert.strictEqual(R.drop(3, 'Ramda'), 'da');
-    assert.strictEqual(R.drop(3, o), '[3:Infinity]');
-  });
-
   it('is curried', function() {
     var drop2 = R.drop(2);
     assert.deepEqual(drop2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
     assert.deepEqual(drop2(['x', 'y', 'z']), ['z']);
   });
+
 });

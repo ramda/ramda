@@ -4,6 +4,7 @@ var R = require('..');
 
 
 describe('take', function() {
+
   it('takes only the first `n` elements from a list', function() {
     assert.deepEqual(R.take(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
   });
@@ -26,16 +27,10 @@ describe('take', function() {
     assert.notStrictEqual(R.take(-1, xs), xs);
   });
 
-  it('dispatches to `slice` method', function() {
-    var o = {slice: function(a, b) { return '[' + a + ':' + b + ']'; }};
-
-    assert.strictEqual(R.take(3, 'Ramda'), 'Ram');
-    assert.strictEqual(R.take(3, o), '[0:3]');
-  });
-
   it('is curried', function() {
     var take3 = R.take(3);
     assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
     assert.deepEqual(take3(['w', 'x', 'y', 'z']), ['w', 'x', 'y']);
   });
+
 });

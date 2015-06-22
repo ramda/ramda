@@ -1,7 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
+var _slice = require('./internal/_slice');
 var _xdrop = require('./internal/_xdrop');
-var slice = require('./slice');
 
 
 /**
@@ -9,9 +9,6 @@ var slice = require('./slice');
  *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
- *
- * Dispatches to its second argument's `slice` method if present. As a
- * result, one may replace `[a]` with `String` in the type signature.
  *
  * @func
  * @memberOf R
@@ -29,5 +26,5 @@ var slice = require('./slice');
  *      R.drop(3, 'ramda');               //=> 'da'
  */
 module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, xs) {
-  return slice(Math.max(0, n), Infinity, xs);
+  return _slice(xs, Math.max(0, n));
 }));
