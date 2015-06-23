@@ -1,4 +1,5 @@
 var _isThenable = require('./_isThenable');
+var curryN = require('../curryN');
 
 
 /**
@@ -25,7 +26,7 @@ var _isThenable = require('./_isThenable');
  *        });
  */
 module.exports = function _composeP(f, g) {
-  return function() {
+  return curryN(g.length, function() {
     var context = this;
     var value = g.apply(this, arguments);
     if (_isThenable(value)) {
@@ -35,5 +36,5 @@ module.exports = function _composeP(f, g) {
     } else {
       return f.call(this, value);
     }
-  };
+  });
 };

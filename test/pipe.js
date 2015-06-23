@@ -49,4 +49,16 @@ describe('pipe', function() {
     assert.strictEqual(g.length, 3);
     assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
   });
+
+  it('returns a curried function', function() {
+    function f(a, b, c) { return [a, b, c].join('_'); }
+    function g(x) { return x + '_END'; }
+    var p = R.pipe(f, g);
+    assert.strictEqual(p.length, 3);
+    assert.strictEqual(typeof p('A'), 'function');
+    assert.strictEqual(typeof p('A')('B'), 'function');
+    assert.strictEqual(p('A')('B')('C'), p('A', 'B', 'C'));
+    assert.strictEqual(p('A')('B')('C'), 'A_B_C_END');
+
+  });
 });
