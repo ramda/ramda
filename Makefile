@@ -26,7 +26,8 @@ lint:
 
 
 .PHONY: release-major release-minor release-patch
-release-major release-minor release-patch:
+release-major release-minor release-patch: dist/ramda.min.js
+	git add --force dist
 	@$(XYZ) --increment $(@:release-%=%)
 
 
