@@ -15,7 +15,6 @@ var _isInteger = require('./internal/_isInteger');
  * @param {Number} m The dividend.
  * @param {Number} p the modulus.
  * @return {Number} The result of `b mod a`.
- * @see R.moduloBy
  * @example
  *
  *      R.mathMod(-17, 5);  //=> 3
