@@ -167,12 +167,10 @@ Then from the root of the project, you can just call
 Alternately, if you've installed the dependencies, via:
 
     npm install
-    npm install -g grunt-cli
 
-then you can run the tests (and get more detailed output) via our `grunt`
-task:
+then you can run the tests (and get detailed output) by running:
 
-    grunt test
+    npm test
 
 **Browser:**
 
