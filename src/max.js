@@ -1,19 +1,20 @@
-var _createMaxMin = require('./internal/_createMaxMin');
-var _gt = require('./internal/_gt');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Determines the largest of a list of numbers (or elements that can be cast to numbers)
+ * Returns the larger of its two arguments.
  *
  * @func
  * @memberOf R
- * @category Math
- * @sig [Number] -> Number
+ * @category Relation
+ * @sig Ord a => a -> a -> a
+ * @param {*} a
+ * @param {*} b
+ * @return {*}
  * @see R.maxBy
- * @param {Array} list A list of numbers
- * @return {Number} The greatest number in the list.
  * @example
  *
- *      R.max([7, 3, 9, 2, 4, 9, 3]); //=> 9
+ *      R.max(789, 123); //=> 789
+ *      R.max('a', 'b'); //=> 'b'
  */
-module.exports = _createMaxMin(_gt, -Infinity);
+module.exports = _curry2(function max(a, b) { return b > a ? b : a; });
