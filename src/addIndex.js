@@ -19,8 +19,8 @@ var curryN = require('./curryN');
  * @category Function
  * @category List
  * @sig ((a ... -> b) ... -> [a] -> *) -> (a ..., Int, [a] -> b) ... -> [a] -> *)
- * @param {Function} fn A list iteration function that does not pass index/list to its callback
- * @return An altered list iteration function thats passes index/list to its callback
+ * @param {Function} fn A list iteration function that does not pass index or list to its callback
+ * @return {Function} An altered list iteration function that passes (item, index, list) to its callback
  * @example
  *
  *      var mapIndexed = R.addIndex(R.map);
