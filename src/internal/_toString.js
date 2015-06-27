@@ -1,4 +1,4 @@
-var _indexOf = require('./_indexOf');
+var _contains = require('./_contains');
 var _map = require('./_map');
 var _quote = require('./_quote');
 var _toISOString = require('./_toISOString');
@@ -8,7 +8,7 @@ var keys = require('../keys');
 module.exports = function _toString(x, seen) {
   var recur = function recur(y) {
     var xs = seen.concat([x]);
-    return _indexOf(xs, y) >= 0 ? '<Circular>' : _toString(y, xs);
+    return _contains(y, xs) ? '<Circular>' : _toString(y, xs);
   };
 
   switch (Object.prototype.toString.call(x)) {
