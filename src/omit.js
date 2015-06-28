@@ -1,5 +1,5 @@
+var _contains = require('./internal/_contains');
 var _curry2 = require('./internal/_curry2');
-var _indexOf = require('./internal/_indexOf');
 
 
 /**
@@ -19,7 +19,7 @@ var _indexOf = require('./internal/_indexOf');
 module.exports = _curry2(function omit(names, obj) {
   var result = {};
   for (var prop in obj) {
-    if (_indexOf(names, prop) < 0) {
+    if (!_contains(prop, names)) {
       result[prop] = obj[prop];
     }
   }

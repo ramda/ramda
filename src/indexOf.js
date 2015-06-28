@@ -22,5 +22,5 @@ var _indexOf = require('./internal/_indexOf');
  *      R.indexOf(10, [1,2,3,4]); //=> -1
  */
 module.exports = _curry2(function indexOf(target, xs) {
-  return _hasMethod('indexOf', xs) ? xs.indexOf(target) : _indexOf(xs, target);
+  return _hasMethod('indexOf', xs) ? xs.indexOf(target) : _indexOf(xs, target, 0);
 });
