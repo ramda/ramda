@@ -1,6 +1,5 @@
 var commuteMap = require('./commuteMap');
 var identity = require('./identity');
-var map = require('./map');
 
 
 /**
@@ -22,4 +21,4 @@ var map = require('./map');
  *      R.commute(Maybe.of, [Just(1), Just(2), Just(3)]);   //=> Just([1, 2, 3])
  *      R.commute(Maybe.of, [Just(1), Just(2), Nothing()]); //=> Nothing()
  */
-module.exports = commuteMap(map(identity));
+module.exports = commuteMap(identity);
