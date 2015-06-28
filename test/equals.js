@@ -1,3 +1,4 @@
+/* global Map, Set, WeakMap, WeakSet */
 /* jshint typed: true */
 
 var assert = require('assert');
@@ -142,15 +143,46 @@ describe('equals', function() {
     assert.strictEqual(R.equals(nestA, nestC), false);
   });
 
-  var date1 = new Date(0);
-  var date2 = new Date(0);
-  var date3 = new Date(1);
-  var date4 = new Date(0);
-  date4.v = 'value';
   it('handles dates', function() {
-    assert.strictEqual(R.equals(date1, date2), true);
-    assert.strictEqual(R.equals(date2, date3), false);
-    assert.strictEqual(R.equals(date1, date4), false);
+    assert.strictEqual(R.equals(new Date(0), new Date(0)), true);
+    assert.strictEqual(R.equals(new Date(1), new Date(1)), true);
+    assert.strictEqual(R.equals(new Date(0), new Date(1)), false);
+    assert.strictEqual(R.equals(new Date(1), new Date(0)), false);
+  });
+
+  it('requires that both objects have the same enumerable properties with the same values', function() {
+    /* jshint -W053 */
+    var a1 = [];
+    var a2 = [];
+    a2.x = 0;
+
+    var b1 = new Boolean(false);
+    var b2 = new Boolean(false);
+    b2.x = 0;
+
+    var d1 = new Date(0);
+    var d2 = new Date(0);
+    d2.x = 0;
+
+    var n1 = new Number(0);
+    var n2 = new Number(0);
+    n2.x = 0;
+
+    var r1 = /(?:)/;
+    var r2 = /(?:)/;
+    r2.x = 0;
+
+    var s1 = new String('');
+    var s2 = new String('');
+    s2.x = 0;
+    /* jshint +W053 */
+
+    assert.strictEqual(R.equals(a1, a2), false);
+    assert.strictEqual(R.equals(b1, b2), false);
+    assert.strictEqual(R.equals(d1, d2), false);
+    assert.strictEqual(R.equals(n1, n2), false);
+    assert.strictEqual(R.equals(r1, r2), false);
+    assert.strictEqual(R.equals(s1, s2), false);
   });
 
   if (typeof ArrayBuffer !== 'undefined' && typeof Int8Array !== 'undefined') {
@@ -165,6 +197,48 @@ describe('equals', function() {
       assert.strictEqual(R.equals(typArr1, typArr2), true);
       assert.strictEqual(R.equals(typArr1, typArr3), false);
       assert.strictEqual(R.equals(typArr1, intTypArr), false);
+    });
+  }
+
+  if (typeof Map !== 'undefined') {
+    it('compares Map objects by value', function() {
+      assert.strictEqual(R.equals(new Map([]), new Map([])), true);
+      assert.strictEqual(R.equals(new Map([]), new Map([[1, 'a']])), false);
+      assert.strictEqual(R.equals(new Map([[1, 'a']]), new Map([])), false);
+      assert.strictEqual(R.equals(new Map([[1, 'a']]), new Map([[1, 'a']])), true);
+      assert.strictEqual(R.equals(new Map([[1, 'a']]), new Map([[1, 'b']])), false);
+      assert.strictEqual(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'c']])]])), true);
+      assert.strictEqual(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'd']])]])), false);
+      assert.strictEqual(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [4, 5, 6]]])), true);
+      assert.strictEqual(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [7, 8, 9]]])), false);
+    });
+  }
+
+  if (typeof Set !== 'undefined') {
+    it('compares Set objects by value', function() {
+      assert.strictEqual(R.equals(new Set([]), new Set([])), true);
+      assert.strictEqual(R.equals(new Set([]), new Set([1])), false);
+      assert.strictEqual(R.equals(new Set([1]), new Set([])), false);
+      assert.strictEqual(R.equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([3])])])), true);
+      assert.strictEqual(R.equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([4])])])), false);
+      assert.strictEqual(R.equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [4, 5, 6]])), true);
+      assert.strictEqual(R.equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [7, 8, 9]])), false);
+    });
+  }
+
+  if (typeof WeakMap !== 'undefined') {
+    it('compares WeakMap objects by identity', function() {
+      var m = new WeakMap([]);
+      assert.strictEqual(R.equals(m, m), true);
+      assert.strictEqual(R.equals(m, new WeakMap([])), false);
+    });
+  }
+
+  if (typeof WeakSet !== 'undefined') {
+    it('compares WeakSet objects by identity', function() {
+      var s = new WeakSet([]);
+      assert.strictEqual(R.equals(s, s), true);
+      assert.strictEqual(R.equals(s, new WeakSet([])), false);
     });
   }
 
