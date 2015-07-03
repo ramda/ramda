@@ -8,12 +8,12 @@ describe('match', function() {
 
   it('determines whether a string matches a regex', function() {
     assert.strictEqual(R.match(re, 'B17-afn').length, 1);
-    assert.strictEqual(R.match(re, 'B1-afn'), null);
+    assert.deepEqual(R.match(re, 'B1-afn'), []);
   });
 
   it('is curried', function() {
     var format = R.match(re);
     assert.strictEqual(format('B17-afn').length, 1);
-    assert.strictEqual(format('B1-afn'), null);
+    assert.deepEqual(format('B1-afn'), []);
   });
 });
