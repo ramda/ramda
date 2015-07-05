@@ -1,10 +1,15 @@
 var _curry1 = require('./internal/_curry1');
+var _isArguments = require('./internal/_isArguments');
+var _isArray = require('./internal/_isArray');
+var _isObject = require('./internal/_isObject');
+var _isString = require('./internal/_isString');
 
 
 /**
  * Returns the empty value of its argument's type. Ramda defines the empty
- * value of Array (`[]`), Object (`{}`), and String (`''`). Other types are
- * supported if they define `<Type>.empty` and/or `<Type>.prototype.empty`.
+ * value of Array (`[]`), Object (`{}`), String (`''`), and Arguments.
+ * Other types are supported if they define `<Type>.empty` and/or
+ * `<Type>.prototype.empty`.
  *
  * @func
  * @memberOf R
@@ -20,15 +25,20 @@ var _curry1 = require('./internal/_curry1');
  *      R.empty({x: 1, y: 2});  //=> {}
  */
 module.exports = _curry1(function empty(x) {
-  if (x != null && typeof x.empty === 'function') {
-    return x.empty();
-  } else if (x != null && typeof x.constructor != null && typeof x.constructor.empty === 'function') {
-    return x.constructor.empty();
-  } else {
-    switch (Object.prototype.toString.call(x)) {
-      case '[object Array]':  return [];
-      case '[object Object]': return {};
-      case '[object String]': return '';
-    }
-  }
+  return (
+    (x != null && typeof x.empty === 'function') ?
+      x.empty() :
+    (x != null && x.constructor != null && typeof x.constructor.empty === 'function') ?
+      x.constructor.empty() :
+    _isArray(x) ?
+      [] :
+    _isString(x) ?
+      '' :
+    _isObject(x) ?
+      {} :
+    _isArguments(x) ?
+      (function() { return arguments; }()) :
+    // else
+      void 0
+  );
 });
