@@ -1,24 +1,23 @@
-var _createMaxMinBy = require('./internal/_createMaxMinBy');
-var _curry2 = require('./internal/_curry2');
-var _gt = require('./internal/_gt');
+var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Determines the largest of a list of items as determined by pairwise comparisons from the supplied comparator.
- * Note that this will return undefined if supplied an empty list.
+ * Takes a function and two values, and returns whichever value produces
+ * the larger result when passed to the provided function.
  *
  * @func
  * @memberOf R
- * @category Math
- * @sig (a -> Number) -> [a] -> a
- * @param {Function} keyFn A comparator function for elements in the list
- * @param {Array} list A list of comparable elements
- * @return {*} The greatest element in the list. `undefined` if the list is empty.
+ * @category Relation
+ * @sig Ord b => (a -> b) -> a -> a -> a
+ * @param {Function} f
+ * @param {*} a
+ * @param {*} b
+ * @return {*}
  * @see R.max
  * @example
  *
- *      function cmp(obj) { return obj.x; }
- *      var a = {x: 1}, b = {x: 2}, c = {x: 3};
- *      R.maxBy(cmp, [a, b, c]); //=> {x: 3}
+ *      R.maxBy(function(n) { return n * n; }, -3, 2); //=> -3
  */
-module.exports = _curry2(_createMaxMinBy(_gt));
+module.exports = _curry3(function maxBy(f, a, b) {
+  return f(b) > f(a) ? b : a;
+});

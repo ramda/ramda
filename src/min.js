@@ -1,19 +1,20 @@
-var _createMaxMin = require('./internal/_createMaxMin');
-var _lt = require('./internal/_lt');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Determines the smallest of a list of numbers (or elements that can be cast to numbers)
+ * Returns the smaller of its two arguments.
  *
  * @func
  * @memberOf R
- * @category Math
- * @sig [Number] -> Number
- * @param {Array} list A list of numbers
- * @return {Number} The greatest number in the list.
+ * @category Relation
+ * @sig Ord a => a -> a -> a
+ * @param {*} a
+ * @param {*} b
+ * @return {*}
  * @see R.minBy
  * @example
  *
- *      R.min([7, 3, 9, 2, 4, 9, 3]); //=> 2
+ *      R.min(789, 123); //=> 123
+ *      R.min('a', 'b'); //=> 'a'
  */
-module.exports = _createMaxMin(_lt, Infinity);
+module.exports = _curry2(function min(a, b) { return b < a ? b : a; });

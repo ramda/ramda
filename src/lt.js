@@ -1,23 +1,23 @@
 var _curry2 = require('./internal/_curry2');
-var _lt = require('./internal/_lt');
 
 
 /**
- * Returns true if the first parameter is less than the second.
+ * Returns `true` if the first argument is less than the second;
+ * `false` otherwise.
  *
  * @func
  * @memberOf R
- * @category Math
- * @sig Number -> Number -> Boolean
- * @param {Number} a
- * @param {Number} b
- * @return {Boolean} a < b
+ * @category Relation
+ * @sig Ord a => a -> a -> Boolean
+ * @param {*} a
+ * @param {*} b
+ * @return {Boolean}
  * @example
  *
- *      R.lt(2, 6); //=> true
- *      R.lt(2, 0); //=> false
+ *      R.lt(2, 1); //=> false
  *      R.lt(2, 2); //=> false
- *      R.lt(5)(10); //=> true
- *      R.lt(R.__, 5)(10); //=> false // right-sectioned currying
+ *      R.lt(2, 3); //=> true
+ *      R.lt('a', 'z'); //=> true
+ *      R.lt('z', 'a'); //=> false
  */
-module.exports = _curry2(_lt);
+module.exports = _curry2(function lt(a, b) { return a < b; });
