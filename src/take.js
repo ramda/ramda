@@ -11,13 +11,11 @@ var slice = require('./slice');
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *
- * Dispatches to its second argument's `slice` method if present. As a
- * result, one may replace `[a]` with `String` in the type signature.
- *
  * @func
  * @memberOf R
  * @category List
  * @sig Number -> [a] -> [a]
+ * @sig Number -> String -> String
  * @param {Number} n The number of elements to return.
  * @param {Array} xs The collection to consider.
  * @return {Array}

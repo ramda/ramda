@@ -12,8 +12,26 @@ describe('slice', function() {
     var args = (function() { return arguments; }(1, 2, 3, 4, 5));
     assert.deepEqual(R.slice(1, 4, args), [2, 3, 4]);
   });
-  it('dispatches to `slice` method', function() {
-    var obj = {slice: function() { return 42; }};
-    assert.strictEqual(R.slice(1, 4, obj), 42);
+  it('can operate on strings', function() {
+    assert.strictEqual(R.slice(0, 0, 'abc'), '');
+    assert.strictEqual(R.slice(0, 1, 'abc'), 'a');
+    assert.strictEqual(R.slice(0, 2, 'abc'), 'ab');
+    assert.strictEqual(R.slice(0, 3, 'abc'), 'abc');
+    assert.strictEqual(R.slice(0, 4, 'abc'), 'abc');
+    assert.strictEqual(R.slice(1, 0, 'abc'), '');
+    assert.strictEqual(R.slice(1, 1, 'abc'), '');
+    assert.strictEqual(R.slice(1, 2, 'abc'), 'b');
+    assert.strictEqual(R.slice(1, 3, 'abc'), 'bc');
+    assert.strictEqual(R.slice(1, 4, 'abc'), 'bc');
+    assert.strictEqual(R.slice(0, -4, 'abc'), '');
+    assert.strictEqual(R.slice(0, -3, 'abc'), '');
+    assert.strictEqual(R.slice(0, -2, 'abc'), 'a');
+    assert.strictEqual(R.slice(0, -1, 'abc'), 'ab');
+    assert.strictEqual(R.slice(0, -0, 'abc'), '');
+    assert.strictEqual(R.slice(-2, -4, 'abc'), '');
+    assert.strictEqual(R.slice(-2, -3, 'abc'), '');
+    assert.strictEqual(R.slice(-2, -2, 'abc'), '');
+    assert.strictEqual(R.slice(-2, -1, 'abc'), 'b');
+    assert.strictEqual(R.slice(-2, -0, 'abc'), '');
   });
 });

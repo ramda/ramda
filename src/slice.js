@@ -6,13 +6,11 @@ var _curry3 = require('./internal/_curry3');
  * Returns a list containing the elements of `xs` from `fromIndex` (inclusive)
  * to `toIndex` (exclusive).
  *
- * Dispatches to its third argument's `slice` method if present. As a
- * result, one may replace `[a]` with `String` in the type signature.
- *
  * @func
  * @memberOf R
  * @category List
  * @sig Number -> Number -> [a] -> [a]
+ * @sig Number -> Number -> String -> String
  * @param {Number} fromIndex The start index (inclusive).
  * @param {Number} toIndex The end index (exclusive).
  * @param {Array} xs The list to take elements from.

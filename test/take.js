@@ -26,11 +26,8 @@ describe('take', function() {
     assert.notStrictEqual(R.take(-1, xs), xs);
   });
 
-  it('dispatches to `slice` method', function() {
-    var o = {slice: function(a, b) { return '[' + a + ':' + b + ']'; }};
-
+  it('can operate on strings', function() {
     assert.strictEqual(R.take(3, 'Ramda'), 'Ram');
-    assert.strictEqual(R.take(3, o), '[0:3]');
   });
 
   it('is curried', function() {

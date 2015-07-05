@@ -25,11 +25,8 @@ describe('drop', function() {
     assert.notStrictEqual(R.drop(-1, xs), xs);
   });
 
-  it('dispatches to `slice` method', function() {
-    var o = {slice: function(a, b) { return '[' + a + ':' + b + ']'; }};
-
+  it('can operate on strings', function() {
     assert.strictEqual(R.drop(3, 'Ramda'), 'da');
-    assert.strictEqual(R.drop(3, o), '[3:Infinity]');
   });
 
   it('is curried', function() {
