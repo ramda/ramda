@@ -3,6 +3,8 @@ var _map = require('./_map');
 var _quote = require('./_quote');
 var _toISOString = require('./_toISOString');
 var keys = require('../keys');
+var reject = require('../reject');
+var test = require('../test');
 
 
 module.exports = function _toString(x, seen) {
@@ -11,11 +13,16 @@ module.exports = function _toString(x, seen) {
     return _contains(y, xs) ? '<Circular>' : _toString(y, xs);
   };
 
+  //  mapPairs :: (Object, [String]) -> [String]
+  var mapPairs = function(obj, keys) {
+    return _map(function(k) { return _quote(k) + ': ' + recur(obj[k]); }, keys.slice().sort());
+  };
+
   switch (Object.prototype.toString.call(x)) {
     case '[object Arguments]':
       return '(function() { return arguments; }(' + _map(recur, x).join(', ') + '))';
     case '[object Array]':
-      return '[' + _map(recur, x).join(', ') + ']';
+      return '[' + _map(recur, x).concat(mapPairs(x, reject(test(/^\d+$/), keys(x)))).join(', ') + ']';
     case '[object Boolean]':
       return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
     case '[object Date]':
@@ -32,6 +39,6 @@ module.exports = function _toString(x, seen) {
       return (typeof x.constructor === 'function' && x.constructor.name !== 'Object' &&
               typeof x.toString === 'function' && x.toString() !== '[object Object]') ?
              x.toString() :  // Function, RegExp, user-defined types
-             '{' + _map(function(k) { return _quote(k) + ': ' + recur(x[k]); }, keys(x).sort()).join(', ') + '}';
+             '{' + mapPairs(x, keys(x)).join(', ') + '}';
   }
 };

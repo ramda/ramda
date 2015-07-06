@@ -78,6 +78,16 @@ describe('toString', function() {
     assert.strictEqual(R.toString(['x', 'y']), '["x", "y"]');
   });
 
+  it('returns the string representation of an array with non-numeric property names', function() {
+    var xs = [1, 2, 3];
+    xs.foo = 0;
+    xs.bar = 0;
+    xs.baz = 0;
+
+    assert.strictEqual(R.toString(/x/.exec('xyz')), '["x", "index": 0, "input": "xyz"]');
+    assert.strictEqual(R.toString(xs), '[1, 2, 3, "bar": 0, "baz": 0, "foo": 0]');
+  });
+
   it('returns the string representation of an arguments object', function() {
     assert.strictEqual(R.toString((function() { return arguments; }())), '(function() { return arguments; }())');
     assert.strictEqual(R.toString((function() { return arguments; }(1, 2, 3))), '(function() { return arguments; }(1, 2, 3))');
