@@ -4,6 +4,7 @@ var R = require('..');
 
 
 describe('take', function() {
+
   it('takes only the first `n` elements from a list', function() {
     assert.deepEqual(R.take(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
   });
@@ -30,9 +31,14 @@ describe('take', function() {
     assert.strictEqual(R.take(3, 'Ramda'), 'Ram');
   });
 
+  it('handles zero correctly (#1224)', function() {
+    assert.deepEqual(R.into([], R.take(0), [1, 2, 3]), []);
+  });
+
   it('is curried', function() {
     var take3 = R.take(3);
     assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
     assert.deepEqual(take3(['w', 'x', 'y', 'z']), ['w', 'x', 'y']);
   });
+
 });
