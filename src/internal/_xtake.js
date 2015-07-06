@@ -11,9 +11,12 @@ module.exports = (function() {
   XTake.prototype['@@transducer/init'] = _xfBase.init;
   XTake.prototype['@@transducer/result'] = _xfBase.result;
   XTake.prototype['@@transducer/step'] = function(result, input) {
-    this.n -= 1;
-    return this.n === 0 ? _reduced(this.xf['@@transducer/step'](result, input))
-                        : this.xf['@@transducer/step'](result, input);
+    if (this.n === 0) {
+      return _reduced(result);
+    } else {
+      this.n -= 1;
+      return this.xf['@@transducer/step'](result, input);
+    }
   };
 
   return _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
