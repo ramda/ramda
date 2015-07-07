@@ -42,5 +42,7 @@ describe('concat', function() {
   });
   it('throws if not an array, String, or object with a concat method', function() {
     assert.throws(function() { return R.concat({}, {}); }, TypeError);
+    assert.throws(function() { return R.concat([1, 2], null); }, TypeError);
+    assert.throws(function() { return R.concat(null, [1, 2]); }, TypeError);
   });
 });
