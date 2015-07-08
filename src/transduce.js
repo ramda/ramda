@@ -24,12 +24,11 @@ var curryN = require('./curryN');
  * The init function can be used to provide an initial accumulator, but is ignored by transduce.
  *
  * The iteration is performed with R.reduce after initializing the transducer.
- * @see R.reduce
- * @see R.reduced
  *
  * @func
  * @memberOf R
  * @category List
+ * @see R.reduce, R.reduced, R.into
  * @sig (c -> c) -> (a,b -> a) -> a -> [b] -> a
  * @param {Function} xf The transducer function. Receives a transformer and returns a transformer.
  * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -37,7 +36,6 @@ var curryN = require('./curryN');
  *        initialize the transducer
  * @param {*} acc The initial accumulator value.
  * @param {Array} list The list to iterate over.
- * @see R.into
  * @return {*} The final, accumulated value.
  * @example
  *

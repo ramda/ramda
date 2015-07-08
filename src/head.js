@@ -8,6 +8,7 @@ var nth = require('./nth');
  * @func
  * @memberOf R
  * @category List
+ * @see R.tail, R.init, R.last
  * @sig [a] -> a | Undefined
  * @param {Array} list The array to consider.
  * @return {*} The first element of the list, or `undefined` if the list is empty.

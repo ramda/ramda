@@ -9,6 +9,7 @@ var _slice = require('./internal/_slice');
  * @func
  * @memberOf R
  * @category List
+ * @see R.head, R.init, R.last
  * @sig [a] -> [a]
  * @param {Array} list The array to consider.
  * @return {Array} A new array containing all but the first element of the input list, or an

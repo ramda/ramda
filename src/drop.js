@@ -8,11 +8,11 @@ var slice = require('./slice');
  * Returns a list containing all but the first `n` elements of the given `list`.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
  * @category List
+ * @see R.transduce
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
  * @param {Number} n The number of elements of `xs` to skip.
