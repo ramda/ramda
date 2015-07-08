@@ -1,4 +1,4 @@
-var _arity = require('./_arity');
+var curryN = require('./curryN');
 
 
 /*
@@ -14,6 +14,6 @@ module.exports = function _createComposer(composeFunction) {
       fn = composeFunction(arguments[idx], fn);
       idx -= 1;
     }
-    return _arity(length, fn);
+    return curryN(length, fn);
   };
 };

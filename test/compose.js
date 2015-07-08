@@ -65,4 +65,14 @@ describe('compose', function() {
     assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
   });
 
+  it('returns a curried function', function() {
+    function f(a) { return a + '_END'; }
+    function g(b, c, d) { return [b, c, d].join('_'); }
+    var c = R.compose(f, g);
+    assert.strictEqual(c.length, 3);
+    assert.strictEqual(typeof c('A'), 'function');
+    assert.strictEqual(typeof c('A')('B'), 'function');
+    assert.strictEqual(c('A')('B')('C'), c('A', 'B', 'C'));
+    assert.strictEqual(c('A')('B')('C'), 'A_B_C_END');
+  });
 });
