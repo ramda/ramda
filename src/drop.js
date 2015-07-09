@@ -5,9 +5,8 @@ var slice = require('./slice');
 
 
 /**
- * Returns a list containing all but the first `n` elements of the given `list`.
- *
- * Acts as a transducer if a transformer is given in list position.
+ * Returns all but the first `n` elements of the given list, string, or
+ * transducer/transformer (or object with a `drop` method).
  *
  * @func
  * @memberOf R
@@ -15,9 +14,9 @@ var slice = require('./slice');
  * @see R.transduce
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
- * @param {Number} n The number of elements of `xs` to skip.
- * @param {Array} xs The collection to consider.
- * @return {Array}
+ * @param {Number} n
+ * @param {*} list
+ * @return {*}
  * @example
  *
  *      R.drop(1, ['foo', 'bar', 'baz']); //=> ['bar', 'baz']

@@ -29,16 +29,13 @@ describe('take', function() {
 
   it('can operate on strings', function() {
     assert.strictEqual(R.take(3, 'Ramda'), 'Ram');
+    assert.strictEqual(R.take(2, 'Ramda'), 'Ra');
+    assert.strictEqual(R.take(1, 'Ramda'), 'R');
+    assert.strictEqual(R.take(0, 'Ramda'), '');
   });
 
   it('handles zero correctly (#1224)', function() {
     assert.deepEqual(R.into([], R.take(0), [1, 2, 3]), []);
-  });
-
-  it('is curried', function() {
-    var take3 = R.take(3);
-    assert.deepEqual(take3(['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
-    assert.deepEqual(take3(['w', 'x', 'y', 'z']), ['w', 'x', 'y']);
   });
 
 });

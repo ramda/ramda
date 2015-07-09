@@ -4,18 +4,27 @@ var R = require('..');
 
 
 describe('init', function() {
-  it('returns an empty list for an empty list', function() {
+
+  it('returns all but the last element of an ordered collection', function() {
+    assert.deepEqual(R.init([1, 2, 3]), [1, 2]);
+    assert.deepEqual(R.init([2, 3]), [2]);
+    assert.deepEqual(R.init([3]), []);
     assert.deepEqual(R.init([]), []);
+
+    assert.strictEqual(R.init('abc'), 'ab');
+    assert.strictEqual(R.init('bc'), 'b');
+    assert.strictEqual(R.init('c'), '');
+    assert.strictEqual(R.init(''), '');
   });
-  it('returns a new list containing all the elements except the last element of a list', function() {
-    assert.deepEqual(R.init(['a', 'b', 'c', 'd']), ['a', 'b', 'c']);
-  });
+
   it('throws if applied to null or undefined', function() {
     assert.throws(function() { R.init(null); }, TypeError);
     assert.throws(function() { R.init(undefined); }, TypeError);
   });
+
   it('handles array-like object', function() {
     var args = (function() { return arguments; }(1, 2, 3, 4, 5));
     assert.deepEqual(R.init(args), [1, 2, 3, 4]);
   });
+
 });
