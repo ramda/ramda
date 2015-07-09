@@ -7,6 +7,7 @@ var slice = require('./slice');
  * @func
  * @memberOf R
  * @category List
+ * @see R.last, R.head, R.tail
  * @sig [a] -> [a]
  * @param {Array} list The array to consider.
  * @return {Array} A new array containing all but the last element of the input list, or an

@@ -10,12 +10,11 @@ var _reduced = require('./internal/_reduced');
  * Note: this optimization is unavailable to functions not explicitly listed
  * above.  For instance, it is not currently supported by reduceIndexed,
  * reduceRight, or reduceRightIndexed.
- * @see R.reduce
- * @see R.transduce
  *
  * @func
  * @memberOf R
  * @category List
+ * @see R.reduce, R.transduce
  * @sig a -> *
  * @param {*} x The final value of the reduce.
  * @return {*} The wrapped value.
