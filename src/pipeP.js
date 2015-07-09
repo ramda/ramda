@@ -1,40 +1,29 @@
-var composeP = require('./composeP');
-var reverse = require('./reverse');
+var _pipeP = require('./internal/_pipeP');
+var curryN = require('./curryN');
+var reduce = require('./reduce');
+var tail = require('./tail');
 
 
 /**
- * Creates a new function that runs each of the functions supplied as parameters in turn,
- * passing to the next function invocation either the value returned by the previous
- * function or the resolved value if the returned value is a promise. In other words,
- * if some of the functions in the sequence return promises, `pipeP` pipes the values
- * asynchronously. If none of the functions return promises, the behavior is the same as
- * that of `pipe`.
- *
- * `pipeP` is the mirror version of `composeP`. `pipeP` is left-associative, which means that
- * each of the functions provided is executed in order from left to right.
+ * Performs left-to-right composition of one or more Promise-returning
+ * functions. The leftmost function may have any arity; the remaining
+ * functions must be unary.
  *
  * @func
  * @memberOf R
  * @category Function
- * @sig ((a... -> b), (b -> c), ..., (x -> y), (y -> z)) -> (a... -> z)
- * @param {...Function} functions A variable number of functions.
- * @return {Function} A new function which represents the result of calling each of the
- *         input `functions`, passing either the returned result or the asynchronously
- *         resolved value) of each function call to the next, from left to right.
+ * @sig ((a -> Promise b), (b -> Promise c), ..., (y -> Promise z)) -> (a -> Promise z)
+ * @param {...Function} functions
+ * @return {Function}
  * @example
  *
- *      var Q = require('q');
- *      var triple = function(x) { return x * 3; };
- *      var double = function(x) { return x * 2; };
- *      var squareAsync = function(x) { return Q.when(x * x); };
- *      var squareAsyncThenDoubleThenTriple = R.pipeP(squareAsync, double, triple);
- *
- *      //≅ squareAsync(5).then(function(x) { return triple(double(x)) };
- *      squareAsyncThenDoubleThenTriple(5)
- *        .then(function(result) {
- *          // result is 150
- *        });
+ *      //  followersForUser :: String -> Promise [User]
+ *      var followersForUser = R.pipeP(db.getUserById, db.getFollowers);
  */
 module.exports = function pipeP() {
-  return composeP.apply(this, reverse(arguments));
+  if (arguments.length === 0) {
+    throw new Error('pipeP requires at least one argument');
+  }
+  return curryN(arguments[0].length,
+                reduce(_pipeP, arguments[0], tail(arguments)));
 };

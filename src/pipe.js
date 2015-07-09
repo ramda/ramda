@@ -1,34 +1,31 @@
-var compose = require('./compose');
-var reverse = require('./reverse');
+var _pipe = require('./internal/_pipe');
+var curryN = require('./curryN');
+var reduce = require('./reduce');
+var tail = require('./tail');
 
 
 /**
- * Creates a new function that runs each of the functions supplied as parameters in turn,
- * passing the return value of each function invocation to the next function invocation,
- * beginning with whatever arguments were passed to the initial invocation.
- *
- * `pipe` is the mirror version of `compose`. `pipe` is left-associative, which means that
- * each of the functions provided is executed in order from left to right.
+ * Performs left-to-right function composition. The leftmost function may have
+ * any arity; the remaining functions must be unary.
  *
  * In some libraries this function is named `sequence`.
+ *
  * @func
  * @memberOf R
  * @category Function
- * @sig ((a... -> b), (b -> c), ..., (x -> y), (y -> z)) -> (a... -> z)
- * @param {...Function} functions A variable number of functions.
- * @return {Function} A new function which represents the result of calling each of the
- *         input `functions`, passing the result of each function call to the next, from
- *         left to right.
+ * @sig (((a, b, ..., n) -> o), (o -> p), ..., (x -> y), (y -> z)) -> (a -> b -> ... -> n -> z)
+ * @param {...Function} functions
+ * @return {Function}
  * @example
  *
- *      var triple = function(x) { return x * 3; };
- *      var double = function(x) { return x * 2; };
- *      var square = function(x) { return x * x; };
- *      var squareThenDoubleThenTriple = R.pipe(square, double, triple);
+ *      var f = R.pipe(Math.pow, R.negate, R.inc);
  *
- *      //≅ triple(double(square(5)))
- *      squareThenDoubleThenTriple(5); //=> 150
+ *      f(3, 4); // -(3^4) + 1
  */
 module.exports = function pipe() {
-  return compose.apply(this, reverse(arguments));
+  if (arguments.length === 0) {
+    throw new Error('pipe requires at least one argument');
+  }
+  return curryN(arguments[0].length,
+                reduce(_pipe, arguments[0], tail(arguments)));
 };

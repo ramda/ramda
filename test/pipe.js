@@ -4,20 +4,34 @@ var R = require('..');
 
 
 describe('pipe', function() {
-  function a(x) {return x + 'A';}
-  function b(x) {return x + 'B';}
-  function c(x) {return x + 'C';}
-  function d(x) {return x + 'D';}
 
-  it('executes its passed in functions in order from left to right', function() {
-    assert.strictEqual(R.pipe(a, b, c, d)(''), 'ABCD');
+  it('is a variadic function', function() {
+    assert.strictEqual(typeof R.pipe, 'function');
+    assert.strictEqual(R.pipe.length, 0);
   });
 
-  it('first function is passed multiple args', function() {
-    function e(a, b, c) {
-      return c + 'E';
-    }
-    assert.strictEqual(R.pipe(e, a, b, c)(1, 2, 3), '3EABC');
+  it('performs left-to-right function composition', function() {
+    var f = function(a) { return [a]; };
+    var g = function(a, b) { return [a, b]; };
+    var h = function(a, b, c) { return [a, b, c]; };
+
+    assert.strictEqual(R.pipe(f, f, f).length, 1);
+    assert.strictEqual(R.pipe(g, f, f).length, 2);
+    assert.strictEqual(R.pipe(h, f, f).length, 3);
+
+    assert.deepEqual(R.pipe(f, f, f)(1), [[[1]]]);
+    assert.deepEqual(R.pipe(g, f, f)(1, 2), [[[1, 2]]]);
+    assert.deepEqual(R.pipe(g, f, f)(1)(2), [[[1, 2]]]);
+    assert.deepEqual(R.pipe(h, f, f)(1, 2, 3), [[[1, 2, 3]]]);
+    assert.deepEqual(R.pipe(h, f, f)(1, 2)(3), [[[1, 2, 3]]]);
+    assert.deepEqual(R.pipe(h, f, f)(1)(2, 3), [[[1, 2, 3]]]);
+    assert.deepEqual(R.pipe(h, f, f)(1)(2)(3), [[[1, 2, 3]]]);
+
+    var $g = R.curry(g);
+
+    assert.strictEqual(R.pipe($g, $g).length, 2);
+    assert.deepEqual(R.pipe($g, $g)(1, 2)(3), [[1, 2], 3]);
+    assert.deepEqual(R.pipe($g, $g)(1)(2)(3), [[1, 2], 3]);
   });
 
   it('passes context to functions', function() {
@@ -40,7 +54,13 @@ describe('pipe', function() {
   });
 
   it('throws if given no arguments', function() {
-    assert.throws(function() { R.pipe(); });
+    assert.throws(
+      function() { R.pipe(); },
+      function(err) {
+        return err.constructor === Error &&
+               err.message === 'pipe requires at least one argument';
+      }
+    );
   });
 
   it('can be applied to one argument', function() {
@@ -49,4 +69,5 @@ describe('pipe', function() {
     assert.strictEqual(g.length, 3);
     assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
   });
+
 });
