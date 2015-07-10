@@ -18,9 +18,9 @@ var _curry2 = require('./internal/_curry2');
  * @deprecated since v0.16.0
  * @example
  *
- *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
+ *      R.repeatWith(R.identity, 5); //=> [0, 1, 2, 3, 4]
  */
-module.exports = _curry2(function times(fn, n) {
+module.exports = _curry2(function repeatWith(fn, n) {
   var len = Number(n);
   var list = new Array(len);
   var idx = 0;

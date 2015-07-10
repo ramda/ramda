@@ -1,6 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var always = require('./always');
-var times = require('./times');
+var repeatWith = require('./repeatWith');
 
 
 /**
@@ -22,5 +22,5 @@ var times = require('./times');
  *      repeatedObjs[0] === repeatedObjs[1]; //=> true
  */
 module.exports = _curry2(function repeat(value, n) {
-  return times(always(value), n);
+  return repeatWith(always(value), n);
 });

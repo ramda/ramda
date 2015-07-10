@@ -17,7 +17,7 @@ var curry = require('./curry');
  * @return {*}
  * @example
  *
- *      var indentN = R.pipe(R.times(R.always(' ')),
+ *      var indentN = R.pipe(R.repeatWith(R.always(' ')),
  *                           R.join(''),
  *                           R.replace(/^(?!$)/gm));
  *
