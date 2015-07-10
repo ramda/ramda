@@ -15,6 +15,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
  * @param {Number} n A value between `0` and `n - 1`. Increments after each function call.
  * @return {Array} An array containing the return values of all calls to `fn`.
+ * @deprecated since v0.18.0
  * @example
  *
  *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
