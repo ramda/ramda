@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var compose = require('./internal/compose');
+var compose = require('./compose');
 var defaultTo = require('./defaultTo');
 var invoker = require('./invoker');
 
