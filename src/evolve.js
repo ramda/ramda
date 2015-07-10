@@ -18,13 +18,13 @@ var _curry2 = require('./internal/_curry2');
  * @return {Object} The transformed object.
  * @example
  *
- *      var tomato  = {firstName: '  Tomato ', elapsed: 100, remaining: 1400};
+ *      var tomato  = {firstName: '  Tomato ', data: {elapsed: 100, remaining: 1400}, id:123};
  *      var transformations = {
  *        firstName: R.trim,
  *        lastName: R.trim, // Will not get invoked.
  *        data: {elapsed: R.add(1), remaining: R.add(-1)}
  *      };
- *      R.evolve(transformations, tomato); //=> {firstName: 'Tomato', data: {elapsed: 101, remaining: 1399}}
+ *      R.evolve(transformations, tomato); //=> {firstName: 'Tomato', data: {elapsed: 101, remaining: 1399}, id:123}
  */
 module.exports = _curry2(function evolve(transformations, object) {
   var transformation, key, type, result = {};
