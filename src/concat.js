@@ -25,7 +25,7 @@ var _isArray = require('./internal/_isArray');
  *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
  *      R.concat('ABC', 'DEF'); // 'ABCDEF'
  */
-module.exports = _curry2(function(set1, set2) {
+module.exports = _curry2(function concat(set1, set2) {
   if (_isArray(set2)) {
     return _concat(set1, set2);
   } else if (_hasMethod('concat', set1)) {

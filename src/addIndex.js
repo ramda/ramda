@@ -27,7 +27,7 @@ var curryN = require('./curryN');
  *      mapIndexed(function(val, idx) {return idx + '-' + val;}, ['f', 'o', 'o', 'b', 'a', 'r']);
  *      //=> ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
-module.exports = _curry1(function(fn) {
+module.exports = _curry1(function addIndex(fn) {
   return curryN(fn.length, function() {
     var idx = 0;
     var origFn = arguments[0];

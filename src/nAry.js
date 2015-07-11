@@ -26,7 +26,7 @@ var _curry2 = require('./internal/_curry2');
  *      // Only `n` arguments are passed to the wrapped function
  *      takesOneArg(1, 2); //=> [1, undefined]
  */
-module.exports = _curry2(function(n, fn) {
+module.exports = _curry2(function nAry(n, fn) {
   switch (n) {
     case 0: return function() {return fn.call(this);};
     case 1: return function(a0) {return fn.call(this, a0);};
