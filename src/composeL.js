@@ -27,7 +27,7 @@ var _composeL = require('./internal/_composeL');
  *      secondOfXOfHeadLens(source); //=> 1
  *      secondOfXOfHeadLens.set(123, source); //=> [{x: [0, 123], y: [2, 3]}, {x: [4, 5], y: [6, 7]}]
  */
-module.exports = function() {
+module.exports = function composeL() {
   var fn = arguments[arguments.length - 1];
   var idx = arguments.length - 2;
   while (idx >= 0) {

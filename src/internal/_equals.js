@@ -5,7 +5,7 @@ var type = require('../type');
 
 // The algorithm used to handle cyclic structures is
 // inspired by underscore's isEqual
-module.exports = function _eqDeep(a, b, stackA, stackB) {
+module.exports = function _equals(a, b, stackA, stackB) {
   var typeA = type(a);
   if (typeA !== type(b)) {
     return false;
@@ -54,7 +54,7 @@ module.exports = function _eqDeep(a, b, stackA, stackB) {
     idx = keysA.length - 1;
     while (idx >= 0) {
       var key = keysA[idx];
-      if (!_has(key, b) || !_eqDeep(b[key], a[key], stackA, stackB)) {
+      if (!_has(key, b) || !_equals(b[key], a[key], stackA, stackB)) {
         return false;
       }
       idx -= 1;

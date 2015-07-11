@@ -23,7 +23,7 @@ var _curry3 = require('./internal/_curry3');
  *      R.adjust(R.add(10), 1, [0, 1, 2]);     //=> [0, 11, 2]
  *      R.adjust(R.add(10))(1)([0, 1, 2]);     //=> [0, 11, 2]
  */
-module.exports = _curry3(function(fn, idx, list) {
+module.exports = _curry3(function adjust(fn, idx, list) {
   if (idx >= list.length || idx < -list.length) {
     return list;
   }

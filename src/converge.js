@@ -30,7 +30,7 @@ var pluck = require('./pluck');
  *      var add3 = function(a, b, c) { return a + b + c; };
  *      R.converge(add3, multiply, add, subtract)(1, 2); //=> 4
  */
-module.exports = curryN(3, function(after) {
+module.exports = curryN(3, function converge(after) {
   var fns = _slice(arguments, 1);
   return curryN(Math.max.apply(Math, pluck('length', fns)), function() {
     var args = arguments;
