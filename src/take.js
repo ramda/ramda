@@ -38,6 +38,7 @@ var slice = require('./slice');
  *        'Ron Crotty'
  *      ];
  *
+ *      var takeFive = R.take(5);
  *      takeFive(personnel);
  *      //=> ['Dave Brubeck', 'Paul Desmond', 'Eugene Wright', 'Joe Morello', 'Gerry Mulligan']
  */
