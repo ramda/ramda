@@ -2,7 +2,7 @@ var _concat = require('./internal/_concat');
 var _curry2 = require('./internal/_curry2');
 var _hasMethod = require('./internal/_hasMethod');
 var _isArray = require('./internal/_isArray');
-
+var toString = require('./toString');
 
 /**
  * Returns a new list consisting of the elements of the first list followed by the elements
@@ -25,12 +25,12 @@ var _isArray = require('./internal/_isArray');
  *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
  *      R.concat('ABC', 'DEF'); // 'ABCDEF'
  */
-module.exports = _curry2(function(set1, set2) {
-  if (_isArray(set2)) {
-    return _concat(set1, set2);
-  } else if (_hasMethod('concat', set1)) {
-    return set1.concat(set2);
+module.exports = _curry2(function(a, b) {
+  if (_isArray(a) && _isArray(b)) {
+    return _concat(a, b);
+  } else if (_hasMethod('concat', a)) {
+    return a.concat(b);
   } else {
-    throw new TypeError("can't concat " + typeof set1);
+    throw new TypeError('Cannot concat ' + toString(a) + ' and ' + toString(b));
   }
 });

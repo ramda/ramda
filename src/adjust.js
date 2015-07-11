@@ -1,5 +1,5 @@
-var _concat = require('./internal/_concat');
 var _curry3 = require('./internal/_curry3');
+var _slice = require('./internal/_slice');
 
 /**
  * Applies a function to the value at the given index of an array,
@@ -29,7 +29,7 @@ module.exports = _curry3(function(fn, idx, list) {
   }
   var start = idx < 0 ? list.length : 0;
   var _idx = start + idx;
-  var _list = _concat(list);
+  var _list = _slice(list);
   _list[_idx] = fn(list[_idx]);
   return _list;
 });
