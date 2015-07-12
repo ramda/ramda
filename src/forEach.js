@@ -1,6 +1,5 @@
+var _checkForMethod = require('./internal/_checkForMethod');
 var _curry2 = require('./internal/_curry2');
-var _forEach = require('./internal/_forEach');
-var _hasMethod = require('./internal/_hasMethod');
 
 
 /**
@@ -31,6 +30,12 @@ var _hasMethod = require('./internal/_hasMethod');
  *      //-> 7
  *      //-> 8
  */
-module.exports = _curry2(function forEach(fn, list) {
-  return _hasMethod('forEach', list) ? list.forEach(fn) : _forEach(fn, list);
-});
+module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
+  var len = list.length;
+  var idx = 0;
+  while (idx < len) {
+    fn(list[idx]);
+    idx += 1;
+  }
+  return list;
+}));

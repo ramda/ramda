@@ -1,6 +1,6 @@
 var _curry3 = require('./internal/_curry3');
-var _path = require('./internal/_path');
 var equals = require('./equals');
+var path = require('./path');
 
 
 /**
@@ -25,6 +25,6 @@ var equals = require('./equals');
  *      var isFamous = R.pathEq(['address', 'zipCode'], 90210);
  *      R.filter(isFamous, users); //=> [ user1 ]
  */
-module.exports = _curry3(function pathEq(path, val, obj) {
-  return equals(_path(path, obj), val);
+module.exports = _curry3(function pathEq(_path, val, obj) {
+  return equals(path(_path, obj), val);
 });

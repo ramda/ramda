@@ -1,19 +1,18 @@
 var _curry2 = require('./internal/_curry2');
-var _extend = require('./internal/_extend');
+var keys = require('./keys');
 
 
 /**
  * Create a new object with the own properties of `a`
  * merged with the own properties of object `b`.
- * This function will *not* mutate passed-in objects.
  *
  * @func
  * @memberOf R
  * @category Object
  * @sig {k: v} -> {k: v} -> {k: v}
- * @param {Object} a source object
- * @param {Object} b object with higher precedence in output
- * @return {Object} The destination object.
+ * @param {Object} a
+ * @param {Object} b
+ * @return {Object}
  * @example
  *
  *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
@@ -23,5 +22,18 @@ var _extend = require('./internal/_extend');
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
 module.exports = _curry2(function merge(a, b) {
-  return _extend(_extend({}, a), b);
+  var result = {};
+  var ks = keys(a);
+  var idx = 0;
+  while (idx < ks.length) {
+    result[ks[idx]] = a[ks[idx]];
+    idx += 1;
+  }
+  ks = keys(b);
+  idx = 0;
+  while (idx < ks.length) {
+    result[ks[idx]] = b[ks[idx]];
+    idx += 1;
+  }
+  return result;
 });

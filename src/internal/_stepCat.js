@@ -1,8 +1,7 @@
-var _add = require('./_add');
 var _concat = require('./_concat');
-var _createMapEntry = require('./_createMapEntry');
 var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');
+var createMapEntry = require('../createMapEntry');
 var isArrayLike = require('../isArrayLike');
 var merge = require('../merge');
 
@@ -15,7 +14,7 @@ module.exports = (function() {
   };
   var _stepCatString = {
     '@@transducer/init': String,
-    '@@transducer/step': _add,
+    '@@transducer/step': function(a, b) { return a + b; },
     '@@transducer/result': _identity
   };
   var _stepCatObject = {
@@ -23,7 +22,7 @@ module.exports = (function() {
     '@@transducer/step': function(result, input) {
       return merge(
         result,
-        isArrayLike(input) ? _createMapEntry(input[0], input[1]) : input
+        isArrayLike(input) ? createMapEntry(input[0], input[1]) : input
       );
     },
     '@@transducer/result': _identity

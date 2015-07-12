@@ -1,6 +1,6 @@
 var _arity = require('./_arity');
-var _pluck = require('./_pluck');
 var _slice = require('./_slice');
+var pluck = require('../pluck');
 
 
 /**
@@ -22,6 +22,6 @@ module.exports = function _predicateWrap(predPicker) {
       // Call function immediately if given arguments
       predIterator.apply(null, _slice(arguments, 1)) :
       // Return a function which will call the predicates with the provided arguments
-      _arity(Math.max.apply(Math, _pluck('length', preds)), predIterator);
+      _arity(Math.max.apply(Math, pluck('length', preds)), predIterator);
   };
 };

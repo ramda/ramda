@@ -1,7 +1,7 @@
-var _append = require('./_append');
 var _curry2 = require('./_curry2');
 var _has = require('./_has');
 var _xfBase = require('./_xfBase');
+var append = require('../append');
 
 
 module.exports = (function() {
@@ -27,7 +27,7 @@ module.exports = (function() {
   XGroupBy.prototype['@@transducer/step'] = function(result, input) {
     var key = this.f(input);
     this.inputs[key] = this.inputs[key] || [key, []];
-    this.inputs[key][1] = _append(input, this.inputs[key][1]);
+    this.inputs[key][1] = append(input, this.inputs[key][1]);
     return result;
   };
 

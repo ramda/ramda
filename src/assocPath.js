@@ -1,5 +1,6 @@
-var _assocPath = require('./internal/_assocPath');
 var _curry3 = require('./internal/_curry3');
+var _slice = require('./internal/_slice');
+var assoc = require('./assoc');
 
 
 /**
@@ -21,4 +22,13 @@ var _curry3 = require('./internal/_curry3');
  *
  *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
  */
-module.exports = _curry3(_assocPath);
+module.exports = _curry3(function assocPath(path, val, obj) {
+  switch (path.length) {
+    case 0:
+      return obj;
+    case 1:
+      return assoc(path[0], val, obj);
+    default:
+      return assoc(path[0], assocPath(_slice(path, 1), val, Object(obj[path[0]])), obj);
+  }
+});

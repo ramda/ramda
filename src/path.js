@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _path = require('./internal/_path');
 
 
 /**
@@ -16,4 +15,14 @@ var _path = require('./internal/_path');
  *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
  *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
  */
-module.exports = _curry2(_path);
+module.exports = _curry2(function path(paths, obj) {
+  if (obj == null) {
+    return;
+  } else {
+    var val = obj;
+    for (var idx = 0, len = paths.length; idx < len && val != null; idx += 1) {
+      val = val[paths[idx]];
+    }
+    return val;
+  }
+});

@@ -1,4 +1,4 @@
-var _append = require('./internal/_append');
+var _concat = require('./internal/_concat');
 var _curry2 = require('./internal/_curry2');
 
 
@@ -20,4 +20,6 @@ var _curry2 = require('./internal/_curry2');
  *      R.append('tests', []); //=> ['tests']
  *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
  */
-module.exports = _curry2(_append);
+module.exports = _curry2(function append(el, list) {
+  return _concat(list, [el]);
+});

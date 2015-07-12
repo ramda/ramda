@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _multiply = require('./internal/_multiply');
 
 
 /**
@@ -20,4 +19,4 @@ var _multiply = require('./internal/_multiply');
  *      triple(4);       //=> 12
  *      R.multiply(2, 5);  //=> 10
  */
-module.exports = _curry2(_multiply);
+module.exports = _curry2(function multiply(a, b) { return a * b; });
