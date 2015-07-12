@@ -18,6 +18,7 @@ var _xall = require('./internal/_xall');
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if the predicate is satisfied by every element, `false`
  *         otherwise.
+ * @see R.any, R.none
  * @example
  *
  *      var lessThan2 = R.flip(R.lt)(2);

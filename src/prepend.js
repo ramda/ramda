@@ -13,6 +13,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {*} el The item to add to the head of the output list.
  * @param {Array} list The array to add to the tail of the output list.
  * @return {Array} A new array.
+ * @see R.append
  * @example
  *
  *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']

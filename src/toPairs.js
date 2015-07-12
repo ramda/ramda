@@ -14,6 +14,7 @@ var _has = require('./internal/_has');
  * @sig {String: *} -> [[String,*]]
  * @param {Object} obj The object to extract from
  * @return {Array} An array of key, value arrays from the object's own properties.
+ * @see R.fromPairs
  * @example
  *
  *      R.toPairs({a: 1, b: 2, c: 3}); //=> [['a', 1], ['b', 2], ['c', 3]]

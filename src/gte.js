@@ -12,6 +12,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Number} a
  * @param {Number} b
  * @return {Boolean}
+ * @see R.lte
  * @example
  *
  *      R.gte(2, 1); //=> true

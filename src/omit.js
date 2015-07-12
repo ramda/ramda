@@ -12,6 +12,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Array} names an array of String property names to omit from the new object
  * @param {Object} obj The object to copy from
  * @return {Object} A new object with properties from `names` not on it.
+ * @see R.pick
  * @example
  *
  *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}

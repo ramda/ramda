@@ -12,6 +12,7 @@ var take = require('./take');
  * @param {Number} n The number of elements of `xs` to skip.
  * @param {Array} xs The collection to consider.
  * @return {Array}
+ * @see R.takeLast
  * @example
  *
  *      R.dropLast(1, ['foo', 'bar', 'baz']); //=> ['foo', 'bar']

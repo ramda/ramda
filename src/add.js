@@ -11,6 +11,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Number} a
  * @param {Number} b
  * @return {Number}
+ * @see R.subtract
  * @example
  *
  *      R.add(2, 3);       //=>  5

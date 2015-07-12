@@ -11,6 +11,7 @@ var _isArray = require('./internal/_isArray');
  * @sig [[k,v]] -> {k: v}
  * @param {Array} pairs An array of two-element arrays that will be the keys and values of the output object.
  * @return {Object} The object made by pairing up `keys` and `values`.
+ * @see R.toPairs
  * @example
  *
  *      R.fromPairs([['a', 1], ['b', 2],  ['c', 3]]); //=> {a: 1, b: 2, c: 3}

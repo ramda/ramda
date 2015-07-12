@@ -15,6 +15,7 @@ var curry = require('./curry');
  * @param {Function} fn The function to apply to the remaining arguments.
  * @param {...*} args Any number of positional arguments.
  * @return {*}
+ * @see R.apply
  * @example
  *
  *      var indentN = R.pipe(R.times(R.always(' ')),

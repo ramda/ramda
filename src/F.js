@@ -8,8 +8,8 @@ var always = require('./always');
  * @memberOf R
  * @category Function
  * @sig * -> false
- * @see R.always
  * @return {Boolean} false
+ * @see R.always, R.T
  * @example
  *
  *      R.F(); //=> false

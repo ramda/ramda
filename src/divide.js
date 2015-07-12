@@ -11,6 +11,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Number} a The first value.
  * @param {Number} b The second value.
  * @return {Number} The result of `a / b`.
+ * @see R.multiply
  * @example
  *
  *      R.divide(71, 100); //=> 0.71

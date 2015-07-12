@@ -12,6 +12,7 @@ var invoker = require('./invoker');
  * @param {String} sep The separator string.
  * @param {String} str The string to separate into an array.
  * @return {Array} The array of strings from `str` separated by `str`.
+ * @see R.join
  * @example
  *
  *      var pathComponents = R.split('/');

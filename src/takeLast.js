@@ -13,6 +13,7 @@ var drop = require('./drop');
  * @param {Number} n The number of elements to return.
  * @param {Array} xs The collection to consider.
  * @return {Array}
+ * @see R.dropLast
  * @example
  *
  *      R.takeLast(1, ['foo', 'bar', 'baz']); //=> ['baz']

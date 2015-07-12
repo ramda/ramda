@@ -17,6 +17,7 @@ var _curry1 = require('./internal/_curry1');
  * @sig (*... -> *) -> (*... -> Boolean)
  * @param {Function} f
  * @return {Function}
+ * @see R.not
  * @example
  *
  *      var isEven = function(n) { return n % 2 === 0; };

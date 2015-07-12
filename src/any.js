@@ -18,6 +18,7 @@ var _xany = require('./internal/_xany');
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if the predicate is satisfied by at least one element, `false`
  *         otherwise.
+ * @see R.all, R.none
  * @example
  *
  *      var lessThan0 = R.flip(R.lt)(0);

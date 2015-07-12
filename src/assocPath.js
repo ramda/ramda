@@ -18,6 +18,7 @@ var assoc = require('./assoc');
  * @param {*} val the new value
  * @param {Object} obj the object to clone
  * @return {Object} a new object similar to the original except along the specified path.
+ * @see R.dissocPath
  * @example
  *
  *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}

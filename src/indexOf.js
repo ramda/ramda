@@ -15,7 +15,7 @@ var _indexOf = require('./internal/_indexOf');
  * @param {*} target The item to find.
  * @param {Array} xs The array to search in.
  * @return {Number} the index of the target, or -1 if the target is not found.
- *
+ * @see R.lastIndexOf
  * @example
  *
  *      R.indexOf(3, [1,2,3,4]); //=> 2

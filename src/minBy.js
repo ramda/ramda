@@ -13,7 +13,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} a
  * @param {*} b
  * @return {*}
- * @see R.min
+ * @see R.min, R.maxBy
  * @example
  *
  *      R.minBy(function(n) { return n * n; }, -3, 2); //=> 2

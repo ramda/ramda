@@ -16,6 +16,7 @@ var any = require('./any');
  * @param {Function} fn The predicate function.
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if the predicate is not satisfied by every element, `false` otherwise.
+ * @see R.all, R.any
  * @example
  *
  *      R.none(R.isNaN, [1, 2, 3]); //=> true

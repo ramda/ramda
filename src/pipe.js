@@ -16,6 +16,7 @@ var tail = require('./tail');
  * @sig (((a, b, ..., n) -> o), (o -> p), ..., (x -> y), (y -> z)) -> (a -> b -> ... -> n -> z)
  * @param {...Function} functions
  * @return {Function}
+ * @see R.compose
  * @example
  *
  *      var f = R.pipe(Math.pow, R.negate, R.inc);

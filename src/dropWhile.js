@@ -19,6 +19,7 @@ var _xdropWhile = require('./internal/_xdropWhile');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} A new array.
+ * @see R.takeWhile
  * @example
  *
  *      var lteTwo = function(x) {

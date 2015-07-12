@@ -14,6 +14,7 @@ var all = require('./all');
  * @param {*} optional Any arguments to pass into the predicates
  * @return {Function} a function that applies its arguments to each of
  *         the predicates, returning `true` if all are satisfied.
+ * @see R.anyPass
  * @example
  *
  *      var gt10 = function(x) { return x > 10; };
