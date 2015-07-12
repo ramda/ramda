@@ -1,5 +1,6 @@
 var chain = require('./chain');
 var compose = require('./compose');
+var identity = require('./identity');
 var map = require('./map');
 
 
@@ -36,5 +37,7 @@ var map = require('./map');
  *      //=> Nothing()
  */
 module.exports = function composeK() {
-  return compose.apply(this, map(chain, arguments));
+  return arguments.length === 0 ?
+    identity :
+    compose.apply(this, map(chain, arguments));
 };

@@ -31,4 +31,11 @@ describe('composeK', function() {
     assert.strictEqual(fn(id).value, R.compose(R.chain(h), R.chain(g), R.chain(f))(id).value);
   });
 
+  it('returns the identity function given no arguments', function() {
+    var identity = R.composeK();
+    assert.strictEqual(identity.length, 1);
+    assert.strictEqual(identity(R.__).length, 1);
+    assert.strictEqual(identity(42), 42);
+  });
+
 });

@@ -31,4 +31,11 @@ describe('pipeK', function() {
     assert.strictEqual(fn(id).value, R.pipe(R.chain(f), R.chain(g), R.chain(h))(id).value);
   });
 
+  it('returns the identity function given no arguments', function() {
+    var identity = R.pipeK();
+    assert.strictEqual(identity.length, 1);
+    assert.strictEqual(identity(R.__).length, 1);
+    assert.strictEqual(identity(42), 42);
+  });
+
 });
