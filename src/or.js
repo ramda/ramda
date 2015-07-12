@@ -16,6 +16,7 @@ var _hasMethod = require('./internal/_hasMethod');
  * @param {*} a any value
  * @param {*} b any other value
  * @return {*} the first truthy argument, otherwise the last argument.
+ * @see R.either
  * @example
  *
  *      R.or(false, true); //=> true

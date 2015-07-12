@@ -14,6 +14,7 @@ var _slice = require('./internal/_slice');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} A new array.
+ * @see R.takeLastWhile
  * @example
  *
  *      var lteThree = function(x) {

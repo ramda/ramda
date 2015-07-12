@@ -15,6 +15,7 @@ var tail = require('./tail');
  * @sig ((a -> Promise b), (b -> Promise c), ..., (y -> Promise z)) -> (a -> Promise z)
  * @param {...Function} functions
  * @return {Function}
+ * @see R.composeP
  * @example
  *
  *      //  followersForUser :: String -> Promise [User]

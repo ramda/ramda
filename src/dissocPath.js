@@ -17,6 +17,7 @@ var dissoc = require('./dissoc');
  * @param {Array} path the path to set
  * @param {Object} obj the object to clone
  * @return {Object} a new object without the property at path
+ * @see R.assocPath
  * @example
  *
  *      R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}

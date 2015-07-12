@@ -14,6 +14,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} f a predicate
  * @param {Function} g another predicate
  * @return {Function} a function that applies its arguments to `f` and `g` and `&&`s their outputs together.
+ * @see R.and
  * @example
  *
  *      var gt10 = function(x) { return x > 10; };

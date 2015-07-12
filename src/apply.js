@@ -13,6 +13,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} fn
  * @param {Array} args
  * @return {*}
+ * @see R.call, R.unapply
  * @example
  *
  *      var nums = [1, 2, 3, -99, 42, 6, 7];

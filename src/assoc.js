@@ -15,6 +15,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} val the new value
  * @param {Object} obj the object to clone
  * @return {Object} a new object similar to the original except for the specified property.
+ * @see R.dissoc
  * @example
  *
  *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}

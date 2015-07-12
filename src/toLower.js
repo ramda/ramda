@@ -10,6 +10,7 @@ var invoker = require('./invoker');
  * @sig String -> String
  * @param {String} str The string to lower case.
  * @return {String} The lower case version of `str`.
+ * @see R.toUpper
  * @example
  *
  *      R.toLower('XYZ'); //=> 'xyz'

@@ -14,6 +14,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Array} list The list whose contents will be added to the beginning of the output
  *        list.
  * @return {Array} A new list containing the contents of the old list followed by `el`.
+ * @see R.prepend
  * @example
  *
  *      R.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']

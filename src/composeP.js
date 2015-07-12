@@ -13,6 +13,7 @@ var reverse = require('./reverse');
  * @sig ((y -> Promise z), (x -> Promise y), ..., (a -> Promise b)) -> (a -> Promise z)
  * @param {...Function} functions
  * @return {Function}
+ * @see R.pipeP
  * @example
  *
  *      //  followersForUser :: String -> Promise [User]

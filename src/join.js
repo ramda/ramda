@@ -12,6 +12,7 @@ var invoker = require('./invoker');
  * @param {Number|String} separator The string used to separate the elements.
  * @param {Array} xs The elements to join into a string.
  * @return {String} str The string made by concatenating `xs` with `separator`.
+ * @see R.split
  * @example
  *
  *      var spacer = R.join(' ');

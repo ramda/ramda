@@ -10,6 +10,7 @@ var add = require('./add');
  * @sig Number -> Number
  * @param {Number} n
  * @return {Number}
+ * @see R.inc
  * @example
  *
  *      R.dec(42); //=> 41

@@ -12,6 +12,7 @@ var reverse = require('./reverse');
  * @sig ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> (a -> b -> ... -> n -> z)
  * @param {...Function} functions
  * @return {Function}
+ * @see R.pipe
  * @example
  *
  *      var f = R.compose(R.inc, R.negate, Math.pow);

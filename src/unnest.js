@@ -12,6 +12,7 @@ var _makeFlat = require('./internal/_makeFlat');
  * @sig [a] -> [b]
  * @param {Array} list The array to consider.
  * @return {Array} The flattened list.
+ * @see R.flatten
  * @example
  *
  *      R.unnest([1, [2], [[3]]]); //=> [1, 2, [3]]

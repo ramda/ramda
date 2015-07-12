@@ -11,7 +11,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {*} a
  * @param {*} b
  * @return {*}
- * @see R.minBy
+ * @see R.minBy, R.max
  * @example
  *
  *      R.min(789, 123); //=> 123

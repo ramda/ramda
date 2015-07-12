@@ -10,6 +10,7 @@ var invoker = require('./invoker');
  * @sig String -> String
  * @param {String} str The string to upper case.
  * @return {String} The upper case version of `str`.
+ * @see R.toLower
  * @example
  *
  *      R.toUpper('abc'); //=> 'ABC'

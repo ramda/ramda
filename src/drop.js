@@ -17,6 +17,7 @@ var slice = require('./slice');
  * @param {Number} n
  * @param {*} list
  * @return {*}
+ * @see R.take
  * @example
  *
  *      R.drop(1, ['foo', 'bar', 'baz']); //=> ['bar', 'baz']

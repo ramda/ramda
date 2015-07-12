@@ -17,6 +17,7 @@ var filter = require('./filter');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} The new filtered array.
+ * @see R.filter
  * @example
  *
  *      var isOdd = function(n) {
