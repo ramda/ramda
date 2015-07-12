@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _nth = require('./internal/_nth');
 
 
 /**
@@ -20,4 +19,6 @@ var _nth = require('./internal/_nth');
  *      R.nth(-1, list); //=> 'quux'
  *      R.nth(-99, list); //=> undefined
  */
-module.exports = _curry2(_nth);
+module.exports = _curry2(function nth(n, list) {
+  return n < 0 ? list[list.length + n] : list[n];
+});

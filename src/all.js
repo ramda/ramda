@@ -1,4 +1,3 @@
-var _all = require('./internal/_all');
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
 var _xall = require('./internal/_xall');
@@ -26,4 +25,13 @@ var _xall = require('./internal/_xall');
  *      R.all(lessThan2)([1, 2]); //=> false
  *      R.all(lessThan3)([1, 2]); //=> true
  */
-module.exports = _curry2(_dispatchable('all', _xall, _all));
+module.exports = _curry2(_dispatchable('all', _xall, function all(fn, list) {
+  var idx = 0;
+  while (idx < list.length) {
+    if (!fn(list[idx])) {
+      return false;
+    }
+    idx += 1;
+  }
+  return true;
+}));

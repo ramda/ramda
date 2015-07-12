@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _dissoc = require('./internal/_dissoc');
 
 
 /**
@@ -16,4 +15,12 @@ var _dissoc = require('./internal/_dissoc');
  *
  *      R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
  */
-module.exports = _curry2(_dissoc);
+module.exports = _curry2(function dissoc(prop, obj) {
+  var result = {};
+  for (var p in obj) {
+    if (p !== prop) {
+      result[p] = obj[p];
+    }
+  }
+  return result;
+});

@@ -1,5 +1,5 @@
-var _composeP = require('./internal/_composeP');
 var _createComposer = require('./internal/_createComposer');
+var _isThenable = require('./internal/_isThenable');
 
 
 /**
@@ -34,4 +34,16 @@ var _createComposer = require('./internal/_createComposer');
  *          // result is 150
  *        });
  */
-module.exports = _createComposer(_composeP);
+module.exports = _createComposer(function composeP(f, g) {
+  return function() {
+    var context = this;
+    var value = g.apply(this, arguments);
+    if (_isThenable(value)) {
+      return value.then(function(result) {
+        return f.call(context, result);
+      });
+    } else {
+      return f.call(this, value);
+    }
+  };
+});

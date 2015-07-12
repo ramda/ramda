@@ -11,7 +11,7 @@ var type = require('../type');
  * @param {Array} refTo Array containing the copied source references
  * @return {*} The copied value.
  */
-module.exports = function _baseCopy(value, refFrom, refTo) {
+module.exports = function _clone(value, refFrom, refTo) {
   var copy = function copy(copiedValue) {
     var len = refFrom.length;
     var idx = 0;
@@ -24,7 +24,7 @@ module.exports = function _baseCopy(value, refFrom, refTo) {
     refFrom[idx + 1] = value;
     refTo[idx + 1] = copiedValue;
     for (var key in value) {
-      copiedValue[key] = _baseCopy(value[key], refFrom, refTo);
+      copiedValue[key] = _clone(value[key], refFrom, refTo);
     }
     return copiedValue;
   };
