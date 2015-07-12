@@ -4,6 +4,7 @@ var R = require('..');
 
 
 describe('drop', function() {
+
   it('skips the first `n` elements from a list, returning the remainder', function() {
     assert.deepEqual(R.drop(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['d', 'e', 'f', 'g']);
   });
@@ -27,11 +28,9 @@ describe('drop', function() {
 
   it('can operate on strings', function() {
     assert.strictEqual(R.drop(3, 'Ramda'), 'da');
+    assert.strictEqual(R.drop(4, 'Ramda'), 'a');
+    assert.strictEqual(R.drop(5, 'Ramda'), '');
+    assert.strictEqual(R.drop(6, 'Ramda'), '');
   });
 
-  it('is curried', function() {
-    var drop2 = R.drop(2);
-    assert.deepEqual(drop2(['a', 'b', 'c', 'd', 'e']), ['c', 'd', 'e']);
-    assert.deepEqual(drop2(['x', 'y', 'z']), ['z']);
-  });
 });

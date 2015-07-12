@@ -4,14 +4,22 @@ var R = require('..');
 
 
 describe('head', function() {
-  it('returns undefined for an empty list', function() {
-    assert.strictEqual(typeof(R.head([])),  'undefined');
+
+  it('returns the first element of an ordered collection', function() {
+    assert.strictEqual(R.head([1, 2, 3]), 1);
+    assert.strictEqual(R.head([2, 3]), 2);
+    assert.strictEqual(R.head([3]), 3);
+    assert.strictEqual(R.head([]), undefined);
+
+    assert.strictEqual(R.head('abc'), 'a');
+    assert.strictEqual(R.head('bc'), 'b');
+    assert.strictEqual(R.head('c'), 'c');
+    assert.strictEqual(R.head(''), '');
   });
-  it('returns the first element of a list', function() {
-    assert.strictEqual(R.head(['a', 'b', 'c', 'd']), 'a');
-  });
+
   it('throws if applied to null or undefined', function() {
     assert.throws(function() { R.head(null); }, TypeError);
     assert.throws(function() { R.head(undefined); }, TypeError);
   });
+
 });

@@ -1,24 +1,30 @@
 var _curry2 = require('./internal/_curry2');
+var _isString = require('./internal/_isString');
 
 
 /**
- * Returns the nth element in a list.
+ * Returns the nth element of the given list or string.
  * If n is negative the element at index length + n is returned.
  *
  * @func
  * @memberOf R
  * @category List
  * @sig Number -> [a] -> a | Undefined
- * @param {Number} idx
- * @param {Array} list
- * @return {*} The nth element of the list.
+ * @sig Number -> String -> String
+ * @param {Number} offset
+ * @param {*} list
+ * @return {*}
  * @example
  *
  *      var list = ['foo', 'bar', 'baz', 'quux'];
  *      R.nth(1, list); //=> 'bar'
  *      R.nth(-1, list); //=> 'quux'
  *      R.nth(-99, list); //=> undefined
+ *
+ *      R.nth('abc', 2); //=> 'c'
+ *      R.nth('abc', 3); //=> ''
  */
-module.exports = _curry2(function nth(n, list) {
-  return n < 0 ? list[list.length + n] : list[n];
+module.exports = _curry2(function nth(offset, list) {
+  var idx = offset < 0 ? list.length + offset : offset;
+  return _isString(list) ? list.charAt(idx) : list[idx];
 });

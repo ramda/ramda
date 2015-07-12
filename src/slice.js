@@ -3,8 +3,8 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Returns a list containing the elements of `xs` from `fromIndex` (inclusive)
- * to `toIndex` (exclusive).
+ * Returns the elements of the given list or string (or object with a `slice`
+ * method) from `fromIndex` (inclusive) to `toIndex` (exclusive).
  *
  * @func
  * @memberOf R
@@ -13,8 +13,8 @@ var _curry3 = require('./internal/_curry3');
  * @sig Number -> Number -> String -> String
  * @param {Number} fromIndex The start index (inclusive).
  * @param {Number} toIndex The end index (exclusive).
- * @param {Array} xs The list to take elements from.
- * @return {Array} The slice of `xs` from `fromIndex` to `toIndex`.
+ * @param {*} list
+ * @return {*}
  * @example
  *
  *      R.slice(1, 3, ['a', 'b', 'c', 'd']);        //=> ['b', 'c']
@@ -23,6 +23,6 @@ var _curry3 = require('./internal/_curry3');
  *      R.slice(-3, -1, ['a', 'b', 'c', 'd']);      //=> ['b', 'c']
  *      R.slice(0, 3, 'ramda');                     //=> 'ram'
  */
-module.exports = _curry3(_checkForMethod('slice', function slice(fromIndex, toIndex, xs) {
-  return Array.prototype.slice.call(xs, fromIndex, toIndex);
+module.exports = _curry3(_checkForMethod('slice', function slice(fromIndex, toIndex, list) {
+  return Array.prototype.slice.call(list, fromIndex, toIndex);
 }));

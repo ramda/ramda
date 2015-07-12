@@ -11,6 +11,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Number} n
  * @param {String} str
  * @return {String}
+ * @deprecated since v0.16.0
  * @example
  *
  *      R.nthChar(2, 'Ramda'); //=> 'm'

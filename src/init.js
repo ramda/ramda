@@ -2,18 +2,26 @@ var slice = require('./slice');
 
 
 /**
- * Returns all but the last element of a list.
+ * Returns all but the last element of the given list or string.
  *
  * @func
  * @memberOf R
  * @category List
  * @see R.last, R.head, R.tail
  * @sig [a] -> [a]
- * @param {Array} list The array to consider.
- * @return {Array} A new array containing all but the last element of the input list, or an
- *         empty list if the input list is empty.
+ * @sig String -> String
+ * @param {*} list
+ * @return {*}
  * @example
  *
- *      R.init(['fi', 'fo', 'fum']); //=> ['fi', 'fo']
+ *      R.init([1, 2, 3]);  //=> [1, 2]
+ *      R.init([1, 2]);     //=> [1]
+ *      R.init([1]);        //=> []
+ *      R.init([]);         //=> []
+ *
+ *      R.init('abc');  //=> 'ab'
+ *      R.init('ab');   //=> 'a'
+ *      R.init('a');    //=> ''
+ *      R.init('');     //=> ''
  */
 module.exports = slice(0, -1);
