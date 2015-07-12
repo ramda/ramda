@@ -5,22 +5,23 @@ var update = require('./update');
 
 
 /**
- * Creates a lens that will focus on index `n` of the source array.
+ * Returns a lens whose focus is the specified index.
  *
  * @func
  * @memberOf R
- * @category List
- * @see R.lens
- * @sig Number -> (a -> b)
- * @param {Number} n The index of the array that the returned lens will focus on.
- * @return {Function} the returned function has `set` and `map` properties that are
- *         also curried functions.
+ * @category Object
+ * @typedef Lens s a = Functor f => (a -> f a) -> s -> f s
+ * @sig Number -> Lens s a
+ * @param {Number} n
+ * @return {Lens}
+ * @see R.view, R.set, R.over
  * @example
  *
- *     var headLens = R.lensIndex(0);
- *     headLens([10, 20, 30, 40]); //=> 10
- *     headLens.set('mu', [10, 20, 30, 40]); //=> ['mu', 20, 30, 40]
- *     headLens.map(function(x) { return x + 1; }, [10, 20, 30, 40]); //=> [11, 20, 30, 40]
+ *      var headLens = R.lensIndex(0);
+ *
+ *      R.view(headLens, ['a', 'b', 'c']);            //=> 'a'
+ *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']
+ *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
  */
 module.exports = _curry1(function lensIndex(n) {
   return lens(nth(n), update(n));

@@ -5,25 +5,23 @@ var prop = require('./prop');
 
 
 /**
- * Creates a lens that will focus on property `k` of the source object.
+ * Returns a lens whose focus is the specified property.
  *
  * @func
  * @memberOf R
  * @category Object
- * @see R.lens
- * @sig String -> (a -> b)
- * @param {String} k A string that represents a property to focus on.
- * @return {Function} the returned function has `set` and `map` properties that are
- *         also curried functions.
+ * @typedef Lens s a = Functor f => (a -> f a) -> s -> f s
+ * @sig String -> Lens s a
+ * @param {String} k
+ * @return {Lens}
+ * @see R.view, R.set, R.over
  * @example
  *
- *     var phraseLens = R.lensProp('phrase');
- *     var obj1 = { phrase: 'Absolute filth . . . and I LOVED it!'};
- *     var obj2 = { phrase: "What's all this, then?"};
- *     phraseLens(obj1); // => 'Absolute filth . . . and I LOVED it!'
- *     phraseLens(obj2); // => "What's all this, then?"
- *     phraseLens.set('Ooh Betty', obj1); //=> { phrase: 'Ooh Betty'}
- *     phraseLens.map(R.toUpper, obj2); //=> { phrase: "WHAT'S ALL THIS, THEN?"}
+ *      var xLens = R.lensProp('x');
+ *
+ *      R.view(xLens, {x: 1, y: 2});            //=> 1
+ *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}
+ *      R.over(xLens, R.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
  */
 module.exports = _curry1(function lensProp(k) {
   return lens(prop(k), assoc(k));
