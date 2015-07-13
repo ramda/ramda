@@ -4,6 +4,7 @@ var R = require('..');
 
 
 describe('range', function() {
+
   it('returns list of numbers', function() {
     assert.deepEqual(R.range(0, 5), [0, 1, 2, 3, 4]);
     assert.deepEqual(R.range(4, 7), [4, 5, 6]);
@@ -25,4 +26,15 @@ describe('range', function() {
     result.push(5);
     assert.deepEqual(R.range(10, 5), []);
   });
+
+  it('terminates given bad input', function() {
+    assert.throws(
+      function() { R.range('a', 'z'); },
+      function(err) {
+        return err.constructor === TypeError &&
+               err.message === 'Both arguments to range must be numbers';
+      }
+    );
+  });
+
 });
