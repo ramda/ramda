@@ -1,22 +1,18 @@
 var _curry3 = require('./internal/_curry3');
 var equals = require('./equals');
-var propSatisfies = require('./propSatisfies');
 
 
 /**
- * Returns `true` if the specified object property is equal, in `R.equals`
- * terms, to the given value; `false` otherwise.
+ * Determines whether the given property of an object has a specific value,
+ * in `R.equals` terms. Most likely used to filter a list.
  *
  * @func
  * @memberOf R
  * @category Relation
- * @sig a -> String -> Object -> Boolean
- * @param {*} val
- * @param {String} name
- * @param {*} obj
- * @return {Boolean}
- * @see R.equals
- * @see R.propSatisfies
+ * @sig k -> v -> {k: v} -> Boolean
+ * @param {Number|String} name The property name (or index) to use.
+ * @param {*} val The value to compare the property with.
+ * @return {Boolean} `true` if the properties are equal, `false` otherwise.
  * @example
  *
  *      var abby = {name: 'Abby', age: 7, hair: 'blond'};
@@ -24,9 +20,9 @@ var propSatisfies = require('./propSatisfies');
  *      var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
  *      var alois = {name: 'Alois', age: 15, disposition: 'surly'};
  *      var kids = [abby, fred, rusty, alois];
- *      var hasBrownHair = R.propEq('brown', 'hair');
+ *      var hasBrownHair = R.propEq('hair', 'brown');
  *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
  */
-module.exports = _curry3(function propEq(val, name, obj) {
-  return propSatisfies(equals(val), name, obj);
+module.exports = _curry3(function propEq(name, val, obj) {
+  return equals(obj[name], val);
 });
