@@ -10,13 +10,12 @@ var propSatisfies = require('./propSatisfies');
  * @func
  * @memberOf R
  * @category Relation
- * @sig a -> String -> Object -> Boolean
- * @param {*} val
+ * @sig String -> a -> Object -> Boolean
  * @param {String} name
+ * @param {*} val
  * @param {*} obj
  * @return {Boolean}
- * @see R.equals
- * @see R.propSatisfies
+ * @see R.equals, R.propSatisfies
  * @example
  *
  *      var abby = {name: 'Abby', age: 7, hair: 'blond'};
@@ -24,9 +23,9 @@ var propSatisfies = require('./propSatisfies');
  *      var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
  *      var alois = {name: 'Alois', age: 15, disposition: 'surly'};
  *      var kids = [abby, fred, rusty, alois];
- *      var hasBrownHair = R.propEq('brown', 'hair');
+ *      var hasBrownHair = R.propEq('hair', 'brown');
  *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
  */
-module.exports = _curry3(function propEq(val, name, obj) {
+module.exports = _curry3(function propEq(name, val, obj) {
   return propSatisfies(equals(val), name, obj);
 });
