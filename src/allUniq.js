@@ -14,11 +14,11 @@ var _indexOf = require('./internal/_indexOf');
  * @return {Boolean} `true` if all elements are unique, else `false`.
  * @example
  *
- *      R.isSet(['1', 1]); //=> true
- *      R.isSet([1, 1]);   //=> false
- *      R.isSet([[42], [42]]); //=> false
+ *      R.allUniq(['1', 1]); //=> true
+ *      R.allUniq([1, 1]);   //=> false
+ *      R.allUniq([[42], [42]]); //=> false
  */
-module.exports = _curry1(function isSet(list) {
+module.exports = _curry1(function allUniq(list) {
   var len = list.length;
   var idx = 0;
   while (idx < len) {
