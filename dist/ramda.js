@@ -1,4 +1,4 @@
-//  Ramda v0.16.0
+//  Ramda v0.17.0
 //  https://github.com/ramda/ramda
 //  (c) 2013-2015 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -4568,8 +4568,8 @@
      * @example
      *
      *      var xs = [{a: 1}, {a: 2}, {a: 3}];
-     *      R.find(R.propEq(2, 'a'))(xs); //=> {a: 2}
-     *      R.find(R.propEq(4, 'a'))(xs); //=> undefined
+     *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
+     *      R.find(R.propEq('a', 4))(xs); //=> undefined
      */
     var find = _curry2(_dispatchable('find', _xfind, function find(fn, list) {
         var idx = 0;
@@ -4600,8 +4600,8 @@
      * @example
      *
      *      var xs = [{a: 1}, {a: 2}, {a: 3}];
-     *      R.findIndex(R.propEq(2, 'a'))(xs); //=> 1
-     *      R.findIndex(R.propEq(4, 'a'))(xs); //=> -1
+     *      R.findIndex(R.propEq('a', 2))(xs); //=> 1
+     *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
      */
     var findIndex = _curry2(_dispatchable('findIndex', _xfindIndex, function findIndex(fn, list) {
         var idx = 0;
@@ -4633,8 +4633,8 @@
      * @example
      *
      *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
-     *      R.findLast(R.propEq(1, 'a'))(xs); //=> {a: 1, b: 1}
-     *      R.findLast(R.propEq(4, 'a'))(xs); //=> undefined
+     *      R.findLast(R.propEq('a', 1))(xs); //=> {a: 1, b: 1}
+     *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
      */
     var findLast = _curry2(_dispatchable('findLast', _xfindLast, function findLast(fn, list) {
         var idx = list.length - 1;
@@ -4664,8 +4664,8 @@
      * @example
      *
      *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
-     *      R.findLastIndex(R.propEq(1, 'a'))(xs); //=> 1
-     *      R.findLastIndex(R.propEq(4, 'a'))(xs); //=> -1
+     *      R.findLastIndex(R.propEq('a', 1))(xs); //=> 1
+     *      R.findLastIndex(R.propEq('a', 4))(xs); //=> -1
      */
     var findLastIndex = _curry2(_dispatchable('findLastIndex', _xfindLastIndex, function findLastIndex(fn, list) {
         var idx = list.length - 1;
@@ -5379,13 +5379,12 @@
      * @func
      * @memberOf R
      * @category Relation
-     * @sig a -> String -> Object -> Boolean
-     * @param {*} val
+     * @sig String -> a -> Object -> Boolean
      * @param {String} name
+     * @param {*} val
      * @param {*} obj
      * @return {Boolean}
-     * @see R.equals
-     * @see R.propSatisfies
+     * @see R.equals, R.propSatisfies
      * @example
      *
      *      var abby = {name: 'Abby', age: 7, hair: 'blond'};
@@ -5393,10 +5392,10 @@
      *      var rusty = {name: 'Rusty', age: 10, hair: 'brown'};
      *      var alois = {name: 'Alois', age: 15, disposition: 'surly'};
      *      var kids = [abby, fred, rusty, alois];
-     *      var hasBrownHair = R.propEq('brown', 'hair');
+     *      var hasBrownHair = R.propEq('hair', 'brown');
      *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
      */
-    var propEq = _curry3(function propEq(val, name, obj) {
+    var propEq = _curry3(function propEq(name, val, obj) {
         return propSatisfies(equals(val), name, obj);
     });
 
