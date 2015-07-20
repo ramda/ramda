@@ -1,7 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var compose = require('./compose');
-var defaultTo = require('./defaultTo');
-var invoker = require('./invoker');
 
 
 /**
@@ -12,13 +9,18 @@ var invoker = require('./invoker');
  *
  * @func
  * @memberOf R
+ * @see R.test
  * @category String
  * @sig RegExp -> String -> [String | Undefined]
  * @param {RegExp} rx A regular expression.
  * @param {String} str The string to match against
- * @return {Array} The list of matches.
+ * @return {Array} The list of matches or empty array.
  * @example
  *
  *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
+ *      R.match(/a/, 'b'); //=> []
+ *      R.match(/a/, null); //=> TypeError: null does not have a method named "match"
  */
-module.exports = _curry2(compose(defaultTo([]), invoker(1, 'match')));
+module.exports = _curry2(function match(rx, str) {
+  return str.match(rx) || [];
+});
