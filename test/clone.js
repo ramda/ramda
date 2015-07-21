@@ -189,3 +189,17 @@ describe('deep clone edge cases', function() {
     assert.notStrictEqual(R.clone(list), list);
   });
 });
+
+
+describe('Let `R.clone` use an arbitrary user defined `clone` method', function() {
+
+  it('dispatches to `clone` method if present', function() {
+    function ArbitraryClone(x) { this.value = x; }
+    ArbitraryClone.prototype.clone = function() { return new ArbitraryClone(this.value); };
+
+    var obj = new ArbitraryClone(42);
+    var arbitraryClonedObj = R.clone(obj);
+    assert.deepEqual(arbitraryClonedObj, new ArbitraryClone(42), true);
+    assert.strictEqual(arbitraryClonedObj instanceof ArbitraryClone, true);
+  });
+});

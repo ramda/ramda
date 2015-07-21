@@ -1,11 +1,12 @@
 var _clone = require('./internal/_clone');
 var _curry1 = require('./internal/_curry1');
+var _hasMethod = require('./internal/_hasMethod');
 
 
 /**
- * Creates a deep copy of the value which may contain (nested) `Array`s and
- * `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s. `Function`s are
- * not copied, but assigned by their reference.
+ * Creates a deep copy of the value which may contain (nested) `Array`s and `Object`s, `Number`s,
+ * `String`s, `Boolean`s and `Date`s. `Function`s are not copied, but assigned by their
+ * reference. Dispatches to a `clone` method if present.
  *
  * @func
  * @memberOf R
@@ -20,5 +21,5 @@ var _curry1 = require('./internal/_curry1');
  *      objects[0] === objectsClone[0]; //=> false
  */
 module.exports = _curry1(function clone(value) {
-  return _clone(value, [], []);
+  return _hasMethod('clone', value) ? value.clone() : _clone(value, [], []);
 });
