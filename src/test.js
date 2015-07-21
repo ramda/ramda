@@ -7,6 +7,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @see R.match
  * @category String
  * @sig RegExp -> String -> Boolean
  * @param {RegExp} pattern
