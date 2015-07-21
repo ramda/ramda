@@ -40,7 +40,7 @@
     "clean": "rimraf dist/*",
     "jscs": "jscs scripts/bookmarklet scripts/build **/*.js **/**/*.js",
     "jshint": "jshint scripts/bookmarklet scripts/build **/*.js **/**/*.js",
-    "pretest": "npm run jshint && npm run jscs && npm run clean && npm run build",
+    "pretest": "npm install && npm run jshint && npm run jscs && npm run clean && npm run build",
     "test": "node scripts/testfiles | node_modules/.bin/mocha --reporter spec",
     "posttest": "git checkout -- dist"
   },
