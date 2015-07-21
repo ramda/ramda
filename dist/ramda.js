@@ -1,4 +1,4 @@
-//  Ramda v0.17.0
+//  Ramda v0.17.1
 //  https://github.com/ramda/ramda
 //  (c) 2013-2015 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -2048,6 +2048,30 @@
     });
 
     /**
+     * Tests a regular expression against a String. Note that this function
+     * will return an empty array when there are no matches. This differs
+     * from [`String.prototype.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
+     * which returns `null` when there are no matches.
+     *
+     * @func
+     * @memberOf R
+     * @see R.test
+     * @category String
+     * @sig RegExp -> String -> [String | Undefined]
+     * @param {RegExp} rx A regular expression.
+     * @param {String} str The string to match against
+     * @return {Array} The list of matches or empty array.
+     * @example
+     *
+     *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
+     *      R.match(/a/, 'b'); //=> []
+     *      R.match(/a/, null); //=> TypeError: null does not have a method named "match"
+     */
+    var match = _curry2(function match(rx, str) {
+        return str.match(rx) || [];
+    });
+
+    /**
      * mathMod behaves like the modulo operator should mathematically, unlike the `%`
      * operator (and by extension, R.modulo). So while "-17 % 5" is -2,
      * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
@@ -3023,7 +3047,7 @@
      * @example
      *
      *      var sortByFirstItem = R.sortBy(prop(0));
-     *      var sortByNameCaseInsensitive = R.sortBy(compose(R.toLower, prop('name')));
+     *      var sortByNameCaseInsensitive = R.sortBy(R.compose(R.toLower, R.prop('name')));
      *      var pairs = [[-1, 1], [-2, 2], [-3, 3]];
      *      sortByFirstItem(pairs); //=> [[-3, 3], [-2, 2], [-1, 1]]
      *      var alice = {
@@ -3131,6 +3155,7 @@
      *
      * @func
      * @memberOf R
+     * @see R.match
      * @category String
      * @sig RegExp -> String -> Boolean
      * @param {RegExp} pattern
@@ -7132,25 +7157,6 @@
      *      R.join('|', [1, 2, 3]);    //=> '1|2|3'
      */
     var join = invoker(1, 'join');
-
-    /**
-     * Tests a regular expression against a String. Note that this function
-     * will return an empty array when there are no matches. This differs
-     * from [`String.prototype.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
-     * which returns `null` when there are no matches.
-     *
-     * @func
-     * @memberOf R
-     * @category String
-     * @sig RegExp -> String -> [String | Undefined]
-     * @param {RegExp} rx A regular expression.
-     * @param {String} str The string to match against
-     * @return {Array} The list of matches.
-     * @example
-     *
-     *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
-     */
-    var match = _curry2(compose(defaultTo([]), invoker(1, 'match')));
 
     /**
      * Creates a new function that, when invoked, caches the result of calling `fn` for a given
