@@ -1,9 +1,11 @@
 var assert = require('assert');
 
 var R = require('..');
+var Maybe = require('./shared/Maybe');
 
 
 describe('unnest', function() {
+
   it('only flattens one layer deep of a nested list', function() {
     var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];
     assert.deepEqual(R.unnest(nest), [1, 2, 3, [4, 5], 6, [[[7], 8]], 9, 10]);
@@ -26,4 +28,16 @@ describe('unnest', function() {
     assert.deepEqual(R.unnest([[], [], []]), []);
     assert.deepEqual(R.unnest([]), []);
   });
+
+  it('is equivalent to R.chain(R.identity)', function() {
+    var Nothing = Maybe.Nothing;
+    var Just = Maybe.Just;
+
+    assert.strictEqual(R.toString(R.unnest(Nothing())), 'Nothing()');
+    assert.strictEqual(R.toString(R.unnest(Just(Nothing()))), 'Nothing()');
+    assert.strictEqual(R.toString(R.unnest(Just(Just(Nothing())))), 'Just(Nothing())');
+    assert.strictEqual(R.toString(R.unnest(Just(Just(42)))), 'Just(42)');
+    assert.strictEqual(R.toString(R.unnest(Just(Just(Just(42))))), 'Just(Just(42))');
+  });
+
 });

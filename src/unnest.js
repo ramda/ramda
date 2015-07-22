@@ -1,21 +1,21 @@
-var _curry1 = require('./internal/_curry1');
-var _makeFlat = require('./internal/_makeFlat');
+var _identity = require('./internal/_identity');
+var chain = require('./chain');
 
 
 /**
- * Returns a new list by pulling every item at the first level of nesting out, and putting
- * them in a new array.
+ * Shorthand for `R.chain(R.identity)`, which removes one level of nesting
+ * from any [Chain](https://github.com/fantasyland/fantasy-land#chain).
  *
  * @func
  * @memberOf R
  * @category List
- * @sig [a] -> [b]
- * @param {Array} list The array to consider.
- * @return {Array} The flattened list.
- * @see R.flatten
+ * @sig Chain c => c (c a) -> c a
+ * @param {*} list
+ * @return {*}
+ * @see R.flatten, R.chain
  * @example
  *
  *      R.unnest([1, [2], [[3]]]); //=> [1, 2, [3]]
  *      R.unnest([[1, 2], [3, 4], [5, 6]]); //=> [1, 2, 3, 4, 5, 6]
  */
-module.exports = _curry1(_makeFlat(false));
+module.exports = chain(_identity);
