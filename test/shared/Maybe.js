@@ -27,6 +27,15 @@ Maybe.of = Maybe.Just;
 Maybe.prototype.of = Maybe.Just;
 
 
+_Just.prototype.toString = function() {
+  return 'Just(' + this.value + ')';
+};
+
+_Nothing.prototype.toString = function() {
+  return 'Nothing()';
+};
+
+
 // functor
 _Just.prototype.map = function(f) {
   return this.of(f(this.value));

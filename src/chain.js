@@ -1,8 +1,8 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
+var _makeFlat = require('./internal/_makeFlat');
 var _xchain = require('./internal/_xchain');
 var map = require('./map');
-var unnest = require('./unnest');
 
 
 /**
@@ -26,5 +26,5 @@ var unnest = require('./unnest');
  *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
  */
 module.exports = _curry2(_dispatchable('chain', _xchain, function chain(fn, list) {
-  return unnest(map(fn, list));
+  return _makeFlat(false)(map(fn, list));
 }));
