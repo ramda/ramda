@@ -23,6 +23,15 @@ describe('allPass', function() {
     assert.strictEqual(R.allPass([odd, gt5], 7), true);
   });
 
+  it('can be curried', function() {
+    assert.strictEqual(R.allPass([odd, gt5])(3), false);
+    assert.strictEqual(R.allPass([odd, gt5])(7), true);
+  });
+
+  it('returns true on empty predicate list', function() {
+    assert.strictEqual(R.allPass([])(3), true);
+  });
+
   it('reports its arity as the longest predicate length', function() {
     assert.strictEqual(R.allPass([odd, gt5, plusEq]).length, 4);
   });

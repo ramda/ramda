@@ -24,6 +24,10 @@ describe('anyPass', function() {
     assert.strictEqual(R.anyPass([odd, lt5], 22), false);
   });
 
+  it('returns false for an empty predicate list', function() {
+    assert.strictEqual(R.anyPass([])(3), false);
+  });
+
   it('reports its arity as the longest predicate length', function() {
     assert.strictEqual(R.anyPass([odd, lt5, plusEq]).length, 4);
   });
