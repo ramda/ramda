@@ -11,6 +11,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {String} key
  * @param {*} val
  * @return {Object}
+ * @see R.pair
  * @example
  *
  *      var matchPhrases = R.compose(
