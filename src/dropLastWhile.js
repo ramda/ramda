@@ -21,7 +21,7 @@ var _slice = require('./internal/_slice');
  *        return x <= 3;
  *      };
  *
- *      R.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2]
+ *      R.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4]
  */
 module.exports = _curry2(function dropLastWhile(pred, list) {
   var idx = list.length - 1;
