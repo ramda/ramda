@@ -16,7 +16,13 @@ var _curry3 = require('./internal/_curry3');
  * @see R.min, R.maxBy
  * @example
  *
- *      R.minBy(function(n) { return n * n; }, -3, 2); //=> 2
+ *      //  square :: Number -> Number
+ *      var square = function(n) { return n * n; };
+ *
+ *      R.minBy(square, -3, 2); //=> 2
+ *
+ *      R.reduce(R.minBy(square), Infinity, [3, -5, 4, 1, -2]); //=> 1
+ *      R.reduce(R.minBy(square), Infinity, []); //=> Infinity
  */
 module.exports = _curry3(function minBy(f, a, b) {
   return f(b) < f(a) ? b : a;
