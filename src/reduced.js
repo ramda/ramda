@@ -21,7 +21,7 @@ var _reduced = require('./internal/_reduced');
  * @example
  *
  *      R.reduce(
- *        R.pipe(R.add, R.ifElse(R.lte(10), R.reduced, R.identity)),
+ *        R.pipe(R.add, R.when(R.gte(R.__, 10), R.reduced)),
  *        0,
  *        [1, 2, 3, 4, 5]) // 10
  */
