@@ -7,8 +7,9 @@ var always = require('./always');
  * @func
  * @memberOf R
  * @category Function
- * @sig * -> false
- * @return {Boolean} false
+ * @sig * -> Boolean
+ * @param {*}
+ * @return {Boolean}
  * @see R.always, R.T
  * @example
  *
