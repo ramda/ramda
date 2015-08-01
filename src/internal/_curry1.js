@@ -1,5 +1,5 @@
 /**
- * Optimized internal two-arity curry function.
+ * Optimized internal one-arity curry function.
  *
  * @private
  * @category Function
