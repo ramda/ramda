@@ -1,4 +1,4 @@
-var objOf = require('./objOf');
+var _curry2 = require('./internal/_curry2');
 
 
 /**
@@ -11,14 +11,17 @@ var objOf = require('./objOf');
  * @param {String} key
  * @param {*} val
  * @return {Object}
- * @see R.pair, R.objOf
- * @deprecated since v0.18.0
+ * @see R.pair
  * @example
  *
  *      var matchPhrases = R.compose(
- *        R.createMapEntry('must'),
- *        R.map(R.createMapEntry('match_phrase'))
+ *        R.objOf('must'),
+ *        R.map(R.objOf('match_phrase'))
  *      );
  *      matchPhrases(['foo', 'bar', 'baz']); //=> {must: [{match_phrase: 'foo'}, {match_phrase: 'bar'}, {match_phrase: 'baz'}]}
  */
-module.exports = objOf;
+module.exports = _curry2(function objOf(key, val) {
+  var obj = {};
+  obj[key] = val;
+  return obj;
+});
