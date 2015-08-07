@@ -40,7 +40,7 @@ var filenameToIdentifier = R.partialRight(path.basename, '.js');
 
 //  identifierToFilename :: String -> String
 var identifierToFilename =
-R.pipe(R.ifElse(RegExp.prototype.test.bind(/^(?!__$)_/),
+R.pipe(R.ifElse(R.test(/^(?!__$)_/),
                 R.partial(path.join, __dirname, '..', 'src', 'internal'),
                 R.partial(path.join, __dirname, '..', 'src')),
        R.concat(_, '.js'));
@@ -97,34 +97,34 @@ var warnIgnoredTopLevel = R.tap(R.pipe(
 ));
 
 //  abortIfNotSorted :: List[{*}] -> List[{*}]
-var abortIfNotSorted = R.tap(R.cond([
+var abortIfNotSorted = R.tap(R.cond([[
     R.complement(R.pipe(
       R.pluck('id'),
       R.pluck('name'),
-      R.converge(R.eqDeep, R.identity, R.sortBy(R.identity))
+      R.converge(R.equals, R.identity, R.sortBy(R.identity))
     )),
     R.pipe(
       R.path(['0', 'loc', 'source']),
       R.concat('Dependencies not declared in alphabetical order in '),
       abort
     )
-  ])
+  ]])
 );
 
 //  abortIfExportNotLast :: {*} -> {*}
-var abortIfExportNotLast = R.tap(R.cond([
+var abortIfExportNotLast = R.tap(R.cond([[
   R.complement(R.pipe(R.prop('body'), R.last, isModuleExportsExpr)),
   R.pipe(
     R.path(['loc', 'source']),
     R.concat('module.exports not positioned last in '),
     abort
   )
-]));
+]]));
 
 //  abortIfDifferentRequireVar :: {*} -> {*}
-var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([
+var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([[
   R.converge(
-    R.complement(R.eq),
+    R.complement(R.equals),
     R.path(['id', 'name']),
     R.pipe(
       R.path(['init', 'arguments', '0', 'value']),
@@ -140,17 +140,17 @@ var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([
       '` in ' + ast.loc.source
     );
   }
-])));
+]])));
 
 //  abortIfEmptyBody :: {*} -> {*}
-var abortIfEmptyBody = R.tap(R.cond([
+var abortIfEmptyBody = R.tap(R.cond([[
   R.pipe(R.prop('body'), R.isEmpty),
   R.pipe(
     R.path(['loc', 'source']),
     R.concat('Nothing parsable in '),
     abort
   )
-]));
+]]));
 
 // dependenciesOf :: String -> [String]
 //
@@ -259,7 +259,7 @@ program
 
 //  filenames :: [String]
 var filenames = program.complete ?
-  R.filter(RegExp.prototype.test.bind(/(^|[/]).*[.]js$/),
+  R.filter(R.test(/(^|[/]).*[.]js$/),
            fs.readdirSync(path.join(__dirname, '..', 'src'))) :
   program.args;
 
