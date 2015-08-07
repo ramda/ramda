@@ -101,7 +101,7 @@ var abortIfNotSorted = R.tap(R.cond([
     R.complement(R.pipe(
       R.pluck('id'),
       R.pluck('name'),
-      R.converge(R.eqDeep, R.identity, R.sortBy(R.identity))
+      R.converge(R.equals, R.identity, R.sortBy(R.identity))
     )),
     R.pipe(
       R.path(['0', 'loc', 'source']),
@@ -124,7 +124,7 @@ var abortIfExportNotLast = R.tap(R.cond([
 //  abortIfDifferentRequireVar :: {*} -> {*}
 var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([
   R.converge(
-    R.complement(R.eq),
+    R.complement(R.equals),
     R.path(['id', 'name']),
     R.pipe(
       R.path(['init', 'arguments', '0', 'value']),

@@ -10,8 +10,8 @@ var R = require('ramda');
 R.pipe(
   fs.readdirSync,
   R.filter(R.test(/[.]js$/)),
-  R.reject(R.eq('bundle.js')),
-  R.reject(R.eq('test.examplesRunner.js')),
+  R.reject(R.equals('bundle.js')),
+  R.reject(R.equals('test.examplesRunner.js')),
   R.map(R.partial(path.resolve, 'test')),
   R.join('\n'),
   console.log
