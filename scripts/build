@@ -97,7 +97,7 @@ var warnIgnoredTopLevel = R.tap(R.pipe(
 ));
 
 //  abortIfNotSorted :: List[{*}] -> List[{*}]
-var abortIfNotSorted = R.tap(R.cond([
+var abortIfNotSorted = R.tap(R.cond([[
     R.complement(R.pipe(
       R.pluck('id'),
       R.pluck('name'),
@@ -108,21 +108,21 @@ var abortIfNotSorted = R.tap(R.cond([
       R.concat('Dependencies not declared in alphabetical order in '),
       abort
     )
-  ])
+  ]])
 );
 
 //  abortIfExportNotLast :: {*} -> {*}
-var abortIfExportNotLast = R.tap(R.cond([
+var abortIfExportNotLast = R.tap(R.cond([[
   R.complement(R.pipe(R.prop('body'), R.last, isModuleExportsExpr)),
   R.pipe(
     R.path(['loc', 'source']),
     R.concat('module.exports not positioned last in '),
     abort
   )
-]));
+]]));
 
 //  abortIfDifferentRequireVar :: {*} -> {*}
-var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([
+var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([[
   R.converge(
     R.complement(R.equals),
     R.path(['id', 'name']),
@@ -140,17 +140,17 @@ var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([
       '` in ' + ast.loc.source
     );
   }
-])));
+]])));
 
 //  abortIfEmptyBody :: {*} -> {*}
-var abortIfEmptyBody = R.tap(R.cond([
+var abortIfEmptyBody = R.tap(R.cond([[
   R.pipe(R.prop('body'), R.isEmpty),
   R.pipe(
     R.path(['loc', 'source']),
     R.concat('Nothing parsable in '),
     abort
   )
-]));
+]]));
 
 // dependenciesOf :: String -> [String]
 //
