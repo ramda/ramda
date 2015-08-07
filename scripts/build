@@ -40,7 +40,7 @@ var filenameToIdentifier = R.partialRight(path.basename, '.js');
 
 //  identifierToFilename :: String -> String
 var identifierToFilename =
-R.pipe(R.ifElse(RegExp.prototype.test.bind(/^(?!__$)_/),
+R.pipe(R.ifElse(R.test(/^(?!__$)_/),
                 R.partial(path.join, __dirname, '..', 'src', 'internal'),
                 R.partial(path.join, __dirname, '..', 'src')),
        R.concat(_, '.js'));
@@ -259,7 +259,7 @@ program
 
 //  filenames :: [String]
 var filenames = program.complete ?
-  R.filter(RegExp.prototype.test.bind(/(^|[/]).*[.]js$/),
+  R.filter(R.test(/(^|[/]).*[.]js$/),
            fs.readdirSync(path.join(__dirname, '..', 'src'))) :
   program.args;
 

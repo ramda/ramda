@@ -60,7 +60,7 @@
     "jshint": "2.7.x",
     "mocha": "2.x.x",
     "q": "^1.1.1",
-    "ramda": "0.13.0",
+    "ramda": "0.14.x",
     "rimraf": "~2.3.2",
     "testem": "^0.6.18",
     "uglify-js": "2.4.x",
