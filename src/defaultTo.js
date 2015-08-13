@@ -14,7 +14,7 @@ var _curry2 = require('./internal/_curry2');
  * @return {*} The the second value or the default value
  * @example
  *
- *      var defaultTo42 = defaultTo(42);
+ *      var defaultTo42 = R.defaultTo(42);
  *
  *      defaultTo42(null);  //=> 42
  *      defaultTo42(undefined);  //=> 42
