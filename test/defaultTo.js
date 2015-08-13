@@ -6,9 +6,10 @@ describe('defaultTo', function() {
 
   var defaultTo42 = R.defaultTo(42);
 
-  it('returns the default value if input is null/undefined', function() {
+  it('returns the default value if input is null, undefined or NaN', function() {
     assert.strictEqual(42, defaultTo42(null));
     assert.strictEqual(42, defaultTo42(undefined));
+    assert.strictEqual(42, defaultTo42(NaN));
   });
 
   it('returns the input value if it is not null/undefined', function() {
