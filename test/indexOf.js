@@ -83,4 +83,20 @@ describe('indexOf', function() {
     var curried = R.indexOf(3);
     eq(curried(list), 2);
   });
+
+  it('finds function, compared by identity', function() {
+    var f = function() {};
+    var g = function() {};
+    var list = [g, f, g, f];
+    eq(R.indexOf(f, list), 1);
+  });
+
+  it('does not find function, compared by identity', function() {
+    var f = function() {};
+    var g = function() {};
+    var h = function() {};
+    var list = [g, f];
+    eq(R.indexOf(h, list), -1);
+  });
+
 });
