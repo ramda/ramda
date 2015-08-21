@@ -1,7 +1,5 @@
 var _curry1 = require('./internal/_curry1');
 var lens = require('./lens');
-var nth = require('./nth');
-var update = require('./update');
 
 
 /**
@@ -24,5 +22,22 @@ var update = require('./update');
  *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
  */
 module.exports = _curry1(function lensIndex(n) {
-  return lens(nth(n), update(n));
+  return lens(
+    function(_xs) {
+      var xs = _xs == null ? [] : _xs;
+      return xs[n];
+    },
+    function(x, _xs) {
+      var xs = _xs == null ? [] : _xs;
+      var result = [];
+      var max = Math.max(n, xs.length - 1);
+      var idx = 0;
+      while (idx <= max) {
+        result.push(xs[idx]);
+        idx += 1;
+      }
+      result[n] = x;
+      return result;
+    }
+  );
 });
