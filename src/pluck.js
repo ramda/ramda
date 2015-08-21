@@ -13,6 +13,7 @@ var prop = require('./prop');
  * @param {Number|String} key The key name to pluck off of each object.
  * @param {Array} list The array to consider.
  * @return {Array} The list of values for the given key.
+ * @see R.props
  * @example
  *
  *      R.pluck('a')([{a: 1}, {a: 2}]); //=> [1, 2]
