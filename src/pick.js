@@ -12,7 +12,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Array} names an array of String property names to copy onto a new object
  * @param {Object} obj The object to copy from
  * @return {Object} A new object with only properties from `names` on it.
- * @see R.omit
+ * @see R.omit, R.props
  * @example
  *
  *      R.pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, d: 4}
