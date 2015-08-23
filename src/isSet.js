@@ -1,5 +1,4 @@
-var _curry1 = require('./internal/_curry1');
-var _indexOf = require('./internal/_indexOf');
+var allUniq = require('./allUniq');
 
 
 /**
@@ -12,20 +11,12 @@ var _indexOf = require('./internal/_indexOf');
  * @sig [a] -> Boolean
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if all elements are unique, else `false`.
+ * @see R.allUniq
+ * @deprecated since v0.18.0
  * @example
  *
  *      R.isSet(['1', 1]); //=> true
  *      R.isSet([1, 1]);   //=> false
  *      R.isSet([[42], [42]]); //=> false
  */
-module.exports = _curry1(function isSet(list) {
-  var len = list.length;
-  var idx = 0;
-  while (idx < len) {
-    if (_indexOf(list, list[idx], idx + 1) >= 0) {
-      return false;
-    }
-    idx += 1;
-  }
-  return true;
-});
+module.exports = allUniq;
