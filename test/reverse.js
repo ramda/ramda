@@ -4,12 +4,19 @@ var R = require('..');
 
 
 describe('reverse', function() {
+
   it('reverses arrays', function() {
-    assert.deepEqual(R.reverse([1, 2, 3, 4]), [4, 3, 2, 1]);
+    assert.deepEqual(R.reverse([]), []);
+    assert.deepEqual(R.reverse([1]), [1]);
+    assert.deepEqual(R.reverse([1, 2]), [2, 1]);
+    assert.deepEqual(R.reverse([1, 2, 3]), [3, 2, 1]);
   });
 
-  it('returns the empty list to itself', function() {
-    assert.deepEqual(R.reverse([]), []);
+  it('reverses strings', function() {
+    assert.strictEqual(R.reverse(''), '');
+    assert.strictEqual(R.reverse('a'), 'a');
+    assert.strictEqual(R.reverse('ab'), 'ba');
+    assert.strictEqual(R.reverse('abc'), 'cba');
   });
 
 });
