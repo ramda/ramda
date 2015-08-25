@@ -1,8 +1,6 @@
 var assert = require('assert');
-var listXf = require('./helpers/listXf');
 
 var R = require('..');
-var _isTransformer = require('../src/internal/_isTransformer');
 
 describe('chain', function() {
   var intoArray = R.into([]);
@@ -32,7 +30,12 @@ describe('chain', function() {
   });
 
   it('dispatches to transformer objects', function() {
-    assert.strictEqual(_isTransformer(R.chain(add1, listXf)), true);
+    var listXf = {
+      '@@transducer/init': function() { return []; },
+      '@@transducer/step': function(acc, x) { return acc.concat([x]); },
+      '@@transducer/result': function(x) { return x; }
+    };
+    assert.strictEqual(typeof R.chain(add1, listXf)['@@transducer/step'], 'function');
   });
 
   it('composes', function() {

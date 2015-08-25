@@ -1,7 +1,6 @@
 var assert = require('assert');
 
 var R = require('..');
-var _isTransformer = require('../src/internal/_isTransformer');
 
 
 describe('groupBy', function() {
@@ -58,6 +57,6 @@ describe('groupBy', function() {
       '@@transducer/result': function(x) { return x; },
       '@@transducer/step': R.merge
     };
-    assert.strictEqual(_isTransformer(R.groupBy(byType, xf)), true);
+    assert.strictEqual(typeof R.groupBy(byType, xf)['@@transducer/step'], 'function');
   });
 });

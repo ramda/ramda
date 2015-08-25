@@ -34,15 +34,18 @@
   "main": "dist/ramda.js",
   "scripts": {
     "bench": "scripts/benchRunner",
-    "browserify": "node_modules/browserify/bin/cmd.js test/*.js --outfile lib/test/bundle.js",
+    "browserify": "browserify test/*.js test/**/*.js --outfile lib/test/bundle.js",
     "bookmarklet": "scripts/bookmarklet",
     "build": "make && make dist/ramda.min.js",
     "clean": "rimraf dist/*",
     "jscs": "jscs scripts/bookmarklet scripts/build **/*.js **/**/*.js",
     "jshint": "jshint scripts/bookmarklet scripts/build **/*.js **/**/*.js",
     "pretest": "npm install && npm run jshint && npm run jscs && npm run clean && npm run build",
-    "test": "node scripts/testfiles | node_modules/.bin/mocha --reporter spec",
-    "posttest": "git checkout -- dist"
+    "test": "mocha -- test/*.js test/**/*.js",
+    "posttest": "git checkout -- dist",
+    "pretestem": "npm run pretest",
+    "testem": "scripts/testem",
+    "posttestem": "npm run posttest"
   },
   "dependencies": {},
   "devDependencies": {
@@ -51,9 +54,9 @@
     "browserify": "10.x.x",
     "cli-table": "0.3.x",
     "commander": "2.5.x",
-    "dox": "latest",
     "envvar": "1.x.x",
     "escodegen": "1.4.x",
+    "expect.js": "0.3.x",
     "handlebars": "3.0.x",
     "js-yaml": "^3.2.5",
     "jscs": "1.13.x",
@@ -61,8 +64,8 @@
     "mocha": "2.x.x",
     "q": "^1.1.1",
     "ramda": "0.17.x",
-    "rimraf": "~2.3.2",
-    "testem": "^0.6.18",
+    "rimraf": "2.x.x",
+    "testem": "0.9.x",
     "uglify-js": "2.4.x",
     "xyz": "0.5.x"
   }

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+if [ "$CI" = true ] ; then
+  node_modules/.bin/testem ci --launch PhantomJS
+else
+  node_modules/.bin/testem ci --parallel 4
+fi

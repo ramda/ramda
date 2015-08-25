@@ -1,5 +1,4 @@
 var assert = require('assert');
-var listXf = require('./helpers/listXf');
 
 var R = require('..');
 
@@ -24,6 +23,11 @@ describe('map', function() {
   });
 
   it('dispatches to transformer objects', function() {
+    var listXf = {
+      '@@transducer/init': function() { return []; },
+      '@@transducer/step': function(acc, x) { return acc.concat([x]); },
+      '@@transducer/result': function(x) { return x; }
+    };
     assert.deepEqual(R.map(add1, listXf), {
       f: add1,
       xf: listXf
@@ -37,6 +41,11 @@ describe('map', function() {
   });
 
   it('can compose transducer-style', function() {
+    var listXf = {
+      '@@transducer/init': function() { return []; },
+      '@@transducer/step': function(acc, x) { return acc.concat([x]); },
+      '@@transducer/result': function(x) { return x; }
+    };
     var mdouble = R.map(times2);
     var mdec = R.map(dec);
     var xcomp = mdec(mdouble(listXf));

@@ -1,7 +1,6 @@
 var assert = require('assert');
 
 var R = require('..');
-var Maybe = require('./shared/Maybe');
 
 
 describe('unnest', function() {
@@ -30,8 +29,16 @@ describe('unnest', function() {
   });
 
   it('is equivalent to R.chain(R.identity)', function() {
-    var Nothing = Maybe.Nothing;
-    var Just = Maybe.Just;
+    function _Nothing() {}
+    _Nothing.prototype.chain = function() { return this; };
+    _Nothing.prototype.toString = function() { return 'Nothing()'; };
+
+    function _Just(x) { this.value = x; }
+    _Just.prototype.chain = function(f) { return f(this.value); };
+    _Just.prototype.toString = function() { return 'Just(' + R.toString(this.value) + ')'; };
+
+    var Nothing = function() { return new _Nothing(); };
+    var Just = function(x) { return new _Just(x); };
 
     assert.strictEqual(R.toString(R.unnest(Nothing())), 'Nothing()');
     assert.strictEqual(R.toString(R.unnest(Just(Nothing()))), 'Nothing()');

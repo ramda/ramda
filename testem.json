@@ -1,15 +1,11 @@
 {
   "framework": "mocha",
-  "cwd": ".",
   "src_files": [
-      "ramda.js",
-      "test/*.js"
-  ],
-  "serve_files": [
-      "lib/test/require-shim.js",
-      "ramda.js",
-      "lib/test/expect.js",
-      "lib/test/assert-shim.js",
-      "test/*.js"
+    "node_modules/expect.js/index.js",
+    "node_modules/q/q.js",
+    "lib/test/assert-shim.js",
+    "lib/test/require-shim.js",
+    "dist/ramda.js",
+    "test/*.js"
   ]
 }

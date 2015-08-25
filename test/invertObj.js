@@ -4,8 +4,8 @@ var R = require('..');
 describe('invertObj', function() {
 
   it('takes a list or object and returns an object', function() {
-    assert.equal(typeof R.invertObj([]), 'object');
-    assert.equal(typeof R.invertObj({}), 'object');
+    assert.strictEqual(typeof R.invertObj([]), 'object');
+    assert.strictEqual(typeof R.invertObj({}), 'object');
   });
 
   it('returns an empty object when applied to a primitive', function() {
