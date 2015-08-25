@@ -12,6 +12,7 @@ var keys = require('./keys');
  * @sig {*} -> [String]
  * @param {Object} obj The objects with functions in it
  * @return {Array} A list of the object's own properties that map to functions.
+ * @deprecated since v0.18.0
  * @example
  *
  *      R.functions(R); // returns list of ramda's own function names

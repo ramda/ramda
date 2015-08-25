@@ -13,6 +13,7 @@ var keysIn = require('./keysIn');
  * @param {Object} obj The objects with functions in it
  * @return {Array} A list of the object's own properties and prototype
  *         properties that map to functions.
+ * @deprecated since v0.18.0
  * @example
  *
  *      R.functionsIn(R); // returns list of ramda's own and prototype function names
