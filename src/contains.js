@@ -13,7 +13,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Object} a The item to compare against.
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if the item is in the list, `false` otherwise.
- *
+ * @see R.any
  * @example
  *
  *      R.contains(3, [1, 2, 3]); //=> true
