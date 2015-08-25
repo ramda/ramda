@@ -16,8 +16,10 @@ var _curry3 = require('./internal/_curry3');
  * @return {Boolean} `true` if `x` is in `list`, else `false`.
  * @example
  *
- *      var xs = [{x: 12}, {x: 11}, {x: 10}];
- *      R.containsWith(function(a, b) { return a.x === b.x; }, {x: 10}, xs); //=> true
- *      R.containsWith(function(a, b) { return a.x === b.x; }, {x: 1}, xs); //=> false
+ *      var absEq = function(a, b) { return Math.abs(a) === Math.abs(b); };
+ *      R.containsWith(absEq, 5, [1, 2, 3]); //=> false
+ *      R.containsWith(absEq, 5, [4, 5, 6]); //=> true
+ *      R.containsWith(absEq, 5, [-1, -2, -3]); //=> false
+ *      R.containsWith(absEq, 5, [-4, -5, -6]); //=> true
  */
 module.exports = _curry3(_containsWith);
