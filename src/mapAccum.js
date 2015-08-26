@@ -12,7 +12,7 @@ var _curry3 = require('./internal/_curry3');
  * @func
  * @memberOf R
  * @category List
- * @sig (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
+ * @sig (acc -> x -> [acc, y]) -> acc -> [x] -> [acc, [y]]
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
