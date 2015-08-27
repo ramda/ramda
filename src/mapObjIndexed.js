@@ -4,7 +4,7 @@ var keys = require('./keys');
 
 
 /**
- * Like `mapObj`, but but passes additional arguments to the predicate function. The
+ * Like `mapObj`, but passes additional arguments to the predicate function. The
  * predicate function is passed three arguments: *(value, key, obj)*.
  *
  * @func
