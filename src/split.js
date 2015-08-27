@@ -8,8 +8,8 @@ var invoker = require('./invoker');
  * @func
  * @memberOf R
  * @category String
- * @sig String -> String -> [String]
- * @param {String} sep The separator string.
+ * @sig (String | RegExp) -> String -> [String]
+ * @param {String|RegExp} sep The pattern.
  * @param {String} str The string to separate into an array.
  * @return {Array} The array of strings from `str` separated by `str`.
  * @see R.join
