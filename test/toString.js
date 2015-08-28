@@ -35,6 +35,16 @@ describe('toString', function() {
   it('returns the string representation of a string primitive', function() {
     assert.strictEqual(R.toString('abc'), '"abc"');
     assert.strictEqual(R.toString('x "y" z'), '"x \\"y\\" z"');
+    assert.strictEqual(R.toString("' '"), '"\' \'"');
+    assert.strictEqual(R.toString('" "'), '"\\" \\""');
+    assert.strictEqual(R.toString('\b \b'), '"\\b \\b"');
+    assert.strictEqual(R.toString('\f \f'), '"\\f \\f"');
+    assert.strictEqual(R.toString('\n \n'), '"\\n \\n"');
+    assert.strictEqual(R.toString('\r \r'), '"\\r \\r"');
+    assert.strictEqual(R.toString('\t \t'), '"\\t \\t"');
+    assert.strictEqual(R.toString('\v \v'), '"\\v \\v"');
+    assert.strictEqual(R.toString('\0 \0'), '"\\0 \\0"');
+    assert.strictEqual(R.toString('\\ \\'), '"\\\\ \\\\"');
   });
 
   it('returns the string representation of a Boolean object', function() {
@@ -55,6 +65,16 @@ describe('toString', function() {
     /* jshint -W053 */
     assert.strictEqual(R.toString(new String('abc')), 'new String("abc")');
     assert.strictEqual(R.toString(new String('x "y" z')), 'new String("x \\"y\\" z")');
+    assert.strictEqual(R.toString(new String("' '")), 'new String("\' \'")');
+    assert.strictEqual(R.toString(new String('" "')), 'new String("\\" \\"")');
+    assert.strictEqual(R.toString(new String('\b \b')), 'new String("\\b \\b")');
+    assert.strictEqual(R.toString(new String('\f \f')), 'new String("\\f \\f")');
+    assert.strictEqual(R.toString(new String('\n \n')), 'new String("\\n \\n")');
+    assert.strictEqual(R.toString(new String('\r \r')), 'new String("\\r \\r")');
+    assert.strictEqual(R.toString(new String('\t \t')), 'new String("\\t \\t")');
+    assert.strictEqual(R.toString(new String('\v \v')), 'new String("\\v \\v")');
+    assert.strictEqual(R.toString(new String('\0 \0')), 'new String("\\0 \\0")');
+    assert.strictEqual(R.toString(new String('\\ \\')), 'new String("\\\\ \\\\")');
     /* jshint +W053 */
   });
 
