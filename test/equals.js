@@ -207,6 +207,8 @@ describe('equals', function() {
       assert.strictEqual(R.equals(new Map([[1, 'a']]), new Map([])), false);
       assert.strictEqual(R.equals(new Map([[1, 'a']]), new Map([[1, 'a']])), true);
       assert.strictEqual(R.equals(new Map([[1, 'a']]), new Map([[1, 'b']])), false);
+      assert.strictEqual(R.equals(new Map([[1, 'a'], [2, 'b']]), new Map([[2, 'b'], [1, 'a']])), true);
+      assert.strictEqual(R.equals(new Map([[1, 'a'], ['1', 'a']]), new Map([['1', 'a'], [1, 'a']])), true);
       assert.strictEqual(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'c']])]])), true);
       assert.strictEqual(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'd']])]])), false);
       assert.strictEqual(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [4, 5, 6]]])), true);
@@ -219,6 +221,8 @@ describe('equals', function() {
       assert.strictEqual(R.equals(new Set([]), new Set([])), true);
       assert.strictEqual(R.equals(new Set([]), new Set([1])), false);
       assert.strictEqual(R.equals(new Set([1]), new Set([])), false);
+      assert.strictEqual(R.equals(new Set([1, 2]), new Set([2, 1])), true);
+      assert.strictEqual(R.equals(new Set([1, '1']), new Set(['1', 1])), true);
       assert.strictEqual(R.equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([3])])])), true);
       assert.strictEqual(R.equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([4])])])), false);
       assert.strictEqual(R.equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [4, 5, 6]])), true);
