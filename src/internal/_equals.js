@@ -2,6 +2,8 @@ var _arrayFromIterator = require('./_arrayFromIterator');
 var _has = require('./_has');
 var identical = require('../identical');
 var keys = require('../keys');
+var sortBy = require('../sortBy');
+var toString = require('../toString');
 var type = require('../type');
 
 
@@ -45,7 +47,10 @@ module.exports = function _equals(a, b, stackA, stackB) {
       break;
     case 'Map':
     case 'Set':
-      if (!_equals(_arrayFromIterator(a.entries()), _arrayFromIterator(b.entries()), stackA, stackB)) {
+      if (!_equals(sortBy(toString, _arrayFromIterator(a.entries())),
+                   sortBy(toString, _arrayFromIterator(b.entries())),
+                   stackA,
+                   stackB)) {
         return false;
       }
       break;

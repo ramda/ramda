@@ -1,4 +1,3 @@
-var _contains = require('./_contains');
 var _map = require('./_map');
 var _quote = require('./_quote');
 var _toISOString = require('./_toISOString');
@@ -10,7 +9,14 @@ var test = require('../test');
 module.exports = function _toString(x, seen) {
   var recur = function recur(y) {
     var xs = seen.concat([x]);
-    return _contains(y, xs) ? '<Circular>' : _toString(y, xs);
+    var idx = 0;
+    while (idx < xs.length) {
+      if (xs[idx] === y) {
+        return '<Circular>';
+      }
+      idx += 1;
+    }
+    return _toString(y, xs);
   };
 
   //  mapPairs :: (Object, [String]) -> [String]
