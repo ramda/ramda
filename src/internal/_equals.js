@@ -14,10 +14,16 @@ module.exports = function _equals(a, b, stackA, stackB) {
     return false;
   }
 
+  if (a == null || b == null) {
+    return false;
+  }
+
+  if (typeof a.equals === 'function' || typeof b.equals === 'function') {
+    return typeof a.equals === 'function' && a.equals(b) &&
+           typeof b.equals === 'function' && b.equals(a);
+  }
+
   switch (type(a)) {
-    case 'Null':
-    case 'Undefined':
-      return false;
     case 'Array':
     case 'Object':
       break;

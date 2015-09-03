@@ -1,6 +1,5 @@
 var _curry2 = require('./internal/_curry2');
 var _equals = require('./internal/_equals');
-var _hasMethod = require('./internal/_hasMethod');
 
 
 /**
@@ -26,6 +25,5 @@ var _hasMethod = require('./internal/_hasMethod');
  *      R.equals(a, b); //=> true
  */
 module.exports = _curry2(function equals(a, b) {
-  return _hasMethod('equals', a) ? a.equals(b) :
-         _hasMethod('equals', b) ? b.equals(a) : _equals(a, b, [], []);
+  return _equals(a, b, [], []);
 });
