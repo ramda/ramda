@@ -43,6 +43,24 @@ describe('find', function() {
     assert.deepEqual(intoArray(R.find(even), []), [undefined]);
   });
 
+  it('finds elements inside iterables', function() {
+    var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
+    var numbers = {};
+    numbers[symIterator] = function() {
+      var i = 0;
+      return {
+        next: function() {
+          i += 1;
+          return {
+            value: i,
+            done: false
+          };
+        }
+      };
+    };
+    assert.strictEqual(R.find(gt100, numbers), 101);
+  });
+
   it('is curried', function() {
     assert.strictEqual(typeof R.find(even), 'function');
     assert.strictEqual(R.find(even)(a), 10);
