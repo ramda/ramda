@@ -242,7 +242,7 @@ describe('equals', function() {
     });
   }
 
-  it('dispatches to `equals` method', function() {
+  it('dispatches to `equals` method recursively', function() {
     function Left(x) { this.value = x; }
     Left.prototype.equals = function(x) {
       return x instanceof Left && R.equals(x.value, this.value);
@@ -259,6 +259,37 @@ describe('equals', function() {
     assert.strictEqual(R.equals({value: 42}, new Left(42)), false);
     assert.strictEqual(R.equals(new Left(42), new Right(42)), false);
     assert.strictEqual(R.equals(new Right(42), new Left(42)), false);
+
+    assert.strictEqual(R.equals([new Left(42)], [new Left(42)]), true);
+    assert.strictEqual(R.equals([new Left(42)], [new Right(42)]), false);
+    assert.strictEqual(R.equals([new Right(42)], [new Left(42)]), false);
+    assert.strictEqual(R.equals([new Right(42)], [new Right(42)]), true);
+  });
+
+  it('is commutative', function() {
+    function Point(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+    Point.prototype.equals = function(point) {
+      return point instanceof Point &&
+             this.x === point.x && this.y === point.y;
+    };
+
+    function ColorPoint(x, y, color) {
+      this.x = x;
+      this.y = y;
+      this.color = color;
+    }
+    ColorPoint.prototype = new Point(0, 0);
+    ColorPoint.prototype.equals = function(point) {
+      return point instanceof ColorPoint &&
+             this.x === point.x && this.y === point.y &&
+             this.color === point.color;
+    };
+
+    assert.strictEqual(R.equals(new Point(2, 2), new ColorPoint(2, 2, 'red')), false);
+    assert.strictEqual(R.equals(new ColorPoint(2, 2, 'red'), new Point(2, 2)), false);
   });
 
   it('is curried', function() {
