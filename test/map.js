@@ -54,4 +54,20 @@ describe('map', function() {
     assert.strictEqual(inc.length, 1);
   });
 
+  it('maps simple functions over iterables', function() {
+    var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
+    var numbers = {};
+    var max = 4;
+    numbers[symIterator] = function() {
+      var i = 0;
+      return {
+        next: function() {
+          i += 1;
+          return i <= max ? {value: i, done: false} : {done: true};
+        }
+      };
+    };
+    assert.deepEqual(R.map(add1, numbers), [2, 3, 4, 5]);
+  });
+
 });
