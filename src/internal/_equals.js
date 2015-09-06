@@ -1,5 +1,8 @@
-var _arrayFromIterator = require('./_arrayFromIterator');
+var _find = require('./_find');
 var _has = require('./_has');
+var _identity = require('./_identity');
+var _map = require('./_map');
+var all = require('../all');
 var identical = require('../identical');
 var keys = require('../keys');
 var type = require('../type');
@@ -45,7 +48,18 @@ module.exports = function _equals(a, b, stackA, stackB) {
       break;
     case 'Map':
     case 'Set':
-      if (!_equals(_arrayFromIterator(a.entries()), _arrayFromIterator(b.entries()), stackA, stackB)) {
+      if (a.size !== b.size) {
+        return false;
+      }
+      var paired = _map(
+        function(entryA) {
+          return _find(function(entryB) {
+            return _equals(entryA, entryB, stackA.slice(0), stackB.slice(0));
+          }, b.entries());
+        },
+        a.entries()
+      );
+      if (!all(_identity, paired)) {
         return false;
       }
       break;

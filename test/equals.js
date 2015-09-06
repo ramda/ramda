@@ -210,6 +210,10 @@ describe('equals', function() {
       assert.strictEqual(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'c']])]])), true);
       assert.strictEqual(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'd']])]])), false);
       assert.strictEqual(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [4, 5, 6]]])), true);
+      assert.strictEqual(R.equals(
+        new Map([[[1, 2, 3], [4, 5, 6]],    [[7, 8, 9], [10, 11, 12]]]),
+        new Map([[[7, 8, 9], [10, 11, 12]], [[1, 2, 3], [4, 5, 6]]])
+      ), true);
       assert.strictEqual(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [7, 8, 9]]])), false);
     });
   }
