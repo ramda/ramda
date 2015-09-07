@@ -2,8 +2,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns the second argument if it is not null or undefined. If it is null
- * or undefined, the first (default) argument is returned.
+ * Returns the second argument if it is not `null`, `undefined` or `NaN`
+ * otherwise the first argument is returned.
  *
  * @func
  * @memberOf R
@@ -19,7 +19,8 @@ var _curry2 = require('./internal/_curry2');
  *      defaultTo42(null);  //=> 42
  *      defaultTo42(undefined);  //=> 42
  *      defaultTo42('Ramda');  //=> 'Ramda'
+ *      defaultTo42(parseInt('string')); //=> 42
  */
 module.exports = _curry2(function defaultTo(d, v) {
-  return v == null ? d : v;
+  return v == null || v !== v ? d : v;
 });
