@@ -1,5 +1,5 @@
-var _asChars = require('./internal/_asChars');
 var _curry1 = require('./internal/_curry1');
+var _isString = require('./internal/_isString');
 var _slice = require('./internal/_slice');
 
 
@@ -26,6 +26,7 @@ var _slice = require('./internal/_slice');
  *      R.reverse('a');        //=> 'a'
  *      R.reverse('');         //=> ''
  */
-module.exports = _curry1(_asChars(function reverse(list) {
-  return _slice(list).reverse();
-}));
+module.exports = _curry1(function reverse(list) {
+  return _isString(list) ? list.split('').reverse().join('') :
+                           _slice(list).reverse();
+});
