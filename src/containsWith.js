@@ -14,6 +14,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} x The item to find
  * @param {Array} list The list to iterate over
  * @return {Boolean} `true` if `x` is in `list`, else `false`.
+ * @deprecated since v0.18.0
  * @example
  *
  *      var absEq = function(a, b) { return Math.abs(a) === Math.abs(b); };
