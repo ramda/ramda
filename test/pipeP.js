@@ -12,26 +12,34 @@ describe('pipeP', function() {
     assert.strictEqual(R.pipeP.length, 0);
   });
 
-  it('performs left-to-right composition of Promise-returning functions', function() {
+  it('performs left-to-right composition of Promise-returning functions', function(done) {
     var f = function(a) { return Q.Promise(function(res) { res([a]); }); };
     var g = function(a, b) { return Q.Promise(function(res) { res([a, b]); }); };
-    var h = function(a, b, c) { return Q.Promise(function(res) { res([a, b, c]); }); };
 
-    assert.strictEqual(R.pipeP(f, f, f).length, 1);
-    assert.strictEqual(R.pipeP(g, f, f).length, 2);
-    assert.strictEqual(R.pipeP(h, f, f).length, 3);
+    assert.strictEqual(R.pipeP(f).length, 1);
+    assert.strictEqual(R.pipeP(g).length, 2);
+    assert.strictEqual(R.pipeP(f, f).length, 1);
+    assert.strictEqual(R.pipeP(f, g).length, 1);
+    assert.strictEqual(R.pipeP(g, f).length, 2);
+    assert.strictEqual(R.pipeP(g, g).length, 2);
 
-    R.pipeP(f, f, f)(1).then(function(result) {
-      assert.deepEqual(result, [[[1]]]);
-    });
+    R.pipeP(f, g)(1).then(function(result) {
+      assert.deepEqual(result, [[1], undefined]);
 
-    R.pipeP(g, f, f)(1)(2).then(function(result) {
-      assert.deepEqual(result, [[[1, 2]]]);
-    });
+      R.pipeP(g, f)(1).then(function(result) {
+        assert.deepEqual(result, [[1, undefined]]);
 
-    R.pipeP(h, f, f)(1)(2)(3).then(function(result) {
-      assert.deepEqual(result, [[[1, 2, 3]]]);
-    });
+        R.pipeP(f, g)(1, 2).then(function(result) {
+          assert.deepEqual(result, [[1], undefined]);
+
+          R.pipeP(g, f)(1, 2).then(function(result) {
+            assert.deepEqual(result, [[1, 2]]);
+
+            done();
+          })['catch'](done);
+        })['catch'](done);
+      })['catch'](done);
+    })['catch'](done);
   });
 
   it('throws if given no arguments', function() {

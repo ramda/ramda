@@ -11,27 +11,12 @@ describe('pipe', function() {
   });
 
   it('performs left-to-right function composition', function() {
-    var f = function(a) { return [a]; };
-    var g = function(a, b) { return [a, b]; };
-    var h = function(a, b, c) { return [a, b, c]; };
+    //  f :: (String, Number?) -> ([Number] -> [Number])
+    var f = R.pipe(parseInt, R.multiply, R.map);
 
-    assert.strictEqual(R.pipe(f, f, f).length, 1);
-    assert.strictEqual(R.pipe(g, f, f).length, 2);
-    assert.strictEqual(R.pipe(h, f, f).length, 3);
-
-    assert.deepEqual(R.pipe(f, f, f)(1), [[[1]]]);
-    assert.deepEqual(R.pipe(g, f, f)(1, 2), [[[1, 2]]]);
-    assert.deepEqual(R.pipe(g, f, f)(1)(2), [[[1, 2]]]);
-    assert.deepEqual(R.pipe(h, f, f)(1, 2, 3), [[[1, 2, 3]]]);
-    assert.deepEqual(R.pipe(h, f, f)(1, 2)(3), [[[1, 2, 3]]]);
-    assert.deepEqual(R.pipe(h, f, f)(1)(2, 3), [[[1, 2, 3]]]);
-    assert.deepEqual(R.pipe(h, f, f)(1)(2)(3), [[[1, 2, 3]]]);
-
-    var $g = R.curry(g);
-
-    assert.strictEqual(R.pipe($g, $g).length, 2);
-    assert.deepEqual(R.pipe($g, $g)(1, 2)(3), [[1, 2], 3]);
-    assert.deepEqual(R.pipe($g, $g)(1)(2)(3), [[1, 2], 3]);
+    assert.strictEqual(f.length, 2);
+    assert.deepEqual(f('10')([1, 2, 3]), [10, 20, 30]);
+    assert.deepEqual(f('10', 2)([1, 2, 3]), [2, 4, 6]);
   });
 
   it('passes context to functions', function() {
