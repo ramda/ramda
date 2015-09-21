@@ -24,6 +24,7 @@ module.exports = function _equals(a, b, stackA, stackB) {
   }
 
   switch (type(a)) {
+    case 'Arguments':
     case 'Array':
     case 'Object':
       break;

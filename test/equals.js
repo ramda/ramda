@@ -98,6 +98,20 @@ describe('equals', function() {
     assert.strictEqual(R.equals({a:2, b:3, c:1}, {a:2, b:3}), false);
   });
 
+  it('considers equivalent Arguments objects equal', function() {
+    var a = (function() { return arguments; }());
+    var b = (function() { return arguments; }());
+    var c = (function() { return arguments; }(1, 2, 3));
+    var d = (function() { return arguments; }(1, 2, 3));
+
+    assert.strictEqual(R.equals(a, b), true);
+    assert.strictEqual(R.equals(b, a), true);
+    assert.strictEqual(R.equals(c, d), true);
+    assert.strictEqual(R.equals(d, c), true);
+    assert.strictEqual(R.equals(a, c), false);
+    assert.strictEqual(R.equals(c, a), false);
+  });
+
   var supportsSticky = false;
   try { RegExp('', 'y'); supportsSticky = true; } catch (e) {}
 
