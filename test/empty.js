@@ -42,4 +42,9 @@ describe('empty', function() {
     /* jshint +W053 */
   });
 
+  it('returns empty arguments object given arguments object', function() {
+    var x = (function() { return arguments; }(1, 2, 3));
+    assert.strictEqual(R.toString(R.empty(x)), '(function() { return arguments; }())');
+  });
+
 });
