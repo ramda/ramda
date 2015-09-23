@@ -55,7 +55,7 @@ module.exports = curry(function useWith(fn /*, transformers */) {
   return curry(_arity(tlen, function() {
     var args = [], idx = 0;
     while (idx < tlen) {
-      args[idx] = transformers[idx](arguments[idx]);
+      args[idx] = transformers[idx].call(this, arguments[idx]);
       idx += 1;
     }
     return fn.apply(this, args.concat(_slice(arguments, tlen)));

@@ -29,4 +29,18 @@ describe('useWith', function() {
     assert.strictEqual(f.length, 3);
   });
 
+  it('maintains the `this` context of main function', function() {
+    function combine(x, y) {return 'x: ' + x + ', y: ' + y + ', z: ' + this.z;}
+    var f = R.useWith(combine, add1, mult2);
+    assert.strictEqual(f.call({z: 15}, 5, 10), 'x: 6, y: 20, z: 15');
+  });
+
+  it('maintains the `this` context of transformer functions', function() {
+    function propX(val) {return this.propX + ': ' + val;}
+    function propY(val) {return this.propY + ': ' + val;}
+    function combine(x, y) {return x + ', ' + y;}
+    var f = R.useWith(combine, propX, propY);
+    assert.strictEqual(f.call({propX: 'alpha', propY: 'beta'}, 5, 10), 'alpha: 5, beta: 10');
+  });
+
 });
