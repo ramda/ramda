@@ -3,7 +3,6 @@
 var assert = require('assert');
 
 var R = require('..');
-var Maybe = require('./shared/Maybe');
 
 
 var add3 = R.curry(function add3(a, b, c) {
@@ -39,8 +38,23 @@ describe('lift', function() {
   });
 
   it('works with other functors such as "Maybe"', function() {
-    var addM = R.lift(R.add);
-    assert.deepEqual(addM(Maybe.of(3), Maybe.of(5)), Maybe.of(8));
+    function Identity(x) {
+      if (!(this instanceof Identity)) {
+        return new Identity(x);
+      }
+      this.value = x;
+    }
+    Identity.prototype.ap = function(x) {
+      return Identity(this.value(x.value));
+    };
+    Identity.prototype.map = function(f) {
+      return Identity(f(this.value));
+    };
+    Identity.prototype.toString = function() {
+      return 'Identity(' + R.toString(this.value) + ')';
+    };
+
+    assert.strictEqual(R.toString(R.lift(R.add)(Identity(3), Identity(5))), 'Identity(8)');
   });
 
 });

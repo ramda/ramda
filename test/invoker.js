@@ -19,21 +19,21 @@ describe('invoker', function() {
     assert.throws(
       function() { R.invoker(0, 'foo')(null); },
       function(err) {
-        return err.constructor === TypeError &&
+        return err.constructor.name === 'TypeError' &&
                err.message === 'null does not have a method named "foo"';
       }
     );
     assert.throws(
       function() { R.invoker(0, 'foo')([1, 2, 3]); },
       function(err) {
-        return err.constructor === TypeError &&
+        return err.constructor.name === 'TypeError' &&
                err.message === '[1, 2, 3] does not have a method named "foo"';
       }
     );
     assert.throws(
       function() { R.invoker(0, 'length')([1, 2, 3]); },
       function(err) {
-        return err.constructor === TypeError &&
+        return err.constructor.name === 'TypeError' &&
                err.message === '[1, 2, 3] does not have a method named "length"';
       }
     );

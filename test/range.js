@@ -31,7 +31,7 @@ describe('range', function() {
     assert.throws(
       function() { R.range('a', 'z'); },
       function(err) {
-        return err.constructor === TypeError &&
+        return err.constructor.name === 'TypeError' &&
                err.message === 'Both arguments to range must be numbers';
       }
     );

@@ -1,5 +1,4 @@
 var assert = require('assert');
-var listXf = require('./helpers/listXf');
 
 var R = require('..');
 
@@ -45,6 +44,11 @@ describe('all', function() {
   });
 
   it('dispatches when given a transformer in list position', function() {
+    var listXf = {
+      '@@transducer/init': function() { return []; },
+      '@@transducer/step': function(acc, x) { return acc.concat([x]); },
+      '@@transducer/result': function(x) { return x; }
+    };
     assert.deepEqual(R.all(even, listXf), {
       all: true,
       f: even,

@@ -32,9 +32,9 @@ describe('converge', function() {
     var c = function(x, y) { return this.f3(x, y); };
     var d = R.converge(c, a, b);
     var context = {f1: R.add(1), f2: R.add(2), f3: R.add};
-    assert.equal(a.call(context, 1), 2);
-    assert.equal(b.call(context, 1), 3);
-    assert.equal(d.call(context, 1), 5);
+    assert.strictEqual(a.call(context, 1), 2);
+    assert.strictEqual(b.call(context, 1), 3);
+    assert.strictEqual(d.call(context, 1), 5);
   });
 
   it('returns a curried function', function() {

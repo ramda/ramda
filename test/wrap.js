@@ -43,8 +43,8 @@ describe('wrap', function() {
       return sideEffect;
     });
     var add10 = wrappedAdd(10);
-    assert.equal(add10(5), 15);
-    assert.equal(sideEffect, 15);
+    assert.strictEqual(add10(5), 15);
+    assert.strictEqual(sideEffect, 15);
   });
 
 });

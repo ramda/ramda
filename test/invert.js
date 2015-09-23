@@ -4,8 +4,8 @@ var R = require('..');
 describe('invert', function() {
 
   it('takes a list or object and returns an object of lists', function() {
-    assert.equal(typeof R.invert([]), 'object');
-    assert.equal(typeof R.invert({}), 'object');
+    assert.strictEqual(typeof R.invert([]), 'object');
+    assert.strictEqual(typeof R.invert({}), 'object');
 
     var inverted = R.invert([0]);
     var keys = R.keys(inverted);
