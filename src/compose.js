@@ -9,7 +9,7 @@ var reverse = require('./reverse');
  * @func
  * @memberOf R
  * @category Function
- * @sig ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> (a -> b -> ... -> n -> z)
+ * @sig ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> ((a, b, ..., n) -> z)
  * @param {...Function} functions
  * @return {Function}
  * @see R.pipe

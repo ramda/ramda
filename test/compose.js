@@ -11,27 +11,12 @@ describe('compose', function() {
   });
 
   it('performs right-to-left function composition', function() {
-    var f = function(a) { return [a]; };
-    var g = function(a, b) { return [a, b]; };
-    var h = function(a, b, c) { return [a, b, c]; };
+    //  f :: (String, Number?) -> ([Number] -> [Number])
+    var f = R.compose(R.map, R.multiply, parseInt);
 
-    assert.strictEqual(R.compose(f, f, f).length, 1);
-    assert.strictEqual(R.compose(f, f, g).length, 2);
-    assert.strictEqual(R.compose(f, f, h).length, 3);
-
-    assert.deepEqual(R.compose(f, f, f)(1), [[[1]]]);
-    assert.deepEqual(R.compose(f, f, g)(1, 2), [[[1, 2]]]);
-    assert.deepEqual(R.compose(f, f, g)(1)(2), [[[1, 2]]]);
-    assert.deepEqual(R.compose(f, f, h)(1, 2, 3), [[[1, 2, 3]]]);
-    assert.deepEqual(R.compose(f, f, h)(1, 2)(3), [[[1, 2, 3]]]);
-    assert.deepEqual(R.compose(f, f, h)(1)(2, 3), [[[1, 2, 3]]]);
-    assert.deepEqual(R.compose(f, f, h)(1)(2)(3), [[[1, 2, 3]]]);
-
-    var $g = R.curry(g);
-
-    assert.strictEqual(R.compose($g, $g).length, 2);
-    assert.deepEqual(R.compose($g, $g)(1, 2)(3), [[1, 2], 3]);
-    assert.deepEqual(R.compose($g, $g)(1)(2)(3), [[1, 2], 3]);
+    assert.strictEqual(f.length, 2);
+    assert.deepEqual(f('10')([1, 2, 3]), [10, 20, 30]);
+    assert.deepEqual(f('10', 2)([1, 2, 3]), [2, 4, 6]);
   });
 
   it('passes context to functions', function() {
