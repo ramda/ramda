@@ -20,9 +20,8 @@ var filter = require('./filter');
  * @see R.filter
  * @example
  *
- *      var isOdd = function(n) {
- *        return n % 2 === 1;
- *      };
+ *      var isOdd = (n) => n % 2 === 1;
+ *
  *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
  */
 module.exports = _curry2(function reject(fn, list) {

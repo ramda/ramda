@@ -17,7 +17,7 @@ var _curry3 = require('./internal/_curry3');
  *         using `fn`.
  * @example
  *
- *      var f = function(x, y) {
+ *      var f = (x, y) => {
  *        // ...
  *      };
  *      R.zipWith(f, [1, 2, 3], ['a', 'b', 'c']);

@@ -20,7 +20,7 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The final list.
  * @example
  *
- *      var f = function(n) { return n > 50 ? false : [-n, n + 10] };
+ *      var f = n => n > 50 ? false : [-n, n + 10];
  *      R.unfold(f, 10); //=> [-10, -20, -30, -40, -50]
  */
 module.exports = _curry2(function unfold(fn, seed) {

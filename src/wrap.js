@@ -16,11 +16,10 @@ var curryN = require('./curryN');
  * @return {Function} The wrapped function.
  * @example
  *
- *      var greet = function(name) {return 'Hello ' + name;};
+ *      var greet = name => 'Hello ' + name;
  *
- *      var shoutedGreet = R.wrap(greet, function(gr, name) {
- *        return gr(name).toUpperCase();
- *      });
+ *      var shoutedGreet = R.wrap(greet, (gr, name) => gr(name).toUpperCase());
+ *
  *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
  *
  *      var shortenedGreet = R.wrap(greet, function(gr, name) {

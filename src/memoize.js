@@ -18,7 +18,7 @@ var toString = require('./toString');
  * @example
  *
  *      var count = 0;
- *      var factorial = R.memoize(function(n) {
+ *      var factorial = R.memoize(n => {
  *        count += 1;
  *        return R.product(R.range(1, n + 1));
  *      });

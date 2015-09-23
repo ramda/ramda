@@ -21,9 +21,9 @@ var last = require('./last');
  * @return {Array} `list` without repeating elements.
  * @example
  *
- *      function lengthEq(x, y) { return Math.abs(x) === Math.abs(y); };
+ *      var lengthEq = (x, y) => Math.abs(x) === Math.abs(y);
  *      var l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
- *      R.dropRepeatsWith(lengthEq, l); //=> [1, 3, 4, -5, 3]
+ *      R.dropRepeatsWith(R.eqBy(Math.abs), l); //=> [1, 3, 4, -5, 3]
  */
 module.exports = _curry2(_dispatchable('dropRepeatsWith', _xdropRepeatsWith, function dropRepeatsWith(pred, list) {
   var result = [];

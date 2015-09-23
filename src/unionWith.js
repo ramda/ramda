@@ -19,10 +19,9 @@ var uniqWith = require('./uniqWith');
  * @see R.union
  * @example
  *
- *      function cmp(x, y) { return x.a === y.a; }
  *      var l1 = [{a: 1}, {a: 2}];
  *      var l2 = [{a: 1}, {a: 4}];
- *      R.unionWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}, {a: 4}]
+ *      R.unionWith(R.eqBy(R.prop('a')), l1, l2); //=> [{a: 1}, {a: 2}, {a: 4}]
  */
 module.exports = _curry3(function unionWith(pred, list1, list2) {
   return uniqWith(pred, _concat(list1, list2));

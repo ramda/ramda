@@ -17,9 +17,7 @@ var _slice = require('./internal/_slice');
  * @see R.dropLastWhile
  * @example
  *
- *      var isNotOne = function(x) {
- *        return !(x === 1);
- *      };
+ *      var isNotOne = x => x !== 1;
  *
  *      R.takeLastWhile(isNotOne, [1, 2, 3, 4]); //=> [2, 3, 4]
  */

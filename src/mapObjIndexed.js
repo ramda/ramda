@@ -19,9 +19,7 @@ var keys = require('./keys');
  * @example
  *
  *      var values = { x: 1, y: 2, z: 3 };
- *      var prependKeyAndDouble = function(num, key, obj) {
- *        return key + (num * 2);
- *      };
+ *      var prependKeyAndDouble = (num, key, obj) => key + (num * 2);
  *
  *      R.mapObjIndexed(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
  */

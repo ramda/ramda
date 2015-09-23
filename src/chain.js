@@ -20,9 +20,7 @@ var map = require('./map');
  * @return {Array}
  * @example
  *
- *      var duplicate = function(n) {
- *        return [n, n];
- *      };
+ *      var duplicate = n => [n, n];
  *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
  */
 module.exports = _curry2(_dispatchable('chain', _xchain, function chain(fn, list) {

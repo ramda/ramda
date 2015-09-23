@@ -18,7 +18,7 @@ var nAry = require('./nAry');
  * @example
  *
  *      // Variadic constructor function
- *      var Widget = function() {
+ *      var Widget = () => {
  *        this.children = Array.prototype.slice.call(arguments);
  *        // ...
  *      };

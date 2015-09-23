@@ -17,7 +17,7 @@ var _curry3 = require('./internal/_curry3');
  * @example
  *
  *      //  square :: Number -> Number
- *      var square = function(n) { return n * n; };
+ *      var square = n => n * n;
  *
  *      R.minBy(square, -3, 2); //=> 2
  *

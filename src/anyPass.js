@@ -17,8 +17,8 @@ var any = require('./any');
  * @see R.allPass
  * @example
  *
- *      var gt10 = function(x) { return x > 10; };
- *      var even = function(x) { return x % 2 === 0};
+ *      var gt10 = x => x > 10;
+ *      var even = x => x % 2 === 0;
  *      var f = R.anyPass([gt10, even]);
  *      f(11); //=> true
  *      f(8); //=> true

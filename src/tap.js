@@ -13,7 +13,7 @@ var _curry2 = require('./internal/_curry2');
  * @return {*} `x`.
  * @example
  *
- *      var sayX = function(x) { console.log('x is ' + x); };
+ *      var sayX = x => console.log('x is ' + x);
  *      R.tap(sayX, 100); //=> 100
  *      //-> 'x is 100'
  */

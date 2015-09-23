@@ -22,9 +22,9 @@ var flip = require('./flip');
  *         `args` appended to `fn`'s arguments list.
  * @example
  *
- *      var greet = function(salutation, title, firstName, lastName) {
- *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
- *      };
+ *      var greet = (salutation, title, firstName, lastName) =>
+ *           salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+ *
  *      var greetMsJaneJones = R.partialRight(greet, 'Ms.', 'Jane', 'Jones');
  *
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'

@@ -15,9 +15,8 @@ var _curry2 = require('./internal/_curry2');
  *         arity `n`.
  * @example
  *
- *      var takesTwoArgs = function(a, b) {
- *        return [a, b];
- *      };
+ *      var takesTwoArgs = (a, b) => [a, b];
+ *
  *      takesTwoArgs.length; //=> 2
  *      takesTwoArgs(1, 2); //=> [1, 2]
  *

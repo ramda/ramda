@@ -22,9 +22,7 @@ var _xdropWhile = require('./internal/_xdropWhile');
  * @see R.takeWhile
  * @example
  *
- *      var lteTwo = function(x) {
- *        return x <= 2;
- *      };
+ *      var lteTwo = x => x <= 2;
  *
  *      R.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
  */

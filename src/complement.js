@@ -20,7 +20,7 @@ var _curry1 = require('./internal/_curry1');
  * @see R.not
  * @example
  *
- *      var isEven = function(n) { return n % 2 === 0; };
+ *      var isEven = n => n % 2 === 0;
  *      var isOdd = R.complement(isEven);
  *      isOdd(21); //=> true
  *      isOdd(42); //=> false

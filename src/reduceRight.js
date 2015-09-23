@@ -26,9 +26,7 @@ var _curry3 = require('./internal/_curry3');
  * @example
  *
  *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
- *      var flattenPairs = function(acc, pair) {
- *        return acc.concat(pair);
- *      };
+ *      var flattenPairs = (acc, pair) => acc.concat(pair);
  *
  *      R.reduceRight(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
  */

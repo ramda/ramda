@@ -18,13 +18,13 @@ var curry = require('./curry');
  *         with `args` prepended to `fn`'s arguments list.
  * @example
  *
- *      var multiply = function(a, b) { return a * b; };
+ *      var multiply = (a, b) => a * b;
  *      var double = R.partial(multiply, 2);
  *      double(2); //=> 4
  *
- *      var greet = function(salutation, title, firstName, lastName) {
- *        return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
- *      };
+ *      var greet = (salutation, title, firstName, lastName) =>
+ *        salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+ *
  *      var sayHello = R.partial(greet, 'Hello');
  *      var sayHelloToMs = R.partial(sayHello, 'Ms.');
  *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
