@@ -27,9 +27,7 @@ var _reduce = require('./internal/_reduce');
  * @example
  *
  *      var numbers = [1, 2, 3];
- *      var add = function(a, b) {
- *        return a + b;
- *      };
+ *      var add = (a, b) => a + b;
  *
  *      R.reduce(add, 10, numbers); //=> 16
  */

@@ -17,8 +17,8 @@ var _curry2 = require('./internal/_curry2');
  * @see R.and
  * @example
  *
- *      var gt10 = function(x) { return x > 10; };
- *      var even = function(x) { return x % 2 === 0 };
+ *      var gt10 = x => x > 10;
+ *      var even = x => x % 2 === 0;
  *      var f = R.both(gt10, even);
  *      f(100); //=> true
  *      f(101); //=> false

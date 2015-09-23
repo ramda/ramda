@@ -17,9 +17,7 @@ var _slice = require('./internal/_slice');
  * @see R.takeLastWhile
  * @example
  *
- *      var lteThree = function(x) {
- *        return x <= 3;
- *      };
+ *      var lteThree = x => x <= 3;
  *
  *      R.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4]
  */

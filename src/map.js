@@ -24,9 +24,7 @@ var _xmap = require('./internal/_xmap');
  * @return {Array} The new list.
  * @example
  *
- *      var double = function(x) {
- *        return x * 2;
- *      };
+ *      var double = x => x * 2;
  *
  *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
  */

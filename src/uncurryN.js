@@ -16,15 +16,7 @@ var curryN = require('./curryN');
  * @see R.curry
  * @example
  *
- *      var addFour = function(a) {
- *        return function(b) {
- *          return function(c) {
- *            return function(d) {
- *              return a + b + c + d;
- *            };
- *          };
- *        };
- *      };
+ *      var addFour = a => b => c => d => a + b + c + d;
  *
  *      var uncurriedAddFour = R.uncurryN(4, addFour);
  *      uncurriedAddFour(1, 2, 3, 4); //=> 10

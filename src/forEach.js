@@ -24,7 +24,7 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The original list.
  * @example
  *
- *      var printXPlusFive = function(x) { console.log(x + 5); };
+ *      var printXPlusFive = x => console.log(x + 5);
  *      R.forEach(printXPlusFive, [1, 2, 3]); //=> [1, 2, 3]
  *      //-> 6
  *      //-> 7

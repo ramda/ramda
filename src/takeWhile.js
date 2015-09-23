@@ -23,9 +23,7 @@ var _xtakeWhile = require('./internal/_xtakeWhile');
  * @see R.dropWhile
  * @example
  *
- *      var isNotFour = function(x) {
- *        return !(x === 4);
- *      };
+ *      var isNotFour = x => x !== 4;
  *
  *      R.takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
  */

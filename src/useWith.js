@@ -23,13 +23,11 @@ var curry = require('./curry');
  * @return {Function} The wrapped function.
  * @example
  *
- *      var double = function(y) { return y * 2; };
- *      var square = function(x) { return x * x; };
- *      var add = function(a, b) { return a + b; };
+ *      var double = y => y * 2;
+ *      var square = x => x * x;
+ *      var add = (a, b) => a + b;
  *      // Adds any number of arguments together
- *      var addAll = function() {
- *        return R.reduce(add, 0, arguments);
- *      };
+ *      var addAll = () => R.reduce(add, 0, arguments);
  *
  *      // Basic example
  *      var addDoubleAndSquare = R.useWith(addAll, double, square);

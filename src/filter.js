@@ -25,9 +25,8 @@ var _xfilter = require('./internal/_xfilter');
  * @see R.reject
  * @example
  *
- *      var isEven = function(n) {
- *        return n % 2 === 0;
- *      };
+ *      var isEven = n => n % 2 === 0;
+ *
  *      R.filter(isEven, [1, 2, 3, 4]); //=> [2, 4]
  */
 module.exports = _curry2(_dispatchable('filter', _xfilter, _filter));

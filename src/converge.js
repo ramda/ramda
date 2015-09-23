@@ -20,14 +20,14 @@ var pluck = require('./pluck');
  * @return {Function} A new function.
  * @example
  *
- *      var add = function(a, b) { return a + b; };
- *      var multiply = function(a, b) { return a * b; };
- *      var subtract = function(a, b) { return a - b; };
+ *      var add = (a, b) => a + b;
+ *      var multiply = (a, b) => a * b;
+ *      var subtract = (a, b) => a - b;
  *
  *      //≅ multiply( add(1, 2), subtract(1, 2) );
  *      R.converge(multiply, add, subtract)(1, 2); //=> -3
  *
- *      var add3 = function(a, b, c) { return a + b + c; };
+ *      var add3 = (a, b, c) => a + b + c;
  *      R.converge(add3, multiply, add, subtract)(1, 2); //=> 4
  */
 module.exports = curryN(3, function converge(after) {

@@ -20,9 +20,7 @@ var keys = require('./keys');
  * @example
  *
  *      var values = { x: 1, y: 2, z: 3 };
- *      var double = function(num) {
- *        return num * 2;
- *      };
+ *      var double = num => num * 2;
  *
  *      R.mapObj(double, values); //=> { x: 2, y: 4, z: 6 }
  */

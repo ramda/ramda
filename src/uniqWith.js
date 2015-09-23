@@ -16,7 +16,7 @@ var _curry2 = require('./internal/_curry2');
  * @return {Array} The list of unique items.
  * @example
  *
- *      var strEq = function(a, b) { return String(a) === String(b); };
+ *      var strEq = R.eqBy(String);
  *      R.uniqWith(strEq)([1, '1', 2, 1]); //=> [1, 2]
  *      R.uniqWith(strEq)([{}, {}]);       //=> [{}]
  *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]

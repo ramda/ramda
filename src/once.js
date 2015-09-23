@@ -14,7 +14,7 @@ var _curry1 = require('./internal/_curry1');
  * @return {Function} The wrapped function.
  * @example
  *
- *      var addOneOnce = R.once(function(x){ return x + 1; });
+ *      var addOneOnce = R.once(x => x + 1);
  *      addOneOnce(10); //=> 11
  *      addOneOnce(addOneOnce(50)); //=> 11
  */

@@ -12,9 +12,7 @@ var _curry1 = require('./internal/_curry1');
  * @return {Function} A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`.
  * @example
  *
- *      var cmp = R.comparator(function(a, b) {
- *        return a.age < b.age;
- *      });
+ *      var cmp = R.comparator((a, b) => a.age < b.age);
  *      var people = [
  *        // ...
  *      ];

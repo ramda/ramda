@@ -38,11 +38,9 @@ var _curryN = require('./internal/_curryN');
  * @see R.curry
  * @example
  *
- *      var addFourNumbers = function() {
- *        return R.sum([].slice.call(arguments, 0, 4));
- *      };
+ *      var sumArgs = (...args) => R.sum(args);
  *
- *      var curriedAddFourNumbers = R.curryN(4, addFourNumbers);
+ *      var curriedAddFourNumbers = R.curryN(4, sumArgs);
  *      var f = curriedAddFourNumbers(1, 2);
  *      var g = f(3);
  *      g(4); //=> 10

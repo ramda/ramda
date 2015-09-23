@@ -15,9 +15,7 @@ var curry = require('./curry');
  * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
  * @example
  *
- *      var mergeThree = function(a, b, c) {
- *        return ([]).concat(a, b, c);
- *      };
+ *      var mergeThree = (a, b, c) => [].concat(a, b, c);
  *
  *      mergeThree(1, 2, 3); //=> [1, 2, 3]
  *

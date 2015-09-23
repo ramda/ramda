@@ -15,7 +15,7 @@ var constructN = require('./constructN');
  * @example
  *
  *      // Constructor function
- *      var Widget = function(config) {
+ *      var Widget = config => {
  *        // ...
  *      };
  *      Widget.prototype = {
