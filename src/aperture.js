@@ -1,9 +1,14 @@
+var _aperture = require('./internal/_aperture');
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
+var _dispatchable = require('./internal/_dispatchable');
+var _xaperture = require('./internal/_xaperture');
 
 /**
  * Returns a new list, composed of n-tuples of consecutive elements
  * If `n` is greater than the length of the list, an empty list is returned.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -18,13 +23,4 @@ var _slice = require('./internal/_slice');
  *      R.aperture(3, [1, 2, 3, 4, 5]); //=> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
  *      R.aperture(7, [1, 2, 3, 4, 5]); //=> []
  */
-module.exports = _curry2(function aperture(n, list) {
-  var idx = 0;
-  var limit = list.length - (n - 1);
-  var acc = new Array(limit >= 0 ? limit : 0);
-  while (idx < limit) {
-    acc[idx] = _slice(list, idx, idx + n);
-    idx += 1;
-  }
-  return acc;
-});
+module.exports = _curry2(_dispatchable('aperture', _xaperture, _aperture));
