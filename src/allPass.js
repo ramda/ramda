@@ -1,26 +1,44 @@
 var _curry1 = require('./internal/_curry1');
-var _predicateWrap = require('./internal/_predicateWrap');
-var all = require('./all');
+var curryN = require('./curryN');
+var max = require('./max');
+var pluck = require('./pluck');
+var reduce = require('./reduce');
 
 
 /**
- * Given a list of predicates, returns a new predicate that will be true exactly when all of them are.
+ * Takes a list of predicates and returns a predicate that returns true
+ * for a given list of arguments if every one of the provided predicates
+ * is satisfied by those arguments.
+ *
+ * The function returned is a curried function whose arity matches that of
+ * the highest-arity predicate.
  *
  * @func
  * @memberOf R
  * @category Logic
  * @sig [(*... -> Boolean)] -> (*... -> Boolean)
- * @param {Array} list An array of predicate functions
- * @param {*} optional Any arguments to pass into the predicates
- * @return {Function} a function that applies its arguments to each of
- *         the predicates, returning `true` if all are satisfied.
+ * @param {Array} preds
+ * @return {Function}
  * @see R.anyPass
  * @example
  *
- *      var gt10 = x => x > 10;
- *      var even = x => x % 2 === 0;
- *      var f = R.allPass([gt10, even]);
- *      f(11); //=> false
- *      f(12); //=> true
+ *      var isQueen = R.propEq('rank', 'Q');
+ *      var isSpade = R.propEq('suit', '♠︎');
+ *      var isQueenOfSpades = R.allPass([isQueen, isSpade]);
+ *
+ *      isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
+ *      isQueenOfSpades({rank: 'Q', suit: '♠︎'}); //=> true
  */
-module.exports = _curry1(_predicateWrap(all));
+module.exports = _curry1(function allPass(preds) {
+  return curryN(reduce(max, 0, pluck('length', preds)), function() {
+    var idx = 0;
+    var len = preds.length;
+    while (idx < len) {
+      if (!preds[idx].apply(this, arguments)) {
+        return false;
+      }
+      idx += 1;
+    }
+    return true;
+  });
+});
