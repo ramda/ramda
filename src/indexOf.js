@@ -1,6 +1,6 @@
 var _curry2 = require('./internal/_curry2');
-var _hasMethod = require('./internal/_hasMethod');
 var _indexOf = require('./internal/_indexOf');
+var _isArray = require('./internal/_isArray');
 
 
 /**
@@ -22,5 +22,7 @@ var _indexOf = require('./internal/_indexOf');
  *      R.indexOf(10, [1,2,3,4]); //=> -1
  */
 module.exports = _curry2(function indexOf(target, xs) {
-  return _hasMethod('indexOf', xs) ? xs.indexOf(target) : _indexOf(xs, target, 0);
+  return typeof xs.indexOf === 'function' && !_isArray(xs) ?
+    xs.indexOf(target) :
+    _indexOf(xs, target, 0);
 });
