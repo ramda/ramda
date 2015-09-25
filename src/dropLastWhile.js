@@ -1,5 +1,7 @@
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
+var _dispatchable = require('./internal/_dispatchable');
+var _dropLastWhile = require('./internal/_dropLastWhile');
+var _xdropLastWhile = require('./internal/_xdropLastWhile');
 
 
 /**
@@ -23,10 +25,4 @@ var _slice = require('./internal/_slice');
  *
  *      R.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4]
  */
-module.exports = _curry2(function dropLastWhile(pred, list) {
-  var idx = list.length - 1;
-  while (idx >= 0 && pred(list[idx])) {
-    idx -= 1;
-  }
-  return _slice(list, 0, idx + 1);
-});
+module.exports = _curry2(_dispatchable('dropLastWhile', _xdropLastWhile, _dropLastWhile));
