@@ -26,6 +26,19 @@ describe('chain', function() {
     assert.deepEqual(intoArray(R.chain(times2), [1, 2, 3, 4]), [2, 4, 6, 8]);
   });
 
+  it('interprets ((->) r) as a monad', function() {
+    var h = function(r) { return r * 2; };
+    var f = function(a) {
+      return function(r) {
+        return r + a;
+      };
+    };
+    var bound = R.chain(h, f);
+    // (>>=) :: (r -> a) -> (a -> r -> b) -> (r -> b)
+    // h >>= f = \w -> f (h w) w
+    assert.strictEqual(bound(10), (10 * 2) + 10);
+  });
+
   it('dispatches to objects that implement `chain`', function() {
     var obj = {x: 100, chain: function(f) { return f(this.x); }};
     assert.deepEqual(R.chain(add1, obj), [101]);

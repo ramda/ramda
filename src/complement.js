@@ -1,5 +1,5 @@
-var _complement = require('./internal/_complement');
-var _curry1 = require('./internal/_curry1');
+var lift = require('./lift');
+var not = require('./not');
 
 
 /**
@@ -10,6 +10,8 @@ var _curry1 = require('./internal/_curry1');
  *
  *   - applying `g` to zero or more arguments will give __false__ if applying
  *     the same arguments to `f` gives a logical __true__ value.
+ *
+ * `R.complement` will work on all other functors as well.
  *
  * @func
  * @memberOf R
@@ -25,4 +27,4 @@ var _curry1 = require('./internal/_curry1');
  *      isOdd(21); //=> true
  *      isOdd(42); //=> false
  */
-module.exports = _curry1(_complement);
+module.exports = lift(not);
