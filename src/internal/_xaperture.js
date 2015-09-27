@@ -12,7 +12,10 @@ module.exports = (function() {
     this.acc = new Array(n);
   }
   XAperture.prototype['@@transducer/init'] = _xfBase.init;
-  XAperture.prototype['@@transducer/result'] = _xfBase.result;
+  XAperture.prototype['@@transducer/result'] = function(result) {
+    this.acc = null;
+    return this.xf['@@transducer/result'](result);
+  };
   XAperture.prototype['@@transducer/step'] = function(result, input) {
     this.store(input);
     return this.full ? this.xf['@@transducer/step'](result, this.getCopy()) : result;
