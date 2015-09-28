@@ -25,9 +25,7 @@ var curry = require('./curry');
  *
  *      var double = y => y * 2;
  *      var square = x => x * x;
- *      var add = (a, b) => a + b;
- *      // Adds any number of arguments together
- *      var addAll = () => R.reduce(add, 0, arguments);
+ *      var addAll = R.unapply(R.sum);
  *
  *      // Basic example
  *      var addDoubleAndSquare = R.useWith(addAll, double, square);
@@ -39,13 +37,16 @@ var curry = require('./curry');
  *      //≅ addAll(double(10), square(5), 100);
  *      addDoubleAndSquare(10, 5, 100); //=> 145
  *
- *      // If there are extra _expected_ arguments that don't need to be transformed, although
- *      // you can ignore them, it might be best to pass in the identity function so that the new
- *      // function correctly reports arity.
- *      var addDoubleAndSquareWithExtraParams = R.useWith(addAll, double, square, R.identity);
- *      // addDoubleAndSquareWithExtraParams.length //=> 3
- *      //≅ addAll(double(10), square(5), R.identity(100));
- *      addDoubleAndSquare(10, 5, 100); //=> 145
+ *      var people = [
+ *        { name: 'Alice', age: 20 },
+ *        { name: 'Bob',   age: 10 },
+ *        { name: 'Clara', age: 30 }
+ *      ];
+ *
+ *      //  findByAge :: Number -> [Object] -> Object
+ *      var findByAge = R.useWith(R.find, R.propEq('age'), R.identity);
+ *      //≅ R.find(R.propEq('age', 10), R.identity(people)
+ *      findByAge(10, people) //=>  { name: 'Bob', age: 10 };
  */
 module.exports = curry(function useWith(fn /*, transformers */) {
   var transformers = _slice(arguments, 1);
