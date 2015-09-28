@@ -1,0 +1,24 @@
+var _curry3 = require('./internal/_curry3');
+var defaultTo = require('./defaultTo');
+var path = require('./path');
+
+
+/**
+ * If the given, non-null object has a value at the given path, returns
+ * the value at that path. Otherwise returns the provided default value.
+ *
+ * @func
+ * @memberOf R
+ * @category Object
+ * @sig a -> [String] -> Object -> a
+ * @param {*} d The default value.
+ * @param {Array} p The path to use.
+ * @return {*} The data at `path` of the supplied object or the default value.
+ * @example
+ *
+ *      R.pathOr('N/A', ['a', 'b'], {a: {b: 2}}); //=> 2
+ *      R.pathOr('N/A', ['a', 'b'], {c: {b: 2}}); //=> "N/A"
+ */
+module.exports = _curry3(function pathOr(d, p, obj) {
+  return defaultTo(d, path(p, obj));
+});
