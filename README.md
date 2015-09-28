@@ -106,7 +106,7 @@ or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 (note that using `latest` is taking a significant risk that ramda API changes could break your code.)
 
-These script tags add the variable `ramda` on the browser's global scope.
+These script tags add the variable `R` on the browser's global scope.
 
 Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](BOOKMARKLET.md).
 
