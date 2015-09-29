@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var _hasMethod = require('./internal/_hasMethod');
+var _isArray = require('./internal/_isArray');
 var equals = require('./equals');
 
 
@@ -22,7 +22,7 @@ var equals = require('./equals');
  *      R.lastIndexOf(10, [1,2,3,4]); //=> -1
  */
 module.exports = _curry2(function lastIndexOf(target, xs) {
-  if (_hasMethod('lastIndexOf', xs)) {
+  if (typeof xs.lastIndexOf === 'function' && !_isArray(xs)) {
     return xs.lastIndexOf(target);
   } else {
     var idx = xs.length - 1;
