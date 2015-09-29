@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('keys', function() {
@@ -11,11 +10,11 @@ describe('keys', function() {
   var cobj = new C();
 
   it("returns an array of the given object's own keys", function() {
-    assert.deepEqual(R.keys(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
+    eq(R.keys(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
   });
 
   it('works with hasOwnProperty override', function() {
-    assert.deepEqual(R.keys({
+    eq(R.keys({
       /* jshint -W001 */
       hasOwnProperty: false
       /* jshint +W001 */
@@ -27,10 +26,10 @@ describe('keys', function() {
     var result = R.map(function(val) {
       return R.keys(val);
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-    assert.deepEqual(result, R.repeat([], 10));
+    eq(result, R.repeat([], 10));
   });
 
   it("does not include the given object's prototype properties", function() {
-    assert.deepEqual(R.keys(cobj).sort(), ['a', 'b']);
+    eq(R.keys(cobj).sort(), ['a', 'b']);
   });
 });

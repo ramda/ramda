@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('match', function() {
@@ -9,14 +10,14 @@ describe('match', function() {
   var notMatching = 'B1-afn';
 
   it('determines whether a string matches a regex', function() {
-    assert.strictEqual(R.match(re, matching).length, 1);
-    assert.deepEqual(R.match(re, notMatching), []);
+    eq(R.match(re, matching).length, 1);
+    eq(R.match(re, notMatching), []);
   });
 
   it('is curried', function() {
     var format = R.match(re);
-    assert.strictEqual(format(matching).length, 1);
-    assert.deepEqual(format(notMatching), []);
+    eq(format(matching).length, 1);
+    eq(format(notMatching), []);
   });
 
   it('defaults to a different empty array each time', function() {

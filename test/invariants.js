@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('invariants', function() {
@@ -9,8 +8,8 @@ describe('invariants', function() {
     for (var prop in R) {
       if (typeof R[prop] === 'function' && R[prop].length > 0) {
         var result = R[prop]();
-        assert.strictEqual(typeof result, 'function');
-        assert.strictEqual(result.length, R[prop].length);
+        eq(typeof result, 'function');
+        eq(result.length, R[prop].length);
       }
     }
   });
@@ -19,8 +18,8 @@ describe('invariants', function() {
     for (var prop in R) {
       if (typeof R[prop] === 'function' && R[prop].length > 0) {
         var result = R[prop](R.__);
-        assert.strictEqual(typeof result, 'function');
-        assert.strictEqual(result.length, R[prop].length);
+        eq(typeof result, 'function');
+        eq(result.length, R[prop].length);
       }
     }
   });
@@ -29,8 +28,8 @@ describe('invariants', function() {
     var testPartialApplication = function(fn, name) {
       if (fn.length > 1) {
         var result = fn(null);
-        assert.strictEqual(typeof result, 'function');
-        assert.strictEqual(result.length, fn.length - 1);
+        eq(typeof result, 'function');
+        eq(result.length, fn.length - 1);
         testPartialApplication(result, name + "'");
       }
     };

@@ -1,27 +1,26 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('isArrayLike', function() {
   it('is true for Arrays', function() {
-    assert.strictEqual(R.isArrayLike([]), true);
-    assert.strictEqual(R.isArrayLike([1, 2, 3, 4]), true);
-    assert.strictEqual(R.isArrayLike([null]), true);
+    eq(R.isArrayLike([]), true);
+    eq(R.isArrayLike([1, 2, 3, 4]), true);
+    eq(R.isArrayLike([null]), true);
   });
 
   it('is true for arguments', function() {
     function test() {
       return R.isArrayLike(arguments);
     }
-    assert.strictEqual(test(), true);
-    assert.strictEqual(test(1, 2, 3), true);
-    assert.strictEqual(test(null), true);
+    eq(test(), true);
+    eq(test(1, 2, 3), true);
+    eq(test(null), true);
   });
 
   it('is false for Strings', function() {
-    assert.strictEqual(R.isArrayLike(''), false);
-    assert.strictEqual(R.isArrayLike('abcdefg'), false);
+    eq(R.isArrayLike(''), false);
+    eq(R.isArrayLike('abcdefg'), false);
   });
 
   it('is true for arbitrary objects with numeric length, if extreme indices are defined', function() {
@@ -31,19 +30,19 @@ describe('isArrayLike', function() {
     var obj4 = {0: 'zero', 1: 'one', length: 2};
     var obj5 = {0: 'zero', length: 2};
     var obj6 = {1: 'one', length: 2};
-    assert.strictEqual(R.isArrayLike(obj1), true);
-    assert.strictEqual(R.isArrayLike(obj2), true);
-    assert.strictEqual(R.isArrayLike(obj3), true);
-    assert.strictEqual(R.isArrayLike(obj4), true);
-    assert.strictEqual(R.isArrayLike(obj5), false);
-    assert.strictEqual(R.isArrayLike(obj6), false);
+    eq(R.isArrayLike(obj1), true);
+    eq(R.isArrayLike(obj2), true);
+    eq(R.isArrayLike(obj3), true);
+    eq(R.isArrayLike(obj4), true);
+    eq(R.isArrayLike(obj5), false);
+    eq(R.isArrayLike(obj6), false);
   });
 
   it('is false for everything else', function() {
-    assert.strictEqual(R.isArrayLike(undefined), false);
-    assert.strictEqual(R.isArrayLike(1), false);
-    assert.strictEqual(R.isArrayLike({}), false);
-    assert.strictEqual(R.isArrayLike(false), false);
-    assert.strictEqual(R.isArrayLike(function() {}), false);
+    eq(R.isArrayLike(undefined), false);
+    eq(R.isArrayLike(1), false);
+    eq(R.isArrayLike({}), false);
+    eq(R.isArrayLike(false), false);
+    eq(R.isArrayLike(function() {}), false);
   });
 });

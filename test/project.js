@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('project', function() {
@@ -12,7 +11,7 @@ describe('project', function() {
   ];
 
   it('selects the chosen properties from each element in a list', function() {
-    assert.deepEqual(R.project(['name', 'age'], kids), [
+    eq(R.project(['name', 'age'], kids), [
       {name: 'Abby', age: 7},
       {name: 'Fred', age: 12},
       {name: 'Rusty', age: 10},
@@ -21,7 +20,7 @@ describe('project', function() {
   });
 
   it('has an undefined property on the output tuple for any input tuple that does not have the property', function() {
-    assert.deepEqual(R.project(['name', 'hair'], kids), [
+    eq(R.project(['name', 'hair'], kids), [
       {name: 'Abby', hair: 'blond'},
       {name: 'Fred', hair: 'brown'},
       {name: 'Rusty', hair: 'brown'},
@@ -31,7 +30,7 @@ describe('project', function() {
 
   it('is curried', function() {
     var myFields = R.project(['name', 'age']);
-    assert.deepEqual(myFields(kids), [
+    eq(myFields(kids), [
       {name: 'Abby', age: 7},
       {name: 'Fred', age: 12},
       {name: 'Rusty', age: 10},

@@ -1,22 +1,23 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('pipe', function() {
 
   it('is a variadic function', function() {
-    assert.strictEqual(typeof R.pipe, 'function');
-    assert.strictEqual(R.pipe.length, 0);
+    eq(typeof R.pipe, 'function');
+    eq(R.pipe.length, 0);
   });
 
   it('performs left-to-right function composition', function() {
     //  f :: (String, Number?) -> ([Number] -> [Number])
     var f = R.pipe(parseInt, R.multiply, R.map);
 
-    assert.strictEqual(f.length, 2);
-    assert.deepEqual(f('10')([1, 2, 3]), [10, 20, 30]);
-    assert.deepEqual(f('10', 2)([1, 2, 3]), [2, 4, 6]);
+    eq(f.length, 2);
+    eq(f('10')([1, 2, 3]), [10, 20, 30]);
+    eq(f('10', 2)([1, 2, 3]), [2, 4, 6]);
   });
 
   it('passes context to functions', function() {
@@ -35,7 +36,7 @@ describe('pipe', function() {
       y: 2,
       z: 1
     };
-    assert.strictEqual(context.a(5), 40);
+    eq(context.a(5), 40);
   });
 
   it('throws if given no arguments', function() {
@@ -51,8 +52,8 @@ describe('pipe', function() {
   it('can be applied to one argument', function() {
     var f = function(a, b, c) { return [a, b, c]; };
     var g = R.pipe(f);
-    assert.strictEqual(g.length, 3);
-    assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
+    eq(g.length, 3);
+    eq(g(1, 2, 3), [1, 2, 3]);
   });
 
 });

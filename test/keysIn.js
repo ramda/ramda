@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('keysIn', function() {
@@ -11,11 +10,11 @@ describe('keysIn', function() {
   var cobj = new C();
 
   it("returns an array of the given object's keys", function() {
-    assert.deepEqual(R.keysIn(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
+    eq(R.keysIn(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
   });
 
   it("includes the given object's prototype properties", function() {
-    assert.deepEqual(R.keysIn(cobj).sort(), ['a', 'b', 'x', 'y']);
+    eq(R.keysIn(cobj).sort(), ['a', 'b', 'x', 'y']);
   });
 
   it('works for primitives', function() {
@@ -23,6 +22,6 @@ describe('keysIn', function() {
     var result = R.map(function(val) {
       return R.keys(val);
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-    assert.deepEqual(result, R.repeat([], 10));
+    eq(result, R.repeat([], 10));
   });
 });

@@ -1,12 +1,11 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('F', function() {
   it('always returns false', function() {
-    assert.strictEqual(R.F(), false);
-    assert.strictEqual(R.F(10), false);
-    assert.strictEqual(R.F(true), false);
+    eq(R.F(), false);
+    eq(R.F(10), false);
+    eq(R.F(true), false);
   });
 });

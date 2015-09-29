@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('dropRepeats', function() {
@@ -8,16 +7,16 @@ describe('dropRepeats', function() {
   var objs2 = [1, 2, 2, 2, 3, 4, 4, 5, 5, 3, 2, 2];
 
   it('removes repeated elements', function() {
-    assert.deepEqual(R.dropRepeats(objs2), objs);
-    assert.deepEqual(R.dropRepeats(objs), objs);
+    eq(R.dropRepeats(objs2), objs);
+    eq(R.dropRepeats(objs), objs);
   });
 
   it('returns an empty array for an empty array', function() {
-    assert.deepEqual(R.dropRepeats([]), []);
+    eq(R.dropRepeats([]), []);
   });
 
   it('can act as a transducer', function() {
-    assert.deepEqual(R.into([], R.dropRepeats, objs2), objs);
+    eq(R.into([], R.dropRepeats, objs2), objs);
   });
 
   it('has R.equals semantics', function() {
@@ -26,9 +25,9 @@ describe('dropRepeats', function() {
       return x instanceof Just && R.equals(x.value, this.value);
     };
 
-    assert.strictEqual(R.dropRepeats([0, -0]).length, 2);
-    assert.strictEqual(R.dropRepeats([-0, 0]).length, 2);
-    assert.strictEqual(R.dropRepeats([NaN, NaN]).length, 1);
-    assert.strictEqual(R.dropRepeats([new Just([42]), new Just([42])]).length, 1);
+    eq(R.dropRepeats([0, -0]).length, 2);
+    eq(R.dropRepeats([-0, 0]).length, 2);
+    eq(R.dropRepeats([NaN, NaN]).length, 1);
+    eq(R.dropRepeats([new Just([42]), new Just([42])]).length, 1);
   });
 });

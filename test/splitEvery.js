@@ -1,23 +1,24 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('splitEvery', function() {
 
   it('splits a collection into slices of the specified length', function() {
-    assert.deepEqual(R.splitEvery(1, [1, 2, 3, 4]), [[1], [2], [3], [4]]);
-    assert.deepEqual(R.splitEvery(2, [1, 2, 3, 4]), [[1, 2], [3, 4]]);
-    assert.deepEqual(R.splitEvery(3, [1, 2, 3, 4]), [[1, 2, 3], [4]]);
-    assert.deepEqual(R.splitEvery(4, [1, 2, 3, 4]), [[1, 2, 3, 4]]);
-    assert.deepEqual(R.splitEvery(5, [1, 2, 3, 4]), [[1, 2, 3, 4]]);
-    assert.deepEqual(R.splitEvery(3, []), []);
-    assert.deepEqual(R.splitEvery(1, 'abcd'), ['a', 'b', 'c', 'd']);
-    assert.deepEqual(R.splitEvery(2, 'abcd'), ['ab', 'cd']);
-    assert.deepEqual(R.splitEvery(3, 'abcd'), ['abc', 'd']);
-    assert.deepEqual(R.splitEvery(4, 'abcd'), ['abcd']);
-    assert.deepEqual(R.splitEvery(5, 'abcd'), ['abcd']);
-    assert.deepEqual(R.splitEvery(3, ''), []);
+    eq(R.splitEvery(1, [1, 2, 3, 4]), [[1], [2], [3], [4]]);
+    eq(R.splitEvery(2, [1, 2, 3, 4]), [[1, 2], [3, 4]]);
+    eq(R.splitEvery(3, [1, 2, 3, 4]), [[1, 2, 3], [4]]);
+    eq(R.splitEvery(4, [1, 2, 3, 4]), [[1, 2, 3, 4]]);
+    eq(R.splitEvery(5, [1, 2, 3, 4]), [[1, 2, 3, 4]]);
+    eq(R.splitEvery(3, []), []);
+    eq(R.splitEvery(1, 'abcd'), ['a', 'b', 'c', 'd']);
+    eq(R.splitEvery(2, 'abcd'), ['ab', 'cd']);
+    eq(R.splitEvery(3, 'abcd'), ['abc', 'd']);
+    eq(R.splitEvery(4, 'abcd'), ['abcd']);
+    eq(R.splitEvery(5, 'abcd'), ['abcd']);
+    eq(R.splitEvery(3, ''), []);
   });
 
   it('throws if first argument is not positive', function() {

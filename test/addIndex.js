@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('addIndex', function() {
@@ -13,20 +12,20 @@ describe('addIndex', function() {
     var mapIndexed = R.addIndex(R.map);
 
     it('working just like a normal map', function() {
-      assert.deepEqual(mapIndexed(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
+      eq(mapIndexed(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
     });
 
     it('passing the index as a second parameter to the callback', function() {
-      assert.deepEqual(mapIndexed(addIndexParam, [8, 6, 7, 5, 3, 0, 9]), [8, 7, 9, 8, 7, 5, 15]); // [8 + 0, 6 + 1...]
+      eq(mapIndexed(addIndexParam, [8, 6, 7, 5, 3, 0, 9]), [8, 7, 9, 8, 7, 5, 15]); // [8 + 0, 6 + 1...]
     });
 
     it('passing the entire list as a third parameter to the callback', function() {
-      assert.deepEqual(mapIndexed(squareEnds, [8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
+      eq(mapIndexed(squareEnds, [8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
     });
 
     it('acting as a curried function', function() {
       var makeSquareEnds = mapIndexed(squareEnds);
-      assert.deepEqual(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
+      eq(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
     });
   });
 
@@ -36,14 +35,14 @@ describe('addIndex', function() {
     var objectify = function(acc, elem, idx) { acc[elem] = idx; return acc;};
 
     it('passing the index as a third parameter to the predicate', function() {
-      assert.strictEqual(reduceIndexed(timesIndexed, 0, [1, 2, 3, 4, 5]), 40);
-      assert.deepEqual(reduceIndexed(objectify, {}, ['a', 'b', 'c', 'd', 'e']), {a: 0, b: 1, c: 2, d: 3, e: 4});
+      eq(reduceIndexed(timesIndexed, 0, [1, 2, 3, 4, 5]), 40);
+      eq(reduceIndexed(objectify, {}, ['a', 'b', 'c', 'd', 'e']), {a: 0, b: 1, c: 2, d: 3, e: 4});
     });
 
     it('passing the entire list as a fourth parameter to the predicate', function() {
       var list = [1, 2, 3];
       reduceIndexed(function(acc, x, idx, ls) {
-        assert.strictEqual(ls, list);
+        eq(ls, list);
         return acc;
       }, 0, list);
     });
@@ -53,8 +52,8 @@ describe('addIndex', function() {
     var allIndexed = R.addIndex(R.all);
     var superDiagonal = allIndexed(R.gt);
     it('passing the index as a second parameter', function() {
-      assert.strictEqual(superDiagonal([8, 6, 5, 4, 9]), true); // 8 > 0, 6 > 1, 5 > 2, 4 > 3, 9 > 5
-      assert.strictEqual(superDiagonal([8, 6, 1, 3, 9]), false); //  1 !> 2, 3 !> 3
+      eq(superDiagonal([8, 6, 5, 4, 9]), true); // 8 > 0, 6 > 1, 5 > 2, 4 > 3, 9 > 5
+      eq(superDiagonal([8, 6, 1, 3, 9]), false); //  1 !> 2, 3 !> 3
     });
   });
 
@@ -64,7 +63,7 @@ describe('addIndex', function() {
     };
     var mapFilterIndexed = R.addIndex(mapFilter);
     it('passing the index as an additional parameter', function() {
-      assert.deepEqual(mapFilterIndexed(
+      eq(mapFilterIndexed(
         R.multiply,
         R.gt(R.__, 13),
         [8, 6, 7, 5, 3, 0, 9]

@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('mathMod', function() {
@@ -18,22 +19,22 @@ describe('mathMod', function() {
   });
 
   it('computes the true modulo function', function() {
-    assert.strictEqual(R.mathMod(-17, 5), 3);
-    assert.strictEqual(R.identical(NaN, R.mathMod(17, -5)), true);
-    assert.strictEqual(R.identical(NaN, R.mathMod(17, 0)), true);
-    assert.strictEqual(R.identical(NaN, R.mathMod(17.2, 5)), true);
-    assert.strictEqual(R.identical(NaN, R.mathMod(17, 5.5)), true);
+    eq(R.mathMod(-17, 5), 3);
+    eq(R.identical(NaN, R.mathMod(17, -5)), true);
+    eq(R.identical(NaN, R.mathMod(17, 0)), true);
+    eq(R.identical(NaN, R.mathMod(17.2, 5)), true);
+    eq(R.identical(NaN, R.mathMod(17, 5.5)), true);
   });
 
   it('is curried', function() {
     var f = R.mathMod(29);
-    assert.strictEqual(f(6), 5);
+    eq(f(6), 5);
   });
 
 
   it('behaves right curried when passed `R.__` for its first argument', function() {
     var mod5 = R.modulo(R.__, 5);
-    assert.strictEqual(mod5(12), 2);
-    assert.strictEqual(mod5(8), 3);
+    eq(mod5(12), 2);
+    eq(mod5(8), 3);
   });
 });

@@ -1,21 +1,22 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('dropLast', function() {
   it('skips the last `n` elements from a list, returning the remainder', function() {
-    assert.deepEqual(R.dropLast(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c', 'd']);
+    eq(R.dropLast(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c', 'd']);
   });
 
   it('returns an empty array if `n` is too large', function() {
-    assert.deepEqual(R.dropLast(20, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), []);
+    eq(R.dropLast(20, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), []);
   });
 
   it('returns an equivalent list if `n` is <= 0', function() {
-    assert.deepEqual(R.dropLast(0, [1, 2, 3]), [1, 2, 3]);
-    assert.deepEqual(R.dropLast(-1, [1, 2, 3]), [1, 2, 3]);
-    assert.deepEqual(R.dropLast(-Infinity, [1, 2, 3]), [1, 2, 3]);
+    eq(R.dropLast(0, [1, 2, 3]), [1, 2, 3]);
+    eq(R.dropLast(-1, [1, 2, 3]), [1, 2, 3]);
+    eq(R.dropLast(-Infinity, [1, 2, 3]), [1, 2, 3]);
   });
 
   it('never returns the input array', function() {
@@ -26,12 +27,12 @@ describe('dropLast', function() {
   });
 
   it('can operate on strings', function() {
-    assert.strictEqual(R.dropLast(3, 'Ramda'), 'Ra');
+    eq(R.dropLast(3, 'Ramda'), 'Ra');
   });
 
   it('is curried', function() {
     var dropLast2 = R.dropLast(2);
-    assert.deepEqual(dropLast2(['a', 'b', 'c', 'd', 'e']), ['a', 'b', 'c']);
-    assert.deepEqual(dropLast2(['x', 'y', 'z']), ['x']);
+    eq(dropLast2(['a', 'b', 'c', 'd', 'e']), ['a', 'b', 'c']);
+    eq(dropLast2(['x', 'y', 'z']), ['x']);
   });
 });

@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('functionsIn', function() {
@@ -19,12 +18,12 @@ describe('functionsIn', function() {
   var f = new F();
 
   it('returns list of functions with prototype functions', function() {
-    assert.deepEqual(R.functionsIn(f).sort(), ['map', 'sort', 'x', 'y']);
-    assert.strictEqual(R.functionsIn(f).length, 4);
+    eq(R.functionsIn(f).sort(), ['map', 'sort', 'x', 'y']);
+    eq(R.functionsIn(f).length, 4);
   });
 
   it('returns an empty array if there are no functions on the object or its prototype chain', function() {
     function G() {}
-    assert.deepEqual(R.functionsIn(new G()), []);
+    eq(R.functionsIn(new G()), []);
   });
 });

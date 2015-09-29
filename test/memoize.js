@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('memoize', function() {
@@ -8,22 +7,22 @@ describe('memoize', function() {
     var ctr = 0;
     var fib = R.memoize(function(n) {ctr += 1; return n < 2 ? n : fib(n - 2) + fib(n - 1);});
     var result = fib(10);
-    assert.strictEqual(result, 55);
-    assert.strictEqual(ctr, 11); // fib(0), fib(1), ... fib(10), no memoization would take 177 iterations.
+    eq(result, 55);
+    eq(ctr, 11); // fib(0), fib(1), ... fib(10), no memoization would take 177 iterations.
   });
 
   it('handles multiple parameters', function() {
     var f = R.memoize(function(a, b, c) {return a + ', ' + b + c;});
-    assert.strictEqual(f('Hello', 'World' , '!'), 'Hello, World!');
-    assert.strictEqual(f('Goodbye', 'Cruel World' , '!!!'), 'Goodbye, Cruel World!!!');
-    assert.strictEqual(f('Hello', 'how are you' , '?'), 'Hello, how are you?');
-    assert.strictEqual(f('Hello', 'World' , '!'), 'Hello, World!');
+    eq(f('Hello', 'World' , '!'), 'Hello, World!');
+    eq(f('Goodbye', 'Cruel World' , '!!!'), 'Goodbye, Cruel World!!!');
+    eq(f('Hello', 'how are you' , '?'), 'Hello, how are you?');
+    eq(f('Hello', 'World' , '!'), 'Hello, World!');
   });
 
   it('does not rely on reported arity', function() {
     var identity = R.memoize(function() { return arguments[0]; });
-    assert.strictEqual(identity('x'), 'x');
-    assert.strictEqual(identity('y'), 'y');
+    eq(identity('x'), 'x');
+    eq(identity('y'), 'y');
   });
 
   it('memoizes "false" return values', function() {
@@ -32,10 +31,10 @@ describe('memoize', function() {
       count += 1;
       return n + 1;
     });
-    assert.strictEqual(inc(-1), 0);
-    assert.strictEqual(inc(-1), 0);
-    assert.strictEqual(inc(-1), 0);
-    assert.strictEqual(count, 1);
+    eq(inc(-1), 0);
+    eq(inc(-1), 0);
+    eq(inc(-1), 0);
+    eq(count, 1);
   });
 
   it('can be applied to nullary function', function() {
@@ -44,10 +43,10 @@ describe('memoize', function() {
       count += 1;
       return 42;
     });
-    assert.strictEqual(f(), 42);
-    assert.strictEqual(f(), 42);
-    assert.strictEqual(f(), 42);
-    assert.strictEqual(count, 1);
+    eq(f(), 42);
+    eq(f(), 42);
+    eq(f(), 42);
+    eq(count, 1);
   });
 
   it('can be applied to function with optional arguments', function() {
@@ -60,18 +59,18 @@ describe('memoize', function() {
       }
       return a + b;
     });
-    assert.strictEqual(f(), 'foobar');
-    assert.strictEqual(f(), 'foobar');
-    assert.strictEqual(f(), 'foobar');
-    assert.strictEqual(count, 1);
+    eq(f(), 'foobar');
+    eq(f(), 'foobar');
+    eq(f(), 'foobar');
+    eq(count, 1);
   });
 
   it('differentiates values with same string representation', function() {
     var f = R.memoize(R.toString);
-    assert.strictEqual(f(42), '42');
-    assert.strictEqual(f('42'), '"42"');
-    assert.strictEqual(f([[42]]), '[[42]]');
-    assert.strictEqual(f([['42']]), '[["42"]]');
+    eq(f(42), '42');
+    eq(f('42'), '"42"');
+    eq(f([[42]]), '[[42]]');
+    eq(f([['42']]), '[["42"]]');
   });
 
   it('respects object equivalence', function() {
@@ -80,9 +79,9 @@ describe('memoize', function() {
       count += 1;
       return R.toString(x);
     });
-    assert.strictEqual(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
-    assert.strictEqual(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
-    assert.strictEqual(f({y: 2, x: 1}), '{"x": 1, "y": 2}');
-    assert.strictEqual(count, 1);
+    eq(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
+    eq(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
+    eq(f({y: 2, x: 1}), '{"x": 1, "y": 2}');
+    eq(count, 1);
   });
 });

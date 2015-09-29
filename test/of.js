@@ -1,14 +1,13 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('of', function() {
   it('returns its argument as an Array', function() {
-    assert.deepEqual(R.of(100), [100]);
-    assert.deepEqual(R.of([100]), [[100]]);
-    assert.deepEqual(R.of(null), [null]);
-    assert.deepEqual(R.of(undefined), [undefined]);
-    assert.deepEqual(R.of([]), [[]]);
+    eq(R.of(100), [100]);
+    eq(R.of([100]), [[100]]);
+    eq(R.of(null), [null]);
+    eq(R.of(undefined), [undefined]);
+    eq(R.of([]), [[]]);
   });
 });

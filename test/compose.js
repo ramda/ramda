@@ -1,22 +1,23 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('compose', function() {
 
   it('is a variadic function', function() {
-    assert.strictEqual(typeof R.compose, 'function');
-    assert.strictEqual(R.compose.length, 0);
+    eq(typeof R.compose, 'function');
+    eq(R.compose.length, 0);
   });
 
   it('performs right-to-left function composition', function() {
     //  f :: (String, Number?) -> ([Number] -> [Number])
     var f = R.compose(R.map, R.multiply, parseInt);
 
-    assert.strictEqual(f.length, 2);
-    assert.deepEqual(f('10')([1, 2, 3]), [10, 20, 30]);
-    assert.deepEqual(f('10', 2)([1, 2, 3]), [2, 4, 6]);
+    eq(f.length, 2);
+    eq(f('10')([1, 2, 3]), [10, 20, 30]);
+    eq(f('10', 2)([1, 2, 3]), [2, 4, 6]);
   });
 
   it('passes context to functions', function() {
@@ -35,7 +36,7 @@ describe('compose', function() {
       y: 2,
       z: 1
     };
-    assert.strictEqual(context.a(5), 40);
+    eq(context.a(5), 40);
   });
 
   it('throws if given no arguments', function() {
@@ -51,8 +52,8 @@ describe('compose', function() {
   it('can be applied to one argument', function() {
     var f = function(a, b, c) { return [a, b, c]; };
     var g = R.compose(f);
-    assert.strictEqual(g.length, 3);
-    assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
+    eq(g.length, 3);
+    eq(g(1, 2, 3), [1, 2, 3]);
   });
 
 });

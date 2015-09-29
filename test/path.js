@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('path', function() {
@@ -21,34 +20,34 @@ describe('path', function() {
       i: 'I',
       j: ['J']
     };
-    assert.strictEqual(R.path(['a', 'b', 'c'], obj), 100);
-    assert.strictEqual(R.path([], obj), obj);
-    assert.strictEqual(R.path(['a', 'e', 'f', '1'], obj), 101);
-    assert.strictEqual(R.path(['j', '0'], obj), 'J');
-    assert.strictEqual(R.path(['j', '1'], obj), undefined);
-    assert.strictEqual(R.path(['a', 'b', 'c'], null), undefined);
+    eq(R.path(['a', 'b', 'c'], obj), 100);
+    eq(R.path([], obj), obj);
+    eq(R.path(['a', 'e', 'f', '1'], obj), 101);
+    eq(R.path(['j', '0'], obj), 'J');
+    eq(R.path(['j', '1'], obj), undefined);
+    eq(R.path(['a', 'b', 'c'], null), undefined);
   });
 
   it("gets a deep property's value from objects", function() {
-    assert.strictEqual(R.path(['a', 'b', 'c'], deepObject), 'c');
-    assert.strictEqual(R.path(['a'], deepObject), deepObject.a);
+    eq(R.path(['a', 'b', 'c'], deepObject), 'c');
+    eq(R.path(['a'], deepObject), deepObject.a);
   });
 
   it('returns undefined for items not found', function() {
-    assert.strictEqual(R.path(['a', 'b', 'foo'], deepObject), undefined);
-    assert.strictEqual(R.path(['bar'], deepObject), undefined);
+    eq(R.path(['a', 'b', 'foo'], deepObject), undefined);
+    eq(R.path(['bar'], deepObject), undefined);
   });
 
   it('returns undefined for null/undefined', function() {
-    assert.strictEqual(R.path(['toString'], null), undefined);
-    assert.strictEqual(R.path(['toString'], undefined), undefined);
+    eq(R.path(['toString'], null), undefined);
+    eq(R.path(['toString'], undefined), undefined);
   });
 
   it('works with falsy items', function() {
-    assert.strictEqual(R.path(['toString'], false), Boolean.prototype.toString);
+    eq(R.path(['toString'], false), Boolean.prototype.toString);
   });
 
   it('is curried', function() {
-    assert.strictEqual(R.path(['arrayVal', '0'])(deepObject), 'arr');
+    eq(R.path(['arrayVal', '0'])(deepObject), 'arr');
   });
 });
