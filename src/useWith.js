@@ -33,7 +33,7 @@ module.exports = _curry2(function useWith(fn, transformers) {
   return curry(_arity(transformers.length, function() {
     var args = [], idx = 0;
     while (idx < transformers.length) {
-      args.push(transformers[idx](arguments[idx]));
+      args.push(transformers[idx].call(this, arguments[idx]));
       idx += 1;
     }
     return fn.apply(this, args.concat(_slice(arguments, transformers.length)));

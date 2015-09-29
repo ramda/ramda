@@ -29,4 +29,16 @@ describe('useWith', function() {
     assert.strictEqual(f.length, 3);
   });
 
+  it('passes context to its functions', function() {
+    var a = function(x) { return this.f1(x); };
+    var b = function(x) { return this.f2(x); };
+    var c = function(x, y) { return this.f3(x, y); };
+    var d = R.useWith(c, [a, b]);
+    var context = {f1: R.add(1), f2: R.add(2), f3: R.add};
+    assert.strictEqual(a.call(context, 1), 2);
+    assert.strictEqual(b.call(context, 1), 3);
+    assert.strictEqual(d.apply(context, [1, 1]), 5);
+    assert.strictEqual(d.apply(context, [2, 3]), 8);
+  });
+
 });
