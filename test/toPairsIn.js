@@ -1,11 +1,10 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('toPairsIn', function() {
   it('converts an object into an array of two-element [key, value] arrays', function() {
-    assert.deepEqual(R.toPairsIn({a: 1, b: 2, c: 3}), [['a', 1], ['b', 2], ['c', 3]]);
+    eq(R.toPairsIn({a: 1, b: 2, c: 3}), [['a', 1], ['b', 2], ['c', 3]]);
   });
   it("iterates properties on the object's prototype chain", function() {
     function sortPairs(a, b) {
@@ -17,6 +16,6 @@ describe('toPairsIn', function() {
     };
     F.prototype.protoProp = 'you can see me';
     var f = new F();
-    assert.deepEqual(R.toPairsIn(f).sort(sortPairs), [['protoProp', 'you can see me'], ['x', 1], ['y', 2]]);
+    eq(R.toPairsIn(f).sort(sortPairs), [['protoProp', 'you can see me'], ['x', 1], ['y', 2]]);
   });
 });

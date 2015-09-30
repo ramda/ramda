@@ -1,20 +1,21 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('head', function() {
 
   it('returns the first element of an ordered collection', function() {
-    assert.strictEqual(R.head([1, 2, 3]), 1);
-    assert.strictEqual(R.head([2, 3]), 2);
-    assert.strictEqual(R.head([3]), 3);
-    assert.strictEqual(R.head([]), undefined);
+    eq(R.head([1, 2, 3]), 1);
+    eq(R.head([2, 3]), 2);
+    eq(R.head([3]), 3);
+    eq(R.head([]), undefined);
 
-    assert.strictEqual(R.head('abc'), 'a');
-    assert.strictEqual(R.head('bc'), 'b');
-    assert.strictEqual(R.head('c'), 'c');
-    assert.strictEqual(R.head(''), '');
+    eq(R.head('abc'), 'a');
+    eq(R.head('bc'), 'b');
+    eq(R.head('c'), 'c');
+    eq(R.head(''), '');
   });
 
   it('throws if applied to null or undefined', function() {

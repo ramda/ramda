@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('invoker', function() {
@@ -8,11 +9,11 @@ describe('invoker', function() {
   var concat2 = R.invoker(2, 'concat');
 
   it('returns a function with correct arity', function() {
-    assert.strictEqual(concat2.length, 3);
+    eq(concat2.length, 3);
   });
 
   it('calls the method on the object', function() {
-    assert.deepEqual(concat2(3, 4, [1, 2]), [1, 2, 3, 4]);
+    eq(concat2(3, 4, [1, 2]), [1, 2, 3, 4]);
   });
 
   it('throws a descriptive TypeError if method does not exist', function() {
@@ -40,9 +41,9 @@ describe('invoker', function() {
   });
 
   it('curries the method call', function() {
-    assert.deepEqual(concat2(3)(4)([1, 2]), [1, 2, 3, 4]);
-    assert.deepEqual(concat2(3, 4)([1, 2]), [1, 2, 3, 4]);
-    assert.deepEqual(concat2(3)(4, [1, 2]), [1, 2, 3, 4]);
+    eq(concat2(3)(4)([1, 2]), [1, 2, 3, 4]);
+    eq(concat2(3, 4)([1, 2]), [1, 2, 3, 4]);
+    eq(concat2(3)(4, [1, 2]), [1, 2, 3, 4]);
   });
 
 });

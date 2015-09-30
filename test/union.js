@@ -1,18 +1,17 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('union', function() {
   var M = [1, 2, 3, 4];
   var N = [3, 4, 5, 6];
   it('combines two lists into the set of all their elements', function() {
-    assert.deepEqual(R.union(M, N), [1, 2, 3, 4, 5, 6]);
+    eq(R.union(M, N), [1, 2, 3, 4, 5, 6]);
   });
 
   it('is curried', function() {
-    assert.strictEqual(typeof R.union(M), 'function');
-    assert.deepEqual(R.union(M)(N), [1, 2, 3, 4, 5, 6]);
+    eq(typeof R.union(M), 'function');
+    eq(R.union(M)(N), [1, 2, 3, 4, 5, 6]);
   });
 
   it('has R.equals semantics', function() {
@@ -21,9 +20,9 @@ describe('union', function() {
       return x instanceof Just && R.equals(x.value, this.value);
     };
 
-    assert.strictEqual(R.union([0], [-0]).length, 2);
-    assert.strictEqual(R.union([-0], [0]).length, 2);
-    assert.strictEqual(R.union([NaN], [NaN]).length, 1);
-    assert.strictEqual(R.union([new Just([42])], [new Just([42])]).length, 1);
+    eq(R.union([0], [-0]).length, 2);
+    eq(R.union([-0], [0]).length, 2);
+    eq(R.union([NaN], [NaN]).length, 1);
+    eq(R.union([new Just([42])], [new Just([42])]).length, 1);
   });
 });

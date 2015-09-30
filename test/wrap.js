@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('wrap', function() {
@@ -10,29 +9,29 @@ describe('wrap', function() {
     var extendedGreet = R.wrap(greet, function(gr, name) {
       return gr(name.toUpperCase());
     });
-    assert.strictEqual(greet('joe'), 'Hello joe');
-    assert.strictEqual(extendedGreet('joe'), 'Hello JOE');
+    eq(greet('joe'), 'Hello joe');
+    eq(extendedGreet('joe'), 'Hello JOE');
   });
 
   it('allows you to modify the output', function() {
     var extendedGreet = R.wrap(greet, function(gr, name) {
       return gr(name).toUpperCase();
     });
-    assert.strictEqual(extendedGreet('joe'), 'HELLO JOE');
+    eq(extendedGreet('joe'), 'HELLO JOE');
   });
 
   it('allows you to entirely replace the input function', function() {
     var extendedGreet = R.wrap(greet, function(gr, name) {
       return gr('my dear ' + name) + ', how are you?';
     });
-    assert.strictEqual(extendedGreet('joe'), 'Hello my dear joe, how are you?');
+    eq(extendedGreet('joe'), 'Hello my dear joe, how are you?');
   });
 
   it('maintains the arity of the function that is being wrapped', function() {
     var extendedGreet = R.wrap(greet, function(gr, name) {
       return gr('my dear ' + name) + ', how are you?';
     });
-    assert.strictEqual(greet.length, extendedGreet.length);
+    eq(greet.length, extendedGreet.length);
   });
 
   it('returns a curried function', function() {
@@ -43,8 +42,8 @@ describe('wrap', function() {
       return sideEffect;
     });
     var add10 = wrappedAdd(10);
-    assert.equal(add10(5), 15);
-    assert.equal(sideEffect, 15);
+    eq(add10(5), 15);
+    eq(sideEffect, 15);
   });
 
 });

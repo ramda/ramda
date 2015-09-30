@@ -1,19 +1,18 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('and', function() {
   it('compares two values with js &&', function() {
-    assert.strictEqual(R.and(true, true), true);
-    assert.strictEqual(R.and(true, false), false);
-    assert.strictEqual(R.and(false, true), false);
-    assert.strictEqual(R.and(false, false), false);
+    eq(R.and(true, true), true);
+    eq(R.and(true, false), false);
+    eq(R.and(false, true), false);
+    eq(R.and(false, false), false);
   });
 
   it('is curried', function() {
     var halfTruth = R.and(true);
-    assert.strictEqual(halfTruth(false), false);
-    assert.strictEqual(halfTruth(true), true);
+    eq(halfTruth(false), false);
+    eq(halfTruth(true), true);
   });
 });

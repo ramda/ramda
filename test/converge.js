@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('converge', function() {
@@ -17,13 +16,13 @@ describe('converge', function() {
                       function(a, b, c) { return c; });
 
   it('passes the results of applying the arguments individually to two separate functions into a single one', function() {
-    assert.strictEqual(R.converge(mult, R.add(1), R.add(3))(2), 15); // mult(add1(2), add3(2)) = mult(3, 5) = 3 * 15;
+    eq(R.converge(mult, R.add(1), R.add(3))(2), 15); // mult(add1(2), add3(2)) = mult(3, 5) = 3 * 15;
   });
 
   it('returns a function with the length of the "longest" argument', function() {
-    assert.strictEqual(f1.length, 1);
-    assert.strictEqual(f2.length, 2);
-    assert.strictEqual(f3.length, 3);
+    eq(f1.length, 1);
+    eq(f2.length, 2);
+    eq(f3.length, 3);
   });
 
   it('passes context to its functions', function() {
@@ -32,13 +31,13 @@ describe('converge', function() {
     var c = function(x, y) { return this.f3(x, y); };
     var d = R.converge(c, a, b);
     var context = {f1: R.add(1), f2: R.add(2), f3: R.add};
-    assert.equal(a.call(context, 1), 2);
-    assert.equal(b.call(context, 1), 3);
-    assert.equal(d.call(context, 1), 5);
+    eq(a.call(context, 1), 2);
+    eq(b.call(context, 1), 3);
+    eq(d.call(context, 1), 5);
   });
 
   it('returns a curried function', function() {
-    assert.strictEqual(f2(6)(7), 42);
-    assert.strictEqual(f3(R.__).length, 3);
+    eq(f2(6)(7), 42);
+    eq(f3(R.__).length, 3);
   });
 });

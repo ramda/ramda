@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('propOr', function() {
@@ -10,17 +9,17 @@ describe('propOr', function() {
   var nm = R.propOr('Unknown', 'name');
 
   it('returns a function that fetches the appropriate property', function() {
-    assert.strictEqual(typeof nm, 'function');
-    assert.strictEqual(nm(fred), 'Fred');
+    eq(typeof nm, 'function');
+    eq(nm(fred), 'Fred');
   });
 
   it('returns the default value when the property does not exist', function() {
-    assert.strictEqual(nm(anon), 'Unknown');
+    eq(nm(anon), 'Unknown');
   });
 
   it('returns the default value when the object is nil', function() {
-    assert.strictEqual(nm(null), 'Unknown');
-    assert.strictEqual(nm(void 0), 'Unknown');
+    eq(nm(null), 'Unknown');
+    eq(nm(void 0), 'Unknown');
   });
 
   it('does not return properties from the prototype chain', function() {
@@ -28,6 +27,6 @@ describe('propOr', function() {
     Person.prototype.age = function() {};
 
     var bob = new Person();
-    assert.strictEqual(R.propOr(100, 'age', bob), 100);
+    eq(R.propOr(100, 'age', bob), 100);
   });
 });

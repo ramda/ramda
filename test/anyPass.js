@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('anyPass', function() {
@@ -11,21 +10,21 @@ describe('anyPass', function() {
 
   it('reports whether any predicates are satisfied by a given value', function() {
     var ok = R.anyPass([odd, gt20, lt5]);
-    assert.strictEqual(ok(7), true);
-    assert.strictEqual(ok(9), true);
-    assert.strictEqual(ok(10), false);
-    assert.strictEqual(ok(18), false);
-    assert.strictEqual(ok(3), true);
-    assert.strictEqual(ok(22), true);
+    eq(ok(7), true);
+    eq(ok(9), true);
+    eq(ok(10), false);
+    eq(ok(18), false);
+    eq(ok(3), true);
+    eq(ok(22), true);
   });
 
   it('returns false for an empty predicate list', function() {
-    assert.strictEqual(R.anyPass([])(3), false);
+    eq(R.anyPass([])(3), false);
   });
 
   it('returns a curried function whose arity matches that of the highest-arity predicate', function() {
-    assert.strictEqual(R.anyPass([odd, lt5, plusEq]).length, 4);
-    assert.strictEqual(R.anyPass([odd, lt5, plusEq])(6, 7, 8, 9), false);
-    assert.strictEqual(R.anyPass([odd, lt5, plusEq])(6)(7)(8)(9), false);
+    eq(R.anyPass([odd, lt5, plusEq]).length, 4);
+    eq(R.anyPass([odd, lt5, plusEq])(6, 7, 8, 9), false);
+    eq(R.anyPass([odd, lt5, plusEq])(6)(7)(8)(9), false);
   });
 });

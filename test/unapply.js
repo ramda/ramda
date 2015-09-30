@@ -1,28 +1,27 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('unapply', function() {
   it('returns a function which is always passed one argument', function() {
     var fn = R.unapply(function() { return arguments.length; });
-    assert.strictEqual(fn(), 1);
-    assert.strictEqual(fn('x'), 1);
-    assert.strictEqual(fn('x', 'y'), 1);
-    assert.strictEqual(fn('x', 'y', 'z'), 1);
+    eq(fn(), 1);
+    eq(fn('x'), 1);
+    eq(fn('x', 'y'), 1);
+    eq(fn('x', 'y', 'z'), 1);
   });
 
   it('forwards arguments to decorated function as an array', function() {
     var fn = R.unapply(function(xs) { return '[' + xs + ']'; });
-    assert.strictEqual(fn(), '[]');
-    assert.strictEqual(fn(2), '[2]');
-    assert.strictEqual(fn(2, 4), '[2,4]');
-    assert.strictEqual(fn(2, 4, 6), '[2,4,6]');
+    eq(fn(), '[]');
+    eq(fn(2), '[2]');
+    eq(fn(2, 4), '[2,4]');
+    eq(fn(2, 4, 6), '[2,4,6]');
   });
 
   it('returns a function with length 0', function() {
     var fn = R.unapply(R.identity);
-    assert.strictEqual(fn.length, 0);
+    eq(fn.length, 0);
   });
 
   it('is the inverse of R.apply', function() {
@@ -36,7 +35,7 @@ describe('unapply', function() {
     n = 1;
     while (n <= 100) {
       a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
-      assert.strictEqual(f(a, b, c, d, e), g(a, b, c, d, e));
+      eq(f(a, b, c, d, e), g(a, b, c, d, e));
       n += 1;
     }
 
@@ -45,7 +44,7 @@ describe('unapply', function() {
     n = 1;
     while (n <= 100) {
       a = rand(); b = rand(); c = rand(); d = rand(); e = rand();
-      assert.strictEqual(f([a, b, c, d, e]), g([a, b, c, d, e]));
+      eq(f([a, b, c, d, e]), g([a, b, c, d, e]));
       n += 1;
     }
   });

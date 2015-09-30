@@ -1,8 +1,7 @@
 /* jshint -W053 */
 
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('bind', function() {
@@ -23,7 +22,7 @@ describe('bind', function() {
   };
 
   it('returns a function', function() {
-    assert.strictEqual(typeof R.bind(add, Foo), 'function');
+    eq(typeof R.bind(add, Foo), 'function');
   });
 
   it('returns a function bound to the specified context object', function() {
@@ -32,14 +31,14 @@ describe('bind', function() {
       return this instanceof Foo;
     }
     var isFooBound = R.bind(isFoo, f);
-    assert.strictEqual(isFoo(), false);
-    assert.strictEqual(isFooBound(), true);
+    eq(isFoo(), false);
+    eq(isFooBound(), true);
   });
 
   it('works with built-in types', function() {
     var abc = R.bind(String.prototype.toLowerCase, 'ABCDEFG');
-    assert.strictEqual(typeof abc, 'function');
-    assert.strictEqual(abc(), 'abcdefg');
+    eq(typeof abc, 'function');
+    eq(abc(), 'abcdefg');
   });
 
   it('works with user-defined types', function() {
@@ -48,7 +47,7 @@ describe('bind', function() {
       return this.x;
     }
     var getXFooBound = R.bind(getX, f);
-    assert.strictEqual(getXFooBound(), 12);
+    eq(getXFooBound(), 12);
   });
 
   it('works with plain objects', function() {
@@ -59,8 +58,8 @@ describe('bind', function() {
       return this.x + 1;
     }
     var incPojso = R.bind(incThis, pojso);
-    assert.strictEqual(typeof incPojso, 'function');
-    assert.strictEqual(incPojso(), 101);
+    eq(typeof incPojso, 'function');
+    eq(incPojso(), 101);
   });
 
   it('does not interefere with existing object methods', function() {
@@ -69,13 +68,13 @@ describe('bind', function() {
       return this.x;
     }
     var getXBarBound = R.bind(getX, b);
-    assert.strictEqual(b.getX(), 'prototype getX');
-    assert.strictEqual(getXBarBound(), 'a');
+    eq(b.getX(), 'prototype getX');
+    eq(getXBarBound(), 'a');
   });
 
   it('is curried', function() {
     var f = new Foo(1);
-    assert.strictEqual(R.bind(add)(f)(10), 11);
+    eq(R.bind(add)(f)(10), 11);
   });
 
   it('preserves arity', function() {
@@ -84,9 +83,9 @@ describe('bind', function() {
     var f2 = function(a, b) { return a + b; };
     var f3 = function(a, b, c) { return a + b + c; };
 
-    assert.strictEqual(R.bind(f0, {}).length, 0);
-    assert.strictEqual(R.bind(f1, {}).length, 1);
-    assert.strictEqual(R.bind(f2, {}).length, 2);
-    assert.strictEqual(R.bind(f3, {}).length, 3);
+    eq(R.bind(f0, {}).length, 0);
+    eq(R.bind(f1, {}).length, 1);
+    eq(R.bind(f2, {}).length, 2);
+    eq(R.bind(f3, {}).length, 3);
   });
 });

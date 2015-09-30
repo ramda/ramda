@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('hasIn', function() {
@@ -9,9 +8,9 @@ describe('hasIn', function() {
 
   it('returns a function that checks the appropriate property', function() {
     var nm = R.hasIn('name');
-    assert.strictEqual(typeof nm, 'function');
-    assert.strictEqual(nm(fred), true);
-    assert.strictEqual(nm(anon), false);
+    eq(typeof nm, 'function');
+    eq(nm(fred), true);
+    eq(nm(anon), false);
   });
 
   it('checks properties from the prototype chain', function() {
@@ -19,11 +18,11 @@ describe('hasIn', function() {
     Person.prototype.age = function() {};
 
     var bob = new Person();
-    assert.strictEqual(R.hasIn('age', bob), true);
+    eq(R.hasIn('age', bob), true);
   });
 
   it('works properly when called with two arguments', function() {
-    assert.strictEqual(R.hasIn('name', fred), true);
-    assert.strictEqual(R.hasIn('name', anon), false);
+    eq(R.hasIn('name', fred), true);
+    eq(R.hasIn('name', anon), false);
   });
 });

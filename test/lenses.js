@@ -1,13 +1,8 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 var they = it;
-
-var eq = function(actual, expected) {
-  assert.strictEqual(R.toString(actual), R.toString(expected));
-};
 
 
 var alice = {

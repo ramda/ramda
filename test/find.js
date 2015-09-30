@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('find', function() {
@@ -14,37 +13,37 @@ describe('find', function() {
   var intoArray = R.into([]);
 
   it('returns the first element that satisfies the predicate', function() {
-    assert.strictEqual(R.find(even, a), 10);
-    assert.strictEqual(R.find(gt100, a), 200);
-    assert.strictEqual(R.find(isStr, a), 'cow');
-    assert.strictEqual(R.find(xGt100, a), obj2);
+    eq(R.find(even, a), 10);
+    eq(R.find(gt100, a), 200);
+    eq(R.find(isStr, a), 'cow');
+    eq(R.find(xGt100, a), obj2);
   });
 
   it('transduces the first element that satisfies the predicate into an array', function() {
-    assert.deepEqual(intoArray(R.find(even), a), [10]);
-    assert.deepEqual(intoArray(R.find(gt100), a), [200]);
-    assert.deepEqual(intoArray(R.find(isStr), a), ['cow']);
-    assert.deepEqual(intoArray(R.find(xGt100), a), [obj2]);
+    eq(intoArray(R.find(even), a), [10]);
+    eq(intoArray(R.find(gt100), a), [200]);
+    eq(intoArray(R.find(isStr), a), ['cow']);
+    eq(intoArray(R.find(xGt100), a), [obj2]);
   });
 
   it('returns `undefined` when no element satisfies the predicate', function() {
-    assert.strictEqual(R.find(even, ['zing']), undefined);
+    eq(R.find(even, ['zing']), undefined);
   });
 
   it('returns `undefined` in array when no element satisfies the predicate into an array', function() {
-    assert.deepEqual(intoArray(R.find(even), ['zing']), [undefined]);
+    eq(intoArray(R.find(even), ['zing']), [undefined]);
   });
 
   it('returns `undefined` when given an empty list', function() {
-    assert.strictEqual(R.find(even, []), undefined);
+    eq(R.find(even, []), undefined);
   });
 
   it('returns `undefined` into an array when given an empty list', function() {
-    assert.deepEqual(intoArray(R.find(even), []), [undefined]);
+    eq(intoArray(R.find(even), []), [undefined]);
   });
 
   it('is curried', function() {
-    assert.strictEqual(typeof R.find(even), 'function');
-    assert.strictEqual(R.find(even)(a), 10);
+    eq(typeof R.find(even), 'function');
+    eq(R.find(even)(a), 10);
   });
 });

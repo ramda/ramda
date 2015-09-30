@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('nth', function() {
@@ -8,29 +9,29 @@ describe('nth', function() {
   var list = ['foo', 'bar', 'baz', 'quux'];
 
   it('accepts positive offsets', function() {
-    assert.strictEqual(R.nth(0, list), 'foo');
-    assert.strictEqual(R.nth(1, list), 'bar');
-    assert.strictEqual(R.nth(2, list), 'baz');
-    assert.strictEqual(R.nth(3, list), 'quux');
-    assert.strictEqual(R.nth(4, list), undefined);
+    eq(R.nth(0, list), 'foo');
+    eq(R.nth(1, list), 'bar');
+    eq(R.nth(2, list), 'baz');
+    eq(R.nth(3, list), 'quux');
+    eq(R.nth(4, list), undefined);
 
-    assert.strictEqual(R.nth(0, 'abc'), 'a');
-    assert.strictEqual(R.nth(1, 'abc'), 'b');
-    assert.strictEqual(R.nth(2, 'abc'), 'c');
-    assert.strictEqual(R.nth(3, 'abc'), '');
+    eq(R.nth(0, 'abc'), 'a');
+    eq(R.nth(1, 'abc'), 'b');
+    eq(R.nth(2, 'abc'), 'c');
+    eq(R.nth(3, 'abc'), '');
   });
 
   it('accepts negative offsets', function() {
-    assert.strictEqual(R.nth(-1, list), 'quux');
-    assert.strictEqual(R.nth(-2, list), 'baz');
-    assert.strictEqual(R.nth(-3, list), 'bar');
-    assert.strictEqual(R.nth(-4, list), 'foo');
-    assert.strictEqual(R.nth(-5, list), undefined);
+    eq(R.nth(-1, list), 'quux');
+    eq(R.nth(-2, list), 'baz');
+    eq(R.nth(-3, list), 'bar');
+    eq(R.nth(-4, list), 'foo');
+    eq(R.nth(-5, list), undefined);
 
-    assert.strictEqual(R.nth(-1, 'abc'), 'c');
-    assert.strictEqual(R.nth(-2, 'abc'), 'b');
-    assert.strictEqual(R.nth(-3, 'abc'), 'a');
-    assert.strictEqual(R.nth(-4, 'abc'), '');
+    eq(R.nth(-1, 'abc'), 'c');
+    eq(R.nth(-2, 'abc'), 'b');
+    eq(R.nth(-3, 'abc'), 'a');
+    eq(R.nth(-4, 'abc'), '');
   });
 
   it('throws if applied to null or undefined', function() {

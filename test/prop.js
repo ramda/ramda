@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('prop', function() {
@@ -8,7 +7,7 @@ describe('prop', function() {
 
   it('returns a function that fetches the appropriate property', function() {
     var nm = R.prop('name');
-    assert.strictEqual(typeof nm, 'function');
-    assert.strictEqual(nm(fred), 'Fred');
+    eq(typeof nm, 'function');
+    eq(nm(fred), 'Fred');
   });
 });

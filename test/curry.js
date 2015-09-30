@@ -1,40 +1,39 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('curry', function() {
   it('curries a single value', function() {
     var f = R.curry(function(a, b, c, d) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
     var g = f(12);
-    assert.strictEqual(g(3, 6, 2), 15);
+    eq(g(3, 6, 2), 15);
   });
 
   it('curries multiple values', function() {
     var f = R.curry(function(a, b, c, d) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
     var g = f(12, 3);
-    assert.strictEqual(g(6, 2), 15);
+    eq(g(6, 2), 15);
     var h = f(12, 3, 6);
-    assert.strictEqual(h(2), 15);
+    eq(h(2), 15);
   });
 
   it('allows further currying of a curried function', function() {
     var f = R.curry(function(a, b, c, d) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
     var g = f(12);
-    assert.strictEqual(g(3, 6, 2), 15);
+    eq(g(3, 6, 2), 15);
     var h = g(3);
-    assert.strictEqual(h(6, 2), 15);
-    assert.strictEqual(g(3, 6)(2), 15);
+    eq(h(6, 2), 15);
+    eq(g(3, 6)(2), 15);
   });
 
   it('properly reports the length of the curried function', function() {
     var f = R.curry(function(a, b, c, d) {return (a + b * c) / d;});
-    assert.strictEqual(f.length, 4);
+    eq(f.length, 4);
     var g = f(12);
-    assert.strictEqual(g.length, 3);
+    eq(g.length, 3);
     var h = g(3);
-    assert.strictEqual(h.length, 2);
-    assert.strictEqual(g(3, 6).length, 1);
+    eq(h.length, 2);
+    eq(g(3, 6).length, 1);
   });
 
   it('preserves context', function() {
@@ -42,8 +41,8 @@ describe('curry', function() {
     var f = function(a, b) { return a + b * this.x; };
     var g = R.curry(f);
 
-    assert.strictEqual(g.call(ctx, 2, 4), 42);
-    assert.strictEqual(g.call(ctx, 2).call(ctx, 4), 42);
+    eq(g.call(ctx, 2, 4), 42);
+    eq(g.call(ctx, 2).call(ctx, 4), 42);
   });
 
   it('supports R.__ placeholder', function() {
@@ -51,29 +50,29 @@ describe('curry', function() {
     var g = R.curry(f);
     var _ = R.__;
 
-    assert.deepEqual(g(1)(2)(3), [1, 2, 3]);
-    assert.deepEqual(g(1)(2, 3), [1, 2, 3]);
-    assert.deepEqual(g(1, 2)(3), [1, 2, 3]);
-    assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
+    eq(g(1)(2)(3), [1, 2, 3]);
+    eq(g(1)(2, 3), [1, 2, 3]);
+    eq(g(1, 2)(3), [1, 2, 3]);
+    eq(g(1, 2, 3), [1, 2, 3]);
 
-    assert.deepEqual(g(_, 2, 3)(1), [1, 2, 3]);
-    assert.deepEqual(g(1, _, 3)(2), [1, 2, 3]);
-    assert.deepEqual(g(1, 2, _)(3), [1, 2, 3]);
+    eq(g(_, 2, 3)(1), [1, 2, 3]);
+    eq(g(1, _, 3)(2), [1, 2, 3]);
+    eq(g(1, 2, _)(3), [1, 2, 3]);
 
-    assert.deepEqual(g(1, _, _)(2)(3), [1, 2, 3]);
-    assert.deepEqual(g(_, 2, _)(1)(3), [1, 2, 3]);
-    assert.deepEqual(g(_, _, 3)(1)(2), [1, 2, 3]);
+    eq(g(1, _, _)(2)(3), [1, 2, 3]);
+    eq(g(_, 2, _)(1)(3), [1, 2, 3]);
+    eq(g(_, _, 3)(1)(2), [1, 2, 3]);
 
-    assert.deepEqual(g(1, _, _)(2, 3), [1, 2, 3]);
-    assert.deepEqual(g(_, 2, _)(1, 3), [1, 2, 3]);
-    assert.deepEqual(g(_, _, 3)(1, 2), [1, 2, 3]);
+    eq(g(1, _, _)(2, 3), [1, 2, 3]);
+    eq(g(_, 2, _)(1, 3), [1, 2, 3]);
+    eq(g(_, _, 3)(1, 2), [1, 2, 3]);
 
-    assert.deepEqual(g(1, _, _)(_, 3)(2), [1, 2, 3]);
-    assert.deepEqual(g(_, 2, _)(_, 3)(1), [1, 2, 3]);
-    assert.deepEqual(g(_, _, 3)(_, 2)(1), [1, 2, 3]);
+    eq(g(1, _, _)(_, 3)(2), [1, 2, 3]);
+    eq(g(_, 2, _)(_, 3)(1), [1, 2, 3]);
+    eq(g(_, _, 3)(_, 2)(1), [1, 2, 3]);
 
-    assert.deepEqual(g(_, _, _)(_, _)(_)(1, 2, 3), [1, 2, 3]);
-    assert.deepEqual(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
+    eq(g(_, _, _)(_, _)(_)(1, 2, 3), [1, 2, 3]);
+    eq(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
   });
 
   it('supports @@functional/placeholder', function() {
@@ -81,29 +80,29 @@ describe('curry', function() {
     var g = R.curry(f);
     var _ = {'@@functional/placeholder': true, x: Math.random()};
 
-    assert.deepEqual(g(1)(2)(3), [1, 2, 3]);
-    assert.deepEqual(g(1)(2, 3), [1, 2, 3]);
-    assert.deepEqual(g(1, 2)(3), [1, 2, 3]);
-    assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
+    eq(g(1)(2)(3), [1, 2, 3]);
+    eq(g(1)(2, 3), [1, 2, 3]);
+    eq(g(1, 2)(3), [1, 2, 3]);
+    eq(g(1, 2, 3), [1, 2, 3]);
 
-    assert.deepEqual(g(_, 2, 3)(1), [1, 2, 3]);
-    assert.deepEqual(g(1, _, 3)(2), [1, 2, 3]);
-    assert.deepEqual(g(1, 2, _)(3), [1, 2, 3]);
+    eq(g(_, 2, 3)(1), [1, 2, 3]);
+    eq(g(1, _, 3)(2), [1, 2, 3]);
+    eq(g(1, 2, _)(3), [1, 2, 3]);
 
-    assert.deepEqual(g(1, _, _)(2)(3), [1, 2, 3]);
-    assert.deepEqual(g(_, 2, _)(1)(3), [1, 2, 3]);
-    assert.deepEqual(g(_, _, 3)(1)(2), [1, 2, 3]);
+    eq(g(1, _, _)(2)(3), [1, 2, 3]);
+    eq(g(_, 2, _)(1)(3), [1, 2, 3]);
+    eq(g(_, _, 3)(1)(2), [1, 2, 3]);
 
-    assert.deepEqual(g(1, _, _)(2, 3), [1, 2, 3]);
-    assert.deepEqual(g(_, 2, _)(1, 3), [1, 2, 3]);
-    assert.deepEqual(g(_, _, 3)(1, 2), [1, 2, 3]);
+    eq(g(1, _, _)(2, 3), [1, 2, 3]);
+    eq(g(_, 2, _)(1, 3), [1, 2, 3]);
+    eq(g(_, _, 3)(1, 2), [1, 2, 3]);
 
-    assert.deepEqual(g(1, _, _)(_, 3)(2), [1, 2, 3]);
-    assert.deepEqual(g(_, 2, _)(_, 3)(1), [1, 2, 3]);
-    assert.deepEqual(g(_, _, 3)(_, 2)(1), [1, 2, 3]);
+    eq(g(1, _, _)(_, 3)(2), [1, 2, 3]);
+    eq(g(_, 2, _)(_, 3)(1), [1, 2, 3]);
+    eq(g(_, _, 3)(_, 2)(1), [1, 2, 3]);
 
-    assert.deepEqual(g(_, _, _)(_, _)(_)(1, 2, 3), [1, 2, 3]);
-    assert.deepEqual(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
+    eq(g(_, _, _)(_, _)(_)(1, 2, 3), [1, 2, 3]);
+    eq(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
   });
 
   it('forwards extra arguments', function() {
@@ -113,10 +112,10 @@ describe('curry', function() {
     };
     var g = R.curry(f);
 
-    assert.deepEqual(g(1, 2, 3), [1, 2, 3]);
-    assert.deepEqual(g(1, 2, 3, 4), [1, 2, 3, 4]);
-    assert.deepEqual(g(1, 2)(3, 4), [1, 2, 3, 4]);
-    assert.deepEqual(g(1)(2, 3, 4), [1, 2, 3, 4]);
-    assert.deepEqual(g(1)(2)(3, 4), [1, 2, 3, 4]);
+    eq(g(1, 2, 3), [1, 2, 3]);
+    eq(g(1, 2, 3, 4), [1, 2, 3, 4]);
+    eq(g(1, 2)(3, 4), [1, 2, 3, 4]);
+    eq(g(1)(2, 3, 4), [1, 2, 3, 4]);
+    eq(g(1)(2)(3, 4), [1, 2, 3, 4]);
   });
 });

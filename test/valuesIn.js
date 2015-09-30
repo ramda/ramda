@@ -1,6 +1,5 @@
-var assert = require('assert');
-
 var R = require('..');
+var eq = require('./shared/eq');
 
 
 describe('valuesIn', function() {
@@ -12,22 +11,22 @@ describe('valuesIn', function() {
 
   it("returns an array of the given object's values", function() {
     var vs = R.valuesIn(obj);
-    assert.strictEqual(vs.length, 6);
-    assert.strictEqual(R.indexOf(100, vs) >= 0, true);
-    assert.strictEqual(R.indexOf('D', vs) >= 0, true);
-    assert.strictEqual(R.indexOf(null, vs) >= 0, true);
-    assert.strictEqual(R.indexOf(undefined, vs) >= 0, true);
-    assert.strictEqual(R.indexOf(obj.b, vs) >= 0, true);
-    assert.strictEqual(R.indexOf(obj.c, vs) >= 0, true);
+    eq(vs.length, 6);
+    eq(R.indexOf(100, vs) >= 0, true);
+    eq(R.indexOf('D', vs) >= 0, true);
+    eq(R.indexOf(null, vs) >= 0, true);
+    eq(R.indexOf(undefined, vs) >= 0, true);
+    eq(R.indexOf(obj.b, vs) >= 0, true);
+    eq(R.indexOf(obj.c, vs) >= 0, true);
   });
 
   it("includes the given object's prototype properties", function() {
     var vs = R.valuesIn(cobj);
-    assert.strictEqual(vs.length, 4);
-    assert.strictEqual(R.indexOf(100, vs) >= 0, true);
-    assert.strictEqual(R.indexOf(200, vs) >= 0, true);
-    assert.strictEqual(R.indexOf(cobj.x, vs) >= 0, true);
-    assert.strictEqual(R.indexOf('y', vs) >= 0, true);
+    eq(vs.length, 4);
+    eq(R.indexOf(100, vs) >= 0, true);
+    eq(R.indexOf(200, vs) >= 0, true);
+    eq(R.indexOf(cobj.x, vs) >= 0, true);
+    eq(R.indexOf('y', vs) >= 0, true);
   });
 
   it('works for primitives', function() {
@@ -35,6 +34,6 @@ describe('valuesIn', function() {
     var result = R.map(function(val) {
       return R.values(val);
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-    assert.deepEqual(result, R.repeat([], 10));
+    eq(result, R.repeat([], 10));
   });
 });
