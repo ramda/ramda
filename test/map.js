@@ -18,6 +18,13 @@ describe('map', function() {
     assert.deepEqual(intoArray(R.map(times2), [1, 2, 3, 4]), [2, 4, 6, 8]);
   });
 
+  it('interprets ((->) r) as a functor', function() {
+    var f = function(a) { return a - 1; };
+    var g = function(b) { return b * 2; };
+    var h = R.map(f, g);
+    assert.strictEqual(h(10), (10 * 2) - 1);
+  });
+
   it('dispatches to objects that implement `map`', function() {
     var obj = {x: 100, map: function(f) { return f(this.x); }};
     assert.strictEqual(R.map(add1, obj), 101);

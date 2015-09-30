@@ -15,6 +15,8 @@ var _xmap = require('./internal/_xmap');
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *
+ * Map treats also treats functions as functors and will compose them together.
+ *
  * @func
  * @memberOf R
  * @category List

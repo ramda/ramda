@@ -23,6 +23,11 @@ var map = require('./map');
  *      var duplicate = n => [n, n];
  *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
  */
-module.exports = _curry2(_dispatchable('chain', _xchain, function chain(fn, list) {
-  return _makeFlat(false)(map(fn, list));
+module.exports = _curry2(_dispatchable('chain', _xchain, function chain(fn, monad) {
+  if (typeof monad === 'function') {
+    return function() {
+      return monad.call(this, fn.apply(this, arguments)).apply(this, arguments);
+    };
+  }
+  return _makeFlat(false)(map(fn, monad));
 }));

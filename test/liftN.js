@@ -28,12 +28,6 @@ describe('liftN', function() {
     assert.deepEqual(addN3([1, 10], [2], [3]), [6, 15]);
   });
 
-  it('produces a cross-product of array values', function() {
-    assert.deepEqual(addN3([1, 2, 3], [1, 2], [1, 2, 3]), [3, 4, 5, 4, 5, 6, 4, 5, 6, 5, 6, 7, 5, 6, 7, 6, 7, 8]);
-    assert.deepEqual(addN3([1], [2], [3]), [6]);
-    assert.deepEqual(addN3([1, 2], [3, 4], [5, 6]), [9, 10, 10, 11, 10, 11, 11, 12]);
-  });
-
   it('can lift functions of any arity', function() {
     assert.deepEqual(addN3([1, 10], [2], [3]), [6, 15]);
     assert.deepEqual(addN4([1, 10], [2], [3], [40]), [46, 55]);
@@ -49,5 +43,25 @@ describe('liftN', function() {
   it('works with other functors such as "Maybe"', function() {
     var addM = R.liftN(2, R.add);
     assert.deepEqual(addM(Maybe(3), Maybe(5)), Maybe(8));
+  });
+
+  it('interprets [a] as a functor', function() {
+    assert.deepEqual(addN3([1, 2, 3], [10, 20], [100, 200, 300]), [111, 211, 311, 121, 221, 321, 112, 212, 312, 122, 222, 322, 113, 213, 313, 123, 223, 323]);
+    assert.deepEqual(addN3([1], [2], [3]), [6]);
+    assert.deepEqual(addN3([1, 2], [10, 20], [100, 200]), [111, 211, 121, 221, 112, 212, 122, 222]);
+  });
+
+  it('interprets ((->) r) as a functor', function() {
+    var convergedOnInt = addN3(R.add(2), R.multiply(3), R.subtract(4));
+    var convergedOnBool = R.liftN(2, R.and)(R.gt(R.__, 0), R.lt(R.__, 3));
+    assert.strictEqual(typeof convergedOnInt, 'function');
+    assert.strictEqual(typeof convergedOnBool, 'function');
+    assert.strictEqual(convergedOnInt(10), (10 + 2) + (10 * 3) + (4 - 10));
+    // jscs:disable disallowYodaConditions
+    assert.strictEqual(convergedOnBool(0), (0 > 0) && (0 < 3));
+    assert.strictEqual(convergedOnBool(1), (1 > 0) && (1 < 3));
+    assert.strictEqual(convergedOnBool(2), (2 > 0) && (2 < 3));
+    assert.strictEqual(convergedOnBool(3), (3 > 0) && (3 < 3));
+    // jscs:enable disallowYodaConditions
   });
 });
