@@ -1,4 +1,5 @@
 var _curry1 = require('./internal/_curry1');
+var _of = require('./internal/_of');
 
 
 /**
@@ -18,4 +19,4 @@ var _curry1 = require('./internal/_curry1');
  *      R.of(null); //=> [null]
  *      R.of([42]); //=> [[42]]
  */
-module.exports = _curry1(function of(x) { return [x]; });
+module.exports = _curry1(_of);

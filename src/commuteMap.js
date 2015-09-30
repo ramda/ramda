@@ -1,7 +1,8 @@
 var _curry3 = require('./internal/_curry3');
+var _of = require('./internal/_of');
 var _reduce = require('./internal/_reduce');
-var ap = require('./ap');
-var append = require('./append');
+var concat = require('./concat');
+var lift = require('./lift');
 var map = require('./map');
 
 
@@ -27,8 +28,9 @@ var map = require('./map');
  *      R.commuteMap(R.map(R.add(10)), Maybe.of, [Just(1), Just(2), Nothing()]); //=> Nothing()
  */
 module.exports = _curry3(function commuteMap(fn, of, list) {
+  var concatF = lift(concat);
   function consF(acc, ftor) {
-    return ap(map(append, fn(ftor)), acc);
+    return concatF(acc, map(_of, fn(ftor)));
   }
   return _reduce(consF, of([]), list);
 });
