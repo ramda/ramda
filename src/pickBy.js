@@ -15,7 +15,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Object} obj The object to copy from
  * @return {Object} A new object with only properties that satisfy `pred`
  *         on it.
- * @see R.pick
+ * @see R.pick, R.filter
  * @example
  *
  *      var isUpperCase = (val, key) => key.toUpperCase() === key;
