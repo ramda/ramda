@@ -7,6 +7,8 @@ var _xall = require('./internal/_xall');
  * Returns `true` if all elements of the list match the predicate, `false` if there are any
  * that don't.
  *
+ * Dispatches to the `all` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *

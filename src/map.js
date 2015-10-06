@@ -15,6 +15,8 @@ var keys = require('./keys');
  * native `Array.prototype.map` method. For more details on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
  *
+ * Dispatches to the `map` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *

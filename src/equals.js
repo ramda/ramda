@@ -7,6 +7,8 @@ var _equals = require('./internal/_equals');
  * Dispatches to an `equals` method if present. Handles cyclical data
  * structures.
  *
+ * Dispatches to the `equals` method of both arguments, if present.
+ *
  * @func
  * @memberOf R
  * @category Relation

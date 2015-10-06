@@ -7,6 +7,8 @@ var _xfind = require('./internal/_xfind');
  * Returns the first element of the list which matches the predicate, or `undefined` if no
  * element matches.
  *
+ * Dispatches to the `find` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *
