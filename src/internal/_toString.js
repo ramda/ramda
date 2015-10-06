@@ -4,7 +4,6 @@ var _quote = require('./_quote');
 var _toISOString = require('./_toISOString');
 var keys = require('../keys');
 var reject = require('../reject');
-var test = require('../test');
 
 
 module.exports = function _toString(x, seen) {
@@ -22,7 +21,7 @@ module.exports = function _toString(x, seen) {
     case '[object Arguments]':
       return '(function() { return arguments; }(' + _map(recur, x).join(', ') + '))';
     case '[object Array]':
-      return '[' + _map(recur, x).concat(mapPairs(x, reject(test(/^\d+$/), keys(x)))).join(', ') + ']';
+      return '[' + _map(recur, x).concat(mapPairs(x, reject(function(k) { return /^\d+$/.test(k); }, keys(x)))).join(', ') + ']';
     case '[object Boolean]':
       return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
     case '[object Date]':
