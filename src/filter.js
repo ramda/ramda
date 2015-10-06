@@ -12,6 +12,8 @@ var _xfilter = require('./internal/_xfilter');
  * `Array.prototype.filter` method. For more details on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
  *
+ * Dispatches to the `filter` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *

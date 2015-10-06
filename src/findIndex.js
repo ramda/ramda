@@ -7,6 +7,8 @@ var _xfindIndex = require('./internal/_xfindIndex');
  * Returns the index of the first element of the list which matches the predicate, or `-1`
  * if no element matches.
  *
+ * Dispatches to the `findIndex` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *

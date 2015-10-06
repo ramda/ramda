@@ -10,6 +10,8 @@ var _xtakeWhile = require('./internal/_xtakeWhile');
  * `false`. Excludes the element that caused the predicate function to fail. The predicate
  * function is passed one argument: *(value)*.
  *
+ * Dispatches to the `takeWhile` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *
