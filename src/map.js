@@ -1,7 +1,10 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
 var _map = require('./internal/_map');
+var _reduce = require('./internal/_reduce');
 var _xmap = require('./internal/_xmap');
+var curryN = require('./curryN');
+var keys = require('./keys');
 
 
 /**
@@ -20,7 +23,7 @@ var _xmap = require('./internal/_xmap');
  * @func
  * @memberOf R
  * @category List
- * @sig (a -> b) -> [a] -> [b]
+ * @sig Functor f => (a -> b) -> f a -> f b
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {Array} list The list to be iterated over.
  * @return {Array} The new list.
@@ -29,5 +32,21 @@ var _xmap = require('./internal/_xmap');
  *      var double = x => x * 2;
  *
  *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
+ *
+ *      R.map(double, {x: 1, y: 2, z: 3}); //=> {x: 2, y: 4, z: 6}
  */
-module.exports = _curry2(_dispatchable('map', _xmap, _map));
+module.exports = _curry2(_dispatchable('map', _xmap, function map(fn, functor) {
+  switch (Object.prototype.toString.call(functor)) {
+    case '[object Function]':
+      return curryN(functor.length, function() {
+        return fn.call(this, functor.apply(this, arguments));
+      });
+    case '[object Object]':
+      return _reduce(function(acc, key) {
+        acc[key] = fn(functor[key]);
+        return acc;
+      }, {}, keys(functor));
+    default:
+      return _map(fn, functor);
+  }
+}));

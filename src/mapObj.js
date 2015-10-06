@@ -17,6 +17,7 @@ var keys = require('./keys');
  * @param {Object} obj The object to iterate over.
  * @return {Object} A new object with the same keys as `obj` and values that are the result
  *         of running each property through `fn`.
+ * @deprecated since v0.18.0
  * @example
  *
  *      var values = { x: 1, y: 2, z: 3 };
