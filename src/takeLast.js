@@ -1,6 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var drop = require('./drop');
 
+
 /**
  * Returns a new list containing the last `n` elements of the given list.
  * If `n > list.length`, returns a list of `list.length` elements.

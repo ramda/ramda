@@ -4,7 +4,7 @@ var _slice = require('./internal/_slice');
 var curry = require('./curry');
 
 
-/*
+/**
  * Accepts a function `fn` and a list of transformer functions and returns a new curried
  * function. When the new function is invoked, it calls the function `fn` with parameters
  * consisting of the result of calling each supplied handler on successive arguments to the

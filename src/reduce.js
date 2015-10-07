@@ -15,6 +15,8 @@ var _reduce = require('./internal/_reduce');
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
  * @see R.reduced
  *
+ * Dispatches to the `reduce` method of the third argument, if present.
+ *
  * @func
  * @memberOf R
  * @category List

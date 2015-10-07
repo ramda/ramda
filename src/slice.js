@@ -6,6 +6,8 @@ var _curry3 = require('./internal/_curry3');
  * Returns the elements of the given list or string (or object with a `slice`
  * method) from `fromIndex` (inclusive) to `toIndex` (exclusive).
  *
+ * Dispatches to the `slice` method of the third argument, if present.
+ *
  * @func
  * @memberOf R
  * @category List
