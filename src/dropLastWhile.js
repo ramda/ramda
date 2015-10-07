@@ -1,6 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var _slice = require('./internal/_slice');
 
+
 /**
  * Returns a new list containing all but last the`n` elements of a given list,
  * passing each value from the right to the supplied predicate function, skipping

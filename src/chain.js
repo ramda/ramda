@@ -7,9 +7,9 @@ var map = require('./map');
 
 /**
  * `chain` maps a function over a list and concatenates the results.
- * This implementation is compatible with the
- * Fantasy-land Chain spec, and will work with types that implement that spec.
  * `chain` is also known as `flatMap` in some libraries
+ *
+ * Dispatches to the `chain` method of the second argument, if present.
  *
  * @func
  * @memberOf R

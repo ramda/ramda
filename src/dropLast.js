@@ -1,6 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var take = require('./take');
 
+
 /**
  * Returns a list containing all but the last `n` elements of the given `list`.
  *

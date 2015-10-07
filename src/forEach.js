@@ -15,6 +15,8 @@ var _curry2 = require('./internal/_curry2');
  * Also note that, unlike `Array.prototype.forEach`, Ramda's `forEach` returns the original
  * array. In some libraries this function is named `each`.
  *
+ * Dispatches to the `forEach` method of the second argument, if present.
+ *
  * @func
  * @memberOf R
  * @category List

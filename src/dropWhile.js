@@ -9,6 +9,8 @@ var _xdropWhile = require('./internal/_xdropWhile');
  * to the supplied predicate function, skipping elements while the predicate function returns
  * `true`. The predicate function is passed one argument: *(value)*.
  *
+ * Dispatches to the `dropWhile` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  * @see R.transduce
  *

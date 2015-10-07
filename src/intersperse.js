@@ -5,6 +5,8 @@ var _curry2 = require('./internal/_curry2');
 /**
  * Creates a new list with the separator interposed between elements.
  *
+ * Dispatches to the `intersperse` method of the second argument, if present.
+ *
  * @func
  * @memberOf R
  * @category List

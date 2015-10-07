@@ -3,6 +3,7 @@ var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
 var _xaperture = require('./internal/_xaperture');
 
+
 /**
  * Returns a new list, composed of n-tuples of consecutive elements
  * If `n` is greater than the length of the list, an empty list is returned.

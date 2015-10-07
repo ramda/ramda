@@ -11,6 +11,8 @@ var _isString = require('./internal/_isString');
  * Other types are supported if they define `<Type>.empty` and/or
  * `<Type>.prototype.empty`.
  *
+ * Dispatches to the `empty` method of the first argument, if present.
+ *
  * @func
  * @memberOf R
  * @category Function
