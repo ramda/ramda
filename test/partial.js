@@ -7,17 +7,17 @@ describe('partial', function() {
     return b * b - 4 * a * c;
   };
 
-  it('caches the initially supplied left-most parameters in the generated function', function() {
-    var f = R.partial(disc, 3);
+  it('caches the initially supplied arguments', function() {
+    var f = R.partial(disc, [3]);
     eq(f(7, 4), 1);
-    var g = R.partial(disc, 3, 7);
+    var g = R.partial(disc, [3, 7]);
     eq(g(4), 1);
   });
 
   it('correctly reports the arity of the new function', function() {
-    var f = R.partial(disc, 3);
+    var f = R.partial(disc, [3]);
     eq(f.length, 2);
-    var g = R.partial(disc, 3, 7);
+    var g = R.partial(disc, [3, 7]);
     eq(g.length, 1);
   });
 });
