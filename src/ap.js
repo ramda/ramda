@@ -13,6 +13,7 @@ var map = require('./map');
  *
  * @func
  * @memberOf R
+ * @since v0.3.0
  * @category Function
  * @sig [f] -> [a] -> [f a]
  * @param {Array} fns An array of functions

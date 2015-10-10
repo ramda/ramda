@@ -9,6 +9,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.6.0
  * @category Function
  * @category Object
  * @see R.partial

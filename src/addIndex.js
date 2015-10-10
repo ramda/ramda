@@ -15,6 +15,7 @@ var curryN = require('./curryN');
  *
  * @func
  * @memberOf R
+ * @since v0.15.0
  * @category Function
  * @category List
  * @sig ((a ... -> b) ... -> [a] -> *) -> (a ..., Int, [a] -> b) ... -> [a] -> *)

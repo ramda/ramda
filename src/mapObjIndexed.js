@@ -9,6 +9,7 @@ var keys = require('./keys');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category Object
  * @sig (v, k, {k: v} -> v) -> {k: v} -> {k: v}
  * @param {Function} fn A function called for each property in `obj`. Its return value will

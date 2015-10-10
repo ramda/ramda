@@ -8,6 +8,7 @@ var _has = require('./internal/_has');
  *
  * @func
  * @memberOf R
+ * @since v0.7.0
  * @category Object
  * @sig s -> {s: x} -> Boolean
  * @param {String} prop The name of the property to check for.

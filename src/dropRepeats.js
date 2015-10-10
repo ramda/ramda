@@ -16,6 +16,7 @@ var equals = require('./equals');
  *
  * @func
  * @memberOf R
+ * @since v0.14.0
  * @category List
  * @sig [a] -> [a]
  * @param {Array} list The array to consider.

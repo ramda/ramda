@@ -10,6 +10,7 @@ var equals = require('./equals');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig a -> [a] -> Number
  * @param {*} target The item to find.

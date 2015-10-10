@@ -7,6 +7,7 @@ var identity = require('./identity');
  *
  * @func
  * @memberOf R
+ * @since v0.8.0
  * @category List
  * @see R.commuteMap
  * @sig Functor f => (x -> f x) -> [f a] -> f [a]

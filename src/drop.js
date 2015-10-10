@@ -12,6 +12,7 @@ var slice = require('./slice');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @see R.transduce
  * @sig Number -> [a] -> [a]

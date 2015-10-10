@@ -7,6 +7,7 @@ var _slice = require('./internal/_slice');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Relation
  * @sig Ord b => (a -> b) -> [a] -> [a]
  * @param {Function} fn

@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.2.0
  * @category Object
  * @sig [String] -> {k: v} -> v | Undefined
  * @param {Array} path The path to use.

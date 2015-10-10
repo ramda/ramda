@@ -8,6 +8,7 @@ var constructN = require('./constructN');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig (* -> {*}) -> (* -> {*})
  * @param {Function} Fn The constructor function to wrap.

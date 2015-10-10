@@ -8,6 +8,7 @@ var equals = require('./equals');
  *
  * @func
  * @memberOf R
+ * @since v0.18.0
  * @category Relation
  * @sig (a -> b) -> a -> a -> Boolean
  * @param {Function} f

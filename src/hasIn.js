@@ -7,6 +7,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.7.0
  * @category Object
  * @sig s -> {s: x} -> Boolean
  * @param {String} prop The name of the property to check for.

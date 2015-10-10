@@ -7,6 +7,7 @@ var _isArray = require('./internal/_isArray');
  *
  * @func
  * @memberOf R
+ * @since v0.3.0
  * @category List
  * @sig [[k,v]] -> {k: v}
  * @param {Array} pairs An array of two-element arrays that will be the keys and values of the output object.

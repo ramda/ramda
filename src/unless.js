@@ -9,6 +9,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.18.0
  * @category Logic
  * @see R.ifElse, R.when
  * @sig (a -> Boolean) -> (a -> a) -> a -> a

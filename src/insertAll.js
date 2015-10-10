@@ -10,6 +10,7 @@ var _slice = require('./internal/_slice');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category List
  * @sig Number -> [a] -> [a] -> [a]
  * @param {Number} index The position to insert the sub-list

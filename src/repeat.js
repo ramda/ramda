@@ -8,6 +8,7 @@ var times = require('./times');
  *
  * @func
  * @memberOf R
+ * @since v0.1.1
  * @category List
  * @sig a -> n -> [a]
  * @param {*} value The value to repeat.

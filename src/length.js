@@ -7,6 +7,7 @@ var is = require('./is');
  *
  * @func
  * @memberOf R
+ * @since v0.3.0
  * @category List
  * @sig [a] -> Number
  * @param {Array} list The array to inspect.

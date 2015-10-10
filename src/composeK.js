@@ -13,6 +13,7 @@ var prepend = require('./prepend');
  *
  * @func
  * @memberOf R
+ * @since v0.16.0
  * @category Function
  * @see R.pipeK
  * @sig Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> (m a -> m z)

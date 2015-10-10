@@ -22,6 +22,7 @@ var _stepCat = require('./internal/_stepCat');
  *
  * @func
  * @memberOf R
+ * @since v0.12.0
  * @category List
  * @sig a -> (b -> b) -> [c] -> a
  * @param {*} acc The initial accumulator value.

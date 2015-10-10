@@ -12,6 +12,7 @@ var assoc = require('./assoc');
  *
  * @func
  * @memberOf R
+ * @since v0.8.0
  * @category Object
  * @sig [String] -> a -> {k: v} -> {k: v}
  * @param {Array} path the path to set

@@ -6,6 +6,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.6.0
  * @category String
  * @sig String -> String
  * @param {String} str The string to trim.

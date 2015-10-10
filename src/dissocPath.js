@@ -12,6 +12,7 @@ var dissoc = require('./dissoc');
  *
  * @func
  * @memberOf R
+ * @since v0.11.0
  * @category Object
  * @sig [String] -> {k: v} -> {k: v}
  * @param {Array} path the path to set

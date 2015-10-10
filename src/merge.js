@@ -8,6 +8,7 @@ var keys = require('./keys');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @sig {k: v} -> {k: v} -> {k: v}
  * @param {Object} a

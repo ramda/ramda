@@ -14,6 +14,7 @@ var _xfindLast = require('./internal/_xfindLast');
  *
  * @func
  * @memberOf R
+ * @since v0.1.1
  * @category List
  * @sig (a -> Boolean) -> [a] -> a | undefined
  * @param {Function} fn The predicate function used to determine if the element is the

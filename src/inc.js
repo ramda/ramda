@@ -6,6 +6,7 @@ var add = require('./add');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category Math
  * @sig Number -> Number
  * @param {Number} n

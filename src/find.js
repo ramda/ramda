@@ -14,6 +14,7 @@ var _xfind = require('./internal/_xfind');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> a | undefined
  * @param {Function} fn The predicate function used to determine if the element is the

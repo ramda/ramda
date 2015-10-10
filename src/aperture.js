@@ -15,6 +15,7 @@ var _xaperture = require('./internal/_xaperture');
  *
  * @func
  * @memberOf R
+ * @since v0.12.0
  * @category List
  * @sig Number -> [a] -> [[a]]
  * @param {Number} n The size of the tuples to create

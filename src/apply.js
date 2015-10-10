@@ -8,6 +8,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.7.0
  * @category Function
  * @sig (*... -> a) -> [*] -> a
  * @param {Function} fn

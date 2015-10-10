@@ -10,6 +10,7 @@ var _has = require('./internal/_has');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @sig {k: v} -> [k]
  * @param {Object} obj The object to extract properties from

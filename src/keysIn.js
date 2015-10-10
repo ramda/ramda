@@ -9,6 +9,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.2.0
  * @category Object
  * @sig {k: v} -> [k]
  * @param {Object} obj The object to extract properties from

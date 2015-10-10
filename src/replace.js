@@ -6,6 +6,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.7.0
  * @category String
  * @sig RegExp|String -> String -> String -> String
  * @param {RegExp|String} pattern A regular expression or a substring to match.

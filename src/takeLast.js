@@ -8,6 +8,7 @@ var drop = require('./drop');
  *
  * @func
  * @memberOf R
+ * @since v0.16.0
  * @category List
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String

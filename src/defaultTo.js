@@ -7,6 +7,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category Logic
  * @sig a -> b -> a | b
  * @param {a} val The default value.

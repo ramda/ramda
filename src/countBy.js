@@ -11,6 +11,7 @@ var _has = require('./internal/_has');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Relation
  * @sig (a -> String) -> [a] -> {*}
  * @param {Function} fn The function used to map values to keys.

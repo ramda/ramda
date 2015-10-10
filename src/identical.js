@@ -8,6 +8,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.15.0
  * @category Relation
  * @sig a -> a -> Boolean
  * @param {*} a

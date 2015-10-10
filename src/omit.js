@@ -7,6 +7,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @sig [String] -> {String: *} -> {String: *}
  * @param {Array} names an array of String property names to omit from the new object

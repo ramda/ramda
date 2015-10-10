@@ -11,6 +11,7 @@ var reduceRight = require('./reduceRight');
  *
  * @func
  * @memberOf R
+ * @since v0.8.0
  * @category List
  * @see R.commute
  * @sig Functor f => (a -> f b) -> (x -> f x) -> [a] -> f [b]

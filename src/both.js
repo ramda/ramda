@@ -10,6 +10,7 @@ var lift = require('./lift');
  *
  * @func
  * @memberOf R
+ * @since v0.12.0
  * @category Logic
  * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
  * @param {Function} f a predicate

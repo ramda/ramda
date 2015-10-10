@@ -27,6 +27,7 @@ var curryN = require('./curryN');
  *
  * @func
  * @memberOf R
+ * @since v0.12.0
  * @category List
  * @see R.reduce, R.reduced, R.into
  * @sig (c -> c) -> (a,b -> a) -> a -> [b] -> a

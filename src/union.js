@@ -10,6 +10,7 @@ var uniq = require('./uniq');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Relation
  * @sig [a] -> [a] -> [a]
  * @param {Array} as The first list.

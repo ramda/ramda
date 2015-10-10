@@ -11,6 +11,7 @@ var _equals = require('./internal/_equals');
  *
  * @func
  * @memberOf R
+ * @since v0.15.0
  * @category Relation
  * @sig a -> b -> Boolean
  * @param {*} a

@@ -11,6 +11,7 @@ var tail = require('./tail');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category Function
  * @sig ((a -> Promise b), (b -> Promise c), ..., (y -> Promise z)) -> (a -> Promise z)
  * @param {...Function} functions

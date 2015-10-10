@@ -7,6 +7,7 @@ var allUniq = require('./allUniq');
  *
  * @func
  * @memberOf R
+ * @since v0.1.1
  * @category List
  * @sig [a] -> Boolean
  * @param {Array} list The array to consider.

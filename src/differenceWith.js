@@ -9,6 +9,7 @@ var containsWith = require('./containsWith');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Relation
  * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
  * @param {Function} pred A predicate used to test whether two items are equal.

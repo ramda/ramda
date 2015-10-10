@@ -6,6 +6,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig (a, b -> Boolean) -> (a, b -> Number)
  * @param {Function} pred A predicate function of arity two.

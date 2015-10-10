@@ -9,6 +9,7 @@ var propSatisfies = require('./propSatisfies');
  *
  * @func
  * @memberOf R
+ * @since v0.16.0
  * @category Type
  * @sig Type -> String -> Object -> Boolean
  * @param {Function} type

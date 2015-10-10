@@ -8,6 +8,7 @@ var _isString = require('./internal/_isString');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig Number -> [a] -> a | Undefined
  * @sig Number -> String -> String

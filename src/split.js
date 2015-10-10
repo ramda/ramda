@@ -7,6 +7,7 @@ var invoker = require('./invoker');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category String
  * @sig (String | RegExp) -> String -> [String]
  * @param {String|RegExp} sep The pattern.

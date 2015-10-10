@@ -7,6 +7,7 @@ var slice = require('./slice');
  *
  * @func
  * @memberOf R
+ * @since v0.16.0
  * @category List
  * @sig Number -> [a] -> [[a]]
  * @sig Number -> String -> [String]

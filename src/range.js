@@ -8,6 +8,7 @@ var _isNumber = require('./internal/_isNumber');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig Number -> Number -> [Number]
  * @param {Number} from The first number in the list.

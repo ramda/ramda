@@ -9,6 +9,7 @@ var curryN = require('./curryN');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig (a... -> b) -> ((a... -> b) -> a... -> c) -> (a... -> c)
  * @param {Function} fn The function to wrap.

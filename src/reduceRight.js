@@ -16,6 +16,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig (a,b -> a) -> a -> [b] -> a
  * @param {Function} fn The iterator function. Receives two values, the accumulator and the

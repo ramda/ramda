@@ -11,6 +11,7 @@ var uniqWith = require('./uniqWith');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Relation
  * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
  * @param {Function} pred A predicate function that determines whether

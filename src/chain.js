@@ -13,6 +13,7 @@ var map = require('./map');
  *
  * @func
  * @memberOf R
+ * @since v0.3.0
  * @category List
  * @sig (a -> [b]) -> [a] -> [b]
  * @param {Function} fn

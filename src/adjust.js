@@ -10,6 +10,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.14.0
  * @category List
  * @sig (a -> a) -> Number -> [a] -> [a]
  * @param {Function} fn The function to apply.

@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category Object
  * @sig String -> {k: v} -> {k: v}
  * @param {String} prop the name of the property to dissociate

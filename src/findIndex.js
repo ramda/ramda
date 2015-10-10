@@ -14,6 +14,7 @@ var _xfindIndex = require('./internal/_xfindIndex');
  *
  * @func
  * @memberOf R
+ * @since v0.1.1
  * @category List
  * @sig (a -> Boolean) -> [a] -> Number
  * @param {Function} fn The predicate function used to determine if the element is the

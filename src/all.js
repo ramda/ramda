@@ -14,6 +14,7 @@ var _xall = require('./internal/_xall');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> Boolean
  * @param {Function} fn The predicate function.

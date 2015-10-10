@@ -16,6 +16,7 @@ var append = require('./append');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig (a -> String) -> [a] -> {String: [a]}
  * @param {Function} fn Function :: a -> String

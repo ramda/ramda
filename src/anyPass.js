@@ -15,6 +15,7 @@ var reduce = require('./reduce');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category Logic
  * @sig [(*... -> Boolean)] -> (*... -> Boolean)
  * @param {Array} preds

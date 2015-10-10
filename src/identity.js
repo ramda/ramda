@@ -8,6 +8,7 @@ var _identity = require('./internal/_identity');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig a -> a
  * @param {*} x The value to return.

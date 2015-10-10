@@ -8,6 +8,7 @@ var uniqWith = require('./uniqWith');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig [a] -> [a]
  * @param {Array} list The array to consider.
