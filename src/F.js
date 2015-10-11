@@ -6,6 +6,7 @@ var always = require('./always');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category Function
  * @sig * -> Boolean
  * @param {*}

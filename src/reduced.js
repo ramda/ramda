@@ -13,6 +13,7 @@ var _reduced = require('./internal/_reduced');
  *
  * @func
  * @memberOf R
+ * @since v0.15.0
  * @category List
  * @see R.reduce, R.transduce
  * @sig a -> *

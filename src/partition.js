@@ -8,6 +8,7 @@ var _reduce = require('./internal/_reduce');
  *
  * @func
  * @memberOf R
+ * @since v0.1.4
  * @category List
  * @sig (a -> Boolean) -> [a] -> [[a],[a]]
  * @param {Function} pred A predicate to determine which array the element belongs to.

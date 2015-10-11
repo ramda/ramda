@@ -10,6 +10,7 @@ var always = require('./always');
  *
  * @func
  * @memberOf R
+ * @since v0.14.0
  * @category List
  * @sig Number -> a -> [a] -> [a]
  * @param {Number} idx The index to update.

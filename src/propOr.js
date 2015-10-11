@@ -9,6 +9,7 @@ var _has = require('./internal/_has');
  *
  * @func
  * @memberOf R
+ * @since v0.6.0
  * @category Object
  * @sig a -> String -> Object -> a
  * @param {*} val The default value.

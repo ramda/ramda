@@ -8,6 +8,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.8.0
  * @category Type
  * @sig (* -> {*}) -> String
  * @param {*} val The value to test

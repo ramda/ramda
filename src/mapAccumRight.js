@@ -14,6 +14,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category List
  * @sig (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
  * @param {Function} fn The function to be called on every element of the input `list`.

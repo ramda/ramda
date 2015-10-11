@@ -8,6 +8,7 @@ var _makeFlat = require('./internal/_makeFlat');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig [a] -> [b]
  * @param {Array} list The array to consider.

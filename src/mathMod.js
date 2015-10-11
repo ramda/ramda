@@ -10,6 +10,7 @@ var _isInteger = require('./internal/_isInteger');
  *
  * @func
  * @memberOf R
+ * @since v0.3.0
  * @category Math
  * @sig Number -> Number -> Number
  * @param {Number} m The dividend.

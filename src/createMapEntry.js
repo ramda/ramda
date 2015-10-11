@@ -6,6 +6,7 @@ var objOf = require('./objOf');
  *
  * @func
  * @memberOf R
+ * @since v0.7.0
  * @category Object
  * @sig String -> a -> {String:a}
  * @param {String} key

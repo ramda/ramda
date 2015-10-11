@@ -19,6 +19,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.1.1
  * @category List
  * @sig (a -> *) -> [a] -> [a]
  * @param {Function} fn The function to invoke. Receives one argument, `value`.

@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @sig s -> {s: a} -> a | Undefined
  * @param {String} p The property name

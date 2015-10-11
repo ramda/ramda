@@ -9,6 +9,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.8.0
  * @category Object
  * @sig String -> a -> {k: v} -> {k: v}
  * @param {String} prop the property name to set

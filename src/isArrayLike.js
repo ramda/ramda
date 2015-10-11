@@ -7,6 +7,7 @@ var _isArray = require('./internal/_isArray');
  *
  * @func
  * @memberOf R
+ * @since v0.5.0
  * @category Type
  * @category List
  * @sig * -> Boolean

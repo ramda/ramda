@@ -9,6 +9,7 @@ var curry = require('./curry');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig (a -> b -> c -> ... -> z) -> (b -> a -> c -> ... -> z)
  * @param {Function} fn The function to invoke with its first two parameters reversed.

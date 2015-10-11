@@ -8,6 +8,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.1.5
  * @category List
  * @sig (a, a -> Boolean) -> a -> [a] -> Boolean
  * @param {Function} pred A predicate used to test whether two items are equal.

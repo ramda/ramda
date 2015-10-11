@@ -12,6 +12,7 @@ var map = require('./map');
  *
  * @func
  * @memberOf R
+ * @since v0.7.0
  * @see R.lift
  * @category Function
  * @sig Number -> (*... -> *) -> ([*]... -> [*])

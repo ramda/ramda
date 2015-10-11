@@ -8,6 +8,7 @@ var nAry = require('./nAry');
  *
  * @func
  * @memberOf R
+ * @since v0.2.0
  * @category Function
  * @sig (* -> c) -> (a, b -> c)
  * @param {Function} fn The function to wrap.

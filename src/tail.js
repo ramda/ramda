@@ -10,6 +10,7 @@ var slice = require('./slice');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @see R.head, R.init, R.last
  * @sig [a] -> [a]

@@ -10,6 +10,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.1.4
  * @category List
  * @sig Number -> Number -> [a] -> [a]
  * @sig Number -> Number -> String -> String

@@ -10,6 +10,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category List
  * @sig (a -> [b]) -> * -> [b]
  * @param {Function} fn The iterator function. receives one argument, `seed`, and returns

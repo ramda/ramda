@@ -8,6 +8,7 @@ var equals = require('./equals');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @sig k -> {k: v} -> {k: v} -> Boolean
  * @param {String} prop The name of the property to compare

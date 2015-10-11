@@ -9,6 +9,7 @@ var _slice = require('./internal/_slice');
  *
  * @func
  * @memberOf R
+ * @since v0.2.2
  * @category List
  * @sig Number -> a -> [a] -> [a]
  * @param {Number} index The position to insert the element

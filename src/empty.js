@@ -15,6 +15,7 @@ var _isString = require('./internal/_isString');
  *
  * @func
  * @memberOf R
+ * @since v0.3.0
  * @category Function
  * @sig a -> a
  * @param {*} x

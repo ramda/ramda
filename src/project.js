@@ -9,6 +9,7 @@ var useWith = require('./useWith');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @category Relation
  * @sig [k] -> [{k: v}] -> [{k: v}]

@@ -8,6 +8,7 @@ var keysIn = require('./keysIn');
  *
  * @func
  * @memberOf R
+ * @since v0.4.0
  * @category Object
  * @sig {*} -> [String]
  * @param {Object} obj The objects with functions in it

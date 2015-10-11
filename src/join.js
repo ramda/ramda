@@ -7,6 +7,7 @@ var invoker = require('./invoker');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig String -> [a] -> String
  * @param {Number|String} separator The string used to separate the elements.

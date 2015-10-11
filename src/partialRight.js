@@ -10,6 +10,7 @@ var flip = require('./flip');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category Function
  * @sig ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
  * @param {Function} f

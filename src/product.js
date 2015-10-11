@@ -7,6 +7,7 @@ var reduce = require('./reduce');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Math
  * @sig [Number] -> Number
  * @param {Array} list An array of numbers

@@ -16,6 +16,7 @@
  *
  * @constant
  * @memberOf R
+ * @since v0.6.0
  * @category Function
  * @example
  *

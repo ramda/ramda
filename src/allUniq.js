@@ -8,6 +8,7 @@ var _indexOf = require('./internal/_indexOf');
  *
  * @func
  * @memberOf R
+ * @since v0.18.0
  * @category List
  * @sig [a] -> Boolean
  * @param {Array} list The array to consider.

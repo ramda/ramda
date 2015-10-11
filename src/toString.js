@@ -25,6 +25,7 @@ var _toString = require('./internal/_toString');
  *
  * @func
  * @memberOf R
+ * @since v0.14.0
  * @category String
  * @sig * -> String
  * @param {*} val

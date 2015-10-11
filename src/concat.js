@@ -9,6 +9,7 @@ var invoker = require('./invoker');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig [a] -> [a] -> [a]
  * @sig String -> String -> String

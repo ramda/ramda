@@ -12,6 +12,7 @@ var tail = require('./tail');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig (((a, b, ..., n) -> o), (o -> p), ..., (x -> y), (y -> z)) -> ((a, b, ..., n) -> z)
  * @param {...Function} functions

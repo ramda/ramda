@@ -7,6 +7,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.16.0
  * @category Logic
  * @sig (a -> Boolean) -> String -> {String: a} -> Boolean
  * @param {Function} pred

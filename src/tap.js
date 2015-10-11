@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig (a -> *) -> a -> a
  * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.

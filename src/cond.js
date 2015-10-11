@@ -11,6 +11,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.6.0
  * @category Logic
  * @sig [[(*... -> Boolean),(*... -> *)]] -> (*... -> *)
  * @param {Array} pairs

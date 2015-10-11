@@ -16,6 +16,7 @@ var _xdropWhile = require('./internal/_xdropWhile');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> [a]
  * @param {Function} fn The function called per iteration.

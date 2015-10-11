@@ -13,6 +13,7 @@ var any = require('./any');
  *
  * @func
  * @memberOf R
+ * @since v0.12.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> Boolean
  * @param {Function} fn The predicate function.

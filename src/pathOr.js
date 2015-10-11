@@ -9,6 +9,7 @@ var path = require('./path');
  *
  * @func
  * @memberOf R
+ * @since v0.18.0
  * @category Object
  * @sig a -> [String] -> Object -> a
  * @param {*} d The default value.

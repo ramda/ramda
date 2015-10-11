@@ -8,6 +8,7 @@ var liftN = require('./liftN');
  *
  * @func
  * @memberOf R
+ * @since v0.7.0
  * @see R.liftN
  * @category Function
  * @sig (*... -> *) -> ([*]... -> [*])

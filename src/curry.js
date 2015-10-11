@@ -28,6 +28,7 @@ var curryN = require('./curryN');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig (* -> a) -> (* -> a)
  * @param {Function} fn The function to curry.

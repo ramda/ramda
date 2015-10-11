@@ -8,6 +8,7 @@ var curryN = require('./curryN');
  *
  * @func
  * @memberOf R
+ * @since v0.14.0
  * @category Function
  * @sig Number -> (a -> b) -> (a -> c)
  * @param {Number} length The arity for the returned function.

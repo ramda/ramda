@@ -9,6 +9,7 @@ var _createPartialApplicator = require('./internal/_createPartialApplicator');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category Function
  * @sig ((a, b, c, ..., n) -> x) -> [a, b, c, ...] -> ((d, e, f, ..., n) -> x)
  * @param {Function} f

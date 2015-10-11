@@ -9,6 +9,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @see R.test
  * @category String
  * @sig RegExp -> String -> [String | Undefined]

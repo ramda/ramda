@@ -6,6 +6,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category Type
  * @sig * -> Boolean
  * @param {*} x The value to test.

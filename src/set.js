@@ -9,6 +9,7 @@ var over = require('./over');
  *
  * @func
  * @memberOf R
+ * @since v0.16.0
  * @category Object
  * @typedefn Lens s a = Functor f => (a -> f a) -> s -> f s
  * @sig Lens s a -> a -> s -> s

@@ -24,6 +24,7 @@ var keys = require('./keys');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig Functor f => (a -> b) -> f a -> f b
  * @param {Function} fn The function to be called on every element of the input `list`.

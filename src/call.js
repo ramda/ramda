@@ -10,6 +10,7 @@ var curry = require('./curry');
  *
  * @func
  * @memberOf R
+ * @since v0.9.0
  * @category Function
  * @sig (*... -> a),*... -> a
  * @param {Function} fn The function to apply to the remaining arguments.

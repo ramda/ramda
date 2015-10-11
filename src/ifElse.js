@@ -8,6 +8,7 @@ var curryN = require('./curryN');
  *
  * @func
  * @memberOf R
+ * @since v0.8.0
  * @category Logic
  * @see R.unless, R.when
  * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)

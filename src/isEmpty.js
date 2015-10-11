@@ -9,6 +9,7 @@ var equals = require('./equals');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Logic
  * @sig a -> Boolean
  * @param {*} x

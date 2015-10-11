@@ -14,6 +14,7 @@ var toString = require('./toString');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig Number -> String -> (a -> b -> ... -> n -> Object -> *)
  * @param {Number} arity Number of arguments the returned function should take

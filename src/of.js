@@ -10,6 +10,7 @@ var _of = require('./internal/_of');
  *
  * @func
  * @memberOf R
+ * @since v0.3.0
  * @category Function
  * @sig a -> [a]
  * @param {*} x any value

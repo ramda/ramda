@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @sig [k] -> {k: v} -> [v]
  * @param {Array} ps The property names to fetch

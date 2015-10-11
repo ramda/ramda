@@ -6,6 +6,7 @@ var nth = require('./nth');
  *
  * @func
  * @memberOf R
+ * @since v0.1.4
  * @category List
  * @see R.init, R.head, R.tail
  * @sig [a] -> a | Undefined

@@ -9,6 +9,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Object
  * @sig {*} -> {*}
  * @param {*} value The object or array to clone

@@ -8,6 +8,7 @@ var prop = require('./prop');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig k -> [{k: v}] -> [v]
  * @param {Number|String} key The key name to pluck off of each object.

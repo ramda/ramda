@@ -8,6 +8,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @function
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig (a,b -> c) -> [a] -> [b] -> [c]
  * @param {Function} fn The function used to combine the two elements into one value.

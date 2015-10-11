@@ -10,6 +10,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Function
  * @sig a -> (* -> a)
  * @param {*} val The value to wrap in a function

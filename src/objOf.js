@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.18.0
  * @category Object
  * @sig String -> a -> {String:a}
  * @param {String} key

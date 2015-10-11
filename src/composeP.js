@@ -9,6 +9,7 @@ var reverse = require('./reverse');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category Function
  * @sig ((y -> Promise z), (x -> Promise y), ..., (a -> Promise b)) -> (a -> Promise z)
  * @param {...Function} functions

@@ -8,6 +8,7 @@ var reduce = require('./reduce');
  *
  * @func
  * @memberOf R
+ * @since v0.10.0
  * @category List
  * @sig [{k: v}] -> {k: v}
  * @param {Array} list An array of objects

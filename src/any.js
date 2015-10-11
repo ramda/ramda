@@ -14,6 +14,7 @@ var _xany = require('./internal/_xany');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> Boolean
  * @param {Function} fn The predicate function.

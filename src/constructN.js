@@ -10,6 +10,7 @@ var nAry = require('./nAry');
  *
  * @func
  * @memberOf R
+ * @since v0.4.0
  * @category Function
  * @sig Number -> (* -> {*}) -> (* -> {*})
  * @param {Number} n The arity of the constructor function.

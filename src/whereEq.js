@@ -14,6 +14,7 @@ var where = require('./where');
  *
  * @func
  * @memberOf R
+ * @since v0.14.0
  * @category Object
  * @sig {String: *} -> {String: *} -> Boolean
  * @param {Object} spec

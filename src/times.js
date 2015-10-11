@@ -10,6 +10,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.2.3
  * @category List
  * @sig (i -> a) -> i -> [a]
  * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.

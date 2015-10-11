@@ -7,6 +7,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since v0.1.0
  * @category Logic
  * @sig * -> Boolean
  * @param {*} a any value

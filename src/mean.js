@@ -7,6 +7,7 @@ var sum = require('./sum');
  *
  * @func
  * @memberOf R
+ * @since v0.14.0
  * @category Math
  * @sig [Number] -> Number
  * @param {Array} list
