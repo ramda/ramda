@@ -10,7 +10,7 @@ var update = require('./update');
  * @func
  * @memberOf R
  * @category Object
- * @typedef Lens s a = Functor f => (a -> f a) -> s -> f s
+ * @typedefn Lens s a = Functor f => (a -> f a) -> s -> f s
  * @sig Number -> Lens s a
  * @param {Number} n
  * @return {Lens}
