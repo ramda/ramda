@@ -1,32 +1,28 @@
 var _concat = require('./internal/_concat');
 var _createPartialApplicator = require('./internal/_createPartialApplicator');
-var curry = require('./curry');
 var flip = require('./flip');
 
 
 /**
- * Accepts as its arguments a function and any number of values and returns a function that,
- * when invoked, calls the original function with all of the values appended to the original
- * function's arguments list.
- *
- * Note that `partialRight` is the opposite of `partial`: `partialRight` fills `fn`'s arguments
- * from the right to the left.  In some libraries this function is named `applyRight`.
+ * Takes a function `f` and a list of arguments, and returns a function `g`.
+ * When applied, `g` returns the result of applying `f` to the arguments
+ * provided to `g` followed by the arguments provided initially.
  *
  * @func
  * @memberOf R
  * @category Function
- * @sig (a -> b-> ... -> i -> j -> ... -> m -> n) -> j -> ... -> m -> n -> (a -> b-> ... -> i)
- * @param {Function} fn The function to invoke.
- * @param {...*} [args] Arguments to append to `fn` when the returned function is invoked.
- * @return {Function} A new function wrapping `fn`. When invoked, it will call `fn` with
- *         `args` appended to `fn`'s arguments list.
+ * @sig ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
+ * @param {Function} f
+ * @param {Array} args
+ * @return {Function}
+ * @see R.partial
  * @example
  *
  *      var greet = (salutation, title, firstName, lastName) =>
- *           salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+ *        salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
  *
- *      var greetMsJaneJones = R.partialRight(greet, 'Ms.', 'Jane', 'Jones');
+ *      var greetMsJaneJones = R.partialRight(greet, ['Ms.', 'Jane', 'Jones']);
  *
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  */
-module.exports = curry(_createPartialApplicator(flip(_concat)));
+module.exports = _createPartialApplicator(flip(_concat));
