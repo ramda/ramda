@@ -1,0 +1,9 @@
+{
+  "name": "ramda",
+  "author": "Scott Sauyet <scott@sauyet.com> (scott.sauyet.com)",
+  "repository": "ramda/ramda",
+  "description": "A practical functional library for JavaScript programmers.",
+  "version": "0.18.0",
+  "scripts": ["dist/ramda.js"],
+  "license": "MIT"
+}
