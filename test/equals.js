@@ -111,6 +111,13 @@ describe('equals', function() {
     eq(R.equals(c, a), false);
   });
 
+  it('considers equivalent Error objects equal', function() {
+    eq(R.equals(new Error('XXX'), new Error('XXX')), true);
+    eq(R.equals(new Error('XXX'), new Error('YYY')), false);
+    eq(R.equals(new Error('XXX'), new TypeError('XXX')), false);
+    eq(R.equals(new Error('XXX'), new TypeError('YYY')), false);
+  });
+
   var supportsSticky = false;
   try { RegExp('', 'y'); supportsSticky = true; } catch (e) {}
 
