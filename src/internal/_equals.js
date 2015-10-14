@@ -40,6 +40,11 @@ module.exports = function _equals(a, b, stackA, stackB) {
         return false;
       }
       break;
+    case 'Error':
+      if (!(a.name === b.name && a.message === b.message)) {
+        return false;
+      }
+      break;
     case 'RegExp':
       if (!(a.source === b.source &&
             a.global === b.global &&
