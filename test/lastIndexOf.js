@@ -80,4 +80,20 @@ describe('lastIndexOf', function() {
     var curried = R.lastIndexOf('a');
     eq(curried(list), 2);
   });
+
+  it('finds function, compared by identity', function() {
+    var f = function() {};
+    var g = function() {};
+    var list = [g, f, g, f];
+    eq(R.lastIndexOf(f, list), 3);
+  });
+
+  it('does not find function, compared by identity', function() {
+    var f = function() {};
+    var g = function() {};
+    var h = function() {};
+    var list = [g, f];
+    eq(R.lastIndexOf(h, list), -1);
+  });
+
 });
