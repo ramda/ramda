@@ -11,7 +11,7 @@ var containsWith = require('./containsWith');
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
+ * @sig (a -> a -> Boolean) -> [*] -> [*] -> [*]
  * @param {Function} pred A predicate used to test whether two items are equal.
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.

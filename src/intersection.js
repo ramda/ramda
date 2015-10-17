@@ -12,7 +12,7 @@ var uniq = require('./uniq');
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig [a] -> [a] -> [a]
+ * @sig [*] -> [*] -> [*]
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.
  * @return {Array} The list of elements found in both `list1` and `list2`.

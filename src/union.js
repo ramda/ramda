@@ -12,7 +12,7 @@ var uniq = require('./uniq');
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig [a] -> [a] -> [a]
+ * @sig [*] -> [*] -> [*]
  * @param {Array} as The first list.
  * @param {Array} bs The second list.
  * @return {Array} The first and second lists concatenated, with
