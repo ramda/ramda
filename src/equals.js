@@ -4,10 +4,9 @@ var _equals = require('./internal/_equals');
 
 /**
  * Returns `true` if its arguments are equivalent, `false` otherwise.
- * Dispatches to an `equals` method if present. Handles cyclical data
- * structures.
+ * Handles cyclical data structures.
  *
- * Dispatches to the `equals` method of both arguments, if present.
+ * Dispatches symmetrically to the `equals` methods of both arguments, if present.
  *
  * @func
  * @memberOf R
