@@ -12,6 +12,10 @@ module.exports = function _toString(x, seen) {
     return _contains(y, xs) ? '<Circular>' : _toString(y, xs);
   };
 
+  var constructorName = function(constructor) {
+    return constructor.toString().match(/function (\w*)/)[1];
+  };
+
   //  mapPairs :: (Object, [String]) -> [String]
   var mapPairs = function(obj, keys) {
     return _map(function(k) { return _quote(k) + ': ' + recur(obj[k]); }, keys.slice().sort());
@@ -35,7 +39,7 @@ module.exports = function _toString(x, seen) {
     case '[object Undefined]':
       return 'undefined';
     default:
-      return (typeof x.constructor === 'function' && x.constructor.name !== 'Object' &&
+      return (typeof x.constructor === 'function' && constructorName(x.constructor) !== 'Object' &&
               typeof x.toString === 'function' && x.toString() !== '[object Object]') ?
              x.toString() :  // Function, RegExp, user-defined types
              '{' + mapPairs(x, keys(x)).join(', ') + '}';
