@@ -1,13 +1,12 @@
 var _curry1 = require('./internal/_curry1');
 
 /**
-* Creates a new list out of the lists supplied by pairing up
+* Creates a new list out of the lists supplied by matching
 * equally positioned items from both lists. The returned list is
 * truncated to the length of the shorter of the two input lists.
 *
 * @func
 * @memberOf R
-* @since v.0.18
 * @category List
 * @sig [a] -> [a]
 * @param {Array} List of arrays to consider
