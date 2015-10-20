@@ -22,6 +22,7 @@ module.exports = (function() {
         }
       }
     }
+    this.inputs = null;
     return this.xf['@@transducer/result'](result);
   };
   XGroupBy.prototype['@@transducer/step'] = function(result, input) {
