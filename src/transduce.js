@@ -29,7 +29,6 @@ var curryN = require('./curryN');
  * @memberOf R
  * @since v0.12.0
  * @category List
- * @see R.reduce, R.reduced, R.into
  * @sig (c -> c) -> (a,b -> a) -> a -> [b] -> a
  * @param {Function} xf The transducer function. Receives a transformer and returns a transformer.
  * @param {Function} fn The iterator function. Receives two values, the accumulator and the
@@ -38,6 +37,7 @@ var curryN = require('./curryN');
  * @param {*} acc The initial accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
+ * @see R.reduce, R.reduced, R.into
  * @example
  *
  *      var numbers = [1, 2, 3, 4];

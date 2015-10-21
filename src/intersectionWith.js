@@ -18,8 +18,8 @@ var uniqWith = require('./uniqWith');
  *        the two supplied elements are equal.
  * @param {Array} list1 One list of items to compare
  * @param {Array} list2 A second list of items to compare
- * @see R.intersection
  * @return {Array} A new list containing those elements common to both lists.
+ * @see R.intersection
  * @example
  *
  *      var buffaloSpringfield = [

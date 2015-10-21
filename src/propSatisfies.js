@@ -14,8 +14,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {String} name
  * @param {*} obj
  * @return {Boolean}
- * @see R.propEq
- * @see R.propIs
+ * @see R.propEq, R.propIs
  * @example
  *
  *      R.propSatisfies(x => x > 0, 'x', {x: 1, y: 2}); //=> true

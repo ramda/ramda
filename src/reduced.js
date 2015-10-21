@@ -15,10 +15,10 @@ var _reduced = require('./internal/_reduced');
  * @memberOf R
  * @since v0.15.0
  * @category List
- * @see R.reduce, R.transduce
  * @sig a -> *
  * @param {*} x The final value of the reduce.
  * @return {*} The wrapped value.
+ * @see R.reduce, R.transduce
  * @example
  *
  *      R.reduce(

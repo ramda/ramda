@@ -8,11 +8,11 @@ var nth = require('./nth');
  * @memberOf R
  * @since v0.1.4
  * @category List
- * @see R.init, R.head, R.tail
  * @sig [a] -> a | Undefined
  * @sig String -> String
  * @param {*} list
  * @return {*}
+ * @see R.init, R.head, R.tail
  * @example
  *
  *      R.last(['fi', 'fo', 'fum']); //=> 'fum'

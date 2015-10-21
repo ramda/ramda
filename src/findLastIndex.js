@@ -10,7 +10,6 @@ var _xfindLastIndex = require('./internal/_xfindLastIndex');
  * Dispatches to the `findLastIndex` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -21,6 +20,7 @@ var _xfindLastIndex = require('./internal/_xfindLastIndex');
  * desired one.
  * @param {Array} list The array to consider.
  * @return {Number} The index of the element found, or `-1`.
+ * @see R.transduce
  * @example
  *
  *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];

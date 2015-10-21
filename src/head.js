@@ -9,11 +9,11 @@ var nth = require('./nth');
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @see R.tail, R.init, R.last
  * @sig [a] -> a | Undefined
  * @sig String -> String
  * @param {*} list
  * @return {*}
+ * @see R.tail, R.init, R.last
  * @example
  *
  *      R.head(['fi', 'fo', 'fum']); //=> 'fi'

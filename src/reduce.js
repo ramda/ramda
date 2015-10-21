@@ -13,7 +13,6 @@ var _reduce = require('./internal/_reduce');
  * Note: `R.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike
  * the native `Array.prototype.reduce` method. For more details on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
- * @see R.reduced
  *
  * Dispatches to the `reduce` method of the third argument, if present.
  *
@@ -27,6 +26,7 @@ var _reduce = require('./internal/_reduce');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
+ * @see R.reduced
  * @example
  *
  *      var numbers = [1, 2, 3];

@@ -9,11 +9,11 @@ var liftN = require('./liftN');
  * @func
  * @memberOf R
  * @since v0.7.0
- * @see R.liftN
  * @category Function
  * @sig (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The function `fn` applicable to mappable objects.
+ * @see R.liftN
  * @example
  *
  *      var madd3 = R.lift(R.curry((a, b, c) => a + b + c));

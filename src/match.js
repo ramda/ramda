@@ -10,12 +10,12 @@ var _curry2 = require('./internal/_curry2');
  * @func
  * @memberOf R
  * @since v0.1.0
- * @see R.test
  * @category String
  * @sig RegExp -> String -> [String | Undefined]
  * @param {RegExp} rx A regular expression.
  * @param {String} str The string to match against
  * @return {Array} The list of matches or empty array.
+ * @see R.test
  * @example
  *
  *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
