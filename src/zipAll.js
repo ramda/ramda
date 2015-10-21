@@ -8,12 +8,12 @@ var _curry1 = require('./internal/_curry1');
 * @func
 * @memberOf R
 * @category List
-* @sig [a] -> [a]
+* @sig [[*]] -> [[*]]
 * @param {Array} List of arrays to consider
 * @return {Array} The list made by paring up same indexed elements of supplied list.
 * @example
 *
-* R.zipAll([[1, 2, 3], ['a', 'b', 'c'], ['A', 'B', 'C']]) //=> [[1, 'a', 'A'], [2, 'b', 'B'], [3, 'c', 'C']]
+* R.zipAll([[1, 2, 3], ['a', 'b', 'c'], [true, true, false]]) //=> [[1, 'a', true], [2, 'b', true], [3, 'c', false]]
 */
 module.exports = _curry1(function zipAll(list) {
   var rv = [];
