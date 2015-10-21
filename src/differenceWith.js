@@ -15,8 +15,8 @@ var containsWith = require('./containsWith');
  * @param {Function} pred A predicate used to test whether two items are equal.
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.
- * @see R.difference
  * @return {Array} The elements in `list1` that are not in `list2`.
+ * @see R.difference
  * @example
  *
  *      function cmp(x, y) => x.a === y.a;

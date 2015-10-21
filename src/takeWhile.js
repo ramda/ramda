@@ -13,7 +13,6 @@ var _xtakeWhile = require('./internal/_xtakeWhile');
  * Dispatches to the `takeWhile` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -23,7 +22,7 @@ var _xtakeWhile = require('./internal/_xtakeWhile');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} A new array.
- * @see R.dropWhile
+ * @see R.dropWhile, R.transduce
  * @example
  *
  *      var isNotFour = x => x !== 4;

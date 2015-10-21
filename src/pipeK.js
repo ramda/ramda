@@ -11,10 +11,10 @@ var reverse = require('./reverse');
  * @memberOf R
  * @since v0.16.0
  * @category Function
- * @see R.composeK
  * @sig Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> (m a -> m z)
  * @param {...Function}
  * @return {Function}
+ * @see R.composeK
  * @example
  *
  *      //  parseJson :: String -> Maybe *

@@ -12,7 +12,6 @@ var append = require('./append');
  * Dispatches to the `groupBy` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -23,6 +22,7 @@ var append = require('./append');
  * @param {Array} list The array to group
  * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
  *         that produced that key when passed to `fn`.
+ * @see R.transduce
  * @example
  *
  *      var byGrade = R.groupBy(function(student) {

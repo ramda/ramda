@@ -18,7 +18,6 @@ var keys = require('./keys');
  * Dispatches to the `map` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * Map treats also treats functions as functors and will compose them together.
  *
@@ -30,6 +29,7 @@ var keys = require('./keys');
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {Array} list The list to be iterated over.
  * @return {Array} The new list.
+ * @see R.transduce
  * @example
  *
  *      var double = x => x * 2;

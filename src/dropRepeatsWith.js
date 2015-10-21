@@ -12,7 +12,6 @@ var last = require('./last');
  * Dispatches to the `dropRepeatsWith` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -22,6 +21,7 @@ var last = require('./last');
  * @param {Function} pred A predicate used to test whether two items are equal.
  * @param {Array} list The array to consider.
  * @return {Array} `list` without repeating elements.
+ * @see R.transduce
  * @example
  *
  *      var lengthEq = (x, y) => Math.abs(x) === Math.abs(y);

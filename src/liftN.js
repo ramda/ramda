@@ -13,11 +13,11 @@ var map = require('./map');
  * @func
  * @memberOf R
  * @since v0.7.0
- * @see R.lift
  * @category Function
  * @sig Number -> (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The function `fn` applicable to mappable objects.
+ * @see R.lift
  * @example
  *
  *      var madd3 = R.liftN(3, R.curryN(3, () => R.reduce(R.add, 0, arguments)));
