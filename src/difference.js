@@ -9,7 +9,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig [a] -> [a] -> [a]
+ * @sig [*] -> [*] -> [*]
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.
  * @return {Array} The elements in `list1` that are not in `list2`.
