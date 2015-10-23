@@ -8,11 +8,12 @@ var keys = require('./keys');
 
 
 /**
- * Returns a new list, constructed by applying the supplied function to every element of the
- * supplied list.
+ * Returns a new list, constructed by applying the supplied function to every
+ * element of the supplied list.
  *
- * Note: `R.map` does not skip deleted or unassigned indices (sparse arrays), unlike the
- * native `Array.prototype.map` method. For more details on this behavior, see:
+ * Note: `R.map` does not skip deleted or unassigned indices (sparse arrays),
+ * unlike the native `Array.prototype.map` method. For more details on this
+ * behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
  *
  * Dispatches to the `map` method of the second argument, if present.

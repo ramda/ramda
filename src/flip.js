@@ -4,8 +4,8 @@ var curry = require('./curry');
 
 
 /**
- * Returns a new function much like the supplied one, except that the first two arguments'
- * order is reversed.
+ * Returns a new function much like the supplied one, except that the first two
+ * arguments' order is reversed.
  *
  * @func
  * @memberOf R

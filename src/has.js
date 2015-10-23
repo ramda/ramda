@@ -3,8 +3,7 @@ var _has = require('./internal/_has');
 
 
 /**
- * Returns whether or not an object has an own property with
- * the specified name
+ * Returns whether or not an object has an own property with the specified name
  *
  * @func
  * @memberOf R

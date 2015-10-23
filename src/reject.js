@@ -4,8 +4,9 @@ var filter = require('./filter');
 
 
 /**
- * Similar to `filter`, except that it keeps only values for which the given predicate
- * function returns falsy. The predicate function is passed one argument: *(value)*.
+ * Similar to `filter`, except that it keeps only values for which the given
+ * predicate function returns falsy. The predicate function is passed one
+ * argument: *(value)*.
  *
  * Acts as a transducer if a transformer is given in list position.
  *

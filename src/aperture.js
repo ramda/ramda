@@ -5,8 +5,8 @@ var _xaperture = require('./internal/_xaperture');
 
 
 /**
- * Returns a new list, composed of n-tuples of consecutive elements
- * If `n` is greater than the length of the list, an empty list is returned.
+ * Returns a new list, composed of n-tuples of consecutive elements If `n` is
+ * greater than the length of the list, an empty list is returned.
  *
  * Dispatches to the `aperture` method of the second argument, if present.
  *

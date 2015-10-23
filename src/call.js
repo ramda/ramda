@@ -5,8 +5,8 @@ var curry = require('./curry');
 /**
  * Returns the result of calling its first argument with the remaining
  * arguments. This is occasionally useful as a converging function for
- * `R.converge`: the left branch can produce a function while the right
- * branch produces a value to be passed to that function as an argument.
+ * `R.converge`: the left branch can produce a function while the right branch
+ * produces a value to be passed to that function as an argument.
  *
  * @func
  * @memberOf R

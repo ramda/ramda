@@ -6,8 +6,8 @@ var map = require('./map');
 
 
 /**
- * `chain` maps a function over a list and concatenates the results.
- * `chain` is also known as `flatMap` in some libraries
+ * `chain` maps a function over a list and concatenates the results. `chain`
+ * is also known as `flatMap` in some libraries
  *
  * Dispatches to the `chain` method of the second argument, if present.
  *

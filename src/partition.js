@@ -3,8 +3,8 @@ var _reduce = require('./internal/_reduce');
 
 
 /**
- * Takes a predicate and a list and returns the pair of lists of
- * elements which do and do not satisfy the predicate, respectively.
+ * Takes a predicate and a list and returns the pair of lists of elements which
+ * do and do not satisfy the predicate, respectively.
  *
  * @func
  * @memberOf R

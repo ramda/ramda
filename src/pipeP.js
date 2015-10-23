@@ -6,8 +6,8 @@ var tail = require('./tail');
 
 /**
  * Performs left-to-right composition of one or more Promise-returning
- * functions. The leftmost function may have any arity; the remaining
- * functions must be unary.
+ * functions. The leftmost function may have any arity; the remaining functions
+ * must be unary.
  *
  * @func
  * @memberOf R

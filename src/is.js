@@ -2,8 +2,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * See if an object (`val`) is an instance of the supplied constructor.
- * This function will check up the inheritance chain, if any.
+ * See if an object (`val`) is an instance of the supplied constructor. This
+ * function will check up the inheritance chain, if any.
  *
  * @func
  * @memberOf R

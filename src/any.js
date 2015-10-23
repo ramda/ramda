@@ -4,8 +4,8 @@ var _xany = require('./internal/_xany');
 
 
 /**
- * Returns `true` if at least one of elements of the list match the predicate, `false`
- * otherwise.
+ * Returns `true` if at least one of elements of the list match the predicate,
+ * `false` otherwise.
  *
  * Dispatches to the `any` method of the second argument, if present.
  *

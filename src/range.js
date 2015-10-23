@@ -3,8 +3,7 @@ var _isNumber = require('./internal/_isNumber');
 
 
 /**
- * Returns a list of numbers from `from` (inclusive) to `to`
- * (exclusive).
+ * Returns a list of numbers from `from` (inclusive) to `to` (exclusive).
  *
  * @func
  * @memberOf R

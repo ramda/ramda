@@ -2,7 +2,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns a function that when supplied an object returns the indicated property of that object, if it exists.
+ * Returns a function that when supplied an object returns the indicated
+ * property of that object, if it exists.
  *
  * @func
  * @memberOf R

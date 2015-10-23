@@ -6,7 +6,7 @@ var _slice = require('./_slice');
 /**
  * Returns a function that dispatches with different strategies based on the
  * object in list position (last argument). If it is an array, executes [fn].
- * Otherwise, if it has a  function with [methodname], it will execute that
+ * Otherwise, if it has a function with [methodname], it will execute that
  * function (functor case). Otherwise, if it is a transformer, uses transducer
  * [xf] to return a new transformer (transducer case). Otherwise, it will
  * default to executing [fn].

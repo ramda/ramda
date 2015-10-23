@@ -6,8 +6,8 @@ var reduceRight = require('./reduceRight');
 
 
 /**
- * Turns a list of Functors into a Functor of a list, applying
- * a mapping function to the elements of the list along the way.
+ * Turns a list of Functors into a Functor of a list, applying a mapping
+ * function to the elements of the list along the way.
  *
  * @func
  * @memberOf R

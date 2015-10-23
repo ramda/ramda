@@ -3,8 +3,8 @@ var keys = require('./keys');
 
 
 /**
- * Create a new object with the own properties of `a`
- * merged with the own properties of object `b`.
+ * Create a new object with the own properties of `a` merged with the own
+ * properties of object `b`.
  *
  * @func
  * @memberOf R

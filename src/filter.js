@@ -5,11 +5,12 @@ var _xfilter = require('./internal/_xfilter');
 
 
 /**
- * Returns a new list containing only those items that match a given predicate function.
- * The predicate function is passed one argument: *(value)*.
+ * Returns a new list containing only those items that match a given predicate
+ * function. The predicate function is passed one argument: *(value)*.
  *
- * Note that `R.filter` does not skip deleted or unassigned indices, unlike the native
- * `Array.prototype.filter` method. For more details on this behavior, see:
+ * Note that `R.filter` does not skip deleted or unassigned indices, unlike the
+ * native `Array.prototype.filter` method. For more details on this behavior,
+ * see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
  *
  * Dispatches to the `filter` method of the second argument, if present.

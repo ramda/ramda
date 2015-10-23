@@ -6,8 +6,8 @@ var equals = require('./equals');
 
 
 /**
- * Returns a new list without any consecutively repeating elements.
- * `R.equals` is used to determine equality.
+ * Returns a new list without any consecutively repeating elements. `R.equals`
+ * is used to determine equality.
  *
  * Dispatches to the `dropRepeats` method of the first argument, if present.
  *

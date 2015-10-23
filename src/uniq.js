@@ -3,8 +3,8 @@ var uniqWith = require('./uniqWith');
 
 
 /**
- * Returns a new list containing only one copy of each element in the original list.
- * `R.equals` is used to determine equality.
+ * Returns a new list containing only one copy of each element in the original
+ * list. `R.equals` is used to determine equality.
  *
  * @func
  * @memberOf R

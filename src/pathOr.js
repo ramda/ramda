@@ -4,8 +4,8 @@ var path = require('./path');
 
 
 /**
- * If the given, non-null object has a value at the given path, returns
- * the value at that path. Otherwise returns the provided default value.
+ * If the given, non-null object has a value at the given path, returns the
+ * value at that path. Otherwise returns the provided default value.
  *
  * @func
  * @memberOf R
