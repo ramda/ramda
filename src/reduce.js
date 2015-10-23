@@ -7,7 +7,7 @@ var _reduce = require('./internal/_reduce');
  * function and passing it an accumulator value and the current value from the array, and
  * then passing the result to the next call.
  *
- * The iterator function receives two values: *(acc, value)*.  It may use `R.reduced` to
+ * The iterator function receives two values: *(acc, value)*. It may use `R.reduced` to
  * shortcut the iteration.
  *
  * Note: `R.reduce` does not skip deleted or unassigned indices (sparse arrays), unlike

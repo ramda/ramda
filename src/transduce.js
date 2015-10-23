@@ -11,7 +11,7 @@ var curryN = require('./curryN');
  *
  * The iterator function receives two values: *(acc, value)*. It will be wrapped as a
  * transformer to initialize the transducer. A transformer can be passed directly in place
- * of an iterator function.  In both cases, iteration may be stopped early with the
+ * of an iterator function. In both cases, iteration may be stopped early with the
  * `R.reduced` function.
  *
  * A transducer is a function that accepts a transformer and returns a transformer and can

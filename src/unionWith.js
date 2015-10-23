@@ -4,7 +4,7 @@ var uniqWith = require('./uniqWith');
 
 
 /**
- * Combines two lists into a set (i.e. no duplicates) composed of the elements of each list.  Duplication is
+ * Combines two lists into a set (i.e. no duplicates) composed of the elements of each list. Duplication is
  * determined according to the value returned by applying the supplied predicate to two list elements.
  *
  * @func

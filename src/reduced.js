@@ -3,12 +3,12 @@ var _reduced = require('./internal/_reduced');
 
 /**
  * Returns a value wrapped to indicate that it is the final value of the
- * reduce and transduce functions.  The returned value
+ * reduce and transduce functions. The returned value
  * should be considered a black box: the internal structure is not
  * guaranteed to be stable.
  *
  * Note: this optimization is unavailable to functions not explicitly listed
- * above.  For instance, it is not currently supported by reduceIndexed,
+ * above. For instance, it is not currently supported by reduceIndexed,
  * reduceRight, or reduceRightIndexed.
  *
  * @func

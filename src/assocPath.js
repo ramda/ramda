@@ -6,8 +6,8 @@ var assoc = require('./assoc');
 /**
  * Makes a shallow clone of an object, setting or overriding the nodes
  * required to create the given path, and placing the specific value at the
- * tail end of that path.  Note that this copies and flattens prototype
- * properties onto the new object as well.  All non-primitive properties
+ * tail end of that path. Note that this copies and flattens prototype
+ * properties onto the new object as well. All non-primitive properties
  * are copied by reference.
  *
  * @func
