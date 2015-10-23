@@ -33,4 +33,5 @@ describe('has', function() {
     eq(pointHas('y'), true);
     eq(pointHas('z'), false);
   });
+
 });

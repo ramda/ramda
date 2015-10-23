@@ -23,4 +23,5 @@ describe('insert', function() {
     eq(R.insert(8)('z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
     eq(R.insert(8, 'z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
   });
+
 });

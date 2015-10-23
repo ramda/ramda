@@ -34,6 +34,6 @@ describe('commute', function() {
     eq(cmtArr(as), [[1, 3], [1, 4]]);
     eq(cmtArr(bs), [[1, 3], [2, 3]]);
     eq(cmtArr(cs), [[1, 3], [1, 4], [2, 3], [2, 4]]);
-
   });
+
 });

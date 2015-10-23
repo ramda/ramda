@@ -52,4 +52,5 @@ describe('into', function() {
     var sum = R.into([], R.map(add));
     eq(sum.length, 1);
   });
+
 });

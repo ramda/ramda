@@ -316,4 +316,5 @@ describe('equals', function() {
     var isA = R.equals(a);
     eq(isA([]), true);
   });
+
 });

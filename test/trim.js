@@ -28,4 +28,5 @@ describe('trim', function() {
       eq(R.trim('\u200b').length, 1);
     });
   }
+
 });

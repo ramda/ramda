@@ -24,4 +24,5 @@ describe('lt', function() {
     eq(lt5(5), false);
     eq(lt5(3), true);
   });
+
 });

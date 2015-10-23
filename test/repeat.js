@@ -16,4 +16,5 @@ describe('repeat', function() {
     eq(makeFoos(0), []);
     eq(makeFoos(3), ['foo', 'foo', 'foo']);
   });
+
 });

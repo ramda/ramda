@@ -55,4 +55,5 @@ describe('countBy', function() {
     eq(result.abc, 1);
     eq(result.toString, 1);
   });
+
 });

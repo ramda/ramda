@@ -7,4 +7,5 @@ describe('join', function() {
     var list = [1, 2, 3, 4];
     eq(R.join('~', list), '1~2~3~4');
   });
+
 });

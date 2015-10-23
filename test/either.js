@@ -37,4 +37,5 @@ describe('either', function() {
     eq(evenOr(gt10)(11), true);
     eq(evenOr(gt10)(9), false);
   });
+
 });

@@ -88,4 +88,5 @@ describe('bind', function() {
     eq(R.bind(f2, {}).length, 2);
     eq(R.bind(f3, {}).length, 3);
   });
+
 });

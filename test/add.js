@@ -11,4 +11,5 @@ describe('add', function() {
     var incr = R.add(1);
     eq(incr(42), 43);
   });
+
 });

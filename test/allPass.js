@@ -26,4 +26,5 @@ describe('allPass', function() {
     eq(R.allPass([odd, gt5, plusEq])(9, 9, 9, 9), true);
     eq(R.allPass([odd, gt5, plusEq])(9)(9)(9)(9), true);
   });
+
 });

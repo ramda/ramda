@@ -29,4 +29,5 @@ describe('propOr', function() {
     var bob = new Person();
     eq(R.propOr(100, 'age', bob), 100);
   });
+
 });

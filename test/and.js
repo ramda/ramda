@@ -15,4 +15,5 @@ describe('and', function() {
     eq(halfTruth(false), false);
     eq(halfTruth(true), true);
   });
+
 });

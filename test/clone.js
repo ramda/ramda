@@ -22,6 +22,7 @@ describe('deep clone integers, strings and booleans', function() {
   it('clone booleans', function() {
     eq(R.clone(true), true);
   });
+
 });
 
 describe('deep clone objects', function() {
@@ -84,6 +85,7 @@ describe('deep clone objects', function() {
     eq(obj.get(), 11);
     eq(clone.get(), 10);
   });
+
 });
 
 describe('deep clone arrays', function() {
@@ -104,6 +106,7 @@ describe('deep clone arrays', function() {
 
     eq(clone, [1, [1, 2, 3], [[[5]]]]);
   });
+
 });
 
 describe('deep `clone` functions', function() {
@@ -116,6 +119,7 @@ describe('deep `clone` functions', function() {
     eq(clone[0].a(10), 20);
     eq(list[0].a, clone[0].a);
   });
+
 });
 
 describe('built-in types', function() {
@@ -141,6 +145,7 @@ describe('built-in types', function() {
       eq(clone.multiline, pattern.multiline);
     }, [/x/, /x/g, /x/i, /x/m, /x/gi, /x/gm, /x/im, /x/gim]);
   });
+
 });
 
 describe('deep clone deep nested mixed objects', function() {
@@ -175,6 +180,7 @@ describe('deep clone deep nested mixed objects', function() {
     eq(clone[0].b, {a:1});
     eq(clone[1].b, {a:1});
   });
+
 });
 
 describe('deep clone edge cases', function() {
@@ -189,6 +195,7 @@ describe('deep clone edge cases', function() {
     var list = [];
     assert.notStrictEqual(R.clone(list), list);
   });
+
 });
 
 
@@ -203,4 +210,5 @@ describe('Let `R.clone` use an arbitrary user defined `clone` method', function(
     eq(arbitraryClonedObj, new ArbitraryClone(42));
     eq(arbitraryClonedObj instanceof ArbitraryClone, true);
   });
+
 });

@@ -40,4 +40,5 @@ describe('converge', function() {
     eq(f2(6)(7), 42);
     eq(f3(R.__).length, 3);
   });
+
 });

@@ -25,4 +25,5 @@ describe('union', function() {
     eq(R.union([NaN], [NaN]).length, 1);
     eq(R.union([new Just([42])], [new Just([42])]).length, 1);
   });
+
 });

@@ -26,4 +26,5 @@ describe('filter', function() {
     var onlyEven = R.filter(even);
     eq(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
   });
+
 });

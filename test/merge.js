@@ -42,4 +42,5 @@ describe('merge', function() {
     var curried = R.merge(R.__, {w: 1, x: 2});
     eq(curried({x: 3, y: 4}), {w: 1, x: 2, y: 4});
   });
+
 });

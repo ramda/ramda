@@ -50,4 +50,5 @@ describe('path', function() {
   it('is curried', function() {
     eq(R.path(['arrayVal', '0'])(deepObject), 'arr');
   });
+
 });

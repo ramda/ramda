@@ -7,6 +7,7 @@ describe('indexOf', function() {
     var list = [0, 10, 20, 30];
     eq(R.indexOf(30, list), 3);
   });
+
   it('returns -1 if the object is not in the list', function() {
     var list = [0, 10, 20, 30];
     eq(R.indexOf(40, list), -1);
@@ -16,6 +17,7 @@ describe('indexOf', function() {
   it('returns the index of the first item', function() {
     eq(R.indexOf(1, input), 0);
   });
+
   it('returns the index of the last item', function() {
     eq(R.indexOf(5, input), 4);
   });
@@ -26,12 +28,15 @@ describe('indexOf', function() {
   it('finds 1', function() {
     eq(R.indexOf(1, list), 0);
   });
+
   it('finds 1 and is result strictly it', function() {
     eq(R.indexOf(1, list), 0);
   });
+
   it('does not find 4', function() {
     eq(R.indexOf(4, list), -1);
   });
+
   it('does not consider "1" equal to 1', function() {
     eq(R.indexOf('1', list), -1);
   });

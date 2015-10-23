@@ -23,4 +23,5 @@ describe('splitAt', function() {
   it('can support negative index', function() {
     eq(R.splitAt(-1, 'foobar'), ['fooba', 'r']);
   });
+
 });

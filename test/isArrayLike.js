@@ -45,4 +45,5 @@ describe('isArrayLike', function() {
     eq(R.isArrayLike(false), false);
     eq(R.isArrayLike(function() {}), false);
   });
+
 });

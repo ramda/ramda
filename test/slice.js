@@ -33,4 +33,5 @@ describe('slice', function() {
     eq(R.slice(-2, -1, 'abc'), 'b');
     eq(R.slice(-2, -0, 'abc'), '');
   });
+
 });

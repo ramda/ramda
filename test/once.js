@@ -30,4 +30,5 @@ describe('once', function() {
     eq(result, 15);
     eq(ctr, 1);
   });
+
 });

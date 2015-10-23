@@ -37,4 +37,5 @@ describe('both', function() {
     eq(evenAnd(gt10)(11), false);
     eq(evenAnd(gt10)(12), true);
   });
+
 });

@@ -36,4 +36,5 @@ describe('valuesIn', function() {
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
     eq(result, R.repeat([], 10));
   });
+
 });

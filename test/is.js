@@ -77,4 +77,5 @@ describe('is', function() {
     eq(typeof R.is(String), 'function');
     eq(R.is(String)('s'), true);
   });
+
 });

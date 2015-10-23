@@ -31,4 +31,5 @@ describe('uniq', function() {
   it('handles null and undefined elements', function() {
     eq(R.uniq([void 0, null, void 0, null]), [void 0, null]);
   });
+
 });
