@@ -1,4 +1,4 @@
-var _slice = require('./internal/_slice');
+var _slice = require('./_slice');
 
 module.exports = function dropLastWhile(pred, list) {
   var idx = list.length - 1;
