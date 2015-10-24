@@ -10,7 +10,16 @@ describe('keys', function() {
   var cobj = new C();
 
   it("returns an array of the given object's own keys", function() {
-    eq(R.keys(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
+    eq(R.keys(obj), ['a', 'b', 'c', 'd', 'e', 'f']);
+  });
+
+
+  it('lists the keys in their natural sort order', function() {
+    eq(R.keys({a: 1, d: 2, c: 3, e: 4, b: 5}), ['a', 'b', 'c', 'd', 'e']);
+  });
+
+  it('places numeric indices first, but in lexicographic order', function() {
+    eq(R.keys({a: 1, 20: 2, c: 3, 9: 4, b: 5}), ['20', '9', 'a', 'b', 'c']);
   });
 
   it('works with hasOwnProperty override', function() {
@@ -30,6 +39,6 @@ describe('keys', function() {
   });
 
   it("does not include the given object's prototype properties", function() {
-    eq(R.keys(cobj).sort(), ['a', 'b']);
+    eq(R.keys(cobj), ['a', 'b']);
   });
 });

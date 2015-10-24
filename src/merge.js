@@ -1,5 +1,5 @@
 var _curry2 = require('./internal/_curry2');
-var keys = require('./keys');
+var _keys = require('./internal/_keys');
 
 
 /**
@@ -24,13 +24,13 @@ var keys = require('./keys');
  */
 module.exports = _curry2(function merge(a, b) {
   var result = {};
-  var ks = keys(a);
+  var ks = _keys(a);
   var idx = 0;
   while (idx < ks.length) {
     result[ks[idx]] = a[ks[idx]];
     idx += 1;
   }
-  ks = keys(b);
+  ks = _keys(b);
   idx = 0;
   while (idx < ks.length) {
     result[ks[idx]] = b[ks[idx]];

@@ -10,11 +10,18 @@ describe('keysIn', function() {
   var cobj = new C();
 
   it("returns an array of the given object's keys", function() {
-    eq(R.keysIn(obj).sort(), ['a', 'b', 'c', 'd', 'e', 'f']);
+    eq(R.keysIn(obj), ['a', 'b', 'c', 'd', 'e', 'f']);
   });
 
   it("includes the given object's prototype properties", function() {
-    eq(R.keysIn(cobj).sort(), ['a', 'b', 'x', 'y']);
+    eq(R.keysIn(cobj), ['a', 'b', 'x', 'y']);
+  });
+
+  it('sorts all the property names', function() {
+    function X() { this.x = 100; this.a = 200; }
+    X.prototype.y = function() { return 'y'; };
+    X.prototype.b = 'b';
+    eq(R.keysIn(new X()), ['a', 'b', 'x', 'y']);
   });
 
   it('works for primitives', function() {

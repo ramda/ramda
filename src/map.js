@@ -1,10 +1,10 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
+var _keys = require('./internal/_keys');
 var _map = require('./internal/_map');
 var _reduce = require('./internal/_reduce');
 var _xmap = require('./internal/_xmap');
 var curryN = require('./curryN');
-var keys = require('./keys');
 
 
 /**
@@ -48,7 +48,7 @@ module.exports = _curry2(_dispatchable('map', _xmap, function map(fn, functor) {
       return _reduce(function(acc, key) {
         acc[key] = fn(functor[key]);
         return acc;
-      }, {}, keys(functor));
+      }, {}, _keys(functor));
     default:
       return _map(fn, functor);
   }

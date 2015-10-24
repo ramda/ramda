@@ -1,5 +1,5 @@
 var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+var _sortedKeys = require('./internal/_sortedKeys');
 
 
 /**
@@ -31,7 +31,7 @@ var keys = require('./keys');
  *      //=> { 'alice': '0', 'jake':'1' }
  */
 module.exports = _curry1(function invertObj(obj) {
-  var props = keys(obj);
+  var props = _sortedKeys(obj);
   var len = props.length;
   var idx = 0;
   var out = {};

@@ -1,6 +1,6 @@
 var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
-var keys = require('./keys');
+var _sortedKeys = require('./internal/_sortedKeys');
 
 
 /**
@@ -14,8 +14,7 @@ var keys = require('./keys');
  * @category Object
  * @sig {s: x} -> {x: [ s, ... ]}
  * @param {Object} obj The object or array to invert
- * @return {Object} out A new object with keys
- * in an array.
+ * @return {Object} out A new object with keys in an array.
  * @example
  *
  *      var raceResultsByFirstName = {
@@ -27,7 +26,7 @@ var keys = require('./keys');
  *      //=> { 'alice': ['first', 'third'], 'jake':['second'] }
  */
 module.exports = _curry1(function invert(obj) {
-  var props = keys(obj);
+  var props = _sortedKeys(obj);
   var len = props.length;
   var idx = 0;
   var out = {};

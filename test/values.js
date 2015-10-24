@@ -9,6 +9,14 @@ describe('values', function() {
   C.prototype.y = 'y';
   var cobj = new C();
 
+  it('lists the values of an object in the natural sort order of the related keys', function() {
+    eq(R.values({a: 1, d: 2, c: 3, e: 4, b: 5}), [1, 5, 3, 2, 4]); // keys: [a, b, c, d, e]
+  });
+
+  it('places numeric indices first, but in lexicographic order', function() {
+    eq(R.values({a: 1, 20: 2, c: 3, 9: 4, b: 5}), [2, 4, 1, 5, 3]); // keys: [20, 9, a, b, c]
+  });
+
   it("returns an array of the given object's values", function() {
     var vs = R.values(obj).sort();
     var ts = [[1, 2, 3], 100, 'D', {x: 200, y: 300}, null, undefined];

@@ -1,5 +1,7 @@
 var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
+var head = require('./head');
+var sortBy = require('./sortBy');
 
 
 /**
@@ -27,5 +29,5 @@ module.exports = _curry1(function toPairs(obj) {
       pairs[pairs.length] = [prop, obj[prop]];
     }
   }
-  return pairs;
+  return sortBy(head, pairs);
 });

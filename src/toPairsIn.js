@@ -1,4 +1,6 @@
 var _curry1 = require('./internal/_curry1');
+var head = require('./head');
+var sortBy = require('./sortBy');
 
 
 /**
@@ -27,5 +29,5 @@ module.exports = _curry1(function toPairsIn(obj) {
   for (var prop in obj) {
     pairs[pairs.length] = [prop, obj[prop]];
   }
-  return pairs;
+  return sortBy(head, pairs);
 });

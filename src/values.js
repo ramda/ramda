@@ -1,5 +1,5 @@
 var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+var _sortedKeys = require('./internal/_sortedKeys');
 
 
 /**
@@ -19,7 +19,7 @@ var keys = require('./keys');
  *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
  */
 module.exports = _curry1(function values(obj) {
-  var props = keys(obj);
+  var props = _sortedKeys(obj);
   var len = props.length;
   var vals = [];
   var idx = 0;

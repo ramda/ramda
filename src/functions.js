@@ -1,6 +1,6 @@
 var _curry1 = require('./internal/_curry1');
 var _functionsWith = require('./internal/_functionsWith');
-var keys = require('./keys');
+var _sortedKeys = require('./internal/_sortedKeys');
 
 
 /**
@@ -23,4 +23,4 @@ var keys = require('./keys');
  *      F.prototype.a = 100;
  *      R.functions(new F()); //=> ["x"]
  */
-module.exports = _curry1(_functionsWith(keys));
+module.exports = _curry1(_functionsWith(_sortedKeys));
