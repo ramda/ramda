@@ -27,6 +27,10 @@ describe('invert', function() {
     eq(R.invert({x:'a', y:'b', z:'c'}), {a:['x'], b:['y'], c:['z']});
   });
 
+  it('sorts the resulting array values according the natural sort', function() {
+    eq(R.invert({p: 'a', j: 'b', s: 'b', f: 'a'}),  {a: ['f', 'p'], b: ['j', 's']});
+  });
+
   it('puts keys that have the same value into the appropriate an array', function() {
     eq(R.invert(['a', 'b', 'a']), {a:['0', '2'], b:['1']});
 

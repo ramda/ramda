@@ -23,9 +23,9 @@ describe('invertObj', function() {
     eq(R.invertObj({x:'a', y:'b', z:'c'}), {a:'x', b:'y', c:'z'});
   });
 
-  it('prefers the last key found when handling keys with the same value', function() {
+  it('prefers the last key in natural sort order when handling keys with the same value', function() {
     eq(R.invertObj(['a', 'b', 'a']), {a:'2', b:'1'});
-    eq(R.invertObj({x:'a', y:'b', z:'a', _id:'a'}), {a: '_id', b: 'y'});
+    eq(R.invertObj({x:'a', y:'b', z:'a', _id:'a'}), {a: 'z', b: 'y'});
   });
 
   // this one is more of a sanity check
