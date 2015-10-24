@@ -18,7 +18,7 @@ var _curry1 = require('./internal/_curry1');
 module.exports = _curry1(function zipAll(list) {
   var rv = [];
   var idx = list.length - 1;
-  var len = list[0].length || 0;
+  var len = list[0].length;
   while (list[idx]) {
     len = Math.min(len, list[idx].length);
     idx -= 1;

@@ -12,4 +12,9 @@ describe('zipAll', function() {
     eq(R.zipAll(arr), [[1, 4, 8], [2, 5, 9], [3, 6, 10]]);
   });
 
+  it('returns an empty list given an empty list in an argument', function() {
+    var arr = [[], [3, 4], [5, 6]];
+    eq(R.zipAll(arr), []);
+  });
+
 });
