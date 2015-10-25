@@ -18,7 +18,8 @@ var reduceRight = require('./reduceRight');
  * @param {Function} of A function that returns the data type to return
  * @param {Array} list An array of functors of the same type
  * @return {*}
- * @see R.commute
+ * @see R.traverse
+ * @deprecated since v0.19.0
  * @example
  *
  *      var add10 = R.map(R.add(10));
