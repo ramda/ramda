@@ -45,7 +45,6 @@ describe('whereEq', function() {
 
   it('is true for an empty spec', function() {
     eq(R.whereEq({}, {a: 1}), true);
-    eq(R.whereEq(null, {a: 1}), true);
   });
 
   it('reports true when the object equals the spec', function() {
