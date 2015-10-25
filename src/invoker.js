@@ -19,7 +19,7 @@ var toString = require('./toString');
  * @sig Number -> String -> (a -> b -> ... -> n -> Object -> *)
  * @param {Number} arity Number of arguments the returned function should take
  *        before the target object.
- * @param {Function} method Name of the method to call.
+ * @param {String} method Name of the method to call.
  * @return {Function} A new curried function.
  * @example
  *
