@@ -11,7 +11,7 @@ var nth = require('./nth');
  * @category List
  * @sig [a] -> a | Undefined
  * @sig String -> String
- * @param {*} list
+ * @param {Array|String} list
  * @return {*}
  * @see R.tail, R.init, R.last
  * @example
