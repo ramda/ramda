@@ -25,7 +25,7 @@ describe('both', function() {
     var F = function() { return false; };
     var Z = function() { effect = 'Z got evaluated'; };
     var effect = 'not evaluated';
-    R.both(F, Z);
+    R.both(F, Z)();
     eq(effect, 'not evaluated');
   });
 
@@ -37,5 +37,4 @@ describe('both', function() {
     eq(evenAnd(gt10)(11), false);
     eq(evenAnd(gt10)(12), true);
   });
-
 });
