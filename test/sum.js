@@ -12,4 +12,5 @@ describe('sum', function() {
     eq(R.sum([1]), 1);
     eq(R.sum([5, 5, 5, 5, 5]), 25);
   });
+
 });

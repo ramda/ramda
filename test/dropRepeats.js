@@ -30,4 +30,5 @@ describe('dropRepeats', function() {
     eq(R.dropRepeats([NaN, NaN]).length, 1);
     eq(R.dropRepeats([new Just([42]), new Just([42])]).length, 1);
   });
+
 });

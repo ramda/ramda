@@ -3,11 +3,9 @@ var keys = require('./keys');
 
 
 /**
- * Returns a new object with the keys of the given object
- * as values, and the values of the given object, which are
- * coerced to strings, as keys.
- * Note that the last key found is preferred when handling
- * the same value.
+ * Returns a new object with the keys of the given object as values, and the
+ * values of the given object, which are coerced to strings, as keys. Note
+ * that the last key found is preferred when handling the same value.
  *
  * @func
  * @memberOf R

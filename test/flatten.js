@@ -31,4 +31,5 @@ describe('flatten', function() {
     eq(R.flatten([[], [], []]), []);
     eq(R.flatten([]), []);
   });
+
 });

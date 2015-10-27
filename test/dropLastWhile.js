@@ -31,4 +31,5 @@ describe('dropLastWhile', function() {
     eq(R.into([], dropLt7, [1, 3, 5, 7, 9, 1, 2]), [1, 3, 5, 7, 9]);
     eq(R.into([], dropLt7, [1, 3, 5]), []);
   });
+
 });

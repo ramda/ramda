@@ -37,4 +37,5 @@ describe('length', function() {
     eq(R.identical(NaN, R.length({length: undefined})), true);
     eq(R.identical(NaN, R.length({})), true);
   });
+
 });

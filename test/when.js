@@ -16,4 +16,5 @@ describe('when', function() {
     eq(ifIsNumber(R.add(1))(15), 16);
     eq(ifIsNumber(R.add(1))('hello'), 'hello');
   });
+
 });

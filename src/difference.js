@@ -3,7 +3,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
+ * Finds the set (i.e. no duplicates) of all elements in the first list not
+ * contained in the second list.
  *
  * @func
  * @memberOf R

@@ -32,4 +32,5 @@ describe('identical', function() {
     var isA = R.identical(a);
     eq(isA([]), false);
   });
+
 });

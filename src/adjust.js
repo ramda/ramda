@@ -3,9 +3,9 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Applies a function to the value at the given index of an array,
- * returning a new copy of the array with the element at the given
- * index replaced with the result of the function application.
+ * Applies a function to the value at the given index of an array, returning a
+ * new copy of the array with the element at the given index replaced with the
+ * result of the function application.
  *
  * @func
  * @memberOf R

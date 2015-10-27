@@ -29,4 +29,5 @@ describe('mapAccumRight', function() {
     var sum = R.mapAccumRight(add, 0);
     eq(sum.length, 1);
   });
+
 });

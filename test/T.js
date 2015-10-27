@@ -8,4 +8,5 @@ describe('T', function() {
     eq(R.T(10), true);
     eq(R.T(true), true);
   });
+
 });

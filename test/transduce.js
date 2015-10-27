@@ -83,4 +83,5 @@ describe('transduce', function() {
     var sum = R.transduce(toxf(add), addxf, 0);
     eq(sum.length, 1);
   });
+
 });

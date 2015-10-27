@@ -6,7 +6,8 @@ var uniq = require('./uniq');
 
 
 /**
- * Combines two lists into a set (i.e. no duplicates) composed of those elements common to both lists.
+ * Combines two lists into a set (i.e. no duplicates) composed of those
+ * elements common to both lists.
  *
  * @func
  * @memberOf R

@@ -20,4 +20,5 @@ describe('call', function() {
     eq(R.call(obj.method), false);
     eq(R.call(R.bind(obj.method, obj)), true);
   });
+
 });

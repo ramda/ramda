@@ -63,4 +63,5 @@ describe('liftN', function() {
     eq(convergedOnBool(3), (3 > 0) && (3 < 3));
     // jscs:enable disallowYodaConditions
   });
+
 });

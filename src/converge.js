@@ -5,10 +5,11 @@ var pluck = require('./pluck');
 
 
 /**
- * Accepts a converging function and a list of branching functions and returns a new function.
- * When invoked, this new function is applied to some arguments, each branching
- * function is applied to those same arguments. The results of each branching
- * function are passed as arguments to the converging function to produce the return value.
+ * Accepts a converging function and a list of branching functions and returns
+ * a new function. When invoked, this new function is applied to some
+ * arguments, each branching function is applied to those same arguments. The
+ * results of each branching function are passed as arguments to the converging
+ * function to produce the return value.
  *
  * @func
  * @memberOf R

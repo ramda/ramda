@@ -12,4 +12,5 @@ describe('identity', function() {
   it('has length 1', function() {
     eq(R.identity.length, 1);
   });
+
 });

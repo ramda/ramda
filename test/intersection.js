@@ -26,4 +26,5 @@ describe('intersection', function() {
     eq(R.intersection([NaN], [NaN]).length, 1);
     eq(R.intersection([new Just([42])], [new Just([42])]).length, 1);
   });
+
 });

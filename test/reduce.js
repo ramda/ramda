@@ -34,4 +34,5 @@ describe('reduce', function() {
     var sum = R.reduce(add, 0);
     eq(sum.length, 1);
   });
+
 });

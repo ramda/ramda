@@ -32,4 +32,5 @@ describe('adjust', function() {
     }
     eq(R.adjust(R.add(1), 2, args(0, 1, 2, 3)), [0, 1, 3, 3]);
   });
+
 });

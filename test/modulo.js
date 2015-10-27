@@ -27,4 +27,5 @@ describe('modulo', function() {
   it('preserves javascript-style modulo evaluation for negative numbers', function() {
     eq(R.modulo(-5, 4), -1);
   });
+
 });

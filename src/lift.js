@@ -3,8 +3,8 @@ var liftN = require('./liftN');
 
 
 /**
- * "lifts" a function of arity > 1 so that it may "map over" an Array or
- * other Functor.
+ * "lifts" a function of arity > 1 so that it may "map over" an Array or other
+ * Functor.
  *
  * @func
  * @memberOf R

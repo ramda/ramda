@@ -33,4 +33,5 @@ describe('assoc', function() {
     eq(f({x: 42}, obj1), expected);
     eq(g(obj1), expected);
   });
+
 });

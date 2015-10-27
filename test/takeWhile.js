@@ -19,4 +19,5 @@ describe('takeWhile', function() {
     eq(takeUntil7([1, 3, 5, 7, 9]), [1, 3, 5]);
     eq(takeUntil7([2, 4, 6, 8, 10]), [2, 4, 6, 8, 10]);
   });
+
 });

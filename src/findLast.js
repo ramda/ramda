@@ -4,8 +4,8 @@ var _xfindLast = require('./internal/_xfindLast');
 
 
 /**
- * Returns the last element of the list which matches the predicate, or `undefined` if no
- * element matches.
+ * Returns the last element of the list which matches the predicate, or
+ * `undefined` if no element matches.
  *
  * Dispatches to the `findLast` method of the second argument, if present.
  *

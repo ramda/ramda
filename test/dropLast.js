@@ -41,4 +41,5 @@ describe('dropLast', function() {
     assert.deepEqual(R.into([], dropLast2, [1, 3, 5, 7, 9, 1, 2]), [1, 3, 5, 7, 9]);
     assert.deepEqual(R.into([], dropLast2, [1]), []);
   });
+
 });

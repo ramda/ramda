@@ -48,4 +48,5 @@ describe('difference', function() {
     eq(typeof R.difference([1, 2, 3]), 'function');
     eq(R.difference([1, 2, 3])([1, 3]), [2]);
   });
+
 });

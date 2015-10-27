@@ -49,4 +49,5 @@ describe('sortBy', function() {
     eq(result[1], 'b');
     eq(result[2], 'c');
   });
+
 });

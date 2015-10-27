@@ -4,8 +4,8 @@ var _xfindLastIndex = require('./internal/_xfindLastIndex');
 
 
 /**
- * Returns the index of the last element of the list which matches the predicate, or
- * `-1` if no element matches.
+ * Returns the index of the last element of the list which matches the
+ * predicate, or `-1` if no element matches.
  *
  * Dispatches to the `findLastIndex` method of the second argument, if present.
  *

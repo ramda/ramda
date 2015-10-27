@@ -40,4 +40,5 @@ describe('contains', function() {
     eq(isDigit('1'), true);
     eq(isDigit('x'), false);
   });
+
 });

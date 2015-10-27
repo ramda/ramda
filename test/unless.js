@@ -15,4 +15,5 @@ describe('unless', function() {
     eq(R.unless(R.isArrayLike)(R.of)(10), [10]);
     eq(R.unless(R.isArrayLike)(R.of)([10]), [10]);
   });
+
 });

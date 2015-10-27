@@ -45,4 +45,5 @@ describe('type', function() {
   it('"Undefined" if given the undefined value', function() {
     eq(R.type(undefined), 'Undefined');
   });
+
 });

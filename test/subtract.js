@@ -16,4 +16,5 @@ describe('subtract', function() {
     var minus5 = R.subtract(R.__, 5);
     eq(minus5(17), 12);
   });
+
 });

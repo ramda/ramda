@@ -16,4 +16,5 @@ describe('pickAll', function() {
     var copyAB = R.pickAll(['a', 'b']);
     eq(copyAB(obj), {a: 1, b: 2});
   });
+
 });

@@ -6,8 +6,8 @@ var toString = require('./toString');
 
 
 /**
- * Turns a named method with a specified arity into a function
- * that can be called directly supplied with arguments and a target object.
+ * Turns a named method with a specified arity into a function that can be
+ * called directly supplied with arguments and a target object.
  *
  * The returned function is curried and accepts `arity + 1` parameters where
  * the final parameter is the target object.

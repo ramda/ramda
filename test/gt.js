@@ -24,4 +24,5 @@ describe('gt', function() {
     eq(gt20(20), false);
     eq(gt20(25), true);
   });
+
 });

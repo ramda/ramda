@@ -57,4 +57,5 @@ describe('dissocPath', function() {
   it('accepts empty path', function() {
     eq(R.dissocPath([], {a: 1, b: 2}), {a: 1, b: 2});
   });
+
 });

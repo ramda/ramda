@@ -17,4 +17,5 @@ describe('unary', function() {
       void z;
     })(10, 20, 30);
   });
+
 });

@@ -16,4 +16,5 @@ describe('complement', function() {
     eq(f(4, 5, 11), false);
     eq(f(12, 2, 6), true);
   });
+
 });

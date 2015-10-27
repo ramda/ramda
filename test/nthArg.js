@@ -18,4 +18,5 @@ describe('nthArg', function() {
   it('returns a function with length 0', function() {
     eq(R.nthArg(2).length, 0);
   });
+
 });

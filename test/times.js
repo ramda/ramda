@@ -21,4 +21,5 @@ describe('times', function() {
     assert.throws(function() { R.times(3)('cheers!'); }, RangeError);
     assert.throws(function() { R.times(R.identity, -1); }, RangeError);
   });
+
 });

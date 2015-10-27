@@ -32,4 +32,5 @@ describe('keys', function() {
   it("does not include the given object's prototype properties", function() {
     eq(R.keys(cobj).sort(), ['a', 'b']);
   });
+
 });

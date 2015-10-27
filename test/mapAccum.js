@@ -30,4 +30,5 @@ describe('mapAccum', function() {
     var sum = R.mapAccum(add, 0);
     eq(sum.length, 1);
   });
+
 });

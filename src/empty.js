@@ -7,8 +7,8 @@ var _isString = require('./internal/_isString');
 
 /**
  * Returns the empty value of its argument's type. Ramda defines the empty
- * value of Array (`[]`), Object (`{}`), String (`''`), and Arguments.
- * Other types are supported if they define `<Type>.empty` and/or
+ * value of Array (`[]`), Object (`{}`), String (`''`), and Arguments. Other
+ * types are supported if they define `<Type>.empty` and/or
  * `<Type>.prototype.empty`.
  *
  * Dispatches to the `empty` method of the first argument, if present.
