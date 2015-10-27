@@ -20,7 +20,7 @@ var keys = require('./keys');
  *
  * Acts as a transducer if a transformer is given in list position.
  *
- * Map treats also treats functions as functors and will compose them together.
+ * Also treats functions as functors and will compose them together.
  *
  * @func
  * @memberOf R
