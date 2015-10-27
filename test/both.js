@@ -25,7 +25,7 @@ describe('both', function() {
     var F = function() { return false; };
     var Z = function() { effect = 'Z got evaluated'; };
     var effect = 'not evaluated';
-    R.both(F, Z);
+    R.both(F, Z)();
     eq(effect, 'not evaluated');
   });
 

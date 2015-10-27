@@ -25,7 +25,7 @@ describe('either', function() {
     var T = function() { return true; };
     var Z = function() { effect = 'Z got evaluated'; };
     var effect = 'not evaluated';
-    R.either(T, Z);
+    R.either(T, Z)();
     eq(effect, 'not evaluated');
   });
 
