@@ -12,7 +12,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.2.3
  * @category List
- * @sig (i -> a) -> i -> [a]
+ * @sig (Number -> a) -> Number -> [a]
  * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
  * @param {Number} n A value between `0` and `n - 1`. Increments after each function call.
  * @return {Array} An array containing the return values of all calls to `fn`.
