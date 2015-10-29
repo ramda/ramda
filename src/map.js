@@ -1,5 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
+var _isGenerator = require('./internal/_isGenerator');
 var _map = require('./internal/_map');
 var _reduce = require('./internal/_reduce');
 var _xmap = require('./internal/_xmap');
@@ -39,17 +40,33 @@ var keys = require('./keys');
  *      R.map(double, {x: 1, y: 2, z: 3}); //=> {x: 2, y: 4, z: 6}
  */
 module.exports = _curry2(_dispatchable('map', _xmap, function map(fn, functor) {
-  switch (Object.prototype.toString.call(functor)) {
-    case '[object Function]':
-      return curryN(functor.length, function() {
-        return fn.call(this, functor.apply(this, arguments));
-      });
-    case '[object Object]':
-      return _reduce(function(acc, key) {
-        acc[key] = fn(functor[key]);
-        return acc;
-      }, {}, keys(functor));
-    default:
-      return _map(fn, functor);
+  if (_isGenerator(functor)) {
+    return function* mapGenerator() {
+      const iter = functor();
+
+      while (true) {
+        const item = iter.next();
+
+        if (item.done) {
+          break;
+        }
+
+        yield fn(item.value);
+      }
+    };
+  } else {
+    switch (Object.prototype.toString.call(functor)) {
+      case '[object Function]':
+        return curryN(functor.length, function() {
+          return fn.call(this, functor.apply(this, arguments));
+        });
+      case '[object Object]':
+        return _reduce(function(acc, key) {
+          acc[key] = fn(functor[key]);
+          return acc;
+        }, {}, keys(functor));
+      default:
+        return _map(fn, functor);
+    }
   }
 }));
