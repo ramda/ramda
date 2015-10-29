@@ -16,4 +16,8 @@ describe('repeat', function() {
     eq(makeFoos(0), []);
     eq(makeFoos(3), ['foo', 'foo', 'foo']);
   });
+
+  it('can generate an infinite list', function() {
+    eq(R.take(5, R.repeat(1, Infinity)), [1, 1, 1, 1, 1]);
+  });
 });
