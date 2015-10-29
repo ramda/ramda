@@ -1,5 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
+var _isGenerator = require('./internal/_isGenerator');
 var _xtake = require('./internal/_xtake');
 var slice = require('./slice');
 
@@ -44,5 +45,22 @@ var slice = require('./slice');
  *      //=> ['Dave Brubeck', 'Paul Desmond', 'Eugene Wright', 'Joe Morello', 'Gerry Mulligan']
  */
 module.exports = _curry2(_dispatchable('take', _xtake, function take(n, xs) {
-  return slice(0, n < 0 ? Infinity : n, xs);
+  if (_isGenerator(xs)) {
+    const iter = xs();
+    const outArr = [];
+
+    for (let i = 0; i < n; i += 1) {
+      const item = iter.next();
+
+      if (item.done) {
+        break;
+      }
+
+      outArr.push(item.value);
+    }
+
+    return outArr;
+  } else {
+    return slice(0, n < 0 ? Infinity : n, xs);
+  }
 }));

@@ -39,4 +39,15 @@ describe('take', function() {
     eq(R.into([], R.take(0), [1, 2, 3]), []);
   });
 
+  it('can take items from an iterator', function() {
+    const range = R.xrange(1, 0, Infinity);
+    eq(R.take(5, range), [0, 1, 2, 3, 4]);
+  });
+
+  it('is refrentially transparent', function() {
+    const natural = R.xrange(1, 1, Infinity);
+    eq(R.take(5, natural), [1, 2, 3, 4, 5]);
+    eq(R.take(5, natural), [1, 2, 3, 4, 5]);
+  });
+
 });
