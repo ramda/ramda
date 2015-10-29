@@ -1,4 +1,5 @@
 var _curry2 = require('./internal/_curry2');
+var _isGenerator = require('./internal/_isGenerator');
 var _isString = require('./internal/_isString');
 
 
@@ -26,6 +27,21 @@ var _isString = require('./internal/_isString');
  *      R.nth('abc', 3); //=> ''
  */
 module.exports = _curry2(function nth(offset, list) {
-  var idx = offset < 0 ? list.length + offset : offset;
-  return _isString(list) ? list.charAt(idx) : list[idx];
+  if (_isGenerator(list)) {
+    const iter = list();
+    let item;
+
+    for (let i = 0; i <= offset; i += 1) {
+      item = iter.next();
+
+      if (item.done) {
+        return;
+      }
+    }
+
+    return item.value;
+  } else {
+    var idx = offset < 0 ? list.length + offset : offset;
+    return _isString(list) ? list.charAt(idx) : list[idx];
+  }
 });
