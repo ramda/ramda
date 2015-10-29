@@ -1,4 +1,5 @@
 var _curry2 = require('./internal/_curry2');
+var _isGenerator = require('./internal/_isGenerator');
 var slice = require('./slice');
 
 
@@ -20,13 +21,36 @@ var slice = require('./slice');
  *      R.splitEvery(3, 'foobarbaz'); //=> ['foo', 'bar', 'baz']
  */
 module.exports = _curry2(function splitEvery(n, list) {
-  if (n <= 0) {
-    throw new Error('First argument to splitEvery must be a positive integer');
+  if (_isGenerator(list)) {
+    return function* splitEveryGenerator() {
+      const iter = list();
+      let iterComplete = false;
+      while (true) {
+        const arr = [];
+        for (let i = 0; i < n; i += 1) {
+          const item = iter.next();
+          if (item.done) {
+            iterComplete = true;
+            break;
+          }
+          arr.push(item.value);
+        }
+        yield arr;
+
+        if (iterComplete) {
+          break;
+        }
+      }
+    };
+  } else {
+    if (n <= 0) {
+      throw new Error('First argument to splitEvery must be a positive integer');
+    }
+    var result = [];
+    var idx = 0;
+    while (idx < list.length) {
+      result.push(slice(idx, idx += n, list));
+    }
+    return result;
   }
-  var result = [];
-  var idx = 0;
-  while (idx < list.length) {
-    result.push(slice(idx, idx += n, list));
-  }
-  return result;
 });

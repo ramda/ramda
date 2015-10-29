@@ -32,4 +32,14 @@ describe('splitEvery', function() {
     assert.throws(function() { R.splitEvery(-1, ''); }, test);
   });
 
+  it('works with infinite list', function() {
+    const natural = R.xrange(1, 1, Infinity);
+    eq(R.take(3, R.splitEvery(2, natural)), [[1, 2], [3, 4], [5, 6]]);
+  });
+
+  it('works with generators of limited length', function() {
+    const nums = R.xrange(1, 1, 6);
+    eq(R.take(3, R.splitEvery(3, nums)), [[1, 2, 3], [4, 5]]);
+  });
+
 });
