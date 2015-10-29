@@ -9,5 +9,7 @@
   "plusplus": true,
   "predef": ["beforeEach", "console", "define", "describe", "it", "module", "process", "require"],
   "undef": true,
+  "strict": false,
+  "esnext": true,
   "unused": true
 }

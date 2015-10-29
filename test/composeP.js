@@ -37,10 +37,10 @@ describe('composeP', function() {
             eq(result, [[1], undefined]);
 
             done();
-          })['catch'](done);
-        })['catch'](done);
-      })['catch'](done);
-    })['catch'](done);
+          }).catch(done);
+        }).catch(done);
+      }).catch(done);
+    }).catch(done);
   });
 
   it('throws if given no arguments', function() {

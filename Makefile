@@ -13,7 +13,7 @@ dist/ramda.js: scripts/build scripts/header scripts/template.js $(SRC)
 
 dist/ramda.min.js: dist/ramda.js scripts/header
 	scripts/header >'$@'
-	$(UGLIFY) --compress --mangle <'$<' >>'$@'
+	babel '$<' | $(UGLIFY) --compress --mangle >>'$@'
 
 
 .PHONY: clean
