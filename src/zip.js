@@ -1,4 +1,6 @@
 var _curry2 = require('./internal/_curry2');
+var _isGenerator = require('./internal/_isGenerator');
+var take = require('./take');
 
 
 /**
@@ -20,12 +22,36 @@ var _curry2 = require('./internal/_curry2');
  *      R.zip([1, 2, 3], ['a', 'b', 'c']); //=> [[1, 'a'], [2, 'b'], [3, 'c']]
  */
 module.exports = _curry2(function zip(a, b) {
-  var rv = [];
-  var idx = 0;
-  var len = Math.min(a.length, b.length);
-  while (idx < len) {
-    rv[idx] = [a[idx], b[idx]];
-    idx += 1;
+  if (_isGenerator(a) && _isGenerator(b)) {
+    return function* zipGenerator() {
+      let iter1 = a();
+      let iter2 = b();
+
+      while (true) {
+        const p = iter1.next();
+        const q = iter2.next();
+
+        if (p.done || q.done) {
+          break;
+        }
+
+        yield [p.value, q.value];
+      }
+    };
+  } else {
+    if (_isGenerator(a)) {
+      a = take(b.length, a);
+    } else if (_isGenerator(b)) {
+      b = take(a.length, b);
+    }
+
+    var rv = [];
+    var idx = 0;
+    var len = Math.min(a.length, b.length);
+    while (idx < len) {
+      rv[idx] = [a[idx], b[idx]];
+      idx += 1;
+    }
+    return rv;
   }
-  return rv;
 });
