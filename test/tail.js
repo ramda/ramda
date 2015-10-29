@@ -23,4 +23,9 @@ describe('tail', function() {
     assert.throws(function() { R.tail(undefined); }, TypeError);
   });
 
+  it('can work with infinite list', function() {
+    const natural = R.xrange(1, 1, Infinity);
+    eq(R.take(3, R.tail(natural)), [2, 3, 4]);
+  });
+
 });
