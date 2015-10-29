@@ -40,4 +40,11 @@ describe('forEach', function() {
     xe([1, 2, 4]);
     eq(xStr, '1 2 4 ');
   });
+
+  it('works with infinite list', function() {
+    var sideEffect = {};
+    const natural = R.xrange(1, 1, Infinity);
+    R.take(3, R.forEach(function(x) { sideEffect[x] = x * x; }, natural));
+    eq(sideEffect, {1: 1, 2: 4, 3: 9});
+  });
 });
