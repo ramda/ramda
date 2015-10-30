@@ -1,3 +1,4 @@
+var _isGenerator = require('./_isGenerator');
 var _xwrap = require('./_xwrap');
 var bind = require('../bind');
 var isArrayLike = require('../isArrayLike');
@@ -50,6 +51,9 @@ module.exports = (function() {
     }
     if (typeof list.next === 'function') {
       return _iterableReduce(fn, acc, list);
+    }
+    if (_isGenerator(list)) {
+      return _iterableReduce(fn, acc, list());
     }
     throw new TypeError('reduce: list must be array or iterable');
   };

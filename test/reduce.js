@@ -34,4 +34,9 @@ describe('reduce', function() {
     var sum = R.reduce(add, 0);
     eq(sum.length, 1);
   });
+
+  it('can work with generator based list', function() {
+    const num = R.xrange(1, 1, 10);
+    eq(R.reduce(add, 0, num), 45);
+  });
 });
