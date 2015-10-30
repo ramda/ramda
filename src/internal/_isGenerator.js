@@ -1,3 +1,3 @@
 module.exports = function(a) {
-  return /function\*/.test(a.toString());
+  return a != null ? a.constructor.name === 'GeneratorFunction' : false;
 };

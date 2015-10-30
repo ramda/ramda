@@ -1,4 +1,5 @@
 var _curry1 = require('./internal/_curry1');
+var _isGenerator = require('./internal/_isGenerator');
 var is = require('./is');
 
 
@@ -18,5 +19,14 @@ var is = require('./is');
  *      R.length([1, 2, 3]); //=> 3
  */
 module.exports = _curry1(function length(list) {
-  return list != null && is(Number, list.length) ? list.length : NaN;
+  if (_isGenerator(list)) {
+    const iter = list();
+    let len = 0;
+    while (!iter.next().done) {
+      len += 1;
+    }
+    return len;
+  } else {
+    return list != null && is(Number, list.length) ? list.length : NaN;
+  }
 });
