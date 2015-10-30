@@ -18,4 +18,9 @@ describe('reverse', function() {
     eq(R.reverse('abc'), 'cba');
   });
 
+  it('can reverse generator based list', function() {
+    const nums = R.xrange(1, 1, 5);
+    eq(R.take(Infinity, R.reverse(nums)), [4, 3, 2, 1]);
+  });
+
 });

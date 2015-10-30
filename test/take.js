@@ -50,4 +50,9 @@ describe('take', function() {
     eq(R.take(5, natural), [1, 2, 3, 4, 5]);
   });
 
+  it('can take all items from a finite sized generator', function() {
+    const nums = R.xrange(1, 1, 5);
+    eq(R.take(Infinity, nums), [1, 2, 3, 4]);
+  });
+
 });
