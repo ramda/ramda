@@ -12,7 +12,7 @@ var slice = require('./slice');
  * @sig Number -> [a] -> [[a]]
  * @sig Number -> String -> [String]
  * @param {Number} n
- * @param {Array} list
+ * @param {Array|String} list
  * @return {Array}
  * @example
  *
