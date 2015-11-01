@@ -15,6 +15,7 @@ var map = require('./map');
  * @since v0.7.0
  * @category Function
  * @sig Number -> (*... -> *) -> ([*]... -> [*])
+ * @param {Number} arity Arity of the lifted function
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The function `fn` applicable to mappable objects.
  * @see R.lift
