@@ -13,8 +13,8 @@ var drop = require('./drop');
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
  * @param {Number} n The number of elements to return.
- * @param {Array} xs The collection to consider.
- * @return {Array}
+ * @param {Array|String} xs The collection to consider.
+ * @return {Array|String}
  * @see R.dropLast
  * @example
  *
