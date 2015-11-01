@@ -14,8 +14,8 @@ var _xdropLast = require('./internal/_xdropLast');
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
  * @param {Number} n The number of elements of `xs` to skip.
- * @param {Array} xs The collection to consider.
- * @return {Array}
+ * @param {Array|String} xs The collection to consider.
+ * @return {Array|String}
  * @see R.takeLast
  * @example
  *
