@@ -10,9 +10,9 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.10.0
  * @category Logic
  * @sig a -> b -> a | b
- * @param {a} val The default value.
- * @param {b} val The value to return if it is not null or undefined
- * @return {*} The the second value or the default value
+ * @param {*} def The default value.
+ * @param {*} val The value to return if it is not null or undefined.
+ * @return {*} The second value or the default value.
  * @example
  *
  *      var defaultTo42 = R.defaultTo(42);
