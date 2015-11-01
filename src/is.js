@@ -10,7 +10,7 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.3.0
  * @category Type
  * @sig (* -> {*}) -> a -> Boolean
- * @param {Object} ctor A constructor
+ * @param {Function} ctor A constructor
  * @param {*} val The value to test
  * @return {Boolean}
  * @example
