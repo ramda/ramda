@@ -11,6 +11,8 @@ var map = require('./map');
  *
  * Dispatches to the `chain` method of the second argument, if present.
  *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.3.0
