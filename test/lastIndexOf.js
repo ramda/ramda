@@ -33,8 +33,7 @@ describe('lastIndexOf', function() {
     eq(R.lastIndexOf('1', list), -1);
   });
   it('returns -1 for an empty array', function() {
-    eq(R.lastIndexOf('x', 2, []), -1);
-    eq(R.lastIndexOf('x', -5, []), -1);
+    eq(R.lastIndexOf('x', []), -1);
   });
 
   it('has R.equals semantics', function() {

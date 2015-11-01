@@ -40,7 +40,7 @@ describe('concat', function() {
     eq(conc123(['a', 'b', 'c']), [1, 2, 3, 'a', 'b', 'c']);
   });
 
-  it('is curried like a binary operator, that accepts an inital placeholder', function() {
+  it('is curried like a binary operator, that accepts an initial placeholder', function() {
     var appendBar = R.concat(R.__, 'bar');
     eq(typeof appendBar, 'function');
     eq(appendBar('foo'), 'foobar');

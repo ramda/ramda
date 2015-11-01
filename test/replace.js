@@ -13,8 +13,8 @@ describe('replace', function() {
   });
 
   it('is curried up to 3 arguments', function() {
-    eq(R.replace(null).constructor, Function);
-    eq(R.replace(null, null).constructor, Function);
+    eq(R.replace('').constructor, Function);
+    eq(R.replace('', '').constructor, Function);
 
     var replaceSemicolon = R.replace(';');
     var removeSemicolon = replaceSemicolon('');
