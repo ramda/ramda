@@ -13,8 +13,8 @@ var invoker = require('./invoker');
  * @category List
  * @sig [a] -> [a] -> [a]
  * @sig String -> String -> String
- * @param {Array|String} a
- * @param {Array|String} b
+ * @param {Array|String|Object} a
+ * @param {Array|String|Object} b
  * @return {Array|String}
  *
  * @example
