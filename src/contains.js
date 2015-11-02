@@ -11,7 +11,7 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.1.0
  * @category List
  * @sig a -> [a] -> Boolean
- * @param {Object} a The item to compare against.
+ * @param {*} a The item to compare against.
  * @param {Array} list The array to consider.
  * @return {Boolean} `true` if the item is in the list, `false` otherwise.
  * @see R.any
