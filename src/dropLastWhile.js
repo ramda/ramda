@@ -10,6 +10,10 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
  * skipping elements while the predicate function returns `true`. The predicate
  * function is passed one argument: (value)*.
  *
+ * Dispatches to the `dropLast` method of the second argument, if present.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.16.0
