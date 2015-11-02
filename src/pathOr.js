@@ -14,7 +14,7 @@ var path = require('./path');
  * @sig a -> [String] -> Object -> a
  * @param {*} d The default value.
  * @param {Array} p The path to use.
- * @param {Object} obj The object to retrieve the nested property from.
+ * @param {Object|*} obj The object to retrieve the nested property from.
  * @return {*} The data at `path` of the supplied object or the default value.
  * @example
  *
