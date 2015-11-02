@@ -14,7 +14,7 @@ var _has = require('./internal/_has');
  * @sig a -> String -> Object -> a
  * @param {*} val The default value.
  * @param {String} p The name of the property to return.
- * @param {Object} obj The object to query.
+ * @param {Object|*} obj The object to query.
  * @return {*} The value of given property of the supplied object or the default value.
  * @example
  *
