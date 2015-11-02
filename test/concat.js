@@ -30,7 +30,7 @@ describe('concat', function() {
     eq(R.concat('', ''), '');
   });
 
-  it('delegates to non-String object with a concat method, as second param', function() {
+  it('delegates to non-String object with a concat method on the first param', function() {
     eq(R.concat(z1, z2), 'z1 z2');
   });
 
