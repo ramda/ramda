@@ -8,6 +8,8 @@ var filter = require('./filter');
  * predicate function returns falsy. The predicate function is passed one
  * argument: *(value)*.
  *
+ * Dispatches to the `filter` method of the second argument, if present.
+ *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func
