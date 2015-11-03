@@ -22,6 +22,8 @@ var _stepCat = require('./internal/_stepCat');
  *
  * The iteration is performed with R.reduce after initializing the transducer.
  *
+ * Dispatches to the `reduce` method of the third argument, if present.
+ *
  * @func
  * @memberOf R
  * @since v0.12.0
