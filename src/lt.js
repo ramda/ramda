@@ -10,8 +10,8 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.1.0
  * @category Relation
  * @sig Ord a => a -> a -> Boolean
- * @param {*} a
- * @param {*} b
+ * @param {Number|String} a
+ * @param {Number|String} b
  * @return {Boolean}
  * @see R.gt
  * @example
