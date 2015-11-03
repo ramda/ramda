@@ -28,16 +28,15 @@ var keys = require('./keys');
  * @category List
  * @sig Functor f => (a -> b) -> f a -> f b
  * @param {Function} fn The function to be called on every element of the input `list`.
- * @param {Array} list The list to be iterated over.
- * @return {Array} The new list.
+ * @param {Array|Object} list The list or object to be iterated over.
+ * @return {Array|Object} The new list or object.
  * @see R.transduce
  * @example
  *
  *      var double = x => x * 2;
  *
- *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
- *
- *      R.map(double, {x: 1, y: 2, z: 3}); //=> {x: 2, y: 4, z: 6}
+ *      R.map(double, [1, 2, 3]);           //=> [2, 4, 6]
+ *      R.map(double, {x: 1, y: 2, z: 3});  //=> {x: 2, y: 4, z: 6}
  */
 module.exports = _curry2(_dispatchable('map', _xmap, function map(fn, functor) {
   switch (Object.prototype.toString.call(functor)) {
