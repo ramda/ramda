@@ -9,19 +9,19 @@ var keys = require('./keys');
 
 
 /**
- * Returns a new list, constructed by applying the supplied function to every element of the
- * supplied list.
+ * Returns a new list, constructed by applying the supplied function to every
+ * element of the supplied list.
  *
- * Note: `R.map` does not skip deleted or unassigned indices (sparse arrays), unlike the
- * native `Array.prototype.map` method. For more details on this behavior, see:
+ * Note: `R.map` does not skip deleted or unassigned indices (sparse arrays),
+ * unlike the native `Array.prototype.map` method. For more details on this
+ * behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
  *
  * Dispatches to the `map` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
- * Map treats also treats functions as functors and will compose them together.
+ * Also treats functions as functors and will compose them together.
  *
  * @func
  * @memberOf R
@@ -31,6 +31,7 @@ var keys = require('./keys');
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {Array} list The list to be iterated over.
  * @return {Array} The new list.
+ * @see R.transduce
  * @example
  *
  *      var double = x => x * 2;

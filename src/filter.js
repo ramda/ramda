@@ -5,17 +5,17 @@ var _xfilter = require('./internal/_xfilter');
 
 
 /**
- * Returns a new list containing only those items that match a given predicate function.
- * The predicate function is passed one argument: *(value)*.
+ * Returns a new list containing only those items that match a given predicate
+ * function. The predicate function is passed one argument: *(value)*.
  *
- * Note that `R.filter` does not skip deleted or unassigned indices, unlike the native
- * `Array.prototype.filter` method. For more details on this behavior, see:
+ * Note that `R.filter` does not skip deleted or unassigned indices, unlike the
+ * native `Array.prototype.filter` method. For more details on this behavior,
+ * see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#Description
  *
  * Dispatches to the `filter` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -25,7 +25,7 @@ var _xfilter = require('./internal/_xfilter');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} The new filtered array.
- * @see R.reject
+ * @see R.reject, R.transduce
  * @example
  *
  *      var isEven = n => n % 2 === 0;

@@ -32,4 +32,5 @@ describe('update', function() {
     }
     eq(R.update(2, 4, args(0, 1, 2, 3)), [0, 1, 4, 3]);
   });
+
 });

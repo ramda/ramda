@@ -4,8 +4,8 @@ var path = require('./path');
 
 
 /**
- * If the given, non-null object has a value at the given path, returns
- * the value at that path. Otherwise returns the provided default value.
+ * If the given, non-null object has a value at the given path, returns the
+ * value at that path. Otherwise returns the provided default value.
  *
  * @func
  * @memberOf R
@@ -14,6 +14,7 @@ var path = require('./path');
  * @sig a -> [String] -> Object -> a
  * @param {*} d The default value.
  * @param {Array} p The path to use.
+ * @param {Object} obj The object to retrieve the nested property from.
  * @return {*} The data at `path` of the supplied object or the default value.
  * @example
  *

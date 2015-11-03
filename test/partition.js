@@ -15,4 +15,5 @@ describe('partition', function() {
     var polarize = R.partition(Boolean);
     eq(polarize([true, 0, 1, null]), [[true, 1], [0, null]]);
   });
+
 });

@@ -10,4 +10,5 @@ describe('of', function() {
     eq(R.of(undefined), [undefined]);
     eq(R.of([]), [[]]);
   });
+
 });

@@ -15,4 +15,5 @@ describe('flip', function() {
     var g = R.flip(f)('a');
     eq(g('b', 'c'), 'b a c');
   });
+
 });

@@ -1,22 +1,22 @@
+var _containsWith = require('./internal/_containsWith');
 var _curry3 = require('./internal/_curry3');
-var containsWith = require('./containsWith');
 
 
 /**
- * Finds the set (i.e. no duplicates) of all elements in the first list not contained in the second list.
- * Duplication is determined according to the value returned by applying the supplied predicate to two list
- * elements.
+ * Finds the set (i.e. no duplicates) of all elements in the first list not
+ * contained in the second list. Duplication is determined according to the
+ * value returned by applying the supplied predicate to two list elements.
  *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
+ * @sig (a -> a -> Boolean) -> [*] -> [*] -> [*]
  * @param {Function} pred A predicate used to test whether two items are equal.
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.
- * @see R.difference
  * @return {Array} The elements in `list1` that are not in `list2`.
+ * @see R.difference
  * @example
  *
  *      function cmp(x, y) => x.a === y.a;
@@ -28,10 +28,10 @@ module.exports = _curry3(function differenceWith(pred, first, second) {
   var out = [];
   var idx = 0;
   var firstLen = first.length;
-  var containsPred = containsWith(pred);
   while (idx < firstLen) {
-    if (!containsPred(first[idx], second) && !containsPred(first[idx], out)) {
-      out[out.length] = first[idx];
+    if (!_containsWith(pred, first[idx], second) &&
+        !_containsWith(pred, first[idx], out)) {
+      out.push(first[idx]);
     }
     idx += 1;
   }

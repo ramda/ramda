@@ -62,4 +62,5 @@ describe('construct', function() {
     eq(complete.source, 'word');
     eq(complete.global, true);
   });
+
 });

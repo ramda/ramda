@@ -8,4 +8,5 @@ describe('not', function() {
     eq(R.not(1), false);
     eq(R.not(''), true);
   });
+
 });

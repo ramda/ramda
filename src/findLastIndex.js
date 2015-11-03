@@ -4,13 +4,12 @@ var _xfindLastIndex = require('./internal/_xfindLastIndex');
 
 
 /**
- * Returns the index of the last element of the list which matches the predicate, or
- * `-1` if no element matches.
+ * Returns the index of the last element of the list which matches the
+ * predicate, or `-1` if no element matches.
  *
  * Dispatches to the `findLastIndex` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -21,6 +20,7 @@ var _xfindLastIndex = require('./internal/_xfindLastIndex');
  * desired one.
  * @param {Array} list The array to consider.
  * @return {Number} The index of the element found, or `-1`.
+ * @see R.transduce
  * @example
  *
  *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];

@@ -2,16 +2,15 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Tests the final argument by passing it to the given predicate function.
- * If the predicate is satisfied, the function will return the result
- * of calling the `whenTrueFn` function with the same argument. If the predicate
- * is not satisfied, the argument is returned as is.
+ * Tests the final argument by passing it to the given predicate function. If
+ * the predicate is satisfied, the function will return the result of calling
+ * the `whenTrueFn` function with the same argument. If the predicate is not
+ * satisfied, the argument is returned as is.
  *
  * @func
  * @memberOf R
  * @since v0.18.0
  * @category Logic
- * @see R.ifElse, R.unless
  * @sig (a -> Boolean) -> (a -> a) -> a -> a
  * @param {Function} pred       A predicate function
  * @param {Function} whenTrueFn A function to invoke when the `condition`
@@ -19,6 +18,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*}        x          An object to test with the `pred` function and
  *                              pass to `whenTrueFn` if necessary.
  * @return {*} Either `x` or the result of applying `x` to `whenTrueFn`.
+ * @see R.ifElse, R.unless
  * @example
  *
  *      // truncate :: String -> String

@@ -3,8 +3,8 @@ var _slice = require('./internal/_slice');
 
 
 /**
- * Inserts the supplied element into the list, at index `index`.  _Note
- * that this is not destructive_: it returns a copy of the list with the changes.
+ * Inserts the supplied element into the list, at index `index`. _Note that
+ * this is not destructive_: it returns a copy of the list with the changes.
  * <small>No lists have been harmed in the application of this function.</small>
  *
  * @func

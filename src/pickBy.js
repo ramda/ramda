@@ -2,8 +2,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns a partial copy of an object containing only the keys that
- * satisfy the supplied predicate.
+ * Returns a partial copy of an object containing only the keys that satisfy
+ * the supplied predicate.
  *
  * @func
  * @memberOf R

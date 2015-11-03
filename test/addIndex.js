@@ -27,6 +27,7 @@ describe('addIndex', function() {
       var makeSquareEnds = mapIndexed(squareEnds);
       eq(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
     });
+
   });
 
   describe('works with binary functions like `reduce`', function() {
@@ -46,6 +47,7 @@ describe('addIndex', function() {
         return acc;
       }, 0, list);
     });
+
   });
 
   describe('works with functions like `all` that do not typically have index applied', function() {
@@ -55,6 +57,7 @@ describe('addIndex', function() {
       eq(superDiagonal([8, 6, 5, 4, 9]), true); // 8 > 0, 6 > 1, 5 > 2, 4 > 3, 9 > 5
       eq(superDiagonal([8, 6, 1, 3, 9]), false); //  1 !> 2, 3 !> 3
     });
+
   });
 
   describe('works with arbitrary user-defined functions', function() {
@@ -69,5 +72,7 @@ describe('addIndex', function() {
         [8, 6, 7, 5, 3, 0, 9]
       ), [7, 5, 9]); // 2 * 7 > 13, 3 * 5 > 13, 6 * 9 > 13
     });
+
   });
+
 });

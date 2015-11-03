@@ -16,4 +16,5 @@ describe('zipWith', function() {
   it('returns an array whose length is equal to the shorter of its input arrays', function() {
     eq(R.zipWith(add, a, c).length, a.length);
   });
+
 });

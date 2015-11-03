@@ -29,4 +29,5 @@ describe('pick', function() {
     var copyAB = R.pick(['a', 'b']);
     eq(copyAB(obj), {a: 1, b: 2});
   });
+
 });

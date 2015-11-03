@@ -4,8 +4,8 @@ var _slice = require('./_slice');
 
 /**
  * Similar to hasMethod, this checks whether a function has a [methodname]
- * function. If it isn't an array it will execute that function otherwise it will
- * default to the ramda implementation.
+ * function. If it isn't an array it will execute that function otherwise it
+ * will default to the ramda implementation.
  *
  * @private
  * @param {Function} fn ramda implemtation

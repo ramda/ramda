@@ -18,4 +18,5 @@ describe('sort', function() {
     eq(sortByLength(['one', 'two', 'three', 'four', 'five', 'six']),
        ['one', 'two', 'six', 'four', 'five', 'three']);
   });
+
 });

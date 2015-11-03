@@ -40,4 +40,5 @@ describe('assocPath', function() {
   it('accepts empty path', function() {
     eq(R.assocPath([], 3, {a: 1, b: 2}), {a: 1, b: 2});
   });
+
 });

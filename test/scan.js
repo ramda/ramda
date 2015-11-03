@@ -28,4 +28,5 @@ describe('scan', function() {
     var sum = R.scan(add, 0);
     eq(sum.length, 1);
   });
+
 });

@@ -46,4 +46,5 @@ describe('findLast', function() {
     eq(typeof R.findLast(even), 'function');
     eq(R.findLast(even)(a), 0);
   });
+
 });

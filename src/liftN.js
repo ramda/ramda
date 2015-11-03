@@ -7,17 +7,17 @@ var map = require('./map');
 
 
 /**
- * "lifts" a function to be the specified arity, so that it may "map over" that many
- * lists (or other Functors).
+ * "lifts" a function to be the specified arity, so that it may "map over" that
+ * many lists (or other Functors).
  *
  * @func
  * @memberOf R
  * @since v0.7.0
- * @see R.lift
  * @category Function
  * @sig Number -> (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The function `fn` applicable to mappable objects.
+ * @see R.lift
  * @example
  *
  *      var madd3 = R.liftN(3, R.curryN(3, () => R.reduce(R.add, 0, arguments)));

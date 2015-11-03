@@ -39,4 +39,5 @@ describe('findIndex', function() {
     eq(typeof R.findIndex(even), 'function');
     eq(R.findIndex(even)(a), 1);
   });
+
 });

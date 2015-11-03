@@ -3,10 +3,9 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Applies a function to the value at the given index of an array,
- * returning a new copy of the array with the element at the given
- * index replaced with the result of the function application.
- * @see R.update
+ * Applies a function to the value at the given index of an array, returning a
+ * new copy of the array with the element at the given index replaced with the
+ * result of the function application.
  *
  * @func
  * @memberOf R
@@ -20,6 +19,7 @@ var _curry3 = require('./internal/_curry3');
  * @return {Array} A copy of the supplied array-like object with
  *         the element at index `idx` replaced with the value
  *         returned by applying `fn` to the existing element.
+ * @see R.update
  * @example
  *
  *      R.adjust(R.add(10), 1, [0, 1, 2]);     //=> [0, 11, 2]

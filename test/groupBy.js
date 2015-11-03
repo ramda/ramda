@@ -59,4 +59,5 @@ describe('groupBy', function() {
     };
     eq(_isTransformer(R.groupBy(byType, xf)), true);
   });
+
 });

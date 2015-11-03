@@ -5,9 +5,10 @@ var take = require('../take');
 
 
 /**
- * Returns a new list containing only one copy of each element in the original list, based
- * upon the value returned by applying the supplied predicate to two list elements. Prefers
- * the first item if two items compare equal based on the predicate.
+ * Returns a new list containing only one copy of each element in the original
+ * list, based upon the value returned by applying the supplied predicate to
+ * two list elements. Prefers the first item if two items compare equal based
+ * on the predicate.
  *
  * @func
  * @memberOf R

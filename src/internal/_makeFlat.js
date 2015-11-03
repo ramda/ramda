@@ -2,8 +2,8 @@ var isArrayLike = require('../isArrayLike');
 
 
 /**
- * `_makeFlat` is a helper function that returns a one-level or fully recursive function
- * based on the flag passed in.
+ * `_makeFlat` is a helper function that returns a one-level or fully recursive
+ * function based on the flag passed in.
  *
  * @private
  */

@@ -29,4 +29,5 @@ describe('match', function() {
   it('throws on null input', function() {
     assert.throws(function shouldThrow() { R.match(re, null); }, TypeError);
   });
+
 });

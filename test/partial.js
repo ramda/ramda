@@ -20,4 +20,5 @@ describe('partial', function() {
     var g = R.partial(disc, [3, 7]);
     eq(g.length, 1);
   });
+
 });

@@ -39,4 +39,5 @@ describe('commuteMap', function() {
     eq(cmtmArr(bs), [[11, 13], [12, 13]]);
     eq(cmtmArr(cs), [[11, 13], [11, 14], [12, 13], [12, 14]]);
   });
+
 });

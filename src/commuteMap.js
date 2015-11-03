@@ -6,19 +6,19 @@ var reduceRight = require('./reduceRight');
 
 
 /**
- * Turns a list of Functors into a Functor of a list, applying
- * a mapping function to the elements of the list along the way.
+ * Turns a list of Functors into a Functor of a list, applying a mapping
+ * function to the elements of the list along the way.
  *
  * @func
  * @memberOf R
  * @since v0.8.0
  * @category List
- * @see R.commute
  * @sig Functor f => (a -> f b) -> (x -> f x) -> [a] -> f [b]
  * @param {Function} fn The transformation function
  * @param {Function} of A function that returns the data type to return
  * @param {Array} list An array of functors of the same type
  * @return {*}
+ * @see R.commute
  * @example
  *
  *      var add10 = R.map(R.add(10));

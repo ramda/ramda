@@ -27,4 +27,5 @@ describe('anyPass', function() {
     eq(R.anyPass([odd, lt5, plusEq])(6, 7, 8, 9), false);
     eq(R.anyPass([odd, lt5, plusEq])(6)(7)(8)(9), false);
   });
+
 });

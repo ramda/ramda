@@ -3,11 +3,11 @@ var _curry1 = require('./internal/_curry1');
 
 /**
  * Returns a function, `fn`, which encapsulates if/else-if/else logic.
- * `R.cond` takes a list of [predicate, transform] pairs. All of the
- * arguments to `fn` are applied to each of the predicates in turn
- * until one returns a "truthy" value, at which point `fn` returns the
- * result of applying its arguments to the corresponding transformer.
- * If none of the predicates matches, `fn` returns undefined.
+ * `R.cond` takes a list of [predicate, transform] pairs. All of the arguments
+ * to `fn` are applied to each of the predicates in turn until one returns a
+ * "truthy" value, at which point `fn` returns the result of applying its
+ * arguments to the corresponding transformer. If none of the predicates
+ * matches, `fn` returns undefined.
  *
  * @func
  * @memberOf R

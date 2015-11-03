@@ -1,4 +1,5 @@
 var _contains = require('./_contains');
+var _functionName = require('./_functionName');
 var _map = require('./_map');
 var _quote = require('./_quote');
 var _toISOString = require('./_toISOString');
@@ -35,7 +36,7 @@ module.exports = function _toString(x, seen) {
     case '[object Undefined]':
       return 'undefined';
     default:
-      return (typeof x.constructor === 'function' && x.constructor.name !== 'Object' &&
+      return (typeof x.constructor === 'function' && _functionName(x.constructor) !== 'Object' &&
               typeof x.toString === 'function' && x.toString() !== '[object Object]') ?
              x.toString() :  // Function, RegExp, user-defined types
              '{' + mapPairs(x, keys(x)).join(', ') + '}';

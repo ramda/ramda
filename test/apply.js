@@ -16,4 +16,5 @@ describe('apply', function() {
     eq(R.apply(obj.method, []), false);
     eq(R.apply(R.bind(obj.method, obj), []), true);
   });
+
 });

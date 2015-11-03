@@ -18,4 +18,5 @@ describe('mergeAll', function() {
     var res = R.mergeAll([foo, {fizz: 'buzz'}]);
     eq(res, {fizz: 'buzz'});
   });
+
 });

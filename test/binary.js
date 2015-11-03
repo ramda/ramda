@@ -17,4 +17,5 @@ describe('binary', function() {
       void z;
     })(10, 20, 30);
   });
+
 });

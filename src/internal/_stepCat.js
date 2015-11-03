@@ -1,9 +1,9 @@
 var _concat = require('./_concat');
 var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');
-var createMapEntry = require('../createMapEntry');
 var isArrayLike = require('../isArrayLike');
 var merge = require('../merge');
+var objOf = require('../objOf');
 
 
 module.exports = (function() {
@@ -22,7 +22,7 @@ module.exports = (function() {
     '@@transducer/step': function(result, input) {
       return merge(
         result,
-        isArrayLike(input) ? createMapEntry(input[0], input[1]) : input
+        isArrayLike(input) ? objOf(input[0], input[1]) : input
       );
     },
     '@@transducer/result': _identity

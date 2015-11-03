@@ -11,4 +11,5 @@ describe('multiply', function() {
     var dbl = R.multiply(2);
     eq(dbl(15), 30);
   });
+
 });

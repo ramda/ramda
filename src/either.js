@@ -3,8 +3,9 @@ var or = require('./or');
 
 
 /**
- * A function wrapping calls to the two functions in an `||` operation, returning the result of the first
- * function if it is truth-y and the result of the second function otherwise.
+ * A function wrapping calls to the two functions in an `||` operation,
+ * returning the result of the first function if it is truth-y and the result
+ * of the second function otherwise.
  *
  * `R.either` will work on all other applicatives as well.
  *

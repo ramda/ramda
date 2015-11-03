@@ -46,4 +46,5 @@ describe('find', function() {
     eq(typeof R.find(even), 'function');
     eq(R.find(even)(a), 10);
   });
+
 });

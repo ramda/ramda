@@ -46,4 +46,5 @@ describe('findLastIndex', function() {
     eq(typeof R.findLastIndex(even), 'function');
     eq(R.findLastIndex(even)(a), 15);
   });
+
 });

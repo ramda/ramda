@@ -10,6 +10,7 @@ var _curry2 = require('./internal/_curry2');
  * @category Object
  * @sig [String] -> {k: v} -> v | Undefined
  * @param {Array} path The path to use.
+ * @param {Object} obj The object to retrieve the nested property from.
  * @return {*} The data at `path`.
  * @example
  *

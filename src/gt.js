@@ -2,8 +2,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns `true` if the first argument is greater than the second;
- * `false` otherwise.
+ * Returns `true` if the first argument is greater than the second; `false`
+ * otherwise.
  *
  * @func
  * @memberOf R

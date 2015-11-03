@@ -66,4 +66,5 @@ describe('ifElse', function() {
     eq(fn(7)(2), 5);
     eq(fn(7, 2), 5);
   });
+
 });

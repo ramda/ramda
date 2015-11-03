@@ -4,11 +4,11 @@ var filter = require('./filter');
 
 
 /**
- * Similar to `filter`, except that it keeps only values for which the given predicate
- * function returns falsy. The predicate function is passed one argument: *(value)*.
+ * Similar to `filter`, except that it keeps only values for which the given
+ * predicate function returns falsy. The predicate function is passed one
+ * argument: *(value)*.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -18,7 +18,7 @@ var filter = require('./filter');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} The new filtered array.
- * @see R.filter
+ * @see R.filter, R.transduce
  * @example
  *
  *      var isOdd = (n) => n % 2 === 1;

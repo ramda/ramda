@@ -1,5 +1,7 @@
 var _curry2 = require('./internal/_curry2');
-var take = require('./take');
+var _dispatchable = require('./internal/_dispatchable');
+var _dropLast = require('./internal/_dropLast');
+var _xdropLast = require('./internal/_xdropLast');
 
 
 /**
@@ -23,6 +25,4 @@ var take = require('./take');
  *      R.dropLast(4, ['foo', 'bar', 'baz']); //=> []
  *      R.dropLast(3, 'ramda');               //=> 'ra'
  */
-module.exports = _curry2(function dropLast(n, xs) {
-  return take(n < xs.length ? xs.length - n : 0, xs);
-});
+module.exports = _curry2(_dispatchable('dropLast', _xdropLast, _dropLast));

@@ -3,8 +3,8 @@ var constructN = require('./constructN');
 
 
 /**
- * Wraps a constructor function inside a curried function that can be called with the same
- * arguments and returns the same type.
+ * Wraps a constructor function inside a curried function that can be called
+ * with the same arguments and returns the same type.
  *
  * @func
  * @memberOf R

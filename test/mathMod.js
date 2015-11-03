@@ -37,4 +37,5 @@ describe('mathMod', function() {
     eq(mod5(12), 2);
     eq(mod5(8), 3);
   });
+
 });

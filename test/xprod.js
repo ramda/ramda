@@ -23,4 +23,5 @@ describe('xprod', function() {
     var something = R.xprod(a);
     eq(something.length, 1);
   });
+
 });

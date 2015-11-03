@@ -17,4 +17,5 @@ describe('intersperse', function() {
   it('is curried', function() {
     eq(R.intersperse('n')(['ba', 'a', 'a']), ['ba', 'n', 'a', 'n', 'a']);
   });
+
 });

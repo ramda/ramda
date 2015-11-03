@@ -5,14 +5,14 @@ var uniq = require('./uniq');
 
 
 /**
- * Combines two lists into a set (i.e. no duplicates) composed of the
- * elements of each list.
+ * Combines two lists into a set (i.e. no duplicates) composed of the elements
+ * of each list.
  *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig [a] -> [a] -> [a]
+ * @sig [*] -> [*] -> [*]
  * @param {Array} as The first list.
  * @param {Array} bs The second list.
  * @return {Array} The first and second lists concatenated, with
