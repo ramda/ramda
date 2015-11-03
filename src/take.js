@@ -5,10 +5,11 @@ var slice = require('./slice');
 
 
 /**
- * Returns the first `n` elements of the given list, string, or
- * transducer/transformer (or object with a `take` method).
+ * Returns the first `n` elements of the given `list`.
  *
  * Dispatches to the `take` method of the second argument, if present.
+ *
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -17,8 +18,8 @@ var slice = require('./slice');
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
  * @param {Number} n
- * @param {*} list
- * @return {*}
+ * @param {Array|String} list
+ * @return {Array|String}
  * @see R.drop
  * @example
  *
