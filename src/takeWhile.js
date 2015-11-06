@@ -23,7 +23,7 @@ var _xtakeWhile = require('./internal/_xtakeWhile');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} A new array.
- * @see R.dropWhile, R.transduce
+ * @see R.dropWhile, R.transduce, R.addIndex
  * @example
  *
  *      var isNotFour = x => x !== 4;

@@ -26,6 +26,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} fn The function to invoke. Receives one argument, `value`.
  * @param {Array} list The list to iterate over.
  * @return {Array} The original list.
+ * @see R.addIndex
  * @example
  *
  *      var printXPlusFive = x => console.log(x + 5);

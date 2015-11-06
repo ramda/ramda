@@ -17,7 +17,7 @@ var _slice = require('./internal/_slice');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} A new array.
- * @see R.dropLastWhile
+ * @see R.dropLastWhile, R.addIndex
  * @example
  *
  *      var isNotOne = x => x !== 1;

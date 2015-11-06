@@ -27,7 +27,7 @@ var _reduce = require('./internal/_reduce');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.reduced
+ * @see R.reduced, R.addIndex
  * @example
  *
  *      var numbers = [1, 2, 3];

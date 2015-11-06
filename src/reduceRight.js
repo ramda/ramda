@@ -26,6 +26,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
+ * @see R.addIndex
  * @example
  *
  *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
