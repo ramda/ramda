@@ -18,7 +18,7 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} A new array.
- * @see R.takeLastWhile
+ * @see R.takeLastWhile, R.addIndex
  * @example
  *
  *      var lteThree = x => x <= 3;

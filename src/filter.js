@@ -25,7 +25,7 @@ var _xfilter = require('./internal/_xfilter');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} The new filtered array.
- * @see R.reject, R.transduce
+ * @see R.reject, R.transduce, R.addIndex
  * @example
  *
  *      var isEven = n => n % 2 === 0;
