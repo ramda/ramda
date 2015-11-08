@@ -7,8 +7,9 @@ var _arity = require('./_arity');
  * @private
  * @category Function
  * @param {Number} length The arity of the curried function.
- * @return {array} An array of arguments received thus far.
+ * @param {Array} An array of arguments received thus far.
  * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
  */
 module.exports = function _curryN(length, received, fn) {
   return function() {
