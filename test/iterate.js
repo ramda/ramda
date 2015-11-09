@@ -26,7 +26,9 @@ describe('iterate', function() {
 
   it('can generate infinite list of prime numbers', function() {
     const seive = function(x, arr) {
-      return R.filter(a => a % x !== 0, arr);
+      return R.filter(function(a) {
+        return a % x !== 0;
+      }, arr);
     };
     const fn = function(list) {
       return seive(R.head(list), R.tail(list));
