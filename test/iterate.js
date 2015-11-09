@@ -9,7 +9,9 @@ describe('iterate', function() {
   });
 
   it('is cool!', function() {
-    const fib = pair => [pair[1], pair[0] + pair[1]];
+    const fib = function(pair) {
+      return [pair[1], pair[0] + pair[1]];
+    };
     const fibboList = R.map(R.head, R.iterate(fib, [0, 1]));
     eq(R.take(5, fibboList), [0, 1, 1, 2, 3]);
   });
@@ -23,8 +25,12 @@ describe('iterate', function() {
   });
 
   it('can generate infinite list of prime numbers', function() {
-    const seive = (x, arr) => R.filter(a => a % x !== 0, arr);
-    const fn = list => seive(R.head(list), R.tail(list));
+    const seive = function(x, arr) {
+      return R.filter(a => a % x !== 0, arr);
+    };
+    const fn = function(list) {
+      return seive(R.head(list), R.tail(list));
+    };
     const primes = R.map(R.head, R.iterate(fn, R.xrange(1, 2, Infinity)));
     eq(R.take(5, primes), [2, 3, 5, 7, 11]);
   });
