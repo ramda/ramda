@@ -7,4 +7,6 @@ cat <<END
 //  (c) 2013-$(git show -s --format=%ai | cut -d - -f 1) Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
 
+require('babel-polyfill');
+
 END

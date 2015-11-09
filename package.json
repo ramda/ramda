@@ -47,6 +47,9 @@
   "dependencies": {},
   "devDependencies": {
     "acorn": "0.9.x",
+    "babel-cli": "^6.1.2",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-es2015": "^6.1.2",
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
     "cli-table": "0.3.x",
@@ -66,5 +69,10 @@
     "testem": "^0.6.18",
     "uglify-js": "2.4.x",
     "xyz": "0.5.x"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   }
 }
