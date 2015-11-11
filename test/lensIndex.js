@@ -22,4 +22,12 @@ describe('lensIndex', function() {
       eq(R.over(R.lensIndex(2), R.keys, testList), [{a: 1}, {b: 2}, ['c']]);
     });
   });
+  describe('composability', function() {
+    it('can be composed', function() {
+      var nestedList = [0, [10, 11, 12], 1, 2];
+      var composedLens = R.compose(R.lensIndex(1), R.lensIndex(0));
+
+      eq(R.view(composedLens, nestedList), 10);
+    });
+  });
 });
