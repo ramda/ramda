@@ -28,8 +28,8 @@ describe('lensProp', function() {
     it('applies function to the value of the specified object property', function() {
       eq(R.over(R.lensProp('a'), R.inc, testObj), {a:2, b:2, c:3});
     });
-    it('returns object unchanged if specified property does not exist', function() {
-      eq(R.over(R.lensProp('X'), R.always(0), testObj), {a:1, b:2, c:3, X:0});
+    it('applies function to undefined and adds the property if it doesn\'t exist', function() {
+      eq(R.over(R.lensProp('X'), R.identity, testObj), {a:1, b:2, c:3, X:undefined});
     });
   });
 });
