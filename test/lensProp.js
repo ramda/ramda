@@ -32,4 +32,12 @@ describe('lensProp', function() {
       eq(R.over(R.lensProp('X'), R.identity, testObj), {a:1, b:2, c:3, X:undefined});
     });
   });
+  describe('composability', function() {
+    it('can be composed', function() {
+      var nestedObj = {a: {b: 1}, c:2};
+      var composedLens = R.compose(R.lensProp('a'), R.lensProp('b'));
+
+      eq(R.view(composedLens, nestedObj), 1);
+    });
+  });
 });
