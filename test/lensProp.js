@@ -40,4 +40,16 @@ describe('lensProp', function() {
       eq(R.view(composedLens, nestedObj), 1);
     });
   });
+  describe('well behaved lens', function() {
+    it('set s (get s) === s', function() {
+      eq(R.set(R.lensProp('a'), R.view(R.lensProp('a'), testObj), testObj), testObj);
+    });
+    it('get (set s v) === v', function() {
+      eq(R.view(R.lensProp('a'), R.set(R.lensProp('a'), 0, testObj)), 0);
+    });
+    it('get (set(set s v1) v2) === v2', function() {
+      eq(R.view(R.lensProp('a'), R.set(R.lensProp('a'), 11, R.set(R.lensProp('a'), 10, testObj))),
+         11);
+    });
+  });
 });

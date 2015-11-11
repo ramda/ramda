@@ -30,4 +30,16 @@ describe('lensIndex', function() {
       eq(R.view(composedLens, nestedList), 10);
     });
   });
+  describe('well behaved lens', function() {
+    it('set s (get s) === s', function() {
+      eq(R.set(R.lensIndex(0), R.view(R.lensIndex(0), testList), testList), testList);
+    });
+    it('get (set s v) === v', function() {
+      eq(R.view(R.lensIndex(0), R.set(R.lensIndex(0), 0, testList)), 0);
+    });
+    it('get (set(set s v1) v2) === v2', function() {
+      eq(R.view(R.lensIndex(0), R.set(R.lensIndex(0), 11, R.set(R.lensIndex(0), 10, testList))),
+         11);
+    });
+  });
 });
