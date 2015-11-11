@@ -7,7 +7,7 @@ var testObj = {
   c: 3
 };
 
-describe.only('lensProp', function() {
+describe('lensProp', function() {
   describe('view', function() {
     it('focuses object the specified object property', function() {
       eq(R.view(R.lensProp('a'), testObj), 1);
