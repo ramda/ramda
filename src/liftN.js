@@ -8,7 +8,7 @@ var map = require('./map');
 
 /**
  * "lifts" a function to be the specified arity, so that it may "map over" that
- * many lists (or other Applies).
+ * many lists (or other Applys).
  *
  * @func
  * @memberOf R
@@ -16,7 +16,7 @@ var map = require('./map');
  * @category Function
  * @sig Number -> (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
- * @return {Function} The function `fn` applicable to applicable objects.
+ * @return {Function} The function `fn` applicable to appable objects.
  * @see R.lift
  * @example
  *
