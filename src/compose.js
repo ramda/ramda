@@ -20,7 +20,7 @@ var reverse = require('./reverse');
  *
  *      f(3, 4); // -(3^4) + 1
  */
-module.exports = function compose() {
+module.exports = function compose(functions) {
   if (arguments.length === 0) {
     throw new Error('compose requires at least one argument');
   }

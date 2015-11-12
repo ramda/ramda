@@ -22,7 +22,7 @@ var tail = require('./tail');
  *      //  followersForUser :: String -> Promise [User]
  *      var followersForUser = R.pipeP(db.getUserById, db.getFollowers);
  */
-module.exports = function pipeP() {
+module.exports = function pipeP(functions) {
   if (arguments.length === 0) {
     throw new Error('pipeP requires at least one argument');
   }
