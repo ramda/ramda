@@ -151,6 +151,8 @@ describe('toString', function() {
     assert.strictEqual(R.toString(Just(42)), 'Just(42)');
     assert.strictEqual(R.toString(Just([1, 2, 3])), 'Just([1, 2, 3])');
     assert.strictEqual(R.toString(Just(Just(Just('')))), 'Just(Just(Just("")))');
+
+    assert.strictEqual(R.toString({toString: R.always('x')}), 'x');
   });
 
   it('handles object with no `toString` method', function() {
