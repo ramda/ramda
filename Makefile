@@ -1,4 +1,3 @@
-MOCHA = node_modules/.bin/mocha
 UGLIFY = node_modules/.bin/uglifyjs
 XYZ = node_modules/.bin/xyz --repo git@github.com:ramda/ramda.git --script scripts/prepublish
 
@@ -38,10 +37,3 @@ setup:
 .PHONY: test
 test: dist/ramda.js
 	npm test
-	find src -name '*.js' -not -path 'src/internal/*' \
-	| sed 's:src/\(.*\)[.]js:exports.\1 = require("./src/\1");:' >index.js
-	sed '/"main":/d' package.json >tmp
-	mv tmp package.json
-	$(MOCHA) -- $(shell find test -name '*.js' -not -name 'test.examplesRunner.js' -not -path 'test/helpers/*')
-	git checkout -- package.json
-	rm index.js
