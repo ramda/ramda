@@ -8,7 +8,7 @@ var map = require('./map');
 
 /**
  * "lifts" a function to be the specified arity, so that it may "map over" that
- * many lists (or other objects that satisfies the FantasyLand Apply spec).
+ * many lists (or other objects that satisfies the [FantasyLand Apply spec](https://github.com/fantasyland/fantasy-land#apply)).
  *
  * @func
  * @memberOf R

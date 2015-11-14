@@ -4,7 +4,7 @@ var liftN = require('./liftN');
 
 /**
  * "lifts" a function of arity > 1 so that it may "map over" an Array or other
- * object that satisfies the FantasyLand Apply spec.
+ * object that satisfies the [FantasyLand Apply spec](https://github.com/fantasyland/fantasy-land#apply).
  *
  * @func
  * @memberOf R
