@@ -4,7 +4,7 @@ var liftN = require('./liftN');
 
 /**
  * "lifts" a function of arity > 1 so that it may "map over" an Array or other
- * Functor.
+ * object that satisfies the [FantasyLand Apply spec](https://github.com/fantasyland/fantasy-land#apply).
  *
  * @func
  * @memberOf R
@@ -12,7 +12,7 @@ var liftN = require('./liftN');
  * @category Function
  * @sig (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
- * @return {Function} The function `fn` applicable to mappable objects.
+ * @return {Function} The lifted function.
  * @see R.liftN
  * @example
  *
