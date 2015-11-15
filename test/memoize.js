@@ -85,4 +85,9 @@ describe('memoize', function() {
     eq(count, 1);
   });
 
+  it('retains arity', function() {
+    var f = R.memoize(function(a, b) { return a + b; });
+    eq(f.length, 2);
+  });
+
 });

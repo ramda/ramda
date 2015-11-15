@@ -1,3 +1,4 @@
+var _arity = require('./internal/_arity');
 var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
 var toString = require('./toString');
@@ -31,11 +32,11 @@ var toString = require('./toString');
  */
 module.exports = _curry1(function memoize(fn) {
   var cache = {};
-  return function() {
+  return _arity(fn.length, function() {
     var key = toString(arguments);
     if (!_has(key, cache)) {
       cache[key] = fn.apply(this, arguments);
     }
     return cache[key];
-  };
+  });
 });
