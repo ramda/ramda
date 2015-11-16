@@ -29,16 +29,6 @@ describe('view, over, and set', function() {
         address: ['22 Walnut St', 'San Francisco', 'CA']});
   });
 
-  they('may be applied to a lens created by `lensIndex`', function() {
-    eq(R.view(headLens, alice.address), '22 Walnut St');
-
-    eq(R.over(headLens, R.toUpper, alice.address),
-       ['22 WALNUT ST', 'San Francisco', 'CA']);
-
-    eq(R.set(headLens, '52 Crane Ave', alice.address),
-       ['52 Crane Ave', 'San Francisco', 'CA']);
-  });
-
   they('may be applied to composed lenses', function() {
     var streetLens = R.compose(addressLens, headLens);
 
