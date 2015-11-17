@@ -14,22 +14,25 @@ describe('lensPath', function() {
     it('focuses the specified object property', function() {
       eq(R.view(R.lensPath(['d']), testObj), 3);
       eq(R.view(R.lensPath(['a', 'b']), testObj), 2);
+      eq(R.view(R.lensPath([]), testObj), testObj);
     });
   });
   describe('set', function() {
     it('sets the value of the object property specified', function() {
       eq(R.set(R.lensPath(['d']), 0, testObj), {a: {b: 2}, d: 0});
       eq(R.set(R.lensPath(['a', 'b']), 0, testObj), {a: {b: 0}, d: 3});
+      eq(R.set(R.lensPath([]), 0, testObj), 0);
     });
     it('adds the property to the object if it doesn\'t exist', function() {
-      eq(R.set(R.lensPath('d'), 0, testObj), {a: {b: 2}, d: 0});
-      eq(R.set(R.lensPath(['a', 'b']), 0, testObj), {a: {b: 0}, d: 3});
+      eq(R.set(R.lensPath('X'), 0, testObj), {a: {b: 2}, d: 3, X: 0});
+      eq(R.set(R.lensPath(['a', 'X']), 0, testObj), {a: {b: 2, X: 0}, d: 3});
     });
   });
   describe('over', function() {
     it('applies function to the value of the specified object property', function() {
       eq(R.over(R.lensPath('d'), R.inc, testObj), {a: {b: 2}, d: 4});
       eq(R.over(R.lensPath(['a', 'b']), R.inc, testObj), {a: {b: 3}, d: 3});
+      eq(R.over(R.lensPath([]), R.toPairs, testObj), [['a', {b: 2}], ['d', 3]]);
     });
     it('applies function to undefined and adds the property if it doesn\'t exist', function() {
       eq(R.over(R.lensPath(['X']), R.identity, testObj), {a: {b: 2}, d: 3, X: undefined});
