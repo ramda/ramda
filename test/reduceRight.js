@@ -19,7 +19,7 @@ describe('reduceRight', function() {
 
   it('is curried', function() {
     var something = R.reduceRight(avg, 54);
-    var rcat = R.reduceRight(R.add, '');
+    var rcat = R.reduceRight(R.concat, '');
     eq(something([12, 4, 10, 6]), 12);
     eq(rcat(['1', '2', '3', '4']), '4321');
   });

@@ -5,7 +5,7 @@ var eq = require('./shared/eq');
 describe('pluck', function() {
   var people = [
     {name: 'Fred', age: 23},
-    {name: 'Wilma', age: 21} ,
+    {name: 'Wilma', age: 21},
     {name: 'Pebbles', age: 2}
   ];
 
