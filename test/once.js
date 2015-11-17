@@ -31,4 +31,9 @@ describe('once', function() {
     eq(ctr, 1);
   });
 
+  it('retains arity', function() {
+    var f = R.once(function(a, b) { return a + b; });
+    eq(f.length, 2);
+  });
+
 });
