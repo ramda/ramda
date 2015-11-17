@@ -1,6 +1,7 @@
 var R = require('..');
 var eq = require('./shared/eq');
 
+
 var testObj = {
   a: 1,
   b: 2,
