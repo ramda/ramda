@@ -13,7 +13,8 @@ var identity = require('./identity');
  * @param {Function} of A function that returns the data type to return
  * @param {Array} list An array of functors of the same type
  * @return {*}
- * @see R.commuteMap
+ * @see R.sequence
+ * @deprecated since v0.19.0
  * @example
  *
  *      R.commute(R.of, [[1], [2, 3]]);   //=> [[1, 2], [1, 3]]
