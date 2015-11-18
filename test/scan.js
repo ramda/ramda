@@ -29,4 +29,9 @@ describe('scan', function() {
     eq(sum.length, 1);
   });
 
+  it('dispatches to `scan` method', function() {
+    var obj = {x: 100, scan: function(f, acc) { return f(acc, this.x); }};
+    eq(R.scan(add, 1, obj), 101);
+  });
+
 });
