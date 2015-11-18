@@ -35,4 +35,13 @@ describe('reduce', function() {
     eq(sum.length, 1);
   });
 
+  it('composes with other transformers', function() {
+    var add1 = function(a) {return a + 1;};
+    var trans = R.compose(
+      R.reduce(add, 1),
+      R.map(add1)
+    );
+    eq(trans([1]), 3);
+    eq(R.transduce(trans, R.flip(R.append), [], [1]), 3);
+  });
 });
