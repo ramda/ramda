@@ -26,7 +26,7 @@ var assoc = require('./assoc');
 module.exports = _curry3(function assocPath(path, val, obj) {
   switch (path.length) {
     case 0:
-      return obj;
+      return val;
     case 1:
       return assoc(path[0], val, obj);
     default:
