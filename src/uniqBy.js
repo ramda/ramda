@@ -22,7 +22,10 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(/* globals Set */ typeof Set === 'undefined' ?
   function uniqBy(fn, list) {
-    var idx = 0, applied = [], result = [], appliedItem, item;
+    var idx = 0;
+    var applied = [];
+    var result = [];
+    var appliedItem, item;
     while (idx < list.length) {
       item = list[idx];
       appliedItem = fn(item);
@@ -35,13 +38,14 @@ module.exports = _curry2(/* globals Set */ typeof Set === 'undefined' ?
     return result;
   } :
   function uniqBySet(fn, list) {
-    var set           = new Set(),
-        applied       = [], appliedItem, item,
-        prevSetSize   = 0,  newSetSize,
-        result        = [],
-        nullExists    = false,
-        negZeroExists = false,
-        idx           = 0;
+    var set           = new Set();
+    var applied       = [];
+    var prevSetSize   = 0;
+    var result        = [];
+    var nullExists    = false;
+    var negZeroExists = false;
+    var idx           = 0;
+    var appliedItem, item, newSetSize;
 
     while (idx < list.length) {
       item = list[idx];

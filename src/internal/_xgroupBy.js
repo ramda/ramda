@@ -33,4 +33,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xgroupBy(f, xf) { return new XGroupBy(f, xf); });
-})();
+}());

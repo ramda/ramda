@@ -14,4 +14,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xmap(f, xf) { return new XMap(f, xf); });
-})();
+}());

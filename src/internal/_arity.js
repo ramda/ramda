@@ -1,5 +1,5 @@
 module.exports = function _arity(n, fn) {
-  // jshint unused:vars
+  /* eslint-disable no-unused-vars */
   switch (n) {
     case 0: return function() { return fn.apply(this, arguments); };
     case 1: return function(a0) { return fn.apply(this, arguments); };

@@ -16,7 +16,7 @@ describe('mean', function() {
   });
 
   it('handles array-like object', function() {
-    eq(R.mean((function() { return arguments; }(1, 2, 3))), 2);
+    eq(R.mean((function() { return arguments; })(1, 2, 3)), 2);
   });
 
 });

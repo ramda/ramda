@@ -17,7 +17,8 @@ ExampleTest.prototype.getFunctionName = function(code) {
   if (func_lines.length === 0) {
     return false;
   }
-  var matches, func_line = (func_lines[0].indexOf('TODO') !== -1 && func_lines.length > 1) ? func_lines[1] : func_lines[0];
+  var matches;
+  var func_line = (func_lines[0].indexOf('TODO') !== -1 && func_lines.length > 1) ? func_lines[1] : func_lines[0];
   if ((matches = func_line.match(/^function (\w+)/)) !== null) {
     return matches[1];
   } else if ((matches = func_line.match(/([\w\.]+\s*=\s*)+/)) !== null) {

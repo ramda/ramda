@@ -32,7 +32,8 @@ var curryN = require('./curryN');
  */
 module.exports = _curry2(function useWith(fn, transformers) {
   return curryN(transformers.length, function() {
-    var args = [], idx = 0;
+    var args = [];
+    var idx = 0;
     while (idx < transformers.length) {
       args.push(transformers[idx].call(this, arguments[idx]));
       idx += 1;

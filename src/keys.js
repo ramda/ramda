@@ -44,7 +44,8 @@ module.exports = (function() {
       if (Object(obj) !== obj) {
         return [];
       }
-      var prop, ks = [], nIdx;
+      var prop, nIdx;
+      var ks = [];
       for (prop in obj) {
         if (_has(prop, obj)) {
           ks[ks.length] = prop;

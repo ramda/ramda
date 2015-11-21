@@ -3,7 +3,8 @@ var eq = require('./shared/eq');
 
 
 describe('xprod', function() {
-  var a = [1, 2], b = ['a', 'b', 'c'];
+  var a = [1, 2];
+  var b = ['a', 'b', 'c'];
 
   it('returns an empty list if either input list is empty', function() {
     eq(R.xprod([], [1, 2, 3]), []);

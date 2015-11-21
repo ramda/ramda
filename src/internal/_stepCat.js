@@ -43,4 +43,4 @@ module.exports = (function() {
     }
     throw new Error('Cannot create transformer for ' + obj);
   };
-})();
+}());

@@ -1,16 +1,15 @@
-/* global window, document */
+/* eslint-env browser */
+/* global ramda:false */
 (function(window, document) {
   var version = '???';
 
   if (typeof window.R !== 'undefined') {
     return showMsg('This page already using ramda');
   }
-  // jscs:disable
-  /* jshint ignore:start */
+  /* eslint-disable space-before-blocks */
   {{{ramda}}}
   version = '{{{version}}}';
-  /* jshint ignore:end*/
-  // jscs:enable
+  /* eslint-enable space-before-blocks */
   showMsg('Ramda v' + version + ' loaded');
 
   function showMsg(msg) {

@@ -15,4 +15,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xtakeWhile(f, xf) { return new XTakeWhile(f, xf); });
-})();
+}());

@@ -32,4 +32,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xdropLastWhile(fn, xf) { return new XDropLastWhile(fn, xf); });
-})();
+}());

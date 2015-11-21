@@ -19,7 +19,7 @@ describe('median', function() {
   });
 
   it('handles array-like object', function() {
-    eq(R.median((function() { return arguments; }(1, 2, 3))), 2);
+    eq(R.median((function() { return arguments; })(1, 2, 3)), 2);
   });
 
 });
