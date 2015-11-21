@@ -1,5 +1,5 @@
-var equals = require('./equals');
-var uniqWith = require('./uniqWith');
+var identity = require('./identity');
+var uniqBy = require('./uniqBy');
 
 
 /**
@@ -19,4 +19,4 @@ var uniqWith = require('./uniqWith');
  *      R.uniq([1, '1']);     //=> [1, '1']
  *      R.uniq([[42], [42]]); //=> [[42]]
  */
-module.exports = uniqWith(equals);
+module.exports = uniqBy(identity);

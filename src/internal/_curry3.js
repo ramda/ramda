@@ -1,5 +1,6 @@
 var _curry1 = require('./_curry1');
 var _curry2 = require('./_curry2');
+var _isPlaceholder = require('./_isPlaceholder');
 
 
 /**
@@ -12,43 +13,26 @@ var _curry2 = require('./_curry2');
  */
 module.exports = function _curry3(fn) {
   return function f3(a, b, c) {
-    var n = arguments.length;
-    if (n === 0) {
-      return f3;
-    } else if (n === 1 && a != null && a['@@functional/placeholder'] === true) {
-      return f3;
-    } else if (n === 1) {
-      return _curry2(function(b, c) { return fn(a, b, c); });
-    } else if (n === 2 && a != null && a['@@functional/placeholder'] === true &&
-                          b != null && b['@@functional/placeholder'] === true) {
-      return f3;
-    } else if (n === 2 && a != null && a['@@functional/placeholder'] === true) {
-      return _curry2(function(a, c) { return fn(a, b, c); });
-    } else if (n === 2 && b != null && b['@@functional/placeholder'] === true) {
-      return _curry2(function(b, c) { return fn(a, b, c); });
-    } else if (n === 2) {
-      return _curry1(function(c) { return fn(a, b, c); });
-    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true &&
-                          b != null && b['@@functional/placeholder'] === true &&
-                          c != null && c['@@functional/placeholder'] === true) {
-      return f3;
-    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true &&
-                          b != null && b['@@functional/placeholder'] === true) {
-      return _curry2(function(a, b) { return fn(a, b, c); });
-    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true &&
-                          c != null && c['@@functional/placeholder'] === true) {
-      return _curry2(function(a, c) { return fn(a, b, c); });
-    } else if (n === 3 && b != null && b['@@functional/placeholder'] === true &&
-                          c != null && c['@@functional/placeholder'] === true) {
-      return _curry2(function(b, c) { return fn(a, b, c); });
-    } else if (n === 3 && a != null && a['@@functional/placeholder'] === true) {
-      return _curry1(function(a) { return fn(a, b, c); });
-    } else if (n === 3 && b != null && b['@@functional/placeholder'] === true) {
-      return _curry1(function(b) { return fn(a, b, c); });
-    } else if (n === 3 && c != null && c['@@functional/placeholder'] === true) {
-      return _curry1(function(c) { return fn(a, b, c); });
-    } else {
-      return fn(a, b, c);
+    switch (arguments.length) {
+      case 0:
+        return f3;
+      case 1:
+        return _isPlaceholder(a) ? f3
+             : _curry2(function(_b, _c) { return fn(a, _b, _c); });
+      case 2:
+        return _isPlaceholder(a) && _isPlaceholder(b) ? f3
+             : _isPlaceholder(a) ? _curry2(function(_a, _c) { return fn(_a, b, _c); })
+             : _isPlaceholder(b) ? _curry2(function(_b, _c) { return fn(a, _b, _c); })
+             : _curry1(function(_c) { return fn(a, b, _c); });
+      default:
+        return _isPlaceholder(a) && _isPlaceholder(b) && _isPlaceholder(c) ? f3
+             : _isPlaceholder(a) && _isPlaceholder(b) ? _curry2(function(_a, _b) { return fn(_a, _b, c); })
+             : _isPlaceholder(a) && _isPlaceholder(c) ? _curry2(function(_a, _c) { return fn(_a, b, _c); })
+             : _isPlaceholder(b) && _isPlaceholder(c) ? _curry2(function(_b, _c) { return fn(a, _b, _c); })
+             : _isPlaceholder(a) ? _curry1(function(_a) { return fn(_a, b, c); })
+             : _isPlaceholder(b) ? _curry1(function(_b) { return fn(a, _b, c); })
+             : _isPlaceholder(c) ? _curry1(function(_c) { return fn(a, b, _c); })
+             : fn(a, b, c);
     }
   };
 };
