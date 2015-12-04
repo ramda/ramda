@@ -28,7 +28,7 @@ var _xtakeWhile = require('./internal/_xtakeWhile');
  *
  *      var isNotFour = x => x !== 4;
  *
- *      R.takeWhile(isNotFour, [1, 2, 3, 4]); //=> [1, 2, 3]
+ *      R.takeWhile(isNotFour, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3]
  */
 module.exports = _curry2(_dispatchable('takeWhile', _xtakeWhile, function takeWhile(fn, list) {
   var idx = 0, len = list.length;
