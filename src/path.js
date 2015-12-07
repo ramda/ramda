@@ -23,7 +23,10 @@ module.exports = _curry2(function path(paths, obj) {
   } else {
     var val = obj;
     var idx = 0;
-    while (val != null && idx < paths.length) {
+    while (idx < paths.length) {
+      if (val == null) {
+        return;
+      }
       val = val[paths[idx]];
       idx += 1;
     }

@@ -36,6 +36,7 @@ describe('path', function() {
   it('returns undefined for items not found', function() {
     eq(R.path(['a', 'b', 'foo'], deepObject), undefined);
     eq(R.path(['bar'], deepObject), undefined);
+    eq(R.path(['a', 'b'], {a: null}), undefined);
   });
 
   it('returns undefined for null/undefined', function() {
