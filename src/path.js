@@ -18,18 +18,14 @@ var _curry2 = require('./internal/_curry2');
  *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
  */
 module.exports = _curry2(function path(paths, obj) {
-  if (obj == null) {
-    return;
-  } else {
-    var val = obj;
-    var idx = 0;
-    while (idx < paths.length) {
-      if (val == null) {
-        return;
-      }
-      val = val[paths[idx]];
-      idx += 1;
+  var val = obj;
+  var idx = 0;
+  while (idx < paths.length) {
+    if (val == null) {
+      return;
     }
-    return val;
+    val = val[paths[idx]];
+    idx += 1;
   }
+  return val;
 });
