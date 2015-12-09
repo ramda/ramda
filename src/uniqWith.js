@@ -1,5 +1,7 @@
 var _containsWith = require('./internal/_containsWith');
 var _curry2 = require('./internal/_curry2');
+var _isGenerator = require('./internal/_isGenerator');
+var take = require('../take');
 
 
 /**
@@ -25,14 +27,28 @@ var _curry2 = require('./internal/_curry2');
  *      R.uniqWith(strEq)(['1', 1, 1]);    //=> ['1']
  */
 module.exports = _curry2(function uniqWith(pred, list) {
-  var idx = 0, len = list.length;
-  var result = [], item;
-  while (idx < len) {
-    item = list[idx];
-    if (!_containsWith(pred, item, result)) {
-      result[result.length] = item;
+  function unique(pred, list) {
+    var idx = 0, len = list.length;
+    var result = [], item;
+    while (idx < len) {
+      item = list[idx];
+      if (!_containsWith(pred, item, result)) {
+        result[result.length] = item;
+      }
+      idx += 1;
     }
-    idx += 1;
+    return result;
   }
-  return result;
+
+  if (_isGenerator(list)) {
+    return function* uniqWithGenerator() {
+      const arr = unique(pred, take(Infinity, list));
+      let i = 0;
+      for (i = 0; i < arr.length; i += 1) {
+        yield arr[i];
+      }
+    };
+  } else {
+    return unique(pred, list);
+  }
 });

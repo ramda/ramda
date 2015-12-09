@@ -1,6 +1,7 @@
 MOCHA = node_modules/.bin/mocha
 UGLIFY = node_modules/.bin/uglifyjs
 XYZ = node_modules/.bin/xyz --repo git@github.com:ramda/ramda.git --script scripts/prepublish
+BABEL = node_modules/.bin/babel
 
 SRC = $(shell find src -name '*.js')
 
@@ -9,7 +10,8 @@ dist/ramda.js: scripts/build scripts/header scripts/template.js $(SRC)
 	git checkout -- '$@'
 	scripts/header >ramda.js.tmp
 	'$<' --complete >>ramda.js.tmp
-	mv ramda.js.tmp '$@'
+	$(BABEL) ramda.js.tmp > '$@'
+	rm ramda.js.tmp
 
 dist/ramda.min.js: dist/ramda.js scripts/header
 	scripts/header >'$@'

@@ -32,4 +32,8 @@ describe('uniq', function() {
     eq(R.uniq([void 0, null, void 0, null]), [void 0, null]);
   });
 
+  it('works with generator based list', function() {
+    const num = R.map(Math.abs, R.xrange(1, -5, 5));
+    eq(R.take(Infinity, R.uniq(num)), [5, 4, 3, 2, 1, 0]);
+  });
 });

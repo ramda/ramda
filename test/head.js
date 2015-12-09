@@ -23,4 +23,9 @@ describe('head', function() {
     assert.throws(function() { R.head(undefined); }, TypeError);
   });
 
+  it('works on infinite list', function() {
+    const natural = R.xrange(1, 1, Infinity);
+    eq(R.head(natural), 1);
+  });
+
 });

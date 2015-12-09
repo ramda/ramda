@@ -37,10 +37,10 @@ describe('pipeP', function() {
             eq(result, [[1, 2]]);
 
             done();
-          })['catch'](done);
-        })['catch'](done);
-      })['catch'](done);
-    })['catch'](done);
+          }).catch(done);
+        }).catch(done);
+      }).catch(done);
+    }).catch(done);
   });
 
   it('throws if given no arguments', function() {

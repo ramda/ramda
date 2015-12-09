@@ -38,4 +38,8 @@ describe('length', function() {
     eq(R.identical(NaN, R.length({})), true);
   });
 
+  it('works with generators', function() {
+    const natural = R.xrange(1, 1, 10);
+    eq(R.length(natural), 9);
+  });
 });

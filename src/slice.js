@@ -1,5 +1,6 @@
 var _checkForMethod = require('./internal/_checkForMethod');
 var _curry3 = require('./internal/_curry3');
+var _isGenerator = require('./internal/_isGenerator');
 
 
 /**
@@ -27,5 +28,27 @@ var _curry3 = require('./internal/_curry3');
  *      R.slice(0, 3, 'ramda');                     //=> 'ram'
  */
 module.exports = _curry3(_checkForMethod('slice', function slice(fromIndex, toIndex, list) {
-  return Array.prototype.slice.call(list, fromIndex, toIndex);
+  if (_isGenerator(list)) {
+    return function* sliceGenerator() {
+      const iter = list();
+      let item;
+
+      for (let i = 0; i < fromIndex; i += 1) {
+        item = iter.next();
+        if (item.done) {
+          return;
+        }
+      }
+
+      for (let i = fromIndex; i < toIndex; i += 1) {
+        item = iter.next();
+        if (item.done) {
+          return;
+        }
+        yield item.value;
+      }
+    };
+  } else {
+    return Array.prototype.slice.call(list, fromIndex, toIndex);
+  }
 }));

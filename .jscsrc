@@ -14,11 +14,11 @@
   "disallowTrailingWhitespace": true,
   "disallowYodaConditions": true,
   "excludeFiles": [
-    "dist/**", 
-    "lib/test/**", 
-    "node_modules/**", 
-    "bower_components/**", 
-    "test/bundle.js", 
+    "dist/**",
+    "lib/test/**",
+    "node_modules/**",
+    "bower_components/**",
+    "test/bundle.js",
     "**/*.min.js"
   ],
   "requireCapitalizedConstructors": true,
@@ -37,5 +37,6 @@
   "requireSpacesInConditionalExpression": true,
   "requireSpacesInFunction": {"beforeOpeningCurlyBrace": true},
   "validateIndentation": 2,
+  "esnext": true,
   "validateQuoteMarks": {"escape": true, "mark": "'"}
 }

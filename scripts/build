@@ -55,6 +55,7 @@ var parse = R.memoize(function(filename) {
       locations: true,
       sourceFile: filename,
       onComment: comments,
+      ecmaVersion: 6,
       onToken: tokens
     }),
     comments: comments,

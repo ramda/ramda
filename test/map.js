@@ -66,4 +66,12 @@ describe('map', function() {
     eq(inc.length, 1);
   });
 
+  it('can map over infinite list', function() {
+    const natural = R.xrange(1, 1, Infinity);
+    const square = function(x) {
+      return x * x;
+    };
+    eq(R.take(3, R.map(square, natural)), [1, 4, 9]);
+  });
+
 });

@@ -27,4 +27,8 @@ describe('filter', function() {
     eq(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
   });
 
+  it('can filter on infinite list', function() {
+    const natural = R.xrange(1, 1, Infinity);
+    eq(R.take(3, R.filter(even, natural)), [2, 4, 6]);
+  });
 });
