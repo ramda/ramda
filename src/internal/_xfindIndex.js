@@ -27,4 +27,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xfindIndex(f, xf) { return new XFindIndex(f, xf); });
-})();
+}());

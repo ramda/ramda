@@ -14,4 +14,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xfilter(f, xf) { return new XFilter(f, xf); });
-})();
+}());

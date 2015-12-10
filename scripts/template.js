@@ -3,6 +3,7 @@
   'use strict';
 
   /* global R */
+  /* eslint-env amd */
 
   /* TEST_ENTRY_POINT */
 

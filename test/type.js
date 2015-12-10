@@ -34,7 +34,6 @@ describe('type', function() {
   });
 
   it('"String" if given a String object', function() {
-    /*jshint -W053 */
     eq(R.type(new String('I am a String object')), 'String');
   });
 

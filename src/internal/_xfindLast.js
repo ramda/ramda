@@ -19,4 +19,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xfindLast(f, xf) { return new XFindLast(f, xf); });
-})();
+}());

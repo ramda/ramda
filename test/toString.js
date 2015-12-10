@@ -109,9 +109,9 @@ describe('toString', function() {
   });
 
   it('returns the string representation of an arguments object', function() {
-    assert.strictEqual(R.toString((function() { return arguments; }())), '(function() { return arguments; }())');
-    assert.strictEqual(R.toString((function() { return arguments; }(1, 2, 3))), '(function() { return arguments; }(1, 2, 3))');
-    assert.strictEqual(R.toString((function() { return arguments; }(['x', 'y']))), '(function() { return arguments; }(["x", "y"]))');
+    assert.strictEqual(R.toString((function() { return arguments; })()), '(function() { return arguments; }())');
+    assert.strictEqual(R.toString((function() { return arguments; })(1, 2, 3)), '(function() { return arguments; }(1, 2, 3))');
+    assert.strictEqual(R.toString((function() { return arguments; })(['x', 'y'])), '(function() { return arguments; }(["x", "y"]))');
   });
 
   it('returns the string representation of a plain object', function() {

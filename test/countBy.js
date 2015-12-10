@@ -21,7 +21,7 @@ var derivedGenre = (function() {
     Baroque: 'Classical',
     Modern: 'Classical',
     Romantic: 'Classical',
-    Metal: 'Rock'  /*, etc */
+    Metal: 'Rock'  /*  etc */
   };
   return function(album) {
     var genre = R.prop('genre', album);

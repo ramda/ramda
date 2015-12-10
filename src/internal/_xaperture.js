@@ -33,4 +33,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });
-})();
+}());

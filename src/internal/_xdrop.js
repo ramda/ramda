@@ -18,4 +18,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xdrop(n, xf) { return new XDrop(n, xf); });
-})();
+}());

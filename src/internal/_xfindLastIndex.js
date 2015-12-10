@@ -22,4 +22,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xfindLastIndex(f, xf) { return new XFindLastIndex(f, xf); });
-})();
+}());

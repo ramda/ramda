@@ -39,7 +39,8 @@ var uniqWith = require('./uniqWith');
  *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
 module.exports = _curry3(function intersectionWith(pred, list1, list2) {
-  var results = [], idx = 0;
+  var results = [];
+  var idx = 0;
   while (idx < list1.length) {
     if (_containsWith(pred, list1[idx], list2)) {
       results[results.length] = list1[idx];

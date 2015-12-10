@@ -20,4 +20,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xdropWhile(f, xf) { return new XDropWhile(f, xf); });
-})();
+}());

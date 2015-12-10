@@ -29,7 +29,8 @@ var _curry2 = require('./internal/_curry2');
  *      R.evolve(transformations, tomato); //=> {firstName: 'Tomato', data: {elapsed: 101, remaining: 1399}, id:123}
  */
 module.exports = _curry2(function evolve(transformations, object) {
-  var transformation, key, type, result = {};
+  var result = {};
+  var transformation, key, type;
   for (key in object) {
     transformation = transformations[key];
     type = typeof transformation;

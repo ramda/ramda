@@ -25,4 +25,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xall(f, xf) { return new XAll(f, xf); });
-})();
+}());

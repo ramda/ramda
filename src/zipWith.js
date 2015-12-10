@@ -25,7 +25,9 @@ var _curry3 = require('./internal/_curry3');
  *      //=> [f(1, 'a'), f(2, 'b'), f(3, 'c')]
  */
 module.exports = _curry3(function zipWith(fn, a, b) {
-  var rv = [], idx = 0, len = Math.min(a.length, b.length);
+  var rv = [];
+  var idx = 0;
+  var len = Math.min(a.length, b.length);
   while (idx < len) {
     rv[idx] = fn(a[idx], b[idx]);
     idx += 1;

@@ -31,4 +31,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xdropLast(n, xf) { return new XDropLast(n, xf); });
-})();
+}());
