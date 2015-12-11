@@ -3,6 +3,7 @@
 
 var R = require('..');
 var eq = require('./shared/eq');
+var jsc = require('jsverify');
 
 describe('equals', function() {
   var a = [];
@@ -315,6 +316,26 @@ describe('equals', function() {
   it('is curried', function() {
     var isA = R.equals(a);
     eq(isA([]), true);
+  });
+
+  describe('properties', function() {
+    var arbs = [jsc.number, jsc.bool, jsc.datetime, jsc.falsy, jsc.json];
+
+    jsc.property('reflexive', jsc.oneof(arbs), function(a) {
+      return R.equals(a, a);
+    });
+    jsc.property('symmetry', jsc.oneof(arbs), jsc.oneof(arbs), function(a, b) {
+      return R.equals(a,b) === R.equals(b,a);
+    });
+    jsc.property('transitive', jsc.oneof(arbs), jsc.oneof(arbs), jsc.oneof(arbs), function(a, b, c) {
+      // TODO : this does not look so good. This should be written in a way
+      // that the ocurrance of a == b == c is guanrateed to occur
+      if (R.equals(a,b) && R.equals(b,c)) {
+        return R.equals(a,c) === true;
+      }
+      return true;
+    });
+
   });
 
 });
