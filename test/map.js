@@ -2,7 +2,7 @@ var listXf = require('./helpers/listXf');
 
 var R = require('..');
 var eq = require('./shared/eq');
-
+var jsc = require('jsverify');
 
 describe('map', function() {
   var times2 = function(x) {return x * 2;};
@@ -64,6 +64,20 @@ describe('map', function() {
   it('correctly reports the arity of curried versions', function() {
     var inc = R.map(add1);
     eq(inc.length, 1);
+  });
+
+  describe('properties', function() {
+    var functors = jsc.oneof([jsc.array(jsc.number), jsc.dict(jsc.string)]);
+
+    jsc.property('identity', jsc.oneof(functors), function(f) {
+      return R.equals(R.map(R.identity, f), f);
+    });
+
+    jsc.property('composition', jsc.oneof(functors), function(f) {
+      return R.equals(R.map(R.compose(R.add(1), R.multiply(2)), f),
+                      R.map(R.add(1), R.map(R.multiply(2), f)));
+    });
+
   });
 
 });
