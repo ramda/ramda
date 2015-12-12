@@ -4,7 +4,7 @@ var eq = require('./shared/eq');
 
 var testObj = {
   a: {
-    b: 2,
+    b: 2
   },
   d: 3
 };
@@ -55,7 +55,8 @@ describe('lensPath', function() {
       eq(R.view(R.lensPath(['a', 'b']), R.set(R.lensPath(['a', 'b']), 0, testObj)), 0);
     });
     it('get (set(set s v1) v2) === v2', function() {
-      var p = 'd', q = ['a', 'b'];
+      var p = 'd';
+      var q = ['a', 'b'];
       eq(R.view(R.lensPath(p), R.set(R.lensPath(p), 11, R.set(R.lensPath(p), 10, testObj))), 11);
       eq(R.view(R.lensPath(q), R.set(R.lensPath(q), 11, R.set(R.lensPath(q), 10, testObj))), 11);
     });
