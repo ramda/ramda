@@ -8,13 +8,13 @@ var keys = require('./keys');
 
 
 /**
- * Returns a new list, constructed by applying the supplied function to every
- * element of the supplied list.
+ * Takes a function and
+ * a [functor](https://github.com/fantasyland/fantasy-land#functor),
+ * applies the function to each of the functor's values, and returns
+ * a functor of the same shape.
  *
- * Note: `R.map` does not skip deleted or unassigned indices (sparse arrays),
- * unlike the native `Array.prototype.map` method. For more details on this
- * behavior, see:
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map#Description
+ * Ramda provides suitable `map` implementations for `Array` and `Object`,
+ * so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.
  *
  * Dispatches to the `map` method of the second argument, if present.
  *
