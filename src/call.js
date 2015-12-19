@@ -23,9 +23,10 @@ var curry = require('./curry');
  *                           R.join(''),
  *                           R.replace(/^(?!$)/gm));
  *
- *      var format = R.converge(R.call,
- *                              R.pipe(R.prop('indent'), indentN),
- *                              R.prop('value'));
+ *      var format = R.converge(R.call, [
+ *                                  R.pipe(R.prop('indent'), indentN),
+ *                                  R.prop('value')
+ *                              ]);
  *
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  */

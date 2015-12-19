@@ -15,6 +15,6 @@ var _curry2 = require('./internal/_curry2');
  * @see R.createMapEntry, R.of
  * @example
  *
- *      pair('foo', 'bar'); //=> ['foo', 'bar']
+ *      R.pair('foo', 'bar'); //=> ['foo', 'bar']
  */
 module.exports = _curry2(function pair(fst, snd) { return [fst, snd]; });
