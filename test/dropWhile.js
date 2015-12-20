@@ -7,7 +7,7 @@ describe('dropWhile', function() {
     eq(R.dropWhile(function(x) {return x < 5;}, [1, 3, 5, 7, 9]), [5, 7, 9]);
   });
 
-  it('returns an empty list for an ampty list', function() {
+  it('returns an empty list for an empty list', function() {
     eq(R.dropWhile(function() { return false; }, []), []);
     eq(R.dropWhile(function() { return true; }, []), []);
   });

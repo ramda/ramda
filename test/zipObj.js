@@ -3,7 +3,7 @@ var eq = require('./shared/eq');
 
 
 describe('zipObj', function() {
-  it('combines an array of keys with an arrau of values into a single object', function() {
+  it('combines an array of keys with an array of values into a single object', function() {
     eq(R.zipObj(['a', 'b', 'c'], [1, 2, 3]), {a: 1, b: 2, c: 3});
   });
 
