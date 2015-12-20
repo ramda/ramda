@@ -62,7 +62,7 @@ describe('bind', function() {
     eq(incPojso(), 101);
   });
 
-  it('does not interefere with existing object methods', function() {
+  it('does not interfere with existing object methods', function() {
     var b = new Bar('a', 'b');
     function getX() {
       return this.x;
