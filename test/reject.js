@@ -25,6 +25,14 @@ describe('reject', function() {
     eq(R.reject(function(x) { return x > 100; }, []), []);
   });
 
+  it('filters objects', function() {
+    eq(R.reject(R.equals(0), {}), {});
+    eq(R.reject(R.equals(0), {x: 0, y: 0, z: 0}), {});
+    eq(R.reject(R.equals(0), {x: 1, y: 0, z: 0}), {x: 1});
+    eq(R.reject(R.equals(0), {x: 1, y: 2, z: 0}), {x: 1, y: 2});
+    eq(R.reject(R.equals(0), {x: 1, y: 2, z: 3}), {x: 1, y: 2, z: 3});
+  });
+
   it('dispatches to `filter` method', function() {
     function Nothing() {}
     Nothing.value = new Nothing();
