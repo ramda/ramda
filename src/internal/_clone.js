@@ -31,7 +31,7 @@ module.exports = function _clone(value, refFrom, refTo) {
   switch (type(value)) {
     case 'Object':  return copy({});
     case 'Array':   return copy([]);
-    case 'Date':    return new Date(value);
+    case 'Date':    return new Date(value.valueOf());
     case 'RegExp':  return _cloneRegExp(value);
     default:        return value;
   }

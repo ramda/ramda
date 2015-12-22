@@ -1,5 +1,6 @@
 var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
+var _isArguments = require('./internal/_isArguments');
 
 
 /**
@@ -24,6 +25,11 @@ module.exports = (function() {
   var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
   var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
                             'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+  // Safari bug
+  var hasArgsEnumBug = (function() {
+    'use strict';
+    return arguments.propertyIsEnumerable('length');
+  }());
 
   var contains = function contains(list, item) {
     var idx = 0;
@@ -36,7 +42,7 @@ module.exports = (function() {
     return false;
   };
 
-  return typeof Object.keys === 'function' ?
+  return typeof Object.keys === 'function' && !hasArgsEnumBug ?
     _curry1(function keys(obj) {
       return Object(obj) !== obj ? [] : Object.keys(obj);
     }) :
@@ -46,8 +52,9 @@ module.exports = (function() {
       }
       var prop, nIdx;
       var ks = [];
+      var checkArgsLength = hasArgsEnumBug && _isArguments(obj);
       for (prop in obj) {
-        if (_has(prop, obj)) {
+        if (_has(prop, obj) && (!checkArgsLength || prop !== 'length')) {
           ks[ks.length] = prop;
         }
       }

@@ -34,14 +34,16 @@
   "main": "dist/ramda.js",
   "scripts": {
     "bench": "scripts/benchRunner",
-    "browserify": "node_modules/browserify/bin/cmd.js test/*.js --outfile lib/test/bundle.js",
     "bookmarklet": "scripts/bookmarklet",
     "build": "make && make dist/ramda.min.js",
     "clean": "rimraf dist/*",
     "lint": "eslint scripts/bookmarklet scripts/build src/*.js src/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "pretest": "npm install && npm run lint && npm run clean && npm run build",
     "test": "node scripts/testfiles | node_modules/.bin/mocha --reporter spec",
-    "posttest": "git checkout -- dist"
+    "posttest": "git checkout -- dist",
+    "prebrowser_test": "npm run pretest",
+    "browser_test": "testem ci",
+    "postbrowser_test": "npm run posttest"
   },
   "dependencies": {},
   "devDependencies": {
@@ -61,7 +63,7 @@
     "ramda": "0.17.x",
     "rimraf": "~2.3.2",
     "sanctuary": "0.7.x",
-    "testem": "^0.6.18",
+    "testem": "0.9.x",
     "uglify-js": "2.4.x",
     "xyz": "0.5.x"
   }
