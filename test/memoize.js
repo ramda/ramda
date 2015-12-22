@@ -54,7 +54,7 @@ describe('memoize', function() {
     var f = R.memoize(function concat(a, b) {
       count += 1;
       switch (arguments.length) {
-        case 0: a = 'foo';  // jshint ignore:line
+        case 0: a = 'foo';
         case 1: b = 'bar';
       }
       return a + b;

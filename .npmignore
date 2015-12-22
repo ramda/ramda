@@ -9,8 +9,6 @@
 /.gitattributes
 /.npmignore
 /.travis.yml
-/.jscsrc
-/.jshintrc
 /CONTRIBUTING.md
 /Makefile
 /bower.json

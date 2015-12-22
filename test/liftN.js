@@ -1,4 +1,3 @@
-/* jshint -W053 */
 
 var R = require('..');
 var eq = require('./shared/eq');

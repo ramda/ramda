@@ -21,9 +21,7 @@ describe('values', function() {
     eq(vs[5], ts[5]);
 
     eq(R.values({
-      /* jshint -W001 */
       hasOwnProperty: false
-      /* jshint +W001 */
     }), [false]);
   });
 
@@ -32,7 +30,6 @@ describe('values', function() {
   });
 
   it('returns an empty object for primitives', function() {
-    /* jshint elision: true */
     var result = R.map(function(val) {
       return R.keys(val);
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);

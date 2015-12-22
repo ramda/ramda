@@ -21,11 +21,9 @@ describe('identical', function() {
     eq(R.identical(NaN, 42), false);
     eq(R.identical(42, NaN), false);
 
-    /* jshint -W053 */
     eq(R.identical(0, new Number(0)), false);
     eq(R.identical(new Number(0), 0), false);
     eq(R.identical(new Number(0), new Number(0)), false);
-    /* jshint +W053 */
   });
 
   it('is curried', function() {

@@ -46,9 +46,7 @@ describe('invert', function() {
 
   it('ignores inherited properties', function() {
     eq(R.invert({x: 'hasOwnProperty'}), {
-      /* jshint -W001 */
       hasOwnProperty: ['x']
-      /* jshint +W001 */
     });
   });
 
