@@ -12,6 +12,7 @@ var reject = require('./reject');
  *
  * @func
  * @memberOf R
+ * @since 0.19.0
  * @category List
  * @sig [a] -> [a] -> [a]
  * @param {Array} list1 The values to be removed from `list2`.

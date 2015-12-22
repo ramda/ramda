@@ -93,14 +93,14 @@ or the minified version:
 or from a CDN, either cdnjs:
 
 ```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.18.0/ramda.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.19.0/ramda.min.js"></script>
 ```
 
 or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 ```html
-<script src="//cdn.jsdelivr.net/ramda/0.18.0/ramda.min.js"></script>
-<script src="//cdn.jsdelivr.net/ramda/0.18/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/ramda/0.19.0/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/ramda/0.19/ramda.min.js"></script>
 <script src="//cdn.jsdelivr.net/ramda/latest/ramda.min.js"></script>
 ```
 

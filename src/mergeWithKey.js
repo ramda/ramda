@@ -12,6 +12,7 @@ var _has = require('./internal/_has');
  *
  * @func
  * @memberOf R
+ * @since 0.19.0
  * @category Object
  * @sig (String -> a -> a -> a) -> {a} -> {a} -> {a}
  * @param {Function} fn

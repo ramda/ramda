@@ -9,6 +9,7 @@ var _curry1 = require('./internal/_curry1');
  *
  * @func
  * @memberOf R
+ * @since 0.19.0
  * @category List
  * @sig [[a]] -> [[a]]
  * @param {Array} list A 2D list
