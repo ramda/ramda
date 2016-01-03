@@ -1,4 +1,6 @@
 var _curry2 = require('./internal/_curry2');
+var _isNumber = require('./internal/_isNumber');
+var toString = require('./toString');
 
 
 /**
@@ -24,4 +26,14 @@ var _curry2 = require('./internal/_curry2');
  *      complementaryAngle(30); //=> 60
  *      complementaryAngle(72); //=> 18
  */
-module.exports = _curry2(function subtract(a, b) { return a - b; });
+module.exports = _curry2(function subtract(a, b) {
+  if (!_isNumber(a)) {
+    throw new TypeError('‘subtract’ expected a value of type Number ' +
+                        'as its first argument; received ' + toString(a));
+  }
+  if (!_isNumber(b)) {
+    throw new TypeError('‘subtract’ expected a value of type Number ' +
+                        'as its second argument; received ' + toString(b));
+  }
+  return a - b;
+});
