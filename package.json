@@ -39,7 +39,7 @@
     "clean": "rimraf dist/*",
     "lint": "eslint scripts/bookmarklet scripts/build src/*.js src/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "pretest": "npm install && npm run lint && npm run clean && npm run build",
-    "test": "node scripts/testfiles | node_modules/.bin/mocha --reporter spec",
+    "test": "mocha --reporter spec",
     "posttest": "git checkout -- dist",
     "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
