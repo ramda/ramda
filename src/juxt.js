@@ -1,7 +1,6 @@
-var __ = require('./__');
+var _arrayOf = require('./internal/_arrayOf');
 var _curry1 = require('./internal/_curry1');
-var apply = require('./apply');
-var map = require('./map');
+var converge = require('./converge');
 
 
 /**
@@ -20,7 +19,5 @@ var map = require('./map');
  *      range(3, 4, 9, -3); //=> [-3, 9]
  */
 module.exports = _curry1(function juxt(fns) {
-  return function() {
-    return map(apply(__, arguments), fns);
-  };
+  return converge(_arrayOf, fns);
 });
