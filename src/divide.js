@@ -1,4 +1,6 @@
 var _curry2 = require('./internal/_curry2');
+var _isNumber = require('./internal/_isNumber');
+var toString = require('./toString');
 
 
 /**
@@ -23,4 +25,14 @@ var _curry2 = require('./internal/_curry2');
  *      var reciprocal = R.divide(1);
  *      reciprocal(4);   //=> 0.25
  */
-module.exports = _curry2(function divide(a, b) { return a / b; });
+module.exports = _curry2(function divide(a, b) {
+  if (!_isNumber(a)) {
+    throw new TypeError('‘divide’ expected a value of type Number ' +
+                        'as its first argument; received ' + toString(a));
+  }
+  if (!_isNumber(b)) {
+    throw new TypeError('‘divide’ expected a value of type Number ' +
+                        'as its second argument; received ' + toString(b));
+  }
+  return a / b;
+});
