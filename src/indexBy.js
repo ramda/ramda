@@ -10,8 +10,7 @@ var _reduce = require('./internal/_reduce');
  *
  * @func
  * @memberOf R
- * @since 0.19.1
- * @since 0.19.0
+ * @since v0.19.0
  * @category List
  * @sig (a -> String) -> [{k: v}] -> {k: {k: v}}
  * @param {Function} fn Function :: a -> String

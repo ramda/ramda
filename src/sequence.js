@@ -14,8 +14,7 @@ var reduceRight = require('./reduceRight');
  *
  * @func
  * @memberOf R
- * @since 0.19.1
- * @since 0.19.0
+ * @since v0.19.0
  * @category List
  * @sig (Applicative f, Traversable t) => (a -> f a) -> t (f a) -> f (t a)
  * @param {Function} of
