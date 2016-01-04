@@ -10,8 +10,7 @@ var differenceWith = require('./differenceWith');
  *
  * @func
  * @memberOf R
- * @since 0.19.1
- * @since 0.19.0
+ * @since v0.19.0
  * @category Relation
  * @sig (a -> a -> Boolean) -> [a] -> [a] -> [a]
  * @param {Function} pred A predicate used to test whether two items are equal.

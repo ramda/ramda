@@ -9,8 +9,7 @@ var path = require('./path');
  *
  * @func
  * @memberOf R
- * @since 0.19.1
- * @since 0.19.0
+ * @since v0.19.0
  * @category Object
  * @typedefn Lens s a = Functor f => (a -> f a) -> s -> f s
  * @sig [String] -> Lens s a

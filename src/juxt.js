@@ -9,8 +9,7 @@ var map = require('./map');
  *
  * @func
  * @memberOf R
- * @since 0.19.1
- * @since 0.19.0
+ * @since v0.19.0
  * @category Function
  * @sig [(a, b, ..., m) -> n] -> ((a, b, ..., m) -> [n])
  * @param {Array} fns An array of functions
