@@ -1,4 +1,7 @@
 var _curry2 = require('./internal/_curry2');
+var _isFunction = require('./internal/_isFunction');
+var lift = require('./lift');
+var or = require('./or');
 
 
 /**
@@ -7,6 +10,9 @@ var _curry2 = require('./internal/_curry2');
  * of the second function otherwise. Note that this is short-circuited,
  * meaning that the second function will not be invoked if the first returns a
  * truth-y value.
+ *
+ * In addition to functions, `R.either` also accepts any fantasy-land compatible
+ * applicative functor.
  *
  * @func
  * @memberOf R
@@ -26,7 +32,9 @@ var _curry2 = require('./internal/_curry2');
  *      f(8); //=> true
  */
 module.exports = _curry2(function either(f, g) {
-  return function _either() {
-    return f.apply(this, arguments) || g.apply(this, arguments);
-  };
+  return _isFunction(f) ?
+    function _either() {
+      return f.apply(this, arguments) || g.apply(this, arguments);
+    } :
+    lift(or)(f, g);
 });
