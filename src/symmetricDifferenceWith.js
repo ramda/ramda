@@ -10,6 +10,7 @@ var differenceWith = require('./differenceWith');
  *
  * @func
  * @memberOf R
+ * @since 0.19.1
  * @since 0.19.0
  * @category Relation
  * @sig (a -> a -> Boolean) -> [a] -> [a] -> [a]

@@ -9,6 +9,7 @@ var difference = require('./difference');
  *
  * @func
  * @memberOf R
+ * @since 0.19.1
  * @since 0.19.0
  * @category Relation
  * @sig [*] -> [*] -> [*]

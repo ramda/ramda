@@ -13,6 +13,7 @@ var sequence = require('./sequence');
  *
  * @func
  * @memberOf R
+ * @since 0.19.1
  * @since 0.19.0
  * @category List
  * @sig (Applicative f, Traversable t) => (a -> f a) -> (a -> f b) -> t a -> f (t b)

@@ -1,6 +1,6 @@
-//  Ramda v0.19.0
+//  Ramda v0.19.1
 //  https://github.com/ramda/ramda
-//  (c) 2013-2015 Scott Sauyet, Michael Hurley, and David Chambers
+//  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
 
 ;(function() {
@@ -2308,6 +2308,7 @@
      *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
      */
     // cover IE < 9 keys issues
+    // Safari bug
     var keys = function () {
         // cover IE < 9 keys issues
         var hasEnumBug = !{ toString: null }.propertyIsEnumerable('toString');
@@ -2320,6 +2321,11 @@
             'hasOwnProperty',
             'toLocaleString'
         ];
+        // Safari bug
+        var hasArgsEnumBug = function () {
+            'use strict';
+            return arguments.propertyIsEnumerable('length');
+        }();
         var contains = function contains(list, item) {
             var idx = 0;
             while (idx < list.length) {
@@ -2330,7 +2336,7 @@
             }
             return false;
         };
-        return typeof Object.keys === 'function' ? _curry1(function keys(obj) {
+        return typeof Object.keys === 'function' && !hasArgsEnumBug ? _curry1(function keys(obj) {
             return Object(obj) !== obj ? [] : Object.keys(obj);
         }) : _curry1(function keys(obj) {
             if (Object(obj) !== obj) {
@@ -2338,8 +2344,9 @@
             }
             var prop, nIdx;
             var ks = [];
+            var checkArgsLength = hasArgsEnumBug && _isArguments(obj);
             for (prop in obj) {
-                if (_has(prop, obj)) {
+                if (_has(prop, obj) && (!checkArgsLength || prop !== 'length')) {
                     ks[ks.length] = prop;
                 }
             }
@@ -2667,6 +2674,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category Object
      * @sig (String -> a -> a -> a) -> {a} -> {a} -> {a}
@@ -2913,8 +2921,10 @@
      * @see R.all, R.any
      * @example
      *
-     *      R.none(R.isNaN, [1, 2, 3]); //=> true
-     *      R.none(R.isNaN, [1, 2, 3, NaN]); //=> false
+     *      var isEven = n => n % 2 === 0;
+     *
+     *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
+     *      R.none(isEven, [1, 3, 5, 7, 8, 11]); //=> false
      */
     var none = _curry2(_complement(_dispatchable('any', _xany, any)));
 
@@ -3210,6 +3220,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category Logic
      * @sig (a -> Boolean) -> [String] -> Object -> Boolean
@@ -3766,6 +3777,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category List
      * @sig Number -> [a] -> [[a], [a]]
@@ -3824,6 +3836,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category List
      * @sig (a -> Boolean) -> [a] -> [[a], [a]]
@@ -4055,8 +4068,12 @@
      */
     var times = _curry2(function times(fn, n) {
         var len = Number(n);
-        var list = new Array(len);
         var idx = 0;
+        var list;
+        if (len < 0 || isNaN(len)) {
+            throw new RangeError('n must be a non-negative number');
+        }
+        list = new Array(len);
         while (idx < len) {
             list[idx] = fn(idx);
             idx += 1;
@@ -4135,6 +4152,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category List
      * @sig [[a]] -> [[a]]
@@ -4878,7 +4896,7 @@
         case 'Array':
             return copy([]);
         case 'Date':
-            return new Date(value);
+            return new Date(value.valueOf());
         case 'RegExp':
             return _cloneRegExp(value);
         default:
@@ -4930,10 +4948,7 @@
             }
             break;
         case 'Error':
-            if (!(a.name === b.name && a.message === b.message)) {
-                return false;
-            }
-            break;
+            return a.name === b.name && a.message === b.message;
         case 'RegExp':
             if (!(a.source === b.source && a.global === b.global && a.ignoreCase === b.ignoreCase && a.multiline === b.multiline && a.sticky === b.sticky && a.unicode === b.unicode)) {
                 return false;
@@ -5537,6 +5552,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category List
      * @sig (a -> String) -> [{k: v}] -> {k: {k: v}}
@@ -5872,6 +5888,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category Object
      * @sig (a -> a -> a) -> {a} -> {a} -> {a}
@@ -6872,6 +6889,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category Function
      * @sig [(a, b, ..., m) -> n] -> ((a, b, ..., m) -> [n])
@@ -6950,6 +6968,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category Object
      * @typedefn Lens s a = Functor f => (a -> f a) -> s -> f s
@@ -7188,6 +7207,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category List
      * @sig (Applicative f, Traversable t) => (a -> f a) -> t (f a) -> f (t a)
@@ -7219,6 +7239,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category List
      * @sig (Applicative f, Traversable t) => (a -> f a) -> (a -> f b) -> t a -> f (t b)
@@ -7323,7 +7344,7 @@
         case '[object Boolean]':
             return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
         case '[object Date]':
-            return 'new Date(' + _quote(_toISOString(x)) + ')';
+            return 'new Date(' + (isNaN(x.valueOf()) ? recur(NaN) : _quote(_toISOString(x))) + ')';
         case '[object Null]':
             return 'null';
         case '[object Number]':
@@ -7830,6 +7851,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category List
      * @sig [a] -> [a] -> [a]
@@ -8113,6 +8135,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category Relation
      * @sig [*] -> [*] -> [*]
@@ -8136,6 +8159,7 @@
      *
      * @func
      * @memberOf R
+     * @since 0.19.1
      * @since 0.19.0
      * @category Relation
      * @sig (a -> a -> Boolean) -> [a] -> [a] -> [a]

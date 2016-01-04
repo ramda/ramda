@@ -8,6 +8,7 @@ var path = require('./path');
  *
  * @func
  * @memberOf R
+ * @since 0.19.1
  * @since 0.19.0
  * @category Logic
  * @sig (a -> Boolean) -> [String] -> Object -> Boolean
