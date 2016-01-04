@@ -80,6 +80,7 @@ describe('toString', function() {
 
   it('returns the string representation of a Date object', function() {
     assert.strictEqual(R.toString(new Date('2001-02-03T04:05:06.000Z')), 'new Date("2001-02-03T04:05:06.000Z")');
+    assert.strictEqual(R.toString(new Date('XXX')), 'new Date(NaN)');
   });
 
   it('returns the string representation of a RegExp object', function() {
