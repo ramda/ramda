@@ -41,9 +41,10 @@ describe('transduce', function() {
   });
 
   it('transduces into strings', function() {
-    eq(R.transduce(R.map(add(1)), add, '', [1, 2, 3, 4]), '2345');
-    eq(R.transduce(R.filter(isOdd), add, '', [1, 2, 3, 4]), '13');
-    eq(R.transduce(R.compose(R.map(add(1)), R.take(2)), add, '', [1, 2, 3, 4]), '23');
+    var _add = function(x, y) { return x + y; };
+    eq(R.transduce(R.map(R.inc), _add, '', [1, 2, 3, 4]), '2345');
+    eq(R.transduce(R.filter(isOdd), _add, '', [1, 2, 3, 4]), '13');
+    eq(R.transduce(R.compose(R.map(add(1)), R.take(2)), _add, '', [1, 2, 3, 4]), '23');
   });
 
   it('transduces into objects', function() {

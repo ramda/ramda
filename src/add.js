@@ -1,4 +1,6 @@
 var _curry2 = require('./internal/_curry2');
+var _isNumber = require('./internal/_isNumber');
+var toString = require('./toString');
 
 
 /**
@@ -18,4 +20,14 @@ var _curry2 = require('./internal/_curry2');
  *      R.add(2, 3);       //=>  5
  *      R.add(7)(10);      //=> 17
  */
-module.exports = _curry2(function add(a, b) { return a + b; });
+module.exports = _curry2(function add(a, b) {
+  if (!_isNumber(a)) {
+    throw new TypeError('‘add’ expected a value of type Number ' +
+                        'as its first argument; received ' + toString(a));
+  }
+  if (!_isNumber(b)) {
+    throw new TypeError('‘add’ expected a value of type Number ' +
+                        'as its second argument; received ' + toString(b));
+  }
+  return a + b;
+});
