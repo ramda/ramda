@@ -1,5 +1,3 @@
-var assert = require('assert');
-
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -9,23 +7,13 @@ describe('subtract', function() {
     eq(R.subtract(22, 7), 15);
   });
 
-  it('type checks its arguments', function() {
-    assert.throws(
-      function() { R.subtract('1', '2'); },
-      function(err) {
-        return err.constructor === TypeError &&
-               err.message === '‘subtract’ expected a value of type Number ' +
-                               'as its first argument; received "1"';
-      }
-    );
-    assert.throws(
-      function() { R.subtract(1, '2'); },
-      function(err) {
-        return err.constructor === TypeError &&
-               err.message === '‘subtract’ expected a value of type Number ' +
-                               'as its second argument; received "2"';
-      }
-    );
+  it('coerces its arguments to numbers', function() {
+    eq(R.subtract('1', '2'), -1);
+    eq(R.subtract(1, '2'), -1);
+    eq(R.subtract(true, false), 1);
+    eq(R.subtract(null, null), 0);
+    eq(R.subtract(undefined, undefined), NaN);
+    eq(R.subtract(new Date(1), new Date(2)), -1);
   });
 
   it('is curried', function() {
