@@ -1,7 +1,9 @@
 var _curry2 = require('./internal/_curry2');
 var _map = require('./internal/_map');
 var curryN = require('./curryN');
+var max = require('./max');
 var pluck = require('./pluck');
+var reduce = require('./reduce');
 
 
 /**
@@ -33,8 +35,7 @@ var pluck = require('./pluck');
  *      R.converge(add3, [multiply, add, subtract])(1, 2); //=> 4
  */
 module.exports = _curry2(function converge(after, fns) {
-  var arity = fns.length ? Math.max.apply(Math, pluck('length', fns)) : 0;
-  return curryN(arity, function() {
+  return curryN(reduce(max, 0, pluck('length', fns)), function() {
     var args = arguments;
     var context = this;
     return after.apply(context, _map(function(fn) {
