@@ -33,7 +33,8 @@ var pluck = require('./pluck');
  *      R.converge(add3, [multiply, add, subtract])(1, 2); //=> 4
  */
 module.exports = _curry2(function converge(after, fns) {
-  return curryN(Math.max.apply(Math, pluck('length', fns)), function() {
+  var arity = fns.length ? Math.max.apply(Math, pluck('length', fns)) : 0;
+  return curryN(arity, function() {
     var args = arguments;
     var context = this;
     return after.apply(context, _map(function(fn) {

@@ -38,4 +38,13 @@ describe('juxt', function() {
     eq(R.juxt([R.add, R.multiply])(2, 3), [5, 6]);
   });
 
+  it('retains the highest arity', function() {
+    var f = R.juxt([R.nAry(1, R.T), R.nAry(3, R.T), R.nAry(2, R.T)]);
+    eq(f.length, 3);
+  });
+
+  it('returns a curried function', function() {
+    eq(R.juxt([R.multiply, R.add])(2)(3), [6, 5]);
+  });
+
 });
