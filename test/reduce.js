@@ -10,6 +10,10 @@ describe('reduce', function() {
     eq(R.reduce(mult, 1, [1, 2, 3, 4]), 24);
   });
 
+  it('folds over simple objects', function() {
+    eq(R.reduce(add, 0, {a: 1, b: 2, c: 3}), 6);
+  });
+
   it('dispatches to objects that implement `reduce`', function() {
     var obj = {x: [1, 2, 3], reduce: function() { return 'override'; }};
     eq(R.reduce(add, 0, obj), 'override');
