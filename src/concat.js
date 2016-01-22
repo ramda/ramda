@@ -5,7 +5,7 @@ var invoker = require('./invoker');
 /**
  * Returns the result of concatenating the given lists or strings.
  *
- * Dispatches to the `concat` method of the second argument, if present.
+ * Dispatches to the `concat` method of the first argument, if present.
  *
  * @func
  * @memberOf R
