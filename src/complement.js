@@ -17,7 +17,7 @@ var not = require('./not');
  * @memberOf R
  * @since v0.12.0
  * @category Logic
- * @sig (*... -> *) -> (*... -> Boolean)
+ * @sig (Any... -> Any) -> (Any... -> Boolean)
  * @param {Function} f
  * @return {Function}
  * @see R.not

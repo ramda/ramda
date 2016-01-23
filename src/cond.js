@@ -17,7 +17,7 @@ var reduce = require('./reduce');
  * @memberOf R
  * @since v0.6.0
  * @category Logic
- * @sig [[(*... -> Boolean),(*... -> *)]] -> (*... -> *)
+ * @sig [[(Any... -> Boolean),(Any... -> Any)]] -> (Any... -> Any)
  * @param {Array} pairs
  * @return {Function}
  * @example

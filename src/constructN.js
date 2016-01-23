@@ -12,7 +12,7 @@ var nAry = require('./nAry');
  * @memberOf R
  * @since v0.4.0
  * @category Function
- * @sig Number -> (* -> {*}) -> (* -> {*})
+ * @sig Number -> (Any -> {Any}) -> (Any -> {Any})
  * @param {Number} n The arity of the constructor function.
  * @param {Function} Fn The constructor function to wrap.
  * @return {Function} A wrapped, curried constructor function.

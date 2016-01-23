@@ -9,8 +9,8 @@ var _curry1 = require('./internal/_curry1');
  * @memberOf R
  * @since v0.1.0
  * @category Logic
- * @sig * -> Boolean
- * @param {*} a any value
+ * @sig Any -> Boolean
+ * @param {Any} a any value
  * @return {Boolean} the logical inverse of passed argument.
  * @see R.complement
  * @example

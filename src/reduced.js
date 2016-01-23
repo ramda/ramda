@@ -13,9 +13,9 @@ var _reduced = require('./internal/_reduced');
  * @memberOf R
  * @since v0.15.0
  * @category List
- * @sig a -> *
- * @param {*} x The final value of the reduce.
- * @return {*} The wrapped value.
+ * @sig a -> Any
+ * @param {Any} x The final value of the reduce.
+ * @return {Any} The wrapped value.
  * @see R.reduce, R.transduce
  * @example
  *

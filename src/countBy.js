@@ -12,7 +12,7 @@ var _has = require('./internal/_has');
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig (a -> String) -> [a] -> {*}
+ * @sig (a -> String) -> [a] -> {Any}
  * @param {Function} fn The function used to map values to keys.
  * @param {Array} list The list to count elements from.
  * @return {Object} An object mapping keys to number of occurrences in the list.

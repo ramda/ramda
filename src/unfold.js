@@ -13,12 +13,12 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.10.0
  * @category List
- * @sig (a -> [b]) -> * -> [b]
+ * @sig (a -> [b]) -> Any -> [b]
  * @param {Function} fn The iterator function. receives one argument, `seed`, and returns
  *        either false to quit iteration or an array of length two to proceed. The element
  *        at index 0 of this array will be added to the resulting array, and the element
  *        at index 1 will be passed to the next call to `fn`.
- * @param {*} seed The seed value.
+ * @param {Any} seed The seed value.
  * @return {Array} The final list.
  * @example
  *

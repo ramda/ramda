@@ -12,9 +12,9 @@ var _curry1 = require('./internal/_curry1');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig a -> (* -> a)
- * @param {*} val The value to wrap in a function
- * @return {Function} A Function :: * -> val.
+ * @sig a -> (Any -> a)
+ * @param {Any} val The value to wrap in a function
+ * @return {Function} A Function :: Any -> val.
  * @example
  *
  *      var t = R.always('Tee');

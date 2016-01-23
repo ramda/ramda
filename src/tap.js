@@ -8,10 +8,10 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig (a -> *) -> a -> a
+ * @sig (a -> Any) -> a -> a
  * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
- * @param {*} x
- * @return {*} `x`.
+ * @param {Any} x
+ * @return {Any} `x`.
  * @example
  *
  *      var sayX = x => console.log('x is ' + x);

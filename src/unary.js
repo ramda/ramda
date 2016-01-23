@@ -11,7 +11,7 @@ var nAry = require('./nAry');
  * @memberOf R
  * @since v0.2.0
  * @category Function
- * @sig (* -> b) -> (a -> b)
+ * @sig (Any -> b) -> (a -> b)
  * @param {Function} fn The function to wrap.
  * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
  *         arity 1.

@@ -10,7 +10,7 @@ var curryN = require('./curryN');
  * @memberOf R
  * @since v0.8.0
  * @category Logic
- * @sig (*... -> Boolean) -> (*... -> *) -> (*... -> *) -> (*... -> *)
+ * @sig (Any... -> Boolean) -> (Any... -> Any) -> (Any... -> Any) -> (Any... -> Any)
  * @param {Function} condition A predicate function
  * @param {Function} onTrue A function to invoke when the `condition` evaluates to a truthy value.
  * @param {Function} onFalse A function to invoke when the `condition` evaluates to a falsy value.

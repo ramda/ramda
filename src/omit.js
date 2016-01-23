@@ -9,7 +9,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.1.0
  * @category Object
- * @sig [String] -> {String: *} -> {String: *}
+ * @sig [String] -> {String: Any} -> {String: Any}
  * @param {Array} names an array of String property names to omit from the new object
  * @param {Object} obj The object to copy from
  * @return {Object} A new object with properties from `names` not on it.

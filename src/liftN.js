@@ -14,7 +14,7 @@ var map = require('./map');
  * @memberOf R
  * @since v0.7.0
  * @category Function
- * @sig Number -> (*... -> *) -> ([*]... -> [*])
+ * @sig Number -> (Any... -> Any) -> ([Any]... -> [Any])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
  * @see R.lift

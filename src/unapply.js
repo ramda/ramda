@@ -17,7 +17,7 @@ var _slice = require('./internal/_slice');
  * @memberOf R
  * @since v0.8.0
  * @category Function
- * @sig ([*...] -> a) -> (*... -> a)
+ * @sig ([Any...] -> a) -> (Any... -> a)
  * @param {Function} fn
  * @return {Function}
  * @see R.apply

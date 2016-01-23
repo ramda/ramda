@@ -22,7 +22,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.1.1
  * @category List
- * @sig (a -> *) -> [a] -> [a]
+ * @sig (a -> Any) -> [a] -> [a]
  * @param {Function} fn The function to invoke. Receives one argument, `value`.
  * @param {Array} list The list to iterate over.
  * @return {Array} The original list.

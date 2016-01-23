@@ -32,7 +32,7 @@ var _curryN = require('./internal/_curryN');
  * @memberOf R
  * @since v0.5.0
  * @category Function
- * @sig Number -> (* -> a) -> (* -> a)
+ * @sig Number -> (Any -> a) -> (Any -> a)
  * @param {Number} length The arity for the returned function.
  * @param {Function} fn The function to curry.
  * @return {Function} A new, curried function.

@@ -10,7 +10,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig Number -> (* -> a) -> (* -> a)
+ * @sig Number -> (Any -> a) -> (Any -> a)
  * @param {Number} n The desired arity of the new function.
  * @param {Function} fn The function to wrap.
  * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of

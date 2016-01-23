@@ -12,7 +12,7 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.6.0
  * @category Function
  * @category Object
- * @sig (* -> *) -> {*} -> (* -> *)
+ * @sig (Any -> Any) -> {Any} -> (Any -> Any)
  * @param {Function} fn The function to bind to context
  * @param {Object} thisObj The context to bind `fn` to
  * @return {Function} A function that will execute in the context of `thisObj`.

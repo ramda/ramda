@@ -13,9 +13,9 @@ var _curry1 = require('./internal/_curry1');
  * @memberOf R
  * @since v0.1.0
  * @category Object
- * @sig {*} -> {*}
- * @param {*} value The object or array to clone
- * @return {*} A new object or array.
+ * @sig {Any} -> {Any}
+ * @param {Any} value The object or array to clone
+ * @return {Any} A new object or array.
  * @example
  *
  *      var objects = [{}, {}, {}];

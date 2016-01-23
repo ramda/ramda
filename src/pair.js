@@ -9,8 +9,8 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.18.0
  * @category List
  * @sig a -> b -> (a,b)
- * @param {*} fst
- * @param {*} snd
+ * @param {Any} fst
+ * @param {Any} snd
  * @return {Array}
  * @see R.objOf, R.of
  * @example

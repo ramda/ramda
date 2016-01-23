@@ -15,7 +15,7 @@ var toString = require('./toString');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig (*... -> a) -> (*... -> a)
+ * @sig (Any... -> a) -> (Any... -> a)
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
  * @example

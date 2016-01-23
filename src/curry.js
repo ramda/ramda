@@ -30,7 +30,7 @@ var curryN = require('./curryN');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig (* -> a) -> (* -> a)
+ * @sig (Any -> a) -> (Any -> a)
  * @param {Function} fn The function to curry.
  * @return {Function} A new, curried function.
  * @see R.curryN

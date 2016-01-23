@@ -12,7 +12,7 @@ var _has = require('./internal/_has');
  * @memberOf R
  * @since v0.4.0
  * @category Object
- * @sig {String: *} -> [[String,*]]
+ * @sig {String: Any} -> [[String,Any]]
  * @param {Object} obj The object to extract from
  * @return {Array} An array of key, value arrays from the object's own properties.
  * @see R.fromPairs

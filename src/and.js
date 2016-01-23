@@ -8,7 +8,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.1.0
  * @category Logic
- * @sig * -> * -> *
+ * @sig Any -> Any -> Any
  * @param {Boolean} a A boolean value
  * @param {Boolean} b A boolean value
  * @return {Boolean} `true` if both arguments are `true`, `false` otherwise

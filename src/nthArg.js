@@ -9,7 +9,7 @@ var nth = require('./nth');
  * @memberOf R
  * @since v0.9.0
  * @category Function
- * @sig Number -> *... -> *
+ * @sig Number -> Any... -> Any
  * @param {Number} n
  * @return {Function}
  * @example

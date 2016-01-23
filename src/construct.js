@@ -10,7 +10,7 @@ var constructN = require('./constructN');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig (* -> {*}) -> (* -> {*})
+ * @sig (Any -> {Any}) -> (Any -> {Any})
  * @param {Function} Fn The constructor function to wrap.
  * @return {Function} A wrapped, curried constructor function.
  * @example

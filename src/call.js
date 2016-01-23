@@ -12,10 +12,10 @@ var curry = require('./curry');
  * @memberOf R
  * @since v0.9.0
  * @category Function
- * @sig (*... -> a),*... -> a
+ * @sig (Any... -> a),Any... -> a
  * @param {Function} fn The function to apply to the remaining arguments.
- * @param {...*} args Any number of positional arguments.
- * @return {*}
+ * @param {...Any} args Any number of positional arguments.
+ * @return {Any}
  * @see R.apply
  * @example
  *

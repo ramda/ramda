@@ -10,10 +10,10 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.7.0
  * @category Function
- * @sig (*... -> a) -> [*] -> a
+ * @sig (Any... -> a) -> [Any] -> a
  * @param {Function} fn
  * @param {Array} args
- * @return {*}
+ * @return {Any}
  * @see R.call, R.unapply
  * @example
  *

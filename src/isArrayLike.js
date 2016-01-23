@@ -11,7 +11,7 @@ var _isArray = require('./internal/_isArray');
  * @category Type
  * @category List
  * @sig * -> Boolean
- * @param {*} x The object to test.
+ * @param {Any} x The object to test.
  * @return {Boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
  * @example
  *

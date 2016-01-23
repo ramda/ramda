@@ -11,9 +11,9 @@ var path = require('./path');
  * @memberOf R
  * @since v0.7.0
  * @category Relation
- * @sig [String] -> * -> {String: *} -> Boolean
+ * @sig [String] -> Any -> {String: Any} -> Boolean
  * @param {Array} path The path of the nested property to use
- * @param {*} val The value to compare the nested property with
+ * @param {Any} val The value to compare the nested property with
  * @param {Object} obj The object to check the nested property in
  * @return {Boolean} `true` if the value equals the nested object property,
  *         `false` otherwise.

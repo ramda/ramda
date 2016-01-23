@@ -8,7 +8,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.3.0
  * @category List
- * @sig [String] -> [*] -> {String: *}
+ * @sig [String] -> [Any] -> {String: Any}
  * @param {Array} keys The array that will be properties on the output object.
  * @param {Array} values The list of values on the output object.
  * @return {Object} The object made by pairing up same-indexed elements of `keys` and `values`.

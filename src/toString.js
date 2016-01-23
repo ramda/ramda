@@ -28,7 +28,7 @@ var _toString = require('./internal/_toString');
  * @since v0.14.0
  * @category String
  * @sig * -> String
- * @param {*} val
+ * @param {Any} val
  * @return {String}
  * @example
  *

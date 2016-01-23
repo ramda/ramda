@@ -10,7 +10,7 @@ var liftN = require('./liftN');
  * @memberOf R
  * @since v0.7.0
  * @category Function
- * @sig (*... -> *) -> ([*]... -> [*])
+ * @sig (Any... -> Any) -> ([Any]... -> [Any])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
  * @see R.liftN

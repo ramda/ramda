@@ -16,7 +16,7 @@ var toString = require('./toString');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig Number -> String -> (a -> b -> ... -> n -> Object -> *)
+ * @sig Number -> String -> (a -> b -> ... -> n -> Object -> Any)
  * @param {Number} arity Number of arguments the returned function should take
  *        before the target object.
  * @param {String} method Name of the method to call.

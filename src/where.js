@@ -16,7 +16,7 @@ var _has = require('./internal/_has');
  * @memberOf R
  * @since v0.1.1
  * @category Object
- * @sig {String: (* -> Boolean)} -> {String: *} -> Boolean
+ * @sig {String: (Any -> Boolean)} -> {String: Any} -> Boolean
  * @param {Object} spec
  * @param {Object} testObj
  * @return {Boolean}

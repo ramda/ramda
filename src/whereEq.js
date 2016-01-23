@@ -16,7 +16,7 @@ var where = require('./where');
  * @memberOf R
  * @since v0.14.0
  * @category Object
- * @sig {String: *} -> {String: *} -> Boolean
+ * @sig {String: Any} -> {String: Any} -> Boolean
  * @param {Object} spec
  * @param {Object} testObj
  * @return {Boolean}

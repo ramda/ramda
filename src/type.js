@@ -11,8 +11,8 @@ var _curry1 = require('./internal/_curry1');
  * @memberOf R
  * @since v0.8.0
  * @category Type
- * @sig (* -> {*}) -> String
- * @param {*} val The value to test
+ * @sig (Any -> {Any}) -> String
+ * @param {Any} val The value to test
  * @return {String}
  * @example
  *
