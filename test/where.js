@@ -16,6 +16,18 @@ describe('where', function() {
     eq(R.where(spec, test4), true);
   });
 
+  it('evaluates the spec recursively', function() {
+    var spec = {nested: {x: R.equals(1)}, y: R.equals(2)};
+    var test1 = {nested: {x: 0}, y: 200};
+    var test2 = {nested: {x: 0}, y: 10};
+    var test3 = {nested: {x: 1}, y: 101};
+    var test4 = {nested: {x: 1}, y: 2};
+    eq(R.where(spec, test1), false);
+    eq(R.where(spec, test2), false);
+    eq(R.where(spec, test3), false);
+    eq(R.where(spec, test4), true);
+  });
+
   it('does not need the spec and the test object to have the same interface (the test object will have a superset of the specs properties)', function() {
     var spec = {x: R.equals(100)};
     var test1 = {x: 20, y: 100, z: 100};
