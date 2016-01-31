@@ -3,7 +3,7 @@ var liftN = require('./liftN');
 
 
 /**
- * "lifts" a function of arity > 1 so that it may "map over" an Array or other
+ * "lifts" a function of arity > 1 so that it may "map over" a list, Function or other
  * object that satisfies the [FantasyLand Apply spec](https://github.com/fantasyland/fantasy-land#apply).
  *
  * @func
@@ -13,7 +13,7 @@ var liftN = require('./liftN');
  * @sig (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
- * @see R.liftN
+ * @see R.liftN, R.lift
  * @example
  *
  *      var madd3 = R.lift(R.curry((a, b, c) => a + b + c));
