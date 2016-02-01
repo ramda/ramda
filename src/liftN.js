@@ -8,7 +8,7 @@ var map = require('./map');
 
 /**
  * "lifts" a function to be the specified arity, so that it may "map over" that
- * many lists (or other objects that satisfies the [FantasyLand Apply spec](https://github.com/fantasyland/fantasy-land#apply)).
+ * many lists, Functions or other objects that satisfy the [FantasyLand Apply spec](https://github.com/fantasyland/fantasy-land#apply).
  *
  * @func
  * @memberOf R
@@ -17,7 +17,7 @@ var map = require('./map');
  * @sig Number -> (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
- * @see R.lift
+ * @see R.lift, R.ap
  * @example
  *
  *      var madd3 = R.liftN(3, R.curryN(3, (...args) => R.sum(args)));
