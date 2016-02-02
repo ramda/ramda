@@ -19,6 +19,7 @@ describe('flatten', function() {
   });
 
   it('handles ridiculously large inputs', function() {
+    this.timeout(10000);
     eq(R.flatten([new Array(1000000), R.range(0, 56000), 5, 1, 3]).length, 1056003);
   });
 
