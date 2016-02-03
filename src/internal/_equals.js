@@ -1,4 +1,5 @@
 var _arrayFromIterator = require('./_arrayFromIterator');
+var _functionName = require('./_functionName');
 var _has = require('./_has');
 var identical = require('../identical');
 var keys = require('../keys');
@@ -27,6 +28,10 @@ module.exports = function _equals(a, b, stackA, stackB) {
     case 'Arguments':
     case 'Array':
     case 'Object':
+      if (typeof a.constructor === 'function' &&
+          _functionName(a.constructor) === 'Promise') {
+        return a === b;
+      }
       break;
     case 'Boolean':
     case 'Number':
