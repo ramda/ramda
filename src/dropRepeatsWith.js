@@ -24,7 +24,6 @@ var last = require('./last');
  * @see R.transduce
  * @example
  *
- *      var lengthEq = (x, y) => Math.abs(x) === Math.abs(y);
  *      var l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
  *      R.dropRepeatsWith(R.eqBy(Math.abs), l); //=> [1, 3, 4, -5, 3]
  */
