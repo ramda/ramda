@@ -1,4 +1,4 @@
-var _contains = require('./internal/_contains');
+var _Set = require('./internal/_Set');
 var _curry2 = require('./internal/_curry2');
 
 
@@ -20,76 +20,19 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.uniqBy(Math.abs, [-1, -5, 2, 10, 1, 2]); //=> [-1, -5, 2, 10]
  */
-module.exports = _curry2(/* globals Set */ typeof Set === 'undefined' ?
-  function uniqBy(fn, list) {
-    var idx = 0;
-    var applied = [];
-    var result = [];
-    var appliedItem, item;
-    while (idx < list.length) {
-      item = list[idx];
-      appliedItem = fn(item);
-      if (!_contains(appliedItem, applied)) {
-        result.push(item);
-        applied.push(appliedItem);
-      }
-      idx += 1;
-    }
-    return result;
-  } :
-  function uniqBySet(fn, list) {
-    var set           = new Set();
-    var applied       = [];
-    var prevSetSize   = 0;
-    var result        = [];
-    var nullExists    = false;
-    var negZeroExists = false;
-    var idx           = 0;
-    var appliedItem, item, newSetSize;
+module.exports = _curry2(function uniqBy(fn, list) {
+  var set = new _Set();
+  var result = [];
+  var idx = 0;
+  var appliedItem, item;
 
-    while (idx < list.length) {
-      item = list[idx];
-      appliedItem = fn(item);
-      switch (typeof appliedItem) {
-        case 'number':
-          // distinguishing between +0 and -0 is not supported by Set
-          if (appliedItem === 0 && !negZeroExists && 1 / appliedItem === -Infinity) {
-            negZeroExists = true;
-            result.push(item);
-            break;
-          }
-        /* falls through */
-        case 'string':
-        case 'boolean':
-        case 'function':
-        case 'undefined':
-          // these types can all utilise Set
-          set.add(appliedItem);
-          newSetSize = set.size;
-          if (newSetSize > prevSetSize) {
-            result.push(item);
-            prevSetSize = newSetSize;
-          }
-          break;
-        case 'object':
-          if (appliedItem === null) {
-            if (!nullExists) {
-              // prevent scan for null by tracking as a boolean
-              nullExists = true;
-              result.push(null);
-            }
-            break;
-          }
-        /* falls through */
-        default:
-          // scan through all previously applied items
-          if (!_contains(appliedItem, applied)) {
-            applied.push(appliedItem);
-            result.push(item);
-          }
-      }
-      idx += 1;
+  while (idx < list.length) {
+    item = list[idx];
+    appliedItem = fn(item);
+    if (set.add(appliedItem)) {
+      result.push(item);
     }
-    return result;
+    idx += 1;
   }
-);
+  return result;
+});
