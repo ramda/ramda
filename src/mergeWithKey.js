@@ -31,7 +31,7 @@ var _has = require('./internal/_has');
 module.exports = _curry3(function mergeWithKey(fn, l, r) {
   var result = {};
   var k;
-  var right = r || {}
+  var right = r || {};
 
   for (k in l) {
     if (_has(k, l)) {
