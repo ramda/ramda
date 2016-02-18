@@ -22,6 +22,7 @@ var reduce = require('./reduce');
  *        `fn1` and `fn2` as its arguments.
  * @param {Array} functions A list of functions.
  * @return {Function} A new function.
+ * @deprecated since v0.20.0
  * @example
  *
  *      var add = (a, b) => a + b;
