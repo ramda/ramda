@@ -31,16 +31,17 @@ var _has = require('./internal/_has');
 module.exports = _curry3(function mergeWithKey(fn, l, r) {
   var result = {};
   var k;
+  var right = r || {}
 
   for (k in l) {
     if (_has(k, l)) {
-      result[k] = _has(k, r) ? fn(k, l[k], r[k]) : l[k];
+      result[k] = _has(k, right) ? fn(k, l[k], right[k]) : l[k];
     }
   }
 
-  for (k in r) {
-    if (_has(k, r) && !(_has(k, result))) {
-      result[k] = r[k];
+  for (k in right) {
+    if (_has(k, right) && !(_has(k, result))) {
+      result[k] = right[k];
     }
   }
 

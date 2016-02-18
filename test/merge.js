@@ -17,6 +17,12 @@ describe('merge', function() {
     eq(R.merge(a, b), {w: 100, x: 2, y: 3, z: 4});
   });
 
+  it('is identity if the second is undefined', function() {
+    var a = {w: 1, x: 2};
+    var b = undefined;
+    eq(R.merge(a, b), a);
+  });
+
   it('is not destructive', function() {
     var a = {w: 1, x: 2};
     var res = R.merge(a, {x: 5});
