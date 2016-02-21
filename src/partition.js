@@ -1,30 +1,29 @@
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
+var filter = require('./filter');
+var juxt = require('./juxt');
+var reject = require('./reject');
 
 
 /**
- * Takes a predicate and a list and returns the pair of lists of elements which
- * do and do not satisfy the predicate, respectively.
+ * Takes a predicate and a list or other "filterable" object and returns the
+ * pair of filterable objects of the same type of elements which do and do not
+ * satisfy, the predicate, respectively.
  *
  * @func
  * @memberOf R
  * @since v0.1.4
  * @category List
- * @sig (a -> Boolean) -> [a] -> [[a],[a]]
- * @param {Function} pred A predicate to determine which array the element belongs to.
- * @param {Array} list The array to partition.
- * @return {Array} A nested array, containing first an array of elements that satisfied the predicate,
- *         and second an array of elements that did not satisfy.
+ * @sig Filterable f => (a -> Boolean) -> f a -> [f a, f a]
+ * @param {Function} pred A predicate to determine which side the element belongs to.
+ * @param {Array} filterable the list (or other filterable) to partition.
+ * @return {Array} An array, containing first the subset of elements that satisfy the
+ *         predicate, and second the subset of elements that do not satisfy.
  * @see R.filter, R.reject
  * @example
  *
  *      R.partition(R.contains('s'), ['sss', 'ttt', 'foo', 'bars']);
- *      //=> [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
+ *      // => [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
+ *
+ *      R.partition(R.contains('s'), { a: 'sss', b: 'ttt', foo: 'bars' });
+ *      // => [ { a: 'sss', foo: 'bars' }, { b: 'ttt' }  ]
  */
-module.exports = _curry2(function partition(pred, list) {
-  return _reduce(function(acc, elt) {
-    var xs = acc[pred(elt) ? 0 : 1];
-    xs[xs.length] = elt;
-    return acc;
-  }, [[], []], list);
-});
+module.exports = juxt([filter, reject]);
