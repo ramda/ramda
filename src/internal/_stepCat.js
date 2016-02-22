@@ -1,15 +1,17 @@
-var _concat = require('./_concat');
 var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');
+var _objectAssign = require('./_objectAssign');
 var isArrayLike = require('../isArrayLike');
-var merge = require('../merge');
 var objOf = require('../objOf');
 
 
 module.exports = (function() {
   var _stepCatArray = {
     '@@transducer/init': Array,
-    '@@transducer/step': function(xs, x) { return _concat(xs, [x]); },
+    '@@transducer/step': function(xs, x) {
+      xs.push(x);
+      return xs;
+    },
     '@@transducer/result': _identity
   };
   var _stepCatString = {
@@ -20,7 +22,7 @@ module.exports = (function() {
   var _stepCatObject = {
     '@@transducer/init': Object,
     '@@transducer/step': function(result, input) {
-      return merge(
+      return _objectAssign(
         result,
         isArrayLike(input) ? objOf(input[0], input[1]) : input
       );
