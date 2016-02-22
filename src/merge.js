@@ -1,4 +1,5 @@
-var mergeWith = require('./mergeWith');
+var _curry2 = require('./internal/_curry2');
+var _objectAssign = require('./internal/_objectAssign');
 
 
 /**
@@ -23,6 +24,6 @@ var mergeWith = require('./mergeWith');
  *      var resetToDefault = R.merge(R.__, {x: 0});
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
-module.exports = mergeWith(function(l, r) {
-  return r;
+module.exports = _curry2(function merge(l, r) {
+  return _objectAssign({}, l, r);
 });
