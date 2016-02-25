@@ -23,11 +23,11 @@ var sequence = require('./sequence');
  * @see R.sequence
  * @example
  *
- *      R.traverse(Maybe.of, R.negate, [Just(1), Just(2), Just(3)]);   //=> Just([-1, -2, -3])
- *      R.traverse(Maybe.of, R.negate, [Just(1), Just(2), Nothing()]); //=> Nothing()
+ *      // Returns `Nothing` if the given divisor is `0`
+ *      safeDiv = n => d => d === 0 ? Nothing() : Just(n / d)
  *
- *      R.traverse(R.of, R.negate, Just([1, 2, 3])); //=> [Just(-1), Just(-2), Just(-3)]
- *      R.traverse(R.of, R.negate, Nothing());       //=> [Nothing()]
+ *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Just([5, 2.5, 2])
+ *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Nothing
  */
 module.exports = _curry3(function traverse(of, f, traversable) {
   return sequence(of, map(f, traversable));
