@@ -3,6 +3,8 @@ var _curry2 = require('./internal/_curry2');
 
 /**
  * Creates a new object out of a list of keys and a list of values.
+ * Key/value pairing is truncated to the length of the shorter of the two lists.
+ * Note: `zipObj` is equivalent to `pipe(zipWith(pair), fromPairs)`.
  *
  * @func
  * @memberOf R
@@ -18,7 +20,7 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function zipObj(keys, values) {
   var idx = 0;
-  var len = keys.length;
+  var len = Math.min(keys.length, values.length);
   var out = {};
   while (idx < len) {
     out[keys[idx]] = values[idx];

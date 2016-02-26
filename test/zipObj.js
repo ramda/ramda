@@ -11,9 +11,8 @@ describe('zipObj', function() {
     eq(R.zipObj(['a', 'b', 'c'], [1, 2, 3, 4, 5, 6, 7]), {a: 1, b: 2, c: 3});
   });
 
-  it('extra keys are undefined', function() {
-    eq(R.zipObj(['a', 'b', 'c', 'd', 'e', 'f'], [1, 2, 3]),
-       {a: 1, b: 2, c: 3, d: undefined, e: undefined, f: undefined});
+  it('ignores extra keys', function() {
+    eq(R.zipObj(['a', 'b', 'c', 'd', 'e', 'f'], [1, 2, 3]), {a: 1, b: 2, c: 3});
   });
 
   it('last one in wins when there are duplicate keys', function() {
