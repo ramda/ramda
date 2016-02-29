@@ -1,4 +1,5 @@
 var assert = require('assert');
+var jsc = require('jsverify');
 
 var R = require('..');
 var eq = require('./shared/eq');
@@ -48,6 +49,18 @@ describe('concat', function() {
 
   it('throws if not an array, String, or object with a concat method', function() {
     assert.throws(function() { return R.concat({}, {}); }, TypeError);
+  });
+
+  describe('properties', function() {
+    var xs = jsc.oneof([jsc.number, jsc.bool, jsc.string, jsc.datetime, jsc.falsy, jsc.json]);
+
+    jsc.property('reflexive', jsc.array(xs), jsc.array(xs), jsc.array(xs), function(a, b, c) {
+      return R.equals(R.concat(R.concat(a, b), c), R.concat(a, R.concat(b, c)));
+    });
+    jsc.property('identity element', jsc.array(xs), function(a) {
+      return R.equals(R.concat(a, []), R.concat([], a));
+    });
+
   });
 
 });

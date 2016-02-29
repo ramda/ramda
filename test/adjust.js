@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var jsc = require('jsverify');
 
 describe('adjust', function() {
   it('applies the given function to the value at the given index of the supplied array', function() {
@@ -31,6 +32,20 @@ describe('adjust', function() {
       return arguments;
     }
     eq(R.adjust(R.add(1), 2, args(0, 1, 2, 3)), [0, 1, 3, 3]);
+  });
+
+  describe('properties', function() {
+    var types = [jsc.number, jsc.bool, jsc.string, jsc.datetime, jsc.falsy, jsc.json];
+    var input = jsc.suchthat(jsc.nearray(jsc.oneof(types)),
+                             jsc.oneof(types),
+                             jsc.nat, function(xs, x, i) {
+                               return i < xs.length;
+                             });
+
+    jsc.property('idempotent', input, function(xs, x, i) {
+      return R.equals(R.adjust(R.always(x), i, xs),
+                      R.adjust(R.always(x), i, R.adjust(R.always(x), i, xs)))
+    });
   });
 
 });
