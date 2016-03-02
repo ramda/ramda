@@ -1,6 +1,8 @@
 var _arity = require('./_arity');
+var _complement = require('./_complement');
+var _equals = require('./_equals');
+var _filter = require('./_filter');
 var _isPlaceholder = require('./_isPlaceholder');
-
 
 /**
  * Internal curryN function.
@@ -13,7 +15,8 @@ var _isPlaceholder = require('./_isPlaceholder');
  * @return {Function} The curried function.
  */
 module.exports = function _curryN(length, received, fn) {
-  return function() {
+  var arity = length - _filter(_complement(_isPlaceholder), received).length;
+  var _fn = _arity(arity, function() {
     var combined = [];
     var argsIdx = 0;
     var left = length;
@@ -35,6 +38,17 @@ module.exports = function _curryN(length, received, fn) {
       combinedIdx += 1;
     }
     return left <= 0 ? fn.apply(this, combined)
-                     : _arity(left, _curryN(length, combined, fn));
+                     : _curryN(length, combined, fn);
+  });
+  // keep track of the original function and the combined args
+  _fn.curried = true
+  _fn.fn = fn.curried ? fn.fn : fn
+  _fn.args = received;
+  // compare the original function with the combined args
+  _fn.equals = function(fn2) {
+    return fn2.curried &&
+           _equals(fn2.fn, _fn.fn, [], []) &&
+           _equals(fn2.args, _fn.args, [], []);
   };
+  return _fn
 };

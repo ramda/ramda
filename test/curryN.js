@@ -105,4 +105,19 @@ describe('curryN', function() {
     eq(g(1)(2)(3, 4), [1, 2, 3, 4]);
   });
 
+  it('equals another curried function', function() {
+    var f = function() { return Array.prototype.slice.call(arguments); };
+    var g = R.curryN(3, f);
+
+    eq(true, R.equals(g(1), g(1)));
+    eq(true, R.equals(g(1, 2), g(1, 2)));
+    eq(true, R.equals(g(), g()));
+
+    eq(false, R.equals(g(1), g(2)));
+    eq(false, R.equals(g(1, 2), g(2)));
+    eq(false, R.equals(g(1, 2), g(2, 1)));
+
+    eq(true, R.equals(g(g(1,2)), g(g(1,2))));
+    eq(false, R.equals(g(g(1,2)), g(g(2,1))));
+  });
 });
