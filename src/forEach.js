@@ -23,7 +23,7 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.1.1
  * @category List
  * @sig (a -> *) -> [a] -> [a]
- * @param {Function} fn The function to invoke. Receives one argument, `value`.
+ * @param {Function} fn The function to invoke. Receives two arguments, `value` and `index`.
  * @param {Array} list The list to iterate over.
  * @return {Array} The original list.
  * @see R.addIndex
@@ -39,7 +39,7 @@ module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
   var len = list.length;
   var idx = 0;
   while (idx < len) {
-    fn(list[idx]);
+    fn(list[idx], idx);
     idx += 1;
   }
   return list;
