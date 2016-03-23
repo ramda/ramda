@@ -51,4 +51,5 @@ describe('invert', function() {
       /* jshint +W001 */
     });
   });
+
 });

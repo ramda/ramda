@@ -41,4 +41,14 @@ describe('cond', function() {
     ]);
     eq(fn(21, 42, 84), 3);
   });
+
+  it('retains highest predicate arity', function() {
+    var fn = R.cond([
+      [R.nAry(2, R.T), R.T],
+      [R.nAry(3, R.T), R.T],
+      [R.nAry(1, R.T), R.T]
+    ]);
+    eq(fn.length, 3);
+  });
+
 });

@@ -220,6 +220,15 @@ describe('equals', function() {
     });
   }
 
+  if (typeof Promise !== 'undefined') {
+    it('compares Promise objects by identity', function() {
+      var p = Promise.resolve(42);
+      var q = Promise.resolve(42);
+      eq(R.equals(p, p), true);
+      eq(R.equals(p, q), false);
+    });
+  }
+
   if (typeof Map !== 'undefined') {
     it('compares Map objects by value', function() {
       eq(R.equals(new Map([]), new Map([])), true);
@@ -316,4 +325,5 @@ describe('equals', function() {
     var isA = R.equals(a);
     eq(isA([]), true);
   });
+
 });

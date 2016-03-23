@@ -5,21 +5,20 @@ var uniqWith = require('./uniqWith');
 
 /**
  * Combines two lists into a set (i.e. no duplicates) composed of those
- * elements common to both lists.  Duplication is determined according
- * to the value returned by applying the supplied predicate to two list
- * elements.
+ * elements common to both lists. Duplication is determined according to the
+ * value returned by applying the supplied predicate to two list elements.
  *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category Relation
- * @sig (a,a -> Boolean) -> [a] -> [a] -> [a]
+ * @sig (a -> a -> Boolean) -> [*] -> [*] -> [*]
  * @param {Function} pred A predicate function that determines whether
  *        the two supplied elements are equal.
  * @param {Array} list1 One list of items to compare
  * @param {Array} list2 A second list of items to compare
- * @see R.intersection
  * @return {Array} A new list containing those elements common to both lists.
+ * @see R.intersection
  * @example
  *
  *      var buffaloSpringfield = [
@@ -40,10 +39,19 @@ var uniqWith = require('./uniqWith');
  *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
 module.exports = _curry3(function intersectionWith(pred, list1, list2) {
-  var results = [], idx = 0;
-  while (idx < list1.length) {
-    if (_containsWith(pred, list1[idx], list2)) {
-      results[results.length] = list1[idx];
+  var lookupList, filteredList;
+  if (list1.length > list2.length) {
+    lookupList = list1;
+    filteredList = list2;
+  } else {
+    lookupList = list2;
+    filteredList = list1;
+  }
+  var results = [];
+  var idx = 0;
+  while (idx < filteredList.length) {
+    if (_containsWith(pred, filteredList[idx], lookupList)) {
+      results[results.length] = filteredList[idx];
     }
     idx += 1;
   }

@@ -25,4 +25,5 @@ describe('hasIn', function() {
     eq(R.hasIn('name', fred), true);
     eq(R.hasIn('name', anon), false);
   });
+
 });

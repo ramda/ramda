@@ -1,13 +1,17 @@
+var _arity = require('./internal/_arity');
 var _curry1 = require('./internal/_curry1');
+var map = require('./map');
+var max = require('./max');
+var reduce = require('./reduce');
 
 
 /**
  * Returns a function, `fn`, which encapsulates if/else-if/else logic.
- * `R.cond` takes a list of [predicate, transform] pairs. All of the
- * arguments to `fn` are applied to each of the predicates in turn
- * until one returns a "truthy" value, at which point `fn` returns the
- * result of applying its arguments to the corresponding transformer.
- * If none of the predicates matches, `fn` returns undefined.
+ * `R.cond` takes a list of [predicate, transform] pairs. All of the arguments
+ * to `fn` are applied to each of the predicates in turn until one returns a
+ * "truthy" value, at which point `fn` returns the result of applying its
+ * arguments to the corresponding transformer. If none of the predicates
+ * matches, `fn` returns undefined.
  *
  * @func
  * @memberOf R
@@ -28,7 +32,10 @@ var _curry1 = require('./internal/_curry1');
  *      fn(100); //=> 'water boils at 100°C'
  */
 module.exports = _curry1(function cond(pairs) {
-  return function() {
+  var arity = reduce(max,
+                     0,
+                     map(function(pair) { return pair[0].length; }, pairs));
+  return _arity(arity, function() {
     var idx = 0;
     while (idx < pairs.length) {
       if (pairs[idx][0].apply(this, arguments)) {
@@ -36,5 +43,5 @@ module.exports = _curry1(function cond(pairs) {
       }
       idx += 1;
     }
-  };
+  });
 });

@@ -34,7 +34,6 @@ describe('type', function() {
   });
 
   it('"String" if given a String object', function() {
-    /*jshint -W053 */
     eq(R.type(new String('I am a String object')), 'String');
   });
 
@@ -45,4 +44,5 @@ describe('type', function() {
   it('"Undefined" if given the undefined value', function() {
     eq(R.type(undefined), 'Undefined');
   });
+
 });

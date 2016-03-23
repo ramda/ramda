@@ -45,7 +45,6 @@ describe('where', function() {
 
   it('is true for an empty spec', function() {
     eq(R.where({}, {a: 1}), true);
-    eq(R.where(null, {a: 1}), true);
   });
 
   it('matches inherited properties', function() {

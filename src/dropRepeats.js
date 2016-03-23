@@ -6,13 +6,12 @@ var equals = require('./equals');
 
 
 /**
- * Returns a new list without any consecutively repeating elements.
- * `R.equals` is used to determine equality.
+ * Returns a new list without any consecutively repeating elements. `R.equals`
+ * is used to determine equality.
  *
  * Dispatches to the `dropRepeats` method of the first argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -21,6 +20,7 @@ var equals = require('./equals');
  * @sig [a] -> [a]
  * @param {Array} list The array to consider.
  * @return {Array} `list` without repeating elements.
+ * @see R.transduce
  * @example
  *
  *     R.dropRepeats([1, 1, 1, 2, 3, 4, 4, 2, 2]); //=> [1, 2, 3, 4, 2]

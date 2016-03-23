@@ -1,3 +1,5 @@
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -25,7 +27,7 @@ describe('both', function() {
     var F = function() { return false; };
     var Z = function() { effect = 'Z got evaluated'; };
     var effect = 'not evaluated';
-    R.both(F, Z);
+    R.both(F, Z)();
     eq(effect, 'not evaluated');
   });
 
@@ -37,4 +39,15 @@ describe('both', function() {
     eq(evenAnd(gt10)(11), false);
     eq(evenAnd(gt10)(12), true);
   });
+
+  it('accepts fantasy-land applicative functors', function() {
+    var Just = S.Just;
+    var Nothing = S.Nothing;
+    eq(R.both(Just(true), Just(true)), Just(true));
+    eq(R.both(Just(true), Just(false)), Just(false));
+    eq(R.both(Just(true), Nothing()), Nothing());
+    eq(R.both(Nothing(), Just(false)), Nothing());
+    eq(R.both(Nothing(), Nothing()), Nothing());
+  });
+
 });

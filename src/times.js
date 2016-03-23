@@ -2,17 +2,17 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Calls an input function `n` times, returning an array containing the results of those
- * function calls.
+ * Calls an input function `n` times, returning an array containing the results
+ * of those function calls.
  *
- * `fn` is passed one argument: The current value of `n`, which begins at `0` and is
- * gradually incremented to `n - 1`.
+ * `fn` is passed one argument: The current value of `n`, which begins at `0`
+ * and is gradually incremented to `n - 1`.
  *
  * @func
  * @memberOf R
  * @since v0.2.3
  * @category List
- * @sig (i -> a) -> i -> [a]
+ * @sig (Number -> a) -> Number -> [a]
  * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
  * @param {Number} n A value between `0` and `n - 1`. Increments after each function call.
  * @return {Array} An array containing the return values of all calls to `fn`.
@@ -22,8 +22,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function times(fn, n) {
   var len = Number(n);
-  var list = new Array(len);
   var idx = 0;
+  var list;
+
+  if (len < 0 || isNaN(len)) {
+    throw new RangeError('n must be a non-negative number');
+  }
+  list = new Array(len);
   while (idx < len) {
     list[idx] = fn(idx);
     idx += 1;

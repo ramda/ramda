@@ -8,4 +8,5 @@ describe('F', function() {
     eq(R.F(10), false);
     eq(R.F(true), false);
   });
+
 });

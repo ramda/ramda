@@ -20,4 +20,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
-})();
+}());

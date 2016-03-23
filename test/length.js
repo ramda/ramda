@@ -19,8 +19,8 @@ describe('length', function() {
   });
 
   it('returns the length of an arguments object', function() {
-    eq(R.length((function() { return arguments; }())), 0);
-    eq(R.length((function() { return arguments; }('x', 'y', 'z'))), 3);
+    eq(R.length((function() { return arguments; })()), 0);
+    eq(R.length((function() { return arguments; })('x', 'y', 'z')), 3);
   });
 
   it('returns NaN for value of unexpected type', function() {
@@ -37,4 +37,5 @@ describe('length', function() {
     eq(R.identical(NaN, R.length({length: undefined})), true);
     eq(R.identical(NaN, R.length({})), true);
   });
+
 });

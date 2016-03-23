@@ -1,14 +1,17 @@
 var _curry2 = require('./internal/_curry2');
 var _map = require('./internal/_map');
 var curryN = require('./curryN');
+var max = require('./max');
 var pluck = require('./pluck');
+var reduce = require('./reduce');
 
 
 /**
- * Accepts a converging function and a list of branching functions and returns a new function.
- * When invoked, this new function is applied to some arguments, each branching
- * function is applied to those same arguments. The results of each branching
- * function are passed as arguments to the converging function to produce the return value.
+ * Accepts a converging function and a list of branching functions and returns
+ * a new function. When invoked, this new function is applied to some
+ * arguments, each branching function is applied to those same arguments. The
+ * results of each branching function are passed as arguments to the converging
+ * function to produce the return value.
  *
  * @func
  * @memberOf R
@@ -32,7 +35,7 @@ var pluck = require('./pluck');
  *      R.converge(add3, [multiply, add, subtract])(1, 2); //=> 4
  */
 module.exports = _curry2(function converge(after, fns) {
-  return curryN(Math.max.apply(Math, pluck('length', fns)), function() {
+  return curryN(reduce(max, 0, pluck('length', fns)), function() {
     var args = arguments;
     var context = this;
     return after.apply(context, _map(function(fn) {

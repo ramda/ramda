@@ -37,7 +37,8 @@ describe('assocPath', function() {
     eq(g(obj1), expected);
   });
 
-  it('accepts empty path', function() {
-    eq(R.assocPath([], 3, {a: 1, b: 2}), {a: 1, b: 2});
+  it('empty path replaces the the whole object', function() {
+    eq(R.assocPath([], 3, {a: 1, b: 2}), 3);
   });
+
 });

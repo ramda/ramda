@@ -16,4 +16,5 @@ describe('prepend', function() {
     eq(typeof R.prepend(4), 'function');
     eq(R.prepend(4)([3, 2, 1]), [4, 3, 2, 1]);
   });
+
 });

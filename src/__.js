@@ -1,9 +1,10 @@
 /**
  * A special placeholder value used to specify "gaps" within curried functions,
- * allowing partial application of any combination of arguments,
- * regardless of their positions.
+ * allowing partial application of any combination of arguments, regardless of
+ * their positions.
  *
- * If `g` is a curried ternary function and `_` is `R.__`, the following are equivalent:
+ * If `g` is a curried ternary function and `_` is `R.__`, the following are
+ * equivalent:
  *
  *   - `g(1, 2, 3)`
  *   - `g(_, 2, 3)(1)`

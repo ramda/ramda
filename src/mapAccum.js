@@ -2,12 +2,13 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * The mapAccum function behaves like a combination of map and reduce; it applies a
- * function to each element of a list, passing an accumulating parameter from left to
- * right, and returning a final value of this accumulator together with the new list.
+ * The mapAccum function behaves like a combination of map and reduce; it
+ * applies a function to each element of a list, passing an accumulating
+ * parameter from left to right, and returning a final value of this
+ * accumulator together with the new list.
  *
- * The iterator function receives two arguments, *acc* and *value*, and should return
- * a tuple *[acc, value]*.
+ * The iterator function receives two arguments, *acc* and *value*, and should
+ * return a tuple *[acc, value]*.
  *
  * @func
  * @memberOf R
@@ -18,15 +19,19 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
+ * @see R.addIndex
  * @example
  *
  *      var digits = ['1', '2', '3', '4'];
- *      var append = (a, b) => [a + b, a + b];
+ *      var appender = (a, b) => [a + b, a + b];
  *
- *      R.mapAccum(append, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
+ *      R.mapAccum(appender, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
  */
 module.exports = _curry3(function mapAccum(fn, acc, list) {
-  var idx = 0, len = list.length, result = [], tuple = [acc];
+  var idx = 0;
+  var len = list.length;
+  var result = [];
+  var tuple = [acc];
   while (idx < len) {
     tuple = fn(tuple[0], list[idx]);
     result[idx] = tuple[1];

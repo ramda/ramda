@@ -12,7 +12,7 @@ describe('ifElse', function() {
     eq(R.ifElse(v, t, identity)(10), 11);
   });
 
-  it('calls the false case function if the validator returns a falsey value', function() {
+  it('calls the false case function if the validator returns a falsy value', function() {
     var v = function(a) { return typeof a === 'number'; };
     eq(R.ifElse(v, t, identity)('hello'), 'hello');
   });
@@ -66,4 +66,5 @@ describe('ifElse', function() {
     eq(fn(7)(2), 5);
     eq(fn(7, 2), 5);
   });
+
 });

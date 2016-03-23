@@ -6,13 +6,12 @@ var last = require('./last');
 
 /**
  * Returns a new list without any consecutively repeating elements. Equality is
- * determined by applying the supplied predicate two consecutive elements.
- * The first element in a series of equal element is the one being preserved.
+ * determined by applying the supplied predicate two consecutive elements. The
+ * first element in a series of equal element is the one being preserved.
  *
  * Dispatches to the `dropRepeatsWith` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -22,9 +21,9 @@ var last = require('./last');
  * @param {Function} pred A predicate used to test whether two items are equal.
  * @param {Array} list The array to consider.
  * @return {Array} `list` without repeating elements.
+ * @see R.transduce
  * @example
  *
- *      var lengthEq = (x, y) => Math.abs(x) === Math.abs(y);
  *      var l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
  *      R.dropRepeatsWith(R.eqBy(Math.abs), l); //=> [1, 3, 4, -5, 3]
  */

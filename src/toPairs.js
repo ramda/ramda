@@ -3,10 +3,10 @@ var _has = require('./internal/_has');
 
 
 /**
- * Converts an object into an array of key, value arrays.
- * Only the object's own properties are used.
- * Note that the order of the output array is not guaranteed to be
- * consistent across different JS platforms.
+ * Converts an object into an array of key, value arrays. Only the object's
+ * own properties are used.
+ * Note that the order of the output array is not guaranteed to be consistent
+ * across different JS platforms.
  *
  * @func
  * @memberOf R

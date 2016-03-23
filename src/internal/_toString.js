@@ -25,7 +25,7 @@ module.exports = function _toString(x, seen) {
     case '[object Boolean]':
       return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
     case '[object Date]':
-      return 'new Date(' + _quote(_toISOString(x)) + ')';
+      return 'new Date(' + (isNaN(x.valueOf()) ? recur(NaN) : _quote(_toISOString(x))) + ')';
     case '[object Null]':
       return 'null';
     case '[object Number]':
@@ -35,9 +35,12 @@ module.exports = function _toString(x, seen) {
     case '[object Undefined]':
       return 'undefined';
     default:
-      return (typeof x.constructor === 'function' && x.constructor.name !== 'Object' &&
-              typeof x.toString === 'function' && x.toString() !== '[object Object]') ?
-             x.toString() :  // Function, RegExp, user-defined types
-             '{' + mapPairs(x, keys(x)).join(', ') + '}';
+      if (typeof x.toString === 'function') {
+        var repr = x.toString();
+        if (repr !== '[object Object]') {
+          return repr;
+        }
+      }
+      return '{' + mapPairs(x, keys(x)).join(', ') + '}';
   }
 };

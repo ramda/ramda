@@ -22,6 +22,7 @@ module.exports = (function() {
         }
       }
     }
+    this.inputs = null;
     return this.xf['@@transducer/result'](result);
   };
   XGroupBy.prototype['@@transducer/step'] = function(result, input) {
@@ -32,4 +33,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xgroupBy(f, xf) { return new XGroupBy(f, xf); });
-})();
+}());

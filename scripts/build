@@ -98,17 +98,17 @@ var warnIgnoredTopLevel = R.tap(R.pipe(
 
 //  abortIfNotSorted :: List[{*}] -> List[{*}]
 var abortIfNotSorted = R.tap(R.cond([[
-    R.complement(R.pipe(
+  R.complement(R.pipe(
       R.pluck('id'),
       R.pluck('name'),
       R.converge(R.equals, R.identity, R.sortBy(R.identity))
     )),
-    R.pipe(
+  R.pipe(
       R.path(['0', 'loc', 'source']),
       R.concat('Dependencies not declared in alphabetical order in '),
       abort
     )
-  ]])
+]])
 );
 
 //  abortIfExportNotLast :: {*} -> {*}

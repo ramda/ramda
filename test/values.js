@@ -31,11 +31,12 @@ describe('values', function() {
     eq(R.values(cobj), [100, 200]);
   });
 
-  it('works for primitives', function() {
+  it('returns an empty object for primitives', function() {
     /* jshint elision: true */
     var result = R.map(function(val) {
       return R.keys(val);
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
     eq(result, R.repeat([], 10));
   });
+
 });

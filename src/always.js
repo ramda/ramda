@@ -5,8 +5,8 @@ var _curry1 = require('./internal/_curry1');
  * Returns a function that always returns the given value. Note that for
  * non-primitives the value returned is a reference to the original value.
  *
- * This function is known as `const`, `constant`, or `K` (for K combinator)
- * in other languages and libraries.
+ * This function is known as `const`, `constant`, or `K` (for K combinator) in
+ * other languages and libraries.
  *
  * @func
  * @memberOf R

@@ -10,4 +10,5 @@ describe('prop', function() {
     eq(typeof nm, 'function');
     eq(nm(fred), 'Fred');
   });
+
 });

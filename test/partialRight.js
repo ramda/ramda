@@ -20,4 +20,5 @@ describe('partialRight', function() {
     var g = R.partialRight(disc, [7, 4]);
     eq(g.length, 1);
   });
+
 });

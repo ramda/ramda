@@ -9,4 +9,5 @@ describe('intersectionWith', function() {
   it('combines two lists into the set of all their elements based on the passed-in equality predicate', function() {
     eq(R.intersectionWith(eqA, Ro, So), [{a: 3}, {a: 4}]);
   });
+
 });

@@ -2,9 +2,9 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Creates a new list out of the two supplied by applying the function to
- * each equally-positioned pair in the lists. The returned list is
- * truncated to the length of the shorter of the two input lists.
+ * Creates a new list out of the two supplied by applying the function to each
+ * equally-positioned pair in the lists. The returned list is truncated to the
+ * length of the shorter of the two input lists.
  *
  * @function
  * @memberOf R
@@ -25,7 +25,9 @@ var _curry3 = require('./internal/_curry3');
  *      //=> [f(1, 'a'), f(2, 'b'), f(3, 'c')]
  */
 module.exports = _curry3(function zipWith(fn, a, b) {
-  var rv = [], idx = 0, len = Math.min(a.length, b.length);
+  var rv = [];
+  var idx = 0;
+  var len = Math.min(a.length, b.length);
   while (idx < len) {
     rv[idx] = fn(a[idx], b[idx]);
     idx += 1;

@@ -1,4 +1,5 @@
 var _arity = require('./_arity');
+var _isPlaceholder = require('./_isPlaceholder');
 
 
 /**
@@ -7,8 +8,9 @@ var _arity = require('./_arity');
  * @private
  * @category Function
  * @param {Number} length The arity of the curried function.
- * @return {array} An array of arguments received thus far.
+ * @param {Array} received An array of arguments received thus far.
  * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
  */
 module.exports = function _curryN(length, received, fn) {
   return function() {
@@ -19,8 +21,7 @@ module.exports = function _curryN(length, received, fn) {
     while (combinedIdx < received.length || argsIdx < arguments.length) {
       var result;
       if (combinedIdx < received.length &&
-          (received[combinedIdx] == null ||
-           received[combinedIdx]['@@functional/placeholder'] !== true ||
+          (!_isPlaceholder(received[combinedIdx]) ||
            argsIdx >= arguments.length)) {
         result = received[combinedIdx];
       } else {
@@ -28,11 +29,12 @@ module.exports = function _curryN(length, received, fn) {
         argsIdx += 1;
       }
       combined[combinedIdx] = result;
-      if (result == null || result['@@functional/placeholder'] !== true) {
+      if (!_isPlaceholder(result)) {
         left -= 1;
       }
       combinedIdx += 1;
     }
-    return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length, combined, fn));
+    return left <= 0 ? fn.apply(this, combined)
+                     : _arity(left, _curryN(length, combined, fn));
   };
 };

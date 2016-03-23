@@ -7,7 +7,7 @@ describe('when', function() {
     eq(R.when(R.is(Number), R.add(1))(10), 11);
   });
 
-  it('returns the argument unmodified if the validator returns a falsey value', function() {
+  it('returns the argument unmodified if the validator returns a falsy value', function() {
     eq(R.when(R.is(Number), R.add(1))('hello'), 'hello');
   });
 
@@ -16,4 +16,5 @@ describe('when', function() {
     eq(ifIsNumber(R.add(1))(15), 16);
     eq(ifIsNumber(R.add(1))('hello'), 'hello');
   });
+
 });

@@ -10,12 +10,12 @@ var toString = require('./toString');
  * @func
  * @memberOf R
  * @since v0.12.0
- * @see R.match
  * @category String
  * @sig RegExp -> String -> Boolean
  * @param {RegExp} pattern
  * @param {String} str
  * @return {Boolean}
+ * @see R.match
  * @example
  *
  *      R.test(/^x/, 'xyz'); //=> true

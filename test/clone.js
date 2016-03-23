@@ -5,27 +5,28 @@ var eq = require('./shared/eq');
 
 
 describe('deep clone integers, strings and booleans', function() {
-  it('clone integers', function() {
+  it('clones integers', function() {
     eq(R.clone(-4), -4);
     eq(R.clone(9007199254740991), 9007199254740991);
   });
 
-  it('clone floats', function() {
+  it('clones floats', function() {
     eq(R.clone(-4.5), -4.5);
     eq(R.clone(0.0), 0.0);
   });
 
-  it('clone strings', function() {
+  it('clones strings', function() {
     eq(R.clone('ramda'), 'ramda');
   });
 
-  it('clone booleans', function() {
+  it('clones booleans', function() {
     eq(R.clone(true), true);
   });
+
 });
 
 describe('deep clone objects', function() {
-  it('clone shallow object', function() {
+  it('clones shallow object', function() {
     var obj = {a: 1, b: 'ramda', c: true, d: new Date(2013, 11, 25)};
     var clone = R.clone(obj);
     obj.c = false;
@@ -33,14 +34,14 @@ describe('deep clone objects', function() {
     eq(clone, {a: 1, b: 'ramda', c: true, d: new Date(2013, 11, 25)});
   });
 
-  it('clone deep object', function() {
+  it('clones deep object', function() {
     var obj = {a: {b: {c: 'ramda'}}};
     var clone = R.clone(obj);
     obj.a.b.c = null;
     eq(clone, {a: {b: {c: 'ramda'}}});
   });
 
-  it('clone objects with circular references', function() {
+  it('clones objects with circular references', function() {
     var x = {c: null};
     var y = {a: x};
     var z = {b: y};
@@ -58,7 +59,7 @@ describe('deep clone objects', function() {
     eq(R.keys(clone.c.b.a.c), R.keys(x.c.b.a.c));
 
     x.c.b = 1;
-    assert.notDeepEqual(R.keys(clone.c.b), R.keys(x.c.b));
+    assert.notDeepEqual(clone.c.b, x.c.b);
   });
 
   it('clone instances', function() {
@@ -84,17 +85,18 @@ describe('deep clone objects', function() {
     eq(obj.get(), 11);
     eq(clone.get(), 10);
   });
+
 });
 
 describe('deep clone arrays', function() {
-  it('clone shallow arrays', function() {
+  it('clones shallow arrays', function() {
     var list = [1, 2, 3];
     var clone = R.clone(list);
     list.pop();
     eq(clone, [1, 2, 3]);
   });
 
-  it('clone deep arrays', function() {
+  it('clones deep arrays', function() {
     var list = [1, [1, 2, 3], [[[5]]]];
     var clone = R.clone(list);
 
@@ -104,9 +106,10 @@ describe('deep clone arrays', function() {
 
     eq(clone, [1, [1, 2, 3], [[[5]]]]);
   });
+
 });
 
-describe('deep `clone` functions', function() {
+describe('deep clone functions', function() {
   it('keep reference to function', function() {
     var fn = function(x) { return x + x;};
     var list = [{a: fn}];
@@ -116,6 +119,7 @@ describe('deep `clone` functions', function() {
     eq(clone[0].a(10), 20);
     eq(list[0].a, clone[0].a);
   });
+
 });
 
 describe('built-in types', function() {
@@ -141,24 +145,25 @@ describe('built-in types', function() {
       eq(clone.multiline, pattern.multiline);
     }, [/x/, /x/g, /x/i, /x/m, /x/gi, /x/gm, /x/im, /x/gim]);
   });
+
 });
 
 describe('deep clone deep nested mixed objects', function() {
-  it('clone array with objects', function() {
+  it('clones array with objects', function() {
     var list = [{a: {b: 1}}, [{c: {d: 1}}]];
     var clone = R.clone(list);
     list[1][0] = null;
     eq(clone, [{a: {b: 1}}, [{c: {d: 1}}]]);
   });
 
-  it('clone array with arrays', function() {
+  it('clones array with arrays', function() {
     var list = [[1], [[3]]];
     var clone = R.clone(list);
     list[1][0] = null;
     eq(clone, [[1], [[3]]]);
   });
 
-  it('clone array with mutual ref object', function() {
+  it('clones array with mutual ref object', function() {
     var obj = {a: 1};
     var list = [{b: obj}, {b: obj}];
     var clone = R.clone(list);
@@ -175,6 +180,7 @@ describe('deep clone deep nested mixed objects', function() {
     eq(clone[0].b, {a:1});
     eq(clone[1].b, {a:1});
   });
+
 });
 
 describe('deep clone edge cases', function() {
@@ -189,6 +195,7 @@ describe('deep clone edge cases', function() {
     var list = [];
     assert.notStrictEqual(R.clone(list), list);
   });
+
 });
 
 
@@ -203,4 +210,5 @@ describe('Let `R.clone` use an arbitrary user defined `clone` method', function(
     eq(arbitraryClonedObj, new ArbitraryClone(42));
     eq(arbitraryClonedObj instanceof ArbitraryClone, true);
   });
+
 });

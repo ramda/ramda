@@ -3,8 +3,8 @@ var _isString = require('./internal/_isString');
 
 
 /**
- * Returns the nth element of the given list or string.
- * If n is negative the element at index length + n is returned.
+ * Returns the nth element of the given list or string. If n is negative the
+ * element at index length + n is returned.
  *
  * @func
  * @memberOf R

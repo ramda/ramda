@@ -61,4 +61,5 @@ describe('any', function() {
     var test = function(n) {count += 1; return odd(n);};
     eq(R.any(test)([2, 4, 6, 7, 8, 10]), true);
   });
+
 });

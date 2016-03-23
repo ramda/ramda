@@ -38,4 +38,5 @@ describe('evolve', function() {
     var expected = {name: 'Tomato', elapsed: 101, remaining: 1399};
     eq(tick(object), expected);
   });
+
 });

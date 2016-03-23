@@ -4,9 +4,8 @@ var keys = require('./keys');
 
 
 /**
- * Same as R.invertObj, however this accounts for objects
- * with duplicate values by putting the values into an
- * array.
+ * Same as R.invertObj, however this accounts for objects with duplicate values
+ * by putting the values into an array.
  *
  * @func
  * @memberOf R

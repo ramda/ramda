@@ -80,6 +80,7 @@ describe('toString', function() {
 
   it('returns the string representation of a Date object', function() {
     assert.strictEqual(R.toString(new Date('2001-02-03T04:05:06.000Z')), 'new Date("2001-02-03T04:05:06.000Z")');
+    assert.strictEqual(R.toString(new Date('XXX')), 'new Date(NaN)');
   });
 
   it('returns the string representation of a RegExp object', function() {
@@ -109,9 +110,9 @@ describe('toString', function() {
   });
 
   it('returns the string representation of an arguments object', function() {
-    assert.strictEqual(R.toString((function() { return arguments; }())), '(function() { return arguments; }())');
-    assert.strictEqual(R.toString((function() { return arguments; }(1, 2, 3))), '(function() { return arguments; }(1, 2, 3))');
-    assert.strictEqual(R.toString((function() { return arguments; }(['x', 'y']))), '(function() { return arguments; }(["x", "y"]))');
+    assert.strictEqual(R.toString((function() { return arguments; })()), '(function() { return arguments; }())');
+    assert.strictEqual(R.toString((function() { return arguments; })(1, 2, 3)), '(function() { return arguments; }(1, 2, 3))');
+    assert.strictEqual(R.toString((function() { return arguments; })(['x', 'y'])), '(function() { return arguments; }(["x", "y"]))');
   });
 
   it('returns the string representation of a plain object', function() {
@@ -151,6 +152,8 @@ describe('toString', function() {
     assert.strictEqual(R.toString(Just(42)), 'Just(42)');
     assert.strictEqual(R.toString(Just([1, 2, 3])), 'Just([1, 2, 3])');
     assert.strictEqual(R.toString(Just(Just(Just('')))), 'Just(Just(Just("")))');
+
+    assert.strictEqual(R.toString({toString: R.always('x')}), 'x');
   });
 
   it('handles object with no `toString` method', function() {

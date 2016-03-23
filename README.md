@@ -93,14 +93,14 @@ or the minified version:
 or from a CDN, either cdnjs:
 
 ```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.18.0/ramda.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.19.1/ramda.min.js"></script>
 ```
 
 or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 ```html
-<script src="//cdn.jsdelivr.net/ramda/0.18.0/ramda.min.js"></script>
-<script src="//cdn.jsdelivr.net/ramda/0.18/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/ramda/0.19.1/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/ramda/0.19/ramda.min.js"></script>
 <script src="//cdn.jsdelivr.net/ramda/latest/ramda.min.js"></script>
 ```
 
@@ -133,7 +133,7 @@ Please review the [API documentation](http://ramdajs.com/docs/).
 Introductions
 -------------
 
-* [Introducing Ramda](http://buzzdecafe.github.io/code/2014/05/16/introducing-ramda/) by Buzz de Cafe
+* [Introducing Ramda](http://buzzdecafe.github.io/code/2014/05/16/introducing-ramda) by Buzz de Cafe
 * [Why Ramda?](http://fr.umio.us/why-ramda/) by Scott Sauyet
 * [Favoring Curry](http://fr.umio.us/favoring-curry/) by Scott Sauyet
 

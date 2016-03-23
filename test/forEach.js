@@ -40,4 +40,5 @@ describe('forEach', function() {
     xe([1, 2, 4]);
     eq(xStr, '1 2 4 ');
   });
+
 });

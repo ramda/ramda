@@ -2,11 +2,12 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Creates a new object by recursively evolving a shallow copy of `object`, according to the
- * `transformation` functions. All non-primitive properties are copied by reference.
+ * Creates a new object by recursively evolving a shallow copy of `object`,
+ * according to the `transformation` functions. All non-primitive properties
+ * are copied by reference.
  *
- * A `transformation` function will not be invoked if its corresponding key does not exist in
- * the evolved object.
+ * A `transformation` function will not be invoked if its corresponding key
+ * does not exist in the evolved object.
  *
  * @func
  * @memberOf R
@@ -28,7 +29,8 @@ var _curry2 = require('./internal/_curry2');
  *      R.evolve(transformations, tomato); //=> {firstName: 'Tomato', data: {elapsed: 101, remaining: 1399}, id:123}
  */
 module.exports = _curry2(function evolve(transformations, object) {
-  var transformation, key, type, result = {};
+  var result = {};
+  var transformation, key, type;
   for (key in object) {
     transformation = transformations[key];
     type = typeof transformation;

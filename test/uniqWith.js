@@ -31,4 +31,5 @@ describe('uniqWith', function() {
     eq(R.uniqWith(eqI)(objs), objs);
     eq(R.uniqWith(eqI)(objs2), [{x: R.T, i: 0}, {x: R.F, i: 1}, {x: R.T, i: 2}, {x: R.T, i: 3}]);
   });
+
 });

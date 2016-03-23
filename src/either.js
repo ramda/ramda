@@ -1,12 +1,18 @@
+var _curry2 = require('./internal/_curry2');
+var _isFunction = require('./internal/_isFunction');
 var lift = require('./lift');
 var or = require('./or');
 
 
 /**
- * A function wrapping calls to the two functions in an `||` operation, returning the result of the first
- * function if it is truth-y and the result of the second function otherwise.
+ * A function wrapping calls to the two functions in an `||` operation,
+ * returning the result of the first function if it is truth-y and the result
+ * of the second function otherwise. Note that this is short-circuited,
+ * meaning that the second function will not be invoked if the first returns a
+ * truth-y value.
  *
- * `R.either` will work on all other applicatives as well.
+ * In addition to functions, `R.either` also accepts any fantasy-land compatible
+ * applicative functor.
  *
  * @func
  * @memberOf R
@@ -25,4 +31,10 @@ var or = require('./or');
  *      f(101); //=> true
  *      f(8); //=> true
  */
-module.exports = lift(or);
+module.exports = _curry2(function either(f, g) {
+  return _isFunction(f) ?
+    function _either() {
+      return f.apply(this, arguments) || g.apply(this, arguments);
+    } :
+    lift(or)(f, g);
+});

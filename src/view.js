@@ -23,11 +23,14 @@ var _curry2 = require('./internal/_curry2');
  *      R.view(xLens, {x: 4, y: 2});  //=> 4
  */
 module.exports = (function() {
+  // `Const` is a functor that effectively ignores the function given to `map`.
   var Const = function(x) {
     return {value: x, map: function() { return this; }};
   };
 
   return _curry2(function view(lens, x) {
+    // Using `Const` effectively ignores the setter function of the `lens`,
+    // leaving the value returned by the getter function unmodified.
     return lens(Const)(x).value;
   });
 }());

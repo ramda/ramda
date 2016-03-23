@@ -26,4 +26,4 @@ module.exports = (function() {
   };
 
   return _curry2(function _xdropRepeatsWith(pred, xf) { return new XDropRepeatsWith(pred, xf); });
-})();
+}());

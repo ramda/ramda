@@ -24,4 +24,5 @@ describe('lte', function() {
     eq(upTo20(20), true);
     eq(upTo20(25), false);
   });
+
 });

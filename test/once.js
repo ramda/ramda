@@ -30,4 +30,10 @@ describe('once', function() {
     eq(result, 15);
     eq(ctr, 1);
   });
+
+  it('retains arity', function() {
+    var f = R.once(function(a, b) { return a + b; });
+    eq(f.length, 2);
+  });
+
 });

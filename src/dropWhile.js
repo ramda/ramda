@@ -5,14 +5,14 @@ var _xdropWhile = require('./internal/_xdropWhile');
 
 
 /**
- * Returns a new list containing the last `n` elements of a given list, passing each value
- * to the supplied predicate function, skipping elements while the predicate function returns
- * `true`. The predicate function is passed one argument: *(value)*.
+ * Returns a new list containing the last `n` elements of a given list, passing
+ * each value to the supplied predicate function, skipping elements while the
+ * predicate function returns `true`. The predicate function is passed one
+ * argument: *(value)*.
  *
  * Dispatches to the `dropWhile` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
- * @see R.transduce
  *
  * @func
  * @memberOf R
@@ -22,7 +22,7 @@ var _xdropWhile = require('./internal/_xdropWhile');
  * @param {Function} fn The function called per iteration.
  * @param {Array} list The collection to iterate over.
  * @return {Array} A new array.
- * @see R.takeWhile
+ * @see R.takeWhile, R.transduce, R.addIndex
  * @example
  *
  *      var lteTwo = x => x <= 2;
@@ -30,7 +30,8 @@ var _xdropWhile = require('./internal/_xdropWhile');
  *      R.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
  */
 module.exports = _curry2(_dispatchable('dropWhile', _xdropWhile, function dropWhile(pred, list) {
-  var idx = 0, len = list.length;
+  var idx = 0;
+  var len = list.length;
   while (idx < len && pred(list[idx])) {
     idx += 1;
   }

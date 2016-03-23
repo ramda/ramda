@@ -2,7 +2,8 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Scan is similar to reduce, but returns a list of successively reduced values from the left
+ * Scan is similar to reduce, but returns a list of successively reduced values
+ * from the left
  *
  * @func
  * @memberOf R
@@ -20,7 +21,9 @@ var _curry3 = require('./internal/_curry3');
  *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
  */
 module.exports = _curry3(function scan(fn, acc, list) {
-  var idx = 0, len = list.length, result = [acc];
+  var idx = 0;
+  var len = list.length;
+  var result = [acc];
   while (idx < len) {
     acc = fn(acc, list[idx]);
     result[idx + 1] = acc;

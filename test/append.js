@@ -16,4 +16,5 @@ describe('append', function() {
     eq(typeof R.append(4), 'function');
     eq(R.append(1)([4, 3, 2]), [4, 3, 2, 1]);
   });
+
 });

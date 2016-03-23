@@ -1,12 +1,18 @@
+var _curry2 = require('./internal/_curry2');
+var _isFunction = require('./internal/_isFunction');
 var and = require('./and');
 var lift = require('./lift');
 
 
 /**
- * A function wrapping calls to the two functions in an `&&` operation, returning the result of the first
- * function if it is false-y and the result of the second function otherwise.
+ * A function wrapping calls to the two functions in an `&&` operation,
+ * returning the result of the first function if it is false-y and the result
+ * of the second function otherwise. Note that this is short-circuited,
+ * meaning that the second function will not be invoked if the first returns a
+ * false-y value.
  *
- * `R.both` will work on all other applicatives as well.
+ * In addition to functions, `R.both` also accepts any fantasy-land compatible
+ * applicative functor.
  *
  * @func
  * @memberOf R
@@ -25,4 +31,10 @@ var lift = require('./lift');
  *      f(100); //=> true
  *      f(101); //=> false
  */
-module.exports = lift(and);
+module.exports = _curry2(function both(f, g) {
+  return _isFunction(f) ?
+    function _both() {
+      return f.apply(this, arguments) && g.apply(this, arguments);
+    } :
+    lift(and)(f, g);
+});

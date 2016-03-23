@@ -20,4 +20,5 @@ describe('always', function() {
     eq(R.always(now)(), new Date(1776, 6, 4));
     eq(R.always(undefined)(), undefined);
   });
+
 });

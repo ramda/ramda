@@ -3,8 +3,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns a new list with the given element at the front, followed by the contents of the
- * list.
+ * Returns a new list with the given element at the front, followed by the
+ * contents of the list.
  *
  * @func
  * @memberOf R

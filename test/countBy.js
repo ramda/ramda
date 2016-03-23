@@ -21,7 +21,7 @@ var derivedGenre = (function() {
     Baroque: 'Classical',
     Modern: 'Classical',
     Romantic: 'Classical',
-    Metal: 'Rock'  /*, etc */
+    Metal: 'Rock'  /*  etc */
   };
   return function(album) {
     var genre = R.prop('genre', album);
@@ -55,4 +55,5 @@ describe('countBy', function() {
     eq(result.abc, 1);
     eq(result.toString, 1);
   });
+
 });

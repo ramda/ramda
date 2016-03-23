@@ -29,4 +29,5 @@ describe('none', function() {
   it('is curried', function() {
     eq(R.none(even)([1, 3, 5, 6, 7, 9]), false);
   });
+
 });

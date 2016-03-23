@@ -34,4 +34,5 @@ describe('invertObj', function() {
     R.invertObj(input);
     eq(input, {x:'a', y:'b', z:'a', _id:'a'});
   });
+
 });

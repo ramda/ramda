@@ -1,5 +1,3 @@
-/* jshint -W053 */
-
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -42,7 +40,7 @@ describe('is', function() {
     var isObject = R.is(Object);
 
     eq(isObject(foo), true);
-    eq(isObject(function() { return arguments; }()), true);
+    eq(isObject((function() { return arguments; })()), true);
     eq(isObject([]), true);
     eq(isObject(new Boolean(false)), true);
     eq(isObject(new Date()), true);
@@ -77,4 +75,5 @@ describe('is', function() {
     eq(typeof R.is(String), 'function');
     eq(R.is(String)('s'), true);
   });
+
 });

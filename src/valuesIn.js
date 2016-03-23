@@ -2,10 +2,10 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Returns a list of all the properties, including prototype properties,
- * of the supplied object.
- * Note that the order of the output array is not guaranteed to be
- * consistent across different JS platforms.
+ * Returns a list of all the properties, including prototype properties, of the
+ * supplied object.
+ * Note that the order of the output array is not guaranteed to be consistent
+ * across different JS platforms.
  *
  * @func
  * @memberOf R
@@ -22,7 +22,8 @@ var _curry1 = require('./internal/_curry1');
  *      R.valuesIn(f); //=> ['X', 'Y']
  */
 module.exports = _curry1(function valuesIn(obj) {
-  var prop, vs = [];
+  var prop;
+  var vs = [];
   for (prop in obj) {
     vs[vs.length] = obj[prop];
   }

@@ -25,7 +25,6 @@ describe('path', function() {
     eq(R.path(['a', 'e', 'f', '1'], obj), 101);
     eq(R.path(['j', '0'], obj), 'J');
     eq(R.path(['j', '1'], obj), undefined);
-    eq(R.path(['a', 'b', 'c'], null), undefined);
   });
 
   it("gets a deep property's value from objects", function() {
@@ -36,11 +35,7 @@ describe('path', function() {
   it('returns undefined for items not found', function() {
     eq(R.path(['a', 'b', 'foo'], deepObject), undefined);
     eq(R.path(['bar'], deepObject), undefined);
-  });
-
-  it('returns undefined for null/undefined', function() {
-    eq(R.path(['toString'], null), undefined);
-    eq(R.path(['toString'], undefined), undefined);
+    eq(R.path(['a', 'b'], {a: null}), undefined);
   });
 
   it('works with falsy items', function() {
@@ -50,4 +45,5 @@ describe('path', function() {
   it('is curried', function() {
     eq(R.path(['arrayVal', '0'])(deepObject), 'arr');
   });
+
 });

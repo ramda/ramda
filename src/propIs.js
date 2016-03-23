@@ -16,8 +16,7 @@ var propSatisfies = require('./propSatisfies');
  * @param {String} name
  * @param {*} obj
  * @return {Boolean}
- * @see R.is
- * @see R.propSatisfies
+ * @see R.is, R.propSatisfies
  * @example
  *
  *      R.propIs(Number, 'x', {x: 1, y: 2});  //=> true

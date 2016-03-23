@@ -3,7 +3,7 @@ var eq = require('./shared/eq');
 
 
 describe('unless', function() {
-  it('calls the whenFalse function if the validator returns a falsey value', function() {
+  it('calls the whenFalse function if the validator returns a falsy value', function() {
     eq(R.unless(R.isArrayLike, R.of)(10), [10]);
   });
 
@@ -15,4 +15,5 @@ describe('unless', function() {
     eq(R.unless(R.isArrayLike)(R.of)(10), [10]);
     eq(R.unless(R.isArrayLike)(R.of)([10]), [10]);
   });
+
 });

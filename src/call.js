@@ -5,8 +5,8 @@ var curry = require('./curry');
 /**
  * Returns the result of calling its first argument with the remaining
  * arguments. This is occasionally useful as a converging function for
- * `R.converge`: the left branch can produce a function while the right
- * branch produces a value to be passed to that function as an argument.
+ * `R.converge`: the left branch can produce a function while the right branch
+ * produces a value to be passed to that function as an argument.
  *
  * @func
  * @memberOf R
@@ -23,9 +23,10 @@ var curry = require('./curry');
  *                           R.join(''),
  *                           R.replace(/^(?!$)/gm));
  *
- *      var format = R.converge(R.call,
- *                              R.pipe(R.prop('indent'), indentN),
- *                              R.prop('value'));
+ *      var format = R.converge(R.call, [
+ *                                  R.pipe(R.prop('indent'), indentN),
+ *                                  R.prop('value')
+ *                              ]);
  *
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  */

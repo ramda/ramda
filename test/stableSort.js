@@ -24,7 +24,7 @@ describe('stableSort', function() {
       {type: 'Apple', price: 10},
       {type: 'Pear', price: 100},
       {type: 'Bannana', price: 10},
-      {type: 'Orange', price: 20},
+      {type: 'Orange', price: 20}
     ];
 
     eq(R.stableSort(function(a, b) {return a.price - b.price;}, list),
@@ -32,7 +32,7 @@ describe('stableSort', function() {
         {type: 'Apple', price: 10},
         {type: 'Bannana', price: 10},
         {type: 'Orange', price: 20},
-        {type: 'Pear', price: 100},
+        {type: 'Pear', price: 100}
       ]
     );
   });

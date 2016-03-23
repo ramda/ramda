@@ -2,7 +2,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Subtracts two numbers. Equivalent to `a - b` but curried.
+ * Subtracts its second argument from its first argument.
  *
  * @func
  * @memberOf R
@@ -24,4 +24,6 @@ var _curry2 = require('./internal/_curry2');
  *      complementaryAngle(30); //=> 60
  *      complementaryAngle(72); //=> 18
  */
-module.exports = _curry2(function subtract(a, b) { return a - b; });
+module.exports = _curry2(function subtract(a, b) {
+  return Number(a) - Number(b);
+});

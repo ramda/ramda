@@ -2,7 +2,8 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Similar to `pick` except that this one includes a `key: undefined` pair for properties that don't exist.
+ * Similar to `pick` except that this one includes a `key: undefined` pair for
+ * properties that don't exist.
  *
  * @func
  * @memberOf R

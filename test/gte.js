@@ -24,4 +24,5 @@ describe('gte', function() {
     eq(gte20(20), true);
     eq(gte20(25), true);
   });
+
 });

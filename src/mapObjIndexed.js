@@ -4,19 +4,19 @@ var keys = require('./keys');
 
 
 /**
- * Like `mapObj`, but passes additional arguments to the predicate function. The
- * predicate function is passed three arguments: *(value, key, obj)*.
+ * An Object-specific version of `map`. The function is applied to three
+ * arguments: *(value, key, obj)*. If only the value is significant, use
+ * `map` instead.
  *
  * @func
  * @memberOf R
  * @since v0.9.0
  * @category Object
- * @sig (v, k, {k: v} -> v) -> {k: v} -> {k: v}
- * @param {Function} fn A function called for each property in `obj`. Its return value will
- *        become a new property on the return object.
- * @param {Object} obj The object to iterate over.
- * @return {Object} A new object with the same keys as `obj` and values that are the result
- *         of running each property through `fn`.
+ * @sig ((*, String, Object) -> *) -> Object -> Object
+ * @param {Function} fn
+ * @param {Object} obj
+ * @return {Object}
+ * @see R.map
  * @example
  *
  *      var values = { x: 1, y: 2, z: 3 };

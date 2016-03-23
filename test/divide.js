@@ -16,4 +16,5 @@ describe('divide', function() {
     var half = R.divide(R.__, 2);
     eq(half(40), 20);
   });
+
 });

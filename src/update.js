@@ -4,9 +4,8 @@ var always = require('./always');
 
 
 /**
- * Returns a new copy of the array with the element at the
- * provided index replaced with the given value.
- * @see R.adjust
+ * Returns a new copy of the array with the element at the provided index
+ * replaced with the given value.
  *
  * @func
  * @memberOf R
@@ -17,6 +16,7 @@ var always = require('./always');
  * @param {*} x The value to exist at the given index of the returned array.
  * @param {Array|Arguments} list The source array-like object to be updated.
  * @return {Array} A copy of `list` with the value at index `idx` replaced with `x`.
+ * @see R.adjust
  * @example
  *
  *      R.update(1, 11, [0, 1, 2]);     //=> [0, 11, 2]

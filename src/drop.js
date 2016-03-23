@@ -14,13 +14,12 @@ var slice = require('./slice');
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @see R.transduce
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
  * @param {Number} n
  * @param {*} list
  * @return {*}
- * @see R.take
+ * @see R.take, R.transduce
  * @example
  *
  *      R.drop(1, ['foo', 'bar', 'baz']); //=> ['bar', 'baz']

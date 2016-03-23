@@ -58,4 +58,5 @@ describe('constructN', function() {
     eq(g2('a', 'b').constructor, G);
     eq(g2('a')('b').constructor, G);
   });
+
 });

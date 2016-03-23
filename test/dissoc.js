@@ -26,4 +26,5 @@ describe('dissoc', function() {
   it('is curried', function() {
     eq(R.dissoc('b')({a: 1, b: 2, c: 3}), {a: 1, c: 3});
   });
+
 });

@@ -1,6 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var equals = require('./equals');
-var mapObj = require('./mapObj');
+var map = require('./map');
 var where = require('./where');
 
 
@@ -32,5 +32,5 @@ var where = require('./where');
  *      pred({a: 1, b: 1});        //=> false
  */
 module.exports = _curry2(function whereEq(spec, testObj) {
-  return where(mapObj(equals, spec), testObj);
+  return where(map(equals, spec), testObj);
 });

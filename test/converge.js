@@ -40,4 +40,11 @@ describe('converge', function() {
     eq(f2(6)(7), 42);
     eq(f3(R.__).length, 3);
   });
+
+  it('works with empty functions list', function() {
+    var fn = R.converge(function() { return arguments.length; }, []);
+    eq(fn.length, 0);
+    eq(fn(), 0);
+  });
+
 });
