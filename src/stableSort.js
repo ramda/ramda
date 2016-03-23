@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
 
 /**
  * Returns a copy of the list, sorted according to the comparator function, which should accept two values at a
@@ -19,13 +18,24 @@ var _slice = require('./internal/_slice');
  *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
  */
 module.exports = _curry2(function stableSort(comparator, list) {
-  var copyList = _slice(list);
+  var sorted = [];
+  var idx;
 
-  return copyList.sort(function(a, b) {
-    if (comparator(a, b) === 0) {
-      return -(copyList.indexOf(a) - copyList.indexOf(b));
-    } else {
-      return comparator(a, b);
-    }
-  }, list);
+  idx = 0;
+  while (idx < list.length) {
+    sorted.push([list[idx], idx]);
+    idx += 1;
+  }
+
+  sorted.sort(function(a, b) {
+    var order = comparator(a[0], b[0]);
+    return order === 0 ? a[1] - b[1] : order;
+  });
+
+  idx = 0;
+  while (idx < list.length) {
+    sorted[idx] = sorted[idx][0];
+    idx += 1;
+  }
+  return sorted;
 });
