@@ -13,6 +13,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.20.0
  * @category Function
  * @sig (...x -> a) -> ((e, ...x) -> a) -> (...x -> a)
  * @param {Function} tryer The function that may throw.

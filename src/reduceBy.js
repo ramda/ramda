@@ -12,6 +12,7 @@ var _reduce = require('./internal/_reduce');
  *
  * @func
  * @memberOf R
+ * @since v0.20.0
  * @category List
  * @sig (b -> String) -> ((a, b) -> a) -> a -> [b] -> {String: a}
  * @param {Function} keyFn The function that maps the list's element into a key.

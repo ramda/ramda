@@ -9,6 +9,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.20.0
  * @category Logic
  * @sig (a -> Boolean) -> (a -> a) -> a -> a
  * @param {Function} pred A predicate function

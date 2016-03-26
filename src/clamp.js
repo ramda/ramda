@@ -7,6 +7,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.20.0
  * @category Relaction
  * @sig Ord a => a -> a -> a -> a
  * @param {Number} minimum number

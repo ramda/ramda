@@ -15,6 +15,7 @@ var values = require('./values');
  *
  * @func
  * @memberOf R
+ * @since v0.20.0
  * @category Function
  * @sig {k: ((a, b, ..., m) -> v)} -> ((a, b, ..., m) -> {k: v})
  * @param {Object} spec an object recursively mapping properties to functions for
