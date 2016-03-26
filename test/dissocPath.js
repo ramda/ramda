@@ -36,17 +36,6 @@ describe('dissocPath', function() {
     );
   });
 
-  it('flattens properties from prototype', function() {
-    var F = function() {};
-    F.prototype.a = 1;
-    var obj1 = new F();
-    obj1.b = {c: 2, d: 3};
-    var obj2 = R.dissocPath(['b', 'c'], obj1);
-    eq(obj2,
-      {a: 1, b: {d: 3}}
-    );
-  });
-
   it('is curried', function() {
     var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
     var expected = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, j: {k: 6, l: 7}}}, m: 8};

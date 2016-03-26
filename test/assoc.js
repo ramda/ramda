@@ -34,4 +34,13 @@ describe('assoc', function() {
     eq(g(obj1), expected);
   });
 
+  it('does not flatten object prototype properties', function() {
+    function Player() { this.a = 1; this.b = 2 }
+    Player.prototype.sayHello = function() { return 'Hello' }
+
+    var obj1 = new Player()
+    var obj2 = R.assoc('a', 42, obj1);
+    eq(obj2, {a: 42, b: 2});
+  });
+
 });
