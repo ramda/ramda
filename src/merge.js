@@ -1,5 +1,5 @@
+var _assign = require('./internal/_assign');
 var _curry2 = require('./internal/_curry2');
-var _objectAssign = require('./internal/_objectAssign');
 
 
 /**
@@ -25,5 +25,5 @@ var _objectAssign = require('./internal/_objectAssign');
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
 module.exports = _curry2(function merge(l, r) {
-  return _objectAssign({}, l, r);
+  return _assign({}, l, r);
 });
