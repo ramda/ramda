@@ -43,4 +43,14 @@ describe('assoc', function() {
     eq(obj2, {a: 42, b: 2});
   });
 
+  it('keeps the prototype properties of the provided object', function() {
+    function Player() { this.a = 1; this.b = 2 }
+    Player.prototype.sayHello = function() { return 'Hello' }
+
+    var obj1 = new Player()
+    var obj2 = R.assoc('a', 42, obj1);
+
+    assert.strictEqual(obj2.sayHello(), 'Hello');
+  });
+
 });
