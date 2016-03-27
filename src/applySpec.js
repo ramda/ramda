@@ -23,6 +23,7 @@ var values = require('./values');
  * @return {Function} A function that returns an object of the same structure
  * as `spec', with each property set to the value returned by calling its
  * associated function with the supplied arguments.
+ * @see R.juxt
  * @example
  *
  *      var getMetrics = R.applySpec({
