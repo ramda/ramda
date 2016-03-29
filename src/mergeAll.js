@@ -1,5 +1,5 @@
+var _assign = require('./internal/_assign');
 var _curry1 = require('./internal/_curry1');
-var _objectAssign = require('./internal/_objectAssign');
 
 
 /**
@@ -19,5 +19,5 @@ var _objectAssign = require('./internal/_objectAssign');
  *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
  */
 module.exports = _curry1(function mergeAll(list) {
-  return _objectAssign.apply(null, [{}].concat(list));
+  return _assign.apply(null, [{}].concat(list));
 });

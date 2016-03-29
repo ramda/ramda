@@ -1,6 +1,6 @@
+var _assign = require('./_assign');
 var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');
-var _objectAssign = require('./_objectAssign');
 var isArrayLike = require('../isArrayLike');
 var objOf = require('../objOf');
 
@@ -22,7 +22,7 @@ module.exports = (function() {
   var _stepCatObject = {
     '@@transducer/init': Object,
     '@@transducer/step': function(result, input) {
-      return _objectAssign(
+      return _assign(
         result,
         isArrayLike(input) ? objOf(input[0], input[1]) : input
       );
