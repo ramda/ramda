@@ -1,4 +1,4 @@
-//  Ramda v0.19.1
+//  Ramda v0.20.1
 //  https://github.com/ramda/ramda
 //  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -406,6 +406,8 @@
         }
         return acc;
     };
+
+    var _assign = typeof Object.assign === 'function' ? Object.assign : _objectAssign;
 
     /**
      * Similar to hasMethod, this checks whether a function has a [methodname]
@@ -2653,7 +2655,7 @@
      *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
      */
     var merge = _curry2(function merge(l, r) {
-        return _objectAssign({}, l, r);
+        return _assign({}, l, r);
     });
 
     /**
@@ -2673,7 +2675,7 @@
      *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
      */
     var mergeAll = _curry1(function mergeAll(list) {
-        return _objectAssign.apply(null, [{}].concat(list));
+        return _assign.apply(null, [{}].concat(list));
     });
 
     /**
@@ -5188,7 +5190,7 @@
         var _stepCatObject = {
             '@@transducer/init': Object,
             '@@transducer/step': function (result, input) {
-                return _objectAssign(result, isArrayLike(input) ? objOf(input[0], input[1]) : input);
+                return _assign(result, isArrayLike(input) ? objOf(input[0], input[1]) : input);
             },
             '@@transducer/result': _identity
         };
@@ -6789,6 +6791,7 @@
      * @return {Function} A function that returns an object of the same structure
      * as `spec', with each property set to the value returned by calling its
      * associated function with the supplied arguments.
+     * @see R.juxt
      * @example
      *
      *      var getMetrics = R.applySpec({
@@ -7129,6 +7132,7 @@
      * @sig [(a, b, ..., m) -> n] -> ((a, b, ..., m) -> [n])
      * @param {Array} fns An array of functions
      * @return {Function} A function that returns a list of values after applying each of the original `fns` to its parameters.
+     * @see R.applySpec
      * @example
      *
      *      var range = R.juxt([Math.min, Math.max]);
