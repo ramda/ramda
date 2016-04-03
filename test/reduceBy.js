@@ -23,7 +23,7 @@ describe('reduceBy', function() {
     ];
     var byGrade = function(student) {return grade(student.score || 0);};
     var collectNames = function(acc, student) {return acc.concat(student.name);};
-    eq(R.reduceBy(byGrade, collectNames, [], students), {
+    eq(R.reduceBy(collectNames, [], byGrade, students), {
       A: ['Dianne', 'Gillian'],
       B: ['Abby', 'Chris', 'Irene'],
       C: ['Brad', 'Hannah'],
@@ -33,12 +33,12 @@ describe('reduceBy', function() {
   });
 
   it('returns an empty object if given an empty array', function() {
-    eq(R.reduceBy(byType, sumValues, 0, []), {});
+    eq(R.reduceBy(sumValues, 0, byType, []), {});
   });
 
   it('is curried', function() {
-    var splitByType = R.reduceBy(byType);
-    var sumByType = splitByType(sumValues, 0);
+    var reduceToSumsBy = R.reduceBy(sumValues, 0);
+    var sumByType = reduceToSumsBy(byType);
     eq(sumByType([
       {type: 'A', val: 10},
       {type: 'B', val: 20},
@@ -50,7 +50,7 @@ describe('reduceBy', function() {
   });
 
   it('correctly reports the arity of curried versions', function() {
-    var inc = R.reduceBy(byType, sumValues)(0);
+    var inc = R.reduceBy(sumValues, 0)(byType);
     eq(inc.length, 1);
   });
 

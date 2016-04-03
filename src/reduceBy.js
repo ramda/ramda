@@ -14,27 +14,25 @@ var _reduce = require('./internal/_reduce');
  * @memberOf R
  * @since v0.20.0
  * @category List
- * @sig (b -> String) -> ((a, b) -> a) -> a -> [b] -> {String: a}
- * @param {Function} keyFn The function that maps the list's element into a key.
+ * @sig ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
  * @param {Function} valueFn The function that reduces the elements of each group to a single
  *        value. Receives two values, accumulator for a particular group and the current element.
  * @param {*} acc The (initial) accumulator value for each group.
+ * @param {Function} keyFn The function that maps the list's element into a key.
  * @param {Array} list The array to group.
  * @return {Object} An object with the output of `keyFn` for keys, mapped to the output of
  *         `valueFn` for elements which produced that key when passed to `keyFn`.
  * @see R.groupBy, R.reduce
  * @example
  *
- *      var byGrade = R.reduceBy(function(student) {
+ *      var reduceToNamesBy = R.reduceBy((acc, student) => acc.concat(student.name), []);
+ *      var namesByGrade = reduceToNamesBy(function(student) {
  *        var score = student.score;
  *        return score < 65 ? 'F' :
  *               score < 70 ? 'D' :
  *               score < 80 ? 'C' :
  *               score < 90 ? 'B' : 'A';
  *      });
- *      var namesByGrade = byGrade(function(acc, student) {
- *        return acc.concat(student.name);
- *      }, []);
  *      var students = [{name: 'Lucy', score: 92},
  *                      {name: 'Drew', score: 85},
  *                      // ...
@@ -47,7 +45,7 @@ var _reduce = require('./internal/_reduce');
  *      //   'F': ['Bart']
  *      // }
  */
-module.exports = _curryN(4, [], function reduceBy(keyFn, valueFn, valueAcc, list) {
+module.exports = _curryN(4, [], function reduceBy(valueFn, valueAcc, keyFn, list) {
   return _reduce(function(acc, elt) {
     var key = keyFn(elt);
     acc[key] = valueFn(_has(key, acc) ? acc[key] : valueAcc, elt);
