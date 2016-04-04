@@ -1,9 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
-var _reduce = require('./internal/_reduce');
 var _xgroupBy = require('./internal/_xgroupBy');
-var append = require('./append');
-
+var reduceBy = require('./reduceBy');
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of
@@ -45,10 +43,10 @@ var append = require('./append');
  *      //   'F': [{name: 'Eddy', score: 58}]
  *      // }
  */
-module.exports = _curry2(_dispatchable('groupBy', _xgroupBy, function groupBy(fn, list) {
-  return _reduce(function(acc, elt) {
-    var key = fn(elt);
-    acc[key] = append(elt, acc[key] || (acc[key] = []));
-    return acc;
-  }, {}, list);
-}));
+module.exports = _curry2(_dispatchable('groupBy', _xgroupBy, reduceBy(function(acc, item) {
+  if (acc == null) {
+    acc = [];
+  }
+  acc.push(item);
+  return acc;
+}, null)));
