@@ -13,7 +13,13 @@
     "new-cap": 0,
     "no-plusplus": 2,
     "no-undef": 2,
-    "no-unused-vars": 2,
+    "no-unused-vars": [
+      2,
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
     "brace-style": [
       2,
       "1tbs",
