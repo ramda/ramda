@@ -1,5 +1,4 @@
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+var reduceBy = require('./reduceBy');
 
 
 /**
@@ -23,14 +22,4 @@ var _has = require('./internal/_has');
  *      R.countBy(Math.floor)(numbers);    //=> {'1': 3, '2': 2, '3': 1}
  *      R.countBy(R.toLower)(letters);   //=> {'a': 5, 'b': 4, 'c': 3}
  */
-module.exports = _curry2(function countBy(fn, list) {
-  var counts = {};
-  var len = list.length;
-  var idx = 0;
-  while (idx < len) {
-    var key = fn(list[idx]);
-    counts[key] = (_has(key, counts) ? counts[key] : 0) + 1;
-    idx += 1;
-  }
-  return counts;
-});
+module.exports = reduceBy(function(acc, elem) { return acc + 1; }, 0);

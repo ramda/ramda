@@ -1,5 +1,4 @@
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
+var reduceBy = require('./reduceBy');
 
 
 /**
@@ -22,10 +21,4 @@ var _reduce = require('./internal/_reduce');
  *      R.indexBy(R.prop('id'), list);
  *      //=> {abc: {id: 'abc', title: 'B'}, xyz: {id: 'xyz', title: 'A'}}
  */
-module.exports = _curry2(function indexBy(fn, list) {
-  return _reduce(function(acc, elem) {
-    var key = fn(elem);
-    acc[key] = elem;
-    return acc;
-  }, {}, list);
-});
+module.exports = reduceBy(function(acc, elem) { return elem; }, null);
