@@ -13,7 +13,7 @@ var liftN = require('./liftN');
  * @sig (*... -> *) -> ([*]... -> [*])
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
- * @see R.liftN, R.lift
+ * @see R.liftN
  * @example
  *
  *      var madd3 = R.lift(R.curry((a, b, c) => a + b + c));
