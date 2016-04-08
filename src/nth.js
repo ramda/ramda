@@ -22,8 +22,8 @@ var _isString = require('./internal/_isString');
  *      R.nth(-1, list); //=> 'quux'
  *      R.nth(-99, list); //=> undefined
  *
- *      R.nth('abc', 2); //=> 'c'
- *      R.nth('abc', 3); //=> ''
+ *      R.nth(2, 'abc'); //=> 'c'
+ *      R.nth(3, 'abc'); //=> ''
  */
 module.exports = _curry2(function nth(offset, list) {
   var idx = offset < 0 ? list.length + offset : offset;
