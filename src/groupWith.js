@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.21.0
  * @category List
  * @sig (a, a -> Boolean) -> [a] -> [[a]]
  * @param {Function} fn Function for determining whether two given (adjacent)
