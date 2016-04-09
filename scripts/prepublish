@@ -7,8 +7,10 @@ README="${README//"${PREVIOUS_VERSION%.*}/ramda.min.js"/"${VERSION%.*}/ramda.min
 echo "$README" >README.md
 git add README.md
 
-for filename in $(find src -depth 1 -name "*.js" | xargs grep --files-without-match "@since v") ; do
-  sed -i "" $'s/@memberOf R/@memberOf R\\\n * @since v'"$VERSION/" $filename
+for filename in $(find src -maxdepth 1 -name "*.js" | xargs grep --files-without-match "@since v") ; do
+  cp -- $filename{,.tmp}
+  sed $'s/@memberOf R/@memberOf R\\\n * @since v'"$VERSION/" $filename.tmp >$filename
+  rm -- $filename.tmp
   git add $filename
 done
 
