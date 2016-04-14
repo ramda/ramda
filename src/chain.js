@@ -9,13 +9,14 @@ var map = require('./map');
  * `chain` maps a function over a list and concatenates the results. `chain`
  * is also known as `flatMap` in some libraries
  *
- * Dispatches to the `chain` method of the second argument, if present.
+ * Dispatches to the `chain` method of the second argument, if present,
+ * according to the [FantasyLand Chain spec](https://github.com/fantasyland/fantasy-land#chain).
  *
  * @func
  * @memberOf R
  * @since v0.3.0
  * @category List
- * @sig (a -> [b]) -> [a] -> [b]
+ * @sig Chain m => (a -> m b) -> m a -> m b
  * @param {Function} fn
  * @param {Array} list
  * @return {Array}
