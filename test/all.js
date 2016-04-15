@@ -19,8 +19,8 @@ describe('all', function() {
     eq(R.all(even, [2, 4, 6, 8, 9, 10]), false);
   });
 
-  it('returns true for an empty list', function() {
-    eq(R.all(T, []), true);
+  it('returns false for an empty list', function() {
+    eq(R.all(T, []), false);
   });
 
   it('returns true into array if all elements satisfy the predicate', function() {
