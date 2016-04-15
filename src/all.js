@@ -29,6 +29,11 @@ var _xall = require('./internal/_xall');
  *      R.all(lessThan3)([1, 2]); //=> true
  */
 module.exports = _curry2(_dispatchable('all', _xall, function all(fn, list) {
+  if (list.length === 0) {
+    // Empty array no element can satisfy the predicate
+    return false;
+  }
+
   var idx = 0;
   while (idx < list.length) {
     if (!fn(list[idx])) {
