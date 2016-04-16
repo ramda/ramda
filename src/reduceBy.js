@@ -1,6 +1,8 @@
 var _curryN = require('./internal/_curryN');
+var _dispatchable = require('./internal/_dispatchable');
 var _has = require('./internal/_has');
 var _reduce = require('./internal/_reduce');
+var _xreduceBy = require('./internal/_xreduceBy');
 
 
 /**
@@ -9,6 +11,8 @@ var _reduce = require('./internal/_reduce');
  * of each group to a single value via the reducer function `valueFn`.
  *
  * This function is basically a more general `groupBy` function.
+ *
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -45,10 +49,11 @@ var _reduce = require('./internal/_reduce');
  *      //   'F': ['Bart']
  *      // }
  */
-module.exports = _curryN(4, [], function reduceBy(valueFn, valueAcc, keyFn, list) {
-  return _reduce(function(acc, elt) {
-    var key = keyFn(elt);
-    acc[key] = valueFn(_has(key, acc) ? acc[key] : valueAcc, elt);
-    return acc;
-  }, {}, list);
-});
+module.exports = _curryN(4, [], _dispatchable('reduceBy', _xreduceBy,
+  function reduceBy(valueFn, valueAcc, keyFn, list) {
+    return _reduce(function(acc, elt) {
+      var key = keyFn(elt);
+      acc[key] = valueFn(_has(key, acc) ? acc[key] : valueAcc, elt);
+      return acc;
+    }, {}, list);
+  }));

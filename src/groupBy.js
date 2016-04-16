@@ -1,6 +1,5 @@
+var _checkForMethod = require('./internal/_checkForMethod');
 var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xgroupBy = require('./internal/_xgroupBy');
 var reduceBy = require('./reduceBy');
 
 /**
@@ -43,7 +42,7 @@ var reduceBy = require('./reduceBy');
  *      //   'F': [{name: 'Eddy', score: 58}]
  *      // }
  */
-module.exports = _curry2(_dispatchable('groupBy', _xgroupBy, reduceBy(function(acc, item) {
+module.exports = _curry2(_checkForMethod('groupBy', reduceBy(function(acc, item) {
   if (acc == null) {
     acc = [];
   }
