@@ -21,6 +21,8 @@ describe('ap', function() {
     // (<*>) :: (r -> a -> b) -> (r -> a) -> (r -> b)
     // f <*> g = \x -> f x (g x)
     eq(h(10), 10 + (10 * 2));
+
+    eq(R.ap(R.add)(g)(10), 10 + (10 * 2));
   });
 
   it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
