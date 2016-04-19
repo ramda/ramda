@@ -4,6 +4,15 @@ var eq = require('./shared/eq');
 var byType = R.prop('type');
 var sumValues = function(acc, obj) {return acc + obj.val;};
 
+var sumInput = [
+  {type: 'A', val: 10},
+  {type: 'B', val: 20},
+  {type: 'A', val: 30},
+  {type: 'A', val: 40},
+  {type: 'C', val: 50},
+  {type: 'B', val: 60}
+];
+
 describe('reduceBy', function() {
   it('splits the list into groups according to the grouping function', function() {
     var grade = function(score) {
@@ -39,19 +48,22 @@ describe('reduceBy', function() {
   it('is curried', function() {
     var reduceToSumsBy = R.reduceBy(sumValues, 0);
     var sumByType = reduceToSumsBy(byType);
-    eq(sumByType([
-      {type: 'A', val: 10},
-      {type: 'B', val: 20},
-      {type: 'A', val: 30},
-      {type: 'A', val: 40},
-      {type: 'C', val: 50},
-      {type: 'B', val: 60}
-    ]), {A: 80, B: 80, C: 50});
+    eq(sumByType(sumInput), {A: 80, B: 80, C: 50});
   });
 
   it('correctly reports the arity of curried versions', function() {
     var inc = R.reduceBy(sumValues, 0)(byType);
     eq(inc.length, 1);
+  });
+
+  it('can act as a transducer', function() {
+    var reduceToSumsBy = R.reduceBy(sumValues, 0);
+    var sumByType = reduceToSumsBy(byType);
+    eq(R.into(
+         {},
+         R.compose(sumByType, R.map(R.adjust(R.multiply(10), 1))),
+         sumInput),
+       {A: 800, B: 800, C: 500});
   });
 
 });

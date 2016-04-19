@@ -7,6 +7,8 @@ var reduceBy = require('./reduceBy');
  * objects generate the same value for the indexing key only the last value
  * will be included in the generated object.
  *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.19.0

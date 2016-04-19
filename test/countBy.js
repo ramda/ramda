@@ -56,4 +56,13 @@ describe('countBy', function() {
     eq(result.toString, 1);
   });
 
+  it('can act as a transducer', function() {
+    var transducer = R.compose(
+      R.countBy(R.prop('genre')),
+      R.map(R.adjust(R.toString, 1)));
+    eq(R.into({}, transducer, albums), {
+      Baroque: '2', Rock: '2', Jazz: '2', Romantic: '1', Metal: '1', Modern: '1', Broadway: '1', Folk: '1', Classical: '1'
+    });
+  });
+
 });

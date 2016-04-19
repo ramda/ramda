@@ -7,6 +7,8 @@ var reduceBy = require('./reduceBy');
  * produced by `fn` to the number of occurrences in the list. Note that all
  * keys are coerced to strings because of how JavaScript objects work.
  *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.1.0
