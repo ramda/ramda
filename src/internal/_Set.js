@@ -9,10 +9,18 @@ module.exports = (function() {
     this._items = {};
   }
 
+  /**
+   * @param item The item to add to the Set
+   * @returns {boolean} true if the item did not exist prior, otherwise false
+   */
   _Set.prototype.add = function(item) {
-    return hasOrAdd(item, true, this);
+    return !hasOrAdd(item, true, this);
   };
 
+  /**
+   * @param item The item to check for existence in the Set
+   * @returns {boolean} true if the item exists in the Set, otherwise false
+   */
   _Set.prototype.has = function(item) {
     return hasOrAdd(item, false, this);
   };
@@ -25,10 +33,7 @@ module.exports = (function() {
    * @param shouldAdd  If true, the item will be added to the set if it doesn't
    *                   already exist.
    * @param set        The set instance to check or add to.
-   * @return {boolean} When shouldAdd is true, this will return true when a new
-   *                   item was added otherwise false. When shouldAdd is false,
-   *                   this will return true if the item already exists, otherwise
-   *                   false.
+   * @return {boolean} true if the item already existed, otherwise false.
    */
   function hasOrAdd(item, shouldAdd, set) {
     var type = typeof item;
@@ -37,19 +42,23 @@ module.exports = (function() {
       case 'string':
       case 'number':
         // distinguish between +0 and -0
-        if (item === 0 && !set._items['-0'] && 1 / item === -Infinity) {
-          if (shouldAdd) {
-            set._items['-0'] = true;
+        if (item === 0 && 1 / item === -Infinity) {
+          if (set._items['-0']) {
+            return true;
+          } else {
+            if (shouldAdd) {
+              set._items['-0'] = true;
+            }
+            return false;
           }
-          return shouldAdd;
         }
-        // these types can all utilise Set
+        // these types can all utilise the native Set
         if (set._nativeSet !== null) {
           if (shouldAdd) {
             prevSize = set._nativeSet.size;
             set._nativeSet.add(item);
             newSize = set._nativeSet.size;
-            return (newSize > prevSize);
+            return newSize === prevSize;
           } else {
             return set._nativeSet.has(item);
           }
@@ -59,14 +68,14 @@ module.exports = (function() {
               set._items[type] = {};
               set._items[type][item] = true;
             }
-            return shouldAdd;
+            return false;
           } else if (item in set._items[type]) {
-            return !shouldAdd;
+            return true;
           } else {
             if (shouldAdd) {
               set._items[type][item] = true;
             }
-            return shouldAdd;
+            return false;
           }
         }
 
@@ -76,18 +85,18 @@ module.exports = (function() {
         if (type in set._items) {
           var bIdx = item ? 1 : 0;
           if (set._items[type][bIdx]) {
-            return !shouldAdd;
+            return true;
           } else {
             if (shouldAdd) {
               set._items[type][bIdx] = true;
             }
-            return shouldAdd;
+            return false;
           }
         } else {
           if (shouldAdd) {
             set._items[type] = item ? [false, true] : [true, false];
           }
-          return shouldAdd;
+          return false;
         }
 
       case 'function':
@@ -106,25 +115,25 @@ module.exports = (function() {
             if (shouldAdd) {
               set._items[type] = [item];
             }
-            return shouldAdd;
+            return false;
           }
           if (!_contains(item, set._items[type])) {
             if (shouldAdd) {
               set._items[type].push(item);
             }
-            return shouldAdd;
+            return false;
           }
+          return true;
         }
-        return !shouldAdd;
 
       case 'undefined':
         if (set._items[type]) {
-          return !shouldAdd;
+          return true;
         } else {
           if (shouldAdd) {
             set._items[type] = true;
           }
-          return shouldAdd;
+          return false;
         }
 
       case 'object':
@@ -133,9 +142,9 @@ module.exports = (function() {
             if (shouldAdd) {
               set._items['null'] = true;
             }
-            return shouldAdd;
+            return false;
           }
-          return !shouldAdd;
+          return true;
         }
       /* falls through */
       default:
@@ -146,16 +155,16 @@ module.exports = (function() {
           if (shouldAdd) {
             set._items[type] = [item];
           }
-          return shouldAdd;
+          return false;
         }
         // scan through all previously applied items
         if (!_contains(item, set._items[type])) {
           if (shouldAdd) {
             set._items[type].push(item);
           }
-          return shouldAdd;
+          return false;
         }
-        return !shouldAdd;
+        return true;
     }
   }
   return _Set;
