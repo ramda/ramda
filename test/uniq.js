@@ -22,6 +22,7 @@ describe('uniq', function() {
       return x instanceof Just && R.equals(x.value, this.value);
     };
 
+    eq(R.uniq([-0, -0]).length, 1);
     eq(R.uniq([0, -0]).length, 2);
     eq(R.uniq([NaN, NaN]).length, 1);
     eq(R.uniq([[1], [1]]).length, 1);
