@@ -5,10 +5,10 @@ var _xdropWhile = require('./internal/_xdropWhile');
 
 
 /**
- * Returns a new list containing the last `n` elements of a given list, passing
- * each value to the supplied predicate function, skipping elements while the
- * predicate function returns `true`. The predicate function is passed one
- * argument: *(value)*.
+ * Returns a new list excluding the leading elements of a given list which
+ * satisfy the supplied predicate function. It passes each value to the supplied
+ * predicate function, skipping elements while the predicate function returns
+ * `true`. The predicate function is applied to one argument: *(value)*.
  *
  * Dispatches to the `dropWhile` method of the second argument, if present.
  *
