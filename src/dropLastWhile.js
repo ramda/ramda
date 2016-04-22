@@ -6,10 +6,10 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
 
 /**
  * Returns a new list excluding all the tailing elements of a given list which
- * match the supplied predicate function. It passes each value from the right
+ * satisfy the supplied predicate function. It passes each value from the right
  * to the supplied predicate function, skipping elements while the predicate
- * function returns `true`. The predicate function is passed one argument: 
- * (value)*.
+ * function returns `true`. The predicate function is applied to one argument:
+ * *(value)*.
  *
  * @func
  * @memberOf R
