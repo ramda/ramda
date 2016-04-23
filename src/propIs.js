@@ -1,6 +1,5 @@
 var _curry3 = require('./internal/_curry3');
 var is = require('./is');
-var propSatisfies = require('./propSatisfies');
 
 
 /**
@@ -24,5 +23,5 @@ var propSatisfies = require('./propSatisfies');
  *      R.propIs(Number, 'x', {});            //=> false
  */
 module.exports = _curry3(function propIs(type, name, obj) {
-  return propSatisfies(is(type), name, obj);
+  return is(type, obj[name]);
 });

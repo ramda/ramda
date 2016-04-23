@@ -22,17 +22,17 @@ function prettyMoe(moe) {
 
 fs.readdirSync('./lib/bench').forEach(function(file) {
   var test, table;
-  if (isBench.test(file)) { 
+  if (isBench.test(file)) {
     test = require('../lib/bench/' + file);
     table = getTable(test.name);
     var suite = Benchmark.Suite(test.name, {
-      onComplete: function() { console.log(table.toString()); } 
+      onComplete: function() { console.log(table.toString()); }
     });
     Object.keys(test.tests).forEach(function(k) {
       suite.add(k, test.tests[k], {
         onComplete: function(vo) {
           table.push([
-            vo.target.name, 
+            vo.target.name,
             prettyHz(vo.target.hz),
             prettyMoe(vo.target.stats.rme)
           ]);
