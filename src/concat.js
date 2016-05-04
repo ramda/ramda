@@ -1,6 +1,6 @@
-var flip = require('./flip');
+var _curry2 = require('./internal/_curry2');
+var _isArray = require('./internal/_isArray');
 var invoker = require('./invoker');
-
 
 /**
  * Returns the result of concatenating the given lists or strings.
@@ -23,4 +23,9 @@ var invoker = require('./invoker');
  *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
  *      R.concat('ABC', 'DEF'); // 'ABCDEF'
  */
-module.exports = flip(invoker(1, 'concat'));
+module.exports = _curry2(function concat(a, b) {
+  if (_isArray(a) && !_isArray(b)) {
+    throw new TypeError(toString(b) + ' is not an array');
+  }
+  return invoker(1, 'concat')(b, a);
+});
