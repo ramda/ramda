@@ -1,4 +1,5 @@
 var assert = require('assert');
+var vm = require('vm');
 
 var R = require('..');
 var eq = require('./shared/eq');
@@ -38,6 +39,10 @@ describe('invoker', function() {
                err.message === '[1, 2, 3] does not have a method named "length"';
       }
     );
+  });
+
+  it('does not rely on constructor identity', function() {
+    eq(concat2([2], [3], vm.runInNewContext('[1]')), [1, 2, 3]);
   });
 
   it('curries the method call', function() {
