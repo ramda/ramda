@@ -1,6 +1,8 @@
 var _curry2 = require('./internal/_curry2');
 var _isArray = require('./internal/_isArray');
 var invoker = require('./invoker');
+var toString = require('./toString');
+
 
 /**
  * Returns the result of concatenating the given lists or strings.
