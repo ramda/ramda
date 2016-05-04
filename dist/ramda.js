@@ -1,9 +1,4 @@
-//  Ramda v0.21.0
-//  https://github.com/ramda/ramda
-//  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
-//  Ramda may be freely distributed under the MIT license.
-
-;(function() {
+﻿;(function() {
 
   'use strict';
 
@@ -902,6 +897,43 @@
         });
     }();
 
+    var _xreduceBy = function () {
+        function XReduceBy(valueFn, valueAcc, keyFn, xf) {
+            this.valueFn = valueFn;
+            this.valueAcc = valueAcc;
+            this.keyFn = keyFn;
+            this.xf = xf;
+            this.inputs = {};
+        }
+        XReduceBy.prototype['@@transducer/init'] = _xfBase.init;
+        XReduceBy.prototype['@@transducer/result'] = function (result) {
+            var key;
+            for (key in this.inputs) {
+                if (_has(key, this.inputs)) {
+                    result = this.xf['@@transducer/step'](result, this.inputs[key]);
+                    if (result['@@transducer/reduced']) {
+                        result = result['@@transducer/value'];
+                        break;
+                    }
+                }
+            }
+            this.inputs = null;
+            return this.xf['@@transducer/result'](result);
+        };
+        XReduceBy.prototype['@@transducer/step'] = function (result, input) {
+            var key = this.keyFn(input);
+            this.inputs[key] = this.inputs[key] || [
+                key,
+                this.valueAcc
+            ];
+            this.inputs[key][1] = this.valueFn(this.inputs[key][1], input);
+            return result;
+        };
+        return _curryN(4, [], function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
+            return new XReduceBy(valueFn, valueAcc, keyFn, xf);
+        });
+    }();
+
     var _xtake = function () {
         function XTake(n, xf) {
             this.xf = xf;
@@ -1528,10 +1560,10 @@
     });
 
     /**
-     * Returns a new list containing the last `n` elements of a given list, passing
-     * each value to the supplied predicate function, skipping elements while the
-     * predicate function returns `true`. The predicate function is passed one
-     * argument: *(value)*.
+     * Returns a new list excluding the leading elements of a given list which
+     * satisfy the supplied predicate function. It passes each value to the supplied
+     * predicate function, skipping elements while the predicate function returns
+     * `true`. The predicate function is applied to one argument: *(value)*.
      *
      * Dispatches to the `dropWhile` method of the second argument, if present.
      *
@@ -1848,23 +1880,23 @@
      * @memberOf R
      * @since v0.21.0
      * @category List
-     * @sig (a, a -> Boolean) -> [a] -> [[a]]
+     * @sig ((a, a) ΓåÆ Boolean) ΓåÆ [a] ΓåÆ [[a]]
      * @param {Function} fn Function for determining whether two given (adjacent)
      *        elements should be in the same group
      * @param {Array} list The array to group. Also accepts a string, which will be
      *        treated as a list of characters.
      * @return {List} A list that contains sublists of equal elements,
-     *         whose concatenations is equal to the original list.
+     *         whose concatenations are equal to the original list.
      * @example
      *
-     *    groupWith(R.equals, [0, 1, 1, 2, 3, 5, 8, 13, 21])
-     *    // [[0], [1, 1], [2, 3, 5, 8, 13, 21]]
+     * R.groupWith(R.equals, [0, 1, 1, 2, 3, 5, 8, 13, 21])
+     * //=> [[0], [1, 1], [2], [3], [5], [8], [13], [21]]
      *
-     *    groupWith((a, b) => a % 2 === b % 2, [0, 1, 1, 2, 3, 5, 8, 13, 21])
-     *    // [[0], [1, 1], [2], [3, 5], [8], [13, 21]]
+     * R.groupWith((a, b) => a % 2 === b % 2, [0, 1, 1, 2, 3, 5, 8, 13, 21])
+     * //=> [[0], [1, 1], [2], [3, 5], [8], [13, 21]]
      *
-     *    R.groupWith(R.eqBy(isVowel), 'aestiou')
-     *    // ['ae', 'st', 'iou']
+     * R.groupWith(R.eqBy(isVowel), 'aestiou')
+     * //=> ['ae', 'st', 'iou']
      */
     var groupWith = _curry2(function (fn, list) {
         var res = [];
@@ -3400,6 +3432,30 @@
     });
 
     /**
+     * Returns `true` if the specified object property is of the given type;
+     * `false` otherwise.
+     *
+     * @func
+     * @memberOf R
+     * @since v0.16.0
+     * @category Type
+     * @sig Type -> String -> Object -> Boolean
+     * @param {Function} type
+     * @param {String} name
+     * @param {*} obj
+     * @return {Boolean}
+     * @see R.is, R.propSatisfies
+     * @example
+     *
+     *      R.propIs(Number, 'x', {x: 1, y: 2});  //=> true
+     *      R.propIs(Number, 'x', {x: 'foo'});    //=> false
+     *      R.propIs(Number, 'x', {});            //=> false
+     */
+    var propIs = _curry3(function propIs(type, name, obj) {
+        return is(type, obj[name]);
+    });
+
+    /**
      * If the given, non-null object has an own property with the specified name,
      * returns the value of that property. Otherwise returns the provided default
      * value.
@@ -4706,10 +4762,10 @@
      *      // truncate :: String -> String
      *      var truncate = R.when(
      *        R.propSatisfies(R.gt(R.__, 10), 'length'),
-     *        R.pipe(R.take(10), R.append('…'), R.join(''))
+     *        R.pipe(R.take(10), R.append('ΓÇª'), R.join(''))
      *      );
      *      truncate('12345');         //=> '12345'
-     *      truncate('0123456789ABC'); //=> '0123456789…'
+     *      truncate('0123456789ABC'); //=> '0123456789ΓÇª'
      */
     var when = _curry3(function when(pred, whenTrueFn, x) {
         return pred(x) ? whenTrueFn(x) : x;
@@ -5219,6 +5275,92 @@
         };
     }();
 
+    // Values of other types are only equal if identical.
+    var _subequals = function _subequals(a, b, stackA, stackB) {
+        if (identical(a, b)) {
+            return true;
+        }
+        if (type(a) !== type(b)) {
+            return false;
+        }
+        if (a == null || b == null) {
+            return false;
+        }
+        if (typeof a.subequals === 'function' || typeof b.subequals === 'function') {
+            return typeof a.subequals === 'function' && a.subequals(b) && typeof b.subequals === 'function' && b.subequals(a);
+        }
+        switch (type(a)) {
+        case 'Arguments':
+        case 'Array':
+        case 'Object':
+            if (typeof a.constructor === 'function' && _functionName(a.constructor) === 'Promise') {
+                return a === b;
+            }
+            break;
+        case 'Boolean':
+        case 'Number':
+        case 'String':
+            if (!(typeof a === typeof b && identical(a.valueOf(), b.valueOf()))) {
+                return false;
+            }
+            break;
+        case 'Date':
+            if (!identical(a.valueOf(), b.valueOf())) {
+                return false;
+            }
+            break;
+        case 'Error':
+            return a.name === b.name && a.message === b.message;
+        case 'RegExp':
+            if (!(a.source === b.source && a.global === b.global && a.ignoreCase === b.ignoreCase && a.multiline === b.multiline && a.sticky === b.sticky && a.unicode === b.unicode)) {
+                return false;
+            }
+            break;
+        case 'Map':
+        case 'Set':
+            if (!_subequals(_arrayFromIterator(a.entries()), _arrayFromIterator(b.entries()), stackA, stackB)) {
+                return false;
+            }
+            break;
+        case 'Int8Array':
+        case 'Uint8Array':
+        case 'Uint8ClampedArray':
+        case 'Int16Array':
+        case 'Uint16Array':
+        case 'Int32Array':
+        case 'Uint32Array':
+        case 'Float32Array':
+        case 'Float64Array':
+            break;
+        case 'ArrayBuffer':
+            break;
+        default:
+            // Values of other types are only equal if identical.
+            return false;
+        }
+        var keysA = keys(a);
+        var idx = stackA.length - 1;
+        while (idx >= 0) {
+            if (stackA[idx] === a) {
+                return stackB[idx] === b;
+            }
+            idx -= 1;
+        }
+        stackA.push(a);
+        stackB.push(b);
+        idx = keysA.length - 1;
+        while (idx >= 0) {
+            var key = keysA[idx];
+            if (!(_has(key, b) && _subequals(b[key], a[key], stackA, stackB))) {
+                return false;
+            }
+            idx -= 1;
+        }
+        stackA.pop();
+        stackB.pop();
+        return true;
+    };
+
     var _xdropLastWhile = function () {
         function XDropLastWhile(fn, xf) {
             this.f = fn;
@@ -5244,41 +5386,6 @@
         };
         return _curry2(function _xdropLastWhile(fn, xf) {
             return new XDropLastWhile(fn, xf);
-        });
-    }();
-
-    var _xgroupBy = function () {
-        function XGroupBy(f, xf) {
-            this.xf = xf;
-            this.f = f;
-            this.inputs = {};
-        }
-        XGroupBy.prototype['@@transducer/init'] = _xfBase.init;
-        XGroupBy.prototype['@@transducer/result'] = function (result) {
-            var key;
-            for (key in this.inputs) {
-                if (_has(key, this.inputs)) {
-                    result = this.xf['@@transducer/step'](result, this.inputs[key]);
-                    if (result['@@transducer/reduced']) {
-                        result = result['@@transducer/value'];
-                        break;
-                    }
-                }
-            }
-            this.inputs = null;
-            return this.xf['@@transducer/result'](result);
-        };
-        XGroupBy.prototype['@@transducer/step'] = function (result, input) {
-            var key = this.f(input);
-            this.inputs[key] = this.inputs[key] || [
-                key,
-                []
-            ];
-            this.inputs[key][1] = append(input, this.inputs[key][1]);
-            return result;
-        };
-        return _curry2(function _xgroupBy(f, xf) {
-            return new XGroupBy(f, xf);
         });
     }();
 
@@ -5475,10 +5582,11 @@
     var dropLast = _curry2(_dispatchable('dropLast', _xdropLast, _dropLast));
 
     /**
-     * Returns a new list containing all but last the`n` elements of a given list,
-     * passing each value from the right to the supplied predicate function,
-     * skipping elements while the predicate function returns `true`. The predicate
-     * function is passed one argument: (value)*.
+     * Returns a new list excluding all the tailing elements of a given list which
+     * satisfy the supplied predicate function. It passes each value from the right
+     * to the supplied predicate function, skipping elements while the predicate
+     * function returns `true`. The predicate function is applied to one argument:
+     * *(value)*.
      *
      * @func
      * @memberOf R
@@ -6171,31 +6279,7 @@
      *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
      */
     var propEq = _curry3(function propEq(name, val, obj) {
-        return propSatisfies(equals(val), name, obj);
-    });
-
-    /**
-     * Returns `true` if the specified object property is of the given type;
-     * `false` otherwise.
-     *
-     * @func
-     * @memberOf R
-     * @since v0.16.0
-     * @category Type
-     * @sig Type -> String -> Object -> Boolean
-     * @param {Function} type
-     * @param {String} name
-     * @param {*} obj
-     * @return {Boolean}
-     * @see R.is, R.propSatisfies
-     * @example
-     *
-     *      R.propIs(Number, 'x', {x: 1, y: 2});  //=> true
-     *      R.propIs(Number, 'x', {x: 'foo'});    //=> false
-     *      R.propIs(Number, 'x', {});            //=> false
-     */
-    var propIs = _curry3(function propIs(type, name, obj) {
-        return propSatisfies(is(type), name, obj);
+        return equals(val, obj[name]);
     });
 
     /**
@@ -6240,6 +6324,8 @@
      *
      * This function is basically a more general `groupBy` function.
      *
+     * Acts as a transducer if a transformer is given in list position.
+     *
      * @func
      * @memberOf R
      * @since v0.20.0
@@ -6275,12 +6361,46 @@
      *      //   'F': ['Bart']
      *      // }
      */
-    var reduceBy = _curryN(4, [], function reduceBy(valueFn, valueAcc, keyFn, list) {
+    var reduceBy = _curryN(4, [], _dispatchable('reduceBy', _xreduceBy, function reduceBy(valueFn, valueAcc, keyFn, list) {
         return _reduce(function (acc, elt) {
             var key = keyFn(elt);
             acc[key] = valueFn(_has(key, acc) ? acc[key] : valueAcc, elt);
             return acc;
         }, {}, list);
+    }));
+
+    /**
+     * Like `reduce`, `reduceWhile` returns a single item by iterating through
+     * the list, successively calling the iterator function. `reduceWhile` also
+     * takes a predicate that is evaluated before each step. If the predicate returns
+     * `false`, it "short-circuits" the iteration and returns the current value
+     * of the accumulator.
+     *
+     * @func
+     * @memberOf R
+     * @category List
+     * @sig ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+     * @param {Function} pred The predicate. It is passed the accumulator and the
+     *        current element.
+     * @param {Function} fn The iterator function. Receives two values, the
+     *        accumulator and the current element.
+     * @param {*} a The accumulator value.
+     * @param {Array} list The list to iterate over.
+     * @return {*} The final, accumulated value.
+     * @see R.reduce, R.reduced
+     * @example
+     *
+     *      var isOdd = (acc, x) => x % 2 === 1;
+     *      var xs = [1, 3, 5, 60, 777, 800];
+     *      R.reduceWhile(isOdd, R.add, 0, xs); //=> 9
+     *
+     *      var ys = [2, 4, 6]
+     *      R.reduceWhile(isOdd, R.add, 111, ys); //=> 111
+     */
+    var reduceWhile = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
+        return _reduce(function (acc, x) {
+            return pred(acc, x) ? fn(acc, x) : _reduced(acc);
+        }, a, list);
     });
 
     /**
@@ -6330,6 +6450,36 @@
      */
     var repeat = _curry2(function repeat(value, n) {
         return times(always(value), n);
+    });
+
+    /**
+     * Returns `true` if its arguments are partially equivalent, `false` otherwise. Handles
+     * cyclical data structures. Returns true when the lValue is a subset of the rValue.
+     *
+     * Dispatches symmetrically to the `partial equals` methods of both arguments, if
+     * present.
+     *
+     * @func
+     * @memberOf R
+     * @since v0.15.0
+     * @category Relation
+     * @sig a -> b -> Boolean
+     * @param {*} a
+     * @param {*} b
+     * @return {Boolean}
+     * @example
+     *
+     *      R.pequals(1, 1); //=> true
+     *      R.pequals(1, '1'); //=> false
+     *      R.pequals([1, 2, 3], [1, 2, 3]); //=> true
+     *      R.pequals([1, 2], [1, 2, 3]); //=> true
+     *
+     *      var a = {}; a.v = a;
+     *      var b = {}; b.v = b;
+     *      R.pequals(a, b); //=> true
+     */
+    var subequals = _curry2(function subequals(a, b) {
+        return _subequals(a, b, [], []);
     });
 
     /**
@@ -6590,11 +6740,11 @@
      * @example
      *
      *      var isQueen = R.propEq('rank', 'Q');
-     *      var isSpade = R.propEq('suit', '♠︎');
+     *      var isSpade = R.propEq('suit', 'ΓÖá∩╕Ä');
      *      var isQueenOfSpades = R.allPass([isQueen, isSpade]);
      *
-     *      isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
-     *      isQueenOfSpades({rank: 'Q', suit: '♠︎'}); //=> true
+     *      isQueenOfSpades({rank: 'Q', suit: 'ΓÖú∩╕Ä'}); //=> false
+     *      isQueenOfSpades({rank: 'Q', suit: 'ΓÖá∩╕Ä'}); //=> true
      */
     var allPass = _curry1(function allPass(preds) {
         return curryN(reduce(max, 0, pluck('length', preds)), function () {
@@ -6682,7 +6832,7 @@
      * ap applies a list of functions to a list of values.
      *
      * Dispatches to the `ap` method of the second argument, if present. Also
-     * treats functions as applicatives.
+     * treats curried functions as applicatives.
      *
      * @func
      * @memberOf R
@@ -6698,9 +6848,9 @@
      */
     // else
     var ap = _curry2(function ap(applicative, fn) {
-        return typeof applicative.ap === 'function' ? applicative.ap(fn) : typeof applicative === 'function' ? curryN(Math.max(applicative.length, fn.length), function () {
-            return applicative.apply(this, arguments)(fn.apply(this, arguments));
-        }) : // else
+        return typeof applicative.ap === 'function' ? applicative.ap(fn) : typeof applicative === 'function' ? function (x) {
+            return applicative(x)(fn(x));
+        } : // else
         _reduce(function (acc, f) {
             return _concat(acc, map(f, fn));
         }, [], applicative);
@@ -6778,13 +6928,14 @@
      * `chain` maps a function over a list and concatenates the results. `chain`
      * is also known as `flatMap` in some libraries
      *
-     * Dispatches to the `chain` method of the second argument, if present.
+     * Dispatches to the `chain` method of the second argument, if present,
+     * according to the [FantasyLand Chain spec](https://github.com/fantasyland/fantasy-land#chain).
      *
      * @func
      * @memberOf R
      * @since v0.3.0
      * @category List
-     * @sig (a -> [b]) -> [a] -> [b]
+     * @sig Chain m => (a -> m b) -> m a -> m b
      * @param {Function} fn
      * @param {Array} list
      * @return {Array}
@@ -6820,13 +6971,13 @@
      * @example
      *
      *      var fn = R.cond([
-     *        [R.equals(0),   R.always('water freezes at 0°C')],
-     *        [R.equals(100), R.always('water boils at 100°C')],
-     *        [R.T,           temp => 'nothing special happens at ' + temp + '°C']
+     *        [R.equals(0),   R.always('water freezes at 0┬░C')],
+     *        [R.equals(100), R.always('water boils at 100┬░C')],
+     *        [R.T,           temp => 'nothing special happens at ' + temp + '┬░C']
      *      ]);
-     *      fn(0); //=> 'water freezes at 0°C'
-     *      fn(50); //=> 'nothing special happens at 50°C'
-     *      fn(100); //=> 'water boils at 100°C'
+     *      fn(0); //=> 'water freezes at 0┬░C'
+     *      fn(50); //=> 'nothing special happens at 50┬░C'
+     *      fn(100); //=> 'water boils at 100┬░C'
      */
     var cond = _curry1(function cond(pairs) {
         var arity = reduce(max, 0, map(function (pair) {
@@ -6928,7 +7079,7 @@
      *      var multiply = (a, b) => a * b;
      *      var subtract = (a, b) => a - b;
      *
-     *      //≅ multiply( add(1, 2), subtract(1, 2) );
+     *      //Γëà multiply( add(1, 2), subtract(1, 2) );
      *      R.converge(multiply, [add, subtract])(1, 2); //=> -3
      *
      *      var add3 = (a, b, c) => a + b + c;
@@ -6949,6 +7100,8 @@
      * key generated by the supplied function. Returns an object mapping the keys
      * produced by `fn` to the number of occurrences in the list. Note that all
      * keys are coerced to strings because of how JavaScript objects work.
+     *
+     * Acts as a transducer if a transformer is given in list position.
      *
      * @func
      * @memberOf R
@@ -7094,7 +7247,7 @@
      *      //   'F': [{name: 'Eddy', score: 58}]
      *      // }
      */
-    var groupBy = _curry2(_dispatchable('groupBy', _xgroupBy, reduceBy(function (acc, item) {
+    var groupBy = _curry2(_checkForMethod('groupBy', reduceBy(function (acc, item) {
         if (acc == null) {
             acc = [];
         }
@@ -7107,6 +7260,8 @@
      * object indexing the objects by the given key. Note that if multiple
      * objects generate the same value for the indexing key only the last value
      * will be included in the generated object.
+     *
+     * Acts as a transducer if a transformer is given in list position.
      *
      * @func
      * @memberOf R
@@ -7916,6 +8071,14 @@
     // A simple Set type that honours R.equals semantics
     /* globals Set */
     /**
+       * @param item The item to add to the Set
+       * @returns {boolean} true if the item did not exist prior, otherwise false
+       */
+    /**
+       * @param item The item to check for existence in the Set
+       * @returns {boolean} true if the item exists in the Set, otherwise false
+       */
+    /**
        * Combines the logic for checking whether an item is a member of the set and
        * for adding a new item to the set.
        *
@@ -7923,13 +8086,10 @@
        * @param shouldAdd  If true, the item will be added to the set if it doesn't
        *                   already exist.
        * @param set        The set instance to check or add to.
-       * @return {boolean} When shouldAdd is true, this will return true when a new
-       *                   item was added otherwise false. When shouldAdd is false,
-       *                   this will return true if the item already exists, otherwise
-       *                   false.
+       * @return {boolean} true if the item already existed, otherwise false.
        */
     // distinguish between +0 and -0
-    // these types can all utilise Set
+    // these types can all utilise the native Set
     // set._items['boolean'] holds a two element array
     // representing [ falseExists, trueExists ]
     // compare functions for reference equality
@@ -7943,9 +8103,17 @@
             this._nativeSet = typeof Set === 'function' ? new Set() : null;
             this._items = {};
         }
+        /**
+       * @param item The item to add to the Set
+       * @returns {boolean} true if the item did not exist prior, otherwise false
+       */
         _Set.prototype.add = function (item) {
-            return hasOrAdd(item, true, this);
+            return !hasOrAdd(item, true, this);
         };
+        /**
+       * @param item The item to check for existence in the Set
+       * @returns {boolean} true if the item exists in the Set, otherwise false
+       */
         _Set.prototype.has = function (item) {
             return hasOrAdd(item, false, this);
         };
@@ -7957,10 +8125,7 @@
        * @param shouldAdd  If true, the item will be added to the set if it doesn't
        *                   already exist.
        * @param set        The set instance to check or add to.
-       * @return {boolean} When shouldAdd is true, this will return true when a new
-       *                   item was added otherwise false. When shouldAdd is false,
-       *                   this will return true if the item already exists, otherwise
-       *                   false.
+       * @return {boolean} true if the item already existed, otherwise false.
        */
         function hasOrAdd(item, shouldAdd, set) {
             var type = typeof item;
@@ -7969,19 +8134,23 @@
             case 'string':
             case 'number':
                 // distinguish between +0 and -0
-                if (item === 0 && !set._items['-0'] && 1 / item === -Infinity) {
-                    if (shouldAdd) {
-                        set._items['-0'] = true;
+                if (item === 0 && 1 / item === -Infinity) {
+                    if (set._items['-0']) {
+                        return true;
+                    } else {
+                        if (shouldAdd) {
+                            set._items['-0'] = true;
+                        }
+                        return false;
                     }
-                    return shouldAdd;
                 }
-                // these types can all utilise Set
+                // these types can all utilise the native Set
                 if (set._nativeSet !== null) {
                     if (shouldAdd) {
                         prevSize = set._nativeSet.size;
                         set._nativeSet.add(item);
                         newSize = set._nativeSet.size;
-                        return newSize > prevSize;
+                        return newSize === prevSize;
                     } else {
                         return set._nativeSet.has(item);
                     }
@@ -7991,14 +8160,14 @@
                             set._items[type] = {};
                             set._items[type][item] = true;
                         }
-                        return shouldAdd;
+                        return false;
                     } else if (item in set._items[type]) {
-                        return !shouldAdd;
+                        return true;
                     } else {
                         if (shouldAdd) {
                             set._items[type][item] = true;
                         }
-                        return shouldAdd;
+                        return false;
                     }
                 }
             case 'boolean':
@@ -8007,12 +8176,12 @@
                 if (type in set._items) {
                     var bIdx = item ? 1 : 0;
                     if (set._items[type][bIdx]) {
-                        return !shouldAdd;
+                        return true;
                     } else {
                         if (shouldAdd) {
                             set._items[type][bIdx] = true;
                         }
-                        return shouldAdd;
+                        return false;
                     }
                 } else {
                     if (shouldAdd) {
@@ -8024,7 +8193,7 @@
                             false
                         ];
                     }
-                    return shouldAdd;
+                    return false;
                 }
             case 'function':
                 // compare functions for reference equality
@@ -8042,24 +8211,24 @@
                         if (shouldAdd) {
                             set._items[type] = [item];
                         }
-                        return shouldAdd;
+                        return false;
                     }
                     if (!_contains(item, set._items[type])) {
                         if (shouldAdd) {
                             set._items[type].push(item);
                         }
-                        return shouldAdd;
+                        return false;
                     }
+                    return true;
                 }
-                return !shouldAdd;
             case 'undefined':
                 if (set._items[type]) {
-                    return !shouldAdd;
+                    return true;
                 } else {
                     if (shouldAdd) {
                         set._items[type] = true;
                     }
-                    return shouldAdd;
+                    return false;
                 }
             case 'object':
                 if (item === null) {
@@ -8067,9 +8236,9 @@
                         if (shouldAdd) {
                             set._items['null'] = true;
                         }
-                        return shouldAdd;
+                        return false;
                     }
-                    return !shouldAdd;
+                    return true;
                 }
             /* falls through */
             default:
@@ -8080,16 +8249,16 @@
                     if (shouldAdd) {
                         set._items[type] = [item];
                     }
-                    return shouldAdd;
+                    return false;
                 }
                 // scan through all previously applied items
                 if (!_contains(item, set._items[type])) {
                     if (shouldAdd) {
                         set._items[type].push(item);
                     }
-                    return shouldAdd;
+                    return false;
                 }
-                return !shouldAdd;
+                return true;
             }
         }
         return _Set;
@@ -8703,6 +8872,7 @@
         reduce: reduce,
         reduceBy: reduceBy,
         reduceRight: reduceRight,
+        reduceWhile: reduceWhile,
         reduced: reduced,
         reject: reject,
         remove: remove,
@@ -8719,6 +8889,7 @@
         splitAt: splitAt,
         splitEvery: splitEvery,
         splitWhen: splitWhen,
+        subequals: subequals,
         subtract: subtract,
         sum: sum,
         symmetricDifference: symmetricDifference,
