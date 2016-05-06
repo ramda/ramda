@@ -8,10 +8,6 @@ describe('fromPairs', function() {
     eq(R.fromPairs([['a', 1], ['b', 2], ['c', 3]]), {a: 1, b: 2, c: 3});
   });
 
-  it('skips empty Arrays and non-Array elements', function() {
-    eq(R.fromPairs([['a', 1], 'x', [], ['b', 2], {}, ['c', 3]]), {a: 1, b: 2, c: 3});
-  });
-
   it('gives later entries precedence over earlier ones', function() {
     eq(R.fromPairs([['x', 1], ['x', 2]]), {x: 2});
   });
