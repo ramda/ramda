@@ -3,7 +3,8 @@ var _isArray = require('./internal/_isArray');
 
 
 /**
- * Creates a new object out of a list key-value pairs.
+ * Creates a new object from a list key-value pairs. If a key appears in
+ * multiple pairs, the rightmost pair is included in the object.
  *
  * @func
  * @memberOf R
