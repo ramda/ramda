@@ -11,7 +11,8 @@ var _curry2 = require('./internal/_curry2');
  * @sig String -> {k: v} -> {k: v}
  * @param {String} prop the name of the property to dissociate
  * @param {Object} obj the object to clone
- * @return {Object} a new object similar to the original but without the specified property
+ * @return {Object} a new object similar to the original but without the specified property,
+ *         or the same object if the property isn't found in the object
  * @see R.assoc
  * @example
  *
@@ -19,10 +20,13 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function dissoc(prop, obj) {
   var result = {};
+  var hasChanged = false;
   for (var p in obj) {
     if (p !== prop) {
       result[p] = obj[p];
+    } else {
+      hasChanged = true;
     }
   }
-  return result;
+  return hasChanged ? result : obj;
 });
