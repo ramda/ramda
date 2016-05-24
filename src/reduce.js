@@ -31,7 +31,7 @@ var _reduce = require('./internal/_reduce');
  * @example
  *
  *      var numbers = [1, 2, 3];
- *      var plus = (a, b) => a + b
+ *      var plus = (a, b) => a + b;
  *
  *      R.reduce(plus, 10, numbers); //=> 16
  */
