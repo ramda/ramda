@@ -32,7 +32,7 @@ var _reduce = require('./internal/_reduce');
  *
  *      var numbers = [1, 2, 3];
  *      var plus = (a, b) => a + b
- * 
+ *
  *      R.reduce(plus, 10, numbers); //=> 16
  */
 module.exports = _curry3(_reduce);
