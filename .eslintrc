@@ -86,9 +86,9 @@
     ],
     "space-infix-ops": 2,
     "space-return-throw-case": 0,
-    "space-after-keywords": [
+    "keyword-spacing": [
       2,
-      "always"
+      { "after": true, "before": true }
     ],
     "lines-around-comment": 0,
     "space-before-blocks": [
