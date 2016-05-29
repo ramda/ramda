@@ -1,4 +1,4 @@
-var util = require('./internal/util.js');
+var util = require('./util.js');
 
 function Maybe(x) {
   return x == null ? _nothing : Maybe.Just(x);
