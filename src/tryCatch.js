@@ -21,8 +21,8 @@ var _curry2 = require('./internal/_curry2');
  * @return {Function} A new function that will catch exceptions and send then to the catcher.
  * @example
  *
- *      R.tryCatch(R.prop('x'), R.F, {x: true}); //=> true
- *      R.tryCatch(R.prop('x'), R.F, null);      //=> false
+ *      R.tryCatch(R.prop('x'), R.F)({x: true}); //=> true
+ *      R.tryCatch(R.prop('x'), R.F)(null);      //=> false
  */
 module.exports = _curry2(function _tryCatch(tryer, catcher) {
   return _arity(tryer.length, function() {
