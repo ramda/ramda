@@ -1,7 +1,8 @@
 {
   "env": {
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   },
   "globals": {
     "Symbol": true
