@@ -1,7 +1,8 @@
 {
   "env": {
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   },
   "globals": {
     "Symbol": true
@@ -86,9 +87,9 @@
     ],
     "space-infix-ops": 2,
     "space-return-throw-case": 0,
-    "space-after-keywords": [
+    "keyword-spacing": [
       2,
-      "always"
+      { "after": true, "before": true }
     ],
     "lines-around-comment": 0,
     "space-before-blocks": [

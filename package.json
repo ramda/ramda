@@ -58,7 +58,7 @@
     "dox": "latest",
     "envvar": "1.x.x",
     "escodegen": "1.4.x",
-    "eslint": "^1.10.1",
+    "eslint": "^2.11.0",
     "handlebars": "3.0.x",
     "istanbul": "^0.4.x",
     "js-yaml": "^3.2.5",
