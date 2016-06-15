@@ -14,7 +14,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.
  * @return {Array} The elements in `list1` that are not in `list2`.
- * @see R.differenceWith
+ * @see R.differenceWith, R.symmetricDifference, R.symmetricDifferenceWith
  * @example
  *
  *      R.difference([1,2,3,4], [7,6,5,4,3]); //=> [1,2]

@@ -15,7 +15,7 @@ var difference = require('./difference');
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.
  * @return {Array} The elements in `list1` or `list2`, but not both.
- * @see R.symmetricDifferenceWith
+ * @see R.symmetricDifferenceWith, R.difference, R.differenceWith
  * @example
  *
  *      R.symmetricDifference([1,2,3,4], [7,6,5,4,3]); //=> [1,2,7,6,5]
