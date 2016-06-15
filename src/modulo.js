@@ -2,7 +2,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Divides the second parameter by the first and returns the remainder. Note
+ * Divides the first parameter by the second and returns the remainder. Note
  * that this function preserves the JavaScript-style behavior for modulo. For
  * mathematical modulo see `mathMod`.
  *
