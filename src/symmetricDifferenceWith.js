@@ -17,7 +17,7 @@ var differenceWith = require('./differenceWith');
  * @param {Array} list1 The first list.
  * @param {Array} list2 The second list.
  * @return {Array} The elements in `list1` or `list2`, but not both.
- * @see R.symmetricDifference
+ * @see R.symmetricDifference, R.difference, R.differenceWith
  * @example
  *
  *      var eqA = R.eqBy(R.prop('a'));
