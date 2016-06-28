@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+slash=/
 README="$(cat README.md)"
-README="${README//"$PREVIOUS_VERSION/ramda.min.js"/"$VERSION/ramda.min.js"}"
-README="${README//"${PREVIOUS_VERSION%.*}/ramda.min.js"/"${VERSION%.*}/ramda.min.js"}"
+README="${README//${PREVIOUS_VERSION}${slash}ramda.min.js/${VERSION}${slash}ramda.min.js}"
+README="${README//${PREVIOUS_VERSION%.*}${slash}ramda.min.js/${VERSION%.*}${slash}ramda.min.js}"
 echo "$README" >README.md
 git add README.md
 
