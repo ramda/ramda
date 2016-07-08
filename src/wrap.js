@@ -16,6 +16,7 @@ var curryN = require('./curryN');
  * @param {Function} fn The function to wrap.
  * @param {Function} wrapper The wrapper function.
  * @return {Function} The wrapped function.
+ * @deprecated since v0.22.0
  * @example
  *
  *      var greet = name => 'Hello ' + name;
