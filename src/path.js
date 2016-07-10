@@ -12,6 +12,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Array} path The path to use.
  * @param {Object} obj The object to retrieve the nested property from.
  * @return {*} The data at `path`.
+ * @see R.prop
  * @example
  *
  *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
