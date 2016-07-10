@@ -13,6 +13,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {String} p The property name
  * @param {Object} obj The object to query
  * @return {*} The value at `obj.p`.
+ * @see R.path
  * @example
  *
  *      R.prop('x', {x: 100}); //=> 100
