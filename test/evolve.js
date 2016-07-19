@@ -39,4 +39,18 @@ describe('evolve', function() {
     eq(tick(object), expected);
   });
 
+  it('ignores primitive value transformations', function() {
+    var transf   = {n: 2, m: 'foo'};
+    var object   = {n: 0, m: 1};
+    var expected = {n: 0, m: 1};
+    eq(R.evolve(transf, object), expected);
+  });
+
+  it('ignores null transformations', function() {
+    var transf   = {n: null};
+    var object   = {n: 0};
+    var expected = {n: 0};
+    eq(R.evolve(transf, object), expected);
+  });
+
 });
