@@ -115,7 +115,7 @@ or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 These script tags add the variable `R` on the browser's global scope.
 
-Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](BOOKMARKLET.md).
+Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](https://github.com/ramda/ramda/blob/master/BOOKMARKLET.md).
 
 ### Build
 
