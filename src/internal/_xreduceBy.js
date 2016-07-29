@@ -1,7 +1,6 @@
-var _curryN = require('./_curryN');
 var _has = require('./_has');
 var _xfBase = require('./_xfBase');
-
+var curryN = require('../curryN');
 
 module.exports = (function() {
   function XReduceBy(valueFn, valueAcc, keyFn, xf) {
@@ -33,8 +32,8 @@ module.exports = (function() {
     return result;
   };
 
-  return _curryN(4, [],
-                 function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
-                   return new XReduceBy(valueFn, valueAcc, keyFn, xf);
-                 });
+  return curryN(4,
+                function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
+                  return new XReduceBy(valueFn, valueAcc, keyFn, xf);
+                });
 }());

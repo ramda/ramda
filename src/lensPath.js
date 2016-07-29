@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var assocPath = require('./assocPath');
 var lens = require('./lens');
 var path = require('./path');
@@ -24,6 +23,6 @@ var path = require('./path');
  *      R.set(xyLens, 4, {x: {y: 2, z: 3}});          //=> {x: {y: 4, z: 3}}
  *      R.over(xyLens, R.negate, {x: {y: 2, z: 3}});  //=> {x: {y: -2, z: 3}}
  */
-module.exports = _curry1(function lensPath(p) {
+module.exports = function lensPath(p) {
   return lens(path(p), assocPath(p));
-});
+};

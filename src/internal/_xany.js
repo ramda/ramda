@@ -1,6 +1,6 @@
 var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
 var _xfBase = require('./_xfBase');
+var reduced = require('./reduced');
 
 
 module.exports = (function() {
@@ -19,7 +19,7 @@ module.exports = (function() {
   XAny.prototype['@@transducer/step'] = function(result, input) {
     if (this.f(input)) {
       this.any = true;
-      result = _reduced(this.xf['@@transducer/step'](result, true));
+      result = reduced(this.xf['@@transducer/step'](result, true));
     }
     return result;
   };

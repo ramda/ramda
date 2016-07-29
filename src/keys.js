@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var _has = require('./internal/_has');
 var _isArguments = require('./internal/_isArguments');
 
@@ -43,10 +42,10 @@ module.exports = (function() {
   };
 
   return typeof Object.keys === 'function' && !hasArgsEnumBug ?
-    _curry1(function keys(obj) {
+    function keys(obj) {
       return Object(obj) !== obj ? [] : Object.keys(obj);
-    }) :
-    _curry1(function keys(obj) {
+    } :
+    function keys(obj) {
       if (Object(obj) !== obj) {
         return [];
       }
@@ -69,5 +68,5 @@ module.exports = (function() {
         }
       }
       return ks;
-    });
+    };
 }());

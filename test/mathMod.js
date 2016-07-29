@@ -31,11 +31,4 @@ describe('mathMod', function() {
     eq(f(6), 5);
   });
 
-
-  it('behaves right curried when passed `R.__` for its first argument', function() {
-    var mod5 = R.modulo(R.__, 5);
-    eq(mod5(12), 2);
-    eq(mod5(8), 3);
-  });
-
 });

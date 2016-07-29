@@ -1,5 +1,4 @@
 var _arity = require('./_arity');
-var _isPlaceholder = require('./_isPlaceholder');
 
 
 /**
@@ -15,26 +14,20 @@ var _isPlaceholder = require('./_isPlaceholder');
 module.exports = function _curryN(length, received, fn) {
   return function() {
     var combined = [];
-    var argsIdx = 0;
-    var left = length;
-    var combinedIdx = 0;
-    while (combinedIdx < received.length || argsIdx < arguments.length) {
-      var result;
-      if (combinedIdx < received.length &&
-          (!_isPlaceholder(received[combinedIdx]) ||
-           argsIdx >= arguments.length)) {
-        result = received[combinedIdx];
-      } else {
-        result = arguments[argsIdx];
-        argsIdx += 1;
-      }
-      combined[combinedIdx] = result;
-      if (!_isPlaceholder(result)) {
-        left -= 1;
-      }
-      combinedIdx += 1;
+    var idx = 0;
+    while (idx < received.length) {
+      combined.push(received[idx]);
+      idx += 1;
     }
-    return left <= 0 ? fn.apply(this, combined)
-                     : _arity(left, _curryN(length, combined, fn));
+    idx = 0;
+    while (idx < arguments.length) {
+      combined.push(arguments[idx]);
+      idx += 1;
+    }
+    if (combined.length >= length) {
+      return fn.apply(this, combined);
+    } else {
+      return _arity(length - combined.length, _curryN(length, combined, fn));
+    }
   };
 };

@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 
 
 /**
@@ -18,4 +17,4 @@ var _curry1 = require('./internal/_curry1');
  *      R.isNil(0); //=> false
  *      R.isNil([]); //=> false
  */
-module.exports = _curry1(function isNil(x) { return x == null; });
+module.exports = function isNil(x) { return x == null; };

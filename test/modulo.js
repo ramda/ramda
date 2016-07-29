@@ -17,13 +17,6 @@ describe('modulo', function() {
     eq(hundredMod(17), 15);
   });
 
-  it('behaves right curried when passed `R.__` for its first argument', function() {
-    var isOdd = R.modulo(R.__, 2);
-    eq(typeof isOdd, 'function');
-    eq(isOdd(3), 1);
-    eq(isOdd(198), 0);
-  });
-
   it('preserves javascript-style modulo evaluation for negative numbers', function() {
     eq(R.modulo(-5, 4), -1);
   });

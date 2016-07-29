@@ -22,7 +22,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.modulo(-17, 3); //=> -2
  *      R.modulo(17, -3); //=> 2
  *
- *      var isOdd = R.modulo(R.__, 2);
+ *      var isOdd = R.flip(R.modulo)(2);
  *      isOdd(42); //=> 0
  *      isOdd(21); //=> 1
  */

@@ -1,5 +1,4 @@
 var _concat = require('./internal/_concat');
-var _curry1 = require('./internal/_curry1');
 var _slice = require('./internal/_slice');
 var curryN = require('./curryN');
 
@@ -28,7 +27,7 @@ var curryN = require('./curryN');
  *      mapIndexed((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r']);
  *      //=> ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
-module.exports = _curry1(function addIndex(fn) {
+module.exports = function addIndex(fn) {
   return curryN(fn.length, function() {
     var idx = 0;
     var origFn = arguments[0];
@@ -41,4 +40,4 @@ module.exports = _curry1(function addIndex(fn) {
     };
     return fn.apply(this, args);
   });
-});
+};

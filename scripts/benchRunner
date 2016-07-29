@@ -4,6 +4,7 @@ var Benchmark = require('benchmark');
 var Table = require('cli-table');
 var fs = require('fs');
 var isBench = /\.bench\.js$/;
+var benchesPath = './lib/bench';
 
 function getTable(name) {
   return new Table({
@@ -20,7 +21,11 @@ function prettyMoe(moe) {
   return moe.toFixed(2) + '%';
 }
 
-fs.readdirSync('./lib/bench').forEach(function(file) {
+var benchFiles = process.argv.length > 2 ?
+  process.argv.slice(2).map(p => p.replace(/^.*\/([\w\.]+)$/, '$1')) :
+  fs.readdirSync(benchesPath);
+
+benchFiles.forEach(function(file) {
   var test, table;
   if (isBench.test(file)) {
     test = require('../lib/bench/' + file);

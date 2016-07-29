@@ -17,9 +17,6 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.divide(71, 100); //=> 0.71
  *
- *      var half = R.divide(R.__, 2);
- *      half(42); //=> 21
- *
  *      var reciprocal = R.divide(1);
  *      reciprocal(4);   //=> 0.25
  */

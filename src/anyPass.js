@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var curryN = require('./curryN');
 var max = require('./max');
 var pluck = require('./pluck');
@@ -29,7 +28,7 @@ var reduce = require('./reduce');
  *      gte(2, 2); //=> true
  *      gte(2, 3); //=> false
  */
-module.exports = _curry1(function anyPass(preds) {
+module.exports = function anyPass(preds) {
   return curryN(reduce(max, 0, pluck('length', preds)), function() {
     var idx = 0;
     var len = preds.length;
@@ -41,4 +40,4 @@ module.exports = _curry1(function anyPass(preds) {
     }
     return false;
   });
-});
+};

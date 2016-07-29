@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var assoc = require('./assoc');
 var lens = require('./lens');
 var prop = require('./prop');
@@ -24,6 +23,6 @@ var prop = require('./prop');
  *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}
  *      R.over(xLens, R.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
  */
-module.exports = _curry1(function lensProp(k) {
+module.exports = function lensProp(k) {
   return lens(prop(k), assoc(k));
-});
+};

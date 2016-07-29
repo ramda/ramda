@@ -18,11 +18,4 @@ describe('lte', function() {
     eq(gte20(25), true);
   });
 
-  it('behaves right curried when passed `R.__` for its first argument', function() {
-    var upTo20 = R.lte(R.__, 20);
-    eq(upTo20(10), true);
-    eq(upTo20(20), true);
-    eq(upTo20(25), false);
-  });
-
 });

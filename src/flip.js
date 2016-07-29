@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var _slice = require('./internal/_slice');
 var curry = require('./curry');
 
@@ -22,11 +21,11 @@ var curry = require('./curry');
  *
  *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
  */
-module.exports = _curry1(function flip(fn) {
+module.exports = function flip(fn) {
   return curry(function(a, b) {
     var args = _slice(arguments);
     args[0] = b;
     args[1] = a;
     return fn.apply(this, args);
   });
-});
+};

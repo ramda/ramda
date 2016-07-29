@@ -1,5 +1,4 @@
-var _curry1 = require('./internal/_curry1');
-var _reduced = require('./internal/_reduced');
+
 
 /**
  * Returns a value wrapped to indicate that it is the final value of the reduce
@@ -20,9 +19,15 @@ var _reduced = require('./internal/_reduced');
  * @example
  *
  *      R.reduce(
- *        R.pipe(R.add, R.when(R.gte(R.__, 10), R.reduced)),
+ *        R.pipe(R.add, R.when(R.flip(R.gte)(10), R.reduced)),
  *        0,
  *        [1, 2, 3, 4, 5]) // 10
  */
 
-module.exports = _curry1(_reduced);
+module.exports = function reduced(x) {
+  return x && x['@@transducer/reduced'] ? x :
+    {
+      '@@transducer/value': x,
+      '@@transducer/reduced': true
+    };
+};

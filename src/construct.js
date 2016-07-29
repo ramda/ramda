@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var constructN = require('./constructN');
 
 
@@ -27,6 +26,6 @@ var constructN = require('./constructN');
  *      ];
  *      R.map(R.construct(Widget), allConfigs); // a list of Widgets
  */
-module.exports = _curry1(function construct(Fn) {
+module.exports = function construct(Fn) {
   return constructN(Fn.length, Fn);
-});
+};

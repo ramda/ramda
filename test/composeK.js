@@ -33,7 +33,6 @@ describe('composeK', function() {
   it('returns the identity function given no arguments', function() {
     var identity = R.composeK();
     eq(identity.length, 1);
-    eq(identity(R.__).length, 1);
     eq(identity(42), 42);
   });
 

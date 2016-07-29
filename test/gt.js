@@ -18,11 +18,4 @@ describe('gt', function() {
     eq(lt20(25), false);
   });
 
-  it('behaves right curried when passed `R.__` for its first argument', function() {
-    var gt20 = R.gt(R.__, 20);
-    eq(gt20(10), false);
-    eq(gt20(20), false);
-    eq(gt20(25), true);
-  });
-
 });

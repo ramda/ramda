@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 
 
 /**
@@ -20,6 +19,6 @@ var _curry1 = require('./internal/_curry1');
  *      R.not(0); //=> true
  *      R.not(1); //=> false
  */
-module.exports = _curry1(function not(a) {
+module.exports = function not(a) {
   return !a;
-});
+};

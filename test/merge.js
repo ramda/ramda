@@ -39,7 +39,7 @@ describe('merge', function() {
   });
 
   it('is curried', function() {
-    var curried = R.merge(R.__, {w: 1, x: 2});
+    var curried = R.flip(R.merge)({w: 1, x: 2});
     eq(curried({x: 3, y: 4}), {w: 1, x: 2, y: 4});
   });
 

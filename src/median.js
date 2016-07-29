@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var _slice = require('./internal/_slice');
 var mean = require('./mean');
 
@@ -19,7 +18,7 @@ var mean = require('./mean');
  *      R.median([7, 2, 10, 9]); //=> 8
  *      R.median([]); //=> NaN
  */
-module.exports = _curry1(function median(list) {
+module.exports = function median(list) {
   var len = list.length;
   if (len === 0) {
     return NaN;
@@ -29,4 +28,4 @@ module.exports = _curry1(function median(list) {
   return mean(_slice(list).sort(function(a, b) {
     return a < b ? -1 : a > b ? 1 : 0;
   }).slice(idx, idx + width));
-});
+};

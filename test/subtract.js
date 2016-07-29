@@ -21,9 +21,4 @@ describe('subtract', function() {
     eq(ninesCompl(6), 3);
   });
 
-  it('behaves right curried when passed `R.__` for its first argument', function() {
-    var minus5 = R.subtract(R.__, 5);
-    eq(minus5(17), 12);
-  });
-
 });

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo -en "trying to build each src file individually...\n\n"
+for srcPath in $(find src -name "*.js" | sort); do
+  echo $srcPath
+  scripts/build $srcPath >/dev/null
+  if [[ $? -ne 0 ]]; then
+    echo "build ${srcPath} failed!"
+    exit 1
+  fi
+done

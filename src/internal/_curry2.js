@@ -1,5 +1,3 @@
-var _curry1 = require('./_curry1');
-var _isPlaceholder = require('./_isPlaceholder');
 
 
 /**
@@ -16,13 +14,9 @@ module.exports = function _curry2(fn) {
       case 0:
         return f2;
       case 1:
-        return _isPlaceholder(a) ? f2
-             : _curry1(function(_b) { return fn(a, _b); });
+        return function(_b) { return fn(a, _b); };
       default:
-        return _isPlaceholder(a) && _isPlaceholder(b) ? f2
-             : _isPlaceholder(a) ? _curry1(function(_a) { return fn(_a, b); })
-             : _isPlaceholder(b) ? _curry1(function(_b) { return fn(a, _b); })
-             : fn(a, b);
+        return fn(a, b);
     }
   };
 };

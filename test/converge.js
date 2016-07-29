@@ -38,7 +38,7 @@ describe('converge', function() {
 
   it('returns a curried function', function() {
     eq(f2(6)(7), 42);
-    eq(f3(R.__).length, 3);
+    eq(f3(6).length, 2);
   });
 
   it('works with empty functions list', function() {

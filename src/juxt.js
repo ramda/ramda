@@ -1,5 +1,4 @@
 var _arrayOf = require('./internal/_arrayOf');
-var _curry1 = require('./internal/_curry1');
 var converge = require('./converge');
 
 
@@ -19,6 +18,6 @@ var converge = require('./converge');
  *      var getRange = R.juxt([Math.min, Math.max]);
  *      getRange(3, 4, 9, -3); //=> [-3, 9]
  */
-module.exports = _curry1(function juxt(fns) {
+module.exports = function juxt(fns) {
   return converge(_arrayOf, fns);
-});
+};

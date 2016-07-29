@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var apply = require('./apply');
 var curryN = require('./curryN');
 var map = require('./map');
@@ -32,7 +31,7 @@ var values = require('./values');
  *                                   });
  *      getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
  */
-module.exports = _curry1(function applySpec(spec) {
+module.exports = function applySpec(spec) {
   spec = map(function(v) { return typeof v == 'function' ? v : applySpec(v) },
              spec);
   return curryN(reduce(max, 0, pluck('length', values(spec))),
@@ -40,4 +39,4 @@ module.exports = _curry1(function applySpec(spec) {
                   var args = arguments;
                   return map(function(f) { return apply(f, args); }, spec);
                 });
-});
+};

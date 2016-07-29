@@ -1,5 +1,4 @@
 var _assign = require('./internal/_assign');
-var _curry1 = require('./internal/_curry1');
 
 
 /**
@@ -18,6 +17,6 @@ var _curry1 = require('./internal/_curry1');
  *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
  *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
  */
-module.exports = _curry1(function mergeAll(list) {
+module.exports = function mergeAll(list) {
   return _assign.apply(null, [{}].concat(list));
-});
+};

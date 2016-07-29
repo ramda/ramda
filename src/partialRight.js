@@ -1,12 +1,15 @@
-var _concat = require('./internal/_concat');
-var _createPartialApplicator = require('./internal/_createPartialApplicator');
-var flip = require('./flip');
+var __ = require('./__');
+var _curry2 = require('./internal/_curry2');
+var partial = require('./partial');
 
 
 /**
  * Takes a function `f` and a list of arguments, and returns a function `g`.
  * When applied, `g` returns the result of applying `f` to the arguments
  * provided to `g` followed by the arguments provided initially.
+ *
+ * `partialRight` also accepts the special placeholder value, `R.__`, used to
+ * specify "gaps" within the arguments.
  *
  * @func
  * @memberOf R
@@ -26,4 +29,12 @@ var flip = require('./flip');
  *
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  */
-module.exports = _createPartialApplicator(flip(_concat));
+module.exports = _curry2(function partialRight(fn, partialArgs) {
+  var leftArgs = [];
+  var leftN = fn.length - partialArgs.length;
+  while (leftN > 0) {
+    leftArgs.push(__);
+    leftN = leftN - 1;
+  }
+  return partial(fn, leftArgs.concat(partialArgs));
+});

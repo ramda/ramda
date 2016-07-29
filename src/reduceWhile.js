@@ -1,6 +1,6 @@
-var _curryN = require('./internal/_curryN');
 var _reduce = require('./internal/_reduce');
-var _reduced = require('./internal/_reduced');
+var curryN = require('./curryN');
+var reduced = require('./internal/reduced');
 
 
 /**
@@ -32,8 +32,8 @@ var _reduced = require('./internal/_reduced');
  *      var ys = [2, 4, 6]
  *      R.reduceWhile(isOdd, R.add, 111, ys); //=> 111
  */
-module.exports = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
+module.exports = curryN(4, function _reduceWhile(pred, fn, a, list) {
   return _reduce(function(acc, x) {
-    return pred(acc, x) ? fn(acc, x) : _reduced(acc);
+    return pred(acc, x) ? fn(acc, x) : reduced(acc);
   }, a, list);
 });

@@ -40,12 +40,6 @@ describe('concat', function() {
     eq(conc123(['a', 'b', 'c']), [1, 2, 3, 'a', 'b', 'c']);
   });
 
-  it('is curried like a binary operator, that accepts an initial placeholder', function() {
-    var appendBar = R.concat(R.__, 'bar');
-    eq(typeof appendBar, 'function');
-    eq(appendBar('foo'), 'foobar');
-  });
-
   it('throws if attempting to combine an array with a non-array', function() {
     assert.throws(function() { return R.concat([1], 2); }, TypeError);
   });

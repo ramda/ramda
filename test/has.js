@@ -28,7 +28,7 @@ describe('has', function() {
     eq(hasName(anon), false);
 
     var point = {x: 0, y: 0};
-    var pointHas = R.has(R.__, point);
+    var pointHas = R.flip(R.has)(point);
     eq(pointHas('x'), true);
     eq(pointHas('y'), true);
     eq(pointHas('z'), false);

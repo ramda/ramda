@@ -1,6 +1,6 @@
 var _curry2 = require('./_curry2');
-var _reduced = require('./_reduced');
 var _xfBase = require('./_xfBase');
+var reduced = require('./reduced');
 
 
 module.exports = (function() {
@@ -19,7 +19,7 @@ module.exports = (function() {
   XFind.prototype['@@transducer/step'] = function(result, input) {
     if (this.f(input)) {
       this.found = true;
-      result = _reduced(this.xf['@@transducer/step'](result, input));
+      result = reduced(this.xf['@@transducer/step'](result, input));
     }
     return result;
   };

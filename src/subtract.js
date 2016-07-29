@@ -17,7 +17,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.subtract(10, 8); //=> 2
  *
- *      var minus5 = R.subtract(R.__, 5);
+ *      var minus5 = R.flip(R.subtract)(5);
  *      minus5(17); //=> 12
  *
  *      var complementaryAngle = R.subtract(90);

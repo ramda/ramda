@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 
 
 /**
@@ -23,7 +22,7 @@ var _curry1 = require('./internal/_curry1');
  *
  *      R.transpose([[10, 11], [20], [], [30, 31, 32]]) //=> [[10, 20, 30], [11, 31], [32]]
  */
-module.exports = _curry1(function transpose(outerlist) {
+module.exports = function transpose(outerlist) {
   var i = 0;
   var result = [];
   while (i < outerlist.length) {
@@ -39,4 +38,4 @@ module.exports = _curry1(function transpose(outerlist) {
     i += 1;
   }
   return result;
-});
+};

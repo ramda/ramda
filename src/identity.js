@@ -1,4 +1,3 @@
-var _curry1 = require('./internal/_curry1');
 var _identity = require('./internal/_identity');
 
 
@@ -20,4 +19,4 @@ var _identity = require('./internal/_identity');
  *      var obj = {};
  *      R.identity(obj) === obj; //=> true
  */
-module.exports = _curry1(_identity);
+module.exports = _identity;

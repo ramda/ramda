@@ -21,7 +21,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
  *      //=> { 'name': 'fred', 'age': 40 }
  *
- *      var resetToDefault = R.merge(R.__, {x: 0});
+ *      var resetToDefault = R.flip(R.merge)({x: 0});
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  */
 module.exports = _curry2(function merge(l, r) {

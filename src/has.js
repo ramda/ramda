@@ -21,7 +21,7 @@ var _has = require('./internal/_has');
  *      hasName({});                //=> false
  *
  *      var point = {x: 0, y: 0};
- *      var pointHas = R.has(R.__, point);
+ *      var pointHas = R.flip(R.has)(point);
  *      pointHas('x');  //=> true
  *      pointHas('y');  //=> true
  *      pointHas('z');  //=> false

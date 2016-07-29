@@ -52,7 +52,7 @@ describe('liftN', function() {
 
   it('interprets ((->) r) as a functor', function() {
     var convergedOnInt = addN3(R.add(2), R.multiply(3), R.subtract(4));
-    var convergedOnBool = R.liftN(2, R.and)(R.gt(R.__, 0), R.lt(R.__, 3));
+    var convergedOnBool = R.liftN(2, R.and)(R.flip(R.gt)(0), R.flip(R.lt)(3));
     eq(typeof convergedOnInt, 'function');
     eq(typeof convergedOnBool, 'function');
     eq(convergedOnInt(10), (10 + 2) + (10 * 3) + (4 - 10));
