@@ -31,9 +31,9 @@ var _curry2 = require('./internal/_curry2');
  *
  *      var printXPlusFive = x => console.log(x + 5);
  *      R.forEach(printXPlusFive, [1, 2, 3]); //=> [1, 2, 3]
- *      //-> 6
- *      //-> 7
- *      //-> 8
+ *      // logs 6
+ *      // logs 7
+ *      // logs 8
  */
 module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
   var len = list.length;
