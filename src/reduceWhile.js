@@ -12,6 +12,7 @@ var _reduced = require('./internal/_reduced');
  *
  * @func
  * @memberOf R
+ * @since v0.22.0
  * @category List
  * @sig ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
  * @param {Function} pred The predicate. It is passed the accumulator and the
