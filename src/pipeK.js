@@ -33,6 +33,7 @@ var reverse = require('./reverse');
  *      //=> Just('NY')
  *      getStateCode(Maybe.of('[Invalid JSON]'));
  *      //=> Nothing()
+ * @symb R.pipeK(f, g, h)(a, b) = R.chain(h, R.chain(g, f(a, b)))
  */
 module.exports = function pipeK() {
   return composeK.apply(this, reverse(arguments));

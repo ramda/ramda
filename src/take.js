@@ -42,6 +42,10 @@ var slice = require('./slice');
  *      var takeFive = R.take(5);
  *      takeFive(personnel);
  *      //=> ['Dave Brubeck', 'Paul Desmond', 'Eugene Wright', 'Joe Morello', 'Gerry Mulligan']
+ * @symb R.take(-1, [a, b]) = [a, b]
+ * @symb R.take(0, [a, b]) = []
+ * @symb R.take(1, [a, b]) = [a]
+ * @symb R.take(2, [a, b]) = [a, b]
  */
 module.exports = _curry2(_dispatchable('take', _xtake, function take(n, xs) {
   return slice(0, n < 0 ? Infinity : n, xs);

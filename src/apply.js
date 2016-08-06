@@ -19,6 +19,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      var nums = [1, 2, 3, -99, 42, 6, 7];
  *      R.apply(Math.max, nums); //=> 42
+ * @symb R.apply(f, [a, b, c]) = f(a, b, c)
  */
 module.exports = _curry2(function apply(fn, args) {
   return fn.apply(this, args);

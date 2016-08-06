@@ -34,5 +34,6 @@ var _reduce = require('./internal/_reduce');
  *      var plus = (a, b) => a + b;
  *
  *      R.reduce(plus, 10, numbers); //=> 16
+ * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
  */
 module.exports = _curry3(_reduce);

@@ -24,6 +24,8 @@ var _curry3 = require('./internal/_curry3');
  *
  *      R.adjust(R.add(10), 1, [0, 1, 2]);     //=> [0, 11, 2]
  *      R.adjust(R.add(10))(1)([0, 1, 2]);     //=> [0, 11, 2]
+ * @symb R.adjust(f, -1, [a, b]) = [a, f(b)]
+ * @symb R.adjust(f, 0, [a, b]) = [f(a), b]
  */
 module.exports = _curry3(function adjust(fn, idx, list) {
   if (idx >= list.length || idx < -list.length) {

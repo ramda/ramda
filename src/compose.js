@@ -21,6 +21,7 @@ var reverse = require('./reverse');
  *      var f = R.compose(R.inc, R.negate, Math.pow);
  *
  *      f(3, 4); // -(3^4) + 1
+ * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
  */
 module.exports = function compose() {
   if (arguments.length === 0) {

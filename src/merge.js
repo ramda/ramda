@@ -23,6 +23,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      var resetToDefault = R.merge(R.__, {x: 0});
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
+ * @symb R.merge({ x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: 5, z: 3 }
  */
 module.exports = _curry2(function merge(l, r) {
   return _assign({}, l, r);

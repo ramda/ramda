@@ -37,6 +37,7 @@ var prepend = require('./prepend');
  *      //=> Just('NY')
  *      getStateCode(Maybe.of('[Invalid JSON]'));
  *      //=> Nothing()
+ * @symb R.composeK(f, g, h)(a, b) = R.chain(f, R.chain(g, h(a, b)))
  */
 module.exports = function composeK() {
   return compose.apply(this, prepend(identity, map(chain, arguments)));

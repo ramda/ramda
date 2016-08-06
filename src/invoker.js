@@ -27,6 +27,9 @@ var toString = require('./toString');
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
  *      var sliceFrom6 = R.invoker(2, 'slice')(6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
+ * @symb R.invoker(0, 'method')(o) = o['method']()
+ * @symb R.invoker(1, 'method')(a, o) = o['method'](a)
+ * @symb R.invoker(2, 'method')(a, b, o) = o['method'](a, b)
  */
 module.exports = _curry2(function invoker(arity, method) {
   return curryN(arity + 1, function() {

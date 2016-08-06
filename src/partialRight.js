@@ -25,5 +25,6 @@ var flip = require('./flip');
  *      var greetMsJaneJones = R.partialRight(greet, ['Ms.', 'Jane', 'Jones']);
  *
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
+ * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)
  */
 module.exports = _createPartialApplicator(flip(_concat));

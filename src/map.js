@@ -38,6 +38,9 @@ var keys = require('./keys');
  *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
  *
  *      R.map(double, {x: 1, y: 2, z: 3}); //=> {x: 2, y: 4, z: 6}
+ * @symb R.map(f, [a, b]) = [f(a), f(b)]
+ * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
+ * @symb R.map(f, functor_o) = functor_o.map(f)
  */
 module.exports = _curry2(_dispatchable('map', _xmap, function map(fn, functor) {
   switch (Object.prototype.toString.call(functor)) {

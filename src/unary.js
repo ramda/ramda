@@ -27,6 +27,7 @@ var nAry = require('./nAry');
  *      takesOneArg.length; //=> 1
  *      // Only 1 argument is passed to the wrapped function
  *      takesOneArg(1, 2); //=> [1, undefined]
+ * @symb R.unary(f)(a, b, c) = f(a)
  */
 module.exports = _curry1(function unary(fn) {
   return nAry(1, fn);

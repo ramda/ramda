@@ -26,6 +26,9 @@ var _curry2 = require('./internal/_curry2');
  *      takesOneArg.length; //=> 1
  *      // Only `n` arguments are passed to the wrapped function
  *      takesOneArg(1, 2); //=> [1, undefined]
+ * @symb R.nAry(0, f)(a, b) = f()
+ * @symb R.nAry(1, f)(a, b) = f(a)
+ * @symb R.nAry(2, f)(a, b) = f(a, b)
  */
 module.exports = _curry2(function nAry(n, fn) {
   switch (n) {

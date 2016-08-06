@@ -23,6 +23,7 @@ var _curry3 = require('./internal/_curry3');
  *      };
  *      R.zipWith(f, [1, 2, 3], ['a', 'b', 'c']);
  *      //=> [f(1, 'a'), f(2, 'b'), f(3, 'c')]
+ * @symb R.zipWith(fn, [a, b, c], [d, e, f]) = [fn(a, d), fn(b, e), fn(c, f)]
  */
 module.exports = _curry3(function zipWith(fn, a, b) {
   var rv = [];
