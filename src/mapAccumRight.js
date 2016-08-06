@@ -32,7 +32,7 @@ var _curry3 = require('./internal/_curry3');
  * @symb R.mapAccumRight(f, a, [b, c, d]) = [
  *   f(f(f(a, d)[0], c)[0], b)[0],
  *   [
- *     f(a, d)[1], 
+ *     f(a, d)[1],
  *     f(f(a, d)[0], c)[1],
  *     f(f(f(a, d)[0], c)[0], b)[1]
  *   ]
