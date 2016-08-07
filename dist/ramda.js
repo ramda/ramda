@@ -1,4 +1,4 @@
-//  Ramda v0.22.0
+//  Ramda v0.22.1
 //  https://github.com/ramda/ramda
 //  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -7936,24 +7936,24 @@
 
     // A simple Set type that honours R.equals semantics
     /* globals Set */
-    /**
-       * @param item The item to add to the Set
-       * @returns {boolean} true if the item did not exist prior, otherwise false
-       */
-    /**
-       * @param item The item to check for existence in the Set
-       * @returns {boolean} true if the item exists in the Set, otherwise false
-       */
-    /**
-       * Combines the logic for checking whether an item is a member of the set and
-       * for adding a new item to the set.
-       *
-       * @param item       The item to check or add to the Set instance.
-       * @param shouldAdd  If true, the item will be added to the set if it doesn't
-       *                   already exist.
-       * @param set        The set instance to check or add to.
-       * @return {boolean} true if the item already existed, otherwise false.
-       */
+    // until we figure out why jsdoc chokes on this
+    // @param item The item to add to the Set
+    // @returns {boolean} true if the item did not exist prior, otherwise false
+    //
+    //
+    // @param item The item to check for existence in the Set
+    // @returns {boolean} true if the item exists in the Set, otherwise false
+    //
+    //
+    // Combines the logic for checking whether an item is a member of the set and
+    // for adding a new item to the set.
+    //
+    // @param item       The item to check or add to the Set instance.
+    // @param shouldAdd  If true, the item will be added to the set if it doesn't
+    //                   already exist.
+    // @param set        The set instance to check or add to.
+    // @return {boolean} true if the item already existed, otherwise false.
+    //
     // distinguish between +0 and -0
     // these types can all utilise the native Set
     // set._items['boolean'] holds a two element array
@@ -7969,30 +7969,30 @@
             this._nativeSet = typeof Set === 'function' ? new Set() : null;
             this._items = {};
         }
-        /**
-       * @param item The item to add to the Set
-       * @returns {boolean} true if the item did not exist prior, otherwise false
-       */
+        // until we figure out why jsdoc chokes on this
+        // @param item The item to add to the Set
+        // @returns {boolean} true if the item did not exist prior, otherwise false
+        //
         _Set.prototype.add = function (item) {
             return !hasOrAdd(item, true, this);
         };
-        /**
-       * @param item The item to check for existence in the Set
-       * @returns {boolean} true if the item exists in the Set, otherwise false
-       */
+        //
+        // @param item The item to check for existence in the Set
+        // @returns {boolean} true if the item exists in the Set, otherwise false
+        //
         _Set.prototype.has = function (item) {
             return hasOrAdd(item, false, this);
         };
-        /**
-       * Combines the logic for checking whether an item is a member of the set and
-       * for adding a new item to the set.
-       *
-       * @param item       The item to check or add to the Set instance.
-       * @param shouldAdd  If true, the item will be added to the set if it doesn't
-       *                   already exist.
-       * @param set        The set instance to check or add to.
-       * @return {boolean} true if the item already existed, otherwise false.
-       */
+        //
+        // Combines the logic for checking whether an item is a member of the set and
+        // for adding a new item to the set.
+        //
+        // @param item       The item to check or add to the Set instance.
+        // @param shouldAdd  If true, the item will be added to the set if it doesn't
+        //                   already exist.
+        // @param set        The set instance to check or add to.
+        // @return {boolean} true if the item already existed, otherwise false.
+        //
         function hasOrAdd(item, shouldAdd, set) {
             var type = typeof item;
             var prevSize, newSize;
