@@ -25,8 +25,8 @@ var _xany = require('./internal/_xany');
  *
  *      var lessThan0 = R.flip(R.lt)(0);
  *      var lessThan2 = R.flip(R.lt)(2);
- *      R.any(lessThan0)([1, 2]); //=> false
- *      R.any(lessThan2)([1, 2]); //=> true
+ *      R.any(lessThan0, [1, 2]); //=> false
+ *      R.any(lessThan2, [1, 2]); //=> true
  */
 module.exports = _curry2(_dispatchable('any', _xany, function any(fn, list) {
   var idx = 0;

@@ -18,8 +18,8 @@ var prop = require('./prop');
  * @see R.props
  * @example
  *
- *      R.pluck('a')([{a: 1}, {a: 2}]); //=> [1, 2]
- *      R.pluck(0)([[1, 2], [3, 4]]);   //=> [1, 3]
+ *      R.pluck('a', [{a: 1}, {a: 2}]); //=> [1, 2]
+ *      R.pluck(0, [1, 2], [3, 4]]);   //=> [1, 3]
  */
 module.exports = _curry2(function pluck(p, list) {
   return map(prop(p), list);

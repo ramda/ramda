@@ -18,7 +18,7 @@ var _curry3 = require('./internal/_curry3');
  * @return {*} Final value that satisfies predicate
  * @example
  *
- *      R.until(R.gt(R.__, 100), R.multiply(2))(1) // => 128
+ *      R.until(R.gt(R.__, 100), R.multiply(2), 1) // => 128
  */
 module.exports = _curry3(function until(pred, fn, init) {
   var val = init;

@@ -19,10 +19,10 @@ var _curry2 = require('./internal/_curry2');
  * @example
  *
  *      var strEq = R.eqBy(String);
- *      R.uniqWith(strEq)([1, '1', 2, 1]); //=> [1, 2]
- *      R.uniqWith(strEq)([{}, {}]);       //=> [{}]
- *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]
- *      R.uniqWith(strEq)(['1', 1, 1]);    //=> ['1']
+ *      R.uniqWith(strEq, [1, '1', 2, 1]); //=> [1, 2]
+ *      R.uniqWith(strEq, [{}, {}]);       //=> [{}]
+ *      R.uniqWith(strEq, [1, '1', 1]);    //=> [1]
+ *      R.uniqWith(strEq, ['1', 1, 1]);    //=> ['1']
  */
 module.exports = _curry2(function uniqWith(pred, list) {
   var idx = 0;

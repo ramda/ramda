@@ -20,7 +20,6 @@ var always = require('./always');
  * @example
  *
  *      R.update(1, 11, [0, 1, 2]);     //=> [0, 11, 2]
- *      R.update(1)(11)([0, 1, 2]);     //=> [0, 11, 2]
  */
 module.exports = _curry3(function update(idx, x, list) {
   return adjust(always(x), idx, list);

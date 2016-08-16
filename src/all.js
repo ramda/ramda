@@ -25,8 +25,8 @@ var _xall = require('./internal/_xall');
  *
  *      var lessThan2 = R.flip(R.lt)(2);
  *      var lessThan3 = R.flip(R.lt)(3);
- *      R.all(lessThan2)([1, 2]); //=> false
- *      R.all(lessThan3)([1, 2]); //=> true
+ *      R.all(lessThan2, [1, 2]); //=> false
+ *      R.all(lessThan3, [1, 2]); //=> true
  */
 module.exports = _curry2(_dispatchable('all', _xall, function all(fn, list) {
   var idx = 0;
