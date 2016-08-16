@@ -19,5 +19,6 @@ var _identity = require('./internal/_identity');
  *
  *      var obj = {};
  *      R.identity(obj) === obj; //=> true
+ * @symb R.identity(a) = a
  */
 module.exports = _curry1(_identity);

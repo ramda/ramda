@@ -29,6 +29,7 @@ var curry = require('./curry');
  *                              ]);
  *
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
+ * @symb R.call(f, a, b) = f(a, b)
  */
 module.exports = curry(function call(fn) {
   return fn.apply(this, _slice(arguments, 1));

@@ -17,6 +17,9 @@ var nth = require('./nth');
  *
  *      R.nthArg(1)('a', 'b', 'c'); //=> 'b'
  *      R.nthArg(-1)('a', 'b', 'c'); //=> 'c'
+ * @symb R.nthArg(-1)(a, b, c) = c
+ * @symb R.nthArg(0)(a, b, c) = a
+ * @symb R.nthArg(1)(a, b, c) = b
  */
 module.exports = _curry1(function nthArg(n) {
   var arity = n < 0 ? 1 : n + 1;

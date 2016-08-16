@@ -19,6 +19,9 @@ var _curry2 = require('./internal/_curry2');
  * @example
  *
  *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
+ * @symb R.times(f, 0) = []
+ * @symb R.times(f, 1) = [f(0)]
+ * @symb R.times(f, 2) = [f(0), f(1)]
  */
 module.exports = _curry2(function times(fn, n) {
   var len = Number(n);

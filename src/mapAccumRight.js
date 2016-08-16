@@ -29,6 +29,14 @@ var _curry3 = require('./internal/_curry3');
  *      var append = (a, b) => [a + b, a + b];
  *
  *      R.mapAccumRight(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
+ * @symb R.mapAccumRight(f, a, [b, c, d]) = [
+ *   f(f(f(a, d)[0], c)[0], b)[0],
+ *   [
+ *     f(a, d)[1],
+ *     f(f(a, d)[0], c)[1],
+ *     f(f(f(a, d)[0], c)[0], b)[1]
+ *   ]
+ * ]
  */
 module.exports = _curry3(function mapAccumRight(fn, acc, list) {
   var idx = list.length - 1;

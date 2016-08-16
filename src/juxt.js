@@ -18,6 +18,7 @@ var converge = require('./converge');
  *
  *      var getRange = R.juxt([Math.min, Math.max]);
  *      getRange(3, 4, 9, -3); //=> [-3, 9]
+ * @symb R.juxt([f, g, h])(a, b) = [f(a, b), g(a, b), h(a, b)]
  */
 module.exports = _curry1(function juxt(fns) {
   return converge(_arrayOf, fns);

@@ -26,6 +26,14 @@ var _curry3 = require('./internal/_curry3');
  *      var appender = (a, b) => [a + b, a + b];
  *
  *      R.mapAccum(appender, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
+ * @symb R.mapAccum(f, a, [b, c, d]) = [
+ *   f(f(f(a, b)[0], c)[0], d)[0],
+ *   [
+ *     f(a, b)[1],
+ *     f(f(a, b)[0], c)[1],
+ *     f(f(f(a, b)[0], c)[0], d)[1]
+ *   ]
+ * ]
  */
 module.exports = _curry3(function mapAccum(fn, acc, list) {
   var idx = 0;

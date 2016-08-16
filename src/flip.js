@@ -21,6 +21,7 @@ var curry = require('./curry');
  *      mergeThree(1, 2, 3); //=> [1, 2, 3]
  *
  *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
+ * @symb R.flip(f)(a, b, c) = f(b, a, c)
  */
 module.exports = _curry1(function flip(fn) {
   return curry(function(a, b) {

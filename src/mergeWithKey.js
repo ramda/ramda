@@ -27,6 +27,7 @@ var _has = require('./internal/_has');
  *                     { a: true, thing: 'foo', values: [10, 20] },
  *                     { b: true, thing: 'bar', values: [15, 35] });
  *      //=> { a: true, b: true, thing: 'bar', values: [10, 20, 15, 35] }
+ * @symb R.mergeWithKey(f, { x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: f('y', 2, 5), z: 3 }
  */
 module.exports = _curry3(function mergeWithKey(fn, l, r) {
   var result = {};

@@ -29,6 +29,7 @@ var curryN = require('./curryN');
  *      R.useWith(Math.pow, [R.identity, R.identity])(3)(4); //=> 81
  *      R.useWith(Math.pow, [R.dec, R.inc])(3, 4); //=> 32
  *      R.useWith(Math.pow, [R.dec, R.inc])(3)(4); //=> 32
+ * @symb R.useWith(f, [g, h])(a, b) = f(g(a), h(b))
  */
 module.exports = _curry2(function useWith(fn, transformers) {
   return curryN(transformers.length, function() {

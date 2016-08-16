@@ -22,6 +22,7 @@ var _curry2 = require('./internal/_curry2');
  *      var log = R.bind(console.log, console);
  *      R.pipe(R.assoc('a', 2), R.tap(log), R.assoc('a', 3))({a: 1}); //=> {a: 3}
  *      // logs {a: 2}
+ * @symb R.bind(f, o)(a, b) = f.call(o, a, b)
  */
 module.exports = _curry2(function bind(fn, thisObj) {
   return _arity(fn.length, function() {

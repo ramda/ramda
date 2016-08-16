@@ -31,6 +31,7 @@ var values = require('./values');
  *                                      nested: { mul: R.multiply }
  *                                   });
  *      getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
+ * @symb R.applySpec({ x: f, y: { z: g } })(a, b) = { x: f(a, b), y: { z: g(a, b) } }
  */
 module.exports = _curry1(function applySpec(spec) {
   spec = map(function(v) { return typeof v == 'function' ? v : applySpec(v) },

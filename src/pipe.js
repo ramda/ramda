@@ -25,6 +25,7 @@ var tail = require('./tail');
  *      var f = R.pipe(Math.pow, R.negate, R.inc);
  *
  *      f(3, 4); // -(3^4) + 1
+ * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
  */
 module.exports = function pipe() {
   if (arguments.length === 0) {
