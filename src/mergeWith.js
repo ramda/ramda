@@ -18,7 +18,7 @@ var mergeWithKey = require('./mergeWithKey');
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.merge, R.mergeWithKey
+ * @see R.mergeDeepWith, R.merge, R.mergeWithKey
  * @example
  *
  *      R.mergeWith(R.concat,

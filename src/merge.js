@@ -15,7 +15,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.mergeWith, R.mergeWithKey
+ * @see R.mergeDeepRight, R.mergeWith, R.mergeWithKey
  * @example
  *
  *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });

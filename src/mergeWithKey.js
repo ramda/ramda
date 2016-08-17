@@ -19,7 +19,7 @@ var _has = require('./internal/_has');
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.merge, R.mergeWith
+ * @see R.mergeDeepWithKey, R.merge, R.mergeWith
  * @example
  *
  *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r
