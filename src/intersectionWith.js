@@ -18,7 +18,8 @@ var uniqWith = require('./uniqWith');
  * @param {Array} list1 One list of items to compare
  * @param {Array} list2 A second list of items to compare
  * @return {Array} A new list containing those elements common to both lists.
- * @see R.intersection
+ * @see R.innerJoin
+ * @deprecated since v0.24.0
  * @example
  *
  *      var buffaloSpringfield = [
