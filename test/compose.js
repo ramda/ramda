@@ -1,4 +1,5 @@
 var assert = require('assert');
+var jsv = require('jsverify');
 
 var R = require('..');
 var eq = require('./shared/eq');
@@ -56,4 +57,21 @@ describe('compose', function() {
     eq(g(1, 2, 3), [1, 2, 3]);
   });
 
+});
+
+
+describe('compose properties', function() {
+
+  jsv.property('composes two functions', jsv.fn(), jsv.fn(), jsv.nat, function(f, g, x) {
+    return R.equals(R.compose(f, g)(x), f(g(x)));
+  });
+
+  jsv.property('associative',  jsv.fn(), jsv.fn(), jsv.fn(), jsv.nat, function(f, g, h, x) {
+    var result = f(g(h(x)));
+    return R.all(R.equals(result), [
+      R.compose(f, g, h)(x),
+      R.compose(f, R.compose(g, h))(x),
+      R.compose(R.compose(f, g), h)(x)
+    ]);
+  });
 });
