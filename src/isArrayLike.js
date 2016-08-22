@@ -14,6 +14,7 @@ var _isString = require('./internal/_isString');
  * @sig * -> Boolean
  * @param {*} x The object to test.
  * @return {Boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
+ * @deprecated since v0.23.0
  * @example
  *
  *      R.isArrayLike([]); //=> true
