@@ -24,15 +24,15 @@ var reduce = require('./reduce');
  * @return {Function} A new function.
  * @example
  *
- *      var add = (a, b) => a + b;
- *      var multiply = (a, b) => a * b;
- *      var subtract = (a, b) => a - b;
+ *      var plus = (a, b) => a + b;
+ *      var multiplyBy = (a, b) => a * b;
+ *      var minus = (a, b) => a - b;
  *
- *      //≅ multiply( add(1, 2), subtract(1, 2) );
- *      R.converge(multiply, [add, subtract])(1, 2); //=> -3
+ *      //≅ multiplyBy( plus(1, 2), minus(1, 2) );
+ *      R.converge(multiplyBy, [plus, minus])(1, 2); //=> -3
  *
  *      var add3 = (a, b, c) => a + b + c;
- *      R.converge(add3, [multiply, add, subtract])(1, 2); //=> 4
+ *      R.converge(add3, [multiplyBy, plus, minus])(1, 2); //=> 4
  * @symb R.converge(f, [g, h])(a, b) = f(g(a, b), h(a, b))
  */
 module.exports = _curry2(function converge(after, fns) {
