@@ -26,7 +26,7 @@ var reduce = require('./reduce');
  *      var isClub = R.propEq('suit', '♣');
  *      var isSpade = R.propEq('suit', '♠');
  *      var isblackCard = R.anyPass([isClub, isSpade]);
- *      
+ *
  *      isblackCard({rank: '10', suit: '♣'}); //=> true
  *      isblackCard({rank: 'Q', suit: '♠'}); //=> true
  *      isblackCard({rank: 'Q', suit: '♦'}); //=> false
