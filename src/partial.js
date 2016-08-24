@@ -18,8 +18,8 @@ var _createPartialApplicator = require('./internal/_createPartialApplicator');
  * @see R.partialRight
  * @example
  *
- *      var multiply = (a, b) => a * b;
- *      var double = R.partial(multiply, [2]);
+ *      var multiply2 = (a, b) => a * b;
+ *      var double = R.partial(multiply2, [2]);
  *      double(2); //=> 4
  *
  *      var greet = (salutation, title, firstName, lastName) =>
