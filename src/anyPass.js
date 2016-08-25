@@ -25,11 +25,11 @@ var reduce = require('./reduce');
  *
  *      var isClub = R.propEq('suit', '♣');
  *      var isSpade = R.propEq('suit', '♠');
- *      var isblackCard = R.anyPass([isClub, isSpade]);
+ *      var isBlackCard = R.anyPass([isClub, isSpade]);
  *
- *      isblackCard({rank: '10', suit: '♣'}); //=> true
- *      isblackCard({rank: 'Q', suit: '♠'}); //=> true
- *      isblackCard({rank: 'Q', suit: '♦'}); //=> false
+ *      isBlackCard({rank: '10', suit: '♣'}); //=> true
+ *      isBlackCard({rank: 'Q', suit: '♠'}); //=> true
+ *      isBlackCard({rank: 'Q', suit: '♦'}); //=> false
  */
 module.exports = _curry1(function anyPass(preds) {
   return curryN(reduce(max, 0, pluck('length', preds)), function() {
