@@ -62,7 +62,7 @@
     "handlebars": "3.0.x",
     "istanbul": "^0.4.x",
     "js-yaml": "^3.2.5",
-    "jsverify": "^0.7.1",
+    "jsverify": "^0.7.3",
     "mocha": "2.x.x",
     "q": "^1.1.1",
     "ramda": "0.17.x",
