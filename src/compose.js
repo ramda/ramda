@@ -23,7 +23,7 @@ var reverse = require('./reverse');
  *      f(3, 4); // -(3^4) + 1
  * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
  */
-module.exports = function compose() {
+module.exports = function compose(functions) {
   if (arguments.length === 0) {
     throw new Error('compose requires at least one argument');
   }

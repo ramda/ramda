@@ -27,7 +27,7 @@ var tail = require('./tail');
  *      f(3, 4); // -(3^4) + 1
  * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
  */
-module.exports = function pipe() {
+module.exports = function pipe(functions) {
   if (arguments.length === 0) {
     throw new Error('pipe requires at least one argument');
   }

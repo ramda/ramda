@@ -12,7 +12,7 @@ var reverse = require('./reverse');
  * @since v0.16.0
  * @category Function
  * @sig Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> (m a -> m z)
- * @param {...Function}
+ * @param {...Function} functions
  * @return {Function}
  * @see R.composeK
  * @example
@@ -35,6 +35,6 @@ var reverse = require('./reverse');
  *      //=> Nothing()
  * @symb R.pipeK(f, g, h)(a, b) = R.chain(h, R.chain(g, f(a, b)))
  */
-module.exports = function pipeK() {
+module.exports = function pipeK(functions) {
   return composeK.apply(this, reverse(arguments));
 };

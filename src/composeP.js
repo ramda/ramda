@@ -20,7 +20,7 @@ var reverse = require('./reverse');
  *      //  followersForUser :: String -> Promise [User]
  *      var followersForUser = R.composeP(db.getFollowers, db.getUserById);
  */
-module.exports = function composeP() {
+module.exports = function composeP(functions) {
   if (arguments.length === 0) {
     throw new Error('composeP requires at least one argument');
   }

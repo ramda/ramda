@@ -16,7 +16,7 @@ var prepend = require('./prepend');
  * @since v0.16.0
  * @category Function
  * @sig Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> (m a -> m z)
- * @param {...Function}
+ * @param {...Function} functions
  * @return {Function}
  * @see R.pipeK
  * @example
@@ -39,6 +39,6 @@ var prepend = require('./prepend');
  *      //=> Nothing()
  * @symb R.composeK(f, g, h)(a, b) = R.chain(f, R.chain(g, h(a, b)))
  */
-module.exports = function composeK() {
+module.exports = function composeK(functions) {
   return compose.apply(this, prepend(identity, map(chain, arguments)));
 };
