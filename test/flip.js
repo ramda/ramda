@@ -1,5 +1,8 @@
+var jsv = require('jsverify');
+
 var R = require('..');
 var eq = require('./shared/eq');
+var funcN = require('./shared/funcN');
 
 
 describe('flip', function() {
@@ -16,4 +19,11 @@ describe('flip', function() {
     eq(g('b', 'c'), 'b a c');
   });
 
+});
+
+describe('flip properties', function() {
+  jsv.property('inverts first two arguments', funcN(3), jsv.json, jsv.json, jsv.json, function(f, a, b, c) {
+    var g = R.flip(f);
+    return R.equals(f(a, b, c), g(b, a, c));
+  });
 });
