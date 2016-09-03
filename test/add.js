@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var jsv = require('jsverify');
 
 
 describe('add', function() {
@@ -21,4 +22,18 @@ describe('add', function() {
     eq(incr(42), 43);
   });
 
+});
+
+describe('add properties', function() {
+  jsv.property('commutative', jsv.number, jsv.number, function(a, b) {
+    return R.add(a, b) === R.add(b, a);
+  });
+
+  jsv.property('associative', jsv.number, jsv.number, jsv.number, function(a, b, c) {
+    return R.add(a, R.add(b, c)) === R.add(R.add(a, b), c);
+  });
+
+  jsv.property('identity', jsv.number, function(a) {
+    return R.add(a, 0) === a && R.add(0, a) === a;
+  });
 });
