@@ -15,13 +15,16 @@ var assoc = require('./assoc');
  * @category Object
  * @sig [String] -> a -> {k: v} -> {k: v}
  * @param {Array} path the path to set
- * @param {*} val the new value
- * @param {Object} obj the object to clone
- * @return {Object} a new object similar to the original except along the specified path.
+ * @param {*} val The new value
+ * @param {Object} obj The object to clone
+ * @return {Object} A new object equivalent to the original except along the specified path.
  * @see R.dissocPath
  * @example
  *
  *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
+ *
+ *      // Any missing or non-object keys in path will be overridden
+ *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
  */
 module.exports = _curry3(function assocPath(path, val, obj) {
   switch (path.length) {

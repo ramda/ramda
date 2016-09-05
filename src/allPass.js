@@ -18,8 +18,8 @@ var reduce = require('./reduce');
  * @since v0.9.0
  * @category Logic
  * @sig [(*... -> Boolean)] -> (*... -> Boolean)
- * @param {Array} preds
- * @return {Function}
+ * @param {Array} predicates An array of predicates to check
+ * @return {Function} The combined predicate
  * @see R.anyPass
  * @example
  *

@@ -23,10 +23,9 @@ var _xall = require('./internal/_xall');
  * @see R.any, R.none, R.transduce
  * @example
  *
- *      var lessThan2 = R.flip(R.lt)(2);
- *      var lessThan3 = R.flip(R.lt)(3);
- *      R.all(lessThan2)([1, 2]); //=> false
- *      R.all(lessThan3)([1, 2]); //=> true
+ *      var equals3 = R.equals(3);
+ *      R.all(equals3)([3, 3, 3, 3]); //=> true
+ *      R.all(equals3)([3, 3, 1, 3]); //=> false
  */
 module.exports = _curry2(_dispatchable('all', _xall, function all(fn, list) {
   var idx = 0;

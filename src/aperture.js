@@ -18,8 +18,8 @@ var _xaperture = require('./internal/_xaperture');
  * @category List
  * @sig Number -> [a] -> [[a]]
  * @param {Number} n The size of the tuples to create
- * @param {Array} list The list to split into `n`-tuples
- * @return {Array} The new list.
+ * @param {Array} list The list to split into `n`-length tuples
+ * @return {Array} The resulting list of `n`-length tuples
  * @see R.transduce
  * @example
  *
