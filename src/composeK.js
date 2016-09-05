@@ -16,27 +16,23 @@ var prepend = require('./prepend');
  * @since v0.16.0
  * @category Function
  * @sig Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> (m a -> m z)
- * @param {...Function}
+ * @param {...Function} ...functions The functions to compose
  * @return {Function}
  * @see R.pipeK
  * @example
  *
- *      //  parseJson :: String -> Maybe *
- *      //  get :: String -> Object -> Maybe *
+ *       //  get :: String -> Object -> Maybe *
+ *       var get = R.curry((propName, obj) => Maybe(obj[propName]))
  *
- *      //  getStateCode :: Maybe String -> Maybe String
- *      var getStateCode = R.composeK(
- *        R.compose(Maybe.of, R.toUpper),
- *        get('state'),
- *        get('address'),
- *        get('user'),
- *        parseJson
- *      );
- *
- *      getStateCode(Maybe.of('{"user":{"address":{"state":"ny"}}}'));
- *      //=> Just('NY')
- *      getStateCode(Maybe.of('[Invalid JSON]'));
- *      //=> Nothing()
+ *       //  getStateCode :: Maybe String -> Maybe String
+ *       var getStateCode = R.composeK(
+ *         R.compose(Maybe.of, R.toUpper),
+ *         get('state'),
+ *         get('address'),
+ *         get('user'),
+ *       );
+ *       getStateCode(Maybe.of({"user":{"address":{"state":"ny"}}})); //=> Maybe.Just("NY")
+ *       getStateCode(Maybe.of({})); //=> Maybe.Nothing()
  * @symb R.composeK(f, g, h)(a, b) = R.chain(f, R.chain(g, h(a, b)))
  */
 module.exports = function composeK() {

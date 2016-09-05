@@ -10,14 +10,14 @@ var _curry3 = require('./internal/_curry3');
  * @since v0.20.0
  * @category Relation
  * @sig Ord a => a -> a -> a -> a
- * @param {Number} minimum number
- * @param {Number} maximum number
- * @param {Number} value to be clamped
- * @return {Number} Returns the clamped value
+ * @param {Number} minimum The lower limit of the clamp (inclusive)
+ * @param {Number} maximum The upper limit of the clamp (inclusive)
+ * @param {Number} value Value to be clamped
+ * @return {Number} Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise
  * @example
  *
- *      R.clamp(1, 10, -1) // => 1
- *      R.clamp(1, 10, 11) // => 10
+ *      R.clamp(1, 10, -5) // => 1
+ *      R.clamp(1, 10, 15) // => 10
  *      R.clamp(1, 10, 4)  // => 4
  */
 module.exports = _curry3(function clamp(min, max, value) {

@@ -17,9 +17,9 @@ var map = require('./map');
  * @since v0.3.0
  * @category List
  * @sig Chain m => (a -> m b) -> m a -> m b
- * @param {Function} fn
- * @param {Array} list
- * @return {Array}
+ * @param {Function} fn The function to map with
+ * @param {Array} list The list to map over
+ * @return {Array} The result of flat-mapping `list` with `fn`
  * @example
  *
  *      var duplicate = n => [n, n];
