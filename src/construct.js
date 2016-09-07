@@ -11,21 +11,27 @@ var constructN = require('./constructN');
  * @since v0.1.0
  * @category Function
  * @sig (* -> {*}) -> (* -> {*})
- * @param {Function} Fn The constructor function to wrap.
+ * @param {Function} fn The constructor function to wrap.
  * @return {Function} A wrapped, curried constructor function.
  * @example
  *
  *      // Constructor function
- *      var Widget = function (config) {
- *        // ...
+ *      function Animal(kind) {
+ *        this.kind = kind;
  *      };
- *      Widget.prototype = {
- *        // ...
- *      };
- *      var allConfigs = [
- *        // ...
- *      ];
- *      R.map(R.construct(Widget), allConfigs); // a list of Widgets
+ *      Animal.prototype.sighting = function() {
+ *        return "It's a " + this.kind + "!";
+ *      }
+ *
+ *      var AnimalConstructor = R.construct(Animal)
+ *
+ *      // Notice we no longer need the 'new' keyword:
+ *      AnimalConstructor('Pig'); //=> {"kind": "Pig", "sighting": function (){...}};
+ *
+ *      var animalTypes = ["Lion", "Tiger", "Bear"];
+ *      var animalSighting = R.invoker(0, 'sighting');
+ *      var sightNewAnimal = R.compose(animalSighting, AnimalConstructor);
+ *      R.map(sightNewAnimal, animalTypes); //=> ["It's a Lion!", "It's a Tiger!", "It's a Bear!"]
  */
 module.exports = _curry1(function construct(Fn) {
   return constructN(Fn.length, Fn);

@@ -7,8 +7,8 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
 /**
  * Returns a new list excluding all the tailing elements of a given list which
  * satisfy the supplied predicate function. It passes each value from the right
- * to the supplied predicate function, skipping elements while the predicate
- * function returns `true`. The predicate function is applied to one argument:
+ * to the supplied predicate function, skipping elements until the predicate
+ * function returns a `falsy` value. The predicate function is applied to one argument:
  * *(value)*.
  *
  * @func
@@ -16,10 +16,10 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
  * @since v0.16.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> [a]
- * @param {Function} fn The function called per iteration.
+ * @param {Function} predicate The function to be called on each element
  * @param {Array} list The collection to iterate over.
- * @return {Array} A new array.
- * @see R.takeLastWhile, R.addIndex
+ * @return {Array} A new array without any trailing elements that return `falsy` values from the `predicate`.
+ * @see R.takeLastWhile, R.addIndex, R.drop, R.dropWhile
  * @example
  *
  *      var lteThree = x => x <= 3;

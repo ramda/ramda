@@ -10,7 +10,7 @@ var add = require('./add');
  * @category Math
  * @sig Number -> Number
  * @param {Number} n
- * @return {Number}
+ * @return {Number} n - 1
  * @see R.inc
  * @example
  *
