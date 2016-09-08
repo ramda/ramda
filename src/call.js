@@ -19,6 +19,8 @@ var curry = require('./curry');
  * @see R.apply
  * @example
  *
+ *      R.call(R.add, 1, 2); //=> 3
+ *
  *      var indentN = R.pipe(R.times(R.always(' ')),
  *                           R.join(''),
  *                           R.replace(/^(?!$)/gm));

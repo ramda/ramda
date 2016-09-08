@@ -3,15 +3,10 @@ var not = require('./not');
 
 
 /**
- * Takes a function `f` and returns a function `g` such that:
+ * Takes a function `f` and returns a function `g` such that if called with the same arguments
+ * when `f` returns a "truthy" value, `g` returns `false` and when `f` returns a "falsy" value `g` returns `true`.
  *
- *   - applying `g` to zero or more arguments will give __true__ if applying
- *     the same arguments to `f` gives a logical __false__ value; and
- *
- *   - applying `g` to zero or more arguments will give __false__ if applying
- *     the same arguments to `f` gives a logical __true__ value.
- *
- * `R.complement` will work on all other functors as well.
+ * `R.complement` may be applied to any functor
  *
  * @func
  * @memberOf R
@@ -23,9 +18,10 @@ var not = require('./not');
  * @see R.not
  * @example
  *
- *      var isEven = n => n % 2 === 0;
- *      var isOdd = R.complement(isEven);
- *      isOdd(21); //=> true
- *      isOdd(42); //=> false
+ *      var isNotNil = R.complement(R.isNil);
+ *      isNil(null); //=> true
+ *      isNotNil(null); //=> false
+ *      isNil(7); //=> false
+ *      isNotNil(7); //=> true
  */
 module.exports = lift(not);
