@@ -14,6 +14,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Object} obj The object to copy from
  * @return {Object} A new object with only properties from `names` on it.
  * @see R.pick
+ * @deprecated since v0.23.0
  * @example
  *
  *      R.pickAll(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, d: 4}
