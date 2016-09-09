@@ -9,13 +9,12 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
- * @since v0.22.2
  * @category Object
- * @sig [k] -> * -> {k: v} -> {k: v}
+ * @sig [String] -> a -> StrMap a -> StrMap a
  * @param {Array} names an array of String property names to copy onto a new object
- * @param * default value when encountering undefined
- * @param {Object} obj The object to copy from
- * @return {Object} A new object with only properties from `names` on it.
+ * @param {*} default The value assigned when property doesn't exist
+ * @param {StrMap} obj The object to copy from
+ * @return {StrMap} A new object with only properties from `names` on it.
  * @see R.pick
  * @example
  *
@@ -26,10 +25,7 @@ module.exports = _curry3(function pickWithDefault(names, def, obj) {
   var result = {};
   var idx = 0;
   while (idx < names.length) {
-    result[names[idx]] = (names[idx] in obj)
-      ?  obj[names[idx]]
-      : def
-
+    result[names[idx]] = names[idx] in obj ? obj[names[idx]] : def;
     idx += 1;
   }
   return result;

@@ -11,10 +11,4 @@ describe('pickWithDefault', function() {
   it('defaults properties not present on the input object', function() {
     eq(R.pickWithDefault(['a', 'c', 'g'], null, obj), {a: 1, c: 3, g: null});
   });
-
-  it('is curried', function() {
-    var copyAdefaultG = R.pickWithDefault(['a', 'g']);
-    eq(copyAdefaultG(null, obj), {a: 1, g: null});
-  });
-
 });
