@@ -5,8 +5,9 @@ var lift = require('./lift');
 
 
 /**
- * A function wrapping calls to the two functions in an `&&` operation,
- * returning the result of the first function if it is false-y and the result
+ * A function which calls the two provided functions and returns the `&&`
+ * of the results.
+ * It returns the result of the first function if it is false-y and the result
  * of the second function otherwise. Note that this is short-circuited,
  * meaning that the second function will not be invoked if the first returns a
  * false-y value.
@@ -19,17 +20,17 @@ var lift = require('./lift');
  * @since v0.12.0
  * @category Logic
  * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
- * @param {Function} f a predicate
- * @param {Function} g another predicate
+ * @param {Function} f A predicate
+ * @param {Function} g Another predicate
  * @return {Function} a function that applies its arguments to `f` and `g` and `&&`s their outputs together.
  * @see R.and
  * @example
  *
- *      var gt10 = x => x > 10;
- *      var even = x => x % 2 === 0;
- *      var f = R.both(gt10, even);
- *      f(100); //=> true
- *      f(101); //=> false
+ *      var gt10 = R.gt(R.__, 10)
+ *      var lt20 = R.lt(R.__, 20)
+ *      var f = R.both(gt10, lt20);
+ *      f(15); //=> true
+ *      f(30); //=> false
  */
 module.exports = _curry2(function both(f, g) {
   return _isFunction(f) ?

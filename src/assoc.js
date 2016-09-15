@@ -12,10 +12,10 @@ var _curry3 = require('./internal/_curry3');
  * @since v0.8.0
  * @category Object
  * @sig String -> a -> {k: v} -> {k: v}
- * @param {String} prop the property name to set
- * @param {*} val the new value
- * @param {Object} obj the object to clone
- * @return {Object} a new object similar to the original except for the specified property.
+ * @param {String} prop The property name to set
+ * @param {*} val The new value
+ * @param {Object} obj The object to clone
+ * @return {Object} A new object equivalent to the original except for the changed property.
  * @see R.dissoc
  * @example
  *

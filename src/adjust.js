@@ -22,8 +22,8 @@ var _curry3 = require('./internal/_curry3');
  * @see R.update
  * @example
  *
- *      R.adjust(R.add(10), 1, [0, 1, 2]);     //=> [0, 11, 2]
- *      R.adjust(R.add(10))(1)([0, 1, 2]);     //=> [0, 11, 2]
+ *      R.adjust(R.add(10), 1, [1, 2, 3]);     //=> [1, 12, 3]
+ *      R.adjust(R.add(10))(1)([1, 2, 3]);     //=> [1, 12, 3]
  * @symb R.adjust(f, -1, [a, b]) = [a, f(b)]
  * @symb R.adjust(f, 0, [a, b]) = [f(a), b]
  */

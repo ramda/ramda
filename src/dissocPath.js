@@ -14,9 +14,9 @@ var dissoc = require('./dissoc');
  * @since v0.11.0
  * @category Object
  * @sig [String] -> {k: v} -> {k: v}
- * @param {Array} path the path to set
- * @param {Object} obj the object to clone
- * @return {Object} a new object without the property at path
+ * @param {Array} path The path to the value to omit
+ * @param {Object} obj The object to clone
+ * @return {Object} A new object without the property at path
  * @see R.assocPath
  * @example
  *

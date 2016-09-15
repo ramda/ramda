@@ -9,9 +9,9 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.10.0
  * @category Object
  * @sig String -> {k: v} -> {k: v}
- * @param {String} prop the name of the property to dissociate
- * @param {Object} obj the object to clone
- * @return {Object} a new object similar to the original but without the specified property
+ * @param {String} prop The name of the property to dissociate
+ * @param {Object} obj The object to clone
+ * @return {Object} A new object equivalent to the original but without the specified property
  * @see R.assoc
  * @example
  *

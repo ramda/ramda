@@ -12,9 +12,9 @@ var _curry2 = require('./internal/_curry2');
  * @category List
  * @sig a -> [a] -> [a]
  * @param {*} el The element to add to the end of the new list.
- * @param {Array} list The list whose contents will be added to the beginning of the output
+ * @param {Array} list The list of elements to add a new item to.
  *        list.
- * @return {Array} A new list containing the contents of the old list followed by `el`.
+ * @return {Array} A new list containing the elements of the old list followed by `el`.
  * @see R.prepend
  * @example
  *

@@ -11,9 +11,9 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.7.0
  * @category Function
  * @sig (*... -> a) -> [*] -> a
- * @param {Function} fn
- * @param {Array} args
- * @return {*}
+ * @param {Function} fn The function which will be called with `args`
+ * @param {Array} args The arguments to call `fn` with
+ * @return {*} result The result, equivalent to `fn(...args)`
  * @see R.call, R.unapply
  * @example
  *
