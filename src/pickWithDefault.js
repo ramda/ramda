@@ -18,8 +18,8 @@ var _curry3 = require('./internal/_curry3');
  * @see R.pick
  * @example
  *
- *      R.pickWithDefault(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, d: 4}
- *      R.pickWithDefault(['a', 'e', 'f'], null, {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, e: null, f: null}
+ *      R.pickWithDefault(null, ['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, d: 4}
+ *      R.pickWithDefault(null, ['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, e: null, f: null}
  */
 module.exports = _curry3(function pickWithDefault(def, names, obj) {
   var result = {};
