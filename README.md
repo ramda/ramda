@@ -117,6 +117,8 @@ These script tags add the variable `R` on the browser's global scope.
 
 Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](https://github.com/ramda/ramda/blob/master/BOOKMARKLET.md).
 
+Or you can install via ng-ramda npm package ```npm install ng-ramda```  then follow the directions at https://www.npmjs.com/package/ng-ramda
+
 ### Build
 
 * on Unix-based platforms, `npm run build` updates __dist/ramda.js__ and __dist/ramda.min.js__
