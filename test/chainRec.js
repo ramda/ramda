@@ -42,16 +42,4 @@ describe('chainRec', function() {
   it('dispatches to objects that implement `fantasy-land/chainRec`', function() {
     eq(R.chainRec({ 'fantasy-land/chainRec': function(f, i) { return true; }}, null, null), true);
   });
-
-  it('is curried', function() {
-    var f = R.chainRec(Array, function(next, done, i) {
-      return [done(i)];
-    });
-    eq(f(10), [10]);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var f = R.chainRec(Array);
-    eq(f.length, 2);
-  });
 });
