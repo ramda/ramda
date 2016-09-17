@@ -25,9 +25,9 @@ var _curry3 = require('./internal/_curry3');
  *
  */
 module.exports = _curry3(function _chainRec(chainRec, fn, i) {
-  if (chainRec != null && typeof chainRec.chainRec === 'function') {
+  if (typeof chainRec.chainRec === 'function') {
     return chainRec.chainRec(fn, i);
-  } else if (chainRec != null && chainRec.constructor != null && typeof chainRec.constructor.chainRec === 'function') {
+  } else if (chainRec.constructor != null && typeof chainRec.constructor.chainRec === 'function') {
     return chainRec.constructor.chainRec(fn, i);
   } else {
     return _arrayChainRec(fn, i);
