@@ -39,8 +39,8 @@ describe('chainRec', function() {
     }, 100000), ['DONE'])
   });
 
-  it('dispatches to objects that implement `chainRec`', function() {
-    eq(R.chainRec({ chainRec: function(f, i) { return true; }}, null, null), true);
+  it('dispatches to objects that implement `fantasy-land/chainRec`', function() {
+    eq(R.chainRec({ 'fantasy-land/chainRec': function(f, i) { return true; }}, null, null), true);
   });
 
   it('is curried', function() {

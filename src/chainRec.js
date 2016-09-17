@@ -25,10 +25,10 @@ var _curry3 = require('./internal/_curry3');
  *
  */
 module.exports = _curry3(function _chainRec(chainRec, fn, i) {
-  if (typeof chainRec.chainRec === 'function') {
-    return chainRec.chainRec(fn, i);
-  } else if (chainRec.constructor != null && typeof chainRec.constructor.chainRec === 'function') {
-    return chainRec.constructor.chainRec(fn, i);
+  if (typeof chainRec['fantasy-land/chainRec'] === 'function') {
+    return chainRec['fantasy-land/chainRec'](fn, i);
+  } else if (chainRec.constructor != null && typeof chainRec.constructor['fantasy-land/chainRec'] === 'function') {
+    return chainRec.constructor['fantasy-land/chainRec'](fn, i);
   } else {
     return _arrayChainRec(fn, i);
   }
