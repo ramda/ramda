@@ -35,11 +35,7 @@ describe('chainRec', function() {
 
   it('is stacksafe', function() {
     eq(R.chainRec(Array, function(next, done, n) {
-      if (n === 0) {
-        return [done('DONE')]
-      } else {
-        return [next(n - 1)]
-      }
+      return n === 0 ? [done('DONE')] : [next(n - 1)];
     }, 100000), ['DONE'])
   });
 
