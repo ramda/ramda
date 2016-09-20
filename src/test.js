@@ -1,7 +1,7 @@
+var $ = require('sanctuary-def');
+
 var _cloneRegExp = require('./internal/_cloneRegExp');
-var _curry2 = require('./internal/_curry2');
-var _isRegExp = require('./internal/_isRegExp');
-var toString = require('./toString');
+var _def = require('./internal/_def');
 
 
 /**
@@ -21,9 +21,8 @@ var toString = require('./toString');
  *      R.test(/^x/, 'xyz'); //=> true
  *      R.test(/^y/, 'xyz'); //=> false
  */
-module.exports = _curry2(function test(pattern, str) {
-  if (!_isRegExp(pattern)) {
-    throw new TypeError('‘test’ requires a value of type RegExp as its first argument; received ' + toString(pattern));
-  }
-  return _cloneRegExp(pattern).test(str);
-});
+module.exports =
+_def('test',
+     {},
+     [$.RegExp, $.String, $.Boolean],
+     function test(pattern, str) { return _cloneRegExp(pattern).test(str); });

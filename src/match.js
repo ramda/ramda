@@ -1,4 +1,6 @@
-var _curry2 = require('./internal/_curry2');
+var $ = require('sanctuary-def');
+
+var _def = require('./internal/_def');
 
 
 /**
@@ -20,8 +22,9 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
  *      R.match(/a/, 'b'); //=> []
- *      R.match(/a/, null); //=> TypeError: null does not have a method named "match"
  */
-module.exports = _curry2(function match(rx, str) {
-  return str.match(rx) || [];
-});
+module.exports =
+_def('match',
+     {},
+     [$.RegExp, $.String, $.Array($.Any)],
+     function(rx, str) { return str.match(rx) || []; });

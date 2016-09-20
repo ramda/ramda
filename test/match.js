@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var errorEq = require('./shared/errorEq');
 var eq = require('./shared/eq');
 
 
@@ -27,7 +28,19 @@ describe('match', function() {
   });
 
   it('throws on null input', function() {
-    assert.throws(function shouldThrow() { R.match(re, null); }, TypeError);
+    assert.throws(
+      function shouldThrow() { R.match(re, null); },
+      errorEq(TypeError,
+              'Invalid value\n' +
+              '\n' +
+              'match :: RegExp -> String -> Array Any\n' +
+              '                   ^^^^^^\n' +
+              '                     1\n' +
+              '\n' +
+              '1)  null :: Null\n' +
+              '\n' +
+              'The value at position 1 is not a member of ‘String’.\n')
+    );
   });
 
 });
