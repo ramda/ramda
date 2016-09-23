@@ -15,6 +15,7 @@ var map = require('./map');
  * @since v0.3.0
  * @category Function
  * @sig [a -> b] -> [a] -> [b]
+ * @sig (a -> b -> c) -> (a -> b) -> a -> c
  * @sig Apply f => f (a -> b) -> f a -> f b
  * @param {Array} fns An array of functions
  * @param {Array} vs An array of values
@@ -23,6 +24,10 @@ var map = require('./map');
  *
  *      R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
  *      R.ap([R.concat('tasty '), R.toUpper], ['pizza', 'salad']); //=> ["tasty pizza", "tasty salad", "PIZZA", "SALAD"]
+ *      
+ *      // R.ap can also be used as S combinator 
+ *      // when only two functions are passed
+ *      R.ap(R.add, R.inc)(5) //=> 11
  * @symb R.ap([f, g], [a, b]) = [f(a), f(b), g(a), g(b)]
  */
 module.exports = _curry2(function ap(applicative, fn) {
