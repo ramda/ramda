@@ -11,7 +11,7 @@ var keys = require('./keys');
  * @func
  * @memberOf R
  * @category Object
- * @sig f => (a -> b) -> f a -> f b
+ * @sig ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
  * @param {Function} fn The function to invoke. Receives three argument, `value`, `key`, `obj`.
  * @param {Object} obj The object to iterate over.
  * @return {Object} The original object.

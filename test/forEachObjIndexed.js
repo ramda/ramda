@@ -17,19 +17,6 @@ describe('forEachObjIndexed', function() {
     eq('12123', s);
   });
 
-  it('no dispatches to `forEachObjIndexed` method', function() {
-    var dispatched = false;
-    var fn = function() {};
-
-    function DummyObject() {}
-    DummyObject.prototype.forEachObjIndexed = function(callback) {
-      dispatched = true;
-      eq(callback, fn);
-    };
-    R.forEachObjIndexed(fn, new DummyObject());
-    eq(dispatched, false);
-  });
-
   it('is curried', function() {
     var xStr = '';
     var xe = R.forEachObjIndexed(function(v) { xStr += (v + ' '); });
