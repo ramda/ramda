@@ -49,7 +49,7 @@ var _xreduceBy = require('./internal/_xreduceBy');
  *      //   'F': ['Bart']
  *      // }
  */
-module.exports = _curryN(4, [], _dispatchable('reduceBy', _xreduceBy,
+module.exports = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);

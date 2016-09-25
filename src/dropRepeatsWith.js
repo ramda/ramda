@@ -9,8 +9,6 @@ var last = require('./last');
  * determined by applying the supplied predicate two consecutive elements. The
  * first element in a series of equal element is the one being preserved.
  *
- * Dispatches to the `dropRepeatsWith` method of the second argument, if present.
- *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func
@@ -27,7 +25,7 @@ var last = require('./last');
  *      var l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
  *      R.dropRepeatsWith(R.eqBy(Math.abs), l); //=> [1, 3, 4, -5, 3]
  */
-module.exports = _curry2(_dispatchable('dropRepeatsWith', _xdropRepeatsWith, function dropRepeatsWith(pred, list) {
+module.exports = _curry2(_dispatchable([], _xdropRepeatsWith, function dropRepeatsWith(pred, list) {
   var result = [];
   var idx = 1;
   var len = list.length;

@@ -27,7 +27,7 @@ var _xall = require('./internal/_xall');
  *      R.all(equals3)([3, 3, 3, 3]); //=> true
  *      R.all(equals3)([3, 3, 1, 3]); //=> false
  */
-module.exports = _curry2(_dispatchable('all', _xall, function all(fn, list) {
+module.exports = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
   var idx = 0;
   while (idx < list.length) {
     if (!fn(list[idx])) {

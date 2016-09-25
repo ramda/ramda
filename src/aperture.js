@@ -8,8 +8,6 @@ var _xaperture = require('./internal/_xaperture');
  * Returns a new list, composed of n-tuples of consecutive elements If `n` is
  * greater than the length of the list, an empty list is returned.
  *
- * Dispatches to the `aperture` method of the second argument, if present.
- *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func
@@ -27,4 +25,4 @@ var _xaperture = require('./internal/_xaperture');
  *      R.aperture(3, [1, 2, 3, 4, 5]); //=> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
  *      R.aperture(7, [1, 2, 3, 4, 5]); //=> []
  */
-module.exports = _curry2(_dispatchable('aperture', _xaperture, _aperture));
+module.exports = _curry2(_dispatchable([], _xaperture, _aperture));

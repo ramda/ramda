@@ -25,4 +25,4 @@ var _xdropLast = require('./internal/_xdropLast');
  *      R.dropLast(4, ['foo', 'bar', 'baz']); //=> []
  *      R.dropLast(3, 'ramda');               //=> 'ra'
  */
-module.exports = _curry2(_dispatchable('dropLast', _xdropLast, _dropLast));
+module.exports = _curry2(_dispatchable([], _xdropLast, _dropLast));

@@ -33,7 +33,7 @@ var keys = require('./keys');
  *
  *      R.filter(isEven, {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, d: 4}
  */
-module.exports = _curry2(_dispatchable('filter', _xfilter, function(pred, filterable) {
+module.exports = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filterable) {
   return (
     _isObject(filterable) ?
       _reduce(function(acc, key) {

@@ -7,8 +7,6 @@ var _xfindLastIndex = require('./internal/_xfindLastIndex');
  * Returns the index of the last element of the list which matches the
  * predicate, or `-1` if no element matches.
  *
- * Dispatches to the `findLastIndex` method of the second argument, if present.
- *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func
@@ -27,7 +25,7 @@ var _xfindLastIndex = require('./internal/_xfindLastIndex');
  *      R.findLastIndex(R.propEq('a', 1))(xs); //=> 1
  *      R.findLastIndex(R.propEq('a', 4))(xs); //=> -1
  */
-module.exports = _curry2(_dispatchable('findLastIndex', _xfindLastIndex, function findLastIndex(fn, list) {
+module.exports = _curry2(_dispatchable([], _xfindLastIndex, function findLastIndex(fn, list) {
   var idx = list.length - 1;
   while (idx >= 0) {
     if (fn(list[idx])) {

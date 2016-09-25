@@ -28,7 +28,7 @@ var _xany = require('./internal/_xany');
  *      R.any(lessThan0)([1, 2]); //=> false
  *      R.any(lessThan2)([1, 2]); //=> true
  */
-module.exports = _curry2(_dispatchable('any', _xany, function any(fn, list) {
+module.exports = _curry2(_dispatchable(['any'], _xany, function any(fn, list) {
   var idx = 0;
   while (idx < list.length) {
     if (fn(list[idx])) {

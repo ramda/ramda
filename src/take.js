@@ -47,6 +47,6 @@ var slice = require('./slice');
  * @symb R.take(1, [a, b]) = [a]
  * @symb R.take(2, [a, b]) = [a, b]
  */
-module.exports = _curry2(_dispatchable('take', _xtake, function take(n, xs) {
+module.exports = _curry2(_dispatchable(['take'], _xtake, function take(n, xs) {
   return slice(0, n < 0 ? Infinity : n, xs);
 }));

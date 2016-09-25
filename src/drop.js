@@ -28,6 +28,6 @@ var slice = require('./slice');
  *      R.drop(4, ['foo', 'bar', 'baz']); //=> []
  *      R.drop(3, 'ramda');               //=> 'da'
  */
-module.exports = _curry2(_dispatchable('drop', _xdrop, function drop(n, xs) {
+module.exports = _curry2(_dispatchable(['drop'], _xdrop, function drop(n, xs) {
   return slice(Math.max(0, n), Infinity, xs);
 }));
