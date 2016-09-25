@@ -1,4 +1,3 @@
-var _checkForMethod = require('./internal/_checkForMethod');
 var _curry2 = require('./internal/_curry2');
 var keys = require('./keys');
 
@@ -8,8 +7,6 @@ var keys = require('./keys');
  * key and value in the object.
  *
  * `fn` receives three argument: *(value, key, obj)*.
- *
- * Dispatches to the `forEachObjIndexed` method of the second argument, if present.
  *
  * @func
  * @memberOf R
@@ -26,7 +23,7 @@ var keys = require('./keys');
  *      // logs y:2
  * @symb R.forEachObjIndexed(f, {x: a, y: b}) = {x: a, y: b}
  */
-module.exports = _curry2(_checkForMethod('forEachObjIndexed', function forEachObjIndexed(fn, obj) {
+module.exports = _curry2(function forEachObjIndexed(fn, obj) {
   var keyList = keys(obj);
   var idx = 0;
   while (idx < keyList.length) {
@@ -35,4 +32,4 @@ module.exports = _curry2(_checkForMethod('forEachObjIndexed', function forEachOb
     idx += 1;
   }
   return obj;
-}));
+});
