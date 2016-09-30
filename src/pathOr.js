@@ -11,7 +11,8 @@ var path = require('./path');
  * @memberOf R
  * @since v0.18.0
  * @category Object
- * @sig a -> [String] -> Object -> a
+ * @typedefn Idx = String | Int
+ * @sig a -> [Idx] -> {a} -> a
  * @param {*} d The default value.
  * @param {Array} p The path to use.
  * @param {Object} obj The object to retrieve the nested property from.

@@ -10,7 +10,8 @@ var path = require('./path');
  * @memberOf R
  * @since v0.19.0
  * @category Logic
- * @sig (a -> Boolean) -> [String] -> Object -> Boolean
+ * @typedefn Idx = String | Int
+ * @sig (a -> Boolean) -> [Idx] -> {a} -> Boolean
  * @param {Function} pred
  * @param {Array} propPath
  * @param {*} obj

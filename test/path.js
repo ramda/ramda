@@ -22,9 +22,9 @@ describe('path', function() {
     };
     eq(R.path(['a', 'b', 'c'], obj), 100);
     eq(R.path([], obj), obj);
-    eq(R.path(['a', 'e', 'f', '1'], obj), 101);
-    eq(R.path(['j', '0'], obj), 'J');
-    eq(R.path(['j', '1'], obj), undefined);
+    eq(R.path(['a', 'e', 'f', 1], obj), 101);
+    eq(R.path(['j', 0], obj), 'J');
+    eq(R.path(['j', 1], obj), undefined);
   });
 
   it("gets a deep property's value from objects", function() {

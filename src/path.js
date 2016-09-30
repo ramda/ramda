@@ -8,7 +8,8 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.2.0
  * @category Object
- * @sig [String] -> {k: v} -> v | Undefined
+ * @typedefn Idx = String | Int
+ * @sig [Idx] -> {a} -> a | Undefined
  * @param {Array} path The path to use.
  * @param {Object} obj The object to retrieve the nested property from.
  * @return {*} The data at `path`.
