@@ -11,18 +11,22 @@ var path = require('./path');
  * @memberOf R
  * @since v0.19.0
  * @category Object
+ * @typedefn Idx = String | Int
  * @typedefn Lens s a = Functor f => (a -> f a) -> s -> f s
- * @sig [String] -> Lens s a
+ * @sig [Idx] -> Lens s a
  * @param {Array} path The path to use.
  * @return {Lens}
  * @see R.view, R.set, R.over
  * @example
  *
- *      var xyLens = R.lensPath(['x', 'y']);
+ *      var xHeadYLens = R.lensPath(['x', 0, 'y']);
  *
- *      R.view(xyLens, {x: {y: 2, z: 3}});            //=> 2
- *      R.set(xyLens, 4, {x: {y: 2, z: 3}});          //=> {x: {y: 4, z: 3}}
- *      R.over(xyLens, R.negate, {x: {y: 2, z: 3}});  //=> {x: {y: -2, z: 3}}
+ *      R.view(xHeadYLens, {x: [{y: 2, z: 3}, {y: 4, z: 5}]});
+ *      //=> 2
+ *      R.set(xHeadYLens, 1, {x: [{y: 2, z: 3}, {y: 4, z: 5}]});
+ *      //=> {x: [{y: 1, z: 3}, {y: 4, z: 5}]}
+ *      R.over(xHeadYLens, R.negate, {x: [{y: 2, z: 3}, {y: 4, z: 5}]});
+ *      //=> {x: [{y: -2, z: 3}, {y: 4, z: 5}]}
  */
 module.exports = _curry1(function lensPath(p) {
   return lens(path(p), assocPath(p));
