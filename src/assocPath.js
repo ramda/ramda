@@ -12,7 +12,8 @@ var assoc = require('./assoc');
  * @memberOf R
  * @since v0.8.0
  * @category Object
- * @sig [String] -> a -> {k: v} -> {k: v}
+ * @typedefn Idx = String | Int
+ * @sig [Idx] -> a -> {a} -> {a}
  * @param {Array} path the path to set
  * @param {*} val The new value
  * @param {Object} obj The object to clone
