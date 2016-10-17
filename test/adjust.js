@@ -22,10 +22,6 @@ describe('adjust', function() {
     eq(list, [0, 1, 2, 3]);
   });
 
-  it('curries the arguments', function() {
-    eq(R.adjust(R.add(1))(2)([0, 1, 2, 3]), [0, 1, 3, 3]);
-  });
-
   it('accepts an array-like object', function() {
     function args() {
       return arguments;

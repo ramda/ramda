@@ -24,8 +24,4 @@ describe('props', function() {
     eq(ps[1], void 0);
   });
 
-  it('is curried', function() {
-    eq(R.props(['a', 'b'])(obj), [1, 2]);
-  });
-
 });

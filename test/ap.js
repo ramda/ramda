@@ -25,15 +25,4 @@ describe('ap', function() {
     eq(R.ap(R.add)(g)(10), 10 + (10 * 2));
   });
 
-  it('dispatches to the passed object\'s ap method when values is a non-Array object', function() {
-    var obj = {ap: function(n) { return 'called ap with ' + n; }};
-    eq(R.ap(obj, 10), obj.ap(10));
-  });
-
-  it('is curried', function() {
-    var val = R.ap([mult2, plus3]);
-    eq(typeof val, 'function');
-    eq(val([1, 2, 3]), [2, 4, 6, 4, 5, 6]);
-  });
-
 });

@@ -35,9 +35,4 @@ describe('findIndex', function() {
     eq(intoArray(R.findIndex(even), ['zing']), [-1]);
   });
 
-  it('is curried', function() {
-    eq(typeof R.findIndex(even), 'function');
-    eq(R.findIndex(even)(a), 1);
-  });
-
 });

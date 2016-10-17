@@ -42,7 +42,7 @@ describe('chain', function() {
   });
 
   it('dispatches to objects that implement `chain`', function() {
-    var obj = {x: 100, chain: function(f) { return f(this.x); }};
+    var obj = {x: 100, 'fantasy-land/chain': function(f) { return f(this.x); }};
     eq(R.chain(add1, obj), [101]);
   });
 
@@ -61,16 +61,6 @@ describe('chain', function() {
     var mdec = R.chain(dec);
     var xcomp = R.compose(mdec, mdouble);
     eq(intoArray(xcomp, [10, 20, 30]), [18, 38, 58]);
-  });
-
-  it('is curried', function() {
-    var flatInc = R.chain(add1);
-    eq(flatInc([1, 2, 3, 4, 5, 6]), [2, 3, 4, 5, 6, 7]);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var inc = R.chain(add1);
-    eq(inc.length, 1);
   });
 
 });

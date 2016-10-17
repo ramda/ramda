@@ -1,5 +1,6 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry3 = require('./internal/_curry3');
-var _reduce = require('./internal/_reduce');
 
 
 /**
@@ -45,4 +46,4 @@ var _reduce = require('./internal/_reduce');
  *
  * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
  */
-module.exports = _curry3(_reduce);
+module.exports = _curry3(Z.reduce);

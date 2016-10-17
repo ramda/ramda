@@ -1,7 +1,7 @@
+var Maybe = require('sanctuary-maybe');
 
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
 
 
 var addN = function() {
@@ -12,7 +12,7 @@ var add3 = R.curry(function add3(a, b, c) {
 });
 
 
-describe('liftN', function() {
+describe.skip('liftN', function() {
 
   var addN3 = R.liftN(3, addN);
   var addN4 = R.liftN(4, addN);
@@ -30,12 +30,6 @@ describe('liftN', function() {
     eq(addN3([1, 10], [2], [3]), [6, 15]);
     eq(addN4([1, 10], [2], [3], [40]), [46, 55]);
     eq(addN5([1, 10], [2], [3], [40], [500, 1000]), [546, 1046, 555, 1055]);
-  });
-
-  it('is curried', function() {
-    var f4 = R.liftN(4);
-    eq(typeof f4, 'function');
-    eq(f4(addN)([1], [2], [3], [4, 5]), [10, 11]);
   });
 
   it('works with other functors such as "Maybe"', function() {

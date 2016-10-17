@@ -1,5 +1,7 @@
+var Z = require('sanctuary-type-classes');
+
+var _curry1 = require('./internal/_curry1');
 var add = require('./add');
-var reduce = require('./reduce');
 
 
 /**
@@ -17,4 +19,6 @@ var reduce = require('./reduce');
  *
  *      R.sum([2,4,6,8,100,1]); //=> 121
  */
-module.exports = reduce(add, 0);
+module.exports = _curry1(function sum(xs) {
+  return Z.reduce(add, 0, xs);
+});

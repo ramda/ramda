@@ -1,7 +1,6 @@
-var _concat = require('./internal/_concat');
+var Z = require('sanctuary-type-classes');
+
 var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var map = require('./map');
 
 
 /**
@@ -25,15 +24,4 @@ var map = require('./map');
  *      R.ap([R.concat('tasty '), R.toUpper], ['pizza', 'salad']); //=> ["tasty pizza", "tasty salad", "PIZZA", "SALAD"]
  * @symb R.ap([f, g], [a, b]) = [f(a), f(b), g(a), g(b)]
  */
-module.exports = _curry2(function ap(applyF, applyX) {
-  return (
-    typeof applyX['fantasy-land/ap'] === 'function' ?
-      applyX['fantasy-land/ap'](applyF) :
-    typeof applyF.ap === 'function' ?
-      applyF.ap(applyX) :
-    typeof applyF === 'function' ?
-      function(x) { return applyF(x)(applyX(x)); } :
-    // else
-      _reduce(function(acc, f) { return _concat(acc, map(f, applyX)); }, [], applyF)
-  );
-});
+module.exports = _curry2(Z.ap);

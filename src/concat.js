@@ -1,8 +1,6 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry2 = require('./internal/_curry2');
-var _isArray = require('./internal/_isArray');
-var _isFunction = require('./internal/_isFunction');
-var _isString = require('./internal/_isString');
-var toString = require('./toString');
 
 
 /**
@@ -31,24 +29,4 @@ var toString = require('./toString');
  *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
  *      R.concat([], []); //=> []
  */
-module.exports = _curry2(function concat(a, b) {
-  if (_isArray(a)) {
-    if (_isArray(b)) {
-      return a.concat(b);
-    }
-    throw new TypeError(toString(b) + ' is not an array');
-  }
-  if (_isString(a)) {
-    if (_isString(b)) {
-      return a + b;
-    }
-    throw new TypeError(toString(b) + ' is not a string');
-  }
-  if (a != null && _isFunction(a['fantasy-land/concat'])) {
-    return a['fantasy-land/concat'](b);
-  }
-  if (a != null && _isFunction(a.concat)) {
-    return a.concat(b);
-  }
-  throw new TypeError(toString(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
-});
+module.exports = _curry2(Z.concat);

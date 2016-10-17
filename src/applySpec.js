@@ -1,10 +1,10 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry1 = require('./internal/_curry1');
 var apply = require('./apply');
 var curryN = require('./curryN');
-var map = require('./map');
 var max = require('./max');
 var pluck = require('./pluck');
-var reduce = require('./reduce');
 var values = require('./values');
 
 
@@ -34,11 +34,11 @@ var values = require('./values');
  * @symb R.applySpec({ x: f, y: { z: g } })(a, b) = { x: f(a, b), y: { z: g(a, b) } }
  */
 module.exports = _curry1(function applySpec(spec) {
-  spec = map(function(v) { return typeof v == 'function' ? v : applySpec(v); },
-             spec);
-  return curryN(reduce(max, 0, pluck('length', values(spec))),
+  spec = Z.map(function(v) { return typeof v == 'function' ? v : applySpec(v); },
+               spec);
+  return curryN(Z.reduce(max, 0, pluck('length', values(spec))),
                 function() {
                   var args = arguments;
-                  return map(function(f) { return apply(f, args); }, spec);
+                  return Z.map(function(f) { return apply(f, args); }, spec);
                 });
 });

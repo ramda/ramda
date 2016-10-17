@@ -17,11 +17,6 @@ describe('add', function() {
     eq(R.add(new Date(1), new Date(2)), 3);
   });
 
-  it('is curried', function() {
-    var incr = R.add(1);
-    eq(incr(42), 43);
-  });
-
 });
 
 describe('add properties', function() {

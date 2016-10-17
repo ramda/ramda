@@ -10,9 +10,4 @@ describe('or', function() {
     eq(R.or(false, false), false);
   });
 
-  it('is curried', function() {
-    eq(R.or(false)(false), false);
-    eq(R.or(false)(true), true);
-  });
-
 });

@@ -11,7 +11,7 @@ describe('reduce', function() {
   });
 
   it('dispatches to objects that implement `reduce`', function() {
-    var obj = {x: [1, 2, 3], reduce: function() { return 'override'; }};
+    var obj = {x: [1, 2, 3], 'fantasy-land/reduce': function() { return 'override'; }};
     eq(R.reduce(add, 0, obj), 'override');
     eq(R.reduce(add, 10, obj), 'override');
   });
@@ -20,19 +20,6 @@ describe('reduce', function() {
     eq(R.reduce(add, 0, []), 0);
     eq(R.reduce(mult, 1, []), 1);
     eq(R.reduce(R.concat, [], []), []);
-  });
-
-  it('is curried', function() {
-    var addOrConcat = R.reduce(add);
-    var sum = addOrConcat(0);
-    var cat = addOrConcat('');
-    eq(sum([1, 2, 3, 4]), 10);
-    eq(cat(['1', '2', '3', '4']), '1234');
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var sum = R.reduce(add, 0);
-    eq(sum.length, 1);
   });
 
 });

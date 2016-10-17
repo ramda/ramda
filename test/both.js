@@ -1,4 +1,4 @@
-var S = require('sanctuary');
+var Maybe = require('sanctuary-maybe');
 
 var R = require('..');
 var eq = require('./shared/eq');
@@ -31,23 +31,12 @@ describe('both', function() {
     eq(effect, 'not evaluated');
   });
 
-  it('is curried', function() {
-    var even = function(x) {return x % 2 === 0;};
-    var gt10 = function(x) {return x > 10;};
-    var evenAnd = R.both(even);
-    eq(typeof evenAnd(gt10), 'function');
-    eq(evenAnd(gt10)(11), false);
-    eq(evenAnd(gt10)(12), true);
-  });
-
   it('accepts fantasy-land applicative functors', function() {
-    var Just = S.Just;
-    var Nothing = S.Nothing;
-    eq(R.both(Just(true), Just(true)), Just(true));
-    eq(R.both(Just(true), Just(false)), Just(false));
-    eq(R.both(Just(true), Nothing()), Nothing());
-    eq(R.both(Nothing(), Just(false)), Nothing());
-    eq(R.both(Nothing(), Nothing()), Nothing());
+    eq(R.both(Maybe.Just(true), Maybe.Just(true)), Maybe.Just(true));
+    eq(R.both(Maybe.Just(true), Maybe.Just(false)), Maybe.Just(false));
+    eq(R.both(Maybe.Just(true), Maybe.Nothing), Maybe.Nothing);
+    eq(R.both(Maybe.Nothing, Maybe.Just(false)), Maybe.Nothing);
+    eq(R.both(Maybe.Nothing, Maybe.Nothing), Maybe.Nothing);
   });
 
 });

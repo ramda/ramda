@@ -1,5 +1,6 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry1 = require('./internal/_curry1');
-var _toString = require('./internal/_toString');
 
 
 /**
@@ -38,4 +39,4 @@ var _toString = require('./internal/_toString');
  *      R.toString({foo: 1, bar: 2, baz: 3}); //=> '{"bar": 2, "baz": 3, "foo": 1}'
  *      R.toString(new Date('2001-02-03T04:05:06Z')); //=> 'new Date("2001-02-03T04:05:06.000Z")'
  */
-module.exports = _curry1(function toString(val) { return _toString(val, []); });
+module.exports = _curry1(Z.toString);

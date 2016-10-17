@@ -11,10 +11,6 @@ describe('o', function() {
     eq(R.o.length, 3);
   });
 
-  it('is a curried function', function() {
-    eq(R.o(R.add(1), R.multiply(2), 10), R.o(R.add(1))(R.multiply(2))(10));
-  });
-
   it('performs right-to-left function composition', function() {
     //  f :: Number -> ([Number] -> [Number])
     var f = R.o(R.map, R.multiply);

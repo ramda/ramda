@@ -14,10 +14,4 @@ describe('takeWhile', function() {
     eq(R.takeWhile(function(x) {return x !== void 0;}, [1, 3, void 0, 5, 7]), [1, 3]);
   });
 
-  it('is curried', function() {
-    var takeUntil7 = R.takeWhile(function(x) {return x !== 7;});
-    eq(takeUntil7([1, 3, 5, 7, 9]), [1, 3, 5]);
-    eq(takeUntil7([2, 4, 6, 8, 10]), [2, 4, 6, 8, 10]);
-  });
-
 });

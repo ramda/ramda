@@ -30,22 +30,6 @@ describe('groupBy', function() {
     });
   });
 
-  it('is curried', function() {
-    var splitByType = R.groupBy(R.prop('type'));
-    eq(splitByType([
-      {type: 'A', val: 10},
-      {type: 'B', val: 20},
-      {type: 'A', val: 30},
-      {type: 'A', val: 40},
-      {type: 'C', val: 50},
-      {type: 'B', val: 60}
-    ]), {
-      A: [{type: 'A', val: 10}, {type: 'A', val: 30}, {type: 'A', val: 40}],
-      B: [{type: 'B', val: 20}, {type: 'B', val: 60}],
-      C: [{type: 'C', val: 50}]
-    });
-  });
-
   it('returns an empty object if given an empty array', function() {
     eq(R.groupBy(R.prop('x'), []), {});
   });

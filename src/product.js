@@ -1,5 +1,7 @@
+var Z = require('sanctuary-type-classes');
+
+var _curry1 = require('./internal/_curry1');
 var multiply = require('./multiply');
-var reduce = require('./reduce');
 
 
 /**
@@ -17,4 +19,6 @@ var reduce = require('./reduce');
  *
  *      R.product([2,4,6,8,100,1]); //=> 38400
  */
-module.exports = reduce(multiply, 1);
+module.exports = _curry1(function product(xs) {
+  return Z.reduce(multiply, 1, xs);
+});

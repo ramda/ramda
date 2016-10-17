@@ -42,17 +42,17 @@
     "bookmarklet": "scripts/bookmarklet",
     "build": "make && make dist/ramda.min.js",
     "clean": "rimraf dist/* coverage/*",
-    "precoverage": "npm run pretest",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
     "postcoverage": "npm run posttest",
     "lint": "eslint scripts/bookmarklet scripts/build src/*.js src/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "test": "mocha --reporter spec",
     "posttest": "git checkout -- dist",
-    "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
     "postbrowser_test": "npm run posttest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "sanctuary-type-classes": "4.0.x"
+  },
   "devDependencies": {
     "acorn": "0.9.x",
     "benchmark": "~1.0.0",
@@ -71,7 +71,9 @@
     "q": "^1.1.1",
     "ramda": "0.17.x",
     "rimraf": "~2.3.2",
-    "sanctuary": "0.7.x",
+    "sanctuary-either": "sanctuary-js/sanctuary-either#2a35646b4da0da85d572645d0e38853fa93ff5c4",
+    "sanctuary-identity": "sanctuary-js/sanctuary-identity#cc94bc2c0d5bc6a42fdd74150a2fa3fc1e16bac7",
+    "sanctuary-maybe": "sanctuary-js/sanctuary-maybe#0f30e92df17c5f9f619e61048f2051c6af292518",
     "sinon": "^1.17.4",
     "testem": "0.9.x",
     "uglify-js": "2.4.x",

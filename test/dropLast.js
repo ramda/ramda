@@ -30,12 +30,6 @@ describe('dropLast', function() {
     eq(R.dropLast(3, 'Ramda'), 'Ra');
   });
 
-  it('is curried', function() {
-    var dropLast2 = R.dropLast(2);
-    eq(dropLast2(['a', 'b', 'c', 'd', 'e']), ['a', 'b', 'c']);
-    eq(dropLast2(['x', 'y', 'z']), ['x']);
-  });
-
   it('can act as a transducer', function() {
     var dropLast2 = R.dropLast(2);
     assert.deepEqual(R.into([], dropLast2, [1, 3, 5, 7, 9, 1, 2]), [1, 3, 5, 7, 9]);

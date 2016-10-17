@@ -1,28 +1,20 @@
 var assert = require('assert');
 
+var Maybe = require('sanctuary-maybe');
+
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
 
 
 describe('unnest', function() {
 
   it('only flattens one layer deep of a nested list', function() {
-    var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];
-    eq(R.unnest(nest), [1, 2, 3, [4, 5], 6, [[[7], 8]], 9, 10]);
-    nest = [[[[3]], 2, 1], 0, [[-1, -2], -3]];
-    eq(R.unnest(nest), [[[3]], 2, 1, 0, [-1, -2], -3]);
-    eq(R.unnest([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
+    eq(R.unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8]]]), [[1, 2], [3, 4], [5, 6], [7, 8]]);
   });
 
   it('is not destructive', function() {
-    var nest = [1, [2], [3, [4, 5], 6, [[[7], 8]]], 9, 10];
+    var nest = [[1], [2], [3]];
     assert.notStrictEqual(R.unnest(nest), nest);
-  });
-
-  it('handles array-like objects', function() {
-    var o = {length: 3, 0: [1, 2, [3]], 1: [], 2: ['a', 'b', 'c', ['d', 'e']]};
-    eq(R.unnest(o), [1, 2, [3], 'a', 'b', 'c', ['d', 'e']]);
   });
 
   it('flattens an array of empty arrays', function() {

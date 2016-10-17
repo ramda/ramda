@@ -1,3 +1,5 @@
+var Maybe = require('sanctuary-maybe');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -37,15 +39,10 @@ describe('lastIndexOf', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.lastIndexOf(0, [-0]), -1);
     eq(R.lastIndexOf(-0, [0]), -1);
     eq(R.lastIndexOf(NaN, [NaN]), 0);
-    eq(R.lastIndexOf(new Just([42]), [new Just([42])]), 0);
+    eq(R.lastIndexOf(Maybe.Just([42]), [Maybe.Just([42])]), 0);
   });
 
   it('dispatches to `lastIndexOf` method', function() {
@@ -73,11 +70,6 @@ describe('lastIndexOf', function() {
     eq(R.lastIndexOf('x', 'banana'), -1);
     eq(R.lastIndexOf('a', list), 5);
     eq(R.lastIndexOf('x', list), -1);
-  });
-
-  it('is curried', function() {
-    var curried = R.lastIndexOf('a');
-    eq(curried(list), 2);
   });
 
   it('finds function, compared by identity', function() {

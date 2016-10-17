@@ -1,5 +1,6 @@
-var _identity = require('./internal/_identity');
-var chain = require('./chain');
+var Z = require('sanctuary-type-classes');
+
+var _curry1 = require('./internal/_curry1');
 
 
 /**
@@ -19,4 +20,4 @@ var chain = require('./chain');
  *      R.unnest([1, [2], [[3]]]); //=> [1, 2, [3]]
  *      R.unnest([[1, 2], [3, 4], [5, 6]]); //=> [1, 2, 3, 4, 5, 6]
  */
-module.exports = chain(_identity);
+module.exports = _curry1(Z.join);
