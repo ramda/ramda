@@ -30,7 +30,7 @@ module.exports = _curry2(function dissocPath(path, obj) {
       return dissoc(path[0], obj);
     default:
       var head = path[0];
-      var tail = _slice(path, 1);
+      var tail = _slice(path, 1, Infinity);
       return obj[head] == null ? obj : assoc(head, dissocPath(tail, obj[head]), obj);
   }
 });

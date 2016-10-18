@@ -33,6 +33,6 @@ module.exports = _curry3(function assocPath(path, val, obj) {
     case 1:
       return assoc(path[0], val, obj);
     default:
-      return assoc(path[0], assocPath(_slice(path, 1), val, Object(obj[path[0]])), obj);
+      return assoc(path[0], assocPath(_slice(path, 1, Infinity), val, Object(obj[path[0]])), obj);
   }
 });

@@ -23,5 +23,5 @@ var _slice = require('./internal/_slice');
  *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
  */
 module.exports = _curry2(function sort(comparator, list) {
-  return _slice(list).sort(comparator);
+  return _slice(list, 0, Infinity).sort(comparator);
 });

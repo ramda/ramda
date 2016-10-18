@@ -35,5 +35,5 @@ module.exports = _curry2(_dispatchable('dropWhile', _xdropWhile, function dropWh
   while (idx < len && pred(list[idx])) {
     idx += 1;
   }
-  return _slice(list, idx);
+  return _slice(list, idx, Infinity);
 }));

@@ -26,7 +26,7 @@ module.exports = _curry1(function median(list) {
   }
   var width = 2 - len % 2;
   var idx = (len - width) / 2;
-  return mean(_slice(list).sort(function(a, b) {
+  return mean(_slice(list, 0, Infinity).sort(function(a, b) {
     return a < b ? -1 : a > b ? 1 : 0;
   }).slice(idx, idx + width));
 });
