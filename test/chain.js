@@ -33,10 +33,12 @@ describe('chain', function() {
         return r + a;
       };
     };
-    var bound = R.chain(h, f);
+    var bound = R.chain(f, h);
     // (>>=) :: (r -> a) -> (a -> r -> b) -> (r -> b)
     // h >>= f = \w -> f (h w) w
     eq(bound(10), (10 * 2) + 10);
+
+    eq(R.chain(R.append, R.head)([1, 2, 3]), [1, 2, 3, 1]);
   });
 
   it('dispatches to objects that implement `chain`', function() {
