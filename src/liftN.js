@@ -26,6 +26,6 @@ var map = require('./map');
 module.exports = _curry2(function liftN(arity, fn) {
   var lifted = curryN(arity, fn);
   return curryN(arity, function() {
-    return _reduce(ap, map(lifted, arguments[0]), _slice(arguments, 1));
+    return _reduce(ap, map(lifted, arguments[0]), _slice(arguments, 1, Infinity));
   });
 });

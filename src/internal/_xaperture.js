@@ -29,7 +29,7 @@ module.exports = (function() {
     }
   };
   XAperture.prototype.getCopy = function() {
-    return _concat(_slice(this.acc, this.pos), _slice(this.acc, 0, this.pos));
+    return _concat(_slice(this.acc, this.pos, Infinity), _slice(this.acc, 0, this.pos));
   };
 
   return _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });

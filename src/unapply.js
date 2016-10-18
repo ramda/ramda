@@ -28,6 +28,6 @@ var _slice = require('./internal/_slice');
  */
 module.exports = _curry1(function unapply(fn) {
   return function() {
-    return fn(_slice(arguments));
+    return fn(_slice(arguments, 0, Infinity));
   };
 });

@@ -23,5 +23,5 @@ var _slice = require('./internal/_slice');
  */
 module.exports = _curry3(function insertAll(idx, elts, list) {
   idx = idx < list.length && idx >= 0 ? idx : list.length;
-  return _concat(_concat(_slice(list, 0, idx), elts), _slice(list, idx));
+  return _concat(_concat(_slice(list, 0, idx), elts), _slice(list, idx, Infinity));
 });

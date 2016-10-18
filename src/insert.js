@@ -22,7 +22,7 @@ var _slice = require('./internal/_slice');
  */
 module.exports = _curry3(function insert(idx, elt, list) {
   idx = idx < list.length && idx >= 0 ? idx : list.length;
-  var result = _slice(list);
+  var result = _slice(list, 0, Infinity);
   result.splice(idx, 0, elt);
   return result;
 });

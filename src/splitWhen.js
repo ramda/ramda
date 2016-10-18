@@ -31,5 +31,5 @@ module.exports = _curry2(function splitWhen(pred, list) {
     idx += 1;
   }
 
-  return [prefix, _slice(list, idx)];
+  return [prefix, _slice(list, idx, Infinity)];
 });

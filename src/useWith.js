@@ -39,6 +39,6 @@ module.exports = _curry2(function useWith(fn, transformers) {
       args.push(transformers[idx].call(this, arguments[idx]));
       idx += 1;
     }
-    return fn.apply(this, args.concat(_slice(arguments, transformers.length)));
+    return fn.apply(this, args.concat(_slice(arguments, transformers.length, Infinity)));
   });
 });
