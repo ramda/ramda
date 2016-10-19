@@ -117,6 +117,7 @@
     "no-dupe-keys": 2,
     "no-duplicate-case": 2,
     "no-extra-semi": 2,
-    "no-unreachable": 2
+    "no-unreachable": 2,
+    "semi": 2
   }
 }
