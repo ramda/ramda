@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
 
 
 /**
@@ -31,5 +30,5 @@ module.exports = _curry2(function splitWhen(pred, list) {
     idx += 1;
   }
 
-  return [prefix, _slice(list, idx)];
+  return [prefix, Array.prototype.slice.call(list, idx)];
 });

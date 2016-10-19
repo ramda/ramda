@@ -1,4 +1,3 @@
-var _slice = require('./internal/_slice');
 var curry = require('./curry');
 
 
@@ -34,5 +33,5 @@ var curry = require('./curry');
  * @symb R.call(f, a, b) = f(a, b)
  */
 module.exports = curry(function call(fn) {
-  return fn.apply(this, _slice(arguments, 1));
+  return fn.apply(this, Array.prototype.slice.call(arguments, 1));
 });

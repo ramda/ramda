@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
 var curryN = require('./curryN');
 
 
@@ -30,7 +29,7 @@ module.exports = _curry2(function uncurryN(depth, fn) {
     var endIdx;
     while (currentDepth <= depth && typeof value === 'function') {
       endIdx = currentDepth === depth ? arguments.length : idx + value.length;
-      value = value.apply(this, _slice(arguments, idx, endIdx));
+      value = value.apply(this, Array.prototype.slice.call(arguments, idx, endIdx));
       currentDepth += 1;
       idx = endIdx;
     }

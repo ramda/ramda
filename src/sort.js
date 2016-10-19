@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
 
 
 /**
@@ -23,5 +22,5 @@ var _slice = require('./internal/_slice');
  *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
  */
 module.exports = _curry2(function sort(comparator, list) {
-  return _slice(list).sort(comparator);
+  return Array.prototype.slice.call(list, 0).sort(comparator);
 });

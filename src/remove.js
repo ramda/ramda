@@ -1,6 +1,4 @@
-var _concat = require('./internal/_concat');
 var _curry3 = require('./internal/_curry3');
-var _slice = require('./internal/_slice');
 
 
 /**
@@ -23,6 +21,7 @@ var _slice = require('./internal/_slice');
  *      R.remove(2, 3, [1,2,3,4,5,6,7,8]); //=> [1,2,6,7,8]
  */
 module.exports = _curry3(function remove(start, count, list) {
-  return _concat(_slice(list, 0, Math.min(start, list.length)),
-                 _slice(list, Math.min(list.length, start + count)));
+  var result = Array.prototype.slice.call(list, 0);
+  result.splice(start, count);
+  return result;
 });
