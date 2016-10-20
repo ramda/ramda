@@ -1,4 +1,4 @@
-var S = require('sanctuary')
+var S = require('sanctuary');
 
 var R = require('..');
 var eq = require('./shared/eq');

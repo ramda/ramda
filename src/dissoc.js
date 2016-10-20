@@ -22,6 +22,6 @@ module.exports = _curry2(function dissoc(prop, obj) {
   for (var p in obj) {
     result[p] = obj[p];
   }
-  delete result[prop]
+  delete result[prop];
   return result;
 });

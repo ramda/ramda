@@ -30,7 +30,7 @@ describe('indexBy', function() {
         R.adjust(R.toUpper, 0),
         R.adjust(R.omit('id'), 1)
       )));
-    var result = R.into({}, transducer, list)
+    var result = R.into({}, transducer, list);
     eq(result, {ABC: {title: 'B'}, XYZ: {title: 'A'}});
   });
 
