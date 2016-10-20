@@ -1,7 +1,7 @@
 Ramda
 =============
 
-A practical functional library for Javascript programmers.
+A practical functional library for JavaScript programmers.
 
 [![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
@@ -49,14 +49,14 @@ Introductions
 
 Philosophy
 ----------
-Using Ramda should feel much like just using Javascript.
-It is practical, functional Javascript. We're not introducing
+Using Ramda should feel much like just using JavaScript.
+It is practical, functional JavaScript. We're not introducing
 lambda expressions in strings, we're not borrowing consed 
 lists, we're not porting over all of the Clojure functions.
 
-Our basic data structures are plain Javascript objects, and our
-usual collections are Javascript arrays. We also keep other
-native features of Javascript, such as functions as objects
+Our basic data structures are plain JavaScript objects, and our
+usual collections are JavaScript arrays. We also keep other
+native features of JavaScript, such as functions as objects
 with properties.
 
 Functional programming is in good part about immutable objects and 
