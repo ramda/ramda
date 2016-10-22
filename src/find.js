@@ -27,7 +27,7 @@ var _xfind = require('./internal/_xfind');
  *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
  *      R.find(R.propEq('a', 4))(xs); //=> undefined
  */
-module.exports = _curry2(_dispatchable('find', _xfind, function find(fn, list) {
+module.exports = _curry2(_dispatchable(['find'], _xfind, function find(fn, list) {
   var idx = 0;
   var len = list.length;
   while (idx < len) {

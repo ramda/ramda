@@ -27,4 +27,4 @@ var any = require('./any');
  *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
  *      R.none(isEven, [1, 3, 5, 7, 8, 11]); //=> false
  */
-module.exports = _curry2(_complement(_dispatchable('any', _xany, any)));
+module.exports = _curry2(_complement(_dispatchable(['any'], _xany, any)));
