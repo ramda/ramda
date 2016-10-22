@@ -1,4 +1,3 @@
-var _arrayOf = require('./internal/_arrayOf');
 var _curry1 = require('./internal/_curry1');
 var converge = require('./converge');
 
@@ -21,5 +20,5 @@ var converge = require('./converge');
  * @symb R.juxt([f, g, h])(a, b) = [f(a, b), g(a, b), h(a, b)]
  */
 module.exports = _curry1(function juxt(fns) {
-  return converge(_arrayOf, fns);
+  return converge(function() { return Array.prototype.slice.call(arguments, 0); }, fns);
 });

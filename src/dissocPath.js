@@ -1,5 +1,4 @@
 var _curry2 = require('./internal/_curry2');
-var _slice = require('./internal/_slice');
 var assoc = require('./assoc');
 var dissoc = require('./dissoc');
 
@@ -30,7 +29,7 @@ module.exports = _curry2(function dissocPath(path, obj) {
       return dissoc(path[0], obj);
     default:
       var head = path[0];
-      var tail = _slice(path, 1);
+      var tail = Array.prototype.slice.call(path, 1);
       return obj[head] == null ? obj : assoc(head, dissocPath(tail, obj[head]), obj);
   }
 });

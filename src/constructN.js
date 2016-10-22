@@ -20,7 +20,7 @@ var nAry = require('./nAry');
  *
  *      // Variadic constructor function
  *      var Widget = function () {
- *        this.children = Array.prototype.slice.call(arguments);
+ *        this.children = Array.prototype.slice.call(arguments, 0);
  *        // ...
  *      };
  *      Widget.prototype = {

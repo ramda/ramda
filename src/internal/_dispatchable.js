@@ -1,6 +1,5 @@
 var _isArray = require('./_isArray');
 var _isTransformer = require('./_isTransformer');
-var _slice = require('./_slice');
 
 
 /**
@@ -25,7 +24,7 @@ module.exports = function _dispatchable(methodname, xf, fn) {
     }
     var obj = arguments[length - 1];
     if (!_isArray(obj)) {
-      var args = _slice(arguments, 0, length - 1);
+      var args = Array.prototype.slice.call(arguments, 0, length - 1);
       if (typeof obj[methodname] === 'function') {
         return obj[methodname].apply(obj, args);
       }

@@ -1,6 +1,5 @@
 var _concat = require('./_concat');
 var _curry2 = require('./_curry2');
-var _slice = require('./_slice');
 var _xfBase = require('./_xfBase');
 
 
@@ -29,7 +28,8 @@ module.exports = (function() {
     }
   };
   XAperture.prototype.getCopy = function() {
-    return _concat(_slice(this.acc, this.pos), _slice(this.acc, 0, this.pos));
+    return _concat(Array.prototype.slice.call(this.acc, this.pos),
+                   Array.prototype.slice.call(this.acc, 0, this.pos));
   };
 
   return _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });
