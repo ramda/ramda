@@ -2,7 +2,6 @@
 
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
 
 
 var addN = function() {
@@ -37,11 +36,6 @@ describe('liftN', function() {
     var f4 = R.liftN(4);
     eq(typeof f4, 'function');
     eq(f4(addN)([1], [2], [3], [4, 5]), [10, 11]);
-  });
-
-  it('works with other functors such as "Maybe"', function() {
-    var addM = R.liftN(2, R.add);
-    eq(addM(Maybe(3), Maybe(5)), Maybe(8));
   });
 
   it('interprets [a] as a functor', function() {

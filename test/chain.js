@@ -41,11 +41,6 @@ describe('chain', function() {
     eq(R.chain(R.append, R.head)([1, 2, 3]), [1, 2, 3, 1]);
   });
 
-  it('dispatches to objects that implement `chain`', function() {
-    var obj = {x: 100, chain: function(f) { return f(this.x); }};
-    eq(R.chain(add1, obj), [101]);
-  });
-
   it('dispatches to transformer objects', function() {
     eq(_isTransformer(R.chain(add1, listXf)), true);
   });

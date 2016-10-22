@@ -1,5 +1,3 @@
-var S = require('sanctuary');
-
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -22,13 +20,6 @@ describe('partition', function() {
        [{ a: 1, b: 3, c: 5, d: 7 }, {}]);
     eq(R.partition(pred, { a: 0, b: 1, c: 2, d: 3 }),
        [{ b: 1, d: 3 }, { a: 0, c: 2 }]);
-  });
-
-  it('works with other filterables', function() {
-    eq(R.partition(R.isEmpty, S.Just(3)),
-       [S.Nothing(), S.Just(3)]);
-    eq(R.partition(R.complement(R.isEmpty), S.Just(3)),
-       [S.Just(3), S.Nothing()]);
   });
 
   it('is curried', function() {

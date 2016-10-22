@@ -30,11 +30,6 @@ describe('map', function() {
     eq(h(10), (10 * 2) - 1);
   });
 
-  it('dispatches to objects that implement `map`', function() {
-    var obj = {x: 100, map: function(f) { return f(this.x); }};
-    eq(R.map(add1, obj), 101);
-  });
-
   it('dispatches to transformer objects', function() {
     eq(R.map(add1, listXf), {
       f: add1,

@@ -26,9 +26,6 @@ module.exports = function _dispatchable(methodname, xf, fn) {
     var obj = arguments[length - 1];
     if (!_isArray(obj)) {
       var args = _slice(arguments, 0, length - 1);
-      if (typeof obj[methodname] === 'function') {
-        return obj[methodname].apply(obj, args);
-      }
       if (_isTransformer(obj)) {
         var transducer = xf.apply(null, args);
         return transducer(obj);

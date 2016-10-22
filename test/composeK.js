@@ -27,7 +27,7 @@ describe('composeK', function() {
     var id = new Identity(8);
 
     eq(fn(id).value, 50);
-    eq(fn(id).value, R.compose(R.chain(h), R.chain(g), R.chain(f))(id).value);
+    eq(fn(id).value, R.compose(x => x.chain(h), x => x.chain(g), x => x.chain(f))(id).value);
   });
 
   it('returns the identity function given no arguments', function() {

@@ -27,7 +27,7 @@ describe('pipeK', function() {
     var id = new Identity(8);
 
     eq(fn(id).value, 50);
-    eq(fn(id).value, R.pipe(R.chain(f), R.chain(g), R.chain(h))(id).value);
+    eq(fn(id).value, R.pipe(x => x.chain(f), x => x.chain(g), x => x.chain(h))(id).value);
   });
 
   it('returns the identity function given no arguments', function() {

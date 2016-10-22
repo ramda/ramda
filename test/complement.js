@@ -1,5 +1,3 @@
-var S = require('sanctuary');
-
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -17,14 +15,6 @@ describe('complement', function() {
     var f = R.complement(between);
     eq(f(4, 5, 11), false);
     eq(f(12, 2, 6), true);
-  });
-
-  it('accepts fantasy-land functors', function() {
-    var Just = S.Just;
-    var Nothing = S.Nothing;
-    eq(R.complement(Just(true)), Just(false));
-    eq(R.complement(Just(false)), Just(true));
-    eq(R.complement(Nothing()), Nothing());
   });
 
 });

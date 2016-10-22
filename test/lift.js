@@ -2,7 +2,6 @@
 
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
 
 
 var add3 = R.curry(function add3(a, b, c) {
@@ -35,11 +34,6 @@ describe('lift', function() {
     eq(madd3([1, 10], [2], [3]), [6, 15]);
     eq(madd4([1, 10], [2], [3], [40]), [46, 55]);
     eq(madd5([1, 10], [2], [3], [40], [500, 1000]), [546, 1046, 555, 1055]);
-  });
-
-  it('works with other functors such as "Maybe"', function() {
-    var addM = R.lift(R.add);
-    eq(addM(Maybe.of(3), Maybe.of(5)), Maybe.of(8));
   });
 
 });

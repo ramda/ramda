@@ -10,12 +10,6 @@ describe('reduce', function() {
     eq(R.reduce(mult, 1, [1, 2, 3, 4]), 24);
   });
 
-  it('dispatches to objects that implement `reduce`', function() {
-    var obj = {x: [1, 2, 3], reduce: function() { return 'override'; }};
-    eq(R.reduce(add, 0, obj), 'override');
-    eq(R.reduce(add, 10, obj), 'override');
-  });
-
   it('returns the accumulator for an empty array', function() {
     eq(R.reduce(add, 0, []), 0);
     eq(R.reduce(mult, 1, []), 1);

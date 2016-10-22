@@ -59,12 +59,6 @@ describe('transduce', function() {
     eq(R.transduce(toxf(mult), mult, 1, [1, 2, 3, 4]), 24);
   });
 
-  it('dispatches to objects that implement `reduce`', function() {
-    var obj = {x: [1, 2, 3], reduce: function() { return 'override'; }};
-    eq(R.transduce(R.map(add(1)), add, 0, obj), 'override');
-    eq(R.transduce(R.map(add(1)), add, 10, obj), 'override');
-  });
-
   it('returns the accumulator for an empty collection', function() {
     eq(R.transduce(toxf(add), addxf, 0, []), 0);
     eq(R.transduce(toxf(mult), multxf, 1, []), 1);

@@ -2,8 +2,6 @@ var assert = require('assert');
 
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
-
 
 describe('unnest', function() {
 
@@ -28,17 +26,6 @@ describe('unnest', function() {
   it('flattens an array of empty arrays', function() {
     eq(R.unnest([[], [], []]), []);
     eq(R.unnest([]), []);
-  });
-
-  it('is equivalent to R.chain(R.identity)', function() {
-    var Nothing = Maybe.Nothing;
-    var Just = Maybe.Just;
-
-    eq(R.unnest(Nothing()), Nothing());
-    eq(R.unnest(Just(Nothing())), Nothing());
-    eq(R.unnest(Just(Just(Nothing()))), Just(Nothing()));
-    eq(R.unnest(Just(Just(42))), Just(42));
-    eq(R.unnest(Just(Just(Just(42)))), Just(Just(42)));
   });
 
 });

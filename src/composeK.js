@@ -1,4 +1,3 @@
-var chain = require('./chain');
 var compose = require('./compose');
 var identity = require('./identity');
 var map = require('./map');
@@ -9,7 +8,7 @@ var prepend = require('./prepend');
  * Returns the right-to-left Kleisli composition of the provided functions,
  * each of which must return a value of a type supported by [`chain`](#chain).
  *
- * `R.composeK(h, g, f)` is equivalent to `R.compose(R.chain(h), R.chain(g), R.chain(f))`.
+ * `R.composeK(h, g, f)` is equivalent to `R.compose(x => x.chain(h), x => x.chain(g), x => x.chain(f))`.
  *
  * @func
  * @memberOf R
@@ -36,5 +35,5 @@ var prepend = require('./prepend');
  * @symb R.composeK(f, g, h)(a, b) = R.chain(f, R.chain(g, h(a, b)))
  */
 module.exports = function composeK() {
-  return compose.apply(this, prepend(identity, map(chain, arguments)));
+  return compose.apply(this, prepend(identity, map(function(arg) {return function(x) {return x.chain(arg);};}, arguments)));
 };

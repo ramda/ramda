@@ -33,6 +33,7 @@ module.exports = _curry2(function sequence(of, traversable) {
   return typeof traversable.sequence === 'function' ?
     traversable.sequence(of) :
     reduceRight(function(acc, x) { return ap(map(prepend, x), acc); },
+//    reduceRight(function(acc, x) { return ap(map(function(anX) {return function(y) {return prepend(y, anX);};}, x), acc); },
                 of([]),
                 traversable);
 });
