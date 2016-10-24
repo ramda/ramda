@@ -41,7 +41,6 @@
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
     "postcoverage": "npm run posttest",
     "lint": "eslint scripts/bookmarklet scripts/build src/*.js src/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
-    "pretest": "npm install && npm run lint && npm run clean && npm run build",
     "test": "mocha --reporter spec",
     "posttest": "git checkout -- dist",
     "prebrowser_test": "npm run pretest",
