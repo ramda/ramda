@@ -6,4 +6,4 @@ node_js:
 - 4
 - 6
 before_script:
-- make clean && make dist/ramda.js
+- npm run lint
