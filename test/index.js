@@ -4,9 +4,9 @@ var fs = require('fs');
 var path = require('path');
 
 
-var sourceMethods = function(dir) {
-  var isJsFile = function(file) { return file.match(/\.js$/); }
-  var removeJsEnding = function(file) { return file.replace('.js', ''); }
+function sourceMethods(dir) {
+  var isJsFile = function(file) { return file.match(/\.js$/); };
+  var removeJsEnding = function(file) { return file.replace('.js', ''); };
   return fs.readdirSync(dir).filter(isJsFile).map(removeJsEnding);
 }
 
