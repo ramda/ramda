@@ -6,11 +6,11 @@
 
         $ git checkout -b <branch>
 
-3.  If adding a function `R.foo`, define it in __src/foo.js__ and include unit
-    tests in __test/foo.js__. It is not necessary to include the `@since`
-    annotation for new functions as it will be set during the release process
-    of the following release. If adding an internal function `_foo`, define it
-    in __src/internal/_foo.js__.
+3.  If adding a function `R.foo`, define it in __src/foo.js__, require it in
+    __index.js__, and include unit tests in __test/foo.js__. It is not necessary
+    to include the `@since` annotation for new functions as it will be set
+    during the release process of the following release. If adding an internal
+    function `_foo`, define it in __src/internal/_foo.js__.
 
 4.  Make one or more atomic commits. Each commit should have a descriptive
     commit message, wrapped at 72 characters. Do not commit changes to

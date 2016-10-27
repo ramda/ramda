@@ -258,9 +258,8 @@ program
 .parse(process.argv);
 
 //  filenames :: [String]
-var filenames = program.complete ?
-  R.filter(R.test(/(^|[/]).*[.]js$/),
-           fs.readdirSync(path.join(__dirname, '..', 'src'))) :
-  program.args;
+var filenames = program.complete
+  ? R.keys(require('../'))
+  : program.args;
 
 process.stdout.write(build(R.map(path.resolve, filenames)));
