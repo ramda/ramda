@@ -6,19 +6,21 @@ describe('pathEq', function() {
 
   var obj = {
     a: 1,
-    b: {
-      ba: '2'
-    }
+    b: [{
+      ba: 2
+    }, {
+      ba: 3
+    }]
   };
 
   it('returns true if the path matches the value', function() {
     eq(R.pathEq(['a'], 1, obj), true);
-    eq(R.pathEq(['b', 'ba'], '2', obj), true);
+    eq(R.pathEq(['b', 1, 'ba'], 3, obj), true);
   });
 
   it('returns false for non matches', function() {
     eq(R.pathEq(['a'], '1', obj), false);
-    eq(R.pathEq(['b', 'ba'], 2, obj), false);
+    eq(R.pathEq(['b', 0, 'ba'], 3, obj), false);
   });
 
   it('returns false for non existing values', function() {

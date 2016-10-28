@@ -23,9 +23,9 @@ describe('pathOr', function() {
     };
     eq(R.pathOr('Unknown', ['a', 'b', 'c'], obj), 100);
     eq(R.pathOr('Unknown', [], obj), obj);
-    eq(R.pathOr('Unknown', ['a', 'e', 'f', '1'], obj), 101);
-    eq(R.pathOr('Unknown', ['j', '0'], obj), 'J');
-    eq(R.pathOr('Unknown', ['j', '1'], obj), 'Unknown');
+    eq(R.pathOr('Unknown', ['a', 'e', 'f', 1], obj), 101);
+    eq(R.pathOr('Unknown', ['j', 0], obj), 'J');
+    eq(R.pathOr('Unknown', ['j', 1], obj), 'Unknown');
     eq(R.pathOr('Unknown', ['a', 'b', 'c'], null), 'Unknown');
   });
 
