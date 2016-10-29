@@ -1,7 +1,5 @@
 var assert = require('assert');
 
-var Q = require('q');
-
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -14,8 +12,8 @@ describe('pipeP', function() {
   });
 
   it('performs left-to-right composition of Promise-returning functions', function(done) {
-    var f = function(a) { return Q.Promise(function(res) { res([a]); }); };
-    var g = function(a, b) { return Q.Promise(function(res) { res([a, b]); }); };
+    var f = function(a) { return new Promise(function(res) { res([a]); }); };
+    var g = function(a, b) { return new Promise(function(res) { res([a, b]); }); };
 
     eq(R.pipeP(f).length, 1);
     eq(R.pipeP(g).length, 2);
