@@ -19,6 +19,11 @@ module.exports = function _equals(a, b, stackA, stackB) {
     return false;
   }
 
+  if (typeof a['fantasy-land/equals'] === 'function' || typeof b['fantasy-land/equals'] === 'function') {
+    return typeof a['fantasy-land/equals'] === 'function' && a['fantasy-land/equals'](b) &&
+           typeof b['fantasy-land/equals'] === 'function' && b['fantasy-land/equals'](a);
+  }
+
   if (typeof a.equals === 'function' || typeof b.equals === 'function') {
     return typeof a.equals === 'function' && a.equals(b) &&
            typeof b.equals === 'function' && b.equals(a);

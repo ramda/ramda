@@ -29,6 +29,10 @@ var _isString = require('./internal/_isString');
  */
 module.exports = _curry1(function empty(x) {
   return (
+    (x != null && typeof x['fantasy-land/empty'] === 'function') ?
+      x['fantasy-land/empty']() :
+    (x != null && x.constructor != null && typeof x.constructor['fantasy-land/empty'] === 'function') ?
+      x.constructor['fantasy-land/empty']() :
     (x != null && typeof x.empty === 'function') ?
       x.empty() :
     (x != null && x.constructor != null && typeof x.constructor.empty === 'function') ?

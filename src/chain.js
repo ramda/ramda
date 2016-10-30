@@ -27,7 +27,7 @@ var map = require('./map');
  *
  *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
  */
-module.exports = _curry2(_dispatchable(['chain'], _xchain, function chain(fn, monad) {
+module.exports = _curry2(_dispatchable(['fantasy-land/chain', 'chain'], _xchain, function chain(fn, monad) {
   if (typeof monad === 'function') {
     return function(x) { return fn(monad(x))(x); };
   }
