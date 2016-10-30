@@ -45,7 +45,9 @@
     "posttest": "git checkout -- dist",
     "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
-    "postbrowser_test": "npm run posttest"
+    "postbrowser_test": "npm run posttest",
+    "prepublish": "cp -r src/* .",
+    "postpublish": "rm -rf internal && git clean -f && git checkout ."
   },
   "dependencies": {},
   "devDependencies": {
