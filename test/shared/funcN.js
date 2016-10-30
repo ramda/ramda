@@ -1,6 +1,6 @@
 var jsv = require('jsverify');
 
-var FMap = jsv._.FMap
+var FMap = jsv._.FMap;
 
 module.exports = function(n, arb) {
   arb = jsv.utils.force(arb || jsv.json);

@@ -66,6 +66,7 @@ module.exports = {
   flatten: require('./src/flatten'),
   flip: require('./src/flip'),
   forEach: require('./src/forEach'),
+  forEachObjIndexed: require('./src/forEachObjIndexed'),
   fromPairs: require('./src/fromPairs'),
   groupBy: require('./src/groupBy'),
   groupWith: require('./src/groupWith'),
