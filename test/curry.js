@@ -1,6 +1,7 @@
 var R = require('..');
 var eq = require('./shared/eq');
-
+var jsv = require('jsverify');
+var funcN = require('./shared/funcN');
 
 describe('curry', function() {
   it('curries a single value', function() {
@@ -119,4 +120,31 @@ describe('curry', function() {
     eq(g(1)(2)(3, 4), [1, 2, 3, 4]);
   });
 
+});
+
+describe('curry properties', function() {
+  jsv.property('curries multiple values', funcN(4), jsv.json, jsv.json, jsv.json, jsv.json, function(f, a, b, c, d) {
+    var g = R.curry(f);
+
+    return R.all(R.equals(f(a, b, c, d)), [
+      g(a, b, c, d),
+      g(a)(b)(c)(d),
+      g(a)(b, c, d),
+      g(a, b)(c, d),
+      g(a, b, c)(d)
+    ]);
+  });
+
+  jsv.property('curries with placeholder', funcN(3), jsv.json, jsv.json, jsv.json, function(f, a, b, c) {
+    var _ = {'@@functional/placeholder': true, x: Math.random()};
+    var g = R.curry(f);
+
+    return R.all(R.equals(f(a, b, c)), [
+      g(_, _, c)(a, b),
+      g(a, _, c)(b),
+      g(_, b, c)(a),
+      g(a, _, _)(_, c)(b),
+      g(a, b, _)(c)
+    ]);
+  });
 });

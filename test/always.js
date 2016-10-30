@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var jsv = require('jsverify');
 
 
 describe('always', function() {
@@ -21,4 +22,12 @@ describe('always', function() {
     eq(R.always(undefined)(), undefined);
   });
 
+});
+
+describe('always properties', function() {
+  jsv.property('returns initial argument', jsv.json, jsv.json, function(a, b) {
+    var f = R.always(a);
+
+    return f() === a && f(b) === a;
+  });
 });
