@@ -1,6 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var _isFunction = require('./internal/_isFunction');
-var lift = require('./lift');
+var lift2 = require('./lift2');
 var or = require('./or');
 
 
@@ -36,5 +36,5 @@ module.exports = _curry2(function either(f, g) {
     function _either() {
       return f.apply(this, arguments) || g.apply(this, arguments);
     } :
-    lift(or)(f, g);
+    lift2(or, f, g);
 });

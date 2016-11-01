@@ -1,7 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var _isFunction = require('./internal/_isFunction');
 var and = require('./and');
-var lift = require('./lift');
+var lift2 = require('./lift2');
 
 
 /**
@@ -37,5 +37,5 @@ module.exports = _curry2(function both(f, g) {
     function _both() {
       return f.apply(this, arguments) && g.apply(this, arguments);
     } :
-    lift(and)(f, g);
+    lift2(and, f, g);
 });
