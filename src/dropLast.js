@@ -13,10 +13,10 @@ var _xdropLast = require('./internal/_xdropLast');
  * @category List
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
- * @param {Number} n The number of elements of `xs` to skip.
- * @param {Array} xs The collection to consider.
- * @return {Array}
- * @see R.takeLast
+ * @param {Number} n The number of elements of `list` to skip.
+ * @param {Array} list The list of elements to consider.
+ * @return {Array} A copy of the list with only the first `list.length - n` elements
+ * @see R.takeLast, R.drop, R.dropWhile, R.dropLastWhile
  * @example
  *
  *      R.dropLast(1, ['foo', 'bar', 'baz']); //=> ['foo', 'bar']

@@ -18,18 +18,25 @@ var nAry = require('./nAry');
  * @return {Function} A wrapped, curried constructor function.
  * @example
  *
- *      // Variadic constructor function
- *      var Widget = function () {
- *        this.children = Array.prototype.slice.call(arguments, 0);
- *        // ...
+ *      // Variadic Constructor function
+ *      function Salad() {
+ *        this.ingredients = arguments;
  *      };
- *      Widget.prototype = {
- *        // ...
- *      };
- *      var allConfigs = [
- *        // ...
- *      ];
- *      R.map(R.constructN(1, Widget), allConfigs); // a list of Widgets
+ *      Salad.prototype.recipe = function() {
+ *        var instructions = R.map((ingredient) => (
+ *          'Add a whollop of ' + ingredient, this.ingredients)
+ *        )
+ *        return R.join('\n', instructions)
+ *      }
+ *
+ *      var ThreeLayerSalad = R.constructN(3, Salad)
+ *
+ *      // Notice we no longer need the 'new' keyword, and the constructor is curried for 3 arguments.
+ *      var salad = ThreeLayerSalad('Mayonnaise')('Potato Chips')('Ketchup')
+ *      console.log(salad.recipe());
+ *      // Add a whollop of Mayonnaise
+ *      // Add a whollop of Potato Chips
+ *      // Add a whollop of Potato Ketchup
  */
 module.exports = _curry2(function constructN(n, Fn) {
   if (n > 10) {

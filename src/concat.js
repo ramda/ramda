@@ -19,15 +19,16 @@ var toString = require('./toString');
  * @category List
  * @sig [a] -> [a] -> [a]
  * @sig String -> String -> String
- * @param {Array|String} a
- * @param {Array|String} b
- * @return {Array|String}
+ * @param {Array|String} firstList The first list
+ * @param {Array|String} secondList The second list
+ * @return {Array|String} A list consisting of the elements of `firstList` followed by the elements of
+ * `secondList`.
  *
  * @example
  *
- *      R.concat([], []); //=> []
- *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
  *      R.concat('ABC', 'DEF'); // 'ABCDEF'
+ *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
+ *      R.concat([], []); //=> []
  */
 module.exports = _curry2(function concat(a, b) {
   if (a == null || !_isFunction(a.concat)) {

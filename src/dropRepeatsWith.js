@@ -6,8 +6,8 @@ var last = require('./last');
 
 /**
  * Returns a new list without any consecutively repeating elements. Equality is
- * determined by applying the supplied predicate two consecutive elements. The
- * first element in a series of equal element is the one being preserved.
+ * determined by applying the supplied predicate to each pair of consecutive elements. The
+ * first element in a series of equal elements will be preserved.
  *
  * Acts as a transducer if a transformer is given in list position.
  *

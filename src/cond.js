@@ -6,8 +6,8 @@ var reduce = require('./reduce');
 
 
 /**
- * Returns a function, `fn`, which encapsulates if/else-if/else logic.
- * `R.cond` takes a list of [predicate, transform] pairs. All of the arguments
+ * Returns a function, `fn`, which encapsulates `if/else, if/else, ...` logic.
+ * `R.cond` takes a list of [predicate, transformer] pairs. All of the arguments
  * to `fn` are applied to each of the predicates in turn until one returns a
  * "truthy" value, at which point `fn` returns the result of applying its
  * arguments to the corresponding transformer. If none of the predicates
@@ -18,7 +18,7 @@ var reduce = require('./reduce');
  * @since v0.6.0
  * @category Logic
  * @sig [[(*... -> Boolean),(*... -> *)]] -> (*... -> *)
- * @param {Array} pairs
+ * @param {Array} pairs A list of [predicate, transformer]
  * @return {Function}
  * @example
  *
