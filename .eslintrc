@@ -1,4 +1,7 @@
 {
+  "parserOptions": {
+    "sourceType": "module"
+  },
   "env": {
     "node": true,
     "mocha": true,
