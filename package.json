@@ -45,11 +45,15 @@
     "posttest": "git checkout -- dist",
     "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
-    "postbrowser_test": "npm run posttest"
+    "postbrowser_test": "npm run posttest",
+    "babel": "babel src --out-dir cjs --copy-files"
   },
   "dependencies": {},
   "devDependencies": {
     "acorn": "0.9.x",
+    "babel-cli": "^6.18.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
     "cli-table": "0.3.x",
