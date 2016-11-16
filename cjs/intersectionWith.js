@@ -1,5 +1,3 @@
-'use strict';
-
 var _containsWith = require('./internal/_containsWith');
 var _curry3 = require('./internal/_curry3');
 var uniqWith = require('./uniqWith');

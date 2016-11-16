@@ -1,5 +1,3 @@
-'use strict';
-
 var filter = require('./filter');
 var juxt = require('./juxt');
 var reject = require('./reject');

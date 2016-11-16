@@ -1,5 +1,3 @@
-'use strict';
-
 var _clone = require('./internal/_clone');
 var _curry1 = require('./internal/_curry1');
 

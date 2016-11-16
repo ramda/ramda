@@ -1,5 +1,3 @@
-'use strict';
-
 var _assign = require('./internal/_assign');
 var _curry1 = require('./internal/_curry1');
 

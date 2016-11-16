@@ -1,5 +1,3 @@
-'use strict';
-
 var _curry3 = require('./internal/_curry3');
 var _has = require('./internal/_has');
 var _isArray = require('./internal/_isArray');

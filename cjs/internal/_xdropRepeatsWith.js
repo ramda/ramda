@@ -1,5 +1,3 @@
-'use strict';
-
 var _curry2 = require('./_curry2');
 
 module.exports = function () {

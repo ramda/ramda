@@ -1,5 +1,3 @@
-'use strict';
-
 var _has = require('./_has');
 
 module.exports = function () {

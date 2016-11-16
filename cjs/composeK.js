@@ -1,5 +1,3 @@
-'use strict';
-
 var chain = require('./chain');
 var compose = require('./compose');
 var identity = require('./identity');

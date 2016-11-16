@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = function _map(fn, functor) {
   var idx = 0;
   var len = functor.length;

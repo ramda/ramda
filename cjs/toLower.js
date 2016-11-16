@@ -1,5 +1,3 @@
-'use strict';
-
 var invoker = require('./invoker');
 
 /**

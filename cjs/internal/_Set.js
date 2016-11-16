@@ -1,5 +1,3 @@
-'use strict';
-
 var _contains = require('./_contains');
 
 // A simple Set type that honours R.equals semantics

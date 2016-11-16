@@ -1,5 +1,3 @@
-'use strict';
-
 var _clone = require('./internal/_clone');
 var _curry3 = require('./internal/_curry3');
 var _isTransformer = require('./internal/_isTransformer');

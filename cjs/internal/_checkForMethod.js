@@ -1,5 +1,3 @@
-'use strict';
-
 var _isArray = require('./_isArray');
 
 /**

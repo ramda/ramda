@@ -1,5 +1,3 @@
-'use strict';
-
 var always = require('./always');
 
 /**

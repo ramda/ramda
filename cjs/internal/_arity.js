@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function _arity(n, fn) {
   /* eslint-disable no-unused-vars */
   switch (n) {

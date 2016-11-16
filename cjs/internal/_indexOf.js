@@ -1,5 +1,3 @@
-'use strict';
-
 var equals = require('../equals');
 
 module.exports = function _indexOf(list, a, idx) {

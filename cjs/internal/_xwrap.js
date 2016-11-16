@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function () {
   function XWrap(fn) {
     this.f = fn;

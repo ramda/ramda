@@ -1,5 +1,3 @@
-'use strict';
-
 var _cloneRegExp = require('./_cloneRegExp');
 var type = require('../type');
 

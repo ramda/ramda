@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function _forceReduced(x) {
   return {
     '@@transducer/value': x,

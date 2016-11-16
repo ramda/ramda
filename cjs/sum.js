@@ -1,5 +1,3 @@
-'use strict';
-
 var add = require('./add');
 var reduce = require('./reduce');
 

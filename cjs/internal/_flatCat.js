@@ -1,5 +1,3 @@
-'use strict';
-
 var _forceReduced = require('./_forceReduced');
 var _reduce = require('./_reduce');
 var _xfBase = require('./_xfBase');

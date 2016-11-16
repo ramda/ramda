@@ -1,5 +1,3 @@
-'use strict';
-
 var _curryN = require('./internal/_curryN');
 var _dispatchable = require('./internal/_dispatchable');
 var _has = require('./internal/_has');

@@ -1,5 +1,3 @@
-'use strict';
-
 var _curry2 = require('./_curry2');
 var _xfBase = require('./_xfBase');
 

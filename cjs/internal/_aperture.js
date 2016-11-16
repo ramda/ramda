@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = function _aperture(n, list) {
   var idx = 0;
   var limit = list.length - (n - 1);

@@ -1,5 +1,3 @@
-'use strict';
-
 var _arrayFromIterator = require('./_arrayFromIterator');
 var _functionName = require('./_functionName');
 var _has = require('./_has');

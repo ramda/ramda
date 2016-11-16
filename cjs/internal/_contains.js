@@ -1,5 +1,3 @@
-'use strict';
-
 var _indexOf = require('./_indexOf');
 
 module.exports = function _contains(a, list) {

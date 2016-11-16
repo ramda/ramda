@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = function _of(x) {
   return [x];
 };

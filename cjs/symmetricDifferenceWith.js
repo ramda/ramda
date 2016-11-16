@@ -1,5 +1,3 @@
-'use strict';
-
 var _curry3 = require('./internal/_curry3');
 var concat = require('./concat');
 var differenceWith = require('./differenceWith');

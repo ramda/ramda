@@ -1,5 +1,3 @@
-'use strict';
-
 var _arity = require('./internal/_arity');
 var _pipeP = require('./internal/_pipeP');
 var reduce = require('./reduce');

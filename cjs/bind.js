@@ -1,5 +1,3 @@
-'use strict';
-
 var _arity = require('./internal/_arity');
 var _curry2 = require('./internal/_curry2');
 

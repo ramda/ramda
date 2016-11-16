@@ -1,8 +1,4 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 var _curry2 = require('./internal/_curry2');
 
 /**

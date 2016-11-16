@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = function _containsWith(pred, x, list) {
   var idx = 0;
   var len = list.length;

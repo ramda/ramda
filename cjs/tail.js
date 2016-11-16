@@ -1,5 +1,3 @@
-'use strict';
-
 var _checkForMethod = require('./internal/_checkForMethod');
 var slice = require('./slice');
 

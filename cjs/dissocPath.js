@@ -1,5 +1,3 @@
-'use strict';
-
 var _curry2 = require('./internal/_curry2');
 var assoc = require('./assoc');
 var dissoc = require('./dissoc');

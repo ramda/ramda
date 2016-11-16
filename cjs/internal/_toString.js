@@ -1,5 +1,3 @@
-'use strict';
-
 var _contains = require('./_contains');
 var _map = require('./_map');
 var _quote = require('./_quote');

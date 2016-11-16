@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Tests whether or not an object is an array.
  *

@@ -1,5 +1,3 @@
-'use strict';
-
 var _map = require('./internal/_map');
 var identity = require('./identity');
 var pickAll = require('./pickAll');

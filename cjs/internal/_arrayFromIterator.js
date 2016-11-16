@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = function _arrayFromIterator(iter) {
   var list = [];
   var next;

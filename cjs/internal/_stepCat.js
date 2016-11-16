@@ -1,5 +1,3 @@
-'use strict';
-
 var _assign = require('./_assign');
 var _identity = require('./_identity');
 var _isTransformer = require('./_isTransformer');

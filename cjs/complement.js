@@ -1,5 +1,3 @@
-'use strict';
-
 var lift = require('./lift');
 var not = require('./not');
 
