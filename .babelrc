@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "add-module-exports",
+    ["transform-es2015-modules-commonjs", {
+      "allowTopLevelThis": false,
+      "strict": false,
+      "loose": true
+    }]
+  ]
+
+}
