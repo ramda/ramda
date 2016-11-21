@@ -20,7 +20,7 @@ var _curry3 = require('./internal/_curry3');
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @sig (a,b -> b) -> b -> [a] -> b
+ * @sig (a, b -> b) -> b -> [a] -> b
  * @param {Function} fn The iterator function. Receives two values, the current element from the array
  *        and the accumulator.
  * @param {*} acc The accumulator value.
