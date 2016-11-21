@@ -35,7 +35,7 @@ var _curry3 = require('./internal/_curry3');
  *     f(c, f(d, a)[0])[1],
  *     f(d, a)[1],
  *   ]
- *   f(f(f(a, d)[0], c)[0], b)[0],
+ *   f(b, f(c, f(d, a)[0])[0])[0],
  * ]
  */
 module.exports = _curry3(function mapAccumRight(fn, acc, list) {
