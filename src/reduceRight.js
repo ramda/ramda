@@ -9,7 +9,8 @@ var _curry3 = require('./internal/_curry3');
  * Similar to `reduce`, except moves through the input list from the right to
  * the left.
  *
- * The iterator function receives two values: *(value, acc)*
+ * The iterator function receives two values: *(value, acc)*, while the arguments'
+ * order of `reduce`'s iterator function is *(acc, value)*.
  *
  * Note: `R.reduceRight` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.reduce` method. For more details
@@ -30,27 +31,29 @@ var _curry3 = require('./internal/_curry3');
  * @example
  *
  *      R.reduceRight(R.subtract, 0, [1, 2, 3, 4]) // => (1 - (2 - (3 - (4 - 0)))) = -2
- *              2
- *               \
- *            1 - 3
- *                 \
- *              2 - -1
- *                   \
- *                3 - 4
- *                     \
- *                  4 - 0
+ *          -               -2
+ *         / \              / \
+ *        1   -            1   3
+ *           / \              / \
+ *          2   -     ==>    2  -1
+ *             / \              / \
+ *            3   -            3   4
+ *               / \              / \
+ *              4   0            4   0
  *
  *      R.reduce(R.subtract, 0, [1, 2, 3, 4]) // => ((((0 - 1) - 2) - 3) - 4) = -10
- *                  -10
- *                 /
- *                -6 - 4
- *               /
- *              -3 - 3
- *             /
- *            -1 - 2
- *           /
- *          0 - 1
+ *                -               -10
+ *               / \              / \
+ *              -   4           -4   4
+ *             / \              / \
+ *            -   3   ==>     -3   3
+ *           / \              / \
+ *          -   2           -1   2
+ *         / \              / \
+ *        0   1            0   1
  *
+ * @symb R.reduceRight(f, a, [b, c, d]) = f(b, f(c, f(d, a)))
+ * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
  */
 module.exports = _curry3(function reduceRight(fn, acc, list) {
   var idx = list.length - 1;
