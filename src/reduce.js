@@ -29,13 +29,13 @@ var _reduce = require('./internal/_reduce');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.reduced, R.addIndex R.reduceRight
+ * @see R.reduced, R.addIndex, R.reduceRight
  * @example
  *
  *      R.reduce(R.subtract, 0, [1, 2, 3, 4]) // => ((((0 - 1) - 2) - 3) - 4) = -10
  *                -               -10
  *               / \              / \
- *              -   4           -4   4
+ *              -   4           -6   4
  *             / \              / \
  *            -   3   ==>     -3   3
  *           / \              / \
@@ -43,18 +43,6 @@ var _reduce = require('./internal/_reduce');
  *         / \              / \
  *        0   1            0   1
  *
- *      R.reduceRight(R.subtract, 0, [1, 2, 3, 4]) // => (1 - (2 - (3 - (4 - 0)))) = -2
- *          -               -2
- *         / \              / \
- *        1   -            1   3
- *           / \              / \
- *          2   -     ==>    2  -1
- *             / \              / \
- *            3   -            3   4
- *               / \              / \
- *              4   0            4   0
- *
  * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
- * @symb R.reduceRight(f, a, [b, c, d]) = f(b, f(c, f(d, a)))
  */
 module.exports = _curry3(_reduce);

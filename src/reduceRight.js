@@ -41,19 +41,7 @@ var _curry3 = require('./internal/_curry3');
  *               / \              / \
  *              4   0            4   0
  *
- *      R.reduce(R.subtract, 0, [1, 2, 3, 4]) // => ((((0 - 1) - 2) - 3) - 4) = -10
- *                -               -10
- *               / \              / \
- *              -   4           -4   4
- *             / \              / \
- *            -   3   ==>     -3   3
- *           / \              / \
- *          -   2           -1   2
- *         / \              / \
- *        0   1            0   1
- *
  * @symb R.reduceRight(f, a, [b, c, d]) = f(b, f(c, f(d, a)))
- * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
  */
 module.exports = _curry3(function reduceRight(fn, acc, list) {
   var idx = list.length - 1;

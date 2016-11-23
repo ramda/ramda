@@ -10,7 +10,7 @@ var _curry3 = require('./internal/_curry3');
  * Similar to `mapAccum`, except moves through the input list from the right to
  * the left.
  *
- * The iterator function receives two arguments, *value *and *acc*, and should
+ * The iterator function receives two arguments, *value* and *acc*, and should
  * return a tuple *[value, acc]*.
  *
  * @func
