@@ -16,6 +16,7 @@ module.exports = {
   append: require('./src/append'),
   apply: require('./src/apply'),
   applySpec: require('./src/applySpec'),
+  ascend: require('./src/ascend'),
   assoc: require('./src/assoc'),
   assocPath: require('./src/assocPath'),
   binary: require('./src/binary'),
@@ -40,6 +41,7 @@ module.exports = {
   curry: require('./src/curry'),
   curryN: require('./src/curryN'),
   dec: require('./src/dec'),
+  descend: require('./src/descend'),
   defaultTo: require('./src/defaultTo'),
   difference: require('./src/difference'),
   differenceWith: require('./src/differenceWith'),
@@ -182,6 +184,7 @@ module.exports = {
   slice: require('./src/slice'),
   sort: require('./src/sort'),
   sortBy: require('./src/sortBy'),
+  sortWith: require('./src/sortWith'),
   split: require('./src/split'),
   splitAt: require('./src/splitAt'),
   splitEvery: require('./src/splitEvery'),
@@ -234,4 +237,4 @@ module.exports = {
   zip: require('./src/zip'),
   zipObj: require('./src/zipObj'),
   zipWith: require('./src/zipWith')
-}
+};
