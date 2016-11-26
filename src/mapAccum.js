@@ -19,7 +19,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.addIndex
+ * @see R.addIndex, R.mapAccumRight
  * @example
  *
  *      var digits = ['1', '2', '3', '4'];

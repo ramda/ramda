@@ -32,7 +32,7 @@ var reduceRight = require('./reduceRight');
 module.exports = _curry2(function sequence(of, traversable) {
   return typeof traversable.sequence === 'function' ?
     traversable.sequence(of) :
-    reduceRight(function(acc, x) { return ap(map(prepend, x), acc); },
+    reduceRight(function(x, acc) { return ap(map(prepend, x), acc); },
                 of([]),
                 traversable);
 });

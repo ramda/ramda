@@ -10,32 +10,32 @@ var _curry3 = require('./internal/_curry3');
  * Similar to `mapAccum`, except moves through the input list from the right to
  * the left.
  *
- * The iterator function receives two arguments, *acc* and *value*, and should
- * return a tuple *[acc, value]*.
+ * The iterator function receives two arguments, *value* and *acc*, and should
+ * return a tuple *[value, acc]*.
  *
  * @func
  * @memberOf R
  * @since v0.10.0
  * @category List
- * @sig (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
+ * @sig (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.addIndex
+ * @see R.addIndex, R.mapAccum
  * @example
  *
  *      var digits = ['1', '2', '3', '4'];
  *      var append = (a, b) => [a + b, a + b];
  *
- *      R.mapAccumRight(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
+ *      R.mapAccumRight(append, 5, digits); //=> [['12345', '2345', '345', '45'], '12345']
  * @symb R.mapAccumRight(f, a, [b, c, d]) = [
- *   f(f(f(a, d)[0], c)[0], b)[0],
  *   [
- *     f(a, d)[1],
- *     f(f(a, d)[0], c)[1],
- *     f(f(f(a, d)[0], c)[0], b)[1]
+ *     f(b, f(c, f(d, a)[0])[0])[1],
+ *     f(c, f(d, a)[0])[1],
+ *     f(d, a)[1],
  *   ]
+ *   f(b, f(c, f(d, a)[0])[0])[0],
  * ]
  */
 module.exports = _curry3(function mapAccumRight(fn, acc, list) {
@@ -43,9 +43,9 @@ module.exports = _curry3(function mapAccumRight(fn, acc, list) {
   var result = [];
   var tuple = [acc];
   while (idx >= 0) {
-    tuple = fn(tuple[0], list[idx]);
+    tuple = fn(list[idx], tuple[0]);
     result[idx] = tuple[1];
     idx -= 1;
   }
-  return [tuple[0], result];
+  return [result, tuple[0]];
 });
