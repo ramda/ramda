@@ -11,7 +11,7 @@ var reverse = require('./reverse');
  * @memberOf R
  * @since v0.16.0
  * @category Function
- * @sig Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> (m a -> m z)
+ * @sig Chain m => ((a -> m b), (b -> m c), ..., (y -> m z)) -> (a -> m z)
  * @param {...Function}
  * @return {Function}
  * @see R.composeK
@@ -29,12 +29,15 @@ var reverse = require('./reverse');
  *        R.compose(Maybe.of, R.toUpper)
  *      );
  *
- *      getStateCode(Maybe.of('{"user":{"address":{"state":"ny"}}}'));
+ *      getStateCode('{"user":{"address":{"state":"ny"}}}');
  *      //=> Just('NY')
- *      getStateCode(Maybe.of('[Invalid JSON]'));
+ *      getStateCode('[Invalid JSON]');
  *      //=> Nothing()
- * @symb R.pipeK(f, g, h)(a, b) = R.chain(h, R.chain(g, f(a, b)))
+ * @symb R.pipeK(f, g, h)(a) = R.chain(h, R.chain(g, f(a)))
  */
 module.exports = function pipeK() {
+  if (arguments.length === 0) {
+    throw new Error('pipeK requires at least one argument');
+  }
   return composeK.apply(this, reverse(arguments));
 };

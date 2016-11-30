@@ -1,3 +1,6 @@
+var jsv = require('jsverify');
+var assert = require('assert');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -10,6 +13,9 @@ Identity.prototype.chain = function(f) {
   return f(this.value);
 };
 
+function IdentityArb(arb) {
+  return arb.smap(function(x) { return new Identity(x); }, function(i) { return i.value; });
+}
 
 describe('pipeK', function() {
 
@@ -18,23 +24,25 @@ describe('pipeK', function() {
     eq(R.pipeK.length, 0);
   });
 
-  it('performs left-to-right Kleisli composition', function() {
-    var f = function(x) { return new Identity(x - 1); };
-    var g = function(x) { return new Identity(x * x); };
-    var h = function(x) { return new Identity(x + 1); };
+  jsv.property('performs left-to-right Kleisli composition',
+    jsv.fn(IdentityArb(jsv.number)),
+    jsv.fn(IdentityArb(jsv.number)),
+    jsv.fn(IdentityArb(jsv.number)),
+    jsv.number,
+    function(f, g, h, x) {
+      var actual = R.pipeK(f, g, h)(x).value;
+      var expected = R.chain(h, R.chain(g, f(x))).value;
+      return actual === expected;
+    }
+  );
 
-    var fn = R.pipeK(f, g, h);
-    var id = new Identity(8);
-
-    eq(fn(id).value, 50);
-    eq(fn(id).value, R.pipe(R.chain(f), R.chain(g), R.chain(h))(id).value);
+  it('throws if given no arguments', function() {
+    assert.throws(
+      function() { R.pipeK(); },
+      function(err) {
+        return err.constructor === Error &&
+          err.message === 'pipeK requires at least one argument';
+      }
+    );
   });
-
-  it('returns the identity function given no arguments', function() {
-    var identity = R.pipeK();
-    eq(identity.length, 1);
-    eq(identity(R.__).length, 1);
-    eq(identity(42), 42);
-  });
-
 });

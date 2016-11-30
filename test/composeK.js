@@ -1,3 +1,6 @@
+var assert = require('assert');
+var jsv = require('jsverify');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -10,6 +13,9 @@ Identity.prototype.chain = function(f) {
   return f(this.value);
 };
 
+function IdentityArb(arb) {
+  return arb.smap(function(x) { return new Identity(x); }, function(i) { return i.value; });
+}
 
 describe('composeK', function() {
 
@@ -18,23 +24,25 @@ describe('composeK', function() {
     eq(R.composeK.length, 0);
   });
 
-  it('performs right-to-left Kleisli composition', function() {
-    var f = function(x) { return new Identity(x - 1); };
-    var g = function(x) { return new Identity(x * x); };
-    var h = function(x) { return new Identity(x + 1); };
+  jsv.property('performs right-to-left Kleisli composition',
+    jsv.fn(IdentityArb(jsv.number)),
+    jsv.fn(IdentityArb(jsv.number)),
+    jsv.fn(IdentityArb(jsv.number)),
+    jsv.number,
+    function(f, g, h, x) {
+      var actual = R.composeK(f, g, h)(x).value;
+      var expected = R.chain(f, R.chain(g, h(x))).value;
+      return actual === expected;
+    }
+  );
 
-    var fn = R.composeK(h, g, f);
-    var id = new Identity(8);
-
-    eq(fn(id).value, 50);
-    eq(fn(id).value, R.compose(R.chain(h), R.chain(g), R.chain(f))(id).value);
+  it('throws if given no arguments', function() {
+    assert.throws(
+      function() { R.composeK(); },
+      function(err) {
+        return err.constructor === Error &&
+          err.message === 'composeK requires at least one argument';
+      }
+    );
   });
-
-  it('returns the identity function given no arguments', function() {
-    var identity = R.composeK();
-    eq(identity.length, 1);
-    eq(identity(R.__).length, 1);
-    eq(identity(42), 42);
-  });
-
 });
