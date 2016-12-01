@@ -22,6 +22,7 @@ var reduce = require('./reduce');
  *        `fn1` and `fn2` as its arguments.
  * @param {Array} functions A list of functions.
  * @return {Function} A new function.
+ * @see R.useWith
  * @example
  *
  *      var average = R.converge(R.divide, [R.sum, R.length])
