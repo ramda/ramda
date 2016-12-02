@@ -106,7 +106,7 @@ module.exports = (function() {
             prevSize = set._nativeSet.size;
             set._nativeSet.add(item);
             newSize = set._nativeSet.size;
-            return (newSize > prevSize);
+            return newSize === prevSize;
           } else {
             return set._nativeSet.has(item);
           }
