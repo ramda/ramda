@@ -105,6 +105,7 @@ module.exports = {
   lastIndexOf: require('./src/lastIndexOf'),
   length: require('./src/length'),
   lens: require('./src/lens'),
+  lensFind: require('./src/lensFind'),
   lensIndex: require('./src/lensIndex'),
   lensPath: require('./src/lensPath'),
   lensProp: require('./src/lensProp'),
