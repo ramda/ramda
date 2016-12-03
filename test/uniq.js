@@ -33,4 +33,8 @@ describe('uniq', function() {
     eq(R.uniq([void 0, null, void 0, null]), [void 0, null]);
   });
 
+  it('uses reference equality for functions', function() {
+    eq(R.uniq([R.add, R.identity, R.add, R.identity, R.add, R.identity]).length, 2);
+  });
+
 });
