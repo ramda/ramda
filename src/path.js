@@ -20,11 +20,11 @@ var _curry2 = require('./internal/_curry2');
  *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
  */
 
-function recursiveFunc(paths, obj, i){
-    if (paths[i]) {
-        return func(paths, obj[paths[i]], i + 1);
-    }
-    return obj;
+function recursiveFunc(paths, obj, i) {
+  if (paths[i]) {
+    return recursiveFunc(paths, obj[paths[i]], i + 1);
+  }
+  return obj;
 }
 
 module.exports = _curry2(function path(paths, obj) {
