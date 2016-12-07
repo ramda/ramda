@@ -9,3 +9,5 @@
 /dist/gh-pages/
 /tmp-test-bundle.js
 /coverage/
+ramda-tests.js
+tsconfig.json
