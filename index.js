@@ -97,6 +97,7 @@ module.exports = {
   isArrayLike: require('./src/isArrayLike'),
   isEmpty: require('./src/isEmpty'),
   isNil: require('./src/isNil'),
+  isNotNil: require('./src/isNotNil'),
   join: require('./src/join'),
   juxt: require('./src/juxt'),
   keys: require('./src/keys'),
