@@ -2088,3 +2088,10 @@ class Why {
     R.intersperse(0, [1, 2]); //=> [1, 0, 2]
     R.intersperse(0, [1]); //=> [1]
 }
+
+// #109
+function grepSomethingRecursively(grepPatterns: string | string[]) {
+    if (R.is(Array, grepPatterns)) {
+        R.forEach(() => {}, grepPatterns)
+    }
+}

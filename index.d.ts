@@ -12,6 +12,7 @@ declare namespace R {
     type Path = Prop[];
     type Struct<T> = Dictionary<T> | Array<T>;
     type AccOpts<T,U> = Array<any>|string|Dictionary<any>|Transformer<T, U, U>;
+    interface Type<T> extends Function { new (...args: any[]): T; }
 
     // Fantasyland interfaces
 
@@ -1031,8 +1032,8 @@ declare namespace R {
          * See if an object (`val`) is an instance of the supplied constructor.
          * This function will check up the inheritance chain, if any.
          */
-        is<T>(ctor: T, val: any): val is T;
-        is<T>(ctor: T): (val: any) => val is T;
+        is<T>(ctor: Type<T>, val: any): val is T;
+        is<T>(ctor: Type<T>): (val: any) => val is T;
         // is<T>: CurriedFn2<T, any, val is T>; // um, val undefined
 
         /**
