@@ -14,6 +14,11 @@ describe('either', function() {
     eq(f(7), false);
   });
 
+  it('consumes arguments as expected', function() {
+    eq(R.either(R.identity, R.identity)(1), 1);
+    eq(R.either(R.identity, R.identity, 1), 1);
+  });
+
   it('accepts functions that take multiple parameters', function() {
     var between = function(a, b, c) {return a < b && b < c;};
     var total20 = function(a, b, c) {return a + b + c === 20;};

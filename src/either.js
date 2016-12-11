@@ -1,5 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var _isFunction = require('./internal/_isFunction');
+var curryN = require('./curryN');
+var curryX = require('./curryX');
 var lift = require('./lift');
 var or = require('./or');
 
@@ -31,10 +33,10 @@ var or = require('./or');
  *      f(101); //=> true
  *      f(8); //=> true
  */
-module.exports = _curry2(function either(f, g) {
+module.exports = curryX(function either(f, g) {
   return _isFunction(f) ?
-    function _either() {
+    curryN(f.length, function _either() {
       return f.apply(this, arguments) || g.apply(this, arguments);
-    } :
+    }) :
     lift(or)(f, g);
 });
