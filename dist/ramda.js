@@ -1013,8 +1013,10 @@
      * @see R.update
      * @example
      *
-     *      R.adjust(R.add(10), 1, [0, 1, 2]);     //=> [0, 11, 2]
-     *      R.adjust(R.add(10))(1)([0, 1, 2]);     //=> [0, 11, 2]
+     *      R.adjust(R.add(10), 1, [1, 2, 3]);     //=> [1, 12, 3]
+     *      R.adjust(R.add(10))(1)([1, 2, 3]);     //=> [1, 12, 3]
+     * @symb R.adjust(f, -1, [a, b]) = [a, f(b)]
+     * @symb R.adjust(f, 0, [a, b]) = [f(a), b]
      */
     var adjust = _curry3(function adjust(fn, idx, list) {
         if (idx >= list.length || idx < -list.length) {
@@ -1047,10 +1049,9 @@
      * @see R.any, R.none, R.transduce
      * @example
      *
-     *      var lessThan2 = R.flip(R.lt)(2);
-     *      var lessThan3 = R.flip(R.lt)(3);
-     *      R.all(lessThan2)([1, 2]); //=> false
-     *      R.all(lessThan3)([1, 2]); //=> true
+     *      var equals3 = R.equals(3);
+     *      R.all(equals3)([3, 3, 3, 3]); //=> true
+     *      R.all(equals3)([3, 3, 1, 3]); //=> false
      */
     var all = _curry2(_dispatchable('all', _xall, function all(fn, list) {
         var idx = 0;
@@ -1161,8 +1162,8 @@
      * @category List
      * @sig Number -> [a] -> [[a]]
      * @param {Number} n The size of the tuples to create
-     * @param {Array} list The list to split into `n`-tuples
-     * @return {Array} The new list.
+     * @param {Array} list The list to split into `n`-length tuples
+     * @return {Array} The resulting list of `n`-length tuples
      * @see R.transduce
      * @example
      *
@@ -1182,9 +1183,9 @@
      * @category List
      * @sig a -> [a] -> [a]
      * @param {*} el The element to add to the end of the new list.
-     * @param {Array} list The list whose contents will be added to the beginning of the output
+     * @param {Array} list The list of elements to add a new item to.
      *        list.
-     * @return {Array} A new list containing the contents of the old list followed by `el`.
+     * @return {Array} A new list containing the elements of the old list followed by `el`.
      * @see R.prepend
      * @example
      *
@@ -1206,14 +1207,15 @@
      * @since v0.7.0
      * @category Function
      * @sig (*... -> a) -> [*] -> a
-     * @param {Function} fn
-     * @param {Array} args
-     * @return {*}
+     * @param {Function} fn The function which will be called with `args`
+     * @param {Array} args The arguments to call `fn` with
+     * @return {*} result The result, equivalent to `fn(...args)`
      * @see R.call, R.unapply
      * @example
      *
      *      var nums = [1, 2, 3, -99, 42, 6, 7];
      *      R.apply(Math.max, nums); //=> 42
+     * @symb R.apply(f, [a, b, c]) = f(a, b, c)
      */
     var apply = _curry2(function apply(fn, args) {
         return fn.apply(this, args);
@@ -1230,10 +1232,10 @@
      * @since v0.8.0
      * @category Object
      * @sig String -> a -> {k: v} -> {k: v}
-     * @param {String} prop the property name to set
-     * @param {*} val the new value
-     * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original except for the specified property.
+     * @param {String} prop The property name to set
+     * @param {*} val The new value
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object equivalent to the original except for the changed property.
      * @see R.dissoc
      * @example
      *
@@ -1260,13 +1262,16 @@
      * @category Object
      * @sig [String] -> a -> {k: v} -> {k: v}
      * @param {Array} path the path to set
-     * @param {*} val the new value
-     * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original except along the specified path.
+     * @param {*} val The new value
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object equivalent to the original except along the specified path.
      * @see R.dissocPath
      * @example
      *
      *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
+     *
+     *      // Any missing or non-object keys in path will be overridden
+     *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
      */
     var assocPath = _curry3(function assocPath(path, val, obj) {
         switch (path.length) {
@@ -1277,6 +1282,36 @@
         default:
             return assoc(path[0], assocPath(_slice(path, 1), val, Object(obj[path[0]])), obj);
         }
+    });
+
+    /**
+     * Makes a shallow clone of an object, overriding the specified property with
+     * the supplied function, applied to the previous value, or undefined if none
+     * exist. Note: that this copies and flattens prototype properties onto the new
+     * object as well. All non-primitive properties are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig String -> (v -> w) -> {k: v} -> {k: v}
+     * @param {String} prop The property name to set
+     * @param {Function} fn The function to apply
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object equivalent to the original except for the changed property.
+     * @see R.assoc
+     * @see R.dissoc
+     * @see R.assocPathWith
+     * @example
+     *
+     *      R.assocWith('c', inc, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
+     */
+    var assocWith = _curry3(function assocWith(prop, fn, obj) {
+        var result = {};
+        for (var p in obj) {
+            result[p] = obj[p];
+        }
+        result[prop] = fn(result[prop]);
+        return result;
     });
 
     /**
@@ -1299,6 +1334,7 @@
      *      var log = R.bind(console.log, console);
      *      R.pipe(R.assoc('a', 2), R.tap(log), R.assoc('a', 3))({a: 1}); //=> {a: 3}
      *      // logs {a: 2}
+     * @symb R.bind(f, o)(a, b) = f.call(o, a, b)
      */
     var bind = _curry2(function bind(fn, thisObj) {
         return _arity(fn.length, function () {
@@ -1316,14 +1352,14 @@
      * @since v0.20.0
      * @category Relation
      * @sig Ord a => a -> a -> a -> a
-     * @param {Number} minimum number
-     * @param {Number} maximum number
-     * @param {Number} value to be clamped
-     * @return {Number} Returns the clamped value
+     * @param {Number} minimum The lower limit of the clamp (inclusive)
+     * @param {Number} maximum The upper limit of the clamp (inclusive)
+     * @param {Number} value Value to be clamped
+     * @return {Number} Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise
      * @example
      *
-     *      R.clamp(1, 10, -1) // => 1
-     *      R.clamp(1, 10, 11) // => 10
+     *      R.clamp(1, 10, -5) // => 1
+     *      R.clamp(1, 10, 15) // => 10
      *      R.clamp(1, 10, 4)  // => 4
      */
     var clamp = _curry3(function clamp(min, max, value) {
@@ -1342,15 +1378,16 @@
      * @since v0.1.0
      * @category Function
      * @sig (a, b -> Boolean) -> (a, b -> Number)
-     * @param {Function} pred A predicate function of arity two.
-     * @return {Function} A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`.
+     * @param {Function} pred A predicate function of arity two which will return `true` if the first argument
+     * is less than the second, `false` otherwise
+     * @return {Function} A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
      * @example
      *
-     *      var cmp = R.comparator((a, b) => a.age < b.age);
+     *      var byAge = R.comparator((a, b) => a.age < b.age);
      *      var people = [
      *        // ...
      *      ];
-     *      R.sort(cmp, people);
+     *      var peopleByIncreasingAge = R.sort(byAge, people);
      */
     var comparator = _curry1(function comparator(pred) {
         return function (a, b) {
@@ -1458,7 +1495,7 @@
      * @memberOf R
      * @since v0.1.0
      * @category Relation
-     * @sig (a -> a -> Boolean) -> [*] -> [*] -> [*]
+     * @sig ((a, a) -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
@@ -1492,9 +1529,9 @@
      * @since v0.10.0
      * @category Object
      * @sig String -> {k: v} -> {k: v}
-     * @param {String} prop the name of the property to dissociate
-     * @param {Object} obj the object to clone
-     * @return {Object} a new object similar to the original but without the specified property
+     * @param {String} prop The name of the property to dissociate
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object equivalent to the original but without the specified property
      * @see R.assoc
      * @example
      *
@@ -1503,10 +1540,9 @@
     var dissoc = _curry2(function dissoc(prop, obj) {
         var result = {};
         for (var p in obj) {
-            if (p !== prop) {
-                result[p] = obj[p];
-            }
+            result[p] = obj[p];
         }
+        delete result[prop];
         return result;
     });
 
@@ -1520,9 +1556,9 @@
      * @since v0.11.0
      * @category Object
      * @sig [String] -> {k: v} -> {k: v}
-     * @param {Array} path the path to set
-     * @param {Object} obj the object to clone
-     * @return {Object} a new object without the property at path
+     * @param {Array} path The path to the value to omit
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object without the property at path
      * @see R.assocPath
      * @example
      *
@@ -1664,7 +1700,7 @@
         for (key in object) {
             transformation = transformations[key];
             type = typeof transformation;
-            result[key] = type === 'function' ? transformation(object[key]) : type === 'object' ? evolve(transformations[key], object[key]) : object[key];
+            result[key] = type === 'function' ? transformation(object[key]) : transformation && type === 'object' ? evolve(transformation, object[key]) : object[key];
         }
         return result;
     });
@@ -1841,6 +1877,7 @@
      *      // logs 6
      *      // logs 7
      *      // logs 8
+     * @symb R.forEach(f, [a, b, c]) = [a, b, c]
      */
     var forEach = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
         var len = list.length;
@@ -2081,6 +2118,7 @@
      *
      *      var obj = {};
      *      R.identity(obj) === obj; //=> true
+     * @symb R.identity(a) = a
      */
     var identity = _curry1(_identity);
 
@@ -2250,6 +2288,7 @@
      * @sig * -> Boolean
      * @param {*} x The object to test.
      * @return {Boolean} `true` if `x` has a numeric length property and extreme indices defined; `false` otherwise.
+     * @deprecated since v0.23.0
      * @example
      *
      *      R.isArrayLike([]); //=> true
@@ -2501,6 +2540,14 @@
      *      var appender = (a, b) => [a + b, a + b];
      *
      *      R.mapAccum(appender, 0, digits); //=> ['01234', ['01', '012', '0123', '01234']]
+     * @symb R.mapAccum(f, a, [b, c, d]) = [
+     *   f(f(f(a, b)[0], c)[0], d)[0],
+     *   [
+     *     f(a, b)[1],
+     *     f(f(a, b)[0], c)[1],
+     *     f(f(f(a, b)[0], c)[0], d)[1]
+     *   ]
+     * ]
      */
     var mapAccum = _curry3(function mapAccum(fn, acc, list) {
         var idx = 0;
@@ -2546,6 +2593,14 @@
      *      var append = (a, b) => [a + b, a + b];
      *
      *      R.mapAccumRight(append, 0, digits); //=> ['04321', ['04321', '0432', '043', '04']]
+     * @symb R.mapAccumRight(f, a, [b, c, d]) = [
+     *   f(f(f(a, d)[0], c)[0], b)[0],
+     *   [
+     *     f(a, d)[1],
+     *     f(f(a, d)[0], c)[1],
+     *     f(f(f(a, d)[0], c)[0], b)[1]
+     *   ]
+     * ]
      */
     var mapAccumRight = _curry3(function mapAccumRight(fn, acc, list) {
         var idx = list.length - 1;
@@ -2699,6 +2754,7 @@
      *
      *      var resetToDefault = R.merge(R.__, {x: 0});
      *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
+     * @symb R.merge({ x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: 5, z: 3 }
      */
     var merge = _curry2(function merge(l, r) {
         return _assign({}, l, r);
@@ -2719,6 +2775,7 @@
      *
      *      R.mergeAll([{foo:1},{bar:2},{baz:3}]); //=> {foo:1,bar:2,baz:3}
      *      R.mergeAll([{foo:1},{foo:2},{bar:2}]); //=> {foo:2,bar:2}
+     * @symb R.mergeAll([{ x: 1 }, { y: 2 }, { z: 3 }]) = { x: 1, y: 2, z: 3 }
      */
     var mergeAll = _curry1(function mergeAll(list) {
         return _assign.apply(null, [{}].concat(list));
@@ -2749,6 +2806,7 @@
      *                     { a: true, thing: 'foo', values: [10, 20] },
      *                     { b: true, thing: 'bar', values: [15, 35] });
      *      //=> { a: true, b: true, thing: 'bar', values: [10, 20, 15, 35] }
+     * @symb R.mergeWithKey(f, { x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: f('y', 2, 5), z: 3 }
      */
     var mergeWithKey = _curry3(function mergeWithKey(fn, l, r) {
         var result = {};
@@ -2893,6 +2951,9 @@
      *      takesOneArg.length; //=> 1
      *      // Only `n` arguments are passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
+     * @symb R.nAry(0, f)(a, b) = f()
+     * @symb R.nAry(1, f)(a, b) = f(a)
+     * @symb R.nAry(2, f)(a, b) = f(a, b)
      */
     var nAry = _curry2(function nAry(n, fn) {
         switch (n) {
@@ -3032,6 +3093,9 @@
      *
      *      R.nth(2, 'abc'); //=> 'c'
      *      R.nth(3, 'abc'); //=> ''
+     * @symb R.nth(-1, [a, b, c]) = c
+     * @symb R.nth(0, [a, b, c]) = a
+     * @symb R.nth(1, [a, b, c]) = b
      */
     var nth = _curry2(function nth(offset, list) {
         var idx = offset < 0 ? list.length + offset : offset;
@@ -3052,6 +3116,9 @@
      *
      *      R.nthArg(1)('a', 'b', 'c'); //=> 'b'
      *      R.nthArg(-1)('a', 'b', 'c'); //=> 'c'
+     * @symb R.nthArg(-1)(a, b, c) = c
+     * @symb R.nthArg(0)(a, b, c) = a
+     * @symb R.nthArg(1)(a, b, c) = b
      */
     var nthArg = _curry1(function nthArg(n) {
         var arity = n < 0 ? 1 : n + 1;
@@ -3736,6 +3803,7 @@
      *
      *      var numbers = [1, 2, 3, 4];
      *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
+     * @symb R.scan(f, a, [b, c]) = [a, f(a, b), f(f(a, b), c)]
      */
     var scan = _curry3(function scan(fn, acc, list) {
         var idx = 0;
@@ -4048,6 +4116,10 @@
      *      var takeFive = R.take(5);
      *      takeFive(personnel);
      *      //=> ['Dave Brubeck', 'Paul Desmond', 'Eugene Wright', 'Joe Morello', 'Gerry Mulligan']
+     * @symb R.take(-1, [a, b]) = [a, b]
+     * @symb R.take(0, [a, b]) = []
+     * @symb R.take(1, [a, b]) = [a]
+     * @symb R.take(2, [a, b]) = [a, b]
      */
     var take = _curry2(_dispatchable('take', _xtake, function take(n, xs) {
         return slice(0, n < 0 ? Infinity : n, xs);
@@ -4134,6 +4206,7 @@
      *      var sayX = x => console.log('x is ' + x);
      *      R.tap(sayX, 100); //=> 100
      *      // logs 'x is 100'
+     * @symb R.tap(f, a) = a
      */
     var tap = _curry2(function tap(fn, x) {
         fn(x);
@@ -4158,6 +4231,9 @@
      * @example
      *
      *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]
+     * @symb R.times(f, 0) = []
+     * @symb R.times(f, 1) = [f(0)]
+     * @symb R.times(f, 2) = [f(0), f(1)]
      */
     var times = _curry2(function times(fn, n) {
         var len = Number(n);
@@ -4258,6 +4334,9 @@
      * If some of the rows are shorter than the following rows, their elements are skipped:
      *
      *      R.transpose([[10, 11], [20], [], [30, 31, 32]]) //=> [[10, 20, 30], [11, 31], [32]]
+     * @symb R.transpose([[a], [b], [c]]) = [a, b, c]
+     * @symb R.transpose([[a, b], [c, d]]) = [[a, c], [b, d]]
+     * @symb R.transpose([[a, b], [c]]) = [[a, c], [b]]
      */
     var transpose = _curry1(function transpose(outerlist) {
         var i = 0;
@@ -4389,6 +4468,7 @@
      * @example
      *
      *      R.unapply(JSON.stringify)(1, 2, 3); //=> '[1,2,3]'
+     * @symb R.unapply(f)(a, b) = f([a, b])
      */
     var unapply = _curry1(function unapply(fn) {
         return function () {
@@ -4421,6 +4501,7 @@
      *      takesOneArg.length; //=> 1
      *      // Only 1 argument is passed to the wrapped function
      *      takesOneArg(1, 2); //=> [1, undefined]
+     * @symb R.unary(f)(a, b, c) = f(a)
      */
     var unary = _curry1(function unary(fn) {
         return nAry(1, fn);
@@ -4484,6 +4565,7 @@
      *
      *      var f = n => n > 50 ? false : [-n, n + 10];
      *      R.unfold(f, 10); //=> [-10, -20, -30, -40, -50]
+     * @symb R.unfold(f, x) = [f(x)[0], f(f(x)[1])[0], f(f(f(x)[1])[1])[0], ...]
      */
     var unfold = _curry2(function unfold(fn, seed) {
         var pair = fn(seed);
@@ -4606,6 +4688,9 @@
      *
      *      R.update(1, 11, [0, 1, 2]);     //=> [0, 11, 2]
      *      R.update(1)(11)([0, 1, 2]);     //=> [0, 11, 2]
+     * @symb R.update(-1, a, [b, c]) = [b, a]
+     * @symb R.update(0, a, [b, c]) = [a, c]
+     * @symb R.update(1, a, [b, c]) = [b, a]
      */
     var update = _curry3(function update(idx, x, list) {
         return adjust(always(x), idx, list);
@@ -4637,6 +4722,7 @@
      *      R.useWith(Math.pow, [R.identity, R.identity])(3)(4); //=> 81
      *      R.useWith(Math.pow, [R.dec, R.inc])(3, 4); //=> 32
      *      R.useWith(Math.pow, [R.dec, R.inc])(3)(4); //=> 32
+     * @symb R.useWith(f, [g, h])(a, b) = f(g(a), h(b))
      */
     var useWith = _curry2(function useWith(fn, transformers) {
         return curryN(transformers.length, function () {
@@ -4801,11 +4887,11 @@
      * @example
      *
      *      // pred :: Object -> Boolean
-     *      var pred = where({
-     *        a: equals('foo'),
-     *        b: complement(equals('bar')),
-     *        x: gt(__, 10),
-     *        y: lt(__, 20)
+     *      var pred = R.where({
+     *        a: R.equals('foo'),
+     *        b: R.complement(R.equals('bar')),
+     *        x: R.gt(__, 10),
+     *        y: R.lt(__, 20)
      *      });
      *
      *      pred({a: 'foo', b: 'xxx', x: 11, y: 19}); //=> true
@@ -4824,39 +4910,6 @@
     });
 
     /**
-     * Wrap a function inside another to allow you to make adjustments to the
-     * parameters, or do other processing either before the internal function is
-     * called or with its results.
-     *
-     * @func
-     * @memberOf R
-     * @since v0.1.0
-     * @category Function
-     * @sig (a... -> b) -> ((a... -> b) -> a... -> c) -> (a... -> c)
-     * @param {Function} fn The function to wrap.
-     * @param {Function} wrapper The wrapper function.
-     * @return {Function} The wrapped function.
-     * @deprecated since v0.22.0
-     * @example
-     *
-     *      var greet = name => 'Hello ' + name;
-     *
-     *      var shoutedGreet = R.wrap(greet, (gr, name) => gr(name).toUpperCase());
-     *
-     *      shoutedGreet("Kathy"); //=> "HELLO KATHY"
-     *
-     *      var shortenedGreet = R.wrap(greet, function(gr, name) {
-     *        return gr(name.substring(0, 3));
-     *      });
-     *      shortenedGreet("Robert"); //=> "Hello Rob"
-     */
-    var wrap = _curry2(function wrap(fn, wrapper) {
-        return curryN(fn.length, function () {
-            return wrapper.apply(this, _concat([fn], arguments));
-        });
-    });
-
-    /**
      * Creates a new list out of the two supplied by creating each possible pair
      * from the lists.
      *
@@ -4872,6 +4925,7 @@
      * @example
      *
      *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+     * @symb R.xprod([a, b], [c, d]) = [[a, c], [a, d], [b, c], [b, d]]
      */
     // = xprodWith(prepend); (takes about 3 times as long...)
     var xprod = _curry2(function xprod(a, b) {
@@ -4912,6 +4966,7 @@
      * @example
      *
      *      R.zip([1, 2, 3], ['a', 'b', 'c']); //=> [[1, 'a'], [2, 'b'], [3, 'c']]
+     * @symb R.zip([a, b, c], [d, e, f]) = [[a, d], [b, e], [c, f]]
      */
     var zip = _curry2(function zip(a, b) {
         var rv = [];
@@ -4977,6 +5032,7 @@
      *      };
      *      R.zipWith(f, [1, 2, 3], ['a', 'b', 'c']);
      *      //=> [f(1, 'a'), f(2, 'b'), f(3, 'c')]
+     * @symb R.zipWith(fn, [a, b, c], [d, e, f]) = [fn(a, d), fn(b, e), fn(c, f)]
      */
     var zipWith = _curry3(function zipWith(fn, a, b) {
         var rv = [];
@@ -5356,6 +5412,41 @@
     });
 
     /**
+     * Makes a shallow clone of an object, setting or overriding the nodes required
+     * to create the given path, and applying the given function to the tail end of
+     * that path. Note that this copies and flattens prototype properties onto the
+     * new object as well. All non-primitive properties are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @category Object
+     * @sig [String] -> (a -> b) -> {k: v} -> {k: v}
+     * @param {Array} path the path to set
+     * @param {Function} fn function to apply
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object equivalent to the original except along the specified path.
+     * @see R.path
+     * @see R.assocPath
+     * @see R.over
+     * @example
+     *
+     *      R.assocPathWith(['a', 'b', 'c'], always(42), {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
+     *
+     *      // Any missing or non-object keys in path will be overridden, the fn will be called with undefined.
+     *      R.assocPathWith(['a', 'b', 'c'], always(42), {a: 5}); //=> {a: {b: {c: 42}}}
+     */
+    var assocPathWith = _curry3(function assocPathWith(path, fn, obj) {
+        switch (path.length) {
+        case 0:
+            return fn(obj);
+        case 1:
+            return assocWith(path[0], fn, obj);
+        default:
+            return assoc(path[0], assocPathWith(_slice(path, 1), fn, Object(obj[path[0]])), obj);
+        }
+    });
+
+    /**
      * Wraps a function of any arity (including nullary) in a function that accepts
      * exactly 2 parameters. Any extraneous parameters will not be passed to the
      * supplied function.
@@ -5380,6 +5471,7 @@
      *      takesTwoArgs.length; //=> 2
      *      // Only 2 arguments are passed to the wrapped function
      *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
+     * @symb R.binary(f)(a, b, c) = f(a, b)
      */
     var binary = _curry1(function binary(fn) {
         return nAry(2, fn);
@@ -5387,8 +5479,8 @@
 
     /**
      * Creates a deep copy of the value which may contain (nested) `Array`s and
-     * `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s. `Function`s are not
-     * copied, but assigned by their reference.
+     * `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s. `Function`s are
+     * assigned by reference rather than copied
      *
      * Dispatches to a `clone` method if present.
      *
@@ -5398,11 +5490,12 @@
      * @category Object
      * @sig {*} -> {*}
      * @param {*} value The object or array to clone
-     * @return {*} A new object or array.
+     * @return {*} A deeply cloned copy of `val`
      * @example
      *
      *      var objects = [{}, {}, {}];
      *      var objectsClone = R.clone(objects);
+     *      objects === objectsClone; //=> false
      *      objects[0] === objectsClone[0]; //=> false
      */
     var clone = _curry1(function clone(value) {
@@ -5632,6 +5725,7 @@
      *      mergeThree(1, 2, 3); //=> [1, 2, 3]
      *
      *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
+     * @symb R.flip(f)(a, b, c) = f(b, a, c)
      */
     var flip = _curry1(function flip(fn) {
         return curry(function (a, b) {
@@ -5700,7 +5794,7 @@
      * @memberOf R
      * @since v0.1.0
      * @category Relation
-     * @sig (a -> a -> Boolean) -> [*] -> [*] -> [*]
+     * @sig ((a, a) -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate function that determines whether
      *        the two supplied elements are equal.
      * @param {Array} list1 One list of items to compare
@@ -5975,6 +6069,9 @@
      *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
      *
      *      R.map(double, {x: 1, y: 2, z: 3}); //=> {x: 2, y: 4, z: 6}
+     * @symb R.map(f, [a, b]) = [f(a), f(b)]
+     * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
+     * @symb R.map(f, functor_o) = functor_o.map(f)
      */
     var map = _curry2(_dispatchable('map', _xmap, function map(fn, functor) {
         switch (Object.prototype.toString.call(functor)) {
@@ -6066,8 +6163,8 @@
      * @see R.partialRight
      * @example
      *
-     *      var multiply = (a, b) => a * b;
-     *      var double = R.partial(multiply, [2]);
+     *      var multiply2 = (a, b) => a * b;
+     *      var double = R.partial(multiply2, [2]);
      *      double(2); //=> 4
      *
      *      var greet = (salutation, title, firstName, lastName) =>
@@ -6076,6 +6173,7 @@
      *      var sayHello = R.partial(greet, ['Hello']);
      *      var sayHelloToMs = R.partial(sayHello, ['Ms.']);
      *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
+     * @symb R.partial(f, [a, b])(c, d) = f(a, b, c, d)
      */
     var partial = _createPartialApplicator(_concat);
 
@@ -6101,6 +6199,7 @@
      *      var greetMsJaneJones = R.partialRight(greet, ['Ms.', 'Jane', 'Jones']);
      *
      *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
+     * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)
      */
     var partialRight = _createPartialApplicator(flip(_concat));
 
@@ -6148,6 +6247,8 @@
      *
      *      R.pluck('a')([{a: 1}, {a: 2}]); //=> [1, 2]
      *      R.pluck(0)([[1, 2], [3, 4]]);   //=> [1, 3]
+     * @symb R.pluck('x', [{x: 1, y: 2}, {x: 3, y: 4}, {x: 5, y: 6}]) = [1, 3, 5]
+     * @symb R.pluck(0, [[1, 2], [3, 4], [5, 6]]) = [1, 3, 5]
      */
     var pluck = _curry2(function pluck(p, list) {
         return map(prop(p), list);
@@ -6238,6 +6339,7 @@
      *      var plus = (a, b) => a + b;
      *
      *      R.reduce(plus, 10, numbers); //=> 16
+     * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
      */
     var reduce = _curry3(_reduce);
 
@@ -6372,6 +6474,9 @@
      *      var obj = {};
      *      var repeatedObjs = R.repeat(obj, 5); //=> [{}, {}, {}, {}, {}]
      *      repeatedObjs[0] === repeatedObjs[1]; //=> true
+     * @symb R.repeat(a, 0) = []
+     * @symb R.repeat(a, 1) = [a]
+     * @symb R.repeat(a, 2) = [a, a]
      */
     var repeat = _curry2(function repeat(value, n) {
         return times(always(value), n);
@@ -6629,8 +6734,8 @@
      * @since v0.9.0
      * @category Logic
      * @sig [(*... -> Boolean)] -> (*... -> Boolean)
-     * @param {Array} preds
-     * @return {Function}
+     * @param {Array} predicates An array of predicates to check
+     * @return {Function} The combined predicate
      * @see R.anyPass
      * @example
      *
@@ -6668,16 +6773,18 @@
      * @since v0.9.0
      * @category Logic
      * @sig [(*... -> Boolean)] -> (*... -> Boolean)
-     * @param {Array} preds
-     * @return {Function}
+     * @param {Array} predicates An array of predicates to check
+     * @return {Function} The combined predicate
      * @see R.allPass
      * @example
      *
-     *      var gte = R.anyPass([R.gt, R.equals]);
+     *      var isClub = R.propEq('suit', '♣');
+     *      var isSpade = R.propEq('suit', '♠');
+     *      var isBlackCard = R.anyPass([isClub, isSpade]);
      *
-     *      gte(3, 2); //=> true
-     *      gte(2, 2); //=> true
-     *      gte(2, 3); //=> false
+     *      isBlackCard({rank: '10', suit: '♣'}); //=> true
+     *      isBlackCard({rank: 'Q', suit: '♠'}); //=> true
+     *      isBlackCard({rank: 'Q', suit: '♦'}); //=> false
      */
     var anyPass = _curry1(function anyPass(preds) {
         return curryN(reduce(max, 0, pluck('length', preds)), function () {
@@ -6711,6 +6818,8 @@
      * @example
      *
      *      R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
+     *      R.ap([R.concat('tasty '), R.toUpper], ['pizza', 'salad']); //=> ["tasty pizza", "tasty salad", "PIZZA", "SALAD"]
+     * @symb R.ap([f, g], [a, b]) = [f(a), f(b), g(a), g(b)]
      */
     // else
     var ap = _curry2(function ap(applicative, fn) {
@@ -6745,6 +6854,7 @@
      *                                      nested: { mul: R.multiply }
      *                                   });
      *      getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
+     * @symb R.applySpec({ x: f, y: { z: g } })(a, b) = { x: f(a, b), y: { z: g(a, b) } }
      */
     var applySpec = _curry1(function applySpec(spec) {
         spec = map(function (v) {
@@ -6775,6 +6885,8 @@
      * @see R.apply
      * @example
      *
+     *      R.call(R.add, 1, 2); //=> 3
+     *
      *      var indentN = R.pipe(R.times(R.always(' ')),
      *                           R.join(''),
      *                           R.replace(/^(?!$)/gm));
@@ -6785,6 +6897,7 @@
      *                              ]);
      *
      *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
+     * @symb R.call(f, a, b) = f(a, b)
      */
     var call = curry(function call(fn) {
         return fn.apply(this, _slice(arguments, 1));
@@ -6802,18 +6915,20 @@
      * @since v0.3.0
      * @category List
      * @sig Chain m => (a -> m b) -> m a -> m b
-     * @param {Function} fn
-     * @param {Array} list
-     * @return {Array}
+     * @param {Function} fn The function to map with
+     * @param {Array} list The list to map over
+     * @return {Array} The result of flat-mapping `list` with `fn`
      * @example
      *
      *      var duplicate = n => [n, n];
      *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
+     *
+     *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
      */
     var chain = _curry2(_dispatchable('chain', _xchain, function chain(fn, monad) {
         if (typeof monad === 'function') {
-            return function () {
-                return monad.call(this, fn.apply(this, arguments)).apply(this, arguments);
+            return function (x) {
+                return fn(monad(x))(x);
             };
         }
         return _makeFlat(false)(map(fn, monad));
@@ -6876,7 +6991,7 @@
      * @example
      *
      *      // Variadic constructor function
-     *      var Widget = () => {
+     *      var Widget = function () {
      *        this.children = Array.prototype.slice.call(arguments);
      *        // ...
      *      };
@@ -6941,15 +7056,9 @@
      * @return {Function} A new function.
      * @example
      *
-     *      var add = (a, b) => a + b;
-     *      var multiply = (a, b) => a * b;
-     *      var subtract = (a, b) => a - b;
-     *
-     *      //≅ multiply( add(1, 2), subtract(1, 2) );
-     *      R.converge(multiply, [add, subtract])(1, 2); //=> -3
-     *
-     *      var add3 = (a, b, c) => a + b + c;
-     *      R.converge(add3, [multiply, add, subtract])(1, 2); //=> 4
+     *      var average = R.converge(R.divide, [R.sum, R.length])
+     *      average([1, 2, 3, 4, 5, 6, 7]) //=> 4
+     * @symb R.converge(f, [g, h])(a, b) = f(g(a, b), h(a, b))
      */
     var converge = _curry2(function converge(after, fns) {
         return curryN(reduce(max, 0, pluck('length', fns)), function () {
@@ -7185,6 +7294,7 @@
      *
      *      var getRange = R.juxt([Math.min, Math.max]);
      *      getRange(3, 4, 9, -3); //=> [-3, 9]
+     * @symb R.juxt([f, g, h])(a, b) = [f(a, b), g(a, b), h(a, b)]
      */
     var juxt = _curry1(function juxt(fns) {
         return converge(_arrayOf, fns);
@@ -7415,6 +7525,7 @@
      *      var f = R.pipe(Math.pow, R.negate, R.inc);
      *
      *      f(3, 4); // -(3^4) + 1
+     * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
      */
     var pipe = function pipe() {
         if (arguments.length === 0) {
@@ -7601,14 +7712,18 @@
      * @since v0.1.0
      * @category Function
      * @sig ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> ((a, b, ..., n) -> z)
-     * @param {...Function} functions
+     * @param {...Function} ...functions The functions to compose
      * @return {Function}
      * @see R.pipe
      * @example
      *
-     *      var f = R.compose(R.inc, R.negate, Math.pow);
+     *      var classyGreeting = (firstName, lastName) => "The name's " + lastName + ", " + firstName + " " + lastName
+     *      var yellGreeting = R.compose(R.toUpper, classyGreeting);
+     *      yellGreeting('James', 'Bond'); //=> "THE NAME'S BOND, JAMES BOND"
      *
-     *      f(3, 4); // -(3^4) + 1
+     *      R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
+     *
+     * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
      */
     var compose = function compose() {
         if (arguments.length === 0) {
@@ -7628,27 +7743,24 @@
      * @since v0.16.0
      * @category Function
      * @sig Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> (m a -> m z)
-     * @param {...Function}
+     * @param {...Function} ...functions The functions to compose
      * @return {Function}
      * @see R.pipeK
      * @example
      *
-     *      //  parseJson :: String -> Maybe *
-     *      //  get :: String -> Object -> Maybe *
+     *       //  get :: String -> Object -> Maybe *
+     *       var get = R.curry((propName, obj) => Maybe(obj[propName]))
      *
-     *      //  getStateCode :: Maybe String -> Maybe String
-     *      var getStateCode = R.composeK(
-     *        R.compose(Maybe.of, R.toUpper),
-     *        get('state'),
-     *        get('address'),
-     *        get('user'),
-     *        parseJson
-     *      );
-     *
-     *      getStateCode(Maybe.of('{"user":{"address":{"state":"ny"}}}'));
-     *      //=> Just('NY')
-     *      getStateCode(Maybe.of('[Invalid JSON]'));
-     *      //=> Nothing()
+     *       //  getStateCode :: Maybe String -> Maybe String
+     *       var getStateCode = R.composeK(
+     *         R.compose(Maybe.of, R.toUpper),
+     *         get('state'),
+     *         get('address'),
+     *         get('user'),
+     *       );
+     *       getStateCode(Maybe.of({"user":{"address":{"state":"ny"}}})); //=> Maybe.Just("NY")
+     *       getStateCode(Maybe.of({})); //=> Maybe.Nothing()
+     * @symb R.composeK(f, g, h)(a, b) = R.chain(f, R.chain(g, h(a, b)))
      */
     var composeK = function composeK() {
         return compose.apply(this, prepend(identity, map(chain, arguments)));
@@ -7664,13 +7776,29 @@
      * @since v0.10.0
      * @category Function
      * @sig ((y -> Promise z), (x -> Promise y), ..., (a -> Promise b)) -> (a -> Promise z)
-     * @param {...Function} functions
+     * @param {...Function} functions The functions to compose
      * @return {Function}
      * @see R.pipeP
      * @example
      *
-     *      //  followersForUser :: String -> Promise [User]
-     *      var followersForUser = R.composeP(db.getFollowers, db.getUserById);
+     *      var db = {
+     *        users: {
+     *          JOE: {
+     *            name: 'Joe',
+     *            followers: ['STEVE', 'SUZY']
+     *          }
+     *        }
+     *      }
+     *
+     *      // We'll pretend to do a db lookup which returns a promise
+     *      var lookupUser = (userId) => Promise.resolve(db.users[userId])
+     *      var lookupFollowers = (user) => Promise.resolve(user.followers)
+     *      lookupUser('JOE').then(lookupFollowers)
+     *
+     *      //  followersForUser :: String -> Promise [UserId]
+     *      var followersForUser = R.composeP(lookupFollowers, lookupUser);
+     *      followersForUser('JOE').then(followers => console.log('Followers:', followers))
+     *      // Followers: ["STEVE","SUZY"]
      */
     var composeP = function composeP() {
         if (arguments.length === 0) {
@@ -7693,7 +7821,7 @@
      * @example
      *
      *      // Constructor function
-     *      var Widget = config => {
+     *      var Widget = function (config) {
      *        // ...
      *      };
      *      Widget.prototype = {
@@ -7866,6 +7994,7 @@
      *      //=> Just('NY')
      *      getStateCode(Maybe.of('[Invalid JSON]'));
      *      //=> Nothing()
+     * @symb R.pipeK(f, g, h)(a, b) = R.chain(h, R.chain(g, f(a, b)))
      */
     var pipeK = function pipeK() {
         return composeK.apply(this, reverse(arguments));
@@ -8131,8 +8260,9 @@
     }();
 
     /**
-     * A function wrapping calls to the two functions in an `&&` operation,
-     * returning the result of the first function if it is false-y and the result
+     * A function which calls the two provided functions and returns the `&&`
+     * of the results.
+     * It returns the result of the first function if it is false-y and the result
      * of the second function otherwise. Note that this is short-circuited,
      * meaning that the second function will not be invoked if the first returns a
      * false-y value.
@@ -8145,17 +8275,17 @@
      * @since v0.12.0
      * @category Logic
      * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
-     * @param {Function} f a predicate
-     * @param {Function} g another predicate
+     * @param {Function} f A predicate
+     * @param {Function} g Another predicate
      * @return {Function} a function that applies its arguments to `f` and `g` and `&&`s their outputs together.
      * @see R.and
      * @example
      *
-     *      var gt10 = x => x > 10;
-     *      var even = x => x % 2 === 0;
-     *      var f = R.both(gt10, even);
-     *      f(100); //=> true
-     *      f(101); //=> false
+     *      var gt10 = R.gt(R.__, 10)
+     *      var lt20 = R.lt(R.__, 20)
+     *      var f = R.both(gt10, lt20);
+     *      f(15); //=> true
+     *      f(30); //=> false
      */
     var both = _curry2(function both(f, g) {
         return _isFunction(f) ? function _both() {
@@ -8164,15 +8294,10 @@
     });
 
     /**
-     * Takes a function `f` and returns a function `g` such that:
+     * Takes a function `f` and returns a function `g` such that if called with the same arguments
+     * when `f` returns a "truthy" value, `g` returns `false` and when `f` returns a "falsy" value `g` returns `true`.
      *
-     *   - applying `g` to zero or more arguments will give __true__ if applying
-     *     the same arguments to `f` gives a logical __false__ value; and
-     *
-     *   - applying `g` to zero or more arguments will give __false__ if applying
-     *     the same arguments to `f` gives a logical __true__ value.
-     *
-     * `R.complement` will work on all other functors as well.
+     * `R.complement` may be applied to any functor
      *
      * @func
      * @memberOf R
@@ -8184,10 +8309,11 @@
      * @see R.not
      * @example
      *
-     *      var isEven = n => n % 2 === 0;
-     *      var isOdd = R.complement(isEven);
-     *      isOdd(21); //=> true
-     *      isOdd(42); //=> false
+     *      var isNotNil = R.complement(R.isNil);
+     *      isNil(null); //=> true
+     *      isNotNil(null); //=> false
+     *      isNil(7); //=> false
+     *      isNotNil(7); //=> true
      */
     var complement = lift(not);
 
@@ -8281,6 +8407,9 @@
      *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
      *      var sliceFrom6 = R.invoker(2, 'slice')(6);
      *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
+     * @symb R.invoker(0, 'method')(o) = o['method']()
+     * @symb R.invoker(1, 'method')(a, o) = o['method'](a)
+     * @symb R.invoker(2, 'method')(a, b, o) = o['method'](a, b)
      */
     var invoker = _curry2(function invoker(arity, method) {
         return curryN(arity + 1, function () {
@@ -8403,7 +8532,7 @@
      * @memberOf R
      * @since v0.19.0
      * @category Relation
-     * @sig (a -> a -> Boolean) -> [a] -> [a] -> [a]
+     * @sig ((a, a) -> Boolean) -> [a] -> [a] -> [a]
      * @param {Function} pred A predicate used to test whether two items are equal.
      * @param {Array} list1 The first list.
      * @param {Array} list2 The second list.
@@ -8599,6 +8728,8 @@
         applySpec: applySpec,
         assoc: assoc,
         assocPath: assocPath,
+        assocPathWith: assocPathWith,
+        assocWith: assocWith,
         binary: binary,
         bind: bind,
         both: both,
@@ -8810,7 +8941,6 @@
         where: where,
         whereEq: whereEq,
         without: without,
-        wrap: wrap,
         xprod: xprod,
         zip: zip,
         zipObj: zipObj,
