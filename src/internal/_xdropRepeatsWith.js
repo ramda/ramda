@@ -1,4 +1,5 @@
 var _curry2 = require('./_curry2');
+var _xfBase = require('./_xfBase');
 
 
 module.exports = (function() {
@@ -8,12 +9,9 @@ module.exports = (function() {
     this.lastValue = undefined;
     this.seenFirstValue = false;
   }
-  XDropRepeatsWith.prototype['@@transducer/init'] = function() {
-    return this.xf['@@transducer/init']();
-  };
-  XDropRepeatsWith.prototype['@@transducer/result'] = function(result) {
-    return this.xf['@@transducer/result'](result);
-  };
+
+  XDropRepeatsWith.prototype['@@transducer/init'] = _xfBase.init;
+  XDropRepeatsWith.prototype['@@transducer/result'] = _xfBase.result;
   XDropRepeatsWith.prototype['@@transducer/step'] = function(result, input) {
     var sameAsLast = false;
     if (!this.seenFirstValue) {
