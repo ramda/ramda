@@ -19,6 +19,8 @@ module.exports = {
   ascend: require('./src/ascend'),
   assoc: require('./src/assoc'),
   assocPath: require('./src/assocPath'),
+  assocPathWith: require('./src/assocPathWith'),
+  assocWith: require('./src/assocWith'),
   binary: require('./src/binary'),
   bind: require('./src/bind'),
   both: require('./src/both'),
