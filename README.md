@@ -1,6 +1,8 @@
 First Timers Only
 =================
 
+Comment on the issue you want to take. It will get assigned to you.
+
 Follow the guide [here](http://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/).
 
 Run `npm install` or `yarn` to install dependencies.
