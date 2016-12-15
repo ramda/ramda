@@ -1,11 +1,12 @@
 First Timers Only
 =================
 
-View the wiki for more details.
+Follow the guide [here](http://blog.scottlowe.org/2015/01/27/using-fork-branch-git-workflow/).
 
-Fork the repo.
+Run `npm install` or `yarn` to install dependencies.
 
-To get started run `npm install`. Then run the test suite with `npm test`.
+`npm test` or `yarn test` to run the test suite.
+
 
 
 Ramda
