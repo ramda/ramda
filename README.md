@@ -1,4 +1,4 @@
-First Timers Only
+First Pull Request
 =================
 
 Comment on the issue you want to take. It will get assigned to you.
