@@ -1,3 +1,13 @@
+First Timers Only
+=================
+
+View the wiki for more details.
+
+Fork the repo.
+
+To get started run `npm install`. Then run the test suite with `npm test`.
+
+
 Ramda
 =============
 
