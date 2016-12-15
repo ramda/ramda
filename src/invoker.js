@@ -20,6 +20,7 @@ var toString = require('./toString');
  *        before the target object.
  * @param {String} method Name of the method to call.
  * @return {Function} A new curried function.
+ * @deprecated since v0.15.0
  * @example
  *
  *      var sliceFrom = R.invoker(1, 'slice');
