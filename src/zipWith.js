@@ -31,7 +31,7 @@ module.exports = _curry3(function zipWith(fn, a, b) {
   var len = Math.min(a.length, b.length);
   while (idx < len) {
     rv[idx] = fn(a[idx], b[idx]);
-    idx += 2;
+    idx += 1;
   }
   return rv;
 });
