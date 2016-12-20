@@ -9,6 +9,15 @@ describe('groupWith', function() {
     eq(R.groupWith(R.equals, [1, 2, 3, 4]), [[1], [2], [3], [4]]);
   });
 
+  it('splits the list into "streaks" testing adjacent elements', function() {
+    var isConsecutive = function(a, b) { return a + 1 === b; };
+    eq(R.groupWith(isConsecutive, []), []);
+    eq(R.groupWith(isConsecutive, [4, 3, 2, 1]), [[4], [3], [2], [1]]);
+    eq(R.groupWith(isConsecutive, [1, 2, 3, 4]), [[1, 2, 3, 4]]);
+    eq(R.groupWith(isConsecutive, [1, 2, 2, 3]), [[1, 2], [2, 3]]);
+    eq(R.groupWith(isConsecutive, [1, 2, 9, 3, 4]), [[1, 2], [9], [3, 4]]);
+  });
+
   it('returns an empty array if given an empty array', function() {
     eq(R.groupWith(R.equals, []), []);
   });
