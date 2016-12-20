@@ -29,7 +29,7 @@ var _curry2 = require('./internal/_curry2');
 module.exports = _curry2(function(fn, list) {
   var res = [];
   var idx = 0;
-  var len = list.length;
+  var len = Array.isArray(list) || typeof list === 'string' ? list.length : 0;
   while (idx < len) {
     var nextidx = idx + 1;
     while (nextidx < len && fn(list[idx], list[nextidx])) {

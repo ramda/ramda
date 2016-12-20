@@ -25,4 +25,7 @@ describe('groupWith', function() {
     eq(R.groupWith(R.equals)('Mississippi'), ['M','i','ss','i','ss','i','pp','i']);
   });
 
+  it('returns an empty array for non-supported values', function() {
+    eq(R.groupWith(R.equals, undefined), []);
+  });
 });
