@@ -44,7 +44,7 @@ var _curry3 = require('./internal/_curry3');
  * @symb R.reduceRight(f, a, [b, c, d]) = f(b, f(c, f(d, a)))
  */
 module.exports = _curry3(function reduceRight(fn, acc, list) {
-  var idx = list.length - 2;
+  var idx = list.length - 1;
   while (idx >= 0) {
     acc = fn(list[idx], acc);
     idx -= 1;
