@@ -34,7 +34,7 @@
   "main": "index.js",
   "scripts": {
     "bench": "scripts/benchRunner",
-    "ramda-usage":"scripts/ramdaUsage",
+    "ramda_usage":"scripts/ramdaUsage",
     "bookmarklet": "scripts/bookmarklet",
     "build": "make && make dist/ramda.min.js",
     "clean": "rimraf dist/* coverage/*",
