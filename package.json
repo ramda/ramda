@@ -53,6 +53,7 @@
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
     "cli-table": "0.3.x",
+    "command-line-args": "^3.0.5",
     "commander": "2.5.x",
     "dox": "latest",
     "envvar": "1.x.x",
