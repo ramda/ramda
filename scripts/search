@@ -4,17 +4,19 @@
 
 const fs = require('fs'),
       path = require('path'),
-      commandLineArgs = require('command-line-args'),
+      commandLineArgs = require('commander'),
       R = require('../dist/ramda.min'),
       exec = require('child_process').exec;
 
 const functionList = R.keys(R);
 
-const optionDefinitions = [
-  { name: 'folder',alias: 'f', type: String, defaultOption: true ,defaultValue :'./'}
-]
+let options= commandLineArgs
+                .option('-f, --folder','./')
+                .parse(process.argv).args[0]
 
-const options = commandLineArgs(optionDefinitions)
+console.log(commandLineArgs.args[0]);
+
+
 
 const walkSync = (dir, filelist = []) => {
   fs.readdirSync(dir).forEach(file => {
@@ -31,7 +33,7 @@ const searchFiles = (file) => {
     return R.filter((name)=> filedata.indexOf('R.'+name) > -1 ,functionList)    
 }
 
-const filepahts = walkSync(options.folder).filter(file => file.includes('.js'));
+const filepahts = walkSync(options).filter(file => file.includes('.js'));
 const list = R.map(searchFiles,filepahts);
 
 let buildArgsarray = R.replace(/,/g,' ',R.toString(R.uniq(R.flatten(list)).map((fnName) => 'src/'+fnName+'.js')));                     
