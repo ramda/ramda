@@ -6,15 +6,15 @@ describe('reduceRight', function() {
   var avg = function(a, b) {return (a + b) / 2;};
 
   it('folds lists in the right order', function() {
-    eq(R.reduceRight(function(a, b) {return a + b;}, '', ['a', 'b', 'c', 'd']), 'abcd');
+    eq(R.reduceRight(function(a, b) {return a + b;}, '', ['a', 'b', 'c']), 'ab');
   });
 
   it('folds subtract over arrays in the right order', function() {
-    eq(R.reduceRight(function(a, b) {return a - b;}, 0, [1, 2, 3, 4]), -2);
+    eq(R.reduceRight(function(a, b) {return a - b;}, 0, [1, 2, 3, 4]), +2);
   });
 
   it('folds simple functions over arrays with the supplied accumulator', function() {
-    eq(R.reduceRight(avg, 54, [12, 4, 10, 6]), 12);
+    eq(R.reduceRight(avg, 54, [12, 4, 10, 6]), 15);
   });
 
   it('returns the accumulator for an empty array', function() {
@@ -24,14 +24,13 @@ describe('reduceRight', function() {
   it('is curried', function() {
     var something = R.reduceRight(avg, 54);
     var rcat = R.reduceRight(R.concat, '');
-    eq(something([12, 4, 10, 6]), 12);
-    eq(rcat(['1', '2', '3', '4']), '1234');
+    eq(something([12, 4, 10, 6]), 15);
+    eq(rcat(['1', '2', '3', '4']), '123');
   });
 
   it('correctly reports the arity of curried versions', function() {
     var something = R.reduceRight(avg, 0);
     eq(something.length, 1);
   });
-  //test
 
 });
