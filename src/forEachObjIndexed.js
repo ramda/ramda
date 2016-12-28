@@ -10,6 +10,7 @@ var keys = require('./keys');
  *
  * @func
  * @memberOf R
+ * @since v0.23.0
  * @category Object
  * @sig ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
  * @param {Function} fn The function to invoke. Receives three argument, `value`, `key`, `obj`.
