@@ -10,7 +10,8 @@ var keys = require('./keys');
 /**
  * Takes a predicate and a `Filterable`, and returns a new filterable of the
  * same type containing the members of the given filterable which satisfy the
- * given predicate. A filterable is any object that has a filter method such as `Array`.
+ * given predicate. Filterable objects include plain objects or any object
+ * that has a filter method such as `Array`.
  *
  * Dispatches to the `filter` method of the second argument, if present.
  *
