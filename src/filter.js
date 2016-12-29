@@ -22,7 +22,7 @@ var keys = require('./keys');
  * @category List
  * @sig Filterable f => (a -> Boolean) -> f a -> f a
  * @param {Function} pred
- * @param {Array} Filterable
+ * @param {Array} filterable
  * @return {Array} Filterable
  * @see R.reject, R.transduce, R.addIndex
  * @example
