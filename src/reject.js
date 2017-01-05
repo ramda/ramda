@@ -6,7 +6,8 @@ var filter = require('./filter');
 /**
  * The complement of `filter`.
  *
- * Acts as a transducer if a transformer is given in list position.
+ * Acts as a transducer if a transformer is given in list position. Filterable objects include plain objects or any object
+ * that has a filter method such as `Array`.
  *
  * @func
  * @memberOf R
