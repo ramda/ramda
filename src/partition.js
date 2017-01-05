@@ -4,9 +4,10 @@ var reject = require('./reject');
 
 
 /**
- * Takes a predicate and a list or other "filterable" object and returns the
+ * Takes a predicate and a list or other `Filterable` object and returns the
  * pair of filterable objects of the same type of elements which do and do not
- * satisfy, the predicate, respectively.
+ * satisfy, the predicate, respectively. Filterable objects include plain objects or any object
+ * that has a filter method such as `Array`.
  *
  * @func
  * @memberOf R
