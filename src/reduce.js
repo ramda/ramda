@@ -10,6 +10,8 @@ var _reduce = require('./internal/_reduce');
  * The iterator function receives two values: *(acc, value)*. It may use
  * `R.reduced` to shortcut the iteration.
  *
+ * The arguments' order of `reduceRight`'s iterator function is *(value, acc)*.
+ *
  * Note: `R.reduce` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.reduce` method. For more details
  * on this behavior, see:
@@ -27,13 +29,20 @@ var _reduce = require('./internal/_reduce');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.reduced, R.addIndex
+ * @see R.reduced, R.addIndex, R.reduceRight
  * @example
  *
- *      var numbers = [1, 2, 3];
- *      var plus = (a, b) => a + b;
+ *      R.reduce(R.subtract, 0, [1, 2, 3, 4]) // => ((((0 - 1) - 2) - 3) - 4) = -10
+ *                -               -10
+ *               / \              / \
+ *              -   4           -6   4
+ *             / \              / \
+ *            -   3   ==>     -3   3
+ *           / \              / \
+ *          -   2           -1   2
+ *         / \              / \
+ *        0   1            0   1
  *
- *      R.reduce(plus, 10, numbers); //=> 16
  * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
  */
 module.exports = _curry3(_reduce);

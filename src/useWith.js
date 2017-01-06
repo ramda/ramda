@@ -22,6 +22,7 @@ var curryN = require('./curryN');
  * @param {Function} fn The function to wrap.
  * @param {Array} transformers A list of transformer functions
  * @return {Function} The wrapped function.
+ * @see R.converge
  * @example
  *
  *      R.useWith(Math.pow, [R.identity, R.identity])(3, 4); //=> 81

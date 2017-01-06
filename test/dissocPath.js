@@ -6,21 +6,22 @@ var eq = require('./shared/eq');
 
 describe('dissocPath', function() {
   it('makes a shallow clone of an object, omitting only what is necessary for the path', function() {
-    var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
-    var obj2 = R.dissocPath(['f', 'g', 'i'], obj1);
+    var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: [{ g: 4}, {h: 5, i: 6, j: {k: 7, l: 8}}], m: 9};
+    var obj2 = R.dissocPath(['f', 1, 'i'], obj1);
     eq(obj2,
-      {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, j: {k: 6, l: 7}}}, m: 8}
+      {a: {b: 1, c: 2, d: {e: 3}}, f: [{g: 4}, {h: 5, j: {k: 7, l: 8}}], m: 9}
     );
     // Note: reference equality below!
     assert.strictEqual(obj2.a, obj1.a);
     assert.strictEqual(obj2.m, obj1.m);
-    assert.strictEqual(obj2.f.g.h, obj1.f.g.h);
-    assert.strictEqual(obj2.f.g.j, obj1.f.g.j);
+    assert.strictEqual(obj2.f[0], obj1.f[0]);
+    assert.strictEqual(obj2.f[1].h, obj1.f[1].h);
+    assert.strictEqual(obj2.f[1].j, obj1.f[1].j);
   });
 
   it('does not try to omit inner properties that do not exist', function() {
     var obj1 = {a: 1, b: {c: 2, d: 3}, e: 4, f: 5};
-    var obj2 = R.dissocPath(['x', 'y', 'z'], obj1);
+    var obj2 = R.dissocPath(['x', 0, 'z'], obj1);
     eq(obj2, {a: 1, b: {c: 2, d: 3}, e: 4, f: 5});
     // Note: reference equality below!
     assert.strictEqual(obj2.a, obj1.a);
@@ -33,6 +34,14 @@ describe('dissocPath', function() {
     var obj2 = R.dissocPath(['b', 'c'], obj1);
     eq(obj2,
       {a: 1, b: {}, d: 3}
+    );
+  });
+
+  it('leaves an empty array when all indexes are omitted', function() {
+    var obj1 = {a: 1, b: [2], d: 3};
+    var obj2 = R.dissocPath(['b', 0], obj1);
+    eq(obj2,
+      {a: 1, b: [], d: 3}
     );
   });
 

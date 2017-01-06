@@ -9,7 +9,8 @@ var _curry3 = require('./internal/_curry3');
  * Similar to `reduce`, except moves through the input list from the right to
  * the left.
  *
- * The iterator function receives two values: *(acc, value)*
+ * The iterator function receives two values: *(value, acc)*, while the arguments'
+ * order of `reduce`'s iterator function is *(acc, value)*.
  *
  * Note: `R.reduceRight` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.reduce` method. For more details
@@ -20,24 +21,32 @@ var _curry3 = require('./internal/_curry3');
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @sig (a,b -> a) -> a -> [b] -> a
- * @param {Function} fn The iterator function. Receives two values, the accumulator and the
- *        current element from the array.
+ * @sig (a, b -> b) -> b -> [a] -> b
+ * @param {Function} fn The iterator function. Receives two values, the current element from the array
+ *        and the accumulator.
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.addIndex
+ * @see R.reduce, R.addIndex
  * @example
  *
- *      var pairs = [ ['a', 1], ['b', 2], ['c', 3] ];
- *      var flattenPairs = (acc, pair) => acc.concat(pair);
+ *      R.reduceRight(R.subtract, 0, [1, 2, 3, 4]) // => (1 - (2 - (3 - (4 - 0)))) = -2
+ *          -               -2
+ *         / \              / \
+ *        1   -            1   3
+ *           / \              / \
+ *          2   -     ==>    2  -1
+ *             / \              / \
+ *            3   -            3   4
+ *               / \              / \
+ *              4   0            4   0
  *
- *      R.reduceRight(flattenPairs, [], pairs); //=> [ 'c', 3, 'b', 2, 'a', 1 ]
+ * @symb R.reduceRight(f, a, [b, c, d]) = f(b, f(c, f(d, a)))
  */
 module.exports = _curry3(function reduceRight(fn, acc, list) {
   var idx = list.length - 1;
   while (idx >= 0) {
-    acc = fn(acc, list[idx]);
+    acc = fn(list[idx], acc);
     idx -= 1;
   }
   return acc;
