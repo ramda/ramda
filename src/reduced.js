@@ -20,7 +20,7 @@ var _reduced = require('./internal/_reduced');
  * @example
  *
  *     R.reduce(
- *       (acc, item) => it > 3 ? R.reduced(acc) : acc.concat(item),
+ *       (acc, item) => item > 3 ? R.reduced(acc) : acc.concat(item),
  *       [],
  *       [1, 2, 3, 4, 5]) // [1, 2, 3]
  */
