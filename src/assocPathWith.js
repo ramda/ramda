@@ -1,7 +1,6 @@
 var _curry3 = require('./internal/_curry3');
 var assocWith = require('./assocWith');
 var _curry3 = require('./internal/_curry3');
-var _isArray = require('./internal/_isArray');
 var _isInteger = require('./internal/_isInteger');
 
 
