@@ -1,6 +1,6 @@
 //  Ramda v0.23.0
 //  https://github.com/ramda/ramda
-//  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
+//  (c) 2013-2017 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
 
 ;(function() {
@@ -8,12 +8,9 @@
   'use strict';
 
   /**
-     * A special placeholder value used to specify "gaps" within curried functions,
-     * allowing partial application of any combination of arguments, regardless of
-     * their positions.
+     * 柯里化函数的参数占位符。允许部分应用于任何参数（顺序）组合，而无需考虑它们的位置。
      *
-     * If `g` is a curried ternary function and `_` is `R.__`, the following are
-     * equivalent:
+     * 假设 `g` 代表柯里化的三元函数，`_` 代表 `R.__`，下面几种写法是等价的：
      *
      *   - `g(1, 2, 3)`
      *   - `g(_, 2, 3)(1)`
@@ -1535,37 +1532,6 @@
         }
         delete result[prop];
         return result;
-    });
-
-    /**
-     * Makes a shallow clone of an object, omitting the property at the given path.
-     * Note that this copies and flattens prototype properties onto the new object
-     * as well. All non-primitive properties are copied by reference.
-     *
-     * @func
-     * @memberOf R
-     * @since v0.11.0
-     * @category Object
-     * @sig [String] -> {k: v} -> {k: v}
-     * @param {Array} path The path to the value to omit
-     * @param {Object} obj The object to clone
-     * @return {Object} A new object without the property at path
-     * @see R.assocPath
-     * @example
-     *
-     *      R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
-     */
-    var dissocPath = _curry2(function dissocPath(path, obj) {
-        switch (path.length) {
-        case 0:
-            return obj;
-        case 1:
-            return dissoc(path[0], obj);
-        default:
-            var head = path[0];
-            var tail = Array.prototype.slice.call(path, 1);
-            return obj[head] == null ? obj : assoc(head, dissocPath(tail, obj[head]), obj);
-        }
     });
 
     /**
@@ -5557,6 +5523,44 @@
     });
 
     /**
+     * Makes a shallow clone of an object, omitting the property at the given path.
+     * Note that this copies and flattens prototype properties onto the new object
+     * as well. All non-primitive properties are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @since v0.11.0
+     * @category Object
+     * @typedefn Idx = String | Int
+     * @sig [Idx] -> {k: v} -> {k: v}
+     * @param {Array} path The path to the value to omit
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object without the property at path
+     * @see R.assocPath
+     * @example
+     *
+     *      R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
+     */
+    var dissocPath = _curry2(function dissocPath(path, obj) {
+        switch (path.length) {
+        case 0:
+            return obj;
+        case 1:
+            return _isInteger(path[0]) ? remove(path[0], 1, obj) : dissoc(path[0], obj);
+        default:
+            var head = path[0];
+            var tail = Array.prototype.slice.call(path, 1);
+            if (obj[head] == null) {
+                return obj;
+            } else if (_isInteger(path[0])) {
+                return update(head, dissocPath(tail, obj[head]), obj);
+            } else {
+                return assoc(head, dissocPath(tail, obj[head]), obj);
+            }
+        }
+    });
+
+    /**
      * Returns all but the first `n` elements of the given list, string, or
      * transducer/transformer (or object with a `drop` method).
      *
@@ -5569,8 +5573,8 @@
      * @sig Number -> [a] -> [a]
      * @sig Number -> String -> String
      * @param {Number} n
-     * @param {[a]} list
-     * @return {[a]} A copy of list without the first `n` elements
+     * @param {*} list
+     * @return {*} A copy of list without the first `n` elements
      * @see R.take, R.transduce, R.dropLast, R.dropWhile
      * @example
      *
