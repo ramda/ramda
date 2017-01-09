@@ -1,9 +1,6 @@
 var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
-var _isArray = require('./internal/_isArray');
-var _isInteger = require('./internal/_isInteger');
-var assoc = require('./assoc');
-var isNil = require('./isNil');
+var assocPathWith = require('./assocPathWith');
+var always = require('./always');
 
 
 /**
@@ -31,19 +28,5 @@ var isNil = require('./isNil');
  *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
  */
 module.exports = _curry3(function assocPath(path, val, obj) {
-  if (path.length === 0) {
-    return val;
-  }
-  var idx = path[0];
-  if (path.length > 1) {
-    var nextObj = (!isNil(obj) && _has(idx, obj)) ? obj[idx] : _isInteger(path[1]) ? [] : {};
-    val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
-  }
-  if (_isInteger(idx) && _isArray(obj)) {
-    var arr = [].concat(obj);
-    arr[idx] = val;
-    return arr;
-  } else {
-    return assoc(idx, val, obj);
-  }
+  return assocPathWith(always(val), path, obj);
 });

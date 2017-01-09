@@ -1,4 +1,5 @@
 var _curry3 = require('./internal/_curry3');
+var _isArray = require('./internal/_isArray');
 
 
 /**
@@ -26,7 +27,7 @@ var _curry3 = require('./internal/_curry3');
  *      R.assocWith(identity, 'c', {a: 1, b: 2}); //=> {a: 1, b: 2, c: undefined}
  */
 module.exports = _curry3(function assocWith(fn, prop, obj) {
-  var result = {};
+  var result = _isArray(obj) ? [] : {};
   for (var p in obj) {
     result[p] = obj[p];
   }

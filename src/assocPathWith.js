@@ -1,7 +1,8 @@
 var _curry3 = require('./internal/_curry3');
-var slice = require('./slice');
-var assoc = require('./assoc');
 var assocWith = require('./assocWith');
+var _curry3 = require('./internal/_curry3');
+var _isArray = require('./internal/_isArray');
+var _isInteger = require('./internal/_isInteger');
 
 
 /**
@@ -30,11 +31,16 @@ var assocWith = require('./assocWith');
  */
 module.exports = _curry3(function assocPathWith(fn, path, obj) {
   switch (path.length) {
-    case 0:
-      return fn(obj);
+    case 0: return fn(obj);
     case 1:
       return assocWith(fn, path[0], obj);
     default:
-      return assoc(path[0], assocPathWith(fn, slice(1, path.length, path), Object(obj[path[0]])), obj);
+      var idx = path[0];
+      var result = _isInteger(idx) ? [] : {};
+      for (var p in obj) {
+        result[p] = obj[p];
+      }
+      result[idx] = assocPathWith(fn, Array.prototype.slice.call(path, 1), result[idx]);
+      return result;
   }
 });
