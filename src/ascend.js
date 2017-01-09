@@ -7,6 +7,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.23.0
  * @category Function
  * @sig Ord b => (a -> b) -> a -> a -> Number
  * @param {Function} fn A function of arity one that returns a value that can be compared

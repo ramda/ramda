@@ -41,4 +41,12 @@ describe('assocPath', function() {
     eq(R.assocPath([], 3, {a: 1, b: 2}), 3);
   });
 
+  it('replaces `undefined` with a new object', function() {
+    eq(assocPath(['foo', 'bar', 'baz'], 42, {foo: undefined}), {foo: {bar: {baz: 42}}});
+  });
+
+  it('replaces `null` with a new object', function() {
+    eq(assocPath(['foo', 'bar', 'baz'], 42, {foo: null}), {foo: {bar: {baz: 42}}});
+  });
+
 });

@@ -19,10 +19,10 @@ var _reduced = require('./internal/_reduced');
  * @see R.reduce, R.transduce
  * @example
  *
- *      R.reduce(
- *        R.pipe(R.add, R.when(R.gte(R.__, 10), R.reduced)),
- *        0,
- *        [1, 2, 3, 4, 5]) // 10
+ *     R.reduce(
+ *       (acc, item) => item > 3 ? R.reduced(acc) : acc.concat(item),
+ *       [],
+ *       [1, 2, 3, 4, 5]) // [1, 2, 3]
  */
 
 module.exports = _curry1(_reduced);

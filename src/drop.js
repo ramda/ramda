@@ -17,8 +17,8 @@ var slice = require('./slice');
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
  * @param {Number} n
- * @param {[a]} list
- * @return {[a]} A copy of list without the first `n` elements
+ * @param {*} list
+ * @return {*} A copy of list without the first `n` elements
  * @see R.take, R.transduce, R.dropLast, R.dropWhile
  * @example
  *

@@ -6,6 +6,7 @@ var _curry2 = require('./internal/_curry2');
  *
  * @func
  * @memberOf R
+ * @since v0.23.0
  * @category Relation
  * @sig [a -> a -> Number] -> [a] -> [a]
  * @param {Array} functions A list of comparator functions.

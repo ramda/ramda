@@ -8,9 +8,10 @@ var keys = require('./keys');
 
 
 /**
- * Takes a predicate and a "filterable", and returns a new filterable of the
+ * Takes a predicate and a `Filterable`, and returns a new filterable of the
  * same type containing the members of the given filterable which satisfy the
- * given predicate.
+ * given predicate. Filterable objects include plain objects or any object
+ * that has a filter method such as `Array`.
  *
  * Dispatches to the `filter` method of the second argument, if present.
  *
@@ -23,7 +24,7 @@ var keys = require('./keys');
  * @sig Filterable f => (a -> Boolean) -> f a -> f a
  * @param {Function} pred
  * @param {Array} filterable
- * @return {Array}
+ * @return {Array} Filterable
  * @see R.reject, R.transduce, R.addIndex
  * @example
  *
