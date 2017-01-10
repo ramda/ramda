@@ -8,10 +8,11 @@
   'use strict';
 
   /**
-     * 柯里化函数的参数占位符。允许部分应用于任何参数（顺序）组合，而无需考虑它们的位置。
+     * 柯里化函数的参数占位符。允许部分应用于任何位置的参数。
      *
      * 假设 `g` 代表柯里化的三元函数，`_` 代表 `R.__`，下面几种写法是等价的：
      *
+     * haha
      *   - `g(1, 2, 3)`
      *   - `g(_, 2, 3)(1)`
      *   - `g(_, _, 3)(1)(2)`
@@ -930,7 +931,7 @@
     }();
 
     /**
-     * Adds two values.
+     * 两数相加。
      *
      * @func
      * @memberOf R
@@ -951,9 +952,7 @@
     });
 
     /**
-     * Applies a function to the value at the given index of an array, returning a
-     * new copy of the array with the element at the given index replaced with the
-     * result of the function application.
+     * 对数组中给定索引的值进行函数变换，返回一份新的数组拷贝，给定索引处的值被替换为函数变换的结果。
      *
      * @func
      * @memberOf R
@@ -5380,14 +5379,9 @@
     }();
 
     /**
-     * Creates a new list iteration function from an existing one by adding two new
-     * parameters to its callback function: the current index, and the entire list.
+     * 对已有迭代函数的回调函数添加两个新的参数：当前索引、整个列表，创建出一个新的列表迭代函数
      *
-     * This would turn, for instance, Ramda's simple `map` function into one that
-     * more closely resembles `Array.prototype.map`. Note that this will only work
-     * for functions in which the iteration callback function is the first
-     * parameter, and where the list is the last parameter. (This latter might be
-     * unimportant if the list parameter is not used.)
+     * 例如，这将把 Ramda 中简单的 `map` 函数变成更接近于 `Array.prototype.map` 形式的函数。注意，只有满足下面条件的函数才能正常工作：迭代回调函数是其首个参数;列表是回调函数的最后一个参数。（如果列表参数没有用到，后一个条件可以忽略）
      *
      * @func
      * @memberOf R
