@@ -4,11 +4,12 @@ var _xall = require('./internal/_xall');
 
 
 /**
- * 如果列表中的所有元素都满足 predicate，则返回 `true`，如果有任意元素不满足，则返回 `false`。
+ * Returns `true` if all elements of the list match the predicate, `false` if
+ * there are any that don't.
  *
- * 若第二个参数自身存在 `all` 方法，则调用自身的 `all` 方法。
+ * Dispatches to the `all` method of the second argument, if present.
  *
- * 若在列表位置中给出 transfomer，则用作 transducer 。
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
