@@ -1,4 +1,5 @@
 var R = require('..');
+var assert = require('assert');
 var eq = require('./shared/eq');
 
 describe('reduce', function() {
@@ -35,4 +36,15 @@ describe('reduce', function() {
     eq(sum.length, 1);
   });
 
+  it('fails when list is null', function() {
+    assert.throws(function() {
+      R.reduce(add, 0, null);
+    }, /reduce: list cannot be null or undefined/);
+  });
+
+  it('fails when list is undefined', function() {
+    assert.throws(function() {
+      R.reduce(add, 0, undefined);
+    }, /reduce: list cannot be null or undefined/);
+  });
 });

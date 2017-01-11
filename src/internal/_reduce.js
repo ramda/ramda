@@ -37,6 +37,9 @@ module.exports = (function() {
 
   var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
   return function _reduce(fn, acc, list) {
+    if (list === null || typeof list === 'undefined') {
+      throw new TypeError('reduce: list cannot be null or undefined');
+    }
     if (typeof fn === 'function') {
       fn = _xwrap(fn);
     }
