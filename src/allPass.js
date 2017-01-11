@@ -6,12 +6,9 @@ var reduce = require('./reduce');
 
 
 /**
- * Takes a list of predicates and returns a predicate that returns true for a
- * given list of arguments if every one of the provided predicates is satisfied
- * by those arguments.
+ * 接受一个 predicates 列表，并返回一个满足下面条件的 predicate：如果给定的每个参数都满足所有的 predicates ，则返回 `true`。
  *
- * The function returned is a curried function whose arity matches that of the
- * highest-arity predicate.
+ * 该函数返回一个柯里化的函数，参数个数由参数最多的 predicate 决定。
  *
  * @func
  * @memberOf R

@@ -2,11 +2,9 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Returns a function that always returns the given value. Note that for
- * non-primitives the value returned is a reference to the original value.
+ * 返回一个总是返回给定值的函数。注意，对于非原始值，返回的值是对原始值的引用。
  *
- * This function is known as `const`, `constant`, or `K` (for K combinator) in
- * other languages and libraries.
+ * 此函数在其他语言或库中被称作：`const`、`constant`、或 `K` (在 K combinator 中)
  *
  * @func
  * @memberOf R

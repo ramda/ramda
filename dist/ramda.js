@@ -952,7 +952,7 @@
     });
 
     /**
-     * 对数组中给定索引的值进行函数变换，返回一份新的数组拷贝，给定索引处的值被替换为函数变换的结果。
+     * 对数组中给定索引的值进行函数变换，返回一份新的数组拷贝，数组中给定索引处的值被替换为函数变换的结果。
      *
      * @func
      * @memberOf R
@@ -986,12 +986,11 @@
     });
 
     /**
-     * Returns `true` if all elements of the list match the predicate, `false` if
-     * there are any that don't.
+     * 如果列表中的所有元素都满足 predicate，则返回 `true`，如果有任意元素不满足，则返回 `false`。
      *
-     * Dispatches to the `all` method of the second argument, if present.
+     * 若第二个参数自身存在 `all` 方法，则调用自身的 `all` 方法。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出 transfomer，则用作 transducer 。
      *
      * @func
      * @memberOf R
@@ -1021,11 +1020,9 @@
     }));
 
     /**
-     * Returns a function that always returns the given value. Note that for
-     * non-primitives the value returned is a reference to the original value.
+     * 返回一个总是返回给定值的函数。注意，对于非原始值，返回的值是对原始值的引用。
      *
-     * This function is known as `const`, `constant`, or `K` (for K combinator) in
-     * other languages and libraries.
+     * 此函数在其他语言或库中被称作：`const`、`constant`、或 `K` (在 K combinator 中)
      *
      * @func
      * @memberOf R
@@ -1046,7 +1043,7 @@
     });
 
     /**
-     * Returns `true` if both arguments are `true`; `false` otherwise.
+     * 如果两个参数都是 `true`，则返回 `true`；否则为`false`。
      *
      * @func
      * @memberOf R
@@ -1069,12 +1066,11 @@
     });
 
     /**
-     * Returns `true` if at least one of elements of the list match the predicate,
-     * `false` otherwise.
+     * 若列表中至少有一个元素满足 predicate，则返回 `true`，否则返回 `false`。
      *
-     * Dispatches to the `any` method of the second argument, if present.
+     * 若第二个参数自身有 `any` 方法，则调用其自身的方法。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出 transfomer，则用作 transducer 。
      *
      * @func
      * @memberOf R
@@ -6772,12 +6768,9 @@
     });
 
     /**
-     * Takes a list of predicates and returns a predicate that returns true for a
-     * given list of arguments if every one of the provided predicates is satisfied
-     * by those arguments.
+     * 接受一个 predicates 列表，并返回一个满足下面条件的 predicate：如果给定的每个参数都满足所有的 predicates ，则返回 `true`。
      *
-     * The function returned is a curried function whose arity matches that of the
-     * highest-arity predicate.
+     * 该函数返回一个柯里化的函数，参数个数由参数最多的 predicate 决定。
      *
      * @func
      * @memberOf R
