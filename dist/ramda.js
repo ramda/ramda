@@ -1534,16 +1534,16 @@
     });
 
     /**
-     * Divides two numbers. Equivalent to `a / b`.
+     * 两数相除. 等同于 `a / b`.
      *
      * @func
      * @memberOf R
      * @since v0.1.0
      * @category Math
      * @sig Number -> Number -> Number
-     * @param {Number} a The first value.
-     * @param {Number} b The second value.
-     * @return {Number} The result of `a / b`.
+     * @param {Number} a
+     * @param {Number} b
+     * @return {Number}
      * @see R.multiply
      * @example
      *
