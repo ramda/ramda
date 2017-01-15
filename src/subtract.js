@@ -2,16 +2,16 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Subtracts its second argument from its first argument.
+ * 第1个参数减去第2个参数。
  *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category Math
  * @sig Number -> Number -> Number
- * @param {Number} a The first value.
- * @param {Number} b The second value.
- * @return {Number} The result of `a - b`.
+ * @param {Number} a 第1个输入
+ * @param {Number} b 第2个输入
+ * @return {Number} `a - b`的计算结果
  * @see R.add
  * @example
  *

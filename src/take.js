@@ -5,10 +5,9 @@ var slice = require('./slice');
 
 
 /**
- * Returns the first `n` elements of the given list, string, or
- * transducer/transformer (or object with a `take` method).
+ * 返回集合的前`n`个元素、字符串的前`n`个字符或者进行 transducer/transform 。
  *
- * Dispatches to the `take` method of the second argument, if present.
+ * 如果第2个参数有`take`方法，则调用`take`方法。
  *
  * @func
  * @memberOf R

@@ -3,8 +3,8 @@ var drop = require('./drop');
 
 
 /**
- * Returns a new list containing the last `n` elements of the given list.
- * If `n > list.length`, returns a list of `list.length` elements.
+ * 返回集合的后`n`个元素。
+ * 如果`n > list.length`则返回`list.length`个元素的集合。
  *
  * @func
  * @memberOf R
@@ -12,8 +12,8 @@ var drop = require('./drop');
  * @category List
  * @sig Number -> [a] -> [a]
  * @sig Number -> String -> String
- * @param {Number} n The number of elements to return.
- * @param {Array} xs The collection to consider.
+ * @param {Number} n 返回的元素个数
+ * @param {Array} xs 输入的集合
  * @return {Array}
  * @see R.dropLast
  * @example

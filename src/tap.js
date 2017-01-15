@@ -2,16 +2,16 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Runs the given function with the supplied object, then returns the object.
+ * 对一个对象执行一个函数，然后返回这个对象。
  *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category Function
  * @sig (a -> *) -> a -> a
- * @param {Function} fn The function to call with `x`. The return value of `fn` will be thrown away.
+ * @param {Function} fn 调用`x`的函数。抛出`fn`的执行结果。
  * @param {*} x
- * @return {*} `x`.
+ * @return {*} `x`
  * @example
  *
  *      var sayX = x => console.log('x is ' + x);
