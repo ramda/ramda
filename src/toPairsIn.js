@@ -12,7 +12,7 @@ var _curry1 = require('./internal/_curry1');
  * @category Object
  * @sig {String: *} -> [[String,*]]
  * @param {Object} obj 需要转换的对象
- * @return {Array} 对所有属性和原型链上属性转换后的键值对数组
+ * @return {Array} 对所有属性和原型链上属性转换后的·键值对数组
  * @example
  *
  *      var F = function() { this.x = 'X'; };
