@@ -5555,10 +5555,12 @@
     });
 
     /**
-     * Returns all but the first `n` elements of the given list, string, or
-     * transducer/transformer (or object with a `drop` method).
+     * 返回给定参数去除前`n`个元素的结果，该参数可以是list，string或者
+     * transducer/transformer（或者具有drop方法的object）。
      *
-     * Dispatches to the `drop` method of the second argument, if present.
+     * 若第二个参数自身存在`drop`方法，则调用自身的`drop`方法。
+     *
+     * 若在列表位置中给出`transfomer`，则用作`transducer`。
      *
      * @func
      * @memberOf R
@@ -5583,7 +5585,7 @@
     }));
 
     /**
-     * Returns a list containing all but the last `n` elements of the given `list`.
+     * 返回给定list去除末尾`n`个元素的结果
      *
      * @func
      * @memberOf R
@@ -5606,11 +5608,10 @@
     var dropLast = _curry2(_dispatchable([], _xdropLast, _dropLast));
 
     /**
-     * Returns a new list excluding all the tailing elements of a given list which
-     * satisfy the supplied predicate function. It passes each value from the right
-     * to the supplied predicate function, skipping elements until the predicate
-     * function returns a `falsy` value. The predicate function is applied to one argument:
-     * *(value)*.
+     *
+     * 返回一个不包含所有满足predicate方法的尾部元素的新的list。
+     *
+     * 从右向左依次对list中的元素执行predicate方法，直至返回一个假值。predicate方法需要作为第一个参数传入。
      *
      * @func
      * @memberOf R

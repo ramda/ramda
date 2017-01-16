@@ -5,7 +5,7 @@ var _xdropLast = require('./internal/_xdropLast');
 
 
 /**
- * Returns a list containing all but the last `n` elements of the given `list`.
+ * 返回给定list去除末尾`n`个元素的结果
  *
  * @func
  * @memberOf R
