@@ -1560,14 +1560,14 @@
     });
 
     /**
-     * Returns a new list excluding the leading elements of a given list which
-     * satisfy the supplied predicate function. It passes each value to the supplied
-     * predicate function, skipping elements while the predicate function returns
-     * `true`. The predicate function is applied to one argument: *(value)*.
      *
-     * Dispatches to the `dropWhile` method of the second argument, if present.
+     * 返回一个不包含所有满足predicate方法的头部元素的新的list。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 从左向右依次对list中的元素执行predicate方法，直至返回一个假值。predicate方法需要作为第一个参数传入。
+     *
+     * 若第二个参数自身存在`dropWhile`方法，则调用自身的`dropWhile`方法。
+     *
+     * 若在列表位置中给出`transfomer`，则用作`transducer`。
      *
      * @func
      * @memberOf R
@@ -7162,11 +7162,11 @@
     }, 0);
 
     /**
-     * Returns a new list without any consecutively repeating elements. Equality is
-     * determined by applying the supplied predicate to each pair of consecutive elements. The
-     * first element in a series of equal elements will be preserved.
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 返回一个没有任何连续重复元素的list。第一个参数提供的predicate方法被用来检验list中相邻的两个元素是否相等。
+     * 一组相等元素中的第一个元素会被保留。
+     *
+     * 若在列表位置中给出`transfomer`，则用作`transducer`。
      *
      * @func
      * @memberOf R
@@ -7971,10 +7971,9 @@
     });
 
     /**
-     * Returns a new list without any consecutively repeating elements. `R.equals`
-     * is used to determine equality.
+     * 返回一个没有任何连续重复元素的list。借助`R.equals`来判断元素是否相等。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出`transfomer`，则用作`transducer`。
      *
      * @func
      * @memberOf R
