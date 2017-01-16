@@ -2,15 +2,15 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Removes (strips) whitespace from both ends of the string.
+ * 移除字符串首尾的空白字符。
  *
  * @func
  * @memberOf R
  * @since v0.6.0
  * @category String
  * @sig String -> String
- * @param {String} str The string to trim.
- * @return {String} Trimmed version of `str`.
+ * @param {String} str 待修剪的字符串
+ * @return {String} 修剪后的`str`
  * @example
  *
  *      R.trim('   xyz  '); //=> 'xyz'

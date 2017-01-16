@@ -10,7 +10,7 @@ var invoker = require('./invoker');
  * @category String
  * @sig String -> String
  * @param {String} str 待转换的字符串
- * @return {String} `str`的小写
+ * @return {String} `str`的小写字符串
  * @see R.toUpper
  * @example
  *
