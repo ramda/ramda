@@ -3,8 +3,7 @@ var curry = require('./curry');
 
 
 /**
- * Returns a new function much like the supplied one, except that the first two
- * arguments' order is reversed.
+ * 接受一个函数，返回一个新的函数，相比于原函数，新函数的前两个参数顺序做了交换。
  *
  * @func
  * @memberOf R

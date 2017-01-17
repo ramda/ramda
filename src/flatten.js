@@ -3,8 +3,7 @@ var _makeFlat = require('./internal/_makeFlat');
 
 
 /**
- * Returns a new list by pulling every item out of it (and all its sub-arrays)
- * and putting them in a new array, depth-first.
+ * 获取给定列表中的所有元素（包含所有子数组）然后生成一个由这些元素组成的一个新的数组，深度优先。
  *
  * @func
  * @memberOf R

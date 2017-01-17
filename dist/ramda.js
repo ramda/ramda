@@ -1627,7 +1627,7 @@
      * 通过递归地对第二个参数 `object` 的浅复制进行变换来创建一个新的object，变换方式由第一个参数 `transformation` 来定义。
      * 所有 `non-primitive` 属性都通过引用来复制。
      *
-     * `transformation`中定义的方法关联的 `object` 属性并不存在，则该方法将不会执行。
+     * 如果`transformation`中定义的方法关联的 `object` 属性并不存在，那么该方法将不会执行。
      *
      * @func
      * @memberOf R
@@ -1790,20 +1790,18 @@
     }));
 
     /**
-     * Iterate over an input `list`, calling a provided function `fn` for each
-     * element in the list.
+     * 遍历给定的 `list`，对列表中的所有元素执行给定的方法 `fn`。
      *
-     * `fn` receives one argument: *(value)*.
+     * `fn` 接收一个参数： *(value)*。
      *
-     * Note: `R.forEach` does not skip deleted or unassigned indices (sparse
-     * arrays), unlike the native `Array.prototype.forEach` method. For more
-     * details on this behavior, see:
+     * 注意: `R.forEach` 并不会跳过已删除的或者未赋值的下标（sparse arrays），这一点和原生的
+     *  `Array.prototype.forEach` 方法不用. 获取更多相关信息, 请查阅:
      * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Description
      *
-     * Also note that, unlike `Array.prototype.forEach`, Ramda's `forEach` returns
-     * the original array. In some libraries this function is named `each`.
+     * 同样要注意, 不同于 `Array.prototype.forEach`，Ramda的 `forEach`返回一个新的数组。
+     * 在其他一些类库中该方法被命名为 `each`.
      *
-     * Dispatches to the `forEach` method of the second argument, if present.
+     * 若第二个参数自身存在 `forEach` 方法，则调用自身的 `forEach` 方法。
      *
      * @func
      * @memberOf R
@@ -1834,8 +1832,8 @@
     }));
 
     /**
-     * Creates a new object from a list key-value pairs. If a key appears in
-     * multiple pairs, the rightmost pair is included in the object.
+     * 从一组只包含键值对元素的列表创建一个新的 `object`。如果一个 `key` 出现了
+     * 多次，最右边的键值对会被保留。
      *
      * @func
      * @memberOf R
@@ -5688,8 +5686,7 @@
     }));
 
     /**
-     * Returns a new list by pulling every item out of it (and all its sub-arrays)
-     * and putting them in a new array, depth-first.
+     * 获取给定列表中的所有元素（包含所有子数组）然后生成一个由这些元素组成的一个新的数组，深度优先。
      *
      * @func
      * @memberOf R
@@ -5707,8 +5704,7 @@
     var flatten = _curry1(_makeFlat(true));
 
     /**
-     * Returns a new function much like the supplied one, except that the first two
-     * arguments' order is reversed.
+     * 接受一个函数，返回一个新的函数，相比于原函数，新函数的前两个参数顺序做了交换。
      *
      * @func
      * @memberOf R
@@ -5736,10 +5732,9 @@
     });
 
     /**
-     * Iterate over an input `object`, calling a provided function `fn` for each
-     * key and value in the object.
+     * 遍历给定的 `object`，对 `object` 中的所有 `key` 和 `value` 执行给定的方法 `fn`。
      *
-     * `fn` receives three argument: *(value, key, obj)*.
+     * `fn` 接收三个参数: *(value, key, obj)*.
      *
      * @func
      * @memberOf R
