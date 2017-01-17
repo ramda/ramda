@@ -3,7 +3,7 @@ var _isNumber = require('./internal/_isNumber');
 
 
 /**
- * 通过返回`list.length`返回数组中元素的数量
+ * 通过返回`list.length`返回数组中元素的数量。
  *
  * @func
  * @memberOf R

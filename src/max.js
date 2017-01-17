@@ -2,7 +2,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * 返回两个参数中的较大者
+ * 返回两个参数中的较大者。
  *
  * @func
  * @memberOf R

@@ -4,7 +4,7 @@ var equals = require('./equals');
 
 
 /**
- * 如果给定的值为空，返回“true”，否则返回“false”
+ * 如果给定的值为空，返回`true`，否则返回`false`。
  *
  * @func
  * @memberOf R

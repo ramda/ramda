@@ -2,7 +2,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * 创建一个包含单个键值对的对象
+ * 创建一个包含单个键值对的对象。
  *
  * @func
  * @memberOf R

@@ -3,7 +3,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * 返回一个对象除去指定键值以外的部分拷贝
+ * 返回一个对象除去指定键值以外的部分拷贝。
  *
  * @func
  * @memberOf R

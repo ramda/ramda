@@ -3,7 +3,7 @@ var _of = require('./internal/_of');
 
 
 /**
- * 返回包含所提供值的一个单例数组
+ * 返回包含所提供值的一个单例数组。
  *
  * 注意这里的`of`和ES6中的`of`是不同的；详见
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of

@@ -2,7 +2,7 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * 接收一个函数和两个值，并返回使得函数执行之后结果更小的值
+ * 接收一个函数和两个值，并返回使得函数执行之后结果更小的值。
  *
  * @func
  * @memberOf R

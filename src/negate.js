@@ -2,7 +2,7 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * 对参数取负值
+ * 对参数取负值。
  *
  *
  * @func
