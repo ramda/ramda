@@ -2,10 +2,9 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Tests a regular expression against a String. Note that this function will
- * return an empty array when there are no matches. This differs from
+ * 对一个字符串测试正则表达式。注意当没有匹配项时这个函数会返回一个空数组。这一点和
  * [`String.prototype.match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
- * which returns `null` when there are no matches.
+ * 有所不同，后者在没有匹配项时会返回`null`。
  *
  * @func
  * @memberOf R
