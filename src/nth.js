@@ -3,8 +3,7 @@ var _isString = require('./internal/_isString');
 
 
 /**
- * Returns the nth element of the given list or string. If n is negative the
- * element at index length + n is returned.
+ * 返回给定列表或字符串的第n个元素。如果n为负数，则返回索引为length + n的元素。
  *
  * @func
  * @memberOf R

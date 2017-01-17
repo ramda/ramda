@@ -13,8 +13,7 @@ var keys = require('./keys');
  * applies the function to each of the functor's values, and returns
  * a functor of the same shape.
  *
- * Ramda provides suitable `map` implementations for `Array` and `Object`,
- * so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.
+ * Ramda为`数组`和`对象`都提供了合适的`map`实现，因此这个函数可以适用于`[1, 2, 3]`或`{x: 1, y: 2, z: 3}`
  *
  * Dispatches to the `map` method of the second argument, if present.
  *

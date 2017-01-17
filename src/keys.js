@@ -8,6 +8,8 @@ var _isArguments = require('./internal/_isArguments');
  * the supplied object.
  * Note that the order of the output array is not guaranteed to be consistent
  * across different JS platforms.
+ * 返回一个包含提供的对象全部可枚举的自属性名的列表
+ * 注意通过不同的JS平台输出数组的顺序并不能保证是相同的
  *
  * @func
  * @memberOf R
