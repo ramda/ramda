@@ -5,13 +5,13 @@ var _xdropWhile = require('./internal/_xdropWhile');
 
 /**
  *
- * 返回一个不包含所有满足predicate方法的头部元素的新的list。
+ * 返回一个新的list，这个list会舍弃所有满足 `predicate` 方法的头部元素。
  *
- * 从左向右依次对list中的元素执行predicate方法，直至返回一个假值。predicate方法需要作为第一个参数传入。
+ * 从左向右依次对list中的元素执行 `predicate` 方法，直至返回一个假值。`predicate` 方法需要作为第一个参数传入。
  *
- * 若第二个参数自身存在`dropWhile`方法，则调用自身的`dropWhile`方法。
+ * 若第二个参数自身存在 `dropWhile` 方法，则调用自身的 `dropWhile` 方法。
  *
- * 若在列表位置中给出`transfomer`，则用作`transducer`。
+ * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
  *
  * @func
  * @memberOf R

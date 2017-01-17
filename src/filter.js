@@ -8,13 +8,12 @@ var keys = require('./keys');
 
 
 /**
- * Takes a predicate and a "filterable", and returns a new filterable of the
- * same type containing the members of the given filterable which satisfy the
- * given predicate.
+ * 接收一个 `predicate` 方法和一个 `filterable` 元素作为参数，返回一个新的相同类型的但
+ * 是只包含满足 `predicate` 方法成员的 `filterable` 元素。
  *
- * Dispatches to the `filter` method of the second argument, if present.
+ * 若第二个参数自身存在 `empty` 方法，则调用自身的 `empty` 方法。
  *
- * Acts as a transducer if a transformer is given in list position.
+ * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
  *
  * @func
  * @memberOf R

@@ -6,12 +6,11 @@ var _isString = require('./internal/_isString');
 
 
 /**
- * Returns the empty value of its argument's type. Ramda defines the empty
- * value of Array (`[]`), Object (`{}`), String (`''`), and Arguments. Other
- * types are supported if they define `<Type>.empty` and/or
- * `<Type>.prototype.empty`.
  *
- * Dispatches to the `empty` method of the first argument, if present.
+ * 根据给定参数的类型返回其对应的空值。Ramda定义了Array (`[]`)，Object (`{}`)，String (`''`)，和 Arguments
+ * 的空值。其它类型的参数如果定义了 `<Type>.empty` 和/或者 `<Type>.prototype.empty` 也是被支持的。
+ *
+ * 若第一个参数自身存在 `empty` 方法，则调用自身的 `empty` 方法。
  *
  * @func
  * @memberOf R

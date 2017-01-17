@@ -3,8 +3,8 @@ var equals = require('./equals');
 
 
 /**
- * Takes a function and two values in its domain and returns `true` if the
- * values map to the same value in the codomain; `false` otherwise.
+ *
+ * 接受一个函数和两个可以作为该函数参数的值，如果这两个值通过该函数的执行结果是相同的则返回 `true` ，否则返回 `false` 。
  *
  * @func
  * @memberOf R

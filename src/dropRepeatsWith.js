@@ -6,10 +6,10 @@ var last = require('./last');
 
 /**
  *
- * 返回一个没有任何连续重复元素的list。第一个参数提供的predicate方法被用来检验list中相邻的两个元素是否相等。
+ * 返回一个没有任何连续重复元素的list。第一个参数提供的 `predicate` 方法被用来检验list中相邻的两个元素是否相等。
  * 一组相等元素中的第一个元素会被保留。
  *
- * 若在列表位置中给出`transfomer`，则用作`transducer`。
+ * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
  *
  * @func
  * @memberOf R

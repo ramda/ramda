@@ -5,12 +5,12 @@ var slice = require('./slice');
 
 
 /**
- * 返回给定参数去除前`n`个元素的结果，该参数可以是list，string或者
+ * 返回给定参数去除前 `n` 个元素后的结果，该参数可以是list，string或者
  * transducer/transformer（或者具有drop方法的object）。
  *
- * 若第二个参数自身存在`drop`方法，则调用自身的`drop`方法。
+ * 若第二个参数自身存在 `drop` 方法，则调用自身的 `drop` 方法。
  *
- * 若在列表位置中给出`transfomer`，则用作`transducer`。
+ * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
  *
  * @func
  * @memberOf R

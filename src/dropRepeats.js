@@ -6,9 +6,9 @@ var equals = require('./equals');
 
 
 /**
- * 返回一个没有任何连续重复元素的list。借助`R.equals`来判断元素是否相等。
+ * 返回一个没有任何连续重复元素的list。借助 `R.equals` 来判断元素是否相等。
  *
- * 若在列表位置中给出`transfomer`，则用作`transducer`。
+ * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
  *
  * @func
  * @memberOf R

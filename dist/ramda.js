@@ -1561,13 +1561,13 @@
 
     /**
      *
-     * 返回一个不包含所有满足predicate方法的头部元素的新的list。
+     * 返回一个新的list，这个list会舍弃所有满足 `predicate` 方法的头部元素。
      *
-     * 从左向右依次对list中的元素执行predicate方法，直至返回一个假值。predicate方法需要作为第一个参数传入。
+     * 从左向右依次对list中的元素执行 `predicate` 方法，直至返回一个假值。`predicate` 方法需要作为第一个参数传入。
      *
-     * 若第二个参数自身存在`dropWhile`方法，则调用自身的`dropWhile`方法。
+     * 若第二个参数自身存在 `dropWhile` 方法，则调用自身的 `dropWhile` 方法。
      *
-     * 若在列表位置中给出`transfomer`，则用作`transducer`。
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -1594,12 +1594,11 @@
     }));
 
     /**
-     * Returns the empty value of its argument's type. Ramda defines the empty
-     * value of Array (`[]`), Object (`{}`), String (`''`), and Arguments. Other
-     * types are supported if they define `<Type>.empty` and/or
-     * `<Type>.prototype.empty`.
      *
-     * Dispatches to the `empty` method of the first argument, if present.
+     * 根据给定参数的类型返回其对应的空值。Ramda定义了Array (`[]`)，Object (`{}`)，String (`''`)，和 Arguments
+     * 的空值。其它类型的参数如果定义了 `<Type>.empty` 和/或者 `<Type>.prototype.empty` 也是被支持的。
+     *
+     * 若第一个参数自身存在 `empty` 方法，则调用自身的 `empty` 方法。
      *
      * @func
      * @memberOf R
@@ -1624,12 +1623,11 @@
     });
 
     /**
-     * Creates a new object by recursively evolving a shallow copy of `object`,
-     * according to the `transformation` functions. All non-primitive properties
-     * are copied by reference.
      *
-     * A `transformation` function will not be invoked if its corresponding key
-     * does not exist in the evolved object.
+     * 通过递归地对第二个参数 `object` 的浅复制进行变换来创建一个新的object，变换方式由第一个参数 `transformation` 来定义。
+     * 所有 `non-primitive` 属性都通过引用来复制。
+     *
+     * `transformation`中定义的方法关联的 `object` 属性并不存在，则该方法将不会执行。
      *
      * @func
      * @memberOf R
@@ -1662,12 +1660,11 @@
     });
 
     /**
-     * Returns the first element of the list which matches the predicate, or
-     * `undefined` if no element matches.
+     * 返回给定的列表中第一个满足 `predicate` 方法的元素，如果没有任何元素满足条件则返回 `undefined` 。
      *
-     * Dispatches to the `find` method of the second argument, if present.
+     * 若第二个参数自身存在 `find` 方法，则调用自身的 `find` 方法。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -1697,10 +1694,9 @@
     }));
 
     /**
-     * Returns the index of the first element of the list which matches the
-     * predicate, or `-1` if no element matches.
+     * 返回给定的列表中第一个满足 `predicate` 方法的元素的索引下标，如果没有任何元素满足条件则返回 `-1` 。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -1731,10 +1727,9 @@
     }));
 
     /**
-     * Returns the last element of the list which matches the predicate, or
-     * `undefined` if no element matches.
+     * 返回给定的列表中最后一个满足 `predicate` 方法的元素，如果没有任何元素满足条件则返回 `undefined` 。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -1763,10 +1758,9 @@
     }));
 
     /**
-     * Returns the index of the last element of the list which matches the
-     * predicate, or `-1` if no element matches.
+     * 返回给定的列表中最后一个满足 `predicate` 方法的元素的索引下标，如果没有任何元素满足条件则返回 `-1` 。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -5055,7 +5049,7 @@
     });
 
     /**
-     * A function that always returns `false`. Any passed in parameters are ignored.
+     * 一个恒定返回 `false` 的函数。所有输入的参数都会被忽略。
      *
      * @func
      * @memberOf R
@@ -5555,12 +5549,12 @@
     });
 
     /**
-     * 返回给定参数去除前`n`个元素的结果，该参数可以是list，string或者
+     * 返回给定参数去除前 `n` 个元素后的结果，该参数可以是list，string或者
      * transducer/transformer（或者具有drop方法的object）。
      *
-     * 若第二个参数自身存在`drop`方法，则调用自身的`drop`方法。
+     * 若第二个参数自身存在 `drop` 方法，则调用自身的 `drop` 方法。
      *
-     * 若在列表位置中给出`transfomer`，则用作`transducer`。
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -5585,7 +5579,7 @@
     }));
 
     /**
-     * 返回给定list去除末尾`n`个元素的结果
+     * 返回给定list去除末尾 `n` 个元素后的结果
      *
      * @func
      * @memberOf R
@@ -5608,10 +5602,9 @@
     var dropLast = _curry2(_dispatchable([], _xdropLast, _dropLast));
 
     /**
+     * 返回一个新的list，这个list会舍弃所有满足 `predicate` 方法的尾部元素。
      *
-     * 返回一个不包含所有满足predicate方法的尾部元素的新的list。
-     *
-     * 从右向左依次对list中的元素执行predicate方法，直至返回一个假值。predicate方法需要作为第一个参数传入。
+     * 从右向左依次对list中的元素执行 `predicate` 方法，直至返回一个假值。`predicate` 方法需要作为第一个参数传入。
      *
      * @func
      * @memberOf R
@@ -5631,11 +5624,10 @@
     var dropLastWhile = _curry2(_dispatchable([], _xdropLastWhile, _dropLastWhile));
 
     /**
-     * Returns `true` if its arguments are equivalent, `false` otherwise. Handles
-     * cyclical data structures.
      *
-     * Dispatches symmetrically to the `equals` methods of both arguments, if
-     * present.
+     * 如果给定的参数是相等的则返回 `true` ，否则返回 `false` 。处理几乎所有JavaScript支持的数据结构。
+     *
+     * 若两个参数自身存在 `equals` 方法，则对称地调用 `equals` 方法。
      *
      * @func
      * @memberOf R
@@ -5660,13 +5652,12 @@
     });
 
     /**
-     * Takes a predicate and a "filterable", and returns a new filterable of the
-     * same type containing the members of the given filterable which satisfy the
-     * given predicate.
+     * 接收一个 `predicate` 方法和一个 `filterable` 元素作为参数，返回一个新的相同类型的但
+     * 是只包含满足 `predicate` 方法成员的 `filterable` 元素。
      *
-     * Dispatches to the `filter` method of the second argument, if present.
+     * 若第二个参数自身存在 `empty` 方法，则调用自身的 `empty` 方法。
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -7163,10 +7154,10 @@
 
     /**
      *
-     * 返回一个没有任何连续重复元素的list。第一个参数提供的predicate方法被用来检验list中相邻的两个元素是否相等。
+     * 返回一个没有任何连续重复元素的list。第一个参数提供的 `predicate` 方法被用来检验list中相邻的两个元素是否相等。
      * 一组相等元素中的第一个元素会被保留。
      *
-     * 若在列表位置中给出`transfomer`，则用作`transducer`。
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -7199,8 +7190,8 @@
     }));
 
     /**
-     * Takes a function and two values in its domain and returns `true` if the
-     * values map to the same value in the codomain; `false` otherwise.
+     *
+     * 接受一个函数和两个可以作为该函数参数的值，如果这两个值通过该函数的执行结果是相同的则返回 `true` ，否则返回 `false` 。
      *
      * @func
      * @memberOf R
@@ -7220,8 +7211,8 @@
     });
 
     /**
-     * Reports whether two objects have the same value, in `R.equals` terms, for
-     * the specified property. Useful as a curried predicate.
+     *
+     * 借助于 `R.equals` 方法判断两个object的指定属性是否相等。当做一个柯里化的 `prediate` 方法是很有用的。
      *
      * @func
      * @memberOf R
@@ -7971,9 +7962,9 @@
     });
 
     /**
-     * 返回一个没有任何连续重复元素的list。借助`R.equals`来判断元素是否相等。
+     * 返回一个没有任何连续重复元素的list。借助 `R.equals` 来判断元素是否相等。
      *
-     * 若在列表位置中给出`transfomer`，则用作`transducer`。
+     * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
      *
      * @func
      * @memberOf R
@@ -8436,14 +8427,11 @@
     });
 
     /**
-     * A function wrapping calls to the two functions in an `||` operation,
-     * returning the result of the first function if it is truth-y and the result
-     * of the second function otherwise. Note that this is short-circuited,
-     * meaning that the second function will not be invoked if the first returns a
-     * truth-y value.
      *
-     * In addition to functions, `R.either` also accepts any fantasy-land compatible
-     * applicative functor.
+     * 返回由 `||` 运算符连接的两个函数的包装函数，如果两个函数中任一函数的执行结果为真值，则返回 `true` ，
+     * 否则，返回 `false` 。注意，这个是短路表达式，意味着如果第一个函数返回真值的话，第二个函数将不会执行。
+     *
+     * 除了函数之外， `R.either` 也接受任何符合 `fantasy-land` 标准的 `applicative functor` 。
      *
      * @func
      * @memberOf R

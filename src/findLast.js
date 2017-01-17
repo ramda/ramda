@@ -4,10 +4,9 @@ var _xfindLast = require('./internal/_xfindLast');
 
 
 /**
- * Returns the last element of the list which matches the predicate, or
- * `undefined` if no element matches.
+ * 返回给定的列表中最后一个满足 `predicate` 方法的元素，如果没有任何元素满足条件则返回 `undefined` 。
  *
- * Acts as a transducer if a transformer is given in list position.
+ * 若在列表位置中给出 `transfomer` ，则用作 `transducer` 。
  *
  * @func
  * @memberOf R

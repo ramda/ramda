@@ -5,10 +5,9 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
 
 
 /**
+ * 返回一个新的list，这个list会舍弃所有满足 `predicate` 方法的尾部元素。
  *
- * 返回一个不包含所有满足predicate方法的尾部元素的新的list。
- *
- * 从右向左依次对list中的元素执行predicate方法，直至返回一个假值。predicate方法需要作为第一个参数传入。
+ * 从右向左依次对list中的元素执行 `predicate` 方法，直至返回一个假值。`predicate` 方法需要作为第一个参数传入。
  *
  * @func
  * @memberOf R
