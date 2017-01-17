@@ -2,7 +2,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns the second argument if it is not `null`, `undefined` or `NaN`
+ * Returns the second argument if it is not `null`, `undefined` or `NaN`;
  * otherwise the first argument is returned.
  *
  * @func
