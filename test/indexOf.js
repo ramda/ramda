@@ -84,6 +84,18 @@ describe('indexOf', function() {
     eq(R.indexOf('x', list), -1);
   });
 
+  it('handles objects with `indexOf` method', function() {
+    var obj = {
+      indexOf: function(value) {
+        return value;
+      }
+    };
+    eq(R.indexOf(1, obj), 1);
+
+    obj = undefined;
+    eq(R.indexOf(1, obj), -1);
+  });
+
   it('is curried', function() {
     var curried = R.indexOf(3);
     eq(curried(list), 2);

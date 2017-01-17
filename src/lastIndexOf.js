@@ -23,6 +23,9 @@ var equals = require('./equals');
  *      R.lastIndexOf(10, [1,2,3,4]); //=> -1
  */
 module.exports = _curry2(function lastIndexOf(target, xs) {
+  if (!xs) {
+    return -1;
+  }
   if (typeof xs.lastIndexOf === 'function' && !_isArray(xs)) {
     return xs.lastIndexOf(target);
   } else {

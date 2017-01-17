@@ -75,6 +75,18 @@ describe('lastIndexOf', function() {
     eq(R.lastIndexOf('x', list), -1);
   });
 
+  it('handles objects with `lastIndexOf` method', function() {
+    var obj = {
+      lastIndexOf: function(value) {
+        return value;
+      }
+    };
+    eq(R.lastIndexOf(1, obj), 1);
+
+    obj = undefined;
+    eq(R.lastIndexOf(1, obj), -1);
+  });
+
   it('is curried', function() {
     var curried = R.lastIndexOf('a');
     eq(curried(list), 2);

@@ -1,6 +1,6 @@
 //  Ramda v0.23.0
 //  https://github.com/ramda/ramda
-//  (c) 2013-2016 Scott Sauyet, Michael Hurley, and David Chambers
+//  (c) 2013-2017 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
 
 ;(function() {
@@ -1109,7 +1109,7 @@
     }));
 
     /**
-     * Returns a new list, composed of n-tuples of consecutive elements If `n` is
+     * Returns a new list, composed of n-tuples of consecutive elements. If `n` is
      * greater than the length of the list, an empty list is returned.
      *
      * Acts as a transducer if a transformer is given in list position.
@@ -1233,48 +1233,6 @@
         }
         result[prop] = val;
         return result;
-    });
-
-    /**
-     * Makes a shallow clone of an object, setting or overriding the nodes required
-     * to create the given path, and placing the specific value at the tail end of
-     * that path. Note that this copies and flattens prototype properties onto the
-     * new object as well. All non-primitive properties are copied by reference.
-     *
-     * @func
-     * @memberOf R
-     * @since v0.8.0
-     * @category Object
-     * @typedefn Idx = String | Int
-     * @sig [Idx] -> a -> {a} -> {a}
-     * @param {Array} path the path to set
-     * @param {*} val The new value
-     * @param {Object} obj The object to clone
-     * @return {Object} A new object equivalent to the original except along the specified path.
-     * @see R.dissocPath
-     * @example
-     *
-     *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
-     *
-     *      // Any missing or non-object keys in path will be overridden
-     *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
-     */
-    var assocPath = _curry3(function assocPath(path, val, obj) {
-        if (path.length === 0) {
-            return val;
-        }
-        var idx = path[0];
-        if (path.length > 1) {
-            var nextObj = _has(idx, obj) ? obj[idx] : _isInteger(path[1]) ? [] : {};
-            val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
-        }
-        if (_isInteger(idx) && _isArray(obj)) {
-            var arr = [].concat(obj);
-            arr[idx] = val;
-            return arr;
-        } else {
-            return assoc(idx, val, obj);
-        }
     });
 
     /**
@@ -1535,37 +1493,6 @@
         }
         delete result[prop];
         return result;
-    });
-
-    /**
-     * Makes a shallow clone of an object, omitting the property at the given path.
-     * Note that this copies and flattens prototype properties onto the new object
-     * as well. All non-primitive properties are copied by reference.
-     *
-     * @func
-     * @memberOf R
-     * @since v0.11.0
-     * @category Object
-     * @sig [String] -> {k: v} -> {k: v}
-     * @param {Array} path The path to the value to omit
-     * @param {Object} obj The object to clone
-     * @return {Object} A new object without the property at path
-     * @see R.assocPath
-     * @example
-     *
-     *      R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
-     */
-    var dissocPath = _curry2(function dissocPath(path, obj) {
-        switch (path.length) {
-        case 0:
-            return obj;
-        case 1:
-            return dissoc(path[0], obj);
-        default:
-            var head = path[0];
-            var tail = Array.prototype.slice.call(path, 1);
-            return obj[head] == null ? obj : assoc(head, dissocPath(tail, obj[head]), obj);
-        }
     });
 
     /**
@@ -3700,10 +3627,10 @@
      * @see R.reduce, R.transduce
      * @example
      *
-     *      R.reduce(
-     *        R.pipe(R.add, R.when(R.gte(R.__, 10), R.reduced)),
-     *        0,
-     *        [1, 2, 3, 4, 5]) // 10
+     *     R.reduce(
+     *       (acc, item) => item > 3 ? R.reduced(acc) : acc.concat(item),
+     *       [],
+     *       [1, 2, 3, 4, 5]) // [1, 2, 3]
      */
     var reduced = _curry1(_reduced);
 
@@ -5456,6 +5383,48 @@
     });
 
     /**
+     * Makes a shallow clone of an object, setting or overriding the nodes required
+     * to create the given path, and placing the specific value at the tail end of
+     * that path. Note that this copies and flattens prototype properties onto the
+     * new object as well. All non-primitive properties are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @since v0.8.0
+     * @category Object
+     * @typedefn Idx = String | Int
+     * @sig [Idx] -> a -> {a} -> {a}
+     * @param {Array} path the path to set
+     * @param {*} val The new value
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object equivalent to the original except along the specified path.
+     * @see R.dissocPath
+     * @example
+     *
+     *      R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
+     *
+     *      // Any missing or non-object keys in path will be overridden
+     *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
+     */
+    var assocPath = _curry3(function assocPath(path, val, obj) {
+        if (path.length === 0) {
+            return val;
+        }
+        var idx = path[0];
+        if (path.length > 1) {
+            var nextObj = !isNil(obj) && _has(idx, obj) ? obj[idx] : _isInteger(path[1]) ? [] : {};
+            val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
+        }
+        if (_isInteger(idx) && _isArray(obj)) {
+            var arr = [].concat(obj);
+            arr[idx] = val;
+            return arr;
+        } else {
+            return assoc(idx, val, obj);
+        }
+    });
+
+    /**
      * Wraps a function of any arity (including nullary) in a function that accepts
      * exactly 2 parameters. Any extraneous parameters will not be passed to the
      * supplied function.
@@ -5557,6 +5526,44 @@
     });
 
     /**
+     * Makes a shallow clone of an object, omitting the property at the given path.
+     * Note that this copies and flattens prototype properties onto the new object
+     * as well. All non-primitive properties are copied by reference.
+     *
+     * @func
+     * @memberOf R
+     * @since v0.11.0
+     * @category Object
+     * @typedefn Idx = String | Int
+     * @sig [Idx] -> {k: v} -> {k: v}
+     * @param {Array} path The path to the value to omit
+     * @param {Object} obj The object to clone
+     * @return {Object} A new object without the property at path
+     * @see R.assocPath
+     * @example
+     *
+     *      R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
+     */
+    var dissocPath = _curry2(function dissocPath(path, obj) {
+        switch (path.length) {
+        case 0:
+            return obj;
+        case 1:
+            return _isInteger(path[0]) ? remove(path[0], 1, obj) : dissoc(path[0], obj);
+        default:
+            var head = path[0];
+            var tail = Array.prototype.slice.call(path, 1);
+            if (obj[head] == null) {
+                return obj;
+            } else if (_isInteger(path[0])) {
+                return update(head, dissocPath(tail, obj[head]), obj);
+            } else {
+                return assoc(head, dissocPath(tail, obj[head]), obj);
+            }
+        }
+    });
+
+    /**
      * Returns all but the first `n` elements of the given list, string, or
      * transducer/transformer (or object with a `drop` method).
      *
@@ -5569,8 +5576,8 @@
      * @sig Number -> [a] -> [a]
      * @sig Number -> String -> String
      * @param {Number} n
-     * @param {[a]} list
-     * @return {[a]} A copy of list without the first `n` elements
+     * @param {*} list
+     * @return {*} A copy of list without the first `n` elements
      * @see R.take, R.transduce, R.dropLast, R.dropWhile
      * @example
      *
@@ -5661,9 +5668,10 @@
     });
 
     /**
-     * Takes a predicate and a "filterable", and returns a new filterable of the
+     * Takes a predicate and a `Filterable`, and returns a new filterable of the
      * same type containing the members of the given filterable which satisfy the
-     * given predicate.
+     * given predicate. Filterable objects include plain objects or any object
+     * that has a filter method such as `Array`.
      *
      * Dispatches to the `filter` method of the second argument, if present.
      *
@@ -5676,7 +5684,7 @@
      * @sig Filterable f => (a -> Boolean) -> f a -> f a
      * @param {Function} pred
      * @param {Array} filterable
-     * @return {Array}
+     * @return {Array} Filterable
      * @see R.reject, R.transduce, R.addIndex
      * @example
      *
@@ -6066,6 +6074,9 @@
      *      R.lastIndexOf(10, [1,2,3,4]); //=> -1
      */
     var lastIndexOf = _curry2(function lastIndexOf(target, xs) {
+        if (!xs) {
+            return -1;
+        }
         if (typeof xs.lastIndexOf === 'function' && !_isArray(xs)) {
             return xs.lastIndexOf(target);
         } else {
@@ -6485,7 +6496,8 @@
     /**
      * The complement of `filter`.
      *
-     * Acts as a transducer if a transformer is given in list position.
+     * Acts as a transducer if a transformer is given in list position. Filterable objects include plain objects or any object
+     * that has a filter method such as `Array`.
      *
      * @func
      * @memberOf R
@@ -7339,7 +7351,7 @@
      *      R.indexOf(10, [1,2,3,4]); //=> -1
      */
     var indexOf = _curry2(function indexOf(target, xs) {
-        return typeof xs.indexOf === 'function' && !_isArray(xs) ? xs.indexOf(target) : _indexOf(xs, target, 0);
+        return !xs ? -1 : typeof xs.indexOf === 'function' && !_isArray(xs) ? xs.indexOf(target) : _indexOf(xs, target, 0);
     });
 
     /**
@@ -7546,9 +7558,10 @@
     });
 
     /**
-     * Takes a predicate and a list or other "filterable" object and returns the
+     * Takes a predicate and a list or other `Filterable` object and returns the
      * pair of filterable objects of the same type of elements which do and do not
-     * satisfy, the predicate, respectively.
+     * satisfy, the predicate, respectively. Filterable objects include plain objects or any object
+     * that has a filter method such as `Array`.
      *
      * @func
      * @memberOf R

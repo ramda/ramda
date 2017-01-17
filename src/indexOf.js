@@ -23,7 +23,7 @@ var _isArray = require('./internal/_isArray');
  *      R.indexOf(10, [1,2,3,4]); //=> -1
  */
 module.exports = _curry2(function indexOf(target, xs) {
-  return typeof xs.indexOf === 'function' && !_isArray(xs) ?
+  return !xs ? -1 : typeof xs.indexOf === 'function' && !_isArray(xs) ?
     xs.indexOf(target) :
     _indexOf(xs, target, 0);
 });
