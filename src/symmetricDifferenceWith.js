@@ -5,14 +5,14 @@ var differenceWith = require('./differenceWith');
 
 /**
  * 寻找一个无重复元素的集合，其元素在且仅在输入集合中的一个里面出现。
- * “重复”由谓词函数返回值决定。
+ * “重复”由条件函数返回值决定。
  *
  * @func
  * @memberOf R
  * @since v0.19.0
  * @category Relation
  * @sig ((a, a) -> Boolean) -> [a] -> [a] -> [a]
- * @param {Function} pred 判断两个元素是否相等的谓词函数
+ * @param {Function} pred 判断两个元素是否相等的条件函数
  * @param {Array} list1 第1个集合
  * @param {Array} list2 第2个集合
  * @return {Array} 元素仅在list1或list2中出现的集合
