@@ -11,6 +11,8 @@ var _xdropLastWhile = require('./internal/_xdropLastWhile');
  * function returns a `falsy` value. The predicate function is applied to one argument:
  * *(value)*.
  *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.16.0

@@ -10,6 +10,8 @@ var slice = require('./slice');
  *
  * Dispatches to the `drop` method of the second argument, if present.
  *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.1.0
