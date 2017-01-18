@@ -4,18 +4,17 @@ var always = require('./always');
 
 
 /**
- * Returns a new copy of the array with the element at the provided index
- * replaced with the given value.
+ * 修改一个数组拷贝指定位置的值，然后返回修改后的数组拷贝。
  *
  * @func
  * @memberOf R
  * @since v0.14.0
  * @category List
  * @sig Number -> a -> [a] -> [a]
- * @param {Number} idx The index to update.
- * @param {*} x The value to exist at the given index of the returned array.
- * @param {Array|Arguments} list The source array-like object to be updated.
- * @return {Array} A copy of `list` with the value at index `idx` replaced with `x`.
+ * @param {Number} idx 需要修改的位置
+ * @param {*} x 在返回数组中修改时需要使用的值
+ * @param {Array|Arguments} list 需要被修改的类数组对象
+ * @return {Array} 第`index`个位置用`x`替换后的`list`的拷贝
  * @see R.adjust
  * @example
  *
