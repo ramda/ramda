@@ -2,7 +2,8 @@ var _curry2 = require('./internal/_curry2');
 
 /**
  * Takes a list and returns a list of lists where each sublist's elements are
- * all "equal" according to the provided equality function.
+ * all satisfied pairwise comparison according to the provided function.
+ * Only adjacent elements are passed to the comparison function.
  *
  * @func
  * @memberOf R
@@ -13,12 +14,15 @@ var _curry2 = require('./internal/_curry2');
  *        elements should be in the same group
  * @param {Array} list The array to group. Also accepts a string, which will be
  *        treated as a list of characters.
- * @return {List} A list that contains sublists of equal elements,
+ * @return {List} A list that contains sublists of elements,
  *         whose concatenations are equal to the original list.
  * @example
  *
  * R.groupWith(R.equals, [0, 1, 1, 2, 3, 5, 8, 13, 21])
  * //=> [[0], [1, 1], [2], [3], [5], [8], [13], [21]]
+ *
+ * R.groupWith((a, b) => a + 1 === b, [0, 1, 1, 2, 3, 5, 8, 13, 21])
+ * //=> [[0, 1], [1, 2, 3], [5], [8], [13], [21]]
  *
  * R.groupWith((a, b) => a % 2 === b % 2, [0, 1, 1, 2, 3, 5, 8, 13, 21])
  * //=> [[0], [1, 1], [2], [3, 5], [8], [13, 21]]
@@ -32,7 +36,7 @@ module.exports = _curry2(function(fn, list) {
   var len = list.length;
   while (idx < len) {
     var nextidx = idx + 1;
-    while (nextidx < len && fn(list[idx], list[nextidx])) {
+    while (nextidx < len && fn(list[nextidx - 1], list[nextidx])) {
       nextidx += 1;
     }
     res.push(list.slice(idx, nextidx));
