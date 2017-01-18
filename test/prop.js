@@ -11,4 +11,7 @@ describe('prop', function() {
     eq(nm(fred), 'Fred');
   });
 
+  it('handles undefined as object gracefully', function() {
+    eq(R.prop('name', undefined), undefined);
+  });
 });
