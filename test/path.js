@@ -36,6 +36,7 @@ describe('path', function() {
     eq(R.path(['a', 'b', 'foo'], deepObject), undefined);
     eq(R.path(['bar'], deepObject), undefined);
     eq(R.path(['a', 'b'], {a: null}), undefined);
+    eq(R.path(['a', 'b'], undefined), undefined);
   });
 
   it('works with falsy items', function() {
