@@ -82,7 +82,7 @@ $ npm install ramda
 Then in the console:
 
 ```javascript
-var R = require('ramda');
+const R = require('ramda');
 ```
 
 To use directly in the browser:
