@@ -13,6 +13,7 @@ var constructN = require('./constructN');
  * @sig (* -> {*}) -> (* -> {*})
  * @param {Function} fn The constructor function to wrap.
  * @return {Function} A wrapped, curried constructor function.
+ * @see R.invoker
  * @example
  *
  *      // Constructor function
