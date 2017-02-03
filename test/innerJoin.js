@@ -18,10 +18,6 @@ describe('innerJoin', function() {
     eq(f([a, b, c], [1, 2, 3, 4]), [a, b, c]);
   });
 
-  it('preserves the ordering of the first list', function() {
-    eq(f([c, a, b], [1, 2, 3]), [c, a, b]);
-  });
-
   it('does not remove duplicates', function() {
     eq(f([a, a, a], [1, 2, 3]), [a, a, a]);
     eq(f([a, b, c], [1, 1, 1]), [a]);
