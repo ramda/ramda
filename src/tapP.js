@@ -20,9 +20,8 @@ var _curry2 = require('./internal/_curry2');
  * @symb R.tap(f, a) = a
  */
 module.exports = _curry2(function tapP(fn, promise) {
-  return promise
-    .then(function (val) {
-      fn(val);
-      return promise;
+  return promise.then(function(val) {
+    fn(val);
+    return promise;
   });
 });

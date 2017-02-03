@@ -199,6 +199,7 @@ module.exports = {
   takeLastWhile: require('./src/takeLastWhile'),
   takeWhile: require('./src/takeWhile'),
   tap: require('./src/tap'),
+  tapP: require('./src/tapP'),
   test: require('./src/test'),
   times: require('./src/times'),
   toLower: require('./src/toLower'),
