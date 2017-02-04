@@ -2,11 +2,10 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Builds a list from a seed value. Accepts an iterator function, which returns
- * either false to stop iteration or an array of length 2 containing the value
- * to add to the resulting list and the seed to be used in the next call to the
- * iterator function.
+ * 通过种子(seed)建立一个集合。输入的迭代函数返回 false 停止迭代，
+ * 否则返回一个数对，前者添加到结果集合中，后者用作种子(seed)传递给下一轮迭代。
  *
+ * 迭代函数只接收一个参数： *(seed)*
  * The iterator function receives one argument: *(seed)*.
  *
  * @func
@@ -14,12 +13,11 @@ var _curry2 = require('./internal/_curry2');
  * @since v0.10.0
  * @category List
  * @sig (a -> [b]) -> * -> [b]
- * @param {Function} fn The iterator function. receives one argument, `seed`, and returns
- *        either false to quit iteration or an array of length two to proceed. The element
- *        at index 0 of this array will be added to the resulting array, and the element
- *        at index 1 will be passed to the next call to `fn`.
- * @param {*} seed The seed value.
- * @return {Array} The final list.
+ * @param {Function} fn 迭代函数。接收一个参数`seed`，返回 false 退出迭代或者返回一个二元数组。
+ *        二元数组第1个元素被添加到结果集合中，
+ *        二元数组第2个元素被作为参数传递给下一次调用`fn`。
+ * @param {*} seed 种子值(seed)
+ * @return {Array} 结果集合
  * @example
  *
  *      var f = n => n > 50 ? false : [-n, n + 10];

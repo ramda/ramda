@@ -2,20 +2,18 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Calls an input function `n` times, returning an array containing the results
- * of those function calls.
+ * 执行一个函数`n`次，返回函数执行结果的数组。
  *
- * `fn` is passed one argument: The current value of `n`, which begins at `0`
- * and is gradually incremented to `n - 1`.
+ * `fn`接收的参数是从`0`递增到`n-1`的值。
  *
  * @func
  * @memberOf R
  * @since v0.2.3
  * @category List
  * @sig (Number -> a) -> Number -> [a]
- * @param {Function} fn The function to invoke. Passed one argument, the current value of `n`.
- * @param {Number} n A value between `0` and `n - 1`. Increments after each function call.
- * @return {Array} An array containing the return values of all calls to `fn`.
+ * @param {Function} fn 需要执行的函数，接收的参数是`n`
+ * @param {Number} n 从`0`到`n - 1`的值，每次函数调用后递增1
+ * @return {Array} `fn`执行结果的数组
  * @example
  *
  *      R.times(R.identity, 5); //=> [0, 1, 2, 3, 4]

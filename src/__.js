@@ -1,11 +1,9 @@
 /**
- * A special placeholder value used to specify "gaps" within curried functions,
- * allowing partial application of any combination of arguments, regardless of
- * their positions.
+ * 柯里化函数的参数占位符。允许部分应用于任何位置的参数。
  *
- * If `g` is a curried ternary function and `_` is `R.__`, the following are
- * equivalent:
+ * 假设 `g` 代表柯里化的三元函数，`_` 代表 `R.__`，下面几种写法是等价的：
  *
+ * haha
  *   - `g(1, 2, 3)`
  *   - `g(_, 2, 3)(1)`
  *   - `g(_, _, 3)(1)(2)`

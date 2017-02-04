@@ -2,15 +2,13 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Takes a function `fn`, which takes a single array argument, and returns a
- * function which:
+ * 输入一个只接收一个数组的作为参数的函数，返回一个函数执行下列过程：
  *
- *   - takes any number of positional arguments;
- *   - passes these arguments to `fn` as an array; and
- *   - returns the result.
+ *   - 接收所有参数；
+ *   - 把参数作为数组传递给`fn`；
+ *   - 返回执行结果。
  *
- * In other words, R.unapply derives a variadic function from a function which
- * takes an array. R.unapply is the inverse of R.apply.
+ * 换言之，R.apply 输入一个只接收一个数组的作为参数的函数，返回一个不定参函数。R.unapply 是 R.apply 的逆函数。
  *
  * @func
  * @memberOf R

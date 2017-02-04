@@ -4,14 +4,9 @@ var curryN = require('./curryN');
 
 
 /**
- * Creates a new list iteration function from an existing one by adding two new
- * parameters to its callback function: the current index, and the entire list.
+ * 对已有迭代函数的回调函数添加两个新的参数：当前索引、整个列表，创建出一个新的列表迭代函数
  *
- * This would turn, for instance, Ramda's simple `map` function into one that
- * more closely resembles `Array.prototype.map`. Note that this will only work
- * for functions in which the iteration callback function is the first
- * parameter, and where the list is the last parameter. (This latter might be
- * unimportant if the list parameter is not used.)
+ * 例如，这将把 Ramda 中简单的 `map` 函数变成更接近于 `Array.prototype.map` 形式的函数。注意，只有满足下面条件的函数才能正常工作：迭代回调函数是其首个参数;列表是回调函数的最后一个参数。（如果列表参数没有用到，后一个条件可以忽略）
  *
  * @func
  * @memberOf R

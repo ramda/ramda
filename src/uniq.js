@@ -3,16 +3,15 @@ var uniqBy = require('./uniqBy');
 
 
 /**
- * Returns a new list containing only one copy of each element in the original
- * list. `R.equals` is used to determine equality.
+ * 返回不重复的元素集合。比较函数是`R.equals`。
  *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category List
  * @sig [a] -> [a]
- * @param {Array} list The array to consider.
- * @return {Array} The list of unique items.
+ * @param {Array} list 待处理的集合
+ * @return {Array} 不重复元素的集合
  * @example
  *
  *      R.uniq([1, 1, 2, 1]); //=> [1, 2]

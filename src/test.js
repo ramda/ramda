@@ -5,7 +5,7 @@ var toString = require('./toString');
 
 
 /**
- * Determines whether a given string matches a given regular expression.
+ * 检测一个字符串是否匹配一个正则表达式。
  *
  * @func
  * @memberOf R

@@ -3,18 +3,15 @@ var nAry = require('./nAry');
 
 
 /**
- * Wraps a function of any arity (including nullary) in a function that accepts
- * exactly 1 parameter. Any extraneous parameters will not be passed to the
- * supplied function.
+ * 把接收任意个（包括0个）参数的函数封装成只接收一个参数的函数，无关的参数不会被传入函数。
  *
  * @func
  * @memberOf R
  * @since v0.2.0
  * @category Function
  * @sig (* -> b) -> (a -> b)
- * @param {Function} fn The function to wrap.
- * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
- *         arity 1.
+ * @param {Function} fn 待封装的函数
+ * @return {Function} 封装后的函数`fn`，只接收一个参数
  * @example
  *
  *      var takesTwoArgs = function(a, b) {
@@ -25,7 +22,7 @@ var nAry = require('./nAry');
  *
  *      var takesOneArg = R.unary(takesTwoArgs);
  *      takesOneArg.length; //=> 1
- *      // Only 1 argument is passed to the wrapped function
+ *      // 只有一个参数能被传递到函数当中
  *      takesOneArg(1, 2); //=> [1, undefined]
  * @symb R.unary(f)(a, b, c) = f(a)
  */

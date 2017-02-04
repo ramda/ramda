@@ -2,19 +2,17 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Converts an object into an array of key, value arrays. The object's own
- * properties and prototype properties are used. Note that the order of the
- * output array is not guaranteed to be consistent across different JS
- * platforms.
+ * 把一个对象转换成键值对数组。使用对象的属性和原型链上的属性。
+ *
+ * 注意：输出数组的顺序在不同的JS运行环境可能不一致。
  *
  * @func
  * @memberOf R
  * @since v0.4.0
  * @category Object
  * @sig {String: *} -> [[String,*]]
- * @param {Object} obj The object to extract from
- * @return {Array} An array of key, value arrays from the object's own
- *         and prototype properties.
+ * @param {Object} obj 需要转换的对象
+ * @return {Array} 对所有属性和原型链上属性转换后的·键值对数组
  * @example
  *
  *      var F = function() { this.x = 'X'; };

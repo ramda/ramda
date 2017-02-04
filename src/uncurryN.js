@@ -3,16 +3,16 @@ var curryN = require('./curryN');
 
 
 /**
- * Returns a function of arity `n` from a (manually) curried function.
+ * 输入一个柯里化的函数，返回一个`n`个参数的函数。
  *
  * @func
  * @memberOf R
  * @since v0.14.0
  * @category Function
  * @sig Number -> (a -> b) -> (a -> c)
- * @param {Number} length The arity for the returned function.
- * @param {Function} fn The function to uncurry.
- * @return {Function} A new function.
+ * @param {Number} length 返回函数的参数个数
+ * @param {Function} fn 需要逆柯里化的函数
+ * @return {Function} 新的函数
  * @see R.curry
  * @example
  *

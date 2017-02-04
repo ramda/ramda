@@ -4,24 +4,22 @@ var _xtakeWhile = require('./internal/_xtakeWhile');
 
 
 /**
- * Returns a new list containing the first `n` elements of a given list,
- * passing each value to the supplied predicate function, and terminating when
- * the predicate function returns `false`. Excludes the element that caused the
- * predicate function to fail. The predicate function is passed one argument:
+ * 集合中从后往前每个元素都使用条件函数判断，直到条件函数返回`false`跳出，然后返回集合在迭代跳出时的后`n`个元素。
+ * 除非条件函数在处理元素的时候报错。条件函数接收一个值：
  * *(value)*.
  *
- * Dispatches to the `takeWhile` method of the second argument, if present.
+ * 如果第2个参数有`takeWhile`方法，则调用`takeWhile`方法。
  *
- * Acts as a transducer if a transformer is given in list position.
+ * 如果第2个参数是 transformer ，则`takeWhile`作为一个 transducer 调用。
  *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> [a]
- * @param {Function} fn The function called per iteration.
- * @param {Array} list The collection to iterate over.
- * @return {Array} A new array.
+ * @param {Function} fn 每次迭代调用的函数
+ * @param {Array} list 用于迭代的集合
+ * @return {Array} 一个新的集合
  * @see R.dropWhile, R.transduce, R.addIndex
  * @example
  *

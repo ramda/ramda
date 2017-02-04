@@ -1,35 +1,13 @@
 {
-  "author": "Scott Sauyet <scott@sauyet.com> (scott.sauyet.com)",
-  "contributors": [
-    {
-      "name": "Michael Hurley",
-      "email": "mh@buzzdecafe.com",
-      "web": "http://buzzdecafe.com"
-    },
-    {
-      "name": "Scott Sauyet",
-      "email": "scott@sauyet.com",
-      "web": "http://fr.umio.us"
-    },
-    {
-      "name": "David Chambers",
-      "email": "dc@davidchambers.me",
-      "web": "http://davidchambers.me"
-    },
-    {
-      "name": "Graeme Yeates",
-      "email": "yeatesgraeme@gmail.com",
-      "web": "https://github.com/megawac"
-    }
-  ],
-  "name": "ramda",
-  "description": "A practical functional library for JavaScript programmers.",
+  "author": "wangzengdi <sunnyadi@163.com>",
+  "name": "ramdacn",
+  "description": "Only for translating ramda into Chinese.",
   "version": "0.23.0",
   "homepage": "http://ramdajs.com/",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ramda/ramda.git"
+    "url": "git@github.com:ramdacn/ramda.git"
   },
   "main": "index.js",
   "scripts": {
@@ -52,6 +30,7 @@
     "acorn": "0.9.x",
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
+    "chokidar": "1.6.1",
     "cli-table": "0.3.x",
     "commander": "2.5.x",
     "dox": "latest",

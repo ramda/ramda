@@ -2,9 +2,8 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Transposes the rows and columns of a 2D list.
- * When passed a list of `n` lists of length `x`,
- * returns a list of `x` lists of length `n`.
+ * 二维数组行列转置。
+ * 输入`n`个长度为`x`的数组，输出`x`个长度为`n`的数组。
  *
  *
  * @func
@@ -12,14 +11,14 @@ var _curry1 = require('./internal/_curry1');
  * @since v0.19.0
  * @category List
  * @sig [[a]] -> [[a]]
- * @param {Array} list A 2D list
- * @return {Array} A 2D list
+ * @param {Array} list 二维数组
+ * @return {Array} 二维数组
  * @example
  *
  *      R.transpose([[1, 'a'], [2, 'b'], [3, 'c']]) //=> [[1, 2, 3], ['a', 'b', 'c']]
  *      R.transpose([[1, 2, 3], ['a', 'b', 'c']]) //=> [[1, 'a'], [2, 'b'], [3, 'c']]
  *
- * If some of the rows are shorter than the following rows, their elements are skipped:
+ * 如果某一行的长度比其他的行长度短，那么这一行的元素会被跳过：
  *
  *      R.transpose([[10, 11], [20], [], [30, 31, 32]]) //=> [[10, 20, 30], [11, 31], [32]]
  * @symb R.transpose([[a], [b], [c]]) = [a, b, c]

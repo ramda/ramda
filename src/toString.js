@@ -3,14 +3,11 @@ var _toString = require('./internal/_toString');
 
 
 /**
- * Returns the string representation of the given value. `eval`'ing the output
- * should result in a value equivalent to the input value. Many of the built-in
- * `toString` methods do not satisfy this requirement.
+ * 返回一个值的字符串表现形式。
+ * 输出的值执行`eval`结果等价于输入的值。原有的`toString`方法不满足这一要求。
  *
- * If the given value is an `[object Object]` with a `toString` method other
- * than `Object.prototype.toString`, this method is invoked with no arguments
- * to produce the return value. This means user-defined constructor functions
- * can provide a suitable `toString` method. For example:
+ * 如果输入值是一个`[object Object]`对象，且有不同于`Object.prototype.toString`的`toString`方法，那么将再不传递参数的情况下调用这个方法。
+ * 换句话说，在构造函数中自定义的`toString`方法可以满足这个条件，例如：
  *
  *     function Point(x, y) {
  *       this.x = x;
