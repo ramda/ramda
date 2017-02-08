@@ -1,10 +1,15 @@
 var listXf = require('./helpers/listXf');
-
-var R = require('..');
 var eq = require('./shared/eq');
 
+var R = require('..');
+var map = require('../src/new_map');
+var dispatcher1 = require('../src/dispatchers/noPHnoTrans');
 
-describe('map', function() {
+
+describe('map 1: no placeholders|transducer|composition, dispatch fl then .map', function() {
+
+  R.map = map(dispatcher1);
+
   var times2 = function(x) {return x * 2;};
   var add1 = function(x) {return x + 1;};
   var dec = function(x) { return x - 1; };
@@ -14,12 +19,12 @@ describe('map', function() {
     eq(R.map(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
   });
 
-  it('supports placeholders', function() {
-    eq(R.map(R.__, [1, 2, 3, 4])(times2), [2, 4, 6, 8]);
-  });
-
   it('maps simple functions into arrays', function() {
     eq(intoArray(R.map(times2), [1, 2, 3, 4]), [2, 4, 6, 8]);
+  });
+
+  it('supports placeholders', function() {
+    eq(R.map(R.__, [1, 2, 3, 4])(times2), [2, 4, 6, 8]);
   });
 
   it('maps over objects', function() {
@@ -36,6 +41,11 @@ describe('map', function() {
 
   it('dispatches to objects that implement `map`', function() {
     var obj = {x: 100, map: function(f) { return f(this.x); }};
+    eq(R.map(add1, obj), 101);
+  });
+
+  it('dispatches to objects that implement `fantasy-land/map`', function() {
+    var obj = {x: 100, ['fantasy-land/map']: function(f) { return f(this.x); }};
     eq(R.map(add1, obj), 101);
   });
 

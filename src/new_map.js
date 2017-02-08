@@ -1,5 +1,4 @@
 var _map = require('./internal/_map');
-var currentDispatcher = require('./dispatchers/current_dispatch');
 
 /**
  * Takes a function and
@@ -55,4 +54,4 @@ function map(dispatcher) {
 }
 
 
-module.exports = map(currentDispatcher);
+module.exports = map;
