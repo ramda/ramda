@@ -11,6 +11,7 @@ module.exports = {
   and: require('./src/and'),
   any: require('./src/any'),
   anyPass: require('./src/anyPass'),
+  anyPassT: require('./src/anyPassT'),
   ap: require('./src/ap'),
   aperture: require('./src/aperture'),
   append: require('./src/append'),

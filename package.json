@@ -54,6 +54,7 @@
     "browserify": "10.x.x",
     "cli-table": "0.3.x",
     "commander": "2.5.x",
+    "data.task": "^3.1.1",
     "dox": "latest",
     "envvar": "1.x.x",
     "escodegen": "1.4.x",
