@@ -4,6 +4,7 @@ module.exports = {
   __: require('./src/__'),
   add: require('./src/add'),
   addIndex: require('./src/addIndex'),
+  addKey: require('./src/addKey'),
   adjust: require('./src/adjust'),
   all: require('./src/all'),
   allPass: require('./src/allPass'),
