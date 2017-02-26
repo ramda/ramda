@@ -82,7 +82,7 @@ $ npm install ramda
 Then in the console:
 
 ```javascript
-var R = require('ramda');
+const R = require('ramda');
 ```
 
 To use directly in the browser:
@@ -170,11 +170,9 @@ then you can run the tests (and get detailed output) by running:
 
 **Browser:**
 
-To run the test suite in the browser, you can simply open `test/index.html`.
-
-Alternatively, you can use [testem](https://github.com/airportyh/testem) to
+You can use [testem](https://github.com/airportyh/testem) to
 test across different browsers (or even headlessly), with livereloading of
-tests too. Install testem (`npm install -g testem`) and run `testem`. Open the
+tests. Install testem (`npm install -g testem`) and run `testem`. Open the
 link provided in your browser and you will see the results in your terminal.
 
 If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the

@@ -14,6 +14,7 @@ var times = require('./times');
  * @param {*} value The value to repeat.
  * @param {Number} n The desired size of the output list.
  * @return {Array} A new array containing `n` `value`s.
+ * @see R.times
  * @example
  *
  *      R.repeat('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
