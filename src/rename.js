@@ -11,7 +11,8 @@ var reduce = require('./reduce');
  */
 module.exports = _curry2(function rename(keysMap, obj) {
   return reduce(function(acc, key) {
-    acc[keysMap[key] || key] = obj[key];
+    var k = keysMap[key] == null ? key : keysMap[key];
+    acc[k] = obj[key];
     return acc;
   }, {}, keys(obj));
 });

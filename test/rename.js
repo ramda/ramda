@@ -22,4 +22,12 @@ describe('rename', function() {
   it('does not add unnecessary properties', function() {
     eq(R.rename({firstName: 'first_name', lastName: 'last_name', something: 'else'}, user), {first_name: 'Wax', last_name: 'Mannequin', age: 25});
   });
+
+  it('should rename keys to empty strings', function() {
+    eq(R.rename({age: ''}, user), {firstName: 'Wax', lastName: 'Mannequin', '': 25});
+  });
+
+  it('should rename keys to 0', function() {
+    eq(R.rename({age: 0}, user), {firstName: 'Wax', lastName: 'Mannequin', 0: 25});
+  });
 });
