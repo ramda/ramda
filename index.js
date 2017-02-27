@@ -190,6 +190,7 @@ module.exports = {
   splitAt: require('./src/splitAt'),
   splitEvery: require('./src/splitEvery'),
   splitWhen: require('./src/splitWhen'),
+  startsWith: require('./src/startsWith'),
   subtract: require('./src/subtract'),
   sum: require('./src/sum'),
   symmetricDifference: require('./src/symmetricDifference'),
