@@ -110,6 +110,8 @@ module.exports = {
   lensPath: require('./src/lensPath'),
   lensProp: require('./src/lensProp'),
   lift: require('./src/lift'),
+  lift2: require('./src/lift2'),
+  lift3: require('./src/lift3'),
   liftN: require('./src/liftN'),
   lt: require('./src/lt'),
   lte: require('./src/lte'),

@@ -17,6 +17,7 @@ var map = require('./map');
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
  * @see R.lift, R.ap
+ * @deprecated since v0.23.0
  * @example
  *
  *      var madd3 = R.liftN(3, (...args) => R.sum(args));
