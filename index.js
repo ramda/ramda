@@ -201,6 +201,7 @@ module.exports = {
   takeWhile: require('./src/takeWhile'),
   tap: require('./src/tap'),
   test: require('./src/test'),
+  through: require('./src/through'),
   times: require('./src/times'),
   toLower: require('./src/toLower'),
   toPairs: require('./src/toPairs'),
