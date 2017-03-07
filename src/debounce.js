@@ -15,7 +15,7 @@
  *      console.log('resize handled');
  *    }))
  */
-module.export = function debounce(fn, wait, immidiate) {
+module.exports = function debounce(fn, wait, immidiate) {
   var timerId = null;
 
   function debounced() {
