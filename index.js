@@ -40,6 +40,7 @@ module.exports = {
   countBy: require('./src/countBy'),
   curry: require('./src/curry'),
   curryN: require('./src/curryN'),
+  debounce: require('./src/debounce'),
   dec: require('./src/dec'),
   defaultTo: require('./src/defaultTo'),
   descend: require('./src/descend'),
