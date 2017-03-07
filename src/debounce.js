@@ -1,3 +1,4 @@
+var _curry3 = require('./internal/_curry3');
 /**
  * Returns a function which delays executing `func` util after await.
  * see: https://css-tricks.com/debouncing-throttling-explained-examples/
@@ -15,11 +16,11 @@
  *      console.log('resize handled');
  *    }))
  */
-module.exports = function debounce(fn, wait, immidiate) {
+module.exports = _curry3(function debounce(fn, wait, immidiate) {
   var timerId = null;
 
   function debounced() {
-    var args = arguments.slice();
+    var args = arguments;
 
     timerId && clearTimeout(timerId);
 
@@ -38,11 +39,10 @@ module.exports = function debounce(fn, wait, immidiate) {
     }, wait);
   }
 
-  debounced.cancel = function cancel() {
-    if (timerId) {
-      clearTimeout(timerId);
-    }
+  debounced.clear = function() {
+    timerId && clearTimeout(timerId);
+    timerId = null;
   };
 
   return debounced;
-};
+});
