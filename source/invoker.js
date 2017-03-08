@@ -5,12 +5,10 @@ import toString from './toString.js';
 
 
 /**
- * Turns a named method (a function as an object proprty) with a specified arity
- * into a function that can be called directly supplied with arguments and a target
+ * Given an `arity` (Number) and a `name` (String) the `invoker()` function
+ * returns a curried function that takes `arity` arguments and a `context`
+ * object. It will "invoke" the `name`'d function (a method) on the `context`
  * object.
- *
- * The returned function is curried and accepts `arity + 1` parameters where
- * the final parameter is the target object.
  *
  * @func
  * @memberOf R
