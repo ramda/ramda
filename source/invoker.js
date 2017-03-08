@@ -28,7 +28,7 @@ import toString from './toString.js';
  *      // Just like calling .then((response) => response.json())
  *      fetch("http://example.com/index.json").then(asJson)
  *
- *      // A function with one arguments
+ *      // A function with one argument
  *      var sliceFrom = invoker(1, 'slice');
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
  *
@@ -40,7 +40,7 @@ import toString from './toString.js';
  *      const firstCreditCardSection = invoker(2, "slice", 0, 4)
  *      firstCreditCardSection("4242 4242 4242 4242") // => Function<...>
  *
- *      // Instead you must immediately invoke the invoker (better wording tbd)
+ *      // Since invoker returns a curried function, you may partially apply it to create the function you need.
  *      const firstCreditCardSection = invoker(2, "slice")(0, 4)
  *      firstCreditCardSection("4242 4242 4242 4242") // => "4242"
  *
