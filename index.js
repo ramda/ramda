@@ -56,6 +56,7 @@ module.exports = {
   dropWhile: require('./src/dropWhile'),
   either: require('./src/either'),
   empty: require('./src/empty'),
+  endsWith: require('./src/endsWith'),
   eqBy: require('./src/eqBy'),
   eqProps: require('./src/eqProps'),
   equals: require('./src/equals'),
