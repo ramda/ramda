@@ -1,6 +1,7 @@
 var _curry2 = require('./internal/_curry2');
 var keys = require('./keys');
 var reduce = require('./reduce');
+var _has = require('./internal/_has');
 
 /**
  * Creates a new object with the own properties of the provided object, but the
@@ -11,7 +12,7 @@ var reduce = require('./reduce');
  */
 module.exports = _curry2(function rename(keysMap, obj) {
   return reduce(function(acc, key) {
-    var k = keysMap[key] == null ? key : keysMap[key];
+    var k = _has(key, keysMap) ? keysMap[key] : key;
     acc[k] = obj[key];
     return acc;
   }, {}, keys(obj));
