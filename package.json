@@ -32,6 +32,11 @@
     "url": "git://github.com/ramda/ramda.git"
   },
   "main": "index.js",
+  "files": [
+    "index.js",
+    "src",
+    "dist"
+  ],
   "scripts": {
     "bench": "scripts/benchRunner",
     "bookmarklet": "scripts/bookmarklet",
