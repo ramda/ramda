@@ -138,6 +138,7 @@ module.exports = {
   not: require('./src/not'),
   nth: require('./src/nth'),
   nthArg: require('./src/nthArg'),
+  o: require('./src/o'),
   objOf: require('./src/objOf'),
   of: require('./src/of'),
   omit: require('./src/omit'),
