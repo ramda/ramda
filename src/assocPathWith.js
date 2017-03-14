@@ -8,7 +8,10 @@ var _isInteger = require('./internal/_isInteger');
  * Makes a shallow clone of an object, setting or overriding the nodes required
  * to create the given path, and applying the given function to the tail end of
  * that path. If no previous value exists, undefined will be supplied to the
- * given function. Note that this copies and flattens prototype properties onto
+ * given function. If the path supplied is an empty list, the whole object will
+ * be applied to the given function.
+ *
+ * Note that this copies and flattens prototype properties onto
  * the new object as well. All non-primitive properties are copied by reference.
  *
  * @func
@@ -27,6 +30,8 @@ var _isInteger = require('./internal/_isInteger');
  *      R.assocPathWith(always(42), ['a', 'b', 'c'], {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
  *
  *      R.assocPathWith(always(42), ['a', 'b', 'c'], {a: 5}); //=> {a: {b: {c: 42}}}
+ *
+ *      R.assocPathWith(always(42), [], {a: 5}); //=> 42
  */
 module.exports = _curry3(function assocPathWith(fn, path, obj) {
   switch (path.length) {

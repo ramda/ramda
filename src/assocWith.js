@@ -5,9 +5,10 @@ var _isArray = require('./internal/_isArray');
 /**
  * Makes a shallow clone of an object, overriding the specified property with
  * the supplied function, applied to the previous value. If no previous value
- * exists, the function will be given undefined as it's argument. Note: that
- * this copies and flattens prototype properties onto the new object as well.
- * All non-primitive properties are copied by reference.
+ * exists, the function will be given undefined as it's argument.
+ *
+ * Note: that this copies and flattens prototype properties onto the new object
+ * as well. All non-primitive properties are copied by reference.
  *
  * @func
  * @memberOf R
