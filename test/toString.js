@@ -48,21 +48,16 @@ describe('toString', function() {
   });
 
   it('returns the string representation of a Boolean object', function() {
-    /* jshint -W053 */
     assert.strictEqual(R.toString(new Boolean(true)), 'new Boolean(true)');
     assert.strictEqual(R.toString(new Boolean(false)), 'new Boolean(false)');
-    /* jshint +W053 */
   });
 
   it('returns the string representation of a Number object', function() {
-    /* jshint -W053 */
     assert.strictEqual(R.toString(new Number(0)), 'new Number(0)');
     assert.strictEqual(R.toString(new Number(-0)), 'new Number(-0)');
-    /* jshint +W053 */
   });
 
   it('returns the string representation of a String object', function() {
-    /* jshint -W053 */
     assert.strictEqual(R.toString(new String('abc')), 'new String("abc")');
     assert.strictEqual(R.toString(new String('x "y" z')), 'new String("x \\"y\\" z")');
     assert.strictEqual(R.toString(new String("' '")), 'new String("\' \'")');
@@ -75,7 +70,6 @@ describe('toString', function() {
     assert.strictEqual(R.toString(new String('\v \v')), 'new String("\\v \\v")');
     assert.strictEqual(R.toString(new String('\0 \0')), 'new String("\\0 \\0")');
     assert.strictEqual(R.toString(new String('\\ \\')), 'new String("\\\\ \\\\")');
-    /* jshint +W053 */
   });
 
   it('returns the string representation of a Date object', function() {

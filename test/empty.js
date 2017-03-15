@@ -36,9 +36,7 @@ describe('empty', function() {
 
   it('returns empty string given string', function() {
     eq(R.empty('abc'), '');
-    /* jshint -W053 */
     eq(R.empty(new String('abc')), '');
-    /* jshint +W053 */
   });
 
   it('returns empty arguments object given arguments object', function() {
