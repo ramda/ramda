@@ -6,9 +6,7 @@ var _has = require('./internal/_has');
  * Creates a new object with the own properties of the two provided objects. If
  * a key exists in both objects, the provided function is applied to the key
  * and the values associated with the key in each object, with the result being
- * used as the value associated with the key in the returned object. The key
- * will be excluded from the returned object if the resulting value is
- * `undefined`.
+ * used as the value associated with the key in the returned object.
  *
  * @func
  * @memberOf R
@@ -19,7 +17,7 @@ var _has = require('./internal/_has');
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.merge, R.mergeWith
+ * @see R.mergeDeepWithKey, R.merge, R.mergeWith
  * @example
  *
  *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r

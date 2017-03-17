@@ -6,8 +6,7 @@ var mergeWithKey = require('./mergeWithKey');
  * Creates a new object with the own properties of the two provided objects. If
  * a key exists in both objects, the provided function is applied to the values
  * associated with the key in each object, with the result being used as the
- * value associated with the key in the returned object. The key will be
- * excluded from the returned object if the resulting value is `undefined`.
+ * value associated with the key in the returned object.
  *
  * @func
  * @memberOf R
@@ -18,7 +17,7 @@ var mergeWithKey = require('./mergeWithKey');
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.merge, R.mergeWithKey
+ * @see R.mergeDeepWith, R.merge, R.mergeWithKey
  * @example
  *
  *      R.mergeWith(R.concat,
