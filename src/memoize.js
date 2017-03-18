@@ -1,6 +1,4 @@
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
-var _has = require('./internal/_has');
+var memoizeWith = require('./memoizeWith');
 var toString = require('./toString');
 
 
@@ -20,8 +18,8 @@ var toString = require('./toString');
  * @return {Function} Memoized version of `fn`.
  * @example
  *
- *      var count = 0;
- *      var factorial = R.memoize(n => {
+ *      let count = 0;
+ *      const factorial = R.memoize(n => {
  *        count += 1;
  *        return R.product(R.range(1, n + 1));
  *      });
@@ -30,13 +28,4 @@ var toString = require('./toString');
  *      factorial(5); //=> 120
  *      count; //=> 1
  */
-module.exports = _curry1(function memoize(fn) {
-  var cache = {};
-  return _arity(fn.length, function() {
-    var key = toString(arguments);
-    if (!_has(key, cache)) {
-      cache[key] = fn.apply(this, arguments);
-    }
-    return cache[key];
-  });
-});
+module.exports = memoizeWith(toString);

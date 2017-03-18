@@ -124,6 +124,7 @@ module.exports = {
   mean: require('./src/mean'),
   median: require('./src/median'),
   memoize: require('./src/memoize'),
+  memoizeWith: require('./src/memoizeWith'),
   merge: require('./src/merge'),
   mergeAll: require('./src/mergeAll'),
   mergeDeepLeft: require('./src/mergeDeepLeft'),
