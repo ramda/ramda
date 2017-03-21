@@ -42,6 +42,7 @@ module.exports = {
   curryN: require('./src/curryN'),
   dec: require('./src/dec'),
   defaultTo: require('./src/defaultTo'),
+  depthReduce: require('./src/depthReduce'),
   descend: require('./src/descend'),
   difference: require('./src/difference'),
   differenceWith: require('./src/differenceWith'),
