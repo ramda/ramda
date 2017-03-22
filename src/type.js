@@ -23,6 +23,7 @@ var _curry1 = require('./internal/_curry1');
  *      R.type(null); //=> "Null"
  *      R.type([]); //=> "Array"
  *      R.type(/[A-z]/); //=> "RegExp"
+ *      R.type(() => {}); //=> "Function"
  */
 module.exports = _curry1(function type(val) {
   return val === null      ? 'Null'      :
