@@ -4,7 +4,7 @@ var eq = require('./shared/eq');
 
 describe('unfold', function() {
   it('unfolds simple functions with a starting point to create a list', function() {
-    eq(R.unfold(function(n) {if (n > 0) {return [n, n - 1];}}, 10), [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
+    eq(R.unfold(function(n) { return n > 0 ? [[n, n - 1]] : []; }, 5), [5, 4, 3, 2, 1]);
   });
 
   it('is cool!', function() {
@@ -13,7 +13,11 @@ describe('unfold', function() {
       return function(pair) {
         count += 1;
         if (count <= n) {
-          return [pair[0], [pair[1], pair[0] + pair[1]]];
+          var head = pair[0];
+          var tail = [pair[1], pair[0] + pair[1]];
+          return [[head, tail]];
+        } else {
+          return [];
         }
       };
     };
