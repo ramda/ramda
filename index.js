@@ -22,6 +22,7 @@ module.exports = {
   binary: require('./src/binary'),
   bind: require('./src/bind'),
   both: require('./src/both'),
+  boundProp: require('./src/boundProp'),
   call: require('./src/call'),
   chain: require('./src/chain'),
   clamp: require('./src/clamp'),
