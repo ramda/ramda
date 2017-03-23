@@ -116,6 +116,7 @@ module.exports = {
   map: require('./src/map'),
   mapAccum: require('./src/mapAccum'),
   mapAccumRight: require('./src/mapAccumRight'),
+  mapObject: require('./src/mapObject.js'),
   mapObjIndexed: require('./src/mapObjIndexed'),
   match: require('./src/match'),
   mathMod: require('./src/mathMod'),
