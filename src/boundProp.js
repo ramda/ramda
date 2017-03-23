@@ -1,6 +1,6 @@
 var _curry2 = require('./internal/_curry2');
-var hasIn = require('./hasIn');
 var bind = require('./bind');
+var hasIn = require('./hasIn');
 
 /**
  * Returns a function that when supplied an object returns the indicated
@@ -16,8 +16,8 @@ var bind = require('./bind');
  * @param {String} p The property name
  * @param {Object} obj The object to query
  * @return {*} The value at `obj.p`, bound to `obj` as with `bind`.
- * @see R.prop
  * @see R.bind
+ * @see R.prop
  * @example
  *
  *      var getX = R.boundProp('getX');
