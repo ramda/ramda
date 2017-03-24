@@ -183,6 +183,7 @@ module.exports = {
   reject: require('./src/reject'),
   remove: require('./src/remove'),
   repeat: require('./src/repeat'),
+  repeatWith: require('./src/repeatWith'),
   replace: require('./src/replace'),
   reverse: require('./src/reverse'),
   scan: require('./src/scan'),
