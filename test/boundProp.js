@@ -5,7 +5,7 @@ var eq = require('./shared/eq');
 describe('boundProp', function() {
   function createScaleFactor(factor) {
     return {
-      factor,
+      factor: factor,
       scale: function(value) {
         return this.factor * value;
       }
