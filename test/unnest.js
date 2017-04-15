@@ -34,9 +34,9 @@ describe('unnest', function() {
     var Nothing = Maybe.Nothing;
     var Just = Maybe.Just;
 
-    eq(R.unnest(Nothing()), Nothing());
-    eq(R.unnest(Just(Nothing())), Nothing());
-    eq(R.unnest(Just(Just(Nothing()))), Just(Nothing()));
+    eq(R.unnest(Nothing), Nothing);
+    eq(R.unnest(Just(Nothing)), Nothing);
+    eq(R.unnest(Just(Just(Nothing))), Just(Nothing));
     eq(R.unnest(Just(Just(42))), Just(42));
     eq(R.unnest(Just(Just(Just(42)))), Just(Just(42)));
   });

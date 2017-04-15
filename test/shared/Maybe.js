@@ -1,87 +1,60 @@
-var util = require('./internal/util.js');
+var equals = require('../../src/equals');
+var toString = require('../../src/toString');
 
-function Maybe(x) {
-  return x == null ? _nothing : Maybe.Just(x);
-}
 
-function _Just(x) {
-  this.value = x;
-}
-util.extend(_Just, Maybe);
+var sentinel = {};
 
-function _Nothing() {}
-util.extend(_Nothing, Maybe);
-
-var _nothing = new _Nothing();
-
-Maybe.Nothing = function() {
-  return _nothing;
+var Maybe = module.exports = function(x, box) {
+  if (x !== sentinel) {
+    throw new Error('Cannot instantiate Maybe');
+  }
+  var isJust = box.length > 0;
+  if (isJust) {
+    this.value = box[0];
+  }
+  this.isNothing = !isJust;
+  this.isJust = isJust;
 };
 
-Maybe.Just = function(x) {
-  return new _Just(x);
+//  Nothing :: Maybe a
+var Nothing = Maybe.Nothing = new Maybe(sentinel, []);
+
+//  Just :: a -> Maybe a
+var Just = Maybe.Just = function(value) { return new Maybe(sentinel, [value]); };
+
+//  Maybe.of :: a -> Maybe a
+Maybe['fantasy-land/of'] = Just;
+
+//  Maybe#@@type :: String
+Maybe.prototype['@@type'] = 'ramda/Maybe';
+
+//  Maybe#equals :: Maybe a ~> Maybe a -> Boolean
+Maybe.prototype['fantasy-land/equals'] = function(other) {
+  return other != null && other['@@type'] === this['@@type'] &&
+         this.isJust ? other.isJust && equals(other.value, this.value) : other.isNothing;
 };
 
-Maybe.of = Maybe.Just;
-
-Maybe.prototype.of = Maybe.Just;
-
-
-_Just.prototype.toString = function() {
-  return 'Just(' + this.value + ')';
+//  Maybe#map :: Maybe a ~> (a -> b) -> Maybe b
+Maybe.prototype['fantasy-land/map'] = function(f) {
+  return this.isJust ? Just(f(this.value)) : Nothing;
 };
 
-_Nothing.prototype.toString = function() {
-  return 'Nothing()';
+//  Maybe#ap :: Maybe a ~> Maybe (a -> b) -> Maybe b
+Maybe.prototype['fantasy-land/ap'] = function(maybe) {
+  return this.isJust && maybe.isJust ? Just(maybe.value(this.value)) : Nothing;
 };
 
-
-// functor
-_Just.prototype.map = function(f) {
-  return this.of(f(this.value));
+//  Maybe#chain :: Maybe a ~> (a -> Maybe b) -> Maybe b
+Maybe.prototype['fantasy-land/chain'] = function(f) {
+  return this.isJust ? f(this.value) : Nothing;
 };
 
-_Nothing.prototype.map = util.returnThis;
-
-// apply
-// takes a Maybe that wraps a function (`app`) and applies its `map`
-// method to this Maybe's value, which must be a function.
-_Just.prototype.ap = function(m) {
-  return m.map(this.value);
+//  Maybe#filter :: Maybe a ~> (a -> Boolean) -> Maybe a
+Maybe.prototype.filter = function(pred) {
+  return this.isJust && pred(this.value) ? this : Nothing;
 };
 
-_Nothing.prototype.ap = util.identity;
-
-// applicative
-// `of` inherited from `Maybe`
-
-
-// chain
-//  f must be a function which returns a value
-//  f must return a value of the same Chain
-//  chain must return a value of the same Chain
-_Just.prototype.chain = util.baseMap;
-
-_Nothing.prototype.chain = util.returnThis;
-
-
-//
-_Just.prototype.datatype = _Just;
-
-_Nothing.prototype.datatype = _Nothing;
-
-// monad
-// A value that implements the Monad specification must also implement the Applicative and Chain specifications.
-// see above.
-
-// equality method to enable testing
-_Just.prototype.equals = function(that) {
-  return that instanceof _Just && this.value === that.value;
+//  Maybe#toString :: Maybe a ~> String
+Maybe.prototype.toString = function() {
+  return this.isJust ? 'Just(' + toString(this.value) + ')' : 'Nothing';
 };
-
-_Nothing.prototype.equals = function(that) {
-  return that === _nothing;
-};
-
-
-module.exports = Maybe;

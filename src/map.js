@@ -42,7 +42,7 @@ var keys = require('./keys');
  * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
  * @symb R.map(f, functor_o) = functor_o.map(f)
  */
-module.exports = _curry2(_dispatchable(['map'], _xmap, function map(fn, functor) {
+module.exports = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
   switch (Object.prototype.toString.call(functor)) {
     case '[object Function]':
       return curryN(functor.length, function() {
