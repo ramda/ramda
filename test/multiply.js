@@ -3,7 +3,7 @@ var eq = require('./shared/eq');
 
 
 describe('multiply', function() {
-  it('adds together two numbers', function() {
+  it('multiplies together two numbers', function() {
     eq(R.multiply(6, 7), 42);
   });
 
