@@ -179,6 +179,10 @@ If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
 
+Translations
+-----------------
+
+[Chinese(中文)](http://ramda.cn/)
 
 
 Acknowledgements
