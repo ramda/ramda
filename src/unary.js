@@ -15,6 +15,7 @@ var nAry = require('./nAry');
  * @param {Function} fn The function to wrap.
  * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
  *         arity 1.
+ * @deprecated since v0.23.0
  * @example
  *
  *      var takesTwoArgs = function(a, b) {
