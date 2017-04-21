@@ -108,6 +108,7 @@ module.exports = {
   length: require('./src/length'),
   lens: require('./src/lens'),
   lensIndex: require('./src/lensIndex'),
+  lensFind: require('./src/lensFind'),
   lensPath: require('./src/lensPath'),
   lensProp: require('./src/lensProp'),
   lift: require('./src/lift'),
