@@ -18,6 +18,9 @@ var keys = require('./keys');
  *
  *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
  */
-module.exports = _curry1(function values(obj){
-  return keys(obj).map(function(key) { return obj [key]; });
+module.exports = _curry1(function values(obj) {
+  return keys(obj)
+    .map(function(key) {
+      return obj[key];
+    });
 });
