@@ -56,13 +56,6 @@ describe('dissocPath', function() {
     );
   });
 
-  it('is curried', function() {
-    var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
-    var expected = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, j: {k: 6, l: 7}}}, m: 8};
-    var f = R.dissocPath(['f', 'g', 'i']);
-    eq(f(obj1), expected);
-  });
-
   it('accepts empty path', function() {
     eq(R.dissocPath([], {a: 1, b: 2}), {a: 1, b: 2});
   });

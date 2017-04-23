@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   F: require('./src/F'),
   T: require('./src/T'),
@@ -180,7 +182,6 @@ module.exports = {
   reduceBy: require('./src/reduceBy'),
   reduceRight: require('./src/reduceRight'),
   reduceWhile: require('./src/reduceWhile'),
-  reduced: require('./src/reduced'),
   reject: require('./src/reject'),
   remove: require('./src/remove'),
   repeat: require('./src/repeat'),

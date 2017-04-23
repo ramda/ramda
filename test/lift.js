@@ -1,7 +1,7 @@
+var Maybe = require('sanctuary-maybe');
 
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
 
 
 var add3 = R.curry(function add3(a, b, c) {

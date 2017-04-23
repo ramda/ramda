@@ -1,8 +1,8 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry2 = require('./internal/_curry2');
 var _dispatchable = require('./internal/_dispatchable');
-var _makeFlat = require('./internal/_makeFlat');
 var _xchain = require('./internal/_xchain');
-var map = require('./map');
 
 
 /**
@@ -27,9 +27,4 @@ var map = require('./map');
  *
  *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
  */
-module.exports = _curry2(_dispatchable(['fantasy-land/chain', 'chain'], _xchain, function chain(fn, monad) {
-  if (typeof monad === 'function') {
-    return function(x) { return fn(monad(x))(x); };
-  }
-  return _makeFlat(false)(map(fn, monad));
-}));
+module.exports = _curry2(_dispatchable(['chain'], _xchain, Z.chain));

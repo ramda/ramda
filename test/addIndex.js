@@ -23,11 +23,6 @@ describe('addIndex', function() {
       eq(mapIndexed(squareEnds, [8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
     });
 
-    it('acts as a curried function', function() {
-      var makeSquareEnds = mapIndexed(squareEnds);
-      eq(makeSquareEnds([8, 6, 7, 5, 3, 0, 9]), [64, 6, 7, 5, 3, 0, 81]);
-    });
-
   });
 
   describe('binary functions like `reduce`', function() {

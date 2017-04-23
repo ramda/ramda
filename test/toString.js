@@ -1,5 +1,7 @@
 var assert = require('assert');
 
+var Maybe = require('sanctuary-maybe');
+
 var R = require('..');
 
 
@@ -104,9 +106,9 @@ describe('toString', function() {
   });
 
   it('returns the string representation of an arguments object', function() {
-    assert.strictEqual(R.toString((function() { return arguments; })()), '(function() { return arguments; }())');
-    assert.strictEqual(R.toString((function() { return arguments; })(1, 2, 3)), '(function() { return arguments; }(1, 2, 3))');
-    assert.strictEqual(R.toString((function() { return arguments; })(['x', 'y'])), '(function() { return arguments; }(["x", "y"]))');
+    assert.strictEqual(R.toString((function() { return arguments; })()), '(function () { return arguments; }())');
+    assert.strictEqual(R.toString((function() { return arguments; })(1, 2, 3)), '(function () { return arguments; }(1, 2, 3))');
+    assert.strictEqual(R.toString((function() { return arguments; })(['x', 'y'])), '(function () { return arguments; }(["x", "y"]))');
   });
 
   it('returns the string representation of a plain object', function() {
@@ -125,27 +127,9 @@ describe('toString', function() {
   });
 
   it('dispatches to custom `toString` method', function() {
-    function Point(x, y) {
-      this.x = x;
-      this.y = y;
-    }
-    Point.prototype.toString = function() {
-      return 'new Point(' + this.x + ', ' + this.y + ')';
-    };
-    assert.strictEqual(R.toString(new Point(1, 2)), 'new Point(1, 2)');
-
-    function Just(x) {
-      if (!(this instanceof Just)) {
-        return new Just(x);
-      }
-      this.value = x;
-    }
-    Just.prototype.toString = function() {
-      return 'Just(' + R.toString(this.value) + ')';
-    };
-    assert.strictEqual(R.toString(Just(42)), 'Just(42)');
-    assert.strictEqual(R.toString(Just([1, 2, 3])), 'Just([1, 2, 3])');
-    assert.strictEqual(R.toString(Just(Just(Just('')))), 'Just(Just(Just("")))');
+    assert.strictEqual(R.toString(Maybe.Just(42)), 'Just(42)');
+    assert.strictEqual(R.toString(Maybe.Just([1, 2, 3])), 'Just([1, 2, 3])');
+    assert.strictEqual(R.toString(Maybe.Just(Maybe.Just(Maybe.Just('')))), 'Just(Just(Just("")))');
 
     assert.strictEqual(R.toString({toString: R.always('x')}), 'x');
   });

@@ -14,8 +14,4 @@ describe('intersperse', function() {
     eq(R.intersperse('x', obj), 'override x');
   });
 
-  it('is curried', function() {
-    eq(R.intersperse('n')(['ba', 'a', 'a']), ['ba', 'n', 'a', 'n', 'a']);
-  });
-
 });

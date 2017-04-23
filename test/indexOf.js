@@ -1,3 +1,5 @@
+var Maybe = require('sanctuary-maybe');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -46,15 +48,10 @@ describe('indexOf', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.indexOf(0, [-0]), -1);
     eq(R.indexOf(-0, [0]), -1);
     eq(R.indexOf(NaN, [NaN]), 0);
-    eq(R.indexOf(new Just([42]), [new Just([42])]), 0);
+    eq(R.indexOf(Maybe.Just([42]), [Maybe.Just([42])]), 0);
   });
 
   it('dispatches to `indexOf` method', function() {
@@ -82,11 +79,6 @@ describe('indexOf', function() {
     eq(R.indexOf('x', 'banana'), -1);
     eq(R.indexOf('a', list), 1);
     eq(R.indexOf('x', list), -1);
-  });
-
-  it('is curried', function() {
-    var curried = R.indexOf(3);
-    eq(curried(list), 2);
   });
 
   it('finds function, compared by identity', function() {

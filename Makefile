@@ -35,5 +35,5 @@ setup:
 
 
 .PHONY: test
-test: dist/ramda.js
+test:
 	npm test

@@ -15,8 +15,4 @@ describe('mean', function() {
     eq(R.identical(NaN, R.mean([])), true);
   });
 
-  it('handles array-like object', function() {
-    eq(R.mean((function() { return arguments; })(1, 2, 3)), 2);
-  });
-
 });

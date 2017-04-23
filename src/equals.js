@@ -1,5 +1,6 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry2 = require('./internal/_curry2');
-var _equals = require('./internal/_equals');
 
 
 /**
@@ -27,6 +28,4 @@ var _equals = require('./internal/_equals');
  *      var b = {}; b.v = b;
  *      R.equals(a, b); //=> true
  */
-module.exports = _curry2(function equals(a, b) {
-  return _equals(a, b, [], []);
-});
+module.exports = _curry2(Z.equals);

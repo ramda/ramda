@@ -1,5 +1,5 @@
 var _curry1 = require('./internal/_curry1');
-var _makeFlat = require('./internal/_makeFlat');
+var isArrayLike = require('./isArrayLike');
 
 
 /**
@@ -19,4 +19,25 @@ var _makeFlat = require('./internal/_makeFlat');
  *      R.flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
  *      //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
  */
-module.exports = _curry1(_makeFlat(true));
+module.exports = _curry1(function flatten(list) {
+  var value, jlen, j;
+  var result = [];
+  var idx = 0;
+  var ilen = list.length;
+
+  while (idx < ilen) {
+    if (isArrayLike(list[idx])) {
+      value = flatten(list[idx]);
+      j = 0;
+      jlen = value.length;
+      while (j < jlen) {
+        result[result.length] = value[j];
+        j += 1;
+      }
+    } else {
+      result[result.length] = list[idx];
+    }
+    idx += 1;
+  }
+  return result;
+});

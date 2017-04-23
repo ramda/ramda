@@ -1,8 +1,8 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
 var ap = require('./ap');
 var curryN = require('./curryN');
-var map = require('./map');
 
 
 /**
@@ -25,6 +25,6 @@ var map = require('./map');
 module.exports = _curry2(function liftN(arity, fn) {
   var lifted = curryN(arity, fn);
   return curryN(arity, function() {
-    return _reduce(ap, map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
+    return Z.reduce(ap, Z.map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
   });
 });

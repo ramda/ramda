@@ -37,12 +37,6 @@ describe('where', function() {
     eq(R.where(spec, test4), false);
   });
 
-  it('is curried', function() {
-    var predicate = R.where({x: R.equals(1), y: R.equals(2)});
-    eq(predicate({x: 1, y: 2, z: 3}), true);
-    eq(predicate({x: 3, y: 2, z: 1}), false);
-  });
-
   it('is true for an empty spec', function() {
     eq(R.where({}, {a: 1}), true);
   });

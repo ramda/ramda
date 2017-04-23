@@ -1,8 +1,9 @@
+var Z = require('sanctuary-type-classes');
+
 var _curry1 = require('./internal/_curry1');
 var curryN = require('./curryN');
 var max = require('./max');
 var pluck = require('./pluck');
-var reduce = require('./reduce');
 
 
 /**
@@ -32,7 +33,7 @@ var reduce = require('./reduce');
  *      isBlackCard({rank: 'Q', suit: '♦'}); //=> false
  */
 module.exports = _curry1(function anyPass(preds) {
-  return curryN(reduce(max, 0, pluck('length', preds)), function() {
+  return curryN(Z.reduce(max, 0, pluck('length', preds)), function() {
     var idx = 0;
     var len = preds.length;
     while (idx < len) {

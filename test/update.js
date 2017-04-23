@@ -22,10 +22,6 @@ describe('update', function() {
     eq(list, [0, 1, 2, 3]);
   });
 
-  it('curries the arguments', function() {
-    eq(R.update(2)(4)([0, 1, 2, 3]), [0, 1, 4, 3]);
-  });
-
   it('accepts an array-like object', function() {
     function args() {
       return arguments;

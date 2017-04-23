@@ -1,4 +1,4 @@
-var S = require('sanctuary');
+var Maybe = require('sanctuary-maybe');
 
 var R = require('..');
 var eq = require('./shared/eq');
@@ -31,24 +31,13 @@ describe('either', function() {
     eq(effect, 'not evaluated');
   });
 
-  it('is curried', function() {
-    var even = function(x) {return x % 2 === 0;};
-    var gt10 = function(x) {return x > 10;};
-    var evenOr = R.either(even);
-    eq(typeof evenOr(gt10), 'function');
-    eq(evenOr(gt10)(11), true);
-    eq(evenOr(gt10)(9), false);
-  });
-
   it('accepts fantasy-land applicative functors', function() {
-    var Just = S.Just;
-    var Nothing = S.Nothing;
-    eq(R.either(Just(true), Just(true)), Just(true));
-    eq(R.either(Just(true), Just(false)), Just(true));
-    eq(R.either(Just(false), Just(false)), Just(false));
-    eq(R.either(Just(true), Nothing()), Nothing());
-    eq(R.either(Nothing(), Just(false)), Nothing());
-    eq(R.either(Nothing(), Nothing()), Nothing());
+    eq(R.either(Maybe.Just(true), Maybe.Just(true)), Maybe.Just(true));
+    eq(R.either(Maybe.Just(true), Maybe.Just(false)), Maybe.Just(true));
+    eq(R.either(Maybe.Just(false), Maybe.Just(false)), Maybe.Just(false));
+    eq(R.either(Maybe.Just(true), Maybe.Nothing), Maybe.Nothing);
+    eq(R.either(Maybe.Nothing, Maybe.Just(false)), Maybe.Nothing);
+    eq(R.either(Maybe.Nothing, Maybe.Nothing), Maybe.Nothing);
   });
 
 });

@@ -12,9 +12,4 @@ describe('pickAll', function() {
     eq(R.pickAll(['a', 'c', 'g'], obj), {a: 1, c: 3, g: undefined});
   });
 
-  it('is curried', function() {
-    var copyAB = R.pickAll(['a', 'b']);
-    eq(copyAB(obj), {a: 1, b: 2});
-  });
-
 });

@@ -18,10 +18,4 @@ describe('insert', function() {
     eq(R.insert(8, 'z', list), ['a', 'b', 'c', 'd', 'e', 'z']);
   });
 
-  it('is curried', function() {
-    var list = ['a', 'b', 'c', 'd', 'e'];
-    eq(R.insert(8)('z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
-    eq(R.insert(8, 'z')(list), ['a', 'b', 'c', 'd', 'e', 'z']);
-  });
-
 });

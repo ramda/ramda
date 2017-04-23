@@ -42,9 +42,4 @@ describe('find', function() {
     eq(intoArray(R.find(even), []), [undefined]);
   });
 
-  it('is curried', function() {
-    eq(typeof R.find(even), 'function');
-    eq(R.find(even)(a), 10);
-  });
-
 });

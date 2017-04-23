@@ -1,3 +1,5 @@
+var Maybe = require('sanctuary-maybe');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -19,15 +21,10 @@ describe('symmetricDifference', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.symmetricDifference([0], [-0]).length, 2);
     eq(R.symmetricDifference([-0], [0]).length, 2);
     eq(R.symmetricDifference([NaN], [NaN]).length, 0);
-    eq(R.symmetricDifference([new Just([42])], [new Just([42])]).length, 0);
+    eq(R.symmetricDifference([Maybe.Just([42])], [Maybe.Just([42])]).length, 0);
   });
 
   it('works for arrays of different lengths', function() {
@@ -42,11 +39,6 @@ describe('symmetricDifference', function() {
   it('returns an empty array if there are no different elements', function() {
     eq(R.symmetricDifference(M2, M), []);
     eq(R.symmetricDifference(M, M2), []);
-  });
-
-  it('is curried', function() {
-    eq(typeof R.symmetricDifference([1, 2, 3]), 'function');
-    eq(R.symmetricDifference([1, 2, 3])([1, 3]), [2]);
   });
 
 });

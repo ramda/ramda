@@ -52,10 +52,4 @@ describe('all', function() {
     });
   });
 
-  it('is curried', function() {
-    var count = 0;
-    var test = function(n) {count += 1; return even(n);};
-    eq(R.all(test)([2, 4, 6, 7, 8, 10]), false);
-  });
-
 });

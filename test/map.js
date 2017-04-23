@@ -31,7 +31,7 @@ describe('map', function() {
   });
 
   it('dispatches to objects that implement `map`', function() {
-    var obj = {x: 100, map: function(f) { return f(this.x); }};
+    var obj = {x: 100, 'fantasy-land/map': function(f) { return f(this.x); }};
     eq(R.map(add1, obj), 101);
   });
 
@@ -54,16 +54,6 @@ describe('map', function() {
     var xcomp = mdec(mdouble(listXf));
     eq(xcomp.xf, {xf: listXf, f: times2});
     eq(xcomp.f, dec);
-  });
-
-  it('is curried', function() {
-    var inc = R.map(add1);
-    eq(inc([1, 2, 3]), [2, 3, 4]);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var inc = R.map(add1);
-    eq(inc.length, 1);
   });
 
 });

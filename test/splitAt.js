@@ -11,11 +11,6 @@ describe('splitAt', function() {
     eq(R.splitAt(5, 'hello world'), ['hello', ' world']);
   });
 
-  it('is curried', function() {
-    var splitAtThree = R.splitAt(3);
-    eq(splitAtThree('foobar'), ['foo', 'bar']);
-  });
-
   it('can handle index greater than array length', function() {
     eq(R.splitAt(4, [1, 2]), [[1, 2], []]);
   });

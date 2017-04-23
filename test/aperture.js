@@ -16,11 +16,6 @@ describe('aperture', function() {
     eq(R.aperture(1, []), []);
   });
 
-  it('is curried', function() {
-    var pairwise = R.aperture(2);
-    eq(pairwise(sevenLs), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]]);
-  });
-
   it('can act as a transducer', function() {
     eq(R.into([], R.aperture(2), sevenLs), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]]);
   });

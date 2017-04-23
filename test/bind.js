@@ -71,11 +71,6 @@ describe('bind', function() {
     eq(getXBarBound(), 'a');
   });
 
-  it('is curried', function() {
-    var f = new Foo(1);
-    eq(R.bind(add)(f)(10), 11);
-  });
-
   it('preserves arity', function() {
     var f0 = function() { return 0; };
     var f1 = function(a) { return a; };
