@@ -46,15 +46,16 @@ module.exports = (function() {
     if (typeof list['fantasy-land/reduce'] === 'function') {
       return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
     }
-    if (typeof list.reduce === 'function') {
-      return _methodReduce(fn, acc, list, 'reduce');
-    }
     if (list[symIterator] != null) {
       return _iterableReduce(fn, acc, list[symIterator]());
     }
     if (typeof list.next === 'function') {
       return _iterableReduce(fn, acc, list);
     }
+    if (typeof list.reduce === 'function') {
+      return _methodReduce(fn, acc, list, 'reduce');
+    }
+
     throw new TypeError('reduce: list must be array or iterable');
   };
 }());
