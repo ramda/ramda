@@ -17,7 +17,9 @@ var _reduce = require('./internal/_reduce');
  * on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
  *
- * Dispatches to the `reduce` method of the third argument, if present.
+ * Dispatches to the `reduce` method of the third argument, if present. When
+ * doing so, it is up to the user to handle the `R.reduced` shortcuting, as
+ * this is not implemented by `reduce`.
  *
  * @func
  * @memberOf R
