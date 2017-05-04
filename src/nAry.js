@@ -15,6 +15,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Function} fn The function to wrap.
  * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
  *         arity `n`.
+ * @see R.binary, R.unary
  * @example
  *
  *      var takesTwoArgs = (a, b) => [a, b];
