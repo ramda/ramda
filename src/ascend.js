@@ -14,6 +14,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} a The first item to be compared.
  * @param {*} b The second item to be compared.
  * @return {Number} `-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`
+ * @see R.descend
  * @example
  *
  *      var byAge = R.ascend(R.prop('age'));
