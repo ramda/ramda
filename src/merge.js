@@ -21,6 +21,9 @@ var _curry2 = require('./internal/_curry2');
  *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
  *      //=> { 'name': 'fred', 'age': 40 }
  *
+ *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': undefined });
+ *      //=> { 'name': 'fred', 'age': undefined }
+ *
  *      var resetToDefault = R.merge(R.__, {x: 0});
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  * @symb R.merge({ x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: 5, z: 3 }
