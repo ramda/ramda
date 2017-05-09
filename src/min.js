@@ -2,7 +2,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns the smaller of its two arguments.
+ * 返回两个参数中的较小者。
  *
  * @func
  * @memberOf R

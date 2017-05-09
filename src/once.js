@@ -7,6 +7,7 @@ var _curry1 = require('./internal/_curry1');
  * `fn` such that `fn` can only ever be called once, no matter how many times
  * the returned function is invoked. The first value calculated is returned in
  * subsequent invocations.
+ * 接收一个函数`fn`，并返回一个守护`fn`调用的函数，使得`fn`只能够被调用一次，不管返回函数被调用多少次。第一个计算得到的值在后续调用用被返回。
  *
  * @func
  * @memberOf R

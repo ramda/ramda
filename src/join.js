@@ -2,8 +2,7 @@ var invoker = require('./invoker');
 
 
 /**
- * Returns a string made by inserting the `separator` between each element and
- * concatenating all the elements into a single string.
+ * 返回一个字符串，通过在每个元素之间插入`分隔符`，然后将所有元素合并为一个字符串。
  *
  * @func
  * @memberOf R

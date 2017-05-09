@@ -4,9 +4,8 @@ var equals = require('./equals');
 
 
 /**
- * Returns the position of the last occurrence of an item in an array, or -1 if
- * the item is not included in the array. `R.equals` is used to determine
- * equality.
+ * 返回数组中某一项最后一次出现的位置，如果数组中不包含该项则返回-1。
+ * `R.equals`用来判定相等性。
  *
  * @func
  * @memberOf R

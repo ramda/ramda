@@ -4,8 +4,7 @@ var equals = require('./equals');
 
 
 /**
- * Returns `true` if the given value is its type's empty value; `false`
- * otherwise.
+ * 如果给定的值为空，返回`true`，否则返回`false`。
  *
  * @func
  * @memberOf R

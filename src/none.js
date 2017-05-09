@@ -6,10 +6,9 @@ var any = require('./any');
 
 
 /**
- * Returns `true` if no elements of the list match the predicate, `false`
- * otherwise.
+ * 如果列表中的元素都不满足断言，则返回`true`，否则返回`false`。
  *
- * Dispatches to the `any` method of the second argument, if present.
+ * 如果提供了第二个参数，则将其分派到`any`方法。
  *
  * @func
  * @memberOf R

@@ -4,7 +4,7 @@ var nth = require('./nth');
 
 
 /**
- * Returns a function which returns its nth argument.
+ * 返回一个函数，该函数返回它的第n个参数。
  *
  * @func
  * @memberOf R

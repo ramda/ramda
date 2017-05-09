@@ -3,9 +3,9 @@ var _of = require('./internal/_of');
 
 
 /**
- * Returns a singleton array containing the value provided.
+ * 返回包含所提供值的一个单例数组。
  *
- * Note this `of` is different from the ES6 `of`; See
+ * 注意这里的`of`和ES6中的`of`是不同的；详见
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
  *
  * @func

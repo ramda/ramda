@@ -2,7 +2,7 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Checks if the input value is `null` or `undefined`.
+ * 检查输入值是否为`null`或`undefined`。
  *
  * @func
  * @memberOf R

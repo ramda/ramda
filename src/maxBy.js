@@ -2,8 +2,7 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Takes a function and two values, and returns whichever value produces the
- * larger result when passed to the provided function.
+ * 接收一个函数和两个值，并返回使得函数执行之后结果更大的值。
  *
  * @func
  * @memberOf R

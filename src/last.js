@@ -2,7 +2,7 @@ var nth = require('./nth');
 
 
 /**
- * Returns the last element of the given list or string.
+ * 返回给定列表或字符串的最后一个元素。
  *
  * @func
  * @memberOf R

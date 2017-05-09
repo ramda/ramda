@@ -2,8 +2,7 @@ var _curry2 = require('./internal/_curry2');
 
 
 /**
- * Returns `true` if one or both of its arguments are `true`. Returns `false`
- * if both arguments are `false`.
+ * 如果一个参数为`true`或全部参数均为`true`，则返回`true`。如果参数均为`false`，则返回`false`。
  *
  * @func
  * @memberOf R

@@ -2,7 +2,8 @@ var _curry1 = require('./internal/_curry1');
 
 
 /**
- * Negates its argument.
+ * 对参数取负值。
+ *
  *
  * @func
  * @memberOf R
