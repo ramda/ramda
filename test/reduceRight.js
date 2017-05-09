@@ -32,5 +32,6 @@ describe('reduceRight', function() {
     var something = R.reduceRight(avg, 0);
     eq(something.length, 1);
   });
+  //test
 
 });
