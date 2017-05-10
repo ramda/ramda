@@ -26,7 +26,7 @@ var map = require('./map');
  *
  *      // R.ap can also be used as S combinator
  *      // when only two functions are passed
- *      R.ap(R.concat, R.toUpper)('Ramda') //=> 'RamdaRAMDA
+ *      R.ap(R.concat, R.toUpper)('Ramda') //=> 'RamdaRAMDA'
  * @symb R.ap([f, g], [a, b]) = [f(a), f(b), g(a), g(b)]
  */
 module.exports = _curry2(function ap(applyF, applyX) {
