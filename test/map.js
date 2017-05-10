@@ -66,4 +66,19 @@ describe('map', function() {
     eq(inc.length, 1);
   });
 
+  it('correctly uses fantasy-land implementations', function() {
+    var Stuff = function(v) {
+      this._val = v;
+    };
+
+    Stuff.prototype[FL.map] = function(funk) {
+      return new Stuff(funk(this._val));
+    };
+
+    var m1 = new Stuff(1);
+    var m2 = R.map(R.sum(1), m1);
+
+    eq(m1._val + 1, m2._val);
+  });
+
 });
