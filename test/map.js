@@ -71,7 +71,7 @@ describe('map', function() {
       this._val = v;
     };
 
-    Stuff.prototype[FL.map] = function(funk) {
+    Stuff.prototype['fantasy-land/map'] = function(funk) {
       return new Stuff(funk(this._val));
     };
 
