@@ -6,7 +6,7 @@ var _curry2 = require('./internal/_curry2');
  * Returns a new list containing only one copy of each element in the original
  * list, based upon the value returned by applying the supplied function to
  * each list element. Prefers the first item if the supplied function produces
- * the same value on two items. `R.equals` is used for comparison.
+ * the same value on two items. [`R.equals`](#equals) is used for comparison.
  *
  * @func
  * @memberOf R

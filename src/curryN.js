@@ -15,10 +15,10 @@ var _curryN = require('./internal/_curryN');
  *   - `g(1, 2)(3)`
  *   - `g(1, 2, 3)`
  *
- * Secondly, the special placeholder value `R.__` may be used to specify
+ * Secondly, the special placeholder value [`R.__`](#__) may be used to specify
  * "gaps", allowing partial application of any combination of arguments,
- * regardless of their positions. If `g` is as above and `_` is `R.__`, the
- * following are equivalent:
+ * regardless of their positions. If `g` is as above and `_` is [`R.__`](#__),
+ * the following are equivalent:
  *
  *   - `g(1, 2, 3)`
  *   - `g(_, 2, 3)(1)`

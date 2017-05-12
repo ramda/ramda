@@ -12,6 +12,7 @@ var sum = require('./sum');
  * @sig [Number] -> Number
  * @param {Array} list
  * @return {Number}
+ * @see R.median
  * @example
  *
  *      R.mean([2, 7, 9]); //=> 6

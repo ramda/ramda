@@ -21,7 +21,8 @@ var _stepCat = require('./internal/_stepCat');
  * final accumulator into the return type and in most cases is R.identity. The
  * init function is used to provide the initial accumulator.
  *
- * The iteration is performed with R.reduce after initializing the transducer.
+ * The iteration is performed with [`R.reduce`](#reduce) after initializing the
+ * transducer.
  *
  * @func
  * @memberOf R

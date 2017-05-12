@@ -12,7 +12,7 @@ var curryN = require('./curryN');
  * The iterator function receives two values: *(acc, value)*. It will be
  * wrapped as a transformer to initialize the transducer. A transformer can be
  * passed directly in place of an iterator function. In both cases, iteration
- * may be stopped early with the `R.reduced` function.
+ * may be stopped early with the [`R.reduced`](#reduced) function.
  *
  * A transducer is a function that accepts a transformer and returns a
  * transformer and can be composed directly.
@@ -21,11 +21,11 @@ var curryN = require('./curryN');
  * function, step, 0-arity initial value function, init, and 1-arity result
  * extraction function, result. The step function is used as the iterator
  * function in reduce. The result function is used to convert the final
- * accumulator into the return type and in most cases is R.identity. The init
- * function can be used to provide an initial accumulator, but is ignored by
- * transduce.
+ * accumulator into the return type and in most cases is
+ * [`R.identity`](#identity). The init function can be used to provide an
+ * initial accumulator, but is ignored by transduce.
  *
- * The iteration is performed with R.reduce after initializing the transducer.
+ * The iteration is performed with [`R.reduce`](#reduce) after initializing the transducer.
  *
  * @func
  * @memberOf R

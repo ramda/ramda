@@ -10,7 +10,7 @@ var _xreduceBy = require('./internal/_xreduceBy');
  * the String-returning function `keyFn` on each element and reduces the elements
  * of each group to a single value via the reducer function `valueFn`.
  *
- * This function is basically a more general `groupBy` function.
+ * This function is basically a more general [`groupBy`](#groupBy) function.
  *
  * Acts as a transducer if a transformer is given in list position.
  *

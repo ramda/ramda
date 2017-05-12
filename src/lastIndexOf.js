@@ -5,8 +5,8 @@ var equals = require('./equals');
 
 /**
  * Returns the position of the last occurrence of an item in an array, or -1 if
- * the item is not included in the array. `R.equals` is used to determine
- * equality.
+ * the item is not included in the array. [`R.equals`](#equals) is used to
+ * determine equality.
  *
  * @func
  * @memberOf R

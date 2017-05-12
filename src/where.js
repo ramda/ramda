@@ -10,7 +10,7 @@ var _has = require('./internal/_has');
  * otherwise.
  *
  * `where` is well suited to declaratively expressing constraints for other
- * functions such as `filter` and `find`.
+ * functions such as [`filter`](#filter) and [`find`](#find).
  *
  * @func
  * @memberOf R
