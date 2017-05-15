@@ -26,8 +26,8 @@ var _has = require('./internal/_has');
  *      var pred = R.where({
  *        a: R.equals('foo'),
  *        b: R.complement(R.equals('bar')),
- *        x: R.gt(__, 10),
- *        y: R.lt(__, 20)
+ *        x: R.gt(R.__, 10),
+ *        y: R.lt(R.__, 20)
  *      });
  *
  *      pred({a: 'foo', b: 'xxx', x: 11, y: 19}); //=> true
