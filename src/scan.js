@@ -2,8 +2,8 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * Scan is similar to reduce, but returns a list of successively reduced values
- * from the left
+ * Scan is similar to [`reduce`](#reduce), but returns a list of successively
+ * reduced values from the left
  *
  * @func
  * @memberOf R
@@ -15,6 +15,7 @@ var _curry3 = require('./internal/_curry3');
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {Array} A list of all intermediately reduced values.
+ * @see R.reduce
  * @example
  *
  *      var numbers = [1, 2, 3, 4];

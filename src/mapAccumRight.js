@@ -2,13 +2,13 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * The mapAccumRight function behaves like a combination of map and reduce; it
+ * The `mapAccumRight` function behaves like a combination of map and reduce; it
  * applies a function to each element of a list, passing an accumulating
  * parameter from right to left, and returning a final value of this
  * accumulator together with the new list.
  *
- * Similar to `mapAccum`, except moves through the input list from the right to
- * the left.
+ * Similar to [`mapAccum`](#mapAccum), except moves through the input list from
+ * the right to the left.
  *
  * The iterator function receives two arguments, *value* and *acc*, and should
  * return a tuple *[value, acc]*.

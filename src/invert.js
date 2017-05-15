@@ -4,8 +4,8 @@ var keys = require('./keys');
 
 
 /**
- * Same as R.invertObj, however this accounts for objects with duplicate values
- * by putting the values into an array.
+ * Same as [`R.invertObj`](#invertObj), however this accounts for objects with
+ * duplicate values by putting the values into an array.
  *
  * @func
  * @memberOf R
@@ -13,8 +13,8 @@ var keys = require('./keys');
  * @category Object
  * @sig {s: x} -> {x: [ s, ... ]}
  * @param {Object} obj The object or array to invert
- * @return {Object} out A new object with keys
- * in an array.
+ * @return {Object} out A new object with keys in an array.
+ * @see R.invertObj
  * @example
  *
  *      var raceResultsByFirstName = {

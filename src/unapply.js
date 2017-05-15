@@ -9,8 +9,8 @@ var _curry1 = require('./internal/_curry1');
  *   - passes these arguments to `fn` as an array; and
  *   - returns the result.
  *
- * In other words, R.unapply derives a variadic function from a function which
- * takes an array. R.unapply is the inverse of R.apply.
+ * In other words, `R.unapply` derives a variadic function from a function which
+ * takes an array. `R.unapply` is the inverse of [`R.apply`](#apply).
  *
  * @func
  * @memberOf R

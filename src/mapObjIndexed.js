@@ -4,9 +4,9 @@ var keys = require('./keys');
 
 
 /**
- * An Object-specific version of `map`. The function is applied to three
+ * An Object-specific version of [`map`](#map). The function is applied to three
  * arguments: *(value, key, obj)*. If only the value is significant, use
- * `map` instead.
+ * [`map`](#map) instead.
  *
  * @func
  * @memberOf R

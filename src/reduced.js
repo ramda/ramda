@@ -7,7 +7,8 @@ var _reduced = require('./internal/_reduced');
  * box: the internal structure is not guaranteed to be stable.
  *
  * Note: this optimization is unavailable to functions not explicitly listed
- * above. For instance, it is not currently supported by reduceRight.
+ * above. For instance, it is not currently supported by
+ * [`reduceRight`](#reduceRight).
  *
  * @func
  * @memberOf R
