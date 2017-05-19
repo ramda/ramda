@@ -2,7 +2,7 @@ var listXf = require('./helpers/listXf');
 
 var R = require('..');
 var eq = require('./shared/eq');
-
+var Id = require('./shared/Id');
 
 describe('map', function() {
   var times2 = function(x) {return x * 2;};
@@ -68,18 +68,10 @@ describe('map', function() {
 
   it('correctly uses fantasy-land implementations', function() {
 
-    function Stuff(v) {
-      this._val = v;
-    }
-
-    Stuff.prototype['fantasy-land/map'] = function(funk) {
-      return new Stuff(funk(this._val));
-    };
-
-    var m1 = new Stuff(1);
+    var m1 = Id(1);
     var m2 = R.map(R.add(1), m1);
 
-    eq(m1._val + 1, m2._val);
+    eq(m1.value + 1, m2.value);
   });
 
 });
