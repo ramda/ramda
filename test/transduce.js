@@ -38,6 +38,7 @@ describe('transduce', function() {
     eq(R.transduce(R.map(add(1)), R.flip(R.append), [], [1, 2, 3, 4]), [2, 3, 4, 5]);
     eq(R.transduce(R.filter(isOdd), R.flip(R.append), [],  [1, 2, 3, 4]), [1, 3]);
     eq(R.transduce(R.compose(R.map(add(1)), R.take(2)), R.flip(R.append), [],  [1, 2, 3, 4]), [2, 3]);
+    eq(R.transduce(R.compose(R.filter(isOdd), R.take(1)), R.flip(R.append), [],  [1, 2, 3, 4]), [1]);
   });
 
   it('transduces into strings', function() {
