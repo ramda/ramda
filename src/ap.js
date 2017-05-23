@@ -27,8 +27,10 @@ var map = require('./map');
  */
 module.exports = _curry2(function ap(applyF, applyX) {
   return (
-    typeof applyX['fantasy-land/ap'] === 'function' ?
-      applyX['fantasy-land/ap'](applyF) :
+    typeof applyF['fantasy-land/ap'] === 'function' ?
+      applyF['fantasy-land/ap'](map(
+        function (x) { return function (f) { return f(x); }; }, applyX)
+      ) :
     typeof applyF.ap === 'function' ?
       applyF.ap(applyX) :
     typeof applyF === 'function' ?
