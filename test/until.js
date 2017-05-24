@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var _isArrayLike = require('../src/internal/_isArrayLike');
 
 
 describe('until', function() {
@@ -8,7 +9,7 @@ describe('until', function() {
   });
 
   it('works with lists', function() {
-    eq(R.until(R.none(R.isArrayLike), R.unnest)([1, [2], [[3]]]), [1, 2, 3]);
+    eq(R.until(R.none(_isArrayLike), R.unnest)([1, [2], [[3]]]), [1, 2, 3]);
   });
 
   it('ignores fn if predicate is always true', function() {

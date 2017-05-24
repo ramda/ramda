@@ -21,10 +21,9 @@ var _curry3 = require('./internal/_curry3');
  * @see R.ifElse, R.when
  * @example
  *
- *      // coerceArray :: (a|[a]) -> [a]
- *      var coerceArray = R.unless(R.isArrayLike, R.of);
- *      coerceArray([1, 2, 3]); //=> [1, 2, 3]
- *      coerceArray(1);         //=> [1]
+ *      let safeInc = R.unless(R.isNil, R.inc);
+ *      safeInc(null); //=> null
+ *      safeInc(1); //=> 2
  */
 module.exports = _curry3(function unless(pred, whenFalseFn, x) {
   return pred(x) ? x : whenFalseFn(x);

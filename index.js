@@ -96,7 +96,6 @@ module.exports = {
   invertObj: require('./src/invertObj'),
   invoker: require('./src/invoker'),
   is: require('./src/is'),
-  isArrayLike: require('./src/isArrayLike'),
   isEmpty: require('./src/isEmpty'),
   isNil: require('./src/isNil'),
   join: require('./src/join'),
