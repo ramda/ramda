@@ -11,7 +11,7 @@ var _isPlaceholder = require('./_isPlaceholder');
  * @return {Function} The curried function.
  */
 module.exports = function _curry2(fn) {
-  return function f2(a, b) {
+  return function f2(a,b) {
     switch (arguments.length) {
       case 0:
         return f2;
