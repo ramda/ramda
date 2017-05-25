@@ -8774,6 +8774,42 @@
         return uniq(_filter(flip(_contains)(lookupList), filteredList));
     });
 
+    var _deprecationWarning = function () {
+        var alreadyLogged = [];
+        function _addLogged(name) {
+            alreadyLogged = append(name, alreadyLogged);
+        }
+        function _isLogged(name) {
+            return contains(name, alreadyLogged);
+        }
+        function logMessage(opts) {
+            var message;
+            if (console) {
+                message = join('', [
+                    'R.',
+                    opts.oldName,
+                    ' has been deprecated. Please use R.',
+                    opts.newName,
+                    ' instead.'
+                ]);
+                if (opts.optionalMessage) {
+                    message = join(' ', [
+                        message,
+                        opts.optionalMessage
+                    ]);
+                }
+                console.warn(message);
+                _addLogged(opts.oldName);
+            }
+        }
+        return function _deprecationWarning(opts) {
+            if (!_isLogged(opts.oldName)) {
+                logMessage(opts);
+            }
+            return opts.fn;
+        };
+    }();
+
     /**
      * Combines two lists into a set (i.e. no duplicates) composed of the elements
      * of each list.
@@ -8792,6 +8828,13 @@
      *      R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
      */
     var union = _curry2(compose(uniq, _concat));
+
+    var mixin = _deprecationWarning({
+        oldName: 'mixin',
+        newName: 'merge',
+        fn: merge,
+        optionalMessage: 'R.mixin will be removed in v1.0.0'
+    });
 
     var R = {
         F: F,
@@ -8924,6 +8967,7 @@
         mergeWithKey: mergeWithKey,
         min: min,
         minBy: minBy,
+        mixin: mixin,
         modulo: modulo,
         multiply: multiply,
         nAry: nAry,
