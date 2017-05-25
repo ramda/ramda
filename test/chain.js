@@ -33,7 +33,7 @@ describe('chain', function() {
         return r + a;
       };
     };
-    var bound = R.chain(f, h);
+    var bound = R.chain(h, f);
     // (>>=) :: (r -> a) -> (a -> r -> b) -> (r -> b)
     // h >>= f = \w -> f (h w) w
     eq(bound(10), (10 * 2) + 10);
