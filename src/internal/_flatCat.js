@@ -1,7 +1,7 @@
 var _forceReduced = require('./_forceReduced');
+var _isArrayLike = require('./_isArrayLike');
 var _reduce = require('./_reduce');
 var _xfBase = require('./_xfBase');
-var isArrayLike = require('../isArrayLike');
 
 module.exports = (function() {
   var preservingReduced = function(xf) {
@@ -25,7 +25,7 @@ module.exports = (function() {
         return rxf['@@transducer/result'](result);
       },
       '@@transducer/step': function(result, input) {
-        return !isArrayLike(input) ? _reduce(rxf, result, [input]) : _reduce(rxf, result, input);
+        return !_isArrayLike(input) ? _reduce(rxf, result, [input]) : _reduce(rxf, result, input);
       }
     };
   };

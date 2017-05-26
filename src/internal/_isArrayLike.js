@@ -1,6 +1,6 @@
-var _curry1 = require('./internal/_curry1');
-var _isArray = require('./internal/_isArray');
-var _isString = require('./internal/_isString');
+var _curry1 = require('./_curry1');
+var _isArray = require('./_isArray');
+var _isString = require('./_isString');
 
 
 /**
