@@ -13,6 +13,7 @@ var _has = require('./internal/_has');
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category Function
  * @sig (*... -> String) -> (*... -> a) -> (*... -> a)
  * @param {Function} fn The function to generate the cache key.

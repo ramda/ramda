@@ -14,6 +14,7 @@ var mergeDeepWithKey = require('./mergeDeepWithKey');
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category Object
  * @sig (a -> a -> a) -> {a} -> {a} -> {a}
  * @param {Function} fn

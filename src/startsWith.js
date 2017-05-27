@@ -7,6 +7,7 @@ var take = require('./take');
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category List
  * @sig [a] -> Boolean
  * @sig String -> Boolean

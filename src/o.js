@@ -9,6 +9,7 @@ var _curry3 = require('./internal/_curry3');
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category Function
  * @sig (b -> c) -> (a -> b) -> a -> c
  * @param {Function} f
