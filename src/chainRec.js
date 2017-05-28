@@ -3,7 +3,7 @@ var _curry3 = require('./internal/_curry3');
 
 
 /**
- * `chainRec` does stack safe recurtion on List
+ * `chainRec` does stack safe recursion on list
  *
  * Dispatches to the `chainRec` method of first argument, if present,
  * according to the [FantasyLand ChainRec spec](https://github.com/fantasyland/fantasy-land#chainrec).
@@ -21,7 +21,7 @@ var _curry3 = require('./internal/_curry3');
  *      R.chainRec(Array, (next, done, a) => (
  *        a.length == 2 ? [a + '!', a + '?'].map(done)
  *                      : [a + 'a', a + 'b'].map(next)
- *      ), ''); // [ 'aa!', 'aa?', 'ab!', 'ab?', 'ba!', 'ba?', 'bb!', 'bb?' ],
+ *      ), ''); // [ 'aa!', 'aa?', 'ab!', 'ab?', 'ba!', 'ba?', 'bb!', 'bb?' ]
  *
  */
 module.exports = _curry3(function _chainRec(chainRec, fn, i) {

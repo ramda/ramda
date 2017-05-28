@@ -36,7 +36,7 @@ describe('chainRec', function() {
   it('is stacksafe', function() {
     eq(R.chainRec(Array, function(next, done, n) {
       return n === 0 ? [done('DONE')] : [next(n - 1)];
-    }, 100000), ['DONE'])
+    }, 100000), ['DONE']);
   });
 
   it('dispatches to objects that implement `fantasy-land/chainRec`', function() {
