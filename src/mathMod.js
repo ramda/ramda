@@ -3,10 +3,10 @@ var _isInteger = require('./internal/_isInteger');
 
 
 /**
- * mathMod behaves like the modulo operator should mathematically, unlike the
- * `%` operator (and by extension, R.modulo). So while "-17 % 5" is -2,
- * mathMod(-17, 5) is 3. mathMod requires Integer arguments, and returns NaN
- * when the modulus is zero or negative.
+ * `mathMod` behaves like the modulo operator should mathematically, unlike the
+ * `%` operator (and by extension, [`R.modulo`](#modulo)). So while
+ * `-17 % 5` is `-2`, `mathMod(-17, 5)` is `3`. `mathMod` requires Integer
+ * arguments, and returns NaN when the modulus is zero or negative.
  *
  * @func
  * @memberOf R
@@ -16,6 +16,7 @@ var _isInteger = require('./internal/_isInteger');
  * @param {Number} m The dividend.
  * @param {Number} p the modulus.
  * @return {Number} The result of `b mod a`.
+ * @see R.modulo
  * @example
  *
  *      R.mathMod(-17, 5);  //=> 3

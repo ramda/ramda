@@ -1,6 +1,6 @@
+var _isArrayLike = require('./_isArrayLike');
 var _xwrap = require('./_xwrap');
 var bind = require('../bind');
-var isArrayLike = require('../isArrayLike');
 
 
 module.exports = (function() {
@@ -40,7 +40,7 @@ module.exports = (function() {
     if (typeof fn === 'function') {
       fn = _xwrap(fn);
     }
-    if (isArrayLike(list)) {
+    if (_isArrayLike(list)) {
       return _arrayReduce(fn, acc, list);
     }
     if (typeof list['fantasy-land/reduce'] === 'function') {

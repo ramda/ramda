@@ -8,7 +8,8 @@ var where = require('./where');
  * Takes a spec object and a test object; returns true if the test satisfies
  * the spec, false otherwise. An object satisfies the spec if, for each of the
  * spec's own properties, accessing that property of the object gives the same
- * value (in `R.equals` terms) as accessing that property of the spec.
+ * value (in [`R.equals`](#equals) terms) as accessing that property of the
+ * spec.
  *
  * `whereEq` is a specialization of [`where`](#where).
  *

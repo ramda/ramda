@@ -5,7 +5,7 @@ var path = require('./path');
 
 /**
  * Determines whether a nested path on an object has a specific value, in
- * `R.equals` terms. Most likely used to filter a list.
+ * [`R.equals`](#equals) terms. Most likely used to filter a list.
  *
  * @func
  * @memberOf R

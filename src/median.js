@@ -12,6 +12,7 @@ var mean = require('./mean');
  * @sig [Number] -> Number
  * @param {Array} list
  * @return {Number}
+ * @see R.mean
  * @example
  *
  *      R.median([2, 9, 7]); //=> 7

@@ -6,8 +6,8 @@ var _curry3 = require('./internal/_curry3');
  * the iterator function and passing it an accumulator value and the current
  * value from the array, and then passing the result to the next call.
  *
- * Similar to `reduce`, except moves through the input list from the right to
- * the left.
+ * Similar to [`reduce`](#reduce), except moves through the input list from the
+ * right to the left.
  *
  * The iterator function receives two values: *(value, acc)*, while the arguments'
  * order of `reduce`'s iterator function is *(acc, value)*.

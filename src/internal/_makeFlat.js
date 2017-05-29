@@ -1,4 +1,4 @@
-var isArrayLike = require('../isArrayLike');
+var _isArrayLike = require('./_isArrayLike');
 
 
 /**
@@ -15,7 +15,7 @@ module.exports = function _makeFlat(recursive) {
     var ilen = list.length;
 
     while (idx < ilen) {
-      if (isArrayLike(list[idx])) {
+      if (_isArrayLike(list[idx])) {
         value = recursive ? flatt(list[idx]) : list[idx];
         j = 0;
         jlen = value.length;

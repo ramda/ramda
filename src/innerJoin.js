@@ -17,6 +17,7 @@ var _filter = require('./internal/_filter');
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category Relation
  * @sig (a -> b -> Boolean) -> [a] -> [b] -> [a]
  * @param {Function} pred

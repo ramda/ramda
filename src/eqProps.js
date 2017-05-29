@@ -3,8 +3,8 @@ var equals = require('./equals');
 
 
 /**
- * Reports whether two objects have the same value, in `R.equals` terms, for
- * the specified property. Useful as a curried predicate.
+ * Reports whether two objects have the same value, in [`R.equals`](#equals)
+ * terms, for the specified property. Useful as a curried predicate.
  *
  * @func
  * @memberOf R

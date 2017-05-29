@@ -16,6 +16,7 @@ var toString = require('./toString');
  * @sig (*... -> a) -> (*... -> a)
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
+ * @see R.memoizeWith
  * @example
  *
  *      let count = 0;

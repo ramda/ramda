@@ -14,6 +14,7 @@ var _curry1 = require('./internal/_curry1');
  * @sig {k: v} -> [k]
  * @param {Object} obj The object to extract properties from
  * @return {Array} An array of the object's own and prototype properties.
+ * @see R.keys, R.valuesIn
  * @example
  *
  *      var F = function() { this.x = 'X'; };

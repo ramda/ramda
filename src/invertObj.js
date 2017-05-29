@@ -14,6 +14,7 @@ var keys = require('./keys');
  * @sig {s: x} -> {x: s}
  * @param {Object} obj The object or array to invert
  * @return {Object} out A new object
+ * @see R.invert
  * @example
  *
  *      var raceResults = {

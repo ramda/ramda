@@ -16,6 +16,7 @@ var _isArguments = require('./internal/_isArguments');
  * @sig {k: v} -> [k]
  * @param {Object} obj The object to extract properties from
  * @return {Array} An array of the object's own properties.
+ * @see R.keysIn, R.values
  * @example
  *
  *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']

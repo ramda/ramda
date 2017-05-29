@@ -1,7 +1,7 @@
 var _assign = require('./_assign');
 var _identity = require('./_identity');
+var _isArrayLike = require('./_isArrayLike');
 var _isTransformer = require('./_isTransformer');
-var isArrayLike = require('../isArrayLike');
 var objOf = require('../objOf');
 
 
@@ -24,7 +24,7 @@ module.exports = (function() {
     '@@transducer/step': function(result, input) {
       return _assign(
         result,
-        isArrayLike(input) ? objOf(input[0], input[1]) : input
+        _isArrayLike(input) ? objOf(input[0], input[1]) : input
       );
     },
     '@@transducer/result': _identity
@@ -34,7 +34,7 @@ module.exports = (function() {
     if (_isTransformer(obj)) {
       return obj;
     }
-    if (isArrayLike(obj)) {
+    if (_isArrayLike(obj)) {
       return _stepCatArray;
     }
     if (typeof obj === 'string') {

@@ -4,15 +4,16 @@ var _has = require('./internal/_has');
 
 
 /**
- * A customisable version of R.memoize. memoizeWith takes an additional
- * function that will be applied to a given argument set and used to create
- * the cache key under which the results of the function to be memoized will
- * be stored. Care must be taken when implementing key generation to avoid
+ * A customisable version of [`R.memoize`](#memoize). `memoizeWith` takes an
+ * additional function that will be applied to a given argument set and used to
+ * create the cache key under which the results of the function to be memoized
+ * will be stored. Care must be taken when implementing key generation to avoid
  * clashes that may overwrite previous entries erroneously.
  *
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category Function
  * @sig (*... -> String) -> (*... -> a) -> (*... -> a)
  * @param {Function} fn The function to generate the cache key.

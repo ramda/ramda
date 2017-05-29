@@ -3,11 +3,13 @@ var _curry3 = require('./internal/_curry3');
 
 /**
  * `o` is a curried composition function that returns a unary function.
- * Like `compose`, `o` performs right-to-left function composition. Unlike `compose`,
- * the rightmost function passed to `o` will be invoked with only one argument.
+ * Like [`compose`](#compose), `o` performs right-to-left function composition.
+ * Unlike [`compose`](#compose), the rightmost function passed to `o` will be
+ * invoked with only one argument.
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category Function
  * @sig (b -> c) -> (a -> b) -> a -> c
  * @param {Function} f

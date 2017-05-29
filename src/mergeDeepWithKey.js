@@ -15,6 +15,7 @@ var mergeWithKey = require('./mergeWithKey');
  *
  * @func
  * @memberOf R
+ * @since v0.24.0
  * @category Object
  * @sig (String -> a -> a -> a) -> {a} -> {a} -> {a}
  * @param {Function} fn
