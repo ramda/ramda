@@ -35,4 +35,21 @@ describe('memoize', function() {
     eq(count, 1);
   });
 
+  it('works with 2 arguments', function() {
+    var called = 0;
+
+    var add = R.memoize(function(x, y) {
+      called += 1;
+      return x + y;
+    });
+
+    eq(add(1, 2), 3);
+    eq(called, 1);
+
+    eq(add(1, 2), 3);
+    eq(called, 1);
+
+    eq(add(1, 3), 4);
+    eq(called, 2);
+  });
 });
