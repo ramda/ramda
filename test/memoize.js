@@ -29,9 +29,9 @@ describe('memoize', function() {
       count += 1;
       return R.toString(x);
     });
-    eq(f({ x: 1, y: 2 }), '{"x": 1, "y": 2}');
-    eq(f({ x: 1, y: 2 }), '{"x": 1, "y": 2}');
-    eq(f({ y: 2, x: 1 }), '{"x": 1, "y": 2}');
+    eq(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
+    eq(f({x: 1, y: 2}), '{"x": 1, "y": 2}');
+    eq(f({y: 2, x: 1}), '{"x": 1, "y": 2}');
     eq(count, 1);
   });
 
