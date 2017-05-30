@@ -1,6 +1,5 @@
 var memoizeWith = require('./memoizeWith');
-var toString = require('./toString');
-
+var toStringN = require('./toStringN');
 
 /**
  * Creates a new function that, when invoked, caches the result of calling `fn`
@@ -28,4 +27,4 @@ var toString = require('./toString');
  *      factorial(5); //=> 120
  *      count; //=> 1
  */
-module.exports = memoizeWith(toString);
+module.exports = memoizeWith(toStringN);

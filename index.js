@@ -214,6 +214,7 @@ module.exports = {
   toPairs: require('./src/toPairs'),
   toPairsIn: require('./src/toPairsIn'),
   toString: require('./src/toString'),
+  toStringN: require('./src/toStringN'),
   toUpper: require('./src/toUpper'),
   transduce: require('./src/transduce'),
   transpose: require('./src/transpose'),
