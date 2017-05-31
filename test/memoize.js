@@ -35,22 +35,90 @@ describe('memoize', function() {
     eq(count, 1);
   });
 
-  it('accepts 2 number arguments', function() {
-    const add = R.memoize(function(a, b) { return a + b; });
+  it('works with 2 arguments', () => {
+    // Example from https://github.com/angeloocana/joj-core
 
-    eq(add(1, 2), 3);
-    eq(add(1, 3), 4);
-  });
+    /**
+     * Get all valid and invalid board near positions.
+     */
+    function getAllNearPositions(position) {
 
-  it('accepts 2 string arguments', function() {
-    var f = R.memoize(function(concatWith, a, b) {
-      return a + concatWith + b;
+      function addPosition(toAdd) {
+        return {
+          x: position.x + toAdd[0],
+          y: position.y + toAdd[1]
+        };
+      }
+
+      return R.map(addPosition, [
+        [-1, -1],
+        [0, -1],
+        [1, -1],
+
+        [-1, 0],
+        [1, 0],
+
+        [-1, 1],
+        [0, 1],
+        [1, 1]
+      ]);
+    }
+
+    /**
+     * Checks if position exists in this board size.
+     */
+    var hasPositionByBoardSize = R.curry(function(boardSize, position) {
+      return position
+        && position.x >= 0 && position.y >= 0
+        && boardSize.y > position.y && boardSize.x > position.x;
     });
 
-    const a_bc = f('_', 'a', 'bc');
-    const ab_c = f('_', 'ab', 'c');
+    var getNearPositions = R.memoize(function(boardSize, xy) {
+      var hasPosition = hasPositionByBoardSize(boardSize);
+      return R.filter(hasPosition, getAllNearPositions(xy));
+    });
 
-    eq(a_bc, 'a_bc');
-    eq(ab_c, 'ab_c');
+    var nearPositions88_11 = getNearPositions({x: 8, y: 8}, {x: 1, y: 1});
+    var nearPositions88_11_2 = getNearPositions({x: 8, y: 8}, {x: 1, y: 1});
+
+    var nearPositions88_22 = getNearPositions({x: 8, y: 8}, {x: 2, y: 2});
+
+    var nearPositions33_22 = getNearPositions({x: 3, y: 3}, {x: 2, y: 2});
+
+    var expectedNearPositions88_11 = [
+      {x: 0, y: 0},
+      {x: 1, y: 0},
+      {x: 2, y: 0},
+      {x: 0, y: 1},
+      {x: 2, y: 1},
+      {x: 0, y: 2},
+      {x: 1, y: 2},
+      {x: 2, y: 2}
+    ];
+
+    var expectedNearPositions88_22 = [
+      {x: 1, y: 1},
+      {x: 2, y: 1},
+      {x: 3, y: 1},
+      {x: 1, y: 2},
+      {x: 3, y: 2},
+      {x: 1, y: 3},
+      {x: 2, y: 3},
+      {x: 3, y: 3}
+    ];
+
+    var expectedNearPositions33_22 = [
+      {x: 1, y: 1},
+      {x: 2, y: 1},
+      {x: 1, y: 2}
+    ];
+
+    if (nearPositions88_11 !== nearPositions88_11_2) {
+      throw Error('memoize not working');
+    }
+
+    eq(nearPositions88_11, expectedNearPositions88_11);
+    eq(nearPositions88_22, expectedNearPositions88_22);
+    eq(nearPositions33_22, expectedNearPositions33_22);
   });
 });
