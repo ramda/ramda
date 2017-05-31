@@ -35,7 +35,7 @@ describe('memoize', function() {
     eq(count, 1);
   });
 
-  it('works with 2 arguments', () => {
+  it('works with 2 arguments', function() {
     // Example from https://github.com/angeloocana/joj-core
 
     /**
