@@ -29,4 +29,6 @@ var toString = require('./toString');
  *      factorial(5); //=> 120
  *      count; //=> 1
  */
-module.exports = memoizeWith(toString);
+module.exports = memoizeWith(function() {
+  return toString(arguments);
+});
