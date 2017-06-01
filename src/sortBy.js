@@ -31,7 +31,7 @@ var _curry2 = require('./internal/_curry2');
  *        age: 314.159
  *      };
  *      var people = [clara, bob, alice];
- *      sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
+ *      sortByNameCaseInsensitive(people); //=> [{"age": 101, "name": "ALICE"}, {"age": -10, "name": "Bob"}, {"age": 314.159, "name": "clara"}]
  */
 module.exports = _curry2(function sortBy(fn, list) {
   return Array.prototype.slice.call(list, 0).sort(function(a, b) {

@@ -31,7 +31,7 @@ var _curry2 = require('./internal/_curry2');
  *        R.descend(R.prop('age')),
  *        R.ascend(R.prop('name'))
  *      ]);
- *      ageNameSort(people); //=> [alice, clara, bob]
+ *      ageNameSort(people); //=> [{"age": 40, "name": "alice"}, {"age": 40, "name": "clara"}, {"age": 30, "name": "bob"}]
  */
 module.exports = _curry2(function sortWith(fns, list) {
   return Array.prototype.slice.call(list, 0).sort(function(a, b) {
