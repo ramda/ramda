@@ -46,4 +46,10 @@ describe('path', function() {
     eq(R.path(['arrayVal', '0'])(deepObject), 'arr');
   });
 
+  it('supports array indices', function() {
+    eq(R.path(['arrayVal', 0], deepObject), 'arr');
+    eq(R.path(['arrayVal', 1], deepObject), undefined);
+    eq(R.path(['arrayVal', -1], deepObject), 'arr');
+  });
+
 });
