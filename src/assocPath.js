@@ -41,7 +41,8 @@ module.exports = _curry3(function assocPath(path, val, obj) {
   }
   if (_isInteger(idx) && _isArray(obj)) {
     var arr = [].concat(obj);
-    arr[idx] = val;
+    var arrIdx = idx < 0 ? arr.length + idx : idx;
+    arr[arrIdx] = val;
     return arr;
   } else {
     return assoc(idx, val, obj);

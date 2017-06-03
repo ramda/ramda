@@ -49,4 +49,9 @@ describe('assocPath', function() {
     eq(assocPath(['foo', 'bar', 'baz'], 42, {foo: null}), {foo: {bar: {baz: 42}}});
   });
 
+  it('supports array indices', function() {
+    eq(assocPath([0], 42, [1, 2, 3]), [42, 2, 3]);
+    eq(assocPath([-1], 42, [1, 2, 3]), [1, 2, 42]);
+  });
+
 });
