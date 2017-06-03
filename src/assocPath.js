@@ -29,6 +29,8 @@ var isNil = require('./isNil');
  *
  *      // Any missing or non-object keys in path will be overridden
  *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
+ *
+ *      R.assocPath([-1], 42, [1,2,3]); //=> [1,2,42]
  */
 module.exports = _curry3(function assocPath(path, val, obj) {
   if (path.length === 0) {
