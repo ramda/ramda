@@ -20,7 +20,7 @@ var map = require('./map');
  * @example
  *
  *      var madd3 = R.liftN(3, (...args) => R.sum(args));
- *      madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
+ *      madd3([100, 200], [30, 40, 50], [6, 7]); //=> [136, 137, 146, 147, 156, 157, 236, 237, 246, 247, 256, 257]
  */
 module.exports = _curry2(function liftN(arity, fn) {
   var lifted = curryN(arity, fn);
