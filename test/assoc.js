@@ -34,4 +34,32 @@ describe('assoc', function() {
     eq(g(obj1), expected);
   });
 
+  it('supports arrays', function() {
+    eq(R.assoc(1, 42, []), [undefined, 42]);
+
+    eq(R.assoc(0, 42, []), [42]);
+    eq(R.assoc(0, 42, [1]), [42]);
+    eq(R.assoc(0, 42, [1, 2]), [42, 2]);
+
+    assert.throws(
+      function() { R.assoc(-1, 42, []); },
+      /Invalid index/
+    );
+
+    eq(R.assoc(-1, 42, [1]), [42]);
+    eq(R.assoc(-1, 42, [1, 2]), [1, 42]);
+
+    assert.throws(
+      function() { R.assoc(-2, 42, []); },
+      /Invalid index/
+    );
+
+    assert.throws(
+      function() { R.assoc(-2, 42, [1]); },
+      /Invalid index/
+    );
+
+    eq(R.assoc(-2, 42, [1, 2]), [42, 2]);
+  });
+
 });

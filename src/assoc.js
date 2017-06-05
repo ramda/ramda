@@ -1,4 +1,5 @@
 var _curry3 = require('./internal/_curry3');
+var _isArray = require('./internal/_isArray');
 
 
 /**
@@ -22,6 +23,16 @@ var _curry3 = require('./internal/_curry3');
  *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
  */
 module.exports = _curry3(function assoc(prop, val, obj) {
+  if (_isArray(obj)) {
+    var newArr = [].concat(obj);
+    if (prop < 0 && Math.abs(prop) > newArr.length) {
+      throw new Error('Invalid index');
+    }
+    var arrIdx = prop < 0 ? newArr.length + prop : prop;
+    newArr[arrIdx] = val;
+    return newArr;
+  }
+
   var result = {};
   for (var p in obj) {
     result[p] = obj[p];
