@@ -52,6 +52,8 @@ describe('assocPath', function() {
   it('supports array indices', function() {
     eq(assocPath([0], 42, [1, 2, 3]), [42, 2, 3]);
     eq(assocPath([-1], 42, [1, 2, 3]), [1, 2, 42]);
+    eq(assocPath([0, 0], 10, [[100]]), [[10]]);
+    eq(assocPath([-1, -1], 10, [[100]]), [[10]]);
   });
 
 });
