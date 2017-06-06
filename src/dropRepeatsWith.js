@@ -15,7 +15,7 @@ var last = require('./last');
  * @memberOf R
  * @since v0.14.0
  * @category List
- * @sig (a, a -> Boolean) -> [a] -> [a]
+ * @sig (a -> a -> Boolean) -> [a] -> [a]
  * @param {Function} pred A predicate used to test whether two items are equal.
  * @param {Array} list The array to consider.
  * @return {Array} `list` without repeating elements.
