@@ -1,4 +1,6 @@
-var _contains = require('./internal/_contains');
+var indexBy = require('./indexBy');
+var _identity = require('./internal/_identity');
+var _has = require('./internal/_has');
 var _curry2 = require('./internal/_curry2');
 
 
@@ -20,8 +22,10 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function omit(names, obj) {
   var result = {};
+  var index = indexBy(_identity, names);
+
   for (var prop in obj) {
-    if (!_contains(prop, names)) {
+    if (!_has(prop, index)) {
       result[prop] = obj[prop];
     }
   }
