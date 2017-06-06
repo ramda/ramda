@@ -1,6 +1,4 @@
-var _contains = require('./internal/_contains');
 var _curry2 = require('./internal/_curry2');
-
 
 /**
  * Returns a partial copy of an object omitting the keys specified.
@@ -20,8 +18,17 @@ var _curry2 = require('./internal/_curry2');
  */
 module.exports = _curry2(function omit(names, obj) {
   var result = {};
+  var index = {};
+  var idx = 0;
+  var len = names.length;
+
+  while (idx < len) {
+    index[names[idx]] = 1;
+    idx += 1;
+  }
+
   for (var prop in obj) {
-    if (!_contains(prop, names)) {
+    if (!index.hasOwnProperty(prop)) {
       result[prop] = obj[prop];
     }
   }
