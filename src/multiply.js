@@ -1,4 +1,6 @@
 var _curry2 = require('./internal/_curry2');
+var _isNumber = require('./internal/_isNumber');
+var toString = require('./toString');
 
 
 /**
@@ -21,4 +23,14 @@ var _curry2 = require('./internal/_curry2');
  *      triple(4);       //=> 12
  *      R.multiply(2, 5);  //=> 10
  */
-module.exports = _curry2(function multiply(a, b) { return a * b; });
+module.exports = _curry2(function multiply(a, b) {
+  if (!_isNumber(a)) {
+    throw new TypeError('‘multiply’ expected a value of type Number ' +
+                        'as its first argument; received ' + toString(a));
+  }
+  if (!_isNumber(b)) {
+    throw new TypeError('‘multiply’ expected a value of type Number ' +
+                        'as its second argument; received ' + toString(b));
+  }
+  return a * b;
+});
