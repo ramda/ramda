@@ -18,11 +18,11 @@ var liftN = require('./liftN');
  *
  *      var madd3 = R.lift((a, b, c) => a + b + c);
  *
+ *      // computes Cartesian product for Arrays
  *      madd3([100, 200], [30, 40, 50], [6, 7]); //=> [136, 137, 146, 147, 156, 157, 236, 237, 246, 247, 256, 257]
  *
- *      var madd5 = R.lift((a, b, c, d, e) => a + b + c + d + e);
- *
- *      madd5([10000, 20000], [3000], [400, 500], [60], [7, 8]); //=> [13467, 13468, 13567, 13568, 23467, 23468, 23567, 23568]
+ *      // works with object that satisfies the FantasyLand Apply spec, such as Maybe in Sanctuary
+ *      madd3(S.Just(1), S.Just(2), S.Just(3)); //=> Just(6)
  */
 module.exports = _curry1(function lift(fn) {
   return liftN(fn.length, fn);
