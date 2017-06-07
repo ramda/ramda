@@ -47,6 +47,7 @@
     "postcoverage": "npm run posttest",
     "lint": "eslint scripts/bookmarklet scripts/build src/*.js src/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "test": "mocha --reporter spec",
+    "pretest": "./node_modules/typescript/bin/tsc --lib \"es5,es2015.promise\" --module amd ramda-tests.ts",
     "posttest": "git checkout -- dist",
     "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
@@ -74,6 +75,7 @@
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
     "testem": "0.9.x",
+    "typescript": "2.2.0-dev.20161127",
     "uglify-js": "2.4.x",
     "xyz": "1.0.x"
   }
