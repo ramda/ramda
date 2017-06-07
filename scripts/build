@@ -122,25 +122,14 @@ var abortIfExportNotLast = R.tap(R.cond([[
 ]]));
 
 //  abortIfDifferentRequireVar :: {*} -> {*}
-var abortIfDifferentRequireVar = R.tap(R.forEach(R.cond([[
-  R.converge(
-    R.complement(R.equals),
-    R.path(['id', 'name']),
-    R.pipe(
-      R.path(['init', 'arguments', '0', 'value']),
-      R.replace(/^[.][/]internal[/]/, './'),
-      R.replace(/^[.]{1,2}[/]/, ''),
-      R.replace(/[.]([a-z])/g, R.pipe(R.nthArg(1), R.toUpper))
-    )
-  ),
-  function(ast) {
+var abortIfDifferentRequireVar = R.tap(R.forEach(function(ast) {
+  var varName = ast.id.name;
+  var depName = ast.init.arguments[0].value;
+  if (/^[.]/.test(depName) && R.last(R.split('/', depName)) !== varName) {
     abort('Dependency declared with different variable name: `' +
-      ast.id.name + '` & `' +
-      ast.init.arguments[0].value +
-      '` in ' + ast.loc.source
-    );
+          varName + '` & `' + depName + '` in ' + ast.loc.source);
   }
-]])));
+}));
 
 //  abortIfEmptyBody :: {*} -> {*}
 var abortIfEmptyBody = R.tap(R.cond([[
@@ -178,8 +167,9 @@ R.pipe(identifierToFilename,
        R.takeWhile(R.both(R.propEq('type', 'VariableDeclaration'),
                           R.pipe(R.prop('declarations'),
                                  R.all(isRequireExpr)))),
-  R.pluck('declarations'),
+       R.pluck('declarations'),
        R.map(R.head),
+       R.reject(R.pathEq(['id', 'name'], '$')),
        abortIfNotSorted,
        abortIfDifferentRequireVar,
        R.map(R.path(['id', 'name'])));

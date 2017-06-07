@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('..');
+var errorEq = require('./shared/errorEq');
 var eq = require('./shared/eq');
 
 
@@ -25,11 +26,16 @@ describe('test', function() {
   it('throws if first argument is not a regexp', function() {
     assert.throws(
       function() { R.test('foo', 'bar'); },
-      function(err) {
-        return err.constructor === TypeError &&
-               err.message === '‘test’ requires a value of type RegExp ' +
-                               'as its first argument; received "foo"';
-      }
+      errorEq(TypeError,
+              'Invalid value\n' +
+              '\n' +
+              'test :: RegExp -> String -> Boolean\n' +
+              '        ^^^^^^\n' +
+              '          1\n' +
+              '\n' +
+              '1)  "foo" :: String\n' +
+              '\n' +
+              'The value at position 1 is not a member of ‘RegExp’.\n')
     );
   });
 
