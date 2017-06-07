@@ -18,10 +18,10 @@ var liftN = require('./liftN');
  *
  *      var madd3 = R.lift((a, b, c) => a + b + c);
  *
- *      // computes Cartesian product for Arrays
+ *      // In Array context, the lift-ed function applies over the Cartesian product of the argument Arrays
  *      madd3([100, 200], [30, 40, 50], [6, 7]); //=> [136, 137, 146, 147, 156, 157, 236, 237, 246, 247, 256, 257]
  *
- *      // works with object that satisfies the FantasyLand Apply spec, such as Maybe in Sanctuary
+ *      // Works with object that satisfies the FantasyLand Apply spec, such as Maybe in Sanctuary
  *      madd3(S.Just(1), S.Just(2), S.Just(3)); //=> Just(6)
  */
 module.exports = _curry1(function lift(fn) {
