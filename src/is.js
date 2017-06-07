@@ -13,6 +13,7 @@ var _curry2 = require('./internal/_curry2');
  * @param {Object} ctor A constructor
  * @param {*} val The value to test
  * @return {Boolean}
+ * @deprecated since v0.22.0
  * @example
  *
  *      R.is(Object, {}); //=> true

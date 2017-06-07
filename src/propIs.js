@@ -16,6 +16,7 @@ var is = require('./is');
  * @param {*} obj
  * @return {Boolean}
  * @see R.is, R.propSatisfies
+ * @deprecated since v0.22.0
  * @example
  *
  *      R.propIs(Number, 'x', {x: 1, y: 2});  //=> true
