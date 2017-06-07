@@ -3,6 +3,7 @@ var _curry2 = require('./internal/_curry2');
 var _filter = require('./internal/_filter');
 var flip = require('./flip');
 var uniq = require('./uniq');
+var memoize = require('./memoize');
 
 
 /**
@@ -31,5 +32,5 @@ module.exports = _curry2(function intersection(list1, list2) {
     lookupList = list2;
     filteredList = list1;
   }
-  return uniq(_filter(flip(_contains)(lookupList), filteredList));
+  return uniq(_filter(memoize(flip(_contains))(lookupList), filteredList));
 });
