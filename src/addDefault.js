@@ -4,9 +4,9 @@ var defaultTo = require('./defaultTo');
 
 
 /**
- * Creates a new function(`'fn`) from an existing one(`fn`) by adding a default returned
+ * Creates a new function(`fn'`) from an existing one(`fn`) by adding a default returned
  * value(`defaultVal`). If the result of `fn` is not `null`, `undefined` or `NaN`, it
- * will be returned by `'fn`; otherwise, `defaultVal` will be returned.
+ * will be returned by `fn'`; otherwise, `defaultVal` will be returned.
  *
  * @func
  * @memberOf R
