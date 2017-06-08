@@ -7,6 +7,8 @@ var _xdropLast = require('./internal/_xdropLast');
 /**
  * Returns a list containing all but the last `n` elements of the given `list`.
  *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.16.0
