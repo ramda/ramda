@@ -16,5 +16,4 @@ describe('tap', function() {
     eq(rv, 200);
     eq(sideEffect, 'string 200');
   });
-
 });
