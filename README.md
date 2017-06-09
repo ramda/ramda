@@ -103,18 +103,18 @@ const R = require('ramda');
 
 Або ви можете вставити ramda у будь-який нічого не підозрюючий сайт за допомогою [bookmarklet](https://github.com/ramda/ramda/blob/master/BOOKMARKLET.md).
 
-### Build
+### Збірка
 
-* on Unix-based platforms, `npm run build` updates __dist/ramda.js__ and __dist/ramda.min.js__
-* on Windows, write the output of `scripts/build --complete` to a temporary file, then rename the temporary file __dist/ramda.js__.
+* на Unix-базованих платформах, `npm run build` оновлює __dist/ramda.js__ та __dist/ramda.min.js__
+* на Windows, запишіть результат `scripts/build --complete` до тимчасового файлу, після чого переіменуйте тимчасовий файл на __dist/ramda.js__.
 
-#### Partial Builds
+#### Часткова збірка
 
-It is possible to build Ramda with a subset of the functionality to reduce its file size. Ramda's build system supports this with command line flags. For example if you're using `R.compose`, `R.reduce`, and `R.filter` you can create a partial build with:
+Можливо зібрати Ramda з підмножиною функціональних можливостей задля зменшення розміру файлаю. Система зборки Ramda надає цю можливість за допомогою прапорців у командній строці. Наприклад, якщо ви використовуєте `R.compose`, `R.reduce` та `R.filter`, ви можете створити часткову збірку за допомогою наступного:
 
     ./scripts/build -- src/compose.js src/reduce.js src/filter.js > dist/ramda.custom.js
 
-This requires having Node/io.js installed. 
+Для цього потрібно мати встановленим Node/io.js. 
 
 Documentation
 -------------
