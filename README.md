@@ -40,32 +40,21 @@ Ramda
 * [Чому Ramda?](http://fr.umio.us/why-ramda/) by Scott Sauyet
 * [Сприяння каррінгу](http://fr.umio.us/favoring-curry/) by Scott Sauyet
 * [Чому кіррінг допомогає](https://hughfdjackson.com/javascript/why-curry-helps/) by Hugh Jackson
-* [Агов, Underscore, Ти Робиш це неправильно!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
+* [Агов, Underscore, ти робиш це неправильно!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
 * [Думати в Ramda](http://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
 
 
-Philosophy
+Філософія
 ----------
-Using Ramda should feel much like just using JavaScript.
-It is practical, functional JavaScript. We're not introducing
-lambda expressions in strings, we're not borrowing consed 
-lists, we're not porting over all of the Clojure functions.
+Використовуючи Ramda ви повинні почувати наче ви просто використовуєте JavaScript. Це приктичний, функціональний JavaScript. Ми не представляємо лямбда вирази у строках, ми не запозичуємо cons списки, ми не портуємо всі функції з Clojure.
 
-Our basic data structures are plain JavaScript objects, and our
-usual collections are JavaScript arrays. We also keep other
-native features of JavaScript, such as functions as objects
-with properties.
+Наші базові структури даних - це прості JavaScript об'єкти і наші звичайні колекціє - це JavaScript масиви. Ми також зберігаємо інші вбудовані у JavaScript фунції, такі як функції, як об'єкти з властивостями.
 
-Functional programming is in good part about immutable objects and 
-side-effect free functions. While Ramda does not *enforce* this, it
-enables such style to be as frictionless as possible.
+Функціональне програмування в значній мірі пов'язано з незмінюємими (не мутабельними) об'єктами та функціями без побічних ефектів. Хоча Ramda не застосовує це, вона дозволяє використовувати такий стиль з якомога меншим "тертям".
 
-We aim for an implementation both clean and elegant, but the API is king.
-We sacrifice a great deal of implementation elegance for even a slightly
-cleaner API.
+Ми прагнемо до реалізація як чистоти так і елегантності, але АРІ лишається королем. Ми частково приносимо в жертву елегантність реалізації заради більш чистого АРІ.
 
-Last but not least, Ramda strives for performance. A reliable and quick
-implementation wins over any notions of functional purity.
+І останнє, але не менш важливе: Ramda прагне до продуктивності. Надійна та швидка реалізація перемагають над будь-якими поняттями функціональної чистоти.
 
 Installation
 ------------
