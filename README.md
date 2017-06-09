@@ -56,40 +56,40 @@ Ramda
 
 І останнє, але не менш важливе: Ramda прагне до продуктивності. Надійна та швидка реалізація перемагають будь-якимі поняття функціональної чистоти.
 
-Installation
+Встановлення
 ------------
 
-To use with node:
+Для використання з node:
 
 ```bash
 $ npm install ramda
 ```
 
-Then in the console:
+Після чого в консолі:
 
 ```javascript
 const R = require('ramda');
 ```
 
-To use directly in the browser:
+Для прямого використання в браузері:
 
 ```html
 <script src="path/to/yourCopyOf/ramda.js"></script>
 ```
 
-or the minified version:
+чи мініміфікована версія:
 
 ```html
 <script src="path/to/yourCopyOf/ramda.min.js"></script>
 ```
 
-or from a CDN, either cdnjs:
+або з CDN чи cdnjs:
 
 ```html
 <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.24.1/ramda.min.js"></script>
 ```
 
-or one of the below links from [jsDelivr](http://jsdelivr.com):
+чи за допомогою одного з посилання наведених нижче з [jsDelivr](http://jsdelivr.com):
 
 ```html
 <script src="//cdn.jsdelivr.net/ramda/0.24.1/ramda.min.js"></script>
@@ -97,11 +97,11 @@ or one of the below links from [jsDelivr](http://jsdelivr.com):
 <script src="//cdn.jsdelivr.net/ramda/latest/ramda.min.js"></script>
 ```
 
-(note that using `latest` is taking a significant risk that ramda API changes could break your code.)
+(зауважте, що використання `latest` привносить величезний ризик, що при зміні ramda API ваш код може зломатися.)
 
-These script tags add the variable `R` on the browser's global scope.
+Ці теги script додають змінну `R` до глобальної області видимості браузера.
 
-Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](https://github.com/ramda/ramda/blob/master/BOOKMARKLET.md).
+Або ви можете вставити ramda у будь-який нічого не підозрюючий сайт за допомогою [bookmarklet](https://github.com/ramda/ramda/blob/master/BOOKMARKLET.md).
 
 ### Build
 
