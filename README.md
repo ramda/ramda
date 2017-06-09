@@ -119,7 +119,7 @@ const R = require('ramda');
 Документація
 -------------
 
-Будь ласка, перегляньте [API документацію](http://ramdajs.com/docs/).
+Будь ласка, перегляньте [API документацію (eng)](http://ramdajs.com/docs/).
 
 Ім'я
 --------
@@ -160,8 +160,8 @@ const R = require('ramda');
 Переклади
 -----------------
 
-[Англійською(English)](https://github.com/ramda/ramda)
-[Китайською(中文)](http://ramda.cn/)
+- [Англійською(English)](https://github.com/ramda/ramda)
+- [Китайською(中文)](http://ramda.cn/)
 
 
 Подяки
