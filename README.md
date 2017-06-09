@@ -19,14 +19,12 @@ Ramda
 
 
 
-What's Different?
+Яка різниця?
 -----------------
 
-The primary distinguishing features of Ramda are:
+Основні відмінні риси Ramda є:
 
-* Ramda emphasizes a purer functional style. Immutability and side-effect free functions 
-  are at the heart of its design philosophy. This can help you get the job done with simple, 
-  elegant code.
+* Ramda наголошує набільш чистому функціоральному стилі. Незмінність даних і відсутність побічних ефектів лежить у самому серці філософії дизайну. Це може допомогти вам виконати роботy за допомогою простого та елегантного коду.
 
 * Ramda functions are automatically curried. This allows you to easily build up new functions 
   from old ones simply by not supplying the final parameters.
