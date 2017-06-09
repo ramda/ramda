@@ -26,13 +26,11 @@ Ramda
 
 * Ramda наголошує набільш чистому функціоральному стилі. Незмінність даних і відсутність побічних ефектів лежить у самому серці філософії дизайну. Це може допомогти вам виконати роботy за допомогою простого та елегантного коду.
 
-* Ramda functions are automatically curried. This allows you to easily build up new functions 
-  from old ones simply by not supplying the final parameters.
+* Ramda функції мають автоматичний каррінг. Це дозволяє легко будувати нові функції зі старих просто не передаваючи кінцевий параметр.
 
-* The parameters to Ramda functions are arranged to make it convenient for currying. The data 
-  to be operated on is generally supplied last.
+* Параметри у Ramda функціях розташовані таким чином, щоб зробити каррінг якомога зручнішим. Дані, які мають опрацьовуватись, як правило, подаються в останню чергу.
 
-The last two points together make it very easy to build functions as sequences of simpler functions, each of which transforms the data and passes it along to the next. Ramda is designed to support this style of coding.
+Останні два пункти разом роблять дуже легким створення функцій у вигляді послідовності простих функцій, кожна з яких перетворює дані та передає їх до наступної. Ramda спроектована для підтримки такого стилю написання коду.
 
 
 Introductions
