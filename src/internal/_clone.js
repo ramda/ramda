@@ -1,19 +1,8 @@
 var _cloneRegExp = require('./_cloneRegExp');
 var type = require('../type');
 
-
-/**
- * Copies an object.
- *
- * @private
- * @param {*} value The value to be copied
- * @param {Array} refFrom Array containing the source references
- * @param {Array} refTo Array containing the copied source references
- * @param {Boolean} deep Whether or not to perform deep cloning.
- * @return {*} The copied value.
- */
-module.exports = function _clone(value, refFrom, refTo, deep) {
-  var copy = function copy(copiedValue) {
+module.exports = (function() {
+  var copy = function copy(copiedValue, value, refFrom, refTo, deep) {
     var len = refFrom.length;
     var idx = 0;
     while (idx < len) {
@@ -30,11 +19,26 @@ module.exports = function _clone(value, refFrom, refTo, deep) {
     }
     return copiedValue;
   };
-  switch (type(value)) {
-    case 'Object':  return copy({});
-    case 'Array':   return copy([]);
-    case 'Date':    return new Date(value.valueOf());
-    case 'RegExp':  return _cloneRegExp(value);
-    default:        return value;
-  }
-};
+
+  /**
+   * Copies an object.
+   *
+   * @private
+   * @param {*} value The value to be copied
+   * @param {Array} refFrom Array containing the source references
+   * @param {Array} refTo Array containing the copied source references
+   * @param {Boolean} deep Whether or not to perform deep cloning.
+   * @return {*} The copied value.
+   */
+  var _clone = function(value, refFrom, refTo, deep) {
+    switch (type(value)) {
+      case 'Object':  return copy({}, value, refFrom, refTo, deep);
+      case 'Array':   return copy([], value, refFrom, refTo, deep);
+      case 'Date':    return new Date(value.valueOf());
+      case 'RegExp':  return _cloneRegExp(value);
+      default:        return value;
+    }
+  };
+
+  return _clone;
+}());
