@@ -129,28 +129,28 @@ const R = require('ramda');
 
 
 
-Running The Test Suite
+Запуск тестів
 ----------------------
 
-**Console:**
+**Консоль:**
 
-To run the test suite from the console, you need to have `mocha` installed:
+Для запуску тестів з консолі, вам необхідно встановити `mocha`:
 
     npm install -g mocha
 
-Then from the root of the project, you can just call
+Тоді з кореня вашого проекту ви можете просто викликати
 
     mocha
 
-Alternately, if you've installed the dependencies, via:
+Або якщо ви встановили залежності через:
 
     npm install
 
-then you can run the tests (and get detailed output) by running:
+тоді ви можете запустити тести (і отримати вивід деталей) запустивши команду:
 
     npm test
 
-**Browser:**
+**Браузер:**
 
 You can use [testem](https://github.com/airportyh/testem) to
 test across different browsers (or even headlessly), with livereloading of
