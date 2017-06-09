@@ -152,24 +152,21 @@ const R = require('ramda');
 
 **Браузер:**
 
-You can use [testem](https://github.com/airportyh/testem) to
-test across different browsers (or even headlessly), with livereloading of
-tests. Install testem (`npm install -g testem`) and run `testem`. Open the
-link provided in your browser and you will see the results in your terminal.
+Ви можете використовувати [testem](https://github.com/airportyh/testem) для тестування у різних браузерах (и навіть у "бузголових" браузрах), з миттєвим перезавантаженням тестівю. Встановіть __testem__ (`npm install -g testem`) і виконайте `testem`. Відкрийте посилання яке надасть вам ваш браузер і ви побачите результати у вашому терміналі.
 
-If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
-tests completely headlessly.
+Якщо у вас встановлений _PhantomJS_ , ви можете виконати `testem -l phantomjs` для запуску тестів повністю у "безголовому" режимі.
 
 
-Translations
+Переклади
 -----------------
 
-[Chinese(中文)](http://ramda.cn/)
+[Англійською(English)](https://github.com/ramda/ramda)
+[Китайською(中文)](http://ramda.cn/)
 
 
-Acknowledgements
+Подяки
 -----------------
 
-Thanks to [J. C. Phillipps](http://www.jcphillipps.com) for the Ramda logo.
+Дякуємо [J. C. Phillipps](http://www.jcphillipps.com) за Ramda logo.
 Ramda logo artwork &copy; 2014 J. C. Phillipps. Licensed Creative Commons 
 [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
