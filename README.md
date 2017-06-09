@@ -33,15 +33,15 @@ Ramda
 Останні два пункти разом роблять дуже легким створення функцій у вигляді послідовності простих функцій, кожна з яких перетворює дані та передає їх до наступної. Ramda спроектована для підтримки такого стилю написання коду.
 
 
-Introductions
+Введення
 -------------
 
-* [Introducing Ramda](http://buzzdecafe.github.io/code/2014/05/16/introducing-ramda) by Buzz de Cafe
-* [Why Ramda?](http://fr.umio.us/why-ramda/) by Scott Sauyet
-* [Favoring Curry](http://fr.umio.us/favoring-curry/) by Scott Sauyet
-* [Why Curry Helps](https://hughfdjackson.com/javascript/why-curry-helps/) by Hugh Jackson
-* [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
-* [Thinking in Ramda](http://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
+* [Введення в Ramda](http://buzzdecafe.github.io/code/2014/05/16/introducing-ramda) by Buzz de Cafe
+* [Чому Ramda?](http://fr.umio.us/why-ramda/) by Scott Sauyet
+* [Сприяння каррінгу](http://fr.umio.us/favoring-curry/) by Scott Sauyet
+* [Чому кіррінг допомогає](https://hughfdjackson.com/javascript/why-curry-helps/) by Hugh Jackson
+* [Агов, Underscore, Ти Робиш це неправильно!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
+* [Думати в Ramda](http://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
 
 
 Philosophy
