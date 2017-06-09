@@ -116,10 +116,10 @@ const R = require('ramda');
 
 Для цього потрібно мати встановленим Node/io.js. 
 
-Documentation
+Документація
 -------------
 
-Please review the [API documentation](http://ramdajs.com/docs/).
+Будь ласка, перегляньте [API документацію](http://ramdajs.com/docs/).
 
 The Name
 --------
