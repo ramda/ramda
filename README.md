@@ -121,14 +121,10 @@ const R = require('ramda');
 
 Будь ласка, перегляньте [API документацію](http://ramdajs.com/docs/).
 
-The Name
+Ім'я
 --------
 
-Ok, so we like sheep.  That's all.  It's a short name, not already 
-taken.  It could as easily have been `eweda`, but then we would be 
-forced to say _eweda lamb!_, and no one wants that.  For non-English 
-speakers, lambs are baby sheep, ewes are female sheep, and rams are male 
-sheep.  So perhaps ramda is a grown-up lambda... but probably not.
+Добре, ми як вівці :ram:.  Це все. Це коротке ім'я, ніким поки не зайняте. Це з легкістю могло би бути `eweda`, але тоді ми б були змушені казати _eweda lamb!_ (lamb - ягня, прим.перекладача), а ніхто того не хоче. Для тих, хто не є носіє англійської мови, _lambs_ - це дитинча вівці, _ewes_ - це вівцематка, а _rams_ - барани. Тому, можливо, _ramda_ - це подорослішавша lambda... Але, напевно, ні.
 
 
 
