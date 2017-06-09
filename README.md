@@ -1,7 +1,7 @@
 Ramda
 =============
 
-A practical functional library for JavaScript programmers.
+Практична функціональна бібліотека для JavaScript програмістів.
 
 [![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
@@ -9,13 +9,14 @@ A practical functional library for JavaScript programmers.
 [![Gitter](https://badges.gitter.im/Join_Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-Why Ramda?
+Чому Ramda?
 ----------
 
 <img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
      width="170" height="190" align="right" hspace="12" />
 
-There are already several excellent libraries with a functional flavor. Typically, they are meant to be general-purpose toolkits, suitable for working in multiple paradigms. Ramda has a more focused goal. We wanted a library designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. 
+Вже є кілька відмінних бібліотек з функціональним ароматом. Як правило, вони призначенні для того, щоб бути інструментами загального призначення, що підзодять для роботи в декількох парадигмах. У Ramda, в своб чергу, більш зфокусована мета. Ми хотіли бібліотеку, розроблену спеціально для програмування у функціональному стилі, бібліотекуз якою легко створювати функціональні джерела інформації, яка не змінює данні користувача.
+
 
 
 What's Different?
