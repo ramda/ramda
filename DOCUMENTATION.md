@@ -1,7 +1,7 @@
 # Документація
 
-- __[__]__(#__) `Function`
-- __[add]__(#add) `Match`
+- [__](#__) `Function`
+- [add](#add) `Match`
 
 Here will live all translated methods names with anchor links to the translated sections below
 
