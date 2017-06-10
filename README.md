@@ -119,8 +119,8 @@ const R = require('ramda');
 Документація
 -------------
 
-Переклад API-документації [українською мовою](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md).
-Будь ласка, перегляньте [API документацію (eng)](http://ramdajs.com/docs/).
+- Переклад API-документації [українською мовою](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md).
+- API документація [англійською мовою](http://ramdajs.com/docs/).
 
 Ім'я
 --------
