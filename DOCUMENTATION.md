@@ -5,6 +5,7 @@
 - [addIndex](#addindex) `Function`
 - [adjust](#adjust) `List`
 - [subtract](#subtract) `Math`
+- [update](#update) `List`
 
 Here will live all translated methods names with anchor links to the translated sections below
 
@@ -111,14 +112,10 @@ _Додано у версії v0.14.0_
 Дивіться також [update](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#update).
 
 ```javascript
-var isQueen = R.propEq('rank', 'Q');
-var isSpade = R.propEq('suit', '♠︎');
-var isQueenOfSpades = R.allPass([isQueen, isSpade]);
-
-isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
-isQueenOfSpades({rank: 'Q', suit: '♠︎'}); //=> true
+R.adjust(R.add(10), 1, [1, 2, 3]);     //=> [1, 12, 3]
+R.adjust(R.add(10))(1)([1, 2, 3]);     //=> [1, 12, 3]
 ```
-Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20isQueen%20%3D%20R.propEq%28%27rank%27%2C%20%27Q%27%29%3B%0Avar%20isSpade%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A0%EF%B8%8E%27%29%3B%0Avar%20isQueenOfSpades%20%3D%20R.allPass%28%5BisQueen%2C%20isSpade%5D%29%3B%0A%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A3%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20false%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A0%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20true)
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?R.adjust%28R.add%2810%29%2C%201%2C%20%5B1%2C%202%2C%203%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B1%2C%2012%2C%203%5D%0AR.adjust%28R.add%2810%29%29%281%29%28%5B1%2C%202%2C%203%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B1%2C%2012%2C%203%5D)
 
 **[⬆ вверх](#Документація)**
 
@@ -152,5 +149,33 @@ complementaryAngle(30); //=> 60
 complementaryAngle(72); //=> 18
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.subtract%2810%2C%208%29%3B%20%2F%2F%3D%3E%202%0A%0Avar%20minus5%20%3D%20R.subtract%28R.__%2C%205%29%3B%0Aminus5%2817%29%3B%20%2F%2F%3D%3E%2012%0A%0Avar%20complementaryAngle%20%3D%20R.subtract%2890%29%3B%0AcomplementaryAngle%2830%29%3B%20%2F%2F%3D%3E%2060%0AcomplementaryAngle%2872%29%3B%20%2F%2F%3D%3E%2018)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## update
+### `[List]`
+
+`Number → a → [a] → [a]`
+
+#### Параметри:
+| idx | Індекс, який необхідно оновити |
+:---|:---|
+| x | Значення, на яке має на зазначеному за індексом місці у масиві, що повернеться. |
+| list | Цільовий масиво-подібний об'єкт, який має бути оновленим. |
+| повертає __Array__ | A copy of `list` with the value at index `idx` replaced with `x`. |
+
+_Додано у версії v0.14.0_
+
+Повертає нову копію масиву з елементом(на вказаному за індексом місці) заміненим на передане значення.
+
+Дивіться також [adjust](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#adjust).
+
+```javascript
+R.update(1, 11, [0, 1, 2]);     //=> [0, 11, 2]
+R.update(1)(11)([0, 1, 2]);     //=> [0, 11, 2]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?R.update%281%2C%2011%2C%20%5B0%2C%201%2C%202%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B0%2C%2011%2C%202%5D%0AR.update%281%29%2811%29%28%5B0%2C%201%2C%202%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B0%2C%2011%2C%202%5D)
 
 **[⬆ вверх](#Документація)**
