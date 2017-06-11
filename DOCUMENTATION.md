@@ -1,16 +1,17 @@
 # Документація
 
 - [__](#__) `Function`
-- [add](#add) `Match`
+- [add](#add) `Math`
+- [subtract](#subtract) `Math`
 
 Here will live all translated methods names with anchor links to the translated sections below
 
 ________
 
-## __ 
+## __
 ### `[Function]`
 
-Додано у версії v0.6.0
+_Додано у версії v0.6.0_
 
 Спеціальне значення, для визначення "прогалин" у каррованих функціях,
 яке дає змогу частковому застосуванню будь-якої комбінації аргументів, в незалежності від їх позицій.
@@ -34,8 +35,8 @@ greet('Alice'); //=> 'Hello, Alice!'
 
 
 
-## add 
-### `[Match]`
+## add
+### `[Math]`
 
 `Number → Number → Number`
 
@@ -45,16 +46,49 @@ greet('Alice'); //=> 'Hello, Alice!'
 | b |
 | повертає __Number__ |
 
-Додано у версії v0.1.0
+_Додано у версії v0.1.0_
 
 Додає два значення
 
-Дивіться також [subtract](). __(на данний момент переклад `subtract` відсутній)__
+Дивіться також [subtract](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#subtract).
 
 ```javascript
 R.add(2, 3);       //=>  5
 R.add(7)(10);      //=> 17
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.add%282%2C%203%29%3B%20%20%20%20%20%20%20%2F%2F%3D%3E%20%205%0AR.add%287%29%2810%29%3B%20%20%20%20%20%20%2F%2F%3D%3E%2017)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## subtract
+### `[Math]`
+
+`Number → Number → Number`
+
+#### Параметри:
+| a | перший аргумент |
+:---|:---|
+| b | другий аргумент |
+| повертає __Number__ | Результат `a-b` |
+
+_Додано у версії v0.1.0_
+
+Віднімає свій другий аргумент від першого.
+
+Дивіться також [add](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#add).
+
+```javascript
+R.subtract(10, 8); //=> 2
+
+var minus5 = R.subtract(R.__, 5);
+minus5(17); //=> 12
+
+var complementaryAngle = R.subtract(90);
+complementaryAngle(30); //=> 60
+complementaryAngle(72); //=> 18
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.subtract%2810%2C%208%29%3B%20%2F%2F%3D%3E%202%0A%0Avar%20minus5%20%3D%20R.subtract%28R.__%2C%205%29%3B%0Aminus5%2817%29%3B%20%2F%2F%3D%3E%2012%0A%0Avar%20complementaryAngle%20%3D%20R.subtract%2890%29%3B%0AcomplementaryAngle%2830%29%3B%20%2F%2F%3D%3E%2060%0AcomplementaryAngle%2872%29%3B%20%2F%2F%3D%3E%2018)
 
 **[⬆ вверх](#Документація)**
