@@ -3,6 +3,7 @@
 - [__](#__) `Function`
 - [add](#add) `Math`
 - [addIndex](#addindex) `Function`
+- [adjust](#adjust) `List`
 - [subtract](#subtract) `Math`
 
 Here will live all translated methods names with anchor links to the translated sections below
@@ -86,6 +87,38 @@ mapIndexed((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r']);
 //=> ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20mapIndexed%20%3D%20R.addIndex%28R.map%29%3B%0AmapIndexed%28%28val%2C%20idx%29%20%3D%3E%20idx%20%2B%20%27-%27%20%2B%20val%2C%20%5B%27f%27%2C%20%27o%27%2C%20%27o%27%2C%20%27b%27%2C%20%27a%27%2C%20%27r%27%5D%29%3B%0A%2F%2F%3D%3E%20%5B%270-f%27%2C%20%271-o%27%2C%20%272-o%27%2C%20%273-b%27%2C%20%274-a%27%2C%20%275-r%27%5D)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## adjust
+### `[List]`
+
+`(a → a) → Number → [a] → [a]`
+
+#### Параметри:
+| fn | Функція яка буде застосована |
+:---|:---|
+| idx | Індекс |
+| list | Масиво-подібний об'єкт, чиє значення буде замінено на вказаному за індексом місці. |
+| повертає __Array__ | Копію переданого масиво-подібного об'єкту, з елементом (на місці згідно з індексом `idx`) заміненим значенням яке повернулось після застосування функції `fn` до існуючого елемента. |
+
+_Додано у версії v0.14.0_
+
+Застосовує функцію до вказаного за індексом елемента у масиві, повертаючи нову копію масиву з елементом, на вказаному за індексом місці, заміненим результатом застосованої функції.
+
+Дивіться також [update](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#update).
+
+```javascript
+var isQueen = R.propEq('rank', 'Q');
+var isSpade = R.propEq('suit', '♠︎');
+var isQueenOfSpades = R.allPass([isQueen, isSpade]);
+
+isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
+isQueenOfSpades({rank: 'Q', suit: '♠︎'}); //=> true
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20isQueen%20%3D%20R.propEq%28%27rank%27%2C%20%27Q%27%29%3B%0Avar%20isSpade%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A0%EF%B8%8E%27%29%3B%0Avar%20isQueenOfSpades%20%3D%20R.allPass%28%5BisQueen%2C%20isSpade%5D%29%3B%0A%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A3%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20false%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A0%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20true)
 
 **[⬆ вверх](#Документація)**
 
