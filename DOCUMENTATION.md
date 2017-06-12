@@ -6,6 +6,7 @@
 - [adjust](#adjust) `List`
 - [all](#all) `List`
 - [any](#any) `List`
+- [none](#none) `List`
 - [subtract](#subtract) `Math`
 - [update](#update) `List`
 
@@ -182,6 +183,37 @@ R.any(lessThan0)([1, 2]); //=> false
 R.any(lessThan2)([1, 2]); //=> true
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20lessThan0%20%3D%20R.flip%28R.lt%29%280%29%3B%0Avar%20lessThan2%20%3D%20R.flip%28R.lt%29%282%29%3B%0AR.any%28lessThan0%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20false%0AR.any%28lessThan2%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20true)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## none
+### `[List]`
+
+`(a → Boolean) → [a] → Boolean`
+
+#### Параметри:
+| fn | Функція предикат |
+:---|:---|
+| list | Масив, який має бути оцінений. |
+| повертає __Boolean__ | `true`, якщо предикат не вдовольняє жоден з елементів, в іншому випадку повернеться `false`. |
+
+_Додано у версії v0.12.0_
+
+Повертає `true`, якщо жоден елемент списку не відповідає предикату, в іншому випадку поверне `false`.
+
+Застосовує до кожного методу другого аргументу, якщо він присутній.
+
+Дивіться також [all](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#all), [any](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#any).
+
+```javascript
+var isEven = n => n % 2 === 0;
+
+R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
+R.none(isEven, [1, 3, 5, 7, 8, 11]); //=> false
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20isEven%20%3D%20n%20%3D%3E%20n%20%25%202%20%3D%3D%3D%200%3B%0A%0AR.none%28isEven%2C%20%5B1%2C%203%2C%205%2C%207%2C%209%2C%2011%5D%29%3B%20%2F%2F%3D%3E%20true%0AR.none%28isEven%2C%20%5B1%2C%203%2C%205%2C%207%2C%208%2C%2011%5D%29%3B%20%2F%2F%3D%3E%20false)
 
 **[⬆ вверх](#Документація)**
 
