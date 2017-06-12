@@ -4,10 +4,10 @@
 - [add](#add) `Math`
 - [addIndex](#addindex) `Function`
 - [adjust](#adjust) `List`
+- [all](#all) `List`
 - [subtract](#subtract) `Math`
 - [update](#update) `List`
 
-Here will live all translated methods names with anchor links to the translated sections below
 
 ________
 
@@ -116,6 +116,38 @@ R.adjust(R.add(10), 1, [1, 2, 3]);     //=> [1, 12, 3]
 R.adjust(R.add(10))(1)([1, 2, 3]);     //=> [1, 12, 3]
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?R.adjust%28R.add%2810%29%2C%201%2C%20%5B1%2C%202%2C%203%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B1%2C%2012%2C%203%5D%0AR.adjust%28R.add%2810%29%29%281%29%28%5B1%2C%202%2C%203%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B1%2C%2012%2C%203%5D)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## all
+### `[List]`
+
+`(a → Boolean) → [a] → Boolean`
+
+#### Параметри:
+| fn | Функція предикат |
+:---|:---|
+| list | Масив, який має бути оцінений. |
+| повертає __Boolean__ | `true` if the predicate is satisfied by every element, `false` otherwise. |
+
+_Додано у версії v0.1.0_
+
+Повертає `true`, якщо всі елементи списку відповідають предикату, `false`, якщо у списку немає жодного який би відповідав.
+
+Застосовує до всіх метод другого аргументу, якщо він присутній.
+
+Діє як перетворювач(трансдюсер), якщо трансформер зазначений на місці списку.
+
+Дивіться також [any](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#any), [none](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#none), [transduce](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#transduce).
+
+```javascript
+var equals3 = R.equals(3);
+R.all(equals3)([3, 3, 3, 3]); //=> true
+R.all(equals3)([3, 3, 1, 3]); //=> false
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20equals3%20%3D%20R.equals%283%29%3B%0AR.all%28equals3%29%28%5B3%2C%203%2C%203%2C%203%5D%29%3B%20%2F%2F%3D%3E%20true%0AR.all%28equals3%29%28%5B3%2C%203%2C%201%2C%203%5D%29%3B%20%2F%2F%3D%3E%20false)
 
 **[⬆ вверх](#Документація)**
 
