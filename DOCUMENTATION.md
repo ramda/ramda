@@ -5,6 +5,7 @@
 - [addIndex](#addindex) `Function`
 - [adjust](#adjust) `List`
 - [all](#all) `List`
+- [any](#any) `List`
 - [subtract](#subtract) `Math`
 - [update](#update) `List`
 
@@ -130,7 +131,7 @@ R.adjust(R.add(10))(1)([1, 2, 3]);     //=> [1, 12, 3]
 | fn | Функція предикат |
 :---|:---|
 | list | Масив, який має бути оцінений. |
-| повертає __Boolean__ | `true` if the predicate is satisfied by every element, `false` otherwise. |
+| повертає __Boolean__ | `true`, якщо предикат вдовольняється кожним з елементів, в іншому випадку повернеться `false`. |
 
 _Додано у версії v0.1.0_
 
@@ -148,6 +149,39 @@ R.all(equals3)([3, 3, 3, 3]); //=> true
 R.all(equals3)([3, 3, 1, 3]); //=> false
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20equals3%20%3D%20R.equals%283%29%3B%0AR.all%28equals3%29%28%5B3%2C%203%2C%203%2C%203%5D%29%3B%20%2F%2F%3D%3E%20true%0AR.all%28equals3%29%28%5B3%2C%203%2C%201%2C%203%5D%29%3B%20%2F%2F%3D%3E%20false)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## any
+### `[List]`
+
+`(a → Boolean) → [a] → Boolean`
+
+#### Параметри:
+| fn | Функція предикат |
+:---|:---|
+| list | Масив, який має бути оцінений. |
+| повертає __Boolean__ | `true`, якщо предикат вдовольняє хоча б один з елементів, в іншому випадку повернеться `false`. |
+
+_Додано у версії v0.1.0_
+
+Повертає `true`, якщо бодай один елемент списку відповідає предикату, в іншому випадку поверне `false`.
+
+Застосовує до будь-якого методу другого аргументу, якщо він присутній.
+
+Діє як перетворювач(трансдюсер), якщо трансформер зазначений на місці списку.
+
+Дивіться також [all](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#all), [none](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#none), [transduce](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#transduce).
+
+```javascript
+var lessThan0 = R.flip(R.lt)(0);
+var lessThan2 = R.flip(R.lt)(2);
+R.any(lessThan0)([1, 2]); //=> false
+R.any(lessThan2)([1, 2]); //=> true
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20lessThan0%20%3D%20R.flip%28R.lt%29%280%29%3B%0Avar%20lessThan2%20%3D%20R.flip%28R.lt%29%282%29%3B%0AR.any%28lessThan0%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20false%0AR.any%28lessThan2%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20true)
 
 **[⬆ вверх](#Документація)**
 
