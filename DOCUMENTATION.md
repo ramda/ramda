@@ -6,9 +6,11 @@
 - [adjust](#adjust) `List`
 - [all](#all) `List`
 - [any](#any) `List`
-- [identity](#) ``
+- [compose](#compose) `Function`
+- [identity](#identity) `Function`
 - [into](#into) `List`
 - [none](#none) `List`
+- [pipe](#) ``
 - [reduce](#) ``
 - [reduced](#) ``
 - [subtract](#subtract) `Math`
@@ -187,6 +189,37 @@ R.any(lessThan0)([1, 2]); //=> false
 R.any(lessThan2)([1, 2]); //=> true
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20lessThan0%20%3D%20R.flip%28R.lt%29%280%29%3B%0Avar%20lessThan2%20%3D%20R.flip%28R.lt%29%282%29%3B%0AR.any%28lessThan0%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20false%0AR.any%28lessThan2%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20true)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## compose
+### `[Function]`
+
+`((y → z), (x → y), …, (o → p), ((a, b, …, n) → o)) → ((a, b, …, n) → z)`
+
+#### Параметри:
+| ...functions | Функції, які мають бути складені. |
+:---|:---|
+| повертає __function__ | Складену функцію |
+
+_Додано у версії v0.1.0_
+
+Виконує складання функцію справа наліво. Крайня права функція може мати будь-яку арність, а інші функції повинні бути унарними.
+
+__Зауважте:__ Результат методу `compose` не каррується автоматично.
+
+Дивіться також [pipe](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#pipe).
+
+```javascript
+var classyGreeting = (firstName, lastName) => "The name's " + lastName + ", " + firstName + " " + lastName
+var yellGreeting = R.compose(R.toUpper, classyGreeting);
+yellGreeting('James', 'Bond'); //=> "THE NAME'S BOND, JAMES BOND"
+
+R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20classyGreeting%20%3D%20%28firstName%2C%20lastName%29%20%3D%3E%20%22The%20name%27s%20%22%20%2B%20lastName%20%2B%20%22%2C%20%22%20%2B%20firstName%20%2B%20%22%20%22%20%2B%20lastName%0Avar%20yellGreeting%20%3D%20R.compose%28R.toUpper%2C%20classyGreeting%29%3B%0AyellGreeting%28%27James%27%2C%20%27Bond%27%29%3B%20%2F%2F%3D%3E%20%22THE%20NAME%27S%20BOND%2C%20JAMES%20BOND%22%0A%0AR.compose%28Math.abs%2C%20R.add%281%29%2C%20R.multiply%282%29%29%28-4%29%20%2F%2F%3D%3E%207)
 
 **[⬆ вверх](#Документація)**
 
