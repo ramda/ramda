@@ -6,7 +6,8 @@
 - [adjust](#adjust) `List`
 - [all](#all) `List`
 - [any](#any) `List`
-- [into](#) ``
+- [identity](#) ``
+- [into](#into) `List`
 - [none](#none) `List`
 - [reduce](#) ``
 - [reduced](#) ``
@@ -85,8 +86,7 @@ _Додано у версії v0.15.0_
 
 Створює нову функцію ітерації списку з уже існуючої, за допомогою додавання двох нових аргументів до функції зворотнього виклику: теперішній індекс і весь список.
 
-Це, в свою чергу, перетворить, наприклад функцію `R.map` у функцію, яка більше нагадує `Array.prototype.map`. Зверніть увагу на те, що це спрацює лише для функцій, в яких ітеруюча функція зворотнього виклику є першим аргументом, а список - останнім. (Це)
-This would turn, for instance, R.map function into one that more closely resembles Array.prototype.map. Note that this will only work for functions in which the iteration callback function is the first parameter, and where the list is the last parameter. (Останнє може бути не важливим, якщо аргумент списку не використовується.)
+Це, в свою чергу, перетворить, наприклад функцію `R.map` у функцію, яка більше нагадує `Array.prototype.map`. Зверніть увагу на те, що це спрацює лише для функцій, в яких ітеруюча функція зворотнього виклику є першим аргументом, а список - останнім. (Останнє може бути не важливим, якщо аргумент списку не використовується.)
 
 ```javascript
 var mapIndexed = R.addIndex(R.map);
@@ -187,6 +187,32 @@ R.any(lessThan0)([1, 2]); //=> false
 R.any(lessThan2)([1, 2]); //=> true
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20lessThan0%20%3D%20R.flip%28R.lt%29%280%29%3B%0Avar%20lessThan2%20%3D%20R.flip%28R.lt%29%282%29%3B%0AR.any%28lessThan0%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20false%0AR.any%28lessThan2%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20true)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## identity
+### `[Function]`
+
+`a → a`
+
+#### Параметри:
+| x | Значення яке повернути. |
+:---|:---|
+| повертає __*__ | Введене значення `x` |
+
+_Додано у версії v0.1.0_
+
+Функція, яка нічого не робить, але повертає переданий в неї аргумент. Гарно підходить, щоб бути функцією за замовчуванням чи функцією-заповнювачем.
+
+```javascript
+R.identity(1); //=> 1
+
+var obj = {};
+R.identity(obj) === obj; //=> true
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?R.identity%281%29%3B%20%2F%2F%3D%3E%201%0A%0Avar%20obj%20%3D%20%7B%7D%3B%0AR.identity%28obj%29%20%3D%3D%3D%20obj%3B%20%2F%2F%3D%3E%20true)
 
 **[⬆ вверх](#Документація)**
 
