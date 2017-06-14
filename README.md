@@ -183,6 +183,7 @@ Translations
 -----------------
 
 [Chinese(中文)](http://ramda.cn/)
+[Ukrainian(Українська)](https://github.com/ivanzusko/ramda)
 
 
 Acknowledgements
