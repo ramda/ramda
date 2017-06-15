@@ -5,7 +5,9 @@
 - [addIndex](#addindex) `Function`
 - [adjust](#adjust) `List`
 - [all](#all) `List`
+- [allPass](#allpass) `Logic`
 - [any](#any) `List`
+- [anyPass](#) ``
 - [compose](#compose) `Function`
 - [identity](#identity) `Function`
 - [into](#into) `List`
@@ -157,6 +159,38 @@ R.all(equals3)([3, 3, 3, 3]); //=> true
 R.all(equals3)([3, 3, 1, 3]); //=> false
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20equals3%20%3D%20R.equals%283%29%3B%0AR.all%28equals3%29%28%5B3%2C%203%2C%203%2C%203%5D%29%3B%20%2F%2F%3D%3E%20true%0AR.all%28equals3%29%28%5B3%2C%203%2C%201%2C%203%5D%29%3B%20%2F%2F%3D%3E%20false)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## allPass
+### `[Logic]`
+
+`[(*… → Boolean)] → (*… → Boolean)`
+
+#### Параметри:
+| predicates | масив предикатів, які необхідно перевірити |
+:---|:---|
+| повертає __function__ | об'єднаний предикат |
+
+_Додано у версії v0.9.0_
+
+Приймає список предикатів і повертає предикат, який повертає `true` для заданого списку аргументів, якщо кожен з переданих предикатів задовольяється тими аргументами.
+
+Повернута функція є каррованою, чия арність співпадає з арністю предиката з найвищою арністю.
+
+Дивіться також [anyPass](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#anypass)
+
+```javascript
+var isQueen = R.propEq('rank', 'Q');
+var isSpade = R.propEq('suit', '♠︎');
+var isQueenOfSpades = R.allPass([isQueen, isSpade]);
+
+isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
+isQueenOfSpades({rank: 'Q', suit: '♠︎'}); //=> true
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20isQueen%20%3D%20R.propEq%28%27rank%27%2C%20%27Q%27%29%3B%0Avar%20isSpade%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A0%EF%B8%8E%27%29%3B%0Avar%20isQueenOfSpades%20%3D%20R.allPass%28%5BisQueen%2C%20isSpade%5D%29%3B%0A%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A3%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20false%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A0%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20true)
 
 **[⬆ вверх](#Документація)**
 
