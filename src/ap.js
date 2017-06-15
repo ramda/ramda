@@ -16,6 +16,7 @@ var map = require('./map');
  * @category Function
  * @sig [a -> b] -> [a] -> [b]
  * @sig Apply f => f (a -> b) -> f a -> f b
+ * @sig (a -> b -> c) -> (a -> b) -> (a -> c)
  * @param {*} applyF
  * @param {*} applyX
  * @return {*}
