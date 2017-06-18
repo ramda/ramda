@@ -7,7 +7,7 @@
 - [all](#all) `List`
 - [allPass](#allpass) `Logic`
 - [always](#always) `Function`
-- [and](#) ``
+- [and](#and) `Logic`
 - [any](#any) `List`
 - [anyPass](#anypass) `List`
 - [ap](#) ``
@@ -19,6 +19,7 @@
 - [assoc](#) ``
 - [assocPath](#) ``
 - [binary](#) ``
+- [both](#) ``
 - [compose](#compose) `Function`
 - [identity](#identity) `Function`
 - [into](#into) `List`
@@ -323,6 +324,38 @@ isBlackCard({rank: 'Q', suit: '♠'}); //=> true
 isBlackCard({rank: 'Q', suit: '♦'}); //=> false
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20isClub%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A3%27%29%3B%0Avar%20isSpade%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A0%27%29%3B%0Avar%20isBlackCard%20%3D%20R.anyPass%28%5BisClub%2C%20isSpade%5D%29%3B%0A%0AisBlackCard%28%7Brank%3A%20%2710%27%2C%20suit%3A%20%27%E2%99%A3%27%7D%29%3B%20%2F%2F%3D%3E%20true%0AisBlackCard%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A0%27%7D%29%3B%20%2F%2F%3D%3E%20true%0AisBlackCard%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A6%27%7D%29%3B%20%2F%2F%3D%3E%20false)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## both
+### `[Logic]`
+
+`(*… → Boolean) → (*… → Boolean) → (*… → Boolean)`
+
+#### Параметри:
+| f | Предикат |
+:---|:---|
+| g | Інший предикат |
+| повертає __function__ | функція, що застосовує свої аргументи до `f` та `g` та `&&` їх результатів разом. |
+
+_Додано у версії v0.12.0_
+
+Функція,яка викликає дві переданих функції і повертає `&&` результату. Це поверне результат першої функції, якщо вона `false`і, а інакше поверне другу функцію. __Зауважте__, що коротке замикання, а це означає, що друга функція не буде викликана, якщо перша поверне значення `false`.
+
+В додачу до функцій, `R.both` також приймає будь-які сумісні з `fantasy-land` аплікативні функтори.
+
+Дивіться також [and](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#and).
+
+```javascript
+var gt10 = R.gt(R.__, 10)
+var lt20 = R.lt(R.__, 20)
+var f = R.both(gt10, lt20);
+f(15); //=> true
+f(30); //=> false
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20gt10%20%3D%20R.gt%28R.__%2C%2010%29%0Avar%20lt20%20%3D%20R.lt%28R.__%2C%2020%29%0Avar%20f%20%3D%20R.both%28gt10%2C%20lt20%29%3B%0Af%2815%29%3B%20%2F%2F%3D%3E%20true%0Af%2830%29%3B%20%2F%2F%3D%3E%20false)
 
 **[⬆ вверх](#Документація)**
 
