@@ -7,12 +7,12 @@
 - [all](#all) `List`
 - [allPass](#allpass) `Logic`
 - [any](#any) `List`
-- [anyPass](#) ``
+- [anyPass](#anypass) `List`
 - [compose](#compose) `Function`
 - [identity](#identity) `Function`
 - [into](#into) `List`
 - [none](#none) `List`
-- [pipe](#) `Function`
+- [pipe](#pipe) `Function`
 - [reduce](#reduce) `List`
 - [reduced](#reduced) `List`
 - [reduceRight](#reduceright) `List`
@@ -224,6 +224,39 @@ R.any(lessThan0)([1, 2]); //=> false
 R.any(lessThan2)([1, 2]); //=> true
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20lessThan0%20%3D%20R.flip%28R.lt%29%280%29%3B%0Avar%20lessThan2%20%3D%20R.flip%28R.lt%29%282%29%3B%0AR.any%28lessThan0%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20false%0AR.any%28lessThan2%29%28%5B1%2C%202%5D%29%3B%20%2F%2F%3D%3E%20true)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## anyPass
+### `[Logic]`
+
+`[(*… → Boolean)] → (*… → Boolean)`
+
+#### Параметри:
+| predicates | масив предикатів, які необхідно перевірити |
+:---|:---|
+| повертає __function__ | об'єднаний предикат |
+
+_Додано у версії v0.9.0_
+
+Приймає список предикатів і повертає предикат, який повертає `true` для заданого списку аргументів, якщо хоча б один з переданих предикатів задовольяється тими аргументами.
+
+Повернута функція є каррованою, чия арність співпадає з арністю предиката з найвищою арністю.
+
+Дивіться також [allPass](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#allpass)
+
+```javascript
+var isClub = R.propEq('suit', '♣');
+var isSpade = R.propEq('suit', '♠');
+var isBlackCard = R.anyPass([isClub, isSpade]);
+
+isBlackCard({rank: '10', suit: '♣'}); //=> true
+isBlackCard({rank: 'Q', suit: '♠'}); //=> true
+isBlackCard({rank: 'Q', suit: '♦'}); //=> false
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20isClub%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A3%27%29%3B%0Avar%20isSpade%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A0%27%29%3B%0Avar%20isBlackCard%20%3D%20R.anyPass%28%5BisClub%2C%20isSpade%5D%29%3B%0A%0AisBlackCard%28%7Brank%3A%20%2710%27%2C%20suit%3A%20%27%E2%99%A3%27%7D%29%3B%20%2F%2F%3D%3E%20true%0AisBlackCard%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A0%27%7D%29%3B%20%2F%2F%3D%3E%20true%0AisBlackCard%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A6%27%7D%29%3B%20%2F%2F%3D%3E%20false)
 
 **[⬆ вверх](#Документація)**
 
