@@ -10,7 +10,7 @@
 - [and](#and) `Logic`
 - [any](#any) `List`
 - [anyPass](#anypass) `List`
-- [ap](#) ``
+- [ap](#ap) `Function`
 - [aperture](#) ``
 - [append](#) ``
 - [apply](#) ``
@@ -19,7 +19,7 @@
 - [assoc](#) ``
 - [assocPath](#) ``
 - [binary](#) ``
-- [both](#) ``
+- [both](#both) `Logic`
 - [compose](#compose) `Function`
 - [identity](#identity) `Function`
 - [into](#into) `List`
@@ -324,6 +324,35 @@ isBlackCard({rank: 'Q', suit: '♠'}); //=> true
 isBlackCard({rank: 'Q', suit: '♦'}); //=> false
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20isClub%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A3%27%29%3B%0Avar%20isSpade%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A0%27%29%3B%0Avar%20isBlackCard%20%3D%20R.anyPass%28%5BisClub%2C%20isSpade%5D%29%3B%0A%0AisBlackCard%28%7Brank%3A%20%2710%27%2C%20suit%3A%20%27%E2%99%A3%27%7D%29%3B%20%2F%2F%3D%3E%20true%0AisBlackCard%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A0%27%7D%29%3B%20%2F%2F%3D%3E%20true%0AisBlackCard%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A6%27%7D%29%3B%20%2F%2F%3D%3E%20false)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## ap
+### `[Function]`
+
+`[a → b] → [a] → [b]`
+
+`Apply f => f (a → b) → f a → f b`
+
+#### Параметри:
+| applyF |
+:---|
+| applyX |
+| повертає __*__ |
+
+_Додано у версії v0.3.0_
+
+`ap` застосовує список функцій до списку значень.
+
+Передає метод `ap` другого аргумента, якщо той присутній. Також сприймає карровані функції як аплікативи.
+
+```javascript
+R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]
+R.ap([R.concat('tasty '), R.toUpper], ['pizza', 'salad']); //=> ["tasty pizza", "tasty salad", "PIZZA", "SALAD"]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.ap%28%5BR.multiply%282%29%2C%20R.add%283%29%5D%2C%20%5B1%2C2%2C3%5D%29%3B%20%2F%2F%3D%3E%20%5B2%2C%204%2C%206%2C%204%2C%205%2C%206%5D%0AR.ap%28%5BR.concat%28%27tasty%20%27%29%2C%20R.toUpper%5D%2C%20%5B%27pizza%27%2C%20%27salad%27%5D%29%3B%20%2F%2F%3D%3E%20%5B%22tasty%20pizza%22%2C%20%22tasty%20salad%22%2C%20%22PIZZA%22%2C%20%22SALAD%22%5D)
 
 **[⬆ вверх](#Документація)**
 
