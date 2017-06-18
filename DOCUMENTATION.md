@@ -7,8 +7,18 @@
 - [all](#all) `List`
 - [allPass](#allpass) `Logic`
 - [always](#always) `Function`
+- [and](#) ``
 - [any](#any) `List`
 - [anyPass](#anypass) `List`
+- [ap](#) ``
+- [aperture](#) ``
+- [append](#) ``
+- [apply](#) ``
+- [applySpec](#) ``
+- [ascend](#) ``
+- [assoc](#) ``
+- [assocPath](#) ``
+- [binary](#) ``
 - [compose](#compose) `Function`
 - [identity](#identity) `Function`
 - [into](#into) `List`
@@ -218,6 +228,35 @@ var t = R.always('Tee');
 t(); //=> 'Tee'
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20t%20%3D%20R.always%28%27Tee%27%29%3B%0At%28%29%3B%20%2F%2F%3D%3E%20%27Tee%27)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## and
+### `[Logic]`
+
+`a → b → a | b`
+
+#### Параметри:
+| a | |
+:---|:---|
+| b | |
+| повертає __Any__ | перший аргумент, якщо він falsy, інакше - другий аргумент. |
+
+_Додано у версії v0.1.0_
+
+Повертає __`true`__, якщо обидва аргументи правидиві(`true`), інакше повертає - `false`.
+
+Дивіться також [both](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#both).
+
+```javascript
+R.and(true, true); //=> true
+R.and(true, false); //=> false
+R.and(false, true); //=> false
+R.and(false, false); //=> false
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.and%28true%2C%20true%29%3B%20%2F%2F%3D%3E%20true%0AR.and%28true%2C%20false%29%3B%20%2F%2F%3D%3E%20false%0AR.and%28false%2C%20true%29%3B%20%2F%2F%3D%3E%20false%0AR.and%28false%2C%20false%29%3B%20%2F%2F%3D%3E%20false)
 
 **[⬆ вверх](#Документація)**
 
