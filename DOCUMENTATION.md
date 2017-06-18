@@ -6,6 +6,7 @@
 - [adjust](#adjust) `List`
 - [all](#all) `List`
 - [allPass](#allpass) `Logic`
+- [always](#always) `Function`
 - [any](#any) `List`
 - [anyPass](#anypass) `List`
 - [compose](#compose) `Function`
@@ -191,6 +192,32 @@ isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
 isQueenOfSpades({rank: 'Q', suit: '♠︎'}); //=> true
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20isQueen%20%3D%20R.propEq%28%27rank%27%2C%20%27Q%27%29%3B%0Avar%20isSpade%20%3D%20R.propEq%28%27suit%27%2C%20%27%E2%99%A0%EF%B8%8E%27%29%3B%0Avar%20isQueenOfSpades%20%3D%20R.allPass%28%5BisQueen%2C%20isSpade%5D%29%3B%0A%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A3%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20false%0AisQueenOfSpades%28%7Brank%3A%20%27Q%27%2C%20suit%3A%20%27%E2%99%A0%EF%B8%8E%27%7D%29%3B%20%2F%2F%3D%3E%20true)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## always
+### `[Function]`
+
+`a → (* → a)`
+
+#### Параметри:
+| val | Значення, яке необхідно обгорнути у функцію |
+:---|:---|
+| повертає __function__ | функція :: * -> val. |
+
+_Додано у версії v0.1.0_
+
+Повертає функцію, яка завжди повертає передане значення. __Зауважте__, що для не примітивів поертаєме значення буде посиланням а оригінальне значення.
+
+Ця функція відома як `const`, константа, чи K (для K комбінатор) у інших мовах та бібліотеках.
+
+```javascript
+var t = R.always('Tee');
+t(); //=> 'Tee'
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20t%20%3D%20R.always%28%27Tee%27%29%3B%0At%28%29%3B%20%2F%2F%3D%3E%20%27Tee%27)
 
 **[⬆ вверх](#Документація)**
 
