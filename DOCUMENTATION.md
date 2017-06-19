@@ -14,13 +14,15 @@
 - [aperture](#aperture) `List`
 - [append](#append) `List`
 - [apply](#apply) `Function`
-- [applySpec](#) ``
+- [applySpec](#applyspec) `Function`
 - [ascend](#) ``
 - [assoc](#) ``
 - [assocPath](#) ``
 - [binary](#) ``
 - [both](#both) `Logic`
 - [compose](#compose) `Function`
+- [converge](#) ``
+- [juxt](#) ``
 - [identity](#identity) `Function`
 - [into](#into) `List`
 - [none](#none) `List`
@@ -443,6 +445,35 @@ var nums = [1, 2, 3, -99, 42, 6, 7];
 R.apply(Math.max, nums); //=> 42
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20nums%20%3D%20%5B1%2C%202%2C%203%2C%20-99%2C%2042%2C%206%2C%207%5D%3B%0AR.apply%28Math.max%2C%20nums%29%3B%20%2F%2F%3D%3E%2042)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## applySpec
+### `[Function]`
+
+`{k: ((a, b, …, m) → v)} → ((a, b, …, m) → {k: v})`
+
+#### Параметри:
+| spec | Об'єкт, який рекурсивно відображає властивості функцій для отримання значеннь для цих властивостей. |
+:---|:---|
+| повертає __function__ | Функція, котра повертає об'єкт з такою ж структурою як і об'єкт `spec`, з кожною властивістю встановленою до значення, яке було повернуте викликом пов'язаної функції з переданими аргументами. |
+
+_Додано у версії v0.20.0_
+
+Враховуючи, що об'єкт `spec` рекурсивно відображає властивості для функції, створюється функція, яка створює об'єкт з такою самою структурою, шляхом співставлення кожної властивості з результатом виклику його пов'язаної функції з переданими аргументами.
+
+Дивіться також [converge](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#converge), [juxt](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#juxt).
+
+```javascript
+var getMetrics = R.applySpec({
+                                sum: R.add,
+                                nested: { mul: R.multiply }
+                             });
+getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20getMetrics%20%3D%20R.applySpec%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sum%3A%20R.add%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20nested%3A%20%7B%20mul%3A%20R.multiply%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0AgetMetrics%282%2C%204%29%3B%20%2F%2F%20%3D%3E%20%7B%20sum%3A%206%2C%20nested%3A%20%7B%20mul%3A%208%20%7D%20%7D)
 
 **[⬆ вверх](#Документація)**
 
