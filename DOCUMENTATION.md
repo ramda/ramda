@@ -16,13 +16,14 @@
 - [apply](#apply) `Function`
 - [applySpec](#applyspec) `Function`
 - [ascend](#ascend) `Function`
-- [assoc](#) ``
+- [assoc](#assoc) `Object`
 - [assocPath](#) ``
 - [binary](#) ``
 - [both](#both) `Logic`
 - [compose](#compose) `Function`
 - [converge](#) ``
 - [descend](#) ``
+- [dissoc](#) ``
 - [juxt](#) ``
 - [identity](#identity) `Function`
 - [into](#into) `List`
@@ -506,6 +507,33 @@ var people = [
 var peopleByYoungestFirst = R.sort(byAge, people);
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20byAge%20%3D%20R.ascend%28R.prop%28%27age%27%29%29%3B%0Avar%20people%20%3D%20%5B%0A%20%20%2F%2F%20...%0A%5D%3B%0Avar%20peopleByYoungestFirst%20%3D%20R.sort%28byAge%2C%20people%29%3B)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## assoc
+### `[Object]`
+
+`String → a → {k: v} → {k: v}`
+
+#### Параметри:
+| prop | Ім'я влативості яке має бути задане. |
+:---|:---|
+| val | Нове значення |
+| obj | Об'єкт який має бути скопійований. |
+| повертає __Object__ | Новий об'єкт, еквівалентний оригінальному, окрім зміненої властивості. |
+
+_Додано у версії v0.8.0_
+
+Робить поверхневу копію об'єкта задаючи чи перезаписуючи зазначену властивість новим значенням. __Зауважте__, що це так само копіює та вирівнює значення прототипів у нового об'єкта. Всі не примітивні значення копіюються за посиланням.
+
+Дивіться також [dissoc](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#dissoc).
+
+```javascript
+R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.assoc%28%27c%27%2C%203%2C%20%7Ba%3A%201%2C%20b%3A%202%7D%29%3B%20%2F%2F%3D%3E%20%7Ba%3A%201%2C%20b%3A%202%2C%20c%3A%203%7D)
 
 **[⬆ вверх](#Документація)**
 
