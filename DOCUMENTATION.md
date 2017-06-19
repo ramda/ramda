@@ -12,8 +12,8 @@
 - [anyPass](#anypass) `List`
 - [ap](#ap) `Function`
 - [aperture](#aperture) `List`
-- [append](#) ``
-- [apply](#) ``
+- [append](#append) `List`
+- [apply](#apply) `Function`
 - [applySpec](#) ``
 - [ascend](#) ``
 - [assoc](#) ``
@@ -25,6 +25,7 @@
 - [into](#into) `List`
 - [none](#none) `List`
 - [pipe](#pipe) `Function`
+- [prepend](#prepend) `List`
 - [reduce](#reduce) `List`
 - [reduced](#reduced) `List`
 - [reduceRight](#reduceright) `List`
@@ -392,6 +393,61 @@ R.aperture(7, [1, 2, 3, 4, 5]); //=> []
 
 
 
+## append
+### `[List]`
+
+`a → [a] → [a]`
+
+#### Параметри:
+| el | Елемент, який треба додати до кінця списку. |
+:---|:---|
+| list | Список елементів до якого слід додати елемент. |
+| повертає __Array__ | Новий список включаючий в себе елементи старого списку та вкінці доданий елемент `el`. |
+
+_Додано у версії v0.1.0_
+
+Повертає новий список, в якому знаходяться елементи переданого в якості параметру списку, та вкінці елемент переданий в якості аргументу.
+
+Дивіться також [prepend](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#prepend).
+
+```javascript
+R.append('tests', ['write', 'more']); //=> ['write', 'more', 'tests']
+R.append('tests', []); //=> ['tests']
+R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.append%28%27tests%27%2C%20%5B%27write%27%2C%20%27more%27%5D%29%3B%20%2F%2F%3D%3E%20%5B%27write%27%2C%20%27more%27%2C%20%27tests%27%5D%0AR.append%28%27tests%27%2C%20%5B%5D%29%3B%20%2F%2F%3D%3E%20%5B%27tests%27%5D%0AR.append%28%5B%27tests%27%5D%2C%20%5B%27write%27%2C%20%27more%27%5D%29%3B%20%2F%2F%3D%3E%20%5B%27write%27%2C%20%27more%27%2C%20%5B%27tests%27%5D%5D)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## apply
+### `[Function]`
+
+`(*… → a) → [*] → a`
+
+#### Параметри:
+| fn | Функція, яка буде викликана з аргументами `args` |
+:---|:---|
+| args | Аргументи, з якими має бути киликана функція `fn`. |
+| повертає __*__ результат | Результат, рівний `fn(...args)` |
+
+_Додано у версії v0.7.0_
+
+Застосовує функцію `fn` до списку аргументів `args`. Це корисно для створення функції з фіксованою арністю із варіаційної функції. `fn` повинна бути прив'язаною функцією, у разі якщо контекст важливий.
+
+Дивіться також [call](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#call), [unapply](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#unapply).
+
+```javascript
+var nums = [1, 2, 3, -99, 42, 6, 7];
+R.apply(Math.max, nums); //=> 42
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20nums%20%3D%20%5B1%2C%202%2C%203%2C%20-99%2C%2042%2C%206%2C%207%5D%3B%0AR.apply%28Math.max%2C%20nums%29%3B%20%2F%2F%3D%3E%2042)
+
+**[⬆ вверх](#Документація)**
+
+
+
 ## both
 ### `[Logic]`
 
@@ -575,6 +631,32 @@ var f = R.pipe(Math.pow, R.negate, R.inc);
 f(3, 4); // -(3^4) + 1
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20f%20%3D%20R.pipe%28Math.pow%2C%20R.negate%2C%20R.inc%29%3B%0A%0Af%283%2C%204%29%3B%20%2F%2F%20-%283%5E4%29%20%2B%201)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## prepend
+### `[List]`
+
+`a → [a] → [a]`
+
+#### Параметри:
+| el | Елемент, який треба додати до початку списку. |
+:---|:---|
+| list | Список елементів до якого слід додати елемент. |
+| повертає __Array__ | Новий масив. |
+
+_Додано у версії v0.1.0_
+
+Повертає новий список, в якому знаходяться елементи переданого в якості параметру списку, та на початку елемент переданий в якості аргументу.
+
+Дивіться також [append](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#append).
+
+```javascript
+R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.prepend%28%27fee%27%2C%20%5B%27fi%27%2C%20%27fo%27%2C%20%27fum%27%5D%29%3B%20%2F%2F%3D%3E%20%5B%27fee%27%2C%20%27fi%27%2C%20%27fo%27%2C%20%27fum%27%5D)
 
 **[⬆ вверх](#Документація)**
 
