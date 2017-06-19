@@ -17,7 +17,7 @@
 - [applySpec](#applyspec) `Function`
 - [ascend](#ascend) `Function`
 - [assoc](#assoc) `Object`
-- [assocPath](#) ``
+- [assocPath](#assocpath) `Object`
 - [binary](#) ``
 - [both](#both) `Logic`
 - [compose](#compose) `Function`
