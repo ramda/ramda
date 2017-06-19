@@ -15,13 +15,14 @@
 - [append](#append) `List`
 - [apply](#apply) `Function`
 - [applySpec](#applyspec) `Function`
-- [ascend](#) ``
+- [ascend](#ascend) `Function`
 - [assoc](#) ``
 - [assocPath](#) ``
 - [binary](#) ``
 - [both](#both) `Logic`
 - [compose](#compose) `Function`
 - [converge](#) ``
+- [descend](#) ``
 - [juxt](#) ``
 - [identity](#identity) `Function`
 - [into](#into) `List`
@@ -474,6 +475,37 @@ var getMetrics = R.applySpec({
 getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20getMetrics%20%3D%20R.applySpec%28%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20sum%3A%20R.add%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20nested%3A%20%7B%20mul%3A%20R.multiply%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%29%3B%0AgetMetrics%282%2C%204%29%3B%20%2F%2F%20%3D%3E%20%7B%20sum%3A%206%2C%20nested%3A%20%7B%20mul%3A%208%20%7D%20%7D)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## ascend
+### `[Function]`
+
+`Ord b => (a → b) → a → a → Number`
+
+#### Параметри:
+| fn | Функція арністю один, котра повертає значення, яке може бути порівняним. |
+:---|:---|
+| a | Перший елемент для порівняння. |
+| b | Другий елемент для порівняння. |
+| повертає __Number__ | `-1` якщо `fn(a) < fn(b)`, `1` - якщо `fn(b) < fn(a)`, інакше поверне `0` |
+
+_Додано у версії v0.23.0_
+
+Робить висхідну функцію порівняння, яка повертає значення як може бути порівняне за допомогою `<` та `>`.
+
+Дивіться також [descend](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#descend).
+
+```javascript
+var byAge = R.ascend(R.prop('age'));
+var people = [
+  // ...
+];
+var peopleByYoungestFirst = R.sort(byAge, people);
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20byAge%20%3D%20R.ascend%28R.prop%28%27age%27%29%29%3B%0Avar%20people%20%3D%20%5B%0A%20%20%2F%2F%20...%0A%5D%3B%0Avar%20peopleByYoungestFirst%20%3D%20R.sort%28byAge%2C%20people%29%3B)
 
 **[⬆ вверх](#Документація)**
 
