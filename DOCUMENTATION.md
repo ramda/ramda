@@ -18,15 +18,17 @@
 - [ascend](#ascend) `Function`
 - [assoc](#assoc) `Object`
 - [assocPath](#assocpath) `Object`
-- [binary](#) ``
+- [binary](#binary) `Function`
 - [both](#both) `Logic`
 - [compose](#compose) `Function`
 - [converge](#) ``
 - [descend](#) ``
 - [dissoc](#) ``
+- [dissocPath](#) ``
 - [juxt](#) ``
 - [identity](#identity) `Function`
 - [into](#into) `List`
+- [nAry](#) ``
 - [none](#none) `List`
 - [pipe](#pipe) `Function`
 - [prepend](#prepend) `List`
@@ -35,6 +37,7 @@
 - [reduceRight](#reduceright) `List`
 - [subtract](#subtract) `Math`
 - [transduce](#transduce) `List`
+- [unary](#) ``
 - [update](#update) `List`
 - [xprod](#xprod) `List`
 - [zip](#zip) `List`
@@ -565,6 +568,40 @@ R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}
 R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.assocPath%28%5B%27a%27%2C%20%27b%27%2C%20%27c%27%5D%2C%2042%2C%20%7Ba%3A%20%7Bb%3A%20%7Bc%3A%200%7D%7D%7D%29%3B%20%2F%2F%3D%3E%20%7Ba%3A%20%7Bb%3A%20%7Bc%3A%2042%7D%7D%7D%0A%0A%2F%2F%20Any%20missing%20or%20non-object%20keys%20in%20path%20will%20be%20overridden%0AR.assocPath%28%5B%27a%27%2C%20%27b%27%2C%20%27c%27%5D%2C%2042%2C%20%7Ba%3A%205%7D%29%3B%20%2F%2F%3D%3E%20%7Ba%3A%20%7Bb%3A%20%7Bc%3A%2042%7D%7D%7D)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## binary
+### `[Function]`
+
+`(* → c) → (a, b → c)`
+
+#### Параметри:
+| fn | Функція, яку необхідно обгорнути. |
+:---|:---|
+| повертає __function__ | Нова функція, яка огортає функцію `fn`. Нова функція гарантовано має арність 2. |
+
+_Додано у версії v0.2.0_
+
+Обгортає функцію будь-якої арності(включаючи нулярну) у функцію, котра приймає в себе чітко 2 аргументи. Жоден з надлишкових аргументів не буде переданий у обгорнуту функцію.
+
+Дивіться також [nAry](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#nary), [unary](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#unary).
+
+```javascript
+var takesThreeArgs = function(a, b, c) {
+  return [a, b, c];
+};
+takesThreeArgs.length; //=> 3
+takesThreeArgs(1, 2, 3); //=> [1, 2, 3]
+
+var takesTwoArgs = R.binary(takesThreeArgs);
+takesTwoArgs.length; //=> 2
+// Only 2 arguments are passed to the wrapped function
+takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var takesThreeArgs %3D function(a%2C b%2C c) {%0A return [a%2C b%2C c]%3B%0A}%3B%0AtakesThreeArgs.length%3B %2F%2F%3D> 3%0AtakesThreeArgs(1%2C 2%2C 3)%3B %2F%2F%3D> [1%2C 2%2C 3]%0A%0Avar takesTwoArgs %3D R.binary(takesThreeArgs)%3B%0AtakesTwoArgs.length%3B %2F%2F%3D> 2%0A%2F%2F Only 2 arguments are passed to the wrapped function%0AtakesTwoArgs(1%2C 2%2C 3)%3B %2F%2F%3D> [1%2C 2%2C undefined])
 
 **[⬆ вверх](#Документація)**
 
