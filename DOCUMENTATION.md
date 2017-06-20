@@ -19,6 +19,7 @@
 - [assoc](#assoc) `Object`
 - [assocPath](#assocpath) `Object`
 - [binary](#binary) `Function`
+- [bind](#bind) `Function`
 - [both](#both) `Logic`
 - [compose](#compose) `Function`
 - [converge](#) ``
@@ -30,6 +31,7 @@
 - [into](#into) `List`
 - [nAry](#) ``
 - [none](#none) `List`
+- [partial](#) ``
 - [pipe](#pipe) `Function`
 - [prepend](#prepend) `List`
 - [reduce](#reduce) `List`
@@ -602,6 +604,34 @@ takesTwoArgs.length; //=> 2
 takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var takesThreeArgs %3D function(a%2C b%2C c) {%0A return [a%2C b%2C c]%3B%0A}%3B%0AtakesThreeArgs.length%3B %2F%2F%3D> 3%0AtakesThreeArgs(1%2C 2%2C 3)%3B %2F%2F%3D> [1%2C 2%2C 3]%0A%0Avar takesTwoArgs %3D R.binary(takesThreeArgs)%3B%0AtakesTwoArgs.length%3B %2F%2F%3D> 2%0A%2F%2F Only 2 arguments are passed to the wrapped function%0AtakesTwoArgs(1%2C 2%2C 3)%3B %2F%2F%3D> [1%2C 2%2C undefined])
+
+**[⬆ вверх](#Документація)**
+
+
+
+## bind
+### `[Function]`
+
+`(* → *) → {*} → (* → *)`
+
+#### Параметри:
+| fn | Функція, яку необхідно прив'язати до контексту. |
+:---|:---|
+| thisObj | Контекст, до якого прив'язується функція `fn` |
+| повертає __function__ | Функція, яка буде виконана у контексті `thisObj`. |
+
+_Додано у версії v0.6.0_
+
+Створює функцію прив'язану до контесту. __Зауважте:__ `R.bind` не надає додаткових можливостей до `Function.prototype.bind`.
+
+Дивіться також [partial](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#partial).
+
+```javascript
+var log = R.bind(console.log, console);
+R.pipe(R.assoc('a', 2), R.tap(log), R.assoc('a', 3))({a: 1}); //=> {a: 3}
+// logs {a: 2}
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20log%20%3D%20R.bind%28console.log%2C%20console%29%3B%0AR.pipe%28R.assoc%28%27a%27%2C%202%29%2C%20R.tap%28log%29%2C%20R.assoc%28%27a%27%2C%203%29%29%28%7Ba%3A%201%7D%29%3B%20%2F%2F%3D%3E%20%7Ba%3A%203%7D%0A%2F%2F%20logs%20%7Ba%3A%202%7D)
 
 **[⬆ вверх](#Документація)**
 
