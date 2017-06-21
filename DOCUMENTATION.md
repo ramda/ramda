@@ -41,7 +41,7 @@
 - [transduce](#transduce) `List`
 - [unary](#) ``
 - [update](#update) `List`
-- [useWith](#) ``
+- [useWith](#usewith) `Function`
 - [xprod](#xprod) `List`
 - [zip](#zip) `List`
 - [zipObj](#zipobj) `List`
@@ -716,7 +716,7 @@ _Додано у версії v0.4.2_
 
 Приймає функцію перетворювач та список функцій та повертає нову функцію. Під час виклику ця нова функція застосовується до деяких аргументів, кожна передана функція застосовується до відповідних аргументів. Результат кожної застосованої функції передається як аргумент до функції перетворювача для створення повертаємого значення.
 
-Дивіться також [useWith](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#useWith).
+Дивіться також [useWith](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#usewith).
 
 ```javascript
 var average = R.converge(R.divide, [R.sum, R.length])
@@ -906,7 +906,7 @@ _Додано у версії v0.1.0_
 
 Якщо присутній третій аргумент він також передається у метод `reduce`. При цьому, залежить від користувача, що робити з `R.reduced`, оскільки це не реалізовано у `reduce`.
 
-Дивіться також [reduced](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#reduced), [addIndex](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#addIndex), [reduceRight](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#reduceright).
+Дивіться також [reduced](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#reduced), [addIndex](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#addindex), [reduceRight](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#reduceright).
 
 ```javascript
 R.reduce(R.subtract, 0, [1, 2, 3, 4]) // => ((((0 - 1) - 2) - 3) - 4) = -10
@@ -978,7 +978,7 @@ _Додано у версії v0.1.0_
 
 **Зауважте:** `R.reduceRight` не пропускає видалені чи нерозподілені індекси(розріджені масиви), на відміну від вбудованого в javascript методу `Array.prototype.reduceRight`. Більш детальну інформацію, щодо цієї поведінки дивіться тут: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description)
 
-Дивіться також [reduce](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#reduce), [addIndex](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#addIndex).
+Дивіться також [reduce](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#reduce), [addIndex](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#addindex).
 
 ```javascript
 R.reduceRight(R.subtract, 0, [1, 2, 3, 4]) // => (1 - (2 - (3 - (4 - 0)))) = -2
@@ -1093,6 +1093,37 @@ R.update(1, 11, [0, 1, 2]);     //=> [0, 11, 2]
 R.update(1)(11)([0, 1, 2]);     //=> [0, 11, 2]
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?R.update%281%2C%2011%2C%20%5B0%2C%201%2C%202%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B0%2C%2011%2C%202%5D%0AR.update%281%29%2811%29%28%5B0%2C%201%2C%202%5D%29%3B%20%20%20%20%20%2F%2F%3D%3E%20%5B0%2C%2011%2C%202%5D)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## useWith
+### `[Function]`
+
+`(x1 → x2 → … → z) → [(a → x1), (b → x2), …] → (a → b → … → z)`
+
+#### Параметри:
+| fn | Функція яку треба обгорнути. |
+:---|:---|
+| transformers | Список функцій трансформерів. |
+| повертає __function__ | Обгорнута функція. |
+
+_Додано у версії v0.1.0_
+
+Приймає функцію `fn` та список функцій-трансформерів та повертає нову карровану функцію. Коли нова функція викликається, вона викликає функцію `fn` з аргументами, які складаються з результату виклику кожного переданого обробника при послідовних аргументах нової функції.
+
+Якщо до поверненої функції передано більше аргуменів ніж до функцій-трансформерів, то ті аргументи передаються напряму до функції `fn` в якості додаткових аргументів. Якщо ви очікуєте на додаткові аргументи, які не потрібно перетворювати, то не дивлячись на те, що ви можете їх проігнорувати, краще передати сутність функції, для того, щоб нова функція відображала правильну арність.
+
+Дивіться також [converge](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#converge).
+
+```javascript
+R.useWith(Math.pow, [R.identity, R.identity])(3, 4); //=> 81
+R.useWith(Math.pow, [R.identity, R.identity])(3)(4); //=> 81
+R.useWith(Math.pow, [R.dec, R.inc])(3, 4); //=> 32
+R.useWith(Math.pow, [R.dec, R.inc])(3)(4); //=> 32
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;R.useWith%28Math.pow%2C%20%5BR.identity%2C%20R.identity%5D%29%283%2C%204%29%3B%20%2F%2F%3D%3E%2081%0AR.useWith%28Math.pow%2C%20%5BR.identity%2C%20R.identity%5D%29%283%29%284%29%3B%20%2F%2F%3D%3E%2081%0AR.useWith%28Math.pow%2C%20%5BR.dec%2C%20R.inc%5D%29%283%2C%204%29%3B%20%2F%2F%3D%3E%2032%0AR.useWith%28Math.pow%2C%20%5BR.dec%2C%20R.inc%5D%29%283%29%284%29%3B%20%2F%2F%3D%3E%2032)
 
 **[⬆ вверх](#Документація)**
 
