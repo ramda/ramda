@@ -22,7 +22,7 @@
 - [bind](#bind) `Function`
 - [both](#both) `Logic`
 - [compose](#compose) `Function`
-- [converge](#) ``
+- [converge](#converge) `Function`
 - [descend](#) ``
 - [dissoc](#) ``
 - [dissocPath](#) ``
@@ -41,6 +41,7 @@
 - [transduce](#transduce) `List`
 - [unary](#) ``
 - [update](#update) `List`
+- [useWith](#) ``
 - [xprod](#xprod) `List`
 - [zip](#zip) `List`
 - [zipObj](#zipobj) `List`
@@ -695,6 +696,36 @@ yellGreeting('James', 'Bond'); //=> "THE NAME'S BOND, JAMES BOND"
 R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20classyGreeting%20%3D%20%28firstName%2C%20lastName%29%20%3D%3E%20%22The%20name%27s%20%22%20%2B%20lastName%20%2B%20%22%2C%20%22%20%2B%20firstName%20%2B%20%22%20%22%20%2B%20lastName%0Avar%20yellGreeting%20%3D%20R.compose%28R.toUpper%2C%20classyGreeting%29%3B%0AyellGreeting%28%27James%27%2C%20%27Bond%27%29%3B%20%2F%2F%3D%3E%20%22THE%20NAME%27S%20BOND%2C%20JAMES%20BOND%22%0A%0AR.compose%28Math.abs%2C%20R.add%281%29%2C%20R.multiply%282%29%29%28-4%29%20%2F%2F%3D%3E%207)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## converge
+### `[Function]`
+
+`(x1 → x2 → … → z) → [(a → b → … → x1), (a → b → … → x2), …] → (a → b → … → z)`
+
+#### Параметри:
+| after | Функція. `after` буде викликана з повертаємими значеннями `fn1` та `fn2` як її аргументи. |
+:---|:---|
+| functions | Список функцій. |
+| повертає __function__ | Нова функція. |
+
+_Додано у версії v0.4.2_
+
+Приймає функцію перетворювач та список функцій та повертає нову функцію. Під час виклику ця нова функція застосовується до деяких аргументів, кожна передана функція застосовується до відповідних аргументів. Результат кожної застосованої функції передається як аргумент до функції перетворювача для створення повертаємого значення.
+
+Дивіться також [useWith](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#useWith).
+
+```javascript
+var average = R.converge(R.divide, [R.sum, R.length])
+average([1, 2, 3, 4, 5, 6, 7]) //=> 4
+
+var strangeConcat = R.converge(R.concat, [R.toUpper, R.toLower])
+strangeConcat("Yodel") //=> "YODELyodel"
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20average%20%3D%20R.converge%28R.divide%2C%20%5BR.sum%2C%20R.length%5D%29%0Aaverage%28%5B1%2C%202%2C%203%2C%204%2C%205%2C%206%2C%207%5D%29%20%2F%2F%3D%3E%204%0A%0Avar%20strangeConcat%20%3D%20R.converge%28R.concat%2C%20%5BR.toUpper%2C%20R.toLower%5D%29%0AstrangeConcat%28%22Yodel%22%29%20%2F%2F%3D%3E%20%22YODELyodel%22)
 
 **[⬆ вверх](#Документація)**
 
