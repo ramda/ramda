@@ -36,7 +36,7 @@ var nAry = require('./nAry');
  *      console.log(salad.recipe());
  *      // Add a dollop of Mayonnaise
  *      // Add a dollop of Potato Chips
- *      // Add a dollop of Potato Ketchup
+ *      // Add a dollop of Ketchup
  */
 module.exports = _curry2(function constructN(n, Fn) {
   if (n > 10) {
