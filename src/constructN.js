@@ -24,7 +24,7 @@ var nAry = require('./nAry');
  *      }
  *
  *      Salad.prototype.recipe = function() {
- *        var instructions = R.map((ingredient) => 'Add a dollop of ' + ingredient, this.ingredients);
+ *        var instructions = R.map(ingredient => 'Add a dollop of ' + ingredient, this.ingredients);
  *        return R.join('\n', instructions);
  *      };
  *
