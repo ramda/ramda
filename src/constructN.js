@@ -21,22 +21,22 @@ var nAry = require('./nAry');
  *      // Variadic Constructor function
  *      function Salad() {
  *        this.ingredients = arguments;
- *      };
- *      Salad.prototype.recipe = function() {
- *        var instructions = R.map((ingredient) => (
- *          'Add a whollop of ' + ingredient, this.ingredients)
- *        )
- *        return R.join('\n', instructions)
  *      }
  *
- *      var ThreeLayerSalad = R.constructN(3, Salad)
+ *      Salad.prototype.recipe = function() {
+ *        var instructions = R.map(ingredient => 'Add a dollop of ' + ingredient, this.ingredients);
+ *        return R.join('\n', instructions);
+ *      };
+ *
+ *      var ThreeLayerSalad = R.constructN(3, Salad);
  *
  *      // Notice we no longer need the 'new' keyword, and the constructor is curried for 3 arguments.
- *      var salad = ThreeLayerSalad('Mayonnaise')('Potato Chips')('Ketchup')
+ *      var salad = ThreeLayerSalad('Mayonnaise')('Potato Chips')('Ketchup');
+ *
  *      console.log(salad.recipe());
- *      // Add a whollop of Mayonnaise
- *      // Add a whollop of Potato Chips
- *      // Add a whollop of Potato Ketchup
+ *      // Add a dollop of Mayonnaise
+ *      // Add a dollop of Potato Chips
+ *      // Add a dollop of Ketchup
  */
 module.exports = _curry2(function constructN(n, Fn) {
   if (n > 10) {
