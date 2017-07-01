@@ -5,6 +5,7 @@ var equals = require('./equals');
 /**
  * Returns `true` if the specified object property is equal, in
  * [`R.equals`](#equals) terms, to the given value; `false` otherwise.
+ * You can test multiple properties with [`R.where`](#where).
  *
  * @func
  * @memberOf R
@@ -15,7 +16,7 @@ var equals = require('./equals');
  * @param {*} val
  * @param {*} obj
  * @return {Boolean}
- * @see R.equals, R.propSatisfies
+ * @see R.whereEq, R.propSatisfies, R.equals
  * @example
  *
  *      var abby = {name: 'Abby', age: 7, hair: 'blond'};
