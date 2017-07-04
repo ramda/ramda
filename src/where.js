@@ -20,6 +20,7 @@ var _has = require('./internal/_has');
  * @param {Object} spec
  * @param {Object} testObj
  * @return {Boolean}
+ * @see R.propSatisfies, R.whereEq
  * @example
  *
  *      // pred :: Object -> Boolean
