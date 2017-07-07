@@ -23,8 +23,9 @@ var any = require('./any');
  * @example
  *
  *      var isEven = n => n % 2 === 0;
+ *      var isOdd = n => n % 2 === 1;
  *
  *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
- *      R.none(isEven, [1, 3, 5, 7, 8, 11]); //=> false
+ *      R.none(isOdd, [1, 3, 5, 7, 8, 11]); //=> false
  */
 module.exports = _curry2(_complement(_dispatchable(['any'], _xany, any)));
