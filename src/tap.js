@@ -1,8 +1,12 @@
 var _curry2 = require('./internal/_curry2');
+var _dispatchable = require('./internal/_dispatchable');
+var _xtap = require('./internal/_xtap');
 
 
 /**
  * Runs the given function with the supplied object, then returns the object.
+ *
+ * Acts as a transducer if a transformer is given as second parameter.
  *
  * @func
  * @memberOf R
@@ -19,7 +23,7 @@ var _curry2 = require('./internal/_curry2');
  *      // logs 'x is 100'
  * @symb R.tap(f, a) = a
  */
-module.exports = _curry2(function tap(fn, x) {
+module.exports = _curry2(_dispatchable([], _xtap, function tap(fn, x) {
   fn(x);
   return x;
-});
+}));
