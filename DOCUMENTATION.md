@@ -21,9 +21,10 @@
 - [binary](#binary) `Function`
 - [bind](#bind) `Function`
 - [both](#both) `Logic`
+- [call](#call) `Function`
 - [compose](#compose) `Function`
 - [converge](#converge) `Function`
-- [descend](#) ``
+- [descend](#descend) `Function`
 - [dissoc](#) ``
 - [dissocPath](#) ``
 - [juxt](#) ``
@@ -670,6 +671,44 @@ f(30); //=> false
 
 
 
+## call
+### `[Function]`
+
+`(*… → a),*… → a`
+
+#### Параметри:
+| fn | Функція, яку потрвібно застосувати до лишившихся аргументів. |
+:---|:---|
+| args | Будь-яка кількість позиційних аргументів. |
+| повертає __*__ |   |
+
+_Додано у версії v0.9.0_
+
+Повертає результат виклику першого аргумента та залишивіся аргументи. Інколи це корисно в якості конверційнрї функції для `R.converge`: перша гілка може утворити функцію, в той час як решта гілок утворюють значення, які будуть передані у ту утворену функцію в якості аргументів.
+
+Дивіться також [apply](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#apply).
+
+```javascript
+R.call(R.add, 1, 2); //=> 3
+
+var indentN = R.pipe(R.times(R.always(' ')),
+                     R.join(''),
+                     R.replace(/^(?!$)/gm));
+
+var format = R.converge(R.call, [
+                            R.pipe(R.prop('indent'), indentN),
+                            R.prop('value')
+                        ]);
+
+format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?R.call%28R.add%2C%201%2C%202%29%3B%20%2F%2F%3D%3E%203%0A%0Avar%20indentN%20%3D%20R.pipe%28R.times%28R.always%28%27%20%27%29%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20R.join%28%27%27%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20R.replace%28%2F%5E%28%3F%21%24%29%2Fgm%29%29%3B%0A%0Avar%20format%20%3D%20R.converge%28R.call%2C%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20R.pipe%28R.prop%28%27indent%27%29%2C%20indentN%29%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20R.prop%28%27value%27%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5D%29%3B%0A%0Aformat%28%7Bindent%3A%202%2C%20value%3A%20%27foo%5Cnbar%5Cnbaz%5Cn%27%7D%29%3B%20%2F%2F%3D%3E%20%27%20%20foo%5Cn%20%20bar%5Cn%20%20baz%5Cn%27)
+
+**[⬆ вверх](#Документація)**
+
+
+
+
 ## compose
 ### `[Function]`
 
@@ -728,6 +767,38 @@ strangeConcat("Yodel") //=> "YODELyodel"
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20average%20%3D%20R.converge%28R.divide%2C%20%5BR.sum%2C%20R.length%5D%29%0Aaverage%28%5B1%2C%202%2C%203%2C%204%2C%205%2C%206%2C%207%5D%29%20%2F%2F%3D%3E%204%0A%0Avar%20strangeConcat%20%3D%20R.converge%28R.concat%2C%20%5BR.toUpper%2C%20R.toLower%5D%29%0AstrangeConcat%28%22Yodel%22%29%20%2F%2F%3D%3E%20%22YODELyodel%22)
 
 **[⬆ вверх](#Документація)**
+
+
+
+## descend
+### `[Function]`
+
+`Ord b => (a → b) → a → a → Number`
+
+#### Параметри:
+| fn | Функція з арністю один, яка повертає значення, яке може бути порівняне |
+:---|:---|
+| a | Перший елемент, який буде порівняно. |
+| b | Другий елемент, який буде порівняно. |
+| повертає __Number__ | `-1` у випадку, якщо `fn(a) > fn(b)`, або `1`, якщо `fn(b) > fn(a), у інших випадках поверне `0` |
+
+_Додано у версії v0.23.0_
+
+Створює низхідну функцію порівняння з функції, яка повертає значення, яке, в подальшому, може бути порівняне з `<` та `>`.
+
+Дивіться також [ascend](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#ascend).
+
+```javascript
+var byAge = R.descend(R.prop('age'));
+var people = [
+  // ...
+];
+var peopleByOldestFirst = R.sort(byAge, people);
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20byAge%20%3D%20R.descend%28R.prop%28%27age%27%29%29%3B%0Avar%20people%20%3D%20%5B%0A%20%20%2F%2F%20...%0A%5D%3B%0Avar%20peopleByOldestFirst%20%3D%20R.sort%28byAge%2C%20people%29%3B)
+
+**[⬆ вверх](#Документація)**
+
 
 
 
