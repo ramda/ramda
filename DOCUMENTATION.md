@@ -1,5 +1,8 @@
 # Документація
 
+[A](#a), [B](#b), [R](#r)
+
+## A
 - [__](#__) `Function`
 - [add](#add) `Math`
 - [addIndex](#addindex) `Function`
@@ -18,6 +21,8 @@
 - [ascend](#ascend) `Function`
 - [assoc](#assoc) `Object`
 - [assocPath](#assocpath) `Object`
+
+## B
 - [binary](#binary) `Function`
 - [bind](#bind) `Function`
 - [both](#both) `Logic`
@@ -36,6 +41,8 @@
 - [partial](#) ``
 - [pipe](#pipe) `Function`
 - [prepend](#prepend) `List`
+
+## R
 - [reduce](#reduce) `List`
 - [reduced](#reduced) `List`
 - [reduceRight](#reduceright) `List`
