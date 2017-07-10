@@ -1,6 +1,6 @@
 # Документація
 
-[A](#a), [B](#b), [R](#r)
+[A](#a), [B](#b), [R](#r), [X](#x), [Z](#z)
 
 ## A
 - [__](#__) `Function`
@@ -22,39 +22,89 @@
 - [assoc](#assoc) `Object`
 - [assocPath](#assocpath) `Object`
 
+**[⬆ вверх](#Документація)**
+
 ## B
 - [binary](#binary) `Function`
 - [bind](#bind) `Function`
 - [both](#both) `Logic`
+
+**[⬆ вверх](#Документація)**
+
+## C
 - [call](#call) `Function`
 - [chain](#chain) `List`
 - [compose](#compose) `Function`
 - [converge](#converge) `Function`
+
+**[⬆ вверх](#Документація)**
+
+## D
 - [descend](#descend) `Function`
 - [dissoc](#) ``
 - [dissocPath](#) ``
+
+**[⬆ вверх](#Документація)**
+
+## J
 - [juxt](#) ``
+
+**[⬆ вверх](#Документація)**
+
+## I
 - [identity](#identity) `Function`
 - [into](#into) `List`
+
+**[⬆ вверх](#Документація)**
+
+## N
 - [nAry](#) ``
 - [none](#none) `List`
+
+**[⬆ вверх](#Документація)**
+
+## P
 - [partial](#) ``
 - [pipe](#pipe) `Function`
 - [prepend](#prepend) `List`
+
+**[⬆ вверх](#Документація)**
 
 ## R
 - [reduce](#reduce) `List`
 - [reduced](#reduced) `List`
 - [reduceRight](#reduceright) `List`
+
+**[⬆ вверх](#Документація)**
+
+## S
 - [subtract](#subtract) `Math`
+
+**[⬆ вверх](#Документація)**
+
+## T
 - [transduce](#transduce) `List`
+
+**[⬆ вверх](#Документація)**
+
+## U
 - [unary](#) ``
 - [update](#update) `List`
 - [useWith](#usewith) `Function`
+
+**[⬆ вверх](#Документація)**
+
+## X
 - [xprod](#xprod) `List`
+
+**[⬆ вверх](#Документація)**
+
+## Z
 - [zip](#zip) `List`
 - [zipObj](#zipobj) `List`
 - [zipWith](#zipwith) `List`
+
+**[⬆ вверх](#Документація)**
 
 
 ________
