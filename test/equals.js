@@ -220,11 +220,23 @@ describe('equals', function() {
       eq(R.equals(new Map([]), new Map([[1, 'a']])), false);
       eq(R.equals(new Map([[1, 'a']]), new Map([])), false);
       eq(R.equals(new Map([[1, 'a']]), new Map([[1, 'a']])), true);
+      eq(R.equals(new Map([[1, 'a'], [2, 'b']]), new Map([[2, 'b'], [1, 'a']])), true);
+      eq(R.equals(new Map([[1, 'a']]), new Map([[2, 'a']])), false);
       eq(R.equals(new Map([[1, 'a']]), new Map([[1, 'b']])), false);
       eq(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'c']])]])), true);
       eq(R.equals(new Map([[1, 'a'], [2, new Map([[3, 'c']])]]), new Map([[1, 'a'], [2, new Map([[3, 'd']])]])), false);
       eq(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [4, 5, 6]]])), true);
       eq(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [7, 8, 9]]])), false);
+    });
+    it('dispatches to `equals` method recursively in Set', function() {
+      var a = new Map();
+      var b = new Map();
+      a.set(a, a);
+      eq(R.equals(a, b), false);
+      a.set(b, b);
+      b.set(b, b);
+      b.set(a, a);
+      eq(R.equals(a, b), true);
     });
   }
 
@@ -233,10 +245,21 @@ describe('equals', function() {
       eq(R.equals(new Set([]), new Set([])), true);
       eq(R.equals(new Set([]), new Set([1])), false);
       eq(R.equals(new Set([1]), new Set([])), false);
+      eq(R.equals(new Set([1, 2]), new Set([2, 1])), true);
       eq(R.equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([3])])])), true);
       eq(R.equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([4])])])), false);
       eq(R.equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [4, 5, 6]])), true);
       eq(R.equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [7, 8, 9]])), false);
+    });
+    it('dispatches to `equals` method recursively in Set', function() {
+      var a = new Set();
+      var b = new Set();
+      a.add(a);
+      eq(R.equals(a, b), false);
+      a.add(b);
+      b.add(b);
+      b.add(a);
+      eq(R.equals(a, b), true);
     });
   }
 
