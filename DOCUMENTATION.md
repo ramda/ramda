@@ -22,6 +22,7 @@
 - [bind](#bind) `Function`
 - [both](#both) `Logic`
 - [call](#call) `Function`
+- [chain](#chain) `List`
 - [compose](#compose) `Function`
 - [converge](#converge) `Function`
 - [descend](#descend) `Function`
@@ -706,6 +707,36 @@ format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
 
 **[⬆ вверх](#Документація)**
 
+
+
+## chain
+### `[List]`
+
+`Chain m => (a → m b) → m a → m b`
+
+#### Параметри:
+| fn | Функція, з якою треба поєднати. |
+:---|:---|
+| list | Список для відображення. |
+| повертає __Array__ | Результат плаского відображення списку `list` з функцією `fn`. |
+
+_Додано у версії v0.3.0_
+
+`chain` застосовує функцію до списку та об'єднує результати. `chain` також відомий у деяких бібліотеках як `flatMap`.
+
+Виконується метод `chain` другого аргументу(якщо він наявний), згадно до [FantasyLand Chain специфікації](https://github.com/fantasyland/fantasy-land#chain).
+
+Дивіться також [apply](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#apply).
+
+```javascript
+var duplicate = n => [n, n];
+R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
+
+R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#;var%20duplicate%20%3D%20n%20%3D%3E%20%5Bn%2C%20n%5D%3B%0AR.chain%28duplicate%2C%20%5B1%2C%202%2C%203%5D%29%3B%20%2F%2F%3D%3E%20%5B1%2C%201%2C%202%2C%202%2C%203%2C%203%5D%0A%0AR.chain%28R.append%2C%20R.head%29%28%5B1%2C%202%2C%203%5D%29%3B%20%2F%2F%3D%3E%20%5B1%2C%202%2C%203%2C%201%5D)
+
+**[⬆ вверх](#Документація)**
 
 
 
