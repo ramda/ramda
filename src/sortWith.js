@@ -8,7 +8,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.23.0
  * @category Relation
- * @sig [a -> a -> Number] -> [a] -> [a]
+ * @sig [(a, a) -> Number] -> [a] -> [a]
  * @param {Array} functions A list of comparator functions.
  * @param {Array} list The list to sort.
  * @return {Array} A new list sorted according to the comarator functions.

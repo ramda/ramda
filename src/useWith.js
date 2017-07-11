@@ -18,7 +18,7 @@ var curryN = require('./curryN');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig (x1 -> x2 -> ... -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
+ * @sig ((x1, x2, ...) -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
  * @param {Function} fn The function to wrap.
  * @param {Array} transformers A list of transformer functions
  * @return {Function} The wrapped function.
