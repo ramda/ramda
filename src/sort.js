@@ -12,7 +12,7 @@ var _curry2 = require('./internal/_curry2');
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @sig (a,a -> Number) -> [a] -> [a]
+ * @sig ((a, a) -> Number) -> [a] -> [a]
  * @param {Function} comparator A sorting function :: a -> b -> Int
  * @param {Array} list The list to sort
  * @return {Array} a new array with its elements sorted by the comparator function.

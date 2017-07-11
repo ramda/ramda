@@ -9,7 +9,7 @@ var _curry1 = require('./internal/_curry1');
  * @memberOf R
  * @since v0.1.0
  * @category Function
- * @sig (a, b -> Boolean) -> (a, b -> Number)
+ * @sig ((a, b) -> Boolean) -> ((a, b) -> Number)
  * @param {Function} pred A predicate function of arity two which will return `true` if the first argument
  * is less than the second, `false` otherwise
  * @return {Function} A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
