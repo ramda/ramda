@@ -5,6 +5,7 @@ var _reduce = require('./internal/_reduce');
 var _xmap = require('./internal/_xmap');
 var curryN = require('./curryN');
 var keys = require('./keys');
+var type = require('./type');
 
 
 /**
@@ -43,12 +44,12 @@ var keys = require('./keys');
  * @symb R.map(f, functor_o) = functor_o.map(f)
  */
 module.exports = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
-  switch (Object.prototype.toString.call(functor)) {
-    case '[object Function]':
+  switch (type(functor)) {
+    case 'Function':
       return curryN(functor.length, function() {
         return fn.call(this, functor.apply(this, arguments));
       });
-    case '[object Object]':
+    case 'Object':
       return _reduce(function(acc, key) {
         acc[key] = fn(functor[key]);
         return acc;
