@@ -5,7 +5,7 @@ var reverse = require('./reverse');
  * Returns the left-to-right Kleisli composition of the provided functions,
  * each of which must return a value of a type supported by [`chain`](#chain).
  *
- * `R.pipeK(f, g, h)` is equivalent to `R.pipe(R.chain(f), R.chain(g), R.chain(h))`.
+ * `R.pipeK(f, g, h)` is equivalent to `R.pipe(f, R.chain(g), R.chain(h))`.
  *
  * @func
  * @memberOf R
