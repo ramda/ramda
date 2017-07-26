@@ -7,7 +7,7 @@ var map = require('./map');
  * Returns the right-to-left Kleisli composition of the provided functions,
  * each of which must return a value of a type supported by [`chain`](#chain).
  *
- * `R.composeK(h, g, f)` is equivalent to `R.compose(R.chain(h), R.chain(g), R.chain(f))`.
+ * `R.composeK(h, g, f)` is equivalent to `R.compose(R.chain(h), R.chain(g), f)`.
  *
  * @func
  * @memberOf R
