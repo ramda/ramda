@@ -1,5 +1,6 @@
 var _curry2 = require('./internal/_curry2');
 var ap = require('./ap');
+var identity = require('./identity');
 var map = require('./map');
 var prepend = require('./prepend');
 var reduceRight = require('./reduceRight');
@@ -30,8 +31,12 @@ var reduceRight = require('./reduceRight');
  *      R.sequence(R.of, Nothing());       //=> [Nothing()]
  */
 module.exports = _curry2(function sequence(of, traversable) {
-  return typeof traversable.sequence === 'function' ?
-    traversable.sequence(of) :
+  if (typeof traversable.sequence === 'function') {
+    return traversable.sequence(of);
+  }
+
+  return typeof traversable['fantasy-land/traverse'] === 'function' ?
+    traversable['fantasy-land/traverse'](of, identity) :
     reduceRight(function(x, acc) { return ap(map(prepend, x), acc); },
                 of([]),
                 traversable);

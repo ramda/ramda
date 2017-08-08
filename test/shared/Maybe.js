@@ -1,6 +1,6 @@
 var equals = require('../../src/equals');
 var toString = require('../../src/toString');
-
+var map = require('../../src/map');
 
 var sentinel = {};
 
@@ -47,6 +47,16 @@ Maybe.prototype['fantasy-land/ap'] = function(maybe) {
 //  Maybe#chain :: Maybe a ~> (a -> Maybe b) -> Maybe b
 Maybe.prototype['fantasy-land/chain'] = function(f) {
   return this.isJust ? f(this.value) : Nothing;
+};
+
+// Maybe#reduce :: Maybe f => f a ~> ((b, a) -> b, b) -> b
+Maybe.prototype['fantasy-land/reduce'] = function(f, acc) {
+  return this.isJust ? f(acc, this.value) : Nothing;
+};
+
+// Maybe#traverse :: Applicative f, Maybe m => m (f a) ~> (f, a -> f b) -> f (m b)
+Maybe.prototype['fantasy-land/traverse']  = function(of, f) {
+  return this.isJust ? map(Maybe.Just, f(this.value)) : of(Nothing);
 };
 
 //  Maybe#filter :: Maybe a ~> (a -> Boolean) -> Maybe a
