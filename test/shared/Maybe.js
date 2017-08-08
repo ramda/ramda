@@ -51,7 +51,7 @@ Maybe.prototype['fantasy-land/chain'] = function(f) {
 
 // Maybe#reduce :: Maybe f => f a ~> ((b, a) -> b, b) -> b
 Maybe.prototype['fantasy-land/reduce'] = function(f, acc) {
-  return this.isJust ? f(acc, this.value) : Nothing;
+  return this.isJust ? f(acc, this.value) : acc;
 };
 
 // Maybe#traverse :: Applicative f, Maybe m => m (f a) ~> (f, a -> f b) -> f (m b)
