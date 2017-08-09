@@ -49,12 +49,12 @@ Maybe.prototype['fantasy-land/chain'] = function(f) {
   return this.isJust ? f(this.value) : Nothing;
 };
 
-// Maybe#reduce :: Maybe f => f a ~> ((b, a) -> b, b) -> b
+// Maybe#reduce :: Foldable f => f a ~> ((b, a) -> b, b) -> b
 Maybe.prototype['fantasy-land/reduce'] = function(f, acc) {
   return this.isJust ? f(acc, this.value) : acc;
 };
 
-// Maybe#traverse :: Applicative f, Maybe m => m (f a) ~> (f, a -> f b) -> f (m b)
+// Maybe#traverse :: Applicative f, Traversable t => t (f a) ~> (f, a -> f b) -> f (t b)
 Maybe.prototype['fantasy-land/traverse']  = function(of, f) {
   return this.isJust ? map(Maybe.Just, f(this.value)) : of(Nothing);
 };
