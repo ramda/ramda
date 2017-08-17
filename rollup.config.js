@@ -1,5 +1,5 @@
 import uglify from 'rollup-plugin-uglify';
-import pkg from './package.json'
+import pkg from './package.json';
 
 var banner = '//  Ramda v' + pkg.version + '\n'
   + '//  https://github.com/ramda/ramda\n'
@@ -13,7 +13,7 @@ var config = {
   moduleName: 'R',
   exports: 'named',
   banner: banner,
-  plugins: [],
+  plugins: []
 };
 
 if (env === 'production') {
@@ -23,8 +23,8 @@ if (env === 'production') {
         pure_getters: true,
         unsafe: true,
         unsafe_comps: true,
-        warnings: false,
-      },
+        warnings: false
+      }
     })
   );
 }

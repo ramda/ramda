@@ -21,7 +21,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "src",
+    "es",
     "test",
     "tests",
     "examples",
