@@ -1,3 +1,6 @@
 {
-  "plugins": ["transform-es2015-modules-commonjs"]
+  "plugins": [
+    "add-module-exports",
+    ["transform-es2015-modules-commonjs", {"loose": true, "noInterop": true, "strict": false}]
+  ]
 }

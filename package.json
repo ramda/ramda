@@ -62,6 +62,7 @@
   "devDependencies": {
     "acorn": "0.9.x",
     "babel-cli": "^6.24.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
