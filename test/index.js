@@ -13,14 +13,14 @@ function sourceMethods(dir) {
 
 /**
  * Convention is
- *  * Actual API—all `./src/*.js` files are top level API methods
- *  * Exported API—object in `./index.js` to be exported
+ *  * Actual API—all `./es/*.js` files are top level API methods
+ *  * Exported API—object in `./es/index.js` to be exported
  *  * Actual and exported APIs should be the same
  *
  * Two cases, when exported and actual APIs might differ
- *  1. newly added API `./src/method.js` is forgotten to be added into './index.js'
- *  2. API method is deprecated and actual source file from `./src/` removed,
- *     while continues to exist in `./index.js`
+ *  1. newly added API `./es/method.js` is forgotten to be added into './es/index.js'
+ *  2. API method is deprecated and actual source file from `./es/` removed,
+ *     while continues to exist in `./es/index.js`
  *
  * 1st case is detected in first assertion, and detailed in second one
  *
@@ -28,7 +28,9 @@ function sourceMethods(dir) {
  * if you would attempt to require non existing file
  */
 describe('API surface', function() {
-  var exported = Object.keys(R);
+  var exported = Object.keys(R).filter(function(key) {
+    return key !== '__esModule';
+  });
   var actual = sourceMethods(path.dirname(require.resolve('..')));
 
   it('both APIs are in sync', function() {

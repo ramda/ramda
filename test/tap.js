@@ -1,7 +1,7 @@
 var R = require('..');
 var eq = require('./shared/eq');
 var listXf = require('./helpers/listXf');
-var _curry2 = require('../cjs/internal/_curry2').default;
+var _curry2 = require('../src/internal/_curry2');
 
 
 describe('tap', function() {
