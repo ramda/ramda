@@ -20,6 +20,10 @@ describe('dropWhile', function() {
     eq(sublist[2], 7);
   });
 
+  it('can operate on strings', function() {
+    eq(R.dropWhile(function(x) { return x !== 'd'; }, 'Ramda'), 'da');
+  });
+
   it('is curried', function() {
     var dropLt7 = R.dropWhile(function(x) {return x < 7;});
     eq(dropLt7([1, 3, 5, 7, 9]), [7, 9]);
