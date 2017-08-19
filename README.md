@@ -178,6 +178,12 @@ link provided in your browser and you will see the results in your terminal.
 If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
+Typings
+-----------------
+
+- [TypeScript](https://github.com/types/npm-ramda/)
+- [Flow](https://github.com/flowtype/flow-typed/tree/master/definitions/npm/ramda_v0.x.x)
+
 
 Translations
 -----------------
