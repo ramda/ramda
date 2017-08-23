@@ -50,7 +50,7 @@
     "clean": "rimraf cjs/* dist/* coverage/*",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
     "postcoverage": "npm run posttest",
-    "lint": "eslint scripts/bookmarklet scripts/build es/*.js es/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
+    "lint": "eslint scripts/bookmarklet scripts/*.js es/*.js es/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "pretest": "npm run build:cjs",
     "test": "mocha --reporter spec",
     "posttest": "git checkout -- dist",
@@ -61,8 +61,6 @@
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
     "cli-table": "0.3.x",

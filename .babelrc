@@ -1,6 +1,5 @@
 {
   "plugins": [
-    "add-module-exports",
-    ["transform-es2015-modules-commonjs", {"loose": true, "strict": false}]
+    "./scripts/transform-es2015-modules-bare-cjs",
   ]
 }
