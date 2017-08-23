@@ -1,6 +1,7 @@
 module.exports = {
   F: require('./src/F'),
   T: require('./src/T'),
+  I: require('./src/I'),
   __: require('./src/__'),
   add: require('./src/add'),
   addIndex: require('./src/addIndex'),
