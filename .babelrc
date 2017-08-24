@@ -1,5 +1,5 @@
 {
   "plugins": [
-    "./scripts/transform-es2015-modules-bare-cjs",
+    "./scripts/transform-esm-to-cjs",
   ]
 }
