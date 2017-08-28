@@ -66,7 +66,7 @@
     "benchmark": "~1.0.0",
     "browserify": "10.x.x",
     "cli-table": "0.3.x",
-    "cross-env": "^5.0.5",
+    "cross-env": "^2.0.1",
     "dox": "latest",
     "envvar": "1.x.x",
     "eslint": "^2.11.0",
