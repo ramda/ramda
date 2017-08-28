@@ -24,7 +24,7 @@ import _curry2 from './internal/_curry2';
  * @symb R.times(f, 1) = [f(0)]
  * @symb R.times(f, 2) = [f(0), f(1)]
  */
-var times = /* #__PURE__*/ _curry2(function times(fn, n) {
+var times = _curry2(function times(fn, n) {
   var len = Number(n);
   var idx = 0;
   var list;

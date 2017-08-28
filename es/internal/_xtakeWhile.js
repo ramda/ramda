@@ -13,5 +13,5 @@ XTakeWhile.prototype['@@transducer/step'] = function(result, input) {
   return this.f(input) ? this.xf['@@transducer/step'](result, input) : _reduced(result);
 };
 
-var _xtakeWhile = /* #__PURE__*/ _curry2(function _xtakeWhile(f, xf) { return new XTakeWhile(f, xf); });
+var _xtakeWhile = _curry2(function _xtakeWhile(f, xf) { return new XTakeWhile(f, xf); });
 export default _xtakeWhile;

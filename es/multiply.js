@@ -21,5 +21,5 @@ import _curry2 from './internal/_curry2';
  *      triple(4);       //=> 12
  *      R.multiply(2, 5);  //=> 10
  */
-var multiply = /* #__PURE__*/ _curry2(function multiply(a, b) { return a * b; });
+var multiply = _curry2(function multiply(a, b) { return a * b; });
 export default multiply;

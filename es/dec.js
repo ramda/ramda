@@ -16,5 +16,5 @@ import add from './add';
  *
  *      R.dec(42); //=> 41
  */
-var dec = /* #__PURE__*/ add(-1);
+var dec = add(-1);
 export default dec;

@@ -27,7 +27,7 @@ var Const = function(x) {
  *      R.view(xLens, {x: 1, y: 2});  //=> 1
  *      R.view(xLens, {x: 4, y: 2});  //=> 4
  */
-var view = /* #__PURE__*/ _curry2(function view(lens, x) {
+var view = _curry2(function view(lens, x) {
   // Using `Const` effectively ignores the setter function of the `lens`,
   // leaving the value returned by the getter function unmodified.
   return lens(Const)(x).value;

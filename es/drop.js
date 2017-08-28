@@ -28,7 +28,7 @@ import slice from './slice';
  *      R.drop(4, ['foo', 'bar', 'baz']); //=> []
  *      R.drop(3, 'ramda');               //=> 'da'
  */
-var drop = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['drop'], _xdrop, function drop(n, xs) {
+var drop = _curry2(_dispatchable(['drop'], _xdrop, function drop(n, xs) {
   return slice(Math.max(0, n), Infinity, xs);
 }));
 export default drop;

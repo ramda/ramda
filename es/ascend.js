@@ -23,7 +23,7 @@ import _curry3 from './internal/_curry3';
  *      ];
  *      var peopleByYoungestFirst = R.sort(byAge, people);
  */
-var ascend = /* #__PURE__*/ _curry3(function ascend(fn, a, b) {
+var ascend = _curry3(function ascend(fn, a, b) {
   var aa = fn(a);
   var bb = fn(b);
   return aa < bb ? -1 : aa > bb ? 1 : 0;

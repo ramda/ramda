@@ -17,5 +17,5 @@ import _curry2 from './internal/_curry2';
  *
  *      R.pair('foo', 'bar'); //=> ['foo', 'bar']
  */
-var pair = /* #__PURE__*/ _curry2(function pair(fst, snd) { return [fst, snd]; });
+var pair = _curry2(function pair(fst, snd) { return [fst, snd]; });
 export default pair;

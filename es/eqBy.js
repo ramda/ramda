@@ -19,7 +19,7 @@ import equals from './equals';
  *
  *      R.eqBy(Math.abs, 5, -5); //=> true
  */
-var eqBy = /* #__PURE__*/ _curry3(function eqBy(f, x, y) {
+var eqBy = _curry3(function eqBy(f, x, y) {
   return equals(f(x), f(y));
 });
 export default eqBy;

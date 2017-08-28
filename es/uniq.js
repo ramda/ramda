@@ -19,5 +19,5 @@ import uniqBy from './uniqBy';
  *      R.uniq([1, '1']);     //=> [1, '1']
  *      R.uniq([[42], [42]]); //=> [[42]]
  */
-var uniq = /* #__PURE__*/ uniqBy(identity);
+var uniq = uniqBy(identity);
 export default uniq;

@@ -29,7 +29,7 @@ import toString from './toString';
  *      factorial(5); //=> 120
  *      count; //=> 1
  */
-var memoize = /* #__PURE__*/ memoizeWith(function() {
+var memoize = memoizeWith(function() {
   return toString(arguments);
 });
 export default memoize;

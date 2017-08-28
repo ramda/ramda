@@ -24,7 +24,7 @@ import update from './update';
  *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']
  *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
  */
-var lensIndex = /* #__PURE__*/ _curry1(function lensIndex(n) {
+var lensIndex = _curry1(function lensIndex(n) {
   return lens(nth(n), update(n));
 });
 export default lensIndex;

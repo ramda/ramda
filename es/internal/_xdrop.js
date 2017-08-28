@@ -16,5 +16,5 @@ XDrop.prototype['@@transducer/step'] = function(result, input) {
   return this.xf['@@transducer/step'](result, input);
 };
 
-var _xdrop = /* #__PURE__*/ _curry2(function _xdrop(n, xf) { return new XDrop(n, xf); });
+var _xdrop = _curry2(function _xdrop(n, xf) { return new XDrop(n, xf); });
 export default _xdrop;

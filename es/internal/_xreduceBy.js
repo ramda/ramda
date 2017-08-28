@@ -32,7 +32,7 @@ XReduceBy.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xreduceBy = /* #__PURE__*/ _curryN(4, [],
+var _xreduceBy = _curryN(4, [],
                function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
                  return new XReduceBy(valueFn, valueAcc, keyFn, xf);
                });

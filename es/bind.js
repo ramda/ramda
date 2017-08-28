@@ -24,7 +24,7 @@ import _curry2 from './internal/_curry2';
  *      // logs {a: 2}
  * @symb R.bind(f, o)(a, b) = f.call(o, a, b)
  */
-var bind = /* #__PURE__*/ _curry2(function bind(fn, thisObj) {
+var bind = _curry2(function bind(fn, thisObj) {
   return _arity(fn.length, function() {
     return fn.apply(thisObj, arguments);
   });

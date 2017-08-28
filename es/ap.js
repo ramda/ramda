@@ -30,7 +30,7 @@ import map from './map';
  *      R.ap(R.concat, R.toUpper)('Ramda') //=> 'RamdaRAMDA'
  * @symb R.ap([f, g], [a, b]) = [f(a), f(b), g(a), g(b)]
  */
-var ap = /* #__PURE__*/ _curry2(function ap(applyF, applyX) {
+var ap = _curry2(function ap(applyF, applyX) {
   return (
     typeof applyX['fantasy-land/ap'] === 'function' ?
       applyX['fantasy-land/ap'](applyF) :

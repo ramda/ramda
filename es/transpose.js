@@ -25,7 +25,7 @@ import _curry1 from './internal/_curry1';
  * @symb R.transpose([[a, b], [c, d]]) = [[a, c], [b, d]]
  * @symb R.transpose([[a, b], [c]]) = [[a, c], [b]]
  */
-var transpose = /* #__PURE__*/ _curry1(function transpose(outerlist) {
+var transpose = _curry1(function transpose(outerlist) {
   var i = 0;
   var result = [];
   while (i < outerlist.length) {

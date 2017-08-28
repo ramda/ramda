@@ -17,5 +17,5 @@ import reduce from './reduce';
  *
  *      R.product([2,4,6,8,100,1]); //=> 38400
  */
-var product = /* #__PURE__*/ reduce(multiply, 1);
+var product = reduce(multiply, 1);
 export default product;

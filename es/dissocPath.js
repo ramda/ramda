@@ -25,7 +25,7 @@ import update from './update';
  *
  *      R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}
  */
-var dissocPath = /* #__PURE__*/ _curry2(function dissocPath(path, obj) {
+var dissocPath = _curry2(function dissocPath(path, obj) {
   switch (path.length) {
     case 0:
       return obj;

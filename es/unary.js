@@ -30,7 +30,7 @@ import nAry from './nAry';
  *      takesOneArg(1, 2); //=> [1, undefined]
  * @symb R.unary(f)(a, b, c) = f(a)
  */
-var unary = /* #__PURE__*/ _curry1(function unary(fn) {
+var unary = _curry1(function unary(fn) {
   return nAry(1, fn);
 });
 export default unary;

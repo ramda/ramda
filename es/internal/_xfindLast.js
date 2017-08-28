@@ -17,5 +17,5 @@ XFindLast.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfindLast = /* #__PURE__*/ _curry2(function _xfindLast(f, xf) { return new XFindLast(f, xf); });
+var _xfindLast = _curry2(function _xfindLast(f, xf) { return new XFindLast(f, xf); });
 export default _xfindLast;

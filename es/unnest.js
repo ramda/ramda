@@ -19,5 +19,5 @@ import chain from './chain';
  *      R.unnest([1, [2], [[3]]]); //=> [1, 2, [3]]
  *      R.unnest([[1, 2], [3, 4], [5, 6]]); //=> [1, 2, 3, 4, 5, 6]
  */
-var unnest = /* #__PURE__*/ chain(_identity);
+var unnest = chain(_identity);
 export default unnest;

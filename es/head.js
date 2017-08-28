@@ -22,5 +22,5 @@ import nth from './nth';
  *      R.head('abc'); //=> 'a'
  *      R.head(''); //=> ''
  */
-var head = /* #__PURE__*/ nth(0);
+var head = nth(0);
 export default head;

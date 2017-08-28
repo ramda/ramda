@@ -20,5 +20,5 @@ import invoker from './invoker';
  *      spacer(['a', 2, 3.4]);   //=> 'a 2 3.4'
  *      R.join('|', [1, 2, 3]);    //=> '1|2|3'
  */
-var join = /* #__PURE__*/ invoker(1, 'join');
+var join = invoker(1, 'join');
 export default join;

@@ -24,7 +24,7 @@ import _curry2 from './internal/_curry2';
  *      R.identical(0, -0); //=> false
  *      R.identical(NaN, NaN); //=> true
  */
-var identical = /* #__PURE__*/ _curry2(function identical(a, b) {
+var identical = _curry2(function identical(a, b) {
   // SameValue algorithm
   if (a === b) { // Steps 1-5, 7-10
     // Steps 6.b-6.e: +0 != -0

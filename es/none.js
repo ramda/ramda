@@ -28,5 +28,5 @@ import any from './any';
  *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
  *      R.none(isOdd, [1, 3, 5, 7, 8, 11]); //=> false
  */
-var none = /* #__PURE__*/ _curry2(/* #__PURE__*/ _complement(/* #__PURE__*/ _dispatchable(['any'], _xany, any)));
+var none = _curry2(_complement(_dispatchable(['any'], _xany, any)));
 export default none;

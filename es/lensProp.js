@@ -24,7 +24,7 @@ import prop from './prop';
  *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}
  *      R.over(xLens, R.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
  */
-var lensProp = /* #__PURE__*/ _curry1(function lensProp(k) {
+var lensProp = _curry1(function lensProp(k) {
   return lens(prop(k), assoc(k));
 });
 export default lensProp;

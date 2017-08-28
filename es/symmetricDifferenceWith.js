@@ -25,7 +25,7 @@ import differenceWith from './differenceWith';
  *      var l2 = [{a: 3}, {a: 4}, {a: 5}, {a: 6}];
  *      R.symmetricDifferenceWith(eqA, l1, l2); //=> [{a: 1}, {a: 2}, {a: 5}, {a: 6}]
  */
-var symmetricDifferenceWith = /* #__PURE__*/ _curry3(function symmetricDifferenceWith(pred, list1, list2) {
+var symmetricDifferenceWith = _curry3(function symmetricDifferenceWith(pred, list1, list2) {
   return concat(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
 });
 export default symmetricDifferenceWith;

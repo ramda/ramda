@@ -25,7 +25,7 @@ import _curry2 from './internal/_curry2';
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  * @symb R.merge({ x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: 5, z: 3 }
  */
-var merge = /* #__PURE__*/ _curry2(function merge(l, r) {
+var merge = _curry2(function merge(l, r) {
   return _assign({}, l, r);
 });
 export default merge;

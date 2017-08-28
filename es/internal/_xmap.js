@@ -12,5 +12,5 @@ XMap.prototype['@@transducer/step'] = function(result, input) {
   return this.xf['@@transducer/step'](result, this.f(input));
 };
 
-var _xmap = /* #__PURE__*/ _curry2(function _xmap(f, xf) { return new XMap(f, xf); });
+var _xmap = _curry2(function _xmap(f, xf) { return new XMap(f, xf); });
 export default _xmap;

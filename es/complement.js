@@ -24,5 +24,5 @@ import not from './not';
  *      isNil(7); //=> false
  *      isNotNil(7); //=> true
  */
-var complement = /* #__PURE__*/ lift(not);
+var complement = lift(not);
 export default complement;

@@ -18,7 +18,7 @@ import sum from './sum';
  *      R.mean([2, 7, 9]); //=> 6
  *      R.mean([]); //=> NaN
  */
-var mean = /* #__PURE__*/ _curry1(function mean(list) {
+var mean = _curry1(function mean(list) {
   return sum(list) / list.length;
 });
 export default mean;

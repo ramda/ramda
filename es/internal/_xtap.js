@@ -13,5 +13,5 @@ XTap.prototype['@@transducer/step'] = function(result, input) {
   return this.xf['@@transducer/step'](result, input);
 };
 
-var _xtap = /* #__PURE__*/ _curry2(function _xtap(f, xf) { return new XTap(f, xf); });
+var _xtap = _curry2(function _xtap(f, xf) { return new XTap(f, xf); });
 export default _xtap;

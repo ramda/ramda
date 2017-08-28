@@ -24,7 +24,7 @@ import _curry2 from './internal/_curry2';
  *      R.tryCatch(R.prop('x'), R.F)({x: true}); //=> true
  *      R.tryCatch(R.prop('x'), R.F)(null);      //=> false
  */
-var tryCatch = /* #__PURE__*/ _curry2(function _tryCatch(tryer, catcher) {
+var tryCatch = _curry2(function _tryCatch(tryer, catcher) {
   return _arity(tryer.length, function() {
     try {
       return tryer.apply(this, arguments);

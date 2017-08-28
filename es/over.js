@@ -29,7 +29,7 @@ var Identity = function(x) {
  *
  *      R.over(headLens, R.toUpper, ['foo', 'bar', 'baz']); //=> ['FOO', 'bar', 'baz']
  */
-var over = /* #__PURE__*/ _curry3(function over(lens, f, x) {
+var over = _curry3(function over(lens, f, x) {
   // The value returned by the getter function is first transformed with `f`,
   // then set as the value of an `Identity`. This is then mapped over with the
   // setter function of the lens.

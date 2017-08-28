@@ -16,7 +16,7 @@ import _curry2 from './internal/_curry2';
  *
  *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
  */
-var omit = /* #__PURE__*/ _curry2(function omit(names, obj) {
+var omit = _curry2(function omit(names, obj) {
   var result = {};
   var index = {};
   var idx = 0;

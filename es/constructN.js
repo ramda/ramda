@@ -38,7 +38,7 @@ import nAry from './nAry';
  *      // Add a dollop of Potato Chips
  *      // Add a dollop of Ketchup
  */
-var constructN = /* #__PURE__*/ _curry2(function constructN(n, Fn) {
+var constructN = _curry2(function constructN(n, Fn) {
   if (n > 10) {
     throw new Error('Constructor with greater than ten arguments');
   }

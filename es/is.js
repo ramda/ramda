@@ -24,7 +24,7 @@ import _curry2 from './internal/_curry2';
  *      R.is(Object, 's'); //=> false
  *      R.is(Number, {}); //=> false
  */
-var is = /* #__PURE__*/ _curry2(function is(Ctor, val) {
+var is = _curry2(function is(Ctor, val) {
   return val != null && val.constructor === Ctor || val instanceof Ctor;
 });
 export default is;

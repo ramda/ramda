@@ -18,5 +18,5 @@ XDropWhile.prototype['@@transducer/step'] = function(result, input) {
   return this.xf['@@transducer/step'](result, input);
 };
 
-var _xdropWhile = /* #__PURE__*/ _curry2(function _xdropWhile(f, xf) { return new XDropWhile(f, xf); });
+var _xdropWhile = _curry2(function _xdropWhile(f, xf) { return new XDropWhile(f, xf); });
 export default _xdropWhile;

@@ -26,7 +26,7 @@ import _curry1 from './internal/_curry1';
  *      R.type(() => {}); //=> "Function"
  *      R.type(undefined); //=> "Undefined"
  */
-var type = /* #__PURE__*/ _curry1(function type(val) {
+var type = _curry1(function type(val) {
   return val === null      ? 'Null'      :
          val === undefined ? 'Undefined' :
          Object.prototype.toString.call(val).slice(8, -1);

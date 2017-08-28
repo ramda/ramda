@@ -22,7 +22,7 @@ import curry from './curry';
  *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
  * @symb R.flip(f)(a, b, c) = f(b, a, c)
  */
-var flip = /* #__PURE__*/ _curry1(function flip(fn) {
+var flip = _curry1(function flip(fn) {
   return curry(function(a, b) {
     var args = Array.prototype.slice.call(arguments, 0);
     args[0] = b;

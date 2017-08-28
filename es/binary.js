@@ -30,7 +30,7 @@ import nAry from './nAry';
  *      takesTwoArgs(1, 2, 3); //=> [1, 2, undefined]
  * @symb R.binary(f)(a, b, c) = f(a, b)
  */
-var binary = /* #__PURE__*/ _curry1(function binary(fn) {
+var binary = _curry1(function binary(fn) {
   return nAry(2, fn);
 });
 export default binary;

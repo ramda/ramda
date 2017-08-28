@@ -22,7 +22,7 @@ import _curry2 from './internal/_curry2';
  *      R.match(/a/, 'b'); //=> []
  *      R.match(/a/, null); //=> TypeError: null does not have a method named "match"
  */
-var match = /* #__PURE__*/ _curry2(function match(rx, str) {
+var match = _curry2(function match(rx, str) {
   return str.match(rx) || [];
 });
 export default match;

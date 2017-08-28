@@ -23,5 +23,5 @@ XFind.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfind = /* #__PURE__*/ _curry2(function _xfind(f, xf) { return new XFind(f, xf); });
+var _xfind = _curry2(function _xfind(f, xf) { return new XFind(f, xf); });
 export default _xfind;

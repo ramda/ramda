@@ -16,5 +16,5 @@ import invoker from './invoker';
  *
  *      R.toLower('XYZ'); //=> 'xyz'
  */
-var toLower = /* #__PURE__*/ invoker(0, 'toLowerCase');
+var toLower = invoker(0, 'toLowerCase');
 export default toLower;

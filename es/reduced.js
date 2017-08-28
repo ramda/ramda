@@ -25,5 +25,5 @@ import _reduced from './internal/_reduced';
  *       [],
  *       [1, 2, 3, 4, 5]) // [1, 2, 3]
  */
-var reduced = /* #__PURE__*/ _curry1(_reduced);
+var reduced = _curry1(_reduced);
 export default reduced;

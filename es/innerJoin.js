@@ -38,7 +38,7 @@ import _filter from './internal/_filter';
  *      );
  *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
-var innerJoin = /* #__PURE__*/ _curry3(function innerJoin(pred, xs, ys) {
+var innerJoin = _curry3(function innerJoin(pred, xs, ys) {
   return _filter(function(x) { return _containsWith(pred, x, ys); }, xs);
 });
 export default innerJoin;

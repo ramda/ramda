@@ -22,7 +22,7 @@ import _curry1 from './internal/_curry1';
  *      var f = new F();
  *      R.keysIn(f); //=> ['x', 'y']
  */
-var keysIn = /* #__PURE__*/ _curry1(function keysIn(obj) {
+var keysIn = _curry1(function keysIn(obj) {
   var prop;
   var ks = [];
   for (prop in obj) {

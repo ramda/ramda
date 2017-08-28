@@ -27,7 +27,7 @@ import curryN from './curryN';
  *      mapIndexed((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r']);
  *      //=> ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
-var addIndex = /* #__PURE__*/ _curry1(function addIndex(fn) {
+var addIndex = _curry1(function addIndex(fn) {
   return curryN(fn.length, function() {
     var idx = 0;
     var origFn = arguments[0];

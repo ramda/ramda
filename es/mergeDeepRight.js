@@ -23,7 +23,7 @@ import mergeDeepWithKey from './mergeDeepWithKey';
  *                       { age: 40, contact: { email: 'baa@example.com' }});
  *      //=> { name: 'fred', age: 40, contact: { email: 'baa@example.com' }}
  */
-var mergeDeepRight = /* #__PURE__*/ _curry2(function mergeDeepRight(lObj, rObj) {
+var mergeDeepRight = _curry2(function mergeDeepRight(lObj, rObj) {
   return mergeDeepWithKey(function(k, lVal, rVal) {
     return rVal;
   }, lObj, rObj);

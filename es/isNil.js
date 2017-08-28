@@ -18,5 +18,5 @@ import _curry1 from './internal/_curry1';
  *      R.isNil(0); //=> false
  *      R.isNil([]); //=> false
  */
-var isNil = /* #__PURE__*/ _curry1(function isNil(x) { return x == null; });
+var isNil = _curry1(function isNil(x) { return x == null; });
 export default isNil;

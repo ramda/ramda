@@ -38,7 +38,7 @@ import _curry3 from './internal/_curry3';
  *   f(b, f(c, f(d, a)[0])[0])[0],
  * ]
  */
-var mapAccumRight = /* #__PURE__*/ _curry3(function mapAccumRight(fn, acc, list) {
+var mapAccumRight = _curry3(function mapAccumRight(fn, acc, list) {
   var idx = list.length - 1;
   var result = [];
   var tuple = [acc];

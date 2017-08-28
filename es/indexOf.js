@@ -22,7 +22,7 @@ import _isArray from './internal/_isArray';
  *      R.indexOf(3, [1,2,3,4]); //=> 2
  *      R.indexOf(10, [1,2,3,4]); //=> -1
  */
-var indexOf = /* #__PURE__*/ _curry2(function indexOf(target, xs) {
+var indexOf = _curry2(function indexOf(target, xs) {
   return typeof xs.indexOf === 'function' && !_isArray(xs) ?
     xs.indexOf(target) :
     _indexOf(xs, target, 0);

@@ -22,7 +22,7 @@ import is from './is';
  *      R.propIs(Number, 'x', {x: 'foo'});    //=> false
  *      R.propIs(Number, 'x', {});            //=> false
  */
-var propIs = /* #__PURE__*/ _curry3(function propIs(type, name, obj) {
+var propIs = _curry3(function propIs(type, name, obj) {
   return is(type, obj[name]);
 });
 export default propIs;

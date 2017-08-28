@@ -25,5 +25,5 @@ import slice from './slice';
  *      R.init('a');    //=> ''
  *      R.init('');     //=> ''
  */
-var init = /* #__PURE__*/ slice(0, -1);
+var init = slice(0, -1);
 export default init;

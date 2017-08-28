@@ -24,7 +24,7 @@ import keys from './keys';
  *      // logs y:2
  * @symb R.forEachObjIndexed(f, {x: a, y: b}) = {x: a, y: b}
  */
-var forEachObjIndexed = /* #__PURE__*/ _curry2(function forEachObjIndexed(fn, obj) {
+var forEachObjIndexed = _curry2(function forEachObjIndexed(fn, obj) {
   var keyList = keys(obj);
   var idx = 0;
   while (idx < keyList.length) {

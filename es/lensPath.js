@@ -28,7 +28,7 @@ import path from './path';
  *      R.over(xHeadYLens, R.negate, {x: [{y: 2, z: 3}, {y: 4, z: 5}]});
  *      //=> {x: [{y: -2, z: 3}, {y: 4, z: 5}]}
  */
-var lensPath = /* #__PURE__*/ _curry1(function lensPath(p) {
+var lensPath = _curry1(function lensPath(p) {
   return lens(path(p), assocPath(p));
 });
 export default lensPath;

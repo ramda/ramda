@@ -22,5 +22,5 @@ XDropRepeatsWith.prototype['@@transducer/step'] = function(result, input) {
   return sameAsLast ? result : this.xf['@@transducer/step'](result, input);
 };
 
-var _xdropRepeatsWith = /* #__PURE__*/ _curry2(function _xdropRepeatsWith(pred, xf) { return new XDropRepeatsWith(pred, xf); });
+var _xdropRepeatsWith = _curry2(function _xdropRepeatsWith(pred, xf) { return new XDropRepeatsWith(pred, xf); });
 export default _xdropRepeatsWith;

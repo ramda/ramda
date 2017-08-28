@@ -43,7 +43,7 @@ import curryN from './curryN';
  *      var g = f(3);
  *      g(4); //=> 10
  */
-var curry = /* #__PURE__*/ _curry1(function curry(fn) {
+var curry = _curry1(function curry(fn) {
   return curryN(fn.length, fn);
 });
 export default curry;

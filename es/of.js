@@ -20,5 +20,5 @@ import _of from './internal/_of';
  *      R.of(null); //=> [null]
  *      R.of([42]); //=> [[42]]
  */
-var of = /* #__PURE__*/ _curry1(_of);
+var of = _curry1(_of);
 export default of;

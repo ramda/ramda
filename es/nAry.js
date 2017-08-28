@@ -31,7 +31,7 @@ import _curry2 from './internal/_curry2';
  * @symb R.nAry(1, f)(a, b) = f(a)
  * @symb R.nAry(2, f)(a, b) = f(a, b)
  */
-var nAry = /* #__PURE__*/ _curry2(function nAry(n, fn) {
+var nAry = _curry2(function nAry(n, fn) {
   switch (n) {
     case 0: return function() {return fn.call(this);};
     case 1: return function(a0) {return fn.call(this, a0);};

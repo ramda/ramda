@@ -21,5 +21,5 @@ import path from './path';
  *      R.prop('x', {}); //=> undefined
  */
 
-var prop = /* #__PURE__*/ _curry2(function prop(p, obj) { return path([p], obj); });
+var prop = _curry2(function prop(p, obj) { return path([p], obj); });
 export default prop;

@@ -21,7 +21,7 @@ import _curry2 from './internal/_curry2';
  *      var diff = function(a, b) { return a - b; };
  *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
  */
-var sort = /* #__PURE__*/ _curry2(function sort(comparator, list) {
+var sort = _curry2(function sort(comparator, list) {
   return Array.prototype.slice.call(list, 0).sort(comparator);
 });
 export default sort;

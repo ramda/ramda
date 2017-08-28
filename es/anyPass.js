@@ -31,7 +31,7 @@ import reduce from './reduce';
  *      isBlackCard({rank: 'Q', suit: '♠'}); //=> true
  *      isBlackCard({rank: 'Q', suit: '♦'}); //=> false
  */
-var anyPass = /* #__PURE__*/ _curry1(function anyPass(preds) {
+var anyPass = _curry1(function anyPass(preds) {
   return curryN(reduce(max, 0, pluck('length', preds)), function() {
     var idx = 0;
     var len = preds.length;

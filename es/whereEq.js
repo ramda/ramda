@@ -32,7 +32,7 @@ import where from './where';
  *      pred({a: 1, b: 2, c: 3});  //=> true
  *      pred({a: 1, b: 1});        //=> false
  */
-var whereEq = /* #__PURE__*/ _curry2(function whereEq(spec, testObj) {
+var whereEq = _curry2(function whereEq(spec, testObj) {
   return where(map(equals, spec), testObj);
 });
 export default whereEq;

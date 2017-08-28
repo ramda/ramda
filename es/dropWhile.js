@@ -32,7 +32,7 @@ import slice from './slice';
  *
  *      R.dropWhile(x => x !== 'd' , 'Ramda'); //=> 'da'
  */
-var dropWhile = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['dropWhile'], _xdropWhile, function dropWhile(pred, xs) {
+var dropWhile = _curry2(_dispatchable(['dropWhile'], _xdropWhile, function dropWhile(pred, xs) {
   var idx = 0;
   var len = xs.length;
   while (idx < len && pred(xs[idx])) {

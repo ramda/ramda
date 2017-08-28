@@ -31,7 +31,7 @@ import or from './or';
  *      f(101); //=> true
  *      f(8); //=> true
  */
-var either = /* #__PURE__*/ _curry2(function either(f, g) {
+var either = _curry2(function either(f, g) {
   return _isFunction(f) ?
     function _either() {
       return f.apply(this, arguments) || g.apply(this, arguments);

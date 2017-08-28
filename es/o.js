@@ -26,7 +26,7 @@ import _curry3 from './internal/_curry3';
  *
  * @symb R.o(f, g, x) = f(g(x))
  */
-var o = /* #__PURE__*/ _curry3(function o(f, g, x) {
+var o = _curry3(function o(f, g, x) {
   return f(g(x));
 });
 export default o;

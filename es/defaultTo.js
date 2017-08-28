@@ -23,7 +23,7 @@ import _curry2 from './internal/_curry2';
  *      // parseInt('string') results in NaN
  *      defaultTo42(parseInt('string')); //=> 42
  */
-var defaultTo = /* #__PURE__*/ _curry2(function defaultTo(d, v) {
+var defaultTo = _curry2(function defaultTo(d, v) {
   return v == null || v !== v ? d : v;
 });
 export default defaultTo;

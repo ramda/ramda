@@ -19,7 +19,7 @@ import _curry3 from './internal/_curry3';
  *
  *      R.insertAll(2, ['x','y','z'], [1,2,3,4]); //=> [1,2,'x','y','z',3,4]
  */
-var insertAll = /* #__PURE__*/ _curry3(function insertAll(idx, elts, list) {
+var insertAll = _curry3(function insertAll(idx, elts, list) {
   idx = idx < list.length && idx >= 0 ? idx : list.length;
   return [].concat(Array.prototype.slice.call(list, 0, idx),
                    elts,

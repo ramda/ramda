@@ -38,5 +38,5 @@ import _toString from './internal/_toString';
  *      R.toString({foo: 1, bar: 2, baz: 3}); //=> '{"bar": 2, "baz": 3, "foo": 1}'
  *      R.toString(new Date('2001-02-03T04:05:06Z')); //=> 'new Date("2001-02-03T04:05:06.000Z")'
  */
-var toString = /* #__PURE__*/ _curry1(function toString(val) { return _toString(val, []); });
+var toString = _curry1(function toString(val) { return _toString(val, []); });
 export default toString;

@@ -23,5 +23,5 @@ XAny.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xany = /* #__PURE__*/ _curry2(function _xany(f, xf) { return new XAny(f, xf); });
+var _xany = _curry2(function _xany(f, xf) { return new XAny(f, xf); });
 export default _xany;

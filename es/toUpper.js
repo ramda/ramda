@@ -16,5 +16,5 @@ import invoker from './invoker';
  *
  *      R.toUpper('abc'); //=> 'ABC'
  */
-var toUpper = /* #__PURE__*/ invoker(0, 'toUpperCase');
+var toUpper = invoker(0, 'toUpperCase');
 export default toUpper;

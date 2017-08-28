@@ -50,7 +50,7 @@ import curryN from './curryN';
  *      var firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
  *      R.transduce(firstOddTransducer, R.flip(R.append), [], R.range(0, 100)); //=> [1]
  */
-var transduce = /* #__PURE__*/ curryN(4, function transduce(xf, fn, acc, list) {
+var transduce = curryN(4, function transduce(xf, fn, acc, list) {
   return _reduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
 });
 export default transduce;

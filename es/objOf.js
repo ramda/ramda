@@ -21,7 +21,7 @@ import _curry2 from './internal/_curry2';
  *      );
  *      matchPhrases(['foo', 'bar', 'baz']); //=> {must: [{match_phrase: 'foo'}, {match_phrase: 'bar'}, {match_phrase: 'baz'}]}
  */
-var objOf = /* #__PURE__*/ _curry2(function objOf(key, val) {
+var objOf = _curry2(function objOf(key, val) {
   var obj = {};
   obj[key] = val;
   return obj;

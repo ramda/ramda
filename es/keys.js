@@ -69,5 +69,5 @@ var _keys = typeof Object.keys === 'function' && !hasArgsEnumBug ?
     }
     return ks;
   };
-var keys = /* #__PURE__*/ _curry1(_keys);
+var keys = _curry1(_keys);
 export default keys;

@@ -29,5 +29,5 @@ XDropLast.prototype.store = function(input) {
   }
 };
 
-var _xdropLast = /* #__PURE__*/ _curry2(function _xdropLast(n, xf) { return new XDropLast(n, xf); });
+var _xdropLast = _curry2(function _xdropLast(n, xf) { return new XDropLast(n, xf); });
 export default _xdropLast;

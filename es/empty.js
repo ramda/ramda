@@ -28,7 +28,7 @@ import _isString from './internal/_isString';
  *      R.empty('unicorns');    //=> ''
  *      R.empty({x: 1, y: 2});  //=> {}
  */
-var empty = /* #__PURE__*/ _curry1(function empty(x) {
+var empty = _curry1(function empty(x) {
   return (
     (x != null && typeof x['fantasy-land/empty'] === 'function') ?
       x['fantasy-land/empty']() :

@@ -32,7 +32,7 @@ import _has from './internal/_has';
  *      factorial(5); //=> 120
  *      count; //=> 1
  */
-var memoizeWith = /* #__PURE__*/ _curry2(function memoizeWith(mFn, fn) {
+var memoizeWith = _curry2(function memoizeWith(mFn, fn) {
   var cache = {};
   return _arity(fn.length, function() {
     var key = mFn.apply(this, arguments);

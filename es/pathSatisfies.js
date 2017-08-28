@@ -21,7 +21,7 @@ import path from './path';
  *
  *      R.pathSatisfies(y => y > 0, ['x', 'y'], {x: {y: 2}}); //=> true
  */
-var pathSatisfies = /* #__PURE__*/ _curry3(function pathSatisfies(pred, propPath, obj) {
+var pathSatisfies = _curry3(function pathSatisfies(pred, propPath, obj) {
   return propPath.length > 0 && pred(path(propPath, obj));
 });
 export default pathSatisfies;

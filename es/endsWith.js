@@ -21,7 +21,7 @@ import takeLast from './takeLast';
  *      R.endsWith(['c'], ['a', 'b', 'c'])    //=> true
  *      R.endsWith(['b'], ['a', 'b', 'c'])    //=> false
  */
-var endsWith = /* #__PURE__*/ _curry2(function(suffix, list) {
+var endsWith = _curry2(function(suffix, list) {
   return equals(takeLast(suffix.length, list), suffix);
 });
 export default endsWith;

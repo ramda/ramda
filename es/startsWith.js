@@ -21,7 +21,7 @@ import take from './take';
  *      R.startsWith(['a'], ['a', 'b', 'c'])    //=> true
  *      R.startsWith(['b'], ['a', 'b', 'c'])    //=> false
  */
-var startsWith = /* #__PURE__*/ _curry2(function(prefix, list) {
+var startsWith = _curry2(function(prefix, list) {
   return equals(take(prefix.length, list), prefix);
 });
 export default startsWith;

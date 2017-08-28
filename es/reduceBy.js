@@ -49,7 +49,7 @@ import _xreduceBy from './internal/_xreduceBy';
  *      //   'F': ['Bart']
  *      // }
  */
-var reduceBy = /* #__PURE__*/ _curryN(4, [], /* #__PURE__*/ _dispatchable([], _xreduceBy,
+var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);

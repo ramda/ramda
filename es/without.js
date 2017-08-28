@@ -23,7 +23,7 @@ import reject from './reject';
  *
  *      R.without([1, 2], [1, 2, 1, 3, 4]); //=> [3, 4]
  */
-var without = /* #__PURE__*/ _curry2(function(xs, list) {
+var without = _curry2(function(xs, list) {
   return reject(flip(_contains)(xs), list);
 });
 export default without;

@@ -29,7 +29,7 @@ import mergeDeepWithKey from './mergeDeepWithKey';
  *                      { b: true, c: { values: [15, 35] }});
  *      //=> { a: true, b: true, c: { values: [10, 20, 15, 35] }}
  */
-var mergeDeepWith = /* #__PURE__*/ _curry3(function mergeDeepWith(fn, lObj, rObj) {
+var mergeDeepWith = _curry3(function mergeDeepWith(fn, lObj, rObj) {
   return mergeDeepWithKey(function(k, lVal, rVal) {
     return fn(lVal, rVal);
   }, lObj, rObj);

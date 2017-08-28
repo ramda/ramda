@@ -15,5 +15,5 @@ import _curry1 from './internal/_curry1';
  *
  *      R.negate(42); //=> -42
  */
-var negate = /* #__PURE__*/ _curry1(function negate(n) { return -n; });
+var negate = _curry1(function negate(n) { return -n; });
 export default negate;

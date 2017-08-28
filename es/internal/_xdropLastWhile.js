@@ -31,5 +31,5 @@ XDropLastWhile.prototype.retain = function(result, input) {
   return result;
 };
 
-var _xdropLastWhile = /* #__PURE__*/ _curry2(function _xdropLastWhile(fn, xf) { return new XDropLastWhile(fn, xf); });
+var _xdropLastWhile = _curry2(function _xdropLastWhile(fn, xf) { return new XDropLastWhile(fn, xf); });
 export default _xdropLastWhile;

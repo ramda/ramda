@@ -16,5 +16,5 @@ XTake.prototype['@@transducer/step'] = function(result, input) {
   return this.n >= 0 && this.i >= this.n ? _reduced(ret) : ret;
 };
 
-var _xtake = /* #__PURE__*/ _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
+var _xtake = _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
 export default _xtake;

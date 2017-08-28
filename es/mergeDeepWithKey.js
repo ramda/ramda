@@ -31,7 +31,7 @@ import mergeWithKey from './mergeWithKey';
  *                         { b: true, c: { thing: 'bar', values: [15, 35] }});
  *      //=> { a: true, b: true, c: { thing: 'bar', values: [10, 20, 15, 35] }}
  */
-var mergeDeepWithKey = /* #__PURE__*/ _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
+var mergeDeepWithKey = _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
   return mergeWithKey(function(k, lVal, rVal) {
     if (_isObject(lVal) && _isObject(rVal)) {
       return mergeDeepWithKey(fn, lVal, rVal);

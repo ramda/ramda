@@ -25,7 +25,7 @@ import over from './over';
  *      R.set(xLens, 4, {x: 1, y: 2});  //=> {x: 4, y: 2}
  *      R.set(xLens, 8, {x: 1, y: 2});  //=> {x: 8, y: 2}
  */
-var set = /* #__PURE__*/ _curry3(function set(lens, v, x) {
+var set = _curry3(function set(lens, v, x) {
   return over(lens, always(v), x);
 });
 export default set;

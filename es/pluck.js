@@ -28,7 +28,7 @@ import prop from './prop';
  * @symb R.pluck('x', [{x: 1, y: 2}, {x: 3, y: 4}, {x: 5, y: 6}]) = [1, 3, 5]
  * @symb R.pluck(0, [[1, 2], [3, 4], [5, 6]]) = [1, 3, 5]
  */
-var pluck = /* #__PURE__*/ _curry2(function pluck(p, list) {
+var pluck = _curry2(function pluck(p, list) {
   return map(prop(p), list);
 });
 export default pluck;

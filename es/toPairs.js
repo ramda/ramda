@@ -20,7 +20,7 @@ import _has from './internal/_has';
  *
  *      R.toPairs({a: 1, b: 2, c: 3}); //=> [['a', 1], ['b', 2], ['c', 3]]
  */
-var toPairs = /* #__PURE__*/ _curry1(function toPairs(obj) {
+var toPairs = _curry1(function toPairs(obj) {
   var pairs = [];
   for (var prop in obj) {
     if (_has(prop, obj)) {

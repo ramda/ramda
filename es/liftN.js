@@ -22,7 +22,7 @@ import map from './map';
  *      var madd3 = R.liftN(3, (...args) => R.sum(args));
  *      madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
-var liftN = /* #__PURE__*/ _curry2(function liftN(arity, fn) {
+var liftN = _curry2(function liftN(arity, fn) {
   var lifted = curryN(arity, fn);
   return curryN(arity, function() {
     return _reduce(ap, map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));

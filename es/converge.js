@@ -33,7 +33,7 @@ import reduce from './reduce';
  *
  * @symb R.converge(f, [g, h])(a, b) = f(g(a, b), h(a, b))
  */
-var converge = /* #__PURE__*/ _curry2(function converge(after, fns) {
+var converge = _curry2(function converge(after, fns) {
   return curryN(reduce(max, 0, pluck('length', fns)), function() {
     var args = arguments;
     var context = this;

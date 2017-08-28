@@ -16,5 +16,5 @@ import add from './add';
  *
  *      R.inc(42); //=> 43
  */
-var inc = /* #__PURE__*/ add(1);
+var inc = add(1);
 export default inc;

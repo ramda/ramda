@@ -20,5 +20,5 @@ XFindLastIndex.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfindLastIndex = /* #__PURE__*/ _curry2(function _xfindLastIndex(f, xf) { return new XFindLastIndex(f, xf); });
+var _xfindLastIndex = _curry2(function _xfindLastIndex(f, xf) { return new XFindLastIndex(f, xf); });
 export default _xfindLastIndex;

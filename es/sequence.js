@@ -29,7 +29,7 @@ import reduceRight from './reduceRight';
  *      R.sequence(R.of, Just([1, 2, 3])); //=> [Just(1), Just(2), Just(3)]
  *      R.sequence(R.of, Nothing());       //=> [Nothing()]
  */
-var sequence = /* #__PURE__*/ _curry2(function sequence(of, traversable) {
+var sequence = _curry2(function sequence(of, traversable) {
   return typeof traversable.sequence === 'function' ?
     traversable.sequence(of) :
     reduceRight(function(x, acc) { return ap(map(prepend, x), acc); },

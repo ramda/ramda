@@ -26,5 +26,5 @@ import _has from './internal/_has';
  *      pointHas('y');  //=> true
  *      pointHas('z');  //=> false
  */
-var has = /* #__PURE__*/ _curry2(_has);
+var has = _curry2(_has);
 export default has;

@@ -33,7 +33,7 @@ import _curry2 from './internal/_curry2';
  *      var people = [clara, bob, alice];
  *      sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
  */
-var sortBy = /* #__PURE__*/ _curry2(function sortBy(fn, list) {
+var sortBy = _curry2(function sortBy(fn, list) {
   return Array.prototype.slice.call(list, 0).sort(function(a, b) {
     var aa = fn(a);
     var bb = fn(b);

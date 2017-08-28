@@ -20,7 +20,7 @@ import _isString from './_isString';
  *      _isArrayLike({length: 10}); //=> false
  *      _isArrayLike({0: 'zero', 9: 'nine', length: 10}); //=> true
  */
-var _isArrayLike = /* #__PURE__*/ _curry1(function isArrayLike(x) {
+var _isArrayLike = _curry1(function isArrayLike(x) {
   if (_isArray(x)) { return true; }
   if (!x) { return false; }
   if (typeof x !== 'object') { return false; }

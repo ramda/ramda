@@ -17,7 +17,7 @@ import _curry1 from './internal/_curry1';
  *
  *      R.fromPairs([['a', 1], ['b', 2], ['c', 3]]); //=> {a: 1, b: 2, c: 3}
  */
-var fromPairs = /* #__PURE__*/ _curry1(function fromPairs(pairs) {
+var fromPairs = _curry1(function fromPairs(pairs) {
   var result = {};
   var idx = 0;
   while (idx < pairs.length) {

@@ -28,7 +28,7 @@ import _has from './internal/_has';
  *      favorite(alice);  //=> undefined
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
-var propOr = /* #__PURE__*/ _curry3(function propOr(val, p, obj) {
+var propOr = _curry3(function propOr(val, p, obj) {
   return (obj != null && _has(p, obj)) ? obj[p] : val;
 });
 export default propOr;

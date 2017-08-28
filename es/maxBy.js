@@ -25,7 +25,7 @@ import _curry3 from './internal/_curry3';
  *      R.reduce(R.maxBy(square), 0, [3, -5, 4, 1, -2]); //=> -5
  *      R.reduce(R.maxBy(square), 0, []); //=> 0
  */
-var maxBy = /* #__PURE__*/ _curry3(function maxBy(f, a, b) {
+var maxBy = _curry3(function maxBy(f, a, b) {
   return f(b) > f(a) ? b : a;
 });
 export default maxBy;

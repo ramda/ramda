@@ -23,7 +23,7 @@ import _xtap from './internal/_xtap';
  *      // logs 'x is 100'
  * @symb R.tap(f, a) = a
  */
-var tap = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable([], _xtap, function tap(fn, x) {
+var tap = _curry2(_dispatchable([], _xtap, function tap(fn, x) {
   fn(x);
   return x;
 }));

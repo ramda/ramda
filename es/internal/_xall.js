@@ -23,5 +23,5 @@ XAll.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xall = /* #__PURE__*/ _curry2(function _xall(f, xf) { return new XAll(f, xf); });
+var _xall = _curry2(function _xall(f, xf) { return new XAll(f, xf); });
 export default _xall;

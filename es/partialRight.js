@@ -27,5 +27,5 @@ import flip from './flip';
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)
  */
-var partialRight = /* #__PURE__*/ _createPartialApplicator(/* #__PURE__*/ flip(_concat));
+var partialRight = _createPartialApplicator(flip(_concat));
 export default partialRight;

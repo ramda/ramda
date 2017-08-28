@@ -21,7 +21,7 @@ import curryN from './curryN';
  *      var uncurriedAddFour = R.uncurryN(4, addFour);
  *      uncurriedAddFour(1, 2, 3, 4); //=> 10
  */
-var uncurryN = /* #__PURE__*/ _curry2(function uncurryN(depth, fn) {
+var uncurryN = _curry2(function uncurryN(depth, fn) {
   return curryN(depth, function() {
     var currentDepth = 1;
     var value = fn;

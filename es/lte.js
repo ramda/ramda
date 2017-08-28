@@ -22,5 +22,5 @@ import _curry2 from './internal/_curry2';
  *      R.lte('a', 'z'); //=> true
  *      R.lte('z', 'a'); //=> false
  */
-var lte = /* #__PURE__*/ _curry2(function lte(a, b) { return a <= b; });
+var lte = _curry2(function lte(a, b) { return a <= b; });
 export default lte;

@@ -16,5 +16,5 @@ import always from './always';
  *
  *      R.F(); //=> false
  */
-var F = /* #__PURE__*/ always(false);
+var F = always(false);
 export default F;

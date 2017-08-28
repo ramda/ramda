@@ -33,7 +33,7 @@ import slice from './slice';
  *
  *      R.takeWhile(x => x !== 'd' , 'Ramda'); //=> 'Ram'
  */
-var takeWhile = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['takeWhile'], _xtakeWhile, function takeWhile(fn, xs) {
+var takeWhile = _curry2(_dispatchable(['takeWhile'], _xtakeWhile, function takeWhile(fn, xs) {
   var idx = 0;
   var len = xs.length;
   while (idx < len && fn(xs[idx])) {

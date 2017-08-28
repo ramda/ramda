@@ -25,5 +25,5 @@ XFindIndex.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfindIndex = /* #__PURE__*/ _curry2(function _xfindIndex(f, xf) { return new XFindIndex(f, xf); });
+var _xfindIndex = _curry2(function _xfindIndex(f, xf) { return new XFindIndex(f, xf); });
 export default _xfindIndex;

@@ -30,7 +30,7 @@ import _curry2 from './internal/_curry2';
  * R.groupWith(R.eqBy(isVowel), 'aestiou')
  * //=> ['ae', 'st', 'iou']
  */
-var groupWith = /* #__PURE__*/ _curry2(function(fn, list) {
+var groupWith = _curry2(function(fn, list) {
   var res = [];
   var idx = 0;
   var len = list.length;

@@ -1,5 +1,6 @@
 {
   "plugins": [
     "./scripts/transform-esm-to-cjs",
+    "./scripts/annotate-pure-calls"
   ]
 }

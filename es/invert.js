@@ -25,7 +25,7 @@ import keys from './keys';
  *      R.invert(raceResultsByFirstName);
  *      //=> { 'alice': ['first', 'third'], 'jake':['second'] }
  */
-var invert = /* #__PURE__*/ _curry1(function invert(obj) {
+var invert = _curry1(function invert(obj) {
   var props = keys(obj);
   var len = props.length;
   var idx = 0;

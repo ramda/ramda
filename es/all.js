@@ -27,7 +27,7 @@ import _xall from './internal/_xall';
  *      R.all(equals3)([3, 3, 3, 3]); //=> true
  *      R.all(equals3)([3, 3, 1, 3]); //=> false
  */
-var all = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['all'], _xall, function all(fn, list) {
+var all = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
   var idx = 0;
   while (idx < list.length) {
     if (!fn(list[idx])) {

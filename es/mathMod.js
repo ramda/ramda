@@ -35,7 +35,7 @@ import _isInteger from './internal/_isInteger';
  *      seventeenMod(4);  //=> 1
  *      seventeenMod(10); //=> 7
  */
-var mathMod = /* #__PURE__*/ _curry2(function mathMod(m, p) {
+var mathMod = _curry2(function mathMod(m, p) {
   if (!_isInteger(m)) { return NaN; }
   if (!_isInteger(p) || p < 1) { return NaN; }
   return ((m % p) + p) % p;

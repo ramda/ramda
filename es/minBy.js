@@ -25,7 +25,7 @@ import _curry3 from './internal/_curry3';
  *      R.reduce(R.minBy(square), Infinity, [3, -5, 4, 1, -2]); //=> 1
  *      R.reduce(R.minBy(square), Infinity, []); //=> Infinity
  */
-var minBy = /* #__PURE__*/ _curry3(function minBy(f, a, b) {
+var minBy = _curry3(function minBy(f, a, b) {
   return f(b) < f(a) ? b : a;
 });
 export default minBy;

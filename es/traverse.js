@@ -29,7 +29,7 @@ import sequence from './sequence';
  *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Just([5, 2.5, 2])
  *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Nothing
  */
-var traverse = /* #__PURE__*/ _curry3(function traverse(of, f, traversable) {
+var traverse = _curry3(function traverse(of, f, traversable) {
   return typeof traversable['fantasy-land/traverse'] === 'function' ?
     traversable['fantasy-land/traverse'](f, of) :
     sequence(of, map(f, traversable));

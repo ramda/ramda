@@ -22,7 +22,7 @@ import _curry1 from './internal/_curry1';
  *      var f = new F();
  *      R.valuesIn(f); //=> ['X', 'Y']
  */
-var valuesIn = /* #__PURE__*/ _curry1(function valuesIn(obj) {
+var valuesIn = _curry1(function valuesIn(obj) {
   var prop;
   var vs = [];
   for (prop in obj) {

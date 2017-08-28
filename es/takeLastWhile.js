@@ -27,7 +27,7 @@ import slice from './slice';
  *
  *      R.takeLastWhile(x => x !== 'R' , 'Ramda'); //=> 'amda'
  */
-var takeLastWhile = /* #__PURE__*/ _curry2(function takeLastWhile(fn, xs) {
+var takeLastWhile = _curry2(function takeLastWhile(fn, xs) {
   var idx = xs.length - 1;
   while (idx >= 0 && fn(xs[idx])) {
     idx -= 1;

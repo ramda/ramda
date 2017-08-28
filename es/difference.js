@@ -22,7 +22,7 @@ import _curry2 from './internal/_curry2';
  *      R.difference([7,6,5,4,3], [1,2,3,4]); //=> [7,6,5]
  *      R.difference([{a: 1}, {b: 2}], [{a: 1}, {c: 3}]) //=> [{b: 2}]
  */
-var difference = /* #__PURE__*/ _curry2(function difference(first, second) {
+var difference = _curry2(function difference(first, second) {
   var out = [];
   var idx = 0;
   var firstLen = first.length;

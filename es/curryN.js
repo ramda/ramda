@@ -46,7 +46,7 @@ import _curryN from './internal/_curryN';
  *      var g = f(3);
  *      g(4); //=> 10
  */
-var curryN = /* #__PURE__*/ _curry2(function curryN(length, fn) {
+var curryN = _curry2(function curryN(length, fn) {
   if (length === 1) {
     return _curry1(fn);
   }

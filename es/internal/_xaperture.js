@@ -31,5 +31,5 @@ XAperture.prototype.getCopy = function() {
                  Array.prototype.slice.call(this.acc, 0, this.pos));
 };
 
-var _xaperture = /* #__PURE__*/ _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });
+var _xaperture = _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });
 export default _xaperture;
