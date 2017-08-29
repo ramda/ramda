@@ -14,6 +14,10 @@ describe('takeLastWhile', function() {
     eq(R.takeLastWhile(function(x) {return x !== void 0;}, [1, 3, void 0, 5, 7]), [5, 7]);
   });
 
+  it('can operate on strings', function() {
+    eq(R.takeLastWhile(function(x) { return x !== 'R'; }, 'Ramda'), 'amda');
+  });
+
   it('is curried', function() {
     var takeLastUntil7 = R.takeLastWhile(function(x) {return x !== 7;});
     eq(takeLastUntil7([1, 3, 5, 7, 9]), [9]);
