@@ -3,12 +3,14 @@
     "cjs": {
       "plugins": [
         "./scripts/transform-esm-to-cjs",
-        "./scripts/annotate-pure-calls"
+        "./scripts/annotate-pure-calls",
+        "./scripts/wrap-constructor-pattern"
       ]
     },
     "es": {
       "plugins": [
-        "./scripts/annotate-pure-calls"
+        "./scripts/annotate-pure-calls",
+        "./scripts/wrap-constructor-pattern"
       ]
     }
   },
