@@ -57,6 +57,10 @@ var functionDeclarationVisitor = function(path) {
   var maybeClassName = path.get('id.name').node;
 
   var methodPaths = path.getAllNextSiblings().filter(function(sibling) {
+    if (!sibling.isExpressionStatement()) {
+      return false;
+    }
+
     var expression = sibling.get('expression');
 
     if (!expression.isAssignmentExpression()) {
@@ -75,8 +79,8 @@ var functionDeclarationVisitor = function(path) {
       return false;
     }
 
-    return leftObject.get('object.name').node === maybeClassName
-        && leftObject.get('property.name').node === 'prototype';
+    return leftObject.get('object').isIdentifier({ name: maybeClassName })
+        && leftObject.get('property').isIdentifier({ name: 'prototype' });
   });
 
   if (methodPaths.length === 0) {
