@@ -9,6 +9,7 @@ A practical functional library for JavaScript programmers.
 [![Gitter](https://badges.gitter.im/Join_Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
+
 Why Ramda?
 ----------
 
@@ -16,6 +17,7 @@ Why Ramda?
      width="170" height="190" align="right" hspace="12" />
 
 There are already several excellent libraries with a functional flavor. Typically, they are meant to be general-purpose toolkits, suitable for working in multiple paradigms. Ramda has a more focused goal. We wanted a library designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. 
+
 
 
 What's Different?
@@ -36,6 +38,7 @@ The primary distinguishing features of Ramda are:
 The last two points together make it very easy to build functions as sequences of simpler functions, each of which transforms the data and passes it along to the next. Ramda is designed to support this style of coding.
 
 
+
 Introductions
 -------------
 
@@ -45,6 +48,7 @@ Introductions
 * [Why Curry Helps](https://hughfdjackson.com/javascript/why-curry-helps/) by Hugh Jackson
 * [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
 * [Thinking in Ramda](http://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
+
 
 
 Philosophy
@@ -69,6 +73,8 @@ cleaner API.
 
 Last but not least, Ramda strives for performance. A reliable and quick
 implementation wins over any notions of functional purity.
+
+
 
 Installation
 ------------
@@ -130,10 +136,15 @@ It is possible to build Ramda with a subset of the functionality to reduce its f
 
 This requires having Node/io.js installed. 
 
+
+
 Documentation
 -------------
 
 Please review the [API documentation](http://ramdajs.com/docs/).
+
+Also available is our [Cookbook](https://github.com/ramda/ramda/wiki/Cookbook) of functions built from Ramda that you may find useful.
+
 
 The Name
 --------
@@ -178,6 +189,8 @@ link provided in your browser and you will see the results in your terminal.
 If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
+
+
 Typings
 -----------------
 
@@ -185,11 +198,14 @@ Typings
 - [Flow](https://github.com/flowtype/flow-typed/tree/master/definitions/npm/ramda_v0.x.x)
 
 
+
+
 Translations
 -----------------
 
 - [Chinese(中文)](http://ramda.cn/)
 - [Ukrainian(Українська)](https://github.com/ivanzusko/ramda)
+
 
 
 Acknowledgements
