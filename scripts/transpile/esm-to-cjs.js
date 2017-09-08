@@ -36,6 +36,13 @@ var buildExportsAssignment = function(node, property) {
   );
 };
 
+/*
+  before
+  import curryN from './curryN';
+
+  after
+  var curryN = require('./curryN');
+*/
 var importDeclarationVisitor = function(path) {
   var importSource = path.node.source.value;
   var defaultSpecifier = path.get('specifiers')[0];
@@ -49,12 +56,31 @@ var importDeclarationVisitor = function(path) {
   );
 };
 
+/*
+  before
+  export default curryN;
+
+  after
+  module.exports = curryN;
+*/
 var exportDefaultDeclarationVisitor = function(path) {
   var declaration = path.get('declaration');
 
   if (declaration.isFunctionDeclaration()) {
+    // case of export default function compose() {}
     var id = declaration.node.id;
     if (id) {
+      /*
+        aligning with es modules specification
+        exported identifiers have file scope (top level)
+        so the declaration is split into 2 lines:
+
+        function compose() {}
+        module.exports = compose;
+
+        this makes `compose` being hoisted
+        and visible in the whole file
+      */
       path.replaceWithMultiple([
         declaration.node,
         buildExportsAssignment(
@@ -62,6 +88,7 @@ var exportDefaultDeclarationVisitor = function(path) {
         )
       ]);
     } else {
+      // if the function is anonymous we can just use simpler 1 line case
       path.replaceWith(
         buildExportsAssignment(declaration)
       );
@@ -69,12 +96,20 @@ var exportDefaultDeclarationVisitor = function(path) {
   } else if (declaration.isClassDeclaration()) {
     throw path.buildCodeFrameError('Exporting ClassDeclaration is not implemented');
   } else {
+    // simple case of - export default curryN;
     path.replaceWith(
       buildExportsAssignment(declaration.node)
     );
   }
 };
 
+/*
+  before
+  export { default as curryN } from './curryN';
+
+  after
+  module.exports.curryN = require('./curryN');
+*/
 var exportNamedDeclarationVisitor = function(path, state) {
   var defaultReexportSpecifier = path.get('specifiers')[0];
   var local = defaultReexportSpecifier.get('local').get('name').node;
@@ -84,6 +119,7 @@ var exportNamedDeclarationVisitor = function(path, state) {
     throw path.buildCodeFrameError('Only named exports allowed are reexports in index.js');
   }
 
+  // used by Program's exit visitor
   state.set('reexports', true);
 
   path.replaceWith(
@@ -112,6 +148,7 @@ module.exports = function() {
             return;
           }
 
+          // adding module.exports = {}; at the top of the index.js file
           path.unshiftContainer(
             'body',
             buildExportsAssignment(

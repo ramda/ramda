@@ -35,6 +35,20 @@ var buildIIFEClass = function(constructorPath, methodPaths) {
   );
 };
 
+/*
+  before
+  function _Set() {}
+  _Set.prototype.add = function(item) { ... };
+  _Set.prototype.has = function(item) { ... };
+
+  after
+  var _Set = (function(){
+    function _Set() {}
+    _Set.prototype.add = function(item) { ... };
+    _Set.prototype.has = function(item) { ... };
+    return _Set;
+  }())
+*/
 var functionDeclarationVisitor = function(path) {
   if (!path.getStatementParent().parentPath.isProgram()) {
     return;
