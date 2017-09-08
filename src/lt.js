@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -22,4 +22,5 @@ var _curry2 = require('./internal/_curry2');
  *      R.lt('a', 'z'); //=> true
  *      R.lt('z', 'a'); //=> false
  */
-module.exports = _curry2(function lt(a, b) { return a < b; });
+var lt = /* #__PURE__*/ _curry2(function lt(a, b) { return a < b; });
+export default lt;

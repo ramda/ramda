@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -17,7 +17,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
  */
-module.exports = _curry2(function dissoc(prop, obj) {
+var dissoc = /* #__PURE__*/ _curry2(function dissoc(prop, obj) {
   var result = {};
   for (var p in obj) {
     result[p] = obj[p];
@@ -25,3 +25,4 @@ module.exports = _curry2(function dissoc(prop, obj) {
   delete result[prop];
   return result;
 });
+export default dissoc;

@@ -24,4 +24,4 @@
  *      var greet = R.replace('{name}', R.__, 'Hello, {name}!');
  *      greet('Alice'); //=> 'Hello, Alice!'
  */
-module.exports = {'@@functional/placeholder': true};
+export default {'@@functional/placeholder': true};

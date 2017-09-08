@@ -1,6 +1,6 @@
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
-var uniqWith = require('./uniqWith');
+import _containsWith from './internal/_containsWith';
+import _curry3 from './internal/_curry3';
+import uniqWith from './uniqWith';
 
 
 /**
@@ -39,7 +39,7 @@ var uniqWith = require('./uniqWith');
  *      R.intersectionWith(R.eqBy(R.prop('id')), buffaloSpringfield, csny);
  *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
-module.exports = _curry3(function intersectionWith(pred, list1, list2) {
+var intersectionWith = /* #__PURE__*/ _curry3(function intersectionWith(pred, list1, list2) {
   var lookupList, filteredList;
   if (list1.length > list2.length) {
     lookupList = list1;
@@ -58,3 +58,4 @@ module.exports = _curry3(function intersectionWith(pred, list1, list2) {
   }
   return uniqWith(pred, results);
 });
+export default intersectionWith;

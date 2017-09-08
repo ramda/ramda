@@ -1,7 +1,7 @@
-var equals = require('../equals');
+import equals from '../equals';
 
 
-module.exports = function _indexOf(list, a, idx) {
+export default function _indexOf(list, a, idx) {
   var inf, item;
   // Array.prototype.indexOf doesn't exist below IE9
   if (typeof list.indexOf === 'function') {
@@ -54,4 +54,4 @@ module.exports = function _indexOf(list, a, idx) {
     idx += 1;
   }
   return -1;
-};
+}

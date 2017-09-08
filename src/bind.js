@@ -1,5 +1,5 @@
-var _arity = require('./internal/_arity');
-var _curry2 = require('./internal/_curry2');
+import _arity from './internal/_arity';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -24,8 +24,9 @@ var _curry2 = require('./internal/_curry2');
  *      // logs {a: 2}
  * @symb R.bind(f, o)(a, b) = f.call(o, a, b)
  */
-module.exports = _curry2(function bind(fn, thisObj) {
+var bind = /* #__PURE__*/ _curry2(function bind(fn, thisObj) {
   return _arity(fn.length, function() {
     return fn.apply(thisObj, arguments);
   });
 });
+export default bind;

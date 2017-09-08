@@ -1,8 +1,8 @@
-var _curry2 = require('./internal/_curry2');
-var _isArray = require('./internal/_isArray');
-var _isFunction = require('./internal/_isFunction');
-var _isString = require('./internal/_isString');
-var toString = require('./toString');
+import _curry2 from './internal/_curry2';
+import _isArray from './internal/_isArray';
+import _isFunction from './internal/_isFunction';
+import _isString from './internal/_isString';
+import toString from './toString';
 
 
 /**
@@ -33,7 +33,7 @@ var toString = require('./toString');
  *      R.concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
  *      R.concat([], []); //=> []
  */
-module.exports = _curry2(function concat(a, b) {
+var concat = /* #__PURE__*/ _curry2(function concat(a, b) {
   if (_isArray(a)) {
     if (_isArray(b)) {
       return a.concat(b);
@@ -54,3 +54,4 @@ module.exports = _curry2(function concat(a, b) {
   }
   throw new TypeError(toString(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
 });
+export default concat;

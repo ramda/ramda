@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 /**
  * Returns a partial copy of an object omitting the keys specified.
@@ -16,7 +16,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, c: 3}
  */
-module.exports = _curry2(function omit(names, obj) {
+var omit = /* #__PURE__*/ _curry2(function omit(names, obj) {
   var result = {};
   var index = {};
   var idx = 0;
@@ -34,3 +34,4 @@ module.exports = _curry2(function omit(names, obj) {
   }
   return result;
 });
+export default omit;

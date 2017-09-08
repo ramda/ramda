@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -26,7 +26,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.unfold(f, 10); //=> [-10, -20, -30, -40, -50]
  * @symb R.unfold(f, x) = [f(x)[0], f(f(x)[1])[0], f(f(f(x)[1])[1])[0], ...]
  */
-module.exports = _curry2(function unfold(fn, seed) {
+var unfold = /* #__PURE__*/ _curry2(function unfold(fn, seed) {
   var pair = fn(seed);
   var result = [];
   while (pair && pair.length) {
@@ -35,3 +35,4 @@ module.exports = _curry2(function unfold(fn, seed) {
   }
   return result;
 });
+export default unfold;

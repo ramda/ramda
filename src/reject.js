@@ -1,6 +1,6 @@
-var _complement = require('./internal/_complement');
-var _curry2 = require('./internal/_curry2');
-var filter = require('./filter');
+import _complement from './internal/_complement';
+import _curry2 from './internal/_curry2';
+import filter from './filter';
 
 
 /**
@@ -27,6 +27,7 @@ var filter = require('./filter');
  *
  *      R.reject(isOdd, {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, d: 4}
  */
-module.exports = _curry2(function reject(pred, filterable) {
+var reject = /* #__PURE__*/ _curry2(function reject(pred, filterable) {
   return filter(_complement(pred), filterable);
 });
+export default reject;

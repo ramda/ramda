@@ -1,5 +1,5 @@
-var take = require('../take');
+import take from '../take';
 
-module.exports = function dropLast(n, xs) {
+export default function dropLast(n, xs) {
   return take(n < xs.length ? xs.length - n : 0, xs);
-};
+}

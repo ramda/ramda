@@ -1,6 +1,6 @@
-var _arity = require('./internal/_arity');
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+import _arity from './internal/_arity';
+import _curry2 from './internal/_curry2';
+import _has from './internal/_has';
 
 
 /**
@@ -32,7 +32,7 @@ var _has = require('./internal/_has');
  *      factorial(5); //=> 120
  *      count; //=> 1
  */
-module.exports = _curry2(function memoizeWith(mFn, fn) {
+var memoizeWith = /* #__PURE__*/ _curry2(function memoizeWith(mFn, fn) {
   var cache = {};
   return _arity(fn.length, function() {
     var key = mFn.apply(this, arguments);
@@ -42,3 +42,4 @@ module.exports = _curry2(function memoizeWith(mFn, fn) {
     return cache[key];
   });
 });
+export default memoizeWith;

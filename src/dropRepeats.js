@@ -1,8 +1,8 @@
-var _curry1 = require('./internal/_curry1');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropRepeatsWith = require('./internal/_xdropRepeatsWith');
-var dropRepeatsWith = require('./dropRepeatsWith');
-var equals = require('./equals');
+import _curry1 from './internal/_curry1';
+import _dispatchable from './internal/_dispatchable';
+import _xdropRepeatsWith from './internal/_xdropRepeatsWith';
+import dropRepeatsWith from './dropRepeatsWith';
+import equals from './equals';
 
 
 /**
@@ -23,4 +23,7 @@ var equals = require('./equals');
  *
  *     R.dropRepeats([1, 1, 1, 2, 3, 4, 4, 2, 2]); //=> [1, 2, 3, 4, 2]
  */
-module.exports = _curry1(_dispatchable([], _xdropRepeatsWith(equals), dropRepeatsWith(equals)));
+var dropRepeats = /* #__PURE__*/ _curry1(/* #__PURE__*/ _dispatchable([],
+                                                      /* #__PURE__*/ _xdropRepeatsWith(equals),
+                                                      /* #__PURE__*/ dropRepeatsWith(equals)));
+export default dropRepeats;

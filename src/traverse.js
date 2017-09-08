@@ -1,6 +1,6 @@
-var _curry3 = require('./internal/_curry3');
-var map = require('./map');
-var sequence = require('./sequence');
+import _curry3 from './internal/_curry3';
+import map from './map';
+import sequence from './sequence';
 
 
 /**
@@ -29,8 +29,9 @@ var sequence = require('./sequence');
  *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Just([5, 2.5, 2])
  *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Nothing
  */
-module.exports = _curry3(function traverse(of, f, traversable) {
+var traverse = /* #__PURE__*/ _curry3(function traverse(of, f, traversable) {
   return typeof traversable['fantasy-land/traverse'] === 'function' ?
     traversable['fantasy-land/traverse'](f, of) :
     sequence(of, map(f, traversable));
 });
+export default traverse;

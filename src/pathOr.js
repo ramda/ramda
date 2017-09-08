@@ -1,6 +1,6 @@
-var _curry3 = require('./internal/_curry3');
-var defaultTo = require('./defaultTo');
-var path = require('./path');
+import _curry3 from './internal/_curry3';
+import defaultTo from './defaultTo';
+import path from './path';
 
 
 /**
@@ -22,6 +22,7 @@ var path = require('./path');
  *      R.pathOr('N/A', ['a', 'b'], {a: {b: 2}}); //=> 2
  *      R.pathOr('N/A', ['a', 'b'], {c: {b: 2}}); //=> "N/A"
  */
-module.exports = _curry3(function pathOr(d, p, obj) {
+var pathOr = /* #__PURE__*/ _curry3(function pathOr(d, p, obj) {
   return defaultTo(d, path(p, obj));
 });
+export default pathOr;

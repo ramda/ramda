@@ -1,5 +1,5 @@
-var lift = require('./lift');
-var not = require('./not');
+import lift from './lift';
+import not from './not';
 
 
 /**
@@ -24,4 +24,5 @@ var not = require('./not');
  *      isNil(7); //=> false
  *      isNotNil(7); //=> true
  */
-module.exports = lift(not);
+var complement = /* #__PURE__*/ lift(not);
+export default complement;

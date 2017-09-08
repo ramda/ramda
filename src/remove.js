@@ -1,4 +1,4 @@
-var _curry3 = require('./internal/_curry3');
+import _curry3 from './internal/_curry3';
 
 
 /**
@@ -20,8 +20,9 @@ var _curry3 = require('./internal/_curry3');
  *
  *      R.remove(2, 3, [1,2,3,4,5,6,7,8]); //=> [1,2,6,7,8]
  */
-module.exports = _curry3(function remove(start, count, list) {
+var remove = /* #__PURE__*/ _curry3(function remove(start, count, list) {
   var result = Array.prototype.slice.call(list, 0);
   result.splice(start, count);
   return result;
 });
+export default remove;

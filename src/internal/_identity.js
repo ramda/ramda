@@ -1,1 +1,1 @@
-module.exports = function _identity(x) { return x; };
+export default function _identity(x) { return x; }

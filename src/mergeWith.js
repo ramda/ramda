@@ -1,5 +1,5 @@
-var _curry3 = require('./internal/_curry3');
-var mergeWithKey = require('./mergeWithKey');
+import _curry3 from './internal/_curry3';
+import mergeWithKey from './mergeWithKey';
 
 
 /**
@@ -25,8 +25,9 @@ var mergeWithKey = require('./mergeWithKey');
  *                  { b: true, values: [15, 35] });
  *      //=> { a: true, b: true, values: [10, 20, 15, 35] }
  */
-module.exports = _curry3(function mergeWith(fn, l, r) {
+var mergeWith = /* #__PURE__*/ _curry3(function mergeWith(fn, l, r) {
   return mergeWithKey(function(_, _l, _r) {
     return fn(_l, _r);
   }, l, r);
 });
+export default mergeWith;

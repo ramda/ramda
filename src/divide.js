@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -23,4 +23,5 @@ var _curry2 = require('./internal/_curry2');
  *      var reciprocal = R.divide(1);
  *      reciprocal(4);   //=> 0.25
  */
-module.exports = _curry2(function divide(a, b) { return a / b; });
+var divide = /* #__PURE__*/ _curry2(function divide(a, b) { return a / b; });
+export default divide;

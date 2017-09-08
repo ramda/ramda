@@ -1,7 +1,7 @@
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
-var compose = require('./compose');
-var uniq = require('./uniq');
+import _concat from './internal/_concat';
+import _curry2 from './internal/_curry2';
+import compose from './compose';
+import uniq from './uniq';
 
 
 /**
@@ -21,4 +21,5 @@ var uniq = require('./uniq');
  *
  *      R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
  */
-module.exports = _curry2(compose(uniq, _concat));
+var union = /* #__PURE__*/ _curry2(/* #__PURE__*/ compose(uniq, _concat));
+export default union;

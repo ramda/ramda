@@ -1,4 +1,4 @@
-var reduceBy = require('./reduceBy');
+import reduceBy from './reduceBy';
 
 
 /**
@@ -25,4 +25,5 @@ var reduceBy = require('./reduceBy');
  *      var letters = ['a', 'b', 'A', 'a', 'B', 'c'];
  *      R.countBy(R.toLower)(letters);   //=> {'a': 3, 'b': 2, 'c': 1}
  */
-module.exports = reduceBy(function(acc, elem) { return acc + 1; }, 0);
+var countBy = /* #__PURE__*/ reduceBy(function(acc, elem) { return acc + 1; }, 0);
+export default countBy;

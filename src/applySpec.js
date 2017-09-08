@@ -1,11 +1,11 @@
-var _curry1 = require('./internal/_curry1');
-var apply = require('./apply');
-var curryN = require('./curryN');
-var map = require('./map');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
-var values = require('./values');
+import _curry1 from './internal/_curry1';
+import apply from './apply';
+import curryN from './curryN';
+import map from './map';
+import max from './max';
+import pluck from './pluck';
+import reduce from './reduce';
+import values from './values';
 
 
 /**
@@ -33,7 +33,7 @@ var values = require('./values');
  *      getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
  * @symb R.applySpec({ x: f, y: { z: g } })(a, b) = { x: f(a, b), y: { z: g(a, b) } }
  */
-module.exports = _curry1(function applySpec(spec) {
+var applySpec = /* #__PURE__*/ _curry1(function applySpec(spec) {
   spec = map(function(v) { return typeof v == 'function' ? v : applySpec(v); },
              spec);
   return curryN(reduce(max, 0, pluck('length', values(spec))),
@@ -42,3 +42,4 @@ module.exports = _curry1(function applySpec(spec) {
                   return map(function(f) { return apply(f, args); }, spec);
                 });
 });
+export default applySpec;

@@ -1,5 +1,5 @@
-var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+import _curry1 from './internal/_curry1';
+import keys from './keys';
 
 
 /**
@@ -19,7 +19,7 @@ var keys = require('./keys');
  *
  *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
  */
-module.exports = _curry1(function values(obj) {
+var values = /* #__PURE__*/ _curry1(function values(obj) {
   var props = keys(obj);
   var len = props.length;
   var vals = [];
@@ -30,3 +30,4 @@ module.exports = _curry1(function values(obj) {
   }
   return vals;
 });
+export default values;

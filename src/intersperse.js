@@ -1,5 +1,5 @@
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
+import _checkForMethod from './internal/_checkForMethod';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -19,7 +19,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.intersperse('n', ['ba', 'a', 'a']); //=> ['ba', 'n', 'a', 'n', 'a']
  */
-module.exports = _curry2(_checkForMethod('intersperse', function intersperse(separator, list) {
+var intersperse = /* #__PURE__*/ _curry2(/* #__PURE__*/ _checkForMethod('intersperse', function intersperse(separator, list) {
   var out = [];
   var idx = 0;
   var length = list.length;
@@ -33,3 +33,4 @@ module.exports = _curry2(_checkForMethod('intersperse', function intersperse(sep
   }
   return out;
 }));
+export default intersperse;

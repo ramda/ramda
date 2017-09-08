@@ -1,7 +1,7 @@
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
-var flip = require('./flip');
-var reject = require('./reject');
+import _contains from './internal/_contains';
+import _curry2 from './internal/_curry2';
+import flip from './flip';
+import reject from './reject';
 
 
 /**
@@ -23,6 +23,7 @@ var reject = require('./reject');
  *
  *      R.without([1, 2], [1, 2, 1, 3, 4]); //=> [3, 4]
  */
-module.exports = _curry2(function(xs, list) {
+var without = /* #__PURE__*/ _curry2(function(xs, list) {
   return reject(flip(_contains)(xs), list);
 });
+export default without;

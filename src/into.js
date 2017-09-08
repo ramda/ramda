@@ -1,8 +1,8 @@
-var _clone = require('./internal/_clone');
-var _curry3 = require('./internal/_curry3');
-var _isTransformer = require('./internal/_isTransformer');
-var _reduce = require('./internal/_reduce');
-var _stepCat = require('./internal/_stepCat');
+import _clone from './internal/_clone';
+import _curry3 from './internal/_curry3';
+import _isTransformer from './internal/_isTransformer';
+import _reduce from './internal/_reduce';
+import _stepCat from './internal/_stepCat';
 
 
 /**
@@ -43,8 +43,9 @@ var _stepCat = require('./internal/_stepCat');
  *      var intoArray = R.into([]);
  *      intoArray(transducer, numbers); //=> [2, 3]
  */
-module.exports = _curry3(function into(acc, xf, list) {
+var into = /* #__PURE__*/ _curry3(function into(acc, xf, list) {
   return _isTransformer(acc) ?
     _reduce(xf(acc), acc['@@transducer/init'](), list) :
     _reduce(xf(_stepCat(acc)), _clone(acc, [], [], false), list);
 });
+export default into;

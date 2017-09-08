@@ -1,8 +1,8 @@
-var _curryN = require('./internal/_curryN');
-var _dispatchable = require('./internal/_dispatchable');
-var _has = require('./internal/_has');
-var _reduce = require('./internal/_reduce');
-var _xreduceBy = require('./internal/_xreduceBy');
+import _curryN from './internal/_curryN';
+import _dispatchable from './internal/_dispatchable';
+import _has from './internal/_has';
+import _reduce from './internal/_reduce';
+import _xreduceBy from './internal/_xreduceBy';
 
 
 /**
@@ -49,7 +49,7 @@ var _xreduceBy = require('./internal/_xreduceBy');
  *      //   'F': ['Bart']
  *      // }
  */
-module.exports = _curryN(4, [], _dispatchable([], _xreduceBy,
+var reduceBy = /* #__PURE__*/ _curryN(4, [], /* #__PURE__*/ _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);
@@ -57,3 +57,4 @@ module.exports = _curryN(4, [], _dispatchable([], _xreduceBy,
       return acc;
     }, {}, list);
   }));
+export default reduceBy;

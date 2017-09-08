@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xtakeWhile = require('./internal/_xtakeWhile');
-var slice = require('./slice');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xtakeWhile from './internal/_xtakeWhile';
+import slice from './slice';
 
 
 /**
@@ -33,7 +33,7 @@ var slice = require('./slice');
  *
  *      R.takeWhile(x => x !== 'd' , 'Ramda'); //=> 'Ram'
  */
-module.exports = _curry2(_dispatchable(['takeWhile'], _xtakeWhile, function takeWhile(fn, xs) {
+var takeWhile = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['takeWhile'], _xtakeWhile, function takeWhile(fn, xs) {
   var idx = 0;
   var len = xs.length;
   while (idx < len && fn(xs[idx])) {
@@ -41,3 +41,4 @@ module.exports = _curry2(_dispatchable(['takeWhile'], _xtakeWhile, function take
   }
   return slice(0, idx, xs);
 }));
+export default takeWhile;

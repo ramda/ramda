@@ -1,5 +1,5 @@
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
+import _containsWith from './internal/_containsWith';
+import _curry3 from './internal/_curry3';
 
 
 /**
@@ -24,7 +24,7 @@ var _curry3 = require('./internal/_curry3');
  *      var l2 = [{a: 3}, {a: 4}];
  *      R.differenceWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}]
  */
-module.exports = _curry3(function differenceWith(pred, first, second) {
+var differenceWith = /* #__PURE__*/ _curry3(function differenceWith(pred, first, second) {
   var out = [];
   var idx = 0;
   var firstLen = first.length;
@@ -37,3 +37,4 @@ module.exports = _curry3(function differenceWith(pred, first, second) {
   }
   return out;
 });
+export default differenceWith;

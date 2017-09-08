@@ -1,5 +1,5 @@
-var _curry1 = require('./internal/_curry1');
-var curry = require('./curry');
+import _curry1 from './internal/_curry1';
+import curry from './curry';
 
 
 /**
@@ -22,7 +22,7 @@ var curry = require('./curry');
  *      R.flip(mergeThree)(1, 2, 3); //=> [2, 1, 3]
  * @symb R.flip(f)(a, b, c) = f(b, a, c)
  */
-module.exports = _curry1(function flip(fn) {
+var flip = /* #__PURE__*/ _curry1(function flip(fn) {
   return curry(function(a, b) {
     var args = Array.prototype.slice.call(arguments, 0);
     args[0] = b;
@@ -30,3 +30,4 @@ module.exports = _curry1(function flip(fn) {
     return fn.apply(this, args);
   });
 });
+export default flip;

@@ -1,7 +1,7 @@
-var _curry1 = require('./internal/_curry1');
-var assocPath = require('./assocPath');
-var lens = require('./lens');
-var path = require('./path');
+import _curry1 from './internal/_curry1';
+import assocPath from './assocPath';
+import lens from './lens';
+import path from './path';
 
 
 /**
@@ -28,6 +28,7 @@ var path = require('./path');
  *      R.over(xHeadYLens, R.negate, {x: [{y: 2, z: 3}, {y: 4, z: 5}]});
  *      //=> {x: [{y: -2, z: 3}, {y: 4, z: 5}]}
  */
-module.exports = _curry1(function lensPath(p) {
+var lensPath = /* #__PURE__*/ _curry1(function lensPath(p) {
   return lens(path(p), assocPath(p));
 });
+export default lensPath;

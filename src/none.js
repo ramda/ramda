@@ -1,8 +1,8 @@
-var _complement = require('./internal/_complement');
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xany = require('./internal/_xany');
-var any = require('./any');
+import _complement from './internal/_complement';
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xany from './internal/_xany';
+import any from './any';
 
 
 /**
@@ -28,4 +28,5 @@ var any = require('./any');
  *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
  *      R.none(isOdd, [1, 3, 5, 7, 8, 11]); //=> false
  */
-module.exports = _curry2(_complement(_dispatchable(['any'], _xany, any)));
+var none = /* #__PURE__*/ _curry2(/* #__PURE__*/ _complement(/* #__PURE__*/ _dispatchable(['any'], _xany, any)));
+export default none;

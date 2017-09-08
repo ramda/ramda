@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -19,7 +19,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.xprod([1, 2], ['a', 'b']); //=> [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
  * @symb R.xprod([a, b], [c, d]) = [[a, c], [a, d], [b, c], [b, d]]
  */
-module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
+var xprod = /* #__PURE__*/ _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
   var idx = 0;
   var ilen = a.length;
   var j;
@@ -35,3 +35,4 @@ module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes 
   }
   return result;
 });
+export default xprod;

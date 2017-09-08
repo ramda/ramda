@@ -1,7 +1,7 @@
-var _map = require('./internal/_map');
-var identity = require('./identity');
-var pickAll = require('./pickAll');
-var useWith = require('./useWith');
+import _map from './internal/_map';
+import identity from './identity';
+import pickAll from './pickAll';
+import useWith from './useWith';
 
 
 /**
@@ -23,4 +23,5 @@ var useWith = require('./useWith');
  *      var kids = [abby, fred];
  *      R.project(['name', 'grade'], kids); //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
  */
-module.exports = useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity
+var project = /* #__PURE__*/ useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity
+export default project;

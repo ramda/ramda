@@ -1,4 +1,4 @@
-var invoker = require('./invoker');
+import invoker from './invoker';
 
 
 /**
@@ -16,4 +16,5 @@ var invoker = require('./invoker');
  *
  *      R.toUpper('abc'); //=> 'ABC'
  */
-module.exports = invoker(0, 'toUpperCase');
+var toUpper = /* #__PURE__*/ invoker(0, 'toUpperCase');
+export default toUpper;

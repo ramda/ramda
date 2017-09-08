@@ -1,10 +1,10 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _filter = require('./internal/_filter');
-var _isObject = require('./internal/_isObject');
-var _reduce = require('./internal/_reduce');
-var _xfilter = require('./internal/_xfilter');
-var keys = require('./keys');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _filter from './internal/_filter';
+import _isObject from './internal/_isObject';
+import _reduce from './internal/_reduce';
+import _xfilter from './internal/_xfilter';
+import keys from './keys';
 
 
 /**
@@ -34,7 +34,7 @@ var keys = require('./keys');
  *
  *      R.filter(isEven, {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, d: 4}
  */
-module.exports = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filterable) {
+var filter = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['filter'], _xfilter, function(pred, filterable) {
   return (
     _isObject(filterable) ?
       _reduce(function(acc, key) {
@@ -47,3 +47,4 @@ module.exports = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filt
       _filter(pred, filterable)
   );
 }));
+export default filter;

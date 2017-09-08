@@ -1,4 +1,4 @@
-var _curry3 = require('./internal/_curry3');
+import _curry3 from './internal/_curry3';
 
 
 /**
@@ -35,7 +35,7 @@ var _curry3 = require('./internal/_curry3');
  *   ]
  * ]
  */
-module.exports = _curry3(function mapAccum(fn, acc, list) {
+var mapAccum = /* #__PURE__*/ _curry3(function mapAccum(fn, acc, list) {
   var idx = 0;
   var len = list.length;
   var result = [];
@@ -47,3 +47,4 @@ module.exports = _curry3(function mapAccum(fn, acc, list) {
   }
   return [tuple[0], result];
 });
+export default mapAccum;

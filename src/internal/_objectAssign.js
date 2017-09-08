@@ -1,7 +1,7 @@
-var _has = require('./_has');
+import _has from './_has';
 
 // Based on https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-module.exports = function _objectAssign(target) {
+export default function _objectAssign(target) {
   if (target == null) {
     throw new TypeError('Cannot convert undefined or null to object');
   }
@@ -21,4 +21,4 @@ module.exports = function _objectAssign(target) {
     idx += 1;
   }
   return output;
-};
+}

@@ -1,8 +1,8 @@
-var _curry2 = require('./internal/_curry2');
-var ap = require('./ap');
-var map = require('./map');
-var prepend = require('./prepend');
-var reduceRight = require('./reduceRight');
+import _curry2 from './internal/_curry2';
+import ap from './ap';
+import map from './map';
+import prepend from './prepend';
+import reduceRight from './reduceRight';
 
 
 /**
@@ -29,10 +29,11 @@ var reduceRight = require('./reduceRight');
  *      R.sequence(R.of, Just([1, 2, 3])); //=> [Just(1), Just(2), Just(3)]
  *      R.sequence(R.of, Nothing());       //=> [Nothing()]
  */
-module.exports = _curry2(function sequence(of, traversable) {
+var sequence = /* #__PURE__*/ _curry2(function sequence(of, traversable) {
   return typeof traversable.sequence === 'function' ?
     traversable.sequence(of) :
     reduceRight(function(x, acc) { return ap(map(prepend, x), acc); },
                 of([]),
                 traversable);
 });
+export default sequence;

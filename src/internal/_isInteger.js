@@ -6,6 +6,6 @@
  * @category Type
  * @return {Boolean}
  */
-module.exports = Number.isInteger || function _isInteger(n) {
+export default Number.isInteger || function _isInteger(n) {
   return (n << 0) === n;
 };

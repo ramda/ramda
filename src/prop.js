@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
-var path = require('./path');
+import _curry2 from './internal/_curry2';
+import path from './path';
 
 
 /**
@@ -20,4 +20,6 @@ var path = require('./path');
  *      R.prop('x', {x: 100}); //=> 100
  *      R.prop('x', {}); //=> undefined
  */
-module.exports = _curry2(function prop(p, obj) { return path([p], obj); });
+
+var prop = /* #__PURE__*/ _curry2(function prop(p, obj) { return path([p], obj); });
+export default prop;

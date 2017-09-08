@@ -1,4 +1,4 @@
-var _curry1 = require('./internal/_curry1');
+import _curry1 from './internal/_curry1';
 
 
 /**
@@ -26,8 +26,9 @@ var _curry1 = require('./internal/_curry1');
  *      R.type(() => {}); //=> "Function"
  *      R.type(undefined); //=> "Undefined"
  */
-module.exports = _curry1(function type(val) {
+var type = /* #__PURE__*/ _curry1(function type(val) {
   return val === null      ? 'Null'      :
          val === undefined ? 'Undefined' :
          Object.prototype.toString.call(val).slice(8, -1);
 });
+export default type;

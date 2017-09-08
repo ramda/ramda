@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
-var mergeDeepWithKey = require('./mergeDeepWithKey');
+import _curry2 from './internal/_curry2';
+import mergeDeepWithKey from './mergeDeepWithKey';
 
 
 /**
@@ -23,8 +23,9 @@ var mergeDeepWithKey = require('./mergeDeepWithKey');
  *                      { age: 40, contact: { email: 'baa@example.com' }});
  *      //=> { name: 'fred', age: 10, contact: { email: 'moo@example.com' }}
  */
-module.exports = _curry2(function mergeDeepLeft(lObj, rObj) {
+var mergeDeepLeft = /* #__PURE__*/ _curry2(function mergeDeepLeft(lObj, rObj) {
   return mergeDeepWithKey(function(k, lVal, rVal) {
     return lVal;
   }, lObj, rObj);
 });
+export default mergeDeepLeft;

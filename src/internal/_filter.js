@@ -1,4 +1,4 @@
-module.exports = function _filter(fn, list) {
+export default function _filter(fn, list) {
   var idx = 0;
   var len = list.length;
   var result = [];
@@ -10,4 +10,4 @@ module.exports = function _filter(fn, list) {
     idx += 1;
   }
   return result;
-};
+}

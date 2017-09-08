@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xtake = require('./internal/_xtake');
-var slice = require('./slice');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xtake from './internal/_xtake';
+import slice from './slice';
 
 
 /**
@@ -47,6 +47,7 @@ var slice = require('./slice');
  * @symb R.take(1, [a, b]) = [a]
  * @symb R.take(2, [a, b]) = [a, b]
  */
-module.exports = _curry2(_dispatchable(['take'], _xtake, function take(n, xs) {
+var take = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['take'], _xtake, function take(n, xs) {
   return slice(0, n < 0 ? Infinity : n, xs);
 }));
+export default take;

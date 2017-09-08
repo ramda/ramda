@@ -1,5 +1,5 @@
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
+import _curry3 from './internal/_curry3';
+import _has from './internal/_has';
 
 
 /**
@@ -27,7 +27,7 @@ var _has = require('./internal/_has');
  *      //=> { a: true, b: true, thing: 'bar', values: [10, 20, 15, 35] }
  * @symb R.mergeWithKey(f, { x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: f('y', 2, 5), z: 3 }
  */
-module.exports = _curry3(function mergeWithKey(fn, l, r) {
+var mergeWithKey = /* #__PURE__*/ _curry3(function mergeWithKey(fn, l, r) {
   var result = {};
   var k;
 
@@ -45,3 +45,4 @@ module.exports = _curry3(function mergeWithKey(fn, l, r) {
 
   return result;
 });
+export default mergeWithKey;

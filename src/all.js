@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xall = require('./internal/_xall');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xall from './internal/_xall';
 
 
 /**
@@ -27,7 +27,7 @@ var _xall = require('./internal/_xall');
  *      R.all(equals3)([3, 3, 3, 3]); //=> true
  *      R.all(equals3)([3, 3, 1, 3]); //=> false
  */
-module.exports = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
+var all = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['all'], _xall, function all(fn, list) {
   var idx = 0;
   while (idx < list.length) {
     if (!fn(list[idx])) {
@@ -37,3 +37,4 @@ module.exports = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
   }
   return true;
 }));
+export default all;

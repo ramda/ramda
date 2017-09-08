@@ -1,9 +1,9 @@
-var _curry2 = require('./internal/_curry2');
-var _map = require('./internal/_map');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+import _curry2 from './internal/_curry2';
+import _map from './internal/_map';
+import curryN from './curryN';
+import max from './max';
+import pluck from './pluck';
+import reduce from './reduce';
 
 
 /**
@@ -33,7 +33,7 @@ var reduce = require('./reduce');
  *
  * @symb R.converge(f, [g, h])(a, b) = f(g(a, b), h(a, b))
  */
-module.exports = _curry2(function converge(after, fns) {
+var converge = /* #__PURE__*/ _curry2(function converge(after, fns) {
   return curryN(reduce(max, 0, pluck('length', fns)), function() {
     var args = arguments;
     var context = this;
@@ -42,3 +42,4 @@ module.exports = _curry2(function converge(after, fns) {
     }, fns));
   });
 });
+export default converge;

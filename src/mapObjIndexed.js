@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var keys = require('./keys');
+import _curry2 from './internal/_curry2';
+import _reduce from './internal/_reduce';
+import keys from './keys';
 
 
 /**
@@ -24,9 +24,10 @@ var keys = require('./keys');
  *
  *      R.mapObjIndexed(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
  */
-module.exports = _curry2(function mapObjIndexed(fn, obj) {
+var mapObjIndexed = /* #__PURE__*/ _curry2(function mapObjIndexed(fn, obj) {
   return _reduce(function(acc, key) {
     acc[key] = fn(obj[key], key, obj);
     return acc;
   }, {}, keys(obj));
 });
+export default mapObjIndexed;

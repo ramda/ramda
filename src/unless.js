@@ -1,4 +1,4 @@
-var _curry3 = require('./internal/_curry3');
+import _curry3 from './internal/_curry3';
 
 
 /**
@@ -25,6 +25,7 @@ var _curry3 = require('./internal/_curry3');
  *      safeInc(null); //=> null
  *      safeInc(1); //=> 2
  */
-module.exports = _curry3(function unless(pred, whenFalseFn, x) {
+var unless = /* #__PURE__*/ _curry3(function unless(pred, whenFalseFn, x) {
   return pred(x) ? x : whenFalseFn(x);
 });
+export default unless;

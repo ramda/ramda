@@ -1,5 +1,5 @@
-var _curry1 = require('./internal/_curry1');
-var nAry = require('./nAry');
+import _curry1 from './internal/_curry1';
+import nAry from './nAry';
 
 
 /**
@@ -30,6 +30,7 @@ var nAry = require('./nAry');
  *      takesOneArg(1, 2); //=> [1, undefined]
  * @symb R.unary(f)(a, b, c) = f(a)
  */
-module.exports = _curry1(function unary(fn) {
+var unary = /* #__PURE__*/ _curry1(function unary(fn) {
   return nAry(1, fn);
 });
+export default unary;

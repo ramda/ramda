@@ -1,4 +1,4 @@
-module.exports = function _containsWith(pred, x, list) {
+export default function _containsWith(pred, x, list) {
   var idx = 0;
   var len = list.length;
 
@@ -9,4 +9,4 @@ module.exports = function _containsWith(pred, x, list) {
     idx += 1;
   }
   return false;
-};
+}

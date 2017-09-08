@@ -1,7 +1,7 @@
-var _curry1 = require('./internal/_curry1');
-var assoc = require('./assoc');
-var lens = require('./lens');
-var prop = require('./prop');
+import _curry1 from './internal/_curry1';
+import assoc from './assoc';
+import lens from './lens';
+import prop from './prop';
 
 
 /**
@@ -24,6 +24,7 @@ var prop = require('./prop');
  *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}
  *      R.over(xLens, R.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
  */
-module.exports = _curry1(function lensProp(k) {
+var lensProp = /* #__PURE__*/ _curry1(function lensProp(k) {
   return lens(prop(k), assoc(k));
 });
+export default lensProp;

@@ -1,5 +1,5 @@
-var _curry3 = require('./internal/_curry3');
-var path = require('./path');
+import _curry3 from './internal/_curry3';
+import path from './path';
 
 
 /**
@@ -21,6 +21,7 @@ var path = require('./path');
  *
  *      R.pathSatisfies(y => y > 0, ['x', 'y'], {x: {y: 2}}); //=> true
  */
-module.exports = _curry3(function pathSatisfies(pred, propPath, obj) {
+var pathSatisfies = /* #__PURE__*/ _curry3(function pathSatisfies(pred, propPath, obj) {
   return propPath.length > 0 && pred(path(propPath, obj));
 });
+export default pathSatisfies;

@@ -1,6 +1,6 @@
-var _concat = require('./internal/_concat');
-var _curry3 = require('./internal/_curry3');
-var uniqWith = require('./uniqWith');
+import _concat from './internal/_concat';
+import _curry3 from './internal/_curry3';
+import uniqWith from './uniqWith';
 
 
 /**
@@ -25,6 +25,7 @@ var uniqWith = require('./uniqWith');
  *      var l2 = [{a: 1}, {a: 4}];
  *      R.unionWith(R.eqBy(R.prop('a')), l1, l2); //=> [{a: 1}, {a: 2}, {a: 4}]
  */
-module.exports = _curry3(function unionWith(pred, list1, list2) {
+var unionWith = /* #__PURE__*/ _curry3(function unionWith(pred, list1, list2) {
   return uniqWith(pred, _concat(list1, list2));
 });
+export default unionWith;

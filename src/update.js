@@ -1,6 +1,6 @@
-var _curry3 = require('./internal/_curry3');
-var adjust = require('./adjust');
-var always = require('./always');
+import _curry3 from './internal/_curry3';
+import adjust from './adjust';
+import always from './always';
 
 
 /**
@@ -25,6 +25,7 @@ var always = require('./always');
  * @symb R.update(0, a, [b, c]) = [a, c]
  * @symb R.update(1, a, [b, c]) = [b, a]
  */
-module.exports = _curry3(function update(idx, x, list) {
+var update = /* #__PURE__*/ _curry3(function update(idx, x, list) {
   return adjust(always(x), idx, list);
 });
+export default update;

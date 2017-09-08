@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -22,4 +22,5 @@ var _curry2 = require('./internal/_curry2');
  *      R.gt('a', 'z'); //=> false
  *      R.gt('z', 'a'); //=> true
  */
-module.exports = _curry2(function gt(a, b) { return a > b; });
+var gt = /* #__PURE__*/ _curry2(function gt(a, b) { return a > b; });
+export default gt;

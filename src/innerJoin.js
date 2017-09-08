@@ -1,6 +1,6 @@
-var _containsWith = require('./internal/_containsWith');
-var _curry3 = require('./internal/_curry3');
-var _filter = require('./internal/_filter');
+import _containsWith from './internal/_containsWith';
+import _curry3 from './internal/_curry3';
+import _filter from './internal/_filter';
 
 
 /**
@@ -38,6 +38,7 @@ var _filter = require('./internal/_filter');
  *      );
  *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
-module.exports = _curry3(function innerJoin(pred, xs, ys) {
+var innerJoin = /* #__PURE__*/ _curry3(function innerJoin(pred, xs, ys) {
   return _filter(function(x) { return _containsWith(pred, x, ys); }, xs);
 });
+export default innerJoin;

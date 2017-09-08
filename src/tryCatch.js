@@ -1,6 +1,6 @@
-var _arity = require('./internal/_arity');
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+import _arity from './internal/_arity';
+import _concat from './internal/_concat';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -24,7 +24,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.tryCatch(R.prop('x'), R.F)({x: true}); //=> true
  *      R.tryCatch(R.prop('x'), R.F)(null);      //=> false
  */
-module.exports = _curry2(function _tryCatch(tryer, catcher) {
+var tryCatch = /* #__PURE__*/ _curry2(function _tryCatch(tryer, catcher) {
   return _arity(tryer.length, function() {
     try {
       return tryer.apply(this, arguments);
@@ -33,3 +33,4 @@ module.exports = _curry2(function _tryCatch(tryer, catcher) {
     }
   });
 });
+export default tryCatch;

@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
-var _equals = require('./internal/_equals');
+import _curry2 from './internal/_curry2';
+import _equals from './internal/_equals';
 
 
 /**
@@ -27,6 +27,7 @@ var _equals = require('./internal/_equals');
  *      var b = {}; b.v = b;
  *      R.equals(a, b); //=> true
  */
-module.exports = _curry2(function equals(a, b) {
+var equals = /* #__PURE__*/ _curry2(function equals(a, b) {
   return _equals(a, b, [], []);
 });
+export default equals;

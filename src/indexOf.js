@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var _indexOf = require('./internal/_indexOf');
-var _isArray = require('./internal/_isArray');
+import _curry2 from './internal/_curry2';
+import _indexOf from './internal/_indexOf';
+import _isArray from './internal/_isArray';
 
 
 /**
@@ -22,8 +22,9 @@ var _isArray = require('./internal/_isArray');
  *      R.indexOf(3, [1,2,3,4]); //=> 2
  *      R.indexOf(10, [1,2,3,4]); //=> -1
  */
-module.exports = _curry2(function indexOf(target, xs) {
+var indexOf = /* #__PURE__*/ _curry2(function indexOf(target, xs) {
   return typeof xs.indexOf === 'function' && !_isArray(xs) ?
     xs.indexOf(target) :
     _indexOf(xs, target, 0);
 });
+export default indexOf;

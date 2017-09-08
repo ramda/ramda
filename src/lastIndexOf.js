@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var _isArray = require('./internal/_isArray');
-var equals = require('./equals');
+import _curry2 from './internal/_curry2';
+import _isArray from './internal/_isArray';
+import equals from './equals';
 
 
 /**
@@ -22,7 +22,7 @@ var equals = require('./equals');
  *      R.lastIndexOf(3, [-1,3,3,0,1,2,3,4]); //=> 6
  *      R.lastIndexOf(10, [1,2,3,4]); //=> -1
  */
-module.exports = _curry2(function lastIndexOf(target, xs) {
+var lastIndexOf = /* #__PURE__*/ _curry2(function lastIndexOf(target, xs) {
   if (typeof xs.lastIndexOf === 'function' && !_isArray(xs)) {
     return xs.lastIndexOf(target);
   } else {
@@ -36,3 +36,4 @@ module.exports = _curry2(function lastIndexOf(target, xs) {
     return -1;
   }
 });
+export default lastIndexOf;

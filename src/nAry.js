@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -31,7 +31,7 @@ var _curry2 = require('./internal/_curry2');
  * @symb R.nAry(1, f)(a, b) = f(a)
  * @symb R.nAry(2, f)(a, b) = f(a, b)
  */
-module.exports = _curry2(function nAry(n, fn) {
+var nAry = /* #__PURE__*/ _curry2(function nAry(n, fn) {
   switch (n) {
     case 0: return function() {return fn.call(this);};
     case 1: return function(a0) {return fn.call(this, a0);};
@@ -47,3 +47,4 @@ module.exports = _curry2(function nAry(n, fn) {
     default: throw new Error('First argument to nAry must be a non-negative integer no greater than ten');
   }
 });
+export default nAry;

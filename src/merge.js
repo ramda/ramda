@@ -1,5 +1,5 @@
-var _assign = require('./internal/_assign');
-var _curry2 = require('./internal/_curry2');
+import _assign from './internal/_assign';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -25,6 +25,7 @@ var _curry2 = require('./internal/_curry2');
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  * @symb R.merge({ x: 1, y: 2 }, { y: 5, z: 3 }) = { x: 1, y: 5, z: 3 }
  */
-module.exports = _curry2(function merge(l, r) {
+var merge = /* #__PURE__*/ _curry2(function merge(l, r) {
   return _assign({}, l, r);
 });
+export default merge;

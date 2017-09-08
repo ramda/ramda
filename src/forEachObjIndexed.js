@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
-var keys = require('./keys');
+import _curry2 from './internal/_curry2';
+import keys from './keys';
 
 
 /**
@@ -24,7 +24,7 @@ var keys = require('./keys');
  *      // logs y:2
  * @symb R.forEachObjIndexed(f, {x: a, y: b}) = {x: a, y: b}
  */
-module.exports = _curry2(function forEachObjIndexed(fn, obj) {
+var forEachObjIndexed = /* #__PURE__*/ _curry2(function forEachObjIndexed(fn, obj) {
   var keyList = keys(obj);
   var idx = 0;
   while (idx < keyList.length) {
@@ -34,3 +34,4 @@ module.exports = _curry2(function forEachObjIndexed(fn, obj) {
   }
   return obj;
 });
+export default forEachObjIndexed;

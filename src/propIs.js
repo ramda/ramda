@@ -1,5 +1,5 @@
-var _curry3 = require('./internal/_curry3');
-var is = require('./is');
+import _curry3 from './internal/_curry3';
+import is from './is';
 
 
 /**
@@ -22,6 +22,7 @@ var is = require('./is');
  *      R.propIs(Number, 'x', {x: 'foo'});    //=> false
  *      R.propIs(Number, 'x', {});            //=> false
  */
-module.exports = _curry3(function propIs(type, name, obj) {
+var propIs = /* #__PURE__*/ _curry3(function propIs(type, name, obj) {
   return is(type, obj[name]);
 });
+export default propIs;

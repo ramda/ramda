@@ -1,4 +1,4 @@
-var nth = require('./nth');
+import nth from './nth';
 
 
 /**
@@ -21,4 +21,5 @@ var nth = require('./nth');
  *      R.last('abc'); //=> 'c'
  *      R.last(''); //=> ''
  */
-module.exports = nth(-1);
+var last = /* #__PURE__*/ nth(-1);
+export default last;

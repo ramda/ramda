@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
-var curryN = require('./curryN');
+import _curry2 from './internal/_curry2';
+import curryN from './curryN';
 
 
 /**
@@ -21,7 +21,7 @@ var curryN = require('./curryN');
  *      var uncurriedAddFour = R.uncurryN(4, addFour);
  *      uncurriedAddFour(1, 2, 3, 4); //=> 10
  */
-module.exports = _curry2(function uncurryN(depth, fn) {
+var uncurryN = /* #__PURE__*/ _curry2(function uncurryN(depth, fn) {
   return curryN(depth, function() {
     var currentDepth = 1;
     var value = fn;
@@ -36,3 +36,4 @@ module.exports = _curry2(function uncurryN(depth, fn) {
     return value;
   });
 });
+export default uncurryN;

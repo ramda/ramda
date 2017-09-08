@@ -1,6 +1,6 @@
-var filter = require('./filter');
-var juxt = require('./juxt');
-var reject = require('./reject');
+import filter from './filter';
+import juxt from './juxt';
+import reject from './reject';
 
 
 /**
@@ -27,4 +27,5 @@ var reject = require('./reject');
  *      R.partition(R.contains('s'), { a: 'sss', b: 'ttt', foo: 'bars' });
  *      // => [ { a: 'sss', foo: 'bars' }, { b: 'ttt' }  ]
  */
-module.exports = juxt([filter, reject]);
+var partition = /* #__PURE__*/ juxt([filter, reject]);
+export default partition;

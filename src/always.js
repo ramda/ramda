@@ -1,4 +1,4 @@
-var _curry1 = require('./internal/_curry1');
+import _curry1 from './internal/_curry1';
 
 
 /**
@@ -20,8 +20,9 @@ var _curry1 = require('./internal/_curry1');
  *      var t = R.always('Tee');
  *      t(); //=> 'Tee'
  */
-module.exports = _curry1(function always(val) {
+var always = /* #__PURE__*/ _curry1(function always(val) {
   return function() {
     return val;
   };
 });
+export default always;

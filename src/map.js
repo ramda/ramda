@@ -1,10 +1,10 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _map = require('./internal/_map');
-var _reduce = require('./internal/_reduce');
-var _xmap = require('./internal/_xmap');
-var curryN = require('./curryN');
-var keys = require('./keys');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _map from './internal/_map';
+import _reduce from './internal/_reduce';
+import _xmap from './internal/_xmap';
+import curryN from './curryN';
+import keys from './keys';
 
 
 /**
@@ -42,7 +42,7 @@ var keys = require('./keys');
  * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
  * @symb R.map(f, functor_o) = functor_o.map(f)
  */
-module.exports = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
+var map = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
   switch (Object.prototype.toString.call(functor)) {
     case '[object Function]':
       return curryN(functor.length, function() {
@@ -57,3 +57,4 @@ module.exports = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, funct
       return _map(fn, functor);
   }
 }));
+export default map;

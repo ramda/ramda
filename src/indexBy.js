@@ -1,4 +1,4 @@
-var reduceBy = require('./reduceBy');
+import reduceBy from './reduceBy';
 
 
 /**
@@ -23,4 +23,5 @@ var reduceBy = require('./reduceBy');
  *      R.indexBy(R.prop('id'), list);
  *      //=> {abc: {id: 'abc', title: 'B'}, xyz: {id: 'xyz', title: 'A'}}
  */
-module.exports = reduceBy(function(acc, elem) { return elem; }, null);
+var indexBy = /* #__PURE__*/ reduceBy(function(acc, elem) { return elem; }, null);
+export default indexBy;

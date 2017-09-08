@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
-var drop = require('./drop');
+import _curry2 from './internal/_curry2';
+import drop from './drop';
 
 
 /**
@@ -24,6 +24,7 @@ var drop = require('./drop');
  *      R.takeLast(4, ['foo', 'bar', 'baz']); //=> ['foo', 'bar', 'baz']
  *      R.takeLast(3, 'ramda');               //=> 'mda'
  */
-module.exports = _curry2(function takeLast(n, xs) {
+var takeLast = /* #__PURE__*/ _curry2(function takeLast(n, xs) {
   return drop(n >= 0 ? xs.length - n : 0, xs);
 });
+export default takeLast;

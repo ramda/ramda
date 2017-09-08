@@ -1,4 +1,4 @@
-var _curry3 = require('./internal/_curry3');
+import _curry3 from './internal/_curry3';
 
 
 /**
@@ -23,8 +23,9 @@ var _curry3 = require('./internal/_curry3');
  *      ];
  *      var peopleByOldestFirst = R.sort(byAge, people);
  */
-module.exports = _curry3(function descend(fn, a, b) {
+var descend = /* #__PURE__*/ _curry3(function descend(fn, a, b) {
   var aa = fn(a);
   var bb = fn(b);
   return aa > bb ? -1 : aa < bb ? 1 : 0;
 });
+export default descend;

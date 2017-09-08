@@ -1,4 +1,4 @@
-var add = require('./add');
+import add from './add';
 
 
 /**
@@ -16,4 +16,5 @@ var add = require('./add');
  *
  *      R.inc(42); //=> 43
  */
-module.exports = add(1);
+var inc = /* #__PURE__*/ add(1);
+export default inc;

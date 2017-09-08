@@ -1,6 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
-var _isArrayLike = require('../src/internal/_isArrayLike');
+var _isArrayLike = require('../cjs/internal/_isArrayLike').default;
 
 
 describe('unless', function() {

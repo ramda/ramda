@@ -1,6 +1,6 @@
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry1 = require('./internal/_curry1');
-var slice = require('./slice');
+import _checkForMethod from './internal/_checkForMethod';
+import _curry1 from './internal/_curry1';
+import slice from './slice';
 
 
 /**
@@ -30,4 +30,5 @@ var slice = require('./slice');
  *      R.tail('a');    //=> ''
  *      R.tail('');     //=> ''
  */
-module.exports = _curry1(_checkForMethod('tail', slice(1, Infinity)));
+var tail = /* #__PURE__*/ _curry1(/* #__PURE__*/ _checkForMethod('tail', /* #__PURE__*/ slice(1, Infinity)));
+export default tail;

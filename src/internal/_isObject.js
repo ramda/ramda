@@ -1,3 +1,3 @@
-module.exports = function _isObject(x) {
+export default function _isObject(x) {
   return Object.prototype.toString.call(x) === '[object Object]';
-};
+}

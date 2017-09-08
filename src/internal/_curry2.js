@@ -1,5 +1,5 @@
-var _curry1 = require('./_curry1');
-var _isPlaceholder = require('./_isPlaceholder');
+import _curry1 from './_curry1';
+import _isPlaceholder from './_isPlaceholder';
 
 
 /**
@@ -10,7 +10,7 @@ var _isPlaceholder = require('./_isPlaceholder');
  * @param {Function} fn The function to curry.
  * @return {Function} The curried function.
  */
-module.exports = function _curry2(fn) {
+export default function _curry2(fn) {
   return function f2(a, b) {
     switch (arguments.length) {
       case 0:
@@ -25,4 +25,4 @@ module.exports = function _curry2(fn) {
              : fn(a, b);
     }
   };
-};
+}

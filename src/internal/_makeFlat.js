@@ -1,4 +1,4 @@
-var _isArrayLike = require('./_isArrayLike');
+import _isArrayLike from './_isArrayLike';
 
 
 /**
@@ -7,7 +7,7 @@ var _isArrayLike = require('./_isArrayLike');
  *
  * @private
  */
-module.exports = function _makeFlat(recursive) {
+export default function _makeFlat(recursive) {
   return function flatt(list) {
     var value, jlen, j;
     var result = [];
@@ -30,4 +30,4 @@ module.exports = function _makeFlat(recursive) {
     }
     return result;
   };
-};
+}

@@ -1,6 +1,6 @@
-var _curry3 = require('./internal/_curry3');
-var concat = require('./concat');
-var differenceWith = require('./differenceWith');
+import _curry3 from './internal/_curry3';
+import concat from './concat';
+import differenceWith from './differenceWith';
 
 
 /**
@@ -25,6 +25,7 @@ var differenceWith = require('./differenceWith');
  *      var l2 = [{a: 3}, {a: 4}, {a: 5}, {a: 6}];
  *      R.symmetricDifferenceWith(eqA, l1, l2); //=> [{a: 1}, {a: 2}, {a: 5}, {a: 6}]
  */
-module.exports = _curry3(function symmetricDifferenceWith(pred, list1, list2) {
+var symmetricDifferenceWith = /* #__PURE__*/ _curry3(function symmetricDifferenceWith(pred, list1, list2) {
   return concat(differenceWith(pred, list1, list2), differenceWith(pred, list2, list1));
 });
+export default symmetricDifferenceWith;

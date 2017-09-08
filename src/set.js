@@ -1,6 +1,6 @@
-var _curry3 = require('./internal/_curry3');
-var always = require('./always');
-var over = require('./over');
+import _curry3 from './internal/_curry3';
+import always from './always';
+import over from './over';
 
 
 /**
@@ -25,6 +25,7 @@ var over = require('./over');
  *      R.set(xLens, 4, {x: 1, y: 2});  //=> {x: 4, y: 2}
  *      R.set(xLens, 8, {x: 1, y: 2});  //=> {x: 8, y: 2}
  */
-module.exports = _curry3(function set(lens, v, x) {
+var set = /* #__PURE__*/ _curry3(function set(lens, v, x) {
   return over(lens, always(v), x);
 });
+export default set;

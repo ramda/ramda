@@ -1,4 +1,4 @@
-var _curry1 = require('./internal/_curry1');
+import _curry1 from './internal/_curry1';
 
 
 /**
@@ -25,7 +25,7 @@ var _curry1 = require('./internal/_curry1');
  * @symb R.transpose([[a, b], [c, d]]) = [[a, c], [b, d]]
  * @symb R.transpose([[a, b], [c]]) = [[a, c], [b]]
  */
-module.exports = _curry1(function transpose(outerlist) {
+var transpose = /* #__PURE__*/ _curry1(function transpose(outerlist) {
   var i = 0;
   var result = [];
   while (i < outerlist.length) {
@@ -42,3 +42,4 @@ module.exports = _curry1(function transpose(outerlist) {
   }
   return result;
 });
+export default transpose;

@@ -1,5 +1,5 @@
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
+import _concat from './internal/_concat';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -19,6 +19,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
  */
-module.exports = _curry2(function prepend(el, list) {
+var prepend = /* #__PURE__*/ _curry2(function prepend(el, list) {
   return _concat([el], list);
 });
+export default prepend;

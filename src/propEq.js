@@ -1,5 +1,5 @@
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+import _curry3 from './internal/_curry3';
+import equals from './equals';
 
 
 /**
@@ -27,6 +27,7 @@ var equals = require('./equals');
  *      var hasBrownHair = R.propEq('hair', 'brown');
  *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
  */
-module.exports = _curry3(function propEq(name, val, obj) {
+var propEq = /* #__PURE__*/ _curry3(function propEq(name, val, obj) {
   return equals(val, obj[name]);
 });
+export default propEq;

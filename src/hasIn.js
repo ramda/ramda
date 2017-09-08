@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -27,6 +27,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.hasIn('width', square);  //=> true
  *      R.hasIn('area', square);  //=> true
  */
-module.exports = _curry2(function hasIn(prop, obj) {
+var hasIn = /* #__PURE__*/ _curry2(function hasIn(prop, obj) {
   return prop in obj;
 });
+export default hasIn;

@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -21,7 +21,7 @@ var _curry2 = require('./internal/_curry2');
  *      var fullName = R.compose(R.join(' '), R.props(['first', 'last']));
  *      fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'}); //=> 'Tony Bullet-Tooth'
  */
-module.exports = _curry2(function props(ps, obj) {
+var props = /* #__PURE__*/ _curry2(function props(ps, obj) {
   var len = ps.length;
   var out = [];
   var idx = 0;
@@ -33,3 +33,4 @@ module.exports = _curry2(function props(ps, obj) {
 
   return out;
 });
+export default props;

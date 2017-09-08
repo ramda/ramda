@@ -1,5 +1,5 @@
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
+import _arity from './internal/_arity';
+import _curry1 from './internal/_curry1';
 
 
 /**
@@ -21,7 +21,7 @@ var _curry1 = require('./internal/_curry1');
  *      addOneOnce(10); //=> 11
  *      addOneOnce(addOneOnce(50)); //=> 11
  */
-module.exports = _curry1(function once(fn) {
+var once = /* #__PURE__*/ _curry1(function once(fn) {
   var called = false;
   var result;
   return _arity(fn.length, function() {
@@ -33,3 +33,4 @@ module.exports = _curry1(function once(fn) {
     return result;
   });
 });
+export default once;

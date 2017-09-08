@@ -1,8 +1,8 @@
-var _curry1 = require('./internal/_curry1');
-var _isArguments = require('./internal/_isArguments');
-var _isArray = require('./internal/_isArray');
-var _isObject = require('./internal/_isObject');
-var _isString = require('./internal/_isString');
+import _curry1 from './internal/_curry1';
+import _isArguments from './internal/_isArguments';
+import _isArray from './internal/_isArray';
+import _isObject from './internal/_isObject';
+import _isString from './internal/_isString';
 
 
 /**
@@ -28,7 +28,7 @@ var _isString = require('./internal/_isString');
  *      R.empty('unicorns');    //=> ''
  *      R.empty({x: 1, y: 2});  //=> {}
  */
-module.exports = _curry1(function empty(x) {
+var empty = /* #__PURE__*/ _curry1(function empty(x) {
   return (
     (x != null && typeof x['fantasy-land/empty'] === 'function') ?
       x['fantasy-land/empty']() :
@@ -50,3 +50,4 @@ module.exports = _curry1(function empty(x) {
       void 0
   );
 });
+export default empty;

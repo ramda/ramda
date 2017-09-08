@@ -1,4 +1,4 @@
-var _isArray = require('./_isArray');
+import _isArray from './_isArray';
 
 
 /**
@@ -11,7 +11,7 @@ var _isArray = require('./_isArray');
  * @param {String} methodname property to check for a custom implementation
  * @return {Object} Whatever the return value of the method is.
  */
-module.exports = function _checkForMethod(methodname, fn) {
+export default function _checkForMethod(methodname, fn) {
   return function() {
     var length = arguments.length;
     if (length === 0) {
@@ -22,4 +22,4 @@ module.exports = function _checkForMethod(methodname, fn) {
       fn.apply(this, arguments) :
       obj[methodname].apply(obj, Array.prototype.slice.call(arguments, 0, length - 1));
   };
-};
+}

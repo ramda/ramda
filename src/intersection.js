@@ -1,8 +1,8 @@
-var _contains = require('./internal/_contains');
-var _curry2 = require('./internal/_curry2');
-var _filter = require('./internal/_filter');
-var flip = require('./flip');
-var uniq = require('./uniq');
+import _contains from './internal/_contains';
+import _curry2 from './internal/_curry2';
+import _filter from './internal/_filter';
+import flip from './flip';
+import uniq from './uniq';
 
 
 /**
@@ -22,7 +22,7 @@ var uniq = require('./uniq');
  *
  *      R.intersection([1,2,3,4], [7,6,5,4,3]); //=> [4, 3]
  */
-module.exports = _curry2(function intersection(list1, list2) {
+var intersection = /* #__PURE__*/ _curry2(function intersection(list1, list2) {
   var lookupList, filteredList;
   if (list1.length > list2.length) {
     lookupList = list1;
@@ -33,3 +33,4 @@ module.exports = _curry2(function intersection(list1, list2) {
   }
   return uniq(_filter(flip(_contains)(lookupList), filteredList));
 });
+export default intersection;

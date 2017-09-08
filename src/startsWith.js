@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var take = require('./take');
+import _curry2 from './internal/_curry2';
+import equals from './equals';
+import take from './take';
 
 /**
  * Checks if a list starts with the provided values
@@ -21,6 +21,7 @@ var take = require('./take');
  *      R.startsWith(['a'], ['a', 'b', 'c'])    //=> true
  *      R.startsWith(['b'], ['a', 'b', 'c'])    //=> false
  */
-module.exports = _curry2(function(prefix, list) {
+var startsWith = /* #__PURE__*/ _curry2(function(prefix, list) {
   return equals(take(prefix.length, list), prefix);
 });
+export default startsWith;

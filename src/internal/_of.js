@@ -1,1 +1,1 @@
-module.exports = function _of(x) { return [x]; };
+export default function _of(x) { return [x]; }

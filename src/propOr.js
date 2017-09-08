@@ -1,5 +1,5 @@
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
+import _curry3 from './internal/_curry3';
+import _has from './internal/_has';
 
 
 /**
@@ -28,6 +28,7 @@ var _has = require('./internal/_has');
  *      favorite(alice);  //=> undefined
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
-module.exports = _curry3(function propOr(val, p, obj) {
+var propOr = /* #__PURE__*/ _curry3(function propOr(val, p, obj) {
   return (obj != null && _has(p, obj)) ? obj[p] : val;
 });
+export default propOr;

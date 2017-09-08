@@ -1,5 +1,5 @@
-var composeK = require('./composeK');
-var reverse = require('./reverse');
+import composeK from './composeK';
+import reverse from './reverse';
 
 /**
  * Returns the left-to-right Kleisli composition of the provided functions,
@@ -35,9 +35,9 @@ var reverse = require('./reverse');
  *      //=> Nothing()
  * @symb R.pipeK(f, g, h)(a) = R.chain(h, R.chain(g, f(a)))
  */
-module.exports = function pipeK() {
+export default function pipeK() {
   if (arguments.length === 0) {
     throw new Error('pipeK requires at least one argument');
   }
   return composeK.apply(this, reverse(arguments));
-};
+}

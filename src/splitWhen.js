@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -20,7 +20,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.splitWhen(R.equals(2), [1, 2, 3, 1, 2, 3]);   //=> [[1], [2, 3, 1, 2, 3]]
  */
-module.exports = _curry2(function splitWhen(pred, list) {
+var splitWhen = /* #__PURE__*/ _curry2(function splitWhen(pred, list) {
   var idx = 0;
   var len = list.length;
   var prefix = [];
@@ -32,3 +32,4 @@ module.exports = _curry2(function splitWhen(pred, list) {
 
   return [prefix, Array.prototype.slice.call(list, idx)];
 });
+export default splitWhen;

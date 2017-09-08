@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var and = require('./and');
-var lift = require('./lift');
+import _curry2 from './internal/_curry2';
+import _isFunction from './internal/_isFunction';
+import and from './and';
+import lift from './lift';
 
 
 /**
@@ -32,10 +32,11 @@ var lift = require('./lift');
  *      f(15); //=> true
  *      f(30); //=> false
  */
-module.exports = _curry2(function both(f, g) {
+var both = /* #__PURE__*/ _curry2(function both(f, g) {
   return _isFunction(f) ?
     function _both() {
       return f.apply(this, arguments) && g.apply(this, arguments);
     } :
     lift(and)(f, g);
 });
+export default both;

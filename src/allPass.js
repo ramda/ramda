@@ -1,8 +1,8 @@
-var _curry1 = require('./internal/_curry1');
-var curryN = require('./curryN');
-var max = require('./max');
-var pluck = require('./pluck');
-var reduce = require('./reduce');
+import _curry1 from './internal/_curry1';
+import curryN from './curryN';
+import max from './max';
+import pluck from './pluck';
+import reduce from './reduce';
 
 
 /**
@@ -30,7 +30,7 @@ var reduce = require('./reduce');
  *      isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
  *      isQueenOfSpades({rank: 'Q', suit: '♠︎'}); //=> true
  */
-module.exports = _curry1(function allPass(preds) {
+var allPass = /* #__PURE__*/ _curry1(function allPass(preds) {
   return curryN(reduce(max, 0, pluck('length', preds)), function() {
     var idx = 0;
     var len = preds.length;
@@ -43,3 +43,4 @@ module.exports = _curry1(function allPass(preds) {
     return true;
   });
 });
+export default allPass;

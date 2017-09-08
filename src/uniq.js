@@ -1,5 +1,5 @@
-var identity = require('./identity');
-var uniqBy = require('./uniqBy');
+import identity from './identity';
+import uniqBy from './uniqBy';
 
 
 /**
@@ -19,4 +19,5 @@ var uniqBy = require('./uniqBy');
  *      R.uniq([1, '1']);     //=> [1, '1']
  *      R.uniq([[42], [42]]); //=> [[42]]
  */
-module.exports = uniqBy(identity);
+var uniq = /* #__PURE__*/ uniqBy(identity);
+export default uniq;

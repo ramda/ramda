@@ -1,5 +1,5 @@
-var _curry2 = require('./internal/_curry2');
-var _has = require('./internal/_has');
+import _curry2 from './internal/_curry2';
+import _has from './internal/_has';
 
 
 /**
@@ -26,4 +26,5 @@ var _has = require('./internal/_has');
  *      pointHas('y');  //=> true
  *      pointHas('z');  //=> false
  */
-module.exports = _curry2(_has);
+var has = /* #__PURE__*/ _curry2(_has);
+export default has;

@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -21,4 +21,5 @@ var _curry2 = require('./internal/_curry2');
  *      triple(4);       //=> 12
  *      R.multiply(2, 5);  //=> 10
  */
-module.exports = _curry2(function multiply(a, b) { return a * b; });
+var multiply = /* #__PURE__*/ _curry2(function multiply(a, b) { return a * b; });
+export default multiply;

@@ -1,5 +1,5 @@
-var _isArray = require('./_isArray');
-var _isTransformer = require('./_isTransformer');
+import _isArray from './_isArray';
+import _isTransformer from './_isTransformer';
 
 
 /**
@@ -16,7 +16,7 @@ var _isTransformer = require('./_isTransformer');
  * @param {Function} fn default ramda implementation
  * @return {Function} A function that dispatches on object in list position
  */
-module.exports = function _dispatchable(methodNames, xf, fn) {
+export default function _dispatchable(methodNames, xf, fn) {
   return function() {
     if (arguments.length === 0) {
       return fn();
@@ -38,4 +38,4 @@ module.exports = function _dispatchable(methodNames, xf, fn) {
     }
     return fn.apply(this, arguments);
   };
-};
+}

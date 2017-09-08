@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -24,7 +24,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.identical(0, -0); //=> false
  *      R.identical(NaN, NaN); //=> true
  */
-module.exports = _curry2(function identical(a, b) {
+var identical = /* #__PURE__*/ _curry2(function identical(a, b) {
   // SameValue algorithm
   if (a === b) { // Steps 1-5, 7-10
     // Steps 6.b-6.e: +0 != -0
@@ -34,3 +34,4 @@ module.exports = _curry2(function identical(a, b) {
     return a !== a && b !== b;
   }
 });
+export default identical;

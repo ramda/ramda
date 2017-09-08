@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var map = require('./map');
-var where = require('./where');
+import _curry2 from './internal/_curry2';
+import equals from './equals';
+import map from './map';
+import where from './where';
 
 
 /**
@@ -32,6 +32,7 @@ var where = require('./where');
  *      pred({a: 1, b: 2, c: 3});  //=> true
  *      pred({a: 1, b: 1});        //=> false
  */
-module.exports = _curry2(function whereEq(spec, testObj) {
+var whereEq = /* #__PURE__*/ _curry2(function whereEq(spec, testObj) {
   return where(map(equals, spec), testObj);
 });
+export default whereEq;

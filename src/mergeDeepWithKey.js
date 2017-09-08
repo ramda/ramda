@@ -1,6 +1,6 @@
-var _curry3 = require('./internal/_curry3');
-var _isObject = require('./internal/_isObject');
-var mergeWithKey = require('./mergeWithKey');
+import _curry3 from './internal/_curry3';
+import _isObject from './internal/_isObject';
+import mergeWithKey from './mergeWithKey';
 
 
 /**
@@ -31,7 +31,7 @@ var mergeWithKey = require('./mergeWithKey');
  *                         { b: true, c: { thing: 'bar', values: [15, 35] }});
  *      //=> { a: true, b: true, c: { thing: 'bar', values: [10, 20, 15, 35] }}
  */
-module.exports = _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
+var mergeDeepWithKey = /* #__PURE__*/ _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
   return mergeWithKey(function(k, lVal, rVal) {
     if (_isObject(lVal) && _isObject(rVal)) {
       return mergeDeepWithKey(fn, lVal, rVal);
@@ -40,3 +40,4 @@ module.exports = _curry3(function mergeDeepWithKey(fn, lObj, rObj) {
     }
   }, lObj, rObj);
 });
+export default mergeDeepWithKey;

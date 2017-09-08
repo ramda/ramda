@@ -1,5 +1,5 @@
-var _curry1 = require('./internal/_curry1');
-var _isString = require('./internal/_isString');
+import _curry1 from './internal/_curry1';
+import _isString from './internal/_isString';
 
 
 /**
@@ -26,7 +26,8 @@ var _isString = require('./internal/_isString');
  *      R.reverse('a');        //=> 'a'
  *      R.reverse('');         //=> ''
  */
-module.exports = _curry1(function reverse(list) {
+var reverse = /* #__PURE__*/ _curry1(function reverse(list) {
   return _isString(list) ? list.split('').reverse().join('') :
                            Array.prototype.slice.call(list, 0).reverse();
 });
+export default reverse;

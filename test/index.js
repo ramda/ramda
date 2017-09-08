@@ -6,8 +6,9 @@ var path = require('path');
 
 function sourceMethods(dir) {
   var isJsFile = function(file) { return file.match(/\.js$/); };
+  var isIndex = R.equals('index.js');
   var removeJsEnding = function(file) { return file.replace('.js', ''); };
-  return fs.readdirSync(dir).filter(isJsFile).map(removeJsEnding);
+  return fs.readdirSync(dir).filter(R.both(R.complement(isIndex), isJsFile)).map(removeJsEnding);
 }
 
 /**
@@ -28,7 +29,7 @@ function sourceMethods(dir) {
  */
 describe('API surface', function() {
   var exported = Object.keys(R);
-  var actual = sourceMethods(path.join(__dirname, '..', 'src'));
+  var actual = sourceMethods(path.dirname(require.resolve('..')));
 
   it('both APIs are in sync', function() {
     eq(actual.length, exported.length);

@@ -1,7 +1,7 @@
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
-var _curry2 = require('./internal/_curry2');
-var _curryN = require('./internal/_curryN');
+import _arity from './internal/_arity';
+import _curry1 from './internal/_curry1';
+import _curry2 from './internal/_curry2';
+import _curryN from './internal/_curryN';
 
 
 /**
@@ -46,9 +46,10 @@ var _curryN = require('./internal/_curryN');
  *      var g = f(3);
  *      g(4); //=> 10
  */
-module.exports = _curry2(function curryN(length, fn) {
+var curryN = /* #__PURE__*/ _curry2(function curryN(length, fn) {
   if (length === 1) {
     return _curry1(fn);
   }
   return _arity(length, _curryN(length, [], fn));
 });
+export default curryN;

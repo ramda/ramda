@@ -1,4 +1,4 @@
-var _curry1 = require('./internal/_curry1');
+import _curry1 from './internal/_curry1';
 
 
 /**
@@ -20,6 +20,7 @@ var _curry1 = require('./internal/_curry1');
  *      R.not(0); //=> true
  *      R.not(1); //=> false
  */
-module.exports = _curry1(function not(a) {
+var not = /* #__PURE__*/ _curry1(function not(a) {
   return !a;
 });
+export default not;

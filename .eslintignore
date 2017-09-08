@@ -1,6 +1,7 @@
 **/*.min.js
 test/index.html
 test/bundle.js
+cjs/**
 dist/**
 lib/test/**
 node_modules/**

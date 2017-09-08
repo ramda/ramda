@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropWhile = require('./internal/_xdropWhile');
-var slice = require('./slice');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xdropWhile from './internal/_xdropWhile';
+import slice from './slice';
 
 
 /**
@@ -32,7 +32,7 @@ var slice = require('./slice');
  *
  *      R.dropWhile(x => x !== 'd' , 'Ramda'); //=> 'da'
  */
-module.exports = _curry2(_dispatchable(['dropWhile'], _xdropWhile, function dropWhile(pred, xs) {
+var dropWhile = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable(['dropWhile'], _xdropWhile, function dropWhile(pred, xs) {
   var idx = 0;
   var len = xs.length;
   while (idx < len && pred(xs[idx])) {
@@ -40,3 +40,4 @@ module.exports = _curry2(_dispatchable(['dropWhile'], _xdropWhile, function drop
   }
   return slice(idx, Infinity, xs);
 }));
+export default dropWhile;

@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var equals = require('./equals');
-var takeLast = require('./takeLast');
+import _curry2 from './internal/_curry2';
+import equals from './equals';
+import takeLast from './takeLast';
 
 /**
  * Checks if a list ends with the provided values
@@ -21,6 +21,7 @@ var takeLast = require('./takeLast');
  *      R.endsWith(['c'], ['a', 'b', 'c'])    //=> true
  *      R.endsWith(['b'], ['a', 'b', 'c'])    //=> false
  */
-module.exports = _curry2(function(suffix, list) {
+var endsWith = /* #__PURE__*/ _curry2(function(suffix, list) {
   return equals(takeLast(suffix.length, list), suffix);
 });
+export default endsWith;

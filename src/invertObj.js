@@ -1,5 +1,5 @@
-var _curry1 = require('./internal/_curry1');
-var keys = require('./keys');
+import _curry1 from './internal/_curry1';
+import keys from './keys';
 
 
 /**
@@ -29,7 +29,7 @@ var keys = require('./keys');
  *      R.invertObj(raceResults);
  *      //=> { 'alice': '0', 'jake':'1' }
  */
-module.exports = _curry1(function invertObj(obj) {
+var invertObj = /* #__PURE__*/ _curry1(function invertObj(obj) {
   var props = keys(obj);
   var len = props.length;
   var idx = 0;
@@ -42,3 +42,4 @@ module.exports = _curry1(function invertObj(obj) {
   }
   return out;
 });
+export default invertObj;

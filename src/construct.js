@@ -1,5 +1,5 @@
-var _curry1 = require('./internal/_curry1');
-var constructN = require('./constructN');
+import _curry1 from './internal/_curry1';
+import constructN from './constructN';
 
 
 /**
@@ -34,6 +34,7 @@ var constructN = require('./constructN');
  *      var sightNewAnimal = R.compose(animalSighting, AnimalConstructor);
  *      R.map(sightNewAnimal, animalTypes); //=> ["It's a Lion!", "It's a Tiger!", "It's a Bear!"]
  */
-module.exports = _curry1(function construct(Fn) {
+var construct = /* #__PURE__*/ _curry1(function construct(Fn) {
   return constructN(Fn.length, Fn);
 });
+export default construct;

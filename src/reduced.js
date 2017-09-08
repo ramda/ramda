@@ -1,5 +1,5 @@
-var _curry1 = require('./internal/_curry1');
-var _reduced = require('./internal/_reduced');
+import _curry1 from './internal/_curry1';
+import _reduced from './internal/_reduced';
 
 /**
  * Returns a value wrapped to indicate that it is the final value of the reduce
@@ -25,5 +25,5 @@ var _reduced = require('./internal/_reduced');
  *       [],
  *       [1, 2, 3, 4, 5]) // [1, 2, 3]
  */
-
-module.exports = _curry1(_reduced);
+var reduced = /* #__PURE__*/ _curry1(_reduced);
+export default reduced;

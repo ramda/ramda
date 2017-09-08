@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var curry = require('./curry');
-var nAry = require('./nAry');
+import _curry2 from './internal/_curry2';
+import curry from './curry';
+import nAry from './nAry';
 
 
 /**
@@ -38,7 +38,7 @@ var nAry = require('./nAry');
  *      // Add a dollop of Potato Chips
  *      // Add a dollop of Ketchup
  */
-module.exports = _curry2(function constructN(n, Fn) {
+var constructN = /* #__PURE__*/ _curry2(function constructN(n, Fn) {
   if (n > 10) {
     throw new Error('Constructor with greater than ten arguments');
   }
@@ -60,3 +60,4 @@ module.exports = _curry2(function constructN(n, Fn) {
     }
   }));
 });
+export default constructN;

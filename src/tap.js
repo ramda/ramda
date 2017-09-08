@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xtap = require('./internal/_xtap');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xtap from './internal/_xtap';
 
 
 /**
@@ -23,7 +23,8 @@ var _xtap = require('./internal/_xtap');
  *      // logs 'x is 100'
  * @symb R.tap(f, a) = a
  */
-module.exports = _curry2(_dispatchable([], _xtap, function tap(fn, x) {
+var tap = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable([], _xtap, function tap(fn, x) {
   fn(x);
   return x;
 }));
+export default tap;

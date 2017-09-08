@@ -1,5 +1,5 @@
-var _concat = require('./internal/_concat');
-var _createPartialApplicator = require('./internal/_createPartialApplicator');
+import _concat from './internal/_concat';
+import _createPartialApplicator from './internal/_createPartialApplicator';
 
 
 /**
@@ -30,4 +30,5 @@ var _createPartialApplicator = require('./internal/_createPartialApplicator');
  *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partial(f, [a, b])(c, d) = f(a, b, c, d)
  */
-module.exports = _createPartialApplicator(_concat);
+var partial = /* #__PURE__*/ _createPartialApplicator(_concat);
+export default partial;

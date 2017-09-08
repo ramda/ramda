@@ -1,4 +1,4 @@
-var _objectAssign = require('./_objectAssign');
+import _objectAssign from './_objectAssign';
 
-module.exports =
+export default
   typeof Object.assign === 'function' ? Object.assign : _objectAssign;

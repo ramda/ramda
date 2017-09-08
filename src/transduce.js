@@ -1,6 +1,6 @@
-var _reduce = require('./internal/_reduce');
-var _xwrap = require('./internal/_xwrap');
-var curryN = require('./curryN');
+import _reduce from './internal/_reduce';
+import _xwrap from './internal/_xwrap';
+import curryN from './curryN';
 
 
 /**
@@ -50,6 +50,7 @@ var curryN = require('./curryN');
  *      var firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
  *      R.transduce(firstOddTransducer, R.flip(R.append), [], R.range(0, 100)); //=> [1]
  */
-module.exports = curryN(4, function transduce(xf, fn, acc, list) {
+var transduce = /* #__PURE__*/ curryN(4, function transduce(xf, fn, acc, list) {
   return _reduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
 });
+export default transduce;

@@ -1,7 +1,7 @@
-var _curry1 = require('./internal/_curry1');
-var lens = require('./lens');
-var nth = require('./nth');
-var update = require('./update');
+import _curry1 from './internal/_curry1';
+import lens from './lens';
+import nth from './nth';
+import update from './update';
 
 
 /**
@@ -24,6 +24,7 @@ var update = require('./update');
  *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']
  *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
  */
-module.exports = _curry1(function lensIndex(n) {
+var lensIndex = /* #__PURE__*/ _curry1(function lensIndex(n) {
   return lens(nth(n), update(n));
 });
+export default lensIndex;

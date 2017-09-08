@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var curryN = require('./curryN');
-var toString = require('./toString');
+import _curry2 from './internal/_curry2';
+import _isFunction from './internal/_isFunction';
+import curryN from './curryN';
+import toString from './toString';
 
 
 /**
@@ -31,7 +31,7 @@ var toString = require('./toString');
  * @symb R.invoker(1, 'method')(a, o) = o['method'](a)
  * @symb R.invoker(2, 'method')(a, b, o) = o['method'](a, b)
  */
-module.exports = _curry2(function invoker(arity, method) {
+var invoker = /* #__PURE__*/ _curry2(function invoker(arity, method) {
   return curryN(arity + 1, function() {
     var target = arguments[arity];
     if (target != null && _isFunction(target[method])) {
@@ -40,3 +40,4 @@ module.exports = _curry2(function invoker(arity, method) {
     throw new TypeError(toString(target) + ' does not have a method named "' + method + '"');
   });
 });
+export default invoker;

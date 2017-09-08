@@ -1,7 +1,7 @@
-var _aperture = require('./internal/_aperture');
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xaperture = require('./internal/_xaperture');
+import _aperture from './internal/_aperture';
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xaperture from './internal/_xaperture';
 
 
 /**
@@ -25,4 +25,5 @@ var _xaperture = require('./internal/_xaperture');
  *      R.aperture(3, [1, 2, 3, 4, 5]); //=> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
  *      R.aperture(7, [1, 2, 3, 4, 5]); //=> []
  */
-module.exports = _curry2(_dispatchable([], _xaperture, _aperture));
+var aperture = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable([], _xaperture, _aperture));
+export default aperture;

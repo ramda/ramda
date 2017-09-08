@@ -1,9 +1,9 @@
-var _curry3 = require('./internal/_curry3');
-var _has = require('./internal/_has');
-var _isArray = require('./internal/_isArray');
-var _isInteger = require('./internal/_isInteger');
-var assoc = require('./assoc');
-var isNil = require('./isNil');
+import _curry3 from './internal/_curry3';
+import _has from './internal/_has';
+import _isArray from './internal/_isArray';
+import _isInteger from './internal/_isInteger';
+import assoc from './assoc';
+import isNil from './isNil';
 
 
 /**
@@ -30,7 +30,7 @@ var isNil = require('./isNil');
  *      // Any missing or non-object keys in path will be overridden
  *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
  */
-module.exports = _curry3(function assocPath(path, val, obj) {
+var assocPath = /* #__PURE__*/ _curry3(function assocPath(path, val, obj) {
   if (path.length === 0) {
     return val;
   }
@@ -47,3 +47,4 @@ module.exports = _curry3(function assocPath(path, val, obj) {
     return assoc(idx, val, obj);
   }
 });
+export default assocPath;

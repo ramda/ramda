@@ -1,8 +1,8 @@
-var _arity = require('./internal/_arity');
-var _curry1 = require('./internal/_curry1');
-var map = require('./map');
-var max = require('./max');
-var reduce = require('./reduce');
+import _arity from './internal/_arity';
+import _curry1 from './internal/_curry1';
+import map from './map';
+import max from './max';
+import reduce from './reduce';
 
 
 /**
@@ -31,7 +31,7 @@ var reduce = require('./reduce');
  *      fn(50); //=> 'nothing special happens at 50°C'
  *      fn(100); //=> 'water boils at 100°C'
  */
-module.exports = _curry1(function cond(pairs) {
+var cond = /* #__PURE__*/ _curry1(function cond(pairs) {
   var arity = reduce(max,
                      0,
                      map(function(pair) { return pair[0].length; }, pairs));
@@ -45,3 +45,4 @@ module.exports = _curry1(function cond(pairs) {
     }
   });
 });
+export default cond;

@@ -1,4 +1,4 @@
-var always = require('./always');
+import always from './always';
 
 
 /**
@@ -16,4 +16,5 @@ var always = require('./always');
  *
  *      R.F(); //=> false
  */
-module.exports = always(false);
+var F = /* #__PURE__*/ always(false);
+export default F;

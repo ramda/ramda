@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -19,7 +19,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
  *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
  */
-module.exports = _curry2(function path(paths, obj) {
+var path = /* #__PURE__*/ _curry2(function path(paths, obj) {
   var val = obj;
   var idx = 0;
   while (idx < paths.length) {
@@ -31,3 +31,4 @@ module.exports = _curry2(function path(paths, obj) {
   }
   return val;
 });
+export default path;

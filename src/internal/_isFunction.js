@@ -1,3 +1,3 @@
-module.exports = function _isFunction(x) {
+export default function _isFunction(x) {
   return Object.prototype.toString.call(x) === '[object Function]';
-};
+}

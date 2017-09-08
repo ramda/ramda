@@ -1,4 +1,4 @@
-var curry = require('./curry');
+import curry from './curry';
 
 
 /**
@@ -33,6 +33,7 @@ var curry = require('./curry');
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  * @symb R.call(f, a, b) = f(a, b)
  */
-module.exports = curry(function call(fn) {
+var call = /* #__PURE__*/ curry(function call(fn) {
   return fn.apply(this, Array.prototype.slice.call(arguments, 1));
 });
+export default call;

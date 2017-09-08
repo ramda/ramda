@@ -1,7 +1,7 @@
-var _concat = require('./internal/_concat');
-var _curry2 = require('./internal/_curry2');
-var _reduce = require('./internal/_reduce');
-var map = require('./map');
+import _concat from './internal/_concat';
+import _curry2 from './internal/_curry2';
+import _reduce from './internal/_reduce';
+import map from './map';
 
 
 /**
@@ -30,7 +30,7 @@ var map = require('./map');
  *      R.ap(R.concat, R.toUpper)('Ramda') //=> 'RamdaRAMDA'
  * @symb R.ap([f, g], [a, b]) = [f(a), f(b), g(a), g(b)]
  */
-module.exports = _curry2(function ap(applyF, applyX) {
+var ap = /* #__PURE__*/ _curry2(function ap(applyF, applyX) {
   return (
     typeof applyX['fantasy-land/ap'] === 'function' ?
       applyX['fantasy-land/ap'](applyF) :
@@ -42,3 +42,4 @@ module.exports = _curry2(function ap(applyF, applyX) {
       _reduce(function(acc, f) { return _concat(acc, map(f, applyX)); }, [], applyF)
   );
 });
+export default ap;

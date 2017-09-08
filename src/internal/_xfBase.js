@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   init: function() {
     return this.xf['@@transducer/init']();
   },

@@ -1,6 +1,6 @@
-var _curry1 = require('./_curry1');
-var _isArray = require('./_isArray');
-var _isString = require('./_isString');
+import _curry1 from './_curry1';
+import _isArray from './_isArray';
+import _isString from './_isString';
 
 
 /**
@@ -20,7 +20,7 @@ var _isString = require('./_isString');
  *      _isArrayLike({length: 10}); //=> false
  *      _isArrayLike({0: 'zero', 9: 'nine', length: 10}); //=> true
  */
-module.exports = _curry1(function isArrayLike(x) {
+var _isArrayLike = /* #__PURE__*/ _curry1(function isArrayLike(x) {
   if (_isArray(x)) { return true; }
   if (!x) { return false; }
   if (typeof x !== 'object') { return false; }
@@ -32,3 +32,4 @@ module.exports = _curry1(function isArrayLike(x) {
   }
   return false;
 });
+export default _isArrayLike;

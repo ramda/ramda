@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var _dispatchable = require('./internal/_dispatchable');
-var _xdropRepeatsWith = require('./internal/_xdropRepeatsWith');
-var last = require('./last');
+import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xdropRepeatsWith from './internal/_xdropRepeatsWith';
+import last from './last';
 
 
 /**
@@ -25,7 +25,7 @@ var last = require('./last');
  *      var l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
  *      R.dropRepeatsWith(R.eqBy(Math.abs), l); //=> [1, 3, 4, -5, 3]
  */
-module.exports = _curry2(_dispatchable([], _xdropRepeatsWith, function dropRepeatsWith(pred, list) {
+var dropRepeatsWith = /* #__PURE__*/ _curry2(/* #__PURE__*/ _dispatchable([], _xdropRepeatsWith, function dropRepeatsWith(pred, list) {
   var result = [];
   var idx = 1;
   var len = list.length;
@@ -40,3 +40,4 @@ module.exports = _curry2(_dispatchable([], _xdropRepeatsWith, function dropRepea
   }
   return result;
 }));
+export default dropRepeatsWith;

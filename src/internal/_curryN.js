@@ -1,5 +1,5 @@
-var _arity = require('./_arity');
-var _isPlaceholder = require('./_isPlaceholder');
+import _arity from './_arity';
+import _isPlaceholder from './_isPlaceholder';
 
 
 /**
@@ -12,7 +12,7 @@ var _isPlaceholder = require('./_isPlaceholder');
  * @param {Function} fn The function to curry.
  * @return {Function} The curried function.
  */
-module.exports = function _curryN(length, received, fn) {
+export default function _curryN(length, received, fn) {
   return function() {
     var combined = [];
     var argsIdx = 0;
@@ -37,4 +37,4 @@ module.exports = function _curryN(length, received, fn) {
     return left <= 0 ? fn.apply(this, combined)
                      : _arity(left, _curryN(length, combined, fn));
   };
-};
+}

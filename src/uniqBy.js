@@ -1,5 +1,5 @@
-var _Set = require('./internal/_Set');
-var _curry2 = require('./internal/_curry2');
+import _Set from './internal/_Set';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -20,7 +20,7 @@ var _curry2 = require('./internal/_curry2');
  *
  *      R.uniqBy(Math.abs, [-1, -5, 2, 10, 1, 2]); //=> [-1, -5, 2, 10]
  */
-module.exports = _curry2(function uniqBy(fn, list) {
+var uniqBy = /* #__PURE__*/ _curry2(function uniqBy(fn, list) {
   var set = new _Set();
   var result = [];
   var idx = 0;
@@ -36,3 +36,4 @@ module.exports = _curry2(function uniqBy(fn, list) {
   }
   return result;
 });
+export default uniqBy;

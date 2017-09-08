@@ -1,5 +1,5 @@
-var multiply = require('./multiply');
-var reduce = require('./reduce');
+import multiply from './multiply';
+import reduce from './reduce';
 
 
 /**
@@ -17,4 +17,5 @@ var reduce = require('./reduce');
  *
  *      R.product([2,4,6,8,100,1]); //=> 38400
  */
-module.exports = reduce(multiply, 1);
+var product = /* #__PURE__*/ reduce(multiply, 1);
+export default product;

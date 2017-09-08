@@ -1,12 +1,12 @@
-var _contains = require('./_contains');
-var _map = require('./_map');
-var _quote = require('./_quote');
-var _toISOString = require('./_toISOString');
-var keys = require('../keys');
-var reject = require('../reject');
+import _contains from './_contains';
+import _map from './_map';
+import _quote from './_quote';
+import _toISOString from './_toISOString';
+import keys from '../keys';
+import reject from '../reject';
 
 
-module.exports = function _toString(x, seen) {
+export default function _toString(x, seen) {
   var recur = function recur(y) {
     var xs = seen.concat([x]);
     return _contains(y, xs) ? '<Circular>' : _toString(y, xs);
@@ -43,4 +43,4 @@ module.exports = function _toString(x, seen) {
       }
       return '{' + mapPairs(x, keys(x)).join(', ') + '}';
   }
-};
+}

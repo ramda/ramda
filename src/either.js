@@ -1,7 +1,7 @@
-var _curry2 = require('./internal/_curry2');
-var _isFunction = require('./internal/_isFunction');
-var lift = require('./lift');
-var or = require('./or');
+import _curry2 from './internal/_curry2';
+import _isFunction from './internal/_isFunction';
+import lift from './lift';
+import or from './or';
 
 
 /**
@@ -31,10 +31,11 @@ var or = require('./or');
  *      f(101); //=> true
  *      f(8); //=> true
  */
-module.exports = _curry2(function either(f, g) {
+var either = /* #__PURE__*/ _curry2(function either(f, g) {
   return _isFunction(f) ?
     function _either() {
       return f.apply(this, arguments) || g.apply(this, arguments);
     } :
     lift(or)(f, g);
 });
+export default either;

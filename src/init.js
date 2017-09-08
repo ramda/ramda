@@ -1,4 +1,4 @@
-var slice = require('./slice');
+import slice from './slice';
 
 
 /**
@@ -25,4 +25,5 @@ var slice = require('./slice');
  *      R.init('a');    //=> ''
  *      R.init('');     //=> ''
  */
-module.exports = slice(0, -1);
+var init = /* #__PURE__*/ slice(0, -1);
+export default init;

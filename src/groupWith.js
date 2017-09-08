@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 /**
  * Takes a list and returns a list of lists where each sublist's elements are
@@ -30,7 +30,7 @@ var _curry2 = require('./internal/_curry2');
  * R.groupWith(R.eqBy(isVowel), 'aestiou')
  * //=> ['ae', 'st', 'iou']
  */
-module.exports = _curry2(function(fn, list) {
+var groupWith = /* #__PURE__*/ _curry2(function(fn, list) {
   var res = [];
   var idx = 0;
   var len = list.length;
@@ -44,3 +44,4 @@ module.exports = _curry2(function(fn, list) {
   }
   return res;
 });
+export default groupWith;

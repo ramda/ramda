@@ -1,7 +1,7 @@
-var _arity = require('./internal/_arity');
-var _pipe = require('./internal/_pipe');
-var reduce = require('./reduce');
-var tail = require('./tail');
+import _arity from './internal/_arity';
+import _pipe from './internal/_pipe';
+import reduce from './reduce';
+import tail from './tail';
 
 
 /**
@@ -27,10 +27,10 @@ var tail = require('./tail');
  *      f(3, 4); // -(3^4) + 1
  * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
  */
-module.exports = function pipe() {
+export default function pipe() {
   if (arguments.length === 0) {
     throw new Error('pipe requires at least one argument');
   }
   return _arity(arguments[0].length,
                 reduce(_pipe, arguments[0], tail(arguments)));
-};
+}

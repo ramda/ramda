@@ -1,5 +1,5 @@
-var memoizeWith = require('./memoizeWith');
-var toString = require('./toString');
+import memoizeWith from './memoizeWith';
+import toString from './toString';
 
 
 /**
@@ -29,6 +29,7 @@ var toString = require('./toString');
  *      factorial(5); //=> 120
  *      count; //=> 1
  */
-module.exports = memoizeWith(function() {
+var memoize = /* #__PURE__*/ memoizeWith(function() {
   return toString(arguments);
 });
+export default memoize;

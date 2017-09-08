@@ -1,5 +1,5 @@
-var _curry3 = require('./internal/_curry3');
-var equals = require('./equals');
+import _curry3 from './internal/_curry3';
+import equals from './equals';
 
 
 /**
@@ -19,6 +19,7 @@ var equals = require('./equals');
  *
  *      R.eqBy(Math.abs, 5, -5); //=> true
  */
-module.exports = _curry3(function eqBy(f, x, y) {
+var eqBy = /* #__PURE__*/ _curry3(function eqBy(f, x, y) {
   return equals(f(x), f(y));
 });
+export default eqBy;

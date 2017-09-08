@@ -1,4 +1,4 @@
-var _curry3 = require('./internal/_curry3');
+import _curry3 from './internal/_curry3';
 
 
 /**
@@ -29,6 +29,7 @@ var _curry3 = require('./internal/_curry3');
  *      truncate('12345');         //=> '12345'
  *      truncate('0123456789ABC'); //=> '0123456789…'
  */
-module.exports = _curry3(function when(pred, whenTrueFn, x) {
+var when = /* #__PURE__*/ _curry3(function when(pred, whenTrueFn, x) {
   return pred(x) ? whenTrueFn(x) : x;
 });
+export default when;

@@ -1,5 +1,5 @@
-var _containsWith = require('./internal/_containsWith');
-var _curry2 = require('./internal/_curry2');
+import _containsWith from './internal/_containsWith';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -24,7 +24,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]
  *      R.uniqWith(strEq)(['1', 1, 1]);    //=> ['1']
  */
-module.exports = _curry2(function uniqWith(pred, list) {
+var uniqWith = /* #__PURE__*/ _curry2(function uniqWith(pred, list) {
   var idx = 0;
   var len = list.length;
   var result = [];
@@ -38,3 +38,4 @@ module.exports = _curry2(function uniqWith(pred, list) {
   }
   return result;
 });
+export default uniqWith;

@@ -1,5 +1,5 @@
-var _checkForMethod = require('./internal/_checkForMethod');
-var _curry2 = require('./internal/_curry2');
+import _checkForMethod from './internal/_checkForMethod';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -36,7 +36,7 @@ var _curry2 = require('./internal/_curry2');
  *      // logs 8
  * @symb R.forEach(f, [a, b, c]) = [a, b, c]
  */
-module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
+var forEach = /* #__PURE__*/ _curry2(/* #__PURE__*/ _checkForMethod('forEach', function forEach(fn, list) {
   var len = list.length;
   var idx = 0;
   while (idx < len) {
@@ -45,3 +45,4 @@ module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
   }
   return list;
 }));
+export default forEach;

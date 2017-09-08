@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var always = require('./always');
-var times = require('./times');
+import _curry2 from './internal/_curry2';
+import always from './always';
+import times from './times';
 
 
 /**
@@ -26,6 +26,7 @@ var times = require('./times');
  * @symb R.repeat(a, 1) = [a]
  * @symb R.repeat(a, 2) = [a, a]
  */
-module.exports = _curry2(function repeat(value, n) {
+var repeat = /* #__PURE__*/ _curry2(function repeat(value, n) {
   return times(always(value), n);
 });
+export default repeat;

@@ -1,6 +1,6 @@
-var _concat = require('./internal/_concat');
-var _createPartialApplicator = require('./internal/_createPartialApplicator');
-var flip = require('./flip');
+import _concat from './internal/_concat';
+import _createPartialApplicator from './internal/_createPartialApplicator';
+import flip from './flip';
 
 
 /**
@@ -27,4 +27,5 @@ var flip = require('./flip');
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)
  */
-module.exports = _createPartialApplicator(flip(_concat));
+var partialRight = /* #__PURE__*/ _createPartialApplicator(/* #__PURE__*/ flip(_concat));
+export default partialRight;

@@ -1,4 +1,4 @@
-module.exports = function _quote(s) {
+export default function _quote(s) {
   var escaped = s
     .replace(/\\/g, '\\\\')
     .replace(/[\b]/g, '\\b')  // \b matches word boundary; [\b] matches backspace
@@ -10,4 +10,4 @@ module.exports = function _quote(s) {
     .replace(/\0/g, '\\0');
 
   return '"' + escaped.replace(/"/g, '\\"') + '"';
-};
+}

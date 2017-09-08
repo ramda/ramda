@@ -1,5 +1,5 @@
-var pipe = require('./pipe');
-var reverse = require('./reverse');
+import pipe from './pipe';
+import reverse from './reverse';
 
 
 /**
@@ -26,9 +26,9 @@ var reverse = require('./reverse');
  *
  * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
  */
-module.exports = function compose() {
+export default function compose() {
   if (arguments.length === 0) {
     throw new Error('compose requires at least one argument');
   }
   return pipe.apply(this, reverse(arguments));
-};
+}

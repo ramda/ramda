@@ -1,4 +1,4 @@
-var _curry2 = require('./internal/_curry2');
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -19,7 +19,7 @@ var _curry2 = require('./internal/_curry2');
  *      R.pick(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1, d: 4}
  *      R.pick(['a', 'e', 'f'], {a: 1, b: 2, c: 3, d: 4}); //=> {a: 1}
  */
-module.exports = _curry2(function pick(names, obj) {
+var pick = /* #__PURE__*/ _curry2(function pick(names, obj) {
   var result = {};
   var idx = 0;
   while (idx < names.length) {
@@ -30,3 +30,4 @@ module.exports = _curry2(function pick(names, obj) {
   }
   return result;
 });
+export default pick;

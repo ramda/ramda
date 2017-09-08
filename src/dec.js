@@ -1,4 +1,4 @@
-var add = require('./add');
+import add from './add';
 
 
 /**
@@ -16,4 +16,5 @@ var add = require('./add');
  *
  *      R.dec(42); //=> 41
  */
-module.exports = add(-1);
+var dec = /* #__PURE__*/ add(-1);
+export default dec;

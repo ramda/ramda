@@ -1,6 +1,6 @@
-var _curry2 = require('./internal/_curry2');
-var length = require('./length');
-var slice = require('./slice');
+import _curry2 from './internal/_curry2';
+import length from './length';
+import slice from './slice';
 
 
 /**
@@ -21,6 +21,7 @@ var slice = require('./slice');
  *      R.splitAt(5, 'hello world');      //=> ['hello', ' world']
  *      R.splitAt(-1, 'foobar');          //=> ['fooba', 'r']
  */
-module.exports = _curry2(function splitAt(index, array) {
+var splitAt = /* #__PURE__*/ _curry2(function splitAt(index, array) {
   return [slice(0, index, array), slice(index, length(array), array)];
 });
+export default splitAt;
