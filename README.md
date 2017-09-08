@@ -106,9 +106,9 @@ or from a CDN, either cdnjs:
 or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 ```html
-<script src="//cdn.jsdelivr.net/ramda/0.24.1/ramda.min.js"></script>
-<script src="//cdn.jsdelivr.net/ramda/0.24/ramda.min.js"></script>
-<script src="//cdn.jsdelivr.net/ramda/latest/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@0.24.1/dist/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@0.24/dist/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@latest/dist/ramda.min.js"></script>
 ```
 
 (note that using `latest` is taking a significant risk that ramda API changes could break your code.)
@@ -198,3 +198,5 @@ Acknowledgements
 Thanks to [J. C. Phillipps](http://www.jcphillipps.com) for the Ramda logo.
 Ramda logo artwork &copy; 2014 J. C. Phillipps. Licensed Creative Commons 
 [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
+
+
