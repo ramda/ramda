@@ -24,6 +24,7 @@ module.exports = {
   both: require('./src/both'),
   call: require('./src/call'),
   chain: require('./src/chain'),
+  chainPath: require('./src/chainPath'),
   clamp: require('./src/clamp'),
   clone: require('./src/clone'),
   comparator: require('./src/comparator'),
