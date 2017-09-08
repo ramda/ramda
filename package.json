@@ -83,7 +83,6 @@
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
     "testem": "0.9.x",
-    "uglify-js": "2.4.x",
     "xyz": "1.0.x"
   }
 }
