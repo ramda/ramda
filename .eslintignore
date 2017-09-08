@@ -1,6 +1,7 @@
 **/*.min.js
 test/index.html
 test/bundle.js
+es/**
 src/**
 dist/**
 lib/test/**

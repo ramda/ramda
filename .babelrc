@@ -1,6 +1,15 @@
 {
-  "plugins": [
-    "./scripts/transform-esm-to-cjs",
-    "./scripts/annotate-pure-calls"
-  ]
+  "env": {
+    "cjs": {
+      "plugins": [
+        "./scripts/transform-esm-to-cjs",
+        "./scripts/annotate-pure-calls"
+      ]
+    },
+    "es": {
+      "plugins": [
+        "./scripts/annotate-pure-calls"
+      ]
+    }
+  },
 }
