@@ -13,7 +13,8 @@ var toString = require('./toString');
  * an error if you `concat` an Array with a non-Array value.
  *
  * Dispatches to the `concat` method of the first argument, if present.
- * Can also concatenate two [fantasy-land compatible semigroups](https://github.com/fantasyland/fantasy-land#semigroup).
+ * Can also concatenate two members of a [fantasy-land
+ * compatible semigroup](https://github.com/fantasyland/fantasy-land#semigroup).
  *
  * @func
  * @memberOf R
