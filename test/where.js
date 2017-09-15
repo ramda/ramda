@@ -64,4 +64,19 @@ describe('where', function() {
     eq(R.where(spec, {x: 5}), false);
   });
 
+  it('predicate recursively', function() {
+    // predicate recursively
+    var predRcrsv = R.where({
+      a: {
+        b: R.equals('bar')
+      },
+      x: R.gt(R.__, 10)
+    });
+    predRcrsv({a: { b: 'bar' }, x: 11, y: 19});
+    predRcrsv({a: { b: 'bar' }, x: 10, y: 19});
+    predRcrsv({a: { b: 'xxx' }, x: 11, y: 19});
+    predRcrsv({a: { c: 'bar' }, x: 11, y: 19});
+    predRcrsv({b: 'bar', x: 11, y: 19});
+  });
+
 });
