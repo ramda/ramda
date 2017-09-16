@@ -72,11 +72,20 @@ describe('where', function() {
       },
       x: R.gt(R.__, 10)
     });
-    predRcrsv({a: { b: 'bar' }, x: 11, y: 19});
-    predRcrsv({a: { b: 'bar' }, x: 10, y: 19});
-    predRcrsv({a: { b: 'xxx' }, x: 11, y: 19});
-    predRcrsv({a: { c: 'bar' }, x: 11, y: 19});
-    predRcrsv({b: 'bar', x: 11, y: 19});
+    eq(predRcrsv({a: { b: 'bar' }, x: 11, y: 19}), true);
+    eq(predRcrsv({a: { b: 'bar' }, x: 10, y: 19}), false);
+    eq(predRcrsv({a: { b: 'xxx' }, x: 11, y: 19}), false);
+    eq(predRcrsv({a: { c: 'bar' }, x: 11, y: 19}), false);
+    eq(predRcrsv({b: 'bar', x: 11, y: 19}), false);
+
+    var predRcrsv2 = R.where({
+      a: R.where({
+        b: R.equals('bar')
+      }),
+      x: R.gt(R.__, 10)
+    });
+    eq(predRcrsv2({a: { b: 'bar' }, x: 11, y: 19}), true);
+
   });
 
 });
