@@ -24,6 +24,7 @@
   ],
   "name": "ramda",
   "description": "A practical functional library for JavaScript programmers.",
+  "side-effects": false,
   "version": "0.24.1",
   "homepage": "http://ramdajs.com/",
   "license": "MIT",
