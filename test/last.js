@@ -6,7 +6,7 @@ var eq = require('./shared/eq');
 
 describe('last', function() {
 
-  it('returns the first element of an ordered collection', function() {
+  it('returns the last element of an ordered collection', function() {
     eq(R.last([1, 2, 3]), 3);
     eq(R.last([1, 2]), 2);
     eq(R.last([1]), 1);

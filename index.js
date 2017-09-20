@@ -103,6 +103,7 @@ module.exports = {
   keys: require('./src/keys'),
   keysIn: require('./src/keysIn'),
   last: require('./src/last'),
+  first: require('./src/first'),
   lastIndexOf: require('./src/lastIndexOf'),
   length: require('./src/length'),
   lens: require('./src/lens'),
