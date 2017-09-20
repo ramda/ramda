@@ -11,7 +11,7 @@ describe('first', function() {
     eq(R.first([1]), 1);
     eq(R.first([]), undefined);
 
-    eq(R.first('abc'), 'c');
+    eq(R.first('abc'), 'a');
     eq(R.first('a'), 'a');
     eq(R.first(''), '');
   });
