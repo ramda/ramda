@@ -32,7 +32,7 @@
     "url": "git://github.com/ramda/ramda.git"
   },
   "main": "index.js",
-  "browser": "dist/ramda.min.js",
+  "unpkg": "dist/ramda.min.js",
   "files": [
     "index.js",
     "src",
