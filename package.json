@@ -44,7 +44,6 @@
     "bookmarklet": "scripts/bookmarklet",
     "build": "make && make dist/ramda.min.js",
     "clean": "rimraf dist/* coverage/*",
-    "precoverage": "npm run pretest",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
     "postcoverage": "npm run posttest",
     "lint": "eslint scripts/bookmarklet scripts/build src/*.js src/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
