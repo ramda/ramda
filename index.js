@@ -127,6 +127,7 @@ module.exports = {
   memoizeWith: require('./src/memoizeWith'),
   merge: require('./src/merge'),
   mergeAll: require('./src/mergeAll'),
+  mergeAllProps: require('./src/mergeAllProps'),
   mergeDeepLeft: require('./src/mergeDeepLeft'),
   mergeDeepRight: require('./src/mergeDeepRight'),
   mergeDeepWith: require('./src/mergeDeepWith'),
