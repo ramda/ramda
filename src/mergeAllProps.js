@@ -3,7 +3,7 @@ var mergeAll = require('./mergeAll');
 var props = require('./props');
 
 /**
- * Function that does the same as object spread
+ * Functional equivalent of merging object properties with object spread
  *
  * @func
  * @memberOf R
