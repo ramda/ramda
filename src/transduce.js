@@ -44,7 +44,7 @@ var curryN = require('./curryN');
  *
  *      var numbers = [1, 2, 3, 4];
  *      var transducer = R.compose(R.map(R.add(1)), R.take(2));
- *      R.transduce(transducer, R.flip(R.append), [], numbers); //=> [2, 3]
+ *      R.transduce(transducer, R.flip(R.append), [], numbers); //=> [3, 4]
  *
  *      var isOdd = (x) => x % 2 === 1;
  *      var firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
