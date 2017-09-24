@@ -2,14 +2,14 @@
   "env": {
     "cjs": {
       "plugins": [
+        "annotate-pure-calls",
         "./scripts/transpile/esm-to-cjs",
-        "./scripts/transpile/annotate-pure-calls",
         "./scripts/transpile/wrap-constructor-pattern"
       ]
     },
     "es": {
       "plugins": [
-        "./scripts/transpile/annotate-pure-calls",
+        "annotate-pure-calls",
         "./scripts/transpile/wrap-constructor-pattern"
       ]
     }
