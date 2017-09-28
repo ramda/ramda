@@ -7,17 +7,10 @@
         ],
         "noImplicitAny": true,
         "noImplicitThis": false,
-        "strictNullChecks": false,
-        "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
-        "types": [],
         "noEmit": true,
-        "forceConsistentCasingInFileNames": true
-    },
-    "files": [
-        "index.d.ts",
-        "ramda-tests.ts"
-    ]
+        "strictNullChecks": false,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": { "ramda": ["./index.d.ts"] }
+    }
 }

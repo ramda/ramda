@@ -34,6 +34,7 @@
   "main": "index.js",
   "unpkg": "dist/ramda.min.js",
   "jsdelivr": "dist/ramda.min.js",
+  "types": "types/index.d.ts",
   "files": [
     "index.js",
     "src",
@@ -52,7 +53,8 @@
     "posttest": "git checkout -- dist",
     "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
-    "postbrowser_test": "npm run posttest"
+    "postbrowser_test": "npm run posttest",
+    "tslint": "tslint --config types/tslint.json --project types/tsconfig.json --format verbose --type-check types/*.ts"
   },
   "dependencies": {},
   "devDependencies": {
@@ -76,6 +78,8 @@
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
     "testem": "0.9.x",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3",
     "uglify-js": "2.4.x",
     "xyz": "1.0.x"
   }
