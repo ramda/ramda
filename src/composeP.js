@@ -15,6 +15,7 @@ var reverse = require('./reverse');
  * @param {...Function} functions The functions to compose
  * @return {Function}
  * @see R.pipeP
+ * @deprecated since v0.23.0
  * @example
  *
  *      var db = {
