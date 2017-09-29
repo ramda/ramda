@@ -36,4 +36,44 @@ describe('ap', function() {
     eq(val([1, 2, 3]), [2, 4, 6, 4, 5, 6]);
   });
 
+  /** Demonstrates the consistent ordering of ap with fantasy-land */
+  it('fantasy-land ap', function() {
+    var Left = function (value) {
+      var self = {
+        simple: function () { return ['Left', value]; },
+
+        // Either e a ~> (a -> b) -> Either e b
+        'fantasy-land/map': function (f) { return self; },
+
+        // Either e a ~> Either e (a -> b) -> Either e b
+        'fantasy-land/ap': function (other) { return self; }
+      };
+      return self;
+    };
+
+    var Right = function (value) {
+      return {
+        simple: function () { return ['Right', value]; },
+
+        // Either e a ~> (a -> b) -> Either e b
+        'fantasy-land/map': function (f) { return Right(f(value)); },
+
+        // Either e a ~> Either e (a -> b) -> Either e b
+        'fantasy-land/ap': function (other) {
+          return other['fantasy-land/map'](function (fn) { return fn(value); });
+        }
+      };
+    };
+
+    var leftFn = Left('Failed fn');
+    var leftVal = Left('Failed val');
+    var rightFn = Right(function (x) { return x * 10; });
+    var rightVal = Right(42);
+
+    eq(R.ap(leftFn, leftVal).simple(), leftFn.simple());
+    eq(R.ap(rightFn, leftVal).simple(), leftVal.simple());
+    eq(R.ap(rightFn, rightVal).simple(), Right(420).simple());
+    eq(R.ap(leftFn, rightVal).simple(), leftFn.simple());
+  });
+
 });
