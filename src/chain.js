@@ -12,6 +12,8 @@ var map = require('./map');
  * Dispatches to the `chain` method of the second argument, if present,
  * according to the [FantasyLand Chain spec](https://github.com/fantasyland/fantasy-land#chain).
  *
+ * Also treats functions as chains and will compose them together.
+ *
  * @func
  * @memberOf R
  * @since v0.3.0
