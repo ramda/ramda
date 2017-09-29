@@ -2,6 +2,8 @@ var S = require('sanctuary');
 
 var R = require('..');
 var Id = require('./shared/Id');
+var Just = require('./shared/Maybe').Just;
+var Nothing = require('./shared/Maybe').Nothing;
 var eq = require('./shared/eq');
 
 
@@ -33,4 +35,9 @@ describe('sequence', function() {
     eq(R.sequence(R.of, Id([1, 2, 3])), [Id(1), Id(2), Id(3)]);
   });
 
+  it('should use `traverse` if it exists', function() {
+    eq(R.sequence(Just, [Just(1), Just(2), Just(3)]), Just([1, 2, 3]));
+    eq(R.sequence(R.of, Just([1, 2, 3])), [Just(1), Just(2), Just(3)]);
+    eq(R.sequence(R.of, Nothing), [Nothing]);
+  });
 });
