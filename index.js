@@ -182,6 +182,7 @@ module.exports = {
   reduced: require('./src/reduced'),
   reject: require('./src/reject'),
   remove: require('./src/remove'),
+  rename: require('./src/rename'),
   repeat: require('./src/repeat'),
   replace: require('./src/replace'),
   reverse: require('./src/reverse'),
