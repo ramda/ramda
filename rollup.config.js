@@ -1,22 +1,25 @@
-import uglify from 'rollup-plugin-uglify';
-import pkg from './package.json';
+var uglify = require('rollup-plugin-uglify');
+var pkg = require('./package.json');
 
 var banner = '//  Ramda v' + pkg.version + '\n'
   + '//  https://github.com/ramda/ramda\n'
   + '//  (c) 2013-' + new Date().getFullYear() + ' Scott Sauyet, Michael Hurley, and David Chambers\n'
   + '//  Ramda may be freely distributed under the MIT license.\n';
 
-var env = process.env.NODE_ENV;
+var input = 'source/index.js';
 
 var config = {
-  format: 'umd',
-  moduleName: 'R',
-  exports: 'named',
+  input: input,
+  output: {
+    format: 'umd',
+    name: 'R',
+    exports: 'named'
+  },
   banner: banner,
   plugins: []
 };
 
-if (env === 'production') {
+if (process.env.NODE_ENV === 'production') {
   config.plugins.push(
     uglify({
       compress: {
@@ -29,4 +32,4 @@ if (env === 'production') {
   );
 }
 
-export default config;
+module.exports = config;
