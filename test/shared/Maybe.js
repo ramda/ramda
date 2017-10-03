@@ -1,5 +1,4 @@
-var equals = require('../../src/equals');
-var toString = require('../../src/toString');
+var R = require('../..');
 
 
 var sentinel = {};
@@ -31,7 +30,7 @@ Maybe.prototype['@@type'] = 'ramda/Maybe';
 //  Maybe#equals :: Maybe a ~> Maybe a -> Boolean
 Maybe.prototype['fantasy-land/equals'] = function(other) {
   return other != null && other['@@type'] === this['@@type'] &&
-         this.isJust ? other.isJust && equals(other.value, this.value) : other.isNothing;
+         this.isJust ? other.isJust && R.equals(other.value, this.value) : other.isNothing;
 };
 
 //  Maybe#map :: Maybe a ~> (a -> b) -> Maybe b
@@ -56,5 +55,5 @@ Maybe.prototype.filter = function(pred) {
 
 //  Maybe#toString :: Maybe a ~> String
 Maybe.prototype.toString = function() {
-  return this.isJust ? 'Just(' + toString(this.value) + ')' : 'Nothing';
+  return this.isJust ? 'Just(' + R.toString(this.value) + ')' : 'Nothing';
 };

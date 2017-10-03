@@ -15,8 +15,9 @@ for filename in $(find src -maxdepth 1 -name "*.js" | xargs grep --files-without
   git add $filename
 done
 
-rm -f dist/ramda{,.min}.js
-make dist/ramda{,.min}.js
+npm run clean
+npm run build
+
 git add dist/ramda{,.min}.js
 
 npm run bookmarklet
