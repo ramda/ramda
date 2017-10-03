@@ -1,8 +1,9 @@
+/es
+/src
 /lib/bench/report/
 /lib/docs/public/
 /node_modules/
 /npm-debug.log
-/ramda.js.tmp
 /lib/test/bundle.js
 /tmp
 /bower_components/

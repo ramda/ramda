@@ -125,16 +125,15 @@ Or you can inject ramda into virtually any unsuspecting website using [the bookm
 
 ### Build
 
-* on Unix-based platforms, `npm run build` updates __dist/ramda.js__ and __dist/ramda.min.js__
-* on Windows, write the output of `scripts/build --complete` to a temporary file, then rename the temporary file __dist/ramda.js__.
+`npm run build` creates `es`, `src` directories and updates both __dist/ramda.js__ and __dist/ramda.min.js__
 
 #### Partial Builds
 
 It is possible to build Ramda with a subset of the functionality to reduce its file size. Ramda's build system supports this with command line flags. For example if you're using `R.compose`, `R.reduce`, and `R.filter` you can create a partial build with:
 
-    ./scripts/build -- src/compose.js src/reduce.js src/filter.js > dist/ramda.custom.js
+    npm run --silent partial-build compose reduce filter > dist/ramda.custom.js
 
-This requires having Node/io.js installed. 
+This requires having Node/io.js installed and ramda's dependencies installed (just use `npm install` before running partial build). 
 
 
 

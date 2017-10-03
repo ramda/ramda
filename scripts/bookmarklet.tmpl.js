@@ -7,8 +7,10 @@
     return showMsg('This page already using ramda');
   }
   /* eslint-disable space-before-blocks */
+  /* eslint-disable semi */
   {{{ramda}}}
   version = '{{{version}}}';
+  /* eslint-enable semi */
   /* eslint-enable space-before-blocks */
   showMsg('Ramda v' + version + ' loaded');
 
@@ -34,4 +36,4 @@
     window.setTimeout(b.removeChild.bind(b, toast), 2500);
   }
 
-})(window, document);
+}(window, document));
