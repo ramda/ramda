@@ -15,6 +15,7 @@ export { default as aperture } from './aperture';
 export { default as append } from './append';
 export { default as apply } from './apply';
 export { default as applySpec } from './applySpec';
+export { default as applyTo } from './applyTo';
 export { default as ascend } from './ascend';
 export { default as assoc } from './assoc';
 export { default as assocPath } from './assocPath';
