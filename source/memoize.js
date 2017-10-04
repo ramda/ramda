@@ -17,6 +17,7 @@ import toString from './toString';
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
  * @see R.memoizeWith
+ * @deprecated since v0.25.0
  * @example
  *
  *      let count = 0;
