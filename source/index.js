@@ -89,7 +89,6 @@ export { default as innerJoin } from './innerJoin';
 export { default as insert } from './insert';
 export { default as insertAll } from './insertAll';
 export { default as intersection } from './intersection';
-export { default as intersectionWith } from './intersectionWith';
 export { default as intersperse } from './intersperse';
 export { default as into } from './into';
 export { default as invert } from './invert';
