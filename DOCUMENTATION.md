@@ -80,6 +80,7 @@
 ## S
 - [sort](#sort) `List`
 - [sortBy](#sortby) `Relation`
+- [sortWith](#sortwith) `Relation`
 - [subtract](#subtract) `Math`
 
 **[⬆ вверх](#Документація)**
@@ -1221,7 +1222,48 @@ var people = [clara, bob, alice];
 sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20sortByFirstItem%20%3D%20R.sortBy%28R.prop%280%29%29%3B%0Avar%20sortByNameCaseInsensitive%20%3D%20R.sortBy%28R.compose%28R.toLower%2C%20R.prop%28%27name%27%29%29%29%3B%0Avar%20pairs%20%3D%20%5B%5B-1%2C%201%5D%2C%20%5B-2%2C%202%5D%2C%20%5B-3%2C%203%5D%5D%3B%0AsortByFirstItem%28pairs%29%3B%20%2F%2F%3D%3E%20%5B%5B-3%2C%203%5D%2C%20%5B-2%2C%202%5D%2C%20%5B-1%2C%201%5D%5D%0Avar%20alice%20%3D%20%7B%0A%20%20name%3A%20%27ALICE%27%2C%0A%20%20age%3A%20101%0A%7D%3B%0Avar%20bob%20%3D%20%7B%0A%20%20name%3A%20%27Bob%27%2C%0A%20%20age%3A%20-10%0A%7D%3B%0Avar%20clara%20%3D%20%7B%0A%20%20name%3A%20%27clara%27%2C%0A%20%20age%3A%20314.159%0A%7D%3B%0Avar%20people%20%3D%20%5Bclara%2C%20bob%2C%20alice%5D%3B%0AsortByNameCaseInsensitive%28people%29%3B%20%2F%2F%3D%3E%20%5Balice%2C%20bob%2C%20clara%5D)
-=======
+
+**[⬆ вверх](#Документація)**
+
+
+
+## sortWith
+### `[Relation]`
+
+`[a → a → Number] → [a] → [a]`
+
+#### Параметри:
+| functions | Список функцій порівняннь |
+:---|:---|
+| list | Список, який необхідно відсортувати |
+| повертає __Array__ | Новий список, відсортований згідно з функціями порівняння |
+
+_Додано у версії v0.23.0_
+
+Сортує список згідно зі списком функцій порівняннь.
+
+```javascript
+var alice = {
+  name: 'alice',
+  age: 40
+};
+var bob = {
+  name: 'bob',
+  age: 30
+};
+var clara = {
+  name: 'clara',
+  age: 40
+};
+var people = [clara, bob, alice];
+var ageNameSort = R.sortWith([
+  R.descend(R.prop('age')),
+  R.ascend(R.prop('name'))
+]);
+ageNameSort(people); //=> [alice, clara, bob]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20alice%20%3D%20%7B%0A%20%20name%3A%20%27alice%27%2C%0A%20%20age%3A%2040%0A%7D%3B%0Avar%20bob%20%3D%20%7B%0A%20%20name%3A%20%27bob%27%2C%0A%20%20age%3A%2030%0A%7D%3B%0Avar%20clara%20%3D%20%7B%0A%20%20name%3A%20%27clara%27%2C%0A%20%20age%3A%2040%0A%7D%3B%0Avar%20people%20%3D%20%5Bclara%2C%20bob%2C%20alice%5D%3B%0Avar%20ageNameSort%20%3D%20R.sortWith%28%5B%0A%20%20R.descend%28R.prop%28%27age%27%29%29%2C%0A%20%20R.ascend%28R.prop%28%27name%27%29%29%0A%5D%29%3B%0AageNameSort%28people%29%3B%20%2F%2F%3D%3E%20%5Balice%2C%20clara%2C%20bob%5D)
+
 **[⬆ вверх](#Документація)**
 
 
