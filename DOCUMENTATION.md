@@ -79,6 +79,7 @@
 
 ## S
 - [sort](#sort) `List`
+- [sortBy](#sortby) `Relation`
 - [subtract](#subtract) `Math`
 
 **[⬆ вверх](#Документація)**
@@ -1180,6 +1181,47 @@ R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20diff%20%3D%20function%28a%2C%20b%29%20%7B%20return%20a%20-%20b%3B%20%7D%3B%0AR.sort%28diff%2C%20%5B4%2C2%2C7%2C5%5D%29%3B%20%2F%2F%3D%3E%20%5B2%2C%204%2C%205%2C%207%5D)
 
+**[⬆ вверх](#Документація)**
+
+
+
+## sortBy
+### `[Relation]`
+
+`Ord b => (a → b) → [a] → [a]`
+
+#### Параметри:
+| fn |  |
+:---|:---|
+| list | Список, який необхідно відсортувати |
+| повертає __Array__ | Новий список, відсортований за ключами, згенерованими функцією `fn` |
+
+_Додано у версії v0.1.0_
+
+Сортує список згідно з наданою функції.
+
+```javascript
+var sortByFirstItem = R.sortBy(R.prop(0));
+var sortByNameCaseInsensitive = R.sortBy(R.compose(R.toLower, R.prop('name')));
+var pairs = [[-1, 1], [-2, 2], [-3, 3]];
+sortByFirstItem(pairs); //=> [[-3, 3], [-2, 2], [-1, 1]]
+var alice = {
+  name: 'ALICE',
+  age: 101
+};
+var bob = {
+  name: 'Bob',
+  age: -10
+};
+var clara = {
+  name: 'clara',
+  age: 314.159
+};
+var people = [clara, bob, alice];
+sortByNameCaseInsensitive(people); //=> [alice, bob, clara]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20sortByFirstItem%20%3D%20R.sortBy%28R.prop%280%29%29%3B%0Avar%20sortByNameCaseInsensitive%20%3D%20R.sortBy%28R.compose%28R.toLower%2C%20R.prop%28%27name%27%29%29%29%3B%0Avar%20pairs%20%3D%20%5B%5B-1%2C%201%5D%2C%20%5B-2%2C%202%5D%2C%20%5B-3%2C%203%5D%5D%3B%0AsortByFirstItem%28pairs%29%3B%20%2F%2F%3D%3E%20%5B%5B-3%2C%203%5D%2C%20%5B-2%2C%202%5D%2C%20%5B-1%2C%201%5D%5D%0Avar%20alice%20%3D%20%7B%0A%20%20name%3A%20%27ALICE%27%2C%0A%20%20age%3A%20101%0A%7D%3B%0Avar%20bob%20%3D%20%7B%0A%20%20name%3A%20%27Bob%27%2C%0A%20%20age%3A%20-10%0A%7D%3B%0Avar%20clara%20%3D%20%7B%0A%20%20name%3A%20%27clara%27%2C%0A%20%20age%3A%20314.159%0A%7D%3B%0Avar%20people%20%3D%20%5Bclara%2C%20bob%2C%20alice%5D%3B%0AsortByNameCaseInsensitive%28people%29%3B%20%2F%2F%3D%3E%20%5Balice%2C%20bob%2C%20clara%5D)
+=======
 **[⬆ вверх](#Документація)**
 
 
