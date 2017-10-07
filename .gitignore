@@ -10,3 +10,6 @@
 /dist/gh-pages/
 /tmp-test-bundle.js
 /coverage/
+/package-lock.json
+/yarn.lock
+/yarn-error.log

@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "semicolon": true,
+    "indent": [true, "spaces", 4],
+
+    // TODOs
+    "no-construct": false, // Required for R.is function testing
+    "no-any-union": false,
+    "no-unnecessary-generics": false
+  }
+}
