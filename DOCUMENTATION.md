@@ -987,6 +987,37 @@ R.none(isEven, [1, 3, 5, 7, 8, 11]); //=> false
 
 
 
+## pathEq
+### `[Relation]`
+
+`[Idx] → a → {a} → Boolean`
+`Idx = String | Int`
+
+#### Параметри:
+| path | Шлях за яким треба провести пошук. | 
+:---|:---|
+| val | Значення, з яким потрібно порівняти вкладену властивість. |
+| obj | Об'єкт, в якому треба перевірити вкладену властивість. |
+| повертає __*__ | Дані які знаходять за вказаний шляхом `path`. |
+
+_Додано у версії v0.7.0_
+
+Визначає чи об'єкт містить певне значення за вказаним шляхом в плані `R.equals`. Найчастіше використовується для фільтрації списку.
+
+```javascript
+var user1 = { address: { zipCode: 90210 } };
+var user2 = { address: { zipCode: 55555 } };
+var user3 = { name: 'Bob' };
+var users = [ user1, user2, user3 ];
+var isFamous = R.pathEq(['address', 'zipCode'], 90210);
+R.filter(isFamous, users); //=> [ user1 ]
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20user1%20%3D%20%7B%20address%3A%20%7B%20zipCode%3A%2090210%20%7D%20%7D%3B%0Avar%20user2%20%3D%20%7B%20address%3A%20%7B%20zipCode%3A%2055555%20%7D%20%7D%3B%0Avar%20user3%20%3D%20%7B%20name%3A%20%27Bob%27%20%7D%3B%0Avar%20users%20%3D%20%5B%20user1%2C%20user2%2C%20user3%20%5D%3B%0Avar%20isFamous%20%3D%20R.pathEq%28%5B%27address%27%2C%20%27zipCode%27%5D%2C%2090210%29%3B%0AR.filter%28isFamous%2C%20users%29%3B%20%2F%2F%3D%3E%20%5B%20user1%20%5D).
+
+**[⬆ вверх](#Документація)**
+
+
+
 ## pipe
 ### `[Function]`
 
