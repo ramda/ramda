@@ -4,7 +4,6 @@ set -e
 slash=/
 README="$(cat README.md)"
 README="${README//${PREVIOUS_VERSION}${slash}ramda.min.js/${VERSION}${slash}ramda.min.js}"
-README="${README//${PREVIOUS_VERSION%.*}${slash}ramda.min.js/${VERSION%.*}${slash}ramda.min.js}"
 README="${README//${PREVIOUS_VERSION}${slash}dist${slash}ramda.min.js/${VERSION}${slash}dist${slash}ramda.min.js}"
 README="${README//${PREVIOUS_VERSION%.*}${slash}dist${slash}ramda.min.js/${VERSION%.*}${slash}dist${slash}ramda.min.js}"
 echo "$README" >README.md
