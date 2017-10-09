@@ -7,6 +7,7 @@ import _curry2 from './internal/_curry2';
 *
 * @func
 * @memberOf R
+ * @since v0.25.0
 * @category Function
 * @sig a -> (a -> b) -> b
 * @param {*} x The value

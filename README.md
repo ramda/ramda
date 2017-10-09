@@ -106,7 +106,7 @@ or the minified version:
 or from a CDN, either cdnjs:
 
 ```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.24.1/ramda.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
 ```
 
 or one of the below links from [jsDelivr](http://jsdelivr.com):
@@ -213,5 +213,3 @@ Acknowledgements
 Thanks to [J. C. Phillipps](http://www.jcphillipps.com) for the Ramda logo.
 Ramda logo artwork &copy; 2014 J. C. Phillipps. Licensed Creative Commons 
 [CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
-
-
