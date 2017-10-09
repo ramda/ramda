@@ -1062,8 +1062,7 @@
     });
 
     /**
-     * Returns `true` if all elements of the list match the predicate, `false` if
-     * there are any that don't.
+     * Returns `false` if any element does not satisfy the predicate, `true` otherwise.
      *
      * Dispatches to the `all` method of the second argument, if present.
      *
@@ -1076,8 +1075,7 @@
      * @sig (a -> Boolean) -> [a] -> Boolean
      * @param {Function} fn The predicate function.
      * @param {Array} list The array to consider.
-     * @return {Boolean} `true` if the predicate is satisfied by every element, `false`
-     *         otherwise.
+     * @return {Boolean} `false` if any element does not satisfy the predicate, `true` otherwise.
      * @see R.any, R.none, R.transduce
      * @example
      *
