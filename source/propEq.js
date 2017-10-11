@@ -5,7 +5,7 @@ import equals from './equals';
 /**
  * Returns `true` if the specified object property is equal, in
  * [`R.equals`](#equals) terms, to the given value; `false` otherwise.
- * You can test multiple properties with [`R.where`](#where).
+ * You can test multiple properties with [`R.whereEq`](#whereEq).
  *
  * @func
  * @memberOf R
