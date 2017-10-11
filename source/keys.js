@@ -41,11 +41,11 @@ var contains = function contains(list, item) {
  *
  *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']
  */
-var _keys = typeof Object.keys === 'function' && !hasArgsEnumBug ?
-  function keys(obj) {
+var keys = typeof Object.keys === 'function' && !hasArgsEnumBug ?
+  _curry1(function keys(obj) {
     return Object(obj) !== obj ? [] : Object.keys(obj);
-  } :
-  function keys(obj) {
+  }) :
+  _curry1(function keys(obj) {
     if (Object(obj) !== obj) {
       return [];
     }
@@ -68,6 +68,5 @@ var _keys = typeof Object.keys === 'function' && !hasArgsEnumBug ?
       }
     }
     return ks;
-  };
-var keys = _curry1(_keys);
+  });
 export default keys;
