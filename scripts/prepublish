@@ -20,7 +20,10 @@ npm run clean
 npm run build
 
 # build reads version from package.json, which isn't updated until after this script is run by xyz
-sed -i 's#//  Ramda v'${PREVIOUS_VERSION}'#//  Ramda v'${VERSION}'#' -- dist/ramda.js
+distpath=dist/ramda.js
+DIST_RAMDA="$(cat $distpath)"
+DIST_RAMDA="${DIST_RAMDA//${slash}${slash}  Ramda v${PREVIOUS_VERSION}/${slash}${slash}  Ramda v${VERSION}}"
+echo "$DIST_RAMDA" >$distpath
 
 git add dist/ramda{,.min}.js
 
