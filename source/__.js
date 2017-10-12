@@ -15,6 +15,7 @@
  *   - `g(_, 2)(1, 3)`
  *   - `g(_, 2)(_, 3)(1)`
  *
+ * @name __
  * @constant
  * @memberOf R
  * @since v0.6.0
