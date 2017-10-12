@@ -112,8 +112,8 @@ or from a CDN, either cdnjs:
 or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/ramda@0.24.1/dist/ramda.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/ramda@0.24/dist/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@0.25.0/dist/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@0.25/dist/ramda.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/ramda@latest/dist/ramda.min.js"></script>
 ```
 
