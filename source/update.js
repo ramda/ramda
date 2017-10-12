@@ -20,7 +20,6 @@ import always from './always';
  * @example
  *
  *      R.update(1, '_', ['a', 'b', 'c']);      //=> ['a', '_', 'c']
- *      R.update(1)('_')(['a', 'b', 'c']);      //=> ['a', '_', 'c']
  *      R.update(-1, '_', ['a', 'b', 'c']);     //=> ['a', 'b', '_']
  * @symb R.update(-1, a, [b, c]) = [b, a]
  * @symb R.update(0, a, [b, c]) = [a, c]

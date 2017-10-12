@@ -23,7 +23,6 @@ import _curry3 from './internal/_curry3';
  * @example
  *
  *      R.adjust(R.toUpper, 1, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
- *      R.adjust(R.toUpper)(1)(['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
  *      R.adjust(R.toUpper, -1, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
  * @symb R.adjust(f, -1, [a, b]) = [a, f(b)]
  * @symb R.adjust(f, 0, [a, b]) = [f(a), b]
