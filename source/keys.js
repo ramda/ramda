@@ -12,7 +12,7 @@ var hasArgsEnumBug = (function() {
   return arguments.propertyIsEnumerable('length');
 }());
 
-var contains = function contains(list, item) {
+var containsFunc = function containsFunc(list, item) {
   var idx = 0;
   while (idx < list.length) {
     if (list[idx] === item) {
@@ -61,7 +61,7 @@ var keys = typeof Object.keys === 'function' && !hasArgsEnumBug ?
       nIdx = nonEnumerableProps.length - 1;
       while (nIdx >= 0) {
         prop = nonEnumerableProps[nIdx];
-        if (_has(prop, obj) && !contains(ks, prop)) {
+        if (_has(prop, obj) && !containsFunc(ks, prop)) {
           ks[ks.length] = prop;
         }
         nIdx -= 1;
