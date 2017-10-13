@@ -1,7 +1,7 @@
 import _has from './_has';
 
 // Based on https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
-export default function _objectAssign(target) {
+function _objectAssign(target) {
   if (target == null) {
     throw new TypeError('Cannot convert undefined or null to object');
   }
@@ -22,3 +22,5 @@ export default function _objectAssign(target) {
   }
   return output;
 }
+
+export default typeof Object.assign === 'function' ? Object.assign : _objectAssign;
