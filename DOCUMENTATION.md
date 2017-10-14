@@ -1243,6 +1243,37 @@ R.reduceRight(R.subtract, 0, [1, 2, 3, 4]) // => (1 - (2 - (3 - (4 - 0)))) = -2
 
 
 
+## set
+### `[Object]`
+
+`Lens s a → a → s → s`
+`Lens s a = Functor f => (a → f a) → s → f s`
+
+#### Параметри:
+| lens |
+:---|
+| v |
+| x |
+| повертає __*__ |
+
+_Додано у версії v0.16.0_
+
+Повертає результат "оновлення" структури даних після заміни її конкретної частини, визначеної лінзою, на нове надане значення.
+
+Дивіться також [prop](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#prop), [lensIndex](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#lensindex), [lensProp](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#lensprop).
+
+```javascript
+var xLens = R.lensProp('x');
+
+R.set(xLens, 4, {x: 1, y: 2});  //=> {x: 4, y: 2}
+R.set(xLens, 8, {x: 1, y: 2});  //=> {x: 8, y: 2}
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20xLens%20%3D%20R.lensProp%28%27x%27%29%3B%0A%0AR.set%28xLens%2C%204%2C%20%7Bx%3A%201%2C%20y%3A%202%7D%29%3B%20%20%2F%2F%3D%3E%20%7Bx%3A%204%2C%20y%3A%202%7D%0AR.set%28xLens%2C%208%2C%20%7Bx%3A%201%2C%20y%3A%202%7D%29%3B%20%20%2F%2F%3D%3E%20%7Bx%3A%208%2C%20y%3A%202%7D)
+
+**[⬆ вверх](#Документація)**
+
+
+
 ## sort
 ### `[List]`
 
