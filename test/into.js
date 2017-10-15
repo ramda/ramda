@@ -53,4 +53,11 @@ describe('into', function() {
     eq(sum.length, 1);
   });
 
+  it('handles R.slice', function() {
+    var numbers = [1, 2, 3, 4];
+    var transducer = R.compose(R.map(R.add(1)), R.slice(2,4));
+    R.into([], transducer, numbers);
+    var intoArray = R.into([]);
+    eq(intoArray(transducer, numbers), [3,4]);
+  });
 });
