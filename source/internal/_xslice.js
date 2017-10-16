@@ -6,7 +6,7 @@ import _xfBase from './_xfBase';
 function XSlice(a, b, xf) {
   this.xf = xf;
   this.a = a;
-  this.b = b-1; // since it b exclusively
+  this.b = b - 1; // since it b exclusively
   this.i = 0;
 }
 XSlice.prototype['@@transducer/init'] = _xfBase.init;

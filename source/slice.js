@@ -4,7 +4,7 @@ import _xslice from './internal/_xslice';
 
 /**
  * Returns the elements of the given list or string (or object with a `slice`
- * method) from `fromIndex` (inclusive) to `toIndex` (exclusive).
+ * method) from `fromIndex` (inclusive) to `toIndex` (exclusive). Acts as a transducer if a transformer is given in list position.
  *
  * Dispatches to the `slice` method of the third argument, if present.
  *
