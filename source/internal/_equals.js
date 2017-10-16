@@ -2,7 +2,7 @@ import _arrayFromIterator from './_arrayFromIterator';
 import _containsWith from './_containsWith';
 import _functionName from './_functionName';
 import _has from './_has';
-import identical from '../identical';
+import _objectIs from './_objectIs';
 import keys from '../keys';
 import type from '../type';
 
@@ -32,7 +32,7 @@ function _uniqContentEquals(aIterator, bIterator, stackA, stackB) {
 }
 
 export default function _equals(a, b, stackA, stackB) {
-  if (identical(a, b)) {
+  if (_objectIs(a, b)) {
     return true;
   }
 
@@ -68,12 +68,12 @@ export default function _equals(a, b, stackA, stackB) {
     case 'Boolean':
     case 'Number':
     case 'String':
-      if (!(typeof a === typeof b && identical(a.valueOf(), b.valueOf()))) {
+      if (!(typeof a === typeof b && _objectIs(a.valueOf(), b.valueOf()))) {
         return false;
       }
       break;
     case 'Date':
-      if (!identical(a.valueOf(), b.valueOf())) {
+      if (!_objectIs(a.valueOf(), b.valueOf())) {
         return false;
       }
       break;

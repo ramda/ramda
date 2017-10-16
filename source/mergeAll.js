@@ -1,4 +1,4 @@
-import _assign from './internal/_assign';
+import _objectAssign from './internal/_objectAssign';
 import _curry1 from './internal/_curry1';
 
 
@@ -20,6 +20,6 @@ import _curry1 from './internal/_curry1';
  * @symb R.mergeAll([{ x: 1 }, { y: 2 }, { z: 3 }]) = { x: 1, y: 2, z: 3 }
  */
 var mergeAll = _curry1(function mergeAll(list) {
-  return _assign.apply(null, [{}].concat(list));
+  return _objectAssign.apply(null, [{}].concat(list));
 });
 export default mergeAll;

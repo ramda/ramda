@@ -1,3 +1,4 @@
+import _objectIs from './internal/_objectIs';
 import _curry2 from './internal/_curry2';
 
 
@@ -5,6 +6,8 @@ import _curry2 from './internal/_curry2';
  * Returns true if its arguments are identical, false otherwise. Values are
  * identical if they reference the same memory. `NaN` is identical to `NaN`;
  * `0` and `-0` are not identical.
+ *
+ * Note this is merely a curried version of ES6 `Object.is`.
  *
  * @func
  * @memberOf R
@@ -24,14 +27,5 @@ import _curry2 from './internal/_curry2';
  *      R.identical(0, -0); //=> false
  *      R.identical(NaN, NaN); //=> true
  */
-var identical = _curry2(function identical(a, b) {
-  // SameValue algorithm
-  if (a === b) { // Steps 1-5, 7-10
-    // Steps 6.b-6.e: +0 != -0
-    return a !== 0 || 1 / a === 1 / b;
-  } else {
-    // Step 6.a: NaN == NaN
-    return a !== a && b !== b;
-  }
-});
+var identical = _curry2(_objectIs);
 export default identical;
