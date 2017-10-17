@@ -11,6 +11,8 @@ import any from './any';
  *
  * Dispatches to the `any` method of the second argument, if present.
  *
+ * Acts as a transducer if a transformer is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.12.0
