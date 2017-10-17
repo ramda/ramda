@@ -1,7 +1,10 @@
 /* global Map, Set, WeakMap, WeakSet */
 
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
+
 
 describe('equals', function() {
   var a = [];
@@ -279,28 +282,18 @@ describe('equals', function() {
     });
   }
 
-  it('dispatches to `equals` method recursively', function() {
-    function Left(x) { this.value = x; }
-    Left.prototype.equals = function(x) {
-      return x instanceof Left && R.equals(x.value, this.value);
-    };
+  it('dispatches to `fantasy-land/equals` method recursively', function() {
+    eq(R.equals(S.Left([42]), S.Left([42])), true);
+    eq(R.equals(S.Left([42]), S.Left([43])), false);
+    eq(R.equals(S.Left(42), {value: 42}), false);
+    eq(R.equals({value: 42}, S.Left(42)), false);
+    eq(R.equals(S.Left(42), S.Right(42)), false);
+    eq(R.equals(S.Right(42), S.Left(42)), false);
 
-    function Right(x) { this.value = x; }
-    Right.prototype.equals = function(x) {
-      return x instanceof Right && R.equals(x.value, this.value);
-    };
-
-    eq(R.equals(new Left([42]), new Left([42])), true);
-    eq(R.equals(new Left([42]), new Left([43])), false);
-    eq(R.equals(new Left(42), {value: 42}), false);
-    eq(R.equals({value: 42}, new Left(42)), false);
-    eq(R.equals(new Left(42), new Right(42)), false);
-    eq(R.equals(new Right(42), new Left(42)), false);
-
-    eq(R.equals([new Left(42)], [new Left(42)]), true);
-    eq(R.equals([new Left(42)], [new Right(42)]), false);
-    eq(R.equals([new Right(42)], [new Left(42)]), false);
-    eq(R.equals([new Right(42)], [new Right(42)]), true);
+    eq(R.equals([S.Left(42)], [S.Left(42)]), true);
+    eq(R.equals([S.Left(42)], [S.Right(42)]), false);
+    eq(R.equals([S.Right(42)], [S.Left(42)]), false);
+    eq(R.equals([S.Right(42)], [S.Right(42)]), true);
   });
 
   it('is commutative', function() {

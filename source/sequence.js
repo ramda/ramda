@@ -1,8 +1,6 @@
+import Z from 'sanctuary-type-classes';
+
 import _curry2 from './internal/_curry2';
-import ap from './ap';
-import map from './map';
-import prepend from './prepend';
-import reduceRight from './reduceRight';
 
 
 /**
@@ -16,24 +14,18 @@ import reduceRight from './reduceRight';
  * @memberOf R
  * @since v0.19.0
  * @category List
- * @sig (Applicative f, Traversable t) => (a -> f a) -> t (f a) -> f (t a)
+ * @sig (Applicative f, Traversable t) => TypeRep f -> t (f a) -> f (t a)
  * @param {Function} of
  * @param {*} traversable
  * @return {*}
  * @see R.traverse
  * @example
  *
- *      R.sequence(Maybe.of, [Just(1), Just(2), Just(3)]);   //=> Just([1, 2, 3])
- *      R.sequence(Maybe.of, [Just(1), Just(2), Nothing()]); //=> Nothing()
+ *      R.sequence(Maybe, [Just(1), Just(2), Just(3)]); //=> Just([1, 2, 3])
+ *      R.sequence(Maybe, [Just(1), Just(2), Nothing]); //=> Nothing
  *
- *      R.sequence(R.of, Just([1, 2, 3])); //=> [Just(1), Just(2), Just(3)]
- *      R.sequence(R.of, Nothing());       //=> [Nothing()]
+ *      R.sequence(Array, Just([1, 2, 3])); //=> [Just(1), Just(2), Just(3)]
+ *      R.sequence(Array, Nothing);         //=> [Nothing]
  */
-var sequence = _curry2(function sequence(of, traversable) {
-  return typeof traversable.sequence === 'function' ?
-    traversable.sequence(of) :
-    reduceRight(function(x, acc) { return ap(map(prepend, x), acc); },
-                of([]),
-                traversable);
-});
+var sequence = _curry2(Z.sequence);
 export default sequence;

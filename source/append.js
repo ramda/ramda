@@ -1,4 +1,5 @@
-import _concat from './internal/_concat';
+import Z from 'sanctuary-type-classes';
+
 import _curry2 from './internal/_curry2';
 
 
@@ -11,6 +12,7 @@ import _curry2 from './internal/_curry2';
  * @since v0.1.0
  * @category List
  * @sig a -> [a] -> [a]
+ * @sig (Applicative f, Semigroup (f a)) => a -> f a -> f a
  * @param {*} el The element to add to the end of the new list.
  * @param {Array} list The list of elements to add a new item to.
  *        list.
@@ -22,7 +24,5 @@ import _curry2 from './internal/_curry2';
  *      R.append('tests', []); //=> ['tests']
  *      R.append(['tests'], ['write', 'more']); //=> ['write', 'more', ['tests']]
  */
-var append = _curry2(function append(el, list) {
-  return _concat(list, [el]);
-});
+var append = _curry2(Z.append);
 export default append;

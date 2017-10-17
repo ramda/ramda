@@ -1,3 +1,5 @@
+import Z from 'sanctuary-type-classes';
+
 import _arrayFromIterator from './_arrayFromIterator';
 import _containsWith from './_containsWith';
 import _functionName from './_functionName';
@@ -47,13 +49,7 @@ export default function _equals(a, b, stackA, stackB) {
   }
 
   if (typeof a['fantasy-land/equals'] === 'function' || typeof b['fantasy-land/equals'] === 'function') {
-    return typeof a['fantasy-land/equals'] === 'function' && a['fantasy-land/equals'](b) &&
-      typeof b['fantasy-land/equals'] === 'function' && b['fantasy-land/equals'](a);
-  }
-
-  if (typeof a.equals === 'function' || typeof b.equals === 'function') {
-    return typeof a.equals === 'function' && a.equals(b) &&
-      typeof b.equals === 'function' && b.equals(a);
+    return Z.equals(a, b) && Z.equals(b, a);
   }
 
   switch (typeA) {

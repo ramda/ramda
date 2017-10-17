@@ -22,8 +22,8 @@ describe('keys', function() {
   it('works for primitives', function() {
     var result = R.map(function(val) {
       return R.keys(val);
-    }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-    eq(result, R.repeat([], 10));
+    }, [null, undefined, 55, '', true, false, NaN, Infinity, []]);
+    eq(result, R.repeat([], 9));
   });
 
   it("does not include the given object's prototype properties", function() {

@@ -1,3 +1,5 @@
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -33,23 +35,11 @@ describe('reject', function() {
     eq(R.reject(R.equals(0), {x: 1, y: 2, z: 3}), {x: 1, y: 2, z: 3});
   });
 
-  it('dispatches to `filter` method', function() {
-    function Nothing() {}
-    Nothing.value = new Nothing();
-    Nothing.prototype.filter = function() {
-      return this;
-    };
-
-    function Just(x) { this.value = x; }
-    Just.prototype.filter = function(pred) {
-      return pred(this.value) ? this : Nothing.value;
-    };
-
-    var m = new Just(42);
-    eq(R.filter(R.T, m), m);
-    eq(R.filter(R.F, m), Nothing.value);
-    eq(R.reject(R.T, m), Nothing.value);
-    eq(R.reject(R.F, m), m);
+  it('supports Fantasy Land types', function() {
+    eq(R.filter(R.T, S.Just(42)), S.Just(42));
+    eq(R.filter(R.F, S.Just(42)), S.Nothing);
+    eq(R.reject(R.T, S.Just(42)), S.Nothing);
+    eq(R.reject(R.F, S.Just(42)), S.Just(42));
   });
 
 });

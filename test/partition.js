@@ -26,9 +26,9 @@ describe('partition', function() {
 
   it('works with other filterables', function() {
     eq(R.partition(R.isEmpty, S.Just(3)),
-       [S.Nothing(), S.Just(3)]);
+       [S.Nothing, S.Just(3)]);
     eq(R.partition(R.complement(R.isEmpty), S.Just(3)),
-       [S.Just(3), S.Nothing()]);
+       [S.Just(3), S.Nothing]);
   });
 
 });

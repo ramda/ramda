@@ -1,3 +1,5 @@
+import Z from 'sanctuary-type-classes';
+
 import _curry1 from './internal/_curry1';
 import empty from './empty';
 import equals from './equals';
@@ -25,6 +27,6 @@ import equals from './equals';
  *      R.isEmpty({length: 0}); //=> false
  */
 var isEmpty = _curry1(function isEmpty(x) {
-  return x != null && equals(x, empty(x));
+  return Z.Monoid.test(x) && equals(x, empty(x));
 });
 export default isEmpty;

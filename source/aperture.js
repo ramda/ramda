@@ -25,5 +25,5 @@ import _xaperture from './internal/_xaperture';
  *      R.aperture(3, [1, 2, 3, 4, 5]); //=> [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
  *      R.aperture(7, [1, 2, 3, 4, 5]); //=> []
  */
-var aperture = _curry2(_dispatchable([], _xaperture, _aperture));
+var aperture = _curry2(_dispatchable(['aperture'], _xaperture, _aperture));
 export default aperture;

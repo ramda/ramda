@@ -1,6 +1,6 @@
+import Z from 'sanctuary-type-classes';
+
 import _curry3 from './internal/_curry3';
-import map from './map';
-import sequence from './sequence';
 
 
 /**
@@ -15,7 +15,7 @@ import sequence from './sequence';
  * @memberOf R
  * @since v0.19.0
  * @category List
- * @sig (Applicative f, Traversable t) => (a -> f a) -> (a -> f b) -> t a -> f (t b)
+ * @sig (Applicative f, Traversable t) => TypeRep f -> (a -> f b) -> t a -> f (t b)
  * @param {Function} of
  * @param {Function} f
  * @param {*} traversable
@@ -24,14 +24,10 @@ import sequence from './sequence';
  * @example
  *
  *      // Returns `Nothing` if the given divisor is `0`
- *      safeDiv = n => d => d === 0 ? Nothing() : Just(n / d)
+ *      safeDiv = n => d => d === 0 ? Nothing : Just(n / d)
  *
- *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Just([5, 2.5, 2])
- *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Nothing
+ *      R.traverse(Maybe, safeDiv(10), [2, 4, 5]); //=> Just([5, 2.5, 2])
+ *      R.traverse(Maybe, safeDiv(10), [2, 0, 5]); //=> Nothing
  */
-var traverse = _curry3(function traverse(of, f, traversable) {
-  return typeof traversable['fantasy-land/traverse'] === 'function' ?
-    traversable['fantasy-land/traverse'](f, of) :
-    sequence(of, map(f, traversable));
-});
+var traverse = _curry3(Z.traverse);
 export default traverse;

@@ -32,13 +32,11 @@ describe('both', function() {
   });
 
   it('accepts fantasy-land applicative functors', function() {
-    var Just = S.Just;
-    var Nothing = S.Nothing;
-    eq(R.both(Just(true), Just(true)), Just(true));
-    eq(R.both(Just(true), Just(false)), Just(false));
-    eq(R.both(Just(true), Nothing()), Nothing());
-    eq(R.both(Nothing(), Just(false)), Nothing());
-    eq(R.both(Nothing(), Nothing()), Nothing());
+    eq(R.both(S.Just(true), S.Just(true)), S.Just(true));
+    eq(R.both(S.Just(true), S.Just(false)), S.Just(false));
+    eq(R.both(S.Just(true), S.Nothing), S.Nothing);
+    eq(R.both(S.Nothing, S.Just(false)), S.Nothing);
+    eq(R.both(S.Nothing, S.Nothing), S.Nothing);
   });
 
 });

@@ -1,7 +1,7 @@
+var S = require('sanctuary');
 
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
 
 
 var addN = function() {
@@ -34,7 +34,7 @@ describe('liftN', function() {
 
   it('works with other functors such as "Maybe"', function() {
     var addM = R.liftN(2, R.add);
-    eq(addM(Maybe.Just(3), Maybe.Just(5)), Maybe.Just(8));
+    eq(addM(S.Just(3), S.Just(5)), S.Just(8));
   });
 
   it('interprets [a] as a functor', function() {

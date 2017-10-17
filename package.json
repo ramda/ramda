@@ -61,7 +61,9 @@
     "browser_test": "testem ci",
     "postbrowser_test": "npm run posttest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "sanctuary-type-classes": "7.0.x"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-annotate-pure-calls": "^0.2.0",
@@ -82,7 +84,7 @@
     "rimraf": "~2.3.2",
     "rollup": "^0.50.0",
     "rollup-plugin-uglify": "^2.0.1",
-    "sanctuary": "0.7.x",
+    "sanctuary": "0.13.x",
     "sinon": "^1.17.4",
     "testem": "0.9.x",
     "xyz": "1.0.x"

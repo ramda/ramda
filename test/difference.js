@@ -1,3 +1,5 @@
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -18,15 +20,10 @@ describe('difference', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.difference([0], [-0]).length, 1);
     eq(R.difference([-0], [0]).length, 1);
     eq(R.difference([NaN], [NaN]).length, 0);
-    eq(R.difference([new Just([42])], [new Just([42])]).length, 0);
+    eq(R.difference([S.Just([42])], [S.Just([42])]).length, 0);
   });
 
   it('works for arrays of different lengths', function() {

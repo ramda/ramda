@@ -1,3 +1,5 @@
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -46,15 +48,10 @@ describe('indexOf', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.indexOf(0, [-0]), -1);
     eq(R.indexOf(-0, [0]), -1);
     eq(R.indexOf(NaN, [NaN]), 0);
-    eq(R.indexOf(new Just([42]), [new Just([42])]), 0);
+    eq(R.indexOf(S.Just([42]), [S.Just([42])]), 0);
   });
 
   it('dispatches to `indexOf` method', function() {

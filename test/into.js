@@ -28,12 +28,6 @@ describe('into', function() {
     eq(R.into({}, R.identity, [{a: 1}, {b: 2, c: 3}]), {a: 1, b: 2, c: 3});
   });
 
-  it('dispatches to objects that implement `reduce`', function() {
-    var obj = {x: [1, 2, 3], reduce: function() { return 'override'; }};
-    eq(R.into([], R.map(add(1)), obj), 'override');
-    eq(R.into([], R.filter(isOdd), obj), 'override');
-  });
-
   it('allows custom transformer', function() {
     var intoSum = R.into(addXf);
     var add2 = R.map(add(2));

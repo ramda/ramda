@@ -1,3 +1,5 @@
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -13,15 +15,10 @@ describe('propEq', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.propEq('value', 0, {value: -0}), false);
     eq(R.propEq('value', -0, {value: 0}), false);
     eq(R.propEq('value', NaN, {value: NaN}), true);
-    eq(R.propEq('value', new Just([42]), {value: new Just([42])}), true);
+    eq(R.propEq('value', S.Just([42]), {value: S.Just([42])}), true);
   });
 
 });

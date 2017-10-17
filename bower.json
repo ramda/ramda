@@ -17,6 +17,9 @@
     "functional"
   ],
   "license": "MIT",
+  "dependencies": {
+    "sanctuary-type-classes": "7.0.x"
+  },
   "ignore": [
     "**/.*",
     "node_modules",

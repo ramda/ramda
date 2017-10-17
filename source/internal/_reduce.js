@@ -1,6 +1,7 @@
+import Z from 'sanctuary-type-classes';
+
 import _isArrayLike from './_isArrayLike';
 import _xwrap from './_xwrap';
-import bind from '../bind';
 
 
 function _arrayReduce(xf, acc, list) {
@@ -30,21 +31,12 @@ function _iterableReduce(xf, acc, iter) {
   return xf['@@transducer/result'](acc);
 }
 
-function _methodReduce(xf, acc, obj, methodName) {
-  return xf['@@transducer/result'](obj[methodName](bind(xf['@@transducer/step'], xf), acc));
-}
-
 var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
 
-export default function _reduce(fn, acc, list) {
-  if (typeof fn === 'function') {
-    fn = _xwrap(fn);
-  }
+export default function _reduce(_fn, acc, list) {
+  var fn = typeof _fn === 'function' ? _xwrap(_fn) : _fn;
   if (_isArrayLike(list)) {
     return _arrayReduce(fn, acc, list);
-  }
-  if (typeof list['fantasy-land/reduce'] === 'function') {
-    return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
   if (list[symIterator] != null) {
     return _iterableReduce(fn, acc, list[symIterator]());
@@ -52,9 +44,16 @@ export default function _reduce(fn, acc, list) {
   if (typeof list.next === 'function') {
     return _iterableReduce(fn, acc, list);
   }
-  if (typeof list.reduce === 'function') {
-    return _methodReduce(fn, acc, list, 'reduce');
+  if (typeof list['fantasy-land/reduce'] === 'function') {
+    return Z.reduce(fn, acc, list);
   }
-
-  throw new TypeError('reduce: list must be array or iterable');
+  if (typeof list.reduceLeft === 'function') {
+    return list.reduceLeft(fn, acc);
+  }
+  if (typeof list.foldLeft === 'function') {
+    return list.foldLeft(fn, acc);
+  }
+  if (typeof list.foldl === 'function') {
+    return list.foldl(fn, acc);
+  }
 }

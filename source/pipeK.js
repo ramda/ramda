@@ -26,13 +26,13 @@ import reverse from './reverse';
  *        get('user'),
  *        get('address'),
  *        get('state'),
- *        R.compose(Maybe.of, R.toUpper)
+ *        R.compose(Maybe.Just, R.toUpper)
  *      );
  *
  *      getStateCode('{"user":{"address":{"state":"ny"}}}');
  *      //=> Just('NY')
  *      getStateCode('[Invalid JSON]');
- *      //=> Nothing()
+ *      //=> Nothing
  * @symb R.pipeK(f, g, h)(a) = R.chain(h, R.chain(g, f(a)))
  */
 export default function pipeK() {

@@ -26,7 +26,7 @@ export default function _dispatchable(methodNames, xf, fn) {
     if (!_isArray(obj)) {
       var idx = 0;
       while (idx < methodNames.length) {
-        if (typeof obj[methodNames[idx]] === 'function') {
+        if (obj != null && typeof obj[methodNames[idx]] === 'function') {
           return obj[methodNames[idx]].apply(obj, args);
         }
         idx += 1;

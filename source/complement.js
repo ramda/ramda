@@ -12,7 +12,7 @@ import not from './not';
  * @memberOf R
  * @since v0.12.0
  * @category Logic
- * @sig (*... -> *) -> (*... -> Boolean)
+ * @sig (a -> Boolean) -> (a -> Boolean)
  * @param {Function} f
  * @return {Function}
  * @see R.not

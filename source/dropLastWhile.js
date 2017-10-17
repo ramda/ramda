@@ -1,7 +1,7 @@
 import _curry2 from './internal/_curry2';
 import _dispatchable from './internal/_dispatchable';
-import _dropLastWhile from './internal/_dropLastWhile';
 import _xdropLastWhile from './internal/_xdropLastWhile';
+import slice from './slice';
 
 
 /**
@@ -31,5 +31,11 @@ import _xdropLastWhile from './internal/_xdropLastWhile';
  *
  *      R.dropLastWhile(x => x !== 'd' , 'Ramda'); //=> 'Ramd'
  */
-var dropLastWhile = _curry2(_dispatchable([], _xdropLastWhile, _dropLastWhile));
+var dropLastWhile = _curry2(_dispatchable(['dropLastWhile'], _xdropLastWhile, function dropLastWhile(pred, xs) {
+  var idx = xs.length - 1;
+  while (idx >= 0 && pred(xs[idx])) {
+    idx -= 1;
+  }
+  return slice(0, idx + 1, xs);
+}));
 export default dropLastWhile;

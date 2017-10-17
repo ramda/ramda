@@ -1,4 +1,5 @@
-import _map from './internal/_map';
+import Z from 'sanctuary-type-classes';
+
 import identity from './identity';
 import pickAll from './pickAll';
 import useWith from './useWith';
@@ -23,5 +24,5 @@ import useWith from './useWith';
  *      var kids = [abby, fred];
  *      R.project(['name', 'grade'], kids); //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
  */
-var project = useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity
+var project = useWith(Z.map, [pickAll, identity]); // passing `identity` gives correct arity
 export default project;

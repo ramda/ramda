@@ -1,4 +1,3 @@
-import _concat from './internal/_concat';
 import _curry3 from './internal/_curry3';
 
 
@@ -33,7 +32,7 @@ var adjust = _curry3(function adjust(fn, idx, list) {
   }
   var start = idx < 0 ? list.length : 0;
   var _idx = start + idx;
-  var _list = _concat(list);
+  var _list = Array.prototype.slice.call(list);
   _list[_idx] = fn(list[_idx]);
   return _list;
 });

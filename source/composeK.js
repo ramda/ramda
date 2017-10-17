@@ -24,13 +24,13 @@ import map from './map';
  *
  *       //  getStateCode :: Maybe String -> Maybe String
  *       var getStateCode = R.composeK(
- *         R.compose(Maybe.of, R.toUpper),
+ *         R.compose(Maybe.Just, R.toUpper),
  *         get('state'),
  *         get('address'),
  *         get('user'),
  *       );
  *       getStateCode({"user":{"address":{"state":"ny"}}}); //=> Maybe.Just("NY")
- *       getStateCode({}); //=> Maybe.Nothing()
+ *       getStateCode({}); //=> Maybe.Nothing
  * @symb R.composeK(f, g, h)(a) = R.chain(f, R.chain(g, h(a)))
  */
 export default function composeK() {

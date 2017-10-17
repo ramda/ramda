@@ -1,4 +1,5 @@
-import _concat from './internal/_concat';
+import Z from 'sanctuary-type-classes';
+
 import _curry3 from './internal/_curry3';
 import uniqWith from './uniqWith';
 
@@ -26,6 +27,6 @@ import uniqWith from './uniqWith';
  *      R.unionWith(R.eqBy(R.prop('a')), l1, l2); //=> [{a: 1}, {a: 2}, {a: 4}]
  */
 var unionWith = _curry3(function unionWith(pred, list1, list2) {
-  return uniqWith(pred, _concat(list1, list2));
+  return uniqWith(pred, Z.concat(list1, list2));
 });
 export default unionWith;

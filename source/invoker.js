@@ -1,7 +1,8 @@
+import Z from 'sanctuary-type-classes';
+
 import _curry2 from './internal/_curry2';
 import _isFunction from './internal/_isFunction';
 import curryN from './curryN';
-import toString from './toString';
 
 
 /**
@@ -37,7 +38,7 @@ var invoker = _curry2(function invoker(arity, method) {
     if (target != null && _isFunction(target[method])) {
       return target[method].apply(target, Array.prototype.slice.call(arguments, 0, arity));
     }
-    throw new TypeError(toString(target) + ' does not have a method named "' + method + '"');
+    throw new TypeError(Z.toString(target) + ' does not have a method named "' + method + '"');
   });
 });
 export default invoker;

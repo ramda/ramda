@@ -1,5 +1,5 @@
 import _curry1 from './internal/_curry1';
-import _makeFlat from './internal/_makeFlat';
+import _isArrayLike from './internal/_isArrayLike';
 
 
 /**
@@ -19,5 +19,19 @@ import _makeFlat from './internal/_makeFlat';
  *      R.flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
  *      //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
  */
-var flatten = _curry1(_makeFlat(true));
+var flatten = _curry1(function flatten(list) {
+  var result = [];
+  for (var idx = 0; idx < list.length; idx += 1) {
+    var x = list[idx];
+    if (_isArrayLike(x)) {
+      var xs = flatten(x);
+      for (var idx2 = 0; idx2 < xs.length; idx2 += 1) {
+        result.push(xs[idx2]);
+      }
+    } else {
+      result.push(x);
+    }
+  }
+  return result;
+});
 export default flatten;

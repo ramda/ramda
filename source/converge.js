@@ -1,5 +1,6 @@
+import Z from 'sanctuary-type-classes';
+
 import _curry2 from './internal/_curry2';
-import _map from './internal/_map';
 import curryN from './curryN';
 import max from './max';
 import pluck from './pluck';
@@ -37,7 +38,7 @@ var converge = _curry2(function converge(after, fns) {
   return curryN(reduce(max, 0, pluck('length', fns)), function() {
     var args = arguments;
     var context = this;
-    return after.apply(context, _map(function(fn) {
+    return after.apply(context, Z.map(function(fn) {
       return fn.apply(context, args);
     }, fns));
   });

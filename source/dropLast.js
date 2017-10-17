@@ -1,7 +1,7 @@
 import _curry2 from './internal/_curry2';
 import _dispatchable from './internal/_dispatchable';
-import _dropLast from './internal/_dropLast';
 import _xdropLast from './internal/_xdropLast';
+import take from './take';
 
 
 /**
@@ -27,5 +27,7 @@ import _xdropLast from './internal/_xdropLast';
  *      R.dropLast(4, ['foo', 'bar', 'baz']); //=> []
  *      R.dropLast(3, 'ramda');               //=> 'ra'
  */
-var dropLast = _curry2(_dispatchable([], _xdropLast, _dropLast));
+var dropLast = _curry2(_dispatchable(['dropLast'], _xdropLast, function dropLast(n, xs) {
+  return take(n < xs.length ? xs.length - n : 0, xs);
+}));
 export default dropLast;

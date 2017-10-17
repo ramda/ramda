@@ -27,11 +27,6 @@ describe('isEmpty', function() {
     eq(R.isEmpty({x: 0}), false);
   });
 
-  it('returns true for empty arguments object', function() {
-    eq(R.isEmpty((function() { return arguments; })()), true);
-    eq(R.isEmpty((function() { return arguments; })(0)), false);
-  });
-
   it('returns false for every other value', function() {
     eq(R.isEmpty(0), false);
     eq(R.isEmpty(NaN), false);

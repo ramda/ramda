@@ -1,7 +1,7 @@
+var S = require('sanctuary');
 
 var R = require('..');
 var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
 
 
 var add3 = R.curry(function add3(a, b, c) {
@@ -38,7 +38,7 @@ describe('lift', function() {
 
   it('works with other functors such as "Maybe"', function() {
     var addM = R.lift(R.add);
-    eq(addM(Maybe.Just(3), Maybe.Just(5)), Maybe.Just(8));
+    eq(addM(S.Just(3), S.Just(5)), S.Just(8));
   });
 
 });

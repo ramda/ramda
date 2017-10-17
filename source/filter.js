@@ -1,8 +1,8 @@
+import Z from 'sanctuary-type-classes';
+
 import _curry2 from './internal/_curry2';
 import _dispatchable from './internal/_dispatchable';
-import _filter from './internal/_filter';
-import _isObject from './internal/_isObject';
-import _reduce from './internal/_reduce';
+import _isPlainObject from './internal/_isPlainObject';
 import _xfilter from './internal/_xfilter';
 import keys from './keys';
 
@@ -21,7 +21,10 @@ import keys from './keys';
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @sig Filterable f => (a -> Boolean) -> f a -> f a
+ * @sig (a -> Boolean) -> [a] -> [a]
+ * @sig (a -> Boolean) -> StrMap a -> StrMap a
+ * @sig (Applicative f, Foldable f, Monoid (f a)) => (a -> Boolean) -> f a -> f a
+ * @sig (Alternative m, Monad m) => (a -> Boolean) -> m a -> m a
  * @param {Function} pred
  * @param {Array} filterable
  * @return {Array} Filterable
@@ -36,15 +39,17 @@ import keys from './keys';
  */
 var filter = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filterable) {
   return (
-    _isObject(filterable) ?
-      _reduce(function(acc, key) {
+    _isPlainObject(filterable) ?
+      Z.reduce(function(acc, key) {
         if (pred(filterable[key])) {
           acc[key] = filterable[key];
         }
         return acc;
       }, {}, keys(filterable)) :
+    Z.Alternative.test(filterable) && Z.Monad.test(filterable) ?
+      Z.filterM(pred, filterable) :
     // else
-      _filter(pred, filterable)
+      Z.filter(pred, filterable)
   );
 }));
 export default filter;

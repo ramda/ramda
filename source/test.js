@@ -1,7 +1,8 @@
+import Z from 'sanctuary-type-classes';
+
 import _cloneRegExp from './internal/_cloneRegExp';
 import _curry2 from './internal/_curry2';
 import _isRegExp from './internal/_isRegExp';
-import toString from './toString';
 
 
 /**
@@ -23,7 +24,7 @@ import toString from './toString';
  */
 var test = _curry2(function test(pattern, str) {
   if (!_isRegExp(pattern)) {
-    throw new TypeError('‘test’ requires a value of type RegExp as its first argument; received ' + toString(pattern));
+    throw new TypeError('‘test’ requires a value of type RegExp as its first argument; received ' + Z.toString(pattern));
   }
   return _cloneRegExp(pattern).test(str);
 });

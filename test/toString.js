@@ -1,5 +1,7 @@
 var assert = require('assert');
 
+var S = require('sanctuary');
+
 var R = require('..');
 
 
@@ -42,8 +44,8 @@ describe('toString', function() {
     assert.strictEqual(R.toString('\n \n'), '"\\n \\n"');
     assert.strictEqual(R.toString('\r \r'), '"\\r \\r"');
     assert.strictEqual(R.toString('\t \t'), '"\\t \\t"');
-    assert.strictEqual(R.toString('\v \v'), '"\\v \\v"');
-    assert.strictEqual(R.toString('\0 \0'), '"\\0 \\0"');
+    assert.strictEqual(R.toString('\v \v'), '"\\u000b \\u000b"');
+    assert.strictEqual(R.toString('\0 \0'), '"\\u0000 \\u0000"');
     assert.strictEqual(R.toString('\\ \\'), '"\\\\ \\\\"');
   });
 
@@ -67,8 +69,8 @@ describe('toString', function() {
     assert.strictEqual(R.toString(new String('\n \n')), 'new String("\\n \\n")');
     assert.strictEqual(R.toString(new String('\r \r')), 'new String("\\r \\r")');
     assert.strictEqual(R.toString(new String('\t \t')), 'new String("\\t \\t")');
-    assert.strictEqual(R.toString(new String('\v \v')), 'new String("\\v \\v")');
-    assert.strictEqual(R.toString(new String('\0 \0')), 'new String("\\0 \\0")');
+    assert.strictEqual(R.toString(new String('\v \v')), 'new String("\\u000b \\u000b")');
+    assert.strictEqual(R.toString(new String('\0 \0')), 'new String("\\u0000 \\u0000")');
     assert.strictEqual(R.toString(new String('\\ \\')), 'new String("\\\\ \\\\")');
   });
 
@@ -104,9 +106,9 @@ describe('toString', function() {
   });
 
   it('returns the string representation of an arguments object', function() {
-    assert.strictEqual(R.toString((function() { return arguments; })()), '(function() { return arguments; }())');
-    assert.strictEqual(R.toString((function() { return arguments; })(1, 2, 3)), '(function() { return arguments; }(1, 2, 3))');
-    assert.strictEqual(R.toString((function() { return arguments; })(['x', 'y'])), '(function() { return arguments; }(["x", "y"]))');
+    assert.strictEqual(R.toString((function() { return arguments; })()), '(function () { return arguments; }())');
+    assert.strictEqual(R.toString((function() { return arguments; })(1, 2, 3)), '(function () { return arguments; }(1, 2, 3))');
+    assert.strictEqual(R.toString((function() { return arguments; })(['x', 'y'])), '(function () { return arguments; }(["x", "y"]))');
   });
 
   it('returns the string representation of a plain object', function() {
@@ -134,18 +136,9 @@ describe('toString', function() {
     };
     assert.strictEqual(R.toString(new Point(1, 2)), 'new Point(1, 2)');
 
-    function Just(x) {
-      if (!(this instanceof Just)) {
-        return new Just(x);
-      }
-      this.value = x;
-    }
-    Just.prototype.toString = function() {
-      return 'Just(' + R.toString(this.value) + ')';
-    };
-    assert.strictEqual(R.toString(Just(42)), 'Just(42)');
-    assert.strictEqual(R.toString(Just([1, 2, 3])), 'Just([1, 2, 3])');
-    assert.strictEqual(R.toString(Just(Just(Just('')))), 'Just(Just(Just("")))');
+    assert.strictEqual(R.toString(S.Just(42)), 'Just(42)');
+    assert.strictEqual(R.toString(S.Just([1, 2, 3])), 'Just([1, 2, 3])');
+    assert.strictEqual(R.toString(S.Just(S.Just(S.Just('')))), 'Just(Just(Just("")))');
 
     assert.strictEqual(R.toString({toString: R.always('x')}), 'x');
   });

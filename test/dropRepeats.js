@@ -1,3 +1,5 @@
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -20,15 +22,10 @@ describe('dropRepeats', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.dropRepeats([0, -0]).length, 2);
     eq(R.dropRepeats([-0, 0]).length, 2);
     eq(R.dropRepeats([NaN, NaN]).length, 1);
-    eq(R.dropRepeats([new Just([42]), new Just([42])]).length, 1);
+    eq(R.dropRepeats([S.Just([42]), S.Just([42])]).length, 1);
   });
 
 });

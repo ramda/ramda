@@ -9,7 +9,7 @@ var Identity = function(x) {
   this.value = x;
 };
 
-Identity.prototype.chain = function(f) {
+Identity.prototype['fantasy-land/chain'] = function(f) {
   return f(this.value);
 };
 

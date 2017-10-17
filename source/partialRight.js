@@ -1,6 +1,7 @@
-import _concat from './internal/_concat';
-import _createPartialApplicator from './internal/_createPartialApplicator';
-import flip from './flip';
+import Z from 'sanctuary-type-classes';
+
+import _arity from './internal/_arity';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -27,5 +28,9 @@ import flip from './flip';
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)
  */
-var partialRight = _createPartialApplicator(flip(_concat));
+var partialRight = _curry2(function partialRight(f, args) {
+  return _arity(Math.max(0, f.length - args.length), function() {
+    return f.apply(this, Z.concat(Array.prototype.slice.call(arguments), args));
+  });
+});
 export default partialRight;

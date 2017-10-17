@@ -1,5 +1,7 @@
-import _concat from './internal/_concat';
-import _createPartialApplicator from './internal/_createPartialApplicator';
+import Z from 'sanctuary-type-classes';
+
+import _arity from './internal/_arity';
+import _curry2 from './internal/_curry2';
 
 
 /**
@@ -30,5 +32,9 @@ import _createPartialApplicator from './internal/_createPartialApplicator';
  *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partial(f, [a, b])(c, d) = f(a, b, c, d)
  */
-var partial = _createPartialApplicator(_concat);
+var partial = _curry2(function partial(f, args) {
+  return _arity(Math.max(0, f.length - args.length), function() {
+    return f.apply(this, Z.concat(args, Array.prototype.slice.call(arguments)));
+  });
+});
 export default partial;

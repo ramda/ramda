@@ -1,3 +1,5 @@
+var S = require('sanctuary');
+
 var R = require('..');
 var eq = require('./shared/eq');
 
@@ -16,15 +18,10 @@ describe('contains', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.contains(0, [-0]), false);
     eq(R.contains(-0, [0]), false);
     eq(R.contains(NaN, [NaN]), true);
-    eq(R.contains(new Just([42]), [new Just([42])]), true);
+    eq(R.contains(S.Just([42]), [S.Just([42])]), true);
   });
 
 });

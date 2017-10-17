@@ -1,5 +1,6 @@
+import Z from 'sanctuary-type-classes';
+
 import _curry2 from './_curry2';
-import _reduce from './_reduce';
 import _xfBase from './_xfBase';
 
 
@@ -18,7 +19,7 @@ XDropLastWhile.prototype['@@transducer/step'] = function(result, input) {
                        : this.flush(result, input);
 };
 XDropLastWhile.prototype.flush = function(result, input) {
-  result = _reduce(
+  result = Z.reduce(
     this.xf['@@transducer/step'],
     result,
     this.retained

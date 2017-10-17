@@ -1,5 +1,6 @@
+import Z from 'sanctuary-type-classes';
+
 import memoizeWith from './memoizeWith';
-import toString from './toString';
 
 
 /**
@@ -31,6 +32,6 @@ import toString from './toString';
  *      count; //=> 1
  */
 var memoize = memoizeWith(function() {
-  return toString(arguments);
+  return Z.toString(arguments);
 });
 export default memoize;

@@ -25,7 +25,7 @@ import _xfindLastIndex from './internal/_xfindLastIndex';
  *      R.findLastIndex(R.propEq('a', 1))(xs); //=> 1
  *      R.findLastIndex(R.propEq('a', 4))(xs); //=> -1
  */
-var findLastIndex = _curry2(_dispatchable([], _xfindLastIndex, function findLastIndex(fn, list) {
+var findLastIndex = _curry2(_dispatchable(['findLastIndex'], _xfindLastIndex, function findLastIndex(fn, list) {
   var idx = list.length - 1;
   while (idx >= 0) {
     if (fn(list[idx])) {
