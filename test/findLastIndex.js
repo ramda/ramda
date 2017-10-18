@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var listXf = require('./helpers/listXf');
 
 
 describe('findLastIndex', function() {
@@ -45,6 +46,25 @@ describe('findLastIndex', function() {
   it('is curried', function() {
     eq(typeof R.findLastIndex(even), 'function');
     eq(R.findLastIndex(even)(a), 15);
+  });
+
+  it('can act as a transducer', function() {
+    var numbers = [0,5,0,5];
+    var idx = 3;
+    var val = 5;
+
+    var xf = R.compose(R.identity, R.findLastIndex(R.equals(val)));
+
+    eq(R.into([], xf, numbers), [idx]);
+  });
+
+  it('dispatches to transformer objects', function() {
+    eq(R.findLastIndex(R.identity, listXf), {
+      f: R.identity,
+      idx: -1,
+      lastIdx: -1,
+      xf: listXf
+    });
   });
 
 });
