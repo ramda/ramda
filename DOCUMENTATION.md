@@ -65,6 +65,8 @@
 
 ## P
 - [partial](#) ``
+- [path](#path) `Object`
+- [pathEq](#patheq) `Relation`
 - [pipe](#pipe) `Function`
 - [prepend](#prepend) `List`
 
@@ -78,6 +80,7 @@
 **[⬆ вверх](#Документація)**
 
 ## S
+- [set](#set) `Object`
 - [sort](#sort) `List`
 - [sortBy](#sortby) `Relation`
 - [sortWith](#sortwith) `Relation`
