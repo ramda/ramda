@@ -1,6 +1,7 @@
 var listXf = require('./helpers/listXf');
 
 var R = require('..');
+var assert = require('assert');
 var eq = require('./shared/eq');
 var Id = require('./shared/Id');
 
@@ -40,6 +41,11 @@ describe('map', function() {
       f: add1,
       xf: listXf
     });
+  });
+
+  it('throws a TypeError on null and undefined', function() {
+    assert.throws(function() { return R.map(times2, null); }, TypeError);
+    assert.throws(function() { return R.map(times2, undefined); }, TypeError);
   });
 
   it('composes', function() {

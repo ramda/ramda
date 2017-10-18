@@ -11,6 +11,8 @@ describe('tap', function() {
     var f = R.tap(R.identity);
     eq(typeof f, 'function');
     eq(f(100), 100);
+    eq(f(undefined), undefined);
+    eq(f(null), null);
   });
 
   it("may take a function as the first argument that executes with tap's argument", function() {
