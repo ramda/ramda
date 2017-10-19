@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var listXf = require('./helpers/listXf');
 
 
 describe('findLast', function() {
@@ -42,4 +43,10 @@ describe('findLast', function() {
     eq(R.findLast(even, []), undefined);
   });
 
+  it('dispatches to transformer objects', function() {
+    eq(R.findLast(R.identity, listXf), {
+      f: R.identity,
+      xf: listXf
+    });
+  });
 });

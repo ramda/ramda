@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var listXf = require('./helpers/listXf');
 
 
 describe('findLastIndex', function() {
@@ -42,4 +43,12 @@ describe('findLastIndex', function() {
     eq(R.findLastIndex(even, []), -1);
   });
 
+  it('dispatches to transformer objects', function() {
+    eq(R.findLastIndex(R.identity, listXf), {
+      f: R.identity,
+      idx: -1,
+      lastIdx: -1,
+      xf: listXf
+    });
+  });
 });

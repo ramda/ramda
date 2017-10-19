@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var listXf = require('./helpers/listXf');
 
 
 describe('findIndex', function() {
@@ -35,4 +36,12 @@ describe('findIndex', function() {
     eq(intoArray(R.findIndex(even), ['zing']), [-1]);
   });
 
+  it('dispatches to transformer objects', function() {
+    eq(R.findIndex(R.identity, listXf), {
+      f: R.identity,
+      found: false,
+      idx: -1,
+      xf: listXf
+    });
+  });
 });
