@@ -11,10 +11,4 @@ describe('repeat', function() {
     eq(R.repeat(null, 3), [null, null, null]);
   });
 
-  it('is curried', function() {
-    var makeFoos = R.repeat('foo');
-    eq(makeFoos(0), []);
-    eq(makeFoos(3), ['foo', 'foo', 'foo']);
-  });
-
 });

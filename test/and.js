@@ -10,10 +10,4 @@ describe('and', function() {
     eq(R.and(false, false), false);
   });
 
-  it('is curried', function() {
-    var halfTruth = R.and(true);
-    eq(halfTruth(false), false);
-    eq(halfTruth(true), true);
-  });
-
 });

@@ -24,12 +24,6 @@ describe('dropLastWhile', function() {
     eq(R.dropLastWhile(function(x) { return x !== 'd'; }, 'Ramda'), 'Ramd');
   });
 
-  it('is curried', function() {
-    var dropGt7 = R.dropLastWhile(function(x) {return x > 7;});
-    eq(dropGt7([1, 3, 5, 7, 9]), [1, 3, 5, 7]);
-    eq(dropGt7([1, 3, 5]), [1, 3, 5]);
-  });
-
   it('can act as a transducer', function() {
     var dropLt7 = R.dropLastWhile(function(x) {return x < 7;});
     eq(R.into([], dropLt7, [1, 3, 5, 7, 9, 1, 2]), [1, 3, 5, 7, 9]);

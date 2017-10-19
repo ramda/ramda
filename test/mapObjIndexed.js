@@ -24,10 +24,4 @@ describe('mapObjIndexed', function() {
        {a: 64, b: 6, c: 7, d: 5, e: 9, f: 0, g: 9});
   });
 
-  it('is curried', function() {
-    var makeSquareVowels = R.mapObjIndexed(squareVowels);
-    eq(makeSquareVowels({a: 8, b: 6, c: 7, d: 5, e: 3, f: 0, g: 9}),
-       {a: 64, b: 6, c: 7, d: 5, e: 9, f: 0, g: 9});
-  });
-
 });

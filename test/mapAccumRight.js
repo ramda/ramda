@@ -17,17 +17,4 @@ describe('mapAccumRight', function() {
     eq(R.mapAccumRight(R.concat, [], []), [[], []]);
   });
 
-  it('is curried', function() {
-    var addOrConcat = R.mapAccumRight(add);
-    var sum = addOrConcat(0);
-    var cat = addOrConcat('');
-    eq(sum([1, 2, 3, 4]), [[10, 9, 7, 4], 10]);
-    eq(cat(['1', '2', '3', '4']), [['1234', '234', '34', '4'], '1234']);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var sum = R.mapAccumRight(add, 0);
-    eq(sum.length, 1);
-  });
-
 });

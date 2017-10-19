@@ -84,11 +84,6 @@ describe('indexOf', function() {
     eq(R.indexOf('x', list), -1);
   });
 
-  it('is curried', function() {
-    var curried = R.indexOf(3);
-    eq(curried(list), 2);
-  });
-
   it('finds function, compared by identity', function() {
     var f = function() {};
     var g = function() {};

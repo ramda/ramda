@@ -10,10 +10,5 @@ describe('applyTo', function() {
     eq(R.applyTo.length, 2);
   });
 
-  it('is curried', function() {
-    eq(R.applyTo(42, R.identity), 42);
-    eq(R.applyTo(42)(R.identity), 42);
-    eq(R.applyTo(R.__, R.identity)(42), 42);
-  });
 });
 

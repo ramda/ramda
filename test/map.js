@@ -62,16 +62,6 @@ describe('map', function() {
     eq(xcomp.f, dec);
   });
 
-  it('is curried', function() {
-    var inc = R.map(add1);
-    eq(inc([1, 2, 3]), [2, 3, 4]);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var inc = R.map(add1);
-    eq(inc.length, 1);
-  });
-
   it('correctly uses fantasy-land implementations', function() {
 
     var m1 = Id(1);

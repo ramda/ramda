@@ -27,18 +27,4 @@ describe('contains', function() {
     eq(R.contains(new Just([42]), [new Just([42])]), true);
   });
 
-  it('is curried', function() {
-    eq(typeof R.contains(7), 'function');
-    eq(R.contains(7)([1, 2, 3]), false);
-    eq(R.contains(7)([1, 2, 7, 3]), true);
-  });
-
-  it('is curried like a binary operator, that accepts an initial placeholder', function() {
-    var isDigit = R.contains(R.__, ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']);
-    eq(typeof isDigit, 'function');
-    eq(isDigit('0'), true);
-    eq(isDigit('1'), true);
-    eq(isDigit('x'), false);
-  });
-
 });

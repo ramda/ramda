@@ -72,18 +72,4 @@ describe('transduce', function() {
     eq(R.transduce(toxf(R.concat), listxf, [], []), []);
   });
 
-  it('is curried', function() {
-    var addOrCat1 = R.transduce(toxf(add));
-    var addOrCat2 = addOrCat1(addxf);
-    var sum = addOrCat2(0);
-    var cat = addOrCat2('');
-    eq(sum([1, 2, 3, 4]), 10);
-    eq(cat(['1', '2', '3', '4']), '1234');
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var sum = R.transduce(toxf(add), addxf, 0);
-    eq(sum.length, 1);
-  });
-
 });

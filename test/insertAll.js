@@ -13,9 +13,4 @@ describe('insertAll', function() {
     eq(R.insertAll(8, ['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
   });
 
-  it('is curried', function() {
-    var list = ['a', 'b', 'c', 'd', 'e'];
-    eq(R.insertAll(8)(['p', 'q', 'r'], list), ['a', 'b', 'c', 'd', 'e', 'p', 'q', 'r']);
-  });
-
 });

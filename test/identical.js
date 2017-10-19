@@ -26,9 +26,4 @@ describe('identical', function() {
     eq(R.identical(new Number(0), new Number(0)), false);
   });
 
-  it('is curried', function() {
-    var isA = R.identical(a);
-    eq(isA([]), false);
-  });
-
 });

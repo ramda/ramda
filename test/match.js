@@ -14,12 +14,6 @@ describe('match', function() {
     eq(R.match(re, notMatching), []);
   });
 
-  it('is curried', function() {
-    var format = R.match(re);
-    eq(format(matching).length, 1);
-    eq(format(notMatching), []);
-  });
-
   it('defaults to a different empty array each time', function() {
     var first = R.match(re, notMatching);
     var second = R.match(re, notMatching);

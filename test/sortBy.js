@@ -26,14 +26,6 @@ describe('sortBy', function() {
     eq(sortedAlbums[11].title, 'Timeout');
   });
 
-  it('is curried', function() {
-    var sorter = R.sortBy(R.prop('title'));
-    var sortedAlbums = sorter(albums);
-    eq(sortedAlbums.length, albums.length);
-    eq(sortedAlbums[0].title, 'A Farewell to Kings');
-    eq(sortedAlbums[11].title, 'Timeout');
-  });
-
   it('preserves object identity', function() {
     var a = {value: 'a'};
     var b = {value: 'b'};
