@@ -30,5 +30,5 @@ import _xchain from './internal/_xchain';
  *
  *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
  */
-var chain = _curry2(_dispatchable(['chain', '**bind**', '(>>=)', '>>='], _xchain, Z.chain));
+var chain = _curry2(_dispatchable(['chain'], _xchain, Z.chain));
 export default chain;

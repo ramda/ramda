@@ -43,5 +43,5 @@ import _xmap from './internal/_xmap';
  * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
  * @symb R.map(f, functor_o) = functor_o.map(f)
  */
-var map = _curry2(_dispatchable(['map', 'fmap', '(<$>)', '<$>'], _xmap, Z.map));
+var map = _curry2(_dispatchable(['map', 'fmap'], _xmap, Z.map));
 export default map;

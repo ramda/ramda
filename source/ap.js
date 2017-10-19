@@ -30,5 +30,5 @@ import _dispatchable from './internal/_dispatchable';
  *      R.ap(R.concat, R.toUpper)('Ramda') //=> 'RamdaRAMDA'
  * @symb R.ap([f, g], [a, b]) = [f(a), f(b), g(a), g(b)]
  */
-var ap = _curry2(_dispatchable(['ap', '(<*>)', '<*>'], null, Z.ap));
+var ap = _curry2(_dispatchable(['ap'], null, Z.ap));
 export default ap;
