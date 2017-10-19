@@ -42,8 +42,4 @@ describe('path', function() {
     eq(R.path(['toString'], false), Boolean.prototype.toString);
   });
 
-  it('is curried', function() {
-    eq(R.path(['arrayVal', '0'])(deepObject), 'arr');
-  });
-
 });

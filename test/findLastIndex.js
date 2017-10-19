@@ -43,11 +43,6 @@ describe('findLastIndex', function() {
     eq(R.findLastIndex(even, []), -1);
   });
 
-  it('is curried', function() {
-    eq(typeof R.findLastIndex(even), 'function');
-    eq(R.findLastIndex(even)(a), 15);
-  });
-
   it('dispatches to transformer objects', function() {
     eq(R.findLastIndex(R.identity, listXf), {
       f: R.identity,
@@ -56,5 +51,4 @@ describe('findLastIndex', function() {
       xf: listXf
     });
   });
-
 });

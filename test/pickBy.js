@@ -38,9 +38,4 @@ describe('pickBy', function() {
     eq(R.pickBy(function(val) {return val < 45;}, obj), {v: 10, w: 20, x: 30, y: 40});
   });
 
-  it('is curried', function() {
-    var copier = R.pickBy(R.T);
-    eq(copier(obj), obj);
-  });
-
 });

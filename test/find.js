@@ -43,11 +43,6 @@ describe('find', function() {
     eq(intoArray(R.find(even), []), [undefined]);
   });
 
-  it('is curried', function() {
-    eq(typeof R.find(even), 'function');
-    eq(R.find(even)(a), 10);
-  });
-
   it('dispatches to transformer objects', function() {
     eq(R.find(R.identity, listXf), {
       f: R.identity,
@@ -55,5 +50,4 @@ describe('find', function() {
       xf: listXf
     });
   });
-
 });

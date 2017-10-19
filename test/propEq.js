@@ -5,8 +5,6 @@ var eq = require('./shared/eq');
 describe('propEq', function() {
   var obj1 = {name: 'Abby', age: 7, hair: 'blond'};
   var obj2 = {name: 'Fred', age: 12, hair: 'brown'};
-  var obj3 = {name: 'Rusty', age: 10, hair: 'brown'};
-  var obj4 = {name: 'Alois', age: 15, disposition: 'surly'};
 
   it('determines whether a particular property matches a given value for a specific object', function() {
     eq(R.propEq('name', 'Abby', obj1), true);
@@ -24,16 +22,6 @@ describe('propEq', function() {
     eq(R.propEq('value', -0, {value: 0}), false);
     eq(R.propEq('value', NaN, {value: NaN}), true);
     eq(R.propEq('value', new Just([42]), {value: new Just([42])}), true);
-  });
-
-  it('is curried', function() {
-    var kids = [obj1, obj2, obj3, obj4];
-    var hairMatch = R.propEq('hair');
-    eq(typeof hairMatch, 'function');
-    var brunette = hairMatch('brown');
-    eq(R.filter(brunette, kids), [obj2, obj3]);
-    // more likely usage:
-    eq(R.filter(R.propEq('hair', 'brown'), kids), [obj2, obj3]);
   });
 
 });

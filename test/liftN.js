@@ -32,12 +32,6 @@ describe('liftN', function() {
     eq(addN5([1, 10], [2], [3], [40], [500, 1000]), [546, 1046, 555, 1055]);
   });
 
-  it('is curried', function() {
-    var f4 = R.liftN(4);
-    eq(typeof f4, 'function');
-    eq(f4(addN)([1], [2], [3], [4, 5]), [10, 11]);
-  });
-
   it('works with other functors such as "Maybe"', function() {
     var addM = R.liftN(2, R.add);
     eq(addM(Maybe.Just(3), Maybe.Just(5)), Maybe.Just(8));

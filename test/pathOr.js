@@ -48,8 +48,4 @@ describe('pathOr', function() {
     eq(R.pathOr('Unknown', ['toString'], false), Boolean.prototype.toString);
   });
 
-  it('is curried', function() {
-    eq(R.pathOr('Unknown', ['arrayVal', '0'])(deepObject), 'arr');
-  });
-
 });
