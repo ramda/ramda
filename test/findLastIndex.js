@@ -48,16 +48,6 @@ describe('findLastIndex', function() {
     eq(R.findLastIndex(even)(a), 15);
   });
 
-  it('can act as a transducer', function() {
-    var numbers = [0,5,0,5];
-    var idx = 3;
-    var val = 5;
-
-    var xf = R.compose(R.identity, R.findLastIndex(R.equals(val)));
-
-    eq(R.into([], xf, numbers), [idx]);
-  });
-
   it('dispatches to transformer objects', function() {
     eq(R.findLastIndex(R.identity, listXf), {
       f: R.identity,

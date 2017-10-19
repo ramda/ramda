@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var listXf = require('./helpers/listXf');
 
 
 describe('findIndex', function() {
@@ -38,6 +39,15 @@ describe('findIndex', function() {
   it('is curried', function() {
     eq(typeof R.findIndex(even), 'function');
     eq(R.findIndex(even)(a), 1);
+  });
+
+  it('dispatches to transformer objects', function() {
+    eq(R.findIndex(R.identity, listXf), {
+      f: R.identity,
+      found: false,
+      idx: -1,
+      xf: listXf
+    });
   });
 
 });

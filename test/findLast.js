@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var listXf = require('./helpers/listXf');
 
 
 describe('findLast', function() {
@@ -45,6 +46,13 @@ describe('findLast', function() {
   it('is curried', function() {
     eq(typeof R.findLast(even), 'function');
     eq(R.findLast(even)(a), 0);
+  });
+
+  it('dispatches to transformer objects', function() {
+    eq(R.findLast(R.identity, listXf), {
+      f: R.identity,
+      xf: listXf
+    });
   });
 
 });
