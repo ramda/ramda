@@ -30,6 +30,14 @@ describe('concat', function() {
     eq(R.concat('', ''), '');
   });
 
+  it('works on objects', function() {
+    eq(R.concat({a: 1}, {b: 2}), {a: 1, b: 2});
+    eq(R.concat({a: 1}, {a: 2}), {a: 2});
+    eq(R.concat({a: 1}, {}), {a: 1});
+    eq(R.concat({}, {a: 1}), {a: 1});
+    eq(R.concat({}, {}), {});
+  });
+
   it('delegates to non-String object with a concat method, as second param', function() {
     eq(R.concat(z1, z2), 'z1 z2');
   });
@@ -44,14 +52,6 @@ describe('concat', function() {
     var appendBar = R.concat(R.__, 'bar');
     eq(typeof appendBar, 'function');
     eq(appendBar('foo'), 'foobar');
-  });
-
-  it('throws if attempting to combine an array with a non-array', function() {
-    assert.throws(function() { return R.concat([1], 2); }, TypeError);
-  });
-
-  it('throws if not an array, String, or object with a concat method', function() {
-    assert.throws(function() { return R.concat({}, {}); }, TypeError);
   });
 
 });
