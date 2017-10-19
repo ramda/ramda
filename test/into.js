@@ -34,23 +34,11 @@ describe('into', function() {
     eq(R.into([], R.filter(isOdd), obj), 'override');
   });
 
-  it('is curried', function() {
-    var intoArray = R.into([]);
-    var add2 = R.map(add(2));
-    var result = intoArray(add2);
-    eq(result([1, 2, 3, 4]), [3, 4, 5, 6]);
-  });
-
   it('allows custom transformer', function() {
     var intoSum = R.into(addXf);
     var add2 = R.map(add(2));
     var result = intoSum(add2);
     eq(result([1, 2, 3, 4]), 18);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var sum = R.into([], R.map(add));
-    eq(sum.length, 1);
   });
 
 });

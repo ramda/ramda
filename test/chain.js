@@ -63,14 +63,4 @@ describe('chain', function() {
     eq(intoArray(xcomp, [10, 20, 30]), [18, 38, 58]);
   });
 
-  it('is curried', function() {
-    var flatInc = R.chain(add1);
-    eq(flatInc([1, 2, 3, 4, 5, 6]), [2, 3, 4, 5, 6, 7]);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var inc = R.chain(add1);
-    eq(inc.length, 1);
-  });
-
 });

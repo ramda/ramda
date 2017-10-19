@@ -28,14 +28,4 @@ describe('project', function() {
     ]);
   });
 
-  it('is curried', function() {
-    var myFields = R.project(['name', 'age']);
-    eq(myFields(kids), [
-      {name: 'Abby', age: 7},
-      {name: 'Fred', age: 12},
-      {name: 'Rusty', age: 10},
-      {name: 'Alois', age: 15}
-    ]);
-  });
-
 });

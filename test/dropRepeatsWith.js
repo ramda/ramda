@@ -28,12 +28,6 @@ describe('dropRepeatsWith', function() {
     eq(R.dropRepeatsWith(eqI, []), []);
   });
 
-  it('is curried', function() {
-    eq(typeof R.dropRepeatsWith(eqI), 'function');
-    eq(R.dropRepeatsWith(eqI)(objs), objs);
-    eq(R.dropRepeatsWith(eqI)(objs2), objs);
-  });
-
   it('can act as a transducer', function() {
     eq(R.into([], R.dropRepeatsWith(eqI), objs2), objs);
   });

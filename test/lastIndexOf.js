@@ -75,11 +75,6 @@ describe('lastIndexOf', function() {
     eq(R.lastIndexOf('x', list), -1);
   });
 
-  it('is curried', function() {
-    var curried = R.lastIndexOf('a');
-    eq(curried(list), 2);
-  });
-
   it('finds function, compared by identity', function() {
     var f = function() {};
     var g = function() {};

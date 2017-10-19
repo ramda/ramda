@@ -30,10 +30,4 @@ describe('ap', function() {
     eq(R.ap(obj, 10), obj.ap(10));
   });
 
-  it('is curried', function() {
-    var val = R.ap([mult2, plus3]);
-    eq(typeof val, 'function');
-    eq(val([1, 2, 3]), [2, 4, 6, 4, 5, 6]);
-  });
-
 });

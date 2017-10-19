@@ -22,16 +22,4 @@ describe('has', function() {
     eq(R.has('age', bob), false);
   });
 
-  it('is curried, op-style', function() {
-    var hasName = R.has('name');
-    eq(hasName(fred), true);
-    eq(hasName(anon), false);
-
-    var point = {x: 0, y: 0};
-    var pointHas = R.has(R.__, point);
-    eq(pointHas('x'), true);
-    eq(pointHas('y'), true);
-    eq(pointHas('z'), false);
-  });
-
 });

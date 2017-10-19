@@ -27,15 +27,6 @@ describe('assocPath', function() {
     assert.strictEqual(obj2.f, obj1.f);
   });
 
-  it('is curried', function() {
-    var obj1 = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: 5, j: {k: 6, l: 7}}}, m: 8};
-    var expected = {a: {b: 1, c: 2, d: {e: 3}}, f: {g: {h: 4, i: {x: 42}, j: {k: 6, l: 7}}}, m: 8};
-    var f = R.assocPath(['f', 'g', 'i']);
-    var g = f({x: 42});
-    eq(f({x: 42}, obj1), expected);
-    eq(g(obj1), expected);
-  });
-
   it('empty path replaces the the whole object', function() {
     eq(R.assocPath([], 3, {a: 1, b: 2}), 3);
   });

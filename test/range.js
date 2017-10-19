@@ -16,11 +16,6 @@ describe('range', function() {
     eq(R.range(5, 5), []);
   });
 
-  it('is curried', function() {
-    var from10 = R.range(10);
-    eq(from10(15), [10, 11, 12, 13, 14]);
-  });
-
   it('returns an empty array if from > to', function() {
     var result = R.range(10, 5);
     eq(result, []);
