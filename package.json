@@ -62,7 +62,7 @@
     "postbrowser_test": "npm run posttest"
   },
   "dependencies": {
-    "sanctuary-type-classes": "7.0.x"
+    "sanctuary-type-classes": "7.1.x"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
