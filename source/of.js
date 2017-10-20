@@ -1,23 +1,29 @@
-import _curry1 from './internal/_curry1';
+import Z from 'sanctuary-type-classes';
+
+import _curry2 from './internal/_curry2';
 
 
 /**
- * Returns a singleton array containing the value provided.
+ * Returns a singleton of the type indicated by the
+ * [type representative](https://github.com/fantasyland/fantasy-land#type-representatives)
+ * (the first argument) containing the given value (the second argument).
  *
- * Note this `of` is different from the ES6 `of`; See
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
+ * The type representative may be `Array`, `Function`, or any representative of a type
+ * which satisfies [Applicative](https://github.com/fantasyland/fantasy-land#applicative).
  *
  * @func
  * @memberOf R
  * @since v0.3.0
  * @category Function
- * @sig a -> [a]
- * @param {*} x any value
- * @return {Array} An array wrapping `x`.
+ * @sig Applicative f => TypeRep f -> a -> f a
+ * @param {*} typeRep
+ * @param {*} x
+ * @return {*}
  * @example
  *
- *      R.of(null); //=> [null]
- *      R.of([42]); //=> [[42]]
+ *      R.of(Array, null); //=> [null]
+ *      R.of(Array, [42]); //=> [[42]]
+ *      R.of(Maybe, 'yo'); //=> Just('yo')
  */
-var of = _curry1(function of(x) { return [x]; });
+var of = _curry2(Z.of);
 export default of;
