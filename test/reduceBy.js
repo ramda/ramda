@@ -50,7 +50,7 @@ describe('reduceBy', function() {
     var sumByType = reduceToSumsBy(byType);
     eq(R.into(
          {},
-         R.compose(sumByType, R.map(R.adjust(R.multiply(10), 1))),
+         R.compose(sumByType, R.map(R.adjust(1, R.multiply(10)))),
          sumInput),
        {A: 800, B: 800, C: 500});
   });

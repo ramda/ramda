@@ -20,8 +20,8 @@ describe('indexBy', function() {
     var transducer = R.compose(
       R.indexBy(R.prop('id')),
       R.map(R.pipe(
-        R.adjust(R.toUpper, 0),
-        R.adjust(R.omit(['id']), 1)
+        R.adjust(0, R.toUpper),
+        R.adjust(1, R.omit(['id']))
       )));
     var result = R.into({}, transducer, list);
     eq(result, {ABC: {title: 'B'}, XYZ: {title: 'A'}});
