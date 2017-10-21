@@ -329,9 +329,4 @@ describe('equals', function() {
     eq(R.equals(new ColorPoint(2, 2, 'red'), new Point(2, 2)), false);
   });
 
-  it('is curried', function() {
-    var isA = R.equals(a);
-    eq(isA([]), true);
-  });
-
 });

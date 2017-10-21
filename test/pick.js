@@ -25,9 +25,4 @@ describe('pick', function() {
     eq(R.pick(['w', 'x', 'y'], obj), {w: 20, x: 30, y: 40});
   });
 
-  it('is curried', function() {
-    var copyAB = R.pick(['a', 'b']);
-    eq(copyAB(obj), {a: 1, b: 2});
-  });
-
 });

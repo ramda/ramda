@@ -17,12 +17,4 @@ describe('forEachObjIndexed', function() {
     eq('12123', s);
   });
 
-  it('is curried', function() {
-    var xStr = '';
-    var xe = R.forEachObjIndexed(function(v) { xStr += (v + ' '); });
-    eq(typeof xe, 'function');
-    xe(obj);
-    eq(xStr, '1 2 123 ');
-  });
-
 });

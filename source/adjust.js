@@ -11,9 +11,9 @@ import _curry3 from './internal/_curry3';
  * @memberOf R
  * @since v0.14.0
  * @category List
- * @sig (a -> a) -> Number -> [a] -> [a]
- * @param {Function} fn The function to apply.
+ * @sig Number -> (a -> a) -> [a] -> [a]
  * @param {Number} idx The index.
+ * @param {Function} fn The function to apply.
  * @param {Array|Arguments} list An array-like object whose value
  *        at the supplied index will be replaced.
  * @return {Array} A copy of the supplied array-like object with
@@ -22,12 +22,12 @@ import _curry3 from './internal/_curry3';
  * @see R.update
  * @example
  *
- *      R.adjust(R.toUpper, 1, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
- *      R.adjust(R.toUpper, -1, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
- * @symb R.adjust(f, -1, [a, b]) = [a, f(b)]
- * @symb R.adjust(f, 0, [a, b]) = [f(a), b]
+ *      R.adjust(1, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
+ *      R.adjust(-1, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
+ * @symb R.adjust(-1, f, [a, b]) = [a, f(b)]
+ * @symb R.adjust(0, f, [a, b]) = [f(a), b]
  */
-var adjust = _curry3(function adjust(fn, idx, list) {
+var adjust = _curry3(function adjust(idx, fn, list) {
   if (idx >= list.length || idx < -list.length) {
     return list;
   }

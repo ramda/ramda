@@ -26,16 +26,4 @@ describe('mathMod', function() {
     eq(R.identical(NaN, R.mathMod(17, 5.5)), true);
   });
 
-  it('is curried', function() {
-    var f = R.mathMod(29);
-    eq(f(6), 5);
-  });
-
-
-  it('behaves right curried when passed `R.__` for its first argument', function() {
-    var mod5 = R.modulo(R.__, 5);
-    eq(mod5(12), 2);
-    eq(mod5(8), 3);
-  });
-
 });

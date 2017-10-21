@@ -18,17 +18,4 @@ describe('mapAccum', function() {
     eq(R.mapAccum(concat, [], []), [[], []]);
   });
 
-  it('is curried', function() {
-    var addOrConcat = R.mapAccum(add);
-    var sum = addOrConcat(0);
-    var cat = addOrConcat('');
-    eq(sum([1, 2, 3, 4]), [10, [1, 3, 6, 10]]);
-    eq(cat(['1', '2', '3', '4']), ['1234', ['1', '12', '123', '1234']]);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var sum = R.mapAccum(add, 0);
-    eq(sum.length, 1);
-  });
-
 });

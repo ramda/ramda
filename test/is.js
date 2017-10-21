@@ -28,12 +28,6 @@ describe('is', function() {
     eq(R.is(Bar, foo), false);
   });
 
-  it('is curried', function() {
-    var isArray = R.is(Array);
-    eq(isArray([]), true);
-    eq(isArray({}), false);
-  });
-
   it('considers almost everything an object', function() {
     function Foo() {}
     var foo = new Foo();
@@ -69,11 +63,6 @@ describe('is', function() {
     eq(R.is(Object, false), false);
     eq(R.is(Object, 0), false);
     eq(R.is(Object, ''), false);
-  });
-
-  it('is curried', function() {
-    eq(typeof R.is(String), 'function');
-    eq(R.is(String)('s'), true);
   });
 
 });

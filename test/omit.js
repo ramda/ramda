@@ -17,9 +17,4 @@ describe('omit', function() {
     eq(R.omit(['w', 'x', 'y'], obj), {v: 10, z: 50});
   });
 
-  it('is curried', function() {
-    var skipAB = R.omit(['a', 'b']);
-    eq(skipAB(obj), {c: 3, d: 4, e: 5, f: 6});
-  });
-
 });

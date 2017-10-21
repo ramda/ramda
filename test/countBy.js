@@ -43,13 +43,6 @@ describe('countBy', function() {
     });
   });
 
-  it('is curried', function() {
-    var counter = R.countBy(R.prop('genre'));
-    eq(counter(albums), {
-      Baroque: 2, Rock: 2, Jazz: 2, Romantic: 1, Metal: 1, Modern: 1, Broadway: 1, Folk: 1, Classical: 1
-    });
-  });
-
   it('ignores inherited properties', function() {
     var result = R.countBy(R.identity, ['abc', 'toString']);
     eq(result.abc, 1);
@@ -59,7 +52,7 @@ describe('countBy', function() {
   it('can act as a transducer', function() {
     var transducer = R.compose(
       R.countBy(R.prop('genre')),
-      R.map(R.adjust(R.toString, 1)));
+      R.map(R.adjust(1, R.toString)));
     eq(R.into({}, transducer, albums), {
       Baroque: '2', Rock: '2', Jazz: '2', Romantic: '1', Metal: '1', Modern: '1', Broadway: '1', Folk: '1', Classical: '1'
     });

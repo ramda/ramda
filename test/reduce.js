@@ -22,19 +22,6 @@ describe('reduce', function() {
     eq(R.reduce(R.concat, [], []), []);
   });
 
-  it('is curried', function() {
-    var addOrConcat = R.reduce(add);
-    var sum = addOrConcat(0);
-    var cat = addOrConcat('');
-    eq(sum([1, 2, 3, 4]), 10);
-    eq(cat(['1', '2', '3', '4']), '1234');
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var sum = R.reduce(add, 0);
-    eq(sum.length, 1);
-  });
-
   it('Prefers the use of the iterator of an object over reduce (and handles short-circuits)', function() {
     var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
 

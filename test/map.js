@@ -1,6 +1,7 @@
 var listXf = require('./helpers/listXf');
 
 var R = require('..');
+var assert = require('assert');
 var eq = require('./shared/eq');
 var Id = require('./shared/Id');
 
@@ -42,6 +43,11 @@ describe('map', function() {
     });
   });
 
+  it('throws a TypeError on null and undefined', function() {
+    assert.throws(function() { return R.map(times2, null); }, TypeError);
+    assert.throws(function() { return R.map(times2, undefined); }, TypeError);
+  });
+
   it('composes', function() {
     var mdouble = R.map(times2);
     var mdec = R.map(dec);
@@ -54,16 +60,6 @@ describe('map', function() {
     var xcomp = mdec(mdouble(listXf));
     eq(xcomp.xf, {xf: listXf, f: times2});
     eq(xcomp.f, dec);
-  });
-
-  it('is curried', function() {
-    var inc = R.map(add1);
-    eq(inc([1, 2, 3]), [2, 3, 4]);
-  });
-
-  it('correctly reports the arity of curried versions', function() {
-    var inc = R.map(add1);
-    eq(inc.length, 1);
   });
 
   it('correctly uses fantasy-land implementations', function() {
