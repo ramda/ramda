@@ -60,4 +60,5 @@ describe('into', function() {
     var intoArray = R.into([]);
     eq(intoArray(transducer, numbers), [3,4]);
   });
+
 });
