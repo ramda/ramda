@@ -31,15 +31,6 @@ describe('both', function() {
     eq(effect, 'not evaluated');
   });
 
-  it('is curried', function() {
-    var even = function(x) {return x % 2 === 0;};
-    var gt10 = function(x) {return x > 10;};
-    var evenAnd = R.both(even);
-    eq(typeof evenAnd(gt10), 'function');
-    eq(evenAnd(gt10)(11), false);
-    eq(evenAnd(gt10)(12), true);
-  });
-
   it('accepts fantasy-land applicative functors', function() {
     var Just = S.Just;
     var Nothing = S.Nothing;

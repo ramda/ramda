@@ -9,11 +9,6 @@ describe('union', function() {
     eq(R.union(M, N), [1, 2, 3, 4, 5, 6]);
   });
 
-  it('is curried', function() {
-    eq(typeof R.union(M), 'function');
-    eq(R.union(M)(N), [1, 2, 3, 4, 5, 6]);
-  });
-
   it('has R.equals semantics', function() {
     function Just(x) { this.value = x; }
     Just.prototype.equals = function(x) {

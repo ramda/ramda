@@ -1,5 +1,6 @@
 var R = require('..');
 var eq = require('./shared/eq');
+var listXf = require('./helpers/listXf');
 
 
 describe('find', function() {
@@ -42,9 +43,11 @@ describe('find', function() {
     eq(intoArray(R.find(even), []), [undefined]);
   });
 
-  it('is curried', function() {
-    eq(typeof R.find(even), 'function');
-    eq(R.find(even)(a), 10);
+  it('dispatches to transformer objects', function() {
+    eq(R.find(R.identity, listXf), {
+      f: R.identity,
+      found: false,
+      xf: listXf
+    });
   });
-
 });

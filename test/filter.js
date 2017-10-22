@@ -31,9 +31,4 @@ describe('filter', function() {
     eq(R.filter(function(s) { return s; }, f), 'called f.filter');
   });
 
-  it('is curried', function() {
-    var onlyEven = R.filter(even);
-    eq(onlyEven([1, 2, 3, 4, 5, 6, 7]), [2, 4, 6]);
-  });
-
 });

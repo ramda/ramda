@@ -1,4 +1,4 @@
-import _assign from './_assign';
+import _objectAssign from './_objectAssign';
 import _identity from './_identity';
 import _isArrayLike from './_isArrayLike';
 import _isTransformer from './_isTransformer';
@@ -21,7 +21,7 @@ var _stepCatString = {
 var _stepCatObject = {
   '@@transducer/init': Object,
   '@@transducer/step': function(result, input) {
-    return _assign(
+    return _objectAssign(
       result,
       _isArrayLike(input) ? objOf(input[0], input[1]) : input
     );

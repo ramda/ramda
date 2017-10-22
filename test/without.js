@@ -7,11 +7,6 @@ describe('without', function() {
     eq(R.without([1, 2], [1, 2, 1, 4, 5]), [4, 5]);
   });
 
-  it('is curried', function() {
-    var withoutOnes = R.without([1]);
-    eq(withoutOnes([1, 2, 3, 5, 1]), [2, 3, 5]);
-  });
-
   it('can act as a transducer', function() {
     eq(R.into([], R.without([1]), [1]), []);
   });

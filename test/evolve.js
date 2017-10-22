@@ -32,13 +32,6 @@ describe('evolve', function() {
     eq(R.evolve(transf, object), expected);
   });
 
-  it('is curried', function() {
-    var tick = R.evolve({elapsed: R.add(1), remaining: R.add(-1)});
-    var object   = {name: 'Tomato', elapsed: 100, remaining: 1400};
-    var expected = {name: 'Tomato', elapsed: 101, remaining: 1399};
-    eq(tick(object), expected);
-  });
-
   it('ignores primitive value transformations', function() {
     var transf   = {n: 2, m: 'foo'};
     var object   = {n: 0, m: 1};

@@ -11,18 +11,4 @@ describe('lte', function() {
     eq(R.lte('abcd', 'abc'), false);
   });
 
-  it('is curried', function() {
-    var gte20 = R.lte(20);
-    eq(gte20(10), false);
-    eq(gte20(20), true);
-    eq(gte20(25), true);
-  });
-
-  it('behaves right curried when passed `R.__` for its first argument', function() {
-    var upTo20 = R.lte(R.__, 20);
-    eq(upTo20(10), true);
-    eq(upTo20(20), true);
-    eq(upTo20(25), false);
-  });
-
 });

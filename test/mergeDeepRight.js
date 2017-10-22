@@ -33,10 +33,4 @@ describe('mergeDeepRight', function() {
     eq(R.mergeDeepRight(a, { x: new Cla() }), { w: 1, x: { y: 2 }});
   });
 
-  it('is curried', function() {
-    var curried = R.mergeDeepRight({ w: 1, x: 2 });
-    var b = { y: 3, z: 4 };
-    eq(curried(b), { w: 1, x: 2, y: 3, z: 4 });
-  });
-
 });

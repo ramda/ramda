@@ -31,9 +31,4 @@ describe('partition', function() {
        [S.Just(3), S.Nothing()]);
   });
 
-  it('is curried', function() {
-    var polarize = R.partition(Boolean);
-    eq(polarize([true, 0, 1, null]), [[true, 1], [0, null]]);
-  });
-
 });

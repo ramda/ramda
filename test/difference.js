@@ -44,9 +44,4 @@ describe('difference', function() {
     eq(R.difference([], M2), []);
   });
 
-  it('is curried', function() {
-    eq(typeof R.difference([1, 2, 3]), 'function');
-    eq(R.difference([1, 2, 3])([1, 3]), [2]);
-  });
-
 });
