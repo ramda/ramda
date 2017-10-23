@@ -33,7 +33,7 @@ import curryN from './curryN';
  * @sig (* -> a) -> (* -> a)
  * @param {Function} fn The function to curry.
  * @return {Function} A new, curried function.
- * @see R.curryN
+ * @see R.curryN, R.partial
  * @example
  *
  *      var addFourNumbers = (a, b, c, d) => a + b + c + d;
