@@ -15,7 +15,7 @@ import _curry3 from './internal/_curry3';
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {Array} A list of all intermediately reduced values.
- * @see R.reduce
+ * @see R.reduce, R.mapAccum
  * @example
  *
  *      var numbers = [1, 2, 3, 4];
