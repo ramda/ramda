@@ -33,6 +33,7 @@ import _stepCat from './internal/_stepCat';
  * @param {Function} xf The transducer function. Receives a transformer and returns a transformer.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
+ * @see R.transduce, R.reduce
  * @example
  *
  *      var numbers = [1, 2, 3, 4];
