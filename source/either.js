@@ -18,11 +18,11 @@ import or from './or';
  * @memberOf R
  * @since v0.12.0
  * @category Logic
- * @sig (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
+ * @sig (*... -> a) -> (*... -> b) -> (*... -> a | b)
  * @param {Function} f a predicate
  * @param {Function} g another predicate
  * @return {Function} a function that applies its arguments to `f` and `g` and `||`s their outputs together.
- * @see R.or
+ * @see R.or, R.anyPass
  * @example
  *
  *      var gt10 = x => x > 10;
