@@ -20,7 +20,7 @@ import reduceBy from './reduceBy';
  * @param {Array} list The array to group
  * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
  *         that produced that key when passed to `fn`.
- * @see R.transduce
+ * @see R.reduceBy, R.transduce
  * @example
  *
  *      var byGrade = R.groupBy(function(student) {
