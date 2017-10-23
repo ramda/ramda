@@ -15,7 +15,7 @@ import _createPartialApplicator from './internal/_createPartialApplicator';
  * @param {Function} f
  * @param {Array} args
  * @return {Function}
- * @see R.partialRight
+ * @see R.partialRight, R.curry
  * @example
  *
  *      var multiply2 = (a, b) => a * b;
