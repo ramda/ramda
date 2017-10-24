@@ -1,6 +1,6 @@
 # Документація
 
-[A](#a), [B](#b), [R](#r), [S](#s), [X](#x), [Z](#z)
+[A](#a), [B](#b), [C](#c), [D](#d), [J](#j), [I](#i), [N](#n), [P](#p), [R](#r), [S](#s), [T](#t), [U](#u), [X](#x), [Z](#z)
 
 ## A
 - [__](#__) `Function`
@@ -65,6 +65,8 @@
 
 ## P
 - [partial](#) ``
+- [path](#path) `Object`
+- [pathEq](#patheq) `Relation`
 - [pipe](#pipe) `Function`
 - [prepend](#prepend) `List`
 
@@ -78,6 +80,7 @@
 **[⬆ вверх](#Документація)**
 
 ## S
+- [set](#set) `Object`
 - [sort](#sort) `List`
 - [sortBy](#sortby) `Relation`
 - [sortWith](#sortwith) `Relation`
