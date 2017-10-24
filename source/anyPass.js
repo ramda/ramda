@@ -20,7 +20,7 @@ import reduce from './reduce';
  * @sig [(*... -> Boolean)] -> (*... -> Boolean)
  * @param {Array} predicates An array of predicates to check
  * @return {Function} The combined predicate
- * @see R.allPass
+ * @see R.allPass, R.either
  * @example
  *
  *      var isClub = R.propEq('suit', '♣');
