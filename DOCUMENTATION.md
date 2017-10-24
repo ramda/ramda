@@ -1,6 +1,6 @@
 # Документація
 
-[A](#a), [B](#b), [C](#c), [D](#d), [J](#j), [I](#i), [N](#n), [P](#p), [R](#r), [S](#s), [T](#t), [U](#u), [X](#x), [Z](#z)
+[A](#a), [B](#b), [C](#c), [D](#d), [J](#j), [I](#i), [M](#m), [N](#n), [P](#p), [R](#r), [S](#s), [T](#t), [U](#u), [X](#x), [Z](#z)
 
 ## A
 - [__](#__) `Function`
@@ -54,6 +54,11 @@
 ## I
 - [identity](#identity) `Function`
 - [into](#into) `List`
+
+**[⬆ вверх](#Документація)**
+
+## M
+- [map](#map) `List`
 
 **[⬆ вверх](#Документація)**
 
@@ -954,6 +959,44 @@ var intoArray = R.into([]);
 intoArray(transducer, numbers); //=> [2, 3]
 ```
 Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.24.1#?var%20numbers%20%3D%20%5B1%2C%202%2C%203%2C%204%5D%3B%0Avar%20transducer%20%3D%20R.compose%28R.map%28R.add%281%29%29%2C%20R.take%282%29%29%3B%0A%0AR.into%28%5B%5D%2C%20transducer%2C%20numbers%29%3B%20%2F%2F%3D%3E%20%5B2%2C%203%5D%0A%0Avar%20intoArray%20%3D%20R.into%28%5B%5D%29%3B%0AintoArray%28transducer%2C%20numbers%29%3B%20%2F%2F%3D%3E%20%5B2%2C%203%5D)
+
+**[⬆ вверх](#Документація)**
+
+
+
+## map
+### `[List]`
+
+`Functor f => (a → b) → f a → f b`
+
+#### Параметри:
+| fn | Фунція, яка має бути викликана по відношенню до кожного елемента зі вхідного списку (`list`). |
+:---|:---|
+| list | Масив, який має бути перебраний. |
+| повертає __Array__ | Новий список. |
+
+_Додано у версії v0.1.0_
+
+Приймає функцію та функтор, застосовує функцію до кожного значення у функторі і повертає функтор такої ж форми.
+
+Ramda надає зручну реалізацію `map` для `Array` та `Object`, тому ця функція може бути застосована як до `[1, 2, 3]`, так і до `{x: 1, y: 2, z: 3}`.
+
+Застосовується до `map` методу другого аргументу, якщо присутній.
+
+Поводиться як трансдьюсер(`transducer`), якщо `transformer` передано на місці списку.
+
+Також сприймає функції як функтори і зробить з них композицію.
+
+Дивіться також [transduce](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#transduce), [addIndex](https://github.com/ivanzusko/ramda/blob/master/DOCUMENTATION.md#addindex).
+
+```javascript
+var double = x => x * 2;
+
+R.map(double, [1, 2, 3]); //=> [2, 4, 6]
+
+R.map(double, {x: 1, y: 2, z: 3}); //=> {x: 2, y: 4, z: 6}
+```
+Спробуйте у [REPL](http://ramdajs.com/repl/?v=0.25.0#?var%20double%20%3D%20x%20%3D%3E%20x%20%2A%202%3B%0A%0AR.map%28double%2C%20%5B1%2C%202%2C%203%5D%29%3B%20%2F%2F%3D%3E%20%5B2%2C%204%2C%206%5D%0A%0AR.map%28double%2C%20%7Bx%3A%201%2C%20y%3A%202%2C%20z%3A%203%7D%29%3B%20%2F%2F%3D%3E%20%7Bx%3A%202%2C%20y%3A%204%2C%20z%3A%206%7D)
 
 **[⬆ вверх](#Документація)**
 
