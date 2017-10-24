@@ -77,7 +77,7 @@ const R = require('ramda');
 <script src="path/to/yourCopyOf/ramda.js"></script>
 ```
 
-чи мініміфікована версія:
+чи мініфікована версія:
 
 ```html
 <script src="path/to/yourCopyOf/ramda.min.js"></script>
