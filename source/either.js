@@ -13,9 +13,6 @@ import or from './or';
  *
  * Also the method returns not only a function, but any applicative functor of corresponded type.
  *
- * In addition to functions, `R.either` also accepts any fantasy-land compatible
- * applicative functor.
- *
  * @func
  * @memberOf R
  * @since v0.12.0
@@ -33,8 +30,8 @@ import or from './or';
  *      f(101); //=> true
  *      f(8); //=> true
  *
- *      either(Maybe.Just(false), Maybe.Just(55)); // => Maybe.Just(55)
- *      either([false, false, 'a'], [11]) // => [11, 11, "a"]
+ *      R.either(Maybe.Just(false), Maybe.Just(55)); // => Maybe.Just(55)
+ *      R.either([false, false, 'a'], [11]) // => [11, 11, "a"]
  */
 var either = _curry2(function either(f, g) {
   return _isFunction(f) ?
