@@ -41,7 +41,7 @@
 
 ## D
 - [descend](#descend) `Function`
-- [dissoc](#) ``
+- [dissoc](#dissoc) `Object`
 - [dissocPath](#) ``
 
 **[⬆ вверх](#Документація)**
