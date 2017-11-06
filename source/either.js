@@ -11,7 +11,8 @@ import or from './or';
  * meaning that the second function will not be invoked if the first returns a
  * truth-y value.
  *
- * Also the method returns not only a function, but any applicative functor of corresponded type.
+ * In addition to functions, `R.either` also accepts any fantasy-land compatible
+ * applicative functor.
  *
  * @func
  * @memberOf R
