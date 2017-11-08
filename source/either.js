@@ -30,6 +30,9 @@ import or from './or';
  *      var f = R.either(gt10, even);
  *      f(101); //=> true
  *      f(8); //=> true
+ *
+ *      R.either(Maybe.Just(false), Maybe.Just(55)); // => Maybe.Just(55)
+ *      R.either([false, false, 'a'], [11]) // => [11, 11, "a"]
  */
 var either = _curry2(function either(f, g) {
   return _isFunction(f) ?
