@@ -22,7 +22,7 @@ import _curry2 from './internal/_curry2';
  * @example
  *
  *      R.tryCatch(R.prop('x'), R.F)({x: true}); //=> true
- *      R.tryCatch(R.prop('x'), R.F)(null);      //=> false
+ *      R.tryCatch(JSON.parse, R.F)({});      //=> false
  */
 var tryCatch = _curry2(function _tryCatch(tryer, catcher) {
   return _arity(tryer.length, function() {
