@@ -25,4 +25,10 @@ describe('assoc', function() {
     assert.strictEqual(obj2.f, obj1.f);
   });
 
+  it('preserves computed properties', function() {
+    var obj1 = {a: 1, get b() { return this.a * 2; }};
+    var obj2 = R.assoc('a', 2, obj1);
+    eq(obj2, {a: 2, b: 4});
+  });
+
 });

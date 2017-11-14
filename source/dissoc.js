@@ -1,4 +1,5 @@
 import _curry2 from './internal/_curry2';
+import _cloneWithDescriptors from './internal/_cloneWithDescriptors';
 
 
 /**
@@ -18,10 +19,7 @@ import _curry2 from './internal/_curry2';
  *      R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}
  */
 var dissoc = _curry2(function dissoc(prop, obj) {
-  var result = {};
-  for (var p in obj) {
-    result[p] = obj[p];
-  }
+  var result = _cloneWithDescriptors(obj);
   delete result[prop];
   return result;
 });

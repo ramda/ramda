@@ -29,4 +29,11 @@ describe('dissoc', function() {
     eq(R.dissoc(undefined, {a: 1, b: 2, undefined: 3}), {a: 1, b: 2});
   });
 
+  it('preserves computed properties', function() {
+    var obj1 = {a: 1, get b() { return this.a == null; }};
+    var obj2 = R.dissoc('a', obj1);
+    eq(obj1, {a: 1, b: false});
+    eq(obj2, {b: true});
+  });
+
 });
