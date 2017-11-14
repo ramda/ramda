@@ -55,7 +55,7 @@
     "postcoverage": "npm run posttest",
     "lint": "eslint scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "pretest": "npm run build:cjs",
-    "test": "mocha --reporter spec",
+    "test": "mocha --reporter spec -- test test/internal",
     "posttest": "git checkout -- dist",
     "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",

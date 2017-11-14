@@ -2,7 +2,7 @@ var eq = require('../shared/eq');
 var _isArrayLike = require('../../src/internal/_isArrayLike');
 
 
-describe('isArrayLike', function() {
+describe('_isArrayLike', function() {
   it('is true for Arrays', function() {
     eq(_isArrayLike([]), true);
     eq(_isArrayLike([1, 2, 3, 4]), true);
