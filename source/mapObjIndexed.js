@@ -19,10 +19,10 @@ import keys from './keys';
  * @see R.map
  * @example
  *
- *      var values = { x: 1, y: 2, z: 3 };
+ *      var xyz = { x: 1, y: 2, z: 3 };
  *      var prependKeyAndDouble = (num, key, obj) => key + (num * 2);
  *
- *      R.mapObjIndexed(prependKeyAndDouble, values); //=> { x: 'x2', y: 'y4', z: 'z6' }
+ *      R.mapObjIndexed(prependKeyAndDouble, xyz); //=> { x: 'x2', y: 'y4', z: 'z6' }
  */
 var mapObjIndexed = _curry2(function mapObjIndexed(fn, obj) {
   return _reduce(function(acc, key) {
