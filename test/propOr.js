@@ -22,12 +22,9 @@ describe('propOr', function() {
     eq(nm(void 0), 'Unknown');
   });
 
-  it('does not return properties from the prototype chain', function() {
-    var Person = function() {};
-    Person.prototype.age = function() {};
-
-    var bob = new Person();
-    eq(R.propOr(100, 'age', bob), 100);
+  it('uses the default when supplied an object with a nil value', function() {
+    eq(R.propOr('foo', 'x', {x: null}), 'foo');
+    eq(R.propOr('foo', 'x', {x: undefined}), 'foo');
   });
 
 });
