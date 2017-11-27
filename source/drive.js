@@ -1,5 +1,6 @@
-var _curry2 = /*#__PURE__*/require('./internal/_curry2');
-var reduce = /*#__PURE__*/require('./reduce');
+import _curry2 from './internal/_curry2';
+import reduce from './reduce';
+
 
 /**
  * Accepts a value and a list of functions and returns the result of
@@ -19,8 +20,7 @@ var reduce = /*#__PURE__*/require('./reduce');
  *      var add2MultBy3 = R.drive(R.__, [R.add(2), R.mult(3)]);
  *      add2MultBy3(2); //=> 12
  */
-
-var drive = /*#__PURE__*/_curry2(function drive(x, fns) {
+var drive = _curry2(function drive(x, fns) {
   return reduce(function(acc, f) {
     return f(acc);
   }, x, fns);
