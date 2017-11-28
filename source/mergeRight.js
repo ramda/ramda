@@ -9,24 +9,22 @@ import _curry2 from './internal/_curry2';
  *
  * @func
  * @memberOf R
- * @since v0.1.0
  * @category Object
  * @sig {k: v} -> {k: v} -> {k: v}
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.mergeRight, R.mergeDeepRight, R.mergeWith, R.mergeWithKey
- * @deprecated
+ * @see R.mergeLeft, R.mergeDeepRight, R.mergeWith, R.mergeWithKey
  * @example
  *
- *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+ *      R.mergeRight({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
  *      //=> { 'name': 'fred', 'age': 40 }
  *
- *      var withDefaults = R.merge({x: 0, y: 0});
+ *      var withDefaults = R.mergeRight({x: 0, y: 0});
  *      withDefaults({y: 2}); //=> {x: 0, y: 2}
- * @symb R.merge(a, b) = {...a, ...b}
+ * @symb R.mergeRight(a, b) = {...a, ...b}
  */
-var merge = _curry2(function merge(l, r) {
+var mergeRight = _curry2(function mergeRight(l, r) {
   return _objectAssign({}, l, r);
 });
-export default merge;
+export default mergeRight;

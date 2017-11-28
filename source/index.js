@@ -130,6 +130,8 @@ export { default as mergeDeepLeft } from './mergeDeepLeft';
 export { default as mergeDeepRight } from './mergeDeepRight';
 export { default as mergeDeepWith } from './mergeDeepWith';
 export { default as mergeDeepWithKey } from './mergeDeepWithKey';
+export { default as mergeLeft } from './mergeLeft';
+export { default as mergeRight } from './mergeRight';
 export { default as mergeWith } from './mergeWith';
 export { default as mergeWithKey } from './mergeWithKey';
 export { default as min } from './min';
