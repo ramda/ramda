@@ -9,19 +9,20 @@ import values from './values';
 
 
 /**
- * Given a spec object recursively mapping properties to functions, creates a
- * function producing an object of the same structure, by mapping each property
- * to the result of calling its associated function with the supplied arguments.
+ * Given a spec hierarchy of objects and/or arrays recursively mapping properties/elements
+ * to functions, creates a value of the same structure, by mapping each 
+ * property/element to the result of calling its associated function with 
+ * the supplied arguments.
  *
  * @func
  * @memberOf R
  * @since v0.20.0
  * @category Function
- * @sig {k: ((a, b, ..., m) -> v)} -> ((a, b, ..., m) -> {k: v})
- * @param {Object} spec an object recursively mapping properties to functions for
- *        producing the values for these properties.
- * @return {Function} A function that returns an object of the same structure
- * as `spec', with each property set to the value returned by calling its
+ * @sig {k: ((a, b, ..., m) -> v)} | [((a, b, ..., m) -> v)] -> ((a, b, ..., m) -> {k: v} | [v])
+ * @param {Object} spec a hierarchy of objects and/or arrays recursively mapping properties/elements
+ * to functions for producing the values for these properties/elements.
+ * @return {Function} A function that returns a value with the same structure
+ * as `spec', with each property/element set to the value returned by calling its
  * associated function with the supplied arguments.
  * @see R.converge, R.juxt
  * @example
@@ -31,6 +32,16 @@ import values from './values';
  *        nested: { mul: R.multiply }
  *      });
  *      getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
+ *
+ *      var beforeCurrentAndAfter = R.applySpec([R.add(-1), R.identity, R.add(1)]);
+ *      beforeCurrentAndAfter(3); // => [2, 3, 4];
+ *
+ *      var operations = R.applySpec([
+ *        { type: R.always('add'), value: R.add },
+ *        { type: R.always('multiply'), value: R.multiply }
+ *      ]);
+ *      operations(2, 4); // => [ { type: 'add', value: 6 }, { type: 'multiply', value: 8 } ];
+ *
  * @symb R.applySpec({ x: f, y: { z: g } })(a, b) = { x: f(a, b), y: { z: g(a, b) } }
  */
 var applySpec = _curry1(function applySpec(spec) {
