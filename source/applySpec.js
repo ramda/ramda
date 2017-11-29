@@ -10,8 +10,8 @@ import values from './values';
 
 /**
  * Given a spec hierarchy of objects and/or arrays recursively mapping properties/elements
- * to functions, creates a value of the same structure, by mapping each 
- * property/element to the result of calling its associated function with 
+ * to functions, creates a value of the same structure, by mapping each
+ * property/element to the result of calling its associated function with
  * the supplied arguments.
  *
  * @func
