@@ -11,12 +11,23 @@ describe('drive', function() {
 
   it('is a curried function', function() {
     var x = 2;
-    var g = R.drive(R.__, [R.add(3)]);
+    var listOfFuncs = [R.add(3)];
+    var f = R.drive(x);
+    var g = R.drive(R.__, listOfFuncs);
+    eq(f(listOfFuncs), 5);
     eq(g(x), 5);
   });
 
   it('pass the value through a list of functions', function() {
-    eq(R.drive(2, [R.add(3), R.multiply(3)]), 15);
+    var x = 2;
+    var listOfFuncs = [R.add(3), R.multiply(3)];
+    eq(R.drive(x, listOfFuncs), 15);
+    eq(R.drive(x, listOfFuncs), R.apply(R.pipe, listOfFuncs)(x));
+  });
+
+  it('should return the first argument if the second argument is an empty list', function() {
+    var x = 2;
+    eq(R.drive(x, []), x);
   });
 
 });

@@ -1,5 +1,5 @@
 import _curry2 from './internal/_curry2';
-import reduce from './reduce';
+import _reduce from './internal/_reduce';
 
 
 /**
@@ -15,14 +15,15 @@ import reduce from './reduce';
  * @param {*} x The value
  * @param {Array} functions A list of functions.
  * @return {*} The result of sequentially applying the list of function to appliying to `x`
+ * @see R.applyTo, R.pipe, R.compose
  * @example
  *
  *      var add2MultBy3 = R.drive(R.__, [R.add(2), R.mult(3)]);
  *      add2MultBy3(2); //=> 12
  */
 var drive = _curry2(function drive(x, fns) {
-  return reduce(function(acc, f) {
+  return _reduce(function(acc, f) {
     return f(acc);
   }, x, fns);
 });
-module.exports = drive;
+export default drive;
