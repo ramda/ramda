@@ -152,6 +152,7 @@ export { default as once } from './once';
 export { default as or } from './or';
 export { default as over } from './over';
 export { default as pair } from './pair';
+export { default as pairwise } from './pairwise';
 export { default as partial } from './partial';
 export { default as partialRight } from './partialRight';
 export { default as partition } from './partition';
