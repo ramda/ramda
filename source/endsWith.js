@@ -3,14 +3,16 @@ import equals from './equals';
 import takeLast from './takeLast';
 
 /**
- * Checks if a list ends with the provided values
+ * Checks if a list ends with the provided sublist.
+ *
+ * Similarly, checks if a string ends with the provided substring.
  *
  * @func
  * @memberOf R
  * @since v0.24.0
  * @category List
- * @sig [a] -> Boolean
- * @sig String -> Boolean
+ * @sig [a] -> [a] -> Boolean
+ * @sig String -> String -> Boolean
  * @param {*} suffix
  * @param {*} list
  * @return {Boolean}
