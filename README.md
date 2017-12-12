@@ -123,6 +123,11 @@ These script tags add the variable `R` on the browser's global scope.
 
 Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](https://github.com/ramda/ramda/blob/master/BOOKMARKLET.md).
 
+**Note for versions > 0.25**
+Ramda versions > 0.25 don't have a default export.
+So instead of `import R from 'ramda';`, one has to use `import * as R from 'ramda';`
+Or better yet, import only the required functions via `import { functionName } from 'ramda';`
+
 ### Build
 
 `npm run build` creates `es`, `src` directories and updates both __dist/ramda.js__ and __dist/ramda.min.js__
