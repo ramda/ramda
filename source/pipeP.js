@@ -23,9 +23,10 @@ import tail from './tail';
  *      var followersForUser = R.pipeP(db.getUserById, db.getFollowers);
  */
 export default function pipeP() {
-  if (arguments.length === 0) {
+  var args = arguments;
+  if (args.length === 0) {
     throw new Error('pipeP requires at least one argument');
   }
-  return _arity(arguments[0].length,
-                reduce(_pipeP, arguments[0], tail(arguments)));
+  return _arity(args[0].length,
+                reduce(_pipeP, function() { return Promise.resolve(args[0].apply(this, arguments)); }, tail(args)));
 }

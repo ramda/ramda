@@ -3,6 +3,34 @@ var assert = require('assert');
 var R = require('..');
 var eq = require('./shared/eq');
 
+// arity of f = 1
+// arity of g = 2
+function testComposition(f, g, done) {
+  eq(R.composeP(f).length, 1);
+  eq(R.composeP(g).length, 2);
+  eq(R.composeP(f, f).length, 1);
+  eq(R.composeP(f, g).length, 2);
+  eq(R.composeP(g, f).length, 1);
+  eq(R.composeP(g, g).length, 2);
+
+  R.composeP(f, g)(1).then(function(result) {
+    eq(result, [[1, undefined]]);
+
+    R.composeP(g, f)(1).then(function(result) {
+      eq(result, [[1], undefined]);
+
+      R.composeP(f, g)(1, 2).then(function(result) {
+        eq(result, [[1, 2]]);
+
+        R.composeP(g, f)(1, 2).then(function(result) {
+          eq(result, [[1], undefined]);
+
+          done();
+        })['catch'](done);
+      })['catch'](done);
+    })['catch'](done);
+  })['catch'](done);
+}
 
 describe('composeP', function() {
 
@@ -14,31 +42,13 @@ describe('composeP', function() {
   it('performs right-to-left composition of Promise-returning functions', function(done) {
     var f = function(a) { return new Promise(function(res) { res([a]); }); };
     var g = function(a, b) { return new Promise(function(res) { res([a, b]); }); };
+    testComposition(f, g, done);
+  });
 
-    eq(R.composeP(f).length, 1);
-    eq(R.composeP(g).length, 2);
-    eq(R.composeP(f, f).length, 1);
-    eq(R.composeP(f, g).length, 2);
-    eq(R.composeP(g, f).length, 1);
-    eq(R.composeP(g, g).length, 2);
-
-    R.composeP(f, g)(1).then(function(result) {
-      eq(result, [[1, undefined]]);
-
-      R.composeP(g, f)(1).then(function(result) {
-        eq(result, [[1], undefined]);
-
-        R.composeP(f, g)(1, 2).then(function(result) {
-          eq(result, [[1, 2]]);
-
-          R.composeP(g, f)(1, 2).then(function(result) {
-            eq(result, [[1], undefined]);
-
-            done();
-          })['catch'](done);
-        })['catch'](done);
-      })['catch'](done);
-    })['catch'](done);
+  it('performs right-to-left composition of both Promise-returning and value-returning functions', function(done) {
+    var f = function(a) { return [a]; };
+    var g = function(a, b) { return new Promise(function(res) { res([a, b]); }); };
+    testComposition(f, g, done);
   });
 
   it('throws if given no arguments', function() {
