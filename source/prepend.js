@@ -1,16 +1,21 @@
 import _concat from './internal/_concat';
 import _curry2 from './internal/_curry2';
+import _isString from './internal/_isString';
 
 
 /**
  * Returns a new list with the given element at the front, followed by the
  * contents of the list.
  *
+ * When string is passed as second arguments,
+ * prepends first argument to it instead.
+ *
  * @func
  * @memberOf R
  * @since v0.1.0
  * @category List
  * @sig a -> [a] -> [a]
+ * @sig String -> String -> String
  * @param {*} el The item to add to the head of the output list.
  * @param {Array} list The array to add to the tail of the output list.
  * @return {Array} A new array.
@@ -18,8 +23,12 @@ import _curry2 from './internal/_curry2';
  * @example
  *
  *      R.prepend('fee', ['fi', 'fo', 'fum']); //=> ['fee', 'fi', 'fo', 'fum']
+ *      R.prepend('foo', 'bar') //=> 'foobar'
  */
 var prepend = _curry2(function prepend(el, list) {
+  if (_isString(list)) {
+    return el + list;
+  }
   return _concat([el], list);
 });
 export default prepend;
