@@ -6,9 +6,8 @@ import _curry3 from './internal/_curry3';
  * Like [`compose`](#compose), `o` performs right-to-left function composition.
  * Unlike [`compose`](#compose), the rightmost function passed to `o` will be
  * invoked with only one argument. Also, unlike [`compose`](#compose), `o` is
- * limited to accepting only 2 unary functions. It's origin is meant to look
- * like the mathematical composition operator `∘`, with lowercase o being the
- * closest ASCII match.
+ * limited to accepting only 2 unary functions. The name o was chosen because
+ * of its similarity to the mathematical composition operator ∘.
  *
  * @func
  * @memberOf R
