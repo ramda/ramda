@@ -7,7 +7,7 @@ import _curry3 from './internal/_curry3';
  * Unlike [`compose`](#compose), the rightmost function passed to `o` will be
  * invoked with only one argument. Also, unlike [`compose`](#compose), `o` is
  * limited to accepting only 2 unary functions. It's origin is meant to look
- * like the mathematical composition operator `∘`, with lowercase o being the 
+ * like the mathematical composition operator `∘`, with lowercase o being the
  * closest ASCII match.
  *
  * @func
