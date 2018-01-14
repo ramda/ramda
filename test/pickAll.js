@@ -12,4 +12,8 @@ describe('pickAll', function() {
     eq(R.pickAll(['a', 'c', 'g'], obj), {a: 1, c: 3, g: undefined});
   });
 
+  it('adds properties to an undefined object', function() {
+    var _obj = undefined;
+    eq(R.pickAll(['a', 'c', 'g'], _obj), {a: undefined, c: undefined, g: undefined});
+  });
 });
