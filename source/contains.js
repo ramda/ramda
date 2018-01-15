@@ -5,6 +5,7 @@ import _curry2 from './internal/_curry2';
 /**
  * Returns `true` if the specified value is equal, in [`R.equals`](#equals)
  * terms, to at least one element of the given list; `false` otherwise.
+ * Works also with strings.
  *
  * @func
  * @memberOf R
@@ -21,6 +22,7 @@ import _curry2 from './internal/_curry2';
  *      R.contains(4, [1, 2, 3]); //=> false
  *      R.contains({ name: 'Fred' }, [{ name: 'Fred' }]); //=> true
  *      R.contains([42], [[42]]); //=> true
+ *      R.contains('ba', 'banana'); //=>true
  */
 var contains = _curry2(_contains);
 export default contains;

@@ -27,4 +27,8 @@ describe('contains', function() {
     eq(R.contains(new Just([42]), [new Just([42])]), true);
   });
 
+  it('returns true if substring is part of string', function() {
+    eq(R.contains('ba', 'banana'), true);
+  });
+
 });
