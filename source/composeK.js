@@ -39,5 +39,7 @@ export default function composeK() {
   }
   var init = Array.prototype.slice.call(arguments);
   var last = init.pop();
-  return compose(compose.apply(this, map(chain, init)), last);
+  return init.length === 0
+    ? last
+    : compose(compose.apply(this, map(chain, init)), last);
 }
