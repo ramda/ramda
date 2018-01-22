@@ -194,6 +194,31 @@ If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
 
+Usage
+-----------------
+
+For `v0.25` and up, import the whole library or pick ES modules directly from the library:
+
+```js
+import R, { identity } from 'ramda'
+
+R.map(identity, [1, 2, 3])
+```
+
+If you want to cherry pick methods (and avoid importing the entire library), you would do:
+
+```js
+import identity from 'ramda/src/identity'
+
+identity()
+```
+
+Manually cherry picking methods is cumbersome, so there are some ways to reduce developer inconvenience while keeping bundle sizes small:
+
+1. Webpack + Babel - use [`babel-plugin-ramda`](https://github.com/megawac/babel-plugin-ramda) to automatically cherry pick methods
+1. Webpack - use `UglifyJS` plugin for treeshaking along with the `ModuleConcatenationPlugin`. Discussion [here](https://github.com/ramda/ramda/issues/2355), with an example setup [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples/blob/master/06-webpack-scope-hoisted/webpack.config.js)
+1. Rollbar - does a fine job properly treeshaking, no special work needed; example [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples/blob/master/07-rollup-ramda-tree-shaking/rollup.config.js)
+
 
 Typings
 -----------------
