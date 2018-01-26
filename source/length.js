@@ -11,7 +11,7 @@ import _isNumber from './internal/_isNumber';
  * @category List
  * @sig [a] | (*… → *) -> Number
  * @param {Array} item The array or function to inspect.
- * @return {Number} The length of the array or the expected number of parameters for the function.
+ * @return {Number} The length of the array or the expected number of arguments for the function.
  * @example
  *
  *      R.length([]); //=> 0
