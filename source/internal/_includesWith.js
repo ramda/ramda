@@ -1,4 +1,4 @@
-export default function _containsWith(pred, x, list) {
+export default function _includesWith(pred, x, list) {
   var idx = 0;
   var len = list.length;
 

@@ -1,4 +1,4 @@
-import _contains from './_contains';
+import _includes from './_includes';
 import _map from './_map';
 import _quote from './_quote';
 import _toISOString from './_toISOString';
@@ -9,7 +9,7 @@ import reject from '../reject';
 export default function _toString(x, seen) {
   var recur = function recur(y) {
     var xs = seen.concat([x]);
-    return _contains(y, xs) ? '<Circular>' : _toString(y, xs);
+    return _includes(y, xs) ? '<Circular>' : _toString(y, xs);
   };
 
   //  mapPairs :: (Object, [String]) -> [String]

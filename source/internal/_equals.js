@@ -1,5 +1,5 @@
 import _arrayFromIterator from './_arrayFromIterator';
-import _containsWith from './_containsWith';
+import _includesWith from './_includesWith';
 import _functionName from './_functionName';
 import _has from './_has';
 import _objectIs from './_objectIs';
@@ -26,8 +26,8 @@ function _uniqContentEquals(aIterator, bIterator, stackA, stackB) {
   }
 
   // if *a* array contains any element that is not included in *b*
-  return !_containsWith(function(b, aItem) {
-    return !_containsWith(eq, aItem, b);
+  return !_includesWith(function(b, aItem) {
+    return !_includesWith(eq, aItem, b);
   }, b, a);
 }
 

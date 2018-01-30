@@ -7,7 +7,7 @@ describe('mapObjIndexed', function() {
   var addIndexed = function(x, key) {return x + key;};
   var squareVowels = function(x, key) {
     var vowels = ['a', 'e', 'i', 'o', 'u'];
-    return R.contains(key, vowels) ? x * x : x;
+    return R.includes(key, vowels) ? x * x : x;
   };
 
   it('works just like a normal mapObj', function() {
