@@ -21,7 +21,7 @@ import mergeDeepWithKey from './mergeDeepWithKey';
  * @param {Object} lObj
  * @param {Object} rObj
  * @return {Object}
- * @see R.mergeWith, R.mergeDeep, R.mergeDeepWithKey
+ * @see R.mergeWith, R.mergeDeepWithKey
  * @example
  *
  *      R.mergeDeepWith(R.concat,
