@@ -26,3 +26,5 @@
         $ git push origin <branch>
 
 7.  Open a pull request.
+
+You can also help triage issues which may include reproducing bug reports or asking for vital information, such as version numbers or reproduction instructions. If you would like to start triaging issues, one easy way to get started is to [subscribe to ramda on CodeTriage](https://www.codetriage.com/ramda/ramda).
