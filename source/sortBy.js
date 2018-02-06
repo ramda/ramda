@@ -15,9 +15,10 @@ import _curry2 from './internal/_curry2';
  * @example
  *
  *      var sortByFirstItem = R.sortBy(R.prop(0));
- *      var sortByNameCaseInsensitive = R.sortBy(R.compose(R.toLower, R.prop('name')));
  *      var pairs = [[-1, 1], [-2, 2], [-3, 3]];
  *      sortByFirstItem(pairs); //=> [[-3, 3], [-2, 2], [-1, 1]]
+ *
+ *      var sortByNameCaseInsensitive = R.sortBy(R.compose(R.toLower, R.prop('name')));
  *      var alice = {
  *        name: 'ALICE',
  *        age: 101
