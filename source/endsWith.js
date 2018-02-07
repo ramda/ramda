@@ -16,6 +16,7 @@ import takeLast from './takeLast';
  * @param {*} suffix
  * @param {*} list
  * @return {Boolean}
+ * @see R.startsWith
  * @example
  *
  *      R.endsWith('c', 'abc')                //=> true

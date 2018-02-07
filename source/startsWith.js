@@ -16,6 +16,7 @@ import take from './take';
  * @param {*} prefix
  * @param {*} list
  * @return {Boolean}
+ * @see R.endsWith
  * @example
  *
  *      R.startsWith('a', 'abc')                //=> true
