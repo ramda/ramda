@@ -13,8 +13,9 @@ import map from './map';
  * @memberOf R
  * @since v0.7.0
  * @category Function
- * @sig Number -> (a, b, c, ... -> z) -> ([a], [b], [c], ... -> [z])
- * @sig Apply f => Number -> f (a, b, c, ... -> z) -> (f a, f b, f c, ... -> f z)
+ * @sig Number -> (a, b, c, ... -> z) -> ([a], [b], [c], ..., [n] -> [*])
+ * @sig Apply f => Number -> f (a, b, c, ... -> z) -> (f a, f b, f c, ..., f n -> f *)
+ * @sig Apply f => Number -> f (a -> b -> c -> ... -> z) -> (f a -> f b -> f c -> ... -> f n -> f (o -> p -> ... -> z))
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
  * @see R.lift, R.ap
