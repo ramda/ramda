@@ -13,14 +13,21 @@ import map from './map';
  * @memberOf R
  * @since v0.7.0
  * @category Function
- * @sig Number -> (*... -> *) -> ([*]... -> [*])
+ * @sig Number -> (a, b, c, ... -> z) -> ([a], [b], [c], ... -> [z])
+ * @sig Apply f => Number -> f (a, b, c, ... -> z) -> (f a, f b, f c, ... -> f z)
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
  * @see R.lift, R.ap
  * @example
  *
  *      var madd3 = R.liftN(3, (...args) => R.sum(args));
+ *
  *      madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
+ *
+ *      // -- can not run here --
+ *      // madd3(Just(1), Just(2), Just(3)); // => Just(6)
+ *      // madd3(Just(1), Just(2), Nothing); // => Nothing
+ *
  */
 var liftN = _curry2(function liftN(arity, fn) {
   var lifted = curryN(arity, fn);

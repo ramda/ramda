@@ -10,7 +10,8 @@ import liftN from './liftN';
  * @memberOf R
  * @since v0.7.0
  * @category Function
- * @sig (*... -> *) -> ([*]... -> [*])
+ * @sig (a, b, c, ... -> z) -> ([a], [b], [c], ... -> [z])
+ * @sig Apply f => f (a, b, c, ... -> z) -> (f a, f b, f c, ... -> f z)
  * @param {Function} fn The function to lift into higher context
  * @return {Function} The lifted function.
  * @see R.liftN
@@ -23,6 +24,11 @@ import liftN from './liftN';
  *      var madd5 = R.lift((a, b, c, d, e) => a + b + c + d + e);
  *
  *      madd5([1,2], [3], [4, 5], [6], [7, 8]); //=> [21, 22, 22, 23, 22, 23, 23, 24]
+ *
+ *      // -- can not run here --
+ *      // madd3(Just(1), Just(2), Just(3)); // => Just(6)
+ *      // madd3(Just(1), Just(2), Nothing); // => Nothing
+ *
  */
 var lift = _curry1(function lift(fn) {
   return liftN(fn.length, fn);
