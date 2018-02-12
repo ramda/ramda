@@ -1,4 +1,4 @@
-import _containsWith from './internal/_containsWith';
+import _includesWith from './internal/_includesWith';
 import _curry2 from './internal/_curry2';
 
 
@@ -31,7 +31,7 @@ var uniqWith = _curry2(function uniqWith(pred, list) {
   var item;
   while (idx < len) {
     item = list[idx];
-    if (!_containsWith(pred, item, result)) {
+    if (!_includesWith(pred, item, result)) {
       result[result.length] = item;
     }
     idx += 1;

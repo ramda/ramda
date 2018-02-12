@@ -1,4 +1,4 @@
-import _contains from './internal/_contains';
+import _includes from './internal/_includes';
 import _curry2 from './internal/_curry2';
 
 
@@ -27,7 +27,7 @@ var difference = _curry2(function difference(first, second) {
   var idx = 0;
   var firstLen = first.length;
   while (idx < firstLen) {
-    if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
+    if (!_includes(first[idx], second) && !_includes(first[idx], out)) {
       out[out.length] = first[idx];
     }
     idx += 1;

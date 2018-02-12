@@ -1,4 +1,4 @@
-import _containsWith from './internal/_containsWith';
+import _includesWith from './internal/_includesWith';
 import _curry3 from './internal/_curry3';
 import _filter from './internal/_filter';
 
@@ -39,6 +39,6 @@ import _filter from './internal/_filter';
  *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
 var innerJoin = _curry3(function innerJoin(pred, xs, ys) {
-  return _filter(function(x) { return _containsWith(pred, x, ys); }, xs);
+  return _filter(function(x) { return _includesWith(pred, x, ys); }, xs);
 });
 export default innerJoin;

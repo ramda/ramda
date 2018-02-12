@@ -1,4 +1,4 @@
-import _containsWith from './internal/_containsWith';
+import _includesWith from './internal/_includesWith';
 import _curry3 from './internal/_curry3';
 
 
@@ -29,8 +29,8 @@ var differenceWith = _curry3(function differenceWith(pred, first, second) {
   var idx = 0;
   var firstLen = first.length;
   while (idx < firstLen) {
-    if (!_containsWith(pred, first[idx], second) &&
-        !_containsWith(pred, first[idx], out)) {
+    if (!_includesWith(pred, first[idx], second) &&
+        !_includesWith(pred, first[idx], out)) {
       out.push(first[idx]);
     }
     idx += 1;
