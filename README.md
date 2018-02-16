@@ -200,7 +200,7 @@ Usage
 For `v0.25` and up, import the whole library or pick ES modules directly from the library:
 
 ```js
-import R, { identity } from 'ramda'
+import * as R, { identity } from 'ramda'
 
 R.map(identity, [1, 2, 3])
 ```
