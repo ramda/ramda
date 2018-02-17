@@ -4,5 +4,6 @@ node_js:
 - '0.12'
 - 4
 - 6
+- 8
 before_script:
 - npm run lint
