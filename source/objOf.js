@@ -15,7 +15,7 @@ import _curry2 from './internal/_curry2';
  * @see R.pair
  * @example
  *
- *      var matchPhrases = R.compose(
+ *      const matchPhrases = R.compose(
  *        R.objOf('must'),
  *        R.map(R.objOf('match_phrase'))
  *      );

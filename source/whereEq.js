@@ -25,7 +25,7 @@ import where from './where';
  * @example
  *
  *      // pred :: Object -> Boolean
- *      var pred = R.whereEq({a: 1, b: 2});
+ *      const pred = R.whereEq({a: 1, b: 2});
  *
  *      pred({a: 1});              //=> false
  *      pred({a: 1, b: 2});        //=> true

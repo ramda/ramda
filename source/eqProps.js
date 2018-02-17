@@ -18,8 +18,8 @@ import equals from './equals';
  *
  * @example
  *
- *      var o1 = { a: 1, b: 2, c: 3, d: 4 };
- *      var o2 = { a: 10, b: 20, c: 3, d: 40 };
+ *      const o1 = { a: 1, b: 2, c: 3, d: 4 };
+ *      const o2 = { a: 10, b: 20, c: 3, d: 40 };
  *      R.eqProps('a', o1, o2); //=> false
  *      R.eqProps('c', o1, o2); //=> true
  */

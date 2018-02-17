@@ -24,14 +24,14 @@ import nAry from './nAry';
  *      }
  *
  *      Salad.prototype.recipe = function() {
- *        var instructions = R.map(ingredient => 'Add a dollop of ' + ingredient, this.ingredients);
+ *        const instructions = R.map(ingredient => 'Add a dollop of ' + ingredient, this.ingredients);
  *        return R.join('\n', instructions);
  *      };
  *
- *      var ThreeLayerSalad = R.constructN(3, Salad);
+ *      const ThreeLayerSalad = R.constructN(3, Salad);
  *
  *      // Notice we no longer need the 'new' keyword, and the constructor is curried for 3 arguments.
- *      var salad = ThreeLayerSalad('Mayonnaise')('Potato Chips')('Ketchup');
+ *      const salad = ThreeLayerSalad('Mayonnaise')('Potato Chips')('Ketchup');
  *
  *      console.log(salad.recipe());
  *      // Add a dollop of Mayonnaise

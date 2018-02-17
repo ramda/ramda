@@ -15,13 +15,13 @@ import _has from './internal/_has';
  * @return {Boolean} Whether the property exists.
  * @example
  *
- *      var hasName = R.has('name');
+ *      const hasName = R.has('name');
  *      hasName({name: 'alice'});   //=> true
  *      hasName({name: 'bob'});     //=> true
  *      hasName({});                //=> false
  *
- *      var point = {x: 0, y: 0};
- *      var pointHas = R.has(R.__, point);
+ *      const point = {x: 0, y: 0};
+ *      const pointHas = R.has(R.__, point);
  *      pointHas('x');  //=> true
  *      pointHas('y');  //=> true
  *      pointHas('z');  //=> false

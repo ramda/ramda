@@ -26,7 +26,7 @@ import slice from './slice';
  * @see R.takeWhile, R.transduce, R.addIndex
  * @example
  *
- *      var lteTwo = x => x <= 2;
+ *      const lteTwo = x => x <= 2;
  *
  *      R.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
  *

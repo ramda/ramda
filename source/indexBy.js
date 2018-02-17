@@ -19,7 +19,7 @@ import reduceBy from './reduceBy';
  * @return {Object} An object indexing each array element by the given property.
  * @example
  *
- *      var list = [{id: 'xyz', title: 'A'}, {id: 'abc', title: 'B'}];
+ *      const list = [{id: 'xyz', title: 'A'}, {id: 'abc', title: 'B'}];
  *      R.indexBy(R.prop('id'), list);
  *      //=> {abc: {id: 'abc', title: 'B'}, xyz: {id: 'xyz', title: 'A'}}
  */

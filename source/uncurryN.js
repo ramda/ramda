@@ -16,9 +16,9 @@ import curryN from './curryN';
  * @see R.curry
  * @example
  *
- *      var addFour = a => b => c => d => a + b + c + d;
+ *      const addFour = a => b => c => d => a + b + c + d;
  *
- *      var uncurriedAddFour = R.uncurryN(4, addFour);
+ *      const uncurriedAddFour = R.uncurryN(4, addFour);
  *      uncurriedAddFour(1, 2, 3, 4); //=> 10
  */
 var uncurryN = _curry2(function uncurryN(depth, fn) {

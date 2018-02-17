@@ -19,7 +19,7 @@ import curryN from './curryN';
  * @see R.unless, R.when, R.cond
  * @example
  *
- *      var incCount = R.ifElse(
+ *      const incCount = R.ifElse(
  *        R.has('count'),
  *        R.over(R.lensProp('count'), R.inc),
  *        R.assoc('count', 1)

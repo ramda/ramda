@@ -18,7 +18,7 @@ import _curry2 from './internal/_curry2';
  * @return {Array} a new array with its elements sorted by the comparator function.
  * @example
  *
- *      var diff = function(a, b) { return a - b; };
+ *      const diff = function(a, b) { return a - b; };
  *      R.sort(diff, [4,2,7,5]); //=> [2, 4, 5, 7]
  */
 var sort = _curry2(function sort(comparator, list) {

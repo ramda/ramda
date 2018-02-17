@@ -22,7 +22,7 @@ import _curry2 from './internal/_curry2';
  *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
  *      //=> { 'name': 'fred', 'age': 40 }
  *
- *      var withDefaults = R.merge({x: 0, y: 0});
+ *      const withDefaults = R.merge({x: 0, y: 0});
  *      withDefaults({y: 2}); //=> {x: 0, y: 2}
  * @symb R.merge(a, b) = {...a, ...b}
  */

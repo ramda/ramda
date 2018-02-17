@@ -18,7 +18,7 @@ import keys from './keys';
  * @return {Object} The original object.
  * @example
  *
- *      var printKeyConcatValue = (value, key) => console.log(key + ':' + value);
+ *      const printKeyConcatValue = (value, key) => console.log(key + ':' + value);
  *      R.forEachObjIndexed(printKeyConcatValue, {x: 1, y: 2}); //=> {x: 1, y: 2}
  *      // logs x:1
  *      // logs y:2

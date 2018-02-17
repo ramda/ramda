@@ -28,7 +28,7 @@ import keys from './keys';
  * @see R.reject, R.transduce, R.addIndex
  * @example
  *
- *      var isEven = n => n % 2 === 0;
+ *      const isEven = n => n % 2 === 0;
  *
  *      R.filter(isEven, [1, 2, 3, 4]); //=> [2, 4]
  *

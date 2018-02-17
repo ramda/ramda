@@ -17,10 +17,10 @@ import _curry2 from './internal/_curry2';
  *
  *      R.divide(71, 100); //=> 0.71
  *
- *      var half = R.divide(R.__, 2);
+ *      const half = R.divide(R.__, 2);
  *      half(42); //=> 21
  *
- *      var reciprocal = R.divide(1);
+ *      const reciprocal = R.divide(1);
  *      reciprocal(4);   //=> 0.25
  */
 var divide = _curry2(function divide(a, b) { return a / b; });

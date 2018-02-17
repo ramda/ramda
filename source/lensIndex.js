@@ -18,7 +18,7 @@ import update from './update';
  * @see R.view, R.set, R.over
  * @example
  *
- *      var headLens = R.lensIndex(0);
+ *      const headLens = R.lensIndex(0);
  *
  *      R.view(headLens, ['a', 'b', 'c']);            //=> 'a'
  *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']

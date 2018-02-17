@@ -23,7 +23,7 @@ import _curry2 from './internal/_curry2';
  *        return this.width * this.height;
  *      };
  *
- *      var square = new Rectangle(2, 2);
+ *      const square = new Rectangle(2, 2);
  *      R.hasIn('width', square);  //=> true
  *      R.hasIn('area', square);  //=> true
  */

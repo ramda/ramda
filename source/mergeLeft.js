@@ -20,7 +20,7 @@ import _curry2 from './internal/_curry2';
  *      R.mergeLeft({ 'age': 40 }, { 'name': 'fred', 'age': 10 });
  *      //=> { 'name': 'fred', 'age': 40 }
  *
- *      var resetToDefault = R.mergeLeft({x: 0});
+ *      const resetToDefault = R.mergeLeft({x: 0});
  *      resetToDefault({x: 5, y: 2}); //=> {x: 0, y: 2}
  * @symb R.mergeLeft(a, b) = {...b, ...a}
  */

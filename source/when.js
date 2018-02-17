@@ -22,7 +22,7 @@ import _curry3 from './internal/_curry3';
  * @example
  *
  *      // truncate :: String -> String
- *      var truncate = R.when(
+ *      const truncate = R.when(
  *        R.propSatisfies(R.gt(R.__, 10), 'length'),
  *        R.pipe(R.take(10), R.append('…'), R.join(''))
  *      );

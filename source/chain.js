@@ -24,7 +24,7 @@ import map from './map';
  * @return {Array} The result of flat-mapping `list` with `fn`
  * @example
  *
- *      var duplicate = n => [n, n];
+ *      const duplicate = n => [n, n];
  *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
  *
  *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]

@@ -19,7 +19,7 @@ import _curry2 from './internal/_curry2';
  * @return {Boolean}
  * @example
  *
- *      var o = {};
+ *      const o = {};
  *      R.identical(o, o); //=> true
  *      R.identical(1, 1); //=> true
  *      R.identical(1, '1'); //=> false

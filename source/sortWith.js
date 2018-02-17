@@ -14,20 +14,20 @@ import _curry2 from './internal/_curry2';
  * @return {Array} A new list sorted according to the comarator functions.
  * @example
  *
- *      var alice = {
+ *      const alice = {
  *        name: 'alice',
  *        age: 40
  *      };
- *      var bob = {
+ *      const bob = {
  *        name: 'bob',
  *        age: 30
  *      };
- *      var clara = {
+ *      const clara = {
  *        name: 'clara',
  *        age: 40
  *      };
- *      var people = [clara, bob, alice];
- *      var ageNameSort = R.sortWith([
+ *      const people = [clara, bob, alice];
+ *      const ageNameSort = R.sortWith([
  *        R.descend(R.prop('age')),
  *        R.ascend(R.prop('name'))
  *      ]);

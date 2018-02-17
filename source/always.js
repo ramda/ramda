@@ -17,7 +17,7 @@ import _curry1 from './internal/_curry1';
  * @return {Function} A Function :: * -> val.
  * @example
  *
- *      var t = R.always('Tee');
+ *      const t = R.always('Tee');
  *      t(); //=> 'Tee'
  */
 var always = _curry1(function always(val) {

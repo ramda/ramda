@@ -18,8 +18,8 @@ import _curry3 from './internal/_curry3';
  * @see R.reduce, R.mapAccum
  * @example
  *
- *      var numbers = [1, 2, 3, 4];
- *      var factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
+ *      const numbers = [1, 2, 3, 4];
+ *      const factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
  * @symb R.scan(f, a, [b, c]) = [a, f(a, b), f(f(a, b), c)]
  */
 var scan = _curry3(function scan(fn, acc, list) {

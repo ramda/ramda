@@ -18,7 +18,7 @@ import prop from './prop';
  * @see R.view, R.set, R.over
  * @example
  *
- *      var xLens = R.lensProp('x');
+ *      const xLens = R.lensProp('x');
  *
  *      R.view(xLens, {x: 1, y: 2});            //=> 1
  *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}

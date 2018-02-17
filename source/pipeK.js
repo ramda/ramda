@@ -21,7 +21,7 @@ import reverse from './reverse';
  *      //  get :: String -> Object -> Maybe *
  *
  *      //  getStateCode :: Maybe String -> Maybe String
- *      var getStateCode = R.pipeK(
+ *      const getStateCode = R.pipeK(
  *        parseJson,
  *        get('user'),
  *        get('address'),

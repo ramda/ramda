@@ -18,7 +18,7 @@ import _xtap from './internal/_xtap';
  * @return {*} `x`.
  * @example
  *
- *      var sayX = x => console.log('x is ' + x);
+ *      const sayX = x => console.log('x is ' + x);
  *      R.tap(sayX, 100); //=> 100
  *      // logs 'x is 100'
  * @symb R.tap(f, a) = a

@@ -19,7 +19,7 @@ import map from './map';
  * @see R.lift, R.ap
  * @example
  *
- *      var madd3 = R.liftN(3, (...args) => R.sum(args));
+ *      const madd3 = R.liftN(3, (...args) => R.sum(args));
  *      madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
 var liftN = _curry2(function liftN(arity, fn) {

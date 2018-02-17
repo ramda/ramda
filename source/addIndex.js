@@ -23,7 +23,7 @@ import curryN from './curryN';
  * @return {Function} An altered list iteration function that passes (item, index, list) to its callback
  * @example
  *
- *      var mapIndexed = R.addIndex(R.map);
+ *      const mapIndexed = R.addIndex(R.map);
  *      mapIndexed((val, idx) => idx + '-' + val, ['f', 'o', 'o', 'b', 'a', 'r']);
  *      //=> ['0-f', '1-o', '2-o', '3-b', '4-a', '5-r']
  */
