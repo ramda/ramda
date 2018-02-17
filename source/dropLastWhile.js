@@ -25,7 +25,7 @@ import _xdropLastWhile from './internal/_xdropLastWhile';
  * @see R.takeLastWhile, R.addIndex, R.drop, R.dropWhile
  * @example
  *
- *      var lteThree = x => x <= 3;
+ *      const lteThree = x => x <= 3;
  *
  *      R.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4]
  *

@@ -23,8 +23,8 @@ import _equals from './internal/_equals';
  *      R.equals(1, '1'); //=> false
  *      R.equals([1, 2, 3], [1, 2, 3]); //=> true
  *
- *      var a = {}; a.v = a;
- *      var b = {}; b.v = b;
+ *      const a = {}; a.v = a;
+ *      const b = {}; b.v = b;
  *      R.equals(a, b); //=> true
  */
 var equals = _curry2(function equals(a, b) {

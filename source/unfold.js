@@ -22,7 +22,7 @@ import _curry2 from './internal/_curry2';
  * @return {Array} The final list.
  * @example
  *
- *      var f = n => n > 50 ? false : [-n, n + 10];
+ *      const f = n => n > 50 ? false : [-n, n + 10];
  *      R.unfold(f, 10); //=> [-10, -20, -30, -40, -50]
  * @symb R.unfold(f, x) = [f(x)[0], f(f(x)[1])[0], f(f(f(x)[1])[1])[0], ...]
  */

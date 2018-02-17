@@ -19,8 +19,8 @@ import times from './times';
  *
  *      R.repeat('hi', 5); //=> ['hi', 'hi', 'hi', 'hi', 'hi']
  *
- *      var obj = {};
- *      var repeatedObjs = R.repeat(obj, 5); //=> [{}, {}, {}, {}, {}]
+ *      const obj = {};
+ *      const repeatedObjs = R.repeat(obj, 5); //=> [{}, {}, {}, {}, {}]
  *      repeatedObjs[0] === repeatedObjs[1]; //=> true
  * @symb R.repeat(a, 0) = []
  * @symb R.repeat(a, 1) = [a]

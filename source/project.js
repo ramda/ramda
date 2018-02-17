@@ -18,9 +18,9 @@ import useWith from './useWith';
  * @return {Array} An array of objects with just the `props` properties.
  * @example
  *
- *      var abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2};
- *      var fred = {name: 'Fred', age: 12, hair: 'brown', grade: 7};
- *      var kids = [abby, fred];
+ *      const abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2};
+ *      const fred = {name: 'Fred', age: 12, hair: 'brown', grade: 7};
+ *      const kids = [abby, fred];
  *      R.project(['name', 'grade'], kids); //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
  */
 var project = useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity

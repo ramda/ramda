@@ -19,7 +19,7 @@ import _curry2 from './internal/_curry2';
  * @see R.partial
  * @example
  *
- *      var log = R.bind(console.log, console);
+ *      const log = R.bind(console.log, console);
  *      R.pipe(R.assoc('a', 2), R.tap(log), R.assoc('a', 3))({a: 1}); //=> {a: 3}
  *      // logs {a: 2}
  * @symb R.bind(f, o)(a, b) = f.call(o, a, b)

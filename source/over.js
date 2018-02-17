@@ -25,7 +25,7 @@ var Identity = function(x) {
  * @see R.prop, R.lensIndex, R.lensProp
  * @example
  *
- *      var headLens = R.lensIndex(0);
+ *      const headLens = R.lensIndex(0);
  *
  *      R.over(headLens, R.toUpper, ['foo', 'bar', 'baz']); //=> ['FOO', 'bar', 'baz']
  */

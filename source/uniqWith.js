@@ -18,7 +18,7 @@ import _curry2 from './internal/_curry2';
  * @return {Array} The list of unique items.
  * @example
  *
- *      var strEq = R.eqBy(String);
+ *      const strEq = R.eqBy(String);
  *      R.uniqWith(strEq)([1, '1', 2, 1]); //=> [1, 2]
  *      R.uniqWith(strEq)([{}, {}]);       //=> [{}]
  *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]

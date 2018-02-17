@@ -21,7 +21,7 @@ import _xfindLastIndex from './internal/_xfindLastIndex';
  * @see R.transduce
  * @example
  *
- *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
+ *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];
  *      R.findLastIndex(R.propEq('a', 1))(xs); //=> 1
  *      R.findLastIndex(R.propEq('a', 4))(xs); //=> -1
  */

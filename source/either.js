@@ -25,9 +25,9 @@ import or from './or';
  * @see R.or
  * @example
  *
- *      var gt10 = x => x > 10;
- *      var even = x => x % 2 === 0;
- *      var f = R.either(gt10, even);
+ *      const gt10 = x => x > 10;
+ *      const even = x => x % 2 === 0;
+ *      const f = R.either(gt10, even);
  *      f(101); //=> true
  *      f(8); //=> true
  *

@@ -21,7 +21,7 @@ import _xfindLast from './internal/_xfindLast';
  * @see R.transduce
  * @example
  *
- *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
+ *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];
  *      R.findLast(R.propEq('a', 1))(xs); //=> {a: 1, b: 1}
  *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
  */

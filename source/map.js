@@ -33,7 +33,7 @@ import keys from './keys';
  * @see R.transduce, R.addIndex
  * @example
  *
- *      var double = x => x * 2;
+ *      const double = x => x * 2;
  *
  *      R.map(double, [1, 2, 3]); //=> [2, 4, 6]
  *

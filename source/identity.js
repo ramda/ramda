@@ -17,7 +17,7 @@ import _identity from './internal/_identity';
  *
  *      R.identity(1); //=> 1
  *
- *      var obj = {};
+ *      const obj = {};
  *      R.identity(obj) === obj; //=> true
  * @symb R.identity(a) = a
  */

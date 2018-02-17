@@ -36,11 +36,11 @@ import curryN from './curryN';
  * @see R.curryN, R.partial
  * @example
  *
- *      var addFourNumbers = (a, b, c, d) => a + b + c + d;
+ *      const addFourNumbers = (a, b, c, d) => a + b + c + d;
  *
- *      var curriedAddFourNumbers = R.curry(addFourNumbers);
- *      var f = curriedAddFourNumbers(1, 2);
- *      var g = f(3);
+ *      const curriedAddFourNumbers = R.curry(addFourNumbers);
+ *      const f = curriedAddFourNumbers(1, 2);
+ *      const g = f(3);
  *      g(4); //=> 10
  */
 var curry = _curry1(function curry(fn) {

@@ -23,14 +23,14 @@ import reduceBy from './reduceBy';
  * @see R.reduceBy, R.transduce
  * @example
  *
- *      var byGrade = R.groupBy(function(student) {
- *        var score = student.score;
+ *      const byGrade = R.groupBy(function(student) {
+ *        const score = student.score;
  *        return score < 65 ? 'F' :
  *               score < 70 ? 'D' :
  *               score < 80 ? 'C' :
  *               score < 90 ? 'B' : 'A';
  *      });
- *      var students = [{name: 'Abby', score: 84},
+ *      const students = [{name: 'Abby', score: 84},
  *                      {name: 'Eddy', score: 58},
  *                      // ...
  *                      {name: 'Jack', score: 69}];

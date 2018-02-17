@@ -19,8 +19,8 @@ import keys from './keys';
  * @see R.map
  * @example
  *
- *      var xyz = { x: 1, y: 2, z: 3 };
- *      var prependKeyAndDouble = (num, key, obj) => key + (num * 2);
+ *      const xyz = { x: 1, y: 2, z: 3 };
+ *      const prependKeyAndDouble = (num, key, obj) => key + (num * 2);
  *
  *      R.mapObjIndexed(prependKeyAndDouble, xyz); //=> { x: 'x2', y: 'y4', z: 'z6' }
  */

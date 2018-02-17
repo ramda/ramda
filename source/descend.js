@@ -17,11 +17,11 @@ import _curry3 from './internal/_curry3';
  * @see R.ascend
  * @example
  *
- *      var byAge = R.descend(R.prop('age'));
- *      var people = [
+ *      const byAge = R.descend(R.prop('age'));
+ *      const people = [
  *        // ...
  *      ];
- *      var peopleByOldestFirst = R.sort(byAge, people);
+ *      const peopleByOldestFirst = R.sort(byAge, people);
  */
 var descend = _curry3(function descend(fn, a, b) {
   var aa = fn(a);

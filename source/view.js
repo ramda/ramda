@@ -22,7 +22,7 @@ var Const = function(x) {
  * @see R.prop, R.lensIndex, R.lensProp
  * @example
  *
- *      var xLens = R.lensProp('x');
+ *      const xLens = R.lensProp('x');
  *
  *      R.view(xLens, {x: 1, y: 2});  //=> 1
  *      R.view(xLens, {x: 4, y: 2});  //=> 4

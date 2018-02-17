@@ -17,7 +17,7 @@ import _curry1 from './internal/_curry1';
  * @return {Function} The wrapped function.
  * @example
  *
- *      var addOneOnce = R.once(x => x + 1);
+ *      const addOneOnce = R.once(x => x + 1);
  *      addOneOnce(10); //=> 11
  *      addOneOnce(addOneOnce(50)); //=> 11
  */

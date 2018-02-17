@@ -20,8 +20,8 @@ import _curry3 from './internal/_curry3';
  * @see R.compose, R.pipe
  * @example
  *
- *      var classyGreeting = name => "The name's " + name.last + ", " + name.first + " " + name.last
- *      var yellGreeting = R.o(R.toUpper, classyGreeting);
+ *      const classyGreeting = name => "The name's " + name.last + ", " + name.first + " " + name.last
+ *      const yellGreeting = R.o(R.toUpper, classyGreeting);
  *      yellGreeting({first: 'James', last: 'Bond'}); //=> "THE NAME'S BOND, JAMES BOND"
  *
  *      R.o(R.multiply(10), R.add(10))(-4) //=> 60

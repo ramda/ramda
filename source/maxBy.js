@@ -18,7 +18,7 @@ import _curry3 from './internal/_curry3';
  * @example
  *
  *      //  square :: Number -> Number
- *      var square = n => n * n;
+ *      const square = n => n * n;
  *
  *      R.maxBy(square, -3, 2); //=> -3
  *

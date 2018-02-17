@@ -18,7 +18,7 @@ import _curry2 from './internal/_curry2';
  * @see R.pick, R.filter
  * @example
  *
- *      var isUpperCase = (val, key) => key.toUpperCase() === key;
+ *      const isUpperCase = (val, key) => key.toUpperCase() === key;
  *      R.pickBy(isUpperCase, {a: 1, b: 2, A: 3, B: 4}); //=> {A: 3, B: 4}
  */
 var pickBy = _curry2(function pickBy(test, obj) {

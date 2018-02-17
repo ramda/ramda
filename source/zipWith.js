@@ -18,7 +18,7 @@ import _curry3 from './internal/_curry3';
  *         using `fn`.
  * @example
  *
- *      var f = (x, y) => {
+ *      const f = (x, y) => {
  *        // ...
  *      };
  *      R.zipWith(f, [1, 2, 3], ['a', 'b', 'c']);

@@ -15,7 +15,7 @@ import _curry2 from './internal/_curry2';
  * @return {*} The second value if it is not `null`, `undefined` or `NaN`, otherwise the default value
  * @example
  *
- *      var defaultTo42 = R.defaultTo(42);
+ *      const defaultTo42 = R.defaultTo(42);
  *
  *      defaultTo42(null);  //=> 42
  *      defaultTo42(undefined);  //=> 42

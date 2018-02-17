@@ -21,7 +21,7 @@ import _xfindIndex from './internal/_xfindIndex';
  * @see R.transduce
  * @example
  *
- *      var xs = [{a: 1}, {a: 2}, {a: 3}];
+ *      const xs = [{a: 1}, {a: 2}, {a: 3}];
  *      R.findIndex(R.propEq('a', 2))(xs); //=> 1
  *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
  */

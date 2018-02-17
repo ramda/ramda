@@ -18,7 +18,7 @@ import _curry2 from './internal/_curry2';
  *      R.props(['x', 'y'], {x: 1, y: 2}); //=> [1, 2]
  *      R.props(['c', 'a', 'b'], {b: 2, a: 1}); //=> [undefined, 1, 2]
  *
- *      var fullName = R.compose(R.join(' '), R.props(['first', 'last']));
+ *      const fullName = R.compose(R.join(' '), R.props(['first', 'last']));
  *      fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'}); //=> 'Tony Bullet-Tooth'
  */
 var props = _curry2(function props(ps, obj) {

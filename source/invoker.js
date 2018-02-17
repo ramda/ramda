@@ -23,9 +23,9 @@ import toString from './toString';
  * @see R.construct
  * @example
  *
- *      var sliceFrom = R.invoker(1, 'slice');
+ *      const sliceFrom = R.invoker(1, 'slice');
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
- *      var sliceFrom6 = R.invoker(2, 'slice')(6);
+ *      const sliceFrom6 = R.invoker(2, 'slice')(6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
  * @symb R.invoker(0, 'method')(o) = o['method']()
  * @symb R.invoker(1, 'method')(a, o) = o['method'](a)

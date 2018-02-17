@@ -20,7 +20,7 @@ import tail from './tail';
  * @example
  *
  *      //  followersForUser :: String -> Promise [User]
- *      var followersForUser = R.pipeP(db.getUserById, db.getFollowers);
+ *      const followersForUser = R.pipeP(db.getUserById, db.getFollowers);
  */
 export default function pipeP() {
   if (arguments.length === 0) {

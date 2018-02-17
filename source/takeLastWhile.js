@@ -21,7 +21,7 @@ import slice from './slice';
  * @see R.dropLastWhile, R.addIndex
  * @example
  *
- *      var isNotOne = x => x !== 1;
+ *      const isNotOne = x => x !== 1;
  *
  *      R.takeLastWhile(isNotOne, [1, 2, 3, 4]); //=> [2, 3, 4]
  *

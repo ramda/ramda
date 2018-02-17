@@ -23,7 +23,7 @@ import reduce from './reduce';
  * @see R.ifElse, R.unless, R.when
  * @example
  *
- *      var fn = R.cond([
+ *      const fn = R.cond([
  *        [R.equals(0),   R.always('water freezes at 0°C')],
  *        [R.equals(100), R.always('water boils at 100°C')],
  *        [R.T,           temp => 'nothing special happens at ' + temp + '°C']

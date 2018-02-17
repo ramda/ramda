@@ -18,8 +18,8 @@ import _curry1 from './internal/_curry1';
  * @return {*} A deeply cloned copy of `val`
  * @example
  *
- *      var objects = [{}, {}, {}];
- *      var objectsClone = R.clone(objects);
+ *      const objects = [{}, {}, {}];
+ *      const objectsClone = R.clone(objects);
  *      objects === objectsClone; //=> false
  *      objects[0] === objectsClone[0]; //=> false
  */

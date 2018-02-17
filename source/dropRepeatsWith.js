@@ -22,7 +22,7 @@ import last from './last';
  * @see R.transduce
  * @example
  *
- *      var l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
+ *      const l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
  *      R.dropRepeatsWith(R.eqBy(Math.abs), l); //=> [1, 3, 4, -5, 3]
  */
 var dropRepeatsWith = _curry2(_dispatchable([], _xdropRepeatsWith, function dropRepeatsWith(pred, list) {

@@ -19,7 +19,7 @@ import path from './path';
  * @see R.view, R.set, R.over
  * @example
  *
- *      var xHeadYLens = R.lensPath(['x', 0, 'y']);
+ *      const xHeadYLens = R.lensPath(['x', 0, 'y']);
  *
  *      R.view(xHeadYLens, {x: [{y: 2, z: 3}, {y: 4, z: 5}]});
  *      //=> 2

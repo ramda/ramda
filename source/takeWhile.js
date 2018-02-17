@@ -27,7 +27,7 @@ import slice from './slice';
  * @see R.dropWhile, R.transduce, R.addIndex
  * @example
  *
- *      var isNotFour = x => x !== 4;
+ *      const isNotFour = x => x !== 4;
  *
  *      R.takeWhile(isNotFour, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3]
  *

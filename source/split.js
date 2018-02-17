@@ -16,7 +16,7 @@ import invoker from './invoker';
  * @see R.join
  * @example
  *
- *      var pathComponents = R.split('/');
+ *      const pathComponents = R.split('/');
  *      R.tail(pathComponents('/usr/local/bin/node')); //=> ['usr', 'local', 'bin', 'node']
  *
  *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']

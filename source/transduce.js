@@ -42,12 +42,12 @@ import curryN from './curryN';
  * @see R.reduce, R.reduced, R.into
  * @example
  *
- *      var numbers = [1, 2, 3, 4];
- *      var transducer = R.compose(R.map(R.add(1)), R.take(2));
+ *      const numbers = [1, 2, 3, 4];
+ *      const transducer = R.compose(R.map(R.add(1)), R.take(2));
  *      R.transduce(transducer, R.flip(R.append), [], numbers); //=> [2, 3]
  *
- *      var isOdd = (x) => x % 2 === 1;
- *      var firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
+ *      const isOdd = (x) => x % 2 === 1;
+ *      const firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
  *      R.transduce(firstOddTransducer, R.flip(R.append), [], R.range(0, 100)); //=> [1]
  */
 var transduce = curryN(4, function transduce(xf, fn, acc, list) {
