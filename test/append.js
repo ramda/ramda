@@ -12,4 +12,8 @@ describe('append', function() {
     eq(R.append(1, []), [1]);
   });
 
+  it('appends a string to the end of another string', function() {
+    eq(R.append('bar', 'foo'), 'foobar');
+  });
+
 });

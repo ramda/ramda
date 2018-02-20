@@ -12,4 +12,8 @@ describe('prepend', function() {
     eq(R.prepend(1, []), [1]);
   });
 
+  it('prepends a string to the beginning of another string', function() {
+    eq(R.prepend('foo', 'bar'), 'foobar');
+  });
+
 });
