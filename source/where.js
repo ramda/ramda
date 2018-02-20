@@ -1,6 +1,7 @@
 import _curry2 from './internal/_curry2';
 import _has from './internal/_has';
 
+var nullObj = Object.create(null);
 
 /**
  * Takes a spec object and a test object; returns true if the test satisfies
@@ -38,8 +39,9 @@ import _has from './internal/_has';
  *      pred({a: 'foo', b: 'xxx', x: 11, y: 20}); //=> false
  */
 var where = _curry2(function where(spec, testObj) {
+  var _testObj = (testObj == null ? nullObj : testObj);
   for (var prop in spec) {
-    if (_has(prop, spec) && !spec[prop](testObj[prop])) {
+    if (_has(prop, spec) && !spec[prop](_testObj[prop])) {
       return false;
     }
   }

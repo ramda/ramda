@@ -41,6 +41,12 @@ describe('whereEq', function() {
     eq(R.whereEq({}, {a: 1}), true);
   });
 
+  it('returns false if testObj is null or undefined', function() {
+    var spec = { x: 1, y: 2 };
+    eq(R.whereEq(spec, null), false);
+    eq(R.whereEq(spec, undefined), false);
+  });
+
   it('reports true when the object equals the spec', function() {
     eq(R.whereEq(R, R), true);
   });

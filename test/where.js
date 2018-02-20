@@ -41,6 +41,12 @@ describe('where', function() {
     eq(R.where({}, {a: 1}), true);
   });
 
+  it('returns false if testObj is null or undefined', function() {
+    var spec = { x: R.equals(1), y: R.equals(2) };
+    eq(R.where(spec, null), false);
+    eq(R.where(spec, undefined), false);
+  });
+
   it('matches inherited properties', function() {
     var spec = {
       toString: R.equals(Object.prototype.toString),
