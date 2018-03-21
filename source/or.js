@@ -2,8 +2,7 @@ import _curry2 from './internal/_curry2';
 
 
 /**
- * Returns `true` if one or both of its arguments are `true`. Returns `false`
- * if both arguments are `false`.
+ * Returns the first argument if truthy, otherwise the second argument.
  *
  * @func
  * @memberOf R
@@ -20,6 +19,10 @@ import _curry2 from './internal/_curry2';
  *      R.or(true, false); //=> true
  *      R.or(false, true); //=> true
  *      R.or(false, false); //=> false
+ *      R.or('a', 'a') //=> 'a'
+ *      R.or('a', '') //=> 'a'
+ *      R.or('', 'a') //=> 'a'
+ *      R.or('', '') //=> ''
  */
 var or = _curry2(function or(a, b) {
   return a || b;

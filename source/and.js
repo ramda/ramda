@@ -2,7 +2,7 @@ import _curry2 from './internal/_curry2';
 
 
 /**
- * Returns `true` if both arguments are `true`; `false` otherwise.
+ * Returns the first argument if it is falsy, otherwise the second argument.
  *
  * @func
  * @memberOf R
@@ -19,6 +19,10 @@ import _curry2 from './internal/_curry2';
  *      R.and(true, false); //=> false
  *      R.and(false, true); //=> false
  *      R.and(false, false); //=> false
+ *      R.and('a', 'a') //=> 'a'
+ *      R.and('a', '') //=> ''
+ *      R.and('', 'a') //=> ''
+ *      R.and('', '') //=> ''
  */
 var and = _curry2(function and(a, b) {
   return a && b;
