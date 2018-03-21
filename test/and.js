@@ -8,6 +8,10 @@ describe('and', function() {
     eq(R.and(true, false), false);
     eq(R.and(false, true), false);
     eq(R.and(false, false), false);
+    eq(R.and('a', 'a'), 'a');
+    eq(R.and('a', ''), '');
+    eq(R.and('', 'a'), '');
+    eq(R.and('', ''), '');
   });
 
 });
