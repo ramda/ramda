@@ -87,6 +87,7 @@ export { default as indexBy } from './indexBy';
 export { default as indexOf } from './indexOf';
 export { default as init } from './init';
 export { default as innerJoin } from './innerJoin';
+export { default as inRange } from './inRange';
 export { default as insert } from './insert';
 export { default as insertAll } from './insertAll';
 export { default as intersection } from './intersection';
