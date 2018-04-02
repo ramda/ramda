@@ -18,10 +18,10 @@ import _curry2 from './internal/_curry2';
 
  */
 var inRange = _curry2(function inRange(val, list) {
-    const sortedList = list.sort(function(a,b) { return a - b;})
-    if (val >= sortedList[0] && val <= sortedList[1]){
-        return true
-    }
-    return false
+  const sortedList = list.sort(function(a,b) { return a - b;});
+  if (val >= sortedList[0] && val <= sortedList[1]) {
+    return true;
+  }
+  return false;
 });
 export default inRange;
