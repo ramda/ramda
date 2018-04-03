@@ -31,4 +31,8 @@ describe('add properties', function() {
   jsv.property('identity', jsv.number, function(a) {
     return R.add(a, 0) === a && R.add(0, a) === a;
   });
+
+  jsv.property('successor', jsv.number, function(a) {
+    return R.add(a, 1) > a;
+  });
 });
