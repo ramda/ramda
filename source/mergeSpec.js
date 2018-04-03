@@ -56,13 +56,12 @@ import values from './values';
 var mergeSpec = _curry1(function mergeSpec(spec) {
   spec = map(function(v) { return typeof v == 'function' ? v : mergeSpec(v); },
              spec);
-  return curryN(reduce(max, 0, pluck('length', values(spec))),
-                function() {
-                  var args = arguments;
-                  if (args.length === 1 && _isObject(args[0])) {
-                    return merge(args[0], map(function(f) { return apply(f, args); }, spec));
-                  }
-                  return map(function(f) { return apply(f, args); }, spec);
-                });
+  return curryN(reduce(max, 0, pluck('length', values(spec))), function() {
+    var args = arguments;
+    if (args.length === 1 && _isObject(args[0])) {
+      return merge(args[0], map(function(f) { return apply(f, args); }, spec));
+    }
+    return map(function(f) { return apply(f, args); }, spec);
+  });
 });
 export default mergeSpec;
