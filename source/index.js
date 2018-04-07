@@ -77,6 +77,7 @@ export { default as gt } from './gt';
 export { default as gte } from './gte';
 export { default as has } from './has';
 export { default as hasIn } from './hasIn';
+export { default as hasPath } from './hasPath';
 export { default as head } from './head';
 export { default as identical } from './identical';
 export { default as identity } from './identity';
