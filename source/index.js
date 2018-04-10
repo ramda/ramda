@@ -68,6 +68,7 @@ export { default as findLast } from './findLast';
 export { default as findLastIndex } from './findLastIndex';
 export { default as flatten } from './flatten';
 export { default as flip } from './flip';
+export { default as flipAll } from './flipAll';
 export { default as forEach } from './forEach';
 export { default as forEachObjIndexed } from './forEachObjIndexed';
 export { default as fromPairs } from  './fromPairs';
