@@ -28,7 +28,7 @@ describe('flipAll', function() {
 
 });
 
-describe('flip properties', function() {
+describe('flipAll properties', function() {
   jsv.property('inverts arguments', funcN(3), jsv.json, jsv.json, jsv.json, function(f, a, b, c) {
     var g = R.flipAll(f);
     return R.equals(f(a, b, c), g(c, b, a));
