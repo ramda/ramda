@@ -1,4 +1,5 @@
 var uglify = require('rollup-plugin-uglify');
+var { sizeSnapshot } = require('rollup-plugin-size-snapshot');
 var pkg = require('./package.json');
 
 var banner = '//  Ramda v' + pkg.version + '\n'
@@ -6,30 +7,41 @@ var banner = '//  Ramda v' + pkg.version + '\n'
   + '//  (c) 2013-' + new Date().getFullYear() + ' Scott Sauyet, Michael Hurley, and David Chambers\n'
   + '//  Ramda may be freely distributed under the MIT license.\n';
 
-var input = 'source/index.js';
+var input = './source/index.js';
 
-var config = {
-  input: input,
-  output: {
-    format: 'umd',
-    name: 'R',
-    exports: 'named'
+module.exports = [
+  {
+    input,
+    output: {
+      file: 'dist/ramda.js',
+      format: 'umd',
+      name: 'R',
+      exports: 'named',
+      banner
+    },
+    plugins: [
+      sizeSnapshot()
+    ]
   },
-  banner: banner,
-  plugins: []
-};
 
-if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(
-    uglify({
-      compress: {
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        warnings: false
-      }
-    })
-  );
-}
-
-module.exports = config;
+  {
+    input,
+    output: {
+      file: 'dist/ramda.min.js',
+      format: 'umd',
+      name: 'R',
+      exports: 'named',
+      banner
+    },
+    plugins: [
+      uglify({
+        compress: {
+          pure_getters: true,
+          unsafe: true,
+          unsafe_comps: true,
+          warnings: false
+        }
+      })
+    ]
+  }
+];
