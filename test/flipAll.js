@@ -6,7 +6,7 @@ var funcN = require('./shared/funcN');
 
 
 describe('flipAll', function() {
-  it('returns a function that flips all arguments', () => {
+  it('returns a function that flips all arguments', function() {
     var f = function(a, b, c) {return a + ' ' + b + ' ' + c;};
     var g = R.flipAll(f);
     eq(f('a', 'b', 'c'), 'a b c');
