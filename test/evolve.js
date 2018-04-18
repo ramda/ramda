@@ -46,4 +46,11 @@ describe('evolve', function() {
     eq(R.evolve(transf, object), expected);
   });
 
+  it('creates a new array by evolving the `array` according to the `transformation` functions', function() {
+    var transf   = [R.add(1), R.add(-1)];
+    var object   = [100, 1400];
+    var expected = [101, 1399];
+    eq(R.evolve(transf, object), expected);
+  });
+
 });
