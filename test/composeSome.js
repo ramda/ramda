@@ -20,7 +20,7 @@ describe('composeSome', function() {
     eq(f('10', 2)([1, 2, 3]), [2, 4, 6]);
   });
 
-  it('performs left-to-right function composition until null returned', function() {
+  it('performs right-to-left function composition until null returned', function() {
     var isOdd = R.modulo(R.__, 2);
     //  f :: (String, Number?) -> Number?
     var f = R.composeSome(R.inc, R.ifElse(isOdd, R.identity, R.always(null)), parseInt);
