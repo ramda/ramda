@@ -11,7 +11,7 @@ import _curry2 from './internal/_curry2';
  * @memberOf R
  * @since v0.1.0
  * @category String
- * @sig RegExp -> String -> [String | Undefined]
+ * @sig RegExp -> String -> [String]
  * @param {RegExp} rx A regular expression.
  * @param {String} str The string to match against
  * @return {Array} The list of matches or empty array.
