@@ -1,7 +1,15 @@
 import _arity from './_arity';
 import reduce from '../reduce';
 import tail from '../tail';
-import take from '../take';
+
+function take(n, arr) {
+  var result = [];
+  for (var i = 0; i < n; i++) {
+    result[i] = arr[i];
+  }
+
+  return result;
+}
 
 export default function _pipeWith(transformFn) {
   return function() {
