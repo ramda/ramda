@@ -11,7 +11,7 @@ describe('composeWith', function() {
 
   it('performs right-to-left function composition with function applying', function() {
     //  f :: (String, Number?) -> ([Number] -> [Number])
-    var f = R.composeWith((f, res) => {
+    var f = R.composeWith(function(f, res) {
       return f(res);
     })(R.map, R.multiply, parseInt);
 
@@ -22,7 +22,7 @@ describe('composeWith', function() {
 
   it('performs right-to-left function while not nil result', function() {
     var isOdd = R.modulo(R.__, 2);
-    var composeWhenNotNil = R.composeWith((f, res) => {
+    var composeWhenNotNil = R.composeWith(function(f, res) {
       return R.isNil(res) ? null : f(res);
     });
 

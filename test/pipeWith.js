@@ -11,7 +11,7 @@ describe('pipeWith', function() {
 
   it('performs left-to-right function composition with function applying', function() {
     //  f :: (String, Number?) -> ([Number] -> [Number])
-    var f = R.pipeWith((f, res) => {
+    var f = R.pipeWith(function(f, res) {
       return f(res);
     })(parseInt, R.multiply, R.map);
 
@@ -22,7 +22,7 @@ describe('pipeWith', function() {
 
   it('performs left-to-right function while not nil result', function() {
     var isOdd = R.modulo(R.__, 2);
-    var pipeWhenNotNil = R.pipeWith((f, res) => {
+    var pipeWhenNotNil = R.pipeWith(function(f, res) {
       return R.isNil(res) ? null : f(res);
     });
 
