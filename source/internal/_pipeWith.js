@@ -1,6 +1,7 @@
 import _arity from './_arity';
 import reduce from '../reduce';
 import tail from '../tail';
+import take from '../take';
 
 export default function _pipeWith(transformFn) {
   return function() {
@@ -8,12 +9,12 @@ export default function _pipeWith(transformFn) {
       throw new Error('composition must contains at least one function');
     }
 
-    var pipeArgs = arguments;
+    var pipeArgs = take(arguments.length, arguments);
 
     return _arity(
       arguments[0].length,
       function() {
-        var inputArgs = arguments;
+        var inputArgs = take(arguments.length, arguments);
 
         return reduce(
           function(result, f) {
