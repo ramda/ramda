@@ -22,8 +22,10 @@ import prop from './prop';
  * @see R.props
  * @example
  *
- *      R.pluck('a', [{a: 1}, {a: 2}]); //=> [1, 2]
- *      R.pluck(0, [[1, 2], [3, 4]]);   //=> [1, 3]
+ *      var getAges = R.pluck('age');
+ *      getAges([{name: 'fred', age: 29}, {name: 'wilma', age: 27}]); //=> [29, 27]
+ *
+ *      R.pluck(0, [[1, 2], [3, 4]]);               //=> [1, 3]
  *      R.pluck('val', {a: {val: 3}, b: {val: 5}}); //=> {a: 3, b: 5}
  * @symb R.pluck('x', [{x: 1, y: 2}, {x: 3, y: 4}, {x: 5, y: 6}]) = [1, 3, 5]
  * @symb R.pluck(0, [[1, 2], [3, 4], [5, 6]]) = [1, 3, 5]
