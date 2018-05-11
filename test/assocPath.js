@@ -27,6 +27,12 @@ describe('assocPath', function() {
     assert.strictEqual(obj2.f, obj1.f);
   });
 
+  it('overwrites primitive values with keys in the path', function() {
+    var obj1 = {a: 'str'};
+    var obj2 = R.assocPath(['a', 'b'], 42, obj1);
+    eq(obj2, {a: {b: 42}});
+  });
+
   it('empty path replaces the the whole object', function() {
     eq(R.assocPath([], 3, {a: 1, b: 2}), 3);
   });
