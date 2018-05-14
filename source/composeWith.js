@@ -23,7 +23,7 @@ import reverse from './reverse';
  *      composeWhileNotNil([R.inc, R.prop('age')])({age: 1}) //=> 2
  *      composeWhileNotNil([R.inc, R.prop('age')])({}) //=> null
  *
- * @symb R.composeWith(f)(g, h, i)(...args) = f(g, f(h, f(i, ...args)))
+ * @symb R.composeWith(f)([g, h, i])(...args) = f(g, f(h, f(i, ...args)))
  */
 var composeWith = _curry2(function composeWith(xf, list) {
   return pipeWith.apply(this, [xf, reverse(list)]);

@@ -23,7 +23,7 @@ import tail from './tail.js';
  *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
  *
  *      f(3, 4); // -(3^4) + 1
- * @symb R.pipeWith(f)(g, h, i)(...args) = f(i, f(h, f(g, ...args)))
+ * @symb R.pipeWith(f)([g, h, i])(...args) = f(i, f(h, f(g, ...args)))
  */
 var pipeWith = _curry2(function pipeWith(xf, list) {
   if (list.length <= 0) {
