@@ -39,7 +39,7 @@ describe('pipeWith', function() {
     ]);
 
     return f(1)
-      .then((res) => {
+      .then(function(res) {
         eq(res, [1, 1]);
       });
   });
