@@ -29,10 +29,10 @@ describe('pipeWith', function() {
   });
 
   it('performs left-to-right function using promise chaining', function() {
-    const then = (f, p) => p.then(f);
+    const then = function(f, p) { return p.then(f); };
     const pipeP = R.pipeWith(then);
-    const toListPromise = function(a) { return new Promise((res) => res([a]));};
-    const doubleListPromise = function(a) { return new Promise((res) => res(R.concat(a, a)));};
+    const toListPromise = function(a) { return new Promise((res) => res([a])); };
+    const doubleListPromise = function(a) { return new Promise((res) => res(R.concat(a, a))); };
     const f = pipeP([
       toListPromise,
       doubleListPromise
