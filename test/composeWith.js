@@ -28,4 +28,20 @@ describe('composeWith', function() {
     eq(f('2'), null);
   });
 
+  it('performs right-to-left function using promise chaining', function() {
+    var then = function(f, p) { return p.then(f); };
+    var composeP = R.composeWith(then);
+    var toListPromise = function(a) { return new Promise(function(res) { res([a]); }); };
+    var doubleListPromise = function(a) { return new Promise(function(res) { res(R.concat(a, a)); }); };
+    var f = composeP([
+      doubleListPromise,
+      toListPromise
+    ]);
+
+    return f(1)
+      .then(function(res) {
+        eq(res, [1, 1]);
+      });
+  });
+
 });
