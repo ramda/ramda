@@ -13,7 +13,7 @@ A practical functional library for JavaScript programmers.
 Why Ramda?
 ----------
 
-<img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
+<img src="https://ramdajs.com/ramdaFilled_200x235.png" 
      width="170" height="190" align="right" hspace="12" />
 
 There are already several excellent libraries with a functional flavor. Typically, they are meant to be general-purpose toolkits, suitable for working in multiple paradigms. Ramda has a more focused goal. We wanted a library designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. 
