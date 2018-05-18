@@ -24,6 +24,18 @@
   ],
   "name": "ramda",
   "description": "A practical functional library for JavaScript programmers.",
+  "keywords": [
+    "ramda",
+    "functional",
+    "utils",
+    "utilities",
+    "toolkit",
+    "fp",
+    "tacit",
+    "point-free",
+    "curried",
+    "pure"
+  ],
   "sideEffects": false,
   "version": "0.25.0",
   "homepage": "http://ramdajs.com/",
