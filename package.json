@@ -34,7 +34,8 @@
     "tacit",
     "point-free",
     "curried",
-    "pure"
+    "pure",
+    "fantasy-land"
   ],
   "sideEffects": false,
   "version": "0.25.0",
