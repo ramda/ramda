@@ -145,7 +145,7 @@ This requires having Node/io.js installed and ramda's dependencies installed (ju
 Documentation
 -------------
 
-Please review the [API documentation](http://ramdajs.com/docs/).
+Please review the [API documentation](https://ramdajs.com/docs/).
 
 Also available is our [Cookbook](https://github.com/ramda/ramda/wiki/Cookbook) of functions built from Ramda that you may find useful.
 
