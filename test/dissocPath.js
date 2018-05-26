@@ -60,4 +60,10 @@ describe('dissocPath', function() {
     eq(R.dissocPath([], {a: 1, b: 2}), {a: 1, b: 2});
   });
 
+  it('coerces non-string types', function() {
+    eq(R.dissocPath([42], {a: 1, b: 2, 42: 3}), {a: 1, b: 2});
+    eq(R.dissocPath([null], {a: 1, b: 2, 'null': 3}), {a: 1, b: 2});
+    eq(R.dissocPath([undefined], {a: 1, b: 2, undefined: 3}), {a: 1, b: 2});
+  });
+
 });
