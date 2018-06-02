@@ -19,4 +19,10 @@ describe('thunkify', function() {
     var f = R.thunkify(R.add(2));
     eq(f(42)(), 44);
   });
+
+  it('should support sending partial arguments', function() {
+    var input = function input(a0, a1) { return [a0, a1]; };
+    var f = R.thunkify(input);
+    eq(f(42)(), [42, undefined]);
+  });
 });
