@@ -7,7 +7,6 @@ import _arity from './internal/_arity';
  *
  * @func
  * @memberOf R
- * @since v0.25.0
  * @category Function
  * @sig (a -> b) -> (a -> b) // FIXME: write appropiate signature
  * @param {Function} fn A function to wrap in a thunk
