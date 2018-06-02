@@ -248,3 +248,4 @@ export { default as xprod } from './xprod';
 export { default as zip } from './zip';
 export { default as zipObj } from './zipObj';
 export { default as zipWith } from './zipWith';
+export { default as thunkify } from './thunkify';
