@@ -217,6 +217,7 @@ export { default as toPairs } from './toPairs';
 export { default as toPairsIn } from './toPairsIn';
 export { default as toString } from './toString';
 export { default as toUpper } from './toUpper';
+export { default as toggle } from './toggle';
 export { default as transduce } from './transduce';
 export { default as transpose } from './transpose';
 export { default as traverse } from './traverse';
