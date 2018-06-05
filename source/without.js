@@ -18,7 +18,7 @@ import reject from './reject';
  * @param {Array} list1 The values to be removed from `list2`.
  * @param {Array} list2 The array to remove values from.
  * @return {Array} The new array without values in `list1`.
- * @see R.transduce, R.difference
+ * @see R.transduce, R.difference, R.remove
  * @example
  *
  *      R.without([1, 2], [1, 2, 1, 3, 4]); //=> [3, 4]
