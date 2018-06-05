@@ -16,6 +16,7 @@ import _curry3 from './internal/_curry3';
  * @param {Number} count The number of elements to remove
  * @param {Array} list The list to remove from
  * @return {Array} A new Array with `count` elements from `start` removed.
+ * @see R.without
  * @example
  *
  *      R.remove(2, 3, [1,2,3,4,5,6,7,8]); //=> [1,2,6,7,8]
