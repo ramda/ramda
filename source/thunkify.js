@@ -1,5 +1,5 @@
-import _curry1 from './internal/_curry1';
 import _arity from './internal/_arity';
+import _curry1 from './internal/_curry1';
 
 /**
  * Creates a thunk out of a function. A thunk delays a calculation until
@@ -16,6 +16,7 @@ import _arity from './internal/_arity';
  * @example
  *
  *      R.thunkify(R.identity)(42)(); //=> 42
+ *      R.thunkify((a, b) => a + b)(25, 17)(); //=> 42
  */
 var thunkify = _curry1(function thunkify(fn) {
   return _arity(fn.length, function createThunk() {
