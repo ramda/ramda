@@ -1,4 +1,5 @@
 import _curry2 from './internal/_curry2';
+import _equals from './internal/_equals';
 
 
 /**
@@ -12,11 +13,25 @@ import _curry2 from './internal/_curry2';
  * @return {*}
  * @example
  *
- *      R.toggle("on", ["on", "off"]);       //=>  "off"
- *      R.toggle("inactive", ["active", "inactive"]);      //=> "active"
- *      R.toggle(10, [10, 100]); //=> 100
+ *      R.toggle(['on', 'off'], 'on');       //=>  'off'
+ *      R.toggle(['active', 'inactive'], 'inactive');      //=> 'active'
+ *      R.toggle([10, 100], 10); //=> 100
+ *      R.toggle(['on', 'off'], 'other'); //=> 'other'
  */
-var toggle = _curry2(function toggle(val, vals) {
-  return val == vals[0] ? vals[1] : vals[0];
+var toggle = _curry2(function toggle(vals, val) {
+
+  if (vals.length < 2) {
+    return val;
+  }
+
+  if (_equals(val, vals[0], [], [])) {
+    return vals[1];
+  }
+
+  if (_equals(val, vals[1], [], [])) {
+    return vals[0];
+  }
+
+  return val;
 });
 export default toggle;
