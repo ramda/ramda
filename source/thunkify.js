@@ -8,7 +8,7 @@ import _arity from './internal/_arity';
  * @func
  * @memberOf R
  * @category Function
- * @sig (a -> b) -> (a -> b) // FIXME: write appropiate signature
+ * @sig ((a, b, ..., j) -> k) -> (a, b, ..., j) -> (() -> k)
  * @param {Function} fn A function to wrap in a thunk
  * @return {Function} Expects arguments for `fn` and returns a new function
  *  that, when called, applies those arguments to `fn`.
