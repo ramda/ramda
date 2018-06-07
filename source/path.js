@@ -10,6 +10,7 @@ import _curry2 from './internal/_curry2';
  * @category Object
  * @typedefn Idx = String | Int
  * @sig [Idx] -> {a} -> a | Undefined
+ * @sig String -> {a} -> a | Undefined
  * @param {Array} path The path to use.
  * @param {Object} obj The object to retrieve the nested property from.
  * @return {*} The data at `path`.
@@ -18,8 +19,14 @@ import _curry2 from './internal/_curry2';
  *
  *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
  *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
+ *
+ *      R.path('a.b', {a: {b: 2}}); //=> 2
+ *      R.path('a.b', {c: {b: 2}}); //=> undefined
  */
 var path = _curry2(function path(paths, obj) {
+  if (typeof paths === 'string') {
+    paths = paths.split('.');
+  }
   var val = obj;
   var idx = 0;
   while (idx < paths.length) {
