@@ -25,7 +25,9 @@ import _curry2 from './internal/_curry2';
  */
 var path = _curry2(function path(paths, obj) {
   if (typeof paths === 'string') {
-    paths = paths.split('.');
+    paths = paths === ''
+      ? []
+      : paths.split('.');
   }
   var val = obj;
   var idx = 0;

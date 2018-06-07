@@ -31,7 +31,7 @@ describe('path', function() {
 
   it('takes a string which describes path and an object and returns the value at the path or undefined', function() {
     eq(R.path('a.b.c', obj), 100);
-    eq(R.path([], obj), obj);
+    eq(R.path('', obj), obj);
     eq(R.path(['a', 'e', 'f', 1], obj), 101);
     eq(R.path(['j', 0], obj), 'J');
     eq(R.path(['j', 1], obj), undefined);
