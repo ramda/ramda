@@ -30,7 +30,7 @@ import _xreduceBy from './internal/_xreduceBy';
  * @example
  *
  *      const groupNames = (acc, student) => acc.concat(student.name)
- *      const toGrade = (student, score = student.score) =>
+ *      const toGrade = ({score}) =>
  *        score < 65 ? 'F' :
  *        score < 70 ? 'D' :
  *        score < 80 ? 'C' :
