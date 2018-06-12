@@ -30,7 +30,7 @@ import _xreduceBy from './internal/_xreduceBy';
  * @example
  *
  *      const groupNames = (acc, student) => acc.concat(student.name)
- *      const toGrade = (student, score = student.score) => 
+ *      const toGrade = (student, score = student.score) =>
  *        score < 65 ? 'F' :
  *        score < 70 ? 'D' :
  *        score < 80 ? 'C' :
@@ -43,7 +43,7 @@ import _xreduceBy from './internal/_xreduceBy';
  *        {name: 'Dora', score: 92},
  *      ]
  *
- *      reduceBy(groupNames, [], toGrade, students) 
+ *      reduceBy(groupNames, [], toGrade, students)
  *      //=> {"A": ["Dora"], "B": ["Abby", "Curt"], "F": ["Bart"]}
  */
 var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
