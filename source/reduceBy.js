@@ -29,25 +29,22 @@ import _xreduceBy from './internal/_xreduceBy';
  * @see R.groupBy, R.reduce
  * @example
  *
- *      const reduceToNamesBy = R.reduceBy((acc, student) => acc.concat(student.name), []);
- *      const namesByGrade = reduceToNamesBy(function(student) {
- *        const score = student.score;
- *        return score < 65 ? 'F' :
- *               score < 70 ? 'D' :
- *               score < 80 ? 'C' :
- *               score < 90 ? 'B' : 'A';
- *      });
- *      const students = [{name: 'Lucy', score: 92},
- *                      {name: 'Drew', score: 85},
- *                      // ...
- *                      {name: 'Bart', score: 62}];
- *      namesByGrade(students);
- *      // {
- *      //   'A': ['Lucy'],
- *      //   'B': ['Drew']
- *      //   // ...,
- *      //   'F': ['Bart']
- *      // }
+ *      const groupNames = (acc, student) => acc.concat(student.name)
+ *      const toGrade = (student, score = student.score) => 
+ *        score < 65 ? 'F' :
+ *        score < 70 ? 'D' :
+ *        score < 80 ? 'C' :
+ *        score < 90 ? 'B' : 'A'
+ *
+ *      var students = [
+ *        {name: 'Abby', score: 83},
+ *        {name: 'Bart', score: 62},
+ *        {name: 'Curt', score: 88},
+ *        {name: 'Dora', score: 92},
+ *      ]
+ *
+ *      reduceBy(groupNames, [], toGrade, students) 
+ *      //=> {"A": ["Dora"], "B": ["Abby", "Curt"], "F": ["Bart"]}
  */
 var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
