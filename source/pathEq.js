@@ -13,6 +13,7 @@ import path from './path';
  * @category Relation
  * @typedefn Idx = String | Int
  * @sig [Idx] -> a -> {a} -> Boolean
+ * @sig String -> a -> {a} -> Boolean
  * @param {Array} path The path of the nested property to use
  * @param {*} val The value to compare the nested property with
  * @param {Object} obj The object to check the nested property in

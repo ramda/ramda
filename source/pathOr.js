@@ -13,6 +13,7 @@ import path from './path';
  * @category Object
  * @typedefn Idx = String | Int
  * @sig a -> [Idx] -> {a} -> a
+ * @sig a -> String -> {a} -> a
  * @param {*} d The default value.
  * @param {Array} p The path to use.
  * @param {Object} obj The object to retrieve the nested property from.
@@ -21,6 +22,9 @@ import path from './path';
  *
  *      R.pathOr('N/A', ['a', 'b'], {a: {b: 2}}); //=> 2
  *      R.pathOr('N/A', ['a', 'b'], {c: {b: 2}}); //=> "N/A"
+ *
+ *      R.pathOr('N/A', 'a.b', {a: {b: 2}}); //=> 2
+ *      R.pathOr('N/A', 'a.b', {c: {b: 2}}); //=> "N/A"
  */
 var pathOr = _curry3(function pathOr(d, p, obj) {
   return defaultTo(d, path(p, obj));

@@ -12,6 +12,7 @@ import path from './path';
  * @category Logic
  * @typedefn Idx = String | Int
  * @sig (a -> Boolean) -> [Idx] -> {a} -> Boolean
+ * @sig (a -> Boolean) -> String -> {a} -> Boolean
  * @param {Function} pred
  * @param {Array} propPath
  * @param {*} obj
@@ -20,6 +21,7 @@ import path from './path';
  * @example
  *
  *      R.pathSatisfies(y => y > 0, ['x', 'y'], {x: {y: 2}}); //=> true
+ *      R.pathSatisfies(y => y > 0, 'x.y', {x: {y: 2}}); //=> true
  */
 var pathSatisfies = _curry3(function pathSatisfies(pred, propPath, obj) {
   return propPath.length > 0 && pred(path(propPath, obj));

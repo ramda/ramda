@@ -16,21 +16,29 @@ describe('pathEq', function() {
   it('returns true if the path matches the value', function() {
     eq(R.pathEq(['a'], 1, obj), true);
     eq(R.pathEq(['b', 1, 'ba'], 3, obj), true);
+    eq(R.pathEq('a', 1, obj), true);
+    eq(R.pathEq('b.1.ba', 3, obj), true);
   });
 
   it('returns false for non matches', function() {
     eq(R.pathEq(['a'], '1', obj), false);
     eq(R.pathEq(['b', 0, 'ba'], 3, obj), false);
+    eq(R.pathEq('a', '1', obj), false);
+    eq(R.pathEq('b.0.ba', 3, obj), false);
   });
 
   it('returns false for non existing values', function() {
     eq(R.pathEq(['c'], 'foo', obj), false);
     eq(R.pathEq(['c', 'd'], 'foo', obj), false);
+    eq(R.pathEq('c', 'foo', obj), false);
+    eq(R.pathEq('c.d', 'foo', obj), false);
   });
 
   it('accepts empty path', function() {
     eq(R.pathEq([], 42, {a: 1, b: 2}), false);
     eq(R.pathEq([], obj, obj), true);
+    eq(R.pathEq('', 42, {a: 1, b: 2}), false);
+    eq(R.pathEq('', obj, obj), true);
   });
 
   it('has R.equals semantics', function() {
@@ -43,6 +51,10 @@ describe('pathEq', function() {
     eq(R.pathEq(['value'], -0, {value: 0}), false);
     eq(R.pathEq(['value'], NaN, {value: NaN}), true);
     eq(R.pathEq(['value'], new Just([42]), {value: new Just([42])}), true);
+    eq(R.pathEq('value', 0, {value: -0}), false);
+    eq(R.pathEq('value', -0, {value: 0}), false);
+    eq(R.pathEq('value', NaN, {value: NaN}), true);
+    eq(R.pathEq('value', new Just([42]), {value: new Just([42])}), true);
   });
 
 });
