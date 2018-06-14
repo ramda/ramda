@@ -1,4 +1,4 @@
-import _arity from './internal/_arity';
+import _curryN from './internal/_curryN';
 import _curry1 from './internal/_curry1';
 
 /**
@@ -19,7 +19,7 @@ import _curry1 from './internal/_curry1';
  *      R.thunkify((a, b) => a + b)(25, 17)(); //=> 42
  */
 var thunkify = _curry1(function thunkify(fn) {
-  return _arity(fn.length, function createThunk() {
+  return _curryN(fn.length, [], function createThunk() {
     const fnArgs = arguments;
     return function invokeThunk() {
       return fn.apply(this, fnArgs);
