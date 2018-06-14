@@ -19,9 +19,12 @@ import _curry3 from './internal/_curry3';
  *
  *      const byAge = R.descend(R.prop('age'));
  *      const people = [
- *        // ...
+ *        { name: 'Emma', age: 70 },
+ *        { name: 'Peter', age: 78 },
+ *        { name: 'Mikhail', age: 62 },
  *      ];
  *      const peopleByOldestFirst = R.sort(byAge, people);
+ *        //=> [{ name: 'Peter', age: 78 }, { name: 'Emma', age: 70 }, { name: 'Mikhail', age: 62 }]
  */
 var descend = _curry3(function descend(fn, a, b) {
   var aa = fn(a);
