@@ -31,8 +31,8 @@ var evolveKeys = _curry2(function evolveKeys(transformations, object) {
   for (key in object) {
     transformation = transformations[key];
     type = typeof transformation;
-    newKey = type === 'function'                 ? transformation(key)
-                                                 : key;
+    newKey = type === 'function' ? transformation(key)
+                                 : key;
 
     result[newKey] = transformation && type === 'object' ? evolveKeys(transformation, object[key])
                                                          : object[key];
