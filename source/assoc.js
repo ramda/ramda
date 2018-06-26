@@ -16,7 +16,7 @@ import _curry3 from './internal/_curry3';
  * @param {*} val The new value
  * @param {Object} obj The object to clone
  * @return {Object} A new object equivalent to the original except for the changed property.
- * @see R.dissoc
+ * @see R.dissoc, R.pick
  * @example
  *
  *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
