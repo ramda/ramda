@@ -220,6 +220,7 @@ export { default as toUpper } from './toUpper';
 export { default as transduce } from './transduce';
 export { default as transpose } from './transpose';
 export { default as traverse } from './traverse';
+export { default as traverseWithKey } from './traverseWithKey';
 export { default as trim } from './trim';
 export { default as tryCatch } from './tryCatch';
 export { default as type } from './type';

@@ -9,7 +9,8 @@ import sequence from './sequence';
  * then uses [`sequence`](#sequence) to transform the resulting Traversable of Applicative
  * into an Applicative of Traversable.
  *
- * Dispatches to the `traverse` method of the third argument, if present.
+ * Objects and Arrays are both accepted as types of Traversable, otherwise this will
+ * dispatch to the `traverse` method of the third argument, if present.
  *
  * @func
  * @memberOf R
@@ -20,7 +21,7 @@ import sequence from './sequence';
  * @param {Function} f
  * @param {*} traversable
  * @return {*}
- * @see R.sequence
+ * @see R.sequence, R.traverseWithKey
  * @example
  *
  *      // Returns `Maybe.Nothing` if the given divisor is `0`
@@ -28,6 +29,9 @@ import sequence from './sequence';
  *
  *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Maybe.Just([5, 2.5, 2])
  *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Maybe.Nothing
+ *
+ *      R.traverse(Maybe.of, safeDiv(10), {a: 2, b: 4, c: 5}); //=> Maybe.Just({a: 5, b: 2.5, c: 2})
+ *      R.traverse(Maybe.of, safeDiv(10), {a: 2, b: 0, c: 5}); //=> Maybe.Nothing
  */
 var traverse = _curry3(function traverse(of, f, traversable) {
   return typeof traversable['fantasy-land/traverse'] === 'function' ?

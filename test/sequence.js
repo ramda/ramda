@@ -33,4 +33,17 @@ describe('sequence', function() {
     eq(R.sequence(R.of, Id([1, 2, 3])), [Id(1), Id(2), Id(3)]);
   });
 
+  it('operates on an object of applicatives', function() {
+    eq(R.sequence(S.Maybe.of, { a: S.Just(3), b: S.Just(4), c: S.Just(5)}), S.Just({a: 3, b: 4, c: 5}));
+    eq(R.sequence(S.Maybe.of, { a: S.Just(3), b: S.Nothing(), c: S.Just(5)}), S.Nothing());
+  });
+
+  it('performs the applicative effects in a consistent order on objects', function() {
+    eq(R.sequence(R.of, { a: [1, 2], b: [3, 4] }),
+       R.sequence(R.of, { b: [3, 4], a: [1, 2] }));
+
+    eq(R.sequence(S.Either.of, { a: S.Left(0), b: S.Left(1) }),
+       R.sequence(S.Either.of, { b: S.Left(1), a: S.Left(0) }));
+  });
+
 });
