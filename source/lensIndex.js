@@ -5,7 +5,7 @@ import update from './update';
 
 
 /**
- * Returns a lens whose focus is the specified index.
+ * Returns a lens whose focus is the specified index, a negative index starts from the end of the array.
  *
  * @func
  * @memberOf R
