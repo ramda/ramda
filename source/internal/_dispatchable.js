@@ -1,4 +1,7 @@
+import _educe from './_educe';
 import _isArray from './_isArray';
+import _isIterable from './_isIterable';
+import _isString from './_isString';
 import _isTransformer from './_isTransformer';
 
 
@@ -31,9 +34,15 @@ export default function _dispatchable(methodNames, xf, fn) {
         }
         idx += 1;
       }
+      var transducer = xf.apply(null, args);
       if (_isTransformer(obj)) {
-        var transducer = xf.apply(null, args);
         return transducer(obj);
+      }
+      if (obj && typeof obj.transduce === 'function') {
+        return obj.transduce(transducer);
+      }
+      if (_isIterable(obj) && !_isString(obj)) {
+        return _educe(transducer, obj);
       }
     }
     return fn.apply(this, arguments);
