@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfindLast from './internal/_xfindLast';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xfindLast from './internal/_xfindLast.js';
 
 
 /**

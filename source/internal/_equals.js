@@ -1,10 +1,10 @@
-import _arrayFromIterator from './_arrayFromIterator';
-import _includesWith from './_includesWith';
-import _functionName from './_functionName';
-import _has from './_has';
-import _objectIs from './_objectIs';
-import keys from '../keys';
-import type from '../type';
+import _arrayFromIterator from './_arrayFromIterator.js';
+import _includesWith from './_includesWith.js';
+import _functionName from './_functionName.js';
+import _has from './_has.js';
+import _objectIs from './_objectIs.js';
+import keys from '../keys.js';
+import type from '../type.js';
 
 /**
  * private _uniqContentEquals function.

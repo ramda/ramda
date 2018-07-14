@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import _reduce from './internal/_reduce';
+import _curry3 from './internal/_curry3.js';
+import _reduce from './internal/_reduce.js';
 
 
 /**

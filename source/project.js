@@ -1,7 +1,7 @@
-import _map from './internal/_map';
-import identity from './identity';
-import pickAll from './pickAll';
-import useWith from './useWith';
+import _map from './internal/_map.js';
+import identity from './identity.js';
+import pickAll from './pickAll.js';
+import useWith from './useWith.js';
 
 
 /**

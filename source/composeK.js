@@ -1,6 +1,6 @@
-import chain from './chain';
-import compose from './compose';
-import map from './map';
+import chain from './chain.js';
+import compose from './compose.js';
+import map from './map.js';
 
 
 /**

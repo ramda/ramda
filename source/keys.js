@@ -1,6 +1,6 @@
-import _curry1 from './internal/_curry1';
-import _has from './internal/_has';
-import _isArguments from './internal/_isArguments';
+import _curry1 from './internal/_curry1.js';
+import _has from './internal/_has.js';
+import _isArguments from './internal/_isArguments.js';
 
 // cover IE < 9 keys issues
 var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');

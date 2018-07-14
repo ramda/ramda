@@ -1,5 +1,5 @@
-import pipeP from './pipeP';
-import reverse from './reverse';
+import pipeP from './pipeP.js';
+import reverse from './reverse.js';
 
 
 /**

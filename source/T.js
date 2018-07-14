@@ -1,4 +1,4 @@
-import always from './always';
+import always from './always.js';
 
 
 /**

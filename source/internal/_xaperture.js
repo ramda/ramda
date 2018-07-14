@@ -1,6 +1,6 @@
-import _concat from './_concat';
-import _curry2 from './_curry2';
-import _xfBase from './_xfBase';
+import _concat from './_concat.js';
+import _curry2 from './_curry2.js';
+import _xfBase from './_xfBase.js';
 
 
 function XAperture(n, xf) {

@@ -1,5 +1,5 @@
-import lift from './lift';
-import not from './not';
+import lift from './lift.js';
+import not from './not.js';
 
 
 /**

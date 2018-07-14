@@ -1,6 +1,6 @@
-import _complement from './internal/_complement';
-import _curry2 from './internal/_curry2';
-import filter from './filter';
+import _complement from './internal/_complement.js';
+import _curry2 from './internal/_curry2.js';
+import filter from './filter.js';
 
 
 /**

@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import _isObject from './internal/_isObject';
-import mergeWithKey from './mergeWithKey';
+import _curry3 from './internal/_curry3.js';
+import _isObject from './internal/_isObject.js';
+import mergeWithKey from './mergeWithKey.js';
 
 
 /**

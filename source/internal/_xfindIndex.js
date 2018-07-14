@@ -1,6 +1,6 @@
-import _curry2 from './_curry2';
-import _reduced from './_reduced';
-import _xfBase from './_xfBase';
+import _curry2 from './_curry2.js';
+import _reduced from './_reduced.js';
+import _xfBase from './_xfBase.js';
 
 
 function XFindIndex(f, xf) {

@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * Takes a list and returns a list of lists where each sublist's elements are

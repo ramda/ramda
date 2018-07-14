@@ -1,7 +1,7 @@
-import _arity from './internal/_arity';
-import _pipeP from './internal/_pipeP';
-import reduce from './reduce';
-import tail from './tail';
+import _arity from './internal/_arity.js';
+import _pipeP from './internal/_pipeP.js';
+import reduce from './reduce.js';
+import tail from './tail.js';
 
 
 /**

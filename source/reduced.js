@@ -1,5 +1,5 @@
-import _curry1 from './internal/_curry1';
-import _reduced from './internal/_reduced';
+import _curry1 from './internal/_curry1.js';
+import _reduced from './internal/_reduced.js';
 
 /**
  * Returns a value wrapped to indicate that it is the final value of the reduce

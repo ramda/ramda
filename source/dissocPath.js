@@ -1,10 +1,10 @@
-import _curry2 from './internal/_curry2';
-import _isInteger from './internal/_isInteger';
-import _isArray from './internal/_isArray';
-import assoc from './assoc';
-import dissoc from './dissoc';
-import remove from './remove';
-import update from './update';
+import _curry2 from './internal/_curry2.js';
+import _isInteger from './internal/_isInteger.js';
+import _isArray from './internal/_isArray.js';
+import assoc from './assoc.js';
+import dissoc from './dissoc.js';
+import remove from './remove.js';
+import update from './update.js';
 
 
 /**

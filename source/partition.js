@@ -1,6 +1,6 @@
-import filter from './filter';
-import juxt from './juxt';
-import reject from './reject';
+import filter from './filter.js';
+import juxt from './juxt.js';
+import reject from './reject.js';
 
 
 /**

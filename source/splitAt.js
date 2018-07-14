@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import length from './length';
-import slice from './slice';
+import _curry2 from './internal/_curry2.js';
+import length from './length.js';
+import slice from './slice.js';
 
 
 /**

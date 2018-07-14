@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 
 // `Const` is a functor that effectively ignores the function given to `map`.

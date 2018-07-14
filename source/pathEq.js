@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import equals from './equals';
-import path from './path';
+import _curry3 from './internal/_curry3.js';
+import equals from './equals.js';
+import path from './path.js';
 
 
 /**

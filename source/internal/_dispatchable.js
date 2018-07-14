@@ -1,5 +1,5 @@
-import _isArray from './_isArray';
-import _isTransformer from './_isTransformer';
+import _isArray from './_isArray.js';
+import _isTransformer from './_isTransformer.js';
 
 
 /**

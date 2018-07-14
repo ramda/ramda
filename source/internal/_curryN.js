@@ -1,5 +1,5 @@
-import _arity from './_arity';
-import _isPlaceholder from './_isPlaceholder';
+import _arity from './_arity.js';
+import _isPlaceholder from './_isPlaceholder.js';
 
 
 /**

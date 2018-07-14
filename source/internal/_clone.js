@@ -1,5 +1,5 @@
-import _cloneRegExp from './_cloneRegExp';
-import type from '../type';
+import _cloneRegExp from './_cloneRegExp.js';
+import type from '../type.js';
 
 
 /**

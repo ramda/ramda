@@ -1,4 +1,4 @@
-import _has from './_has';
+import _has from './_has.js';
 
 
 var toString = Object.prototype.toString;

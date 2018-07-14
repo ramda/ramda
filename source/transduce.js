@@ -1,6 +1,6 @@
-import _reduce from './internal/_reduce';
-import _xwrap from './internal/_xwrap';
-import curryN from './curryN';
+import _reduce from './internal/_reduce.js';
+import _xwrap from './internal/_xwrap.js';
+import curryN from './curryN.js';
 
 
 /**

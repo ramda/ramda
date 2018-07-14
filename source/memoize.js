@@ -1,5 +1,5 @@
-import memoizeWith from './memoizeWith';
-import toString from './toString';
+import memoizeWith from './memoizeWith.js';
+import toString from './toString.js';
 
 
 /**

@@ -1,4 +1,4 @@
-import _indexOf from './_indexOf';
+import _indexOf from './_indexOf.js';
 
 
 export default function _includes(a, list) {
