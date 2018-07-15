@@ -1,5 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
+var iter = require('./shared/iterableOnly');
 
 
 describe('aperture', function() {
@@ -18,6 +19,10 @@ describe('aperture', function() {
 
   it('can act as a transducer', function() {
     eq(R.into([], R.aperture(2), sevenLs), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]]);
+  });
+
+  it('can operate on any iterable', function() {
+    eq(Array.from(R.aperture(2, iter(sevenLs))), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]]);
   });
 
 });

@@ -1,5 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
+var iter = require('./shared/iterableOnly');
 
 
 describe('filter', function() {
@@ -24,6 +25,10 @@ describe('filter', function() {
     eq(R.filter(positive, {x: 1, y: 0, z: 0}), {x: 1});
     eq(R.filter(positive, {x: 1, y: 2, z: 0}), {x: 1, y: 2});
     eq(R.filter(positive, {x: 1, y: 2, z: 3}), {x: 1, y: 2, z: 3});
+  });
+
+  it('can operate on any iterable', function() {
+    eq(Array.from(R.filter(even, iter([1, 2, 3, 4, 5]))), [2, 4]);
   });
 
   it('dispatches to passed-in non-Array object with a `filter` method', function() {

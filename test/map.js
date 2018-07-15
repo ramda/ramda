@@ -4,6 +4,7 @@ var R = require('../source');
 var assert = require('assert');
 var eq = require('./shared/eq');
 var Id = require('./shared/Id');
+var iter = require('./shared/iterableOnly');
 
 describe('map', function() {
   var times2 = function(x) {return x * 2;};
@@ -29,6 +30,10 @@ describe('map', function() {
     var g = function(b) { return b * 2; };
     var h = R.map(f, g);
     eq(h(10), (10 * 2) - 1);
+  });
+
+  it('can operate on any iterable', function() {
+    eq(Array.from(R.map(times2, iter([1, 2, 3, 4]))), [2, 4, 6, 8]);
   });
 
   it('dispatches to objects that implement `map`', function() {

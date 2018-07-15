@@ -2,6 +2,7 @@ var assert = require('assert');
 
 var R = require('../source');
 var eq = require('./shared/eq');
+var iter = require('./shared/iterableOnly');
 
 
 describe('drop', function() {
@@ -32,6 +33,10 @@ describe('drop', function() {
     eq(R.drop(4, 'Ramda'), 'a');
     eq(R.drop(5, 'Ramda'), '');
     eq(R.drop(6, 'Ramda'), '');
+  });
+
+  it('can operate on any iterable', function() {
+    eq(Array.from(R.drop(3, iter('abcdefg'))), ['d', 'e', 'f', 'g']);
   });
 
 });

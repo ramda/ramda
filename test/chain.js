@@ -3,6 +3,7 @@ var listXf = require('./helpers/listXf');
 var R = require('../source');
 var eq = require('./shared/eq');
 var _isTransformer = require('../source/internal/_isTransformer');
+var iter = require('./shared/iterableOnly');
 
 describe('chain', function() {
   var intoArray = R.into([]);
@@ -39,6 +40,10 @@ describe('chain', function() {
     eq(bound(10), (10 * 2) + 10);
 
     eq(R.chain(R.append, R.head)([1, 2, 3]), [1, 2, 3, 1]);
+  });
+
+  it('can operate on any iterable', function() {
+    eq(Array.from(R.chain(times2, iter([1, 2, 3]))), [2, 4, 6]);
   });
 
   it('dispatches to objects that implement `chain`', function() {

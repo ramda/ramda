@@ -3,6 +3,7 @@ var sinon = require('sinon');
 
 var R = require('../source');
 var eq = require('./shared/eq');
+var iter = require('./shared/iterableOnly');
 
 
 describe('take', function() {
@@ -34,6 +35,10 @@ describe('take', function() {
     eq(R.take(2, 'Ramda'), 'Ra');
     eq(R.take(1, 'Ramda'), 'R');
     eq(R.take(0, 'Ramda'), '');
+  });
+
+  it('can operate on any iterable', function() {
+    eq(Array.from(R.take(3, iter('abcdefg'))), ['a', 'b', 'c']);
   });
 
   it('handles zero correctly (#1224)', function() {
