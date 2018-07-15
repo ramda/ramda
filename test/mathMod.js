@@ -6,10 +6,10 @@ var eq = require('./shared/eq');
 
 describe('mathMod', function() {
   it('requires integer arguments', function() {
-    assert.notStrictEqual(R.mathMod('s', 3), R.mathMod('s', 3));
-    assert.notStrictEqual(R.mathMod(3, 's'), R.mathMod(3, 's'));
-    assert.notStrictEqual(R.mathMod(12.2, 3), R.mathMod(12.2, 3));
-    assert.notStrictEqual(R.mathMod(3, 12.2), R.mathMod(3, 12.2));
+    assert(Number.isNaN(R.mathMod('s', 3)));
+    assert(Number.isNaN(R.mathMod(3, 's')));
+    assert(Number.isNaN(R.mathMod(12.2, 3)));
+    assert(Number.isNaN(R.mathMod(3, 12.2)));
   });
 
   it('behaves differently than JS modulo', function() {
