@@ -12,6 +12,9 @@ import slice from './slice';
  *
  * Dispatches to the `dropWhile` method of the second argument, if present.
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array and non-string iterable is given in list position.
+ *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func

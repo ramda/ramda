@@ -10,6 +10,9 @@ import slice from './slice';
  *
  * Dispatches to the `take` method of the second argument, if present.
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
  * @func
  * @memberOf R
  * @since v0.1.0

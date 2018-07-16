@@ -11,6 +11,9 @@ import _xdropLastWhile from './internal/_xdropLastWhile';
  * function returns a `falsy` value. The predicate function is applied to one argument:
  * *(value)*.
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array and non-string iterable is given in list position.
+ *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func

@@ -18,6 +18,9 @@ import keys from './keys';
  *
  * Dispatches to the `map` method of the second argument, if present.
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
  * Acts as a transducer if a transformer is given in list position.
  *
  * Also treats functions as functors and will compose them together.
