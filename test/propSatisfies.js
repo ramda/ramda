@@ -16,7 +16,6 @@ describe('propSatisfies returns Boolean taking predicate', function() {
 
 });
 
-
 describe('propSatisfies returns Boolean taking function that returns falsy or truthy value', function() {
 
   var identity = function(n) { return n; };
