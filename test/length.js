@@ -13,6 +13,18 @@ describe('length', function() {
     eq(R.length('xyz'), 3);
   });
 
+  it('returns the size of a es6 set', function() {
+    if (typeof Set !== 'function') { return; }
+    eq(R.length(new Set()), 0);
+    eq(R.length(new Set(['x', 'y', 'z'])), 3);
+  });
+
+  it('returns the size of a es6 map', function() {
+    if (typeof Map !== 'function') { return; }
+    eq(R.length(new Map()), 0);
+    eq(R.length(new Map([['k1', 'v1'], ['k2', 'v2']])), 2);
+  });
+
   it('returns the length of a function', function() {
     eq(R.length(function() {}), 0);
     eq(R.length(function(x, y, z) { return z; }), 3);
