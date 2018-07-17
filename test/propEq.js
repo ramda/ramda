@@ -24,4 +24,9 @@ describe('propEq', function() {
     eq(R.propEq('value', new Just([42]), {value: new Just([42])}), true);
   });
 
+  it('returns false if called with a null or undefined object', function () {
+    eq(R.propEq('name', 'Abby', null), false);
+    eq(R.propEq('name', 'Abby', undefined), false);
+  })
+
 });
