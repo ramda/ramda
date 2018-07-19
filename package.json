@@ -70,7 +70,6 @@
     "pretest": "npm run build:cjs",
     "test": "mocha --reporter spec",
     "posttest": "git checkout -- dist",
-    "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
     "postbrowser_test": "npm run posttest"
   },
@@ -80,7 +79,7 @@
     "babel-plugin-annotate-pure-calls": "^0.2.0",
     "babel-types": "^6.26.0",
     "benchmark": "~1.0.0",
-    "browserify": "10.x.x",
+    "browserify-glob": "^0.2.0",
     "cli-table": "0.3.x",
     "cross-env": "^2.0.1",
     "dox": "latest",
