@@ -2,12 +2,12 @@
   "framework": "mocha",
   "cwd": ".",
   "src_files": [
-      "dist/ramda.js",
+      "source/**.js",
       "test/*.js"
   ],
   "serve_files": [
       "tmp-test-bundle.js"
   ],
-  "before_tests": "node_modules/.bin/browserify test/*.js --outfile tmp-test-bundle.js",
-  "after_tests": "rm tmp-test-bundle.js"
+  "before_tests": "npm run pretest && browserify-glob test/*.js > tmp-test-bundle.js",
+  "after_tests": "rimraf tmp-test-bundle.js"
 }
