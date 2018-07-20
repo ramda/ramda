@@ -1,6 +1,5 @@
-import _includes from './internal/_includes.js';
 import _curry2 from './internal/_curry2.js';
-import flip from './flip.js';
+import _Set from './internal/_Set.js';
 import reject from './reject.js';
 
 
@@ -23,7 +22,13 @@ import reject from './reject.js';
  *
  *      R.without([1, 2], [1, 2, 1, 3, 4]); //=> [3, 4]
  */
-var without = _curry2(function(xs, list) {
-  return reject(flip(_includes)(xs), list);
+var without = _curry2(function without(xs, list) {
+  var toRemove = new _Set();
+
+  for (var i = 0; i < xs.length; i += 1) {
+    toRemove.add(xs[i]);
+  }
+
+  return reject(toRemove.has.bind(toRemove), list);
 });
 export default without;
