@@ -76,8 +76,9 @@
     "babel-plugin-annotate-pure-calls": "^0.2.0",
     "babel-register": "^6.26.0",
     "babel-types": "^6.26.0",
+    "babelify": "^8.0.0",
     "benchmark": "~1.0.0",
-    "browserify": "10.x.x",
+    "browserify": "https://api.github.com/repos/browserify/browserify/tarball/9ff7c55cc67a7ddbc64f8e7270bcd75fcc72ce2f",
     "cli-table": "0.3.x",
     "cross-env": "^2.0.1",
     "dox": "latest",
@@ -94,7 +95,7 @@
     "rollup-plugin-terser": "^1.0.1",
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
-    "testem": "0.9.x",
+    "testem": "^2.9.0",
     "xyz": "1.0.x"
   }
 }
