@@ -1,7 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
 
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 
 
