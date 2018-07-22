@@ -4,7 +4,7 @@ import curryN from './curryN';
 
 /**
  * Returns a curried equivalent of the provided function. The curried function
- * has two unusual capabilities. First, its arguments needn't be provided one
+ * has two unusual capabilities. First, it's arguments need not be provided one
  * at a time. If `f` is a ternary function and `g` is `R.curry(f)`, the
  * following are equivalent:
  *
