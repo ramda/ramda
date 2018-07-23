@@ -110,14 +110,21 @@ describe('deep clone arrays', function() {
 });
 
 describe('deep clone functions', function() {
-  it('keep reference to function', function() {
-    var fn = function(x) { return x + x;};
+  it('returns new function with the same name, arity and toString', function() {
+    var fn = function double(x) { return x + x; };
+    fn.foo = {};
     var list = [{a: fn}];
 
     var clone = R.clone(list);
 
     eq(clone[0].a(10), 20);
-    eq(list[0].a, clone[0].a);
+    eq(list[0].a.toString(), clone[0].a.toString());
+    eq(list[0].length, clone[0].length);
+    eq(list[0].name, clone[0].name);
+    assert(list[0].a !== clone[0].a);
+    assert(list[0].a.foo !== clone[0].a.foo);
+    // assert(R.equals(list[0].a, clone[0].a));
+    assert(R.equals(list[0].a.foo, clone[0].a.foo));
   });
 
 });

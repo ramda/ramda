@@ -1,3 +1,4 @@
+import _cloneFunction from './_cloneFunction';
 import _cloneRegExp from './_cloneRegExp';
 import type from '../type';
 
@@ -33,6 +34,7 @@ export default function _clone(value, refFrom, refTo, deep) {
   switch (type(value)) {
     case 'Object':  return copy({});
     case 'Array':   return copy([]);
+    case 'Function':return copy(_cloneFunction(value));
     case 'Date':    return new Date(value.valueOf());
     case 'RegExp':  return _cloneRegExp(value);
     default:        return value;
