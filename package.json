@@ -64,6 +64,7 @@
     "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min",
     "partial-build": "node ./scripts/partialBuild",
     "clean": "rimraf es/* src/* dist/* coverage/*",
+    "prepare": "npm run clean && npm run build",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
     "postcoverage": "npm run posttest",
     "lint": "eslint scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
