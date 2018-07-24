@@ -22,21 +22,12 @@ import uniq from './uniq.js';
  *      R.intersection([1,2,3,4], [7,6,5,4,3]); //=> [4, 3]
  */
 var intersection = _curry2(function intersection(list1, list2) {
-  var lookupList, filteredList;
   var toKeep = new _Set();
 
-  if (list1.length > list2.length) {
-    lookupList = list1;
-    filteredList = list2;
-  } else {
-    lookupList = list2;
-    filteredList = list1;
+  for (var i = 0; i < list1.length; i += 1) {
+    toKeep.add(list1[i]);
   }
 
-  for (var i = 0; i < lookupList.length; i += 1) {
-    toKeep.add(lookupList[i]);
-  }
-
-  return uniq(_filter(toKeep.has.bind(toKeep), filteredList));
+  return uniq(_filter(toKeep.has.bind(toKeep), list2));
 });
 export default intersection;
