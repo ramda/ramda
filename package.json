@@ -94,7 +94,7 @@
     "ramda": "0.17.x",
     "rimraf": "~2.3.2",
     "rollup": "^0.50.0",
-    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-plugin-terser": "^1.0.1",
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
     "testem": "0.9.x",

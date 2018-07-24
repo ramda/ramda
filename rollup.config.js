@@ -1,4 +1,4 @@
-var uglify = require('rollup-plugin-uglify');
+var uglify = require('rollup-plugin-terser').terser;
 var pkg = require('./package.json');
 
 var banner = '//  Ramda v' + pkg.version + '\n'
