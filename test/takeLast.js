@@ -36,4 +36,11 @@ describe('takeLast', function() {
     eq(R.takeLast(0, [1, 2, 3]), []);
   });
 
+  it('can act as a transducer', function() {
+    eq(R.into([], R.takeLast(3), ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['e', 'f', 'g']);
+    eq(R.into([], R.takeLast(3), [1, 2]), [1, 2]);
+    eq(R.into([], R.takeLast(0), [1, 2, 3]), []);
+    eq(R.into([], R.takeLast(-1), [1, 2, 3]), [1, 2, 3]);
+  });
+
 });

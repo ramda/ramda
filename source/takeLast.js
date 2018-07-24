@@ -1,10 +1,18 @@
 import _curry2 from './internal/_curry2';
+import _dispatchable from './internal/_dispatchable';
+import _xtakeLast from './internal/_xtakeLast';
 import drop from './drop';
 
 
 /**
  * Returns a new list containing the last `n` elements of the given list.
  * If `n > list.length`, returns a list of `list.length` elements.
+ *
+ * Dispatches to `takeLast`, `drop`, or `slice` method of the second argument, if present.
+ *
+ * Returns a non-iterator iterable if a non-array iterable is given in list position.
+ *
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -24,7 +32,7 @@ import drop from './drop';
  *      R.takeLast(4, ['foo', 'bar', 'baz']); //=> ['foo', 'bar', 'baz']
  *      R.takeLast(3, 'ramda');               //=> 'mda'
  */
-var takeLast = _curry2(function takeLast(n, xs) {
+const takeLast = _curry2(_dispatchable(['takeLast'], _xtakeLast, function takeLast(n, xs) {
   return drop(n >= 0 ? xs.length - n : 0, xs);
-});
+}));
 export default takeLast;
