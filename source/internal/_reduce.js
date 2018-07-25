@@ -1,21 +1,6 @@
-import _isArrayLike from './_isArrayLike';
 import _xwrap from './_xwrap';
 import bind from '../bind';
 
-
-function _arrayReduce(xf, acc, list) {
-  var idx = 0;
-  var len = list.length;
-  while (idx < len) {
-    acc = xf['@@transducer/step'](acc, list[idx]);
-    if (acc && acc['@@transducer/reduced']) {
-      acc = acc['@@transducer/value'];
-      break;
-    }
-    idx += 1;
-  }
-  return xf['@@transducer/result'](acc);
-}
 
 function _iterableReduce(xf, acc, iter) {
   var step = iter.next();
@@ -40,9 +25,6 @@ export default function _reduce(fn, acc, list) {
   if (typeof fn === 'function') {
     fn = _xwrap(fn);
   }
-  if (_isArrayLike(list)) {
-    return _arrayReduce(fn, acc, list);
-  }
   if (typeof list['fantasy-land/reduce'] === 'function') {
     return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
@@ -56,5 +38,5 @@ export default function _reduce(fn, acc, list) {
     return _methodReduce(fn, acc, list, 'reduce');
   }
 
-  throw new TypeError('reduce: list must be array or iterable');
+  throw new TypeError('reduce: input must be iterable');
 }
