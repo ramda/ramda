@@ -1,5 +1,3 @@
-var assert = require('assert');
-
 var R = require('../source');
 var eq = require('./shared/eq');
 
@@ -35,18 +33,6 @@ describe('constructN', function() {
     function Foo() {}
     var foo = R.constructN(0, Foo)();
     eq(foo.constructor, Foo);
-  });
-
-  it('does not support constructor with greater than ten arguments', function() {
-    assert.throws(function() {
-      function Foo($0, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10) {
-        this.eleventh = $10;
-      }
-      R.constructN(11, Foo);
-    }, function(err) {
-      return (err instanceof Error &&
-              err.message === 'Constructor with greater than ten arguments');
-    });
   });
 
 });
