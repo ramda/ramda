@@ -25,7 +25,6 @@ describe('into', function() {
 
   it('transduces into objects', function() {
     eq(R.into({}, R.identity, [['a', 1], ['b', 2]]), {a: 1, b: 2});
-    eq(R.into({}, R.identity, [{a: 1}, {b: 2, c: 3}]), {a: 1, b: 2, c: 3});
   });
 
   it('dispatches to objects that implement `reduce`', function() {

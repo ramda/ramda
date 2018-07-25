@@ -1,6 +1,9 @@
 import _isArrayLike from './_isArrayLike';
+import _isMap from './_isMap';
+import _isObject from './_isObject';
 import _xwrap from './_xwrap';
 import bind from '../bind';
+import toPairs from '../toPairs';
 
 
 function _arrayReduce(xf, acc, list) {
@@ -30,6 +33,17 @@ function _iterableReduce(xf, acc, iter) {
   return xf['@@transducer/result'](acc);
 }
 
+function _pairsReduce(xf, acc, pairs) {
+  for (const [key, value] of pairs) {
+    acc = xf['@@transducer/step'](acc, value, key);
+    if (acc && acc['@@transducer/reduced']) {
+      acc = acc['@@transducer/value'];
+      break;
+    }
+  }
+  return xf['@@transducer/result'](acc);
+}
+
 function _methodReduce(xf, acc, obj, methodName) {
   return xf['@@transducer/result'](obj[methodName](bind(xf['@@transducer/step'], xf), acc));
 }
@@ -46,6 +60,9 @@ export default function _reduce(fn, acc, list) {
   if (typeof list['fantasy-land/reduce'] === 'function') {
     return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
+  if (_isMap(list)) {
+    return _pairsReduce(fn, acc, list);
+  }
   if (list[symIterator] != null) {
     return _iterableReduce(fn, acc, list[symIterator]());
   }
@@ -54,6 +71,9 @@ export default function _reduce(fn, acc, list) {
   }
   if (typeof list.reduce === 'function') {
     return _methodReduce(fn, acc, list, 'reduce');
+  }
+  if (_isObject(list)) {
+    return _pairsReduce(fn, acc, toPairs(list));
   }
 
   throw new TypeError('reduce: list must be array or iterable');

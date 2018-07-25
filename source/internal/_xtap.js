@@ -8,9 +8,9 @@ function XTap(f, xf) {
 }
 XTap.prototype['@@transducer/init'] = _xfBase.init;
 XTap.prototype['@@transducer/result'] = _xfBase.result;
-XTap.prototype['@@transducer/step'] = function(result, input) {
+XTap.prototype['@@transducer/step'] = function(result, input, ...args) {
   this.f(input);
-  return this.xf['@@transducer/step'](result, input);
+  return this.xf['@@transducer/step'](result, input, ...args);
 };
 
 var _xtap = _curry2(function _xtap(f, xf) { return new XTap(f, xf); });

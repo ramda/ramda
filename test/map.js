@@ -24,6 +24,17 @@ describe('map', function() {
     eq(R.map(dec, {x: 4, y: 5, z: 6}), {x: 3, y: 4, z: 5});
   });
 
+  it('can act as keyed transducer', function() {
+    eq(R.into({}, R.map(dec), { x: 4, y: 5, z: 6 }), { x: 3, y: 4, z: 5 });
+    eq(R.into([], R.map(dec), { x: 4, y: 5, z: 6 }), [3, 4, 5]);
+    if (typeof Map !== 'function') {
+      return;
+    }
+    eq(R.into({}, R.map(dec), new Map([['x', 4], ['y', 5], ['z', 6]])), { x: 3, y: 4, z: 5 });
+    assert.deepStrictEqual(R.into(new Map(), R.map(dec), { x: 4, y: 5, z: 6 }), new Map([['x', 3], ['y', 4], ['z', 5]]));
+    assert.deepStrictEqual(R.into(new Map(), R.map(dec), new Map([['x', 4], ['y', 5], ['z', 6]])), new Map([['x', 3], ['y', 4], ['z', 5]]));
+  });
+
   it('interprets ((->) r) as a functor', function() {
     var f = function(a) { return a - 1; };
     var g = function(b) { return b * 2; };

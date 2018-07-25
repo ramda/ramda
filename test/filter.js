@@ -1,4 +1,5 @@
 var R = require('../source');
+var assert = require('assert');
 var eq = require('./shared/eq');
 
 
@@ -24,6 +25,18 @@ describe('filter', function() {
     eq(R.filter(positive, {x: 1, y: 0, z: 0}), {x: 1});
     eq(R.filter(positive, {x: 1, y: 2, z: 0}), {x: 1, y: 2});
     eq(R.filter(positive, {x: 1, y: 2, z: 3}), {x: 1, y: 2, z: 3});
+  });
+
+  it('can act as keyed transducer', function() {
+    var positive = function(x) { return x > 0; };
+    eq(R.into({}, R.filter(positive), { x: 1, y: 0, z: 0 }), { x: 1 });
+    eq(R.into([], R.filter(positive), { x: 1, y: 0, z: 0 }), [1]);
+    if (typeof Map !== 'function') {
+      return;
+    }
+    eq(R.into({}, R.filter(positive), new Map([['x', 1], ['y', 0], ['z', 0]])), { x: 1 });
+    assert.deepStrictEqual(R.into(new Map(), R.filter(positive), { x: 1, y: 0, z: 0 }), new Map([['x', 1]]));
+    assert.deepStrictEqual(R.into(new Map(), R.filter(positive), new Map([['x', 1], ['y', 0], ['z', 0]])), new Map([['x', 1]]));
   });
 
   it('dispatches to passed-in non-Array object with a `filter` method', function() {
