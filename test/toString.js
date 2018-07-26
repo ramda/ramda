@@ -100,7 +100,6 @@ describe('toString', function() {
     xs.bar = 0;
     xs.baz = 0;
 
-    assert.strictEqual(R.toString(/x/.exec('xyz')), '["x", "index": 0, "input": "xyz"]');
     assert.strictEqual(R.toString(xs), '[1, 2, 3, "bar": 0, "baz": 0, "foo": 0]');
   });
 
