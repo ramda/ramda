@@ -1,6 +1,6 @@
 var jsv = require('jsverify');
 
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 
 

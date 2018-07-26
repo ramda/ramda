@@ -1,6 +1,6 @@
 var eq = require('../shared/eq');
-var _ = require('../../src/__');
-var _curry2 = require('../../src/internal/_curry2');
+var _ = require('../../source/__');
+var _curry2 = require('../../source/internal/_curry2');
 
 
 describe('_curry2', function() {

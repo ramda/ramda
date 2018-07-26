@@ -66,22 +66,19 @@
     "clean": "rimraf es/* src/* dist/* coverage/*",
     "prepare": "npm run clean && npm run build",
     "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
-    "postcoverage": "npm run posttest",
     "lint": "eslint scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
-    "pretest": "npm run build:cjs",
-    "test": "mocha --reporter spec",
-    "posttest": "git checkout -- dist",
-    "prebrowser_test": "npm run pretest",
     "browser_test": "testem ci",
-    "postbrowser_test": "npm run posttest"
+    "test": "cross-env BABEL_ENV=cjs mocha --require babel-register --reporter spec"
   },
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-annotate-pure-calls": "^0.2.0",
+    "babel-register": "^6.26.0",
     "babel-types": "^6.26.0",
+    "babelify": "^8.0.0",
     "benchmark": "~1.0.0",
-    "browserify": "10.x.x",
+    "browserify": "https://api.github.com/repos/browserify/browserify/tarball/9ff7c55cc67a7ddbc64f8e7270bcd75fcc72ce2f",
     "cli-table": "0.3.x",
     "cross-env": "^2.0.1",
     "dox": "latest",
@@ -98,7 +95,7 @@
     "rollup-plugin-terser": "^1.0.1",
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
-    "testem": "0.9.x",
+    "testem": "^2.9.0",
     "xyz": "1.0.x"
   }
 }

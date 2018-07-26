@@ -1,6 +1,6 @@
 var assert = require('assert');
 var fs = require('fs');
-var R = require('..');
+var R = require('../source');
 var dox = require('dox');
 
 // simple object to hold info about our examples

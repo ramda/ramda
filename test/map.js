@@ -1,6 +1,6 @@
 var listXf = require('./helpers/listXf');
 
-var R = require('..');
+var R = require('../source');
 var assert = require('assert');
 var eq = require('./shared/eq');
 var Id = require('./shared/Id');

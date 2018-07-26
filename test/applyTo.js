@@ -1,4 +1,4 @@
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 
 describe('applyTo', function() {
@@ -11,4 +11,3 @@ describe('applyTo', function() {
   });
 
 });
-

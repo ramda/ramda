@@ -1,8 +1,8 @@
 var listXf = require('./helpers/listXf');
 
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
-var _isTransformer = require('../src/internal/_isTransformer');
+var _isTransformer = require('../source/internal/_isTransformer');
 
 describe('chain', function() {
   var intoArray = R.into([]);

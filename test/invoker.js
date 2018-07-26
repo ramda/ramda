@@ -1,7 +1,7 @@
 var assert = require('assert');
 var vm = require('vm');
 
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 
 
