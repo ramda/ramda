@@ -7,6 +7,10 @@ describe('slice', function() {
     var list = [8, 6, 7, 5, 3, 0, 9];
     eq(R.slice(2, 5, list), [7, 5, 3]);
   });
+  it('can act as a transducer', function() {
+    var list = [8, 6, 7, 5, 3, 0, 9];
+    eq(R.into([], R.slice(2, 5), list), [7, 5, 3]);
+  });
   it('handles array-like object', function() {
     var args = (function() { return arguments; }(1, 2, 3, 4, 5));
     eq(R.slice(1, 4, args), [2, 3, 4]);

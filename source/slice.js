@@ -1,5 +1,6 @@
-import _checkForMethod from './internal/_checkForMethod';
 import _curry3 from './internal/_curry3';
+import _dispatchable from './internal/_dispatchable';
+import _xslice from './internal/_xslice';
 
 
 /**
@@ -7,6 +8,11 @@ import _curry3 from './internal/_curry3';
  * method) from `fromIndex` (inclusive) to `toIndex` (exclusive).
  *
  * Dispatches to the `slice` method of the third argument, if present.
+ *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -26,7 +32,7 @@ import _curry3 from './internal/_curry3';
  *      R.slice(-3, -1, ['a', 'b', 'c', 'd']);      //=> ['b', 'c']
  *      R.slice(0, 3, 'ramda');                     //=> 'ram'
  */
-var slice = _curry3(_checkForMethod('slice', function slice(fromIndex, toIndex, list) {
+var slice = _curry3(_dispatchable(['slice'], _xslice, function slice(fromIndex, toIndex, list) {
   return Array.prototype.slice.call(list, fromIndex, toIndex);
 }));
 export default slice;
