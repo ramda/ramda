@@ -1,10 +1,6 @@
 import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _filter from './internal/_filter';
-import _isObject from './internal/_isObject';
-import _reduce from './internal/_reduce';
+import _dispatchKeyed from './internal/_dispatchKeyed';
 import _xfilter from './internal/_xfilter';
-import keys from './keys';
 
 
 /**
@@ -34,17 +30,5 @@ import keys from './keys';
  *
  *      R.filter(isEven, {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, d: 4}
  */
-var filter = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filterable) {
-  return (
-    _isObject(filterable) ?
-      _reduce(function(acc, key) {
-        if (pred(filterable[key])) {
-          acc[key] = filterable[key];
-        }
-        return acc;
-      }, {}, keys(filterable)) :
-    // else
-      _filter(pred, filterable)
-  );
-}));
+const filter = _curry2(_dispatchKeyed(['fantasy-land/filter', 'filter'], _xfilter));
 export default filter;

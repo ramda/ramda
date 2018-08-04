@@ -1,10 +1,7 @@
 import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _map from './internal/_map';
-import _reduce from './internal/_reduce';
+import _dispatchKeyed from './internal/_dispatchKeyed';
 import _xmap from './internal/_xmap';
-import curryN from './curryN';
-import keys from './keys';
+import compose from './compose';
 
 
 /**
@@ -42,19 +39,5 @@ import keys from './keys';
  * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
  * @symb R.map(f, functor_o) = functor_o.map(f)
  */
-var map = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
-  switch (Object.prototype.toString.call(functor)) {
-    case '[object Function]':
-      return curryN(functor.length, function() {
-        return fn.call(this, functor.apply(this, arguments));
-      });
-    case '[object Object]':
-      return _reduce(function(acc, key) {
-        acc[key] = fn(functor[key]);
-        return acc;
-      }, {}, keys(functor));
-    default:
-      return _map(fn, functor);
-  }
-}));
+const map = _curry2(_dispatchKeyed(['fantasy-land/map', 'map'], _xmap, compose));
 export default map;
