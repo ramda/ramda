@@ -26,10 +26,14 @@ export default function _toString(x, seen) {
       return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
     case '[object Date]':
       return 'new Date(' + (isNaN(x.valueOf()) ? recur(NaN) : _quote(_toISOString(x))) + ')';
+    case '[object Map]':
+      return 'new Map(' + recur(Array.from(x)) + ')';
     case '[object Null]':
       return 'null';
     case '[object Number]':
       return typeof x === 'object' ? 'new Number(' + recur(x.valueOf()) + ')' : 1 / x === -Infinity ? '-0' : x.toString(10);
+    case '[object Set]':
+      return 'new Set(' + recur(Array.from(x).sort()) + ')';
     case '[object String]':
       return typeof x === 'object' ? 'new String(' + recur(x.valueOf()) + ')' : _quote(x);
     case '[object Undefined]':
