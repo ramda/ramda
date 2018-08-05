@@ -1,7 +1,9 @@
 import _curry2 from './internal/_curry2';
+import _identity from './internal/_identity';
 import _isArray from './internal/_isArray';
 import _isFunction from './internal/_isFunction';
 import _isString from './internal/_isString';
+import into from './into';
 import toString from './toString';
 
 
@@ -52,6 +54,9 @@ var concat = _curry2(function concat(a, b) {
   if (a != null && _isFunction(a.concat)) {
     return a.concat(b);
   }
+  try {
+    return into(a, _identity, b);
+  } catch (error) {}
   throw new TypeError(toString(a) + ' does not have a method named "concat" or "fantasy-land/concat"');
 });
 export default concat;
