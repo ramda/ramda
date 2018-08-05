@@ -4,6 +4,9 @@
 /lib/docs/public/
 /node_modules/
 /npm-debug.log
+/package-lock.json
+/shrinkwrap.yaml
+/yarn.lock
 /lib/test/bundle.js
 /tmp
 /bower_components/
