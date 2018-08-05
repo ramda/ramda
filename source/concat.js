@@ -1,8 +1,7 @@
 import _curry2 from './internal/_curry2';
-import _isArray from './internal/_isArray';
 import _isFunction from './internal/_isFunction';
-import _isString from './internal/_isString';
 import toString from './toString';
+import type from './type';
 
 
 /**
@@ -34,17 +33,8 @@ import toString from './toString';
  *      R.concat([], []); //=> []
  */
 var concat = _curry2(function concat(a, b) {
-  if (_isArray(a)) {
-    if (_isArray(b)) {
-      return a.concat(b);
-    }
-    throw new TypeError(toString(b) + ' is not an array');
-  }
-  if (_isString(a)) {
-    if (_isString(b)) {
-      return a + b;
-    }
-    throw new TypeError(toString(b) + ' is not a string');
+  if (type(a) !== type(b)) {
+    throw new TypeError('Cannot concatenate ' + toString(a) + ' with ' + toString(b));
   }
   if (a != null && _isFunction(a['fantasy-land/concat'])) {
     return a['fantasy-land/concat'](b);
