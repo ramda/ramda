@@ -19,11 +19,10 @@ describe('flip', function() {
     eq(g('b', 'c'), 'b a c');
   });
 
-  it('returns a function with the correct arity', function() {
-    var f2 = function(a, b) {return a + ' ' + b;};
-    var f3 = function(a, b, c) {return a + ' ' + b + ' ' + c;};
-    eq(R.flip(f2).length, 2);
-    eq(R.flip(f3).length, 3);
+  it('can be used as right section', function() {
+    const isPositive = R.flip(R.gt, 0);
+    eq(isPositive(5), true);
+    eq(isPositive(-5), false);
   });
 
 });
