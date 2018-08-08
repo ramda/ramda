@@ -1,7 +1,7 @@
-import _arity from './internal/_arity.js'
+import _arity from './internal/_arity.js';
 import _curry2 from './internal/_curry2';
 import head from './head.js';
-import _reduce from './internal/_reduce.js'
+import _reduce from './internal/_reduce.js';
 import tail from './tail.js';
 import identity from './identity.js';
 
