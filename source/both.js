@@ -26,8 +26,8 @@ import lift from './lift';
  * @see R.and
  * @example
  *
- *      const gt10 = R.gt(R.__, 10)
- *      const lt20 = R.lt(R.__, 20)
+ *      const gt10 = R.flip(R.gt)(10)
+ *      const lt20 = R.flip(R.lt)(20)
  *      const f = R.both(gt10, lt20);
  *      f(15); //=> true
  *      f(30); //=> false

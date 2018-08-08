@@ -21,7 +21,7 @@ import hasPath from './hasPath';
  *      hasName({});                //=> false
  *
  *      const point = {x: 0, y: 0};
- *      const pointHas = R.has(R.__, point);
+ *      const pointHas = R.flip(R.has)(point);
  *      pointHas('x');  //=> true
  *      pointHas('y');  //=> true
  *      pointHas('z');  //=> false

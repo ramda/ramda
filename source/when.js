@@ -23,7 +23,7 @@ import _curry3 from './internal/_curry3';
  *
  *      // truncate :: String -> String
  *      const truncate = R.when(
- *        R.propSatisfies(R.gt(R.__, 10), 'length'),
+ *        R.propSatisfies(R.flip(R.gt)(10), 'length'),
  *        R.pipe(R.take(10), R.append('…'), R.join(''))
  *      );
  *      truncate('12345');         //=> '12345'
