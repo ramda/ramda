@@ -3,6 +3,7 @@ import _curry2 from './internal/_curry2';
 import head from './head.js';
 import _reduce from './internal/_reduce.js'
 import tail from './tail.js';
+import identity from './identity.js';
 
 
 /**
@@ -28,7 +29,7 @@ import tail from './tail.js';
  */
 var pipeWith = _curry2(function pipeWith(xf, list) {
   if (list.length <= 0) {
-    throw new Error('composition must contains at least one function');
+    return identity;
   }
 
   const headList = head(list);
