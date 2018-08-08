@@ -26,7 +26,7 @@ import _isInteger from './internal/_isInteger';
  *      R.mathMod(17.2, 5); //=> NaN
  *      R.mathMod(17, 5.3); //=> NaN
  *
- *      const clock = R.mathMod(R.__, 12);
+ *      const clock = R.flip(R.mathMod)(12);
  *      clock(15); //=> 3
  *      clock(24); //=> 0
  *

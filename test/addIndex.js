@@ -68,7 +68,7 @@ describe('addIndex', function() {
     it('passes the index as an additional parameter', function() {
       eq(mapFilterIndexed(
         R.multiply,
-        R.gt(R.__, 13),
+        R.flip(R.gt)(13),
         [8, 6, 7, 5, 3, 0, 9]
       ), [7, 5, 9]); // 2 * 7 > 13, 3 * 5 > 13, 6 * 9 > 13
     });

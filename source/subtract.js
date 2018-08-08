@@ -17,7 +17,7 @@ import _curry2 from './internal/_curry2';
  *
  *      R.subtract(10, 8); //=> 2
  *
- *      const minus5 = R.subtract(R.__, 5);
+ *      const minus5 = R.flip(R.subtract)(5);
  *      minus5(17); //=> 12
  *
  *      const complementaryAngle = R.subtract(90);

@@ -27,8 +27,8 @@ import _has from './internal/_has';
  *      const pred = R.where({
  *        a: R.equals('foo'),
  *        b: R.complement(R.equals('bar')),
- *        x: R.gt(R.__, 10),
- *        y: R.lt(R.__, 20)
+ *        x: R.flip(R.gt)(10),
+ *        y: R.flip(R.lt)(20)
  *      });
  *
  *      pred({a: 'foo', b: 'xxx', x: 11, y: 19}); //=> true

@@ -18,7 +18,7 @@ import _curry3 from './internal/_curry3';
  * @return {*} Final value that satisfies predicate
  * @example
  *
- *      R.until(R.gt(R.__, 100), R.multiply(2))(1) // => 128
+ *      R.until(R.flip(R.gt)(100), R.multiply(2))(1) // => 128
  */
 var until = _curry3(function until(pred, fn, init) {
   var val = init;

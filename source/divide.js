@@ -17,7 +17,7 @@ import _curry2 from './internal/_curry2';
  *
  *      R.divide(71, 100); //=> 0.71
  *
- *      const half = R.divide(R.__, 2);
+ *      const half = R.flip(R.divide)(2);
  *      half(42); //=> 21
  *
  *      const reciprocal = R.divide(1);
