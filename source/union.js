@@ -1,5 +1,5 @@
 import _concat from './internal/_concat';
-import _curry2 from './internal/_curry2';
+import _curryN from './internal/_curryN';
 import compose from './compose';
 import uniq from './uniq';
 
@@ -21,5 +21,5 @@ import uniq from './uniq';
  *
  *      R.union([1, 2, 3], [2, 3, 4]); //=> [1, 2, 3, 4]
  */
-var union = _curry2(compose(uniq, _concat));
+const union = _curryN(2, 'R.union', compose(uniq, _concat));
 export default union;

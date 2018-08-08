@@ -32,7 +32,7 @@ import _reduced from './internal/_reduced';
  *      const ys = [2, 4, 6]
  *      R.reduceWhile(isOdd, R.add, 111, ys); //=> 111
  */
-var reduceWhile = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
+const reduceWhile = _curryN(4, 'R.reduceWhile', function _reduceWhile(pred, fn, a, list) {
   return _reduce(function(acc, x) {
     return pred(acc, x) ? fn(acc, x) : _reduced(acc);
   }, a, list);

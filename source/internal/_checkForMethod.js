@@ -1,4 +1,5 @@
 import _isArray from './_isArray';
+import _nameFn from './_nameFn';
 
 
 /**
@@ -12,7 +13,7 @@ import _isArray from './_isArray';
  * @return {Object} Whatever the return value of the method is.
  */
 export default function _checkForMethod(methodname, fn) {
-  return function() {
+  return _nameFn(fn.name, function() {
     var length = arguments.length;
     if (length === 0) {
       return fn();
@@ -21,5 +22,5 @@ export default function _checkForMethod(methodname, fn) {
     return (_isArray(obj) || typeof obj[methodname] !== 'function') ?
       fn.apply(this, arguments) :
       obj[methodname].apply(obj, Array.prototype.slice.call(arguments, 0, length - 1));
-  };
+  });
 }

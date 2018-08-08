@@ -1,6 +1,3 @@
-import _curry1 from './internal/_curry1';
-import _dispatchable from './internal/_dispatchable';
-import _xdropRepeatsWith from './internal/_xdropRepeatsWith';
 import dropRepeatsWith from './dropRepeatsWith';
 import equals from './equals';
 
@@ -23,7 +20,5 @@ import equals from './equals';
  *
  *     R.dropRepeats([1, 1, 1, 2, 3, 4, 4, 2, 2]); //=> [1, 2, 3, 4, 2]
  */
-var dropRepeats = _curry1(_dispatchable([],
-                                                      _xdropRepeatsWith(equals),
-                                                      dropRepeatsWith(equals)));
+const dropRepeats = dropRepeatsWith(equals);
 export default dropRepeats;

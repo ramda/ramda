@@ -1,5 +1,4 @@
-import _curry1 from './internal/_curry1';
-import _identity from './internal/_identity';
+import _nameFn from './internal/_nameFn';
 
 
 /**
@@ -21,5 +20,10 @@ import _identity from './internal/_identity';
  *      R.identity(obj) === obj; //=> true
  * @symb R.identity(a) = a
  */
-var identity = _curry1(_identity);
+const identity = _nameFn('R.identity', function(x) {
+  if (arguments.length === 0) {
+    return identity;
+  }
+  return x;
+});
 export default identity;

@@ -1,5 +1,5 @@
-import _map from './internal/_map';
 import identity from './identity';
+import map from './map';
 import pickAll from './pickAll';
 import useWith from './useWith';
 
@@ -23,5 +23,5 @@ import useWith from './useWith';
  *      const kids = [abby, fred];
  *      R.project(['name', 'grade'], kids); //=> [{name: 'Abby', grade: 2}, {name: 'Fred', grade: 7}]
  */
-var project = useWith(_map, [pickAll, identity]); // passing `identity` gives correct arity
+const project = useWith(map, [pickAll, identity]); // passing `identity` gives correct arity
 export default project;

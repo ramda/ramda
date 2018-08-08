@@ -1,5 +1,6 @@
 import _isArray from './_isArray';
 import _isTransformer from './_isTransformer';
+import _nameFn from './_nameFn';
 
 
 /**
@@ -17,11 +18,7 @@ import _isTransformer from './_isTransformer';
  * @return {Function} A function that dispatches on object in list position
  */
 export default function _dispatchable(methodNames, xf, fn) {
-  return function() {
-    if (arguments.length === 0) {
-      return fn();
-    }
-    var args = Array.prototype.slice.call(arguments, 0);
+  var dispatching = function(...args) {
     var obj = args.pop();
     if (!_isArray(obj)) {
       var idx = 0;
@@ -38,4 +35,5 @@ export default function _dispatchable(methodNames, xf, fn) {
     }
     return fn.apply(this, arguments);
   };
+  return _nameFn(fn ? fn.name : '', dispatching);
 }

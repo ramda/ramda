@@ -1,5 +1,6 @@
 import _arity from './_arity';
 import _partial from './_partial';
+import _nameReturnedFn from './_nameReturnedFn';
 
 
 /**
@@ -13,12 +14,12 @@ import _partial from './_partial';
  * @return {Function} The curried function.
  */
 export default (length, name, fn) => {
-  const curried = _arity(length, function() {
+  const curried = _nameReturnedFn(name, _arity(length, function() {
     if (arguments.length < length) {
       return _partial(curried, arguments);
     } else {
       return fn.apply(this, arguments);
     }
-  });
+  }));
   return curried;
 };

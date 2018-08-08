@@ -1,6 +1,7 @@
 import _arity from './internal/_arity';
+import _nameReturnedFn from './internal/_nameReturnedFn';
 import _pipe from './internal/_pipe';
-import reduce from './reduce';
+import _reduce from './internal/_reduce';
 import tail from './tail';
 
 
@@ -27,10 +28,10 @@ import tail from './tail';
  *      f(3, 4); // -(3^4) + 1
  * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
  */
-export default function pipe() {
+export default _nameReturnedFn('R.pipe', function pipe() {
   if (arguments.length === 0) {
     throw new Error('pipe requires at least one argument');
   }
   return _arity(arguments[0].length,
-                reduce(_pipe, arguments[0], tail(arguments)));
-}
+                _reduce(_pipe, arguments[0], tail(arguments)));
+});
