@@ -1,15 +1,14 @@
-import _includes from './_includes';
 import _map from './_map';
 import _quote from './_quote';
 import _toISOString from './_toISOString';
-import keys from '../keys';
-import reject from '../reject';
+
+const { keys } = Object;
 
 
 export default function _toString(x, seen) {
   var recur = function recur(y) {
     var xs = seen.concat([x]);
-    return _includes(y, xs) ? '<Circular>' : _toString(y, xs);
+    return xs.includes(y) ? '<Circular>' : _toString(y, xs);
   };
 
   //  mapPairs :: (Object, [String]) -> [String]
@@ -21,7 +20,13 @@ export default function _toString(x, seen) {
     case '[object Arguments]':
       return '(function() { return arguments; }(' + _map(recur, x).join(', ') + '))';
     case '[object Array]':
-      return '[' + _map(recur, x).concat(mapPairs(x, reject(function(k) { return /^\d+$/.test(k); }, keys(x)))).join(', ') + ']';
+      return (
+        '[' +
+        _map(recur, x)
+          .concat(mapPairs(x, keys(x).filter(k => !/^\d+$/.test(k))))
+          .join(', ') +
+        ']'
+      );
     case '[object Boolean]':
       return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
     case '[object Date]':
