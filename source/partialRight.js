@@ -1,5 +1,6 @@
 import _concat from './internal/_concat';
 import _createPartialApplicator from './internal/_createPartialApplicator';
+import _curryN from './internal/_curryN';
 import flip from './flip';
 
 
@@ -27,5 +28,5 @@ import flip from './flip';
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)
  */
-var partialRight = _createPartialApplicator(flip(_concat));
+const partialRight = _curryN(2, 'R.partialRight', _createPartialApplicator(flip(_concat)));
 export default partialRight;

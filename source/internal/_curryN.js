@@ -1,5 +1,5 @@
 import _arity from './_arity';
-import _isPlaceholder from './_isPlaceholder';
+import _partial from './_partial';
 
 
 /**
@@ -8,33 +8,17 @@ import _isPlaceholder from './_isPlaceholder';
  * @private
  * @category Function
  * @param {Number} length The arity of the curried function.
- * @param {Array} received An array of arguments received thus far.
+ * @param {string} name Name for the function.
  * @param {Function} fn The function to curry.
  * @return {Function} The curried function.
  */
-export default function _curryN(length, received, fn) {
-  return function() {
-    var combined = [];
-    var argsIdx = 0;
-    var left = length;
-    var combinedIdx = 0;
-    while (combinedIdx < received.length || argsIdx < arguments.length) {
-      var result;
-      if (combinedIdx < received.length &&
-          (!_isPlaceholder(received[combinedIdx]) ||
-           argsIdx >= arguments.length)) {
-        result = received[combinedIdx];
-      } else {
-        result = arguments[argsIdx];
-        argsIdx += 1;
-      }
-      combined[combinedIdx] = result;
-      if (!_isPlaceholder(result)) {
-        left -= 1;
-      }
-      combinedIdx += 1;
+export default (length, name, fn) => {
+  const curried = _arity(length, function() {
+    if (arguments.length < length) {
+      return _partial(curried, arguments);
+    } else {
+      return fn.apply(this, arguments);
     }
-    return left <= 0 ? fn.apply(this, combined)
-                     : _arity(left, _curryN(length, combined, fn));
-  };
-}
+  });
+  return curried;
+};
