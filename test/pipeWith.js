@@ -10,7 +10,7 @@ describe('pipeWith', function() {
       return f(res);
     })([parseInt, R.multiply, R.map]);
 
-    eq(f.length, 0);
+    eq(f.length, 2);
     eq(f('10')([1, 2, 3]), [10, 20, 30]);
     eq(f('10', 2)([1, 2, 3]), [2, 4, 6]);
   });
@@ -23,7 +23,7 @@ describe('pipeWith', function() {
 
     var f = pipeWhenNotNil([parseInt, R.ifElse(isOdd, R.identity, R.always(null)), R.inc]);
 
-    eq(f.length, 0);
+    eq(f.length, 2);
     eq(f('1'), 2);
     eq(f('2'), null);
   });

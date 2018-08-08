@@ -1,6 +1,7 @@
+import _arity from './internal/_arity.js'
 import _curry2 from './internal/_curry2';
 import head from './head.js';
-import reduce from './reduce.js';
+import _reduce from './internal/_reduce.js'
 import tail from './tail.js';
 
 
@@ -30,14 +31,17 @@ var pipeWith = _curry2(function pipeWith(xf, list) {
     throw new Error('composition must contains at least one function');
   }
 
-  return function() {
-    return reduce(
+  const headList = head(list);
+  const tailList = tail(list);
+
+  return _arity(headList.length, function() {
+    return _reduce(
       function(result, f) {
         return xf.call(this, f, result);
       },
-      head(list).apply(this, arguments),
-      tail(list)
+      headList.apply(this, arguments),
+      tailList
     );
-  };
+  });
 });
 export default pipeWith;
