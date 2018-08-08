@@ -1,6 +1,5 @@
 export { default as F } from './F';
 export { default as T } from './T';
-export { default as __ } from './__';
 export { default as add } from './add';
 export { default as addIndex } from './addIndex';
 export { default as adjust } from './adjust';

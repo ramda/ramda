@@ -46,66 +46,6 @@ describe('curry', function() {
     eq(g.call(ctx, 2).call(ctx, 4), 42);
   });
 
-  it('supports R.__ placeholder', function() {
-    var f = function(a, b, c) { return [a, b, c]; };
-    var g = R.curry(f);
-    var _ = R.__;
-
-    eq(g(1)(2)(3), [1, 2, 3]);
-    eq(g(1)(2, 3), [1, 2, 3]);
-    eq(g(1, 2)(3), [1, 2, 3]);
-    eq(g(1, 2, 3), [1, 2, 3]);
-
-    eq(g(_, 2, 3)(1), [1, 2, 3]);
-    eq(g(1, _, 3)(2), [1, 2, 3]);
-    eq(g(1, 2, _)(3), [1, 2, 3]);
-
-    eq(g(1, _, _)(2)(3), [1, 2, 3]);
-    eq(g(_, 2, _)(1)(3), [1, 2, 3]);
-    eq(g(_, _, 3)(1)(2), [1, 2, 3]);
-
-    eq(g(1, _, _)(2, 3), [1, 2, 3]);
-    eq(g(_, 2, _)(1, 3), [1, 2, 3]);
-    eq(g(_, _, 3)(1, 2), [1, 2, 3]);
-
-    eq(g(1, _, _)(_, 3)(2), [1, 2, 3]);
-    eq(g(_, 2, _)(_, 3)(1), [1, 2, 3]);
-    eq(g(_, _, 3)(_, 2)(1), [1, 2, 3]);
-
-    eq(g(_, _, _)(_, _)(_)(1, 2, 3), [1, 2, 3]);
-    eq(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
-  });
-
-  it('supports @@functional/placeholder', function() {
-    var f = function(a, b, c) { return [a, b, c]; };
-    var g = R.curry(f);
-    var _ = {'@@functional/placeholder': true, x: Math.random()};
-
-    eq(g(1)(2)(3), [1, 2, 3]);
-    eq(g(1)(2, 3), [1, 2, 3]);
-    eq(g(1, 2)(3), [1, 2, 3]);
-    eq(g(1, 2, 3), [1, 2, 3]);
-
-    eq(g(_, 2, 3)(1), [1, 2, 3]);
-    eq(g(1, _, 3)(2), [1, 2, 3]);
-    eq(g(1, 2, _)(3), [1, 2, 3]);
-
-    eq(g(1, _, _)(2)(3), [1, 2, 3]);
-    eq(g(_, 2, _)(1)(3), [1, 2, 3]);
-    eq(g(_, _, 3)(1)(2), [1, 2, 3]);
-
-    eq(g(1, _, _)(2, 3), [1, 2, 3]);
-    eq(g(_, 2, _)(1, 3), [1, 2, 3]);
-    eq(g(_, _, 3)(1, 2), [1, 2, 3]);
-
-    eq(g(1, _, _)(_, 3)(2), [1, 2, 3]);
-    eq(g(_, 2, _)(_, 3)(1), [1, 2, 3]);
-    eq(g(_, _, 3)(_, 2)(1), [1, 2, 3]);
-
-    eq(g(_, _, _)(_, _)(_)(1, 2, 3), [1, 2, 3]);
-    eq(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
-  });
-
   it('forwards extra arguments', function() {
     var f = function(a, b, c) {
       void c;
@@ -135,16 +75,4 @@ describe('curry properties', function() {
     ]);
   });
 
-  jsv.property('curries with placeholder', funcN(3), jsv.json, jsv.json, jsv.json, function(f, a, b, c) {
-    var _ = {'@@functional/placeholder': true, x: Math.random()};
-    var g = R.curry(f);
-
-    return R.all(R.equals(f(a, b, c)), [
-      g(_, _, c)(a, b),
-      g(a, _, c)(b),
-      g(_, b, c)(a),
-      g(a, _, _)(_, c)(b),
-      g(a, b, _)(c)
-    ]);
-  });
 });
