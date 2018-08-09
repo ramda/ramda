@@ -1,3 +1,4 @@
+import _nameFn from './internal/_nameFn';
 import chain from './chain';
 import compose from './compose';
 import map from './map';
@@ -33,11 +34,11 @@ import map from './map';
  *       getStateCode({}); //=> Maybe.Nothing()
  * @symb R.composeK(f, g, h)(a) = R.chain(f, R.chain(g, h(a)))
  */
-export default function composeK() {
+export default _nameFn('R.composeK', function() {
   if (arguments.length === 0) {
     throw new Error('composeK requires at least one argument');
   }
   var init = Array.prototype.slice.call(arguments);
   var last = init.pop();
   return compose(compose.apply(this, map(chain, init)), last);
-}
+});

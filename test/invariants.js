@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
 
@@ -29,6 +31,11 @@ describe('invariants', function() {
         testPartialApplication(R[prop], prop);
       }
     }
+  });
+
+  it('-- every function has a proper name', function() {
+    const hasProperName = fn => /^R\.(?!curryN?\()\w+/.test(fn.name);
+    assert.deepStrictEqual(R.pickBy(R.complement(hasProperName), R), {});
   });
 
 });

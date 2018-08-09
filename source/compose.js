@@ -1,3 +1,4 @@
+import _nameFn from './internal/_nameFn';
 import pipe from './pipe';
 import reverse from './reverse';
 
@@ -26,9 +27,9 @@ import reverse from './reverse';
  *
  * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
  */
-export default function compose() {
+export default _nameFn('R.compose', function() {
   if (arguments.length === 0) {
     throw new Error('compose requires at least one argument');
   }
   return pipe.apply(this, reverse(arguments));
-}
+});

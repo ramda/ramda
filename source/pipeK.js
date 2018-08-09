@@ -1,3 +1,4 @@
+import _nameFn from './internal/_nameFn';
 import composeK from './composeK';
 import reverse from './reverse';
 
@@ -35,9 +36,9 @@ import reverse from './reverse';
  *      //=> Nothing()
  * @symb R.pipeK(f, g, h)(a) = R.chain(h, R.chain(g, f(a)))
  */
-export default function pipeK() {
+export default _nameFn('R.pipeK', function() {
   if (arguments.length === 0) {
     throw new Error('pipeK requires at least one argument');
   }
   return composeK.apply(this, reverse(arguments));
-}
+});
