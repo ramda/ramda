@@ -3,7 +3,7 @@ import _dispatchable from './internal/_dispatchable';
 import _map from './internal/_map';
 import _reduce from './internal/_reduce';
 import _xmap from './internal/_xmap';
-import curryN from './curryN';
+import compose from './compose';
 import keys from './keys';
 
 
@@ -45,9 +45,7 @@ import keys from './keys';
 var map = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
   switch (Object.prototype.toString.call(functor)) {
     case '[object Function]':
-      return curryN(functor.length, function() {
-        return fn.call(this, functor.apply(this, arguments));
-      });
+      return compose(fn, functor);
     case '[object Object]':
       return _reduce(function(acc, key) {
         acc[key] = fn(functor[key]);

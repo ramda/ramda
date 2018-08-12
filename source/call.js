@@ -1,4 +1,4 @@
-import _curry1 from './internal/_curry1';
+import _curryN from './internal/_curryN';
 
 
 /**
@@ -33,7 +33,7 @@ import _curry1 from './internal/_curry1';
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  * @symb R.call(f, a, b) = f(a, b)
  */
-const call = _curry1(function call(fn) {
+const call = _curryN(1, 'R.call', function(fn) {
   return fn.apply(this, Array.prototype.slice.call(arguments, 1));
-});
+}, args => args.length < 1);
 export default call;

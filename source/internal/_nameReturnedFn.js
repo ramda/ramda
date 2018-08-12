@@ -10,10 +10,10 @@ const toString = value => _toString(value, emptyArray);
 
 const _isPoorFnName = name => /^$|^R\.curryN?\(/.test(name);
 
-export default (name, fn) => {
+export default (name, fn, nameIf = ()=>true) => {
   const wrapped = _nameFn(name, _arity(fn.length, function(...args) {
     const result = fn.apply(this, args);
-    if (_isFunction(result) && _isPoorFnName(result.name) && !args.includes(result)) {
+    if (_isFunction(result) && nameIf(args) && _isPoorFnName(result.name) && !args.includes(result)) {
       Object.defineProperties(result, {
         name: {
           get: () => wrapped.name + '(' + args.map(toString).join(', ') + ')',

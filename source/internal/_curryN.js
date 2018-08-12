@@ -13,13 +13,13 @@ import _nameReturnedFn from './_nameReturnedFn';
  * @param {Function} fn The function to curry.
  * @return {Function} The curried function.
  */
-export default (length, name, fn) => {
+export default (length, name, fn, nameIf) => {
   const curried = _nameReturnedFn(name, _arity(length, function() {
     if (arguments.length < length) {
       return _partial(curried, arguments);
     } else {
       return fn.apply(this, arguments);
     }
-  }));
+  }), nameIf);
   return curried;
 };
