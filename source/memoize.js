@@ -9,6 +9,9 @@ import toString from './toString';
  * call to `fn`; instead, the cached result for that set of arguments will be
  * returned.
  *
+ * Arguments are compared by string representation of values.  Behavior when
+ * handling functions or large data structures as arguments is not guaranteed.
+ *
  * @func
  * @memberOf R
  * @since v0.1.0

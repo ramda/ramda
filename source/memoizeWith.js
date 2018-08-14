@@ -7,9 +7,10 @@ import _has from './internal/_has';
  * A customisable version of [`R.memoize`](#memoize). `memoizeWith` takes an
  * additional function that will be applied to a given argument set and used to
  * create the cache key under which the results of the function to be memoized
- * will be stored. Care must be taken when implementing key generation to avoid
- * clashes that may overwrite previous entries erroneously.
+ * will be stored.
  *
+ * Care must be taken when implementing key generation to avoid key collision,
+ * or if tracking references, memory leaks and mutating arguments.
  *
  * @func
  * @memberOf R
@@ -19,7 +20,7 @@ import _has from './internal/_has';
  * @param {Function} fn The function to generate the cache key.
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
- * @see R.memoize
+ * @see R.memoize, R.toString
  * @example
  *
  *      let count = 0;
