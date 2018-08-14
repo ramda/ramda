@@ -28,7 +28,7 @@ import _curry3 from './internal/_curry3';
  *      const digits = ['1', '2', '3', '4'];
  *      const appender = (a, b) => [a + b, a + b];
  *
- *      R.mapAccumRight(append, 5, digits); //=> [['12345', '2345', '345', '45'], '12345']
+ *      R.mapAccumRight(appender, 5, digits); //=> [['12345', '2345', '345', '45'], '12345']
  * @symb R.mapAccumRight(f, a, [b, c, d]) = [
  *   [
  *     f(b, f(c, f(d, a)[0])[0])[1],
