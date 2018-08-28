@@ -19,7 +19,8 @@ import _curry2 from './internal/_curry2';
  *        R.objOf('must'),
  *        R.map(R.objOf('match_phrase'))
  *      );
- *      matchPhrases(['foo', 'bar', 'baz']); //=> {must: [{match_phrase: 'foo'}, {match_phrase: 'bar'}, {match_phrase: 'baz'}]}
+ *      matchPhrases(['foo', 'bar', 'baz']); //=> {'must': [{'match_phrase': 'foo'},
+ *      {'match_phrase': 'bar'}, {'match_phrase': 'baz'}]}
  */
 var objOf = _curry2(function objOf(key, val) {
   var obj = {};
