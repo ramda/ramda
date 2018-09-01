@@ -1,6 +1,5 @@
 import _curry2 from './internal/_curry2';
 
-
 /**
  * Exclusive disjunction logical operation.
  * Returns `true` if one of the arguments is `true` and the other is `false`.
@@ -22,6 +21,6 @@ import _curry2 from './internal/_curry2';
  *      R.xor(false, false); //=> false
  */
 var xor = _curry2(function xor(a, b) {
-  return (a || b) && !(a && b);
+  return Boolean(a || b) && !(a && b);
 });
 export default xor;
