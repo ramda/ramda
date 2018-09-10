@@ -1,6 +1,6 @@
 /* global Map, Set, WeakMap, WeakSet */
 
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 
 describe('equals', function() {

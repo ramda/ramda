@@ -1,4 +1,4 @@
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 var fs = require('fs');
 var path = require('path');
@@ -28,10 +28,13 @@ function sourceMethods(dir) {
  * if you would attempt to require non existing file
  */
 describe('API surface', function() {
+  if (typeof require.resolve !== 'function') {
+    return;
+  }
   var exported = Object.keys(R).filter(function(key) {
     return key !== '__esModule';
   });
-  var actual = sourceMethods(path.dirname(require.resolve('..')));
+  var actual = sourceMethods(path.dirname(require.resolve('../source')));
 
   it('both APIs are in sync', function() {
     eq(actual.length, exported.length);

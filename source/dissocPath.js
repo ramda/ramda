@@ -1,5 +1,6 @@
 import _curry2 from './internal/_curry2';
 import _isInteger from './internal/_isInteger';
+import _isArray from './internal/_isArray';
 import assoc from './assoc';
 import dissoc from './dissoc';
 import remove from './remove';
@@ -30,13 +31,13 @@ var dissocPath = _curry2(function dissocPath(path, obj) {
     case 0:
       return obj;
     case 1:
-      return _isInteger(path[0]) ? remove(path[0], 1, obj) : dissoc(path[0], obj);
+      return _isInteger(path[0]) && _isArray(obj) ? remove(path[0], 1, obj) : dissoc(path[0], obj);
     default:
       var head = path[0];
       var tail = Array.prototype.slice.call(path, 1);
       if (obj[head] == null) {
         return obj;
-      } else if (_isInteger(path[0])) {
+      } else if (_isInteger(head) && _isArray(obj)) {
         return update(head, dissocPath(tail, obj[head]), obj);
       } else {
         return assoc(head, dissocPath(tail, obj[head]), obj);

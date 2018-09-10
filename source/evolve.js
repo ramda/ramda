@@ -20,7 +20,7 @@ import _curry2 from './internal/_curry2';
  * @return {Object} The transformed object.
  * @example
  *
- *      const tomato  = {firstName: '  Tomato ', data: {elapsed: 100, remaining: 1400}, id:123};
+ *      const tomato = {firstName: '  Tomato ', data: {elapsed: 100, remaining: 1400}, id:123};
  *      const transformations = {
  *        firstName: R.trim,
  *        lastName: R.trim, // Will not get invoked.

@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 
 
@@ -58,6 +58,10 @@ describe('dissocPath', function() {
 
   it('accepts empty path', function() {
     eq(R.dissocPath([], {a: 1, b: 2}), {a: 1, b: 2});
+  });
+
+  it('allow integer to be used as key for object', function() {
+    eq(R.dissocPath([42], {a: 1, b: 2, 42: 3}), {a: 1, b: 2});
   });
 
 });

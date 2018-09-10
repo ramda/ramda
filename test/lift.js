@@ -1,5 +1,5 @@
 
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 var Maybe = require('./shared/Maybe');
 

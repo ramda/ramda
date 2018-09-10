@@ -1,4 +1,4 @@
-var R = require('..');
+var R = require('../source');
 var eq = require('./shared/eq');
 var jsv = require('jsverify');
 var funcN = require('./shared/funcN');

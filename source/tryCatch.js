@@ -2,7 +2,6 @@ import _arity from './internal/_arity';
 import _concat from './internal/_concat';
 import _curry2 from './internal/_curry2';
 
-
 /**
  * `tryCatch` takes two functions, a `tryer` and a `catcher`. The returned
  * function evaluates the `tryer`; if it does not throw, it simply returns the
@@ -22,8 +21,9 @@ import _curry2 from './internal/_curry2';
  * @example
  *
  *      R.tryCatch(R.prop('x'), R.F)({x: true}); //=> true
- *      R.tryCatch(JSON.parse, R.F)({});      //=> false
- */
+ *      R.tryCatch(() => { throw 'foo'}, R.always('catched'))('bar') // => 'catched'
+ *      R.tryCatch(R.times(R.identity), R.always([]))('s') // => []
+ `` */
 var tryCatch = _curry2(function _tryCatch(tryer, catcher) {
   return _arity(tryer.length, function() {
     try {
