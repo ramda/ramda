@@ -2,7 +2,7 @@ import _curry2 from './internal/_curry2';
 
 /**
  * Exclusive disjunction logical operation.
- * Returns `true` if one of the arguments is `true` and the other is `false`.
+ * Returns `true` if one of the arguments is truthy and the other is falsy.
  * Otherwise, it returns `false`.
  *
  * @func
