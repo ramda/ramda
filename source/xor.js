@@ -21,6 +21,6 @@ import _curry2 from './internal/_curry2';
  *      R.xor(false, false); //=> false
  */
 var xor = _curry2(function xor(a, b) {
-  return Boolean(a || b) && !(a && b);
+  return Boolean(!a ^ !b);
 });
 export default xor;
