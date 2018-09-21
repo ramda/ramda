@@ -5,6 +5,7 @@ describe('transduce', function() {
   var add = R.add;
   var mult = function(a, b) {return a * b;};
   var isOdd = function(b) {return b % 2 === 1;};
+  var square = function(a) {return a * a;};
   var addxf = {
     '@@transducer/step': function(acc, x) { return acc + x; },
     '@@transducer/init': function() { return 0; },
@@ -72,4 +73,10 @@ describe('transduce', function() {
     eq(R.transduce(toxf(R.concat), listxf, [], []), []);
   });
 
+  it('short circuits with reduced', function() {
+    var transducer = R.compose(R.map(square), R.filter(isOdd));
+    var iterator = function(acc, val) {return val > 10 ? R.reduced(acc) : R.append(val, acc);};
+    var getOddSquaresWhileLessThan10 = R.transduce(transducer, iterator, []);
+    eq(getOddSquaresWhileLessThan10([1, 2, 3, 4]), [1, 9]);
+  });
 });
