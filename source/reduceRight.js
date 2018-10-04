@@ -47,6 +47,10 @@ var reduceRight = _curry3(function reduceRight(fn, acc, list) {
   var idx = list.length - 1;
   while (idx >= 0) {
     acc = fn(list[idx], acc);
+    if (acc && acc['@@transducer/reduced']) {
+      acc = acc['@@transducer/value'];
+      break;
+    }
     idx -= 1;
   }
   return acc;
