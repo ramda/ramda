@@ -12,6 +12,9 @@ import _xreduceBy from './internal/_xreduceBy.js';
  * the String-returning function `keyFn` on each element and reduces the elements
  * of each group to a single value via the reducer function `valueFn`.
  *
+ * The value function receives two values: *(acc, value)*. It may use
+ * [`R.reduced`](#reduced) to shortcut the iteration.
+ *
  * This function is basically a more general [`groupBy`](#groupBy) function.
  *
  * Acts as a transducer if a transformer is given in list position.
@@ -28,7 +31,7 @@ import _xreduceBy from './internal/_xreduceBy.js';
  * @param {Array} list The array to group.
  * @return {Object} An object with the output of `keyFn` for keys, mapped to the output of
  *         `valueFn` for elements which produced that key when passed to `keyFn`.
- * @see R.groupBy, R.reduce
+ * @see R.groupBy, R.reduce, R.reduced
  * @example
  *
  *      const groupNames = (acc, {name}) => acc.concat(name)

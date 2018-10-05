@@ -10,7 +10,8 @@ import _curry3 from './internal/_curry3.js';
  * right to the left.
  *
  * The iterator function receives two values: *(value, acc)*, while the arguments'
- * order of `reduce`'s iterator function is *(acc, value)*.
+ * order of `reduce`'s iterator function is *(acc, value)*. `reduceRight` may use [`reduced`](#reduced)
+ * to shortcut the iteration.
  *
  * Note: `R.reduceRight` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.reduceRight` method. For more details
@@ -27,7 +28,7 @@ import _curry3 from './internal/_curry3.js';
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.reduce, R.addIndex
+ * @see R.reduce, R.addIndex, R.reduced
  * @example
  *
  *      R.reduceRight(R.subtract, 0, [1, 2, 3, 4]) // => (1 - (2 - (3 - (4 - 0)))) = -2
