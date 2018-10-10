@@ -4,7 +4,7 @@ import _xany from './internal/_xany';
 
 
 /**
- * Returns `true` if at least one of elements of the list match the predicate,
+ * Returns `true` if at least one of the elements of the list match the predicate,
  * `false` otherwise.
  *
  * Dispatches to the `any` method of the second argument, if present.
