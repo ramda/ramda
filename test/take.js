@@ -3,9 +3,11 @@ var sinon = require('sinon');
 
 var R = require('../source');
 var eq = require('./shared/eq');
+var throwReduceTypeError = require('./helpers/throwReduceTypeError');
 
 
 describe('take', function() {
+  var takeOneWithInto = R.into([], R.take(1));
 
   it('takes only the first `n` elements from a list', function() {
     eq(R.take(3, ['a', 'b', 'c', 'd', 'e', 'f', 'g']), ['a', 'b', 'c']);
@@ -50,6 +52,12 @@ describe('take', function() {
     var spy = sinon.spy();
     R.into([], R.compose(R.map(spy), R.take(-1)), [1, 2, 3]);
     sinon.assert.calledThrice(spy);
+  });
+
+  it('throws if input value is not array or iterable', function() {
+    assert.throws(function() { takeOneWithInto(/abc/); }, throwReduceTypeError);
+    assert.throws(function() { takeOneWithInto(undefined); }, throwReduceTypeError);
+    assert.throws(function() { takeOneWithInto({}); }, throwReduceTypeError);
   });
 
 });

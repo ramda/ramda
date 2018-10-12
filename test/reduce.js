@@ -1,5 +1,8 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
+var throwReduceTypeError = require('./helpers/throwReduceTypeError');
 
 describe('reduce', function() {
   var add = function(a, b) {return a + b;};
@@ -74,5 +77,11 @@ describe('reduce', function() {
     var addWithMaxOf10 = function(acc, val) {return acc + val > 10 ? R.reduced(acc) : acc + val;};
     eq(R.reduce(addWithMaxOf10, 0, [1, 2, 3, 4]), 10);
     eq(R.reduce(addWithMaxOf10, 0, [2, 4, 6, 8]), 6);
+  });
+
+  it('throws if input value is not array or iterable', function() {
+    assert.throws(function() { R.reduce(add, 0, {a: 5, b: 2}); }, throwReduceTypeError);
+    assert.throws(function() { R.reduce(add, 0, null); }, throwReduceTypeError);
+    assert.throws(function() { R.reduce(add, 0, new Number(3)); }, throwReduceTypeError);
   });
 });

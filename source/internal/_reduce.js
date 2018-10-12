@@ -35,8 +35,12 @@ function _methodReduce(xf, acc, obj, methodName) {
 }
 
 var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
+var typeErrorMessage = 'reduce: list must be array or iterable';
 
 export default function _reduce(fn, acc, list) {
+  if (!list) {
+    throw new TypeError(typeErrorMessage);
+  }
   if (typeof fn === 'function') {
     fn = _xwrap(fn);
   }
@@ -56,5 +60,5 @@ export default function _reduce(fn, acc, list) {
     return _methodReduce(fn, acc, list, 'reduce');
   }
 
-  throw new TypeError('reduce: list must be array or iterable');
+  throw new TypeError(typeErrorMessage);
 }
