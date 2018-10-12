@@ -24,6 +24,7 @@ describe('path', function() {
     eq(R.path([], obj), obj);
     eq(R.path(['a', 'e', 'f', 1], obj), 101);
     eq(R.path(['j', 0], obj), 'J');
+    eq(R.path(['j', -1], obj), 'J');
     eq(R.path(['j', 1], obj), undefined);
   });
 
