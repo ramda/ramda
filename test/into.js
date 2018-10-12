@@ -8,8 +8,10 @@ var throwReduceTypeError = require('./helpers/throwReduceTypeError');
 describe('into', function() {
   var add = R.add;
   var isOdd = function(b) {return b % 2 === 1;};
+  var isTriple = function(b) {return b % 3 === 0;};
   var mapInc = R.map(R.inc);
   var takeOne = R.take(1);
+  var mapDec = R.map(R.dec);
   var addXf = {
     '@@transducer/step': add,
     '@@transducer/init': R.always(0),
@@ -33,9 +35,17 @@ describe('into', function() {
     eq(R.into({}, R.identity, [{a: 1}, {b: 2, c: 3}]), {a: 1, b: 2, c: 3});
   });
 
-  it('transduces from objects into objects', function() {
+  it('transduces from objects into objects using simple commutative transducers', function() {
     eq(R.into({}, R.map(add(2)), {a: 1, b: 2, c: 3}), {a: 3, b: 4, c: 5});
     eq(R.into({}, R.map(add(2)), {}), {});
+    eq(R.into({}, R.filter(isOdd), {a: 1, b: 2, c: 3}), {a: 1, c: 3});
+  });
+
+  it('transduces from objects into objects using complex commutative transducers', function() {
+    eq(R.into({}, R.compose(mapInc, mapDec), {a: 1, b: 2}), {a: 1, b: 2});
+    eq(R.into({}, R.compose(mapInc, R.filter(isOdd)), {a: 1, b: 2}), {b: 3});
+    eq(R.into({}, R.compose(R.filter(isOdd), mapInc), {a: 1, b: 2}), {a: 2});
+    eq(R.into({}, R.compose(R.filter(isOdd), R.filter(isTriple)), {a: 1, b: 2, c: 3}), {c: 3});
   });
 
   it('dispatches to objects that implement `reduce`', function() {

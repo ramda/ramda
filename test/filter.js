@@ -1,9 +1,13 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
+var throwReduceTypeError = require('./helpers/throwReduceTypeError');
 
 
 describe('filter', function() {
   var even = function(x) {return x % 2 === 0;};
+  var quintuple = function(x) {return x % 5 === 0;};
 
   it('reduces an array to those matching a filter', function() {
     eq(R.filter(even, [1, 2, 3, 4, 5]), [2, 4]);
@@ -29,6 +33,18 @@ describe('filter', function() {
   it('dispatches to passed-in non-Array object with a `filter` method', function() {
     var f = {filter: function(f) { return f('called f.filter'); }};
     eq(R.filter(function(s) { return s; }, f), 'called f.filter');
+  });
+
+  it('composes with object inputs using R.into', function() {
+    var fn = R.compose(R.filter(even), R.filter(quintuple));
+    eq(R.into({}, fn, {a: 5, b: 10, c: 2}), {b: 10});
+  });
+
+  it('does not filter with objects inputs and array acummulator using R.into', function() {
+    var fn = R.compose(R.filter(even), R.filter(quintuple));
+    assert.throws(function() {
+      R.into([], fn, {a: 5, b: 10, c: 2});
+    }, throwReduceTypeError);
   });
 
 });
