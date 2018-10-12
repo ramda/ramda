@@ -1,10 +1,15 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
+var throwReduceTypeError = require('./helpers/throwReduceTypeError');
 
 
 describe('into', function() {
   var add = R.add;
   var isOdd = function(b) {return b % 2 === 1;};
+  var mapInc = R.map(R.inc);
+  var takeOne = R.take(1);
   var addXf = {
     '@@transducer/step': add,
     '@@transducer/init': R.always(0),
@@ -23,9 +28,14 @@ describe('into', function() {
     eq(R.into('', R.compose(R.map(add(1)), R.take(2)), [1, 2, 3, 4]), '23');
   });
 
-  it('transduces into objects', function() {
+  it('transduces from arrays into objects', function() {
     eq(R.into({}, R.identity, [['a', 1], ['b', 2]]), {a: 1, b: 2});
     eq(R.into({}, R.identity, [{a: 1}, {b: 2, c: 3}]), {a: 1, b: 2, c: 3});
+  });
+
+  it('transduces from objects into objects', function() {
+    eq(R.into({}, R.map(add(2)), {a: 1, b: 2, c: 3}), {a: 3, b: 4, c: 5});
+    eq(R.into({}, R.map(add(2)), {}), {});
   });
 
   it('dispatches to objects that implement `reduce`', function() {
@@ -39,6 +49,13 @@ describe('into', function() {
     var add2 = R.map(add(2));
     var result = intoSum(add2);
     eq(result([1, 2, 3, 4]), 18);
+  });
+
+  it('throws if input is an object and function is a composition with some no commutative transducer', function() {
+    assert.throws(function() {R.into({}, R.compose(mapInc, takeOne), {a: 1, b: 2});}, throwReduceTypeError);
+    assert.throws(function() {R.into({}, R.compose(takeOne, mapInc), {a: 1, b: 2});}, throwReduceTypeError);
+    assert.throws(function() {R.into([], R.compose(mapInc, takeOne), {a: 1, b: 2});}, throwReduceTypeError);
+    assert.throws(function() {R.into([], R.compose(takeOne, mapInc), {a: 1, b: 2});}, throwReduceTypeError);
   });
 
 });

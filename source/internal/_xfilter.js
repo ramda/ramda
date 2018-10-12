@@ -5,6 +5,7 @@ import _xfBase from './_xfBase';
 function XFilter(f, xf) {
   this.xf = xf;
   this.f = f;
+  this['@@transducer/commutative'] = xf['@@transducer/commutative'];
 }
 XFilter.prototype['@@transducer/init'] = _xfBase.init;
 XFilter.prototype['@@transducer/result'] = _xfBase.result;

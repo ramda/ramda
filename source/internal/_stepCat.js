@@ -1,10 +1,19 @@
 import _objectAssign from './_objectAssign';
 import _identity from './_identity';
 import _isArrayLike from './_isArrayLike';
+import _isString from './_isString';
 import _isTransformer from './_isTransformer';
 import objOf from '../objOf';
 
 
+function convertObjectInput(input, key) {
+  if (_isString(key)) {
+    return objOf(key, input);
+  } else if (_isArrayLike(input)) {
+    return objOf(input[0], input[1]);
+  }
+  return input;
+}
 var _stepCatArray = {
   '@@transducer/init': Array,
   '@@transducer/step': function(xs, x) {
@@ -20,12 +29,13 @@ var _stepCatString = {
 };
 var _stepCatObject = {
   '@@transducer/init': Object,
-  '@@transducer/step': function(result, input) {
+  '@@transducer/step': function(result, input, key) {
     return _objectAssign(
       result,
-      _isArrayLike(input) ? objOf(input[0], input[1]) : input
+      convertObjectInput(input, key)
     );
   },
+  '@@transducer/commutative': true,
   '@@transducer/result': _identity
 };
 

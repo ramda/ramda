@@ -1,4 +1,6 @@
 import _isArrayLike from './_isArrayLike';
+import _has from './_has';
+import _isObject from './_isObject';
 import _xwrap from './_xwrap';
 import bind from '../bind';
 
@@ -26,6 +28,19 @@ function _iterableReduce(xf, acc, iter) {
       break;
     }
     step = iter.next();
+  }
+  return xf['@@transducer/result'](acc);
+}
+
+function _objectReduce(xf, acc, object) {
+  for (var key in object) {
+    if (_has(key, object)) {
+      acc = xf['@@transducer/step'](acc, object[key], key);
+      if (acc && acc['@@transducer/reduced']) {
+        acc = acc['@@transducer/value'];
+        break;
+      }
+    }
   }
   return xf['@@transducer/result'](acc);
 }
@@ -58,6 +73,9 @@ export default function _reduce(fn, acc, list) {
   }
   if (typeof list.reduce === 'function') {
     return _methodReduce(fn, acc, list, 'reduce');
+  }
+  if (fn['@@transducer/commutative'] && _isObject(list)) {
+    return _objectReduce(fn, acc, list);
   }
 
   throw new TypeError(typeErrorMessage);
