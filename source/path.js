@@ -14,11 +14,13 @@ import nth from './nth';
  * @param {Array} path The path to use.
  * @param {Object} obj The object to retrieve the nested property from.
  * @return {*} The data at `path`.
- * @see R.prop
+ * @see R.prop, R.nth
  * @example
  *
  *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
  *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
+ *      R.path(['a', 'b', 0], {a: {b: [1, 2, 3]}}); //=> 1
+ *      R.path(['a', 'b', -2], {a: {b: [1, 2, 3]}}); //=> 2
  */
 var path = _curry2(function path(paths, obj) {
   var val = obj;
