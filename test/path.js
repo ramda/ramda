@@ -28,6 +28,19 @@ describe('path', function() {
     eq(R.path(['j', 1], obj), undefined);
   });
 
+  it('takes a path that contains indeces into arrays that might be negative', function() {
+    var obj = {
+      a: [[{}], [{x: 'first'}, {x: 'second'}, {x: 'third'}, {x: 'last'}]]
+    };
+    eq(R.path(['a', 0, 0], obj), {});
+    eq(R.path(['a', 0, 1], obj), undefined);
+    eq(R.path(['a', 1, 0, 'x'], obj), 'first');
+    eq(R.path(['a', 1, 1, 'x'], obj), 'second');
+    eq(R.path(['a', 1, -2, 'x'], obj), 'third');
+    eq(R.path(['a', 1, -1, 'x'], obj), 'last');
+    eq(R.path([0], ['A']), 'A');
+  });
+
   it("gets a deep property's value from objects", function() {
     eq(R.path(['a', 'b', 'c'], deepObject), 'c');
     eq(R.path(['a'], deepObject), deepObject.a);
