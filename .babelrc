@@ -13,5 +13,5 @@
         "./scripts/transpile/wrap-constructor-pattern"
       ]
     }
-  },
+  }
 }
