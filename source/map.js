@@ -45,6 +45,9 @@ import keys from './keys';
 var map = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, function map(fn, functor) {
   switch (Object.prototype.toString.call(functor)) {
     case '[object Function]':
+    case '[object AsyncFunction]':
+    case '[object GeneratorFunction]':
+    case '[object AsyncGeneratorFunction]':
       return curryN(functor.length, function() {
         return fn.call(this, functor.apply(this, arguments));
       });

@@ -45,4 +45,15 @@ describe('type', function() {
     eq(R.type(undefined), 'Undefined');
   });
 
+  it('"Function" if given a function', function() {
+    eq(R.type(() => {}), 'Function');
+  });
+
+  it('"AsyncFunction" if given an async function', function() {
+    eq(R.type(async() => {}), 'AsyncFunction');
+  });
+
+  it('"Generator Function" if given a generator function', function() {
+    eq(R.type(function* () {}), 'GeneratorFunction');
+  });
 });
