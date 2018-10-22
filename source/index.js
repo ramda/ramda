@@ -62,6 +62,7 @@ export { default as eqBy } from './eqBy';
 export { default as eqProps } from './eqProps';
 export { default as equals } from './equals';
 export { default as evolve } from './evolve';
+export { default as evolveTo } from './evolveTo';
 export { default as filter } from './filter';
 export { default as find } from './find';
 export { default as findIndex } from './findIndex';
