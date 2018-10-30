@@ -1,12 +1,20 @@
 import _curry1 from './internal/_curry1';
 import apply from './apply';
 import curryN from './curryN';
-import map from './map';
 import max from './max';
 import pluck from './pluck';
 import reduce from './reduce';
+import keys from './keys';
 import values from './values';
 
+// Use custom mapValues function to avoid issues with specs that include a "map" key and R.map
+// delegating calls to .map
+function mapValues(fn, obj) {
+  return keys(obj).reduce(function(acc, key) {
+    acc[key] = fn(obj[key]);
+    return acc;
+  }, {});
+}
 
 /**
  * Given a spec object recursively mapping properties to functions, creates a
@@ -34,12 +42,16 @@ import values from './values';
  * @symb R.applySpec({ x: f, y: { z: g } })(a, b) = { x: f(a, b), y: { z: g(a, b) } }
  */
 var applySpec = _curry1(function applySpec(spec) {
-  spec = map(function(v) { return typeof v == 'function' ? v : applySpec(v); },
-             spec);
-  return curryN(reduce(max, 0, pluck('length', values(spec))),
-                function() {
-                  var args = arguments;
-                  return map(function(f) { return apply(f, args); }, spec);
-                });
+  spec = mapValues(
+    function(v) { return typeof v == 'function' ? v : applySpec(v); },
+    spec
+  );
+
+  return curryN(
+    reduce(max, 0, pluck('length', values(spec))),
+    function() {
+      var args = arguments;
+      return mapValues(function(f) { return apply(f, args); }, spec);
+    });
 });
 export default applySpec;

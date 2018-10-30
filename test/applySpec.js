@@ -21,6 +21,10 @@ describe('applySpec', function() {
        { unnested: 0, nested: { sum: 3 } });
   });
 
+  it('works with a spec defining a map key', function() {
+    eq(R.applySpec({map: R.prop('a')})({a: 1}), {map: 1});
+  });
+
   it('retains the highest arity', function() {
     var f = R.applySpec({ f1: R.nAry(2, R.T), f2: R.nAry(5, R.T) });
     eq(f.length, 5);
@@ -29,5 +33,4 @@ describe('applySpec', function() {
   it('returns a curried function', function() {
     eq(R.applySpec({ sum: R.add })(1)(2), { sum: 3 });
   });
-
 });
