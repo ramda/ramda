@@ -17,7 +17,7 @@ import _curry2 from './internal/_curry2';
  * @return {Array} The new list.
  * @example
  *
- *      R.intersperse('n', ['ba', 'a', 'a']); //=> ['ba', 'n', 'a', 'n', 'a']
+ *      R.intersperse('a', ['b', 'n', 'n', 's']); //=> ['b', 'a', 'n', 'a', 'n', 'a', 's']
  */
 var intersperse = _curry2(_checkForMethod('intersperse', function intersperse(separator, list) {
   var out = [];
