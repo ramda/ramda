@@ -1,4 +1,3 @@
-import always from './always';
 
 
 /**
@@ -11,10 +10,10 @@ import always from './always';
  * @sig * -> Boolean
  * @param {*}
  * @return {Boolean}
- * @see R.always, R.F
+ * @see R.F
  * @example
  *
  *      R.T(); //=> true
  */
-var T = always(true);
+var T = function() {return true;};
 export default T;
