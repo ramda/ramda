@@ -15,6 +15,7 @@ import _curry1 from './internal/_curry1';
  * @sig a -> (* -> a)
  * @param {*} val The value to wrap in a function
  * @return {Function} A Function :: * -> val.
+ * @see R.T, R.F
  * @example
  *
  *      const t = R.always('Tee');
