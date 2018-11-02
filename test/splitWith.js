@@ -2,7 +2,7 @@ var R = require('../source');
 var eq = require('./shared/eq');
 
 
-describe.only('splitWith', function() {
+describe('splitWith', function() {
   it('splits an array at every instance of predicate matching', function() {
     eq(R.splitWith(R.equals(2), [1, 2, 3, 4, 2, 1]), [[1], [3, 4], [1]]);
   });
