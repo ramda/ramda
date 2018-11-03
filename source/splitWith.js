@@ -15,7 +15,7 @@ import _curry2 from './internal/_curry2';
  * @example
  *
  *      R.splitWith(R.equals(2), [1, 2, 3, 4, 2, 1]); //=> [[1], [3, 4], [1]];
- *      R.splitWith(R.equals('a'), 'bananas'); //=> [['b'],['n'],['n'],['s']]
+ *      R.splitWith(R.equals('a'), ['b','a','n','a','n','a','s']); //=> [['b'],['n'],['n'],['s']]
  */
 
 var splitWith = _curry2(function splitWith(pred, list) {
