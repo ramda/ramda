@@ -56,4 +56,10 @@ describe('any', function() {
     });
   });
 
+  it('dispatches to objects that implement `reduce`', function() {
+    var obj = {x: [1, 2, 3], reduce: function() { return 'override'; }};
+    eq(R.any(odd, obj), 'override');
+    eq(R.any(R.equals(1), obj), 'override');
+  });
+
 });
