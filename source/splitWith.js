@@ -15,24 +15,23 @@ import _reduce from './internal/_reduce';
  * @return {Array}
  * @example
  *
- *      R.splitWith(R.equals('a'), [1, 2, 3, 1, 2, 3]); //=> [[1], [3, 1], [3]]
+ *      R.splitWith(R.equals(2), [1, 2, 3, 4, 2, 1]); //=> [[1], [3, 4], [1]];
+ *      R.splitWith(R.equals('a'), 'bananas'); //=> [['b'],['n'],['n'],['s']]
  */
+
 var splitWith = _curry2(function splitWith(pred, list) {
-  let currIndex = 0;
-  return _reduce(function(acc, curr) {
-    if (pred(curr)) {
-      if (currIndex !== list.length - 1) {
-        acc.push([]);
-      }
-    } else {
-      if (acc[acc.length - 1]) {
-        acc[acc.length - 1].push(curr);
-      } else {
-        acc.push([curr]);
-      }
+  var idx = 0;
+  var len = list.length;
+  var ret = [];
+  while (idx < len) {
+    var entry = [];
+    while (idx < len && !pred(list[idx])) {
+      entry = entry.concat(list[idx]);
+      idx += 1;
     }
-    currIndex += 1;
-    return acc;
-  }, [], list);
+    ret = entry.length ? ret.concat([entry]) : ret;
+    idx += 1;
+  }
+  return ret;
 });
 export default splitWith;
