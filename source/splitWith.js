@@ -1,5 +1,4 @@
 import _curry2 from './internal/_curry2';
-import _reduce from './internal/_reduce';
 
 
 /**
