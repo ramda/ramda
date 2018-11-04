@@ -17,7 +17,7 @@ import _curry2 from './internal/_curry2';
  * @sig (* -> {*}) -> a -> {a}
  * @param {Object} ctor A constructor
  * @param {*} val any value
- * @return {*} An instance of tbe `ctor` wrapping `val`.
+ * @return {*} An instance of the `ctor` wrapping `val`.
  * @example
  *
  *      R.of(Array, null); //=> [null]
