@@ -86,7 +86,7 @@
     "dox": "latest",
     "envvar": "1.x.x",
     "eslint": "^2.11.0",
-    "handlebars": "3.0.x",
+    "handlebars": ">=4.0.0",
     "istanbul": "^0.4.x",
     "js-yaml": "^3.2.5",
     "jsverify": "^0.7.3",
