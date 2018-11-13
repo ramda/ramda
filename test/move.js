@@ -3,7 +3,7 @@ var eq = require('./shared/eq');
 
 var list = [8, 6, 7, 5, 3, 0, 9];
 
-describe.only('move', function() {
+describe('move', function() {
   it('moves an element from an index to another', function() {
     eq(R.move(0, 1, list), [6, 8, 7, 5, 3, 0, 9]);
     eq(R.move(2, 1, list), [8, 7, 6, 5, 3, 0, 9]);
