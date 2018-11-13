@@ -14,8 +14,8 @@ import _curry3 from './internal/_curry3';
  * @return {Array} The new list reordered
  * @example
  *
- *      R.move(0, 2, [1,2,3]); //=> [2,3,1]
- *      R.move(-1, 0, [1,2,3]); //=> [3,1,2] list rotation
+ *      R.move(0, 2, [8, 6, 7, 5, 3, 0, 9]); //=> [ 6, 7, 8, 5, 3, 0, 9 ]
+ *      R.move(-1, 0, [8, 6, 7, 5, 3, 0, 9]); //=> [ 6, 7, 5, 3, 0, 9, 8 ] list rotation
  */
 var move = _curry3(function(from, to, list) {
   var result = list.slice();
