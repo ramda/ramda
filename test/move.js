@@ -1,19 +1,22 @@
 var R = require('../source');
 var eq = require('./shared/eq');
 
+var list = [8, 6, 7, 5, 3, 0, 9];
+
 describe.only('move', function() {
-  it('should correctly moves an element from an index to another', function() {
-    eq(R.move(0, 1, [1,2,3]), [2,1,3]);
-    eq(R.move(2, 1, [1,2,3]), [1,3,2]);
-    eq(R.move(-1, 0, [1,2,3]), [3,1,2]);
+  it('moves an element from an index to another', function() {
+    eq(R.move(0, 1, list), [6, 8, 7, 5, 3, 0, 9]);
+    eq(R.move(2, 1, list), [8, 7, 6, 5, 3, 0, 9]);
+    eq(R.move(-1, 0, list), [9, 8, 6, 7, 5, 3, 0]);
+    eq(R.move(0, -1, list), [6, 7, 5, 3, 0, 9, 8]);
   });
 
-  it('should move the element at the end when the destination index is outside liste bounds', function() {
-    eq(R.move(0, 20, [1,2,3]), [2,3,1]);
+  it('move the element at the end when the destination index is outside list bounds', function() {
+    eq(R.move(0, 20, list), [6, 7, 5, 3, 0, 9, 8]);
   });
 
-  it('should do nothing when source index is outside liste bounds', function() {
-    eq(R.move(20, 0, [1,2,3]), [1,2,3]);
-    eq(R.move(20, 20, [1,2,3]), [1,2,3]);
+  it('do nothing when source index is outside list bounds', function() {
+    eq(R.move(20, 0, list), list);
+    eq(R.move(20, 20, list), list);
   });
 });

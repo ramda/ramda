@@ -20,11 +20,12 @@ import _curry3 from './internal/_curry3';
 var move = _curry3(function(from, to, list) {
   var result = list.slice();
   var item = result.splice(from, 1);
+  var positiveTo = to < 0 ? list.length + to : to;
 
   return []
-    .concat(result.slice(0, to))
+    .concat(result.slice(0, positiveTo))
     .concat(item)
-    .concat(result.slice(to, list.length));
+    .concat(result.slice(positiveTo, list.length));
 });
 
 export default move;
