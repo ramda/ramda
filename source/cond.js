@@ -33,9 +33,11 @@ import reduce from './reduce';
  *      fn(100); //=> 'water boils at 100°C'
  */
 var cond = _curry1(function cond(pairs) {
-  var arity = reduce(max,
-                     0,
-                     map(function(pair) { return pair[0].length; }, pairs));
+  var arity = reduce(
+    max,
+    0,
+    map(function(pair) { return pair[0].length; }, pairs)
+  );
   return _arity(arity, function() {
     var idx = 0;
     while (idx < pairs.length) {

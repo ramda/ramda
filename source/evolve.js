@@ -34,9 +34,11 @@ var evolve = _curry2(function evolve(transformations, object) {
   for (key in object) {
     transformation = transformations[key];
     type = typeof transformation;
-    result[key] = type === 'function'                 ? transformation(object[key])
-                : transformation && type === 'object' ? evolve(transformation, object[key])
-                                                      : object[key];
+    result[key] = type === 'function'
+      ? transformation(object[key])
+      : transformation && type === 'object'
+        ? evolve(transformation, object[key])
+        : object[key];
   }
   return result;
 });

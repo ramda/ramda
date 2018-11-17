@@ -32,14 +32,13 @@ import map from './map';
  */
 var ap = _curry2(function ap(applyF, applyX) {
   return (
-    typeof applyX['fantasy-land/ap'] === 'function' ?
-      applyX['fantasy-land/ap'](applyF) :
-    typeof applyF.ap === 'function' ?
-      applyF.ap(applyX) :
-    typeof applyF === 'function' ?
-      function(x) { return applyF(x)(applyX(x)); } :
-    // else
-      _reduce(function(acc, f) { return _concat(acc, map(f, applyX)); }, [], applyF)
+    typeof applyX['fantasy-land/ap'] === 'function'
+      ? applyX['fantasy-land/ap'](applyF)
+      : typeof applyF.ap === 'function'
+        ? applyF.ap(applyX)
+        : typeof applyF === 'function'
+          ? function(x) { return applyF(x)(applyX(x)); }
+          : _reduce(function(acc, f) { return _concat(acc, map(f, applyX)); }, [], applyF)
   );
 });
 export default ap;

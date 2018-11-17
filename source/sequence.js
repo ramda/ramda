@@ -32,8 +32,10 @@ import reduceRight from './reduceRight';
 var sequence = _curry2(function sequence(of, traversable) {
   return typeof traversable.sequence === 'function' ?
     traversable.sequence(of) :
-    reduceRight(function(x, acc) { return ap(map(prepend, x), acc); },
-                of([]),
-                traversable);
+    reduceRight(
+      function(x, acc) { return ap(map(prepend, x), acc); },
+      of([]),
+      traversable
+    );
 });
 export default sequence;
