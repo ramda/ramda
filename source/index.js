@@ -125,7 +125,6 @@ export { default as max } from './max';
 export { default as maxBy } from './maxBy';
 export { default as mean } from './mean';
 export { default as median } from './median';
-export { default as memoize } from './memoize';
 export { default as memoizeWith } from './memoizeWith';
 export { default as merge } from './merge';
 export { default as mergeAll } from './mergeAll';
