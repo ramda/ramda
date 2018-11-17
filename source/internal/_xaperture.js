@@ -28,7 +28,8 @@ XAperture.prototype.store = function(input) {
 };
 XAperture.prototype.getCopy = function() {
   return _concat(Array.prototype.slice.call(this.acc, this.pos),
-                 Array.prototype.slice.call(this.acc, 0, this.pos));
+    Array.prototype.slice.call(this.acc, 0, this.pos)
+  );
 };
 
 var _xaperture = _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });

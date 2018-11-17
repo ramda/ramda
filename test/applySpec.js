@@ -18,7 +18,8 @@ describe('applySpec', function() {
 
   it('works with nested specs', function() {
     eq(R.applySpec({ unnested: R.always(0), nested: { sum: R.add } })(1, 2),
-       { unnested: 0, nested: { sum: 3 } });
+      { unnested: 0, nested: { sum: 3 } }
+    );
   });
 
   it('works with a spec defining a map key', function() {

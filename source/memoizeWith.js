@@ -19,7 +19,6 @@ import _has from './internal/_has';
  * @param {Function} fn The function to generate the cache key.
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
- * @see R.memoize
  * @example
  *
  *      let count = 0;

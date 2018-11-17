@@ -7,11 +7,11 @@ var eq = require('./shared/eq');
 describe('otherwise', function() {
   it('catches failed promises', function(done) {
     R.otherwise(
-        function(n) {
-          eq(n, 1);
-          done();
-        },
-        Promise.reject(1)
+      function(n) {
+        eq(n, 1);
+        done();
+      },
+      Promise.reject(1)
     );
   });
 
@@ -26,12 +26,11 @@ describe('otherwise', function() {
 
   it('throws a typeError if the then method does not exist', function() {
     assert.throws(
-            function() { R.otherwise(R.inc, 1); },
-            function(err) {
-              return err.constructor === TypeError &&
-                       err.message === '`otherwise` expected a Promise, received 1';
-            }
-        );
-
+      function() { R.otherwise(R.inc, 1); },
+      function(err) {
+        return err.constructor === TypeError &&
+               err.message === '`otherwise` expected a Promise, received 1';
+      }
+    );
   });
 });

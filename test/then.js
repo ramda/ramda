@@ -7,11 +7,11 @@ var eq = require('./shared/eq');
 describe('then', function() {
   it('invokes then on the promise with the function passed to it', function(done) {
     R.then(
-        function(n) {
-          eq(n, 1);
-          done();
-        },
-        Promise.resolve(1)
+      function(n) {
+        eq(n, 1);
+        done();
+      },
+      Promise.resolve(1)
     );
   });
 
@@ -27,13 +27,12 @@ describe('then', function() {
 
   it('throws a typeError if the then method does not exist', function() {
     assert.throws(
-            function() { R.then(R.inc, 1); },
-            function(err) {
-              return err.constructor === TypeError &&
-                       err.message === '`then` expected a Promise, received 1';
-            }
-        );
-
+      function() { R.then(R.inc, 1); },
+      function(err) {
+        return err.constructor === TypeError &&
+          err.message === '`then` expected a Promise, received 1';
+      }
+    );
   });
 
   it('is not dependent on a particular promise implementation', function(done) {

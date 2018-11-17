@@ -74,9 +74,9 @@
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-plugin-annotate-pure-calls": "^0.2.0",
-    "babel-register": "^6.26.0",
+    "babel-plugin-annotate-pure-calls": "^0.2.2",
     "babel-plugin-import-export-rename": "^1.0.1",
+    "babel-register": "^6.26.0",
     "babel-types": "^6.26.0",
     "babelify": "^8.0.0",
     "benchmark": "~1.0.0",
@@ -85,19 +85,19 @@
     "cross-env": "^2.0.1",
     "dox": "latest",
     "envvar": "1.x.x",
-    "eslint": "^2.11.0",
+    "eslint": "^5.9.0",
     "handlebars": ">=4.0.0",
     "istanbul": "^0.4.x",
-    "js-yaml": "^3.2.5",
+    "js-yaml": "^3.12.0",
     "jsverify": "^0.7.3",
-    "mocha": "2.x.x",
+    "mocha": "^5.2.0",
     "ramda": "0.17.x",
-    "rimraf": "~2.3.2",
+    "rimraf": "^2.6.2",
     "rollup": "^0.50.0",
     "rollup-plugin-terser": "^1.0.1",
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
     "testem": "^2.9.0",
-    "xyz": "1.0.x"
+    "xyz": "^3.0.0"
   }
 }

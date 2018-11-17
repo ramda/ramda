@@ -26,6 +26,8 @@ export default function pipeP() {
   if (arguments.length === 0) {
     throw new Error('pipeP requires at least one argument');
   }
-  return _arity(arguments[0].length,
-                reduce(_pipeP, arguments[0], tail(arguments)));
+  return _arity(
+    arguments[0].length,
+    reduce(_pipeP, arguments[0], tail(arguments))
+  );
 }

@@ -33,7 +33,8 @@ XReduceBy.prototype['@@transducer/step'] = function(result, input) {
 };
 
 var _xreduceBy = _curryN(4, [],
-               function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
-                 return new XReduceBy(valueFn, valueAcc, keyFn, xf);
-               });
+  function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
+    return new XReduceBy(valueFn, valueAcc, keyFn, xf);
+  }
+);
 export default _xreduceBy;
