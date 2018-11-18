@@ -15,6 +15,7 @@ import reverse from './reverse';
  * @param {...Function}
  * @return {Function}
  * @see R.composeK
+ * @deprecated since v0.26.0
  * @example
  *
  *      //  parseJson :: String -> Maybe *

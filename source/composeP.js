@@ -15,6 +15,7 @@ import reverse from './reverse';
  * @param {...Function} functions The functions to compose
  * @return {Function}
  * @see R.pipeP
+ * @deprecated since v0.26.0
  * @example
  *
  *      const db = {

@@ -17,6 +17,7 @@ import map from './map';
  * @param {...Function} ...functions The functions to compose
  * @return {Function}
  * @see R.pipeK
+ * @deprecated since v0.26.0
  * @example
  *
  *       //  get :: String -> Object -> Maybe *
