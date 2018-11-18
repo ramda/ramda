@@ -17,6 +17,7 @@ import tail from './tail';
  * @param {...Function} functions
  * @return {Function}
  * @see R.composeP
+ * @deprecated since v0.26.0
  * @example
  *
  *      //  followersForUser :: String -> Promise [User]
