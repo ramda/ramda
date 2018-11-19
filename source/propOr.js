@@ -3,7 +3,7 @@ import pathOr from './pathOr';
 
 
 /**
- * If the given object has an property with the specified name, returns the value of that
+ * If the given object has a property with the specified name, returns the value of that
  * property. Otherwise returns the provided default value.
  *
  * @func
