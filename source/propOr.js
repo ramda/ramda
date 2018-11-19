@@ -3,9 +3,8 @@ import pathOr from './pathOr';
 
 
 /**
- * If the given, non-null object has an own property with the specified name,
- * returns the value of that property. Otherwise returns the provided default
- * value.
+ * If the given object has an property with the specified name, returns the value of that
+ * property. Otherwise returns the provided default value.
  *
  * @func
  * @memberOf R
@@ -22,11 +21,19 @@ import pathOr from './pathOr';
  *        name: 'ALICE',
  *        age: 101
  *      };
+ *      const bob = {
+ *        name: 'BOB',
+ *        age: 61,
+ *        favouriteLibrary: 'Ramda@0.26.0'
+ *      };
  *      const favorite = R.prop('favoriteLibrary');
  *      const favoriteWithDefault = R.propOr('Ramda', 'favoriteLibrary');
  *
  *      favorite(alice);  //=> undefined
  *      favoriteWithDefault(alice);  //=> 'Ramda'
+ *      favoriteWithDefault(Object.create(alice));  //=> 'Ramda'
+ *      favoriteWithDefault(null);  //=> 'Ramda'
+ *      favoriteWithDefault(bob);  //=> 'Ramda@0.26.0'
  */
 var propOr = _curry3(function propOr(val, p, obj) {
   return pathOr(val, [p], obj);
