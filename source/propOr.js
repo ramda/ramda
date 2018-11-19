@@ -24,7 +24,7 @@ import pathOr from './pathOr';
  *      const bob = {
  *        name: 'BOB',
  *        age: 61,
- *        favouriteLibrary: 'Ramda@0.26.0'
+ *        favoriteLibrary: 'Ramda@0.26.0'
  *      };
  *      const favorite = R.prop('favoriteLibrary');
  *      const favoriteWithDefault = R.propOr('Ramda', 'favoriteLibrary');
