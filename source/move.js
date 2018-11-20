@@ -1,4 +1,6 @@
 import _curry3 from './internal/_curry3';
+import max from './max';
+import min from './min';
 
 /**
  * Move an item, at index `from`, to index `to`, in a list of elements.
@@ -14,18 +16,23 @@ import _curry3 from './internal/_curry3';
  * @return {Array} The new list reordered
  * @example
  *
- *      R.move(0, 2, [8, 6, 7, 5, 3, 0, 9]); //=> [ 6, 7, 8, 5, 3, 0, 9 ]
- *      R.move(-1, 0, [8, 6, 7, 5, 3, 0, 9]); //=> [ 6, 7, 5, 3, 0, 9, 8 ] list rotation
+ *      R.move(0, 2, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['b', 'c', 'a', 'd', 'e', 'f']
+ *      R.move(-1, 0, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['f', 'a', 'b', 'c', 'd', 'e'] list rotation
  */
 var move = _curry3(function(from, to, list) {
+  var length = list.length;
+  var positiveFrom = from < 0 ? max(length + from, 0) : min(length - 1, from);
+  var positiveTo =   to   < 0 ? max(length + to, 0)   : min(length - 1, to);
   var result = list.slice();
-  var item = result.splice(from, 1);
-  var positiveTo = to < 0 ? list.length + to : to;
+  var item = result.splice(positiveFrom, 1);
 
-  return []
-    .concat(result.slice(0, positiveTo))
-    .concat(item)
-    .concat(result.slice(positiveTo, list.length));
+  return positiveFrom < 0 || positiveFrom >= length
+      || positiveTo   < 0 || positiveTo   >= length
+    ? list
+    : []
+      .concat(result.slice(0, positiveTo))
+      .concat(item)
+      .concat(result.slice(positiveTo, length));
 });
 
 export default move;
