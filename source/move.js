@@ -1,6 +1,4 @@
 import _curry3 from './internal/_curry3';
-import max from './max';
-import min from './min';
 
 /**
  * Move an item, at index `from`, to index `to`, in a list of elements.
@@ -21,18 +19,18 @@ import min from './min';
  */
 var move = _curry3(function(from, to, list) {
   var length = list.length;
-  var positiveFrom = from < 0 ? max(length + from, 0) : min(length - 1, from);
-  var positiveTo =   to   < 0 ? max(length + to, 0)   : min(length - 1, to);
   var result = list.slice();
+  var positiveFrom = from < 0 ? length + from : from;
+  var positiveTo = to < 0 ? length + to : to;
   var item = result.splice(positiveFrom, 1);
 
-  return positiveFrom < 0 || positiveFrom >= length
-      || positiveTo   < 0 || positiveTo   >= length
+  return positiveFrom < 0 || positiveFrom >= list.length
+      || positiveTo   < 0 || positiveTo   >= list.length
     ? list
     : []
       .concat(result.slice(0, positiveTo))
       .concat(item)
-      .concat(result.slice(positiveTo, length));
+      .concat(result.slice(positiveTo, list.length));
 });
 
 export default move;
