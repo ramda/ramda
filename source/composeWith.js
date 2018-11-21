@@ -21,7 +21,7 @@ import reverse from './reverse';
  *      const composeWhileNotNil = R.composeWith((f, res) => R.isNil(res) ? res : f(res));
  *
  *      composeWhileNotNil([R.inc, R.prop('age')])({age: 1}) //=> 2
- *      composeWhileNotNil([R.inc, R.prop('age')])({}) //=> null
+ *      composeWhileNotNil([R.inc, R.prop('age')])({}) //=> undefined
  *
  * @symb R.composeWith(f)([g, h, i])(...args) = f(g, f(h, f(i, ...args)))
  */
