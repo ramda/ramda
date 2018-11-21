@@ -23,10 +23,11 @@ import _assertPromise from './internal/_assertPromise';
  *
  *      //recoverFromFailure :: String -> Promise ({firstName, lastName})
  *      var recoverFromFailure = R.pipe(
- *        failedFetch(12345),
+ *        failedFetch,
  *        R.otherwise(useDefault),
- *        R.then(R.pick(['firstName', 'lastName']))
+ *        R.then(R.pick(['firstName', 'lastName'])),
  *      );
+ *      recoverFromFailure(12345).then(console.log)
  */
 const otherwise = _curry2(function otherwise(f, p) {
   _assertPromise('otherwise', p);
