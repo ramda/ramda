@@ -4,11 +4,10 @@ import _has from './internal/_has';
 
 
 /**
- * A customisable version of [`R.memoize`](#memoize). `memoizeWith` takes an
- * additional function that will be applied to a given argument set and used to
- * create the cache key under which the results of the function to be memoized
- * will be stored. Care must be taken when implementing key generation to avoid
- * clashes that may overwrite previous entries erroneously.
+ * Takes an additional function that will be applied to a given argument set 
+ * and used to create the cache key under which the results of the function to be 
+ * memoized will be stored. Care must be taken when implementing key generation 
+ * to avoid clashes that may overwrite previous entries erroneously.
  *
  *
  * @func
