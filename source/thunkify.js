@@ -20,7 +20,7 @@ import _curry1 from './internal/_curry1';
  */
 var thunkify = _curry1(function thunkify(fn) {
   return curryN(fn.length, function createThunk() {
-    const fnArgs = arguments;
+    var fnArgs = arguments;
     return function invokeThunk() {
       return fn.apply(this, fnArgs);
     };

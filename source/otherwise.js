@@ -29,7 +29,7 @@ import _assertPromise from './internal/_assertPromise';
  *      );
  *      recoverFromFailure(12345).then(console.log)
  */
-const otherwise = _curry2(function otherwise(f, p) {
+var otherwise = _curry2(function otherwise(f, p) {
   _assertPromise('otherwise', p);
 
   return p.then(null, f);

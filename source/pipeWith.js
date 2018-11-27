@@ -32,8 +32,8 @@ var pipeWith = _curry2(function pipeWith(xf, list) {
     return identity;
   }
 
-  const headList = head(list);
-  const tailList = tail(list);
+  var headList = head(list);
+  var tailList = tail(list);
 
   return _arity(headList.length, function() {
     return _reduce(

@@ -27,7 +27,7 @@ import _assertPromise from './internal/_assertPromise';
  *        R.then(R.pick(['firstName', 'lastName']))
  *      );
  */
-const then = _curry2(function then(f, p) {
+var then = _curry2(function then(f, p) {
   _assertPromise('then', p);
 
   return p.then(f);
