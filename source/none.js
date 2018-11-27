@@ -28,7 +28,7 @@ import all from './all';
  *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
  *      R.none(isOdd, [1, 3, 5, 7, 8, 11]); //=> false
  */
-const none = _curry2(function none(fn, input) {
+var none = _curry2(function none(fn, input) {
   return all(_complement(fn), input);
 });
 export default none;
