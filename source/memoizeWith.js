@@ -4,10 +4,11 @@ import _has from './internal/_has';
 
 
 /**
- * Takes an additional function that will be applied to a given argument set
- * and used to create the cache key under which the results of the function to be
- * memoized will be stored. Care must be taken when implementing key generation
- * to avoid clashes that may overwrite previous entries erroneously.
+ * Creates a new function that, when invoked, caches the result of calling `fn`
+ * for a given argument set and returns the result. Subsequent calls to the
+ * memoized `fn` with the same argument set will not result in an additional
+ * call to `fn`; instead, the cached result for that set of arguments will be
+ * returned.
  *
  *
  * @func
