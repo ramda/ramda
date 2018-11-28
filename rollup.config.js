@@ -1,4 +1,5 @@
-var uglify = require('rollup-plugin-terser').terser;
+// uglify handles only es5 code, so this also acts as smoke test against shipping es2015+ syntax
+var uglify = require('rollup-plugin-uglify').uglify;
 var pkg = require('./package.json');
 
 var banner = '//  Ramda v' + pkg.version + '\n'
