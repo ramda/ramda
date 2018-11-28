@@ -139,6 +139,7 @@ export { default as mergeWithKey } from './mergeWithKey';
 export { default as min } from './min';
 export { default as minBy } from './minBy';
 export { default as modulo } from './modulo';
+export { default as move } from './move';
 export { default as multiply } from './multiply';
 export { default as nAry } from './nAry';
 export { default as negate } from './negate';
