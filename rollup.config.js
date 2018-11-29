@@ -14,9 +14,9 @@ var config = {
   output: {
     format: 'umd',
     name: 'R',
-    exports: 'named'
+    exports: 'named',
+    banner: banner
   },
-  banner: banner,
   plugins: []
 };
 
