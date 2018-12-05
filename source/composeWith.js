@@ -7,7 +7,8 @@ import reverse from './reverse';
  * Performs right-to-left function composition using transforming function. The rightmost function may have
  * any arity; the remaining functions must be unary.
  *
- * **Note:** The result of compose is not automatically curried.
+ * **Note:** The result of compose is not automatically curried. Transforming function is not used on the
+ * rightmost function.
  *
  * @func
  * @memberOf R
@@ -23,7 +24,7 @@ import reverse from './reverse';
  *      composeWhileNotNil([R.inc, R.prop('age')])({age: 1}) //=> 2
  *      composeWhileNotNil([R.inc, R.prop('age')])({}) //=> undefined
  *
- * @symb R.composeWith(f)([g, h, i])(...args) = f(g, f(h, f(i, ...args)))
+ * @symb R.composeWith(f)([g, h, i])(...args) = f(g, f(h, i(...args)))
  */
 var composeWith = _curry2(function composeWith(xf, list) {
   return pipeWith.apply(this, [xf, reverse(list)]);
