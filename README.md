@@ -77,7 +77,7 @@ no deleted components
 Now our new component has two [untracked file dependencies](https://docs.bitsrc.io/docs/isolating-and-tracking-components.html#tracking-a-component-with-dependencies), both in the `internal` directory. Well, let's just [track](https://docs.bitsrc.io/docs/isolating-and-tracking-components.html) all the internal components:
 
 ```bash
-$ it add source/internal/*.js
+$ bit add source/internal/*.js
 tracking 73 new components
 ```
 
