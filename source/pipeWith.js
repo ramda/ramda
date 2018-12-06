@@ -7,11 +7,11 @@ import identity from './identity';
 
 
 /**
- * Performs left-to-right function composition using transforming function. The leftmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs left-to-right function composition using transforming function. The first argument may have
+ * any arity; the remaining arguments must be unary.
  *
  * **Note:** The result of pipeWith is not automatically curried. Transforming function is not used on the
- * leftmost function.
+ * first argument.
  *
  * @func
  * @memberOf R

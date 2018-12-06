@@ -4,11 +4,11 @@ import reverse from './reverse';
 
 
 /**
- * Performs right-to-left function composition using transforming function. The rightmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs right-to-left function composition using transforming function. The last argument may have
+ * any arity; the remaining arguments must be unary.
  *
  * **Note:** The result of compose is not automatically curried. Transforming function is not used on the
- * rightmost function.
+ * last argument.
  *
  * @func
  * @memberOf R
