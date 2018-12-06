@@ -13,29 +13,20 @@ import _isPlaceholder from './_isPlaceholder';
  * @return {Function} The curried function.
  */
 export default function _curryN(length, received, fn) {
-  return function() {
-    var combined = [];
-    var argsIdx = 0;
-    var left = length;
-    var combinedIdx = 0;
-    while (combinedIdx < received.length || argsIdx < arguments.length) {
-      var result;
-      if (combinedIdx < received.length &&
-          (!_isPlaceholder(received[combinedIdx]) ||
-           argsIdx >= arguments.length)) {
-        result = received[combinedIdx];
-      } else {
-        result = arguments[argsIdx];
-        argsIdx += 1;
+  return function () {
+    var r_index = 0, a_index = 0;
+    while (a_index < arguments.length) {
+      var valid = _isPlaceholder(arguments[a_index]);
+      if (r_index < received.length && _isPlaceholder(received[r_index])) {
+        valid ? false : length--
+        received[r_index] = arguments[a_index++];
       }
-      combined[combinedIdx] = result;
-      if (!_isPlaceholder(result)) {
-        left -= 1;
+      else if (r_index >= received.length) {
+        valid ? false : length--
+        received.push(arguments[a_index++])
       }
-      combinedIdx += 1;
+      r_index++;
     }
-    return left <= 0
-      ? fn.apply(this, combined)
-      : _arity(left, _curryN(length, combined, fn));
+    return length <= 0 ? fn.apply(this, received) : _arity(length, _curryN(length, received, fn));
   };
 }
