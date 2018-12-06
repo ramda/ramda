@@ -7,10 +7,11 @@ import identity from './identity';
 
 
 /**
- * Performs left-to-right function composition using transforming function. The leftmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs left-to-right function composition using transforming function. The first argument may have
+ * any arity; the remaining arguments must be unary.
  *
- * **Note:** The result of pipeWith is not automatically curried.
+ * **Note:** The result of pipeWith is not automatically curried. Transforming function is not used on the
+ * first argument.
  *
  * @func
  * @memberOf R
@@ -25,7 +26,7 @@ import identity from './identity';
  *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
  *
  *      f(3, 4); // -(3^4) + 1
- * @symb R.pipeWith(f)([g, h, i])(...args) = f(i, f(h, f(g, ...args)))
+ * @symb R.pipeWith(f)([g, h, i])(...args) = f(i, f(h, g(...args)))
  */
 var pipeWith = _curry2(function pipeWith(xf, list) {
   if (list.length <= 0) {

@@ -3,8 +3,8 @@ import reverse from './reverse';
 
 
 /**
- * Performs right-to-left function composition. The rightmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs right-to-left function composition. The last argument may have
+ * any arity; the remaining arguments must be unary.
  *
  * **Note:** The result of compose is not automatically curried.
  *

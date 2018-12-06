@@ -6,7 +6,7 @@ import tail from './tail';
 
 /**
  * Performs left-to-right composition of one or more Promise-returning
- * functions. The leftmost function may have any arity; the remaining functions
+ * functions. The first argument may have any arity; the remaining arguments
  * must be unary.
  *
  * @func
