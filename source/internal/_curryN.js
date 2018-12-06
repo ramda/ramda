@@ -13,19 +13,21 @@ import _isPlaceholder from './_isPlaceholder';
  * @return {Function} The curried function.
  */
 export default function _curryN(length, received, fn) {
-  return function () {
-    var r_index = 0, a_index = 0;
+  return function() {
+    var r_index = 0;
+    var a_index = 0;
     while (a_index < arguments.length) {
       var valid = _isPlaceholder(arguments[a_index]);
       if (r_index < received.length && _isPlaceholder(received[r_index])) {
-        valid ? false : length--
-        received[r_index] = arguments[a_index++];
+        valid ? false : length -= 1;
+        received[r_index] = arguments[a_index];
+        a_index += 1;
+      } else if (r_index >= received.length) {
+        valid ? false : length -= 1;
+        received.push(arguments[a_index]);
+        a_index += 1;
       }
-      else if (r_index >= received.length) {
-        valid ? false : length--
-        received.push(arguments[a_index++])
-      }
-      r_index++;
+      r_index += 1;
     }
     return length <= 0 ? fn.apply(this, received) : _arity(length, _curryN(length, received, fn));
   };
