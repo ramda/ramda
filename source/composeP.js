@@ -4,8 +4,8 @@ import reverse from './reverse';
 
 /**
  * Performs right-to-left composition of one or more Promise-returning
- * functions. The rightmost function may have any arity; the remaining
- * functions must be unary.
+ * functions. The last arguments may have any arity; the remaining
+ * arguments must be unary.
  *
  * @func
  * @memberOf R
