@@ -1,4 +1,3 @@
-import _curry2 from './_curry2';
 import _reduced from './_reduced';
 import _xfBase from './_xfBase';
 
@@ -23,5 +22,4 @@ XFind.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfind = _curry2(function _xfind(f, xf) { return new XFind(f, xf); });
-export default _xfind;
+export default XFind;

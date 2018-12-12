@@ -32,7 +32,7 @@ export default function _dispatchable(methodNames, xf, fn) {
         idx += 1;
       }
       if (_isTransformer(obj)) {
-        var transducer = xf.apply(null, args);
+        var transducer = transformer => new xf(...args, transformer);
         return transducer(obj);
       }
     }

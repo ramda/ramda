@@ -1,4 +1,3 @@
-import _curry2 from './_curry2';
 import _reduce from './_reduce';
 import _xfBase from './_xfBase';
 
@@ -32,5 +31,4 @@ XDropLastWhile.prototype.retain = function(result, input) {
   return result;
 };
 
-var _xdropLastWhile = _curry2(function _xdropLastWhile(fn, xf) { return new XDropLastWhile(fn, xf); });
-export default _xdropLastWhile;
+export default XDropLastWhile;

@@ -1,4 +1,3 @@
-import _curry2 from './_curry2';
 import _xfBase from './_xfBase';
 
 
@@ -17,5 +16,4 @@ XFindLast.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfindLast = _curry2(function _xfindLast(f, xf) { return new XFindLast(f, xf); });
-export default _xfindLast;
+export default XFindLast;
