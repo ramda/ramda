@@ -56,7 +56,7 @@ describe('hasPath', function() {
     eq(R.hasPath(['toString'], bob), false);
   });
 
-  it('returns false for empty path', function() {
+  it('returns false for non-objects', function() {
     eq(R.hasPath([], obj), false);
   });
 

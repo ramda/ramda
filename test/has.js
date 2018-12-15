@@ -22,7 +22,7 @@ describe('has', function() {
     eq(R.has('age', bob), false);
   });
 
-  it('tests paths on non-objects', function() {
+  it('returns false for non-objects', function() {
     eq(R.has('a', undefined), false);
     eq(R.has('a', null), false);
     eq(R.has('a', true), false);
