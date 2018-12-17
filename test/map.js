@@ -31,6 +31,13 @@ describe('map', function() {
     eq(h(10), (10 * 2) - 1);
   });
 
+  it('interprets generator function as a functor', function() {
+    var f = function(gen) { return [gen.next().value - 1, gen.next().value - 2, gen.next().value - 3]; };
+    var g = function* (b) { yield b * 1; yield b * 2; yield b * 3; };
+    var h = R.map(f, g);
+    eq(h(10), [(10 * 1) - 1, (10 * 2) - 2, (10 * 3) - 3]);
+  });
+
   it('dispatches to objects that implement `map`', function() {
     var obj = {x: 100, map: function(f) { return f(this.x); }};
     eq(R.map(add1, obj), 101);
