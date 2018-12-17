@@ -25,20 +25,18 @@ import _curry1 from './internal/_curry1';
  * @symb R.transpose([[a, b], [c, d]]) = [[a, c], [b, d]]
  * @symb R.transpose([[a, b], [c]]) = [[a, c], [b]]
  */
-var transpose = _curry1(function transpose(outerlist) {
-  var i = 0;
-  var result = [];
-  while (i < outerlist.length) {
-    var innerlist = outerlist[i];
-    var j = 0;
-    while (j < innerlist.length) {
+var transpose = _curry1(function transpose(outerList) {
+  const result = [];
+
+  for (let i = 0; i < outerList.length; i += 1) {
+    const innerList = outerList[i];
+
+    for (let j = 0; j < innerList.length; j += 1) {
       if (typeof result[j] === 'undefined') {
         result[j] = [];
       }
-      result[j].push(innerlist[j]);
-      j += 1;
+      result[j].push(innerList[j]);
     }
-    i += 1;
   }
   return result;
 });
