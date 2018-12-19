@@ -83,6 +83,7 @@ export { default as head } from './head';
 export { default as identical } from './identical';
 export { default as identity } from './identity';
 export { default as ifElse } from './ifElse';
+export { default as ifElseP } from './ifElseP';
 export { default as inc } from './inc';
 export { default as includes } from './includes';
 export { default as indexBy } from './indexBy';
