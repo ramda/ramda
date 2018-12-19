@@ -32,6 +32,15 @@ describe('hasPath', function() {
     eq(R.hasPath(['arrayVal', 1], obj), false);
   });
 
+  it('tests for paths in arrays', function() {
+    eq(R.hasPath([0], [1, 2]), true);
+    eq(R.hasPath([2], [1, 2]), false);
+
+    eq(R.hasPath(['0'], [1, 2]), true);
+    eq(R.hasPath(['2'], [1, 2]), false);
+  });
+
+
   it('returns false for non-existent path', function() {
     eq(R.hasPath(['Unknown'], obj), false);
     eq(R.hasPath(['objVal', 'Unknown'], obj), false);
@@ -47,7 +56,19 @@ describe('hasPath', function() {
     eq(R.hasPath(['toString'], bob), false);
   });
 
-  it('returns false for empty path', function() {
+  it('returns false for non-objects', function() {
     eq(R.hasPath([], obj), false);
+  });
+
+  it('tests paths on non-objects', function() {
+    eq(R.hasPath(['a', 'b'], undefined), false);
+    eq(R.hasPath(['a', 'b'], null), false);
+    eq(R.hasPath('a', true), false);
+    eq(R.hasPath('a', ''), false);
+    eq(R.hasPath('a', /a/), false);
+  });
+
+  it('tests currying', function() {
+    eq(R.hasPath(['a', 'b'])({ a: { b: 1 } }), true);
   });
 });
