@@ -151,6 +151,7 @@ export { default as o } from './o';
 export { default as objOf } from './objOf';
 export { default as of } from './of';
 export { default as omit } from './omit';
+export { default as omitArgs } from './omitArgs';
 export { default as once } from './once';
 export { default as or } from './or';
 export { default as otherwise } from './otherwise';
