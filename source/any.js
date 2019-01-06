@@ -1,6 +1,5 @@
+import _checkForMethod from './internal/_checkForMethod';
 import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xany from './internal/_xany';
 
 
 /**
@@ -8,8 +7,6 @@ import _xany from './internal/_xany';
  * `false` otherwise.
  *
  * Dispatches to the `any` method of the second argument, if present.
- *
- * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -28,7 +25,7 @@ import _xany from './internal/_xany';
  *      R.any(lessThan0)([1, 2]); //=> false
  *      R.any(lessThan2)([1, 2]); //=> true
  */
-var any = _curry2(_dispatchable(['any'], _xany, function any(fn, list) {
+var any = _curry2(_checkForMethod('any', function any(fn, list) {
   var idx = 0;
   while (idx < list.length) {
     if (fn(list[idx])) {

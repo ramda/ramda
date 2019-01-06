@@ -1,6 +1,5 @@
+import _checkForMethod from './internal/_checkForMethod';
 import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfind from './internal/_xfind';
 
 
 /**
@@ -8,8 +7,6 @@ import _xfind from './internal/_xfind';
  * `undefined` if no element matches.
  *
  * Dispatches to the `find` method of the second argument, if present.
- *
- * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -27,7 +24,7 @@ import _xfind from './internal/_xfind';
  *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
  *      R.find(R.propEq('a', 4))(xs); //=> undefined
  */
-var find = _curry2(_dispatchable(['find'], _xfind, function find(fn, list) {
+var find = _curry2(_checkForMethod('find', function find(fn, list) {
   var idx = 0;
   var len = list.length;
   while (idx < len) {

@@ -1,13 +1,9 @@
 import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfindIndex from './internal/_xfindIndex';
 
 
 /**
  * Returns the index of the first element of the list which matches the
  * predicate, or `-1` if no element matches.
- *
- * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -25,7 +21,7 @@ import _xfindIndex from './internal/_xfindIndex';
  *      R.findIndex(R.propEq('a', 2))(xs); //=> 1
  *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
  */
-var findIndex = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, list) {
+var findIndex = _curry2(function findIndex(fn, list) {
   var idx = 0;
   var len = list.length;
   while (idx < len) {
@@ -35,5 +31,5 @@ var findIndex = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, li
     idx += 1;
   }
   return -1;
-}));
+});
 export default findIndex;

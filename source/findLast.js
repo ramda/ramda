@@ -1,13 +1,9 @@
 import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfindLast from './internal/_xfindLast';
 
 
 /**
  * Returns the last element of the list which matches the predicate, or
  * `undefined` if no element matches.
- *
- * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -25,7 +21,7 @@ import _xfindLast from './internal/_xfindLast';
  *      R.findLast(R.propEq('a', 1))(xs); //=> {a: 1, b: 1}
  *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
  */
-var findLast = _curry2(_dispatchable([], _xfindLast, function findLast(fn, list) {
+var findLast = _curry2(function findLast(fn, list) {
   var idx = list.length - 1;
   while (idx >= 0) {
     if (fn(list[idx])) {
@@ -33,5 +29,5 @@ var findLast = _curry2(_dispatchable([], _xfindLast, function findLast(fn, list)
     }
     idx -= 1;
   }
-}));
+});
 export default findLast;
