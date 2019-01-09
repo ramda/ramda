@@ -55,8 +55,8 @@
     "dist"
   ],
   "scripts": {
-    "bench": "scripts/benchRunner",
-    "bookmarklet": "scripts/bookmarklet",
+    "bench": "node scripts/benchRunner",
+    "bookmarklet": "node scripts/bookmarklet",
     "build:es": "cross-env BABEL_ENV=es babel source --out-dir es",
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
     "build:mjs": "cross-env BABEL_ENV=es babel source/index.js --out-file src/index.mjs",

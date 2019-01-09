@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+process.env.BABEL_ENV = 'cjs';
+require('babel-register');
+
 var Benchmark = require('benchmark');
 var Table = require('cli-table');
 var fs = require('fs');
@@ -8,7 +11,7 @@ var isBench = /\.bench\.js$/;
 function getTable(name) {
   return new Table({
     head: [name, 'Hertz', 'Margin of Error'],
-    colWidths: [24, 24, 24]
+    colWidths: [24, 24, 17]
   });
 }
 
