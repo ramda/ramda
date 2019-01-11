@@ -1,4 +1,5 @@
 var R = require('../source');
+var _xwrap = require('../source/internal/_xwrap');
 var eq = require('./shared/eq');
 
 
@@ -18,11 +19,11 @@ describe('reduced', function() {
     // black box test.
     eq(
       R.reduce(
-        function(acc, v) {
+        _xwrap(function(acc, v) {
           var result = acc + v;
           if (result >= 10) {result = R.reduced(result);}
           return result;
-        },
+        }),
         0,
         [1, 2, 3, 4, 5]),
       10);

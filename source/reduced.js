@@ -7,7 +7,7 @@ import _reduced from './internal/_reduced';
  * box: the internal structure is not guaranteed to be stable.
  *
  * Note: this optimization is only available to the below functions:
- * - [`reduce`](#reduce)
+ * - [`reduce`](#reduce) (**when passed a transformer**)
  * - [`reduceWhile`](#reduceWhile)
  * - [`transduce`](#transduce)
  *

@@ -1,4 +1,5 @@
 var R = require('../source');
+var _xwrap = require('../source/internal/_xwrap');
 var eq = require('./shared/eq');
 
 describe('reduce', function() {
@@ -71,7 +72,7 @@ describe('reduce', function() {
   });
 
   it('short circuits with reduced', function() {
-    var addWithMaxOf10 = function(acc, val) {return acc + val > 10 ? R.reduced(acc) : acc + val;};
+    var addWithMaxOf10 = _xwrap(function(acc, val) {return acc + val > 10 ? R.reduced(acc) : acc + val;});
     eq(R.reduce(addWithMaxOf10, 0, [1, 2, 3, 4]), 10);
     eq(R.reduce(addWithMaxOf10, 0, [2, 4, 6, 8]), 6);
   });

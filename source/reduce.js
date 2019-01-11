@@ -7,7 +7,9 @@ import _reduce from './internal/_reduce';
  * the iterator function and passing it an accumulator value and the current
  * value from the array, and then passing the result to the next call.
  *
- * The iterator function receives two values: *(acc, value)*. It may use
+ * The iterator function receives two values: *(acc, value)*.
+ *
+ * If transformer is passed instead of function, it may use
  * [`R.reduced`](#reduced) to shortcut the iteration.
  *
  * The arguments' order of [`reduceRight`](#reduceRight)'s iterator function

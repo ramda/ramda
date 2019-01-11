@@ -3,12 +3,12 @@ import _xwrap from './_xwrap';
 import bind from '../bind';
 
 
-function _arrayReduce(xf, acc, list) {
+function _arrayReduce(xf, acc, list, reduced) {
   var idx = 0;
   var len = list.length;
   while (idx < len) {
     acc = xf['@@transducer/step'](acc, list[idx]);
-    if (acc && acc['@@transducer/reduced']) {
+    if (reduced && acc && acc['@@transducer/reduced']) {
       acc = acc['@@transducer/value'];
       break;
     }
@@ -17,11 +17,11 @@ function _arrayReduce(xf, acc, list) {
   return xf['@@transducer/result'](acc);
 }
 
-function _iterableReduce(xf, acc, iter) {
+function _iteratorReduce(xf, acc, iter, reduced) {
   var step = iter.next();
   while (!step.done) {
     acc = xf['@@transducer/step'](acc, step.value);
-    if (acc && acc['@@transducer/reduced']) {
+    if (reduced && acc && acc['@@transducer/reduced']) {
       acc = acc['@@transducer/value'];
       break;
     }
@@ -37,20 +37,25 @@ function _methodReduce(xf, acc, obj, methodName) {
 var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
 
 export default function _reduce(fn, acc, list) {
+  var reduced = true;
   if (typeof fn === 'function') {
+    reduced = false;
+    if (!reduced && typeof list['fantasy-land/reduce'] === 'function') {
+      return list['fantasy-land/reduce'](fn, acc);
+    }
     fn = _xwrap(fn);
   }
   if (_isArrayLike(list)) {
-    return _arrayReduce(fn, acc, list);
+    return _arrayReduce(fn, acc, list, reduced);
   }
-  if (typeof list['fantasy-land/reduce'] === 'function') {
+  if (!reduced && typeof list['fantasy-land/reduce'] === 'function') {
     return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
   if (list[symIterator] != null) {
-    return _iterableReduce(fn, acc, list[symIterator]());
+    return _iteratorReduce(fn, acc, list[symIterator](), reduced);
   }
   if (typeof list.next === 'function') {
-    return _iterableReduce(fn, acc, list);
+    return _iteratorReduce(fn, acc, list, reduced);
   }
   if (typeof list.reduce === 'function') {
     return _methodReduce(fn, acc, list, 'reduce');
