@@ -24,7 +24,7 @@ import _curry1 from './internal/_curry1';
  *      objects[0] === objectsClone[0]; //=> false
  */
 var clone = _curry1(function clone(value) {
-  return value != null && typeof value.clone === 'function' ?
+  return value !== null && value !== undefined && typeof value.clone === 'function' ?
     value.clone() :
     _clone(value, [], [], true);
 });

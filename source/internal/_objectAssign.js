@@ -2,7 +2,7 @@ import _has from './_has';
 
 // Based on https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 function _objectAssign(target) {
-  if (target == null) {
+  if (target === null || target === undefined) {
     throw new TypeError('Cannot convert undefined or null to object');
   }
 
@@ -11,7 +11,7 @@ function _objectAssign(target) {
   var length = arguments.length;
   while (idx < length) {
     var source = arguments[idx];
-    if (source != null) {
+    if (source !== null && source !== undefined) {
       for (var nextKey in source) {
         if (_has(nextKey, source)) {
           output[nextKey] = source[nextKey];

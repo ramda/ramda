@@ -8,10 +8,11 @@
  *
  *      _isArray([]); //=> true
  *      _isArray(null); //=> false
+ *      _isArray(undefined); //=> false
  *      _isArray({}); //=> false
  */
 export default Array.isArray || function _isArray(val) {
-  return (val != null &&
+  return (val !== null && val !== undefined &&
           val.length >= 0 &&
           Object.prototype.toString.call(val) === '[object Array]');
 };

@@ -42,7 +42,7 @@ export default function _equals(a, b, stackA, stackB) {
     return false;
   }
 
-  if (a == null || b == null) {
+  if (a === null || a === undefined || b === null || b === undefined) {
     return false;
   }
 

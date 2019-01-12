@@ -46,7 +46,7 @@ export default function _reduce(fn, acc, list) {
   if (typeof list['fantasy-land/reduce'] === 'function') {
     return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
-  if (list[symIterator] != null) {
+  if (list[symIterator] !== null) {
     return _iterableReduce(fn, acc, list[symIterator]());
   }
   if (typeof list.next === 'function') {

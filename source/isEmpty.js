@@ -25,6 +25,6 @@ import equals from './equals';
  *      R.isEmpty({length: 0}); //=> false
  */
 var isEmpty = _curry1(function isEmpty(x) {
-  return x != null && equals(x, empty(x));
+  return x !== null && equals(x, empty(x));
 });
 export default isEmpty;

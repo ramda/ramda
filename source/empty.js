@@ -30,13 +30,13 @@ import _isString from './internal/_isString';
  */
 var empty = _curry1(function empty(x) {
   return (
-    (x != null && typeof x['fantasy-land/empty'] === 'function')
+    (x !== null && x !== undefined && typeof x['fantasy-land/empty'] === 'function')
       ? x['fantasy-land/empty']()
-      : (x != null && x.constructor != null && typeof x.constructor['fantasy-land/empty'] === 'function')
+      : (x !== null && x !== undefined && x.constructor !== null && x.constructor !== undefined && typeof x.constructor['fantasy-land/empty'] === 'function')
         ? x.constructor['fantasy-land/empty']()
-        : (x != null && typeof x.empty === 'function')
+        : (x !== null && x !== undefined && typeof x.empty === 'function')
           ? x.empty()
-          : (x != null && x.constructor != null && typeof x.constructor.empty === 'function')
+          : (x !== null && x !== undefined && x.constructor !== null && x.constructor !== undefined && typeof x.constructor.empty === 'function')
             ? x.constructor.empty()
             : _isArray(x)
               ? []
