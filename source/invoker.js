@@ -31,12 +31,9 @@ import toString from './toString';
  *      const dog = {
  *        speak: async () => 'Woof!'
  *      };
- *      const person = {
- *        speak: async () => 'Hi!'
- *      };
  *      const speak = R.invoker(0, 'speak');
- *      speak(dog).then(R.identity) //=> 'Woof!'
- *      speak(person).then(R.identity) //=> 'Hi!'
+ *      speak(dog).then(console.log) //~> 'Woof!'
+ *
  * @symb R.invoker(0, 'method')(o) = o['method']()
  * @symb R.invoker(1, 'method')(a, o) = o['method'](a)
  * @symb R.invoker(2, 'method')(a, b, o) = o['method'](a, b)
