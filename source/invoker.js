@@ -27,6 +27,13 @@ import toString from './toString';
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
  *      const sliceFrom6 = R.invoker(2, 'slice')(6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
+ *
+ *      const dog = {
+ *        speak: async () => 'Woof!'
+ *      };
+ *      const speak = R.invoker(0, 'speak');
+ *      speak(dog).then(console.log) //~> 'Woof!'
+ *
  * @symb R.invoker(0, 'method')(o) = o['method']()
  * @symb R.invoker(1, 'method')(a, o) = o['method'](a)
  * @symb R.invoker(2, 'method')(a, b, o) = o['method'](a, b)
