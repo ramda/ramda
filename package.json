@@ -55,10 +55,11 @@
     "dist"
   ],
   "scripts": {
-    "bench": "scripts/benchRunner",
-    "bookmarklet": "scripts/bookmarklet",
+    "prebench": "npm run --silent build:cjs",
+    "bench": "node scripts/benchRunner",
+    "bookmarklet": "node scripts/bookmarklet",
     "build:es": "cross-env BABEL_ENV=es babel source --out-dir es",
-    "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel -q source --out-dir src",
     "build:mjs": "cross-env BABEL_ENV=es babel source/index.js --out-file src/index.mjs",
     "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
