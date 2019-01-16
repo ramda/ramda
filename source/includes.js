@@ -8,7 +8,7 @@ import _curry2 from './internal/_curry2';
  *
  * @func
  * @memberOf R
- * @since v0.1.0
+ * @since v0.26.0
  * @category List
  * @sig a -> [a] -> Boolean
  * @param {Object} a The item to compare against.
