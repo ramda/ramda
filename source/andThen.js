@@ -24,12 +24,12 @@ import _assertPromise from './internal/_assertPromise';
  *      var getMemberName = R.pipe(
  *        makeQuery,
  *        fetchMember,
- *        R.then(R.pick(['firstName', 'lastName']))
+ *        R.andThen(R.pick(['firstName', 'lastName']))
  *      );
  */
-var then = _curry2(function then(f, p) {
-  _assertPromise('then', p);
+var andThen = _curry2(function andThen(f, p) {
+  _assertPromise('andThen', p);
 
   return p.then(f);
 });
-export default then;
+export default andThen;

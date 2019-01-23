@@ -16,9 +16,9 @@ describe('otherwise', function() {
   });
 
   it('does nothing to successfully resolved promises', function(done) {
-    var asyncAddTwo = R.pipe(Promise.resolve.bind(Promise), R.then(R.inc), R.otherwise(R.multiply(0)), R.then(R.inc));
+    var asyncAddTwo = R.pipe(Promise.resolve.bind(Promise), R.andThen(R.inc), R.otherwise(R.multiply(0)), R.andThen(R.inc));
 
-    R.then(function(result) {
+    R.andThen(function(result) {
       eq(result, 3);
       done();
     })(asyncAddTwo(1));

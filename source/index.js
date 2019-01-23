@@ -214,7 +214,7 @@ export { default as takeLastWhile } from './takeLastWhile';
 export { default as takeWhile } from './takeWhile';
 export { default as tap } from './tap';
 export { default as test } from './test';
-export { default as then } from './then';
+export { default as andThen } from './andThen';
 export { default as times } from './times';
 export { default as toLower } from './toLower';
 export { default as toPairs } from './toPairs';
