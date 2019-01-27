@@ -53,7 +53,7 @@ describe('type', function() {
     eq(R.type(async() => {}), 'AsyncFunction');
   });
 
-  it('"Generator Function" if given a generator function', function() {
+  it('"GeneratorFunction" if given a generator function', function() {
     eq(R.type(function* () {}), 'GeneratorFunction');
   });
 });
