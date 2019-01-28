@@ -22,7 +22,7 @@ import _curry3 from './internal/_curry3';
  *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
  */
 var assoc = _curry3(function assoc(prop, val, obj) {
-  var result = {};
+  var result = obj === undefined || obj === null ? {} : Object.create(obj.__proto__);
   for (var p in obj) {
     result[p] = obj[p];
   }
