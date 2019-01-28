@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
 
@@ -71,5 +73,21 @@ describe('view, over, and set', function() {
       pets: {dog: 'joker', cat: 'batman'}
     });
   });
+
+  they('keep the prototype of source object', function() {
+    class X {
+      constructor(a) {
+        this.a = a
+      }
+    }
+    let a  = R.lensPath(["a"])
+    let x0 = new X(2)
+    let x1 = R.over(a, y => y + 5, x0)
+    assert.strictEqual(x1.a, 7);
+    assert.strictEqual(x1.__proto__, x0.__proto__);
+    let x2 = R.set(a, 5, x1)
+    assert.strictEqual(x2.a, 5);
+    assert.strictEqual(x2.__proto__, x1.__proto__);
+  })
 
 });
