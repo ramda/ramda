@@ -8,9 +8,9 @@ describe('assoc', function() {
   it('keeps `__proto__` property of source object', function() {
     class X {
       constructor({a, b, e, f}) {
-        Object.assign(this, {a, b, e, f})
+        Object.assign(this, {a, b, e, f});
       }
-    };
+    }
 
     var obj1 = new X({a: 1, b: {c: 2, d: 3}, e: 4, f: 5});
     var obj2 = R.assoc('e', {x: 42}, obj1);
@@ -25,9 +25,9 @@ describe('assoc', function() {
   it('keeps `__proto__` property of source object unless overridden', function() {
     class X {
       constructor({a, b, e, f}) {
-        Object.assign(this, {a, b, e, f})
+        Object.assign(this, {a, b, e, f});
       }
-    };
+    }
 
     class Y {}
 
