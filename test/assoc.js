@@ -19,7 +19,7 @@ describe('assoc', function() {
     assert.strictEqual(obj2.a, obj1.a);
     assert.strictEqual(obj2.b, obj1.b);
     assert.strictEqual(obj2.f, obj1.f);
-    assert.strictEqual(obj2.__proto__, obj1.__proto__);
+    assert.strictEqual(Object.getPrototypeOf(obj2), Object.getPrototypeOf(obj1));
   });
 
   it('keeps `__proto__` property of source object unless overridden', function() {
@@ -39,7 +39,7 @@ describe('assoc', function() {
     assert.strictEqual(obj2.b, obj1.b);
     assert.strictEqual(obj2.e, obj1.e);
     assert.strictEqual(obj2.f, obj1.f);
-    assert.strictEqual(obj2.__proto__, Y.prototype);
+    assert.strictEqual(Object.getPrototypeOf(obj2), Y.prototype);
   });
 
   it('makes a shallow clone of an object, overriding only the specified property', function() {
