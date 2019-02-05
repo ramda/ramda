@@ -105,4 +105,27 @@ describe('curryN', function() {
     eq(g(1)(2)(3, 4), [1, 2, 3, 4]);
   });
 
+  it('retains original function name', function() {
+    function f(a, b, c) { return [a, b, c]; }
+    var g = R.curryN(3, f);
+    var _ = R.__;
+
+    eq(g(1)(2).name, f.name);
+    eq(g(1, 2).name, f.name);
+
+    eq(g(_, 2, 3).name, f.name);
+    eq(g(1, _, 3).name, f.name);
+    eq(g(1, 2, _).name, f.name);
+
+    eq(g(1, _, _)(2).name, f.name);
+    eq(g(_, 2, _)(1).name, f.name);
+    eq(g(_, _, 3)(1).name, f.name);
+
+    eq(g(1, _, _)(_, 3).name, f.name);
+    eq(g(_, 2, _)(_, 3).name, f.name);
+    eq(g(_, _, 3)(_, 2).name, f.name);
+
+    eq(g(_, _, _)(_, _)(_)(1, 2).name, f.name);
+    eq(g(_, _, _)(1, _, _)(_, _)(2, _)(_).name, f.name);
+  });
 });

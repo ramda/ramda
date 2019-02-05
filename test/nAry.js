@@ -45,4 +45,14 @@ describe('nAry', function() {
     });
   });
 
+  it('retains the name of the original function', function() {
+    function g(x) { return x; }
+    var arity = 10;
+    while (arity >= 0) {
+      var fn = R.nAry(arity, g);
+      eq(fn.name, g.name);
+      arity -= 1;
+    }
+  });
+
 });

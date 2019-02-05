@@ -1,6 +1,6 @@
 import _arity from './_arity';
 import _isPlaceholder from './_isPlaceholder';
-
+import _copyNameProperty from './_copyNameProperty';
 
 /**
  * Internal curryN function.
@@ -13,7 +13,7 @@ import _isPlaceholder from './_isPlaceholder';
  * @return {Function} The curried function.
  */
 export default function _curryN(length, received, fn) {
-  return function() {
+  return _copyNameProperty(fn, function() {
     var combined = [];
     var argsIdx = 0;
     var left = length;
@@ -37,5 +37,5 @@ export default function _curryN(length, received, fn) {
     return left <= 0
       ? fn.apply(this, combined)
       : _arity(left, _curryN(length, combined, fn));
-  };
+  });
 }
