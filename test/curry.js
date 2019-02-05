@@ -125,6 +125,10 @@ describe('curry', function() {
     var g = R.curry(f);
     var _ = R.__;
 
+    // Verify that function name is correct and
+    // not just equal
+    eq(f.name, 'f');
+
     eq(g(1)(2).name, f.name);
     eq(g(1, 2).name, f.name);
 
