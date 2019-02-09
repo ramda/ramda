@@ -160,6 +160,7 @@ export { default as partial } from './partial';
 export { default as partialRight } from './partialRight';
 export { default as partition } from './partition';
 export { default as path } from './path';
+export { default as paths } from './paths';
 export { default as pathEq } from './pathEq';
 export { default as pathOr } from './pathOr';
 export { default as pathSatisfies } from './pathSatisfies';
