@@ -1,10 +1,8 @@
 import _curry3 from './internal/_curry3.js';
 import _has from './internal/_has.js';
-import _isArray from './internal/_isArray.js';
 import _isInteger from './internal/_isInteger.js';
-import assoc from './assoc.js';
+import _assoc from './internal/_assoc.js';
 import isNil from './isNil.js';
-
 
 /**
  * Makes a shallow clone of an object, setting or overriding the nodes required
@@ -39,12 +37,6 @@ var assocPath = _curry3(function assocPath(path, val, obj) {
     var nextObj = (!isNil(obj) && _has(idx, obj)) ? obj[idx] : _isInteger(path[1]) ? [] : {};
     val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
   }
-  if (_isInteger(idx) && _isArray(obj)) {
-    var arr = [].concat(obj);
-    arr[idx] = val;
-    return arr;
-  } else {
-    return assoc(idx, val, obj);
-  }
+  return _assoc(idx, val, obj);
 });
 export default assocPath;

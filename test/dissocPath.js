@@ -64,4 +64,17 @@ describe('dissocPath', function() {
     eq(R.dissocPath([42], {a: 1, b: 2, 42: 3}), {a: 1, b: 2});
   });
 
+  it('support remove null/undefined value path', function() {
+    eq(R.dissocPath(['c', 'd'], {a: 1, b: 2, c: null}), {a: 1, b: 2, c: null});
+    eq(R.dissocPath(['c', 'd'], {a: 1, b: 2, c: undefined}), {a: 1, b: 2, c: undefined});
+
+    var obj1 = {a: 1, b: 2};
+    var obj2 = R.dissocPath(['c', 'd'], obj1);
+
+    eq(obj2, obj1);
+
+    // Note: reference equality below!
+    assert.notStrictEqual(obj2, obj1);
+  });
+
 });
