@@ -12,7 +12,7 @@ import _curry2 from './internal/_curry2';
  * @param {Any} a
  * @param {Any} b
  * @return {Any} the first argument if it is falsy, otherwise the second argument.
- * @see R.both
+ * @see R.both, R.xor
  * @example
  *
  *      R.and(true, true); //=> true
