@@ -12,7 +12,7 @@ import invoker from './invoker';
  * @sig (String | RegExp) -> String -> [String]
  * @param {String|RegExp} sep The pattern.
  * @param {String} str The string to separate into an array.
- * @return {Array} The array of strings from `str` separated by `str`.
+ * @return {Array} The array of strings from `str` separated by `sep`.
  * @see R.join
  * @example
  *
