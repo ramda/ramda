@@ -14,8 +14,12 @@ describe('pathSatisfies', function() {
     eq(R.pathSatisfies(isPositive, ['x', 'y'], {x: {z: 42}}), false);
   });
 
-  it('returns false if the path is empty', function() {
-    eq(R.pathSatisfies(isPositive, [], {x: {z: 42}}), false);
+  it('handles empty paths by applying pred to data: positive', function() {
+    eq(R.pathSatisfies(R.is(Object), [], {x: {z: 42}}), true);
+  });
+
+  it('handles empty paths by applying pred to data: negative', function() {
+    eq(R.pathSatisfies(R.has('y'), [], {x: {z: 42}}), false);
   });
 
   it('returns false otherwise', function() {
