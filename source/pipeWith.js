@@ -15,6 +15,7 @@ import identity from './identity';
  *
  * @func
  * @memberOf R
+ * @since v0.26.0
  * @category Function
  * @sig ((* -> *), [((a, b, ..., n) -> o), (o -> p), ..., (x -> y), (y -> z)]) -> ((a, b, ..., n) -> z)
  * @param {...Function} functions

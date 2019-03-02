@@ -7,6 +7,7 @@ import _curry1 from './internal/_curry1';
  *
  * @func
  * @memberOf R
+ * @since v0.26.0
  * @category Function
  * @sig ((a, b, ..., j) -> k) -> (a, b, ..., j) -> (() -> k)
  * @param {Function} fn A function to wrap in a thunk
