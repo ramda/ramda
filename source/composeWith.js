@@ -12,6 +12,7 @@ import reverse from './reverse';
  *
  * @func
  * @memberOf R
+ * @since v0.26.0
  * @category Function
  * @sig ((* -> *), [(y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)]) -> ((a, b, ..., n) -> z)
  * @param {...Function} ...functions The functions to compose
