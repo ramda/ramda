@@ -15,7 +15,7 @@ import sequence from './sequence';
  * @memberOf R
  * @since v0.19.0
  * @category List
- * @sig (Applicative f, Traversable t) => (a -> f a) -> (a -> f b) -> t a -> f (t b)
+ * @sig (Applicative f, Traversable t) => (b -> f b) -> (a -> f b) -> t a -> f (t b)
  * @param {Function} of
  * @param {Function} f
  * @param {*} traversable
