@@ -4,5 +4,13 @@ node_js:
 - 8
 - 10
 - 12
-before_script:
-- npm run lint
+- node # latest
+cache: npm
+jobs:
+  include:
+    - stage: test
+      name: Browsers
+      script: xvfb-run npm run browser_test -- --launch Firefox,Chrome
+    - stage: test
+      name: Lint
+      script: npm run lint
