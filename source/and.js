@@ -8,7 +8,7 @@ import _curry2 from './internal/_curry2';
  * @memberOf R
  * @since v0.1.0
  * @category Logic
- * @sig a -> b -> a | b
+ * @sig a -> b -> a & b
  * @param {Any} a
  * @param {Any} b
  * @return {Any} the first argument if it is falsy, otherwise the second argument.
