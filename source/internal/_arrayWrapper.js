@@ -15,11 +15,6 @@ import _isArray from './_isArray';
  *
  */
 
-// export default Array.isArray || function _isArray(val) {
-//   return (val != null &&
-//           val.length >= 0 &&
-//           Object.prototype.toString.call(val) === '[object Array]');
-// };
 export default function _arrayWrapper(val) {
   return _isArray(val) ? val : [val];
 }
