@@ -14,8 +14,9 @@ XDropLastWhile.prototype['@@transducer/result'] = function(result) {
   return this.xf['@@transducer/result'](result);
 };
 XDropLastWhile.prototype['@@transducer/step'] = function(result, input) {
-  return this.f(input) ? this.retain(result, input)
-                       : this.flush(result, input);
+  return this.f(input)
+    ? this.retain(result, input)
+    : this.flush(result, input);
 };
 XDropLastWhile.prototype.flush = function(result, input) {
   result = _reduce(

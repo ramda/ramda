@@ -16,7 +16,7 @@ import _curry2 from './internal/_curry2';
  * @param {Object} r
  * @return {Object}
  * @see R.mergeRight, R.mergeDeepRight, R.mergeWith, R.mergeWithKey
- * @deprecated
+ * @deprecated since v0.26.0
  * @example
  *
  *      R.merge({ 'name': 'fred', 'age': 10 }, { 'age': 40 });

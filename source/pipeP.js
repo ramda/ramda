@@ -6,7 +6,7 @@ import tail from './tail';
 
 /**
  * Performs left-to-right composition of one or more Promise-returning
- * functions. The leftmost function may have any arity; the remaining functions
+ * functions. The first argument may have any arity; the remaining arguments
  * must be unary.
  *
  * @func
@@ -17,6 +17,7 @@ import tail from './tail';
  * @param {...Function} functions
  * @return {Function}
  * @see R.composeP
+ * @deprecated since v0.26.0
  * @example
  *
  *      //  followersForUser :: String -> Promise [User]
@@ -26,6 +27,8 @@ export default function pipeP() {
   if (arguments.length === 0) {
     throw new Error('pipeP requires at least one argument');
   }
-  return _arity(arguments[0].length,
-                reduce(_pipeP, arguments[0], tail(arguments)));
+  return _arity(
+    arguments[0].length,
+    reduce(_pipeP, arguments[0], tail(arguments))
+  );
 }

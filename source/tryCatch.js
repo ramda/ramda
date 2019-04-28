@@ -23,7 +23,8 @@ import _curry2 from './internal/_curry2';
  *      R.tryCatch(R.prop('x'), R.F)({x: true}); //=> true
  *      R.tryCatch(() => { throw 'foo'}, R.always('catched'))('bar') // => 'catched'
  *      R.tryCatch(R.times(R.identity), R.always([]))('s') // => []
- `` */
+ *      R.tryCatch(() => { throw 'this is not a valid value'}, (err, value)=>({error : err,  value }))('bar') // => {'error': 'this is not a valid value', 'value': 'bar'}
+ */
 var tryCatch = _curry2(function _tryCatch(tryer, catcher) {
   return _arity(tryer.length, function() {
     try {

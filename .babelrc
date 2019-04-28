@@ -10,8 +10,9 @@
     "es": {
       "plugins": [
         "annotate-pure-calls",
+        ["import-export-rename", {"^(.+?)(?:\\.m?js)?$": "$1.js"}],
         "./scripts/transpile/wrap-constructor-pattern"
       ]
     }
-  },
+  }
 }

@@ -38,7 +38,7 @@
     "fantasy-land"
   ],
   "sideEffects": false,
-  "version": "0.25.0",
+  "version": "0.26.1",
   "homepage": "https://ramdajs.com/",
   "license": "MIT",
   "repository": {
@@ -46,7 +46,7 @@
     "url": "git://github.com/ramda/ramda.git"
   },
   "module": "es/index.js",
-  "main": "src/index.js",
+  "main": "src/index",
   "unpkg": "dist/ramda.min.js",
   "jsdelivr": "dist/ramda.min.js",
   "files": [
@@ -55,13 +55,15 @@
     "dist"
   ],
   "scripts": {
-    "bench": "scripts/benchRunner",
-    "bookmarklet": "scripts/bookmarklet",
+    "prebench": "npm run --silent build:cjs",
+    "bench": "node scripts/benchRunner",
+    "bookmarklet": "node scripts/bookmarklet",
     "build:es": "cross-env BABEL_ENV=es babel source --out-dir es",
-    "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
+    "build:cjs": "cross-env BABEL_ENV=cjs babel -q source --out-dir src",
+    "build:mjs": "cross-env BABEL_ENV=es babel source/index.js --out-file src/index.mjs",
     "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
-    "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min",
+    "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min && npm run build:mjs",
     "partial-build": "node ./scripts/partialBuild",
     "clean": "rimraf es/* src/* dist/* coverage/*",
     "prepare": "npm run clean && npm run build",
@@ -73,7 +75,8 @@
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-plugin-annotate-pure-calls": "^0.2.0",
+    "babel-plugin-annotate-pure-calls": "^0.2.2",
+    "babel-plugin-import-export-rename": "^1.0.1",
     "babel-register": "^6.26.0",
     "babel-types": "^6.26.0",
     "babelify": "^8.0.0",
@@ -83,19 +86,19 @@
     "cross-env": "^2.0.1",
     "dox": "latest",
     "envvar": "1.x.x",
-    "eslint": "^2.11.0",
-    "handlebars": "3.0.x",
+    "eslint": "^5.9.0",
+    "handlebars": ">=4.0.0",
     "istanbul": "^0.4.x",
-    "js-yaml": "^3.2.5",
+    "js-yaml": "^3.12.0",
     "jsverify": "^0.7.3",
-    "mocha": "2.x.x",
+    "mocha": "^5.2.0",
     "ramda": "0.17.x",
-    "rimraf": "~2.3.2",
-    "rollup": "^0.50.0",
-    "rollup-plugin-terser": "^1.0.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.67.3",
+    "rollup-plugin-uglify": "^6.0.0",
     "sanctuary": "0.7.x",
     "sinon": "^1.17.4",
     "testem": "^2.9.0",
-    "xyz": "1.0.x"
+    "xyz": "^3.0.0"
   }
 }

@@ -1,6 +1,5 @@
 import _curry2 from './internal/_curry2';
 
-
 /**
  * Returns `true` if one or both of its arguments are `true`. Returns `false`
  * if both arguments are `false`.
@@ -13,7 +12,7 @@ import _curry2 from './internal/_curry2';
  * @param {Any} a
  * @param {Any} b
  * @return {Any} the first argument if truthy, otherwise the second argument.
- * @see R.either
+ * @see R.either, R.xor
  * @example
  *
  *      R.or(true, true); //=> true

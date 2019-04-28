@@ -1,15 +1,13 @@
 import _complement from './internal/_complement';
 import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xany from './internal/_xany';
-import any from './any';
+import all from './all';
 
 
 /**
  * Returns `true` if no elements of the list match the predicate, `false`
  * otherwise.
  *
- * Dispatches to the `any` method of the second argument, if present.
+ * Dispatches to the `all` method of the second argument, if present.
  *
  * Acts as a transducer if a transformer is given in list position.
  *
@@ -30,5 +28,7 @@ import any from './any';
  *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
  *      R.none(isOdd, [1, 3, 5, 7, 8, 11]); //=> false
  */
-var none = _curry2(_complement(_dispatchable(['any'], _xany, any)));
+var none = _curry2(function none(fn, input) {
+  return all(_complement(fn), input);
+});
 export default none;
