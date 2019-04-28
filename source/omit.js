@@ -23,7 +23,7 @@ var omit = _curry2(function omit(names, obj) {
   var index = {};
   var idx = 0;
   var len = names.length;
-  names = _arrayWrapper(names)
+  names = _arrayWrapper(names);
 
   while (idx < len) {
     index[names[idx]] = 1;

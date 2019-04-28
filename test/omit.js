@@ -16,11 +16,13 @@ describe('omit', function() {
     obj.v = 10; obj.w = 20;
     eq(R.omit(['w', 'x', 'y'], obj), {v: 10, z: 50});
   });
+
   it('pass single string prop to omit', function() {
     eq(R.omit('a', obj), { b: 2, c: 3, d: 4, e: 5, f: 6});
-  })
+  });
+
   it('pass single string prop but undeclared', function() {
     eq(R.omit('notExist', obj), obj);
-  })
+  });
 
 });

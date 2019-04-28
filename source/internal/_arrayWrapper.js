@@ -1,4 +1,3 @@
-import _curry1 from './_curry1';
 import _isArray from './_isArray';
 
 /**
@@ -22,5 +21,5 @@ import _isArray from './_isArray';
 //           Object.prototype.toString.call(val) === '[object Array]');
 // };
 export default function _arrayWrapper(val) {
-  return _isArray(val) ? val : [val]
-};
+  return _isArray(val) ? val : [val];
+}
