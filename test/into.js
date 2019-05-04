@@ -3,6 +3,7 @@ var assert = require('assert');
 var R = require('../source');
 var eq = require('./shared/eq');
 var throwReduceTypeError = require('./helpers/throwReduceTypeError');
+var unorderedErrorMessage = 'unordered input passed for ordered transducer';
 
 
 describe('into', function() {
@@ -62,10 +63,10 @@ describe('into', function() {
   });
 
   it('throws if input is an object and function is a composition with some no commutative transducer', function() {
-    assert.throws(function() {R.into({}, R.compose(mapInc, takeOne), {a: 1, b: 2});}, throwReduceTypeError);
-    assert.throws(function() {R.into({}, R.compose(takeOne, mapInc), {a: 1, b: 2});}, throwReduceTypeError);
-    assert.throws(function() {R.into([], R.compose(mapInc, takeOne), {a: 1, b: 2});}, throwReduceTypeError);
-    assert.throws(function() {R.into([], R.compose(takeOne, mapInc), {a: 1, b: 2});}, throwReduceTypeError);
+    assert.throws(function() {R.into({}, R.compose(mapInc, takeOne), {a: 1, b: 2});}, throwReduceTypeError(unorderedErrorMessage));
+    assert.throws(function() {R.into({}, R.compose(takeOne, mapInc), {a: 1, b: 2});}, throwReduceTypeError(unorderedErrorMessage));
+    assert.throws(function() {R.into([], R.compose(mapInc, takeOne), {a: 1, b: 2});}, throwReduceTypeError(unorderedErrorMessage));
+    assert.throws(function() {R.into([], R.compose(takeOne, mapInc), {a: 1, b: 2});}, throwReduceTypeError(unorderedErrorMessage));
   });
 
 });

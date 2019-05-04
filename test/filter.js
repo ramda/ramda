@@ -44,7 +44,7 @@ describe('filter', function() {
     var fn = R.compose(R.filter(even), R.filter(quintuple));
     assert.throws(function() {
       R.into([], fn, {a: 5, b: 10, c: 2});
-    }, throwReduceTypeError);
+    }, throwReduceTypeError('unordered input passed for ordered transducer'));
   });
 
 });

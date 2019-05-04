@@ -1,4 +1,5 @@
-export default function throwReduceTypeError(err) {
-  return err.constructor === TypeError &&
-    err.message === 'reduce: list must be array or iterable';
+export default function throwReduceTypeError(expectedMessage) {
+  return function(err) {
+    return err.constructor === TypeError && err.message === 'reduce: ' + expectedMessage;
+  };
 }

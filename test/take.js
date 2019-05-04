@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var R = require('../source');
 var eq = require('./shared/eq');
 var throwReduceTypeError = require('./helpers/throwReduceTypeError');
-
+var noIterableErrorMessage = 'list must be array or iterable';
 
 describe('take', function() {
   var takeOneWithInto = R.into([], R.take(1));
@@ -55,9 +55,9 @@ describe('take', function() {
   });
 
   it('throws if input value is not array or iterable', function() {
-    assert.throws(function() { takeOneWithInto(/abc/); }, throwReduceTypeError);
-    assert.throws(function() { takeOneWithInto(undefined); }, throwReduceTypeError);
-    assert.throws(function() { takeOneWithInto({}); }, throwReduceTypeError);
+    assert.throws(function() { takeOneWithInto(/abc/); }, throwReduceTypeError(noIterableErrorMessage));
+    assert.throws(function() { takeOneWithInto(undefined); }, throwReduceTypeError(noIterableErrorMessage));
+    assert.throws(function() { takeOneWithInto({}); }, throwReduceTypeError('unordered input passed for ordered transducer'));
   });
 
 });

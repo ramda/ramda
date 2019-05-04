@@ -74,8 +74,12 @@ export default function _reduce(fn, acc, list) {
   if (typeof list.reduce === 'function') {
     return _methodReduce(fn, acc, list, 'reduce');
   }
-  if (fn['@@transducer/commutative'] && _isObject(list)) {
-    return _objectReduce(fn, acc, list);
+  if (_isObject(list)) {
+    if (fn['@@transducer/commutative']) {
+      return _objectReduce(fn, acc, list);
+    } else {
+      throw new TypeError('reduce: unordered input passed for ordered transducer');
+    }
   }
 
   throw new TypeError(typeErrorMessage);

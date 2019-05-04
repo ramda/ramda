@@ -30,7 +30,7 @@ describe('map', function() {
   it('does not map from objects into arrays using R.into', function() {
     assert.throws(function() {
       R.into([], R.map(times2), {a: 1, b: 2, c: 3});
-    }, throwReduceTypeError);
+    }, throwReduceTypeError('unordered input passed for ordered transducer'));
   });
 
   it('maps over objects', function() {

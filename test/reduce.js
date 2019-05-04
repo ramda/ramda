@@ -3,6 +3,7 @@ var assert = require('assert');
 var R = require('../source');
 var eq = require('./shared/eq');
 var throwReduceTypeError = require('./helpers/throwReduceTypeError');
+var noIterableErrorMessage = 'list must be array or iterable';
 
 describe('reduce', function() {
   var add = function(a, b) {return a + b;};
@@ -80,8 +81,8 @@ describe('reduce', function() {
   });
 
   it('throws if input value is not array or iterable', function() {
-    assert.throws(function() { R.reduce(add, 0, {a: 5, b: 2}); }, throwReduceTypeError);
-    assert.throws(function() { R.reduce(add, 0, null); }, throwReduceTypeError);
-    assert.throws(function() { R.reduce(add, 0, new Number(3)); }, throwReduceTypeError);
+    assert.throws(function() { R.reduce(add, 0, {a: 5, b: 2}); }, throwReduceTypeError('unordered input passed for ordered transducer'));
+    assert.throws(function() { R.reduce(add, 0, null); }, throwReduceTypeError(noIterableErrorMessage));
+    assert.throws(function() { R.reduce(add, 0, new Number(3)); }, throwReduceTypeError(noIterableErrorMessage));
   });
 });
