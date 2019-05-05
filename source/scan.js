@@ -1,4 +1,6 @@
 import _curry3 from './internal/_curry3';
+import _dispatchable from './internal/_dispatchable';
+import _xscan from './internal/_xscan';
 
 
 /**
@@ -22,7 +24,7 @@ import _curry3 from './internal/_curry3';
  *      const factorials = R.scan(R.multiply, 1, numbers); //=> [1, 1, 2, 6, 24]
  * @symb R.scan(f, a, [b, c]) = [a, f(a, b), f(f(a, b), c)]
  */
-var scan = _curry3(function scan(fn, acc, list) {
+var scan = _curry3(_dispatchable([], _xscan, function scan(fn, acc, list) {
   var idx = 0;
   var len = list.length;
   var result = [acc];
@@ -32,5 +34,5 @@ var scan = _curry3(function scan(fn, acc, list) {
     idx += 1;
   }
   return result;
-});
+}));
 export default scan;
