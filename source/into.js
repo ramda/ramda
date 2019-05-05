@@ -1,4 +1,3 @@
-import _clone from './internal/_clone';
 import _curry3 from './internal/_curry3';
 import _isTransformer from './internal/_isTransformer';
 import _reduce from './internal/_reduce';
@@ -44,9 +43,8 @@ import _stepCat from './internal/_stepCat';
  *      const intoArray = R.into([]);
  *      intoArray(transducer, numbers); //=> [2, 3]
  */
-var into = _curry3(function into(acc, xf, list) {
-  return _isTransformer(acc) ?
-    _reduce(xf(acc), acc['@@transducer/init'](), list) :
-    _reduce(xf(_stepCat(acc)), _clone(acc, [], [], false), list);
+var into = _curry3(function into(acc, x, list) {
+  var xf = x(_isTransformer(acc) ? acc : _stepCat(acc));
+  return _reduce(xf, xf['@@transducer/init'](), list);
 });
 export default into;

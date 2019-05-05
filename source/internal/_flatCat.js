@@ -3,30 +3,27 @@ import _isArrayLike from './_isArrayLike';
 import _reduce from './_reduce';
 import _xfBase from './_xfBase';
 
-var preservingReduced = function(xf) {
-  return {
-    '@@transducer/init': _xfBase.init,
-    '@@transducer/result': function(result) {
-      return xf['@@transducer/result'](result);
-    },
-    '@@transducer/step': function(result, input) {
-      var ret = xf['@@transducer/step'](result, input);
-      return ret['@@transducer/reduced'] ? _forceReduced(ret) : ret;
-    }
-  };
+var tInit = '@@transducer/init';
+var tStep = '@@transducer/step';
+var tResult = '@@transducer/result';
+function XPreservingReduced(xf) {
+  this.xf = xf;
+}
+XPreservingReduced.prototype[tInit] = _xfBase.init;
+XPreservingReduced.prototype[tResult] = _xfBase.result;
+XPreservingReduced.prototype[tStep] = function(result, input) {
+  var ret = this.xf[tStep](result, input);
+  return ret['@@transducer/reduced'] ? _forceReduced(ret) : ret;
 };
 
-var _flatCat = function _xcat(xf) {
-  var rxf = preservingReduced(xf);
-  return {
-    '@@transducer/init': _xfBase.init,
-    '@@transducer/result': function(result) {
-      return rxf['@@transducer/result'](result);
-    },
-    '@@transducer/step': function(result, input) {
-      return !_isArrayLike(input) ? _reduce(rxf, result, [input]) : _reduce(rxf, result, input);
-    }
-  };
+function XFlatCat(xf) {
+  this.xf = new XPreservingReduced(xf);
+}
+XFlatCat.prototype[tInit] = _xfBase.init;
+XFlatCat.prototype[tResult] = _xfBase.result;
+XFlatCat.prototype[tStep] = function(result, input) {
+  return !_isArrayLike(input) ? _reduce(this.xf, result, [input]) : _reduce(this.xf, result, input);
 };
+var _flatCat = function _xcat(xf) { return new XFlatCat(xf); };
 
 export default _flatCat;
