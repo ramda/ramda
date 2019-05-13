@@ -18,7 +18,7 @@ import toString from './toString';
  * @sig Number -> String -> (a -> b -> ... -> n -> Object -> *)
  * @param {Number} arity Number of arguments the returned function should take
  *        before the target object.
- * @param {String} method Name of the method to call.
+ * @param {String} method Name of any of the target object's methods to call.
  * @return {Function} A new curried function.
  * @see R.construct
  * @example
