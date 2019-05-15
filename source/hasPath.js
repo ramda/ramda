@@ -1,7 +1,6 @@
 import _curry2 from './internal/_curry2';
 import _has from './internal/_has';
 
-import is from './is';
 import isNil from './isNil';
 
 
@@ -33,7 +32,7 @@ var hasPath = _curry2(function hasPath(_path, obj) {
   var val = obj;
   var idx = 0;
   while (idx < _path.length) {
-    if (!isNil(val) && is(Object, val) && _has(_path[idx], val)) {
+    if (!isNil(val) && _has(_path[idx], val)) {
       val = val[_path[idx]];
       idx += 1;
     } else {
