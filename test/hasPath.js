@@ -24,6 +24,13 @@ describe('hasPath', function() {
     eq(R.hasPath(['undefinedVal'], obj), true);
   });
 
+  it('return false for a test for a child to a non-object', function() {
+    eq(R.hasPath(['undefinedVal', 'child', 'grandchild'], obj), false);
+    eq(R.hasPath(['falseVal', 'child', 'grandchild'], obj), false);
+    eq(R.hasPath(['nullVal', 'child', 'grandchild'], obj), false);
+    eq(R.hasPath(['arrayVal', 0, 'child', 'grandchild'], obj), false);
+  });
+
   it('returns true for existing path with indexes', function() {
     eq(R.hasPath(['arrayVal', 0], obj), true);
   });
