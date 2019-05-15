@@ -23,7 +23,7 @@ describe('hasPath', function() {
     eq(R.hasPath(['nullVal'], obj), true);
     eq(R.hasPath(['undefinedVal'], obj), true);
   });
- 
+
   it('return false for a test for a child to a non-object', function() {
     eq(R.hasPath(['undefinedVal', 'child'], obj), false);
     eq(R.hasPath(['falseVal', 'child'], obj), false);
