@@ -1,5 +1,5 @@
 'use strict';
-var t = require('babel-types');
+var t = require('@babel/types');
 
 var buildImportAssignment = function(id, source) {
   return t.variableDeclaration(

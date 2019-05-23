@@ -1,6 +1,6 @@
 'use strict';
 
-var t = require('babel-types');
+var t = require('@babel/types');
 
 var buildIIFEClass = function(constructorPath, methodPaths) {
   var className = constructorPath.get('id.name').node;
