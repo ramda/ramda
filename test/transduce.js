@@ -50,7 +50,7 @@ describe('transduce', function() {
   });
 
   it('transduces into objects', function() {
-    eq(R.transduce(R.map(R.identity), R.merge, {}, [{a: 1}, {b: 2, c: 3}]), {a: 1, b: 2, c: 3});
+    eq(R.transduce(R.map(R.identity), R.mergeRight, {}, [{a: 1}, {b: 2, c: 3}]), {a: 1, b: 2, c: 3});
   });
 
   it('folds transformer objects over a collection with the supplied accumulator', function() {
