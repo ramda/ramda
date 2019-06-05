@@ -63,10 +63,6 @@ describe('hasPath', function() {
     eq(R.hasPath(['toString'], bob), false);
   });
 
-  it('returns false for non-objects', function() {
-    eq(R.hasPath([], obj), false);
-  });
-
   it('tests paths on non-objects', function() {
     eq(R.hasPath(['a', 'b'], undefined), false);
     eq(R.hasPath(['a', 'b'], null), false);
@@ -77,5 +73,14 @@ describe('hasPath', function() {
 
   it('tests currying', function() {
     eq(R.hasPath(['a', 'b'])({ a: { b: 1 } }), true);
+  });
+
+  it('returns true for empty path array', function() {
+    eq(R.hasPath([], obj), true);
+    eq(R.hasPath([], undefined), true);
+    eq(R.hasPath([], null), true);
+    eq(R.hasPath([], true), true);
+    eq(R.hasPath([], ''), true);
+    eq(R.hasPath([], /a/), true);
   });
 });

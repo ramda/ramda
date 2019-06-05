@@ -26,9 +26,12 @@ import isNil from './isNil';
  *      R.hasPath(['a', 'b'], {});                  // => false
  */
 var hasPath = _curry2(function hasPath(_path, obj) {
-  if (_path.length === 0 || isNil(obj)) {
+  if (_path.length === 0) {
+    return true;
+  } else if (isNil(obj)) {
     return false;
   }
+
   var val = obj;
   var idx = 0;
   while (idx < _path.length) {
