@@ -45,6 +45,7 @@ export { default as difference } from './difference';
 export { default as differenceWith } from './differenceWith';
 export { default as dissoc } from './dissoc';
 export { default as dissocPath } from './dissocPath';
+export { default as diverge } from './diverge';
 export { default as divide } from './divide';
 export { default as drop } from './drop';
 export { default as dropLast } from './dropLast';
