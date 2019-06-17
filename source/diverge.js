@@ -3,7 +3,7 @@ import _map from './internal/_map';
 
 
 /**
- * Accepts an array of arity 1 functions which will be applied to the supplied
+ * Accepts an object or array of arity 1 functions which will be applied to the supplied
  * data. The results will be returned as an array in the original order.
  *
  * @func
@@ -19,8 +19,8 @@ import _map from './internal/_map';
  *      const average = R.diverge([R.sum, R.length])
  *      average([1, 2, 3, 4, 5, 6, 7]) //=> [28, 7]
  *
- *      const strangeConcat = R.diverge([R.toUpper, R.toLower])
- *      strangeConcat("Yodel") //=> ["YODEL", "yodel"]
+ *      const strangeConcat = R.diverge(upper: R.toUpper, lower: R.toLower})
+ *      strangeConcat("Yodel") //=> {upper: "YODEL", lower: "yodel"}
  *
  * @symb R.diverge([g, h], a) = [g(a), h(a)]
  */
