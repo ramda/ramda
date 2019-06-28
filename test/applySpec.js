@@ -41,6 +41,21 @@ describe('applySpec', function() {
     [['a1', 'a2'], ['b1', 'b2']]);
   });
 
+  it('should retain literal values on the spec', () => {
+    eq(R.applySpec({ v: [42, 'foo'], u: 'bar' })(2), {
+      v: [42, 'foo'],
+      u: 'bar'
+    });
+  });
+
+  it('should support mixing literal values and spec functions', () => {
+    eq(R.applySpec({ v: [x => x + 40, 'foo'], u: 'bar', w: x => 2 * x })(2), {
+      v: [42, 'foo'],
+      u: 'bar',
+      w: 4
+    });
+  });
+
   it('works with a spec defining a map key', function() {
     eq(R.applySpec({map: R.prop('a')})({a: 1}), {map: 1});
   });

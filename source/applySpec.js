@@ -1,5 +1,6 @@
 import _curry1 from './internal/_curry1';
 import _isArray from './internal/_isArray';
+import always from './always';
 import apply from './apply';
 import curryN from './curryN';
 import max from './max';
@@ -39,15 +40,19 @@ function mapValues(fn, obj) {
  * @example
  *
  *      const getMetrics = R.applySpec({
+ *        list: [R.add, 'value']
  *        sum: R.add,
- *        nested: { mul: R.multiply }
+ *        some: 'value',
+ *        nested: { mul: R.multiply, any: 'value' }
  *      });
- *      getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }
+ *      getMetrics(2, 4); // =>  {  list: [6, 'value'], sum: 6, some: 'value', nested: { mul: 8, any: 'value' } }
  * @symb R.applySpec({ x: f, y: { z: g } })(a, b) = { x: f(a, b), y: { z: g(a, b) } }
  */
 var applySpec = _curry1(function applySpec(spec) {
   spec = mapValues(
-    function(v) { return typeof v == 'function' ? v : applySpec(v); },
+    function(v) {
+      return typeof v === 'function' ? v : typeof v === 'object' ? applySpec(v) : always(v);
+    },
     spec
   );
 
