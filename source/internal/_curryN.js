@@ -14,25 +14,35 @@ import _isPlaceholder from './_isPlaceholder';
  */
 export default function _curryN(length, received, fn) {
   return function() {
-    var combined = [];
+    var receivedLen = received.length;
+    var holdersCount = 0;
+    var argsLen = arguments.length;
+    var argsHoldersCount = 0;
+    var left;
+    var combined;
+    var idx = -1;
     var argsIdx = 0;
-    var left = length;
-    var combinedIdx = 0;
-    while (combinedIdx < received.length || argsIdx < arguments.length) {
-      var result;
-      if (combinedIdx < received.length &&
-          (!_isPlaceholder(received[combinedIdx]) ||
-           argsIdx >= arguments.length)) {
-        result = received[combinedIdx];
-      } else {
-        result = arguments[argsIdx];
-        argsIdx += 1;
-      }
-      combined[combinedIdx] = result;
-      if (!_isPlaceholder(result)) {
-        left -= 1;
-      }
-      combinedIdx += 1;
+    for (var i = 0; i < receivedLen; i++) {
+      if (_isPlaceholder(received[i])) holdersCount++;
+    }
+    for (var i = 0; i < argsLen; i++) {
+      if (_isPlaceholder(arguments[i])) argsHoldersCount++;
+    }
+    left = length - receivedLen + holdersCount - argsLen + argsHoldersCount;
+    combined = Array(
+      argsLen > holdersCount
+        ? receivedLen + argsLen - holdersCount
+        : receivedLen
+    );
+    while (++idx < receivedLen) {
+      combined[idx] = _isPlaceholder(received[idx])
+        ? argsIdx < argsLen
+          ? arguments[argsIdx++]
+          : received[idx]
+        : received[idx];
+    }
+    while (argsIdx < argsLen) {
+      combined[idx++] = arguments[argsIdx++];
     }
     return left <= 0
       ? fn.apply(this, combined)
