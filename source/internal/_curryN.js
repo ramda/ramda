@@ -14,36 +14,59 @@ import _isPlaceholder from './_isPlaceholder';
  */
 export default function _curryN(length, received, fn) {
   return function() {
+    var combined,
+      left,
+      idx;
     var receivedLen = received.length;
     var holdersCount = 0;
     var argsLen = arguments.length;
     var argsHoldersCount = 0;
-    var left;
-    var combined;
-    var idx = -1;
     var argsIdx = 0;
-    for (var i = 0; i < receivedLen; i++) {
-      if (_isPlaceholder(received[i])) holdersCount++;
+
+    idx = 0;
+    while (idx < receivedLen) {
+      if (_isPlaceholder(received[idx])) {
+        holdersCount += 1;
+      }
+      idx += 1;
     }
-    for (var i = 0; i < argsLen; i++) {
-      if (_isPlaceholder(arguments[i])) argsHoldersCount++;
+
+    idx = 0;
+    while (idx < argsLen) {
+      if (_isPlaceholder(arguments[idx])) {
+        argsHoldersCount += 1;
+      }
+      idx += 1;
     }
+
     left = length - receivedLen + holdersCount - argsLen + argsHoldersCount;
+
     combined = Array(
       argsLen > holdersCount
         ? receivedLen + argsLen - holdersCount
         : receivedLen
     );
-    while (++idx < receivedLen) {
-      combined[idx] = _isPlaceholder(received[idx])
-        ? argsIdx < argsLen
-          ? arguments[argsIdx++]
-          : received[idx]
-        : received[idx];
+
+    idx = 0;
+    while (idx < receivedLen) {
+      if (_isPlaceholder(received[idx])) {
+        if (argsIdx < argsLen) {
+          combined[idx] = arguments[argsIdx];
+          argsIdx += 1;
+        } else {
+          combined[idx] = received[idx];
+        }
+      } else {
+        combined[idx] = received[idx];
+      }
+      idx += 1;
     }
     while (argsIdx < argsLen) {
-      combined[idx++] = arguments[argsIdx++];
+      combined[idx] = arguments[argsIdx];
+      idx += 1;
+      argsIdx += 1;
     }
+
     return left <= 0
       ? fn.apply(this, combined)
       : _arity(left, _curryN(length, combined, fn));
