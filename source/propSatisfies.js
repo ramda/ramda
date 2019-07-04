@@ -1,5 +1,5 @@
 import _curry3 from './internal/_curry3';
-
+import prop from './prop';
 
 /**
  * Returns `true` if the specified object property satisfies the given
@@ -21,6 +21,6 @@ import _curry3 from './internal/_curry3';
  *      R.propSatisfies(x => x > 0, 'x', {x: 1, y: 2}); //=> true
  */
 var propSatisfies = _curry3(function propSatisfies(pred, name, obj) {
-  return pred(obj[name]);
+  return pred(prop(name, obj));
 });
 export default propSatisfies;
