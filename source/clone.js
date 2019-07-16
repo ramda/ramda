@@ -3,9 +3,9 @@ import _curry1 from './internal/_curry1';
 
 
 /**
- * Creates a deep copy of the value which may contain (nested) `Array`s and
- * `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s. `Function`s are
- * assigned by reference rather than copied
+ * Creates a deep copy of the source that can be used in place of the source object without retaining any references to it.
+ * The source object may contain (nested) `Array`s, `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s.
+ * `Function`s are assigned by reference rather than copied.
  *
  * Dispatches to a `clone` method if present.
  *
