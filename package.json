@@ -93,7 +93,6 @@
     "js-yaml": "^3.13.1",
     "jsverify": "^0.8.4",
     "mocha": "^6.1.4",
-    "ramda": "latest",
     "rimraf": "^2.6.3",
     "rollup": "^0.68.2",
     "rollup-plugin-uglify": "^6.0.2",
