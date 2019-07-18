@@ -115,6 +115,8 @@ export { default as lte } from './lte';
 export { default as map } from './map';
 export { default as mapAccum } from './mapAccum';
 export { default as mapAccumRight } from './mapAccumRight';
+export { default as mapAsync } from './mapAsync';
+export { default as mapGenerator } from './mapGenerator';
 export { default as mapObjIndexed } from './mapObjIndexed';
 export { default as match } from './match';
 export { default as mathMod } from './mathMod';
