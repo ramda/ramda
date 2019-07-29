@@ -24,8 +24,8 @@ import curryN from './curryN';
  *        R.over(R.lensProp('count'), R.inc),
  *        R.assoc('count', 1)
  *      );
- *      incCount({});           //=> { count: 1 }
  *      incCount({ count: 1 }); //=> { count: 2 }
+ *      incCount({});           //=> { count: 1 }
  */
 var ifElse = _curry3(function ifElse(condition, onTrue, onFalse) {
   return curryN(Math.max(condition.length, onTrue.length, onFalse.length),
