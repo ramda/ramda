@@ -69,6 +69,7 @@ export { default as flip } from './flip';
 export { default as forEach } from './forEach';
 export { default as forEachObjIndexed } from './forEachObjIndexed';
 export { default as fromPairs } from  './fromPairs';
+export { default as fullRange } from './fullRange';
 export { default as groupBy } from './groupBy';
 export { default as groupWith } from './groupWith';
 export { default as gt } from './gt';
