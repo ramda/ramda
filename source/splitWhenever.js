@@ -1,4 +1,4 @@
- import _curryN from './internal/_curryN';
+import _curryN from './internal/_curryN';
 /**
  * Splits an array into slices on every occurrence of a value.
  *
@@ -20,19 +20,18 @@
 var splitWhenever = _curryN(2, [], function splitWhenever(n, list, incDelimiter) {
   var acc = [];
   var curr = [];
-  for(var i=0;i<list.length;i++){
-      curr.push(list[i]);
-    if( i < list.length-1 && list[i+1] === n || i===list.length-1){
-      if(incDelimiter === true){
-          acc.push(curr)
-      } 
-      else{
-        (curr[0] === n  && curr.length > 1 ) && curr.shift();
-        !(curr.length === 1 && curr[0] === n ) && acc.push(curr)
+  for (var i = 0;i < list.length;i = i + 1) {
+    curr.push(list[i]);
+    if (i < list.length - 1 && list[i + 1] === n || i === list.length - 1) {
+      if (incDelimiter === true) {
+        acc.push(curr);
+      } else {
+        (curr[0] === n && curr.length > 1) && curr.shift();
+        !(curr.length === 1 && curr[0] === n) && acc.push(curr);
       }
-      curr = []; 
-      }
+      curr = [];
     }
-    return acc
+  }
+  return acc;
 });
 export default splitWhenever;
