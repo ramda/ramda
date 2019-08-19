@@ -155,7 +155,7 @@ export { default as pair } from './pair';
 export { default as partial } from './partial';
 export { default as partialRight } from './partialRight';
 export { default as partition } from './partition';
-export { default as partOnEvery } from './partOnEvery';
+export { default as splitWhenever } from './splitWhenever';
 export { default as path } from './path';
 export { default as paths } from './paths';
 export { default as pathEq } from './pathEq';
