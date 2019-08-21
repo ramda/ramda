@@ -197,6 +197,7 @@ export { default as split } from './split';
 export { default as splitAt } from './splitAt';
 export { default as splitEvery } from './splitEvery';
 export { default as splitWhen } from './splitWhen';
+export { default as splitWhenever } from './splitWhenever';
 export { default as startsWith } from './startsWith';
 export { default as subtract } from './subtract';
 export { default as sum } from './sum';
