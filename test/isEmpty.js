@@ -22,6 +22,15 @@ describe('isEmpty', function() {
     eq(R.isEmpty([[]]), false);
   });
 
+  it('returns true for empty typed array', function() {
+    eq(R.isEmpty(Uint8Array.from('')), true);
+    eq(R.isEmpty(Float32Array.from('')), true);
+    eq(R.isEmpty(new Float32Array([])), true);
+    eq(R.isEmpty(Uint8Array.from('1')), false);
+    eq(R.isEmpty(Float32Array.from('1')), false);
+    eq(R.isEmpty(new Float32Array([1])), false);
+  });
+
   it('returns true for empty object', function() {
     eq(R.isEmpty({}), true);
     eq(R.isEmpty({x: 0}), false);
