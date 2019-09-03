@@ -39,7 +39,7 @@ describe('groupBy', function() {
     var xf = {
       '@@transducer/init': function() { return {}; },
       '@@transducer/result': function(x) { return x; },
-      '@@transducer/step': R.merge
+      '@@transducer/step': R.mergeRight
     };
     eq(_isTransformer(R.groupBy(byType, xf)), true);
   });

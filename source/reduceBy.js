@@ -1,3 +1,4 @@
+import _clone from './internal/_clone';
 import _curryN from './internal/_curryN';
 import _dispatchable from './internal/_dispatchable';
 import _has from './internal/_has';
@@ -50,7 +51,7 @@ var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);
-      acc[key] = valueFn(_has(key, acc) ? acc[key] : valueAcc, elt);
+      acc[key] = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
       return acc;
     }, {}, list);
   }));

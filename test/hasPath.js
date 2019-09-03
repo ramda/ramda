@@ -24,6 +24,13 @@ describe('hasPath', function() {
     eq(R.hasPath(['undefinedVal'], obj), true);
   });
 
+  it('return false for a test for a child to a non-object', function() {
+    eq(R.hasPath(['undefinedVal', 'child', 'grandchild'], obj), false);
+    eq(R.hasPath(['falseVal', 'child', 'grandchild'], obj), false);
+    eq(R.hasPath(['nullVal', 'child', 'grandchild'], obj), false);
+    eq(R.hasPath(['arrayVal', 0, 'child', 'grandchild'], obj), false);
+  });
+
   it('returns true for existing path with indexes', function() {
     eq(R.hasPath(['arrayVal', 0], obj), true);
   });
@@ -31,6 +38,15 @@ describe('hasPath', function() {
   it('returns false for non-existing path with indexes', function() {
     eq(R.hasPath(['arrayVal', 1], obj), false);
   });
+
+  it('tests for paths in arrays', function() {
+    eq(R.hasPath([0], [1, 2]), true);
+    eq(R.hasPath([2], [1, 2]), false);
+
+    eq(R.hasPath(['0'], [1, 2]), true);
+    eq(R.hasPath(['2'], [1, 2]), false);
+  });
+
 
   it('returns false for non-existent path', function() {
     eq(R.hasPath(['Unknown'], obj), false);
@@ -47,7 +63,19 @@ describe('hasPath', function() {
     eq(R.hasPath(['toString'], bob), false);
   });
 
-  it('returns false for empty path', function() {
+  it('returns false for non-objects', function() {
     eq(R.hasPath([], obj), false);
+  });
+
+  it('tests paths on non-objects', function() {
+    eq(R.hasPath(['a', 'b'], undefined), false);
+    eq(R.hasPath(['a', 'b'], null), false);
+    eq(R.hasPath('a', true), false);
+    eq(R.hasPath('a', ''), false);
+    eq(R.hasPath('a', /a/), false);
+  });
+
+  it('tests currying', function() {
+    eq(R.hasPath(['a', 'b'])({ a: { b: 1 } }), true);
   });
 });

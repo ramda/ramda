@@ -140,7 +140,9 @@ It is possible to build Ramda with a subset of the functionality to reduce its f
 
 This requires having Node/io.js installed and ramda's dependencies installed (just use `npm install` before running partial build). 
 
+### Install specific functions
 
+[Install individual functions](https://bitsrc.io/ramda/ramda) with bit, npm and yarn without installing the whole library.
 
 Documentation
 -------------
@@ -216,7 +218,7 @@ identity()
 
 Manually cherry picking methods is cumbersome, however. Most bundlers like Webpack and Rollup offer tree-shaking as a way to drop unused Ramda code and reduce bundle size, but their performance varies, discussed [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples). Here is a summary of the optimal setup based on what technology you are using:
 
-1. Webpack + Babel - use [`babel-plugin-ramda`](https://github.com/megawac/babel-plugin-ramda) to automatically cherry pick methods. Discussion [here](http://www.andrewsouthpaw.com/2018/01/19/ramda-tree-shaking-not-supported-out-of-the-box/), example [here](https://github.com/AndrewSouthpaw/ramda-webpack-tree-shaking-examples/blob/master/07-webpack-babel-plugin-ramda/package.json)
+1. Webpack + Babel - use [`babel-plugin-ramda`](https://github.com/megawac/babel-plugin-ramda) to automatically cherry pick methods. Discussion [here](https://www.andrewsouthpaw.com/ramda-webpack-and-tree-shaking/), example [here](https://github.com/AndrewSouthpaw/ramda-webpack-tree-shaking-examples/blob/master/07-webpack-babel-plugin-ramda/package.json)
 1. Webpack only - use `UglifyJS` plugin for treeshaking along with the `ModuleConcatenationPlugin`. Discussion [here](https://github.com/ramda/ramda/issues/2355), with an example setup [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples/blob/master/06-webpack-scope-hoisted/webpack.config.js)
 1. Rollup - does a fine job properly treeshaking, no special work needed; example [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples/blob/master/07-rollup-ramda-tree-shaking/rollup.config.js)
 
@@ -235,6 +237,8 @@ Translations
 
 - [Chinese(中文)](http://ramda.cn/)
 - [Ukrainian(Українська)](https://github.com/ivanzusko/ramda)
+- [Portuguese(BR)](https://github.com/renansj/ramda)
+- [Russian(Русский)](https://github.com/Guck111/ramda)
 
 
 

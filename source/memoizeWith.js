@@ -4,10 +4,11 @@ import _has from './internal/_has';
 
 
 /**
- * A customisable version of [`R.memoize`](#memoize). `memoizeWith` takes an
- * additional function that will be applied to a given argument set and used to
- * create the cache key under which the results of the function to be memoized
- * will be stored.
+ * Creates a new function that, when invoked, caches the result of calling `fn`
+ * for a given argument set and returns the result. Subsequent calls to the
+ * memoized `fn` with the same argument set will not result in an additional
+ * call to `fn`; instead, the cached result for that set of arguments will be
+ * returned.
  *
  * Care must be taken when implementing key generation to avoid key collision,
  * or if tracking references, memory leaks and mutating arguments.
@@ -20,7 +21,6 @@ import _has from './internal/_has';
  * @param {Function} fn The function to generate the cache key.
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
- * @see R.memoize, R.toString
  * @example
  *
  *      let count = 0;

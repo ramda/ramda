@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "no-restricted-properties": ["error", {
+      "object": "describe",
+      "property": "only"
+    }],
+    "no-restricted-modules": ["error", ".."]
+  }
+}

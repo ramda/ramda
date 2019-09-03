@@ -23,7 +23,7 @@ import equals from './equals';
  *
  *     R.dropRepeats([1, 1, 1, 2, 3, 4, 4, 2, 2]); //=> [1, 2, 3, 4, 2]
  */
-var dropRepeats = _curry1(_dispatchable([],
-                                                      _xdropRepeatsWith(equals),
-                                                      dropRepeatsWith(equals)));
+var dropRepeats = _curry1(
+  _dispatchable([], _xdropRepeatsWith(equals), dropRepeatsWith(equals))
+);
 export default dropRepeats;

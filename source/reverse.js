@@ -27,7 +27,8 @@ import _isString from './internal/_isString';
  *      R.reverse('');         //=> ''
  */
 var reverse = _curry1(function reverse(list) {
-  return _isString(list) ? list.split('').reverse().join('') :
-                           Array.prototype.slice.call(list, 0).reverse();
+  return _isString(list)
+    ? list.split('').reverse().join('')
+    : Array.prototype.slice.call(list, 0).reverse();
 });
 export default reverse;

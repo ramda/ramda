@@ -4,8 +4,10 @@ import _isArguments from './internal/_isArguments';
 
 // cover IE < 9 keys issues
 var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
-var nonEnumerableProps = ['constructor', 'valueOf', 'isPrototypeOf', 'toString',
-                          'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+var nonEnumerableProps = [
+  'constructor', 'valueOf', 'isPrototypeOf', 'toString',
+  'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'
+];
 // Safari bug
 var hasArgsEnumBug = (function() {
   'use strict';

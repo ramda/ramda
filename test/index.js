@@ -28,7 +28,7 @@ function sourceMethods(dir) {
  * if you would attempt to require non existing file
  */
 describe('API surface', function() {
-  if (require.resolve !== 'function') {
+  if (typeof require.resolve !== 'function') {
     return;
   }
   var exported = Object.keys(R).filter(function(key) {

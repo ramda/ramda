@@ -1,19 +1,21 @@
-import _arity from './internal/_arity.js';
+import _arity from './internal/_arity';
 import _curry2 from './internal/_curry2';
-import head from './head.js';
-import _reduce from './internal/_reduce.js';
-import tail from './tail.js';
-import identity from './identity.js';
+import head from './head';
+import _reduce from './internal/_reduce';
+import tail from './tail';
+import identity from './identity';
 
 
 /**
- * Performs left-to-right function composition using transforming function. The leftmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs left-to-right function composition using transforming function. The first argument may have
+ * any arity; the remaining arguments must be unary.
  *
- * **Note:** The result of pipeWith is not automatically curried.
+ * **Note:** The result of pipeWith is not automatically curried. Transforming function is not used on the
+ * first argument.
  *
  * @func
  * @memberOf R
+ * @since v0.26.0
  * @category Function
  * @sig ((* -> *), [((a, b, ..., n) -> o), (o -> p), ..., (x -> y), (y -> z)]) -> ((a, b, ..., n) -> z)
  * @param {...Function} functions
@@ -25,15 +27,15 @@ import identity from './identity.js';
  *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
  *
  *      f(3, 4); // -(3^4) + 1
- * @symb R.pipeWith(f)([g, h, i])(...args) = f(i, f(h, f(g, ...args)))
+ * @symb R.pipeWith(f)([g, h, i])(...args) = f(i, f(h, g(...args)))
  */
 var pipeWith = _curry2(function pipeWith(xf, list) {
   if (list.length <= 0) {
     return identity;
   }
 
-  const headList = head(list);
-  const tailList = tail(list);
+  var headList = head(list);
+  var tailList = tail(list);
 
   return _arity(headList.length, function() {
     return _reduce(

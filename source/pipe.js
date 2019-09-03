@@ -5,8 +5,8 @@ import tail from './tail';
 
 
 /**
- * Performs left-to-right function composition. The leftmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs left-to-right function composition. The first argument may have
+ * any arity; the remaining arguments must be unary.
  *
  * In some libraries this function is named `sequence`.
  *
@@ -31,6 +31,8 @@ export default function pipe() {
   if (arguments.length === 0) {
     throw new Error('pipe requires at least one argument');
   }
-  return _arity(arguments[0].length,
-                reduce(_pipe, arguments[0], tail(arguments)));
+  return _arity(
+    arguments[0].length,
+    reduce(_pipe, arguments[0], tail(arguments))
+  );
 }

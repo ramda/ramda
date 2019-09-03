@@ -30,6 +30,13 @@ describe('empty', function() {
     eq(R.empty([1, 2, 3]), []);
   });
 
+  it('returns empty typed array of equivalent type given typed array', function() {
+    eq(R.empty(Uint8Array.from('123')), Uint8Array.from(''));
+    eq(R.empty(Uint8Array.from('123')).constructor.name, 'Uint8Array');
+    eq(R.empty(new Float32Array([1, 2, 3])), new Float32Array([]));
+    eq(R.empty(new Float32Array([1, 2, 3])).constructor.name, 'Float32Array');
+  });
+
   it('returns empty object given object', function() {
     eq(R.empty({x: 1, y: 2}), {});
   });
