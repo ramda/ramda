@@ -22,12 +22,9 @@ describe('propOr', function() {
     eq(nm(void 0), 'Unknown');
   });
 
-  it('uses the default when supplied an object with an undefined value', function() {
-    eq(R.propOr('foo', 'x', {x: undefined}), 'foo');
-  });
-
-  it('returns null when supplied an object with a null value', function() {
+  it('returns the value when supplied an object with a nil value', function() {
     eq(R.propOr('foo', 'x', {x: null}), null);
+    eq(R.propOr('foo', 'x', {x: undefined}), undefined);
   });
 
 });
