@@ -31,7 +31,7 @@ describe('values', function() {
 
   it('returns an empty object for primitives', function() {
     var result = R.map(function(val) {
-      return R.keys(val);
+      return R.values(val);
     }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
     eq(result, R.repeat([], 10));
   });
