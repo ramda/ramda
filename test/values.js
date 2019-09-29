@@ -30,10 +30,15 @@ describe('values', function() {
   });
 
   it('returns an empty object for primitives', function() {
-    var result = R.map(function(val) {
-      return R.keys(val);
-    }, [null, undefined, 55, '', true, false, NaN, Infinity, , []]);
-    eq(result, R.repeat([], 10));
+    eq(R.values(null), []);
+    eq(R.values(undefined), []);
+    eq(R.values(55), []);
+    eq(R.values('foo'), []);
+    eq(R.values(true), []);
+    eq(R.values(false), []);
+    eq(R.values(NaN), []);
+    eq(R.values(Infinity), []);
+    eq(R.values([]), []);
   });
 
 });
