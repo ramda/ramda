@@ -97,6 +97,7 @@ export { default as invoker } from './invoker';
 export { default as is } from './is';
 export { default as isEmpty } from './isEmpty';
 export { default as isNil } from './isNil';
+export { default as isUndefined } from './isUndefined';
 export { default as join } from './join';
 export { default as juxt } from './juxt';
 export { default as keys } from './keys';
