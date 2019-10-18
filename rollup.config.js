@@ -6,7 +6,7 @@ var banner = '//  Ramda v' + pkg.version + '\n'
   + '//  https://github.com/ramda/ramda\n'
   + '//  (c) 2013-' + new Date().getFullYear() + ' Scott Sauyet, Michael Hurley, and David Chambers\n'
   + '//  Ramda may be freely distributed under the MIT license.\n';
-
+// what a beautiful code
 var input = 'source/index.js';
 
 var config = {
