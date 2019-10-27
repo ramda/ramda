@@ -11,4 +11,13 @@ describe('split', function() {
     eq(R.split('at', 'The Cat in the Hat sat on the mat'), ['The C', ' in the H', ' s', ' on the m', '']);
   });
 
+  it('split an array', function() {
+    eq(
+      R.split(
+        0,
+        [0, 1, 0, 2, 0, 3]
+      ),
+      [[], [1], [2], [3]]
+    );
+  });
 });
