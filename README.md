@@ -226,7 +226,7 @@ Manually cherry picking methods is cumbersome, however. Most bundlers like Webpa
 Typings
 -----------------
 
-- [TypeScript](https://github.com/types/npm-ramda/)
+- [TypeScript](https://www.npmjs.com/package/@types/ramda)
 - [Flow](https://github.com/flowtype/flow-typed/tree/master/definitions/npm/ramda_v0.x.x)
 
 
