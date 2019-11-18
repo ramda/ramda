@@ -12,7 +12,7 @@ import _curry2 from './internal/_curry2';
  * @param {Any} a
  * @param {Any} b
  * @return {Any} the first argument if truthy, otherwise the second argument.
- * @see R.either, R.xor
+ * @see R.either, R.and
  * @example
  *
  *      R.or(true, true); //=> true
