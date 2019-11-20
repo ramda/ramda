@@ -16,6 +16,7 @@ import useWith from './useWith';
  * @param {Array} props The property names to project
  * @param {Array} objs The objects to query
  * @return {Array} An array of objects with just the `props` properties.
+ * @see R.pluck
  * @example
  *
  *      const abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2};
