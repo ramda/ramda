@@ -76,8 +76,9 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
-    "@babel/types": "^7.4.4",
+    "@babel/preset-env": "^7.7.4",
     "@babel/register": "^7.4.4",
+    "@babel/types": "^7.4.4",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "babel-plugin-import-export-rename": "^1.0.1",
     "babelify": "^10.0.0",
@@ -95,6 +96,7 @@
     "mocha": "^6.1.4",
     "rimraf": "^2.6.3",
     "rollup": "^0.68.2",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-uglify": "^6.0.2",
     "sanctuary": "0.7.x",
     "sinon": "^7.3.2",
