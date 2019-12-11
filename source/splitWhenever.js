@@ -7,9 +7,8 @@ import _curryN from './internal/_curryN';
  * @since v0.26.1
  * @category List
  * @sig (a -> Boolean) -> [a] -> [[a]]
- * @param {Number} n
- * @param {Array} list
- * @param {Boolean} incDelimiter
+ * @param {Function} pred The predicate that determines where the array is split.
+ * @param {Array} list The array to be split.
  * @return {Array}
  * @example
  *
