@@ -243,6 +243,7 @@ export { default as valuesIn } from './valuesIn';
 export { default as view } from './view';
 export { default as when } from './when';
 export { default as where } from './where';
+export { default as whereAny } from './whereAny';
 export { default as whereEq } from './whereEq';
 export { default as without } from './without';
 export { default as xor } from './xor';
