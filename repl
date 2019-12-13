@@ -4,8 +4,7 @@
 
 const repl = require('repl');
 
-process.env.BABEL_ENV = 'cjs';
-require('@babel/register');
+require('@babel/register')({ envName: 'cjs', root: __dirname });
 
 const R = require('./source');
 
