@@ -30,7 +30,7 @@ import keys from './keys';
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {Array} list The list to be iterated over.
  * @return {Array} The new list.
- * @see R.transduce, R.addIndex
+ * @see R.transduce, R.addIndex, R.pluck, R.project
  * @example
  *
  *      const double = x => x * 2;
