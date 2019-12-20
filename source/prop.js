@@ -15,7 +15,7 @@ import path from './path';
  * @param {String|Number} p The property name or array index
  * @param {Object} obj The object to query
  * @return {*} The value at `obj.p`.
- * @see R.path, R.nth
+ * @see R.path, R.props, R.pluck, R.project, R.nth
  * @example
  *
  *      R.prop('x', {x: 100}); //=> 100

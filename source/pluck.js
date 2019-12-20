@@ -19,7 +19,7 @@ import prop from './prop';
  * @param {Number|String} key The key name to pluck off of each object.
  * @param {Array} f The array or functor to consider.
  * @return {Array} The list of values for the given key.
- * @see R.props, R.project
+ * @see R.project, R.prop, R.props
  * @example
  *
  *      var getAges = R.pluck('age');
