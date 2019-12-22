@@ -1,7 +1,6 @@
-import _concat from './internal/_concat';
-import _createPartialApplicator from './internal/_createPartialApplicator';
-import flip from './flip';
-
+import _arity from './internal/_arity';
+import _curry2 from './internal/_curry2';
+import insertAll from './insertAll';
 
 /**
  * Takes a function `f` and a list of arguments, and returns a function `g`.
@@ -27,5 +26,15 @@ import flip from './flip';
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)
  */
-var partialRight = _createPartialApplicator(flip(_concat));
+var partialRight = _curry2(function partialRight(fn, partialArgs) {
+  if (partialArgs.length >= fn.length) {
+    return fn.apply(this, partialArgs);
+  } else {
+    var restLength = fn.length - partialArgs.length;
+    return _arity(restLength, function() {
+      return fn.apply(this, insertAll(restLength, partialArgs, arguments));
+    });
+  }
+});
+
 export default partialRight;

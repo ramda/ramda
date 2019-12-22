@@ -1,9 +1,9 @@
 var R = require('../source');
 var eq = require('./shared/eq');
 
-
 describe('partialRight', function() {
-  var disc = function(a, b, c) { // note disc(3, 7, 4) => 1
+  var disc = function(a, b, c) {
+    // note disc(3, 7, 4) => 1
     return b * b - 4 * a * c;
   };
 
@@ -21,4 +21,9 @@ describe('partialRight', function() {
     eq(g.length, 1);
   });
 
+  it('correctly processes rest arguments', function() {
+    var foo = (a, b, c, d, ...rest) => ({ a, b, c, d, rest });
+    var f = R.partialRight(foo, [100, 200]);
+    eq(f(1, 2, 3, 4), { a: 1, b: 2, c: 100, d: 200, rest: [3, 4] });
+  });
 });
