@@ -21,9 +21,12 @@ describe('partial', function() {
     eq(g.length, 1);
   });
 
-  it('correctly processes rest arguments', function() {
-    var foo = (a, b, c, d, ...rest) => ({ a, b, c, d, rest });
-    var f = R.partial(foo, [100, 200]);
-    eq(f(1, 2, 3, 4), { a: 100, b: 200, c: 1, d: 2, rest: [3, 4] });
+  it('correctly processes rest of the arguments', function() {
+    function greet(salutation, title, firstName, lastName) {
+      return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+    }
+    var sayHello = R.partial(greet, ['Hello']);
+    var sayHelloToMs = R.partial(sayHello, ['Ms.']);
+    eq(sayHelloToMs('Jane', 'Jones', '&', 'Green'), 'Hello, Ms. Jane Jones!');
   });
 });

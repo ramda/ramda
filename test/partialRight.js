@@ -21,9 +21,11 @@ describe('partialRight', function() {
     eq(g.length, 1);
   });
 
-  it('correctly processes rest arguments', function() {
-    var foo = (a, b, c, d, ...rest) => ({ a, b, c, d, rest });
-    var f = R.partialRight(foo, [100, 200]);
-    eq(f(1, 2, 3, 4), { a: 1, b: 2, c: 100, d: 200, rest: [3, 4] });
+  it('correctly processes rest of the arguments', function() {
+    function greet(salutation, title, firstName, lastName) {
+      return salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
+    }
+    var greetMsJaneJones = R.partialRight(greet, ['Ms.', 'Jane', 'Jones']);
+    eq(greetMsJaneJones('Hello', 'Mr.', 'Green'), 'Hello, Ms. Jane Jones!');
   });
 });
