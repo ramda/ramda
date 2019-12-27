@@ -6,7 +6,8 @@ import uniqWith from './uniqWith';
 /**
  * Combines two lists into a set (i.e. no duplicates) composed of the elements
  * of each list. Duplication is determined according to the value returned by
- * applying the supplied predicate to two list elements.
+ * applying the supplied predicate to two list elements. If an element exists
+ * in both lists, the first element from the first list will be used.
  *
  * @func
  * @memberOf R
