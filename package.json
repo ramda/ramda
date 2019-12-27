@@ -72,6 +72,11 @@
     "browser_test": "testem ci",
     "test": "cross-env BABEL_ENV=cjs mocha --require @babel/register --reporter spec"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run test && npm run lint"
+    }
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -90,6 +95,7 @@
     "envvar": "^2.0.0",
     "eslint": "^5.16.0",
     "handlebars": ">=4.1.2",
+    "husky": "3.1.0",
     "istanbul": "^0.4.x",
     "js-yaml": "^3.13.1",
     "jsverify": "^0.8.4",
