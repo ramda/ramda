@@ -22,12 +22,12 @@ import equals from './equals';
  *
  *      const abby = {name: 'Abby', age: 7, hair: 'blond', family: { father: 'Jones' }};
  *      const kids = ['abby', 'fred', 'rusty', 'alois'];
- * 
+ *
  *      const ageLens = R.lens(R.prop('age'), R.assoc('age'));
  *      const hairPropLens = R.lensProp('hair');
  *      const fatherPathLens = R.lensPath(['family', 'father']);
  *      const secondIndexLens = R.lensIndex(1);
- * 
+ *
  *      R.lensEq(ageLens, 7, abby); //=> true
  *      R.lensEq(hairPropLens, 'blond', abby); //=> true
  *      R.lensEq(fatherPathLens, 'Jones', abby); //=> true
