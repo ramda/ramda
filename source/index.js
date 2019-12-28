@@ -108,6 +108,8 @@ export { default as lens } from './lens';
 export { default as lensIndex } from './lensIndex';
 export { default as lensPath } from './lensPath';
 export { default as lensProp } from './lensProp';
+export { default as lensEq } from './lensEq';
+export { default as lensSatisfies } from './lensSatisfies';
 export { default as lift } from './lift';
 export { default as liftN } from './liftN';
 export { default as lt } from './lt';
