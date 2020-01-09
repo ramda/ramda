@@ -26,6 +26,7 @@ import tail from './tail';
  *
  *      f(3, 4); // -(3^4) + 1
  * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
+ * @symb R.pipe(f, g, h)(a)(b) = h(g(f(a)))(b)
  */
 export default function pipe() {
   if (arguments.length === 0) {
