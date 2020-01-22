@@ -1,4 +1,4 @@
-import curry from './curry';
+import _curry1 from './internal/_curry1';
 
 
 /**
@@ -38,7 +38,7 @@ import curry from './curry';
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  * @symb R.call(f, a, b) = f(a, b)
  */
-var call = curry(function call(fn) {
+var call = _curry1(function call(fn) {
   return fn.apply(this, Array.prototype.slice.call(arguments, 1));
 });
 export default call;
