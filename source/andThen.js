@@ -18,14 +18,18 @@ import _assertPromise from './internal/_assertPromise';
  * @see R.otherwise
  * @example
  *
- *      var makeQuery = (email) => ({ query: { email }});
+ *      const makeQuery = email => ({ query: { email }});
+ *      const fetchMember = request =>
+ *        Promise.resolve({ firstName: 'Bob', lastName: 'Loblaw', id: 42 });
  *
- *      //getMemberName :: String -> Promise ({firstName, lastName})
- *      var getMemberName = R.pipe(
+ *      //getMemberName :: String -> Promise ({ firstName, lastName })
+ *      const getMemberName = R.pipe(
  *        makeQuery,
  *        fetchMember,
  *        R.andThen(R.pick(['firstName', 'lastName']))
  *      );
+ *
+ *      getMemberName('bob@gmail.com').then(console.log);
  */
 var andThen = _curry2(function andThen(f, p) {
   _assertPromise('andThen', p);
