@@ -1,5 +1,6 @@
 import _curry3 from './internal/_curry3';
-import pathOr from './pathOr';
+import defaultTo from './defaultTo';
+import prop from './prop';
 
 
 /**
@@ -29,6 +30,6 @@ import pathOr from './pathOr';
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
 var propOr = _curry3(function propOr(val, p, obj) {
-  return pathOr(val, [p], obj);
+  return defaultTo(val, prop(p, obj));
 });
 export default propOr;
