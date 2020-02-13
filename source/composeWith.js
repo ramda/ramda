@@ -7,8 +7,8 @@ import reverse from './reverse';
  * Performs right-to-left function composition using transforming function. The last argument may have
  * any arity; the remaining arguments must be unary.
  *
- * **Note:** The result of compose is not automatically curried. Transforming function is not used on the
- * last argument.
+ * **Note:** The result of composeWith is not automatically curried. Transforming function is not used
+ * on the last argument.
  *
  * @func
  * @memberOf R
