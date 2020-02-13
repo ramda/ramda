@@ -4,8 +4,8 @@ import reverse from './reverse';
 
 
 /**
- * Performs right-to-left function composition using transforming function. The last argument may have
- * any arity; the remaining arguments must be unary.
+ * Performs right-to-left function composition using transforming function. The last function may have
+ * any arity; the remaining functions must be unary.
  *
  * **Note:** The result of composeWith is not automatically curried. Transforming function is not used
  * on the last argument.
@@ -15,7 +15,8 @@ import reverse from './reverse';
  * @since v0.26.0
  * @category Function
  * @sig ((* -> *), [(y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)]) -> ((a, b, ..., n) -> z)
- * @param {...Function} ...functions The functions to compose
+ * @param {Function} transformer The transforming function
+ * @param {Array} functions The functions to compose
  * @return {Function}
  * @see R.compose, R.pipeWith
  * @example

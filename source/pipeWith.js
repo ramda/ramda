@@ -7,8 +7,8 @@ import identity from './identity';
 
 
 /**
- * Performs left-to-right function composition using transforming function. The first argument may have
- * any arity; the remaining arguments must be unary.
+ * Performs left-to-right function composition using transforming function. The first function may have
+ * any arity; the remaining functions must be unary.
  *
  * **Note:** The result of pipeWith is not automatically curried. Transforming function is not used on the
  * first argument.
@@ -18,7 +18,8 @@ import identity from './identity';
  * @since v0.26.0
  * @category Function
  * @sig ((* -> *), [((a, b, ..., n) -> o), (o -> p), ..., (x -> y), (y -> z)]) -> ((a, b, ..., n) -> z)
- * @param {...Function} functions
+ * @param {Function} transformer The transforming function
+ * @param {Array} functions The functions to pipe
  * @return {Function}
  * @see R.composeWith, R.pipe
  * @example
