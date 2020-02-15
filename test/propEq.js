@@ -12,6 +12,15 @@ describe('propEq', function() {
     eq(R.propEq('hair', 'blond', obj2), false);
   });
 
+  it('handles number as property', function() {
+    var deities = ['Cthulhu', 'Dagon', 'Yog-Sothoth'];
+    eq(R.propEq(0, 'Cthulhu', deities), true);
+    eq(R.propEq(1, 'Dagon', deities), true);
+    eq(R.propEq(2, 'Yog-Sothoth', deities), true);
+    eq(R.propEq(-1, 'Yog-Sothoth', deities), true);
+    eq(R.propEq(3, undefined, deities), true);
+  });
+
   it('has R.equals semantics', function() {
     function Just(x) { this.value = x; }
     Just.prototype.equals = function(x) {
