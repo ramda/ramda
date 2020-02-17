@@ -55,7 +55,7 @@ var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);
-      var value = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
+      var value = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, false), elt);
 
       if (value && value['@@transducer/reduced']) {
         return _reduced(acc);
