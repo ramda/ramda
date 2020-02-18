@@ -24,8 +24,9 @@ var recall = uncurryN(2, function(fn) {
     var numArgs = arguments.length;
     var value = fn;
     var i = 0;
-    while(typeof value == 'function' && i < numArgs) {
-      value = value(arguments[ i++ ]);
+    while (typeof value == 'function' && i < numArgs) {
+      value = value(arguments[ i ]);
+	  i = i + 1;
     }
     return value;
   };

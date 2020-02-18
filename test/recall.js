@@ -7,8 +7,8 @@ var fn = function(a) {
     var y = x * b;
     return function(c) {
       return y * c;
-    }
-  }
+    };
+  };
 };
 
 describe('recall', function() {
