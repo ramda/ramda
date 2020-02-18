@@ -26,7 +26,7 @@ var recall = uncurryN(2, function(fn) {
     var i = 0;
     while (typeof value == 'function' && i < numArgs) {
       value = value(arguments[ i ]);
-	  i = i + 1;
+      i = i + 1;
     }
     return value;
   };
