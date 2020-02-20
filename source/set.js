@@ -17,7 +17,7 @@ import over from './over';
  * @param {*} v
  * @param {*} x
  * @return {*}
- * @see R.prop, R.lensIndex, R.lensProp
+ * @see R.view, R.prop, R.lensIndex, R.lensProp
  * @example
  *
  *      const xLens = R.lensProp('x');
