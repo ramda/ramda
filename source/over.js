@@ -22,7 +22,7 @@ var Identity = function(x) {
  * @param {*} v
  * @param {*} x
  * @return {*}
- * @see R.prop, R.lensIndex, R.lensProp
+ * @see R.view, R.set, R.lens, R.lensIndex, R.lensProp, R.lensPath
  * @example
  *
  *      const headLens = R.lensIndex(0);

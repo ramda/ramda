@@ -19,7 +19,7 @@ var Const = function(x) {
  * @param {Lens} lens
  * @param {*} x
  * @return {*}
- * @see R.prop, R.lensIndex, R.lensProp
+ * @see R.set, R.over, R.lens, R.lensIndex, R.lensProp, R.lensPath
  * @example
  *
  *      const xLens = R.lensProp('x');
