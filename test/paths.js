@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
 
@@ -17,17 +19,20 @@ describe('paths', function() {
   };
   it('takes paths and returns values at those paths', function() {
     eq(R.paths([['a', 'b', 'c'], ['x', 'y']], obj), [1, 'Alice']);
-    eq(R.paths([['a', 'b', 'd'], ['p', 'q']], obj), [2, undefined]);
+    assert.throws(function() {
+      R.paths([['a', 'b', 'd'], ['p', 'q']], obj);
+    }, function(err) {
+      return (err instanceof Error &&
+              err.message === 'Specified path not in object');
+    });
   });
 
   it('takes a paths that contains indices into arrays', function() {
     eq(R.paths([['p', 0, 'q'], ['x', 'z', 0, 0]], obj), [3, {}]);
-    eq(R.paths([['p', 0, 'q'], ['x', 'z', 2, 1]], obj), [3, undefined]);
   });
 
   it('takes a path that contains negative indices into arrays', function() {
     eq(R.paths([['p', -2, 'q'], ['p', -1]], obj), [3, 'Hi']);
-    eq(R.paths([['p', -4, 'q'], ['x', 'z', -1, 0]], obj), [undefined, {}]);
   });
 
   it("gets a deep property's value from objects", function() {
@@ -35,9 +40,45 @@ describe('paths', function() {
     eq(R.paths([['p', 0]], obj), [obj.p[0]]);
   });
 
-  it('returns undefined for items not found', function() {
-    eq(R.paths([['a', 'x', 'y']], obj), [undefined]);
-    eq(R.paths([['p', 2]], obj), [undefined]);
+  it('throws an error for items not found in an object', function() {
+    assert.throws(function() {
+      R.paths([['a', 'x', 'y']], obj);
+    }, function(err) {
+      return (err instanceof Error &&
+              err.message === 'Specified path not in object');
+    });
+
+    assert.throws(function() {
+      R.paths([['p', 0, 'q'], ['x', 'z', 2, 1]], obj);
+    }, function(err) {
+      return (err instanceof Error &&
+              err.message === 'Specified path not in object');
+    });
+
+    assert.throws(function() {
+      R.paths([['p', -4, 'q'], ['x', 'z', -1, 0]], obj);
+    }, function(err) {
+      return (err instanceof Error &&
+              err.message === 'Specified path not in object');
+    });
+  });
+
+  it('does not index into strings values', function() {
+    assert.throws(function() {
+      R.paths([['x', 'y', 1]], obj);
+    }, function(err) {
+      return (err instanceof Error &&
+              err.message === 'Specified path not in object');
+    });
+  });
+
+  it('raises an error for items not found in a list', function() {
+    assert.throws(function() {
+      eq(R.paths([['p', 2]], obj), [undefined]);
+    }, function(err) {
+      return (err instanceof Error &&
+              err.message === 'Specified path not in object');
+    });
   });
 
 });
