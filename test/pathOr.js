@@ -44,8 +44,8 @@ describe('pathOr', function() {
     eq(R.pathOr('Unknown', ['toString'], undefined), 'Unknown');
   });
 
-  it('returns the default for non-object items', function() {
-    eq(R.pathOr('Unknown', ['toString'], false), 'Unknown');
+  it('works with falsy items', function() {
+    eq(R.pathOr('Unknown', ['toString'], false), Boolean.prototype.toString);
   });
 
 });

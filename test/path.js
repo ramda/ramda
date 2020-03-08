@@ -54,8 +54,8 @@ describe('path', function() {
     eq(R.path(['a', 'b'], {a: null}), undefined);
   });
 
-  it('returns undefined for non-object items', function() {
-    eq(R.path(['toString'], false), undefined);
+  it('works with falsy items', function() {
+    eq(R.path(['toString'], false), Boolean.prototype.toString);
   });
 
 });
