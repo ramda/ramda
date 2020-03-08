@@ -26,33 +26,11 @@ var paths = _curry2(function paths(pathsArray, obj) {
     var p;
     while (idx < paths.length) {
       if (val == null) {
-        throw new Error('Specified path not in object2');
+        return;
       }
-
       p = paths[idx];
-
-      if (
-        _isInteger(p) &&
-        Array.isArray(val) &&
-        (
-          (p < 0 && (val.length >= Math.abs(p))) ||
-          (p >= 0 && p < val.length)
-        )
-      ) {
-      // nth is only intended to be used on arrays.
-      // Have to check array bounds because nth returns
-      // undefined when the value is not in the list
-      // and when the index is out of the range
-        val = nth(p, val);
-      } else if (
-        val instanceof Object &&
-        p in val) {
-        val = val[p];
-      } else {
-        throw new Error('Specified path not in object');
-      }
+      val = _isInteger(p) ? nth(p, val) : val[p];
       idx += 1;
-
     }
     return val;
   });

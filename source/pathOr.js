@@ -1,5 +1,7 @@
 import _curry3 from './internal/_curry3';
-import paths from './paths';
+import defaultTo from './defaultTo';
+import path from './path';
+
 
 /**
  * If the given, non-null object has a value at the given path, returns the
@@ -21,10 +23,6 @@ import paths from './paths';
  *      R.pathOr('N/A', ['a', 'b'], {c: {b: 2}}); //=> "N/A"
  */
 var pathOr = _curry3(function pathOr(d, p, obj) {
-  try {
-    return paths([p], obj)[0];
-  } catch (e) {
-    return d;
-  }
+  return defaultTo(d, path(p, obj));
 });
 export default pathOr;
