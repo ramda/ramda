@@ -1,7 +1,10 @@
 import _arity from './internal/_arity';
+import _isFunction from './internal/_isFunction';
 import _pipe from './internal/_pipe';
+import complement from './complement';
 import reduce from './reduce';
 import tail from './tail';
+import toString from './toString';
 
 
 /**
@@ -31,6 +34,12 @@ import tail from './tail';
 export default function pipe() {
   if (arguments.length === 0) {
     throw new Error('pipe requires at least one argument');
+  }
+  const firstNonFunction = [].slice.call(arguments).find(complement(_isFunction));
+  if (firstNonFunction) {
+    throw new TypeError(
+      'pipe: ' + toString(firstNonFunction) + ' is not a function'
+    );
   }
   return _arity(
     arguments[0].length,

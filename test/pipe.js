@@ -56,4 +56,13 @@ describe('pipe', function() {
     eq(g(1, 2, 3), [1, 2, 3]);
   });
 
+  it('throws given non-function arguments', function() {
+    assert.throws(
+      function() { R.pipe(x => x, x => x, 'not-a-function'); },
+      function(err) {
+        return err.constructor === TypeError &&
+               err.message === 'pipe: "not-a-function" is not a function';
+      }
+    );
+  });
 });
