@@ -18,7 +18,7 @@ import liftN from './liftN';
  *
  *      const madd3 = R.lift((a, b, c) => a + b + c);
  *
- *      madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
+ *      madd3([100, 200, 300], [10, 20], [1]); //=> [111, 121, 211, 221, 311, 321]
  *
  *      const madd5 = R.lift((a, b, c, d, e) => a + b + c + d + e);
  *

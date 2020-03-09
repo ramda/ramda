@@ -25,6 +25,7 @@ import reverse from './reverse';
  *      R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
  *
  * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
+ * @symb R.compose(f, g, h)(a)(b) = f(g(h(a)))(b)
  */
 export default function compose() {
   if (arguments.length === 0) {

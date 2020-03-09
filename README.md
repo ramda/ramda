@@ -47,7 +47,7 @@ Introductions
 * [Favoring Curry](http://fr.umio.us/favoring-curry/) by Scott Sauyet
 * [Why Curry Helps](https://hughfdjackson.com/javascript/why-curry-helps/) by Hugh Jackson
 * [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
-* [Thinking in Ramda](http://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
+* [Thinking in Ramda](https://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
 
 
 
@@ -226,7 +226,7 @@ Manually cherry picking methods is cumbersome, however. Most bundlers like Webpa
 Typings
 -----------------
 
-- [TypeScript](https://github.com/types/npm-ramda/)
+- [TypeScript](https://www.npmjs.com/package/@types/ramda)
 - [Flow](https://github.com/flowtype/flow-typed/tree/master/definitions/npm/ramda_v0.x.x)
 
 
@@ -239,6 +239,8 @@ Translations
 - [Ukrainian(Українська)](https://github.com/ivanzusko/ramda)
 - [Portuguese(BR)](https://github.com/renansj/ramda)
 - [Russian(Русский)](https://github.com/Guck111/ramda)
+- [Spanish(ES)](https://github.com/wirecobweb/ramda)
+
 
 
 

@@ -26,4 +26,8 @@ describe('hasIn', function() {
     eq(R.hasIn('name', anon), false);
   });
 
+  it('returns false when non-existent object', function() {
+    eq(R.hasIn('name', null), false);
+    eq(R.hasIn('name', undefined), false);
+  });
 });

@@ -5,11 +5,6 @@ var eq = require('./shared/eq');
 
 
 describe('concat', function() {
-  it('adds combines the elements of the two lists', function() {
-    eq(R.concat(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
-    eq(R.concat([], ['c', 'd']), ['c', 'd']);
-  });
-
   var z1 = {
     x: 'z1',
     concat: function(that) { return this.x + ' ' + that.x; }
