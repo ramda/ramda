@@ -6,6 +6,9 @@ import filter from './filter';
 /**
  * The complement of [`filter`](#filter).
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
  * Acts as a transducer if a transformer is given in list position. Filterable
  * objects include plain objects or any object that has a filter method such
  * as `Array`.

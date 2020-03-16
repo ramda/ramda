@@ -1,5 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
+var iter = require('./shared/iterableOnly');
 
 
 describe('dropRepeatsWith', function() {
@@ -30,6 +31,10 @@ describe('dropRepeatsWith', function() {
 
   it('can act as a transducer', function() {
     eq(R.into([], R.dropRepeatsWith(eqI), objs2), objs);
+  });
+
+  it('can operate on any iterable', function() {
+    eq(Array.from(R.dropRepeatsWith(eqI, iter(objs2))), objs);
   });
 
 });

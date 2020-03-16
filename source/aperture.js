@@ -8,6 +8,9 @@ import _xaperture from './internal/_xaperture';
  * Returns a new list, composed of n-tuples of consecutive elements. If `n` is
  * greater than the length of the list, an empty list is returned.
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func

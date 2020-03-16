@@ -9,6 +9,9 @@ import equals from './equals';
  * Returns a new list without any consecutively repeating elements.
  * [`R.equals`](#equals) is used to determine equality.
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func

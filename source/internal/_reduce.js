@@ -1,4 +1,5 @@
 import _isArrayLike from './_isArrayLike';
+import _isIterator from './_isIterator';
 import _xwrap from './_xwrap';
 import bind from '../bind';
 
@@ -46,11 +47,11 @@ export default function _reduce(fn, acc, list) {
   if (typeof list['fantasy-land/reduce'] === 'function') {
     return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
+  if (_isIterator(list)) {
+    throw new TypeError('Iterator input');
+  }
   if (list[symIterator] != null) {
     return _iterableReduce(fn, acc, list[symIterator]());
-  }
-  if (typeof list.next === 'function') {
-    return _iterableReduce(fn, acc, list);
   }
   if (typeof list.reduce === 'function') {
     return _methodReduce(fn, acc, list, 'reduce');

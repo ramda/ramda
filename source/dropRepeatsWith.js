@@ -9,6 +9,9 @@ import last from './last';
  * determined by applying the supplied predicate to each pair of consecutive elements. The
  * first element in a series of equal elements will be preserved.
  *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
  * Acts as a transducer if a transformer is given in list position.
  *
  * @func
