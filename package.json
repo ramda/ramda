@@ -45,8 +45,18 @@
     "type": "git",
     "url": "git://github.com/ramda/ramda.git"
   },
-  "module": "es/index.js",
-  "main": "src/index",
+  "main": "./src/index.js",
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./es/index.js",
+      "default": "./src/index.js"
+    },
+    "./es/": "./es/",
+    "./src/": "./src/",
+    "./dist/": "./dist/"
+  },
+  "module": "./es/index.js",
   "unpkg": "dist/ramda.min.js",
   "jsdelivr": "dist/ramda.min.js",
   "files": [
@@ -58,12 +68,11 @@
     "prebench": "npm run --silent build:cjs",
     "bench": "node scripts/benchRunner",
     "bookmarklet": "node scripts/bookmarklet",
-    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es",
+    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es && node ./scripts/addModulePackageScope.js",
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
-    "build:mjs": "cross-env BABEL_ENV=es babel source/index.js --out-file src/index.mjs",
     "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
-    "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min && npm run build:mjs",
+    "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min",
     "partial-build": "node ./scripts/partialBuild",
     "clean": "rimraf es/* src/* dist/* coverage/*",
     "prepare": "npm run clean && npm run build",
