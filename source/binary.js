@@ -11,7 +11,7 @@ import nAry from './nAry';
  * @memberOf R
  * @since v0.2.0
  * @category Function
- * @sig (* -> c) -> (a, b -> c)
+ * @sig (* -> c) -> ((a, b) -> c)
  * @param {Function} fn The function to wrap.
  * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
  *         arity 2.
