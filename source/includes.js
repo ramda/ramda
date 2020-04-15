@@ -4,7 +4,7 @@ import _curry2 from './internal/_curry2';
 /**
  * Returns `true` if the specified value is equal, in [`R.equals`](#equals)
  * terms, to at least one element of the given list; `false` otherwise.
- * Works also with strings.
+ * Also works with strings.
  *
  * @func
  * @memberOf R
