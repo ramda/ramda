@@ -2097,7 +2097,7 @@ function _pipe(f, g) {
  * implementation.
  *
  * @private
- * @param {Function} fn ramda implemtation
+ * @param {Function} fn ramda implementation
  * @param {String} methodname property to check for a custom implementation
  * @return {Object} Whatever the return value of the method is.
  */
