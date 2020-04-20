@@ -12,6 +12,15 @@ describe('propEq', function() {
     eq(R.propEq('hair', 'blond', obj2), false);
   });
 
+  it('handles number as property', function() {
+    var deities = ['Cthulhu', 'Dagon', 'Yog-Sothoth'];
+    eq(R.propEq(0, 'Cthulhu', deities), true);
+    eq(R.propEq(1, 'Dagon', deities), true);
+    eq(R.propEq(2, 'Yog-Sothoth', deities), true);
+    eq(R.propEq(-1, 'Yog-Sothoth', deities), true);
+    eq(R.propEq(3, undefined, deities), true);
+  });
+
   it('has R.equals semantics', function() {
     function Just(x) { this.value = x; }
     Just.prototype.equals = function(x) {
@@ -22,6 +31,11 @@ describe('propEq', function() {
     eq(R.propEq('value', -0, {value: 0}), false);
     eq(R.propEq('value', NaN, {value: NaN}), true);
     eq(R.propEq('value', new Just([42]), {value: new Just([42])}), true);
+  });
+
+  it('returns false if called with a null or undefined object', function() {
+    eq(R.propEq('name', 'Abby', null), false);
+    eq(R.propEq('name', 'Abby', undefined), false);
   });
 
 });

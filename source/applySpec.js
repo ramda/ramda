@@ -1,4 +1,5 @@
 import _curry1 from './internal/_curry1';
+import _isArray from './internal/_isArray';
 import apply from './apply';
 import curryN from './curryN';
 import max from './max';
@@ -7,13 +8,16 @@ import reduce from './reduce';
 import keys from './keys';
 import values from './values';
 
+
 // Use custom mapValues function to avoid issues with specs that include a "map" key and R.map
 // delegating calls to .map
 function mapValues(fn, obj) {
-  return keys(obj).reduce(function(acc, key) {
-    acc[key] = fn(obj[key]);
-    return acc;
-  }, {});
+  return _isArray(obj)
+    ? obj.map(fn)
+    : keys(obj).reduce(function(acc, key) {
+      acc[key] = fn(obj[key]);
+      return acc;
+    }, {});
 }
 
 /**

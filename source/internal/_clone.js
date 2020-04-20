@@ -22,8 +22,8 @@ export default function _clone(value, refFrom, refTo, deep) {
       }
       idx += 1;
     }
-    refFrom[idx + 1] = value;
-    refTo[idx + 1] = copiedValue;
+    refFrom[idx] = value;
+    refTo[idx] = copiedValue;
     for (var key in value) {
       copiedValue[key] = deep ?
         _clone(value[key], refFrom, refTo, true) : value[key];

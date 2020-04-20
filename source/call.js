@@ -1,4 +1,4 @@
-import curry from './curry';
+import _curry1 from './internal/_curry1';
 
 
 /**
@@ -12,7 +12,7 @@ import curry from './curry';
  * @memberOf R
  * @since v0.9.0
  * @category Function
- * @sig (*... -> a),*... -> a
+ * @sig ((*... -> a), *...) -> a
  * @param {Function} fn The function to apply to the remaining arguments.
  * @param {...*} args Any number of positional arguments.
  * @return {*}
@@ -21,19 +21,24 @@ import curry from './curry';
  *
  *      R.call(R.add, 1, 2); //=> 3
  *
- *      const indentN = R.pipe(R.repeat(' '),
- *                           R.join(''),
- *                           R.replace(/^(?!$)/gm));
+ *      const indentN = R.pipe(
+ *        R.repeat(' '),
+ *        R.join(''),
+ *        R.replace(/^(?!$)/gm)
+ *      );
  *
- *      const format = R.converge(R.call, [
- *                                  R.pipe(R.prop('indent'), indentN),
- *                                  R.prop('value')
- *                              ]);
+ *      const format = R.converge(
+ *        R.call,
+ *        [
+ *          R.pipe(R.prop('indent'), indentN),
+ *          R.prop('value')
+ *        ]
+ *      );
  *
  *      format({indent: 2, value: 'foo\nbar\nbaz\n'}); //=> '  foo\n  bar\n  baz\n'
  * @symb R.call(f, a, b) = f(a, b)
  */
-var call = curry(function call(fn) {
+var call = _curry1(function call(fn) {
   return fn.apply(this, Array.prototype.slice.call(arguments, 1));
 });
 export default call;

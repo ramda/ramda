@@ -27,6 +27,7 @@ import _curry2 from './internal/_curry2';
  * R.groupWith((a, b) => a % 2 === b % 2, [0, 1, 1, 2, 3, 5, 8, 13, 21])
  * //=> [[0], [1, 1], [2], [3, 5], [8], [13, 21]]
  *
+ * const isVowel = R.test(/^[aeiou]$/i);
  * R.groupWith(R.eqBy(isVowel), 'aestiou')
  * //=> ['ae', 'st', 'iou']
  */
