@@ -21,6 +21,6 @@ import prop from './prop';
  *      R.propSatisfies(x => x > 0, 'x', {x: 1, y: 2}); //=> true
  */
 var propSatisfies = _curry3(function propSatisfies(pred, name, obj) {
-  return pred(prop(name, obj));
+  return Boolean(pred(prop(name, obj)));
 });
 export default propSatisfies;

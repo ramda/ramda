@@ -23,6 +23,6 @@ import path from './path';
  *      R.pathSatisfies(R.is(Object), [], {x: {y: 2}}); //=> true
  */
 var pathSatisfies = _curry3(function pathSatisfies(pred, propPath, obj) {
-  return pred(path(propPath, obj));
+  return Boolean(pred(path(propPath, obj)));
 });
 export default pathSatisfies;
