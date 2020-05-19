@@ -1,6 +1,6 @@
 import _cloneRegExp from './_cloneRegExp';
+import _queue from './_queue';
 import type from '../type';
-
 
 /**
  * Copies an object.
@@ -12,29 +12,32 @@ import type from '../type';
  * @param {Boolean} deep Whether or not to perform deep cloning.
  * @return {*} The copied value.
  */
-export default function _clone(value, refFrom, refTo, deep) {
-  var copy = function copy(copiedValue) {
-    var len = refFrom.length;
-    var idx = 0;
-    while (idx < len) {
-      if (value === refFrom[idx]) {
-        return refTo[idx];
-      }
-      idx += 1;
+export default function _clone(value, deep) {
+  const refs = new WeakMap();
+  return _queue((value,push) => {
+    switch (type(value)) {
+      case 'Array':
+      case 'Object':
+        break;
+      case 'Date':
+        return new Date(value.valueOf());
+      case 'RegExp':
+        return _cloneRegExp(value);
+      default:
+        return value;
     }
-    refFrom[idx] = value;
-    refTo[idx] = copiedValue;
-    for (var key in value) {
-      copiedValue[key] = deep ?
-        _clone(value[key], refFrom, refTo, true) : value[key];
+    const copiedValue = type(value) === 'Array' ? [] : {};
+    if (refs.has(value)) {
+      return refs.get(value);
+    }
+    refs.set(value, copiedValue);
+    for (let key in value) {
+      if (!deep) {
+        copiedValue[key] = value[key];
+      } else {
+        push(value[key], copiedValue, key);
+      }
     }
     return copiedValue;
-  };
-  switch (type(value)) {
-    case 'Object':  return copy({});
-    case 'Array':   return copy([]);
-    case 'Date':    return new Date(value.valueOf());
-    case 'RegExp':  return _cloneRegExp(value);
-    default:        return value;
-  }
+  }, value, ([source]) => source, ([, target, key],result) => target[key] = result);
 }
