@@ -6,7 +6,7 @@ var eq = require('./shared/eq');
 
 let nestedObject = {};
 let nestedArray = [];
-for (var i = 0; i < Math.pow(10, 6); i += 1) {
+for (var i = 0; i < 1.15 * Math.pow(10, 4); i += 1) {
   nestedObject = {next: nestedObject};
   nestedArray = [nestedArray];
 }
@@ -70,12 +70,9 @@ describe('deep clone objects', function() {
     assert.notDeepEqual(clone.c.b, x.c.b);
   });
 
-  it('clones objects with deep nesting', function(done) {
-    setTimeout(() => {
-      var clone = R.clone(nestedObject);
-      assert.notStrictEqual(clone, nestedObject);
-      done();
-    });
+  it('clones objects with deep nesting', function() {
+    var clone = R.clone(nestedObject);
+    assert.notStrictEqual(clone, nestedObject);
   });
 
   it('clone instances', function() {
@@ -123,12 +120,9 @@ describe('deep clone arrays', function() {
     eq(clone, [1, [1, 2, 3], [[[5]]]]);
   });
 
-  it('clones deep nested arrays', function(done) {
-    setTimeout(() => {
-      var clone = R.clone(nestedArray);
-      assert.notStrictEqual(clone, nestedArray);
-      done();
-    });
+  it('clones deep nested arrays', function() {
+    var clone = R.clone(nestedArray);
+    assert.notStrictEqual(clone, nestedArray);
   });
 
 });
