@@ -1,0 +1,28 @@
+version: '2'
+
+plugins:
+  nodesecurity:
+    enabled: true
+
+  editorconfig:
+    enabled: true
+
+  markdownlint:
+    enabled: true
+
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - javascript
+
+  eslint:
+    enabled: true
+
+  fixme:
+    enabled: true
+
+exclude_patterns:
+  - '.*'
+  - '**/*.*'
+  - '!source/**/*.js'
