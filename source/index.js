@@ -171,6 +171,7 @@ export { default as pluck } from './pluck';
 export { default as prepend } from './prepend';
 export { default as product } from './product';
 export { default as project } from './project';
+export { default as promap } from './promap';
 export { default as prop } from './prop';
 export { default as propEq } from './propEq';
 export { default as propIs } from './propIs';
