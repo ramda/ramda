@@ -26,6 +26,7 @@ export { default as call } from './call';
 export { default as chain } from './chain';
 export { default as clamp } from './clamp';
 export { default as clone } from './clone';
+export { default as collectBy } from './collectBy';
 export { default as comparator } from './comparator';
 export { default as complement } from './complement';
 export { default as compose } from './compose';
