@@ -2,14 +2,15 @@ import _curry2 from './internal/_curry2';
 import _reduce from './internal/_reduce';
 
 /**
- * Splits a list into sub-lists, based on the result of calling a String-returning function on each element,
+ * Splits a list into sub-lists, based on the result of calling a key-returning function on each element,
  * and grouping the results according to values returned.
  *
  * @func
  * @memberOf R
  * @category List
- * @sig (a -> String) -> [a] -> [[a]]
- * @param {Function} fn Function :: a -> String
+ * @typedefn Idx = String | Int | Symbol
+ * @sig Idx a => (b -> a) -> [b] -> [[b]]
+ * @param {Function} fn Function :: a -> Idx
  * @param {Array} list The array to group
  * @return {Array}
  *    An array of arrays where each sub-array contains items for which

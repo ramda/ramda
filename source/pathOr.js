@@ -11,7 +11,7 @@ import path from './path';
  * @memberOf R
  * @since v0.18.0
  * @category Object
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @sig a -> [Idx] -> {a} -> a
  * @param {*} d The default value.
  * @param {Array} p The path to use.

@@ -11,7 +11,7 @@ import nth from './nth';
  * @memberOf R
  * @since v0.1.0
  * @category Object
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @sig Idx -> {s: a} -> a | Undefined
  * @param {String|Number} p The property name or array index
  * @param {Object} obj The object to query

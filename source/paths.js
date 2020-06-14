@@ -8,7 +8,7 @@ import nth from './nth';
  * @func
  * @memberOf R
  * @category Object
- * @typedefn Idx = [String | Int]
+ * @typedefn Idx = [String | Int | Symbol]
  * @sig [Idx] -> {a} -> [a | Undefined]
  * @param {Array} pathsArray The array of paths to be fetched.
  * @param {Object} obj The object to retrieve the nested properties from.

@@ -11,7 +11,7 @@ import path from './path';
  * @memberOf R
  * @since v0.19.0
  * @category Object
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @typedefn Lens s a = Functor f => (a -> f a) -> s -> f s
  * @sig [Idx] -> Lens s a
  * @param {Array} path The path to use.

@@ -8,7 +8,7 @@ import paths from './paths';
  * @memberOf R
  * @since v0.2.0
  * @category Object
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @sig [Idx] -> {a} -> a | Undefined
  * @param {Array} path The path to use.
  * @param {Object} obj The object to retrieve the nested property from.
