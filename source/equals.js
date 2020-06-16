@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _equals from './internal/_equals';
+import _curry2 from './internal/_curry2.js';
+import _equals from './internal/_equals.js';
 
 
 /**

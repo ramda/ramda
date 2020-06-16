@@ -1,8 +1,8 @@
-import _arity from './internal/_arity';
-import _curry1 from './internal/_curry1';
-import map from './map';
-import max from './max';
-import reduce from './reduce';
+import _arity from './internal/_arity.js';
+import _curry1 from './internal/_curry1.js';
+import map from './map.js';
+import max from './max.js';
+import reduce from './reduce.js';
 
 
 /**

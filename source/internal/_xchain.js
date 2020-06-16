@@ -1,6 +1,6 @@
-import _curry2 from './_curry2';
-import _flatCat from './_flatCat';
-import map from '../map';
+import _curry2 from './_curry2.js';
+import _flatCat from './_flatCat.js';
+import map from '../map.js';
 
 
 var _xchain = _curry2(function _xchain(f, xf) {

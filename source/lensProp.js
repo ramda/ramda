@@ -1,7 +1,7 @@
-import _curry1 from './internal/_curry1';
-import assoc from './assoc';
-import lens from './lens';
-import prop from './prop';
+import _curry1 from './internal/_curry1.js';
+import assoc from './assoc.js';
+import lens from './lens.js';
+import prop from './prop.js';
 
 
 /**

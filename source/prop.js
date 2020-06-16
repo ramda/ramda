@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _isInteger from './internal/_isInteger';
-import nth from './nth';
+import _curry2 from './internal/_curry2.js';
+import _isInteger from './internal/_isInteger.js';
+import nth from './nth.js';
 
 
 /**

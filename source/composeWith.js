@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import pipeWith from './pipeWith';
-import reverse from './reverse';
+import _curry2 from './internal/_curry2.js';
+import pipeWith from './pipeWith.js';
+import reverse from './reverse.js';
 
 
 /**

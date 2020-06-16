@@ -1,8 +1,8 @@
-import _curry1 from './internal/_curry1';
-import _dispatchable from './internal/_dispatchable';
-import _xdropRepeatsWith from './internal/_xdropRepeatsWith';
-import dropRepeatsWith from './dropRepeatsWith';
-import equals from './equals';
+import _curry1 from './internal/_curry1.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xdropRepeatsWith from './internal/_xdropRepeatsWith.js';
+import dropRepeatsWith from './dropRepeatsWith.js';
+import equals from './equals.js';
 
 
 /**

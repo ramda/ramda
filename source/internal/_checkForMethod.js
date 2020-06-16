@@ -1,4 +1,4 @@
-import _isArray from './_isArray';
+import _isArray from './_isArray.js';
 
 
 /**

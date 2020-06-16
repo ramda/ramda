@@ -1,5 +1,5 @@
-import _concat from './internal/_concat';
-import _createPartialApplicator from './internal/_createPartialApplicator';
+import _concat from './internal/_concat.js';
+import _createPartialApplicator from './internal/_createPartialApplicator.js';
 
 
 /**

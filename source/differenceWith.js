@@ -1,5 +1,5 @@
-import _includesWith from './internal/_includesWith';
-import _curry3 from './internal/_curry3';
+import _includesWith from './internal/_includesWith.js';
+import _curry3 from './internal/_curry3.js';
 
 
 /**

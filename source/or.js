@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * Returns `true` if one or both of its arguments are `true`. Returns `false`

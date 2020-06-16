@@ -1,5 +1,5 @@
-import multiply from './multiply';
-import reduce from './reduce';
+import multiply from './multiply.js';
+import reduce from './reduce.js';
 
 
 /**

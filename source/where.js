@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _has from './internal/_has';
+import _curry2 from './internal/_curry2.js';
+import _has from './internal/_has.js';
 
 
 /**

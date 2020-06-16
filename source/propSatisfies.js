@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import prop from './prop';
+import _curry3 from './internal/_curry3.js';
+import prop from './prop.js';
 
 /**
  * Returns `true` if the specified object property satisfies the given

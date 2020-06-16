@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import defaultTo from './defaultTo';
-import prop from './prop';
+import _curry3 from './internal/_curry3.js';
+import defaultTo from './defaultTo.js';
+import prop from './prop.js';
 
 
 /**

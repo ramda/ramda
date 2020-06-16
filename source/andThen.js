@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _assertPromise from './internal/_assertPromise';
+import _curry2 from './internal/_curry2.js';
+import _assertPromise from './internal/_assertPromise.js';
 
 
 /**

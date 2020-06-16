@@ -1,5 +1,5 @@
-import _includes from './internal/_includes';
-import _curry2 from './internal/_curry2';
+import _includes from './internal/_includes.js';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * Returns `true` if the specified value is equal, in [`R.equals`](#equals)

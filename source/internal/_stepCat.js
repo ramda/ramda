@@ -1,8 +1,8 @@
-import _objectAssign from './_objectAssign';
-import _identity from './_identity';
-import _isArrayLike from './_isArrayLike';
-import _isTransformer from './_isTransformer';
-import objOf from '../objOf';
+import _objectAssign from './_objectAssign.js';
+import _identity from './_identity.js';
+import _isArrayLike from './_isArrayLike.js';
+import _isTransformer from './_isTransformer.js';
+import objOf from '../objOf.js';
 
 
 var _stepCatArray = {

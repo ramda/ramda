@@ -1,8 +1,8 @@
-import _includes from './internal/_includes';
-import _curry2 from './internal/_curry2';
-import _filter from './internal/_filter';
-import flip from './flip';
-import uniq from './uniq';
+import _includes from './internal/_includes.js';
+import _curry2 from './internal/_curry2.js';
+import _filter from './internal/_filter.js';
+import flip from './flip.js';
+import uniq from './uniq.js';
 
 
 /**

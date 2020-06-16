@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _reduce from './internal/_reduce';
+import _curry2 from './internal/_curry2.js';
+import _reduce from './internal/_reduce.js';
 
 /**
  * Splits a list into sub-lists, based on the result of calling a key-returning function on each element,

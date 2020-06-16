@@ -1,9 +1,9 @@
-import _clone from './internal/_clone';
-import _curryN from './internal/_curryN';
-import _dispatchable from './internal/_dispatchable';
-import _has from './internal/_has';
-import _reduce from './internal/_reduce';
-import _xreduceBy from './internal/_xreduceBy';
+import _clone from './internal/_clone.js';
+import _curryN from './internal/_curryN.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _has from './internal/_has.js';
+import _reduce from './internal/_reduce.js';
+import _xreduceBy from './internal/_xreduceBy.js';
 
 
 /**

@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import paths from './paths';
+import _curry2 from './internal/_curry2.js';
+import paths from './paths.js';
 
 /**
  * Retrieve the value at a given path.

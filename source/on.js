@@ -1,4 +1,4 @@
-import curryN from './internal/_curryN';
+import curryN from './internal/_curryN.js';
 
 
 /**

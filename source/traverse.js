@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import map from './map';
-import sequence from './sequence';
+import _curry3 from './internal/_curry3.js';
+import map from './map.js';
+import sequence from './sequence.js';
 
 
 /**
