@@ -10,6 +10,7 @@
   "globals": {
     "Symbol": true
   },
+  "plugins": [ "import" ],
   "rules": {
     "no-eval": 2,
     "eqeqeq": 0,
@@ -121,6 +122,10 @@
     "no-duplicate-case": 2,
     "no-extra-semi": 2,
     "no-unreachable": 2,
-    "semi": 2
+    "semi": 2,
+    "import/extensions": [
+      2,
+      "always"
+    ]
   }
 }
