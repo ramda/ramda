@@ -12,7 +12,7 @@ import isNil from './isNil';
  * @memberOf R
  * @since v0.26.0
  * @category Object
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @sig [Idx] -> {a} -> Boolean
  * @param {Array} path The path to use.
  * @param {Object} obj The object to check the path in.

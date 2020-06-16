@@ -4,7 +4,7 @@ import reduceBy from './reduceBy';
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of
- * calling a String-returning function on each element, and grouping the
+ * calling a key-returning function on each element, and grouping the
  * results according to values returned.
  *
  * Dispatches to the `groupBy` method of the second argument, if present.
@@ -15,8 +15,9 @@ import reduceBy from './reduceBy';
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @sig (a -> String) -> [a] -> {String: [a]}
- * @param {Function} fn Function :: a -> String
+ * @typedefn Idx = String | Int | Symbol
+ * @sig Idx a => (b -> a) -> [b] -> {a: [b]}
+ * @param {Function} fn Function :: a -> Idx
  * @param {Array} list The array to group
  * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
  *         that produced that key when passed to `fn`.

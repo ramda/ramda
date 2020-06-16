@@ -16,7 +16,7 @@ import update from './update';
  * @memberOf R
  * @since v0.11.0
  * @category Object
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @sig [Idx] -> {k: v} -> {k: v}
  * @param {Array} path The path to the value to omit
  * @param {Object} obj The object to clone

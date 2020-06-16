@@ -16,7 +16,7 @@ import isNil from './isNil';
  * @memberOf R
  * @since v0.8.0
  * @category Object
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @sig [Idx] -> a -> {a} -> {a}
  * @param {Array} path the path to set
  * @param {*} val The new value
