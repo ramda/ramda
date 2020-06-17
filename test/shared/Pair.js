@@ -38,7 +38,7 @@ function Pair(left, right) {
     },
     toArray: function toArray() { return [left, right]; },
     left: left,
-    right: right,
+    right: right
   };
 }
 
