@@ -1,5 +1,6 @@
 import _curry3 from './internal/_curry3';
 import equals from './equals';
+import prop from './prop';
 
 
 /**
@@ -23,7 +24,7 @@ import equals from './equals';
  *      R.eqProps('a', o1, o2); //=> false
  *      R.eqProps('c', o1, o2); //=> true
  */
-var eqProps = _curry3(function eqProps(prop, obj1, obj2) {
-  return equals(obj1[prop], obj2[prop]);
+var eqProps = _curry3(function eqProps(key, obj1, obj2) {
+  return equals(prop(key, obj1), prop(key, obj2));
 });
 export default eqProps;

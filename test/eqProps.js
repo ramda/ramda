@@ -20,4 +20,19 @@ describe('eqProps', function() {
     eq(R.eqProps('value', {value: new Just([42])}, {value: new Just([42])}), true);
   });
 
+  it('can handle null or undefined object', function() {
+    eq(R.eqProps('value', {value: 0}, null), false);
+    eq(R.eqProps('value', null, {value: 0}), false);
+    eq(R.eqProps('value', {value: 0}, undefined), false);
+    eq(R.eqProps('value', undefined, {value: 0}), false);
+    eq(R.eqProps('value', undefined, {value: undefined}), true);
+    eq(R.eqProps('value', null, {value: undefined}), true);
+    eq(R.eqProps('value', {value: undefined}, undefined), true);
+    eq(R.eqProps('value', {value: undefined}, null), true);
+    eq(R.eqProps('value', {}, null), true);
+    eq(R.eqProps('value', {}, undefined), true);
+    eq(R.eqProps('value', null, {}), true);
+    eq(R.eqProps('value', undefined, {}), true);
+  });
+
 });
