@@ -23,6 +23,10 @@ import paths from './paths';
  */
 
 var path = _curry2(function path(pathAr, obj) {
-  return paths([pathAr], obj)[0];
+  try {
+    return paths([pathAr], obj)[0];
+  } catch (e) {
+    return undefined;
+  }
 });
 export default path;

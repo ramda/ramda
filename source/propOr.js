@@ -1,7 +1,7 @@
-import _curry3 from './internal/_curry3';
-import defaultTo from './defaultTo';
-import prop from './prop';
-
+import _curry3 from './internal/_curry3'
+import defaultTo from './defaultTo'
+import prop from './prop'
+import pathOr from './pathOr'
 
 /**
  * If the given, non-null object has an own property with the specified name,
@@ -29,7 +29,7 @@ import prop from './prop';
  *      favorite(alice);  //=> undefined
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
-var propOr = _curry3(function propOr(val, p, obj) {
-  return defaultTo(val, prop(p, obj));
-});
-export default propOr;
+var propOr = _curry3(function propOr (val, p, obj) {
+  return pathOr(val, [p], obj)
+})
+export default propOr
