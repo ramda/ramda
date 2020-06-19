@@ -1,6 +1,6 @@
-import _curry3 from './_curry3';
-import _xfBase from './_xfBase';
-import _promap from './_promap';
+import _curry3 from './_curry3.js';
+import _xfBase from './_xfBase.js';
+import _promap from './_promap.js';
 
 
 function XPromap(f, g, xf) {
