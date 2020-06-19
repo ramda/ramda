@@ -1,5 +1,5 @@
-import _curry2 from './_curry2';
-import _xfBase from './_xfBase';
+import _curry2 from './_curry2.js';
+import _xfBase from './_xfBase.js';
 
 
 function XMap(f, xf) {

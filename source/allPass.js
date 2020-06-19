@@ -1,8 +1,8 @@
-import _curry1 from './internal/_curry1';
-import curryN from './curryN';
-import max from './max';
-import pluck from './pluck';
-import reduce from './reduce';
+import _curry1 from './internal/_curry1.js';
+import curryN from './curryN.js';
+import max from './max.js';
+import pluck from './pluck.js';
+import reduce from './reduce.js';
 
 
 /**

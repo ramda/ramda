@@ -1,6 +1,6 @@
-import _arity from './internal/_arity';
-import _concat from './internal/_concat';
-import _curry2 from './internal/_curry2';
+import _arity from './internal/_arity.js';
+import _concat from './internal/_concat.js';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * `tryCatch` takes two functions, a `tryer` and a `catcher`. The returned

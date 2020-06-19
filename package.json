@@ -98,6 +98,7 @@
     "dox": "latest",
     "envvar": "^2.0.0",
     "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.21.2",
     "handlebars": ">=4.1.2",
     "js-yaml": "^3.13.1",
     "jsverify": "^0.8.4",

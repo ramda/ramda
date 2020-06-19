@@ -1,4 +1,4 @@
-import _curryN from './internal/_curryN';
+import _curryN from './internal/_curryN.js';
 /**
  * Splits an array into slices on every occurrence of a value.
  *

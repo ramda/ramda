@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _indexOf from './internal/_indexOf';
-import _isArray from './internal/_isArray';
+import _curry2 from './internal/_curry2.js';
+import _indexOf from './internal/_indexOf.js';
+import _isArray from './internal/_isArray.js';
 
 
 /**

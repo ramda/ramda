@@ -1,8 +1,8 @@
-import _curry2 from './internal/_curry2';
-import _reduce from './internal/_reduce';
-import ap from './ap';
-import curryN from './curryN';
-import map from './map';
+import _curry2 from './internal/_curry2.js';
+import _reduce from './internal/_reduce.js';
+import ap from './ap.js';
+import curryN from './curryN.js';
+import map from './map.js';
 
 
 /**

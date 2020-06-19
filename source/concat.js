@@ -1,8 +1,8 @@
-import _curry2 from './internal/_curry2';
-import _isArray from './internal/_isArray';
-import _isFunction from './internal/_isFunction';
-import _isString from './internal/_isString';
-import toString from './toString';
+import _curry2 from './internal/_curry2.js';
+import _isArray from './internal/_isArray.js';
+import _isFunction from './internal/_isFunction.js';
+import _isString from './internal/_isString.js';
+import toString from './toString.js';
 
 
 /**

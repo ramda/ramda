@@ -1,9 +1,9 @@
-import _curry3 from './internal/_curry3';
-import _has from './internal/_has';
-import _isArray from './internal/_isArray';
-import _isInteger from './internal/_isInteger';
-import assoc from './assoc';
-import isNil from './isNil';
+import _curry3 from './internal/_curry3.js';
+import _has from './internal/_has.js';
+import _isArray from './internal/_isArray.js';
+import _isInteger from './internal/_isInteger.js';
+import assoc from './assoc.js';
+import isNil from './isNil.js';
 
 
 /**

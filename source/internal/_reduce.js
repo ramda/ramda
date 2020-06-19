@@ -1,6 +1,6 @@
-import _isArrayLike from './_isArrayLike';
-import _xwrap from './_xwrap';
-import bind from '../bind';
+import _isArrayLike from './_isArrayLike.js';
+import _xwrap from './_xwrap.js';
+import bind from '../bind.js';
 
 
 function _arrayReduce(xf, acc, list) {

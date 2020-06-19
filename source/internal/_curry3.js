@@ -1,6 +1,6 @@
-import _curry1 from './_curry1';
-import _curry2 from './_curry2';
-import _isPlaceholder from './_isPlaceholder';
+import _curry1 from './_curry1.js';
+import _curry2 from './_curry2.js';
+import _isPlaceholder from './_isPlaceholder.js';
 
 
 /**

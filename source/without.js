@@ -1,7 +1,7 @@
-import _includes from './internal/_includes';
-import _curry2 from './internal/_curry2';
-import flip from './flip';
-import reject from './reject';
+import _includes from './internal/_includes.js';
+import _curry2 from './internal/_curry2.js';
+import flip from './flip.js';
+import reject from './reject.js';
 
 
 /**

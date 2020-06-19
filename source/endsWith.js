@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import equals from './equals';
-import takeLast from './takeLast';
+import _curry2 from './internal/_curry2.js';
+import equals from './equals.js';
+import takeLast from './takeLast.js';
 
 /**
  * Checks if a list ends with the provided sublist.

@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import slice from './slice';
+import _curry2 from './internal/_curry2.js';
+import slice from './slice.js';
 
 
 /**

@@ -1,4 +1,4 @@
-import _filter from './_filter';
+import _filter from './_filter.js';
 
 
 /**

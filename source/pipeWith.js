@@ -1,9 +1,9 @@
-import _arity from './internal/_arity';
-import _curry2 from './internal/_curry2';
-import head from './head';
-import _reduce from './internal/_reduce';
-import tail from './tail';
-import identity from './identity';
+import _arity from './internal/_arity.js';
+import _curry2 from './internal/_curry2.js';
+import head from './head.js';
+import _reduce from './internal/_reduce.js';
+import tail from './tail.js';
+import identity from './identity.js';
 
 
 /**

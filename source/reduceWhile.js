@@ -1,6 +1,6 @@
-import _curryN from './internal/_curryN';
-import _reduce from './internal/_reduce';
-import _reduced from './internal/_reduced';
+import _curryN from './internal/_curryN.js';
+import _reduce from './internal/_reduce.js';
+import _reduced from './internal/_reduced.js';
 
 
 /**

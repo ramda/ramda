@@ -1,7 +1,7 @@
-import _curry3 from './internal/_curry3';
-import _dispatchable from './internal/_dispatchable';
-import _promap from './internal/_promap';
-import _xpromap from './internal/_xpromap';
+import _curry3 from './internal/_curry3.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _promap from './internal/_promap.js';
+import _xpromap from './internal/_xpromap.js';
 
 
 /**
