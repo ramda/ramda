@@ -179,6 +179,7 @@ export { default as propOr } from './propOr';
 export { default as propSatisfies } from './propSatisfies';
 export { default as props } from './props';
 export { default as range } from './range';
+export { default as recall } from './recall';
 export { default as reduce } from './reduce';
 export { default as reduceBy } from './reduceBy';
 export { default as reduceRight } from './reduceRight';
