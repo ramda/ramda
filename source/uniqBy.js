@@ -1,5 +1,6 @@
 import _Set from './internal/_Set';
 import _curry2 from './internal/_curry2';
+import filter from './filter';
 
 
 /**
@@ -7,6 +8,13 @@ import _curry2 from './internal/_curry2';
  * list, based upon the value returned by applying the supplied function to
  * each list element. Prefers the first item if the supplied function produces
  * the same value on two items. [`R.equals`](#equals) is used for comparison.
+ *
+ * Dispatches to the `filter` method of the second argument, if present.
+ *
+ * Performs the transformation lazily and returns a non-iterator iterable
+ * if a non-array iterable is given in list position.
+ *
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -22,18 +30,6 @@ import _curry2 from './internal/_curry2';
  */
 var uniqBy = _curry2(function uniqBy(fn, list) {
   var set = new _Set();
-  var result = [];
-  var idx = 0;
-  var appliedItem, item;
-
-  while (idx < list.length) {
-    item = list[idx];
-    appliedItem = fn(item);
-    if (set.add(appliedItem)) {
-      result.push(item);
-    }
-    idx += 1;
-  }
-  return result;
+  return filter(item => set.add(fn(item)), list);
 });
 export default uniqBy;
