@@ -28,9 +28,33 @@ describe('traverse', function() {
     eq(R.traverse(S.Either.of, R.identity, [S.Left('XXX'), S.Left('YYY')]), S.Left('XXX'));
   });
 
-  it('dispatches to `sequence` method', function() {
-    eq(R.traverse(Id, R.map(R.negate), [Id(1), Id(2), Id(3)]), Id([-1, -2, -3]));
-    eq(R.traverse(R.of, R.map(R.negate), Id([1, 2, 3])), [Id(-1), Id(-2), Id(-3)]);
+  it('dispatches to `traverse` method', function() {
+    const mockTraversable = { traverse(_1, _2) { return 'traverse called'; } };
+
+    eq(R.traverse(Id, R.identity, mockTraversable), 'traverse called');
+  });
+
+  it('dispatches to `fantasy-land/traverse` method', function() {
+    const mockTraversable2 = {
+      ['fantasy-land/traverse'](_1, _2) { return 'fantasy-land/traverse called'; }
+    };
+    eq(R.traverse(Id, R.identity, mockTraversable2), 'fantasy-land/traverse called');
+  });
+
+  it('dispatches to `fantasy-land/traverse` method when it and `traverse` exist', function() {
+    const mockTraversable3 = {
+      traverse(_1, _2) { return 'traverse called'; },
+      ['fantasy-land/traverse'](_1, _2) { return 'fantasy-land/traverse called'; }
+    };
+    eq(R.traverse(Id, R.identity, mockTraversable3), 'fantasy-land/traverse called');
+  });
+
+  it('dispatches to `traverse` when it exists and `fantasy-land/traverse` is not a function', function() {
+    const mockTraversable4 = {
+      traverse(_1, _2) { return 'traverse called'; },
+      'fantasy-land/traverse': new Error()
+    };
+    eq(R.traverse(Id, R.identity, mockTraversable4), 'traverse called');
   });
 
 });
