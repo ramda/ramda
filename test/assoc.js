@@ -25,4 +25,28 @@ describe('assoc', function() {
     assert.strictEqual(obj2.f, obj1.f);
   });
 
+  it('makes a shallow clone of an array, overriding only the specified index', function() {
+    var newValue = [4, 2];
+    var ary1 = [1, [2, 3], 4, 5];
+    var ary2 = R.assoc(2, newValue, ary1);
+    eq(ary2, [1, [2, 3], [4, 2], 5]);
+    // Note: reference equality below!
+    assert.strictEqual(ary2[0], ary1[0]);
+    assert.strictEqual(ary2[1], ary1[1]);
+    assert.strictEqual(ary2[2], newValue);
+    assert.strictEqual(ary2[3], ary1[3]);
+  });
+
+  it('is the equivalent of clone and set if the index is not on the original', function() {
+    var newValue = [4, 2];
+    var ary1 = [1, [2, 3], 4];
+    var ary2 = R.assoc(5, newValue, ary1);
+    eq(ary2, [1, [2, 3], 4, undefined, undefined, [4, 2]]);
+    // Note: reference equality below!
+    assert.strictEqual(ary2[0], ary1[0]);
+    assert.strictEqual(ary2[1], ary1[1]);
+    assert.strictEqual(ary2[2], ary1[2]);
+    assert.strictEqual(ary2[5], newValue);
+  });
+
 });
