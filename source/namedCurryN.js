@@ -47,7 +47,7 @@ import keys from './keys.js';
 
 function filterPlaceholders(mappedPairs) {
   return filter(function([, val]) {
-    return !_isPlaceholder(val)
+    return !_isPlaceholder(val);
   }, mappedPairs);
 }
 
@@ -59,12 +59,12 @@ function partialFn(curriedFn, len, acc, props) {
   const mappedPairs = toPairs(props);
   const propsAsEntries = prepareEntries(acc, mappedPairs);
 
-  return keys(propsAsEntries).length >= len ? 
-    curriedFn.apply(this, propsAsEntries) : 
-    curry(partialFn)(curriedFn, len, propsAsEntries)
+  return keys(propsAsEntries).length >= len ?
+    curriedFn.apply(this, propsAsEntries) :
+    curry(partialFn)(curriedFn, len, propsAsEntries);
 }
 
-function fnToRun(fn, ...args) {  
+function fnToRun(fn, ...args) {
   return fn.call(this, fromPairs(args));
 }
 
