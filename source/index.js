@@ -139,6 +139,7 @@ export { default as modulo } from './modulo.js';
 export { default as move } from './move.js';
 export { default as multiply } from './multiply.js';
 export { default as nAry } from './nAry.js';
+export { default as namedCurryN } from './namedCurryN.js';
 export { default as negate } from './negate.js';
 export { default as none } from './none.js';
 export { default as not } from './not.js';
