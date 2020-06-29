@@ -21,18 +21,17 @@ export default function _dispatchable(methodNames, xf, fn) {
     if (arguments.length === 0) {
       return fn();
     }
-    var args = Array.prototype.slice.call(arguments, 0);
-    var obj = args.pop();
+    var obj = arguments[arguments.length - 1];
     if (!_isArray(obj)) {
       var idx = 0;
       while (idx < methodNames.length) {
         if (typeof obj[methodNames[idx]] === 'function') {
-          return obj[methodNames[idx]].apply(obj, args);
+          return obj[methodNames[idx]].apply(obj, Array.prototype.slice.call(arguments, 0, -1));
         }
         idx += 1;
       }
       if (_isTransformer(obj)) {
-        var transducer = xf.apply(null, args);
+        var transducer = xf.apply(null, Array.prototype.slice.call(arguments, 0, -1));
         return transducer(obj);
       }
     }
