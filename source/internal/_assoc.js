@@ -1,5 +1,5 @@
-import _isArray from './_isArray';
-import _isInteger from './_isInteger';
+import _isArray from './_isArray.js';
+import _isInteger from './_isInteger.js';
 
 /**
  * Makes a shallow clone of an object, setting or overriding the specified
