@@ -92,6 +92,11 @@ Then in the console:
 const R = require('ramda');
 ```
 
+To use directly in [Deno](https://deno.land):
+```javascript
+import * as R from "https://deno.land/x/ramda/index.js";
+```
+
 To use directly in the browser:
 
 ```html
