@@ -1,6 +1,6 @@
-import _isInteger from './_isInteger';
-import _isArray from './_isArray';
-import remove from '../remove';
+import _isInteger from './_isInteger.js';
+import _isArray from './_isArray.js';
+import remove from '../remove.js';
 
 /**
  * Returns a new object that does not contain a `prop` property.
