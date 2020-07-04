@@ -48,7 +48,7 @@ function accumulate(paths, props) {
 
 function parsePaths(paths, fn, acc, props) {
   const needed = accumulate(paths, props);
-  const nextObj = {...acc, ...props};
+  const nextObj = Object.assign({}, acc, props);
 
   return needed.length ? curry(parsePaths)(needed, fn, nextObj) : fn.call(this, nextObj);
 }
