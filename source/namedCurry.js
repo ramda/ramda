@@ -1,12 +1,6 @@
-import curryN from './curryN.js';
+import path from './path.js';
 import curry from './curry.js';
-import fromPairs from './fromPairs.js';
-import toPairs from './toPairs.js';
 import _isPlaceholder from './internal/_isPlaceholder.js';
-import filter from './filter.js';
-import concat from './concat.js';
-import compose from './compose.js';
-import keys from './keys.js';
 
 /**
  * Returns a curried equivalent of the provided function with named parameters.
@@ -45,32 +39,22 @@ import keys from './keys.js';
  *      g({ d: 4, c: 2 }); //=> 10
  */
 
-function filterPlaceholders(mappedPairs) {
-  return filter(function([, val]) {
-    return !_isPlaceholder(val);
-  }, mappedPairs);
+function accumulate(paths, props) {
+  return paths.filter((p) => {
+    const hasPath = path(p, props);
+    return !hasPath || _isPlaceholder(hasPath);
+  })
 }
 
-function prepareEntries(acc, mappedPairs) {
-  return compose(curry(concat)(acc), filterPlaceholders)(mappedPairs);
+function parsePaths(paths, fn, acc, props) {
+  const needed = accumulate(paths, props);
+  const nextObj = {...acc, ...props};
+
+  return needed.length ? curry(parsePaths)(needed, fn, nextObj) : fn.call(this, nextObj);
 }
 
-function partialFn(curriedFn, len, acc, props) {
-  const mappedPairs = toPairs(props);
-  const propsAsEntries = prepareEntries(acc, mappedPairs);
-
-  return keys(propsAsEntries).length >= len ?
-    curriedFn.apply(this, propsAsEntries) :
-    curry(partialFn)(curriedFn, len, propsAsEntries);
-}
-
-function fnToRun(fn, ...args) {
-  return fn.call(this, fromPairs(args));
-}
-
-function namedCurryN(num = 0, fn) {
-  const curriedFnToRun = curryN(2, fnToRun)(fn);
-  return curry(partialFn)(curriedFnToRun, num, []);
+function namedCurryN(paths = [], fn) {
+  return curry(parsePaths)(paths, fn, {})
 }
 
 export default namedCurryN;
