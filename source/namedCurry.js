@@ -41,7 +41,7 @@ function curryPaths(paths, fn, acc) {
   return (props) => {
     const needed = accumulate(paths, props);
     const nextObj = Object.assign({}, acc, props);
-  
+
     return needed.length ? curryPaths(needed, fn, nextObj) : fn.call(this, nextObj);
   };
 }
