@@ -3,7 +3,7 @@ var eq = require('./shared/eq');
 
 describe('namedCurry', function() {
   it('curries a single value', function() {
-    var f = R.namedCurry(['a', 'b', 'c', 'd'], function({a, b, c, d}) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
+    var f = R.namedCurry([['a'], ['b'], ['c'], ['d']], function({a, b, c, d}) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
     var g = f({ a: 12 });
     eq(g({ b: 3, c: 6, d: 2 }), 15);
   });
@@ -17,7 +17,7 @@ describe('namedCurry', function() {
   });
 
   it('allows further currying of a curried function', function() {
-    var f = R.namedCurry(['a', 'b', 'c', 'd'], function({a, b, c, d}) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
+    var f = R.namedCurry([['a'], ['b'], ['c'], ['d']], function({a, b, c, d}) {return (a + b * c) / d;}); // f(12, 3, 6, 2) == 15
     var g = f({ a: 12 });
     eq(g({ b: 3, c: 6, d: 2 }), 15);
     var h = g({ b: 3 });
@@ -30,7 +30,7 @@ describe('namedCurry', function() {
       void c;
       return Array.prototype.slice.call(arguments);
     };
-    var g = R.namedCurry(['a', 'b', 'c'], f);
+    var g = R.namedCurry([['a'], ['b'], ['c']], f);
 
     eq(g({a:1, b:2, c:3}), [{a:1, b:2, c:3}]);
     eq(g({a:1, b:2, c:3, d:4}), [{a:1, b:2, c:3, d:4}]);

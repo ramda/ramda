@@ -25,7 +25,7 @@ import _isPlaceholder from './internal/_isPlaceholder.js';
  *
  *      const addFourNumbers = ({ a, b, c, e }) => a + b + c.d + e;
  *
- *      const curriedAddFourNumbers = R.namedCurry([['a'], ['b'], ['c', 'd'], 'e'], addFourNumbers);
+ *      const curriedAddFourNumbers = R.namedCurry([['a'], ['b'], ['c', 'd'], ['e']], addFourNumbers);
  *      const f = curriedAddFourNumbers({ b: 1, c: { d: 2 } });
  *      const g = f({ a: 3 });
  *      g({ e: 4 }); //=> 10
@@ -45,7 +45,6 @@ function curryPaths(paths, fn, acc) {
     return needed.length ? curryPaths(needed, fn, nextObj) : fn.call(this, nextObj);
   };
 }
-
 
 function namedCurry(paths = [], fn) {
   return curryPaths(paths, fn, {});
