@@ -1,5 +1,4 @@
 import hasPath from './hasPath.js';
-import _isPlaceholder from './internal/_isPlaceholder.js';
 import _filter from './internal/_filter';
 import _curry2 from './internal/_curry2';
 
