@@ -1,6 +1,7 @@
-import path from './path.js';
 import hasPath from './hasPath.js';
 import _isPlaceholder from './internal/_isPlaceholder.js';
+import _filter from './internal/_filter';
+import _curry2 from './internal/_curry2';
 
 /**
  * Returns a curried equivalent of the provided function with named parameters.
@@ -32,9 +33,9 @@ import _isPlaceholder from './internal/_isPlaceholder.js';
  */
 
 function accumulate(paths, props) {
-  return paths.filter((p) => {
-    return !hasPath(p, props) || _isPlaceholder(path(p, props));
-  });
+  return _filter((p) => {
+    return !hasPath(p, props);
+  }, paths);
 }
 
 function curryPaths(paths, fn, acc) {
@@ -46,8 +47,8 @@ function curryPaths(paths, fn, acc) {
   };
 }
 
-function namedCurry(paths = [], fn) {
+var namedCurry = _curry2(function(paths, fn) {
   return curryPaths(paths, fn, {});
-}
+});
 
 export default namedCurry;
