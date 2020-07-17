@@ -1,7 +1,7 @@
 import _curry2 from './_curry2.js';
 import _reduce from './_reduce.js';
 import _xfBase from './_xfBase.js';
-import bind from '../bind.js'
+import bind from '../bind.js';
 
 
 function XDropLastWhile(fn, xf) {
