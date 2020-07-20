@@ -26,7 +26,7 @@ import _curry2 from './internal/_curry2';
  *      const sayHello = R.partialObject(greet, { salutation: 'Hello' });
  *      const sayHelloToMs = R.partialObject(sayHello, { title: 'Ms.' });
  *      sayHelloToMs({ firstName: 'Jane', lastName: 'Jones' }); //=> 'Hello, Ms. Jane Jones!'
- * @symb R.partial(f, { a, b })({ c, d }) = f({ a, b, c, d })
+ * @symb R.partialObject(f, { a, b })({ c, d }) = f({ a, b, c, d })
  */
 
 export default _curry2((f, o) => (props) => f.call(this, mergeDeepRight(o, props)));
