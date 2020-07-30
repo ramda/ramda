@@ -1,4 +1,4 @@
-XYZ = node_modules/.bin/xyz --repo git@github.com:ramda/ramda.git --script scripts/prepublish
+XYZ = node_modules/.bin/xyz --branch v0.27 --repo git@github.com:ramda/ramda.git --script scripts/prepublish
 
 
 dist/ramda.js:
