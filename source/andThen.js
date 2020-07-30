@@ -9,6 +9,7 @@ import _assertPromise from './internal/_assertPromise.js';
  *
  * @func
  * @memberOf R
+ * @since v0.27.1
  * @category Function
  * @sig (a -> b) -> (Promise e a) -> (Promise e b)
  * @sig (a -> (Promise e b)) -> (Promise e a) -> (Promise e b)

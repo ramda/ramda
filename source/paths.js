@@ -7,6 +7,7 @@ import nth from './nth.js';
  *
  * @func
  * @memberOf R
+ * @since v0.27.1
  * @category Object
  * @typedefn Idx = [String | Int | Symbol]
  * @sig [Idx] -> {a} -> [a | Undefined]
