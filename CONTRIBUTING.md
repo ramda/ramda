@@ -18,10 +18,11 @@
     commit message, wrapped at 72 characters. Do not commit changes to
     `dist/ramda.js`.
 
-1.  Run `npm test` (or `make test lint`) and address any errors. It will install
-    needed dependencies locally.  Preferably, fix commits in place using `git
-    rebase` or `git commit --amend` to make the changes easier to review and to
-    keep the history tidy.
+1.  Run `npm install` to install needed local dependencies.
+
+1.  Run `npm test` and address any errors.  Preferably, fix commits in place
+    using `git rebase` or `git commit --amend` to make the changes easier to
+    review and to keep the history tidy.
 
 1.  Push to your fork:
 
