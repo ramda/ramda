@@ -1,5 +1,5 @@
-import mergeDeepRight from './mergeDeepRight';
-import _curry2 from './internal/_curry2';
+import mergeDeepRight from './mergeDeepRight.js';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * Takes a function `f` and an object, and returns a function `g`.

@@ -24,7 +24,7 @@ describe('partialObject', function() {
   });
 
   it('merges deeply right', function() {
-    var nestedDiscriminant = function ({ a, c, d}) {
+    var nestedDiscriminant = function({ a, c, d}) {
       return d.b * d.b - 4 * a * c;
     };
 
