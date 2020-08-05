@@ -1,7 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
-var jsv = require('jsverify');
-var funcN = require('./shared/funcN');
+var fc = require('fast-check');
 
 describe('curry', function() {
   it('curries a single value', function() {
@@ -123,28 +122,38 @@ describe('curry', function() {
 });
 
 describe('curry properties', function() {
-  jsv.property('curries multiple values', funcN(4), jsv.json, jsv.json, jsv.json, jsv.json, function(f, a, b, c, d) {
-    var g = R.curry(f);
+  it('curries multiple values', function() {
+    fc.assert(fc.property(fc.func(fc.anything()), fc.anything(), fc.anything(), fc.anything(), fc.anything(), function(f, a, b, c, d) {
+      var f4 = function(a, b, c, d) {
+        return f(a, b, c, d);
+      };
+      var g = R.curry(f4);
 
-    return R.all(R.equals(f(a, b, c, d)), [
-      g(a, b, c, d),
-      g(a)(b)(c)(d),
-      g(a)(b, c, d),
-      g(a, b)(c, d),
-      g(a, b, c)(d)
-    ]);
+      return R.all(R.equals(f4(a, b, c, d)), [
+        g(a, b, c, d),
+        g(a)(b)(c)(d),
+        g(a)(b, c, d),
+        g(a, b)(c, d),
+        g(a, b, c)(d)
+      ]);
+    }));
   });
 
-  jsv.property('curries with placeholder', funcN(3), jsv.json, jsv.json, jsv.json, function(f, a, b, c) {
-    var _ = {'@@functional/placeholder': true, x: Math.random()};
-    var g = R.curry(f);
+  it('curries with placeholder', function() {
+    fc.assert(fc.property(fc.func(fc.anything()), fc.anything(), fc.anything(), fc.anything(), function(f, a, b, c) {
+      var _ = {'@@functional/placeholder': true, x: Math.random()};
+      var f3 = function(a, b, c) {
+        return f(a, b, c);
+      };
+      var g = R.curry(f3);
 
-    return R.all(R.equals(f(a, b, c)), [
-      g(_, _, c)(a, b),
-      g(a, _, c)(b),
-      g(_, b, c)(a),
-      g(a, _, _)(_, c)(b),
-      g(a, b, _)(c)
-    ]);
+      return R.all(R.equals(f3(a, b, c)), [
+        g(_, _, c)(a, b),
+        g(a, _, c)(b),
+        g(_, b, c)(a),
+        g(a, _, _)(_, c)(b),
+        g(a, b, _)(c)
+      ]);
+    }));
   });
 });
