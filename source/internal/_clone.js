@@ -30,11 +30,10 @@ export default function _clone(value, refFrom, refTo, deep) {
           _clone(value[key], refFrom, refTo, true) : value[key];
       }
     }
-    copiedValue.__proto__ = value.__proto__;
     return copiedValue;
   };
   switch (type(value)) {
-    case 'Object':  return copy({});
+    case 'Object':  return copy(Object.create(Object.getPrototypeOf(value)));
     case 'Array':   return copy([]);
     case 'Date':    return new Date(value.valueOf());
     case 'RegExp':  return _cloneRegExp(value);
