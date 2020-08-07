@@ -26,8 +26,7 @@ export default function _clone(value, refFrom, refTo, deep) {
     refTo[idx] = copiedValue;
     for (var key in value) {
       if (value.hasOwnProperty(key)) {
-        copiedValue[key] = deep ?
-          _clone(value[key], refFrom, refTo, true) : value[key];
+        copiedValue[key] = deep ? _clone(value[key], refFrom, refTo, true) : value[key];
       }
     }
     return copiedValue;
