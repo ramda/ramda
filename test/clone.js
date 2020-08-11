@@ -212,3 +212,61 @@ describe('Let `R.clone` use an arbitrary user defined `clone` method', function(
   });
 
 });
+
+describe('Clone object with non-enumerable properties in Object and Array, preserve constructor', function() {
+
+  it('clone non-enumerable in object', function() {
+
+    function EfYP7(data) {
+      this.id = Math.floor(Math.random() * 25);
+      this.data = data;
+
+      Object.defineProperty(this, "gTr", {
+        enumerable: false,
+        value: function () {
+          return "it's me " + this.id + "!";
+        }
+      });
+    }
+    
+    const i = new EfYP7({ a: 1, b: 2 });
+    const o = R.clone(i);
+
+    eq(o.gTr, i.gTr);
+  });
+
+  it('clone non-enumerable in array', function() {
+
+    const arr = [1, 2, {a: 1}];
+
+    Object.defineProperty(arr, "gTr", {
+      enumerable: false,
+      value: function () {
+        return 'length : ' + this.length;
+      }
+    });
+
+    const o = R.clone(arr);
+    eq(o.gTr(), arr.gTr());
+  });
+
+  it('check still same constructor', function() {
+    function EfYP7(data) {
+      this.id = Math.floor(Math.random() * 25);
+      this.data = data;
+
+      Object.defineProperty(this, "gTr", {
+        enumerable: false,
+        value: function () {
+          return "it's me " + this.id + "!";
+        }
+      });
+    }
+    
+    const i = new EfYP7({ a: 1, b: 2 });
+    const o = R.clone(i);
+
+    eq(o.constructor.name, i.constructor.name);
+  });
+
+});
