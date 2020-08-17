@@ -86,6 +86,32 @@ describe('deep clone objects', function() {
     eq(clone.get(), 10);
   });
 
+  it('only own properties be copied', function() {
+    function Obj() {
+      this.x = 'own property';
+    }
+
+    Obj.prototype = {
+      y: 'not own property'
+    };
+
+    const obj = new Obj();
+    const cloneObj = R.clone(obj);
+    eq(Object.keys(obj), Object.keys(cloneObj));
+  });
+
+  it('the prototype should keep the same', function() {
+    function Obj() {}
+
+    Obj.prototype = {
+      x: 'prototype property'
+    };
+
+    const obj = new Obj();
+    const cloneObj = R.clone(obj);
+    eq(Object.getPrototypeOf(obj), Object.getPrototypeOf(cloneObj));
+  });
+
 });
 
 describe('deep clone arrays', function() {
