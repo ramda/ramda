@@ -53,4 +53,11 @@ describe('evolve', function() {
     eq(R.evolve(transf, object), expected);
   });
 
+  it('ignores transformations if the input value is not Array and Object', function() {
+    var transf   = { a: R.add(1) };
+    eq(R.evolve(transf, 42), 42);
+    eq(R.evolve(transf, undefined), undefined);
+    eq(R.evolve(transf, null), null);
+    eq(R.evolve(transf, ''), '');
+  });
 });
