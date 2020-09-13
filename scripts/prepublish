@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-node ./scripts/updateReadmeVersion.js
+node ./scripts/beforePublish.js
 git add README.md
 
 for filename in $(find source -maxdepth 1 -name "*.js" | xargs grep --files-without-match "@since v") ; do
