@@ -17,7 +17,7 @@ import curryN from './curryN.js';
  * A transducer is a function that accepts a transformer and returns a
  * transformer and can be composed directly.
  *
- * A transformer is an an object that provides a 2-arity reducing iterator
+ * A transformer is an object that provides a 2-arity reducing iterator
  * function, step, 0-arity initial value function, init, and 1-arity result
  * extraction function, result. The step function is used as the iterator
  * function in reduce. The result function is used to convert the final
