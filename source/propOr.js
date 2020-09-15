@@ -4,9 +4,10 @@ import prop from './prop.js';
 
 
 /**
- * If the given, non-null object has an own property with the specified name,
- * returns the value of that property. Otherwise returns the provided default
- * value.
+ * Return the specified property of the given non-null object if the property
+ * is present and it's value is not `null`, `undefined` or `NaN`.
+ *
+ * Otherwise the first argument is returned.
  *
  * @func
  * @memberOf R
