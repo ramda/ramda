@@ -27,27 +27,28 @@ LRU.prototype._hoistNode = function(node) {
   }
 
   if (this.last === node) {
-    this.last = node.newer || node;
+    this.last = node.newer;
     this.last.older = null;
-  }
-
-  if (node.older) {
+  } else {
     node.older.newer = node.newer;
-  }
-  if (node.newer) {
     node.newer.older = node.older;
   }
 
   node.older = this.head;
   node.newer = null;
+  this.head.newer = node;
+  this.head = node;
+};
 
-  if (this.head) {
-    this.head.newer = node;
-  }
-
-  if (!this.last) {
+LRU.prototype._appendToHead = function(node) {
+  if (!this.head) {
     this.last = node;
+    this.head = node;
+    return;
   }
+
+  node.older = this.head;
+  this.head.newer = node;
   this.head = node;
 };
 
@@ -72,6 +73,8 @@ LRU.prototype.set = function(key, value) {
     node = createNode(key, value);
     this.map.set(key, node);
     this.length += 1;
+    this._appendToHead(node);
+    return;
   } else {
     node = this.last;
     this.map.delete(node.key);
