@@ -13,7 +13,7 @@ import _isTransformer from './_isTransformer.js';
  *
  * @private
  * @param {Array} methodNames properties to check for a custom implementation
- * @param {Function} transducerCreator transducer constructor if object is transformer
+ * @param {Function} transducerCreator transducer factory if object is transformer
  * @param {Function} fn default ramda implementation
  * @return {Function} A function that dispatches on object in list position
  */
