@@ -34,7 +34,7 @@ describe('add properties', function() {
 
   it('identity', function() {
     fc.assert(fc.property(fc.integer(), function(a) {
-      return R.add(a, 0) === a && R.add(0, a) === a
+      return R.add(a, 0) === a && R.add(0, a) === a;
     }));
   });
 });
