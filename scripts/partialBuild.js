@@ -12,7 +12,8 @@ rollupConfig.plugins.push(partialBuildPlugin);
 rollup.rollup(rollupConfig).then(function(bundle) {
   return bundle.generate(rollupConfig.output);
 }).then(function(result) {
-  process.stdout.write(result.code);
+  var chunk = result.output[0];
+  process.stdout.write(chunk.code);
 });
 
 function partialBuild(options) {
