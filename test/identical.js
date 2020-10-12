@@ -1,6 +1,5 @@
 var R = require('../source');
 var eq = require('./shared/eq');
-var fc = require('fast-check');
 
 
 describe('identical', function() {
@@ -25,12 +24,6 @@ describe('identical', function() {
     eq(R.identical(0, new Number(0)), false);
     eq(R.identical(new Number(0), 0), false);
     eq(R.identical(new Number(0), new Number(0)), false);
-  });
-
-  it('perfect clones should be considered identical', function() {
-    fc.assert(fc.property(fc.dedup(fc.anything({ maxDepth: 0 }), 2), function(values) {
-      eq(R.identical(values[0], values[1]), true);
-    }));
   });
 
 });
