@@ -54,7 +54,7 @@ describe('symmetricDifference', function() {
   })).map(array => R.uniq(array));
 
   it('returns empty arrays when receiving twice the same array', function() {
-    fc.assert(fc.property(fc.dedup(compatibleREquals, 2), function(arrays) {
+    fc.assert(fc.property(fc.clone(compatibleREquals, 2), function(arrays) {
       var A1 = arrays[0];
       var A2 = arrays[1];
       eq(R.symmetricDifference(A1, A2), []);
@@ -62,7 +62,7 @@ describe('symmetricDifference', function() {
   });
 
   it('returns empty arrays when receiving an array and a permutation of it', function() {
-    fc.assert(fc.property(fc.dedup(compatibleREquals, 2).chain(function(arrays) {
+    fc.assert(fc.property(fc.clone(compatibleREquals, 2).chain(function(arrays) {
       return fc.tuple(fc.constant(arrays[0]), fc.shuffledSubarray(arrays[1], arrays[1].length, arrays[1].length));
     }), function(arrays) {
       var A1 = arrays[0];
@@ -72,7 +72,7 @@ describe('symmetricDifference', function() {
   });
 
   it('returns missing items when receiving an array and a permuted subset of it', function() {
-    fc.assert(fc.property(fc.dedup(compatibleREquals, 2).chain(function(arrays) {
+    fc.assert(fc.property(fc.clone(compatibleREquals, 2).chain(function(arrays) {
       return fc.tuple(fc.constant(arrays[0]), fc.shuffledSubarray(arrays[1]));
     }), function(arrays) {
       var A1 = arrays[0];

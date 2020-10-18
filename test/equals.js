@@ -341,7 +341,7 @@ describe('equals', function() {
   });
 
   it('perfect clones should be considered equal', function() {
-    fc.assert(fc.property(fc.dedup(anythingInstanceArb, 2), function(values) {
+    fc.assert(fc.property(fc.clone(anythingInstanceArb, 2), function(values) {
       eq(R.equals(values[0], values[1]), true);
     }));
   });

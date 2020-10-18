@@ -101,7 +101,7 @@
     "envvar": "^2.0.0",
     "eslint": "^5.16.0",
     "eslint-plugin-import": "^2.21.2",
-    "fast-check": "^2.0.0",
+    "fast-check": "^2.5.0",
     "handlebars": ">=4.1.2",
     "js-yaml": "^3.13.1",
     "mocha": "^6.1.4",
