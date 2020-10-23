@@ -76,15 +76,15 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
     "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
-    "build": "npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min",
+    "build": "npm-run-all --parallel build:**",
     "partial-build": "node ./scripts/partialBuild",
     "clean": "rimraf es/* src/* dist/* coverage/*",
-    "prepare": "npm run clean && npm run build",
+    "prepare": "npm-run-all --sequential clean build",
     "coverage": "BABEL_ENV=cjs nyc --reporter=lcov mocha -- --require @babel/register",
     "lint": "eslint scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "browser_test": "testem ci",
     "spec": "cross-env BABEL_ENV=cjs mocha --require @babel/register --reporter spec",
-    "test": "npm run spec && npm run lint"
+    "test": "npm-run-all --sequential spec lint"
   },
   "dependencies": {},
   "devDependencies": {
@@ -109,6 +109,7 @@
     "handlebars": ">=4.1.2",
     "js-yaml": "^3.13.1",
     "mocha": "^6.1.4",
+    "npm-run-all": "^4.1.5",
     "nyc": "^15.0.1",
     "rimraf": "^2.6.3",
     "rollup": "^1.32.1",
