@@ -84,7 +84,7 @@
     "lint": "eslint scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "browser_test": "testem ci",
     "spec": "cross-env BABEL_ENV=cjs mocha --require @babel/register --reporter spec",
-    "test": "npm-run-all --sequential spec lint"
+    "test": "npm-run-all --parallel spec lint"
   },
   "dependencies": {},
   "devDependencies": {
