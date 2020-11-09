@@ -31,16 +31,15 @@ describe('modifyPath', function() {
     eq(object, expected);
   });
 
-  it('ignores primitive value transformations', function() {
+  it('throws error for non-function transformations', function() {
     var object   = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
-    var expected = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
-    eq(R.modifyPath(['b', 'c', 'd', 1], 2, object), expected);
-  });
-
-  it('ignores null transformations', function() {
-    var object   = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
-    var expected = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
-    eq(R.modifyPath(['b', 'c', 'd', 1], null, object), expected);
+    assert.throws(
+      function () { R.modifyPath(['b', 'c', 'd', 1], 2, object) },
+      function (err) {
+        return err.constructor === TypeError &&
+               err.message === 'fn is not a function';
+      }
+    );
   });
 
 });
