@@ -46,10 +46,10 @@ var modifyPath = _curry3(function modifyPath(path, fn, object) {
   }
 
   var val = modifyPath(Array.prototype.slice.call(path, 1), fn, object[idx]);
-  if (val !== object[idx]) {
-    return _assoc(idx, val, object);
+  if (val === object[idx]) {
+    return object;
   }
-  return object;
+  return _assoc(idx, val, object);
 
 });
 export default modifyPath;
