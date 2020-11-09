@@ -2,14 +2,14 @@ import _isArray from './_isArray.js';
 import _isInteger from './_isInteger.js';
 
 /**
- * Makes a shallow clone of an object, setting or overriding the specified
+ * Makes a shallow clone of an object, applying the given fn to the specified
  * property with the given value. Note that this copies and flattens prototype
  * properties onto the new object as well. All non-primitive properties are
  * copied by reference.
  *
  * @private
  * @param {String|Number} prop The property name to set
- * @param {*} val The new value
+ * @param {Function} fn The function to apply to the property
  * @param {Object|Array} obj The object to clone
  * @return {Object|Array} A new object equivalent to the original except for the changed property.
  */

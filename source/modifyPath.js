@@ -2,7 +2,6 @@ import _curry3 from './internal/_curry3.js';
 import _isArray from './internal/_isArray.js';
 import _isObject from './internal/_isObject.js';
 import _has from './internal/_has.js';
-import _isFunction from './internal/_isFunction.js';
 import _assoc from './internal/_assoc.js';
 import _modify from './internal/_modify.js';
 
@@ -33,10 +32,7 @@ import _modify from './internal/_modify.js';
  *      R.modifyPath(['addresses', 0, 'zipCode'], R.reverse, person); //=> {name: 'James', addresses: [{ zipCode: '61209' }]}
  */
 var modifyPath = _curry3(function modifyPath(path, fn, object) {
-  if (!_isObject(object) && !_isArray(object) || !_isFunction(fn)) {
-    return object;
-  }
-  if (path.length === 0) {
+  if (!_isObject(object) && !_isArray(object) || path.length === 0) {
     return object;
   }
 
