@@ -34,8 +34,8 @@ describe('modifyPath', function() {
   it('throws error for non-function transformations', function() {
     var object   = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
     assert.throws(
-      function () { R.modifyPath(['b', 'c', 'd', 1], 2, object) },
-      function (err) {
+      function() { R.modifyPath(['b', 'c', 'd', 1], 2, object) ;},
+      function(err) {
         return err.constructor === TypeError &&
                err.message === 'fn is not a function';
       }
