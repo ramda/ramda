@@ -135,6 +135,8 @@ export { default as mergeWith } from './mergeWith.js';
 export { default as mergeWithKey } from './mergeWithKey.js';
 export { default as min } from './min.js';
 export { default as minBy } from './minBy.js';
+export { default as modify } from './modify.js';
+export { default as modifyPath } from './modifyPath.js';
 export { default as modulo } from './modulo.js';
 export { default as move } from './move.js';
 export { default as multiply } from './multiply.js';
