@@ -17,15 +17,15 @@ function _arrayReduce(xf, acc, list) {
   return xf['@@transducer/result'](acc);
 }
 
-function _iterableReduce(xf, acc, iter) {
-  var step = iter.next();
+function _iteratorReduce(xf, acc, iterator) {
+  var step = iterator.next();
   while (!step.done) {
     acc = xf['@@transducer/step'](acc, step.value);
     if (acc && acc['@@transducer/reduced']) {
       acc = acc['@@transducer/value'];
       break;
     }
-    step = iter.next();
+    step = iterator.next();
   }
   return xf['@@transducer/result'](acc);
 }
@@ -47,10 +47,10 @@ export default function _reduce(fn, acc, list) {
     return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
   if (list[symIterator] != null) {
-    return _iterableReduce(fn, acc, list[symIterator]());
+    return _iteratorReduce(fn, acc, list[symIterator]());
   }
   if (typeof list.next === 'function') {
-    return _iterableReduce(fn, acc, list);
+    return _iteratorReduce(fn, acc, list);
   }
   if (typeof list.reduce === 'function') {
     return _methodReduce(fn, acc, list, 'reduce');
