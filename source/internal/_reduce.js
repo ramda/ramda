@@ -56,5 +56,5 @@ export default function _reduce(fn, acc, list) {
     return _methodReduce(fn, acc, list, 'reduce');
   }
 
-  throw new TypeError('reduce: list must be array or iterable');
+  throw new TypeError('reduce: list must be array, iterable or iterator');
 }
