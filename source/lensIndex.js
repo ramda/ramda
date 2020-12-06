@@ -15,7 +15,7 @@ import update from './update.js';
  * @sig Number -> Lens s a
  * @param {Number} n
  * @return {Lens}
- * @see R.view, R.set, R.over, R.nth
+ * @see R.view, R.set, R.over
  * @example
  *
  *      const headLens = R.lensIndex(0);
