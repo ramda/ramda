@@ -1,10 +1,7 @@
 import _curry2 from './internal/_curry2.js';
-import has from './has.js';
-import propIs from './propIs.js';
-import reduce from './reduce.js';
-import clone from './clone.js';
-import dissoc from './dissoc.js';
-import assoc from './assoc.js';
+import _isArray from './internal/_isArray.js';
+import _map from './internal/_map.js';
+import _assoc from './internal/_assoc.js';
 
 /**
  *
@@ -32,23 +29,14 @@ import assoc from './assoc.js';
  */
 
 var unwind = _curry2(function(key, object) {
-  // If prop as key is not in Object or prop as key is not an List in Object
-  if (!(has(key, object) && propIs(Array, key, object))) { return [object]; }
-  // Reduce Function
-  var fn = function(acc, item) {
-    // Cloning
-    var clonedObject = clone(object);
-    // Removing key from newly cloned object
-    var dissocObject = dissoc(key, clonedObject);
-    // Adding key to newly dissocated object
-    var assocObject = assoc(key, item, dissocObject);
-    // Adding assocated object to Accumulator
-    acc.push(assocObject);
-    return acc;
-  };
-  // Reduce over object[key] which is an list
-  // Initialize Accumulator with empty list
-  return reduce(fn, [], object[key]);
+  // If key is not in object or key is not as a list in object
+  if (!(key in object && _isArray(object[key]))) {
+    return [object];
+  }
+  // Map over object[key] which is a list and assoc each element with key
+  return _map(function(item) {
+    return _assoc(key, item, object);
+  }, object[key]);
 });
 
 export default unwind;

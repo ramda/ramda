@@ -3,14 +3,10 @@ var eq = require('./shared/eq');
 
 
 describe('unwind', function() {
-  var object = { name: 'alice',
+  var object = {
+    name: 'alice',
     hobbies: ['Golf', 'Hacking'],
     colors: ['red', 'green']
-  };
-  var quiz = {
-    title: 'What is the best programming language?',
-    options: {0: 'Python', 1: 'Java', 2: 'JavaScript', 3: 'C++'},
-    ans: 'Correct Answer is C'
   };
 
 
@@ -25,13 +21,21 @@ describe('unwind', function() {
     ]);
   });
 
-  it('returns list of original object if key is not present in the object', function() {
+  it('returns a list containing only the original object if the key is not present in the object', function() {
     eq(R.unwind('hobby', object), [object]);
   });
 
-  it('returns list of original object if key is present in the object but does not have iterable value to be destructed', function() {
+  it('returns a list containing only the original object if the the value for that key is not iterable', function() {
     eq(R.unwind('passtimes', object), [object]);
-    eq(R.unwind('options', quiz), [quiz]);
+    eq(R.unwind('options',  {
+      title: 'What is the best programming language?',
+      options: {0: 'Python', 1: 'Java', 2: 'JavaScript', 3: 'C++'},
+      ans: 'Correct Answer is 2'
+    }), [{
+      title: 'What is the best programming language?',
+      options: {0: 'Python', 1: 'Java', 2: 'JavaScript', 3: 'C++'},
+      ans: 'Correct Answer is 2'
+    }]);
     eq(R.unwind('hobbies', { name: 'Berney', hobbies: NaN}), [{ name: 'Berney', hobbies: NaN}]);
   });
 
@@ -50,17 +54,17 @@ describe('unwind', function() {
       { '': 'JavaScript'},
       { '': 'C++'}
     ]);
-    eq(R.unwind(0, {
-      0: ['Python', 'Java', 'JavaScript', 'C++']
+    eq(R.unwind('-1', {
+      [-1]: ['Python', 'Java', 'JavaScript', 'C++']
     }), [
-      { 0: 'Python'},
-      { 0: 'Java'},
-      { 0: 'JavaScript'},
-      { 0: 'C++'}
+      {'-1': 'Python'},
+      {'-1': 'Java'},
+      {'-1': 'JavaScript'},
+      {'-1': 'C++'}
     ]);
   });
 
-  it('do not treat String as list', function() {
+  it('does not treat a String as a list', function() {
     eq(R.unwind('hobbies', { name: 'alice', hobbies:'Golf' }), [
       { name: 'alice', hobbies: 'Golf'}
     ]);
