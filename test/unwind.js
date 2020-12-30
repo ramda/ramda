@@ -39,31 +39,6 @@ describe('unwind', function() {
     eq(R.unwind('hobbies', { name: 'Berney', hobbies: NaN}), [{ name: 'Berney', hobbies: NaN}]);
   });
 
-  it('key can be any value that can form key of the object', function() {
-    // Correct: key <- String | ''
-    // Correct: key <- 0 | any positive integer value
-    // Correct: key <- true | false
-
-    // Incorrect: key <- -1 | any negative integer value
-
-    eq(R.unwind('', {
-      '': ['Python', 'Java', 'JavaScript', 'C++']
-    }), [
-      { '': 'Python'},
-      { '': 'Java'},
-      { '': 'JavaScript'},
-      { '': 'C++'}
-    ]);
-    eq(R.unwind('-1', {
-      [-1]: ['Python', 'Java', 'JavaScript', 'C++']
-    }), [
-      {'-1': 'Python'},
-      {'-1': 'Java'},
-      {'-1': 'JavaScript'},
-      {'-1': 'C++'}
-    ]);
-  });
-
   it('does not treat a String as a list', function() {
     eq(R.unwind('hobbies', { name: 'alice', hobbies:'Golf' }), [
       { name: 'alice', hobbies: 'Golf'}
