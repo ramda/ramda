@@ -17,14 +17,14 @@ import _assoc from './internal/_assoc.js';
  * @return {List} A new list of object containing the value of input key having list replaced by each element in the object.
  * @example
  *
- *  R.unwind('hobbies', {
- *  name: 'alice',
- *  hobbies: ['Golf', 'Hacking'],
- *  colors: ['red', 'green'],
+ * R.unwind('hobbies', {
+ *   name: 'alice',
+ *   hobbies: ['Golf', 'Hacking'],
+ *   colors: ['red', 'green'],
  * });
- * // => [
- * //      { name: 'alice', hobbies: 'Golf', colors: ['red', 'green'] },
- * //      { name: 'alice', hobbies: 'Hacking', colors: ['red', 'green'] }
+ * //=> [
+ * //     { name: 'alice', hobbies: 'Golf', colors: ['red', 'green'] },
+ * //     { name: 'alice', hobbies: 'Hacking', colors: ['red', 'green'] }
  * // ]
  */
 
