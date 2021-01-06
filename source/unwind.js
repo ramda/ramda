@@ -23,8 +23,8 @@ import _assoc from './internal/_assoc.js';
  *   colors: ['red', 'green'],
  * });
  * // [
- * //     { name: 'alice', hobbies: 'Golf', colors: ['red', 'green'] },
- * //     { name: 'alice', hobbies: 'Hacking', colors: ['red', 'green'] }
+ * //   { name: 'alice', hobbies: 'Golf', colors: ['red', 'green'] },
+ * //   { name: 'alice', hobbies: 'Hacking', colors: ['red', 'green'] }
  * // ]
  */
 
