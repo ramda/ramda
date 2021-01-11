@@ -13,7 +13,7 @@ import _xreduceBy from './internal/_xreduceBy.js';
  * of each group to a single value via the reducer function `valueFn`.
  *
  * The value function receives two values: *(acc, value)*. It may use
- * [`R.reduced`](#reduced) to shortcut the iteration.
+ * [`R.reduced`](#reduced) to short circuit the iteration.
  *
  * This function is basically a more general [`groupBy`](#groupBy) function.
  *

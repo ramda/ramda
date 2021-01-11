@@ -11,7 +11,7 @@ import _curry3 from './internal/_curry3.js';
  *
  * The iterator function receives two values: *(value, acc)*, while the arguments'
  * order of `reduce`'s iterator function is *(acc, value)*. `reduceRight` may use [`reduced`](#reduced)
- * to shortcut the iteration.
+ * to short circuit the iteration.
  *
  * Note: `R.reduceRight` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.reduceRight` method. For more details
