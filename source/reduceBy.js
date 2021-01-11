@@ -3,6 +3,7 @@ import _curryN from './internal/_curryN.js';
 import _dispatchable from './internal/_dispatchable.js';
 import _has from './internal/_has.js';
 import _reduce from './internal/_reduce.js';
+import _reduced from './internal/_reduced.js';
 import _xreduceBy from './internal/_xreduceBy.js';
 
 
@@ -51,7 +52,13 @@ var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);
-      acc[key] = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
+      var value = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
+
+      if (value && value['@@transducer/reduced']) {
+        return _reduced(acc);
+      }
+
+      acc[key] = value;
       return acc;
     }, {}, list);
   }));
