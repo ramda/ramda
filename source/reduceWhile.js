@@ -8,7 +8,8 @@ import _reduced from './internal/_reduced.js';
  * through the list, successively calling the iterator function. `reduceWhile`
  * also takes a predicate that is evaluated before each step. If the predicate
  * returns `false`, it "short-circuits" the iteration and returns the current
- * value of the accumulator.
+ * value of the accumulator. `reduceWhile` may alternatively be short-circuited
+ * via [`reduced`](#reduced).
  *
  * @func
  * @memberOf R

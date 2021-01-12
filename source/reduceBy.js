@@ -3,6 +3,7 @@ import _curryN from './internal/_curryN.js';
 import _dispatchable from './internal/_dispatchable.js';
 import _has from './internal/_has.js';
 import _reduce from './internal/_reduce.js';
+import _reduced from './internal/_reduced.js';
 import _xreduceBy from './internal/_xreduceBy.js';
 
 
@@ -10,6 +11,9 @@ import _xreduceBy from './internal/_xreduceBy.js';
  * Groups the elements of the list according to the result of calling
  * the String-returning function `keyFn` on each element and reduces the elements
  * of each group to a single value via the reducer function `valueFn`.
+ *
+ * The value function receives two values: *(acc, value)*. It may use
+ * [`R.reduced`](#reduced) to short circuit the iteration.
  *
  * This function is basically a more general [`groupBy`](#groupBy) function.
  *
@@ -27,7 +31,7 @@ import _xreduceBy from './internal/_xreduceBy.js';
  * @param {Array} list The array to group.
  * @return {Object} An object with the output of `keyFn` for keys, mapped to the output of
  *         `valueFn` for elements which produced that key when passed to `keyFn`.
- * @see R.groupBy, R.reduce
+ * @see R.groupBy, R.reduce, R.reduced
  * @example
  *
  *      const groupNames = (acc, {name}) => acc.concat(name)
@@ -51,7 +55,13 @@ var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);
-      acc[key] = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
+      var value = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
+
+      if (value && value['@@transducer/reduced']) {
+        return _reduced(acc);
+      }
+
+      acc[key] = value;
       return acc;
     }, {}, list);
   }));

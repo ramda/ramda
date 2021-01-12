@@ -14,23 +14,24 @@ var sumInput = [
 ];
 
 describe('reduceBy', function() {
+  var grade = function(score) {
+    return (score < 65) ? 'F' : (score < 70) ? 'D' : (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
+  };
+  var students = [
+    {name: 'Abby', score: 84},
+    {name: 'Brad', score: 73},
+    {name: 'Chris', score: 89},
+    {name: 'Dianne', score: 99},
+    {name: 'Eddy', score: 58},
+    {name: 'Fred', score: 67},
+    {name: 'Gillian', score: 91},
+    {name: 'Hannah', score: 78},
+    {name: 'Irene', score: 85},
+    {name: 'Jack', score: 69}
+  ];
+  var byGrade = function(student) {return grade(student.score || 0);};
+
   it('splits the list into groups according to the grouping function', function() {
-    var grade = function(score) {
-      return (score < 65) ? 'F' : (score < 70) ? 'D' : (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
-    };
-    var students = [
-      {name: 'Abby', score: 84},
-      {name: 'Brad', score: 73},
-      {name: 'Chris', score: 89},
-      {name: 'Dianne', score: 99},
-      {name: 'Eddy', score: 58},
-      {name: 'Fred', score: 67},
-      {name: 'Gillian', score: 91},
-      {name: 'Hannah', score: 78},
-      {name: 'Irene', score: 85},
-      {name: 'Jack', score: 69}
-    ];
-    var byGrade = function(student) {return grade(student.score || 0);};
     var collectNames = function(acc, student) {return acc.concat(student.name);};
     eq(R.reduceBy(collectNames, [], byGrade, students), {
       A: ['Dianne', 'Gillian'],
@@ -42,22 +43,6 @@ describe('reduceBy', function() {
   });
 
   it('splits the list into mutation-free groups', function() {
-    var grade = function(score) {
-      return (score < 65) ? 'F' : (score < 70) ? 'D' : (score < 80) ? 'C' : (score < 90) ? 'B' : 'A';
-    };
-    var students = [
-      {name: 'Abby', score: 84},
-      {name: 'Brad', score: 73},
-      {name: 'Chris', score: 89},
-      {name: 'Dianne', score: 99},
-      {name: 'Eddy', score: 58},
-      {name: 'Fred', score: 67},
-      {name: 'Gillian', score: 91},
-      {name: 'Hannah', score: 78},
-      {name: 'Irene', score: 85},
-      {name: 'Jack', score: 69}
-    ];
-    var byGrade = function(student) {return grade(student.score || 0);};
     var collectNames = function(acc, student) {
       acc.push(student.name);
       return acc;
@@ -83,5 +68,15 @@ describe('reduceBy', function() {
       R.compose(sumByType, R.map(R.adjust(1, R.multiply(10)))),
       sumInput
     ), {A: 800, B: 800, C: 500});
+  });
+
+  it('short circuits with reduced', function() {
+    var collectNames = function(acc, student) { return student.name === 'Fred' ? R.reduced(acc) : acc.concat(student.name); };
+    eq(R.reduceBy(collectNames, [], byGrade, students), {
+      A: ['Dianne'],
+      B: ['Abby', 'Chris'],
+      C: ['Brad'],
+      F: ['Eddy']
+    });
   });
 });
