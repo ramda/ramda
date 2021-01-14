@@ -15,6 +15,7 @@ import _assoc from './internal/_assoc.js';
  * @param {String} key The key to determine which property of the object should be unwind
  * @param {Object} object The object containing list under property named as key which is to unwind
  * @return {List} A new list of object containing the value of input key having list replaced by each element in the object.
+ * @see R.unwindAll
  * @example
  *
  * R.unwind('hobbies', {
@@ -30,7 +31,7 @@ import _assoc from './internal/_assoc.js';
 
 var unwind = _curry2(function(key, object) {
   // If key is not in object or key is not as a list in object
-  if (!(key in object && _isArray(object[key]))) {
+  if (!(key in object && _isArray(object[key]) && object[key].length)) {
     return [object];
   }
   // Map over object[key] which is a list and assoc each element with key

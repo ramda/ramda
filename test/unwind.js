@@ -3,6 +3,7 @@ var eq = require('./shared/eq');
 
 
 describe('unwind', function() {
+
   var object = {
     name: 'alice',
     hobbies: ['Golf', 'Hacking'],
@@ -25,7 +26,7 @@ describe('unwind', function() {
     eq(R.unwind('hobby', object), [object]);
   });
 
-  it('returns a list containing only the original object if the the value for that key is not iterable', function() {
+  it('returns a list containing only the original object if the the value for that key is not iterable or empty', function() {
     eq(R.unwind('passtimes', object), [object]);
     eq(R.unwind('options',  {
       title: 'What is the best programming language?',
@@ -37,6 +38,7 @@ describe('unwind', function() {
       ans: 'Correct Answer is 2'
     }]);
     eq(R.unwind('hobbies', { name: 'Berney', hobbies: NaN}), [{ name: 'Berney', hobbies: NaN}]);
+    eq(R.unwind('hobbies', { name: 'Berney', hobbies: []}), [{ name: 'Berney', hobbies:[]}]);
   });
 
   it('does not treat a String as a list', function() {
@@ -50,4 +52,5 @@ describe('unwind', function() {
     //     { name: 'alice', hobbies: 'f'},
     // ]
   });
+
 });

@@ -242,6 +242,7 @@ export { default as unless } from './unless.js';
 export { default as unnest } from './unnest.js';
 export { default as until } from './until.js';
 export { default as unwind } from './unwind.js';
+export { default as unwindAll } from './unwindAll.js';
 export { default as update } from './update.js';
 export { default as useWith } from './useWith.js';
 export { default as values } from './values.js';
