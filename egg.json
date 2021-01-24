@@ -2,11 +2,15 @@
   "name": "ramda",
   "description": "A practical functional library for JavaScript programmers.",
   "stable": true,
-  "entry": "./source/index.js",
+  "entry": "./mod.ts",
   "files": [
-    "./source/**/*.js",
-    "./README.md"
+    "./README.md",
+    "./source/**/*.js"
   ],
-  "version": "0.27.0",
-  "repository": "https://github.com/ramda/ramda"
+  "version": "0.27.2",
+  "repository": "https://github.com/ramda/ramda",
+  "check": false,
+  "homepage": "https://github.com/ramda/ramda",
+  "ignore": [],
+  "unlisted": false
 }

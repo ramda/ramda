@@ -6,9 +6,11 @@ import _reduced from './internal/_reduced.js';
  * and transduce functions. The returned value should be considered a black
  * box: the internal structure is not guaranteed to be stable.
  *
- * Note: this optimization is only available to the below functions:
+ * This optimization is available to the below functions:
  * - [`reduce`](#reduce)
  * - [`reduceWhile`](#reduceWhile)
+ * - [`reduceBy`](#reduceBy)
+ * - [`reduceRight`](#reduceRight)
  * - [`transduce`](#transduce)
  *
  * @func
@@ -18,7 +20,7 @@ import _reduced from './internal/_reduced.js';
  * @sig a -> *
  * @param {*} x The final value of the reduce.
  * @return {*} The wrapped value.
- * @see R.reduce, R.reduceWhile, R.transduce
+ * @see R.reduce, R.reduceWhile, R.reduceBy, R.reduceRight, R.transduce
  * @example
  *
  *     R.reduce(
