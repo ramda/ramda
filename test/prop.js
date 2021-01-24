@@ -1,6 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
-
+var fc = require('fast-check');
 
 describe('prop', function() {
   var fred = {name: 'Fred', age: 23};
@@ -65,5 +65,44 @@ describe('prop', function() {
 
     eq(propResult, pathResult);
     eq(propException, pathException);
+  });
+
+  it('returns that value associated to a property given valid one', function() {
+    fc.assert(
+      fc.property(fc.string(), fc.anything(), function(p, value) {
+        const o = { [p]: value };
+        eq(R.prop(p, o), value);
+      })
+    );
+  });
+
+  it('shows the same behaviour as path on any object', function() {
+    fc.assert(
+      fc.property(fc.string(), fc.object(), function(p, o) {
+        eq(R.prop(p, o), R.path([p], o));
+      })
+    );
+  });
+
+  it('shows the same behaviour as path on any value', function() {
+    fc.assert(
+      fc.property(fc.string(), fc.anything(), function(p, o) {
+        var propResult, propException, pathResult, pathException;
+        try {
+          propResult = R.prop(p, o);
+        } catch (e) {
+          propException = e;
+        }
+
+        try {
+          pathResult = R.path([p], o);
+        } catch (e) {
+          pathException = e;
+        }
+
+        eq(propResult, pathResult);
+        eq(propException, pathException);
+      })
+    );
   });
 });
