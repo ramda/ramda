@@ -1,8 +1,8 @@
 var assert = require('assert');
-var jsv = require('jsverify');
 
 var R = require('../source');
 var eq = require('./shared/eq');
+var fc = require('fast-check');
 
 
 describe('compose', function() {
@@ -62,16 +62,20 @@ describe('compose', function() {
 
 describe('compose properties', function() {
 
-  jsv.property('composes two functions', jsv.fn(), jsv.fn(), jsv.nat, function(f, g, x) {
-    return R.equals(R.compose(f, g)(x), f(g(x)));
+  it('composes two functions', function() {
+    fc.assert(fc.property(fc.func(fc.nat()), fc.func(fc.nat()), fc.nat(), function(f, g, x) {
+      return R.equals(R.compose(f, g)(x), f(g(x)));
+    }));
   });
 
-  jsv.property('associative',  jsv.fn(), jsv.fn(), jsv.fn(), jsv.nat, function(f, g, h, x) {
-    var result = f(g(h(x)));
-    return R.all(R.equals(result), [
-      R.compose(f, g, h)(x),
-      R.compose(f, R.compose(g, h))(x),
-      R.compose(R.compose(f, g), h)(x)
-    ]);
+  it('associative', function() {
+    fc.assert(fc.property(fc.func(fc.nat()), fc.func(fc.nat()), fc.func(fc.nat()), fc.nat(), function(f, g, h, x) {
+      var result = f(g(h(x)));
+      return R.all(R.equals(result), [
+        R.compose(f, g, h)(x),
+        R.compose(f, R.compose(g, h))(x),
+        R.compose(R.compose(f, g), h)(x)
+      ]);
+    }));
   });
 });

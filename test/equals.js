@@ -2,6 +2,7 @@
 
 var R = require('../source');
 var eq = require('./shared/eq');
+var fc = require('fast-check');
 
 describe('equals', function() {
   var a = [];
@@ -327,6 +328,28 @@ describe('equals', function() {
 
     eq(R.equals(new Point(2, 2), new ColorPoint(2, 2, 'red')), false);
     eq(R.equals(new ColorPoint(2, 2, 'red'), new Point(2, 2)), false);
+  });
+
+  // Arbitrary configured to produce any kind of values
+  // from simple numbers to complex objects
+  const anythingInstanceArb = fc.anything({
+    withBoxedValues: true, // eg.: new Number(1), ...
+    withNullPrototype: true, // eg.: Object.create(null), ...
+    withObjectString: true, // eg.: "{}", "null", ...
+    withMap: typeof Map !== 'undefined',
+    withSet: typeof Set !== 'undefined'
+  });
+
+  it('perfect clones should be considered equal', function() {
+    fc.assert(fc.property(fc.clone(anythingInstanceArb, 2), function(values) {
+      eq(R.equals(values[0], values[1]), true);
+    }));
+  });
+
+  it('is commutative whatever the values', function() {
+    fc.assert(fc.property(anythingInstanceArb, anythingInstanceArb, function(v1, v2) {
+      eq(R.equals(v1, v2), R.equals(v2, v1));
+    }));
   });
 
 });

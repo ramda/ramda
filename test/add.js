@@ -1,6 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
-var jsv = require('jsverify');
+var fc = require('fast-check');
 
 
 describe('add', function() {
@@ -20,15 +20,21 @@ describe('add', function() {
 });
 
 describe('add properties', function() {
-  jsv.property('commutative', jsv.number, jsv.number, function(a, b) {
-    return R.add(a, b) === R.add(b, a);
+  it('commutative', function() {
+    fc.assert(fc.property(fc.integer(), fc.integer(), function(a, b) {
+      return R.add(a, b) === R.add(b, a);
+    }));
   });
 
-  jsv.property('associative', jsv.number, jsv.number, jsv.number, function(a, b, c) {
-    return R.add(a, R.add(b, c)) === R.add(R.add(a, b), c);
+  it('associative', function() {
+    fc.assert(fc.property(fc.integer(), fc.integer(), fc.integer(), function(a, b, c) {
+      return R.add(a, R.add(b, c)) === R.add(R.add(a, b), c);
+    }));
   });
 
-  jsv.property('identity', jsv.number, function(a) {
-    return R.add(a, 0) === a && R.add(0, a) === a;
+  it('identity', function() {
+    fc.assert(fc.property(fc.integer(), function(a) {
+      return R.add(a, 0) === a && R.add(0, a) === a;
+    }));
   });
 });

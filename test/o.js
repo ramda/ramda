@@ -1,7 +1,6 @@
-var jsv = require('jsverify');
-
 var R = require('../source');
 var eq = require('./shared/eq');
+var fc = require('fast-check');
 
 
 describe('o', function() {
@@ -25,20 +24,24 @@ describe('o', function() {
 
   describe('o properties', function() {
 
-    jsv.property('composes two functions', jsv.fn(), jsv.fn(), jsv.nat, function(f, g, x) {
-      return R.equals(R.o(f, g)(x), f(g(x)));
+    it('composes two functions', function() {
+      fc.assert(fc.property(fc.func(fc.nat()), fc.func(fc.nat()), fc.nat(), function(f, g, x) {
+        return R.equals(R.o(f, g)(x), f(g(x)));
+      }));
     });
 
-    jsv.property('associative',  jsv.fn(), jsv.fn(), jsv.fn(), jsv.nat, function(f, g, h, x) {
-      var result = f(g(h(x)));
-      var fg = R.o(f, g);
-      var gh = R.o(g, h);
-      return R.all(R.equals(result), [
-        R.o(f, gh, x),
-        R.o(fg, h, x),
-        R.o(f, gh)(x),
-        R.o(fg, h)(x)
-      ]);
+    it('associative', function() {
+      fc.assert(fc.property(fc.func(fc.nat()), fc.func(fc.nat()), fc.func(fc.nat()), fc.nat(), function(f, g, h, x) {
+        var result = f(g(h(x)));
+        var fg = R.o(f, g);
+        var gh = R.o(g, h);
+        return R.all(R.equals(result), [
+          R.o(f, gh, x),
+          R.o(fg, h, x),
+          R.o(f, gh)(x),
+          R.o(fg, h)(x)
+        ]);
+      }));
     });
   });
 });
