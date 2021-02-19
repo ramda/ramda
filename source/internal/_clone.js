@@ -35,7 +35,19 @@ export default function _clone(value, refFrom, refTo, deep) {
     case 'Object':  return copy(Object.create(Object.getPrototypeOf(value)));
     case 'Array':   return copy([]);
     case 'Date':    return new Date(value.valueOf());
-    case 'RegExp':  return _cloneRegExp(value);
+    case 'RegExp': return _cloneRegExp(value);
+    case 'Int8Array':
+    case 'Uint8Array':
+    case 'Uint8ClampedArray':
+    case 'Int16Array':
+    case 'Uint16Array':
+    case 'Int32Array':
+    case 'Uint32Array':
+    case 'Float32Array':
+    case 'Float64Array':
+    case 'BigInt64Array':
+    case 'BigUint64Array':
+      return value.slice();
     default:        return value;
   }
 }
