@@ -135,6 +135,81 @@ describe('deep clone arrays', function() {
 
 });
 
+describe('deep clone typed arrays', function() {
+  it('clones Uint16Array', function() {
+    var array = new Uint16Array([1, 2, 3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Uint16Array([1, 2, 3]));
+  });
+
+  it('clones Int8Array', function() {
+    var array = new Int8Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Int8Array([1,2,3]));
+  });
+  it('clones Uint8Array', function() {
+    var array = new Uint8Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Uint8Array([1,2,3]));
+  });
+  it('clones Uint8ClampedArray', function() {
+    var array = new Uint8ClampedArray([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Uint8ClampedArray([1,2,3]));
+  });
+  it('clones Int16Array', function() {
+    var array = new Int16Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Int16Array([1,2,3]));
+  });
+  it('clones Uint16Array', function() {
+    var array = new Uint16Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Uint16Array([1,2,3]));
+  });
+  it('clones Int32Array', function() {
+    var array = new Int32Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Int32Array([1,2,3]));
+  });
+  it('clones Uint32Array', function() {
+    var array = new Uint32Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Uint32Array([1,2,3]));
+  });
+  it('clones Float32Array', function() {
+    var array = new Float32Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Float32Array([1,2,3]));
+  });
+  it('clones Float64Array', function() {
+    var array = new Float64Array([1,2,3]);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(array, clone);
+    eq(clone, new Float64Array([1,2,3]));
+  });
+
+});
+
 describe('deep clone functions', function() {
   it('keep reference to function', function() {
     var fn = function(x) { return x + x;};
