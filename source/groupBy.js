@@ -44,10 +44,7 @@ import reduceBy from './reduceBy.js';
  *      // }
  */
 var groupBy = _curry2(_checkForMethod('groupBy', reduceBy(function(acc, item) {
-  if (acc == null) {
-    acc = [];
-  }
   acc.push(item);
   return acc;
-}, null)));
+}, [])));
 export default groupBy;
