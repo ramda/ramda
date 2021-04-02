@@ -4,7 +4,7 @@ var eq = require('./shared/eq');
 describe('transduce', function() {
   var add = R.add;
   var mult = function(a, b) {return a * b;};
-  var isOdd = function(b) {return b % 2 === 1;};
+  var isOdd = function(b) { return b % 2 !== 0; };
   var square = function(a) {return a * a;};
   var addxf = {
     '@@transducer/step': function(acc, x) { return acc + x; },

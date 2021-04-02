@@ -23,7 +23,7 @@ import all from './all.js';
  * @example
  *
  *      const isEven = n => n % 2 === 0;
- *      const isOdd = n => n % 2 === 1;
+ *      const isOdd = n => n % 2 !== 0;
  *
  *      R.none(isEven, [1, 3, 5, 7, 9, 11]); //=> true
  *      R.none(isOdd, [1, 3, 5, 7, 8, 11]); //=> false

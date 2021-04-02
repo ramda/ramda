@@ -1,7 +1,7 @@
 var R = require('../source');
 var eq = require('./shared/eq');
 
-var isOdd = function(_, x) {return x % 2 === 1; };
+var isOdd = function(_, x) { return x % 2 !== 0; };
 
 describe('reduceWhile', function() {
   it('reduces until its predicate fails', function() {

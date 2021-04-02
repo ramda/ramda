@@ -21,7 +21,7 @@ import filter from './filter.js';
  * @see R.filter, R.transduce, R.addIndex
  * @example
  *
- *      const isOdd = (n) => n % 2 === 1;
+ *      const isOdd = (n) => n % 2 !== 0;
  *
  *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
  *

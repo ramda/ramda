@@ -4,7 +4,7 @@ var eq = require('./shared/eq');
 
 describe('into', function() {
   var add = R.add;
-  var isOdd = function(b) {return b % 2 === 1;};
+  var isOdd = function(b) { return b % 2 !== 0; };
   var addXf = {
     '@@transducer/step': add,
     '@@transducer/init': R.always(0),
