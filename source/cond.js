@@ -12,7 +12,7 @@ import reduce from './reduce.js';
  * "truthy" value, at which point `fn` returns the result of applying its
  * arguments to the corresponding transformer. If none of the predicates
  * matches, `fn` returns undefined.
- * 
+ *
  * **Please note**: This is not a direct substitute for a `switch` statement.
  * Remember that both elements of every pair passed to `cond` are *functions*,
  * and `cond` returns a function.
