@@ -18,7 +18,6 @@ describe('retry', function() {
   it('retry with infinity with delay 500ms until true', function(done) {
     let f = () => {
       let d = new Date(); // current time
-      console.log(d.getMilliseconds() % 2);
       return d.getMilliseconds() % 2 == 0; // => true or false
     };
     var retryWithDelay1000 = R.retry(f, 500);
