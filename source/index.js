@@ -258,3 +258,4 @@ export { default as zip } from './zip.js';
 export { default as zipObj } from './zipObj.js';
 export { default as zipWith } from './zipWith.js';
 export { default as thunkify } from './thunkify.js';
+export { default as retry } from './retry.js';
