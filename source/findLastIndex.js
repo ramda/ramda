@@ -18,7 +18,7 @@ import _xfindLastIndex from './internal/_xfindLastIndex.js';
  * desired one.
  * @param {Array} list The array to consider.
  * @return {Number} The index of the element found, or `-1`.
- * @see R.transduce
+ * @see R.transduce, R.lastIndexOf
  * @example
  *
  *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];

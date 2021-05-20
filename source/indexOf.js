@@ -16,7 +16,7 @@ import _isArray from './internal/_isArray.js';
  * @param {*} target The item to find.
  * @param {Array} xs The array to search in.
  * @return {Number} the index of the target, or -1 if the target is not found.
- * @see R.lastIndexOf
+ * @see R.lastIndexOf, R.findIndex
  * @example
  *
  *      R.indexOf(3, [1,2,3,4]); //=> 2
