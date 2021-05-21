@@ -16,7 +16,7 @@ import equals from './equals.js';
  * @param {*} target The item to find.
  * @param {Array} xs The array to search in.
  * @return {Number} the index of the target, or -1 if the target is not found.
- * @see R.indexOf
+ * @see R.indexOf, R.findLastIndex
  * @example
  *
  *      R.lastIndexOf(3, [-1,3,3,0,1,2,3,4]); //=> 6
