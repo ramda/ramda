@@ -1,4 +1,4 @@
-import reduce from './reduce.js';
+import _reduce from './internal/_reduce.js';
 import curry from './curry.js';
 
 
@@ -19,7 +19,7 @@ import curry from './curry.js';
  *      R.map(R.count(even), [[1, 1, 1], [2, 3, 4, 5], [6]]); // => [0, 2, 1]
  */
 var count = curry(function(pred, list) {
-  return reduce(function(a, e) { return pred(e) ? a + 1 : a; }, 0, list);
+  return _reduce(function(a, e) { return pred(e) ? a + 1 : a; }, 0, list);
 });
 
 export default count;
