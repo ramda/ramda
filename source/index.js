@@ -191,6 +191,7 @@ export { default as reject } from './reject.js';
 export { default as remove } from './remove.js';
 export { default as repeat } from './repeat.js';
 export { default as replace } from './replace.js';
+export { default as retry } from './retry.js';
 export { default as reverse } from './reverse.js';
 export { default as scan } from './scan.js';
 export { default as sequence } from './sequence.js';
