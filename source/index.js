@@ -36,6 +36,7 @@ export { default as cond } from './cond.js';
 export { default as construct } from './construct.js';
 export { default as constructN } from './constructN.js';
 export { default as converge } from './converge.js';
+export { default as count } from './count.js';
 export { default as countBy } from './countBy.js';
 export { default as curry } from './curry.js';
 export { default as curryN } from './curryN.js';
