@@ -5,6 +5,13 @@ var eq = require('./shared/eq');
 
 
 describe('test', function() {
+  it('returns true if string matches dotAll pattern', function() {
+    eq(R.test(/x.*z/s, 'x.\nyz'), true);  /* eslint-env es2018 */
+  });
+
+  it('returns true if string matches dotAll pattern', function() {
+    eq(R.test(/x.*z/s, 'x.\nyz'), true);
+  });
 
   it('returns true if string matches pattern', function() {
     eq(R.test(/^x/, 'xyz'), true);
