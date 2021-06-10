@@ -1,3 +1,4 @@
+/* eslint-env es2018 */
 var assert = require('assert');
 
 var R = require('../source');
@@ -6,11 +7,7 @@ var eq = require('./shared/eq');
 
 describe('test', function() {
   it('returns true if string matches dotAll pattern', function() {
-    eq(R.test(/x.*z/s, 'x.\nyz'), true);  /* eslint-env es2018 */
-  });
-
-  it('returns true if string matches dotAll pattern', function() {
-    eq(R.test(/x.*z/s, 'x.\nyz'), true);
+    eq(R.test(/x.*z/s, 'x.\nyz'), true); // eslint-disable-line no-invalid-regexp
   });
 
   it('returns true if string matches pattern', function() {
