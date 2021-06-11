@@ -14,7 +14,7 @@ import path from './path.js';
  * @param {Array} ps The property names to fetch
  * @param {Object} obj The object to query
  * @return {Array} The corresponding values or partially applied function.
- * @see R.prop, R.pluck, R.project
+ * @see R.prop, R.pluck, R.project, R.paths
  * @example
  *
  *      R.props(['x', 'y'], {x: 1, y: 2}); //=> [1, 2]

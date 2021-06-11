@@ -14,7 +14,7 @@ import nth from './nth.js';
  * @param {Array} pathsArray The array of paths to be fetched.
  * @param {Object} obj The object to retrieve the nested properties from.
  * @return {Array} A list consisting of values at paths specified by "pathsArray".
- * @see R.path
+ * @see R.path, R.props
  * @example
  *
  *      R.paths([['a', 'b'], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); //=> [2, 3]
@@ -27,7 +27,7 @@ var paths = _curry2(function paths(pathsArray, obj) {
     var p;
     while (idx < paths.length) {
       if (val == null) {
-        return;
+        return val;
       }
       p = paths[idx];
       val = _isInteger(p) ? nth(p, val) : val[p];
