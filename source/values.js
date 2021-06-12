@@ -14,7 +14,7 @@ import keys from './keys.js';
  * @sig {k: v} -> [v]
  * @param {Object} obj The object to extract values from
  * @return {Array} An array of the values of the object's own properties.
- * @see R.valuesIn, R.keys
+ * @see R.valuesIn, R.keys, R.toPairs
  * @example
  *
  *      R.values({a: 1, b: 2, c: 3}); //=> [1, 2, 3]
