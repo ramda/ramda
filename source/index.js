@@ -5,6 +5,7 @@ export { default as add } from './add.js';
 export { default as addIndex } from './addIndex.js';
 export { default as adjust } from './adjust.js';
 export { default as all } from './all.js';
+export { default as allThen } from './allThen.js';
 export { default as allPass } from './allPass.js';
 export { default as always } from './always.js';
 export { default as and } from './and.js';
