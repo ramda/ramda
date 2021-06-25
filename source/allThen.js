@@ -1,6 +1,6 @@
 import _curry2 from './internal/_curry2.js';
 import _isString from './internal/_isString.js';
-import _isArrayLike from './internal/_isArrayLike.js';
+import _isArray from './internal/_isArray.js';
 import _isFunction from './internal/_isFunction.js';
 import toString from './toString.js';
 import andThen from './andThen.js';
@@ -35,7 +35,7 @@ var allThen = _curry2(function allThen(f, ps) {
     throw new Error('Promise is not defined');
   }
 
-  if (!(_isString(ps) || _isArrayLike(ps) || _isIterator(ps))) {
+  if (!(_isString(ps) || _isArray(ps) || _isIterator(ps))) {
     throw new TypeError(toString(ps) + ' is not iterable');
   }
 
