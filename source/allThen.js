@@ -18,9 +18,7 @@ var _isIterator = function(a) {
  * @memberOf R
  * @since v0.27.1
  * @category Function
- * @sig ([a] -> b) -> a -> (Promise e b)
  * @sig ([a] -> b) -> [a] -> (Promise e b)
- * @sig ([a] -> b) -> [(Promise e a)] -> (Promise e b)
  * @param {Function} f The function which will be called with an array.
  * @param {*} ps a value or an array.
  * @return {Promise} The result of calling `Promise.all(ps).then(f)`
