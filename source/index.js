@@ -126,6 +126,7 @@ export { default as mean } from './mean.js';
 export { default as median } from './median.js';
 export { default as memoizeWith } from './memoizeWith.js';
 export { default as mergeAll } from './mergeAll.js';
+export { default as mergeBy } from './mergeBy.js';
 export { default as mergeDeepLeft } from './mergeDeepLeft.js';
 export { default as mergeDeepRight } from './mergeDeepRight.js';
 export { default as mergeDeepWith } from './mergeDeepWith.js';
