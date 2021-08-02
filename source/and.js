@@ -3,6 +3,7 @@ import _curry2 from './internal/_curry2.js';
 
 /**
  * Returns the first argument if it is falsy, otherwise the second argument.
+ * Acts as the boolean `and` statement if both inputs are `Boolean`s.
  *
  * @func
  * @memberOf R
