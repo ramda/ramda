@@ -141,6 +141,10 @@ Ramda versions > 0.25 don't have a default export.
 So instead of `import R from 'ramda';`, one has to use `import * as R from 'ramda';`
 Or better yet, import only the required functions via `import { functionName } from 'ramda';`
 
+**Note for ES6 module and browsers**
+In order to access to the ES6 module in browsers, one has to provide the content of  the __es__ directory (see below for the build instructions) and use `import * as R from '<path-to-es-directory>/es/index.js';`
+
+
 ### Build
 
 `npm run build` creates `es`, `src` directories and updates both __dist/ramda.js__ and __dist/ramda.min.js__
