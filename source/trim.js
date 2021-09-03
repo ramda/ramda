@@ -23,9 +23,7 @@ var hasProtoTrim = (typeof String.prototype.trim === 'function');
  */
 var trim = !hasProtoTrim || (ws.trim() || !zeroWidth.trim()) ?
   _curry1(function trim(str) {
-    var beginRx = new RegExp('^[' + ws + '][' + ws + ']*');
-    var endRx = new RegExp('[' + ws + '][' + ws + ']*$');
-    return str.replace(beginRx, '').replace(endRx, '');
+    return str.trim ? str.trim() : str.replace(/^\ws+|\ws+$/g, '');
   }) :
   _curry1(function trim(str) {
     return str.trim();
