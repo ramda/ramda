@@ -21,12 +21,9 @@ var hasProtoTrim = (typeof String.prototype.trim === 'function');
  *      R.trim('   xyz  '); //=> 'xyz'
  *      R.map(R.trim, R.split(',', 'x, y, z')); //=> ['x', 'y', 'z']
  */
-var trim = !hasProtoTrim || (ws.trim() || !zeroWidth.trim()) ?
+var trim = !hasProtoTrim || ws.trim() || !zeroWidth.trim() ?
   _curry1(function trim(str) {
-    ws = "[" + ws + "]";
-  var beginRx = new RegExp("^" + ws + ws + "*");
-  var endRx  = new RegExp(ws + ws + "*$");
-  return String(this).replace(beginRx, "").replace(endRx, "");
+    return str.trim ? str.trim() : str.replace(/^\s${ws}+|\s${ws}+$/g, '');
   }) :
   _curry1(function trim(str) {
     return str.trim();
