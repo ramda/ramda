@@ -40,16 +40,24 @@ var cond = _curry1(function cond(pairs) {
   var arity = reduce(
     max,
     0,
-    map(function(pair) { return pair[0].length; }, pairs)
+    map(function (pair) { return pair[0].length; }, pairs)
   );
-  return _arity(arity, function() {
+  return _arity(arity, function () {
     var idx = 0;
     while (idx < pairs.length) {
-      let predicate = pairs[idx][0].apply(this, arguments)
-      if (predicate) {
-        let args = Array.from(arguments)
-        args.push(predicate) // transformer(...arguments, predicate)
-        return pairs[idx][1].apply(this, args);
+      let pair = pairs[idx]
+      if (typeof pair === 'function') {
+        let transformer = pair.apply(this, arguments)
+        if (transformer) {
+          return transformer;
+        }
+      } else if (Array.isArray(pair)) {
+        let predicate = pair[0].apply(this, arguments)
+        if (predicate) {
+          let args = Array.from(arguments)
+          args.push(predicate) // transformer(...arguments, predicate)
+          return pair[1].apply(this, args);
+        }
       }
       idx += 1;
     }
