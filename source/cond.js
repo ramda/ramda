@@ -45,8 +45,11 @@ var cond = _curry1(function cond(pairs) {
   return _arity(arity, function() {
     var idx = 0;
     while (idx < pairs.length) {
-      if (pairs[idx][0].apply(this, arguments)) {
-        return pairs[idx][1].apply(this, arguments);
+      let predicate = pairs[idx][0].apply(this, arguments)
+      if (predicate) {
+        let args = Array.from(arguments)
+        args.push(predicate) // transformer(...arguments, predicate)
+        return pairs[idx][1].apply(this, args);
       }
       idx += 1;
     }
