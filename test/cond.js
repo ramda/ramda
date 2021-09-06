@@ -55,23 +55,33 @@ describe('cond', function() {
 
 describe('cond new featrues', function () {
 
-  it('storage predicate result', function () {
-    let sS = cond([
-      [R.trim, (_, res) => res],
-    ]);
-    let y = sS("  x  ")
+  it('just predicate and return result', function () {
+    let fmt = cond([trim]);
+    let x = fmt(" ")
+    expect(x).toEqual(undefined)
+    let y = fmt("  x  ")
     expect(y).toEqual("x")
-    let z = sS("")
+    let z = fmt("")
     expect(z).toEqual(undefined)
-    let x = sS(" ")
+  });
+
+  it('cache predicate result', function () {
+    let fmt = cond([
+      [trim, (_, res) => ({ res })],
+    ]);
+    let y = fmt("  x  ")
+    expect(y).toEqual({ res: "x" })
+    let z = fmt("")
+    expect(z).toEqual(undefined)
+    let x = fmt(" ")
     expect(x).toEqual(undefined)
   });
 
-  it('just transformer', function () {
+  it('an example in world', function () {
     let token = cond([
       input => {
         let mtch = /^\d+/.exec(input)
-        if (mtch && mtch.length > 0) { 
+        if (mtch && mtch.length > 0) {
           let lexeme = mtch[0]
           let restInput = input.slice(lexeme.length)
           return { token: { number: parseInt(lexeme) }, restInput }
