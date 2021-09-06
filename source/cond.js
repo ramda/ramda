@@ -55,7 +55,7 @@ var cond = _curry1(function cond(pairs) {
         let predicate = pair[0].apply(this, arguments)
         if (predicate) {
           let args = Array.from(arguments)
-          args.push(predicate) // transformer(...arguments, predicate)
+          args.push(predicate) // transformer(...arguments, predicate(...arguments))
           return pair[1].apply(this, args);
         }
       }
