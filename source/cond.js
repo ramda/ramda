@@ -40,7 +40,7 @@ var cond = _curry1(function cond(pairs) {
   var arity = reduce(
     max,
     0,
-    map(function (pair) { return pair[0].length; }, pairs)
+    map(function (pair) { return typeof pair === 'function' ? pair.length : pair[0].length; }, pairs)
   );
   return _arity(arity, function () {
     var idx = 0;
