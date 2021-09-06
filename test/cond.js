@@ -53,13 +53,11 @@ describe('cond', function() {
 
 });
 
-import {  equals, trim, identity } from 'ramda';
-
 describe('cond new featrues', function () {
 
   it('storage predicate result', function () {
     let sS = cond([
-      [trim, (_, res) => res],
+      [R.trim, (_, res) => res],
     ]);
     let y = sS("  x  ")
     expect(y).toEqual("x")
@@ -80,8 +78,7 @@ describe('cond new featrues', function () {
         } else {
           return null
         }
-      },
-      [equals(""), identity],
+      }
     ]);
     let y = token("123+234")
     expect(y).toEqual({ "restInput": "+234", "token": { "number": 123 } })
