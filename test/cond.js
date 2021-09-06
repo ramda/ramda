@@ -39,7 +39,7 @@ describe('cond', function() {
     var fn = R.cond([
       [function(_, x) { return x === 42; }, function() { return arguments.length; }]
     ]);
-    eq(fn(21, 42, 84), 3);
+    eq(fn(21, 42, 84), 4);  // transformer.arguments = ( 21, 42, 84, true )
   });
 
   it('retains highest predicate arity', function() {
@@ -49,6 +49,42 @@ describe('cond', function() {
       [R.nAry(1, R.T), R.T]
     ]);
     eq(fn.length, 3);
+  });
+
+});
+
+import {  equals, trim, identity } from 'ramda';
+
+describe('cond new featrues', function () {
+
+  it('storage predicate result', function () {
+    let sS = cond([
+      [trim, (_, res) => res],
+    ]);
+    let y = sS("  x  ")
+    expect(y).toEqual("x")
+    let z = sS("")
+    expect(z).toEqual(undefined)
+    let x = sS(" ")
+    expect(x).toEqual(undefined)
+  });
+
+  it('just transformer', function () {
+    let token = cond([
+      input => {
+        let mtch = /^\d+/.exec(input)
+        if (mtch && mtch.length > 0) { 
+          let lexeme = mtch[0]
+          let restInput = input.slice(lexeme.length)
+          return { token: { number: parseInt(lexeme) }, restInput }
+        } else {
+          return null
+        }
+      },
+      [equals(""), identity],
+    ]);
+    let y = token("123+234")
+    expect(y).toEqual({ "restInput": "+234", "token": { "number": 123 } })
   });
 
 });
