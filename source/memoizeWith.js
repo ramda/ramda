@@ -24,7 +24,7 @@ import _has from './internal/_has.js';
  * @example
  *
  *      let count = 0;
- *      const factorial = R.memoizeWith(Number, n => {
+ *      const factorial = R.memoizeWith(R.toString, n => {
  *        count += 1;
  *        return R.product(R.range(1, n + 1));
  *      });
