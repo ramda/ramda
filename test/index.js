@@ -24,7 +24,7 @@ function sourceMethods(dir) {
  *
  * 1st case is detected in first assertion, and detailed in second one
  *
- * 2st case doesnt need detection, because NodeJS will throw an error
+ * 2nd case does not need detection, because NodeJS will throw an error
  * if you would attempt to require non existing file
  */
 describe('API surface', function() {

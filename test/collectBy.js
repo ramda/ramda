@@ -12,7 +12,7 @@ describe('collectBy', function() {
     }));
   });
 
-  it('groups items but neiter adds new ones nor removes any', function() {
+  it('groups items but neither adds new ones nor removes any', function() {
     fc.assert(fc.property(fc.array(fc.nat()), function(xs) {
       var check = compose(isEmpty, difference(xs), unnest);
       var ys = collectBy(identity)(xs);

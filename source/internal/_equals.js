@@ -12,7 +12,7 @@ import type from '../type.js';
  * - iterators lengths are the same
  * - iterators values are unique
  *
- * false-positive result will be returned for comparision of, e.g.
+ * false-positive result will be returned for comparison of, e.g.
  * - [1,2,3] and [1,2,3,4]
  * - [1,1,1] and [1,2,3]
  * */
