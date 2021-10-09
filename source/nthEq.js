@@ -18,7 +18,7 @@ import equals from './equals.js';
  * @param {*} val
  * @param {*} list
  * @return {Boolean}
- * @see R.equals
+ * @see R.nth, R.equals
  * @example
  *
  *      const labels = {
