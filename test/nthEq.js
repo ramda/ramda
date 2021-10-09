@@ -10,8 +10,13 @@ describe('nthEq', function() {
 
   it('determines whether a particular offset matches a given value for a specific list', function() {
     eq(R.nthEq(0, 'apples', list1), true);
+    eq(R.nthEq(-3, 'apples', list1), true);
+
     eq(R.nthEq(1, 'oranges', list1), true);
-    eq(R.nthEq(1, 'paper', list2), false);
+    eq(R.nthEq(-2, 'oranges', list1), true);
+
+    eq(R.nthEq(2, 'paper', list2), false);
+    eq(R.nthEq(-1, 'paper', list2), false);
   });
 
   it('has R.equals semantics', function() {
