@@ -20,19 +20,24 @@ import equals from './equals.js';
  * @see R.equals
  * @example
  *
- *      const labels = ['snack', 'seat', 'exam'];
- *      const bobby = ['apple', '1A', 'math'];
- *      const claire = ['apple', '1B', 'economics'];
- *      const fred = ['PB & J', '2a', 'math'];
- *      const jess = ['brisket', '2B', 'english'];
- *      const examinees = {
- *        bobby,
- *        claire,
- *        fred,
- *        jess,
+ *      const labels = {
+ *        snack: 0,
+ *        seat: 1,
+ *        exam: 2,
  *      };
- *      const takingMathExam = R.nth(2, 'math');
- *      R.filter(takingMathExamm, examinees); //=> [fred, rusty]
+ *      const examinees = {
+ *        bobby: ['apple', '1A', 'math'],
+ *        claire: ['apple', '1B', 'economics'],
+ *        fred: ['PB & J', '2a', 'math'],
+ *        jess: ['brisket', '2B', 'english'],
+ *      };
+ *      const takingMathExam = R.nthEq(labels.exam, 'math');
+ *      const seatsForMathExam = R.pipe(
+ *        R.filter(takingMathExam), //=> {"bobby": ["apple", "1A", "math"], "fred": ["PB & J", "2a", "math"]}
+ *        R.values, //=>[["apple", "1A", "math"], ["PB & J", "2a", "math"]]
+ *        R.map(R.nth(labels.seat)) //=>["1A", "2a"]
+ *      );
+ *      seatsForMathExam(examinees) //=>["1A", "2a"]
  */
 var nthEq = _curry3(function nthEq(offset, val, list) {
   return equals(val, nth(offset, list));
