@@ -12,7 +12,8 @@ import equals from './equals.js';
  * @memberOf R
  * @since v2.7.2
  * @category Relation
- * @sig Number -> a -> Object -> Boolean
+ * @sig Number -> a -> [a] -> Boolean
+ * @sig Number -> String -> String -> Boolean
  * @param {Number} offset
  * @param {*} val
  * @param {*} list
@@ -28,16 +29,16 @@ import equals from './equals.js';
  *      const examinees = {
  *        bobby: ['apple', '1A', 'math'],
  *        claire: ['apple', '1B', 'economics'],
- *        fred: ['PB & J', '2a', 'math'],
+ *        fred: ['PB & J', '2A', 'math'],
  *        jess: ['brisket', '2B', 'english'],
  *      };
  *      const takingMathExam = R.nthEq(labels.exam, 'math');
  *      const seatsForMathExam = R.pipe(
- *        R.filter(takingMathExam), //=> {"bobby": ["apple", "1A", "math"], "fred": ["PB & J", "2a", "math"]}
- *        R.values, //=>[["apple", "1A", "math"], ["PB & J", "2a", "math"]]
- *        R.map(R.nth(labels.seat)) //=>["1A", "2a"]
+ *        R.filter(takingMathExam), //=> {"bobby": ["apple", "1A", "math"], "fred": ["PB & J", "2A", "math"]}
+ *        R.values, //=>[["apple", "1A", "math"], ["PB & J", "2A", "math"]]
+ *        R.map(R.nth(labels.seat)) //=>["1A", "2A"]
  *      );
- *      seatsForMathExam(examinees) //=>["1A", "2a"]
+ *      seatsForMathExam(examinees) //=>["1A", "2A"]
  */
 var nthEq = _curry3(function nthEq(offset, val, list) {
   return equals(val, nth(offset, list));
