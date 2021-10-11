@@ -26,7 +26,10 @@ import keys from './keys.js';
  */
 var mapObjIndexed = _curry2(function mapObjIndexed(fn, obj) {
   return _reduce(function(acc, key) {
-    acc[key] = fn(obj[key], key, obj);
+    // Prevention of prototype poisoning
+    if (key !== "__proto__" && key !== "prototype" && key !== "constructor") {
+      acc[key] = fn(obj[key], key, obj);
+    }
     return acc;
   }, {}, keys(obj));
 });
