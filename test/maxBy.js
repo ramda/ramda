@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
 
@@ -9,4 +11,7 @@ describe('maxBy', function() {
     eq(R.maxBy(R.prop('x'), {x: 3, y: 1}, {x: 5, y: 10}), {x: 5, y: 10});
   });
 
+  it('throws a typeError if the returned values by the function cannot be compared', function() {
+    assert.throws(function() { R.maxBy(n => n * 2, 1, undefined); }, TypeError);
+  });
 });

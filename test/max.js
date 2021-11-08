@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
 
@@ -19,4 +21,12 @@ describe('max', function() {
     eq(R.max('b', 'a'), 'b');
   });
 
+  it('returns the second argument if both arguments are equal', function() {
+    eq(R.max(7, 7), 7);
+    eq(R.max(undefined, undefined), undefined);
+  });
+
+  it('throws a typeError if the arguments cannot be compared', function() {
+    assert.throws(function() { return R.max(1, 'a'); }, TypeError);
+  });
 });

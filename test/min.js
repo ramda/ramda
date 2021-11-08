@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 var R = require('../source');
 var eq = require('./shared/eq');
 
@@ -19,4 +21,12 @@ describe('min', function() {
     eq(R.min('b', 'a'), 'a');
   });
 
+  it('returns the second argument if both arguments are equal', function() {
+    eq(R.min(7, 7), 7);
+    eq(R.min(undefined, undefined), undefined);
+  });
+
+  it('throws a typeError if the arguments cannot be compared', function() {
+    assert.throws(function() { return R.min(1, 'a'); }, TypeError);
+  });
 });
