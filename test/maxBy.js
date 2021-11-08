@@ -12,6 +12,12 @@ describe('maxBy', function() {
   });
 
   it('throws a typeError if the returned values by the function cannot be compared', function() {
-    assert.throws(function() { R.maxBy(n => n * 2, 1, undefined); }, TypeError);
+    assert.throws(
+      function() { R.maxBy(n => n * 2, 1, undefined); },
+      function(err) {
+        return err.constructor === TypeError &&
+          err.message === 'cannot compare 2 with NaN';
+      }
+    );
   });
 });

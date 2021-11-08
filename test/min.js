@@ -27,6 +27,12 @@ describe('min', function() {
   });
 
   it('throws a typeError if the arguments cannot be compared', function() {
-    assert.throws(function() { return R.min(1, 'a'); }, TypeError);
+    assert.throws(
+      function() { R.min(1, 'a'); },
+      function(err) {
+        return err.constructor === TypeError &&
+          err.message === 'cannot compare 1 with "a"';
+      }
+    );
   });
 });

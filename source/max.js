@@ -1,5 +1,6 @@
 import _curry2 from './internal/_curry2.js';
 import equals from './equals.js';
+import toString from './toString.js';
 
 /**
  * Returns the larger of its two arguments.
