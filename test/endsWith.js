@@ -1,7 +1,7 @@
 var R = require('../source');
 var eq = require('./shared/eq');
 
-describe('startsWith', function() {
+describe('endsWith', function() {
   it('should return true when a string ends with the provided value', function() {
     eq(R.endsWith('c', 'abc'), true);
   });
