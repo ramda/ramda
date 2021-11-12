@@ -42,6 +42,7 @@ describe('is', function() {
     eq(isObject(new Number(0)), true);
     eq(isObject(/(?:)/), true);
     eq(isObject(new String('')), true);
+    eq(isObject(Object.create(null)), true);
 
     eq(isObject(null), false);
     eq(isObject(undefined), false);
