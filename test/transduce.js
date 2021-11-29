@@ -5,7 +5,9 @@ describe('transduce', function() {
   var add = R.add;
   var mult = function(a, b) {return a * b;};
   var isOdd = function(b) { return b % 2 !== 0; };
+  var isEven = function(b) { return b % 2 === 0; };
   var square = function(a) {return a * a;};
+  var negate = function(a) {return -1 * a;};
   var addxf = {
     '@@transducer/step': function(acc, x) { return acc + x; },
     '@@transducer/init': function() { return 0; },
@@ -40,6 +42,10 @@ describe('transduce', function() {
     eq(R.transduce(R.filter(isOdd), R.flip(R.append), [],  [1, 2, 3, 4]), [1, 3]);
     eq(R.transduce(R.compose(R.map(add(1)), R.take(2)), R.flip(R.append), [],  [1, 2, 3, 4]), [2, 3]);
     eq(R.transduce(R.compose(R.filter(isOdd), R.take(1)), R.flip(R.append), [],  [1, 2, 3, 4]), [1]);
+    eq(R.transduce(R.compose(R.uniq, R.map(square), R.take(3)), R.flip(R.append), [],  [1, 1, 2, 2, 3, 3, 4, 4]), [1, 4, 9]);
+    eq(R.transduce(R.compose(R.filter(isEven), R.uniq), R.flip(R.append), [],  [1, 1, 2, 2, 3, 3, 4, 4]), [2, 4]);
+    eq(R.transduce(R.compose(R.map(negate), R.uniqBy(Math.abs), R.map(square)), R.flip(R.append), [],  [-1, -5, 2, 10, 1, 2]), [1, 25, 4, 100]);
+    eq(R.transduce(R.compose(R.uniqWith(R.eqBy(String)), R.map(square), R.take(3)), R.flip(R.append), [],  [1, '1', '2', 2, 3, '3', '4', 4]), [1, 4, 9]);
   });
 
   it('transduces into strings', function() {
