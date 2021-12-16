@@ -1,4 +1,3 @@
-import _Set from './_Set.js';
 import _curry2 from './_curry2.js';
 import _includesWith from './_includesWith.js';
 import _xfBase from './_xfBase.js';
