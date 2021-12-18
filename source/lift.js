@@ -3,7 +3,7 @@ import liftN from './liftN.js';
 
 
 /**
- * "lifts" a function of arity > 1 so that it may "map over" a list, Function or other
+ * "lifts" a function of arity >= 1 so that it may "map over" a list, Function or other
  * object that satisfies the [FantasyLand Apply spec](https://github.com/fantasyland/fantasy-land#apply).
  *
  * @func
