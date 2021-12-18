@@ -3,7 +3,7 @@ import _curry2 from './internal/_curry2.js';
 
 /**
  * See if an object (i.e. `val`) is an instance of the supplied constructor. This
- * function will check up the inheritance chain, if any. 
+ * function will check up the inheritance chain, if any.
  * If `val` was created using `Object.create`, `R.is(Object, val) === true`.
  *
  * @func
@@ -26,9 +26,9 @@ import _curry2 from './internal/_curry2.js';
  *      R.is(Number, {}); //=> false
  */
 var is = _curry2(function is(Ctor, val) {
-  return val instanceof Ctor || 
+  return val instanceof Ctor ||
     val != null && (
-      val.constructor === Ctor || 
+      val.constructor === Ctor ||
       (Ctor.name === 'Object' && typeof val === 'object'));
 });
 export default is;
