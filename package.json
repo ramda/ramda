@@ -45,6 +45,10 @@
     "type": "git",
     "url": "git://github.com/ramda/ramda.git"
   },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ramda"
+  },
   "main": "./src/index.js",
   "exports": {
     ".": {
