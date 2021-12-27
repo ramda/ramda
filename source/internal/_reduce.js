@@ -38,13 +38,13 @@ var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterato
 
 export default function _reduce(fn, acc, list) {
   if (typeof fn === 'function') {
+    if (typeof list['fantasy-land/reduce'] === 'function') {
+      return list['fantasy-land/reduce'](fn, acc);
+    }
     fn = _xwrap(fn);
   }
   if (_isArrayLike(list)) {
     return _arrayReduce(fn, acc, list);
-  }
-  if (typeof list['fantasy-land/reduce'] === 'function') {
-    return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }
   if (list[symIterator] != null) {
     return _iterableReduce(fn, acc, list[symIterator]());
