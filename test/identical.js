@@ -1,5 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
+var assert = require('assert');
 
 
 describe('identical', function() {
@@ -24,6 +25,38 @@ describe('identical', function() {
     eq(R.identical(0, new Number(0)), false);
     eq(R.identical(new Number(0), 0), false);
     eq(R.identical(new Number(0), new Number(0)), false);
+  });
+  
+  it('is auto-curried', function() {
+    assert.strictEqual(R.identical.length, 2);
+    var unaryFn = R.identical("foo");
+    assert.strictEqual(unaryFn.length, 1);
+    eq(unaryFn("bar"), false);
+    eq(unaryFn("foo"), true);
+    
+    eq(R.identical()("foo")()("foo"), true);
+  });
+  
+  it("does not access the placeholder property of it's arguments which is forbidden for cross-origin browser windows", function() {
+    var forbiddenPropertyAccessObject = {};
+    Object.defineProperty(
+      forbiddenPropertyAccessObject, 
+      '@@functional/placeholder', 
+      { get: function(){ throw new Error("Not allowed!"); } }
+    );
+    
+    assert.doesNotThrow(
+      () => R.identical(forbiddenPropertyAccessObject, {}),
+      Error
+    );
+    
+    assert.doesNotThrow(
+      () => R.identical({}, forbiddenPropertyAccessObject),
+      Error
+    );
+    
+    eq(R.identical(forbiddenPropertyAccessObject, forbiddenPropertyAccessObject), true);
+    eq(R.identical(forbiddenPropertyAccessObject, {}), false);
   });
 
 });
