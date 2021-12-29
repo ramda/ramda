@@ -42,7 +42,7 @@ var identical = function(a, b) {
           }
         };
       }());
-    case 2:
+    default:
       return _objectIs(a, b);
   }
 };
