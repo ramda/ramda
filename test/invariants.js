@@ -15,7 +15,7 @@ describe('invariants', function() {
   });
 
   it('-- applying function f with length n (where n > 0) to R.__ gives function with length n', function() {
-    var unsupportedFunctionNames = ["identical"];
+    var unsupportedFunctionNames = ['identical'];
     for (var prop in R) {
       if (typeof R[prop] === 'function' && R[prop].length > 0 && unsupportedFunctionNames.indexOf(prop) === -1) {
         var result = R[prop](R.__);

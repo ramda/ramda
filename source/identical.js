@@ -31,9 +31,9 @@ import _objectIs from './internal/_objectIs.js';
 var identical = function(a, b) {
   switch (arguments.length) {
     case 0:
-      return identical; 
+      return identical;
     case 1:
-      return (function(){
+      return (function() {
         return function unaryIdentical(_b) {
           switch (arguments.length) {
             case 0:
@@ -49,8 +49,8 @@ var identical = function(a, b) {
 };
 
 // In order to support Cross-origin Window objects as arguments to identical,
-// it cannot be implemented as _curry2(_objectIs). 
-// The reason is that _curry2 checks if a function argument is the placeholder __ 
-// by accessing a paritcular property. However, across URL origins access 
-// to most properties of Window is forbidden. 
+// it cannot be implemented as _curry2(_objectIs).
+// The reason is that _curry2 checks if a function argument is the placeholder __
+// by accessing a paritcular property. However, across URL origins access
+// to most properties of Window is forbidden.
 export default identical;
