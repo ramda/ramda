@@ -8,6 +8,8 @@ import _objectIs from './internal/_objectIs.js';
  *
  * Note this is merely a curried version of ES6 `Object.is`.
  *
+ * `identical` does not support the `__` placeholder.
+ *
  * @func
  * @memberOf R
  * @since v0.15.0
