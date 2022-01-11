@@ -1,6 +1,6 @@
-//  Ramda v0.27.1
+//  Ramda v0.27.2
 //  https://github.com/ramda/ramda
-//  (c) 2013-2020 Scott Sauyet, Michael Hurley, and David Chambers
+//  (c) 2013-2022 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
 
 (function (global, factory) {
@@ -8729,7 +8729,7 @@
       sequence(of, map(f, traversable));
   });
 
-  var ws = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
+  var ws = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u2000\u2001\u2002\u2003' +
            '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028' +
            '\u2029\uFEFF';
   var zeroWidth = '\u200b';
@@ -8749,7 +8749,7 @@
    *      R.trim('   xyz  '); //=> 'xyz'
    *      R.map(R.trim, R.split(',', 'x, y, z')); //=> ['x', 'y', 'z']
    */
-  var trim = !hasProtoTrim || (ws.trim() || !zeroWidth.trim()) ?
+  var trim = !hasProtoTrim || ws.trim() || !zeroWidth.trim() ?
     _curry1(function trim(str) {
       var beginRx = new RegExp('^[' + ws + '][' + ws + ']*');
       var endRx = new RegExp('[' + ws + '][' + ws + ']*$');
