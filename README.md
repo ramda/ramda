@@ -260,6 +260,12 @@ Translations
 
 
 
+Funding
+-----------------
+
+If you wish to donate to Ramda please see our [Open Collective](https://opencollective.com/ramda) page. Thank you!
+
+
 Acknowledgements
 -----------------
 
