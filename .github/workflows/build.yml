@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Installing Dependencies
-        run: npm ci
+        run: npm install --ignore-scripts
 
       - name: Collecting Coverage
         uses: paambaati/codeclimate-action@v2.6.0
@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Installing Dependencies
-        run: npm ci
+        run: npm install --ignore-scripts
 
       - name: Linting Codebase
         run: npm run lint
