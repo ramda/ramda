@@ -4,6 +4,7 @@
 /lib/docs/public/
 /node_modules/
 /npm-debug.log
+/package-lock.json
 /lib/test/bundle.js
 /tmp
 /bower_components/
