@@ -8,6 +8,7 @@ import _curry2 from './internal/_curry2.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category Function
  * @sig (({ a, b, c, ..., n }) -> x) -> { a, b, c, ...} -> ({ d, e, f, ..., n } -> x)
  * @param {Function} f

@@ -7,6 +7,7 @@ import _reduce from './internal/_reduce.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category List
  * @typedefn Idx = String | Int | Symbol
  * @sig Idx a => (b -> a) -> [b] -> [[b]]

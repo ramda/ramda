@@ -16,6 +16,7 @@ import _modify from './internal/_modify.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category Object
  * @sig [Idx] -> (v -> v) -> {k: v} -> {k: v}
  * @param {Array} path The path to be modified.

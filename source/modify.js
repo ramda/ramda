@@ -11,6 +11,7 @@ import modifyPath from './modifyPath.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category Object
  * @sig Idx -> (v -> v) -> {k: v} -> {k: v}
  * @param {String|Number} prop The property to be modified.
