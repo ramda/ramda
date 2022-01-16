@@ -1,7 +1,7 @@
 
-var R = require('../source');
-var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 var addN = function() {

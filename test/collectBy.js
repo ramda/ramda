@@ -1,4 +1,4 @@
-var {all, compose , difference , equals , head , identity , is , isEmpty , length , uniq , unnest , collectBy} = require('../source');
+var {all, compose , difference , equals , head , identity , is , isEmpty , length , uniq , unnest , collectBy} = require('../source/index.js');
 var fc = require('fast-check');
 var {spy} = require('sinon');
 

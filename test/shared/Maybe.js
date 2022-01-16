@@ -1,4 +1,4 @@
-var R = require('../../source');
+var R = require('../../source/index.js');
 
 
 var sentinel = {};

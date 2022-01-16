@@ -1,6 +1,6 @@
-var R = require('../source');
-var eq = require('./shared/eq');
-var Pair = require('./shared/Pair');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var Pair = require('./shared/Pair.js');
 
 
 describe('promap', function() {

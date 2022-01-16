@@ -1,7 +1,7 @@
 
-var R = require('../source');
-var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 var not = function(x) { return !x; };
 var add3 = R.curry(function add3(a, b, c) {
