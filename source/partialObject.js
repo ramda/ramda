@@ -29,5 +29,5 @@ import _curry2 from './internal/_curry2.js';
  *      sayHelloToMs({ firstName: 'Jane', lastName: 'Jones' }); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partialObject(f, { a, b })({ c, d }) = f({ a, b, c, d })
  */
-
-export default _curry2((f, o) => (props) => f.call(this, mergeDeepRight(o, props)));
+var partialObject = _curry2((f, o) => (props) => f.call(this, mergeDeepRight(o, props)));
+export default partialObject;
