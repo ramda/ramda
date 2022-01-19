@@ -18,6 +18,12 @@ import _curry3 from './internal/_curry3.js';
  * on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
  *
+ * Be cautious of mutating and returning the accumulator. If you reuse it across
+ * invocations, it will continue to accumulate onto the same value. The general
+ * recommendation is to always return a new value. If you can't do so for
+ * performance reasons, then be sure to reinitialize the accumulator on each
+ * invocation.
+ * 
  * @func
  * @memberOf R
  * @since v0.1.0
