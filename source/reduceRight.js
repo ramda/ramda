@@ -23,7 +23,7 @@ import _curry3 from './internal/_curry3.js';
  * recommendation is to always return a new value. If you can't do so for
  * performance reasons, then be sure to reinitialize the accumulator on each
  * invocation.
- * 
+ *
  * @func
  * @memberOf R
  * @since v0.1.0

@@ -23,7 +23,7 @@ import _reduce from './internal/_reduce.js';
  * recommendation is to always return a new value. If you can't do so for
  * performance reasons, then be sure to reinitialize the accumulator on each
  * invocation.
- * 
+ *
  * Dispatches to the `reduce` method of the third argument, if present. When
  * doing so, it is up to the user to handle the [`R.reduced`](#reduced)
  * shortcuting, as this is not implemented by `reduce`.
