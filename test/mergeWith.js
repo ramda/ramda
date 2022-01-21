@@ -37,4 +37,26 @@ describe('mergeWith', function() {
     eq(R.mergeWith(last, new Cla(), {w: 1}), {w: 1});
   });
 
+  describe('acts as if nil values are simply empty objects', function() {
+    it('... if the first object is nil and the second empty', function() {
+      eq(R.mergeWith(R.concat, undefined, {}), {});
+    });
+
+    it('... if the first object is empty and the second nil', function() {
+      eq(R.mergeWith(R.concat, {}, null), {});
+    });
+
+    it('... if both objects are nil', function() {
+      eq(R.mergeWith(R.concat, undefined, null), {});
+    });
+
+    it('... if the first object is not empty and the second is nil', function() {
+      eq(R.mergeWith(R.concat, {a: 'a'}, null), {a: 'a'});
+    });
+
+    it('... if the first object is nil and the second is not empty', function() {
+      eq(R.mergeWith(R.concat, undefined, {a: 'a'}), {a: 'a'});
+    });
+  });
+
 });

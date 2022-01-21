@@ -37,4 +37,25 @@ describe('mergeWithKey', function() {
     eq(R.mergeWithKey(last, a, new Cla()), {w: 1, x: 2});
   });
 
+  describe('acts as if nil values are simply empty objects', function() {
+    var a = {a: 'b', x: 'd'};
+    var b = {a: 'c', y: 'e'};
+    const combine = function(k, a, b) { return k + a + b; };
+
+    eq(R.mergeWithKey(combine, a, b), {a: 'abc', x: 'd', y: 'e'});
+
+    it('... if the first object is nil', function() {
+      eq(R.mergeWithKey(combine, null, b), b);
+
+    });
+
+    it('... if the second object is nil', function() {
+      eq(R.mergeWithKey(combine, a, undefined), a);
+    });
+
+    it('... if both objects are nil', function() {
+      eq(R.mergeWithKey(combine, null, undefined), {});
+    });
+  });
+
 });
