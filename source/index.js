@@ -208,6 +208,7 @@ export { default as splitWhenever } from './splitWhenever.js';
 export { default as startsWith } from './startsWith.js';
 export { default as subtract } from './subtract.js';
 export { default as sum } from './sum.js';
+export { default as swap } from './swap.js';
 export { default as symmetricDifference } from './symmetricDifference.js';
 export { default as symmetricDifferenceWith } from './symmetricDifferenceWith.js';
 export { default as tail } from './tail.js';
