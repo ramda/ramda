@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-slash=/
-README="$(cat README.md)"
-README="${README//${PREVIOUS_VERSION}${slash}ramda.min.js/${VERSION}${slash}ramda.min.js}"
-README="${README//${PREVIOUS_VERSION}${slash}dist${slash}ramda.min.js/${VERSION}${slash}dist${slash}ramda.min.js}"
-README="${README//${PREVIOUS_VERSION%.*}${slash}dist${slash}ramda.min.js/${VERSION%.*}${slash}dist${slash}ramda.min.js}"
-echo "$README" >README.md
+node ./scripts/beforePublish.js
 git add README.md
 
 for filename in $(find source -maxdepth 1 -name "*.js" | xargs grep --files-without-match "@since v") ; do
