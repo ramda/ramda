@@ -34,7 +34,7 @@ var assocPath = _curry3(function assocPath(path, val, obj) {
   }
   var idx = path[0];
   if (path.length > 1) {
-    var nextObj = (!isNil(obj) && _has(idx, obj)) ? obj[idx] : _isInteger(path[1]) ? [] : {};
+    var nextObj = (!isNil(obj) && _has(idx, obj) && typeof obj[idx] === 'object') ? obj[idx] : _isInteger(path[1]) ? [] : {};
     val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
   }
   return _assoc(idx, val, obj);
