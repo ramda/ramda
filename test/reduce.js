@@ -22,6 +22,13 @@ describe('reduce', function() {
     eq(R.reduce(R.concat, [], []), []);
   });
 
+  it('returns the accumulator for an null/undefined list', function() {
+    eq(R.reduce(add, 0, null), 0);
+    eq(R.reduce(R.concat, [], null), []);
+    eq(R.reduce(add, 0, undefined), 0);
+    eq(R.reduce(R.concat, [], undefined), []);
+  });
+
   it('Prefers the use of the iterator of an object over reduce (and handles short-circuits)', function() {
     var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
 
