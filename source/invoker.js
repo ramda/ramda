@@ -5,7 +5,7 @@ import toString from './toString.js';
 
 
 /**
- * Given an `arity` (Number) and a `name` (String) the `invoker()` function
+ * Given an `arity` (Number) and a `name` (String) the `invoker` function
  * returns a curried function that takes `arity` arguments and a `context`
  * object. It will "invoke" the `name`'d function (a method) on the `context`
  * object.
