@@ -104,7 +104,7 @@
     "dox": "latest",
     "envvar": "^2.0.0",
     "eslint": "^5.16.0",
-    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-import": "^2.25.4",
     "fast-check": "^2.12.0",
     "handlebars": ">=4.1.2",
     "js-yaml": "^3.13.1",
