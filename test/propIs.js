@@ -18,7 +18,7 @@ describe('propIs', function() {
     eq(R.propIs(String, 0, deities), true);
     eq(R.propIs(String, 1, deities), true);
     eq(R.propIs(String, 2, deities), true);
-    eq(R.propIs(String, -1, deities), true);
+    eq(R.propIs(String, -1, deities), false);
     eq(R.propIs(String, 3, deities), false);
   });
 

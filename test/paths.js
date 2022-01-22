@@ -26,8 +26,8 @@ describe('paths', function() {
   });
 
   it('takes a path that contains negative indices into arrays', function() {
-    eq(R.paths([['p', -2, 'q'], ['p', -1]], obj), [3, 'Hi']);
-    eq(R.paths([['p', -4, 'q'], ['x', 'z', -1, 0]], obj), [undefined, {}]);
+    eq(R.paths([['p', -2, 'q'], ['p', -1]], obj), [undefined, undefined]);
+    eq(R.paths([['p', -4, 'q'], ['x', 'z', -1, 0]], obj), [undefined, undefined]);
   });
 
   it("gets a deep property's value from objects", function() {

@@ -32,7 +32,7 @@ describe('propOr', function() {
     eq(R.propOr('Unknown', 0, deities), 'Cthulhu');
     eq(R.propOr('Unknown', 1, deities), 'Dagon');
     eq(R.propOr('Unknown', 2, deities), 'Yog-Sothoth');
-    eq(R.propOr('Unknown', -1, deities), 'Yog-Sothoth');
+    eq(R.propOr('Unknown', -1, deities), 'Unknown');
     eq(R.propOr('Unknown', 3, deities), 'Unknown');
   });
 

@@ -17,7 +17,7 @@ describe('propEq', function() {
     eq(R.propEq(0, 'Cthulhu', deities), true);
     eq(R.propEq(1, 'Dagon', deities), true);
     eq(R.propEq(2, 'Yog-Sothoth', deities), true);
-    eq(R.propEq(-1, 'Yog-Sothoth', deities), true);
+    eq(R.propEq(-1, 'Yog-Sothoth', deities), false);
     eq(R.propEq(3, undefined, deities), true);
   });
 
