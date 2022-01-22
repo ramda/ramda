@@ -27,11 +27,11 @@ import toString from './toString.js';
  *      fetch("http://example.com/index.json").then(asJson)
  *
  *      // A function with one argument
- *      var sliceFrom = invoker(1, 'slice');
+ *      const sliceFrom = invoker(1, 'slice');
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
  *
  *      // A function with two arguments
- *      var sliceFrom6 = invoker(2, 'slice')(6);
+ *      const sliceFrom6 = invoker(2, 'slice')(6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
  *
  *      // NOTE: You can't simply pass some of the arguments to the initial invoker function.
