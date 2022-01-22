@@ -1,4 +1,4 @@
-var R = require('../../source');
+var R = require('../../source/index.js');
 
 
 function Pair(left, right) {

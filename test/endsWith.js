@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 describe('endsWith', function() {
   it('should return true when a string ends with the provided value', function() {

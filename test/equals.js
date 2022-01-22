@@ -1,7 +1,7 @@
 /* global Map, Set, WeakMap, WeakSet */
 
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 var fc = require('fast-check');
 
 describe('equals', function() {
