@@ -2,9 +2,6 @@ var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
 var list = ['a', 'b', 'c', 'd', 'e', 'f'];
-var o = {a: 1, b: 2};
-var o2 = {};
-var map = new Map([[o, 1], [o2, 2]]);
 
 describe('swap', function() {
   it('swaps an element from one index to the other', function() {
@@ -32,8 +29,8 @@ describe('swap', function() {
   });
 
   it('swaps property values from one property to another', function() {
-    eq(R.swap('a', 'b', o), {a: 2, b: 1});
-    eq(R.swap('b', 'a', o), {a: 2, b: 1});
+    eq(R.swap('a', 'b', {a: 1, b: 2}), {a: 2, b: 1});
+    eq(R.swap('b', 'a', {a: 1, b: 2}), {a: 2, b: 1});
   });
 
   it('does nothing when property names are not defined', function() {
@@ -43,9 +40,5 @@ describe('swap', function() {
 
   it('swaps characters in string from one index to another', function() {
     eq(R.swap(0, 2, 'foo'), 'oof');
-  });
-
-  it('swaps object indexes in map from one index to another', function() {
-    eq(R.swap(o, o2, map), new Map([[o, 2], [o2, 1]]));
   });
 });
