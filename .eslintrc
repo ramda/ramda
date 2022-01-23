@@ -127,5 +127,13 @@
       2,
       "always"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["test/**/*.js"],
+      "parserOptions": {
+        "ecmaVersion": 2018
+      }
+    }
+  ]
 }
