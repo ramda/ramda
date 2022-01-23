@@ -1,4 +1,4 @@
-var R = require('../..');
+var R = require('../../source/index.js');
 
 
 var sentinel = {};
@@ -49,7 +49,7 @@ Maybe.prototype['fantasy-land/chain'] = function(f) {
 };
 
 //  Maybe#filter :: Maybe a ~> (a -> Boolean) -> Maybe a
-Maybe.prototype.filter = function(pred) {
+Maybe.prototype['fantasy-land/filter'] = function(pred) {
   return this.isJust && pred(this.value) ? this : Nothing;
 };
 

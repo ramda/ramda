@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xtake from './internal/_xtake';
-import slice from './slice';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xtake from './internal/_xtake.js';
+import slice from './slice.js';
 
 
 /**
@@ -28,7 +28,7 @@ import slice from './slice';
  *      R.take(4, ['foo', 'bar', 'baz']); //=> ['foo', 'bar', 'baz']
  *      R.take(3, 'ramda');               //=> 'ram'
  *
- *      var personnel = [
+ *      const personnel = [
  *        'Dave Brubeck',
  *        'Paul Desmond',
  *        'Eugene Wright',
@@ -39,7 +39,7 @@ import slice from './slice';
  *        'Ron Crotty'
  *      ];
  *
- *      var takeFive = R.take(5);
+ *      const takeFive = R.take(5);
  *      takeFive(personnel);
  *      //=> ['Dave Brubeck', 'Paul Desmond', 'Eugene Wright', 'Joe Morello', 'Gerry Mulligan']
  * @symb R.take(-1, [a, b]) = [a, b]

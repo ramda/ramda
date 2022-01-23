@@ -1,15 +1,15 @@
-import _contains from './_contains';
-import _map from './_map';
-import _quote from './_quote';
-import _toISOString from './_toISOString';
-import keys from '../keys';
-import reject from '../reject';
+import _includes from './_includes.js';
+import _map from './_map.js';
+import _quote from './_quote.js';
+import _toISOString from './_toISOString.js';
+import keys from '../keys.js';
+import reject from '../reject.js';
 
 
 export default function _toString(x, seen) {
   var recur = function recur(y) {
     var xs = seen.concat([x]);
-    return _contains(y, xs) ? '<Circular>' : _toString(y, xs);
+    return _includes(y, xs) ? '<Circular>' : _toString(y, xs);
   };
 
   //  mapPairs :: (Object, [String]) -> [String]
@@ -26,10 +26,14 @@ export default function _toString(x, seen) {
       return typeof x === 'object' ? 'new Boolean(' + recur(x.valueOf()) + ')' : x.toString();
     case '[object Date]':
       return 'new Date(' + (isNaN(x.valueOf()) ? recur(NaN) : _quote(_toISOString(x))) + ')';
+    case '[object Map]':
+      return 'new Map(' + recur(Array.from(x)) + ')';
     case '[object Null]':
       return 'null';
     case '[object Number]':
       return typeof x === 'object' ? 'new Number(' + recur(x.valueOf()) + ')' : 1 / x === -Infinity ? '-0' : x.toString(10);
+    case '[object Set]':
+      return 'new Set(' + recur(Array.from(x).sort()) + ')';
     case '[object String]':
       return typeof x === 'object' ? 'new String(' + recur(x.valueOf()) + ')' : _quote(x);
     case '[object Undefined]':

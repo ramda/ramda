@@ -1,5 +1,5 @@
-import _curry1 from './internal/_curry1';
-import nAry from './nAry';
+import _curry1 from './internal/_curry1.js';
+import nAry from './nAry.js';
 
 
 /**
@@ -11,20 +11,20 @@ import nAry from './nAry';
  * @memberOf R
  * @since v0.2.0
  * @category Function
- * @sig (* -> b) -> (a -> b)
+ * @sig (a -> b -> c -> ... -> z) -> (a -> z)
  * @param {Function} fn The function to wrap.
  * @return {Function} A new function wrapping `fn`. The new function is guaranteed to be of
  *         arity 1.
  * @see R.binary, R.nAry
  * @example
  *
- *      var takesTwoArgs = function(a, b) {
+ *      const takesTwoArgs = function(a, b) {
  *        return [a, b];
  *      };
  *      takesTwoArgs.length; //=> 2
  *      takesTwoArgs(1, 2); //=> [1, 2]
  *
- *      var takesOneArg = R.unary(takesTwoArgs);
+ *      const takesOneArg = R.unary(takesTwoArgs);
  *      takesOneArg.length; //=> 1
  *      // Only 1 argument is passed to the wrapped function
  *      takesOneArg(1, 2); //=> [1, undefined]

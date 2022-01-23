@@ -1,6 +1,6 @@
-var R = require('..');
-var eq = require('./shared/eq');
-var _isTransformer = require('../src/internal/_isTransformer');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var _isTransformer = require('../source/internal/_isTransformer.js');
 
 
 describe('groupBy', function() {
@@ -39,7 +39,7 @@ describe('groupBy', function() {
     var xf = {
       '@@transducer/init': function() { return {}; },
       '@@transducer/result': function(x) { return x; },
-      '@@transducer/step': R.merge
+      '@@transducer/step': R.mergeRight
     };
     eq(_isTransformer(R.groupBy(byType, xf)), true);
   });

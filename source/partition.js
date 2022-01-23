@@ -1,6 +1,6 @@
-import filter from './filter';
-import juxt from './juxt';
-import reject from './reject';
+import filter from './filter.js';
+import juxt from './juxt.js';
+import reject from './reject.js';
 
 
 /**
@@ -21,10 +21,10 @@ import reject from './reject';
  * @see R.filter, R.reject
  * @example
  *
- *      R.partition(R.contains('s'), ['sss', 'ttt', 'foo', 'bars']);
+ *      R.partition(R.includes('s'), ['sss', 'ttt', 'foo', 'bars']);
  *      // => [ [ 'sss', 'bars' ],  [ 'ttt', 'foo' ] ]
  *
- *      R.partition(R.contains('s'), { a: 'sss', b: 'ttt', foo: 'bars' });
+ *      R.partition(R.includes('s'), { a: 'sss', b: 'ttt', foo: 'bars' });
  *      // => [ { a: 'sss', foo: 'bars' }, { b: 'ttt' }  ]
  */
 var partition = juxt([filter, reject]);

@@ -1,7 +1,7 @@
-import _curry1 from './internal/_curry1';
-import lens from './lens';
-import nth from './nth';
-import update from './update';
+import _curry1 from './internal/_curry1.js';
+import lens from './lens.js';
+import nth from './nth.js';
+import update from './update.js';
 
 
 /**
@@ -15,10 +15,10 @@ import update from './update';
  * @sig Number -> Lens s a
  * @param {Number} n
  * @return {Lens}
- * @see R.view, R.set, R.over
+ * @see R.view, R.set, R.over, R.nth
  * @example
  *
- *      var headLens = R.lensIndex(0);
+ *      const headLens = R.lensIndex(0);
  *
  *      R.view(headLens, ['a', 'b', 'c']);            //=> 'a'
  *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']

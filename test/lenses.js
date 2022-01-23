@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 var they = it;
@@ -26,25 +26,29 @@ describe('view, over, and set', function() {
   they('may be applied to a lens created by `lensProp`', function() {
     eq(R.view(nameLens, alice), 'Alice Jones');
 
-    eq(R.over(nameLens, R.toUpper, alice),
-       {name: 'ALICE JONES',
-        address: ['22 Walnut St', 'San Francisco', 'CA'],
-        pets: {dog: 'joker', cat: 'batman'}});
+    eq(R.over(nameLens, R.toUpper, alice), {
+      name: 'ALICE JONES',
+      address: ['22 Walnut St', 'San Francisco', 'CA'],
+      pets: {dog: 'joker', cat: 'batman'}
+    });
 
-    eq(R.set(nameLens, 'Alice Smith', alice),
-       {name: 'Alice Smith',
-        address: ['22 Walnut St', 'San Francisco', 'CA'],
-        pets: {dog: 'joker', cat: 'batman'}});
+    eq(R.set(nameLens, 'Alice Smith', alice), {
+      name: 'Alice Smith',
+      address: ['22 Walnut St', 'San Francisco', 'CA'],
+      pets: {dog: 'joker', cat: 'batman'}
+    });
   });
 
   they('may be applied to a lens created by `lensIndex`', function() {
     eq(R.view(headLens, alice.address), '22 Walnut St');
 
     eq(R.over(headLens, R.toUpper, alice.address),
-       ['22 WALNUT ST', 'San Francisco', 'CA']);
+      ['22 WALNUT ST', 'San Francisco', 'CA']
+    );
 
     eq(R.set(headLens, '52 Crane Ave', alice.address),
-       ['52 Crane Ave', 'San Francisco', 'CA']);
+      ['52 Crane Ave', 'San Francisco', 'CA']
+    );
   });
 
   they('may be applied to composed lenses', function() {
@@ -55,16 +59,17 @@ describe('view, over, and set', function() {
 
     eq(R.view(streetLens, alice), '22 Walnut St');
 
-    eq(R.over(streetLens, R.toUpper, alice),
-       {name: 'Alice Jones',
-        address: ['22 WALNUT ST', 'San Francisco', 'CA'],
-        pets: {dog: 'joker', cat: 'batman'}});
+    eq(R.over(streetLens, R.toUpper, alice), {
+      name: 'Alice Jones',
+      address: ['22 WALNUT ST', 'San Francisco', 'CA'],
+      pets: {dog: 'joker', cat: 'batman'}
+    });
 
-    eq(R.set(streetLens, '52 Crane Ave', alice),
-       {name: 'Alice Jones',
-        address: ['52 Crane Ave', 'San Francisco', 'CA'],
-        pets: {dog: 'joker', cat: 'batman'}});
+    eq(R.set(streetLens, '52 Crane Ave', alice), {
+      name: 'Alice Jones',
+      address: ['52 Crane Ave', 'San Francisco', 'CA'],
+      pets: {dog: 'joker', cat: 'batman'}
+    });
   });
 
 });
-

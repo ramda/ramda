@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const repl = require('repl');
+
+require('@babel/register')({ envName: 'cjs', root: __dirname });
+
+const R = require('./source');
+
+const r = repl.start();
+
+Object.assign(r.context, {R}, R);

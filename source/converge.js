@@ -1,17 +1,18 @@
-import _curry2 from './internal/_curry2';
-import _map from './internal/_map';
-import curryN from './curryN';
-import max from './max';
-import pluck from './pluck';
-import reduce from './reduce';
+import _curry2 from './internal/_curry2.js';
+import _map from './internal/_map.js';
+import curryN from './curryN.js';
+import max from './max.js';
+import pluck from './pluck.js';
+import reduce from './reduce.js';
 
 
 /**
  * Accepts a converging function and a list of branching functions and returns
- * a new function. When invoked, this new function is applied to some
- * arguments, each branching function is applied to those same arguments. The
- * results of each branching function are passed as arguments to the converging
- * function to produce the return value.
+ * a new function. The arity of the new function is the same as the arity of
+ * the longest branching function. When invoked, this new function is applied
+ * to some arguments, and each branching function is applied to those same
+ * arguments. The results of each branching function are passed as arguments
+ * to the converging function to produce the return value.
  *
  * @func
  * @memberOf R
@@ -25,10 +26,10 @@ import reduce from './reduce';
  * @see R.useWith
  * @example
  *
- *      var average = R.converge(R.divide, [R.sum, R.length])
+ *      const average = R.converge(R.divide, [R.sum, R.length])
  *      average([1, 2, 3, 4, 5, 6, 7]) //=> 4
  *
- *      var strangeConcat = R.converge(R.concat, [R.toUpper, R.toLower])
+ *      const strangeConcat = R.converge(R.concat, [R.toUpper, R.toLower])
  *      strangeConcat("Yodel") //=> "YODELyodel"
  *
  * @symb R.converge(f, [g, h])(a, b) = f(g(a, b), h(a, b))

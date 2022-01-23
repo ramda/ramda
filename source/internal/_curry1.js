@@ -1,4 +1,4 @@
-import _isPlaceholder from './_isPlaceholder';
+import _isPlaceholder from './_isPlaceholder.js';
 
 
 /**

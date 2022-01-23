@@ -1,5 +1,4 @@
-import _objectIs from './internal/_objectIs';
-import _curry2 from './internal/_curry2';
+import _objectIs from './internal/_objectIs.js';
 
 
 /**
@@ -8,6 +7,8 @@ import _curry2 from './internal/_curry2';
  * `0` and `-0` are not identical.
  *
  * Note this is merely a curried version of ES6 `Object.is`.
+ *
+ * `identical` does not support the `__` placeholder.
  *
  * @func
  * @memberOf R
@@ -19,7 +20,7 @@ import _curry2 from './internal/_curry2';
  * @return {Boolean}
  * @example
  *
- *      var o = {};
+ *      const o = {};
  *      R.identical(o, o); //=> true
  *      R.identical(1, 1); //=> true
  *      R.identical(1, '1'); //=> false
@@ -27,5 +28,29 @@ import _curry2 from './internal/_curry2';
  *      R.identical(0, -0); //=> false
  *      R.identical(NaN, NaN); //=> true
  */
-var identical = _curry2(_objectIs);
+var identical = function(a, b) {
+  switch (arguments.length) {
+    case 0:
+      return identical;
+    case 1:
+      return (function() {
+        return function unaryIdentical(_b) {
+          switch (arguments.length) {
+            case 0:
+              return unaryIdentical;
+            default:
+              return _objectIs(a, _b);
+          }
+        };
+      }());
+    default:
+      return _objectIs(a, b);
+  }
+};
+
+// In order to support Cross-origin Window objects as arguments to identical,
+// it cannot be implemented as _curry2(_objectIs).
+// The reason is that _curry2 checks if a function argument is the placeholder __
+// by accessing a paritcular property. However, across URL origins access
+// to most properties of Window is forbidden.
 export default identical;

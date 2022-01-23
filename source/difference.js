@@ -1,5 +1,5 @@
-import _contains from './internal/_contains';
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
+import _Set from './internal/_Set.js';
 
 
 /**
@@ -26,8 +26,15 @@ var difference = _curry2(function difference(first, second) {
   var out = [];
   var idx = 0;
   var firstLen = first.length;
+  var secondLen = second.length;
+  var toFilterOut = new _Set();
+
+  for (var i = 0; i < secondLen; i += 1) {
+    toFilterOut.add(second[i]);
+  }
+
   while (idx < firstLen) {
-    if (!_contains(first[idx], second) && !_contains(first[idx], out)) {
+    if (toFilterOut.add(first[idx])) {
       out[out.length] = first[idx];
     }
     idx += 1;

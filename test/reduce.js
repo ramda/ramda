@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 describe('reduce', function() {
   var add = function(a, b) {return a + b;};
@@ -20,6 +20,13 @@ describe('reduce', function() {
     eq(R.reduce(add, 0, []), 0);
     eq(R.reduce(mult, 1, []), 1);
     eq(R.reduce(R.concat, [], []), []);
+  });
+
+  it('returns the accumulator for an null/undefined list', function() {
+    eq(R.reduce(add, 0, null), 0);
+    eq(R.reduce(R.concat, [], null), []);
+    eq(R.reduce(add, 0, undefined), 0);
+    eq(R.reduce(R.concat, [], undefined), []);
   });
 
   it('Prefers the use of the iterator of an object over reduce (and handles short-circuits)', function() {
@@ -68,5 +75,11 @@ describe('reduce', function() {
     var list = new Reducible([1, 2, 3, 4, 5, 6]);
 
     eq(R.reduce(rfn, [], list), [1, 2]);
+  });
+
+  it('short circuits with reduced', function() {
+    var addWithMaxOf10 = function(acc, val) {return acc + val > 10 ? R.reduced(acc) : acc + val;};
+    eq(R.reduce(addWithMaxOf10, 0, [1, 2, 3, 4]), 10);
+    eq(R.reduce(addWithMaxOf10, 0, [2, 4, 6, 8]), 6);
   });
 });

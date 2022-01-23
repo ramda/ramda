@@ -1,9 +1,9 @@
-var listXf = require('./helpers/listXf');
+var listXf = require('./helpers/listXf.js');
 
-var R = require('..');
+var R = require('../source/index.js');
 var assert = require('assert');
-var eq = require('./shared/eq');
-var Id = require('./shared/Id');
+var eq = require('./shared/eq.js');
+var Id = require('./shared/Id.js');
 
 describe('map', function() {
   var times2 = function(x) {return x * 2;};

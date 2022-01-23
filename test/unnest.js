@@ -1,8 +1,8 @@
 var assert = require('assert');
 
-var R = require('..');
-var eq = require('./shared/eq');
-var Maybe = require('./shared/Maybe');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 describe('unnest', function() {

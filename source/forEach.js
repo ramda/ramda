@@ -1,5 +1,5 @@
-import _checkForMethod from './internal/_checkForMethod';
-import _curry2 from './internal/_curry2';
+import _checkForMethod from './internal/_checkForMethod.js';
+import _curry2 from './internal/_curry2.js';
 
 
 /**
@@ -29,7 +29,7 @@ import _curry2 from './internal/_curry2';
  * @see R.addIndex
  * @example
  *
- *      var printXPlusFive = x => console.log(x + 5);
+ *      const printXPlusFive = x => console.log(x + 5);
  *      R.forEach(printXPlusFive, [1, 2, 3]); //=> [1, 2, 3]
  *      // logs 6
  *      // logs 7

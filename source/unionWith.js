@@ -1,12 +1,13 @@
-import _concat from './internal/_concat';
-import _curry3 from './internal/_curry3';
-import uniqWith from './uniqWith';
+import _concat from './internal/_concat.js';
+import _curry3 from './internal/_curry3.js';
+import uniqWith from './uniqWith.js';
 
 
 /**
  * Combines two lists into a set (i.e. no duplicates) composed of the elements
  * of each list. Duplication is determined according to the value returned by
- * applying the supplied predicate to two list elements.
+ * applying the supplied predicate to two list elements. If an element exists
+ * in both lists, the first element from the first list will be used.
  *
  * @func
  * @memberOf R
@@ -21,8 +22,8 @@ import uniqWith from './uniqWith';
  * @see R.union
  * @example
  *
- *      var l1 = [{a: 1}, {a: 2}];
- *      var l2 = [{a: 1}, {a: 4}];
+ *      const l1 = [{a: 1}, {a: 2}];
+ *      const l2 = [{a: 1}, {a: 4}];
  *      R.unionWith(R.eqBy(R.prop('a')), l1, l2); //=> [{a: 1}, {a: 2}, {a: 4}]
  */
 var unionWith = _curry3(function unionWith(pred, list1, list2) {

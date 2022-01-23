@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import _isObject from './internal/_isObject';
-import mergeWithKey from './mergeWithKey';
+import _curry3 from './internal/_curry3.js';
+import _isObject from './internal/_isObject.js';
+import mergeWithKey from './mergeWithKey.js';
 
 
 /**
@@ -22,7 +22,7 @@ import mergeWithKey from './mergeWithKey';
  * @param {Object} lObj
  * @param {Object} rObj
  * @return {Object}
- * @see R.mergeWithKey, R.mergeDeep, R.mergeDeepWith
+ * @see R.mergeWithKey, R.mergeDeepWith
  * @example
  *
  *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r

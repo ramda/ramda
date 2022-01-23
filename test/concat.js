@@ -1,15 +1,10 @@
 var assert = require('assert');
 
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('concat', function() {
-  it('adds combines the elements of the two lists', function() {
-    eq(R.concat(['a', 'b'], ['c', 'd']), ['a', 'b', 'c', 'd']);
-    eq(R.concat([], ['c', 'd']), ['c', 'd']);
-  });
-
   var z1 = {
     x: 'z1',
     concat: function(that) { return this.x + ' ' + that.x; }

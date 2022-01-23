@@ -1,4 +1,4 @@
-import _curry3 from './internal/_curry3';
+import _curry3 from './internal/_curry3.js';
 
 
 /**
@@ -17,11 +17,14 @@ import _curry3 from './internal/_curry3';
  * @see R.descend
  * @example
  *
- *      var byAge = R.ascend(R.prop('age'));
- *      var people = [
- *        // ...
+ *      const byAge = R.ascend(R.prop('age'));
+ *      const people = [
+ *        { name: 'Emma', age: 70 },
+ *        { name: 'Peter', age: 78 },
+ *        { name: 'Mikhail', age: 62 },
  *      ];
- *      var peopleByYoungestFirst = R.sort(byAge, people);
+ *      const peopleByYoungestFirst = R.sort(byAge, people);
+ *        //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]
  */
 var ascend = _curry3(function ascend(fn, a, b) {
   var aa = fn(a);

@@ -1,4 +1,4 @@
-import _curry3 from './internal/_curry3';
+import _curry3 from './internal/_curry3.js';
 
 // `Identity` is a functor that holds a single value, where `map` simply
 // transforms the held value with the provided function.
@@ -22,10 +22,10 @@ var Identity = function(x) {
  * @param {*} v
  * @param {*} x
  * @return {*}
- * @see R.prop, R.lensIndex, R.lensProp
+ * @see R.view, R.set, R.lens, R.lensIndex, R.lensProp, R.lensPath
  * @example
  *
- *      var headLens = R.lensIndex(0);
+ *      const headLens = R.lensIndex(0);
  *
  *      R.over(headLens, R.toUpper, ['foo', 'bar', 'baz']); //=> ['FOO', 'bar', 'baz']
  */

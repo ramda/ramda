@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import curryN from './curryN';
+import _curry3 from './internal/_curry3.js';
+import curryN from './curryN.js';
 
 
 /**
@@ -19,13 +19,13 @@ import curryN from './curryN';
  * @see R.unless, R.when, R.cond
  * @example
  *
- *      var incCount = R.ifElse(
+ *      const incCount = R.ifElse(
  *        R.has('count'),
  *        R.over(R.lensProp('count'), R.inc),
  *        R.assoc('count', 1)
  *      );
- *      incCount({});           //=> { count: 1 }
  *      incCount({ count: 1 }); //=> { count: 2 }
+ *      incCount({});           //=> { count: 1 }
  */
 var ifElse = _curry3(function ifElse(condition, onTrue, onFalse) {
   return curryN(Math.max(condition.length, onTrue.length, onFalse.length),

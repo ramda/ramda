@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 describe('descend', function() {
   it('builds a descending comparator function out of the identity function', function() {

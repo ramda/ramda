@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import _reduce from './internal/_reduce';
+import _curry3 from './internal/_curry3.js';
+import _reduce from './internal/_reduce.js';
 
 
 /**
@@ -17,6 +17,12 @@ import _reduce from './internal/_reduce';
  * arrays), unlike the native `Array.prototype.reduce` method. For more details
  * on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Description
+ *
+ * Be cautious of mutating and returning the accumulator. If you reuse it across
+ * invocations, it will continue to accumulate onto the same value. The general
+ * recommendation is to always return a new value. If you can't do so for
+ * performance reasons, then be sure to reinitialize the accumulator on each
+ * invocation.
  *
  * Dispatches to the `reduce` method of the third argument, if present. When
  * doing so, it is up to the user to handle the [`R.reduced`](#reduced)

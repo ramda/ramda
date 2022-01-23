@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import concat from './concat';
-import differenceWith from './differenceWith';
+import _curry3 from './internal/_curry3.js';
+import concat from './concat.js';
+import differenceWith from './differenceWith.js';
 
 
 /**
@@ -20,9 +20,9 @@ import differenceWith from './differenceWith';
  * @see R.symmetricDifference, R.difference, R.differenceWith
  * @example
  *
- *      var eqA = R.eqBy(R.prop('a'));
- *      var l1 = [{a: 1}, {a: 2}, {a: 3}, {a: 4}];
- *      var l2 = [{a: 3}, {a: 4}, {a: 5}, {a: 6}];
+ *      const eqA = R.eqBy(R.prop('a'));
+ *      const l1 = [{a: 1}, {a: 2}, {a: 3}, {a: 4}];
+ *      const l2 = [{a: 3}, {a: 4}, {a: 5}, {a: 6}];
  *      R.symmetricDifferenceWith(eqA, l1, l2); //=> [{a: 1}, {a: 2}, {a: 5}, {a: 6}]
  */
 var symmetricDifferenceWith = _curry3(function symmetricDifferenceWith(pred, list1, list2) {

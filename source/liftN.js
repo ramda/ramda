@@ -1,8 +1,8 @@
-import _curry2 from './internal/_curry2';
-import _reduce from './internal/_reduce';
-import ap from './ap';
-import curryN from './curryN';
-import map from './map';
+import _curry2 from './internal/_curry2.js';
+import _reduce from './internal/_reduce.js';
+import ap from './ap.js';
+import curryN from './curryN.js';
+import map from './map.js';
 
 
 /**
@@ -19,7 +19,7 @@ import map from './map';
  * @see R.lift, R.ap
  * @example
  *
- *      var madd3 = R.liftN(3, (...args) => R.sum(args));
+ *      const madd3 = R.liftN(3, (...args) => R.sum(args));
  *      madd3([1,2,3], [1,2,3], [1]); //=> [3, 4, 5, 4, 5, 6, 5, 6, 7]
  */
 var liftN = _curry2(function liftN(arity, fn) {

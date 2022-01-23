@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _isString from './internal/_isString';
+import _curry2 from './internal/_curry2.js';
+import _isString from './internal/_isString.js';
 
 
 /**
@@ -17,7 +17,7 @@ import _isString from './internal/_isString';
  * @return {*}
  * @example
  *
- *      var list = ['foo', 'bar', 'baz', 'quux'];
+ *      const list = ['foo', 'bar', 'baz', 'quux'];
  *      R.nth(1, list); //=> 'bar'
  *      R.nth(-1, list); //=> 'quux'
  *      R.nth(-99, list); //=> undefined

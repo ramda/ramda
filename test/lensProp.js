@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 var testObj = {
@@ -49,8 +49,10 @@ describe('lensProp', function() {
       eq(R.view(R.lensProp('a'), R.set(R.lensProp('a'), 0, testObj)), 0);
     });
     it('get (set(set s v1) v2) === v2', function() {
-      eq(R.view(R.lensProp('a'), R.set(R.lensProp('a'), 11, R.set(R.lensProp('a'), 10, testObj))),
-         11);
+      eq(
+        R.view(R.lensProp('a'), R.set(R.lensProp('a'), 11, R.set(R.lensProp('a'), 10, testObj))),
+        11
+      );
     });
   });
 });

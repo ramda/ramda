@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import equals from './equals';
-import map from './map';
-import where from './where';
+import _curry2 from './internal/_curry2.js';
+import equals from './equals.js';
+import map from './map.js';
+import where from './where.js';
 
 
 /**
@@ -25,7 +25,7 @@ import where from './where';
  * @example
  *
  *      // pred :: Object -> Boolean
- *      var pred = R.whereEq({a: 1, b: 2});
+ *      const pred = R.whereEq({a: 1, b: 2});
  *
  *      pred({a: 1});              //=> false
  *      pred({a: 1, b: 2});        //=> true

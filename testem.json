@@ -8,6 +8,6 @@
   "serve_files": [
       "tmp-test-bundle.js"
   ],
-  "before_tests": "node_modules/.bin/browserify test/*.js --outfile tmp-test-bundle.js",
-  "after_tests": "rm tmp-test-bundle.js"
+  "before_tests": "cross-env BABEL_ENV=cjs browserify test/*.js -t babelify --outfile tmp-test-bundle.js",
+  "after_tests": "rimraf tmp-test-bundle.js"
 }

@@ -1,9 +1,9 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 
 /**
- * Returns `true` if one or both of its arguments are `true`. Returns `false`
- * if both arguments are `false`.
+ * Returns the first argument if it is truthy, otherwise the second argument.
+ * Acts as the boolean `or` statement if both inputs are `Boolean`s.
  *
  * @func
  * @memberOf R
@@ -12,8 +12,8 @@ import _curry2 from './internal/_curry2';
  * @sig a -> b -> a | b
  * @param {Any} a
  * @param {Any} b
- * @return {Any} the first argument if truthy, otherwise the second argument.
- * @see R.either
+ * @return {Any}
+ * @see R.either, R.and
  * @example
  *
  *      R.or(true, true); //=> true

@@ -1,5 +1,5 @@
-import _curry1 from './internal/_curry1';
-import curryN from './curryN';
+import _curry1 from './internal/_curry1.js';
+import curryN from './curryN.js';
 
 
 /**
@@ -15,7 +15,7 @@ import curryN from './curryN';
  * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
  * @example
  *
- *      var mergeThree = (a, b, c) => [].concat(a, b, c);
+ *      const mergeThree = (a, b, c) => [].concat(a, b, c);
  *
  *      mergeThree(1, 2, 3); //=> [1, 2, 3]
  *

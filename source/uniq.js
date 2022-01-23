@@ -1,5 +1,5 @@
-import identity from './identity';
-import uniqBy from './uniqBy';
+import identity from './identity.js';
+import uniqBy from './uniqBy.js';
 
 
 /**

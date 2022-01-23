@@ -1,11 +1,13 @@
-import _curry3 from './internal/_curry3';
-import _has from './internal/_has';
+import _curry3 from './internal/_curry3.js';
+import defaultTo from './defaultTo.js';
+import prop from './prop.js';
 
 
 /**
- * If the given, non-null object has an own property with the specified name,
- * returns the value of that property. Otherwise returns the provided default
- * value.
+ * Return the specified property of the given non-null object if the property
+ * is present and it's value is not `null`, `undefined` or `NaN`.
+ *
+ * Otherwise the first argument is returned.
  *
  * @func
  * @memberOf R
@@ -18,17 +20,17 @@ import _has from './internal/_has';
  * @return {*} The value of given property of the supplied object or the default value.
  * @example
  *
- *      var alice = {
+ *      const alice = {
  *        name: 'ALICE',
  *        age: 101
  *      };
- *      var favorite = R.prop('favoriteLibrary');
- *      var favoriteWithDefault = R.propOr('Ramda', 'favoriteLibrary');
+ *      const favorite = R.prop('favoriteLibrary');
+ *      const favoriteWithDefault = R.propOr('Ramda', 'favoriteLibrary');
  *
  *      favorite(alice);  //=> undefined
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
 var propOr = _curry3(function propOr(val, p, obj) {
-  return (obj != null && _has(p, obj)) ? obj[p] : val;
+  return defaultTo(val, prop(p, obj));
 });
 export default propOr;

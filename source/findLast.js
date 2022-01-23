@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfindLast from './internal/_xfindLast';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xfindLast from './internal/_xfindLast.js';
 
 
 /**
@@ -21,7 +21,7 @@ import _xfindLast from './internal/_xfindLast';
  * @see R.transduce
  * @example
  *
- *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
+ *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];
  *      R.findLast(R.propEq('a', 1))(xs); //=> {a: 1, b: 1}
  *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
  */

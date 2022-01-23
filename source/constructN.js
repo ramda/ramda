@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import curry from './curry';
-import nAry from './nAry';
+import _curry2 from './internal/_curry2.js';
+import curry from './curry.js';
+import nAry from './nAry.js';
 
 
 /**
@@ -24,14 +24,14 @@ import nAry from './nAry';
  *      }
  *
  *      Salad.prototype.recipe = function() {
- *        var instructions = R.map(ingredient => 'Add a dollop of ' + ingredient, this.ingredients);
+ *        const instructions = R.map(ingredient => 'Add a dollop of ' + ingredient, this.ingredients);
  *        return R.join('\n', instructions);
  *      };
  *
- *      var ThreeLayerSalad = R.constructN(3, Salad);
+ *      const ThreeLayerSalad = R.constructN(3, Salad);
  *
  *      // Notice we no longer need the 'new' keyword, and the constructor is curried for 3 arguments.
- *      var salad = ThreeLayerSalad('Mayonnaise')('Potato Chips')('Ketchup');
+ *      const salad = ThreeLayerSalad('Mayonnaise')('Potato Chips')('Ketchup');
  *
  *      console.log(salad.recipe());
  *      // Add a dollop of Mayonnaise
@@ -46,7 +46,7 @@ var constructN = _curry2(function constructN(n, Fn) {
     return function() { return new Fn(); };
   }
   return curry(nAry(n, function($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
-    switch (arguments.length) {
+    switch (n) {
       case  1: return new Fn($0);
       case  2: return new Fn($0, $1);
       case  3: return new Fn($0, $1, $2);

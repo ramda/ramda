@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import mergeDeepWithKey from './mergeDeepWithKey';
+import _curry3 from './internal/_curry3.js';
+import mergeDeepWithKey from './mergeDeepWithKey.js';
 
 
 /**
@@ -21,7 +21,7 @@ import mergeDeepWithKey from './mergeDeepWithKey';
  * @param {Object} lObj
  * @param {Object} rObj
  * @return {Object}
- * @see R.mergeWith, R.mergeDeep, R.mergeDeepWithKey
+ * @see R.mergeWith, R.mergeDeepWithKey
  * @example
  *
  *      R.mergeDeepWith(R.concat,

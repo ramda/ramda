@@ -1,5 +1,5 @@
-import _concat from './internal/_concat';
-import _curry3 from './internal/_curry3';
+import _concat from './internal/_concat.js';
+import _curry3 from './internal/_curry3.js';
 
 
 /**
@@ -28,11 +28,11 @@ import _curry3 from './internal/_curry3';
  * @symb R.adjust(0, f, [a, b]) = [f(a), b]
  */
 var adjust = _curry3(function adjust(idx, fn, list) {
-  if (idx >= list.length || idx < -list.length) {
+  var len = list.length;
+  if (idx >= len || idx < -len) {
     return list;
   }
-  var start = idx < 0 ? list.length : 0;
-  var _idx = start + idx;
+  var _idx = (len + idx) % len;
   var _list = _concat(list);
   _list[_idx] = fn(list[_idx]);
   return _list;

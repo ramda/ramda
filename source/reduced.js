@@ -1,14 +1,17 @@
-import _curry1 from './internal/_curry1';
-import _reduced from './internal/_reduced';
+import _curry1 from './internal/_curry1.js';
+import _reduced from './internal/_reduced.js';
 
 /**
  * Returns a value wrapped to indicate that it is the final value of the reduce
  * and transduce functions. The returned value should be considered a black
  * box: the internal structure is not guaranteed to be stable.
  *
- * Note: this optimization is unavailable to functions not explicitly listed
- * above. For instance, it is not currently supported by
- * [`reduceRight`](#reduceRight).
+ * This optimization is available to the below functions:
+ * - [`reduce`](#reduce)
+ * - [`reduceWhile`](#reduceWhile)
+ * - [`reduceBy`](#reduceBy)
+ * - [`reduceRight`](#reduceRight)
+ * - [`transduce`](#transduce)
  *
  * @func
  * @memberOf R
@@ -17,7 +20,7 @@ import _reduced from './internal/_reduced';
  * @sig a -> *
  * @param {*} x The final value of the reduce.
  * @return {*} The wrapped value.
- * @see R.reduce, R.transduce
+ * @see R.reduce, R.reduceWhile, R.reduceBy, R.reduceRight, R.transduce
  * @example
  *
  *     R.reduce(

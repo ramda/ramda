@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import always from './always';
-import over from './over';
+import _curry3 from './internal/_curry3.js';
+import always from './always.js';
+import over from './over.js';
 
 
 /**
@@ -17,10 +17,10 @@ import over from './over';
  * @param {*} v
  * @param {*} x
  * @return {*}
- * @see R.prop, R.lensIndex, R.lensProp
+ * @see R.view, R.over, R.lens, R.lensIndex, R.lensProp, R.lensPath
  * @example
  *
- *      var xLens = R.lensProp('x');
+ *      const xLens = R.lensProp('x');
  *
  *      R.set(xLens, 4, {x: 1, y: 2});  //=> {x: 4, y: 2}
  *      R.set(xLens, 8, {x: 1, y: 2});  //=> {x: 8, y: 2}

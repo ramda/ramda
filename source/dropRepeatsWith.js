@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xdropRepeatsWith from './internal/_xdropRepeatsWith';
-import last from './last';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xdropRepeatsWith from './internal/_xdropRepeatsWith.js';
+import last from './last.js';
 
 
 /**
@@ -22,7 +22,7 @@ import last from './last';
  * @see R.transduce
  * @example
  *
- *      var l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
+ *      const l = [1, -1, 1, 3, 4, -4, -4, -5, 5, 3, 3];
  *      R.dropRepeatsWith(R.eqBy(Math.abs), l); //=> [1, 3, 4, -5, 3]
  */
 var dropRepeatsWith = _curry2(_dispatchable([], _xdropRepeatsWith, function dropRepeatsWith(pred, list) {

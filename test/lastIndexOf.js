@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('lastIndexOf', function() {
@@ -62,12 +62,18 @@ describe('lastIndexOf', function() {
     };
 
     var list = new List('b',
-               new List('a',
-               new List('n',
-               new List('a',
-               new List('n',
-               new List('a',
-               new Empty()))))));
+      new List('a',
+        new List('n',
+          new List('a',
+            new List('n',
+              new List('a',
+                new Empty()
+              )
+            )
+          )
+        )
+      )
+    );
 
     eq(R.lastIndexOf('a', 'banana'), 5);
     eq(R.lastIndexOf('x', 'banana'), -1);

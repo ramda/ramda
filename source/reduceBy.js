@@ -1,14 +1,19 @@
-import _curryN from './internal/_curryN';
-import _dispatchable from './internal/_dispatchable';
-import _has from './internal/_has';
-import _reduce from './internal/_reduce';
-import _xreduceBy from './internal/_xreduceBy';
+import _clone from './internal/_clone.js';
+import _curryN from './internal/_curryN.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _has from './internal/_has.js';
+import _reduce from './internal/_reduce.js';
+import _reduced from './internal/_reduced.js';
+import _xreduceBy from './internal/_xreduceBy.js';
 
 
 /**
  * Groups the elements of the list according to the result of calling
  * the String-returning function `keyFn` on each element and reduces the elements
  * of each group to a single value via the reducer function `valueFn`.
+ *
+ * The value function receives two values: *(acc, value)*. It may use
+ * [`R.reduced`](#reduced) to short circuit the iteration.
  *
  * This function is basically a more general [`groupBy`](#groupBy) function.
  *
@@ -26,34 +31,37 @@ import _xreduceBy from './internal/_xreduceBy';
  * @param {Array} list The array to group.
  * @return {Object} An object with the output of `keyFn` for keys, mapped to the output of
  *         `valueFn` for elements which produced that key when passed to `keyFn`.
- * @see R.groupBy, R.reduce
+ * @see R.groupBy, R.reduce, R.reduced
  * @example
  *
- *      var reduceToNamesBy = R.reduceBy((acc, student) => acc.concat(student.name), []);
- *      var namesByGrade = reduceToNamesBy(function(student) {
- *        var score = student.score;
- *        return score < 65 ? 'F' :
- *               score < 70 ? 'D' :
- *               score < 80 ? 'C' :
- *               score < 90 ? 'B' : 'A';
- *      });
- *      var students = [{name: 'Lucy', score: 92},
- *                      {name: 'Drew', score: 85},
- *                      // ...
- *                      {name: 'Bart', score: 62}];
- *      namesByGrade(students);
- *      // {
- *      //   'A': ['Lucy'],
- *      //   'B': ['Drew']
- *      //   // ...,
- *      //   'F': ['Bart']
- *      // }
+ *      const groupNames = (acc, {name}) => acc.concat(name)
+ *      const toGrade = ({score}) =>
+ *        score < 65 ? 'F' :
+ *        score < 70 ? 'D' :
+ *        score < 80 ? 'C' :
+ *        score < 90 ? 'B' : 'A'
+ *
+ *      var students = [
+ *        {name: 'Abby', score: 83},
+ *        {name: 'Bart', score: 62},
+ *        {name: 'Curt', score: 88},
+ *        {name: 'Dora', score: 92},
+ *      ]
+ *
+ *      reduceBy(groupNames, [], toGrade, students)
+ *      //=> {"A": ["Dora"], "B": ["Abby", "Curt"], "F": ["Bart"]}
  */
 var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
   function reduceBy(valueFn, valueAcc, keyFn, list) {
     return _reduce(function(acc, elt) {
       var key = keyFn(elt);
-      acc[key] = valueFn(_has(key, acc) ? acc[key] : valueAcc, elt);
+      var value = valueFn(_has(key, acc) ? acc[key] : _clone(valueAcc, [], [], false), elt);
+
+      if (value && value['@@transducer/reduced']) {
+        return _reduced(acc);
+      }
+
+      acc[key] = value;
       return acc;
     }, {}, list);
   }));

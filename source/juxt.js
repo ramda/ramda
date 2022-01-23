@@ -1,5 +1,5 @@
-import _curry1 from './internal/_curry1';
-import converge from './converge';
+import _curry1 from './internal/_curry1.js';
+import converge from './converge.js';
 
 
 /**
@@ -15,7 +15,7 @@ import converge from './converge';
  * @see R.applySpec
  * @example
  *
- *      var getRange = R.juxt([Math.min, Math.max]);
+ *      const getRange = R.juxt([Math.min, Math.max]);
  *      getRange(3, 4, 9, -3); //=> [-3, 9]
  * @symb R.juxt([f, g, h])(a, b) = [f(a, b), g(a, b), h(a, b)]
  */

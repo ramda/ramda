@@ -1,6 +1,6 @@
-import _reduce from './internal/_reduce';
-import _xwrap from './internal/_xwrap';
-import curryN from './curryN';
+import _reduce from './internal/_reduce.js';
+import _xwrap from './internal/_xwrap.js';
+import curryN from './curryN.js';
 
 
 /**
@@ -17,7 +17,7 @@ import curryN from './curryN';
  * A transducer is a function that accepts a transformer and returns a
  * transformer and can be composed directly.
  *
- * A transformer is an an object that provides a 2-arity reducing iterator
+ * A transformer is an object that provides a 2-arity reducing iterator
  * function, step, 0-arity initial value function, init, and 1-arity result
  * extraction function, result. The step function is used as the iterator
  * function in reduce. The result function is used to convert the final
@@ -42,12 +42,12 @@ import curryN from './curryN';
  * @see R.reduce, R.reduced, R.into
  * @example
  *
- *      var numbers = [1, 2, 3, 4];
- *      var transducer = R.compose(R.map(R.add(1)), R.take(2));
+ *      const numbers = [1, 2, 3, 4];
+ *      const transducer = R.compose(R.map(R.add(1)), R.take(2));
  *      R.transduce(transducer, R.flip(R.append), [], numbers); //=> [2, 3]
  *
- *      var isOdd = (x) => x % 2 === 1;
- *      var firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
+ *      const isOdd = (x) => x % 2 !== 0;
+ *      const firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
  *      R.transduce(firstOddTransducer, R.flip(R.append), [], R.range(0, 100)); //=> [1]
  */
 var transduce = curryN(4, function transduce(xf, fn, acc, list) {

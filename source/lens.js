@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import map from './map';
+import _curry2 from './internal/_curry2.js';
+import map from './map.js';
 
 
 /**
@@ -19,7 +19,7 @@ import map from './map';
  * @see R.view, R.set, R.over, R.lensIndex, R.lensProp
  * @example
  *
- *      var xLens = R.lens(R.prop('x'), R.assoc('x'));
+ *      const xLens = R.lens(R.prop('x'), R.assoc('x'));
  *
  *      R.view(xLens, {x: 1, y: 2});            //=> 1
  *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}

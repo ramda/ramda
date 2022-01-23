@@ -1,4 +1,4 @@
-import invoker from './invoker';
+import invoker from './invoker.js';
 
 
 /**
@@ -12,11 +12,11 @@ import invoker from './invoker';
  * @sig (String | RegExp) -> String -> [String]
  * @param {String|RegExp} sep The pattern.
  * @param {String} str The string to separate into an array.
- * @return {Array} The array of strings from `str` separated by `str`.
+ * @return {Array} The array of strings from `str` separated by `sep`.
  * @see R.join
  * @example
  *
- *      var pathComponents = R.split('/');
+ *      const pathComponents = R.split('/');
  *      R.tail(pathComponents('/usr/local/bin/node')); //=> ['usr', 'local', 'bin', 'node']
  *
  *      R.split('.', 'a.b.c.xyz.d'); //=> ['a', 'b', 'c', 'xyz', 'd']

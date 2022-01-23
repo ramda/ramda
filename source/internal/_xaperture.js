@@ -1,6 +1,6 @@
-import _concat from './_concat';
-import _curry2 from './_curry2';
-import _xfBase from './_xfBase';
+import _concat from './_concat.js';
+import _curry2 from './_curry2.js';
+import _xfBase from './_xfBase.js';
 
 
 function XAperture(n, xf) {
@@ -28,7 +28,8 @@ XAperture.prototype.store = function(input) {
 };
 XAperture.prototype.getCopy = function() {
   return _concat(Array.prototype.slice.call(this.acc, this.pos),
-                 Array.prototype.slice.call(this.acc, 0, this.pos));
+    Array.prototype.slice.call(this.acc, 0, this.pos)
+  );
 };
 
 var _xaperture = _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });

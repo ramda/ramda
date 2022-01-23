@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfind from './internal/_xfind';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xfind from './internal/_xfind.js';
 
 
 /**
@@ -23,7 +23,7 @@ import _xfind from './internal/_xfind';
  * @see R.transduce
  * @example
  *
- *      var xs = [{a: 1}, {a: 2}, {a: 3}];
+ *      const xs = [{a: 1}, {a: 2}, {a: 3}];
  *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
  *      R.find(R.propEq('a', 4))(xs); //=> undefined
  */

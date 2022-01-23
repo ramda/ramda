@@ -1,8 +1,8 @@
-import _curry1 from './internal/_curry1';
-import curryN from './curryN';
-import max from './max';
-import pluck from './pluck';
-import reduce from './reduce';
+import _curry1 from './internal/_curry1.js';
+import curryN from './curryN.js';
+import max from './max.js';
+import pluck from './pluck.js';
+import reduce from './reduce.js';
 
 
 /**
@@ -23,9 +23,9 @@ import reduce from './reduce';
  * @see R.allPass, R.either
  * @example
  *
- *      var isClub = R.propEq('suit', '♣');
- *      var isSpade = R.propEq('suit', '♠');
- *      var isBlackCard = R.anyPass([isClub, isSpade]);
+ *      const isClub = R.propEq('suit', '♣');
+ *      const isSpade = R.propEq('suit', '♠');
+ *      const isBlackCard = R.anyPass([isClub, isSpade]);
  *
  *      isBlackCard({rank: '10', suit: '♣'}); //=> true
  *      isBlackCard({rank: 'Q', suit: '♠'}); //=> true

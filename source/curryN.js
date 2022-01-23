@@ -1,7 +1,7 @@
-import _arity from './internal/_arity';
-import _curry1 from './internal/_curry1';
-import _curry2 from './internal/_curry2';
-import _curryN from './internal/_curryN';
+import _arity from './internal/_arity.js';
+import _curry1 from './internal/_curry1.js';
+import _curry2 from './internal/_curry2.js';
+import _curryN from './internal/_curryN.js';
 
 
 /**
@@ -39,11 +39,11 @@ import _curryN from './internal/_curryN';
  * @see R.curry
  * @example
  *
- *      var sumArgs = (...args) => R.sum(args);
+ *      const sumArgs = (...args) => R.sum(args);
  *
- *      var curriedAddFourNumbers = R.curryN(4, sumArgs);
- *      var f = curriedAddFourNumbers(1, 2);
- *      var g = f(3);
+ *      const curriedAddFourNumbers = R.curryN(4, sumArgs);
+ *      const f = curriedAddFourNumbers(1, 2);
+ *      const g = f(3);
  *      g(4); //=> 10
  */
 var curryN = _curry2(function curryN(length, fn) {

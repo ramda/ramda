@@ -1,5 +1,5 @@
-import _arity from './_arity';
-import _curry2 from './_curry2';
+import _arity from './_arity.js';
+import _curry2 from './_curry2.js';
 
 
 export default function _createPartialApplicator(concat) {

@@ -1,4 +1,4 @@
-import reduceBy from './reduceBy';
+import reduceBy from './reduceBy.js';
 
 
 /**
@@ -19,10 +19,10 @@ import reduceBy from './reduceBy';
  * @return {Object} An object mapping keys to number of occurrences in the list.
  * @example
  *
- *      var numbers = [1.0, 1.1, 1.2, 2.0, 3.0, 2.2];
+ *      const numbers = [1.0, 1.1, 1.2, 2.0, 3.0, 2.2];
  *      R.countBy(Math.floor)(numbers);    //=> {'1': 3, '2': 2, '3': 1}
  *
- *      var letters = ['a', 'b', 'A', 'a', 'B', 'c'];
+ *      const letters = ['a', 'b', 'A', 'a', 'B', 'c'];
  *      R.countBy(R.toLower)(letters);   //=> {'a': 3, 'b': 2, 'c': 1}
  */
 var countBy = reduceBy(function(acc, elem) { return acc + 1; }, 0);

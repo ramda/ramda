@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _isInteger from './internal/_isInteger';
+import _curry2 from './internal/_curry2.js';
+import _isInteger from './internal/_isInteger.js';
 
 
 /**
@@ -26,11 +26,11 @@ import _isInteger from './internal/_isInteger';
  *      R.mathMod(17.2, 5); //=> NaN
  *      R.mathMod(17, 5.3); //=> NaN
  *
- *      var clock = R.mathMod(R.__, 12);
+ *      const clock = R.mathMod(R.__, 12);
  *      clock(15); //=> 3
  *      clock(24); //=> 0
  *
- *      var seventeenMod = R.mathMod(17);
+ *      const seventeenMod = R.mathMod(17);
  *      seventeenMod(3);  //=> 2
  *      seventeenMod(4);  //=> 1
  *      seventeenMod(10); //=> 7

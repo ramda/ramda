@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _dropLastWhile from './internal/_dropLastWhile';
-import _xdropLastWhile from './internal/_xdropLastWhile';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _dropLastWhile from './internal/_dropLastWhile.js';
+import _xdropLastWhile from './internal/_xdropLastWhile.js';
 
 
 /**
@@ -25,7 +25,7 @@ import _xdropLastWhile from './internal/_xdropLastWhile';
  * @see R.takeLastWhile, R.addIndex, R.drop, R.dropWhile
  * @example
  *
- *      var lteThree = x => x <= 3;
+ *      const lteThree = x => x <= 3;
  *
  *      R.dropLastWhile(lteThree, [1, 2, 3, 4, 3, 2, 1]); //=> [1, 2, 3, 4]
  *

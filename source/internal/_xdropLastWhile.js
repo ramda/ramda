@@ -1,6 +1,6 @@
-import _curry2 from './_curry2';
-import _reduce from './_reduce';
-import _xfBase from './_xfBase';
+import _curry2 from './_curry2.js';
+import _reduce from './_reduce.js';
+import _xfBase from './_xfBase.js';
 
 
 function XDropLastWhile(fn, xf) {
@@ -14,8 +14,9 @@ XDropLastWhile.prototype['@@transducer/result'] = function(result) {
   return this.xf['@@transducer/result'](result);
 };
 XDropLastWhile.prototype['@@transducer/step'] = function(result, input) {
-  return this.f(input) ? this.retain(result, input)
-                       : this.flush(result, input);
+  return this.f(input)
+    ? this.retain(result, input)
+    : this.flush(result, input);
 };
 XDropLastWhile.prototype.flush = function(result, input) {
   result = _reduce(

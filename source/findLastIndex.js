@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfindLastIndex from './internal/_xfindLastIndex';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xfindLastIndex from './internal/_xfindLastIndex.js';
 
 
 /**
@@ -18,10 +18,10 @@ import _xfindLastIndex from './internal/_xfindLastIndex';
  * desired one.
  * @param {Array} list The array to consider.
  * @return {Number} The index of the element found, or `-1`.
- * @see R.transduce
+ * @see R.transduce, R.lastIndexOf
  * @example
  *
- *      var xs = [{a: 1, b: 0}, {a:1, b: 1}];
+ *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];
  *      R.findLastIndex(R.propEq('a', 1))(xs); //=> 1
  *      R.findLastIndex(R.propEq('a', 4))(xs); //=> -1
  */

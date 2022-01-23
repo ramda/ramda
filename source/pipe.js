@@ -1,12 +1,12 @@
-import _arity from './internal/_arity';
-import _pipe from './internal/_pipe';
-import reduce from './reduce';
-import tail from './tail';
+import _arity from './internal/_arity.js';
+import _pipe from './internal/_pipe.js';
+import reduce from './reduce.js';
+import tail from './tail.js';
 
 
 /**
- * Performs left-to-right function composition. The leftmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs left-to-right function composition. The first argument may have
+ * any arity; the remaining arguments must be unary.
  *
  * In some libraries this function is named `sequence`.
  *
@@ -22,15 +22,18 @@ import tail from './tail';
  * @see R.compose
  * @example
  *
- *      var f = R.pipe(Math.pow, R.negate, R.inc);
+ *      const f = R.pipe(Math.pow, R.negate, R.inc);
  *
  *      f(3, 4); // -(3^4) + 1
  * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
+ * @symb R.pipe(f, g, h)(a)(b) = h(g(f(a)))(b)
  */
 export default function pipe() {
   if (arguments.length === 0) {
     throw new Error('pipe requires at least one argument');
   }
-  return _arity(arguments[0].length,
-                reduce(_pipe, arguments[0], tail(arguments)));
+  return _arity(
+    arguments[0].length,
+    reduce(_pipe, arguments[0], tail(arguments))
+  );
 }

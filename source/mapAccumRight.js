@@ -1,4 +1,4 @@
-import _curry3 from './internal/_curry3';
+import _curry3 from './internal/_curry3.js';
 
 
 /**
@@ -10,14 +10,14 @@ import _curry3 from './internal/_curry3';
  * Similar to [`mapAccum`](#mapAccum), except moves through the input list from
  * the right to the left.
  *
- * The iterator function receives two arguments, *value* and *acc*, and should
- * return a tuple *[value, acc]*.
+ * The iterator function receives two arguments, *acc* and *value*, and should
+ * return a tuple *[acc, value]*.
  *
  * @func
  * @memberOf R
  * @since v0.10.0
  * @category List
- * @sig ((x, acc) -> (y, acc)) -> acc -> [x] -> ([y], acc)
+ * @sig ((acc, x) -> (acc, y)) -> acc -> [x] -> (acc, [y])
  * @param {Function} fn The function to be called on every element of the input `list`.
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
@@ -25,17 +25,17 @@ import _curry3 from './internal/_curry3';
  * @see R.addIndex, R.mapAccum
  * @example
  *
- *      var digits = ['1', '2', '3', '4'];
- *      var append = (a, b) => [a + b, a + b];
+ *      const digits = ['1', '2', '3', '4'];
+ *      const appender = (a, b) => [b + a, b + a];
  *
- *      R.mapAccumRight(append, 5, digits); //=> [['12345', '2345', '345', '45'], '12345']
+ *      R.mapAccumRight(appender, 5, digits); //=> ['12345', ['12345', '2345', '345', '45']]
  * @symb R.mapAccumRight(f, a, [b, c, d]) = [
+ *   f(f(f(a, d)[0], c)[0], b)[0],
  *   [
- *     f(b, f(c, f(d, a)[0])[0])[1],
- *     f(c, f(d, a)[0])[1],
- *     f(d, a)[1],
+ *     f(a, d)[1],
+ *     f(f(a, d)[0], c)[1],
+ *     f(f(f(a, d)[0], c)[0], b)[1]
  *   ]
- *   f(b, f(c, f(d, a)[0])[0])[0],
  * ]
  */
 var mapAccumRight = _curry3(function mapAccumRight(fn, acc, list) {
@@ -43,10 +43,10 @@ var mapAccumRight = _curry3(function mapAccumRight(fn, acc, list) {
   var result = [];
   var tuple = [acc];
   while (idx >= 0) {
-    tuple = fn(list[idx], tuple[0]);
+    tuple = fn(tuple[0], list[idx]);
     result[idx] = tuple[1];
     idx -= 1;
   }
-  return [result, tuple[0]];
+  return [tuple[0], result];
 });
 export default mapAccumRight;

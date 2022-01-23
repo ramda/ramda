@@ -1,7 +1,7 @@
-var R = require('..');
-var eq = require('./shared/eq');
-var listXf = require('./helpers/listXf');
-var _curry2 = require('../src/internal/_curry2');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var listXf = require('./helpers/listXf.js');
+var _curry2 = require('../source/internal/_curry2.js');
 
 
 describe('tap', function() {

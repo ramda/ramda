@@ -1,4 +1,4 @@
-var R = require('../..');
+var R = require('../../source/index.js');
 
 
 //  Id :: a -> Id a

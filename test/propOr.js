@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('propOr', function() {
@@ -22,12 +22,53 @@ describe('propOr', function() {
     eq(nm(void 0), 'Unknown');
   });
 
-  it('does not return properties from the prototype chain', function() {
-    var Person = function() {};
-    Person.prototype.age = function() {};
-
-    var bob = new Person();
-    eq(R.propOr(100, 'age', bob), 100);
+  it('uses the default when supplied an object with a nil value', function() {
+    eq(R.propOr('foo', 'x', {x: null}), 'foo');
+    eq(R.propOr('foo', 'x', {x: undefined}), 'foo');
   });
 
+  it('handles number as property', function() {
+    var deities = ['Cthulhu', 'Dagon', 'Yog-Sothoth'];
+    eq(R.propOr('Unknown', 0, deities), 'Cthulhu');
+    eq(R.propOr('Unknown', 1, deities), 'Dagon');
+    eq(R.propOr('Unknown', 2, deities), 'Yog-Sothoth');
+    eq(R.propOr('Unknown', -1, deities), 'Yog-Sothoth');
+    eq(R.propOr('Unknown', 3, deities), 'Unknown');
+  });
+
+  it('shows the same behaviour as pathOr for a nonexistent property', function() {
+    var propOrResult = R.propOr('Unknown', 'incorrect', fred);
+    var pathOrResult = R.pathOr('Unknown', ['incorrect'], fred);
+    eq(propOrResult, pathOrResult);
+  });
+
+  it('shows the same behaviour as pathOr for an undefined property', function() {
+    var propOrResult = R.propOr('Unknown', undefined, fred);
+    var pathOrResult = R.pathOr('Unknown', [undefined], fred);
+    eq(propOrResult, pathOrResult);
+  });
+
+  it('shows the same behaviour as pathOr for a null property', function() {
+    var propOrResult = R.propOr('Unknown', null, fred);
+    var pathOrResult = R.pathOr('Unknown', [null], fred);
+    eq(propOrResult, pathOrResult);
+  });
+
+  it('shows the same behaviour as pathOr for a valid property and object', function() {
+    var propOrResult = R.propOr('Unknown', 'age', fred);
+    var pathOrResult = R.pathOr('Unknown', ['age'], fred);
+    eq(propOrResult, pathOrResult);
+  });
+
+  it('shows the same behaviour as pathOr for a null object', function() {
+    var propOrResult = R.propOr('Unknown', 'age', null);
+    var pathOrResult = R.pathOr('Unknown', ['age'], null);
+    eq(propOrResult, pathOrResult);
+  });
+
+  it('shows the same behaviour as pathOr for an undefined object', function() {
+    var propOrResult = R.propOr('Unknown', 'age', undefined);
+    var pathOrResult = R.pathOr('Unknown', ['age'], undefined);
+    eq(propOrResult, pathOrResult);
+  });
 });

@@ -1,7 +1,7 @@
-import _contains from './internal/_contains';
-import _curry2 from './internal/_curry2';
-import flip from './flip';
-import reject from './reject';
+import _includes from './internal/_includes.js';
+import _curry2 from './internal/_curry2.js';
+import flip from './flip.js';
+import reject from './reject.js';
 
 
 /**
@@ -18,12 +18,12 @@ import reject from './reject';
  * @param {Array} list1 The values to be removed from `list2`.
  * @param {Array} list2 The array to remove values from.
  * @return {Array} The new array without values in `list1`.
- * @see R.transduce, R.difference
+ * @see R.transduce, R.difference, R.remove
  * @example
  *
  *      R.without([1, 2], [1, 2, 1, 3, 4]); //=> [3, 4]
  */
 var without = _curry2(function(xs, list) {
-  return reject(flip(_contains)(xs), list);
+  return reject(flip(_includes)(xs), list);
 });
 export default without;

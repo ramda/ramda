@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xdropWhile from './internal/_xdropWhile';
-import slice from './slice';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xdropWhile from './internal/_xdropWhile.js';
+import slice from './slice.js';
 
 
 /**
@@ -26,7 +26,7 @@ import slice from './slice';
  * @see R.takeWhile, R.transduce, R.addIndex
  * @example
  *
- *      var lteTwo = x => x <= 2;
+ *      const lteTwo = x => x <= 2;
  *
  *      R.dropWhile(lteTwo, [1, 2, 3, 4, 3, 2, 1]); //=> [3, 4, 3, 2, 1]
  *

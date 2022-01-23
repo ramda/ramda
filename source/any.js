@@ -1,10 +1,10 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xany from './internal/_xany';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xany from './internal/_xany.js';
 
 
 /**
- * Returns `true` if at least one of elements of the list match the predicate,
+ * Returns `true` if at least one of the elements of the list match the predicate,
  * `false` otherwise.
  *
  * Dispatches to the `any` method of the second argument, if present.
@@ -23,8 +23,8 @@ import _xany from './internal/_xany';
  * @see R.all, R.none, R.transduce
  * @example
  *
- *      var lessThan0 = R.flip(R.lt)(0);
- *      var lessThan2 = R.flip(R.lt)(2);
+ *      const lessThan0 = R.flip(R.lt)(0);
+ *      const lessThan2 = R.flip(R.lt)(2);
  *      R.any(lessThan0)([1, 2]); //=> false
  *      R.any(lessThan2)([1, 2]); //=> true
  */

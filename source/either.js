@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _isFunction from './internal/_isFunction';
-import lift from './lift';
-import or from './or';
+import _curry2 from './internal/_curry2.js';
+import _isFunction from './internal/_isFunction.js';
+import lift from './lift.js';
+import or from './or.js';
 
 
 /**
@@ -25,11 +25,14 @@ import or from './or';
  * @see R.both, R.anyPass, R.or
  * @example
  *
- *      var gt10 = x => x > 10;
- *      var even = x => x % 2 === 0;
- *      var f = R.either(gt10, even);
+ *      const gt10 = x => x > 10;
+ *      const even = x => x % 2 === 0;
+ *      const f = R.either(gt10, even);
  *      f(101); //=> true
  *      f(8); //=> true
+ *
+ *      R.either(Maybe.Just(false), Maybe.Just(55)); // => Maybe.Just(55)
+ *      R.either([false, false, 'a'], [11]) // => [11, 11, "a"]
  */
 var either = _curry2(function either(f, g) {
   return _isFunction(f) ?

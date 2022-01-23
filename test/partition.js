@@ -1,7 +1,7 @@
 var S = require('sanctuary');
 
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('partition', function() {
@@ -17,18 +17,23 @@ describe('partition', function() {
     var pred = function(n) { return n % 2; };
     eq(R.partition(pred, {}), [{}, {}]);
     eq(R.partition(pred, { a: 0, b: 2, c: 4, d: 6 }),
-       [{}, { a: 0, b: 2, c: 4, d: 6 }]);
+      [{}, { a: 0, b: 2, c: 4, d: 6 }]
+    );
     eq(R.partition(pred, { a: 1, b: 3, c: 5, d: 7 }),
-       [{ a: 1, b: 3, c: 5, d: 7 }, {}]);
+      [{ a: 1, b: 3, c: 5, d: 7 }, {}]
+    );
     eq(R.partition(pred, { a: 0, b: 1, c: 2, d: 3 }),
-       [{ b: 1, d: 3 }, { a: 0, c: 2 }]);
+      [{ b: 1, d: 3 }, { a: 0, c: 2 }]
+    );
   });
 
   it('works with other filterables', function() {
     eq(R.partition(R.isEmpty, S.Just(3)),
-       [S.Nothing(), S.Just(3)]);
+      [S.Nothing(), S.Just(3)]
+    );
     eq(R.partition(R.complement(R.isEmpty), S.Just(3)),
-       [S.Just(3), S.Nothing()]);
+      [S.Just(3), S.Nothing()]
+    );
   });
 
 });

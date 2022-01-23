@@ -1,6 +1,6 @@
-var R = require('..');
-var eq = require('./shared/eq');
-var jsv = require('jsverify');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var fc = require('fast-check');
 
 
 describe('always', function() {
@@ -25,9 +25,11 @@ describe('always', function() {
 });
 
 describe('always properties', function() {
-  jsv.property('returns initial argument', jsv.json, jsv.json, function(a, b) {
-    var f = R.always(a);
-
-    return f() === a && f(b) === a;
+  it('returns initial argument', function() {
+    fc.assert(fc.property(fc.anything(), fc.anything(), function(a, b) {
+      fc.pre(a === a);
+      var f = R.always(a);
+      return f() === a && f(b) === a;
+    }));
   });
 });

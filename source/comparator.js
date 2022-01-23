@@ -1,4 +1,4 @@
-import _curry1 from './internal/_curry1';
+import _curry1 from './internal/_curry1.js';
 
 
 /**
@@ -15,11 +15,14 @@ import _curry1 from './internal/_curry1';
  * @return {Function} A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`
  * @example
  *
- *      var byAge = R.comparator((a, b) => a.age < b.age);
- *      var people = [
- *        // ...
+ *      const byAge = R.comparator((a, b) => a.age < b.age);
+ *      const people = [
+ *        { name: 'Emma', age: 70 },
+ *        { name: 'Peter', age: 78 },
+ *        { name: 'Mikhail', age: 62 },
  *      ];
- *      var peopleByIncreasingAge = R.sort(byAge, people);
+ *      const peopleByIncreasingAge = R.sort(byAge, people);
+ *        //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]
  */
 var comparator = _curry1(function comparator(pred) {
   return function(a, b) {

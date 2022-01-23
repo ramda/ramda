@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _has from './internal/_has';
+import _curry2 from './internal/_curry2.js';
+import _has from './internal/_has.js';
 
 
 /**
@@ -24,7 +24,7 @@ import _has from './internal/_has';
  * @example
  *
  *      // pred :: Object -> Boolean
- *      var pred = R.where({
+ *      const pred = R.where({
  *        a: R.equals('foo'),
  *        b: R.complement(R.equals('bar')),
  *        x: R.gt(R.__, 10),

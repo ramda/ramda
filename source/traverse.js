@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import map from './map';
-import sequence from './sequence';
+import _curry3 from './internal/_curry3.js';
+import map from './map.js';
+import sequence from './sequence.js';
 
 
 /**
@@ -23,15 +23,19 @@ import sequence from './sequence';
  * @see R.sequence
  * @example
  *
- *      // Returns `Nothing` if the given divisor is `0`
- *      safeDiv = n => d => d === 0 ? Nothing() : Just(n / d)
+ *      // Returns `Maybe.Nothing` if the given divisor is `0`
+ *      const safeDiv = n => d => d === 0 ? Maybe.Nothing() : Maybe.Just(n / d)
  *
- *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Just([5, 2.5, 2])
- *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Nothing
+ *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Maybe.Just([5, 2.5, 2])
+ *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Maybe.Nothing
  */
 var traverse = _curry3(function traverse(of, f, traversable) {
-  return typeof traversable['fantasy-land/traverse'] === 'function' ?
-    traversable['fantasy-land/traverse'](f, of) :
-    sequence(of, map(f, traversable));
+  return (
+    typeof traversable['fantasy-land/traverse'] === 'function'
+      ? traversable['fantasy-land/traverse'](f, of)
+      : typeof traversable.traverse === 'function'
+        ? traversable.traverse(f, of)
+        : sequence(of, map(f, traversable))
+  );
 });
 export default traverse;

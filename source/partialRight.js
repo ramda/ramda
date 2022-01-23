@@ -1,6 +1,6 @@
-import _concat from './internal/_concat';
-import _createPartialApplicator from './internal/_createPartialApplicator';
-import flip from './flip';
+import _concat from './internal/_concat.js';
+import _createPartialApplicator from './internal/_createPartialApplicator.js';
+import flip from './flip.js';
 
 
 /**
@@ -19,10 +19,10 @@ import flip from './flip';
  * @see R.partial
  * @example
  *
- *      var greet = (salutation, title, firstName, lastName) =>
+ *      const greet = (salutation, title, firstName, lastName) =>
  *        salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';
  *
- *      var greetMsJaneJones = R.partialRight(greet, ['Ms.', 'Jane', 'Jones']);
+ *      const greetMsJaneJones = R.partialRight(greet, ['Ms.', 'Jane', 'Jones']);
  *
  *      greetMsJaneJones('Hello'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partialRight(f, [a, b])(c, d) = f(c, d, a, b)

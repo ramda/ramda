@@ -1,5 +1,5 @@
-var eq = require('./shared/eq');
-var R = require('..');
+var eq = require('./shared/eq.js');
+var R = require('../source/index.js');
 
 describe('clamp', function() {
   it('clamps to the lower bound', function() {

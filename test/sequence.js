@@ -1,8 +1,8 @@
 var S = require('sanctuary');
 
-var R = require('..');
-var Id = require('./shared/Id');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var Id = require('./shared/Id.js');
+var eq = require('./shared/eq.js');
 
 
 describe('sequence', function() {

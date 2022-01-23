@@ -1,8 +1,8 @@
-import _contains from './internal/_contains';
-import _curry2 from './internal/_curry2';
-import _filter from './internal/_filter';
-import flip from './flip';
-import uniq from './uniq';
+import _includes from './internal/_includes.js';
+import _curry2 from './internal/_curry2.js';
+import _filter from './internal/_filter.js';
+import flip from './flip.js';
+import uniq from './uniq.js';
 
 
 /**
@@ -31,6 +31,6 @@ var intersection = _curry2(function intersection(list1, list2) {
     lookupList = list2;
     filteredList = list1;
   }
-  return uniq(_filter(flip(_contains)(lookupList), filteredList));
+  return uniq(_filter(flip(_includes)(lookupList), filteredList));
 });
 export default intersection;

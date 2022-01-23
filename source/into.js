@@ -1,8 +1,8 @@
-import _clone from './internal/_clone';
-import _curry3 from './internal/_curry3';
-import _isTransformer from './internal/_isTransformer';
-import _reduce from './internal/_reduce';
-import _stepCat from './internal/_stepCat';
+import _clone from './internal/_clone.js';
+import _curry3 from './internal/_curry3.js';
+import _isTransformer from './internal/_isTransformer.js';
+import _reduce from './internal/_reduce.js';
+import _stepCat from './internal/_stepCat.js';
 
 
 /**
@@ -36,12 +36,12 @@ import _stepCat from './internal/_stepCat';
  * @see R.transduce
  * @example
  *
- *      var numbers = [1, 2, 3, 4];
- *      var transducer = R.compose(R.map(R.add(1)), R.take(2));
+ *      const numbers = [1, 2, 3, 4];
+ *      const transducer = R.compose(R.map(R.add(1)), R.take(2));
  *
  *      R.into([], transducer, numbers); //=> [2, 3]
  *
- *      var intoArray = R.into([]);
+ *      const intoArray = R.into([]);
  *      intoArray(transducer, numbers); //=> [2, 3]
  */
 var into = _curry3(function into(acc, xf, list) {

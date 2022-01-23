@@ -1,9 +1,10 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('reduceRight', function() {
   var avg = function(a, b) {return (a + b) / 2;};
+  var concatFirstThree = function(val, acc) {return acc.length === 3 ? R.reduced(acc) : acc.concat(val);};
 
   it('folds lists in the right order', function() {
     eq(R.reduceRight(function(a, b) {return a + b;}, '', ['a', 'b', 'c', 'd']), 'abcd');
@@ -21,4 +22,7 @@ describe('reduceRight', function() {
     eq(R.reduceRight(avg, 0, []), 0);
   });
 
+  it('short circuits with reduced', function() {
+    eq(R.reduceRight(concatFirstThree, '', ['a', 'd', 'm', 'a', 'r']), 'ram');
+  });
 });

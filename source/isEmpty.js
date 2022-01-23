@@ -1,6 +1,6 @@
-import _curry1 from './internal/_curry1';
-import empty from './empty';
-import equals from './equals';
+import _curry1 from './internal/_curry1.js';
+import empty from './empty.js';
+import equals from './equals.js';
 
 
 /**
@@ -17,12 +17,13 @@ import equals from './equals';
  * @see R.empty
  * @example
  *
- *      R.isEmpty([1, 2, 3]);   //=> false
- *      R.isEmpty([]);          //=> true
- *      R.isEmpty('');          //=> true
- *      R.isEmpty(null);        //=> false
- *      R.isEmpty({});          //=> true
- *      R.isEmpty({length: 0}); //=> false
+ *      R.isEmpty([1, 2, 3]);           //=> false
+ *      R.isEmpty([]);                  //=> true
+ *      R.isEmpty('');                  //=> true
+ *      R.isEmpty(null);                //=> false
+ *      R.isEmpty({});                  //=> true
+ *      R.isEmpty({length: 0});         //=> false
+ *      R.isEmpty(Uint8Array.from('')); //=> true
  */
 var isEmpty = _curry1(function isEmpty(x) {
   return x != null && equals(x, empty(x));

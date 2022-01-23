@@ -3,9 +3,11 @@ Ramda
 
 A practical functional library for JavaScript programmers.
 
-[![Build Status](https://travis-ci.org/ramda/ramda.svg?branch=master)](https://travis-ci.org/ramda/ramda)
+[![Build Status](https://github.com/ramda/ramda/workflows/Build/badge.svg)](https://github.com/ramda/ramda/actions?query=workflow%3ABuild)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/953a3c5ee423e5301d18/test_coverage)](https://codeclimate.com/github/ramda/ramda/test_coverage)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
-[![dependencies](https://david-dm.org/ramda/ramda.svg)](https://david-dm.org/ramda/ramda)
+[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/ramda@v0.27.2)
+[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/ramda)
 [![Gitter](https://badges.gitter.im/Join_Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
@@ -13,7 +15,7 @@ A practical functional library for JavaScript programmers.
 Why Ramda?
 ----------
 
-<img src="http://ramda.jcphillipps.com/logo/ramdaFilled_200x235.png" 
+<img src="https://ramdajs.com/ramdaFilled_200x235.png" 
      width="170" height="190" align="right" hspace="12" />
 
 There are already several excellent libraries with a functional flavor. Typically, they are meant to be general-purpose toolkits, suitable for working in multiple paradigms. Ramda has a more focused goal. We wanted a library designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. 
@@ -47,7 +49,7 @@ Introductions
 * [Favoring Curry](http://fr.umio.us/favoring-curry/) by Scott Sauyet
 * [Why Curry Helps](https://hughfdjackson.com/javascript/why-curry-helps/) by Hugh Jackson
 * [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
-* [Thinking in Ramda](http://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
+* [Thinking in Ramda](https://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
 
 
 
@@ -91,6 +93,16 @@ Then in the console:
 const R = require('ramda');
 ```
 
+To use directly in [Deno](https://deno.land):
+```javascript
+import * as R from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+```
+
+or using Nest.land:
+```javascript
+import * as R from "https://x.nest.land/ramda@0.27.2/mod.ts";
+```
+
 To use directly in the browser:
 
 ```html
@@ -106,14 +118,13 @@ or the minified version:
 or from a CDN, either cdnjs:
 
 ```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.27.1/ramda.min.js"></script>
 ```
 
 or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/ramda@0.25.0/dist/ramda.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/ramda@0.25/dist/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/ramda@latest/dist/ramda.min.js"></script>
 ```
 
@@ -122,6 +133,15 @@ or one of the below links from [jsDelivr](http://jsdelivr.com):
 These script tags add the variable `R` on the browser's global scope.
 
 Or you can inject ramda into virtually any unsuspecting website using [the bookmarklet](https://github.com/ramda/ramda/blob/master/BOOKMARKLET.md).
+
+**Note for versions > 0.25**
+Ramda versions > 0.25 don't have a default export.
+So instead of `import R from 'ramda';`, one has to use `import * as R from 'ramda';`
+Or better yet, import only the required functions via `import { functionName } from 'ramda';`
+
+**Note for ES6 module and browsers**
+In order to access to the ES6 module in browsers, one has to provide the content of  the __es__ directory (see below for the build instructions) and use `import * as R from './node_modules/ramda/es/index.js';`
+
 
 ### Build
 
@@ -135,12 +155,14 @@ It is possible to build Ramda with a subset of the functionality to reduce its f
 
 This requires having Node/io.js installed and ramda's dependencies installed (just use `npm install` before running partial build). 
 
+### Install specific functions
 
+[Install individual functions](https://bitsrc.io/ramda/ramda) with bit, npm and yarn without installing the whole library.
 
 Documentation
 -------------
 
-Please review the [API documentation](http://ramdajs.com/docs/).
+Please review the [API documentation](https://ramdajs.com/docs/).
 
 Also available is our [Cookbook](https://github.com/ramda/ramda/wiki/Cookbook) of functions built from Ramda that you may find useful.
 
@@ -189,11 +211,37 @@ If you have _PhantomJS_ installed, you can run `testem -l phantomjs` to run the
 tests completely headlessly.
 
 
+Usage
+-----------------
+
+For `v0.25` and up, import the whole library or pick ES modules directly from the library:
+
+```js
+import * as R from 'ramda'
+
+const {identity} = R
+R.map(identity, [1, 2, 3])
+```
+
+Destructuring imports from ramda *does not necessarily prevent importing the entire library*. You can manually cherry-pick methods like the following, which would only grab the parts necessary for `identity` to work:
+
+```js
+import identity from 'ramda/src/identity'
+
+identity()
+```
+
+Manually cherry picking methods is cumbersome, however. Most bundlers like Webpack and Rollup offer tree-shaking as a way to drop unused Ramda code and reduce bundle size, but their performance varies, discussed [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples). Here is a summary of the optimal setup based on what technology you are using:
+
+1. Webpack + Babel - use [`babel-plugin-ramda`](https://github.com/megawac/babel-plugin-ramda) to automatically cherry pick methods. Discussion [here](https://www.andrewsouthpaw.com/ramda-webpack-and-tree-shaking/), example [here](https://github.com/AndrewSouthpaw/ramda-webpack-tree-shaking-examples/blob/master/07-webpack-babel-plugin-ramda/package.json)
+1. Webpack only - use `UglifyJS` plugin for treeshaking along with the `ModuleConcatenationPlugin`. Discussion [here](https://github.com/ramda/ramda/issues/2355), with an example setup [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples/blob/master/06-webpack-scope-hoisted/webpack.config.js)
+1. Rollup - does a fine job properly treeshaking, no special work needed; example [here](https://github.com/scabbiaza/ramda-webpack-tree-shaking-examples/blob/master/07-rollup-ramda-tree-shaking/rollup.config.js)
+
 
 Typings
 -----------------
 
-- [TypeScript](https://github.com/types/npm-ramda/)
+- [TypeScript](https://www.npmjs.com/package/@types/ramda)
 - [Flow](https://github.com/flowtype/flow-typed/tree/master/definitions/npm/ramda_v0.x.x)
 
 
@@ -204,7 +252,17 @@ Translations
 
 - [Chinese(中文)](http://ramda.cn/)
 - [Ukrainian(Українська)](https://github.com/ivanzusko/ramda)
+- [Portuguese(BR)](https://github.com/renansj/ramda)
+- [Russian(Русский)](https://github.com/Guck111/ramda)
+- [Spanish(ES)](https://github.com/wirecobweb/ramda)
 
+
+
+
+Funding
+-----------------
+
+If you wish to donate to Ramda please see our [Open Collective](https://opencollective.com/ramda) page. Thank you!
 
 
 Acknowledgements

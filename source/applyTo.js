@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * Takes a value and applies a function to it.
@@ -15,7 +15,7 @@ import _curry2 from './internal/_curry2';
  * @return {*} The result of applying `f` to `x`
  * @example
  *
- *      var t42 = R.applyTo(42);
+ *      const t42 = R.applyTo(42);
  *      t42(R.identity); //=> 42
  *      t42(R.add(1)); //=> 43
  */

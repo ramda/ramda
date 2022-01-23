@@ -1,13 +1,19 @@
-import _clone from './internal/_clone';
-import _curry1 from './internal/_curry1';
+import _clone from './internal/_clone.js';
+import _curry1 from './internal/_curry1.js';
 
 
 /**
- * Creates a deep copy of the value which may contain (nested) `Array`s and
- * `Object`s, `Number`s, `String`s, `Boolean`s and `Date`s. `Function`s are
- * assigned by reference rather than copied
+ * Creates a deep copy of the source that can be used in place of the source
+ * object without retaining any references to it.
+ * The source object may contain (nested) `Array`s and `Object`s,
+ * `Number`s, `String`s, `Boolean`s and `Date`s.
+ * `Function`s are assigned by reference rather than copied.
  *
  * Dispatches to a `clone` method if present.
+ *
+ * Note that if the source object has multiple nodes that share a reference,
+ * the returned object will have the same structure, but the references will
+ * be pointed to the location within the cloned value.
  *
  * @func
  * @memberOf R
@@ -18,8 +24,8 @@ import _curry1 from './internal/_curry1';
  * @return {*} A deeply cloned copy of `val`
  * @example
  *
- *      var objects = [{}, {}, {}];
- *      var objectsClone = R.clone(objects);
+ *      const objects = [{}, {}, {}];
+ *      const objectsClone = R.clone(objects);
  *      objects === objectsClone; //=> false
  *      objects[0] === objectsClone[0]; //=> false
  */

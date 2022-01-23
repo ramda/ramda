@@ -1,10 +1,10 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('into', function() {
   var add = R.add;
-  var isOdd = function(b) {return b % 2 === 1;};
+  var isOdd = function(b) { return b % 2 !== 0; };
   var addXf = {
     '@@transducer/step': add,
     '@@transducer/init': R.always(0),

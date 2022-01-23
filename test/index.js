@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 var fs = require('fs');
 var path = require('path');
 
@@ -24,14 +24,17 @@ function sourceMethods(dir) {
  *
  * 1st case is detected in first assertion, and detailed in second one
  *
- * 2st case doesnt need detection, because NodeJS will throw an error
+ * 2nd case does not need detection, because NodeJS will throw an error
  * if you would attempt to require non existing file
  */
 describe('API surface', function() {
+  if (typeof require.resolve !== 'function') {
+    return;
+  }
   var exported = Object.keys(R).filter(function(key) {
     return key !== '__esModule';
   });
-  var actual = sourceMethods(path.dirname(require.resolve('..')));
+  var actual = sourceMethods(path.dirname(require.resolve('../source')));
 
   it('both APIs are in sync', function() {
     eq(actual.length, exported.length);

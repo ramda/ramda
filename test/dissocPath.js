@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('dissocPath', function() {
@@ -58,6 +58,23 @@ describe('dissocPath', function() {
 
   it('accepts empty path', function() {
     eq(R.dissocPath([], {a: 1, b: 2}), {a: 1, b: 2});
+  });
+
+  it('allow integer to be used as key for object', function() {
+    eq(R.dissocPath([42], {a: 1, b: 2, 42: 3}), {a: 1, b: 2});
+  });
+
+  it('support remove null/undefined value path', function() {
+    eq(R.dissocPath(['c', 'd'], {a: 1, b: 2, c: null}), {a: 1, b: 2, c: null});
+    eq(R.dissocPath(['c', 'd'], {a: 1, b: 2, c: undefined}), {a: 1, b: 2, c: undefined});
+
+    var obj1 = {a: 1, b: 2};
+    var obj2 = R.dissocPath(['c', 'd'], obj1);
+
+    eq(obj2, obj1);
+
+    // Note: reference equality below!
+    assert.notStrictEqual(obj2, obj1);
   });
 
 });

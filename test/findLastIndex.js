@@ -1,6 +1,6 @@
-var R = require('..');
-var eq = require('./shared/eq');
-var listXf = require('./helpers/listXf');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var listXf = require('./helpers/listXf.js');
 
 
 describe('findLastIndex', function() {

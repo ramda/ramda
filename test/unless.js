@@ -1,6 +1,6 @@
-var R = require('..');
-var eq = require('./shared/eq');
-var _isArrayLike = require('../src/internal/_isArrayLike');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var _isArrayLike = require('../source/internal/_isArrayLike.js');
 
 
 describe('unless', function() {

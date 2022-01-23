@@ -1,4 +1,5 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
+import path from './path.js';
 
 
 /**
@@ -13,24 +14,18 @@ import _curry2 from './internal/_curry2';
  * @param {Array} ps The property names to fetch
  * @param {Object} obj The object to query
  * @return {Array} The corresponding values or partially applied function.
+ * @see R.prop, R.pluck, R.project
  * @example
  *
  *      R.props(['x', 'y'], {x: 1, y: 2}); //=> [1, 2]
  *      R.props(['c', 'a', 'b'], {b: 2, a: 1}); //=> [undefined, 1, 2]
  *
- *      var fullName = R.compose(R.join(' '), R.props(['first', 'last']));
+ *      const fullName = R.compose(R.join(' '), R.props(['first', 'last']));
  *      fullName({last: 'Bullet-Tooth', age: 33, first: 'Tony'}); //=> 'Tony Bullet-Tooth'
  */
 var props = _curry2(function props(ps, obj) {
-  var len = ps.length;
-  var out = [];
-  var idx = 0;
-
-  while (idx < len) {
-    out[idx] = obj[ps[idx]];
-    idx += 1;
-  }
-
-  return out;
+  return  ps.map(function(p) {
+    return path([p], obj);
+  });
 });
 export default props;

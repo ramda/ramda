@@ -1,5 +1,5 @@
-var R = require('..');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('hasIn', function() {
@@ -26,4 +26,8 @@ describe('hasIn', function() {
     eq(R.hasIn('name', anon), false);
   });
 
+  it('returns false when non-existent object', function() {
+    eq(R.hasIn('name', null), false);
+    eq(R.hasIn('name', undefined), false);
+  });
 });

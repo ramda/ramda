@@ -1,6 +1,6 @@
-import _complement from './internal/_complement';
-import _curry2 from './internal/_curry2';
-import filter from './filter';
+import _complement from './internal/_complement.js';
+import _curry2 from './internal/_curry2.js';
+import filter from './filter.js';
 
 
 /**
@@ -21,7 +21,7 @@ import filter from './filter';
  * @see R.filter, R.transduce, R.addIndex
  * @example
  *
- *      var isOdd = (n) => n % 2 === 1;
+ *      const isOdd = (n) => n % 2 !== 0;
  *
  *      R.reject(isOdd, [1, 2, 3, 4]); //=> [2, 4]
  *

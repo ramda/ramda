@@ -1,9 +1,11 @@
-import _objectAssign from './internal/_objectAssign';
-import _curry1 from './internal/_curry1';
+import _objectAssign from './internal/_objectAssign.js';
+import _curry1 from './internal/_curry1.js';
 
 
 /**
- * Merges a list of objects together into one object.
+ * Creates one new object with the own properties from a list of objects.
+ * If a key exists in more than one object, the value from the last
+ * object it exists in will be used.
  *
  * @func
  * @memberOf R
