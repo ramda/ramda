@@ -15,6 +15,7 @@ import _xpromap from './internal/_xpromap.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category Function
  * @sig (a -> b) -> (c -> d) -> (b -> c) -> (a -> d)
  * @sig Profunctor p => (a -> b) -> (c -> d) -> p b c -> p a d

@@ -127,5 +127,20 @@
       2,
       "always"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["test/**/*.js"],
+      "parserOptions": {
+        "ecmaVersion": 2018
+      },
+      "rules": {
+        "no-restricted-properties": ["error", {
+          "object": "describe",
+          "property": "only"
+        }],
+        "no-restricted-modules": ["error", ".."]
+      }
+    }
+  ]
 }

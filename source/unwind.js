@@ -10,6 +10,7 @@ import _assoc from './internal/_assoc.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category Object
  * @sig String -> {k: [v]} -> [{k: v}]
  * @param {String} key The key to determine which property of the object should be unwind

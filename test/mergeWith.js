@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('mergeWith', function() {
@@ -35,6 +35,28 @@ describe('mergeWith', function() {
     eq(R.mergeWith(last, new Cla(), {w: 1, x: 2}), {w: 1, x: 2});
     eq(R.mergeWith(last, {w: 1, x: 2}, new Cla()), {w: 1, x: 2});
     eq(R.mergeWith(last, new Cla(), {w: 1}), {w: 1});
+  });
+
+  describe('acts as if nil values are simply empty objects', function() {
+    it('... if the first object is nil and the second empty', function() {
+      eq(R.mergeWith(R.concat, undefined, {}), {});
+    });
+
+    it('... if the first object is empty and the second nil', function() {
+      eq(R.mergeWith(R.concat, {}, null), {});
+    });
+
+    it('... if both objects are nil', function() {
+      eq(R.mergeWith(R.concat, undefined, null), {});
+    });
+
+    it('... if the first object is not empty and the second is nil', function() {
+      eq(R.mergeWith(R.concat, {a: 'a'}, null), {a: 'a'});
+    });
+
+    it('... if the first object is nil and the second is not empty', function() {
+      eq(R.mergeWith(R.concat, undefined, {a: 'a'}), {a: 'a'});
+    });
   });
 
 });

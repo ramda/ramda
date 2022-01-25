@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 var testList = [{a: 1}, {b: 2}, {c: 3}];

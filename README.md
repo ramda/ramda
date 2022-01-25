@@ -8,7 +8,6 @@ A practical functional library for JavaScript programmers.
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
 [![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/ramda@v0.27.2)
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/ramda)
-[![dependencies](https://david-dm.org/ramda/ramda.svg)](https://david-dm.org/ramda/ramda)
 [![Gitter](https://badges.gitter.im/Join_Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
@@ -119,14 +118,13 @@ or the minified version:
 or from a CDN, either cdnjs:
 
 ```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.27.1/ramda.min.js"></script>
 ```
 
 or one of the below links from [jsDelivr](http://jsdelivr.com):
 
 ```html
-<script src="//cdn.jsdelivr.net/npm/ramda@0.25.0/dist/ramda.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/ramda@0.25/dist/ramda.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/ramda@latest/dist/ramda.min.js"></script>
 ```
 
@@ -259,6 +257,12 @@ Translations
 - [Spanish(ES)](https://github.com/wirecobweb/ramda)
 
 
+
+
+Funding
+-----------------
+
+If you wish to donate to Ramda please see our [Open Collective](https://opencollective.com/ramda) page. Thank you!
 
 
 Acknowledgements

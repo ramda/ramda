@@ -13,6 +13,7 @@ import _has from './internal/_has.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category Object
  * @sig {String: (* -> Boolean)} -> {String: *} -> Boolean
  * @param {Object} spec

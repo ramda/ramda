@@ -43,6 +43,9 @@ export default function _reduce(fn, acc, list) {
   if (_isArrayLike(list)) {
     return _arrayReduce(fn, acc, list);
   }
+  if (list == null) {
+    return acc;
+  }
   if (typeof list['fantasy-land/reduce'] === 'function') {
     return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
   }

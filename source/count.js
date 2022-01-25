@@ -7,6 +7,7 @@ import curry from './curry.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> Number
  * @param {Function} predicate to match items against

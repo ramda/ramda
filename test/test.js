@@ -1,10 +1,13 @@
 var assert = require('assert');
 
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('test', function() {
+  it('returns true if string matches dotAll pattern', function() {
+    eq(R.test(/x.*z/s, 'x.\nyz'), true);
+  });
 
   it('returns true if string matches pattern', function() {
     eq(R.test(/^x/, 'xyz'), true);
