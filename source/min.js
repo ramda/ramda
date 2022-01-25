@@ -1,5 +1,4 @@
 import _curry2 from './internal/_curry2.js';
-import equals from './equals.js';
 import toString from './toString.js';
 
 /**
@@ -20,8 +19,22 @@ import toString from './toString.js';
  *      R.min('a', 'b'); //=> 'a'
  */
 var min = _curry2(function min(a, b) {
-  if (equals(a, b)) { return b; }
-  if (a > b || b > a) { return b < a ? b : a; }
-  throw new TypeError('cannot compare ' + toString(a) + ' with ' + toString(b));
+  if (a === b) { return a; }
+
+  function safeMin(x, y) {
+    if ((x < y) !== (y < x)) { return y < x ? y : x; }
+    return undefined;
+  }
+
+  const minByValue = safeMin(a, b);
+  if (minByValue !== undefined) { return minByValue; }
+
+  const minByType = safeMin(typeof a, typeof b);
+  if (minByType !== undefined) { return minByType === typeof a ? a : b; }
+
+  const minByStringValue = safeMin(toString(a), toString(b));
+  if (minByStringValue !== undefined) { return minByStringValue === toString(a) ? a : b; }
+
+  return a;
 });
 export default min;

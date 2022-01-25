@@ -26,7 +26,8 @@ import max from './max.js';
  *      R.reduce(R.maxBy(square), 0, []); //=> 0
  */
 var maxBy = _curry3(function maxBy(f, a, b) {
-  return max(f(a), f(b)) === f(b) ? b : a;
+  const resultB = f(b);
+  return max(f(a), resultB) === resultB ? b : a;
 });
 
 export default maxBy;

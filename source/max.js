@@ -1,5 +1,4 @@
 import _curry2 from './internal/_curry2.js';
-import equals from './equals.js';
 import toString from './toString.js';
 
 /**
@@ -20,8 +19,22 @@ import toString from './toString.js';
  *      R.max('a', 'b'); //=> 'b'
  */
 var max = _curry2(function max(a, b) {
-  if (equals(a, b)) { return b; }
-  if (a > b || b > a) { return b > a ? b : a; }
-  throw new TypeError('cannot compare ' + toString(a) + ' with ' + toString(b));
+  if (a === b) { return b; }
+
+  function safeMax(x, y) {
+    if ((x > y) !== (y > x)) { return y > x ? y : x; }
+    return undefined;
+  }
+
+  const maxByValue = safeMax(a, b);
+  if (maxByValue !== undefined) { return maxByValue; }
+
+  const maxByType = safeMax(typeof a, typeof b);
+  if (maxByType !== undefined) { return maxByType === typeof a ? a : b; }
+
+  const maxByStringValue = safeMax(toString(a), toString(b));
+  if (maxByStringValue !== undefined) { return maxByStringValue === toString(a) ? a : b; }
+
+  return b;
 });
 export default max;

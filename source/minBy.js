@@ -26,6 +26,7 @@ import min from './min.js';
  *      R.reduce(R.minBy(square), Infinity, []); //=> Infinity
  */
 var minBy = _curry3(function minBy(f, a, b) {
-  return min(f(a), f(b)) === f(b) ? b : a;
+  const resultB = f(b);
+  return min(f(a), resultB) === resultB ? b : a;
 });
 export default minBy;
