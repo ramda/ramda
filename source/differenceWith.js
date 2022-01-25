@@ -1,5 +1,5 @@
-import _includesWith from './internal/_includesWith';
-import _curry3 from './internal/_curry3';
+import _includesWith from './internal/_includesWith.js';
+import _curry3 from './internal/_curry3.js';
 
 
 /**
@@ -23,6 +23,9 @@ import _curry3 from './internal/_curry3';
  *      const l1 = [{a: 1}, {a: 2}, {a: 3}];
  *      const l2 = [{a: 3}, {a: 4}];
  *      R.differenceWith(cmp, l1, l2); //=> [{a: 1}, {a: 2}]
+ *
+ *      R.differenceWith(R.equals, [1, 2, 3, 3, 3], []); //=> [1, 2, 3]
+ *      R.differenceWith(R.equals, [1, 2, 3, 3, 3], [1]); //=> [2, 3]
  */
 var differenceWith = _curry3(function differenceWith(pred, first, second) {
   var out = [];

@@ -1,5 +1,5 @@
-import add from './add';
-import reduce from './reduce';
+import add from './add.js';
+import reduce from './reduce.js';
 
 
 /**

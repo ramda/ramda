@@ -1,6 +1,6 @@
-import _curry1 from './internal/_curry1';
-import _has from './internal/_has';
-import _isArguments from './internal/_isArguments';
+import _curry1 from './internal/_curry1.js';
+import _has from './internal/_has.js';
+import _isArguments from './internal/_isArguments.js';
 
 // cover IE < 9 keys issues
 var hasEnumBug = !({toString: null}).propertyIsEnumerable('toString');
@@ -38,7 +38,7 @@ var contains = function contains(list, item) {
  * @sig {k: v} -> [k]
  * @param {Object} obj The object to extract properties from
  * @return {Array} An array of the object's own properties.
- * @see R.keysIn, R.values
+ * @see R.keysIn, R.values, R.toPairs
  * @example
  *
  *      R.keys({a: 1, b: 2, c: 3}); //=> ['a', 'b', 'c']

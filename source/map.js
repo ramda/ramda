@@ -1,10 +1,10 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _map from './internal/_map';
-import _reduce from './internal/_reduce';
-import _xmap from './internal/_xmap';
-import curryN from './curryN';
-import keys from './keys';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _map from './internal/_map.js';
+import _reduce from './internal/_reduce.js';
+import _xmap from './internal/_xmap.js';
+import curryN from './curryN.js';
+import keys from './keys.js';
 
 
 /**

@@ -1,7 +1,7 @@
-import _concat from './internal/_concat';
-import _curry2 from './internal/_curry2';
-import compose from './compose';
-import uniq from './uniq';
+import _concat from './internal/_concat.js';
+import _curry2 from './internal/_curry2.js';
+import compose from './compose.js';
+import uniq from './uniq.js';
 
 
 /**

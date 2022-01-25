@@ -1,5 +1,5 @@
-import _identity from './internal/_identity';
-import chain from './chain';
+import _identity from './internal/_identity.js';
+import chain from './chain.js';
 
 
 /**

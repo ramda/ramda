@@ -1,8 +1,8 @@
-import _arity from './internal/_arity';
-import _curry1 from './internal/_curry1';
-import map from './map';
-import max from './max';
-import reduce from './reduce';
+import _arity from './internal/_arity.js';
+import _curry1 from './internal/_curry1.js';
+import map from './map.js';
+import max from './max.js';
+import reduce from './reduce.js';
 
 
 /**
@@ -12,6 +12,10 @@ import reduce from './reduce';
  * "truthy" value, at which point `fn` returns the result of applying its
  * arguments to the corresponding transformer. If none of the predicates
  * matches, `fn` returns undefined.
+ *
+ * **Please note**: This is not a direct substitute for a `switch` statement.
+ * Remember that both elements of every pair passed to `cond` are *functions*,
+ * and `cond` returns a function.
  *
  * @func
  * @memberOf R

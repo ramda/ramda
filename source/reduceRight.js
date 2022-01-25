@@ -1,4 +1,4 @@
-import _curry3 from './internal/_curry3';
+import _curry3 from './internal/_curry3.js';
 
 
 /**
@@ -10,12 +10,19 @@ import _curry3 from './internal/_curry3';
  * right to the left.
  *
  * The iterator function receives two values: *(value, acc)*, while the arguments'
- * order of `reduce`'s iterator function is *(acc, value)*.
+ * order of `reduce`'s iterator function is *(acc, value)*. `reduceRight` may use [`reduced`](#reduced)
+ * to short circuit the iteration.
  *
  * Note: `R.reduceRight` does not skip deleted or unassigned indices (sparse
  * arrays), unlike the native `Array.prototype.reduceRight` method. For more details
  * on this behavior, see:
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+ *
+ * Be cautious of mutating and returning the accumulator. If you reuse it across
+ * invocations, it will continue to accumulate onto the same value. The general
+ * recommendation is to always return a new value. If you can't do so for
+ * performance reasons, then be sure to reinitialize the accumulator on each
+ * invocation.
  *
  * @func
  * @memberOf R
@@ -27,7 +34,7 @@ import _curry3 from './internal/_curry3';
  * @param {*} acc The accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
- * @see R.reduce, R.addIndex
+ * @see R.reduce, R.addIndex, R.reduced
  * @example
  *
  *      R.reduceRight(R.subtract, 0, [1, 2, 3, 4]) // => (1 - (2 - (3 - (4 - 0)))) = -2
@@ -47,6 +54,10 @@ var reduceRight = _curry3(function reduceRight(fn, acc, list) {
   var idx = list.length - 1;
   while (idx >= 0) {
     acc = fn(list[idx], acc);
+    if (acc && acc['@@transducer/reduced']) {
+      acc = acc['@@transducer/value'];
+      break;
+    }
     idx -= 1;
   }
   return acc;

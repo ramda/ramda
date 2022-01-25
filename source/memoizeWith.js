@@ -1,6 +1,6 @@
-import _arity from './internal/_arity';
-import _curry2 from './internal/_curry2';
-import _has from './internal/_has';
+import _arity from './internal/_arity.js';
+import _curry2 from './internal/_curry2.js';
+import _has from './internal/_has.js';
 
 
 /**
@@ -10,6 +10,8 @@ import _has from './internal/_has';
  * call to `fn`; instead, the cached result for that set of arguments will be
  * returned.
  *
+ * Care must be taken when implementing key generation to avoid key collision,
+ * or if tracking references, memory leaks and mutating arguments.
  *
  * @func
  * @memberOf R
@@ -22,7 +24,7 @@ import _has from './internal/_has';
  * @example
  *
  *      let count = 0;
- *      const factorial = R.memoizeWith(R.identity, n => {
+ *      const factorial = R.memoizeWith(Number, n => {
  *        count += 1;
  *        return R.product(R.range(1, n + 1));
  *      });

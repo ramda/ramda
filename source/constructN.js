@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import curry from './curry';
-import nAry from './nAry';
+import _curry2 from './internal/_curry2.js';
+import curry from './curry.js';
+import nAry from './nAry.js';
 
 
 /**
@@ -46,7 +46,7 @@ var constructN = _curry2(function constructN(n, Fn) {
     return function() { return new Fn(); };
   }
   return curry(nAry(n, function($0, $1, $2, $3, $4, $5, $6, $7, $8, $9) {
-    switch (arguments.length) {
+    switch (n) {
       case  1: return new Fn($0);
       case  2: return new Fn($0, $1);
       case  3: return new Fn($0, $1, $2);

@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xdropRepeatsWith from './internal/_xdropRepeatsWith';
-import last from './last';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xdropRepeatsWith from './internal/_xdropRepeatsWith.js';
+import last from './last.js';
 
 
 /**

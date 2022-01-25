@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _assertPromise from './internal/_assertPromise';
+import _curry2 from './internal/_curry2.js';
+import _assertPromise from './internal/_assertPromise.js';
 
 
 /**
@@ -16,19 +16,19 @@ import _assertPromise from './internal/_assertPromise';
  * @param {Function} onFailure The function to apply. Can return a value or a promise of a value.
  * @param {Promise} p
  * @return {Promise} The result of calling `p.then(null, onFailure)`
- * @see R.then
+ * @see R.andThen
  * @example
  *
- *      var failedFetch = (id) => Promise.reject('bad ID');
- *      var useDefault = () => ({ firstName: 'Bob', lastName: 'Loblaw' })
+ *      const failedFetch = id => Promise.reject('bad ID');
+ *      const useDefault = () => ({ firstName: 'Bob', lastName: 'Loblaw' });
  *
- *      //recoverFromFailure :: String -> Promise ({firstName, lastName})
- *      var recoverFromFailure = R.pipe(
+ *      //recoverFromFailure :: String -> Promise ({ firstName, lastName })
+ *      const recoverFromFailure = R.pipe(
  *        failedFetch,
  *        R.otherwise(useDefault),
- *        R.then(R.pick(['firstName', 'lastName'])),
+ *        R.andThen(R.pick(['firstName', 'lastName'])),
  *      );
- *      recoverFromFailure(12345).then(console.log)
+ *      recoverFromFailure(12345).then(console.log);
  */
 var otherwise = _curry2(function otherwise(f, p) {
   _assertPromise('otherwise', p);

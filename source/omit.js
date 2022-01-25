@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * Returns a partial copy of an object omitting the keys specified.

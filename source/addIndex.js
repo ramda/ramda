@@ -1,6 +1,6 @@
-import _concat from './internal/_concat';
-import _curry1 from './internal/_curry1';
-import curryN from './curryN';
+import _concat from './internal/_concat.js';
+import _curry1 from './internal/_curry1.js';
+import curryN from './curryN.js';
 
 
 /**

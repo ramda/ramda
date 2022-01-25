@@ -1,5 +1,7 @@
-import _includesWith from './internal/_includesWith';
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _includesWith from './internal/_includesWith.js';
+import _xuniqWith from './internal/_xuniqWith.js';
 
 
 /**
@@ -7,6 +9,8 @@ import _curry2 from './internal/_curry2';
  * list, based upon the value returned by applying the supplied predicate to
  * two list elements. Prefers the first item if two items compare equal based
  * on the predicate.
+ *
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
@@ -24,7 +28,7 @@ import _curry2 from './internal/_curry2';
  *      R.uniqWith(strEq)([1, '1', 1]);    //=> [1]
  *      R.uniqWith(strEq)(['1', 1, 1]);    //=> ['1']
  */
-var uniqWith = _curry2(function uniqWith(pred, list) {
+var uniqWith = _curry2(_dispatchable([], _xuniqWith, function(pred, list) {
   var idx = 0;
   var len = list.length;
   var result = [];
@@ -37,5 +41,5 @@ var uniqWith = _curry2(function uniqWith(pred, list) {
     idx += 1;
   }
   return result;
-});
+}));
 export default uniqWith;

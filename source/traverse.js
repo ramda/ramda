@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import map from './map';
-import sequence from './sequence';
+import _curry3 from './internal/_curry3.js';
+import map from './map.js';
+import sequence from './sequence.js';
 
 
 /**
@@ -15,7 +15,7 @@ import sequence from './sequence';
  * @memberOf R
  * @since v0.19.0
  * @category List
- * @sig (Applicative f, Traversable t) => (a -> f a) -> (a -> f b) -> t a -> f (t b)
+ * @sig (Applicative f, Traversable t) => (b -> f b) -> (a -> f b) -> t a -> f (t b)
  * @param {Function} of
  * @param {Function} f
  * @param {*} traversable
@@ -30,8 +30,12 @@ import sequence from './sequence';
  *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Maybe.Nothing
  */
 var traverse = _curry3(function traverse(of, f, traversable) {
-  return typeof traversable['fantasy-land/traverse'] === 'function' ?
-    traversable['fantasy-land/traverse'](f, of) :
-    sequence(of, map(f, traversable));
+  return (
+    typeof traversable['fantasy-land/traverse'] === 'function'
+      ? traversable['fantasy-land/traverse'](f, of)
+      : typeof traversable.traverse === 'function'
+        ? traversable.traverse(f, of)
+        : sequence(of, map(f, traversable))
+  );
 });
 export default traverse;

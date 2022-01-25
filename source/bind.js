@@ -1,5 +1,5 @@
-import _arity from './internal/_arity';
-import _curry2 from './internal/_curry2';
+import _arity from './internal/_arity.js';
+import _curry2 from './internal/_curry2.js';
 
 
 /**

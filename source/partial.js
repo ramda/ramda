@@ -1,6 +1,6 @@
-import _arity from './internal/_arity';
-import _concat from './internal/_concat';
-import _curry2 from './internal/_curry2';
+import _arity from './internal/_arity.js';
+import _concat from './internal/_concat.js';
+import _curry2 from './internal/_curry2.js';
 
 
 /**
@@ -21,7 +21,7 @@ import _curry2 from './internal/_curry2';
  *
  *      const multiply2 = (a, b) => a * b;
  *      const double = R.partial(multiply2, [2]);
- *      double(2); //=> 4
+ *      double(3); //=> 6
  *
  *      const greet = (salutation, title, firstName, lastName) =>
  *        salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';

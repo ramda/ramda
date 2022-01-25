@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _reduce from './internal/_reduce';
-import keys from './keys';
+import _curry2 from './internal/_curry2.js';
+import _reduce from './internal/_reduce.js';
+import keys from './keys.js';
 
 
 /**

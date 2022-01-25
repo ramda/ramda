@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import path from './path';
+import _curry3 from './internal/_curry3.js';
+import path from './path.js';
 
 
 /**
@@ -10,7 +10,7 @@ import path from './path';
  * @memberOf R
  * @since v0.19.0
  * @category Logic
- * @typedefn Idx = String | Int
+ * @typedefn Idx = String | Int | Symbol
  * @sig (a -> Boolean) -> [Idx] -> {a} -> Boolean
  * @param {Function} pred
  * @param {Array} propPath

@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xtap from './internal/_xtap';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xtap from './internal/_xtap.js';
 
 
 /**
@@ -21,7 +21,7 @@ import _xtap from './internal/_xtap';
  *      const sayX = x => console.log('x is ' + x);
  *      R.tap(sayX, 100); //=> 100
  *      // logs 'x is 100'
- * @symb R.tap(f, a) = a
+ * @symb R.tap(f, a) = (f(a), a)
  */
 var tap = _curry2(_dispatchable([], _xtap, function tap(fn, x) {
   fn(x);

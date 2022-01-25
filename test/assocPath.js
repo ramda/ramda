@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('assocPath', function() {
@@ -25,6 +25,12 @@ describe('assocPath', function() {
     assert.strictEqual(obj2.b, obj1.b);
     assert.strictEqual(obj2.e, obj1.e);
     assert.strictEqual(obj2.f, obj1.f);
+  });
+
+  it('overwrites primitive values with keys in the path', function() {
+    var obj1 = {a: 'str'};
+    var obj2 = R.assocPath(['a', 'b'], 42, obj1);
+    eq(obj2, {a: {b: 42}});
   });
 
   it('empty path replaces the the whole object', function() {

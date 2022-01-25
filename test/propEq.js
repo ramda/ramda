@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('propEq', function() {
@@ -10,6 +10,15 @@ describe('propEq', function() {
     eq(R.propEq('name', 'Abby', obj1), true);
     eq(R.propEq('hair', 'brown', obj2), true);
     eq(R.propEq('hair', 'blond', obj2), false);
+  });
+
+  it('handles number as property', function() {
+    var deities = ['Cthulhu', 'Dagon', 'Yog-Sothoth'];
+    eq(R.propEq(0, 'Cthulhu', deities), true);
+    eq(R.propEq(1, 'Dagon', deities), true);
+    eq(R.propEq(2, 'Yog-Sothoth', deities), true);
+    eq(R.propEq(-1, 'Yog-Sothoth', deities), true);
+    eq(R.propEq(3, undefined, deities), true);
   });
 
   it('has R.equals semantics', function() {

@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import mergeWithKey from './mergeWithKey';
+import _curry3 from './internal/_curry3.js';
+import mergeWithKey from './mergeWithKey.js';
 
 
 /**

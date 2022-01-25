@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _assertPromise from './internal/_assertPromise';
+import _curry2 from './internal/_curry2.js';
+import _assertPromise from './internal/_assertPromise.js';
 
 
 /**
@@ -9,6 +9,7 @@ import _assertPromise from './internal/_assertPromise';
  *
  * @func
  * @memberOf R
+ * @since v0.27.1
  * @category Function
  * @sig (a -> b) -> (Promise e a) -> (Promise e b)
  * @sig (a -> (Promise e b)) -> (Promise e a) -> (Promise e b)
@@ -18,14 +19,18 @@ import _assertPromise from './internal/_assertPromise';
  * @see R.otherwise
  * @example
  *
- *      var makeQuery = (email) => ({ query: { email }});
+ *      const makeQuery = email => ({ query: { email }});
+ *      const fetchMember = request =>
+ *        Promise.resolve({ firstName: 'Bob', lastName: 'Loblaw', id: 42 });
  *
- *      //getMemberName :: String -> Promise ({firstName, lastName})
- *      var getMemberName = R.pipe(
+ *      //getMemberName :: String -> Promise ({ firstName, lastName })
+ *      const getMemberName = R.pipe(
  *        makeQuery,
  *        fetchMember,
  *        R.andThen(R.pick(['firstName', 'lastName']))
  *      );
+ *
+ *      getMemberName('bob@gmail.com').then(console.log);
  */
 var andThen = _curry2(function andThen(f, p) {
   _assertPromise('andThen', p);

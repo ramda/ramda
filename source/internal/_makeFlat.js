@@ -1,4 +1,4 @@
-import _isArrayLike from './_isArrayLike';
+import _isArrayLike from './_isArrayLike.js';
 
 
 /**

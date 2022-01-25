@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 describe('adjust', function() {
   it('applies the given function to the value at the given index of the supplied array', function() {

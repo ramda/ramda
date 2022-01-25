@@ -1,4 +1,4 @@
-import _curry3 from './internal/_curry3';
+import _curry3 from './internal/_curry3.js';
 
 /**
  * Move an item, at index `from`, to index `to`, in a list of elements.
@@ -6,6 +6,7 @@ import _curry3 from './internal/_curry3';
  *
  * @func
  * @memberOf R
+ * @since v0.27.1
  * @category List
  * @sig Number -> Number -> [a] -> [a]
  * @param {Number} from The source index

@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _isFunction from './internal/_isFunction';
-import lift from './lift';
-import or from './or';
+import _curry2 from './internal/_curry2.js';
+import _isFunction from './internal/_isFunction.js';
+import lift from './lift.js';
+import or from './or.js';
 
 
 /**

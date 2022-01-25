@@ -1,8 +1,8 @@
 'use strict';
 
-var babel = require('rollup-plugin-babel');
+var { babel } = require('@rollup/plugin-babel');
 // uglify handles only es5 code, so this also acts as smoke test against shipping es2015+ syntax
-var uglify = require('rollup-plugin-uglify').uglify;
+var { uglify } = require('rollup-plugin-uglify');
 var pkg = require('./package.json');
 
 var banner = '//  Ramda v' + pkg.version + '\n'
@@ -21,7 +21,10 @@ var config = {
     banner: banner
   },
   plugins: [
-    babel({ presets: [['@babel/preset-env', { targets: { ie: '11' } }]]})
+    babel({
+      babelHelpers: 'bundled',
+      presets: [['@babel/preset-env', { targets: { ie: '11' } }]]
+    })
   ]
 };
 

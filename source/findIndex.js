@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xfindIndex from './internal/_xfindIndex';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xfindIndex from './internal/_xfindIndex.js';
 
 
 /**
@@ -18,7 +18,7 @@ import _xfindIndex from './internal/_xfindIndex';
  * desired one.
  * @param {Array} list The array to consider.
  * @return {Number} The index of the element found, or `-1`.
- * @see R.transduce
+ * @see R.transduce, R.indexOf
  * @example
  *
  *      const xs = [{a: 1}, {a: 2}, {a: 3}];

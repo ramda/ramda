@@ -1,5 +1,5 @@
-import _objectAssign from './internal/_objectAssign';
-import _curry2 from './internal/_curry2';
+import _objectAssign from './internal/_objectAssign.js';
+import _curry2 from './internal/_curry2.js';
 
 
 /**

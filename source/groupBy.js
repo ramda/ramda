@@ -1,10 +1,10 @@
-import _checkForMethod from './internal/_checkForMethod';
-import _curry2 from './internal/_curry2';
-import reduceBy from './reduceBy';
+import _checkForMethod from './internal/_checkForMethod.js';
+import _curry2 from './internal/_curry2.js';
+import reduceBy from './reduceBy.js';
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of
- * calling a String-returning function on each element, and grouping the
+ * calling a key-returning function on each element, and grouping the
  * results according to values returned.
  *
  * Dispatches to the `groupBy` method of the second argument, if present.
@@ -15,12 +15,13 @@ import reduceBy from './reduceBy';
  * @memberOf R
  * @since v0.1.0
  * @category List
- * @sig (a -> String) -> [a] -> {String: [a]}
- * @param {Function} fn Function :: a -> String
+ * @typedefn Idx = String | Int | Symbol
+ * @sig Idx a => (b -> a) -> [b] -> {a: [b]}
+ * @param {Function} fn Function :: a -> Idx
  * @param {Array} list The array to group
  * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
  *         that produced that key when passed to `fn`.
- * @see R.reduceBy, R.transduce
+ * @see R.reduceBy, R.transduce, R.indexBy
  * @example
  *
  *      const byGrade = R.groupBy(function(student) {
@@ -43,10 +44,7 @@ import reduceBy from './reduceBy';
  *      // }
  */
 var groupBy = _curry2(_checkForMethod('groupBy', reduceBy(function(acc, item) {
-  if (acc == null) {
-    acc = [];
-  }
   acc.push(item);
   return acc;
-}, null)));
+}, [])));
 export default groupBy;

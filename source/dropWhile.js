@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _xdropWhile from './internal/_xdropWhile';
-import slice from './slice';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xdropWhile from './internal/_xdropWhile.js';
+import slice from './slice.js';
 
 
 /**

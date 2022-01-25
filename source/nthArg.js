@@ -1,6 +1,6 @@
-import _curry1 from './internal/_curry1';
-import curryN from './curryN';
-import nth from './nth';
+import _curry1 from './internal/_curry1.js';
+import curryN from './curryN.js';
+import nth from './nth.js';
 
 
 /**

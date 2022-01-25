@@ -1,6 +1,6 @@
-import _curry1 from './_curry1';
-import _isArray from './_isArray';
-import _isString from './_isString';
+import _curry1 from './_curry1.js';
+import _isArray from './_isArray.js';
+import _isString from './_isString.js';
 
 
 /**

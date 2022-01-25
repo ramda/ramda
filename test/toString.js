@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var R = require('../source');
+var R = require('../source/index.js');
 
 
 describe('toString', function() {
@@ -52,9 +52,23 @@ describe('toString', function() {
     assert.strictEqual(R.toString(new Boolean(false)), 'new Boolean(false)');
   });
 
+  it('returns the string representation of a Map object', function() {
+    if (typeof Map !== 'function') {
+      return;
+    }
+    assert.strictEqual(R.toString(new Map([[1, 2], [3, 4]])), 'new Map([[1, 2], [3, 4]])');
+  });
+
   it('returns the string representation of a Number object', function() {
     assert.strictEqual(R.toString(new Number(0)), 'new Number(0)');
     assert.strictEqual(R.toString(new Number(-0)), 'new Number(-0)');
+  });
+
+  it('returns the string representation of a Set object', function() {
+    if (typeof Set !== 'function') {
+      return;
+    }
+    assert.strictEqual(R.toString(new Set([2, 1])), 'new Set([1, 2])');
   });
 
   it('returns the string representation of a String object', function() {

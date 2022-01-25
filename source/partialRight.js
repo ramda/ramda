@@ -1,6 +1,6 @@
-import _arity from './internal/_arity';
-import _curry2 from './internal/_curry2';
-import insertAll from './insertAll';
+import _arity from './internal/_arity.js';
+import _curry2 from './internal/_curry2.js';
+import insertAll from './insertAll.js';
 
 /**
  * Takes a function `f` and a list of arguments, and returns a function `g`.

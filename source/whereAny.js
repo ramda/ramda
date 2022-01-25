@@ -1,5 +1,5 @@
-import _curry2 from './internal/_curry2';
-import _has from './internal/_has';
+import _curry2 from './internal/_curry2.js';
+import _has from './internal/_has.js';
 
 
 /**
@@ -13,6 +13,7 @@ import _has from './internal/_has';
  *
  * @func
  * @memberOf R
+ * @since v0.28.0
  * @category Object
  * @sig {String: (* -> Boolean)} -> {String: *} -> Boolean
  * @param {Object} spec

@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 
 // `Const` is a functor that effectively ignores the function given to `map`.
@@ -19,7 +19,7 @@ var Const = function(x) {
  * @param {Lens} lens
  * @param {*} x
  * @return {*}
- * @see R.prop, R.lensIndex, R.lensProp
+ * @see R.set, R.over, R.lens, R.lensIndex, R.lensProp, R.lensPath
  * @example
  *
  *      const xLens = R.lensProp('x');

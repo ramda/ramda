@@ -1,5 +1,5 @@
-import _curry1 from './internal/_curry1';
-import converge from './converge';
+import _curry1 from './internal/_curry1.js';
+import converge from './converge.js';
 
 
 /**

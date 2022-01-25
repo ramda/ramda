@@ -1,4 +1,4 @@
-import equals from '../equals';
+import equals from '../equals.js';
 
 
 export default function _indexOf(list, a, idx) {

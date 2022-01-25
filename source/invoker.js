@@ -1,15 +1,14 @@
-import _curry2 from './internal/_curry2';
-import _isFunction from './internal/_isFunction';
-import curryN from './curryN';
-import toString from './toString';
+import _curry2 from './internal/_curry2.js';
+import _isFunction from './internal/_isFunction.js';
+import curryN from './curryN.js';
+import toString from './toString.js';
 
 
 /**
- * Turns a named method with a specified arity into a function that can be
- * called directly supplied with arguments and a target object.
- *
- * The returned function is curried and accepts `arity + 1` parameters where
- * the final parameter is the target object.
+ * Given an `arity` (Number) and a `name` (String) the `invoker` function
+ * returns a curried function that takes `arity` arguments and a `context`
+ * object. It will "invoke" the `name`'d function (a method) on the `context`
+ * object.
  *
  * @func
  * @memberOf R
@@ -22,17 +21,26 @@ import toString from './toString';
  * @return {Function} A new curried function.
  * @see R.construct
  * @example
+ *      // A function with no arguments
+ *      const asJson = invoker(0, "json")
+ *      // Just like calling .then((response) => response.json())
+ *      fetch("http://example.com/index.json").then(asJson)
  *
- *      const sliceFrom = R.invoker(1, 'slice');
+ *      // A function with one argument
+ *      const sliceFrom = invoker(1, 'slice');
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
- *      const sliceFrom6 = R.invoker(2, 'slice')(6);
+ *
+ *      // A function with two arguments
+ *      const sliceFrom6 = invoker(2, 'slice')(6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
  *
- *      const dog = {
- *        speak: async () => 'Woof!'
- *      };
- *      const speak = R.invoker(0, 'speak');
- *      speak(dog).then(console.log) //~> 'Woof!'
+ *      // NOTE: You can't simply pass some of the arguments to the initial invoker function.
+ *      const firstCreditCardSection = invoker(2, "slice", 0, 4)
+ *      firstCreditCardSection("4242 4242 4242 4242") // => Function<...>
+ *
+ *      // Since invoker returns a curried function, you may partially apply it to create the function you need.
+ *      const firstCreditCardSection = invoker(2, "slice")(0, 4)
+ *      firstCreditCardSection("4242 4242 4242 4242") // => "4242"
  *
  * @symb R.invoker(0, 'method')(o) = o['method']()
  * @symb R.invoker(1, 'method')(a, o) = o['method'](a)

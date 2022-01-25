@@ -1,9 +1,9 @@
-import _curry1 from './internal/_curry1';
-import _isArguments from './internal/_isArguments';
-import _isArray from './internal/_isArray';
-import _isObject from './internal/_isObject';
-import _isString from './internal/_isString';
-import _isTypedArray from './internal/_isTypedArray';
+import _curry1 from './internal/_curry1.js';
+import _isArguments from './internal/_isArguments.js';
+import _isArray from './internal/_isArray.js';
+import _isObject from './internal/_isObject.js';
+import _isString from './internal/_isString.js';
+import _isTypedArray from './internal/_isTypedArray.js';
 
 
 /**

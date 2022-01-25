@@ -1,11 +1,13 @@
-import _curry3 from './internal/_curry3';
-import pathOr from './pathOr';
+import _curry3 from './internal/_curry3.js';
+import defaultTo from './defaultTo.js';
+import prop from './prop.js';
 
 
 /**
- * If the given, non-null object has an own property with the specified name,
- * returns the value of that property. Otherwise returns the provided default
- * value.
+ * Return the specified property of the given non-null object if the property
+ * is present and it's value is not `null`, `undefined` or `NaN`.
+ *
+ * Otherwise the first argument is returned.
  *
  * @func
  * @memberOf R
@@ -29,6 +31,6 @@ import pathOr from './pathOr';
  *      favoriteWithDefault(alice);  //=> 'Ramda'
  */
 var propOr = _curry3(function propOr(val, p, obj) {
-  return pathOr(val, [p], obj);
+  return defaultTo(val, prop(p, obj));
 });
 export default propOr;

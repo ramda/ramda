@@ -1,6 +1,6 @@
-import _curryN from './_curryN';
-import _has from './_has';
-import _xfBase from './_xfBase';
+import _curryN from './_curryN.js';
+import _has from './_has.js';
+import _xfBase from './_xfBase.js';
 
 
 function XReduceBy(valueFn, valueAcc, keyFn, xf) {

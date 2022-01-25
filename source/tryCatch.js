@@ -1,6 +1,6 @@
-import _arity from './internal/_arity';
-import _concat from './internal/_concat';
-import _curry2 from './internal/_curry2';
+import _arity from './internal/_arity.js';
+import _concat from './internal/_concat.js';
+import _curry2 from './internal/_curry2.js';
 
 /**
  * `tryCatch` takes two functions, a `tryer` and a `catcher`. The returned
@@ -17,11 +17,12 @@ import _curry2 from './internal/_curry2';
  * @sig (...x -> a) -> ((e, ...x) -> a) -> (...x -> a)
  * @param {Function} tryer The function that may throw.
  * @param {Function} catcher The function that will be evaluated if `tryer` throws.
- * @return {Function} A new function that will catch exceptions and send then to the catcher.
+ * @return {Function} A new function that will catch exceptions and send them to the catcher.
  * @example
  *
  *      R.tryCatch(R.prop('x'), R.F)({x: true}); //=> true
- *      R.tryCatch(() => { throw 'foo'}, R.always('catched'))('bar') // => 'catched'
+ *      R.tryCatch(() => { throw 'foo'}, R.always('caught'))('bar') // =>
+ *      'caught'
  *      R.tryCatch(R.times(R.identity), R.always([]))('s') // => []
  *      R.tryCatch(() => { throw 'this is not a valid value'}, (err, value)=>({error : err,  value }))('bar') // => {'error': 'this is not a valid value', 'value': 'bar'}
  */
