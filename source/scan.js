@@ -5,7 +5,9 @@ import _xscan from './internal/_xscan.js';
 
 /**
  * Scan is similar to [`reduce`](#reduce), but returns a list of successively
- * reduced values from the left
+ * reduced values from the left.
+ *
+ * Acts as a transducer if a transformer is given in list position.
  *
  * @func
  * @memberOf R
