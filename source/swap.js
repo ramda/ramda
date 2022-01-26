@@ -62,7 +62,6 @@ var swapString = function(indexA, indexB, s) {
  *      R.swap(-1, 0, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['f', 'b', 'c', 'd', 'e', 'a'] list rotation
  *      R.swap('a', 'b', {a: 1, b: 2}); //=> {a: 2, b: 2}
  *      R.swap(0, 2, 'foo'); //=> 'oof'
- *      R.swap(obj1, obj2, new Map ([[obj1, 1] [obj2, 2]]); //=> new Map ([[obj1, 2], [obj2, 1]])
  */
 var swap = _curry3(function(indexA, indexB, o) {
   if (_isArray(o)) {
