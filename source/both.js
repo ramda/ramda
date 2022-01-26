@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _isFunction from './internal/_isFunction';
-import and from './and';
-import lift from './lift';
+import _curry2 from './internal/_curry2.js';
+import _isFunction from './internal/_isFunction.js';
+import and from './and.js';
+import lift from './lift.js';
 
 
 /**
@@ -23,7 +23,7 @@ import lift from './lift';
  * @param {Function} f A predicate
  * @param {Function} g Another predicate
  * @return {Function} a function that applies its arguments to `f` and `g` and `&&`s their outputs together.
- * @see R.and
+ * @see R.either, R.and
  * @example
  *
  *      const gt10 = R.gt(R.__, 10)

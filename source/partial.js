@@ -1,5 +1,5 @@
-import _concat from './internal/_concat';
-import _createPartialApplicator from './internal/_createPartialApplicator';
+import _concat from './internal/_concat.js';
+import _createPartialApplicator from './internal/_createPartialApplicator.js';
 
 
 /**
@@ -20,7 +20,7 @@ import _createPartialApplicator from './internal/_createPartialApplicator';
  *
  *      const multiply2 = (a, b) => a * b;
  *      const double = R.partial(multiply2, [2]);
- *      double(2); //=> 4
+ *      double(3); //=> 6
  *
  *      const greet = (salutation, title, firstName, lastName) =>
  *        salutation + ', ' + title + ' ' + firstName + ' ' + lastName + '!';

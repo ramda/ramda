@@ -1,4 +1,6 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
+import _isArray from './internal/_isArray.js';
+import _isObject from './internal/_isObject.js';
 
 
 /**
@@ -29,14 +31,19 @@ import _curry2 from './internal/_curry2';
  *      R.evolve(transformations, tomato); //=> {firstName: 'Tomato', data: {elapsed: 101, remaining: 1399}, id:123}
  */
 var evolve = _curry2(function evolve(transformations, object) {
-  var result = {};
+  if (!_isObject(object) && !_isArray(object)) {
+    return object;
+  }
+  var result = object instanceof Array ? [] : {};
   var transformation, key, type;
   for (key in object) {
     transformation = transformations[key];
     type = typeof transformation;
-    result[key] = type === 'function'                 ? transformation(object[key])
-                : transformation && type === 'object' ? evolve(transformation, object[key])
-                                                      : object[key];
+    result[key] = type === 'function'
+      ? transformation(object[key])
+      : transformation && type === 'object'
+        ? evolve(transformation, object[key])
+        : object[key];
   }
   return result;
 });

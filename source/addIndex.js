@@ -1,6 +1,6 @@
-import _concat from './internal/_concat';
-import _curry1 from './internal/_curry1';
-import curryN from './curryN';
+import _concat from './internal/_concat.js';
+import _curry1 from './internal/_curry1.js';
+import curryN from './curryN.js';
 
 
 /**
@@ -18,7 +18,7 @@ import curryN from './curryN';
  * @since v0.15.0
  * @category Function
  * @category List
- * @sig ((a ... -> b) ... -> [a] -> *) -> ((a ..., Int, [a] -> b) ... -> [a] -> *)
+ * @sig (((a ...) -> b) ... -> [a] -> *) -> (((a ..., Int, [a]) -> b) ... -> [a] -> *)
  * @param {Function} fn A list iteration function that does not pass index or list to its callback
  * @return {Function} An altered list iteration function that passes (item, index, list) to its callback
  * @example

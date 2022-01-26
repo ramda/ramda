@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import _indexOf from './internal/_indexOf';
-import _isArray from './internal/_isArray';
+import _curry2 from './internal/_curry2.js';
+import _indexOf from './internal/_indexOf.js';
+import _isArray from './internal/_isArray.js';
 
 
 /**
@@ -16,7 +16,7 @@ import _isArray from './internal/_isArray';
  * @param {*} target The item to find.
  * @param {Array} xs The array to search in.
  * @return {Number} the index of the target, or -1 if the target is not found.
- * @see R.lastIndexOf
+ * @see R.lastIndexOf, R.findIndex
  * @example
  *
  *      R.indexOf(3, [1,2,3,4]); //=> 2

@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-
+import _curry3 from './internal/_curry3.js';
+import assocPath from './assocPath.js';
 
 /**
  * Makes a shallow clone of an object, setting or overriding the specified
@@ -11,8 +11,9 @@ import _curry3 from './internal/_curry3';
  * @memberOf R
  * @since v0.8.0
  * @category Object
- * @sig String -> a -> {k: v} -> {k: v}
- * @param {String} prop The property name to set
+ * @typedefn Idx = String | Int
+ * @sig Idx -> a -> {k: v} -> {k: v}
+ * @param {String|Number} prop The property name to set
  * @param {*} val The new value
  * @param {Object} obj The object to clone
  * @return {Object} A new object equivalent to the original except for the changed property.
@@ -21,12 +22,5 @@ import _curry3 from './internal/_curry3';
  *
  *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
  */
-var assoc = _curry3(function assoc(prop, val, obj) {
-  var result = {};
-  for (var p in obj) {
-    result[p] = obj[p];
-  }
-  result[prop] = val;
-  return result;
-});
+var assoc = _curry3(function assoc(prop, val, obj) { return assocPath([prop], val, obj); });
 export default assoc;

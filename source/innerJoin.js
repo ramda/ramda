@@ -1,6 +1,6 @@
-import _includesWith from './internal/_includesWith';
-import _curry3 from './internal/_curry3';
-import _filter from './internal/_filter';
+import _includesWith from './internal/_includesWith.js';
+import _curry3 from './internal/_curry3.js';
+import _filter from './internal/_filter.js';
 
 
 /**

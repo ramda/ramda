@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('has', function() {
@@ -22,4 +22,15 @@ describe('has', function() {
     eq(R.has('age', bob), false);
   });
 
+  it('returns false for non-objects', function() {
+    eq(R.has('a', undefined), false);
+    eq(R.has('a', null), false);
+    eq(R.has('a', true), false);
+    eq(R.has('a', ''), false);
+    eq(R.has('a', /a/), false);
+  });
+
+  it('tests currying', function() {
+    eq(R.has('a')({ a: { b: 1 } }), true);
+  });
 });

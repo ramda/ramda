@@ -1,19 +1,22 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('converge', function() {
   var mult = function(a, b) {return a * b;};
 
-  var f1 = R.converge(mult,
-                      [function(a) { return a; },
-                       function(a) { return a; }]);
-  var f2 = R.converge(mult,
-                      [function(a) { return a; },
-                       function(a, b) { return b; }]);
-  var f3 = R.converge(mult,
-                      [function(a) { return a; },
-                       function(a, b, c) { return c; }]);
+  var f1 = R.converge(mult, [
+    function(a) { return a; },
+    function(a) { return a; }
+  ]);
+  var f2 = R.converge(mult, [
+    function(a) { return a; },
+    function(a, b) { return b; }
+  ]);
+  var f3 = R.converge(mult, [
+    function(a) { return a; },
+    function(a, b, c) { return c; }
+  ]);
 
   it('passes the results of applying the arguments individually to two separate functions into a single one', function() {
     eq(R.converge(mult, [R.add(1), R.add(3)])(2), 15); // mult(add1(2), add3(2)) = mult(3, 5) = 3 * 15;

@@ -1,7 +1,7 @@
-import _map from './internal/_map';
-import identity from './identity';
-import pickAll from './pickAll';
-import useWith from './useWith';
+import _map from './internal/_map.js';
+import identity from './identity.js';
+import pickAll from './pickAll.js';
+import useWith from './useWith.js';
 
 
 /**
@@ -16,6 +16,7 @@ import useWith from './useWith';
  * @param {Array} props The property names to project
  * @param {Array} objs The objects to query
  * @return {Array} An array of objects with just the `props` properties.
+ * @see R.pluck, R.props, R.prop
  * @example
  *
  *      const abby = {name: 'Abby', age: 7, hair: 'blond', grade: 2};

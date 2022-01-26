@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import adjust from './adjust';
-import always from './always';
+import _curry3 from './internal/_curry3.js';
+import adjust from './adjust.js';
+import always from './always.js';
 
 
 /**

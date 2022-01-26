@@ -1,4 +1,4 @@
-import reduceBy from './reduceBy';
+import reduceBy from './reduceBy.js';
 
 
 /**
@@ -13,10 +13,12 @@ import reduceBy from './reduceBy';
  * @memberOf R
  * @since v0.19.0
  * @category List
- * @sig (a -> String) -> [{k: v}] -> {k: {k: v}}
- * @param {Function} fn Function :: a -> String
+ * @typedefn Idx = String | Int | Symbol
+ * @sig Idx a => (b -> a) -> [b] -> {a: b}
+ * @param {Function} fn Function :: a -> Idx
  * @param {Array} array The array of objects to index
  * @return {Object} An object indexing each array element by the given property.
+ * @see R.groupBy
  * @example
  *
  *      const list = [{id: 'xyz', title: 'A'}, {id: 'abc', title: 'B'}];

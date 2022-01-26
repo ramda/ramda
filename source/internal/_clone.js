@@ -1,5 +1,5 @@
-import _cloneRegExp from './_cloneRegExp';
-import type from '../type';
+import _cloneRegExp from './_cloneRegExp.js';
+import type from '../type.js';
 
 
 /**
@@ -22,19 +22,32 @@ export default function _clone(value, refFrom, refTo, deep) {
       }
       idx += 1;
     }
-    refFrom[idx + 1] = value;
-    refTo[idx + 1] = copiedValue;
+    refFrom[idx] = value;
+    refTo[idx] = copiedValue;
     for (var key in value) {
-      copiedValue[key] = deep ?
-        _clone(value[key], refFrom, refTo, true) : value[key];
+      if (value.hasOwnProperty(key)) {
+        copiedValue[key] = deep ? _clone(value[key], refFrom, refTo, true) : value[key];
+      }
     }
     return copiedValue;
   };
   switch (type(value)) {
-    case 'Object':  return copy({});
+    case 'Object':  return copy(Object.create(Object.getPrototypeOf(value)));
     case 'Array':   return copy([]);
     case 'Date':    return new Date(value.valueOf());
-    case 'RegExp':  return _cloneRegExp(value);
+    case 'RegExp': return _cloneRegExp(value);
+    case 'Int8Array':
+    case 'Uint8Array':
+    case 'Uint8ClampedArray':
+    case 'Int16Array':
+    case 'Uint16Array':
+    case 'Int32Array':
+    case 'Uint32Array':
+    case 'Float32Array':
+    case 'Float64Array':
+    case 'BigInt64Array':
+    case 'BigUint64Array':
+      return value.slice();
     default:        return value;
   }
 }

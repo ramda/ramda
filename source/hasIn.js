@@ -1,4 +1,5 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
+import isNil from './isNil.js';
 
 
 /**
@@ -28,6 +29,9 @@ import _curry2 from './internal/_curry2';
  *      R.hasIn('area', square);  //=> true
  */
 var hasIn = _curry2(function hasIn(prop, obj) {
+  if (isNil(obj)) {
+    return false;
+  }
   return prop in obj;
 });
 export default hasIn;

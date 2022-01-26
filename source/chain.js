@@ -1,8 +1,8 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _makeFlat from './internal/_makeFlat';
-import _xchain from './internal/_xchain';
-import map from './map';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _makeFlat from './internal/_makeFlat.js';
+import _xchain from './internal/_xchain.js';
+import map from './map.js';
 
 
 /**

@@ -1,6 +1,6 @@
-import _curry1 from './internal/_curry1';
-import _has from './internal/_has';
-import keys from './keys';
+import _curry1 from './internal/_curry1.js';
+import _has from './internal/_has.js';
+import keys from './keys.js';
 
 
 /**

@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('indexOf', function() {
@@ -71,12 +71,18 @@ describe('indexOf', function() {
     };
 
     var list = new List('b',
-               new List('a',
-               new List('n',
-               new List('a',
-               new List('n',
-               new List('a',
-               new Empty()))))));
+      new List('a',
+        new List('n',
+          new List('a',
+            new List('n',
+              new List('a',
+                new Empty()
+              )
+            )
+          )
+        )
+      )
+    );
 
     eq(R.indexOf('a', 'banana'), 1);
     eq(R.indexOf('x', 'banana'), -1);

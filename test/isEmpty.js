@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('isEmpty', function() {
@@ -20,6 +20,15 @@ describe('isEmpty', function() {
   it('returns true for empty array', function() {
     eq(R.isEmpty([]), true);
     eq(R.isEmpty([[]]), false);
+  });
+
+  it('returns true for empty typed array', function() {
+    eq(R.isEmpty(Uint8Array.from('')), true);
+    eq(R.isEmpty(Float32Array.from('')), true);
+    eq(R.isEmpty(new Float32Array([])), true);
+    eq(R.isEmpty(Uint8Array.from('1')), false);
+    eq(R.isEmpty(Float32Array.from('1')), false);
+    eq(R.isEmpty(new Float32Array([1])), false);
   });
 
   it('returns true for empty object', function() {

@@ -1,5 +1,5 @@
-import _objectAssign from './internal/_objectAssign';
-import _curry2 from './internal/_curry2';
+import _objectAssign from './internal/_objectAssign.js';
+import _curry2 from './internal/_curry2.js';
 
 
 /**
@@ -9,6 +9,7 @@ import _curry2 from './internal/_curry2';
  *
  * @func
  * @memberOf R
+ * @since v0.26.0
  * @category Object
  * @sig {k: v} -> {k: v} -> {k: v}
  * @param {Object} l

@@ -1,5 +1,5 @@
-import _curry3 from './internal/_curry3';
-import _has from './internal/_has';
+import _curry3 from './internal/_curry3.js';
+import _has from './internal/_has.js';
 
 
 /**
@@ -30,6 +30,8 @@ import _has from './internal/_has';
 var mergeWithKey = _curry3(function mergeWithKey(fn, l, r) {
   var result = {};
   var k;
+  l = l || {};
+  r = r || {};
 
   for (k in l) {
     if (_has(k, l)) {

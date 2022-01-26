@@ -1,13 +1,13 @@
-import _concat from './internal/_concat';
-import _curry2 from './internal/_curry2';
-import _reduce from './internal/_reduce';
-import map from './map';
+import _concat from './internal/_concat.js';
+import _curry2 from './internal/_curry2.js';
+import _reduce from './internal/_reduce.js';
+import map from './map.js';
 
 
 /**
  * ap applies a list of functions to a list of values.
  *
- * Dispatches to the `ap` method of the second argument, if present. Also
+ * Dispatches to the `ap` method of the first argument, if present. Also
  * treats curried functions as applicatives.
  *
  * @func
@@ -32,14 +32,13 @@ import map from './map';
  */
 var ap = _curry2(function ap(applyF, applyX) {
   return (
-    typeof applyX['fantasy-land/ap'] === 'function' ?
-      applyX['fantasy-land/ap'](applyF) :
-    typeof applyF.ap === 'function' ?
-      applyF.ap(applyX) :
-    typeof applyF === 'function' ?
-      function(x) { return applyF(x)(applyX(x)); } :
-    // else
-      _reduce(function(acc, f) { return _concat(acc, map(f, applyX)); }, [], applyF)
+    typeof applyX['fantasy-land/ap'] === 'function'
+      ? applyX['fantasy-land/ap'](applyF)
+      : typeof applyF.ap === 'function'
+        ? applyF.ap(applyX)
+        : typeof applyF === 'function'
+          ? function(x) { return applyF(x)(applyX(x)); }
+          : _reduce(function(acc, f) { return _concat(acc, map(f, applyX)); }, [], applyF)
   );
 });
 export default ap;

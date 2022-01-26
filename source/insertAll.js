@@ -1,4 +1,4 @@
-import _curry3 from './internal/_curry3';
+import _curry3 from './internal/_curry3.js';
 
 
 /**
@@ -21,8 +21,10 @@ import _curry3 from './internal/_curry3';
  */
 var insertAll = _curry3(function insertAll(idx, elts, list) {
   idx = idx < list.length && idx >= 0 ? idx : list.length;
-  return [].concat(Array.prototype.slice.call(list, 0, idx),
-                   elts,
-                   Array.prototype.slice.call(list, idx));
+  return [].concat(
+    Array.prototype.slice.call(list, 0, idx),
+    elts,
+    Array.prototype.slice.call(list, idx)
+  );
 });
 export default insertAll;

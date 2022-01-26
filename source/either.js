@@ -1,7 +1,7 @@
-import _curry2 from './internal/_curry2';
-import _isFunction from './internal/_isFunction';
-import lift from './lift';
-import or from './or';
+import _curry2 from './internal/_curry2.js';
+import _isFunction from './internal/_isFunction.js';
+import lift from './lift.js';
+import or from './or.js';
 
 
 /**
@@ -22,7 +22,7 @@ import or from './or';
  * @param {Function} f a predicate
  * @param {Function} g another predicate
  * @return {Function} a function that applies its arguments to `f` and `g` and `||`s their outputs together.
- * @see R.or
+ * @see R.both, R.or
  * @example
  *
  *      const gt10 = x => x > 10;

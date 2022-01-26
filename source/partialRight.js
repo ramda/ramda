@@ -1,6 +1,6 @@
-import _concat from './internal/_concat';
-import _createPartialApplicator from './internal/_createPartialApplicator';
-import flip from './flip';
+import _concat from './internal/_concat.js';
+import _createPartialApplicator from './internal/_createPartialApplicator.js';
+import flip from './flip.js';
 
 
 /**

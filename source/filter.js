@@ -1,10 +1,10 @@
-import _curry2 from './internal/_curry2';
-import _dispatchable from './internal/_dispatchable';
-import _filter from './internal/_filter';
-import _isObject from './internal/_isObject';
-import _reduce from './internal/_reduce';
-import _xfilter from './internal/_xfilter';
-import keys from './keys';
+import _curry2 from './internal/_curry2.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _filter from './internal/_filter.js';
+import _isObject from './internal/_isObject.js';
+import _reduce from './internal/_reduce.js';
+import _xfilter from './internal/_xfilter.js';
+import keys from './keys.js';
 
 
 /**
@@ -34,7 +34,7 @@ import keys from './keys';
  *
  *      R.filter(isEven, {a: 1, b: 2, c: 3, d: 4}); //=> {b: 2, d: 4}
  */
-var filter = _curry2(_dispatchable(['filter'], _xfilter, function(pred, filterable) {
+var filter = _curry2(_dispatchable(['fantasy-land/filter', 'filter'], _xfilter, function(pred, filterable) {
   return (
     _isObject(filterable) ?
       _reduce(function(acc, key) {

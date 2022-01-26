@@ -1,5 +1,5 @@
-import curryN from './curryN';
-import _curry1 from './internal/_curry1';
+import curryN from './curryN.js';
+import _curry1 from './internal/_curry1.js';
 
 /**
  * Creates a thunk out of a function. A thunk delays a calculation until
@@ -7,6 +7,7 @@ import _curry1 from './internal/_curry1';
  *
  * @func
  * @memberOf R
+ * @since v0.26.0
  * @category Function
  * @sig ((a, b, ..., j) -> k) -> (a, b, ..., j) -> (() -> k)
  * @param {Function} fn A function to wrap in a thunk
@@ -20,7 +21,7 @@ import _curry1 from './internal/_curry1';
  */
 var thunkify = _curry1(function thunkify(fn) {
   return curryN(fn.length, function createThunk() {
-    const fnArgs = arguments;
+    var fnArgs = arguments;
     return function invokeThunk() {
       return fn.apply(this, fnArgs);
     };

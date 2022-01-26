@@ -1,6 +1,6 @@
-import _curry3 from './internal/_curry3';
-import _dispatchable from './internal/_dispatchable';
-import _xscan from './internal/_xscan';
+import _curry3 from './internal/_curry3.js';
+import _dispatchable from './internal/_dispatchable.js';
+import _xscan from './internal/_xscan.js';
 
 
 /**

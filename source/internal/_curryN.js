@@ -1,5 +1,5 @@
-import _arity from './_arity';
-import _isPlaceholder from './_isPlaceholder';
+import _arity from './_arity.js';
+import _isPlaceholder from './_isPlaceholder.js';
 
 
 /**
@@ -34,7 +34,8 @@ export default function _curryN(length, received, fn) {
       }
       combinedIdx += 1;
     }
-    return left <= 0 ? fn.apply(this, combined)
-                     : _arity(left, _curryN(length, combined, fn));
+    return left <= 0
+      ? fn.apply(this, combined)
+      : _arity(left, _curryN(length, combined, fn));
   };
 }

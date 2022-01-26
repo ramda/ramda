@@ -1,4 +1,4 @@
-import _includes from './_includes';
+import _includes from './_includes.js';
 
 
 function _Set() {

@@ -1,5 +1,5 @@
-import _curry3 from './_curry3';
-import _xfBase from './_xfBase';
+import _curry3 from './_curry3.js';
+import _xfBase from './_xfBase.js';
 
 var tInit = '@@transducer/init';
 var tStep = '@@transducer/step';

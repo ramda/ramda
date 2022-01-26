@@ -1,5 +1,6 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 describe('filter', function() {
@@ -29,6 +30,13 @@ describe('filter', function() {
   it('dispatches to passed-in non-Array object with a `filter` method', function() {
     var f = {filter: function(f) { return f('called f.filter'); }};
     eq(R.filter(function(s) { return s; }, f), 'called f.filter');
+  });
+
+  it('correctly uses fantasy-land implementations', function() {
+    var m1 = Maybe.Just(-1);
+    var m2 = R.filter(function(x) { return x > 0; } , m1);
+
+    eq(m2.isNothing, true);
   });
 
 });

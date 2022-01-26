@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 
 /**
@@ -16,6 +16,7 @@ import _curry2 from './internal/_curry2';
  * @param {Function} comparator A sorting function :: a -> b -> Int
  * @param {Array} list The list to sort
  * @return {Array} a new array with its elements sorted by the comparator function.
+ * @see R.ascend, R.descend
  * @example
  *
  *      const diff = function(a, b) { return a - b; };

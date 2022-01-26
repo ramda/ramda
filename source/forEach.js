@@ -1,5 +1,5 @@
-import _checkForMethod from './internal/_checkForMethod';
-import _curry2 from './internal/_curry2';
+import _checkForMethod from './internal/_checkForMethod.js';
+import _curry2 from './internal/_curry2.js';
 
 
 /**

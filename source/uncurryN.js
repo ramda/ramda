@@ -1,19 +1,22 @@
-import _curry2 from './internal/_curry2';
-import curryN from './curryN';
+import _curry2 from './internal/_curry2.js';
+import curryN from './curryN.js';
 
 
 /**
  * Returns a function of arity `n` from a (manually) curried function.
+ * Note that, the returned function is actually a ramda style
+ * curryied function, which can accept one or more arguments in each
+ * function calling.
  *
  * @func
  * @memberOf R
  * @since v0.14.0
  * @category Function
- * @sig Number -> (a -> b) -> (a -> c)
+ * @sig Number -> (a -> b -> c ... -> z) -> ((a -> b -> c ...) -> z)
  * @param {Number} length The arity for the returned function.
  * @param {Function} fn The function to uncurry.
  * @return {Function} A new function.
- * @see R.curry
+ * @see R.curry, R.curryN
  * @example
  *
  *      const addFour = a => b => c => d => a + b + c + d;

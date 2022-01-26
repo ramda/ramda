@@ -1,5 +1,6 @@
-import _curry3 from './internal/_curry3';
-import equals from './equals';
+import _curry3 from './internal/_curry3.js';
+import prop from './prop.js';
+import equals from './equals.js';
 
 
 /**
@@ -28,6 +29,6 @@ import equals from './equals';
  *      R.filter(hasBrownHair, kids); //=> [fred, rusty]
  */
 var propEq = _curry3(function propEq(name, val, obj) {
-  return equals(val, obj[name]);
+  return equals(val, prop(name, obj));
 });
 export default propEq;

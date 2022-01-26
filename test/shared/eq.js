@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-var R = require('../../source');
+var R = require('../../source/index.js');
 
 
 module.exports = function(actual, expected) {

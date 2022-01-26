@@ -1,5 +1,5 @@
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('path', function() {
@@ -25,6 +25,22 @@ describe('path', function() {
     eq(R.path(['a', 'e', 'f', 1], obj), 101);
     eq(R.path(['j', 0], obj), 'J');
     eq(R.path(['j', 1], obj), undefined);
+  });
+
+  it('takes a path that contains indices into arrays', function() {
+    var obj = {
+      a: [[{}], [{x: 'first'}, {x: 'second'}, {x: 'third'}, {x: 'last'}]]
+    };
+    eq(R.path(['a', 0, 0], obj), {});
+    eq(R.path(['a', 0, 1], obj), undefined);
+    eq(R.path(['a', 1, 0, 'x'], obj), 'first');
+    eq(R.path(['a', 1, 1, 'x'], obj), 'second');
+    eq(R.path([0], ['A']), 'A');
+  });
+
+  it('takes a path that contains negative indices into arrays', function() {
+    eq(R.path(['x', -2], {x: ['a', 'b', 'c', 'd']}), 'c');
+    eq(R.path([-1, 'y'], [{x: 1, y: 99}, {x: 2, y: 98}, {x: 3, y: 97}]), 97);
   });
 
   it("gets a deep property's value from objects", function() {

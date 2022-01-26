@@ -1,10 +1,10 @@
-import pipe from './pipe';
-import reverse from './reverse';
+import pipe from './pipe.js';
+import reverse from './reverse.js';
 
 
 /**
- * Performs right-to-left function composition. The rightmost function may have
- * any arity; the remaining functions must be unary.
+ * Performs right-to-left function composition. The last argument may have
+ * any arity; the remaining arguments must be unary.
  *
  * **Note:** The result of compose is not automatically curried.
  *
@@ -25,6 +25,7 @@ import reverse from './reverse';
  *      R.compose(Math.abs, R.add(1), R.multiply(2))(-4) //=> 7
  *
  * @symb R.compose(f, g, h)(a, b) = f(g(h(a, b)))
+ * @symb R.compose(f, g, h)(a)(b) = f(g(h(a)))(b)
  */
 export default function compose() {
   if (arguments.length === 0) {

@@ -38,15 +38,29 @@
     "fantasy-land"
   ],
   "sideEffects": false,
-  "version": "0.25.0",
+  "version": "0.28.0",
   "homepage": "https://ramdajs.com/",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/ramda/ramda.git"
   },
-  "module": "es/index.js",
-  "main": "src/index.js",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ramda"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": {
+      "require": "./src/index.js",
+      "import": "./es/index.js",
+      "default": "./src/index.js"
+    },
+    "./es/": "./es/",
+    "./src/": "./src/",
+    "./dist/": "./dist/"
+  },
+  "module": "./es/index.js",
   "unpkg": "dist/ramda.min.js",
   "jsdelivr": "dist/ramda.min.js",
   "files": [
@@ -55,9 +69,10 @@
     "dist"
   ],
   "scripts": {
-    "bench": "scripts/benchRunner",
-    "bookmarklet": "scripts/bookmarklet",
-    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es",
+    "prebench": "npm run --silent build:cjs",
+    "bench": "node scripts/benchRunner",
+    "bookmarklet": "node scripts/bookmarklet",
+    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es && node ./scripts/addModulePackageScope.js",
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
     "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
@@ -65,37 +80,42 @@
     "partial-build": "node ./scripts/partialBuild",
     "clean": "rimraf es/* src/* dist/* coverage/*",
     "prepare": "npm run clean && npm run build",
-    "coverage": "istanbul cover node_modules/.bin/_mocha -- --reporter spec",
+    "coverage": "BABEL_ENV=cjs nyc --reporter=lcov mocha -- --require @babel/register",
     "lint": "eslint scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "browser_test": "testem ci",
-    "test": "cross-env BABEL_ENV=cjs mocha --require babel-register --reporter spec"
+    "spec": "cross-env BABEL_ENV=cjs mocha --require @babel/register --reporter spec",
+    "test": "npm run spec && npm run lint"
   },
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-annotate-pure-calls": "^0.2.0",
-    "babel-register": "^6.26.0",
-    "babel-types": "^6.26.0",
-    "babelify": "^8.0.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.4.4",
+    "@babel/types": "^7.4.4",
+    "@rollup/plugin-babel": "^5.0.4",
+    "babel-plugin-annotate-pure-calls": "^0.4.0",
+    "babel-plugin-import-export-rename": "^1.0.1",
+    "babelify": "^10.0.0",
     "benchmark": "~1.0.0",
     "browserify": "https://api.github.com/repos/browserify/browserify/tarball/9ff7c55cc67a7ddbc64f8e7270bcd75fcc72ce2f",
     "cli-table": "0.3.x",
-    "cross-env": "^2.0.1",
+    "cross-env": "^5.2.0",
     "dox": "latest",
-    "envvar": "1.x.x",
-    "eslint": "^2.11.0",
-    "handlebars": "3.0.x",
-    "istanbul": "^0.4.x",
-    "js-yaml": "^3.2.5",
-    "jsverify": "^0.7.3",
-    "mocha": "2.x.x",
-    "ramda": "0.17.x",
-    "rimraf": "~2.3.2",
-    "rollup": "^0.50.0",
-    "rollup-plugin-terser": "^1.0.1",
+    "envvar": "^2.0.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-import": "^2.25.4",
+    "fast-check": "^2.12.0",
+    "handlebars": ">=4.1.2",
+    "js-yaml": "^3.13.1",
+    "mocha": "^6.1.4",
+    "nyc": "^15.0.1",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.32.1",
+    "rollup-plugin-uglify": "^6.0.4",
     "sanctuary": "0.7.x",
-    "sinon": "^1.17.4",
-    "testem": "^2.9.0",
-    "xyz": "1.0.x"
+    "sinon": "^7.3.2",
+    "testem": "^2.16.0",
+    "xyz": "^3.0.0"
   }
 }

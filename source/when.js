@@ -1,4 +1,4 @@
-import _curry3 from './internal/_curry3';
+import _curry3 from './internal/_curry3.js';
 
 
 /**
@@ -11,7 +11,7 @@ import _curry3 from './internal/_curry3';
  * @memberOf R
  * @since v0.18.0
  * @category Logic
- * @sig (a -> Boolean) -> (a -> a) -> a -> a
+ * @sig (a -> Boolean) -> (a -> b) -> a -> a | b
  * @param {Function} pred       A predicate function
  * @param {Function} whenTrueFn A function to invoke when the `condition`
  *                              evaluates to a truthy value.

@@ -1,7 +1,7 @@
 var assert = require('assert');
 
-var R = require('../source');
-var eq = require('./shared/eq');
+var R = require('../source/index.js');
+var eq = require('./shared/eq.js');
 
 
 describe('mergeLeft', function() {
@@ -38,6 +38,23 @@ describe('mergeLeft', function() {
     var res = R.mergeLeft(a, b);
     assert.strictEqual(a.x, res.x);
     eq(res, { x: { u: 1, v: 2 }, y: 0, z: 0 });
+  });
+
+  describe('acts as if nil values are simply empty objects', function() {
+    var a = {w: 1, x: 2};
+    var b = {w: 100, y: 3, z: 4};
+
+    it('... if the first object is nil', function() {
+      eq(R.mergeLeft(null, b), b);
+    });
+
+    it('... if the second object is nil', function() {
+      eq(R.mergeLeft(a, undefined), a);
+    });
+
+    it('... if both objects are nil', function() {
+      eq(R.mergeLeft(null, undefined), {});
+    });
   });
 
 });

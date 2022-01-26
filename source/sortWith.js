@@ -1,4 +1,4 @@
-import _curry2 from './internal/_curry2';
+import _curry2 from './internal/_curry2.js';
 
 
 /**
@@ -12,6 +12,7 @@ import _curry2 from './internal/_curry2';
  * @param {Array} functions A list of comparator functions.
  * @param {Array} list The list to sort.
  * @return {Array} A new list sorted according to the comarator functions.
+ * @see R.ascend, R.descend
  * @example
  *
  *      const alice = {

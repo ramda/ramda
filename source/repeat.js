@@ -1,6 +1,6 @@
-import _curry2 from './internal/_curry2';
-import always from './always';
-import times from './times';
+import _curry2 from './internal/_curry2.js';
+import always from './always.js';
+import times from './times.js';
 
 
 /**
