@@ -23,6 +23,6 @@ import uniq from './uniq.js';
  *      R.intersection([1,2,3,4], [7,6,5,4,3]); //=> [4, 3]
  */
 var intersection = _curry2(function intersection(list1, list2) {
-  return uniq(_filter(flip(_includes)(list1), list2));
+  return uniq(_filter(flip(_includes)(list2), list1));
 });
 export default intersection;
