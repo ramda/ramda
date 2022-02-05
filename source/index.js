@@ -3,6 +3,7 @@ export { default as T } from './T.js';
 export { default as __ } from './__.js';
 export { default as add } from './add.js';
 export { default as addIndex } from './addIndex.js';
+export { default as addIndexRight } from './addIndexRight.js';
 export { default as adjust } from './adjust.js';
 export { default as all } from './all.js';
 export { default as allPass } from './allPass.js';
