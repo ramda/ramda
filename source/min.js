@@ -26,14 +26,15 @@ var min = _curry2(function min(a, b) {
     return undefined;
   }
 
-  const minByValue = safeMin(a, b);
+  var minByValue = safeMin(a, b);
   if (minByValue !== undefined) { return minByValue; }
 
-  const minByType = safeMin(typeof a, typeof b);
+  var minByType = safeMin(typeof a, typeof b);
   if (minByType !== undefined) { return minByType === typeof a ? a : b; }
 
-  const minByStringValue = safeMin(toString(a), toString(b));
-  if (minByStringValue !== undefined) { return minByStringValue === toString(a) ? a : b; }
+  var stringA = toString(a);
+  var minByStringValue = safeMin(stringA, toString(b));
+  if (minByStringValue !== undefined) { return minByStringValue === stringA ? a : b; }
 
   return a;
 });
