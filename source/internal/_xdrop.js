@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -16,5 +15,6 @@ XDrop.prototype['@@transducer/step'] = function(result, input) {
   return this.xf['@@transducer/step'](result, input);
 };
 
-var _xdrop = _curry2(function _xdrop(n, xf) { return new XDrop(n, xf); });
-export default _xdrop;
+export default function _xdrop(n) {
+  return function(xf) { return new XDrop(n, xf); };
+}

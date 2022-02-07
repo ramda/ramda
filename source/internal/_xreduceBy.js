@@ -1,4 +1,3 @@
-import _curryN from './_curryN.js';
 import _has from './_has.js';
 import _xfBase from './_xfBase.js';
 
@@ -32,9 +31,8 @@ XReduceBy.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xreduceBy = _curryN(4, [],
-  function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
+export default function _xreduceBy(valueFn, valueAcc, keyFn) {
+  return function(xf) {
     return new XReduceBy(valueFn, valueAcc, keyFn, xf);
-  }
-);
-export default _xreduceBy;
+  };
+}

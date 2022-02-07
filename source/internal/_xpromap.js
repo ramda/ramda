@@ -1,4 +1,3 @@
-import _curry3 from './_curry3.js';
 import _xfBase from './_xfBase.js';
 import _promap from './_promap.js';
 
@@ -14,5 +13,6 @@ XPromap.prototype['@@transducer/step'] = function(result, input) {
   return this.xf['@@transducer/step'](result, _promap(this.f, this.g, input));
 };
 
-var _xpromap = _curry3(function _xpromap(f, g, xf) { return new XPromap(f, g, xf); });
-export default _xpromap;
+export default function _xpromap(f, g) {
+  return function(xf) { return new XPromap(f, g, xf); };
+}

@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _reduced from './_reduced.js';
 import _xfBase from './_xfBase.js';
 
@@ -16,5 +15,6 @@ XTake.prototype['@@transducer/step'] = function(result, input) {
   return this.n >= 0 && this.i >= this.n ? _reduced(ret) : ret;
 };
 
-var _xtake = _curry2(function _xtake(n, xf) { return new XTake(n, xf); });
-export default _xtake;
+export default function _xtake(n) {
+  return function(xf) {return new XTake(n, xf); };
+}

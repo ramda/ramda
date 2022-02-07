@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -22,5 +21,6 @@ XDropRepeatsWith.prototype['@@transducer/step'] = function(result, input) {
   return sameAsLast ? result : this.xf['@@transducer/step'](result, input);
 };
 
-var _xdropRepeatsWith = _curry2(function _xdropRepeatsWith(pred, xf) { return new XDropRepeatsWith(pred, xf); });
-export default _xdropRepeatsWith;
+export default function _xdropRepeatsWith(pred) {
+  return function(xf) { return new XDropRepeatsWith(pred, xf); };
+}

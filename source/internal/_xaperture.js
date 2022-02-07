@@ -1,5 +1,4 @@
 import _concat from './_concat.js';
-import _curry2 from './_curry2.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -32,5 +31,6 @@ XAperture.prototype.getCopy = function() {
   );
 };
 
-var _xaperture = _curry2(function _xaperture(n, xf) { return new XAperture(n, xf); });
-export default _xaperture;
+export default function _xaperture(n) {
+  return function(xf) { return new XAperture(n, xf); };
+}
