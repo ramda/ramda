@@ -11,7 +11,7 @@ import _curry1 from './internal/_curry1.js';
  * @memberOf R
  * @since v0.8.0
  * @category Type
- * @sig (* -> {*}) -> String
+ * @sig * -> String
  * @param {*} val The value to test
  * @return {String}
  * @example
