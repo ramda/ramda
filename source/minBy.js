@@ -1,5 +1,5 @@
 import _curry3 from './internal/_curry3.js';
-
+import min from './min.js';
 
 /**
  * Takes a function and two values, and returns whichever value produces the
@@ -26,6 +26,7 @@ import _curry3 from './internal/_curry3.js';
  *      R.reduce(R.minBy(square), Infinity, []); //=> Infinity
  */
 var minBy = _curry3(function minBy(f, a, b) {
-  return f(b) < f(a) ? b : a;
+  var resultB = f(b);
+  return min(f(a), resultB) === resultB ? b : a;
 });
 export default minBy;
