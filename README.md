@@ -4,7 +4,6 @@ Ramda
 A practical functional library for JavaScript programmers.
 
 [![Build Status](https://github.com/ramda/ramda/workflows/Build/badge.svg)](https://github.com/ramda/ramda/actions?query=workflow%3ABuild)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/953a3c5ee423e5301d18/test_coverage)](https://codeclimate.com/github/ramda/ramda/test_coverage)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
 [![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/ramda@v0.27.2)
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/ramda)
