@@ -21,6 +21,7 @@ import keys from './keys.js';
  * @memberOf R
  * @since v0.1.0
  * @category List
+ * @category Object
  * @sig Filterable f => (a -> Boolean) -> f a -> f a
  * @param {Function} pred
  * @param {Array} filterable
