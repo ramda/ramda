@@ -53,6 +53,7 @@ export { default as drop } from './drop.js';
 export { default as dropLast } from './dropLast.js';
 export { default as dropLastWhile } from './dropLastWhile.js';
 export { default as dropRepeats } from './dropRepeats.js';
+export { default as dropRepeatsBy } from './dropRepeatsBy.js';
 export { default as dropRepeatsWith } from './dropRepeatsWith.js';
 export { default as dropWhile } from './dropWhile.js';
 export { default as either } from './either.js';
