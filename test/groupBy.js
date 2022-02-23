@@ -44,4 +44,12 @@ describe('groupBy', function() {
     eq(_isTransformer(R.groupBy(byType, xf)), true);
   });
 
+  it('works as a transducer without polluting state', function() {
+    eq(R.into([], R.groupBy(x => x.length), ['a', 'xyz', 'ab', 'xy', 'abc', 'x']), [
+      [1, ['a', 'x']],
+      [2, ['ab', 'xy']],
+      [3, ['xyz', 'abc']]
+    ]);
+    eq(R.groupBy(x => x.length, ['a', 'xyz', 'ab', 'xy', 'abc', 'x']), {1: ['a', 'x'], 2: ['ab', 'xy'], 3: ['xyz', 'abc']});
+  });
 });
