@@ -6,6 +6,8 @@ import curryN from './curryN.js';
  * Creates a function that will process either the `onTrue` or the `onFalse`
  * function depending upon the result of the `condition` predicate.
  *
+ * Note that `ifElse` takes its arity from the longest of the three functions passed to it.
+ *
  * @func
  * @memberOf R
  * @since v0.8.0

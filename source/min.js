@@ -1,5 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-
+import toString from './toString.js';
 
 /**
  * Returns the smaller of its two arguments.
@@ -18,5 +18,24 @@ import _curry2 from './internal/_curry2.js';
  *      R.min(789, 123); //=> 123
  *      R.min('a', 'b'); //=> 'a'
  */
-var min = _curry2(function min(a, b) { return b < a ? b : a; });
+var min = _curry2(function min(a, b) {
+  if (a === b) { return a; }
+
+  function safeMin(x, y) {
+    if ((x < y) !== (y < x)) { return y < x ? y : x; }
+    return undefined;
+  }
+
+  var minByValue = safeMin(a, b);
+  if (minByValue !== undefined) { return minByValue; }
+
+  var minByType = safeMin(typeof a, typeof b);
+  if (minByType !== undefined) { return minByType === typeof a ? a : b; }
+
+  var stringA = toString(a);
+  var minByStringValue = safeMin(stringA, toString(b));
+  if (minByStringValue !== undefined) { return minByStringValue === stringA ? a : b; }
+
+  return a;
+});
 export default min;

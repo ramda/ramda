@@ -4,13 +4,18 @@ import _has from './internal/_has.js';
 
 
 /**
- * Creates a new function that, when invoked, caches the result of calling `fn`
- * for a given argument set and returns the result. Subsequent calls to the
- * memoized `fn` with the same argument set will not result in an additional
- * call to `fn`; instead, the cached result for that set of arguments will be
- * returned.
+ * Takes a string-returning function `keyGen` and a function `fn` and returns
+ * a new function that returns cached results for subsequent
+ * calls with the same arguments.
  *
- * Care must be taken when implementing key generation to avoid key collision,
+ * When the function is invoked, `keyGen` is applied to the same arguments
+ * and its result becomes the cache key. If the cache contains something
+ * under that key, the function simply returns it and does not invoke `fn` at all.
+ *
+ * Otherwise `fn` is applied to the same arguments and its return value
+ * is cached under that key and returned by the function.
+ *
+ * Care must be taken when implementing `keyGen` to avoid key collision,
  * or if tracking references, memory leaks and mutating arguments.
  *
  * @func
@@ -18,25 +23,28 @@ import _has from './internal/_has.js';
  * @since v0.24.0
  * @category Function
  * @sig (*... -> String) -> (*... -> a) -> (*... -> a)
- * @param {Function} fn The function to generate the cache key.
+ * @param {Function} keyGen The function to generate the cache key.
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
  * @example
- *
- *      let count = 0;
- *      const factorial = R.memoizeWith(Number, n => {
- *        count += 1;
- *        return R.product(R.range(1, n + 1));
+ *      const withAge = memoizeWith(o => `${o.birth}/${o.death}`, ({birth, death}) => {
+ *      //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^
+ *      //                          keyGen                        fn
+ *        console.log(`computing age for ${birth}/${death}`);
+ *        return ({birth, death, age: death - birth});
  *      });
- *      factorial(5); //=> 120
- *      factorial(5); //=> 120
- *      factorial(5); //=> 120
- *      count; //=> 1
+ *
+ *      withAge({birth: 1921, death: 1999});
+ *      //=> LOG: computing age for 1921/1999
+ *      //=> {birth: 1921, death: 1999, age: 78} (returned from fn)
+ *
+ *      withAge({birth: 1921, death: 1999});
+ *      //=> {birth: 1921, death: 1999, age: 78} (returned from cache)
  */
-var memoizeWith = _curry2(function memoizeWith(mFn, fn) {
+var memoizeWith = _curry2(function memoizeWith(keyGen, fn) {
   var cache = {};
   return _arity(fn.length, function() {
-    var key = mFn.apply(this, arguments);
+    var key = keyGen.apply(this, arguments);
     if (!_has(key, cache)) {
       cache[key] = fn.apply(this, arguments);
     }

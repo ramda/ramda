@@ -5,7 +5,7 @@ import reverse from './reverse.js';
 
 /**
  * Performs right-to-left function composition using transforming function. The last function may have
- * any arity; the remaining functions must be unary.
+ * any arity; the remaining functions must be unary. Unlike `compose`, functions are passed in an array.
  *
  * **Note:** The result of composeWith is not automatically curried. Transforming function is not used
  * on the last argument.
