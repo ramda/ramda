@@ -1,5 +1,6 @@
 import _curryN from './internal/_curryN.js';
-import _reduce from './internal/_reduce.js';
+import _xReduce from './internal/_xReduce.js';
+import _xwrap from './internal/_xwrap.js';
 import _reduced from './internal/_reduced.js';
 
 
@@ -34,8 +35,9 @@ import _reduced from './internal/_reduced.js';
  *      R.reduceWhile(isOdd, R.add, 111, ys); //=> 111
  */
 var reduceWhile = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
-  return _reduce(function(acc, x) {
+  var xf = _xwrap(function(acc, x) {
     return pred(acc, x) ? fn(acc, x) : _reduced(acc);
-  }, a, list);
+  });
+  return _xReduce(xf, a, list);
 });
 export default reduceWhile;
