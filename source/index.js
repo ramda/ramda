@@ -181,6 +181,7 @@ export { default as project } from './project.js';
 export { default as promap } from './promap.js';
 export { default as prop } from './prop.js';
 export { default as propEq } from './propEq.js';
+export { default as propIncludes } from './propIncludes.js';
 export { default as propIs } from './propIs.js';
 export { default as propOr } from './propOr.js';
 export { default as propSatisfies } from './propSatisfies.js';
