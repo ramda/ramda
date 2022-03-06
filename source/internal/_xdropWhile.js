@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -18,5 +17,6 @@ XDropWhile.prototype['@@transducer/step'] = function(result, input) {
   return this.xf['@@transducer/step'](result, input);
 };
 
-var _xdropWhile = _curry2(function _xdropWhile(f, xf) { return new XDropWhile(f, xf); });
-export default _xdropWhile;
+export default function _xdropWhile(f) {
+  return function(xf) { return new XDropWhile(f, xf); };
+}

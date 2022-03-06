@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _reduced from './_reduced.js';
 import _xfBase from './_xfBase.js';
 
@@ -23,5 +22,6 @@ XAny.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xany = _curry2(function _xany(f, xf) { return new XAny(f, xf); });
-export default _xany;
+export default function _xany(f) {
+  return function(xf) { return new XAny(f, xf); };
+}

@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -12,5 +11,6 @@ XFilter.prototype['@@transducer/step'] = function(result, input) {
   return this.f(input) ? this.xf['@@transducer/step'](result, input) : result;
 };
 
-var _xfilter = _curry2(function _xfilter(f, xf) { return new XFilter(f, xf); });
-export default _xfilter;
+export default function _xfilter(f) {
+  return function(xf) { return new XFilter(f, xf); };
+}
