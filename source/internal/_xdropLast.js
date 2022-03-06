@@ -3,6 +3,9 @@ import _xfBase from './_xfBase.js';
 
 
 function XDropLast(n, xf) {
+  if (n <= 0) {
+    return xf;
+  }
   this.xf = xf;
   this.pos = 0;
   this.full = false;
