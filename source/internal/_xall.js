@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _reduced from './_reduced.js';
 import _xfBase from './_xfBase.js';
 
@@ -23,5 +22,6 @@ XAll.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xall = _curry2(function _xall(f, xf) { return new XAll(f, xf); });
-export default _xall;
+export default function _xall(f) {
+  return function(xf) { return new XAll(f, xf); };
+}

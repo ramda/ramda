@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _includesWith from './_includesWith.js';
 import _xfBase from './_xfBase.js';
 
@@ -19,5 +18,6 @@ XUniqWith.prototype['@@transducer/step'] = function(result, input) {
   }
 };
 
-var _xuniqWith = _curry2(function _xuniqWith(pred, xf) { return new XUniqWith(pred, xf); });
-export default _xuniqWith;
+export default function _xuniqWith(pred) {
+  return function(xf) { return new XUniqWith(pred, xf); };
+}

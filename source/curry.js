@@ -26,6 +26,25 @@ import curryN from './curryN.js';
  *   - `g(_, 2)(1, 3)`
  *   - `g(_, 2)(_, 3)(1)`
  *
+ * Please note that default parameters don't count towards a [function arity](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length)
+ * and therefore `curry` won't work well with those:
+ *
+ * ```
+ * const h = R.curry((a, b, c = 2) => a + b + c);
+ *
+ * h(40);
+ * //=> function (waits for `b`)
+ *
+ * h(39)(1);
+ * //=> 42
+ *
+ * h(1)(2, 3);
+ * //=> 6
+ *
+ * h(1)(2)(7);
+ * //=> Error! (`3` is not a function!)
+ * ```
+ *
  * @func
  * @memberOf R
  * @since v0.1.0

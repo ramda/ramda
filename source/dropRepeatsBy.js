@@ -25,6 +25,8 @@ import eqBy from './eqBy.js';
  *     R.dropRepeatsBy(Math.abs, [1, -1, -1, 2, 3, -4, 4, 2, 2]); //=> [1, 2, 3, -4, 2]
  */
 var dropRepeatsBy = _curry2(function(fn, list) {
-  return _dispatchable([], _xdropRepeatsWith(eqBy(fn)), dropRepeatsWith(eqBy(fn)))(list);
+  return _dispatchable([], function() {
+    return _xdropRepeatsWith(eqBy(fn));
+  }, dropRepeatsWith(eqBy(fn)))(list);
 });
 export default dropRepeatsBy;

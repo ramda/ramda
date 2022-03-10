@@ -1,8 +1,10 @@
-import _curry2 from './_curry2.js';
 import _xfBase from './_xfBase.js';
 
 
 function XDropLast(n, xf) {
+  if (n <= 0) {
+    return xf;
+  }
   this.xf = xf;
   this.pos = 0;
   this.full = false;
@@ -29,5 +31,6 @@ XDropLast.prototype.store = function(input) {
   }
 };
 
-var _xdropLast = _curry2(function _xdropLast(n, xf) { return new XDropLast(n, xf); });
-export default _xdropLast;
+export default function _xdropLast(n) {
+  return function(xf) { return new XDropLast(n, xf); };
+}
