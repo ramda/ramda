@@ -1,7 +1,6 @@
-import _includes from './internal/_includes.js';
 import _curry2 from './internal/_curry2.js';
 import _filter from './internal/_filter.js';
-import flip from './flip.js';
+import _Set from './internal/_Set.js';
 import uniq from './uniq.js';
 
 
@@ -23,14 +22,12 @@ import uniq from './uniq.js';
  *      R.intersection([1,2,3,4], [7,6,5,4,3]); //=> [4, 3]
  */
 var intersection = _curry2(function intersection(list1, list2) {
-  var lookupList, filteredList;
-  if (list1.length > list2.length) {
-    lookupList = list1;
-    filteredList = list2;
-  } else {
-    lookupList = list2;
-    filteredList = list1;
+  var toKeep = new _Set();
+
+  for (var i = 0; i < list1.length; i += 1) {
+    toKeep.add(list1[i]);
   }
-  return uniq(_filter(flip(_includes)(lookupList), filteredList));
+
+  return uniq(_filter(toKeep.has.bind(toKeep), list2));
 });
 export default intersection;

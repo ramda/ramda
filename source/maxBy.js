@@ -1,5 +1,5 @@
 import _curry3 from './internal/_curry3.js';
-
+import max from './max.js';
 
 /**
  * Takes a function and two values, and returns whichever value produces the
@@ -26,6 +26,8 @@ import _curry3 from './internal/_curry3.js';
  *      R.reduce(R.maxBy(square), 0, []); //=> 0
  */
 var maxBy = _curry3(function maxBy(f, a, b) {
-  return f(b) > f(a) ? b : a;
+  var resultB = f(b);
+  return max(f(a), resultB) === resultB ? b : a;
 });
+
 export default maxBy;

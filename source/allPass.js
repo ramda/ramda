@@ -20,7 +20,7 @@ import reduce from './reduce.js';
  * @sig [(*... -> Boolean)] -> (*... -> Boolean)
  * @param {Array} predicates An array of predicates to check
  * @return {Function} The combined predicate
- * @see R.anyPass
+ * @see R.anyPass, R.both
  * @example
  *
  *      const isQueen = R.propEq('rank', 'Q');

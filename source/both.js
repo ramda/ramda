@@ -23,7 +23,7 @@ import lift from './lift.js';
  * @param {Function} f A predicate
  * @param {Function} g Another predicate
  * @return {Function} a function that applies its arguments to `f` and `g` and `&&`s their outputs together.
- * @see R.either, R.and
+ * @see R.either, R.allPass, R.and
  * @example
  *
  *      const gt10 = R.gt(R.__, 10)

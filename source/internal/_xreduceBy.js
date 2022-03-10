@@ -1,4 +1,4 @@
-import _curryN from './_curryN.js';
+import _clone from './_clone.js';
 import _has from './_has.js';
 import _xfBase from './_xfBase.js';
 
@@ -27,14 +27,13 @@ XReduceBy.prototype['@@transducer/result'] = function(result) {
 };
 XReduceBy.prototype['@@transducer/step'] = function(result, input) {
   var key = this.keyFn(input);
-  this.inputs[key] = this.inputs[key] || [key, this.valueAcc];
+  this.inputs[key] = this.inputs[key] || [key, _clone(this.valueAcc, false)];
   this.inputs[key][1] = this.valueFn(this.inputs[key][1], input);
   return result;
 };
 
-var _xreduceBy = _curryN(4, [],
-  function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
+export default function _xreduceBy(valueFn, valueAcc, keyFn) {
+  return function(xf) {
     return new XReduceBy(valueFn, valueAcc, keyFn, xf);
-  }
-);
-export default _xreduceBy;
+  };
+}

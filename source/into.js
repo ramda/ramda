@@ -43,8 +43,8 @@ import _stepCat from './internal/_stepCat.js';
  *      const intoArray = R.into([]);
  *      intoArray(transducer, numbers); //=> [2, 3]
  */
-var into = _curry3(function into(acc, x, list) {
-  var xf = x(_isTransformer(acc) ? acc : _stepCat(acc));
+var into = _curry3(function into(acc, transducer, list) {
+  var xf = transducer(_isTransformer(acc) ? acc : _stepCat(acc));
   return _reduce(xf, xf['@@transducer/init'](), list);
 });
 export default into;

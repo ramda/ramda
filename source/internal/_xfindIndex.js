@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _reduced from './_reduced.js';
 import _xfBase from './_xfBase.js';
 
@@ -25,5 +24,6 @@ XFindIndex.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfindIndex = _curry2(function _xfindIndex(f, xf) { return new XFindIndex(f, xf); });
-export default _xfindIndex;
+export default function _xfindIndex(f) {
+  return function(xf) { return new XFindIndex(f, xf); };
+}

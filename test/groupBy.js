@@ -44,4 +44,10 @@ describe('groupBy', function() {
     eq(_isTransformer(R.groupBy(byType, xf)), true);
   });
 
+  it('works with R.into', function() {
+    var evenOdd = x => x % 2  === 0 ? 'even' : 'odd';
+    var result = R.into({}, R.groupBy(evenOdd), R.range(1, 10));
+    eq(result, {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]});
+  });
+
 });

@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _reduced from './_reduced.js';
 import _xfBase from './_xfBase.js';
 
@@ -13,5 +12,6 @@ XTakeWhile.prototype['@@transducer/step'] = function(result, input) {
   return this.f(input) ? this.xf['@@transducer/step'](result, input) : _reduced(result);
 };
 
-var _xtakeWhile = _curry2(function _xtakeWhile(f, xf) { return new XTakeWhile(f, xf); });
-export default _xtakeWhile;
+export default function _xtakeWhile(f) {
+  return function(xf) { return new XTakeWhile(f, xf); };
+}

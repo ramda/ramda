@@ -1,4 +1,3 @@
-import _curry2 from './_curry2.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -20,5 +19,6 @@ XFindLastIndex.prototype['@@transducer/step'] = function(result, input) {
   return result;
 };
 
-var _xfindLastIndex = _curry2(function _xfindLastIndex(f, xf) { return new XFindLastIndex(f, xf); });
-export default _xfindLastIndex;
+export default function _xfindLastIndex(f) {
+  return function(xf) { return new XFindLastIndex(f, xf); };
+}
