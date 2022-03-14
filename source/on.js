@@ -22,7 +22,7 @@ import curryN from './internal/_curryN.js';
  *      const eqBy = R.on((a, b) => a === b);
  *      eqBy(R.prop('a'), {b:0, a:1}, {a:1}) //=> true;
  *
- *      const containsInsensitive = R.on(R.contains, R.toLower);
+ *      const containsInsensitive = R.on(R.includes, R.toLower);
  *      containsInsensitive('o', 'FOO'); //=> true
  * @symb R.on(f, g, a, b) = f(g(a), g(b))
  */
