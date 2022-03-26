@@ -1,5 +1,6 @@
 import _reduce from './_reduce.js';
 import _xfBase from './_xfBase.js';
+import bind from '../bind.js';
 
 
 function XDropLastWhile(fn, xf) {
@@ -19,7 +20,7 @@ XDropLastWhile.prototype['@@transducer/step'] = function(result, input) {
 };
 XDropLastWhile.prototype.flush = function(result, input) {
   result = _reduce(
-    this.xf['@@transducer/step'],
+    bind(this.xf['@@transducer/step'],this.xf),
     result,
     this.retained
   );
