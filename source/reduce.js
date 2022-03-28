@@ -1,5 +1,6 @@
 import _curry3 from './internal/_curry3.js';
-import _reduce from './internal/_reduce.js';
+import _xReduce from './internal/_xReduce.js';
+import _xwrap from './internal/_xwrap.js';
 
 
 /**
@@ -54,5 +55,7 @@ import _reduce from './internal/_reduce.js';
  *
  * @symb R.reduce(f, a, [b, c, d]) = f(f(f(a, b), c), d)
  */
-var reduce = _curry3(_reduce);
+var reduce = _curry3(function(xf, acc, list) {
+  return _xReduce(typeof xf === 'function' ? _xwrap(xf) : xf, acc, list);
+});
 export default reduce;

@@ -1,6 +1,7 @@
 import _forceReduced from './_forceReduced.js';
 import _isArrayLike from './_isArrayLike.js';
-import _reduce from './_reduce.js';
+import _xArrayReduce from './_xArrayReduce.js';
+import _xReduce from './_xReduce.js';
 import _xfBase from './_xfBase.js';
 
 var preservingReduced = function(xf) {
@@ -24,7 +25,7 @@ var _flatCat = function _xcat(xf) {
       return rxf['@@transducer/result'](result);
     },
     '@@transducer/step': function(result, input) {
-      return !_isArrayLike(input) ? _reduce(rxf, result, [input]) : _reduce(rxf, result, input);
+      return !_isArrayLike(input) ? _xArrayReduce(rxf, result, [input]) : _xReduce(rxf, result, input);
     }
   };
 };

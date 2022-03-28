@@ -1,8 +1,8 @@
+import _arrayReduce from './internal/_arrayReduce.js';
 import _curry2 from './internal/_curry2.js';
 import _dispatchable from './internal/_dispatchable.js';
 import _filter from './internal/_filter.js';
 import _isObject from './internal/_isObject.js';
-import _reduce from './internal/_reduce.js';
 import _xfilter from './internal/_xfilter.js';
 import keys from './keys.js';
 
@@ -38,7 +38,7 @@ import keys from './keys.js';
 var filter = _curry2(_dispatchable(['fantasy-land/filter', 'filter'], _xfilter, function(pred, filterable) {
   return (
     _isObject(filterable) ?
-      _reduce(function(acc, key) {
+      _arrayReduce(function(acc, key) {
         if (pred(filterable[key])) {
           acc[key] = filterable[key];
         }

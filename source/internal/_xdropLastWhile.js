@@ -1,5 +1,5 @@
-import _reduce from './_reduce.js';
 import _xfBase from './_xfBase.js';
+import _xReduce from './_xReduce.js';
 
 
 function XDropLastWhile(fn, xf) {
@@ -18,8 +18,8 @@ XDropLastWhile.prototype['@@transducer/step'] = function(result, input) {
     : this.flush(result, input);
 };
 XDropLastWhile.prototype.flush = function(result, input) {
-  result = _reduce(
-    this.xf['@@transducer/step'],
+  result = _xReduce(
+    this.xf,
     result,
     this.retained
   );

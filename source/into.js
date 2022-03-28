@@ -1,7 +1,7 @@
 import _clone from './internal/_clone.js';
 import _curry3 from './internal/_curry3.js';
 import _isTransformer from './internal/_isTransformer.js';
-import _reduce from './internal/_reduce.js';
+import _xReduce from './internal/_xReduce.js';
 import _stepCat from './internal/_stepCat.js';
 
 
@@ -46,7 +46,7 @@ import _stepCat from './internal/_stepCat.js';
  */
 var into = _curry3(function into(acc, xf, list) {
   return _isTransformer(acc)
-    ? _reduce(xf(acc), acc['@@transducer/init'](), list)
-    : _reduce(xf(_stepCat(acc)), _clone(acc, false), list);
+    ? _xReduce(xf(acc), acc['@@transducer/init'](), list)
+    : _xReduce(xf(_stepCat(acc)), _clone(acc, false), list);
 });
 export default into;
