@@ -1,7 +1,7 @@
+import _arrayReduce from './internal/_arrayReduce.js';
 import _curry2 from './internal/_curry2.js';
 import _dispatchable from './internal/_dispatchable.js';
 import _map from './internal/_map.js';
-import _reduce from './internal/_reduce.js';
 import _xmap from './internal/_xmap.js';
 import curryN from './curryN.js';
 import keys from './keys.js';
@@ -49,7 +49,7 @@ var map = _curry2(_dispatchable(['fantasy-land/map', 'map'], _xmap, function map
         return fn.call(this, functor.apply(this, arguments));
       });
     case '[object Object]':
-      return _reduce(function(acc, key) {
+      return _arrayReduce(function(acc, key) {
         acc[key] = fn(functor[key]);
         return acc;
       }, {}, keys(functor));

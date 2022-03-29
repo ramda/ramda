@@ -1,5 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import _reduce from './internal/_reduce.js';
+import _arrayReduce from './internal/_arrayReduce.js';
 import ap from './ap.js';
 import curryN from './curryN.js';
 import map from './map.js';
@@ -25,7 +25,7 @@ import map from './map.js';
 var liftN = _curry2(function liftN(arity, fn) {
   var lifted = curryN(arity, fn);
   return curryN(arity, function() {
-    return _reduce(ap, map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
+    return _arrayReduce(ap, map(lifted, arguments[0]), Array.prototype.slice.call(arguments, 1));
   });
 });
 export default liftN;

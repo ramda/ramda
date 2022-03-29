@@ -1,6 +1,7 @@
 import _forceReduced from './_forceReduced.js';
 import _isArrayLike from './_isArrayLike.js';
-import _reduce from './_reduce.js';
+import _xArrayReduce from './_xArrayReduce.js';
+import _xReduce from './_xReduce.js';
 import _xfBase from './_xfBase.js';
 
 var tInit = '@@transducer/init';
@@ -22,7 +23,7 @@ function XFlatCat(xf) {
 XFlatCat.prototype[tInit] = _xfBase.init;
 XFlatCat.prototype[tResult] = _xfBase.result;
 XFlatCat.prototype[tStep] = function(result, input) {
-  return !_isArrayLike(input) ? _reduce(this.xf, result, [input]) : _reduce(this.xf, result, input);
+  return !_isArrayLike(input) ? _xArrayReduce(this.xf, result, [input]) : _xReduce(this.xf, result, input);
 };
 var _flatCat = function _xcat(xf) { return new XFlatCat(xf); };
 

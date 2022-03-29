@@ -1,5 +1,5 @@
+import _arrayReduce from './internal/_arrayReduce.js';
 import _curry2 from './internal/_curry2.js';
-import _reduce from './internal/_reduce.js';
 import keys from './keys.js';
 
 
@@ -25,7 +25,7 @@ import keys from './keys.js';
  *      R.mapObjIndexed(prependKeyAndDouble, xyz); //=> { x: 'x2', y: 'y4', z: 'z6' }
  */
 var mapObjIndexed = _curry2(function mapObjIndexed(fn, obj) {
-  return _reduce(function(acc, key) {
+  return _arrayReduce(function(acc, key) {
     acc[key] = fn(obj[key], key, obj);
     return acc;
   }, {}, keys(obj));

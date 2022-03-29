@@ -1,6 +1,6 @@
 import _curry3 from './internal/_curry3.js';
 import _isTransformer from './internal/_isTransformer.js';
-import _reduce from './internal/_reduce.js';
+import _xReduce from './internal/_xReduce.js';
 import _stepCat from './internal/_stepCat.js';
 
 
@@ -45,6 +45,6 @@ import _stepCat from './internal/_stepCat.js';
  */
 var into = _curry3(function into(acc, transducer, list) {
   var xf = transducer(_isTransformer(acc) ? acc : _stepCat(acc));
-  return _reduce(xf, xf['@@transducer/init'](), list);
+  return _xReduce(xf, xf['@@transducer/init'](), list);
 });
 export default into;
