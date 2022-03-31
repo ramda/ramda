@@ -21,7 +21,7 @@ import reduceBy from './reduceBy.js';
  * @param {Array} list The array to group
  * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
  *         that produced that key when passed to `fn`.
- * @see R.reduceBy, R.transduce, R.indexBy
+ * @see R.reduceBy, R.transduce, R.indexBy, R.collectBy
  * @example
  *
  *      const byGrade = R.groupBy(function(student) {
