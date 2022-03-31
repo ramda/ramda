@@ -1,5 +1,6 @@
 import _curry2 from './internal/_curry2.js';
-import _reduce from './internal/_reduce.js';
+import groupBy from './groupBy.js';
+import values from './values.js';
 
 /**
  * Splits a list into sub-lists, based on the result of calling a key-returning function on each element,
@@ -33,14 +34,6 @@ import _reduce from './internal/_reduce.js';
  *      //   [ {type: 'dinner', item: '🍝'} ] ]
  */
 var collectBy = _curry2(function collectBy(fn, list) {
-  var group = _reduce(function(o, x) {
-    var tag = fn(x);
-    if (o[tag] === undefined) { o[tag] = []; }
-    o[tag].push(x);
-    return o;
-  }, {}, list);
-  var newList = [];
-  for (var tag in group) { newList.push(group[tag]); }
-  return newList;
+  return values(groupBy(fn, list));
 });
 export default collectBy;
