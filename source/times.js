@@ -1,6 +1,5 @@
 import _curry2 from './internal/_curry2.js';
 
-
 /**
  * Calls an input function `n` times, returning an array containing the results
  * of those function calls.
@@ -26,17 +25,18 @@ import _curry2 from './internal/_curry2.js';
  */
 var times = _curry2(function times(fn, n) {
   var len = Number(n);
-  var idx = 0;
   var list;
 
   if (len < 0 || isNaN(len)) {
     throw new RangeError('n must be a non-negative number');
   }
-  list = new Array(len);
-  while (idx < len) {
-    list[idx] = fn(idx);
-    idx += 1;
+
+  list = [];
+  for (let x = 0; x < len; x += 1) {
+    list[x] = fn(x);
   }
+
   return list;
 });
+
 export default times;
