@@ -30,8 +30,7 @@ export default function _clone(value, deep, map) {
     map.set(value, copiedValue);
 
     for (var key in value) {
-      // If there is no prototype, the property must be its own
-      if (!_hasPrototype(value) || value.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(value, key)) {
         copiedValue[key] = deep ? _clone(value[key], true, map) : value[key];
       }
     }
@@ -64,10 +63,6 @@ function _isPrimitive(param) {
   return param == null || (type != 'object' && type != 'function');
 }
 
-function _hasPrototype(param) {
-  return Object.getPrototypeOf(param) != null;
-}
-
 function _ObjectMap() {
   this.map = {};
   this.length = 0;
@@ -88,11 +83,7 @@ _ObjectMap.prototype.set = function(key, value) {
 _ObjectMap.prototype.hash = function(key) {
   let hashedKey = [];
   for (var value in key) {
-    if (_hasPrototype(key[value])) {
-      hashedKey.push(key[value]);
-    } else {
-      hashedKey.push(Object.prototype.toString.call(key[value]));
-    }
+    hashedKey.push(Object.prototype.toString.call(key[value]));
   }
   return hashedKey.join();
 };
