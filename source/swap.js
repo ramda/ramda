@@ -20,21 +20,25 @@ var swapObject = function(indexA, indexB, o) {
 var swapList = function(indexA, indexB, list) {
   var length = list.length;
   var result = list.slice();
+
   var positiveIndexA = indexA < 0 ? length + indexA : indexA;
   var positiveIndexB = indexB < 0 ? length + indexB : indexB;
+
   var positiveMin = Math.min(positiveIndexA, positiveIndexB);
   var positiveMax = Math.max(positiveIndexA, positiveIndexB);
 
-  return positiveIndexA < 0 || positiveIndexA >= list.length
-      || positiveIndexB < 0 || positiveIndexB >= list.length
-      || positiveIndexA == positiveIndexB
-    ? result
-    : []
-      .concat(result.slice(0, positiveMin))
-      .concat(result[positiveMax])
-      .concat(result.slice(positiveMin + 1, positiveMax))
-      .concat(result[positiveMin])
-      .concat(result.slice(positiveMax + 1, list.length));
+  if (positiveIndexA < 0 || positiveIndexA > length) {return result;}
+  if (positiveIndexB < 0 || positiveIndexB > length) {return result;}
+  if (positiveIndexA === positiveIndexB) {return result;}
+
+  result = []
+    .concat(result.slice(0, positiveMin))
+    .concat(result[positiveMax])
+    .concat(result.slice(positiveMin + 1, positiveMax))
+    .concat(result[positiveMin])
+    .concat(result.slice(positiveMax + 1, length));
+
+  return result;
 };
 
 var swapString = function(indexA, indexB, s) {
