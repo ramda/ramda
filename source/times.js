@@ -33,7 +33,7 @@ var times = _curry2(function times(fn, n) {
 
   list = [];
   for (var x = 0; x < len; x += 1) {
-    list[x] = fn(x);
+    list.push(fn(x));
   }
 
   return list;
