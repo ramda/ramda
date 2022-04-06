@@ -30,7 +30,7 @@ export default function _clone(value, deep, map) {
     map.set(value, copiedValue);
 
     for (var key in value) {
-      if (value.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(value, key)) {
         copiedValue[key] = deep ? _clone(value[key], true, map) : value[key];
       }
     }
@@ -83,7 +83,7 @@ _ObjectMap.prototype.set = function(key, value) {
 _ObjectMap.prototype.hash = function(key) {
   let hashedKey = [];
   for (var value in key) {
-    hashedKey.push(key[value]);
+    hashedKey.push(Object.prototype.toString.call(key[value]));
   }
   return hashedKey.join();
 };

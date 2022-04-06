@@ -299,6 +299,19 @@ describe('deep clone edge cases', function() {
 
 });
 
+describe('clone objects with no prototypes', function() {
+  it('nested object with no prototype', function() {
+    const obj = Object.create(null);
+    obj.intValue = 1;
+    obj.a = Object.create(null);
+    obj.a.stringValue = 'Yeah';
+    const clonedObj = R.clone(obj);
+    assert.strictEqual(Object.getPrototypeOf(clonedObj), null);
+    assert.strictEqual(Object.getPrototypeOf(clonedObj.a), null);
+    assert.strictEqual(clonedObj.intValue, 1);
+    assert.strictEqual(clonedObj.a.stringValue, 'Yeah');
+  });
+});
 
 describe('Let `R.clone` use an arbitrary user defined `clone` method', function() {
 
