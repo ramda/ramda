@@ -17,14 +17,6 @@ describe('reject', function() {
     eq(R.reject(function(x) { return x > 100; }, []), []);
   });
 
-  it('returns an empty array if no element matches', function() {
-    eq(R.reject(function(x) { return x < 100; }, [1, 9, 99]), []);
-  });
-
-  it('returns an empty array if asked to filter an empty array', function() {
-    eq(R.reject(function(x) { return x > 100; }, []), []);
-  });
-
   it('filters objects', function() {
     eq(R.reject(R.equals(0), {}), {});
     eq(R.reject(R.equals(0), {x: 0, y: 0, z: 0}), {});
