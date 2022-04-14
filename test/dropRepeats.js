@@ -17,6 +17,7 @@ describe('dropRepeats', function() {
 
   it('can act as a transducer', function() {
     eq(R.into([], R.dropRepeats, objs2), objs);
+    eq(R.transduce(R.dropRepeats, R.flip(R.append), [], objs2), objs);
   });
 
   it('has R.equals semantics', function() {

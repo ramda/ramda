@@ -23,8 +23,9 @@ describe('indexBy', function() {
         R.adjust(0, R.toUpper),
         R.adjust(1, R.omit(['id']))
       )));
-    var result = R.into({}, transducer, list);
-    eq(result, {ABC: {title: 'B'}, XYZ: {title: 'A'}});
+    var expected = {ABC: {title: 'B'}, XYZ: {title: 'A'}};
+    eq(R.into({}, transducer, list), expected);
+    eq(R.transduce(transducer, (result, input) => {result[input[0]] = input[1]; return result;}, {}, list), expected);
   });
 
 });

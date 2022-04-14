@@ -44,10 +44,11 @@ describe('groupBy', function() {
     eq(_isTransformer(R.groupBy(byType, xf)), true);
   });
 
-  it('works with R.into', function() {
+  it('can act as a transducer', function() {
     var evenOdd = x => x % 2  === 0 ? 'even' : 'odd';
-    var result = R.into({}, R.groupBy(evenOdd), R.range(1, 10));
-    eq(result, {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]});
+    var expected = {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]};
+    eq(R.into({}, R.groupBy(evenOdd), R.range(1, 10)), expected);
+    eq(R.transduce(R.groupBy(evenOdd), (result, input) => {result[input[0]] = input[1]; return result;}, {}, R.range(1, 10)), expected);
   });
 
 });

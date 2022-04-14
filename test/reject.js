@@ -44,4 +44,11 @@ describe('reject', function() {
     eq(R.reject(R.F, m), m);
   });
 
+  it('can act as a transducer', function() {
+    var input = [1, 2, 3, 4];
+    var expected = [1, 3];
+    eq(R.into([], R.reject(even), input), expected);
+    eq(R.transduce(R.reject(even), R.flip(R.append), [], input), expected);
+  });
+
 });

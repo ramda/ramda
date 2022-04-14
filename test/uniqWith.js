@@ -26,4 +26,11 @@ describe('uniqWith', function() {
     eq(R.uniqWith(eqI, []), []);
   });
 
+  it('can act as a transducer', function() {
+    var input = [1, '1', 2, 1];
+    var expected = [1, 2];
+    eq(R.into([], R.uniqWith(R.eqBy(String)), input), expected);
+    eq(R.transduce(R.uniqWith(R.eqBy(String)), R.flip(R.append), [], input), expected);
+  });
+
 });

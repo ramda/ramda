@@ -17,7 +17,9 @@ describe('aperture', function() {
   });
 
   it('can act as a transducer', function() {
-    eq(R.into([], R.aperture(2), sevenLs), [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]]);
+    var expected = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]];
+    eq(R.into([], R.aperture(2), sevenLs), expected);
+    eq(R.transduce(R.aperture(2), R.flip(R.append), [], sevenLs), expected);
   });
 
 });

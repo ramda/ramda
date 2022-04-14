@@ -39,4 +39,11 @@ describe('filter', function() {
     eq(m2.isNothing, true);
   });
 
+  it('can act as a transducer', function() {
+    var input = [1, 2, 3, 4];
+    var expected = [2, 4];
+    eq(R.into([], R.filter(even), input), expected);
+    eq(R.transduce(R.filter(even), R.flip(R.append), [], input), expected);
+  });
+
 });

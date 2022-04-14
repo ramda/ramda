@@ -9,14 +9,9 @@ describe('map', function() {
   var times2 = function(x) {return x * 2;};
   var add1 = function(x) {return x + 1;};
   var dec = function(x) { return x - 1; };
-  var intoArray = R.into([]);
 
   it('maps simple functions over arrays', function() {
     eq(R.map(times2, [1, 2, 3, 4]), [2, 4, 6, 8]);
-  });
-
-  it('maps simple functions into arrays', function() {
-    eq(intoArray(R.map(times2), [1, 2, 3, 4]), [2, 4, 6, 8]);
   });
 
   it('maps over objects', function() {
@@ -68,6 +63,11 @@ describe('map', function() {
     var m2 = R.map(R.add(1), m1);
 
     eq(m1.value + 1, m2.value);
+  });
+
+  it('can act as a transducer', function() {
+    eq(R.into([], R.map(times2), [1, 2, 3, 4]), [2, 4, 6, 8]);
+    eq(R.transduce(R.map(times2), R.flip(R.append), [], [1, 2, 3, 4]), [2, 4, 6, 8]);
   });
 
 });

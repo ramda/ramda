@@ -26,8 +26,10 @@ describe('dropLastWhile', function() {
 
   it('can act as a transducer', function() {
     var dropLt7 = R.dropLastWhile(function(x) {return x < 7;});
-    eq(R.into([], dropLt7, [1, 3, 5, 7, 9, 1, 2]), [1, 3, 5, 7, 9]);
-    eq(R.into([], dropLt7, [1, 3, 5]), []);
+    var input = [1, 3, 5, 7, 9, 1, 2];
+    var expected = [1, 3, 5, 7, 9];
+    eq(R.into([], dropLt7, input), expected);
+    eq(R.transduce(dropLt7, R.flip(R.append), [], input), expected);
   });
 
 });

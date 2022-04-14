@@ -18,4 +18,12 @@ describe('takeWhile', function() {
     eq(R.takeWhile(function(x) { return x !== 'd'; }, 'Ramda'), 'Ram');
   });
 
+  it('can act as a transducer', function() {
+    var isNotFour = x => x !== 4;
+    var input = [1, 2, 3, 4, 3, 2, 1];
+    var expected = [1, 2, 3];
+    eq(R.into([], R.takeWhile(isNotFour), input), expected);
+    eq(R.transduce(R.takeWhile(isNotFour), R.flip(R.append), [], input), expected);
+  });
+
 });

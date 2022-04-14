@@ -56,4 +56,11 @@ describe('any', function() {
     });
   });
 
+  it('can act as a transducer', function() {
+    var input = [2, 4, 6, 8, 10];
+    var expected = [false];
+    eq(R.into([], R.any(odd), input), expected);
+    eq(R.transduce(R.any(odd), R.flip(R.append), [], input), expected);
+  });
+
 });

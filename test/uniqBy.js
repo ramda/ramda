@@ -28,4 +28,11 @@ describe('uniqBy', function() {
     eq(R.uniqBy(R.identity, [new Just([1, 2, 3]), new Just([1, 2, 3])]).length, 1);
   });
 
+  it('can act as a transducer', function() {
+    var input = [-1, -5, 2, 10, 1, 2];
+    var expected = [-1, -5, 2, 10];
+    eq(R.into([], R.uniqBy(Math.abs), input), expected);
+    eq(R.transduce(R.uniqBy(Math.abs), R.flip(R.append), [], input), expected);
+  });
+
 });
