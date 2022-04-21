@@ -11,7 +11,6 @@ describe('findLastIndex', function() {
   var gt100 = function(x) { return x > 100; };
   var isStr = function(x) { return typeof x === 'string'; };
   var xGt100 = function(o) { return o && o.x > 100; };
-  var intoArray = R.into([]);
 
   it('returns the index of the last element that satisfies the predicate', function() {
     eq(R.findLastIndex(even, a), 15);
@@ -22,17 +21,6 @@ describe('findLastIndex', function() {
 
   it('returns -1 when no element satisfies the predicate', function() {
     eq(R.findLastIndex(even, ['zing']), -1);
-  });
-
-  it('returns the index of the last element into an array that satisfies the predicate', function() {
-    eq(intoArray(R.findLastIndex(even), a), [15]);
-    eq(intoArray(R.findLastIndex(gt100), a), [9]);
-    eq(intoArray(R.findLastIndex(isStr), a), [3]);
-    eq(intoArray(R.findLastIndex(xGt100), a), [10]);
-  });
-
-  it('returns -1 into an array when no element satisfies the predicate', function() {
-    eq(intoArray(R.findLastIndex(even), ['zing']), [-1]);
   });
 
   it('works when the first element matches', function() {
@@ -51,4 +39,10 @@ describe('findLastIndex', function() {
       xf: listXf
     });
   });
+
+  it('can act as a transducer', function() {
+    eq(R.into([], R.findLastIndex(even), a), [15]);
+    eq(R.transduce(R.findLastIndex(even), R.flip(R.append), [], a), [15]);
+  });
+
 });

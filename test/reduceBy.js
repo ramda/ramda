@@ -68,6 +68,12 @@ describe('reduceBy', function() {
       R.compose(sumByType, R.map(R.adjust(1, R.multiply(10)))),
       sumInput
     ), {A: 800, B: 800, C: 500});
+    eq(R.transduce(
+      R.compose(sumByType, R.map(R.adjust(1, R.multiply(10)))),
+      (result, input) => {result[input[0]] = result[input[0]] ? result[input[0]] : 0 + input[1]; return result;},
+      {},
+      sumInput
+    ), {A: 800, B: 800, C: 500});
   });
 
   it('short circuits with reduced', function() {

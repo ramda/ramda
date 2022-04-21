@@ -9,6 +9,7 @@ describe('without', function() {
 
   it('can act as a transducer', function() {
     eq(R.into([], R.without([1]), [1]), []);
+    eq(R.transduce(R.without([1]), R.flip(R.append), [], [1]), []);
   });
 
   it('has R.equals semantics', function() {

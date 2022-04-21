@@ -24,4 +24,12 @@ describe('dropWhile', function() {
     eq(R.dropWhile(function(x) { return x !== 'd'; }, 'Ramda'), 'da');
   });
 
+  it('can act as a transducer', function() {
+    var lteTwo = x => x <= 2;
+    var input = [1, 2, 3, 4, 3, 2, 1];
+    var expected = [3, 4, 3, 2, 1];
+    eq(R.into([], R.dropWhile(lteTwo), input), expected);
+    eq(R.transduce(R.dropWhile(lteTwo), R.flip(R.append), [], input), expected);
+  });
+
 });

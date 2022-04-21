@@ -30,6 +30,7 @@ describe('dropRepeatsWith', function() {
 
   it('can act as a transducer', function() {
     eq(R.into([], R.dropRepeatsWith(eqI), objs2), objs);
+    eq(R.transduce(R.dropRepeatsWith(eqI), R.flip(R.append), [], objs2), objs);
   });
 
 });

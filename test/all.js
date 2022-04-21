@@ -52,4 +52,11 @@ describe('all', function() {
     });
   });
 
+  it('can act as a transducer', function() {
+    var input = [2, 4, 6, 8, 9, 10];
+    var expected = [false];
+    eq(R.into([], R.all(even), input), expected);
+    eq(R.transduce(R.all(even), R.flip(R.append), [], input), expected);
+  });
+
 });

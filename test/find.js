@@ -11,7 +11,6 @@ describe('find', function() {
   var gt100 = function(x) { return x > 100; };
   var isStr = function(x) { return typeof x === 'string'; };
   var xGt100 = function(o) { return o && o.x > 100; };
-  var intoArray = R.into([]);
 
   it('returns the first element that satisfies the predicate', function() {
     eq(R.find(even, a), 10);
@@ -20,27 +19,12 @@ describe('find', function() {
     eq(R.find(xGt100, a), obj2);
   });
 
-  it('transduces the first element that satisfies the predicate into an array', function() {
-    eq(intoArray(R.find(even), a), [10]);
-    eq(intoArray(R.find(gt100), a), [200]);
-    eq(intoArray(R.find(isStr), a), ['cow']);
-    eq(intoArray(R.find(xGt100), a), [obj2]);
-  });
-
   it('returns `undefined` when no element satisfies the predicate', function() {
     eq(R.find(even, ['zing']), undefined);
   });
 
-  it('returns `undefined` in array when no element satisfies the predicate into an array', function() {
-    eq(intoArray(R.find(even), ['zing']), [undefined]);
-  });
-
   it('returns `undefined` when given an empty list', function() {
     eq(R.find(even, []), undefined);
-  });
-
-  it('returns `undefined` into an array when given an empty list', function() {
-    eq(intoArray(R.find(even), []), [undefined]);
   });
 
   it('dispatches to transformer objects', function() {
@@ -50,4 +34,10 @@ describe('find', function() {
       xf: listXf
     });
   });
+
+  it('can act as a transducer', function() {
+    eq(R.into([], R.find(even), a), [10]);
+    eq(R.transduce(R.find(even), R.flip(R.append), [], a), [10]);
+  });
+
 });
