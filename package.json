@@ -22,7 +22,7 @@
       "web": "https://github.com/megawac"
     }
   ],
-  "name": "ramda",
+  "name": "ramda-ts-self",
   "description": "A practical functional library for JavaScript programmers.",
   "keywords": [
     "ramda",
@@ -38,7 +38,7 @@
     "fantasy-land"
   ],
   "sideEffects": false,
-  "version": "0.28.0",
+  "version": "0.28.1",
   "homepage": "https://ramdajs.com/",
   "license": "MIT",
   "repository": {
@@ -56,9 +56,6 @@
       "import": "./es/index.js",
       "default": "./src/index.js"
     },
-    "./es/*": "./es/*.js",
-    "./src/*": "./src/*.js",
-    "./dist/*": "./dist/*.js",
     "./es/": "./es/",
     "./src/": "./src/",
     "./dist/": "./dist/"
@@ -75,7 +72,7 @@
     "prebench": "npm run --silent build:cjs",
     "bench": "node scripts/benchRunner",
     "bookmarklet": "node scripts/bookmarklet",
-    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es && node ./scripts/addModulePackageScope.js",
+    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es && node ./scripts/addModulePackageScope.js && cp index.d.ts es/",
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
     "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
