@@ -14,6 +14,7 @@ import eqBy from './eqBy.js';
  *
  * @func
  * @memberOf R
+ * @since v0.28.2
  * @category List
  * @sig (a -> b) -> [a] -> [a]
  * @param {Function} fn A function used to produce a value to use during comparisons.
