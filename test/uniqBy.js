@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 describe('uniqBy', function() {
@@ -17,15 +18,9 @@ describe('uniqBy', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) {
-      this.value = x;
-    }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
     eq(R.uniqBy(R.identity, [-0, 0]).length, 2);
     eq(R.uniqBy(R.identity, [NaN, NaN]).length, 1);
-    eq(R.uniqBy(R.identity, [new Just([1, 2, 3]), new Just([1, 2, 3])]).length, 1);
+    eq(R.uniqBy(R.identity, [new  Maybe.Just([1, 2, 3]), new Maybe.Just([1, 2, 3])]).length, 1);
   });
 
   it('can act as a transducer', function() {

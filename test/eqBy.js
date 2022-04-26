@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 describe('eqBy', function() {
@@ -13,15 +14,10 @@ describe('eqBy', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.eqBy(R.identity, 0, -0), false);
     eq(R.eqBy(R.identity, -0, 0), false);
     eq(R.eqBy(R.identity, NaN, NaN), true);
-    eq(R.eqBy(R.identity, new Just([42]), new Just([42])), true);
+    eq(R.eqBy(R.identity, new Maybe.Just([42]), new Maybe.Just([42])), true);
   });
 
 });

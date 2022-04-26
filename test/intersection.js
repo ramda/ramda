@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 describe('intersection', function() {
@@ -24,15 +25,10 @@ describe('intersection', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.intersection([0], [-0]).length, 0);
     eq(R.intersection([-0], [0]).length, 0);
     eq(R.intersection([NaN], [NaN]).length, 1);
-    eq(R.intersection([new Just([42])], [new Just([42])]).length, 1);
+    eq(R.intersection([new Maybe.Just([42])], [new Maybe.Just([42])]).length, 1);
   });
 
 });

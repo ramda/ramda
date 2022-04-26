@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 describe('propEq', function() {
@@ -22,15 +23,10 @@ describe('propEq', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.propEq(0, 'value', {value: -0}), false);
     eq(R.propEq(-0, 'value', {value: 0}), false);
     eq(R.propEq(NaN, 'value', {value: NaN}), true);
-    eq(R.propEq(new Just([42]), 'value', {value: new Just([42])}), true);
+    eq(R.propEq(new Maybe.Just([42]), 'value', {value: new Maybe.Just([42])}), true);
   });
 
   it('returns false if called with a null or undefined object', function() {

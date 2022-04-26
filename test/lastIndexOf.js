@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var Maybe = require('./shared/Maybe.js');
 
 
 describe('lastIndexOf', function() {
@@ -37,15 +38,10 @@ describe('lastIndexOf', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.lastIndexOf(0, [-0]), -1);
     eq(R.lastIndexOf(-0, [0]), -1);
     eq(R.lastIndexOf(NaN, [NaN]), 0);
-    eq(R.lastIndexOf(new Just([42]), [new Just([42])]), 0);
+    eq(R.lastIndexOf(new Maybe.Just([42]), [new Maybe.Just([42])]), 0);
   });
 
   it('dispatches to `lastIndexOf` method', function() {
