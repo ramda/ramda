@@ -72,7 +72,7 @@
     "prebench": "npm run --silent build:cjs",
     "bench": "node scripts/benchRunner",
     "bookmarklet": "node scripts/bookmarklet",
-    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es && node ./scripts/addModulePackageScope.js && cp index.d.ts es/",
+    "build:es": "cross-env BABEL_ENV=es babel source --out-dir es && node ./scripts/addModulePackageScope.js && cp index.d.ts tools.d.ts es/",
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
     "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
@@ -86,7 +86,6 @@
     "spec": "cross-env BABEL_ENV=cjs mocha --require @babel/register --reporter spec",
     "test": "npm-run-all --parallel spec lint"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
@@ -118,5 +117,8 @@
     "sinon": "^7.3.2",
     "testem": "^2.16.0",
     "xyz": "^3.0.0"
+  },
+  "dependencies": {
+    "ts-toolbelt": "^6.15.1"
   }
 }
