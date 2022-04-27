@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var R = require('../source/index.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('toString', function() {
@@ -148,15 +149,6 @@ describe('toString', function() {
     };
     assert.strictEqual(R.toString(new Point(1, 2)), 'new Point(1, 2)');
 
-    function Just(x) {
-      if (!(this instanceof Just)) {
-        return new Just(x);
-      }
-      this.value = x;
-    }
-    Just.prototype.toString = function() {
-      return 'Just(' + R.toString(this.value) + ')';
-    };
     assert.strictEqual(R.toString(Just(42)), 'Just(42)');
     assert.strictEqual(R.toString(Just([1, 2, 3])), 'Just([1, 2, 3])');
     assert.strictEqual(R.toString(Just(Just(Just('')))), 'Just(Just(Just("")))');

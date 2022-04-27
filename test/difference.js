@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('difference', function() {
@@ -18,11 +19,6 @@ describe('difference', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.difference([0], [-0]).length, 1);
     eq(R.difference([-0], [0]).length, 1);
     eq(R.difference([NaN], [NaN]).length, 0);

@@ -2,7 +2,7 @@ var assert = require('assert');
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just, Nothing} = require('./shared/Maybe.js');
 
 
 describe('unnest', function() {
@@ -31,9 +31,6 @@ describe('unnest', function() {
   });
 
   it('is equivalent to R.chain(R.identity)', function() {
-    var Nothing = Maybe.Nothing;
-    var Just = Maybe.Just;
-
     eq(R.unnest(Nothing), Nothing);
     eq(R.unnest(Just(Nothing)), Nothing);
     eq(R.unnest(Just(Just(Nothing))), Just(Nothing));

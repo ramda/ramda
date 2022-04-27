@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('indexOf', function() {
@@ -46,11 +47,6 @@ describe('indexOf', function() {
   });
 
   it('has R.equals semantics', function() {
-    function Just(x) { this.value = x; }
-    Just.prototype.equals = function(x) {
-      return x instanceof Just && R.equals(x.value, this.value);
-    };
-
     eq(R.indexOf(0, [-0]), -1);
     eq(R.indexOf(-0, [0]), -1);
     eq(R.indexOf(NaN, [NaN]), 0);

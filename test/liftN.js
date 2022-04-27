@@ -1,7 +1,7 @@
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 var addN = function() {
@@ -34,7 +34,7 @@ describe('liftN', function() {
 
   it('works with other functors such as "Maybe"', function() {
     var addM = R.liftN(2, R.add);
-    eq(addM(Maybe.Just(3), Maybe.Just(5)), Maybe.Just(8));
+    eq(addM(Just(3), Just(5)), Just(8));
   });
 
   it('interprets [a] as a functor', function() {
