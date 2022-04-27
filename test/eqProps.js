@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('eqProps', function() {
@@ -13,7 +13,7 @@ describe('eqProps', function() {
     eq(R.eqProps('value', {value: 0}, {value: -0}), false);
     eq(R.eqProps('value', {value: -0}, {value: 0}), false);
     eq(R.eqProps('value', {value: NaN}, {value: NaN}), true);
-    eq(R.eqProps('value', {value: new Maybe.Just([42])}, {value: new Maybe.Just([42])}), true);
+    eq(R.eqProps('value', {value: new Just([42])}, {value: new Just([42])}), true);
   });
 
 });

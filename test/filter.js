@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('filter', function() {
@@ -33,7 +33,7 @@ describe('filter', function() {
   });
 
   it('correctly uses fantasy-land implementations', function() {
-    var m1 = Maybe.Just(-1);
+    var m1 = Just(-1);
     var m2 = R.filter(function(x) { return x > 0; } , m1);
 
     eq(m2.isNothing, true);

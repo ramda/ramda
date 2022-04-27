@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('indexOf', function() {
@@ -50,7 +50,7 @@ describe('indexOf', function() {
     eq(R.indexOf(0, [-0]), -1);
     eq(R.indexOf(-0, [0]), -1);
     eq(R.indexOf(NaN, [NaN]), 0);
-    eq(R.indexOf(new Maybe.Just([42]), [new Maybe.Just([42])]), 0);
+    eq(R.indexOf(new Just([42]), [new Just([42])]), 0);
   });
 
   it('dispatches to `indexOf` method', function() {

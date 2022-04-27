@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('difference', function() {
@@ -22,7 +22,7 @@ describe('difference', function() {
     eq(R.difference([0], [-0]).length, 1);
     eq(R.difference([-0], [0]).length, 1);
     eq(R.difference([NaN], [NaN]).length, 0);
-    eq(R.difference([new Maybe.Just([42])], [new Maybe.Just([42])]).length, 0);
+    eq(R.difference([new Just([42])], [new Just([42])]).length, 0);
   });
 
   it('works for arrays of different lengths', function() {

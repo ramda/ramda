@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('uniq', function() {
@@ -22,7 +22,7 @@ describe('uniq', function() {
     eq(R.uniq([0, -0]).length, 2);
     eq(R.uniq([NaN, NaN]).length, 1);
     eq(R.uniq([[1], [1]]).length, 1);
-    eq(R.uniq([new Maybe.Just([42]), new Maybe.Just([42])]).length, 1);
+    eq(R.uniq([new Just([42]), new Just([42])]).length, 1);
   });
 
   it('handles null and undefined elements', function() {

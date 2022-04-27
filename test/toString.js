@@ -1,7 +1,7 @@
 var assert = require('assert');
 
 var R = require('../source/index.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('toString', function() {
@@ -149,9 +149,9 @@ describe('toString', function() {
     };
     assert.strictEqual(R.toString(new Point(1, 2)), 'new Point(1, 2)');
 
-    assert.strictEqual(R.toString(Maybe.Just(42)), 'Just(42)');
-    assert.strictEqual(R.toString(Maybe.Just([1, 2, 3])), 'Just([1, 2, 3])');
-    assert.strictEqual(R.toString(Maybe.Just(Maybe.Just(Maybe.Just('')))), 'Just(Just(Just("")))');
+    assert.strictEqual(R.toString(Just(42)), 'Just(42)');
+    assert.strictEqual(R.toString(Just([1, 2, 3])), 'Just([1, 2, 3])');
+    assert.strictEqual(R.toString(Just(Just(Just('')))), 'Just(Just(Just("")))');
 
     assert.strictEqual(R.toString({toString: R.always('x')}), 'x');
   });

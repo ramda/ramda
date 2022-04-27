@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just, Nothing} = require('./shared/Maybe.js');
 
 
 describe('reject', function() {
@@ -27,10 +27,10 @@ describe('reject', function() {
   });
 
   it('dispatches to `filter` method', function() {
-    var m = new Maybe.Just(42);
+    var m = new Just(42);
     eq(R.filter(R.T, m), m);
-    eq(R.filter(R.F, m), Maybe.Nothing);
-    eq(R.reject(R.T, m), Maybe.Nothing);
+    eq(R.filter(R.F, m), Nothing);
+    eq(R.reject(R.T, m), Nothing);
     eq(R.reject(R.F, m), m);
   });
 

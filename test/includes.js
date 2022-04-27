@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('includes', function() {
@@ -20,7 +20,7 @@ describe('includes', function() {
     eq(R.includes(0, [-0]), false);
     eq(R.includes(-0, [0]), false);
     eq(R.includes(NaN, [NaN]), true);
-    eq(R.includes(new Maybe.Just([42]), [new Maybe.Just([42])]), true);
+    eq(R.includes(new Just([42]), [new Just([42])]), true);
   });
 
   it('returns true if substring is part of string', function() {

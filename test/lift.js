@@ -1,7 +1,7 @@
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 var not = function(x) { return !x; };
 var add3 = R.curry(function add3(a, b, c) {
@@ -40,7 +40,7 @@ describe('lift', function() {
 
   it('works with other functors such as "Maybe"', function() {
     var addM = R.lift(R.add);
-    eq(addM(Maybe.Just(3), Maybe.Just(5)), Maybe.Just(8));
+    eq(addM(Just(3), Just(5)), Just(8));
   });
 
 });

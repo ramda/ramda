@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('dropRepeats', function() {
@@ -25,7 +25,7 @@ describe('dropRepeats', function() {
     eq(R.dropRepeats([0, -0]).length, 2);
     eq(R.dropRepeats([-0, 0]).length, 2);
     eq(R.dropRepeats([NaN, NaN]).length, 1);
-    eq(R.dropRepeats([new Maybe.Just([42]), new Maybe.Just([42])]).length, 1);
+    eq(R.dropRepeats([new Just([42]), new Just([42])]).length, 1);
   });
 
 });

@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('lastIndexOf', function() {
@@ -41,7 +41,7 @@ describe('lastIndexOf', function() {
     eq(R.lastIndexOf(0, [-0]), -1);
     eq(R.lastIndexOf(-0, [0]), -1);
     eq(R.lastIndexOf(NaN, [NaN]), 0);
-    eq(R.lastIndexOf(new Maybe.Just([42]), [new Maybe.Just([42])]), 0);
+    eq(R.lastIndexOf(new Just([42]), [new Just([42])]), 0);
   });
 
   it('dispatches to `lastIndexOf` method', function() {

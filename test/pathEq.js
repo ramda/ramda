@@ -1,6 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
-var Maybe = require('./shared/Maybe.js');
+var {Just} = require('./shared/Maybe.js');
 
 
 describe('pathEq', function() {
@@ -38,7 +38,7 @@ describe('pathEq', function() {
     eq(R.pathEq(0, ['value'], {value: -0}), false);
     eq(R.pathEq(-0, ['value'], {value: 0}), false);
     eq(R.pathEq(NaN, ['value'], {value: NaN}), true);
-    eq(R.pathEq(new Maybe.Just([42]), ['value'], {value: new Maybe.Just([42])}), true);
+    eq(R.pathEq(new Just([42]), ['value'], {value: new Just([42])}), true);
   });
 
 });
