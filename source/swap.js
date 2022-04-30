@@ -54,6 +54,7 @@ var swapString = function(indexA, indexB, s) {
  *
  * @func
  * @memberOf R
+ * @since v0.40.1
  * @category List
  * @sig Number -> Number -> [a] -> [a]
  * @param {Number|string|Object} indexA The first index

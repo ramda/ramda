@@ -7,6 +7,7 @@ import _curry1 from './internal/_curry1.js';
  *
  * @func
  * @memberOf R
+ * @since v0.40.1
  * @category Type
  * @sig * -> Boolean
  * @param {*} x The value to test.

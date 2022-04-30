@@ -12,6 +12,7 @@ import curryN from './curryN.js';
  *
  * @func
  * @memberOf R
+ * @since v0.40.1
  * @category Function
  * @category List
  * @sig ((a ... -> b) ... -> [a] -> *) -> (a ..., Int, [a] -> b) ... -> [a] -> *)
