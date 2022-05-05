@@ -12,6 +12,8 @@ import _curry1 from './internal/_curry1.js';
  * In other words, `R.unapply` derives a variadic function from a function which
  * takes an array. `R.unapply` is the inverse of [`R.apply`](#apply).
  *
+ * **Note:** The result of unapply is not automatically curried.
+ * 
  * @func
  * @memberOf R
  * @since v0.8.0
@@ -26,7 +28,7 @@ import _curry1 from './internal/_curry1.js';
  * @symb R.unapply(f)(a, b) = f([a, b])
  */
 var unapply = _curry1(function unapply(fn) {
-  return function() {
+  return function () {
     return fn(Array.prototype.slice.call(arguments, 0));
   };
 });
