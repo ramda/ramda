@@ -11,33 +11,35 @@ let mk_type_file = (path) => {
   return {
     path,
     exports: null,
-    docs: null,
-  }
+    docs: null
+  };
 };
 
 let mk_docs = (src) => {
   let dox = Dox.parseComments(src, { raw: true })[0];
-  let desc = dox.description?.full ?? '';
-  let tags = dox.tags ?? [];
+  let desc = (dox.description && dox.description.full) || '';
+  let tags = dox.tags || [];
   let see = get_tag_val(tags, 'see');
   let example = get_tag_val(tags, 'example');
   return { desc, see, example };
 };
 
 let get_tag_val = (tags, key) => {
-  return (tags.find(x => x.type == key)?.string ?? '').trim();
+  let maybe_tag = tags.find(x => x.type == key);
+  return ((maybe_tag && maybe_tag.string) || '').trim();
 };
 
 let read_type_file = (x) => {
   let lines = FS.readFileSync(x.path).toString().split('\n');
 
   let i;
-  for (i = 0; !/^export /.test(lines[i]); ++i);
+  for (i = 0; !/^export /.test(lines[i]); i += 1) {
+  }
   let exports = lines.slice(i).join('\n');
 
   return {
     path: x.path,
-    exports,
+    exports
   };
 };
 
@@ -49,41 +51,38 @@ let attach_docs_from_js_file = (x) => {
     return null;
   }
   let docs = mk_docs(FS.readFileSync(js_path).toString());
-  return {
-    ...x,
-    docs,
-  };
+  return Object.assign({}, x, { docs });
 };
 
 let read = () => {
   return (
     FS
-    .readdirSync(TYPES_DIR)
-    .filter(x => /\.d\.ts$/.test(x))
-    .map(filename => mk_type_file(`${TYPES_DIR}/${filename}`))
-    .map(read_type_file)
-    .map(attach_docs_from_js_file)
-    .filter(x => x != null)
-    .sort((a, b) => a.path.localeCompare(b.path))
+      .readdirSync(TYPES_DIR)
+      .filter(x => /\.d\.ts$/.test(x))
+      .map(filename => mk_type_file(`${TYPES_DIR}/${filename}`))
+      .map(read_type_file)
+      .map(attach_docs_from_js_file)
+      .filter(x => x != null)
+      .sort((a, b) => a.path.localeCompare(b.path))
   );
 };
 
 let gen_imports = (tools_path) => {
   let tools_exports_as_imports = (
     FS
-    .readFileSync(tools_path)
-    .toString()
-    .split('\n')
-    .map(x => /^export \w+ (\w+)/.exec(x))
-    .filter(x => x != null)
-    .map(x => `    ${x[1]},`)
-    .join('\n')
+      .readFileSync(tools_path)
+      .toString()
+      .split('\n')
+      .map(x => /^export \w+ (\w+)/.exec(x))
+      .filter(x => x != null)
+      .map(x => `    ${x[1]},`)
+      .join('\n')
   );
   return [
-    `import * as _ from 'ts-toolbelt';`,
-    `import {`,
+    'import * as _ from \'ts-toolbelt\';',
+    'import {',
     tools_exports_as_imports,
-    `} from './tools';`
+    '} from \'./tools\';'
   ].join('\n');
 };
 
@@ -92,37 +91,35 @@ let gen_desc = (desc) => {
 };
 
 let gen_see = (see) => {
-  if (see == "") {
+  if (see == '') {
     return [];
-  }
-  else {
+  } else {
     let ts_see = (
       see
-      .split(',')
-      .map(x => x.trim())
-      .map(x => x.replace(/^R\./, ''))
-      .map(x => `{@link ${x}}`)
-      .join(', ')
+        .split(',')
+        .map(x => x.trim())
+        .map(x => x.replace(/^R\./, ''))
+        .map(x => `{@link ${x}}`)
+        .join(', ')
     );
     return [`See also ${ts_see}`];
   }
 };
 
 let gen_example = (example) => {
-  if (example == "") {
+  if (example == '') {
     return [];
-  }
-  else {
+  } else {
     return [
       '@example',
       '```typescript',
       ...(
         example
-        .split("\n")
-        .map(x => x.replace(/^     /, ''))
-        .map(x => x.replace(/\s+$/, ''))
+          .split('\n')
+          .map(x => x.replace(/^     /, ''))
+          .map(x => x.replace(/\s+$/, ''))
       ),
-      '```',
+      '```'
     ];
   }
 };
@@ -144,7 +141,7 @@ let gen_export = (x) => {
     ...as_comment(desc, { first_comment: true }),
     ...as_comment(see),
     ...as_comment(example),
-    ' */',
+    ' */'
   ].join('\n');
   return `${docs}\n${x.exports}`;
 };
@@ -161,8 +158,8 @@ let write = (exports) => {
   let imports_code = gen_imports(tools_path);
   let exports_code = gen_exports(exports);
   let other_exports = [
-    `export * from './tools';`,
-    'export as namespace R;',
+    'export * from \'./tools\';',
+    'export as namespace R;'
   ].join('\n');
 
   let code = [
@@ -172,7 +169,7 @@ let write = (exports) => {
     exports_code,
     '',
     '',
-    other_exports,
+    other_exports
   ].join('\n');
 
   FS.writeFileSync(`${OUTPUT_DIR}/index.d.ts`, code);
