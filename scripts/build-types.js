@@ -172,6 +172,7 @@ const write = (exports) => {
     other_exports
   ].join('\n');
 
+  FS.mkdirSync(OUTPUT_DIR, { recursive: true});
   FS.writeFileSync(`${OUTPUT_DIR}/index.d.ts`, code);
   FS.copyFileSync(tools_path, `${OUTPUT_DIR}/${tools_file}`);
 };
