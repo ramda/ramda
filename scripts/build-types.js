@@ -1,13 +1,13 @@
-let Path = require('path');
-let FS = require('fs');
+const Path = require('path');
+const FS = require('fs');
 
-let Dox = require('dox');
+const Dox = require('dox');
 
 const TYPES_DIR = './types';
 const SOURCE_DIR = './source';
 const OUTPUT_DIR = './es';
 
-let mk_type_file = (path) => {
+const mk_type_file = (path) => {
   return {
     path,
     exports: null,
@@ -15,27 +15,27 @@ let mk_type_file = (path) => {
   };
 };
 
-let mk_docs = (src) => {
-  let dox = Dox.parseComments(src, { raw: true })[0];
-  let desc = (dox.description && dox.description.full) || '';
-  let tags = dox.tags || [];
-  let see = get_tag_val(tags, 'see');
-  let example = get_tag_val(tags, 'example');
+const mk_docs = (src) => {
+  const dox = Dox.parseComments(src, { raw: true })[0];
+  const desc = (dox.description && dox.description.full) || '';
+  const tags = dox.tags || [];
+  const see = get_tag_val(tags, 'see');
+  const example = get_tag_val(tags, 'example');
   return { desc, see, example };
 };
 
-let get_tag_val = (tags, key) => {
-  let maybe_tag = tags.find(x => x.type == key);
+const get_tag_val = (tags, key) => {
+  const maybe_tag = tags.find(x => x.type == key);
   return ((maybe_tag && maybe_tag.string) || '').trim();
 };
 
-let read_type_file = (x) => {
-  let lines = FS.readFileSync(x.path).toString().split('\n');
+const read_type_file = (x) => {
+  const lines = FS.readFileSync(x.path).toString().split('\n');
 
   let i;
   for (i = 0; !/^export /.test(lines[i]); i += 1) {
   }
-  let exports = lines.slice(i).join('\n');
+  const exports = lines.slice(i).join('\n');
 
   return {
     path: x.path,
@@ -43,18 +43,18 @@ let read_type_file = (x) => {
   };
 };
 
-let attach_docs_from_js_file = (x) => {
-  let path = Path.parse(x.path);
-  let js_file = path.base.replace(/\.d\.ts$/, '.js');
-  let js_path = `${SOURCE_DIR}/${js_file}`;
+const attach_docs_from_js_file = (x) => {
+  const path = Path.parse(x.path);
+  const js_file = path.base.replace(/\.d\.ts$/, '.js');
+  const js_path = `${SOURCE_DIR}/${js_file}`;
   if (!FS.existsSync(js_path)) {
     return null;
   }
-  let docs = mk_docs(FS.readFileSync(js_path).toString());
+  const docs = mk_docs(FS.readFileSync(js_path).toString());
   return Object.assign({}, x, { docs });
 };
 
-let read = () => {
+const read = () => {
   return (
     FS
       .readdirSync(TYPES_DIR)
@@ -67,8 +67,8 @@ let read = () => {
   );
 };
 
-let gen_imports = (tools_path) => {
-  let tools_exports_as_imports = (
+const gen_imports = (tools_path) => {
+  const tools_exports_as_imports = (
     FS
       .readFileSync(tools_path)
       .toString()
@@ -86,15 +86,15 @@ let gen_imports = (tools_path) => {
   ].join('\n');
 };
 
-let gen_desc = (desc) => {
+const gen_desc = (desc) => {
   return desc.split('\n');
 };
 
-let gen_see = (see) => {
+const gen_see = (see) => {
   if (see == '') {
     return [];
   } else {
-    let ts_see = (
+    const ts_see = (
       see
         .split(',')
         .map(x => x.trim())
@@ -106,7 +106,7 @@ let gen_see = (see) => {
   }
 };
 
-let gen_example = (example) => {
+const gen_example = (example) => {
   if (example == '') {
     return [];
   } else {
@@ -124,7 +124,7 @@ let gen_example = (example) => {
   }
 };
 
-let as_comment = (lines, opts = { first_comment: false }) => {
+const as_comment = (lines, opts = { first_comment: false }) => {
   let comments = lines.map(x => ` * ${x}`);
   if (!opts.first_comment && lines.length > 0) {
     comments = [' *', ... comments];
@@ -132,11 +132,11 @@ let as_comment = (lines, opts = { first_comment: false }) => {
   return comments;
 };
 
-let gen_export = (x) => {
-  let desc = gen_desc(x.docs.desc);
-  let see = gen_see(x.docs.see);
-  let example = gen_example(x.docs.example);
-  let docs = [
+const gen_export = (x) => {
+  const desc = gen_desc(x.docs.desc);
+  const see = gen_see(x.docs.see);
+  const example = gen_example(x.docs.example);
+  const docs = [
     '/**',
     ...as_comment(desc, { first_comment: true }),
     ...as_comment(see),
@@ -146,23 +146,23 @@ let gen_export = (x) => {
   return `${docs}\n${x.exports}`;
 };
 
-let gen_exports = (exports) => {
+const gen_exports = (exports) => {
   return exports.map(gen_export).join('\n\n');
 };
 
-let write = (exports) => {
-  let tools_file = 'tools.d.ts';
-  let tools_path = `${TYPES_DIR}/util/tools.d.ts`;
+const write = (exports) => {
+  const tools_file = 'tools.d.ts';
+  const tools_path = `${TYPES_DIR}/util/tools.d.ts`;
 
-  let preamble = FS.readFileSync(`${TYPES_DIR}/util/index-preamble.d.ts`).toString();
-  let imports_code = gen_imports(tools_path);
-  let exports_code = gen_exports(exports);
-  let other_exports = [
+  const preamble = FS.readFileSync(`${TYPES_DIR}/util/index-preamble.d.ts`).toString();
+  const imports_code = gen_imports(tools_path);
+  const exports_code = gen_exports(exports);
+  const other_exports = [
     'export * from \'./tools\';',
     'export as namespace R;'
   ].join('\n');
 
-  let code = [
+  const code = [
     preamble,
     imports_code,
     '',
@@ -176,7 +176,7 @@ let write = (exports) => {
   FS.copyFileSync(tools_path, `${OUTPUT_DIR}/${tools_file}`);
 };
 
-let main = () => {
+const main = () => {
   write(read());
 };
 
