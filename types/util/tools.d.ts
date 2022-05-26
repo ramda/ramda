@@ -431,6 +431,13 @@ export type ObjectHavingSome<Key extends string> = A.Clean<
 /**
  * <needs description>
  */
+export type PartialRecord<K extends keyof any, T> = {
+    [P in K]?: T;
+};
+
+/**
+ * <needs description>
+ */
 export type Path = Array<number | string>;
 
 /**
