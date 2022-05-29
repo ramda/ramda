@@ -61,8 +61,12 @@
     "./dist/": "./dist/"
   },
   "module": "./es/index.js",
+  "types": "./es/index.d.ts",
   "unpkg": "dist/ramda.min.js",
   "jsdelivr": "dist/ramda.min.js",
+  "tsd": {
+    "directory": "test/types/"
+  },
   "files": [
     "es",
     "src",
@@ -85,7 +89,8 @@
     "lint": "eslint scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js test/*.js test/**/*.js lib/sauce/*.js lib/bench/*.js",
     "browser_test": "testem ci",
     "spec": "cross-env BABEL_ENV=cjs mocha --require @babel/register --reporter spec",
-    "test": "npm-run-all --parallel spec lint"
+    "test:types": "tsd",
+    "test": "npm-run-all --parallel spec lint test:types"
   },
   "dependencies": {
     "ts-toolbelt": "^6.15.1"
@@ -120,6 +125,7 @@
     "sanctuary": "0.7.x",
     "sinon": "^7.3.2",
     "testem": "^2.16.0",
+    "tsd": "^0.20.0",
     "xyz": "^3.0.0"
   }
 }
