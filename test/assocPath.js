@@ -33,7 +33,7 @@ describe('assocPath', function() {
     eq(obj2, {a: {b: 42}});
   });
 
-  it('empty path replaces the the whole object', function() {
+  it('empty path replaces the whole object', function() {
     eq(R.assocPath([], 3, {a: 1, b: 2}), 3);
   });
 
