@@ -25,7 +25,7 @@ describe('unwind', function() {
     eq(R.unwind('hobby', object), [object]);
   });
 
-  it('returns a list containing only the original object if the the value for that key is not iterable', function() {
+  it('returns a list containing only the original object if the value for that key is not iterable', function() {
     eq(R.unwind('passtimes', object), [object]);
     eq(R.unwind('options',  {
       title: 'What is the best programming language?',
