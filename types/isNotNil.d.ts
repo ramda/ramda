@@ -1,1 +1,3 @@
-export function isNotNil(value: any): boolean;
+export function isNotNil<T>(
+  value: T
+): T extends null | undefined ? false : true;
