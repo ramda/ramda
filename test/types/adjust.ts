@@ -1,4 +1,4 @@
-import { expectType, expectError, expectNotAssignable } from "tsd";
+import { expectType, expectError } from "tsd";
 import * as R from "../../es/index";
 
 expectType<string[]>(R.adjust(1, R.toUpper, ["a", "b", "c"]));
