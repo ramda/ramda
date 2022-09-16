@@ -45,4 +45,8 @@ describe('type', function() {
     eq(R.type(undefined), 'Undefined');
   });
 
+  it('"Date" if given a Date object', function() {
+    eq(R.type(new Date()), 'Date');
+  });
+
 });
