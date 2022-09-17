@@ -11,4 +11,5 @@ export function type(
     | 'Function'
     | 'Undefined'
     | 'Symbol'
-    | 'Error';
+    | 'Error'
+    | 'Date';
