@@ -1,5 +1,5 @@
 import { expectType } from "tsd";
-import { path } from "../../es/index";
+import { __, path } from "../../es/index";
 
 const obj: {
   v: string;
@@ -43,9 +43,10 @@ const obj: {
   }
 };
 
-expectType<string>(path(['v'], obj));
 expectType<string>(path<typeof obj, 'v'>(['v'])(obj));
+expectType<string>(path(['v'], obj));
 expectType<string>(path(['v'])(obj));
+expectType<string>(path(__, obj)(['v']));
 
 
 // expectType<number>(path(['a', 'v'], obj));

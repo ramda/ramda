@@ -1,8 +1,9 @@
-import { Path } from './util/tools';
+import { Path, Placeholder } from './util/tools';
 
 export function path<S, K0 extends keyof S>(path: [K0]): (obj: S) => S[K0];
 export function path<S, K0 extends keyof S>(path: [K0], obj: S): S[K0];
 export function path<K0 extends string>(path: [K0]): <S extends Record<K0, any>>(obj: S) => S[K0];
+export function path<S>(__: Placeholder, obj: S): <K0 extends keyof S>(path: [K0]) => S[K0];
 
 // export function path<S, K0 extends keyof S = keyof S, K1 extends keyof S[K0]>(path: [K0, K1], obj: S): S[K0][K1];
 // export function path<
