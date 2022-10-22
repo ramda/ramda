@@ -38,13 +38,6 @@ export interface ArrayLike {
 }
 
 /**
- * <needs description>
- * @param K
- */
-export type AssocPartialOne<K extends keyof any> = (<T>(val: T) => <U>(obj: U) => Record<K, T> & Omit<U, K>) &
-    (<T, U>(val: T, obj: U) => Record<K, T> & Omit<U, K>);
-
-/**
  * Array of functions to compose/pipe with.
  */
 export type AtLeastOneFunctionsFlow<TArgs extends any[], TResult> =
