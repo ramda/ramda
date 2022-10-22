@@ -198,6 +198,12 @@ type Arr1LessThanOrEqual<
     : never;
 
 /**
+ * R.all dispatches to `.all` of the second argument, if present.
+ * This type infers the type of the first argument of that method and returns it
+ */
+export type InferAllAType<T> = T extends { all: (fn: (a: infer A) => boolean) => boolean } ? A : never;
+
+/**
  * Return true if types T1 and T2 can intersect, e.g. both are primitives or both are objects.
  * Taking into account branded types too.
  *
