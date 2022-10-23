@@ -1,5 +1,5 @@
-import { expectType, expectError } from "tsd";
-import { __, andThen, Placeholder } from "../../es/index";
+import { expectType } from "tsd";
+import { __, andThen } from "../../es/index";
 
 const aToB = (a: number): string => a.toString();
 const aToPb = (a: number): Promise<string> => Promise.resolve(a.toString());
