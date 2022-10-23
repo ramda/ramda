@@ -86,7 +86,7 @@
     "clean": "rimraf es/* src/* dist/* coverage/*",
     "prepare": "npm run clean && npm run build",
     "coverage": "BABEL_ENV=cjs nyc --reporter=lcov mocha -- --require @babel/register",
-    "lint": "eslint --ext js,ts scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js types/**/*.ts test/**/*.{js,ts} lib/sauce/*.js lib/bench/*.js",
+    "lint": "eslint --ext js,ts scripts/bookmarklet scripts/*.js source/*.js source/internal/*.js types/*.ts types/**/*.ts test/*.js test/**/*.{js,ts} lib/sauce/*.js lib/bench/*.js",
     "browser_test": "testem ci",
     "spec": "cross-env BABEL_ENV=cjs mocha --require @babel/register --reporter spec",
     "test:types": "tsd",
