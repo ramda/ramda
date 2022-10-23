@@ -193,7 +193,7 @@ type Arr1LessThanOrEqual<
   ? true
   : T2['length'] extends 0
     ? false
-    : T2 extends readonly [infer First, ...infer Rest]
+    : T2 extends readonly [infer First, ...infer Rest] // eslint-disable-line @typescript-eslint/no-unused-vars
       ? Arr1LessThanOrEqual<T1, Rest>
       : never;
 

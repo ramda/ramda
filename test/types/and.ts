@@ -1,4 +1,4 @@
-import { expectType, expectError } from 'tsd';
+import { expectType } from 'tsd';
 import * as R from '../../es/index';
 
 expectType<string | boolean>(R.and('a')(false));

@@ -212,7 +212,12 @@
         "no-extra-semi": 0,
         "@typescript-eslint/no-extra-semi": 2,
         "semi": 0,
-        "@typescript-eslint/semi": 2
+        "@typescript-eslint/semi": 2,
+        // typescript never wants extensions
+        "import/extensions": [
+          2,
+          "never"
+        ]
       }
     }
   ]
