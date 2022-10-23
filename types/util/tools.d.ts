@@ -165,6 +165,12 @@ export type Functor<A> =
     | { map: <B>(fn: (a: A) => B) => Functor<B>; [key: string]: any };
 
 /**
+ * R.any dispatches to `.any` of the second argument, if present.
+ * This type infers the type of the first argument of that method and returns it
+ */
+export type InferAnyAType<T> = T extends { any: (fn: (a: infer A) => boolean) => boolean } ? A : never;
+
+/**
  * A pair containing the key and corresponding value of an object.
  * @param K Key type
  * @param V Value type
