@@ -34,7 +34,7 @@ export type Arity2Fn = (a: any, b: any) => any;
  * @deprecated Unknown purpose. If really needed, consider `{ nodeType: number; }` instead.
  */
 export interface ArrayLike {
-    nodeType: number;
+  nodeType: number;
 }
 
 /**
@@ -42,7 +42,7 @@ export interface ArrayLike {
  * @param K
  */
 export type AssocPartialOne<K extends keyof any> = (<T>(val: T) => <U>(obj: U) => Record<K, T> & Omit<U, K>) &
-    (<T, U>(val: T, obj: U) => Record<K, T> & Omit<U, K>);
+(<T, U>(val: T, obj: U) => Record<K, T> & Omit<U, K>);
 
 /**
  * Array of functions to compose/pipe with.
@@ -60,7 +60,7 @@ export type AtLeastOneFunctionsFlowFromRightToLeft<TArgs extends any[], TResult>
  * @deprecated Unknown purpose. If really needed, consider `string & { push(x: string): void; }` instead.
  */
 export interface CharList extends String {
-    push(x: string): void;
+  push(x: string): void;
 }
 
 /**
@@ -78,7 +78,7 @@ export type CondPairTypeguard<T, TFiltered extends T, R> = [(value: T) => value 
  * @param A The type of dictionary values
  */
 export interface Dictionary<A> {
-    [index: string]: A;
+  [index: string]: A;
 }
 
 /**
@@ -86,7 +86,7 @@ export interface Dictionary<A> {
  * @param E
  */
 export type Evolvable<E extends Evolver> = {
-    [P in keyof E]?: Evolved<E[P]>;
+  [P in keyof E]?: Evolved<E[P]>;
 };
 
 /**
@@ -95,7 +95,7 @@ export type Evolvable<E extends Evolver> = {
  * @param E
  */
 export type Evolve<O extends Evolvable<E>, E extends Evolver> = {
-    [P in keyof O]: P extends keyof E ? EvolveValue<O[P], E[P]> : O[P];
+  [P in keyof O]: P extends keyof E ? EvolveValue<O[P], E[P]> : O[P];
 };
 
 /**
@@ -109,8 +109,8 @@ type Evolved<A> = A extends (value: infer V) => any ? V : A extends Evolver ? Ev
  * @param T - the type to be evolved
  */
 export type Evolver<T extends Evolvable<any> = any> = {
-    // if T[K] isn't evolvable, don't allow nesting for that property
-    [key in keyof Partial<T>]: ((value: T[key]) => T[key]) | (T[key] extends Evolvable<any> ? Evolver<T[key]> : never);
+  // if T[K] isn't evolvable, don't allow nesting for that property
+  [key in keyof Partial<T>]: ((value: T[key]) => T[key]) | (T[key] extends Evolvable<any> ? Evolver<T[key]> : never);
 };
 
 /**
@@ -119,10 +119,10 @@ export type Evolver<T extends Evolvable<any> = any> = {
  * @param E
  */
 type EvolveNestedValue<O, E extends Evolver> = O extends object
-    ? O extends Evolvable<E>
-        ? Evolve<O, E>
-        : never
-    : never;
+  ? O extends Evolvable<E>
+    ? Evolve<O, E>
+    : never
+  : never;
 
 /**
  * <needs description>
@@ -130,8 +130,8 @@ type EvolveNestedValue<O, E extends Evolver> = O extends object
  * @param E
  */
 type EvolveValue<V, E> = E extends (value: V) => any
-    ? ReturnType<E>
-    : E extends Evolver
+  ? ReturnType<E>
+  : E extends Evolver
     ? EvolveNestedValue<V, E>
     : never;
 
@@ -142,7 +142,7 @@ type EvolveValue<V, E> = E extends (value: V) => any
  * the seventh being `document.all`. However `NaN` is not a valid literal type,
  * and `document.all` is an object so it's probably not a good idea to add it either.
  */
-export type Falsy = undefined | null | 0 | "" | false;
+export type Falsy = undefined | null | 0 | '' | false;
 
 /**
  * The type of `R.find` and `R.findLast`
@@ -150,10 +150,10 @@ export type Falsy = undefined | null | 0 | "" | false;
  * @deprecated Inlined.
  */
 export interface Find {
-    <T, P extends T>(pred: (val: T) => val is P, list: readonly T[]): P | undefined;
-    <T>(pred: (val: T) => boolean, list: readonly T[]): T | undefined;
-    <T, P extends T>(pred: (val: T) => val is P): (list: readonly T[]) => P | undefined;
-    <T>(pred: (val: T) => boolean): (list: readonly T[]) => T | undefined;
+  <T, P extends T>(pred: (val: T) => val is P, list: readonly T[]): P | undefined;
+  <T>(pred: (val: T) => boolean, list: readonly T[]): T | undefined;
+  <T, P extends T>(pred: (val: T) => val is P): (list: readonly T[]) => P | undefined;
+  <T>(pred: (val: T) => boolean): (list: readonly T[]) => T | undefined;
 }
 
 /**
@@ -187,15 +187,15 @@ export type Lens<S, A> = (functorFactory: (a: A) => Functor<A>) => (s: S) => Fun
  * <created by @valerii15298>
  */
 type Arr1LessThanOrEqual<
-    T1 extends ReadonlyArray<any>,
-    T2 extends ReadonlyArray<any>,
+  T1 extends ReadonlyArray<any>,
+  T2 extends ReadonlyArray<any>
 > = T1['length'] extends T2['length']
-    ? true
-    : T2['length'] extends 0
+  ? true
+  : T2['length'] extends 0
     ? false
     : T2 extends readonly [infer First, ...infer Rest]
-    ? Arr1LessThanOrEqual<T1, Rest>
-    : never;
+      ? Arr1LessThanOrEqual<T1, Rest>
+      : never;
 
 /**
  * Return true if types T1 and T2 can intersect, e.g. both are primitives or both are objects.
@@ -207,18 +207,18 @@ type Arr1LessThanOrEqual<
  * <created by @valerii15298>
  */
 type Intersectable<T1, T2> = [T1] extends [T2]
-    ? true
-    : [T2] extends [T1]
+  ? true
+  : [T2] extends [T1]
     ? true
     : [T1] extends [object]
-    ? [T2] extends [object]
+      ? [T2] extends [object]
         ? true
         : false
-    : [T1] extends [M.Primitive]
-    ? [T2] extends [M.Primitive]
-        ? true
-        : false
-    : false;
+      : [T1] extends [M.Primitive]
+        ? [T2] extends [M.Primitive]
+          ? true
+          : false
+        : false;
 
 /**
  * Check if type `T` is `any`
@@ -241,12 +241,12 @@ type IsAny<T> = 0 extends 1 & T ? true : false;
  * <created by @valerii15298>
  */
 type Intersection<T1, T2> = Intersectable<T1, T2> extends true
-    ? IsAny<T1> extends true
-        ? T2
-        : IsAny<T2> extends true
-        ? T1
-        : T1 & T2
-    : never;
+  ? IsAny<T1> extends true
+    ? T2
+    : IsAny<T2> extends true
+      ? T1
+      : T1 & T2
+  : never;
 
 /**
  * Merge second array with first one,
@@ -264,9 +264,9 @@ type Intersection<T1, T2> = Intersectable<T1, T2> extends true
  * <created by @valerii15298>
  */
 export type mergeArrWithLeft<T1 extends ReadonlyArray<any>, T2 extends ReadonlyArray<any>> = readonly [
-    ...{
-        readonly [Index in keyof T1]: Index extends keyof T2 ? Intersection<T1[Index], T2[Index]> : T1[Index];
-    }
+  ...{
+    readonly [Index in keyof T1]: Index extends keyof T2 ? Intersection<T1[Index], T2[Index]> : T1[Index];
+  }
 ];
 
 /**
@@ -282,11 +282,11 @@ export type mergeArrWithLeft<T1 extends ReadonlyArray<any>, T2 extends ReadonlyA
  * <created by @valerii15298>
  */
 type MergeArrays<T1 extends ReadonlyArray<any>, T2 extends ReadonlyArray<any>> = Arr1LessThanOrEqual<
-    T1,
-    T2
+T1,
+T2
 > extends true
-    ? mergeArrWithLeft<T2, T1>
-    : mergeArrWithLeft<T1, T2>;
+  ? mergeArrWithLeft<T2, T1>
+  : mergeArrWithLeft<T1, T2>;
 
 /**
  * Given array of functions will return new array which will be constructed
@@ -299,11 +299,11 @@ type MergeArrays<T1 extends ReadonlyArray<any>, T2 extends ReadonlyArray<any>> =
  * <created by @valerii15298>
  */
 export type LargestArgumentsList<T extends ReadonlyArray<any>> = T extends readonly [
-    (...args: infer Args) => any,
-    ...infer Rest
+  (...args: infer Args) => any,
+  ...infer Rest
 ]
-    ? MergeArrays<LargestArgumentsList<Rest>, Args>
-    : readonly [];
+  ? MergeArrays<LargestArgumentsList<Rest>, Args>
+  : readonly [];
 
 /**
  * Checks if type is `never`
@@ -326,10 +326,10 @@ type IsNever<T> = [T] extends [never] ? true : false;
  * <created by @valerii15298>
  */
 type HasNever<T extends readonly any[]> = T extends readonly [infer First, ...infer Rest]
-    ? IsNever<First> extends true
-        ? true
-        : HasNever<Rest>
-    : false;
+  ? IsNever<First> extends true
+    ? true
+    : HasNever<Rest>
+  : false;
 
 /**
  * Checks if corresponding types of arguments in functions overlap(have at least one type in common, except never)
@@ -341,10 +341,10 @@ type HasNever<T extends readonly any[]> = T extends readonly [infer First, ...in
  * <created by @valerii15298>
  */
 export type IfFunctionsArgumentsDoNotOverlap<T extends ReadonlyArray<Fn>, ErrorMsg extends string> = HasNever<
-    LargestArgumentsList<T>
+LargestArgumentsList<T>
 > extends true
-    ? ErrorMsg
-    : unknown;
+  ? ErrorMsg
+  : unknown;
 
 /**
  * Merge an object `O1` with `O2`
@@ -362,10 +362,10 @@ export type IfFunctionsArgumentsDoNotOverlap<T extends ReadonlyArray<Fn>, ErrorM
  * <created by @pirix-gh>
  */
 export type Merge<O1 extends object, O2 extends object, Depth extends 'flat' | 'deep'> = O.MergeUp<
-    T.ObjectOf<O1>,
-    T.ObjectOf<O2>,
-    Depth,
-    1
+T.ObjectOf<O1>,
+T.ObjectOf<O2>,
+Depth,
+1
 >;
 
 /**
@@ -378,10 +378,10 @@ export type Merge<O1 extends object, O2 extends object, Depth extends 'flat' | '
  * <created by @pirix-gh>
  */
 export type MergeAll<Os extends readonly object[]> = O.AssignUp<{}, Os, 'flat', 1> extends infer M
-    ? {} extends M // nothing merged => bcs no `as const`
-        ? T.UnionOf<Os> // so we output the approximate types
-        : M // otherwise, we can get accurate types
-    : never;
+  ? {} extends M // nothing merged => bcs no `as const`
+    ? T.UnionOf<Os> // so we output the approximate types
+    : M // otherwise, we can get accurate types
+  : never;
 
 /**
  * Predicate for an object containing the key.
@@ -423,16 +423,16 @@ export type Ordering = LT | EQ | GT;
 // Implementation taken from
 // https://github.com/piotrwitek/utility-types/blob/df2502ef504c4ba8bd9de81a45baef112b7921d0/src/mapped-types.ts#L351-L362
 export type ObjectHavingSome<Key extends string> = A.Clean<
-    {
-        [K in Key]: { [P in K]: unknown };
-    }[Key]
+{
+  [K in Key]: { [P in K]: unknown };
+}[Key]
 >;
 
 /**
  * <needs description>
  */
 export type PartialRecord<K extends keyof any, T> = {
-    [P in K]?: T;
+  [P in K]?: T;
 };
 
 /**
@@ -473,8 +473,8 @@ export type PredTypeguard<T, TTypeguarded extends T> = (a: T) => a is TTypeguard
  * @param A The type of the contained value
  */
 export interface Reduced<A> {
-    '@@transducer/value': A;
-    '@@transducer/reduced': true;
+  '@@transducer/value': A;
+  '@@transducer/reduced': true;
 }
 
 /**
@@ -487,22 +487,22 @@ export type Fn = (...args: any[]) => unknown;
  * @param A The array of functions
  */
 export type ReturnTypesOfFns<A extends ReadonlyArray<Fn>> = A extends readonly [(...args: any[]) => infer H, ...infer R]
-    ? R extends readonly Fn[]
-        ? readonly [H, ...ReturnTypesOfFns<R>]
-        : readonly []
-    : readonly [];
+  ? R extends readonly Fn[]
+    ? readonly [H, ...ReturnTypesOfFns<R>]
+    : readonly []
+  : readonly [];
 
 /**
  * Converts an array of functions taking a single parameter to an array of their parameter types.
  * @param A The array of functions
  */
 export type InputTypesOfFns<A extends ReadonlyArray<Fn>> = A extends [infer H, ...infer R]
-    ? H extends Fn
-        ? R extends Fn[]
-            ? [Parameters<H>[0], ...InputTypesOfFns<R>]
-            : []
-        : []
-    : [];
+  ? H extends Fn
+    ? R extends Fn[]
+      ? [Parameters<H>[0], ...InputTypesOfFns<R>]
+      : []
+    : []
+  : [];
 
 /**
  * The type of the values of a record.
@@ -525,12 +525,12 @@ export type ValueOfUnion<T> = T extends infer U ? U[keyof U] : never;
  * @param Tuple Input tuple type
  */
 export type Take<
-    N extends number,
-    Tuple extends any[],
-    ReturnTuple extends any[] = [],
+  N extends number,
+  Tuple extends any[],
+  ReturnTuple extends any[] = []
 > = ReturnTuple['length'] extends N
-    ? ReturnTuple
-    : Tuple extends [infer X, ...infer Xs]
+  ? ReturnTuple
+  : Tuple extends [infer X, ...infer Xs]
     ? Take<N, Xs, [...ReturnTuple, X]>
     : never;
 
@@ -547,8 +547,8 @@ type _TupleOf<T, N extends number, R extends unknown[]> = R['length'] extends N 
  * [string, number] -> [string[], number[]]
  */
 export type ToTupleOfArray<Tuple extends any[]> = Tuple extends []
-    ? []
-    : Tuple extends [infer X, ...infer Xs]
+  ? []
+  : Tuple extends [infer X, ...infer Xs]
     ? [X[], ...ToTupleOfArray<Xs>]
     : never;
 
@@ -558,8 +558,8 @@ export type ToTupleOfArray<Tuple extends any[]> = Tuple extends []
  * @param Tuple Return type of every function
  */
 export type ToTupleOfFunction<R, Tuple extends any[]> = Tuple extends []
-    ? []
-    : Tuple extends [infer X, ...infer Xs]
+  ? []
+  : Tuple extends [infer X, ...infer Xs]
     ? [(arg: R) => X, ...ToTupleOfFunction<R, Xs>]
     : never;
 
