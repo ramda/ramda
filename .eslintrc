@@ -141,6 +141,20 @@
         }],
         "no-restricted-modules": ["error", ".."]
       }
+    },
+    {
+      "files": [
+        "types/**/*.ts",
+        "test/types/**/*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "parserOptions": {
+        "ecmaVersion": 2018
+      },
+      "rules": {
+
+      }
     }
   ]
 }
