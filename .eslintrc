@@ -153,7 +153,66 @@
         "ecmaVersion": 2018
       },
       "rules": {
-
+        // all the rules below are the typescript versions of ones defined above
+        "no-unused-vars": 0,
+        "@typescript-eslint/no-unused-vars": [
+          2,
+          {
+            "vars": "all",
+            "args": "none"
+          }
+        ],
+        "brace-style": 0,
+        "@typescript-eslint/brace-style": [
+          2,
+          "1tbs",
+          {
+            "allowSingleLine": true
+          }
+        ],
+        "space-before-function-paren": 0,
+        "@typescript-eslint/space-before-function-paren": [
+          2,
+          "never"
+        ],
+        "space-infix-ops": 0,
+        "@typescript-eslint/space-infix-ops": 2,
+        "keyword-spacing": 0,
+        "@typescript-eslint/keyword-spacing": [
+          2,
+          {
+            "after": true,
+            "before": true
+          }
+        ],
+        "space-before-blocks": 0,
+        "@typescript-eslint/space-before-blocks": [
+          2,
+          "always"
+        ],
+        "indent": 0,
+        "@typescript-eslint/indent": [
+          2,
+          2,
+          {
+            "SwitchCase": 1
+          }
+        ],
+        "quotes": 0,
+        "@typescript-eslint/quotes": [
+          2,
+          "single",
+          "avoid-escape"
+        ],
+        "comma-dangle": 0,
+        "@typescript-eslint/comma-dangle": [
+          2,
+          "never"
+        ],
+        "no-extra-semi": 0,
+        "@typescript-eslint/no-extra-semi": 2,
+        "semi": 0,
+        "@typescript-eslint/semi": 2
       }
     }
   ]
