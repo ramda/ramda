@@ -2,7 +2,7 @@ import { InferAllAType, Placeholder } from './util/tools';
 
 // all(fn, list)
 export function all<T>(fn: (a: T) => boolean, list: readonly T[]): boolean;
-// all({ all }, list)
+// all(fn, { all })
 export function all<T, U extends { all: (fn: (a: T) => boolean) => boolean }>(fn: (a: T) => boolean, obj: U): boolean;
 
 // all(__, list)(fn)
