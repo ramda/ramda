@@ -1,7 +1,7 @@
 import { expectType } from "tsd";
 import { __, path } from "../../es/index";
 
-const obj: {
+type Obj = {
   v: string;
   a: {
     v: number;
@@ -21,7 +21,9 @@ const obj: {
       }
     }
   }
-} = {
+};
+
+const obj: Obj = {
   v: '1',
   a: {
     v: 2,
