@@ -1,12 +1,13 @@
 export function modify<
   K extends string | number,
-  F extends (...args: any) => (...args: any) => object
+  O extends object,
+  F extends (...args: any) => (obj: O) => O
 >(key: K): F;
 export function modify<
   K extends string | number,
   F extends (...args: any) => any,
   O extends object
->(key: K, func: F): (...args: any) => O;
+>(key: K, func: F): (obj: O) => O;
 export function modify<
   K extends string | number,
   F extends (...args: any) => any,
