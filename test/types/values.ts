@@ -1,4 +1,4 @@
-import { expectType, expectError } from "tsd";
+import { expectType } from "tsd";
 import { values } from "../../es/index";
 
 expectType<number[]>(values({a: 1, b: 2, c: 3}));
