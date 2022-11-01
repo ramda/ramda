@@ -39,6 +39,7 @@ export { default as constructN } from './constructN.js';
 export { default as converge } from './converge.js';
 export { default as count } from './count.js';
 export { default as countBy } from './countBy.js';
+export { default as coerceString } from './coerceString.js';
 export { default as curry } from './curry.js';
 export { default as curryN } from './curryN.js';
 export { default as dec } from './dec.js';
