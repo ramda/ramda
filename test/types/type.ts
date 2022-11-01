@@ -1,4 +1,4 @@
-import { expectType, expectError } from "tsd";
+import { expectType } from "tsd";
 import { type } from "../../es/index";
 import { TypeFunctionReturnTypes } from "../../types/type";
 
@@ -14,3 +14,4 @@ expectType<TypeFunctionReturnTypes>(type(undefined));
 expectType<TypeFunctionReturnTypes>(type(Symbol("test")));
 expectType<TypeFunctionReturnTypes>(type(new Error("System failure!")));
 expectType<TypeFunctionReturnTypes>(type(new Date()));
+expectType<TypeFunctionReturnTypes>(type(NaN));

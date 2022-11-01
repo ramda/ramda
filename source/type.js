@@ -1,6 +1,5 @@
 import _curry1 from './internal/_curry1.js';
 
-
 /**
  * Gives a single-word string description of the (native) type of a value,
  * returning such answers as 'Object', 'Number', 'Array', or 'Null'. Does not
@@ -18,6 +17,7 @@ import _curry1 from './internal/_curry1.js';
  *
  *      R.type({}); //=> "Object"
  *      R.type(1); //=> "Number"
+ *      R.type(NaN); //=> "Number"
  *      R.type(false); //=> "Boolean"
  *      R.type('s'); //=> "String"
  *      R.type(null); //=> "Null"
