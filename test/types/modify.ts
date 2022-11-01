@@ -6,8 +6,8 @@ const person: Person = { name: "James", age: 20, pets: ["dog", "cat"] };
 
 expectType<Person>(modify("age", add(1), person));
 expectType<(...args: any) => any>(modify("age"));
-expectType<(...args: any) => object>(modify("age", add(1)));
-expectType<(...args: any) => object>(modify("age")(add(1)));
+expectType<(obj: object) => object>(modify("age", add(1)));
+expectType<(obj: object) => object>(modify("age")(add(1)));
 expectType<object>(modify("age")(add(1))(person));
 expectType<object>(modify("age", add(1))(person));
 
