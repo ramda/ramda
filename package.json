@@ -56,9 +56,9 @@
       "import": "./es/index.js",
       "default": "./src/index.js"
     },
-    "./es/*": "./es/*.js",
-    "./src/*": "./src/*.js",
-    "./dist/*": "./dist/*.js",
+    "./es/*": "./es/*",
+    "./src/*": "./src/*",
+    "./dist/*": "./dist/*",
     "./es/": "./es/",
     "./src/": "./src/",
     "./dist/": "./dist/"
