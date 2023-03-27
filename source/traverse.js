@@ -15,8 +15,10 @@ import sequence from './sequence.js';
  * @memberOf R
  * @since v0.19.0
  * @category List
+ * @sig fantasy-land/of :: TypeRep f => f ~> a -> f a
+ * @sig (Applicative f, Traversable t) => TypeRep f -> (a -> f b) -> t a -> f (t b)
  * @sig (Applicative f, Traversable t) => (b -> f b) -> (a -> f b) -> t a -> f (t b)
- * @param {Function} of
+ * @param {Object|Function} TypeRepresentative with an `of` or `fantasy-land/of` method
  * @param {Function} f
  * @param {*} traversable
  * @return {*}
@@ -28,14 +30,26 @@ import sequence from './sequence.js';
  *
  *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Maybe.Just([5, 2.5, 2])
  *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Maybe.Nothing
+ *
+ *      // Using a Type Representative
+ *      R.traverse(Maybe, safeDiv(10), Right(4)); //=> Just(Right(2.5))
+ *      R.traverse(Maybe, safeDiv(10), Right(0)); //=> Nothing
+ *      R.traverse(Maybe, safeDiv(10), Left("X")); //=> Just(Left("X"))
  */
-var traverse = _curry3(function traverse(of, f, traversable) {
+var traverse = _curry3(function traverse(F, f, traversable) {
+  const of = typeof F['fantasy-land/of'] === 'function'
+    ? F['fantasy-land/of']
+    : typeof F.of === 'function'
+      ? F.of
+      : F;
+  const TypeRep = { ['fantasy-land/of']: of };
+
   return (
     typeof traversable['fantasy-land/traverse'] === 'function'
-      ? traversable['fantasy-land/traverse'](f, of)
+      ? traversable['fantasy-land/traverse'](TypeRep, f)
       : typeof traversable.traverse === 'function'
-        ? traversable.traverse(f, of)
-        : sequence(of, map(f, traversable))
+        ? traversable.traverse(TypeRep, f)
+        : sequence(TypeRep, map(f, traversable))
   );
 });
 export default traverse;

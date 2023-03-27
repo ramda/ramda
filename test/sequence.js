@@ -1,7 +1,8 @@
 var S = require('sanctuary');
+const { Right, Left, Either, Just, Nothing } = require('sanctuary3');
+var Id = require('sanctuary-identity');
 
 var R = require('../source/index.js');
-var Id = require('./shared/Id.js');
 var eq = require('./shared/eq.js');
 
 var ofArray = R.of(Array);
@@ -31,9 +32,15 @@ describe('sequence', function() {
     eq(R.sequence(ofEither, [S.Left('XXX'), S.Left('YYY')]), S.Left('XXX'));
   });
 
-  it('dispatches to `sequence` method', function() {
+  it('dispatches to `traverse` method', function() {
     eq(R.sequence(Id, [Id(1), Id(2), Id(3)]), Id([1, 2, 3]));
     eq(R.sequence(ofArray, Id([1, 2, 3])), [Id(1), Id(2), Id(3)]);
+  });
+
+  it('swaps types in a Maybe of Either', function() {
+    eq(R.sequence(Either, Just(Right('foo'))), Right(Just('foo')));
+    eq(R.sequence(Either, Just(Left('X'))), Left('X'));
+    eq(R.sequence(Either, Nothing), Right(Nothing));
   });
 
 });
