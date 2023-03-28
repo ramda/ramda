@@ -37,12 +37,12 @@ import sequence from './sequence.js';
  *      R.traverse(Maybe, safeDiv(10), Left("X")); //=> Just(Left("X"))
  */
 var traverse = _curry3(function traverse(F, f, traversable) {
-  const of = typeof F['fantasy-land/of'] === 'function'
+  var of = typeof F['fantasy-land/of'] === 'function'
     ? F['fantasy-land/of']
     : typeof F.of === 'function'
       ? F.of
       : F;
-  const TypeRep = { ['fantasy-land/of']: of };
+  var TypeRep = { 'fantasy-land/of': of };
 
   return (
     typeof traversable['fantasy-land/traverse'] === 'function'

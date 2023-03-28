@@ -3,6 +3,7 @@ import ap from './ap.js';
 import map from './map.js';
 import prepend from './prepend.js';
 import reduceRight from './reduceRight.js';
+import identity from './internal/_identity.js';
 
 
 /**
@@ -32,18 +33,18 @@ import reduceRight from './reduceRight.js';
  *      R.sequence(R.of(Array), Nothing());       //=> [Nothing()]
  */
 var sequence = _curry2(function sequence(F, traversable) {
-  const of = typeof F['fantasy-land/of'] === 'function'
+  var of = typeof F['fantasy-land/of'] === 'function'
     ? F['fantasy-land/of']
     : typeof F.of === 'function'
       ? F.of
       : F;
-  const TypeRep = { ['fantasy-land/of']: of };
+  var TypeRep = { 'fantasy-land/of': of };
 
   return (
     typeof traversable['fantasy-land/traverse'] === 'function'
-      ? traversable['fantasy-land/traverse'](TypeRep, x => x)
+      ? traversable['fantasy-land/traverse'](TypeRep, identity)
       : typeof traversable.traverse === 'function'
-        ? traversable.traverse(TypeRep, x => x)
+        ? traversable.traverse(TypeRep, identity)
         : reduceRight(
           function(x, acc) {
             return ap(map(prepend, x), acc);
