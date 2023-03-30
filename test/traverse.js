@@ -1,7 +1,8 @@
 var S = require('sanctuary');
+const { Right, Left, Either, Maybe, Just, Nothing } = require('sanctuary3');
+var Id = require('sanctuary-identity');
 
 var R = require('../source/index.js');
-var Id = require('./shared/Id.js');
 var eq = require('./shared/eq.js');
 
 var ofArray = R.of(Array);
@@ -23,6 +24,12 @@ describe('traverse', function() {
   it('operates on a list of applicatives', function() {
     eq(R.traverse(ofMaybe, R.map(R.add(10)), [S.Just(3), S.Just(4), S.Just(5)]), S.Just([13, 14, 15]));
     eq(R.traverse(ofMaybe, R.map(R.add(10)), [S.Just(3), S.Nothing(), S.Just(5)]), S.Nothing());
+  });
+
+  it('operates on a list of FL-applicatives', function() {
+    eq(R.traverse(Maybe, R.map(R.add(10)), [Just(3), Just(4), Just(5)]), Just([13, 14, 15]));
+    eq(R.traverse(Maybe, R.map(R.add(10)), [Just(3), Nothing, Just(5)]), Nothing);
+    eq(R.traverse(Id, R.map(R.add(10)), [Id(3), Id(4), Id(5)]), Id([13, 14, 15]));
   });
 
   it('traverses left to right', function() {
@@ -59,6 +66,24 @@ describe('traverse', function() {
       'fantasy-land/traverse': new Error()
     };
     eq(R.traverse(Id, R.identity, mockTraversable4), 'traverse called');
+  });
+
+  it('operates on a FL-compliant Maybe of Either', function() {
+    const safeToUpper = s => typeof s === 'string'
+      ? Right(s.toUpperCase())
+      : Left('no string given');
+
+    eq(R.traverse(Either, safeToUpper, Just('foo')), Right(Just('FOO')));
+    eq(R.traverse(Either, safeToUpper, Just(8)), Left('no string given'));
+    eq(R.traverse(Either, safeToUpper, Nothing), Right(Nothing));
+  });
+
+  it('works for the example in the docs', function() {
+    const safeDiv = n => d => d === 0 ? Nothing : Just(n / d);
+
+    eq(R.traverse(Maybe, safeDiv(10), Right(4)), Just(Right(2.5)));
+    eq(R.traverse(Maybe, safeDiv(10), Right(0)), Nothing);
+    eq(R.traverse(Maybe, safeDiv(10), Left('X')), Just(Left('X')));
   });
 
 });
