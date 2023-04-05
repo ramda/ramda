@@ -64,8 +64,8 @@ var swapString = function(indexA, indexB, s) {
  * @example
  *
  *      R.swap(0, 2, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['c', 'b', 'a', 'd', 'e', 'f']
- *      R.swap(-1, 0, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['f', 'b', 'c', 'd', 'e', 'a'] list rotation
- *      R.swap('a', 'b', {a: 1, b: 2}); //=> {a: 2, b: 2}
+ *      R.swap(-1, 0, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['f', 'b', 'c', 'd', 'e', 'a']
+ *      R.swap('a', 'b', {a: 1, b: 2}); //=> {a: 2, b: 1}
  *      R.swap(0, 2, 'foo'); //=> 'oof'
  */
 var swap = _curry3(function(indexA, indexB, o) {
