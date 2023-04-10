@@ -24,11 +24,11 @@ var xprod = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about
   var ilen = a.length;
   var j;
   var jlen = b.length;
-  var result = [];
+  var result = Array(ilen + jlen);
   while (idx < ilen) {
     j = 0;
     while (j < jlen) {
-      result[result.length] = [a[idx], b[j]];
+      result[idx + j] = [a[idx], b[j]];
       j += 1;
     }
     idx += 1;
