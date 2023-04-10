@@ -19,15 +19,17 @@ import _curry2 from './internal/_curry2.js';
  *
  *      R.intersperse('a', ['b', 'n', 'n', 's']); //=> ['b', 'a', 'n', 'a', 'n', 'a', 's']
  */
-var intersperse = _curry2(_checkForMethod('intersperse', function intersperse(separator, list) {
-  var out = [];
-  var idx = 0;
+var intersperse = _curry2(_checkForMethod('intersperse', function _intersperse(separator, list) {
   var length = list.length;
+  var out = Array(length * 2 - 1);
+  var idx = 0;
   while (idx < length) {
+    var i = idx * 2;
     if (idx === length - 1) {
-      out.push(list[idx]);
+      out[i] = list[idx];
     } else {
-      out.push(list[idx], separator);
+      out[i] = list[idx];
+      out[i + 1] = separator;
     }
     idx += 1;
   }
