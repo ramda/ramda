@@ -22,7 +22,7 @@ var range = _curry2(function range(from, to) {
   if (!(_isNumber(from) && _isNumber(to))) {
     throw new TypeError('Both arguments to range must be numbers');
   }
-  var result = [];
+  var result = Array(n < to ? to - n : 0);
   var n = from;
   while (n < to) {
     result.push(n);
