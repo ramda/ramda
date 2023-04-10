@@ -39,9 +39,9 @@ export default function _clone(value, deep, map) {
 
   switch (type(value)) {
     case 'Object':  return copy(Object.create(Object.getPrototypeOf(value)));
-    case 'Array':   return copy([]);
+    case 'Array':   return copy(Array(value.length));
     case 'Date':    return new Date(value.valueOf());
-    case 'RegExp': return _cloneRegExp(value);
+    case 'RegExp':  return _cloneRegExp(value);
     case 'Int8Array':
     case 'Uint8Array':
     case 'Uint8ClampedArray':
