@@ -29,7 +29,8 @@ import _xscan from './internal/_xscan.js';
 var scan = _curry3(_dispatchable([], _xscan, function scan(fn, acc, list) {
   var idx = 0;
   var len = list.length;
-  var result = [acc];
+  var result = Array(len + 1);
+  result[0] = acc;
   while (idx < len) {
     acc = fn(acc, list[idx]);
     result[idx + 1] = acc;
