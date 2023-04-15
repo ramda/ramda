@@ -24,8 +24,8 @@ import _xfind from './internal/_xfind.js';
  * @example
  *
  *      const xs = [{a: 1}, {a: 2}, {a: 3}];
- *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
- *      R.find(R.propEq('a', 4))(xs); //=> undefined
+ *      R.find(R.propEq(2, 'a'))(xs); //=> {a: 2}
+ *      R.find(R.propEq(4, 'a'))(xs); //=> undefined
  */
 var find = _curry2(_dispatchable(['find'], _xfind, function find(fn, list) {
   var idx = 0;

@@ -22,8 +22,8 @@ import _xfindIndex from './internal/_xfindIndex.js';
  * @example
  *
  *      const xs = [{a: 1}, {a: 2}, {a: 3}];
- *      R.findIndex(R.propEq('a', 2))(xs); //=> 1
- *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
+ *      R.findIndex(R.propEq(2, 'a'))(xs); //=> 1
+ *      R.findIndex(R.propEq(4, 'a'))(xs); //=> -1
  */
 var findIndex = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, list) {
   var idx = 0;

@@ -22,8 +22,8 @@ import _xfindLast from './internal/_xfindLast.js';
  * @example
  *
  *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];
- *      R.findLast(R.propEq('a', 1))(xs); //=> {a: 1, b: 1}
- *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
+ *      R.findLast(R.propEq(1, 'a'))(xs); //=> {a: 1, b: 1}
+ *      R.findLast(R.propEq(4, 'a'))(xs); //=> undefined
  */
 var findLast = _curry2(_dispatchable([], _xfindLast, function findLast(fn, list) {
   var idx = list.length - 1;
