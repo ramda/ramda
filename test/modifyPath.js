@@ -24,6 +24,13 @@ describe('modifyPath', function() {
     assert.strictEqual(object, created);
   });
 
+  it('modifies the original object if path is empty array', function() {
+    var object  = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
+    var expected = {a: 'Tomato', b: 'Potato', e: { f: 'g', h: [1, 2, 3] }};
+    var created = R.modifyPath([], R.assoc('b', 'Potato'), object);
+    eq(created, expected);
+  });
+
   it('is not destructive', function() {
     var object   = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
     var expected = {a: 'Tomato', b: { c: { d: [100, 101, 102] } }, e: { f: 'g', h: [1, 2, 3]  }};
