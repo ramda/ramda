@@ -33,8 +33,12 @@ import _modify from './internal/_modify.js';
  *      R.modifyPath(['addresses', 0, 'zipCode'], R.reverse, person); //=> {name: 'James', addresses: [{ zipCode: '61209' }]}
  */
 var modifyPath = _curry3(function modifyPath(path, fn, object) {
-  if ((!_isObject(object) && !_isArray(object)) || path.length === 0) {
+  if (!_isObject(object) && !_isArray(object)) {
     return object;
+  }
+
+  if (path.length === 0) {
+    return fn(object);
   }
 
   var idx = path[0];
