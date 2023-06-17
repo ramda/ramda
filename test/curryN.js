@@ -67,7 +67,7 @@ describe('curryN', function() {
   it('supports @@functional/placeholder', function() {
     var f = function() { return Array.prototype.slice.call(arguments); };
     var g = R.curryN(3, f);
-    var _ = {'@@functional/placeholder': true, x: Math.random()};
+    var _ = R.__;
 
     eq(g(1)(2)(3), [1, 2, 3]);
     eq(g(1)(2, 3), [1, 2, 3]);
