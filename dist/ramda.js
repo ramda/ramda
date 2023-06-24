@@ -178,92 +178,21 @@
    *
    *      _concat([4, 5, 6], [1, 2, 3]); //=> [4, 5, 6, 1, 2, 3]
    */
-  function _concat(set1, set2) {
-    set1 = set1 || [];
-    set2 = set2 || [];
-    var idx;
-    var len1 = set1.length;
-    var len2 = set2.length;
-    var result = [];
-    idx = 0;
-
-    while (idx < len1) {
-      result[result.length] = set1[idx];
-      idx += 1;
-    }
-
-    idx = 0;
-
-    while (idx < len2) {
-      result[result.length] = set2[idx];
-      idx += 1;
-    }
-
+  function concat(array1 = [], array2 = []) {
+    const result = [...array1, ...array2];
     return result;
   }
-
-  function _arity(n, fn) {
-    /* eslint-disable no-unused-vars */
-    switch (n) {
-      case 0:
-        return function () {
-          return fn.apply(this, arguments);
-        };
-
-      case 1:
-        return function (a0) {
-          return fn.apply(this, arguments);
-        };
-
-      case 2:
-        return function (a0, a1) {
-          return fn.apply(this, arguments);
-        };
-
-      case 3:
-        return function (a0, a1, a2) {
-          return fn.apply(this, arguments);
-        };
-
-      case 4:
-        return function (a0, a1, a2, a3) {
-          return fn.apply(this, arguments);
-        };
-
-      case 5:
-        return function (a0, a1, a2, a3, a4) {
-          return fn.apply(this, arguments);
-        };
-
-      case 6:
-        return function (a0, a1, a2, a3, a4, a5) {
-          return fn.apply(this, arguments);
-        };
-
-      case 7:
-        return function (a0, a1, a2, a3, a4, a5, a6) {
-          return fn.apply(this, arguments);
-        };
-
-      case 8:
-        return function (a0, a1, a2, a3, a4, a5, a6, a7) {
-          return fn.apply(this, arguments);
-        };
-
-      case 9:
-        return function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
-          return fn.apply(this, arguments);
-        };
-
-      case 10:
-        return function (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
-          return fn.apply(this, arguments);
-        };
-
-      default:
-        throw new Error('First argument to _arity must be a non-negative integer no greater than ten');
+  
+  function arity(n, fn) {
+    if (n < 0 || n > 10) {
+      throw new Error('First argument to arity must be a non-negative integer no greater than ten');
     }
+  
+    return function curriedFn(...args) {
+      return fn.call(this, ...args);
+    };
   }
+  
 
   /**
    * Internal curryN function.
