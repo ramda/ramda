@@ -24,6 +24,7 @@ import _curry1 from './internal/_curry1.js';
  *      R.type([]); //=> "Array"
  *      R.type(/[A-z]/); //=> "RegExp"
  *      R.type(() => {}); //=> "Function"
+ *      R.type(async () => {}); //=> "AsyncFunction"
  *      R.type(undefined); //=> "Undefined"
  */
 var type = _curry1(function type(val) {
