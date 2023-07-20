@@ -12,9 +12,9 @@ import path from './path.js';
  * @since v0.7.0
  * @category Relation
  * @typedefn Idx = String | Int | Symbol
- * @sig a -> [Idx] -> {a} -> Boolean
- * @param {*} val The value to compare the nested property with
+ * @sig [Idx] -> a -> {a} -> Boolean
  * @param {Array} path The path of the nested property to use
+ * @param {*} val The value to compare the nested property with
  * @param {Object} obj The object to check the nested property in
  * @return {Boolean} `true` if the value equals the nested object property,
  *         `false` otherwise.
@@ -25,10 +25,10 @@ import path from './path.js';
  *      const user2 = { address: { zipCode: 55555 } };
  *      const user3 = { name: 'Bob' };
  *      const users = [ user1, user2, user3 ];
- *      const isFamous = R.pathEq(90210, ['address', 'zipCode']);
+ *      const isFamous = R.pathEq(['address', 'zipCode'], 90210);
  *      R.filter(isFamous, users); //=> [ user1 ]
  */
-var pathEq = _curry3(function pathEq(val, _path, obj) {
+var pathEq = _curry3(function pathEq(_path, val, obj) {
   return equals(path(_path, obj), val);
 });
 export default pathEq;

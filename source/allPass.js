@@ -23,8 +23,8 @@ import reduce from './reduce.js';
  * @see R.anyPass, R.both
  * @example
  *
- *      const isQueen = R.propEq('Q', 'rank');
- *      const isSpade = R.propEq('♠︎', 'suit');
+ *      const isQueen = R.propEq('rank', 'Q');
+ *      const isSpade = R.propEq('suit', '♠︎');
  *      const isQueenOfSpades = R.allPass([isQueen, isSpade]);
  *
  *      isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false

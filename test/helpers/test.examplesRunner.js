@@ -64,8 +64,8 @@ ExampleTest.prototype.getTestLine = function(line) {
       expected = 'String(NaN)';
     }
     test_info_str += '_tests.push({';
-    test_info_str += 'expression:'   + expression + ',';
-    test_info_str += 'expected:'     + expected + ',';
+    test_info_str += 'expression:' + expression + ',';
+    test_info_str += 'expected:' + expected + ',';
     test_info_str += 'description:"(' + expression.replace(/"/g, '\\"') + ' => "+' + expression + '+")"';
     test_info_str += '});';
     return test_info_str;
@@ -143,13 +143,13 @@ function tagListToMap(targets, list) {
 }
 
 var propIn = R.curry(function(prop_name, prop_vals, object) {
-  return R.any(R.identity, R.ap(R.map(R.propEq(R.__, prop_name), prop_vals), [object]));
+  return R.any(R.identity, R.ap(R.map(R.propEq(prop_name), prop_vals), [object]));
 });
 
 // create our example objects from dox
 function getExampleFromDox(dox_info) {
   var tags = R.filter(propIn('type', ['example', 'see', 'namespace']), dox_info.tags);
-  var tag_map = tagListToMap({example: 'string', namespace: 'string', see: 'local'}, tags);
+  var tag_map = tagListToMap({ example: 'string', namespace: 'string', see: 'local' }, tags);
   if (tag_map.namespace) {
     // ignore namespaces
     return false;
