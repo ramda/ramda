@@ -33,9 +33,9 @@ var swapList = function(indexA, indexB, list) {
 
   result = []
     .concat(result.slice(0, positiveMin))
-    .concat(result[positiveMax])
+    .concat([result[positiveMax]])
     .concat(result.slice(positiveMin + 1, positiveMax))
-    .concat(result[positiveMin])
+    .concat([result[positiveMin]])
     .concat(result.slice(positiveMax + 1, length));
 
   return result;
