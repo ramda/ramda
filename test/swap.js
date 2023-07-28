@@ -28,6 +28,10 @@ describe('swap', function() {
     eq(R.swap(0, 1, list), R.swap(1, 0, list));
   });
 
+  it('works with lists of arrays', function() {
+    eq(R.swap(0, -1, [['a', 'A'], ['b', 'B']]), [['b', 'B'], ['a', 'A']]);
+  });
+
   it('swaps property values from one property to another', function() {
     eq(R.swap('a', 'b', {a: 1, b: 2}), {a: 2, b: 1});
     eq(R.swap('b', 'a', {a: 1, b: 2}), {a: 2, b: 1});
