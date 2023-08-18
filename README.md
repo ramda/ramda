@@ -156,7 +156,7 @@ This requires having Node/io.js installed and ramda's dependencies installed (ju
 
 ### Install specific functions
 
-[Install individual functions](https://bitsrc.io/ramda/ramda) with bit, npm and yarn without installing the whole library.
+[Install individual functions](https://bit.cloud/ramda/ramda) with bit, npm and yarn without installing the whole library.
 
 Documentation
 -------------
