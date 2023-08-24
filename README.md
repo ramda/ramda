@@ -154,10 +154,6 @@ It is possible to build Ramda with a subset of the functionality to reduce its f
 
 This requires having Node/io.js installed and ramda's dependencies installed (just use `npm install` before running partial build). 
 
-### Install specific functions
-
-[Install individual functions](https://bitsrc.io/ramda/ramda) with bit, npm and yarn without installing the whole library.
-
 Documentation
 -------------
 
