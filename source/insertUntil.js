@@ -26,7 +26,7 @@ import _xinsertUntil from './internal/_xinsertUntil.js';
  *
  *      const gteTwo = x => x >= 2;
  *
- *      R.insertUntil(gteTwo, [1,3,3]); //=> [1, 2, 3, 3]
+ *      R.insertUntil(gteTwo, 2,[1,3,3]); //=> [1, 2, 3, 3]
  */
 var insertUntil = _curry3(_dispatchable(['insertUntil'], _xinsertUntil, function insertUntil(pred, elt, xs) {
   var idx = 0;
