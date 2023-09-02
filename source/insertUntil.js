@@ -20,6 +20,7 @@ import _xinsertUntil from './internal/_xinsertUntil.js';
  * @sig (a -> Boolean) -> [a] -> [a]
  * @sig (a -> Boolean) -> String -> String
  * @param {Function} fn The function called per iteration.
+ * @param {*} elt The accumulator value.
  * @param {Array} xs The collection to iterate over.
  * @return {Array} A new array.
  * @example
@@ -28,10 +29,10 @@ import _xinsertUntil from './internal/_xinsertUntil.js';
  *
  *      R.insertUntil(gteTwo, 2,[1,3,3]); //=> [1, 2, 3, 3]
  */
-var insertUntil = _curry3(_dispatchable(['insertUntil'], _xinsertUntil, function insertUntil(pred, elt, xs) {
+var insertUntil = _curry3(_dispatchable(['insertUntil'], _xinsertUntil, function insertUntil(fn, elt, xs) {
   var idx = 0;
   var len = xs.length;
-  while (idx < len && !pred(xs[idx])) {
+  while (idx < len && !fn(xs[idx])) {
     idx += 1;
   }
   var result = Array.prototype.slice.call(xs, 0);
