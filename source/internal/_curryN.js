@@ -34,7 +34,8 @@ export default function _curryN(length, received, fn) {
       }
       combinedIdx += 1;
     }
-    return left <= 0
+    var noPlaceholder = (combined.slice(0,length).every(item=>!_isPlaceholder(item)));
+    return (left <= 0 && noPlaceholder)
       ? fn.apply(this, combined)
       : _arity(left, _curryN(length, combined, fn));
   };
