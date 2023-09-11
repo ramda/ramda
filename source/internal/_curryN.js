@@ -35,7 +35,7 @@ export default function _curryN(length, received, fn) {
       combinedIdx += 1;
     }
     var noPlaceholder = true;
-    for (var i = 0; i < combined.length; i += 1) {
+    for (var i = 0; i < length; i += 1) {
       if (_isPlaceholder(combined[i])) {
         noPlaceholder = false;
         break;
