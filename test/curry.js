@@ -119,6 +119,15 @@ describe('curry', function() {
     eq(g(1)(2)(3, 4), [1, 2, 3, 4]);
   });
 
+  it('return value when collet value which is not placeholder', function() {
+    var f = function(a, b, c) { return [a, b, c]; };
+    var g = R.curry(f);
+    var _ = R.__;
+
+    eq(g(1)(_)(2, _, _)(3), [1, 2, 3]);
+    eq(g(1)(_, _, _)(2, _, _)(3), [1, 2, 3]);
+    eq(g(1)(_, _, _, 4)(2, _, _)(3), [1, 2, 3]);
+  });
 });
 
 describe('curry properties', function() {
