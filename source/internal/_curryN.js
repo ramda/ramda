@@ -18,6 +18,7 @@ export default function _curryN(length, received, fn) {
     var argsIdx = 0;
     var left = length;
     var combinedIdx = 0;
+    var hasPlaceholderBeforeFinalArg = false;
     while (combinedIdx < received.length || argsIdx < arguments.length) {
       var result;
       if (combinedIdx < received.length &&
@@ -31,17 +32,12 @@ export default function _curryN(length, received, fn) {
       combined[combinedIdx] = result;
       if (!_isPlaceholder(result)) {
         left -= 1;
+      } else if (combinedIdx < length) {
+        hasPlaceholderBeforeFinalArg = true;
       }
       combinedIdx += 1;
     }
-    var noPlaceholder = true;
-    for (var i = 0; i < length; i += 1) {
-      if (_isPlaceholder(combined[i])) {
-        noPlaceholder = false;
-        break;
-      }
-    }
-    return (left <= 0 && noPlaceholder)
+    return (left <= 0 && !hasPlaceholderBeforeFinalArg)
       ? fn.apply(this, combined)
       : _arity(left, _curryN(length, combined, fn));
   };
