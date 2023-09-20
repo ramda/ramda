@@ -37,10 +37,9 @@ export default function _curryN(length, received, fn) {
       }
       combinedIdx += 1;
     }
-    if (left <= 0) {left = 0;}
 
     return (!hasPlaceholder && left <= 0)
       ? fn.apply(this, combined)
-      : _arity(left, _curryN(length, combined, fn));
+      : _arity(Math.max(0, left), _curryN(length, combined, fn));
   };
 }
