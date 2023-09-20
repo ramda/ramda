@@ -119,7 +119,7 @@ describe('curry', function() {
     eq(g(1)(2)(3, 4), [1, 2, 3, 4]);
   });
 
-  it('return value when collet value which is not placeholder', function() {
+  it('handles arguments beyond function arity when called with placeholder', function() {
     var f = function(a, b, c) { return [a, b, c]; };
     var g = R.curry(f);
     var _ = R.__;
@@ -135,7 +135,7 @@ describe('curry', function() {
 
   });
 
-  it('return value without declare parameter', function() {
+  it('passes along all arguments from previous calls including placeholder', function() {
     var f = function() { return [...arguments]; };
     var g = R.curry(f);
     var _ = R.__;
