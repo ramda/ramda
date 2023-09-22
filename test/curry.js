@@ -119,6 +119,32 @@ describe('curry', function() {
     eq(g(1)(2)(3, 4), [1, 2, 3, 4]);
   });
 
+  it('handles arguments beyond function arity when called with placeholder', function() {
+    var f = function(a, b, c) { return [a, b, c]; };
+    var g = R.curry(f);
+    var _ = R.__;
+
+    eq(g(1)(_, _, _)(2, _, _)(3)(4), [1, 2, 3]);
+    eq(g(_, 2, 3, 4)(1), [1, 2, 3]);
+    eq(g(1, 2, 3, _)(4), [1, 2, 3]);
+    eq(g(1)(_, 3, 4)(2), [1, 2, 3]);
+    eq(g(_)(_, 2, 3, 4)(1), [1, 2, 3]);
+    eq(g(_)(_, 2, _, 4, 5)(_, 3, 4)(1), [1, 2, 3]);
+    eq(g(_, _, _)(1, _, _)(_, _)(2, _)(_)(3), [1, 2, 3]);
+    eq(g(_)(_, 2, _, 4, 5)(1, 3), [1, 2, 3]);
+
+  });
+
+  it('passes along all arguments from previous calls including placeholder', function() {
+    var f = function() { return [...arguments]; };
+    var g = R.curry(f);
+    var _ = R.__;
+
+    eq(g(_)(_, 2, _, 4, 5)(1, 3), [1, 2, 3, 4, 5]);
+    eq(g(_, 2, 3, 4)(_, 5, 6)(_, 7, 8, 9)(1, 10), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    eq(g(1), [1]);
+    eq(g(), []);
+  });
 });
 
 describe('curry properties', function() {
