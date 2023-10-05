@@ -1,4 +1,4 @@
-//  Ramda v0.29.0
+//  Ramda v0.29.1
 //  https://github.com/ramda/ramda
 //  (c) 2013-2023 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -282,6 +282,7 @@
       var argsIdx = 0;
       var left = length;
       var combinedIdx = 0;
+      var hasPlaceholder = false;
 
       while (combinedIdx < received.length || argsIdx < arguments.length) {
         var result;
@@ -297,12 +298,14 @@
 
         if (!_isPlaceholder(result)) {
           left -= 1;
+        } else {
+          hasPlaceholder = true;
         }
 
         combinedIdx += 1;
       }
 
-      return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length, combined, fn));
+      return !hasPlaceholder && left <= 0 ? fn.apply(this, combined) : _arity(Math.max(0, left), _curryN(length, combined, fn));
     };
   }
 
@@ -840,6 +843,7 @@
    *      R.type([]); //=> "Array"
    *      R.type(/[A-z]/); //=> "RegExp"
    *      R.type(() => {}); //=> "Function"
+   *      R.type(async () => {}); //=> "AsyncFunction"
    *      R.type(undefined); //=> "Undefined"
    */
 
@@ -1839,8 +1843,8 @@
    * @see R.anyPass, R.both
    * @example
    *
-   *      const isQueen = R.propEq('rank', 'Q');
-   *      const isSpade = R.propEq('suit', '♠︎');
+   *      const isQueen = R.propEq('Q', 'rank');
+   *      const isSpade = R.propEq('♠︎', 'suit');
    *      const isQueenOfSpades = R.allPass([isQueen, isSpade]);
    *
    *      isQueenOfSpades({rank: 'Q', suit: '♣︎'}); //=> false
@@ -2004,8 +2008,8 @@
    * @see R.allPass, R.either
    * @example
    *
-   *      const isClub = R.propEq('suit', '♣');
-   *      const isSpade = R.propEq('suit', '♠');
+   *      const isClub = R.propEq('♣', 'suit');
+   *      const isSpade = R.propEq('♠', 'suit');
    *      const isBlackCard = R.anyPass([isClub, isSpade]);
    *
    *      isBlackCard({rank: '10', suit: '♣'}); //=> true
@@ -3608,23 +3612,7 @@
    *   - `g(_, 2)(_, 3)(1)`
    *
    * Please note that default parameters don't count towards a [function arity](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length)
-   * and therefore `curry` won't work well with those:
-   *
-   * ```
-   * const h = R.curry((a, b, c = 2) => a + b + c);
-   *
-   * h(40);
-   * //=> function (waits for `b`)
-   *
-   * h(39)(1);
-   * //=> 42
-   *
-   * h(1)(2, 3);
-   * //=> 6
-   *
-   * h(1)(2)(7);
-   * //=> Error! (`3` is not a function!)
-   * ```
+   * and therefore `curry` won't work well with those.
    *
    * @func
    * @memberOf R
@@ -3637,11 +3625,14 @@
    * @example
    *
    *      const addFourNumbers = (a, b, c, d) => a + b + c + d;
-   *
    *      const curriedAddFourNumbers = R.curry(addFourNumbers);
    *      const f = curriedAddFourNumbers(1, 2);
    *      const g = f(3);
    *      g(4); //=> 10
+   *
+   *      // R.curry not working well with default parameters
+   *      const h = R.curry((a, b, c = 2) => a + b + c);
+   *      h(1)(2)(7); //=> Error! (`3` is not a function!)
    */
 
   var curry = _curry1(function curry(fn) {
@@ -5280,8 +5271,8 @@
    * @example
    *
    *      const xs = [{a: 1}, {a: 2}, {a: 3}];
-   *      R.find(R.propEq('a', 2))(xs); //=> {a: 2}
-   *      R.find(R.propEq('a', 4))(xs); //=> undefined
+   *      R.find(R.propEq(2, 'a'))(xs); //=> {a: 2}
+   *      R.find(R.propEq(4, 'a'))(xs); //=> undefined
    */
 
   var find = _curry2(_dispatchable(['find'], _xfind, function find(fn, list) {
@@ -5350,8 +5341,8 @@
    * @example
    *
    *      const xs = [{a: 1}, {a: 2}, {a: 3}];
-   *      R.findIndex(R.propEq('a', 2))(xs); //=> 1
-   *      R.findIndex(R.propEq('a', 4))(xs); //=> -1
+   *      R.findIndex(R.propEq(2, 'a'))(xs); //=> 1
+   *      R.findIndex(R.propEq(4, 'a'))(xs); //=> -1
    */
 
   var findIndex = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, list) {
@@ -5413,8 +5404,8 @@
    * @example
    *
    *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];
-   *      R.findLast(R.propEq('a', 1))(xs); //=> {a: 1, b: 1}
-   *      R.findLast(R.propEq('a', 4))(xs); //=> undefined
+   *      R.findLast(R.propEq(1, 'a'))(xs); //=> {a: 1, b: 1}
+   *      R.findLast(R.propEq(4, 'a'))(xs); //=> undefined
    */
 
   var findLast = _curry2(_dispatchable([], _xfindLast, function findLast(fn, list) {
@@ -5477,8 +5468,8 @@
    * @example
    *
    *      const xs = [{a: 1, b: 0}, {a:1, b: 1}];
-   *      R.findLastIndex(R.propEq('a', 1))(xs); //=> 1
-   *      R.findLastIndex(R.propEq('a', 4))(xs); //=> -1
+   *      R.findLastIndex(R.propEq(1, 'a'))(xs); //=> 1
+   *      R.findLastIndex(R.propEq(4, 'a'))(xs); //=> -1
    */
 
   var findLastIndex = _curry2(_dispatchable([], _xfindLastIndex, function findLastIndex(fn, list) {
@@ -7900,8 +7891,12 @@
    */
 
   var modifyPath = _curry3(function modifyPath(path, fn, object) {
-    if (!_isObject(object) && !_isArray(object) || path.length === 0) {
+    if (!_isObject(object) && !_isArray(object)) {
       return object;
+    }
+
+    if (path.length === 0) {
+      return fn(object);
     }
 
     var idx = path[0];
@@ -9738,7 +9733,7 @@
       return result;
     }
 
-    result = [].concat(result.slice(0, positiveMin)).concat(result[positiveMax]).concat(result.slice(positiveMin + 1, positiveMax)).concat(result[positiveMin]).concat(result.slice(positiveMax + 1, length));
+    result = [].concat(result.slice(0, positiveMin)).concat([result[positiveMax]]).concat(result.slice(positiveMin + 1, positiveMax)).concat([result[positiveMin]]).concat(result.slice(positiveMax + 1, length));
     return result;
   };
 
@@ -9762,8 +9757,8 @@
    * @example
    *
    *      R.swap(0, 2, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['c', 'b', 'a', 'd', 'e', 'f']
-   *      R.swap(-1, 0, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['f', 'b', 'c', 'd', 'e', 'a'] list rotation
-   *      R.swap('a', 'b', {a: 1, b: 2}); //=> {a: 2, b: 2}
+   *      R.swap(-1, 0, ['a', 'b', 'c', 'd', 'e', 'f']); //=> ['f', 'b', 'c', 'd', 'e', 'a']
+   *      R.swap('a', 'b', {a: 1, b: 2}); //=> {a: 2, b: 1}
    *      R.swap(0, 2, 'foo'); //=> 'oof'
    */
 
