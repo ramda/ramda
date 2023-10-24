@@ -1,6 +1,6 @@
 import _curry2 from './internal/_curry2.js';
 import _isInteger from './internal/_isInteger.js';
-import nth from './nth.js';
+import _nth from './internal/_nth.js';
 
 /**
  * Retrieves the values at given paths of an object.
@@ -30,7 +30,7 @@ var paths = _curry2(function paths(pathsArray, obj) {
         return;
       }
       p = paths[idx];
-      val = _isInteger(p) ? nth(p, val) : val[p];
+      val = _isInteger(p) ? _nth(p, val) : val[p];
       idx += 1;
     }
     return val;
