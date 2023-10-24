@@ -1,5 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import path from './path.js';
+import prop from './prop.js';
 
 
 /**
@@ -25,7 +25,7 @@ import path from './path.js';
  */
 var props = _curry2(function props(ps, obj) {
   return  ps.map(function(p) {
-    return path([p], obj);
+    return prop(p, obj);
   });
 });
 export default props;
