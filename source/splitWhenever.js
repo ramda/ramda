@@ -4,7 +4,7 @@ import _curryN from './internal/_curryN.js';
  *
  * @func
  * @memberOf R
- * @since v0.26.1
+ * @since v0.28.0
  * @category List
  * @sig (a -> Boolean) -> [a] -> [[a]]
  * @param {Function} pred The predicate that determines where the array is split.
