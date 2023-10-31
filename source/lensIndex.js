@@ -1,6 +1,6 @@
 import _curry1 from './internal/_curry1.js';
+import _nth from './internal/_nth.js';
 import lens from './lens.js';
-import nth from './nth.js';
 import update from './update.js';
 
 
@@ -25,6 +25,9 @@ import update from './update.js';
  *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
  */
 var lensIndex = _curry1(function lensIndex(n) {
-  return lens(nth(n), update(n));
+  return lens(
+    val => _nth(n, val),
+    update(n)
+  );
 });
 export default lensIndex;
