@@ -31,7 +31,7 @@ import _path from './internal/_path.js';
 
 var lensPath = _curry1(function lensPath(p) {
   return lens(
-    (val) => _path(p, val),
+    function(val) { return _path(p, val);},
     assocPath(p)
   );
 });

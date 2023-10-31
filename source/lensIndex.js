@@ -26,7 +26,7 @@ import update from './update.js';
  */
 var lensIndex = _curry1(function lensIndex(n) {
   return lens(
-    val => _nth(n, val),
+    function(val) { return _nth(n, val);},
     update(n)
   );
 });
