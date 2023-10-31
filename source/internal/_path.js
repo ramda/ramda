@@ -2,8 +2,8 @@ import _isInteger from './_isInteger.js';
 import _nth from './_nth.js';
 
 function path(pathAr, obj) {
-  let val = obj;
-  for (let i = 0; i < pathAr.length; i += 1) {
+  var val = obj;
+  for (var i = 0; i < pathAr.length; i += 1) {
     if (val == null) {
       return undefined;
     }
