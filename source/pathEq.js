@@ -14,7 +14,7 @@ import equals from './equals.js';
  * @typedefn Idx = String | Int | Symbol
  * @sig a -> [Idx] -> {a} -> Boolean
  * @param {*} val The value to compare the nested property with
- * @param {Array} pathAr The path of the nested property to use
+ * @param {Array} path The path of the nested property to use
  * @param {Object} obj The object to check the nested property in
  * @return {Boolean} `true` if the value equals the nested object property,
  *         `false` otherwise.
