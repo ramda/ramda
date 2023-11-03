@@ -1,5 +1,5 @@
 import _curry3 from './internal/_curry3.js';
-import path from './path.js';
+import _path from './internal/_path.js';
 
 
 /**
@@ -23,6 +23,6 @@ import path from './path.js';
  *      R.pathSatisfies(R.is(Object), [], {x: {y: 2}}); //=> true
  */
 var pathSatisfies = _curry3(function pathSatisfies(pred, propPath, obj) {
-  return pred(path(propPath, obj));
+  return pred(_path(propPath, obj));
 });
 export default pathSatisfies;

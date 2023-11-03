@@ -1,6 +1,6 @@
 import _curry1 from './internal/_curry1.js';
+import _nth from './internal/_nth.js';
 import curryN from './curryN.js';
-import nth from './nth.js';
 
 
 /**
@@ -24,7 +24,7 @@ import nth from './nth.js';
 var nthArg = _curry1(function nthArg(n) {
   var arity = n < 0 ? 1 : n + 1;
   return curryN(arity, function() {
-    return nth(n, arguments);
+    return _nth(n, arguments);
   });
 });
 export default nthArg;

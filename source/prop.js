@@ -1,6 +1,6 @@
 import _curry2 from './internal/_curry2.js';
 import _isInteger from './internal/_isInteger.js';
-import nth from './nth.js';
+import _nth from './internal/_nth.js';
 
 
 /**
@@ -29,6 +29,6 @@ var prop = _curry2(function prop(p, obj) {
   if (obj == null) {
     return;
   }
-  return _isInteger(p) ? nth(p, obj) : obj[p];
+  return _isInteger(p) ? _nth(p, obj) : obj[p];
 });
 export default prop;

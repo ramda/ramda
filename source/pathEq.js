@@ -1,6 +1,6 @@
 import _curry3 from './internal/_curry3.js';
+import _path from './internal/_path.js';
 import equals from './equals.js';
-import path from './path.js';
 
 
 /**
@@ -28,7 +28,7 @@ import path from './path.js';
  *      const isFamous = R.pathEq(90210, ['address', 'zipCode']);
  *      R.filter(isFamous, users); //=> [ user1 ]
  */
-var pathEq = _curry3(function pathEq(val, _path, obj) {
-  return equals(path(_path, obj), val);
+var pathEq = _curry3(function pathEq(val, pathAr, obj) {
+  return equals(_path(pathAr, obj), val);
 });
 export default pathEq;

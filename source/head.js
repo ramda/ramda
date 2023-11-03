@@ -1,4 +1,5 @@
-import nth from './nth.js';
+import _curry1 from './internal/_curry1.js';
+import _nth from './internal/_nth.js';
 
 
 /**
@@ -22,5 +23,7 @@ import nth from './nth.js';
  *      R.head('abc'); //=> 'a'
  *      R.head(''); //=> ''
  */
-var head = nth(0);
+var head = _curry1(function(list) {
+  return _nth(0, list);
+});
 export default head;
