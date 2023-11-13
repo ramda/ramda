@@ -117,7 +117,7 @@
     "rimraf": "^5.0.5",
     "rollup": "^1.32.1",
     "rollup-plugin-uglify": "^6.0.4",
-    "sanctuary": "3.1.0",
+    "sanctuary": "^0.7.x",
     "sanctuary-identity": "^2.1.0",
     "sanctuary3": "npm:sanctuary@^3.1.0",
     "sinon": "^17.0.1",
