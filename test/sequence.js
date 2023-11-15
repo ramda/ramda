@@ -1,13 +1,12 @@
-var S = require('sanctuary');
-const { Right, Left, Either, Just, Nothing } = require('sanctuary3');
+const { Right, Left, Either, Just, Nothing, Maybe } = require('sanctuary');
 var Id = require('sanctuary-identity');
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
 var ofArray = R.of(Array);
-var ofEither = R.of(S.Either);
-var ofMaybe = R.of(S.Maybe);
+var ofEither = R.of(Either);
+var ofMaybe = R.of(Maybe);
 
 describe('sequence', function() {
 
@@ -21,15 +20,15 @@ describe('sequence', function() {
   });
 
   it('operates on a list of applicatives', function() {
-    eq(R.sequence(ofMaybe, [S.Just(3), S.Just(4), S.Just(5)]), S.Just([3, 4, 5]));
-    eq(R.sequence(ofMaybe, [S.Just(3), S.Nothing(), S.Just(5)]), S.Nothing());
+    eq(R.sequence(ofMaybe, [Just(3), Just(4), Just(5)]), Just([3, 4, 5]));
+    eq(R.sequence(ofMaybe, [Just(3), Nothing, Just(5)]), Nothing);
   });
 
   it('traverses left to right', function() {
-    eq(R.sequence(ofEither, [S.Right(1), S.Right(2)]), S.Right([1, 2]));
-    eq(R.sequence(ofEither, [S.Right(1), S.Left('XXX')]), S.Left('XXX'));
-    eq(R.sequence(ofEither, [S.Left('XXX'), S.Right(1)]), S.Left('XXX'));
-    eq(R.sequence(ofEither, [S.Left('XXX'), S.Left('YYY')]), S.Left('XXX'));
+    eq(R.sequence(ofEither, [Right(1), Right(2)]), Right([1, 2]));
+    eq(R.sequence(ofEither, [Right(1), Left('XXX')]), Left('XXX'));
+    eq(R.sequence(ofEither, [Left('XXX'), Right(1)]), Left('XXX'));
+    eq(R.sequence(ofEither, [Left('XXX'), Left('YYY')]), Left('XXX'));
   });
 
   it('dispatches to `traverse` method', function() {
@@ -42,5 +41,4 @@ describe('sequence', function() {
     eq(R.sequence(Either, Just(Left('X'))), Left('X'));
     eq(R.sequence(Either, Nothing), Right(Nothing));
   });
-
 });

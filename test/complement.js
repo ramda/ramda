@@ -1,4 +1,4 @@
-var S = require('sanctuary');
+const { Nothing, Just} = require('sanctuary');
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
@@ -20,11 +20,9 @@ describe('complement', function() {
   });
 
   it('accepts fantasy-land functors', function() {
-    var Just = S.Just;
-    var Nothing = S.Nothing;
     eq(R.complement(Just(true)), Just(false));
     eq(R.complement(Just(false)), Just(true));
-    eq(R.complement(Nothing()), Nothing());
+    eq(R.complement(Nothing), Nothing);
   });
 
 });

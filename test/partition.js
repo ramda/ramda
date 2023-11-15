@@ -1,4 +1,4 @@
-var S = require('sanctuary');
+var { Nothing, Just } = require('sanctuary');
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
@@ -28,11 +28,11 @@ describe('partition', function() {
   });
 
   it('works with other filterables', function() {
-    eq(R.partition(R.isEmpty, S.Just(3)),
-      [S.Nothing(), S.Just(3)]
+    eq(R.partition(R.isEmpty, Just(3)),
+      [Nothing, Just(3)]
     );
-    eq(R.partition(R.complement(R.isEmpty), S.Just(3)),
-      [S.Just(3), S.Nothing()]
+    eq(R.partition(R.complement(R.isEmpty), Just(3)),
+      [Just(3), Nothing]
     );
   });
 
