@@ -21,6 +21,7 @@ import _curry2 from './internal/_curry2.js';
  */
 var intersperse = _curry2(_checkForMethod('intersperse', function _intersperse(separator, list) {
   var length = list.length;
+  if (length === 0) { return []; }
   var out = Array(length * 2 - 1);
   var idx = 0;
   while (idx < length) {
