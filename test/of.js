@@ -1,4 +1,4 @@
-var S = require('sanctuary');
+const { Maybe, Just } = require('sanctuary');
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
@@ -14,6 +14,6 @@ describe('of', function() {
   });
 
   it('dispatches to an available of method', function() {
-    eq(R.of(S.Maybe, 100), S.Just(100));
+    eq(R.of(Maybe, 100), Just(100));
   });
 });
