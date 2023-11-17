@@ -27,7 +27,7 @@ import reduce from './reduce.js'
  *      R.prop('x', {x: 100}); //=> 100
  *      R.prop('x', {}); //=> undefined
  *      R.prop(0, [100]); //=> 100
- *      R.prop(['x', 'y'], { x: {y: 100}}); //=> 100
+ *      R.prop(['x', 'y'], {x: {y: 100}}); //=> 100
  *      R.compose(R.inc, R.prop('x'))({ x: 3 }) //=> 4
  */
 
