@@ -5,6 +5,7 @@ import _isString from './internal/_isString.js';
 import _isArray from './internal/_isArray.js';
 import compose from './compose.js';
 import identity from './identity.js';
+import reduce from './reduce.js';
 
 
 /**
@@ -44,7 +45,7 @@ var prop = _curry2(function _prop(p, obj) {
   }
 
   if (_isArray(p)) {
-    return p.reduce((acc, propName) => compose(prop(propName), acc), identity)(obj);
+    return reduce((acc, propName) => compose(prop(propName), acc), identity, p)(obj);
   }
 });
 export default prop;
