@@ -1,6 +1,11 @@
 import _curry2 from './internal/_curry2.js';
 import _isInteger from './internal/_isInteger.js';
 import _nth from './internal/_nth.js';
+import _isString from './internal/_isString.js';
+import _isArray from './internal/_isArray.js';
+import compose from './compose.js';
+import identity from './identity.js';
+import reduce from './reduce.js'
 
 
 /**
@@ -22,13 +27,25 @@ import _nth from './internal/_nth.js';
  *      R.prop('x', {x: 100}); //=> 100
  *      R.prop('x', {}); //=> undefined
  *      R.prop(0, [100]); //=> 100
+ *      R.prop(['x', 'y'], { x: {y: 100}}); //=> 100
  *      R.compose(R.inc, R.prop('x'))({ x: 3 }) //=> 4
  */
 
-var prop = _curry2(function prop(p, obj) {
+var prop = _curry2(function _prop(p, obj) {
   if (obj == null) {
     return;
   }
-  return _isInteger(p) ? _nth(p, obj) : obj[p];
+
+  if (_isInteger(p)) {
+    return _nth(p, obj);
+  }
+
+  if (_isString(p)) {
+    return obj[p];
+  }
+
+  if (_isArray(p)) {
+    return reduce((acc, propName) => compose(prop(propName), acc), identity)(obj);
+  }
 });
 export default prop;
