@@ -124,15 +124,5 @@ describe('prop', function() {
     const propResult = R.prop(['user', 'firstName', 0], nested);
     const pathResult = R.path(['user', 'firstName', 0], nested);
     eq(propResult, pathResult);
-  });
-  it('should return same result for nested objects with an array', function() {
-    const nested = {
-      user: {
-        firstName: ['first name']
-      }
-    };
-    const pathResult = R.path(['user', 'firstName', 0], nested);
-    const propResult = R.prop(['user', 'firstName', 0], nested);
-    eq(propResult, pathResult);
-  });
+  })
 });
