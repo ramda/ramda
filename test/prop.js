@@ -124,5 +124,5 @@ describe('prop', function() {
     const propResult = R.prop(['user', 'firstName', 0], nested);
     const pathResult = R.path(['user', 'firstName', 0], nested);
     eq(propResult, pathResult);
-  })
+  });
 });
