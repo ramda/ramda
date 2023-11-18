@@ -26,9 +26,9 @@ import _curry3 from './internal/_curry3.js';
  * @symb R.zipWith(fn, [a, b, c], [d, e, f]) = [fn(a, d), fn(b, e), fn(c, f)]
  */
 var zipWith = _curry3(function zipWith(fn, a, b) {
-  var rv = [];
-  var idx = 0;
   var len = Math.min(a.length, b.length);
+  var rv = Array(len);
+  var idx = 0;
   while (idx < len) {
     rv[idx] = fn(a[idx], b[idx]);
     idx += 1;

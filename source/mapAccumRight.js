@@ -40,7 +40,7 @@ import _curry3 from './internal/_curry3.js';
  */
 var mapAccumRight = _curry3(function mapAccumRight(fn, acc, list) {
   var idx = list.length - 1;
-  var result = [];
+  var result = Array(list.length);
   var tuple = [acc];
   while (idx >= 0) {
     tuple = fn(tuple[0], list[idx]);

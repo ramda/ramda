@@ -21,9 +21,9 @@ import _curry2 from './internal/_curry2.js';
  * @symb R.zip([a, b, c], [d, e, f]) = [[a, d], [b, e], [c, f]]
  */
 var zip = _curry2(function zip(a, b) {
-  var rv = [];
-  var idx = 0;
   var len = Math.min(a.length, b.length);
+  var rv = Array(len);
+  var idx = 0;
   while (idx < len) {
     rv[idx] = [a[idx], b[idx]];
     idx += 1;

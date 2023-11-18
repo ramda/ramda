@@ -22,11 +22,12 @@ var range = _curry2(function range(from, to) {
   if (!(_isNumber(from) && _isNumber(to))) {
     throw new TypeError('Both arguments to range must be numbers');
   }
-  var result = [];
-  var n = from;
-  while (n < to) {
-    result.push(n);
-    n += 1;
+  var result = Array(from < to ? to - from : 0);
+  var finish = from < 0 ? to + Math.abs(from) : to - from;
+  var idx = 0;
+  while (idx < finish) {
+    result[idx] = idx + from;
+    idx += 1;
   }
   return result;
 });

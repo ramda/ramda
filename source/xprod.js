@@ -20,18 +20,18 @@ import _curry2 from './internal/_curry2.js';
  * @symb R.xprod([a, b], [c, d]) = [[a, c], [a, d], [b, c], [b, d]]
  */
 var xprod = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes about 3 times as long...)
-  var idx = 0;
+  var i = 0;
   var ilen = a.length;
   var j;
   var jlen = b.length;
-  var result = [];
-  while (idx < ilen) {
+  var result = Array(ilen * jlen);
+  while (i < ilen) {
     j = 0;
     while (j < jlen) {
-      result[result.length] = [a[idx], b[j]];
+      result[(i * jlen) + j] = [a[i], b[j]];
       j += 1;
     }
-    idx += 1;
+    i += 1;
   }
   return result;
 });
