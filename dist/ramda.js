@@ -1506,10 +1506,37 @@
     return Object.prototype.toString.call(x) === '[object String]';
   }
 
-  function _nth(offset, list) {
+  /**
+   * Returns the nth element of the given list or string. If n is negative the
+   * element at index length + n is returned.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.1.0
+   * @category List
+   * @sig Number -> [a] -> a | Undefined
+   * @sig Number -> String -> String
+   * @param {Number} offset
+   * @param {*} list
+   * @return {*}
+   * @example
+   *
+   *      const list = ['foo', 'bar', 'baz', 'quux'];
+   *      R.nth(1, list); //=> 'bar'
+   *      R.nth(-1, list); //=> 'quux'
+   *      R.nth(-99, list); //=> undefined
+   *
+   *      R.nth(2, 'abc'); //=> 'c'
+   *      R.nth(3, 'abc'); //=> ''
+   * @symb R.nth(-1, [a, b, c]) = c
+   * @symb R.nth(0, [a, b, c]) = a
+   * @symb R.nth(1, [a, b, c]) = b
+   */
+
+  var nth = _curry2(function nth(offset, list) {
     var idx = offset < 0 ? list.length + offset : offset;
     return _isString(list) ? list.charAt(idx) : list[idx];
-  }
+  });
 
   /**
    * Returns a function that when supplied an object returns the indicated
@@ -1538,7 +1565,7 @@
       return;
     }
 
-    return _isInteger(p) ? _nth(p, obj) : obj[p];
+    return _isInteger(p) ? nth(p, obj) : obj[p];
   });
 
   /**
@@ -3357,9 +3384,7 @@
    *      R.head(''); //=> ''
    */
 
-  var head = _curry1(function (list) {
-    return _nth(0, list);
-  });
+  var head = nth(0);
 
   function _identity(x) {
     return x;
@@ -4773,9 +4798,7 @@
    *      R.last(''); //=> ''
    */
 
-  var last = _curry1(function (list) {
-    return _nth(-1, list);
-  });
+  var last = nth(-1);
 
   /**
    * Returns a new list without any consecutively repeating elements. Equality is
@@ -6636,7 +6659,7 @@
   });
 
   /**
-   * Returns `false` if the given value is its type's empty value; `true`
+   * Returns `true` if the given value is its type's empty value; `false`
    * otherwise.
    *
    * @func
@@ -6646,7 +6669,7 @@
    * @sig a -> Boolean
    * @param {*} x
    * @return {Boolean}
-   * @see R.empty, R.isNotEmpty
+   * @see R.empty
    * @example
    *
    *      R.isEmpty([1, 2, 3]);           //=> false
@@ -6660,33 +6683,6 @@
 
   var isEmpty = _curry1(function isEmpty(x) {
     return x != null && equals(x, empty(x));
-  });
-
-  /**
-   * Returns `true` if the given value is its type's empty value; `false`
-   * otherwise.
-   *
-   * @func
-   * @memberOf R
-   * @since v0.29.2
-   * @category Logic
-   * @sig a -> Boolean
-   * @param {*} x
-   * @return {Boolean}
-   * @see R.empty, R.isEmpty
-   * @example
-   *
-   *      R.isEmpty([1, 2, 3]);           //=> true
-   *      R.isEmpty([]);                  //=> false
-   *      R.isEmpty('');                  //=> false
-   *      R.isEmpty(null);                //=> true
-   *      R.isEmpty({});                  //=> false
-   *      R.isEmpty({length: 0});         //=> true
-   *      R.isEmpty(Uint8Array.from('')); //=> false
-   */
-
-  var isNotEmpty = _curry1(function isNotEmpty(x) {
-    return !isEmpty(x);
   });
 
   /**
@@ -6935,30 +6931,76 @@
    */
 
   var lensIndex = _curry1(function lensIndex(n) {
-    return lens(function (val) {
-      return _nth(n, val);
-    }, update(n));
+    return lens(nth(n), update(n));
   });
 
-  function _path(pathAr, obj) {
-    var val = obj;
+  /**
+   * Retrieves the values at given paths of an object.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.27.1
+   * @category Object
+   * @typedefn Idx = [String | Int | Symbol]
+   * @sig [Idx] -> {a} -> [a | Undefined]
+   * @param {Array} pathsArray The array of paths to be fetched.
+   * @param {Object} obj The object to retrieve the nested properties from.
+   * @return {Array} A list consisting of values at paths specified by "pathsArray".
+   * @see R.path
+   * @example
+   *
+   *      R.paths([['a', 'b'], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); //=> [2, 3]
+   *      R.paths([['a', 'b'], ['p', 'r']], {a: {b: 2}, p: [{q: 3}]}); //=> [2, undefined]
+   */
 
-    for (var i = 0; i < pathAr.length; i += 1) {
-      if (val == null) {
-        return undefined;
+  var paths = _curry2(function paths(pathsArray, obj) {
+    return pathsArray.map(function (paths) {
+      var val = obj;
+      var idx = 0;
+      var p;
+
+      while (idx < paths.length) {
+        if (val == null) {
+          return;
+        }
+
+        p = paths[idx];
+        val = _isInteger(p) ? nth(p, val) : val[p];
+        idx += 1;
       }
 
-      var p = pathAr[i];
+      return val;
+    });
+  });
 
-      if (_isInteger(p)) {
-        val = _nth(p, val);
-      } else {
-        val = val[p];
-      }
-    }
+  /**
+   * Retrieves the value at a given path. The nodes of the path can be arbitrary strings or non-negative integers.
+   * For anything else, the value is unspecified. Integer paths are meant to index arrays, strings are meant for objects.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.2.0
+   * @category Object
+   * @typedefn Idx = String | Int | Symbol
+   * @sig [Idx] -> {a} -> a | Undefined
+   * @sig Idx = String | NonNegativeInt
+   * @param {Array} path The path to use.
+   * @param {Object} obj The object or array to retrieve the nested property from.
+   * @return {*} The data at `path`.
+   * @see R.prop, R.nth, R.assocPath, R.dissocPath
+   * @example
+   *
+   *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
+   *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
+   *      R.path(['a', 'b', 0], {a: {b: [1, 2, 3]}}); //=> 1
+   *      R.path(['a', 'b', -2], {a: {b: [1, 2, 3]}}); //=> 2
+   *      R.path([2], {'2': 2}); //=> 2
+   *      R.path([-2], {'-2': 'a'}); //=> undefined
+   */
 
-    return val;
-  }
+  var path = _curry2(function path(pathAr, obj) {
+    return paths([pathAr], obj)[0];
+  });
 
   /**
    * Returns a lens whose focus is the specified path.
@@ -6986,9 +7028,7 @@
    */
 
   var lensPath = _curry1(function lensPath(p) {
-    return lens(function (val) {
-      return _path(p, val);
-    }, assocPath(p));
+    return lens(path(p), assocPath(p));
   });
 
   /**
@@ -8074,35 +8114,6 @@
   });
 
   /**
-   * Returns the nth element of the given list or string. If n is negative the
-   * element at index length + n is returned.
-   *
-   * @func
-   * @memberOf R
-   * @since v0.1.0
-   * @category List
-   * @sig Number -> [a] -> a | Undefined
-   * @sig Number -> String -> String
-   * @param {Number} offset
-   * @param {*} list
-   * @return {*}
-   * @example
-   *
-   *      const list = ['foo', 'bar', 'baz', 'quux'];
-   *      R.nth(1, list); //=> 'bar'
-   *      R.nth(-1, list); //=> 'quux'
-   *      R.nth(-99, list); //=> undefined
-   *
-   *      R.nth(2, 'abc'); //=> 'c'
-   *      R.nth(3, 'abc'); //=> ''
-   * @symb R.nth(-1, [a, b, c]) = c
-   * @symb R.nth(0, [a, b, c]) = a
-   * @symb R.nth(1, [a, b, c]) = b
-   */
-
-  var nth = _curry2(_nth);
-
-  /**
    * Returns a function which returns its nth argument.
    *
    * @func
@@ -8124,7 +8135,7 @@
   var nthArg = _curry1(function nthArg(n) {
     var arity = n < 0 ? 1 : n + 1;
     return curryN(arity, function () {
-      return _nth(n, arguments);
+      return nth(n, arguments);
     });
   });
 
@@ -8490,72 +8501,6 @@
   var partition = juxt([filter, reject]);
 
   /**
-   * Retrieves the value at a given path. The nodes of the path can be arbitrary strings or non-negative integers.
-   * For anything else, the value is unspecified. Integer paths are meant to index arrays, strings are meant for objects.
-   *
-   * @func
-   * @memberOf R
-   * @since v0.2.0
-   * @category Object
-   * @typedefn Idx = String | Int | Symbol
-   * @sig [Idx] -> {a} -> a | Undefined
-   * @sig Idx = String | NonNegativeInt
-   * @param {Array} path The path to use.
-   * @param {Object} obj The object or array to retrieve the nested property from.
-   * @return {*} The data at `path`.
-   * @see R.prop, R.nth, R.assocPath, R.dissocPath
-   * @example
-   *
-   *      R.path(['a', 'b'], {a: {b: 2}}); //=> 2
-   *      R.path(['a', 'b'], {c: {b: 2}}); //=> undefined
-   *      R.path(['a', 'b', 0], {a: {b: [1, 2, 3]}}); //=> 1
-   *      R.path(['a', 'b', -2], {a: {b: [1, 2, 3]}}); //=> 2
-   *      R.path([2], {'2': 2}); //=> 2
-   *      R.path([-2], {'-2': 'a'}); //=> undefined
-   */
-
-  var path = _curry2(_path);
-
-  /**
-   * Retrieves the values at given paths of an object.
-   *
-   * @func
-   * @memberOf R
-   * @since v0.27.1
-   * @category Object
-   * @typedefn Idx = [String | Int | Symbol]
-   * @sig [Idx] -> {a} -> [a | Undefined]
-   * @param {Array} pathsArray The array of paths to be fetched.
-   * @param {Object} obj The object to retrieve the nested properties from.
-   * @return {Array} A list consisting of values at paths specified by "pathsArray".
-   * @see R.path
-   * @example
-   *
-   *      R.paths([['a', 'b'], ['p', 0, 'q']], {a: {b: 2}, p: [{q: 3}]}); //=> [2, 3]
-   *      R.paths([['a', 'b'], ['p', 'r']], {a: {b: 2}, p: [{q: 3}]}); //=> [2, undefined]
-   */
-
-  var paths = _curry2(function paths(pathsArray, obj) {
-    return pathsArray.map(function (paths) {
-      var val = obj;
-      var idx = 0;
-      var p;
-
-      while (idx < paths.length) {
-        if (val == null) {
-          return;
-        }
-
-        p = paths[idx];
-        val = _isInteger(p) ? _nth(p, val) : val[p];
-        idx += 1;
-      }
-
-      return val;
-    });
-  });
-
-  /**
    * Determines whether a nested path on an object has a specific value, in
    * [`R.equals`](#equals) terms. Most likely used to filter a list.
    *
@@ -8581,8 +8526,8 @@
    *      R.filter(isFamous, users); //=> [ user1 ]
    */
 
-  var pathEq = _curry3(function pathEq(val, pathAr, obj) {
-    return equals(_path(pathAr, obj), val);
+  var pathEq = _curry3(function pathEq(val, _path, obj) {
+    return equals(path(_path, obj), val);
   });
 
   /**
@@ -8606,7 +8551,7 @@
    */
 
   var pathOr = _curry3(function pathOr(d, p, obj) {
-    return defaultTo(d, _path(p, obj));
+    return defaultTo(d, path(p, obj));
   });
 
   /**
@@ -8631,7 +8576,7 @@
    */
 
   var pathSatisfies = _curry3(function pathSatisfies(pred, propPath, obj) {
-    return pred(_path(propPath, obj));
+    return pred(path(propPath, obj));
   });
 
   /**
@@ -9035,7 +8980,7 @@
 
   var props = _curry2(function props(ps, obj) {
     return ps.map(function (p) {
-      return prop(p, obj);
+      return path([p], obj);
     });
   });
 
@@ -11322,7 +11267,6 @@
   exports.is = is;
   exports.isEmpty = isEmpty;
   exports.isNil = isNil;
-  exports.isNotEmpty = isNotEmpty;
   exports.isNotNil = isNotNil;
   exports.join = join;
   exports.juxt = juxt;
