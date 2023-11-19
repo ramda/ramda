@@ -7,20 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Code Climate Coverage
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Installing Dependencies
-        run: npm ci
-
-      - name: Collecting Coverage
-        uses: paambaati/codeclimate-action@v2.6.0
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
         with:
           coverageCommand: npm run coverage
-          coverageLocations: |
-            ${{github.workspace}}/coverage/lcov.info:lcov
+          debug: true
 
   build:
     runs-on: ubuntu-latest
