@@ -7,6 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Code Climate Coverage
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clean Install
+        run: npm ci
+
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
@@ -23,9 +29,9 @@ jobs:
     name: Node ${{ matrix.node }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Installing Dependencies
+      - name: Clean Install
         run: npm ci
 
       - name: Linting Codebase
