@@ -4,7 +4,7 @@ import equals from './equals.js';
 
 
 /**
- * Returns `false` if the given value is its type's empty value; `true`
+ * Returns `true` if the given value is its type's empty value; `false`
  * otherwise.
  *
  * @func
@@ -14,7 +14,7 @@ import equals from './equals.js';
  * @sig a -> Boolean
  * @param {*} x
  * @return {Boolean}
- * @see R.empty, R.isNotEmpty
+ * @see R.empty
  * @example
  *
  *      R.isEmpty([1, 2, 3]);           //=> false
