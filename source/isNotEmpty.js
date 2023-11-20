@@ -3,7 +3,7 @@ import isEmpty from './isEmpty.js';
 
 
 /**
- * Returns `true` if the given value is its type's empty value; `false`
+ * Returns `false` if the given value is its type's empty value; `true`
  * otherwise.
  *
  * @func
@@ -16,13 +16,13 @@ import isEmpty from './isEmpty.js';
  * @see R.empty, R.isEmpty
  * @example
  *
- *      R.isEmpty([1, 2, 3]);           //=> true
- *      R.isEmpty([]);                  //=> false
- *      R.isEmpty('');                  //=> false
- *      R.isEmpty(null);                //=> true
- *      R.isEmpty({});                  //=> false
- *      R.isEmpty({length: 0});         //=> true
- *      R.isEmpty(Uint8Array.from('')); //=> false
+ *      R.isNotEmpty([1, 2, 3]);           //=> true
+ *      R.isNotEmpty([]);                  //=> false
+ *      R.isNotEmpty('');                  //=> false
+ *      R.isNotEmpty(null);                //=> true
+ *      R.isNotEmpty({});                  //=> false
+ *      R.isNotEmpty({length: 0});         //=> true
+ *      R.isNotEmpty(Uint8Array.from('')); //=> false
  */
 var isNotEmpty = _curry1(function isNotEmpty(x) { return !isEmpty(x); });
 export default isNotEmpty;

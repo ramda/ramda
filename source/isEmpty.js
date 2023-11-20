@@ -14,7 +14,7 @@ import equals from './equals.js';
  * @sig a -> Boolean
  * @param {*} x
  * @return {Boolean}
- * @see R.empty
+ * @see R.empty, R.isNotEmpty
  * @example
  *
  *      R.isEmpty([1, 2, 3]);           //=> false
