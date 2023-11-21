@@ -101,6 +101,7 @@ export { default as invoker } from './invoker.js';
 export { default as is } from './is.js';
 export { default as isEmpty } from './isEmpty.js';
 export { default as isNil } from './isNil.js';
+export { default as isNotEmpty } from './isNotEmpty.js';
 export { default as isNotNil } from './isNotNil.js';
 export { default as join } from './join.js';
 export { default as juxt } from './juxt.js';
