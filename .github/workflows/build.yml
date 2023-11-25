@@ -7,6 +7,12 @@ jobs:
     if: github.repository == 'ramda/ramda'
     runs-on: ubuntu-latest
     name: Coverage
+
+    permissions:
+      issues: write
+      contents: read
+      pull-requests: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
