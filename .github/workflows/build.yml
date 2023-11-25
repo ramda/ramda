@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   coverage:
     runs-on: ubuntu-latest
-    name: Code Climate Coverage
+    name: Coverage
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -13,7 +13,7 @@ jobs:
       - name: Clean Install
         run: npm ci
 
-      - name: Coverage
+      - name: Run Coverage
         run: npm run coverage
 
   build:
