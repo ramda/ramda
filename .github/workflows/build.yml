@@ -13,15 +13,8 @@ jobs:
       - name: Clean Install
         run: npm ci
 
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-        with:
-          coverageCommand: npm run coverage
-          coverageLocations: |
-            ${{github.workspace}}/coverage/lcov.info:lcov
-          debug: true
+      - name: Coverage
+        run: npm run coverage
 
   build:
     runs-on: ubuntu-latest
