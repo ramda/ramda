@@ -1,9 +1,10 @@
 name: Build
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   coverage:
+    if: github.repository == 'ramda/ramda'
     runs-on: ubuntu-latest
     name: Coverage
     steps:
@@ -14,7 +15,44 @@ jobs:
         run: npm ci
 
       - name: Run Coverage
-        run: npm run coverage
+        id: run-coverage
+        run: |
+          {
+            echo 'COVERAGE_OUTPUT<<EOF'
+            npm run coverage
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Log Coverage
+        env:
+          COVERAGE_OUTPUT: ${{ steps.run-coverage.outputs.COVERAGE_OUTPUT }}
+        run: echo "$COVERAGE_OUTPUT"
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: find-comment
+        continue-on-error: true
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Coverage Results
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            <details>
+              <summary>Coverage Results</summary>
+
+              ```bash
+              ${{ steps.run-coverage.outputs.COVERAGE_OUTPUT }}
+              ```
+
+            </details>
+          edit-mode: replace
+
 
   build:
     runs-on: ubuntu-latest
