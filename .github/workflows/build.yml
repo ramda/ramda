@@ -8,10 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Coverage
 
-    permissions:
-      issues: write
-      contents: read
-      pull-requests: write
+    permissions: write-all
 
     steps:
       - name: Checkout repository
