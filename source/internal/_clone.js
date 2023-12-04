@@ -71,7 +71,7 @@ function _ObjectMap() {
 _ObjectMap.prototype.set = function(key, value) {
   const hashedKey = this.hash(key);
 
-  let bucket = this.map[hashedKey];
+  var bucket = this.map[hashedKey];
   if (!bucket) {
     this.map[hashedKey] = bucket = [];
   }
@@ -81,7 +81,7 @@ _ObjectMap.prototype.set = function(key, value) {
 };
 
 _ObjectMap.prototype.hash = function(key) {
-  let hashedKey = [];
+  var hashedKey = [];
   for (var value in key) {
     hashedKey.push(Object.prototype.toString.call(key[value]));
   }
@@ -99,7 +99,7 @@ _ObjectMap.prototype.get = function(key) {
     for (const p in this.map) {
       const bucket = this.map[p];
 
-      for (let i = 0; i < bucket.length; i += 1) {
+      for (var i = 0; i < bucket.length; i += 1) {
         const element = bucket[i];
         if (element[0] === key) {return element[1];}
       }
@@ -113,7 +113,7 @@ _ObjectMap.prototype.get = function(key) {
 
   if (!bucket) {return;}
 
-  for (let i = 0; i < bucket.length; i += 1) {
+  for (var i = 0; i < bucket.length; i += 1) {
     const element = bucket[i];
     if (element[0] === key) {return element[1];}
   }
