@@ -1,0 +1,63 @@
+name: Coverage
+
+on:
+  pull_request_target:
+    types: [edited, opened, synchronize, ready_for_review, review_requested, reopened]
+
+jobs:
+  coverage:
+    if: github.repository == 'ramda/ramda'
+    runs-on: ubuntu-latest
+    name: Coverage
+
+    permissions:
+      issues: write
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clean Install
+        run: npm ci
+
+      - name: Run Coverage
+        id: run-coverage
+        run: |
+          {
+            echo 'COVERAGE_OUTPUT<<EOF'
+            npm run coverage
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Log Coverage
+        env:
+          COVERAGE_OUTPUT: ${{ steps.run-coverage.outputs.COVERAGE_OUTPUT }}
+        run: echo "$COVERAGE_OUTPUT"
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: find-comment
+        continue-on-error: true
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Coverage Results
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            <details>
+              <summary>Coverage Results</summary>
+
+              ```bash
+              ${{ steps.run-coverage.outputs.COVERAGE_OUTPUT }}
+              ```
+
+            </details>
+          edit-mode: replace
+

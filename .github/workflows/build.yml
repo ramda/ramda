@@ -3,25 +3,6 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  coverage:
-    runs-on: ubuntu-latest
-    name: Code Climate Coverage
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Installing Dependencies
-        run: npm ci
-
-      - name: Collecting Coverage
-        uses: paambaati/codeclimate-action@v2.6.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
-        with:
-          coverageCommand: npm run coverage
-          coverageLocations: |
-            ${{github.workspace}}/coverage/lcov.info:lcov
-
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -30,9 +11,9 @@ jobs:
     name: Node ${{ matrix.node }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Installing Dependencies
+      - name: Clean Install
         run: npm ci
 
       - name: Linting Codebase
