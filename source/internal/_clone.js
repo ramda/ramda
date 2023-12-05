@@ -69,7 +69,7 @@ function _ObjectMap() {
 }
 
 _ObjectMap.prototype.set = function(key, value) {
-  const hashedKey = this.hash(key);
+  var hashedKey = this.hash(key);
 
   var bucket = this.map[hashedKey];
   if (!bucket) {
@@ -96,11 +96,11 @@ _ObjectMap.prototype.get = function(key) {
    */
   if (this.length <= 180) {
 
-    for (const p in this.map) {
-      const bucket = this.map[p];
+    for (var p in this.map) {
+      var bucket = this.map[p];
 
       for (var i = 0; i < bucket.length; i += 1) {
-        const element = bucket[i];
+        var element = bucket[i];
         if (element[0] === key) {return element[1];}
       }
 
@@ -108,13 +108,13 @@ _ObjectMap.prototype.get = function(key) {
     return;
   }
 
-  const hashedKey = this.hash(key);
-  const bucket = this.map[hashedKey];
+  var hashedKey = this.hash(key);
+  var bucket = this.map[hashedKey];
 
   if (!bucket) {return;}
 
   for (var i = 0; i < bucket.length; i += 1) {
-    const element = bucket[i];
+    var element = bucket[i];
     if (element[0] === key) {return element[1];}
   }
 

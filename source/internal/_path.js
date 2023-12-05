@@ -8,7 +8,7 @@ export default function _path(pathAr, obj) {
       return undefined;
     }
 
-    const p = pathAr[i];
+    var p = pathAr[i];
     if (_isInteger(p)) {
       val = _nth(p, val);
     } else {
