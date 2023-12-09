@@ -22,19 +22,31 @@ jobs:
       - name: Clean Install
         run: npm ci
 
-      - name: Run Coverage
-        id: run-coverage
+      - name: Coverage Summary
+        id: coverage-summary
         run: |
           {
-            echo 'COVERAGE_OUTPUT<<EOF'
-            npm run coverage
+            echo 'COVERAGE_SUMMARY_OUTPUT<<EOF'
+            npm run coverage:summary
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Coverage Details
+        id: coverage-details
+        run: |
+          {
+            echo 'COVERAGE_DETAILS_OUTPUT<<EOF'
+            npm run coverage:details
             echo EOF
           } >> "$GITHUB_OUTPUT"
 
       - name: Log Coverage
         env:
-          COVERAGE_OUTPUT: ${{ steps.run-coverage.outputs.COVERAGE_OUTPUT }}
-        run: echo "$COVERAGE_OUTPUT"
+          COVERAGE_SUMMARY_OUTPUT: ${{ steps.coverage-summary.outputs.COVERAGE_SUMMARY_OUTPUT }}
+          COVERAGE_DETAILS_OUTPUT: ${{ steps.coverage-details.outputs.COVERAGE_DETAILS_OUTPUT }}
+        run: |
+          echo "$COVERAGE_SUMMARY_OUTPUT"
+          echo "$COVERAGE_DETAILS_OUTPUT"
 
       - name: Find Comment
         uses: peter-evans/find-comment@v2
@@ -52,10 +64,10 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             <details>
-              <summary>Coverage Results</summary>
+              <summary>Coverage</summary>
 
               ```bash
-              ${{ steps.run-coverage.outputs.COVERAGE_OUTPUT }}
+              ${{ steps.coverage-summary.outputs.COVERAGE_SUMMARY_OUTPUT }}
               ```
 
             </details>
