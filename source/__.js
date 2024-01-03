@@ -1,3 +1,4 @@
+import _placeholder from './internal/_placeholder.js';
 /**
  * A special placeholder value used to specify "gaps" within curried functions,
  * allowing partial application of any combination of arguments, regardless of
@@ -25,4 +26,4 @@
  *      const greet = R.replace('{name}', R.__, 'Hello, {name}!');
  *      greet('Alice'); //=> 'Hello, Alice!'
  */
-export default {'@@functional/placeholder': true};
+export default _placeholder;

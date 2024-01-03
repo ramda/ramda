@@ -78,7 +78,7 @@ describe('curry', function() {
   it('supports @@functional/placeholder', function() {
     var f = function(a, b, c) { return [a, b, c]; };
     var g = R.curry(f);
-    var _ = {'@@functional/placeholder': true, x: Math.random()};
+    var _ = R.__;
 
     eq(g(1)(2)(3), [1, 2, 3]);
     eq(g(1)(2, 3), [1, 2, 3]);
@@ -167,7 +167,7 @@ describe('curry properties', function() {
 
   it('curries with placeholder', function() {
     fc.assert(fc.property(fc.func(fc.anything()), fc.anything(), fc.anything(), fc.anything(), function(f, a, b, c) {
-      var _ = {'@@functional/placeholder': true, x: Math.random()};
+      var _ = R.__;
       var f3 = function(a, b, c) {
         return f(a, b, c);
       };
