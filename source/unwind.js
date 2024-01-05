@@ -13,9 +13,9 @@ import _assoc from './internal/_assoc.js';
  * @since v0.28.0
  * @category Object
  * @sig String -> {k: [v]} -> [{k: v}]
- * @param {String} key The key to determine which property of the object should be unwind
- * @param {Object} object The object containing list under property named as key which is to unwind
- * @return {List} A new list of object containing the value of input key having list replaced by each element in the object.
+ * @param {String} key The key to determine which property of the object should be unwound.
+ * @param {Object} object The object containing the list to unwind at the property named by the key.
+ * @return {List} A list of new objects, each having the given key associated to an item from the unwound list.
  * @example
  *
  * R.unwind('hobbies', {
