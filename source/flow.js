@@ -18,11 +18,11 @@ import tail from './tail.js';
  * @see R.pipe
  * @example
  *
- *      const m2 = R.pipe(9, Math.sqrt, R.negate, R.inc); //=> -2
+ *      const m2 = R.flow(9, Math.sqrt, R.negate, R.inc); //=> -2
  */
 export default function flow() {
-  if (arguments.length <= 1) {
-    throw new Error('flow requires at least two arguments');
+  if (arguments.length === 0) {
+    throw new Error('flow requires at least one argument');
   }
   return tail(arguments).reduce(
     applyTo,

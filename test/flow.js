@@ -24,12 +24,13 @@ describe('flow', function() {
       function() { R.flow(); },
       function(err) {
         return err.constructor === Error &&
-               err.message === 'flow requires at least two arguments';
+               err.message === 'flow requires at least one argument';
       }
     );
   });
 
-  it('can be applied to one argument', function() {
-    eq(R.flow(16, Math.sqrt), 4);
+  it('returns the seed argument when the only one given', function() {
+    var sentinel = { foo: 'bar' };
+    eq(R.flow(sentinel), sentinel);
   });
 });
