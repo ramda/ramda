@@ -2,7 +2,9 @@ import applyTo from './applyTo.js';
 import tail from './tail.js';
 
 /**
- * Performs left-to-right serial function application. The first argument is the seed value;
+ * Pipe the value of an expression into a pipeline of functions by performing
+ * left-to-right serial function composition.
+ * The first argument is the seed value;
  * the remaining arguments must be unary functions.
  *
  * In some libraries this function is named `pipe`.
@@ -11,7 +13,7 @@ import tail from './tail.js';
  * @memberOf R
  * @since v0.30.0
  * @category Function
- * @sig (a → (a → b), …, (y → z)) → z
+ * @sig (a, (a → b), …, (y → z)) → z
  * @param {*} a The seed value
  * @param {...Function} functions
  * @return {*} z The result of the function pipeline
