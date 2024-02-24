@@ -1,5 +1,3 @@
-var assert = require('assert');
-
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
