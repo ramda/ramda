@@ -20,7 +20,7 @@ import _curry2 from './internal/_curry2.js';
  * @memberOf R
  * @since v0.30.0
  * @category Function
- * @sig (a, [(a → b), …, (y → z)]) → z
+ * @sig a → [(a → b), …, (y → z)] → z
  * @param {*} a The seed value
  * @param {Array<Function>} pipeline functions composing the pipeline
  * @return {*} z The result of applying the seed value to the function pipeline
