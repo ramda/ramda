@@ -5,32 +5,19 @@ var eq = require('./shared/eq.js');
 
 describe('flow', function() {
 
-  it('is a variadic function', function() {
+  it('is a binary function', function() {
     eq(typeof R.flow, 'function');
-    eq(R.flow.length, 0);
+    eq(R.flow.length, 2);
   });
 
   it('performs left-to-right function composition', function() {
-    //  f10 :: [Number] -> [Number]
-    var f2 = R.flow(4, Math.sqrt, R.multiply, R.map);
-    var f3 = R.flow(9, Math.sqrt, R.multiply, R.map);
+    //  f :: [Number] -> [Number]
+    var f2 = R.flow(4, [Math.sqrt, R.multiply, R.map]);
+    var f3 = R.flow(9, [Math.sqrt, R.multiply, R.map]);
 
     eq(f2([1, 2, 3]), [2, 4, 6]);
     eq(f3([1, 2, 3]), [3, 6, 9]);
-  });
 
-  it('throws if given no arguments', function() {
-    assert.throws(
-      function() { R.flow(); },
-      function(err) {
-        return err.constructor === Error &&
-               err.message === 'flow requires at least one argument';
-      }
-    );
-  });
-
-  it('returns the seed argument when the only one given', function() {
-    var sentinel = { foo: 'bar' };
-    eq(R.flow(sentinel), sentinel);
+    eq(R.flow(9, [Math.sqrt, R.negate, R.inc]), -2);
   });
 });

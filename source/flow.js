@@ -1,11 +1,18 @@
 import applyTo from './applyTo.js';
-import tail from './tail.js';
+import _curry2 from './internal/_curry2.js';
 
 /**
- * Pipe the value of an expression into a pipeline of functions by performing
- * left-to-right serial function composition.
- * The first argument is the seed value;
- * the remaining arguments must be unary functions.
+ * Takes the value of an expression and applies it to a function
+ * which is the left-to-right serial composition of the functions
+ * given in the second argument.
+ *
+ * The functions in the pipeline should be unary functions.
+ *
+ * `flow` is helps to avoid introducing named functions with named arguments
+ * for computing the result of a function pipeline which depends on given initial values.
+ * Rather than composing a custom pipeline function `p = (_x, _y) => R.pipe(g(x), h(y), …)`
+ * which is only later needed once `z = p(x, y)`,
+ * the introduction of `p`, `_x` and `_y` can be avoided: `z = flow(x, [g, h(y),…]`
  *
  * In some libraries this function is named `pipe`.
  *
@@ -13,21 +20,18 @@ import tail from './tail.js';
  * @memberOf R
  * @since v0.30.0
  * @category Function
- * @sig (a, (a → b), …, (y → z)) → z
+ * @sig (a, [(a → b), …, (y → z)]) → z
  * @param {*} a The seed value
- * @param {...Function} functions
- * @return {*} z The result of the function pipeline
+ * @param {Array<Function>} pipeline functions composing the pipeline
+ * @return {*} z The result of applying the seed value to the function pipeline
  * @see R.pipe
  * @example
- *
- *      const m2 = R.flow(9, Math.sqrt, R.negate, R.inc); //=> -2
+ *      const defaultName = 'Jane Doe';
+ *      const savedName = R.flow(localStorage.get('name'), [R.when(R.isNil(defaultName)), R.match(/(.+)\s/), R.nth(0)]);
+ *      const givenName = R.flow($givenName.value, [R.trim, R.when(R.isEmpty, R.always(savedName))])
  */
-export default function flow() {
-  if (arguments.length === 0) {
-    throw new Error('flow requires at least one argument');
-  }
-  return tail(arguments).reduce(
-    applyTo,
-    arguments[0]
-  );
-}
+var flow = _curry2(function flow(seed, pipeline) {
+  return pipeline.reduce(applyTo, seed);
+});
+
+export default flow;
