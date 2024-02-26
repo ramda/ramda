@@ -70,6 +70,7 @@ export { default as findLast } from './findLast.js';
 export { default as findLastIndex } from './findLastIndex.js';
 export { default as flatten } from './flatten.js';
 export { default as flip } from './flip.js';
+export { default as flow } from './flow.js';
 export { default as forEach } from './forEach.js';
 export { default as forEachObjIndexed } from './forEachObjIndexed.js';
 export { default as fromPairs } from  './fromPairs.js';
