@@ -8,7 +8,7 @@ describe('flow', function() {
     eq(R.flow.length, 2);
   });
 
-  it('performs left-to-right function composition', function() {
+  it('applies the first argument to a left-to-right composed function', function() {
     //  f :: [Number] -> [Number]
     var f2 = R.flow(4, [Math.sqrt, R.multiply, R.map]);
     var f3 = R.flow(9, [Math.sqrt, R.multiply, R.map]);
