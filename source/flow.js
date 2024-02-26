@@ -27,6 +27,8 @@ import _reduce from './internal/_reduce.js';
  * @return {*} z The result of applying the seed value to the function pipeline
  * @see R.pipe
  * @example
+ *      R.flow(9, [Math.sqrt, R.negate, R.inc]), //=> -2
+ *
  *      const defaultName = 'Jane Doe';
  *      const savedName = R.flow(localStorage.get('name'), [R.when(R.isNil(defaultName)), R.match(/(.+)\s/), R.nth(0)]);
  *      const givenName = R.flow($givenNameInput.value, [R.trim, R.when(R.isEmpty, R.always(savedName))])
