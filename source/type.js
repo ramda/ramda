@@ -26,6 +26,7 @@ import _curry1 from './internal/_curry1.js';
  *      R.type(() => {}); //=> "Function"
  *      R.type(async () => {}); //=> "AsyncFunction"
  *      R.type(undefined); //=> "Undefined"
+ *      R.type(BigInt(123)); //=> "BigInt"
  */
 var type = _curry1(function type(val) {
   return val === null
