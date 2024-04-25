@@ -5,8 +5,9 @@ import _curry2 from './internal/_curry2.js';
  * containing the value.
  *
  * Dispatches to the `fantasy-land/of` method of the constructor first (if present)
- * or to the `of` method last (if present). When neither are present, wraps the
- * value in an array.
+ * or to the `of` method last (if present). When the global `Function` constructor
+ * is given, it returns a Reader (aka binary function) monad of the value.
+ * In any other case, it wraps the value in an array.
  *
  * Note this `of` is different from the ES6 `of`; See
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of
@@ -24,6 +25,18 @@ import _curry2 from './internal/_curry2.js';
  *      R.of(Array, 42);   //=> [42]
  *      R.of(Array, [42]); //=> [[42]]
  *      R.of(Maybe, 42);   //=> Maybe.Just(42)
+ *      R.of(Function, 42)({foo: 'bar'});  //=> 42
+ *
+ *      // Reader "reads" from the environment passed as second argument
+ *      greeting = R.flow(
+ *        R.of(Function, 'Hello, '),
+ *        [R.chain(s => ({isDistribution}) => s + (isDistribution ? 'Customers' : 'Employees')),
+ *        R.map(s => s + '!'),
+ *        R.chain(s => ({caller}) =>
+ *          caller === 'api' ? `{ "data": "${s}" }` : `<h1>${s}</h1>`
+ *        )]
+ *      );
+ *      greeting({caller: 'browser', isDistribution: true}); //=>'<h1>Hello, Customers!</h1>'
  */
 var of = _curry2(function of(Ctor, val) {
   return (
@@ -31,7 +44,9 @@ var of = _curry2(function of(Ctor, val) {
       ? Ctor['fantasy-land/of'](val)
       : typeof Ctor.of === 'function'
         ? Ctor.of(val)
-        : [val]
+        : Ctor === Function
+          ? function(unused) { return val; }
+          : [val]
   );
 });
 

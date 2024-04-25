@@ -13,6 +13,7 @@ import map from './map.js';
  * according to the [FantasyLand Chain spec](https://github.com/fantasyland/fantasy-land#chain).
  *
  * If second argument is a function, `chain(f, g)(x)` is equivalent to `f(g(x), x)`.
+ * This can be used in a Reader monad pipeline, to pass the environment value as second argument into that function.
  *
  * Acts as a transducer if a transformer is given in list position.
  *
@@ -30,6 +31,15 @@ import map from './map.js';
  *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
  *
  *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
+ *
+ *      // withSumInKey :: string → {number} → {number}
+ *      withSumInKey = key => R.flow(
+ *        R.of(Function, key),    // :: Reader {number} string
+ *        [R.chain(R.dissoc),
+ *        R.map(R.o(R.sum, R.values)),
+ *        R.chain(R.assoc(key))]
+ *      );
+ *      withSumInKey('baz')({foo: 10, bar: 20, baz: 50}); //=>{"foo":10,"bar":20,"baz":30}
  */
 var chain = _curry2(_dispatchable(['fantasy-land/chain', 'chain'], _xchain, function chain(fn, monad) {
   if (typeof monad === 'function') {
