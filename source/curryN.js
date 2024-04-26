@@ -1,6 +1,7 @@
 import _arity from './internal/_arity.js';
 import _curry1 from './internal/_curry1.js';
 import _curry2 from './internal/_curry2.js';
+import _curry3 from './internal/_curry3.js';
 import _curryN from './internal/_curryN.js';
 
 
@@ -47,9 +48,11 @@ import _curryN from './internal/_curryN.js';
  *      g(4); //=> 10
  */
 var curryN = _curry2(function curryN(length, fn) {
-  if (length === 1) {
-    return _curry1(fn);
+  switch (length) {
+    case 1: return _curry1(fn);
+    case 2: return _curry2(fn);
+    case 3: return _curry3(fn);
+    default: _arity(length, _curryN(length, [], fn));
   }
-  return _arity(length, _curryN(length, [], fn));
 });
 export default curryN;
