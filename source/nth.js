@@ -10,7 +10,7 @@ import _nth from './internal/_nth.js';
  * @since v0.1.0
  * @category List
  * @sig Number -> [a] -> a | Undefined
- * @sig Number -> String -> String
+ * @sig Number -> String -> String | Undefined
  * @param {Number} offset
  * @param {*} list
  * @return {*}
@@ -22,7 +22,7 @@ import _nth from './internal/_nth.js';
  *      R.nth(-99, list); //=> undefined
  *
  *      R.nth(2, 'abc'); //=> 'c'
- *      R.nth(3, 'abc'); //=> ''
+ *      R.nth(3, 'abc'); //=> undefined
  * @symb R.nth(-1, [a, b, c]) = c
  * @symb R.nth(0, [a, b, c]) = a
  * @symb R.nth(1, [a, b, c]) = b
