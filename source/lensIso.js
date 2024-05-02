@@ -3,7 +3,7 @@ import map from './map.js';
 
 
 /**
- * Returns a lens for the given isomorphic function pairs to/from.
+ * Returns a lens for the given isomorphic function pairs `to` and `from`.
  * Where we go source `to` focus, then backwards source `from` focus.
  * The function pairs should never loose data between the structure mappings
  *
@@ -16,7 +16,7 @@ import map from './map.js';
  * @param {Function} to
  * @param {Function} from
  * @return {Lens}
- * @see R.view, R.set, R.over, R.lensIndex, R.lensProp
+ * @see R.view, R.set, R.over, R.lens
  * @example
  *
  *      const xJson = lensIso(JSON.parse, JSON.stringify);
