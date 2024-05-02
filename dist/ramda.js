@@ -4269,7 +4269,7 @@
    *      R.last([]); //=> undefined
    *
    *      R.last('abc'); //=> 'c'
-   *      R.last(''); //=> ''
+   *      R.last(''); //=> undefined
    */
   var last = _curry1(function (list) {
     return _nth(-1, list);
