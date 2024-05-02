@@ -8,7 +8,7 @@ import isEmpty from './isEmpty.js';
  *
  * @func
  * @memberOf R
- * @since v0.29.2
+ * @since v0.30.0
  * @category Logic
  * @sig a -> Boolean
  * @param {*} x
