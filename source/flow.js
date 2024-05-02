@@ -30,8 +30,8 @@ import _reduce from './internal/_reduce.js';
  *      R.flow(9, [Math.sqrt, R.negate, R.inc]); //=> -2
  *
  *      const personObj = { first: 'Jane', last: 'Doe' };
- *      const savedName = R.flow(personObj, [R.values, R.join(' ')]); //=> "Jane Doe"
- *      const givenName = R.flow('    ', [R.trim, R.when(R.isEmpty, R.always(savedName))]); //=> "Jane Doe"
+ *      const fullName = R.flow(personObj, [R.values, R.join(' ')]); //=> "Jane Doe"
+ *      const givenName = R.flow('    ', [R.trim, R.when(R.isEmpty, R.always(fullName))]); //=> "Jane Doe"
  */
 var flow = _curry2(function flow(seed, pipeline) {
   return _reduce(applyTo, seed, pipeline);
