@@ -2979,7 +2979,7 @@
    * @since v0.1.0
    * @category List
    * @sig [a] -> a | Undefined
-   * @sig String -> String | Undefined
+   * @sig String -> String
    * @param {Array|String} list
    * @return {*}
    * @see R.tail, R.init, R.last
@@ -2989,7 +2989,7 @@
    *      R.head([]); //=> undefined
    *
    *      R.head('abc'); //=> 'a'
-   *      R.head(''); //=> undefined
+   *      R.head(''); //=> ''
    */
   var head = _curry1(function (list) {
     return _nth(0, list);
@@ -4259,7 +4259,7 @@
    * @since v0.1.4
    * @category List
    * @sig [a] -> a | Undefined
-   * @sig String -> String | Undefined
+   * @sig String -> String
    * @param {*} list
    * @return {*}
    * @see R.init, R.head, R.tail
@@ -4269,7 +4269,7 @@
    *      R.last([]); //=> undefined
    *
    *      R.last('abc'); //=> 'c'
-   *      R.last(''); //=> undefined
+   *      R.last(''); //=> ''
    */
   var last = _curry1(function (list) {
     return _nth(-1, list);
@@ -7396,7 +7396,7 @@
    * @since v0.1.0
    * @category List
    * @sig Number -> [a] -> a | Undefined
-   * @sig Number -> String -> String | Undefined
+   * @sig Number -> String -> String
    * @param {Number} offset
    * @param {*} list
    * @return {*}
@@ -7408,7 +7408,7 @@
    *      R.nth(-99, list); //=> undefined
    *
    *      R.nth(2, 'abc'); //=> 'c'
-   *      R.nth(3, 'abc'); //=> undefined
+   *      R.nth(3, 'abc'); //=> ''
    * @symb R.nth(-1, [a, b, c]) = c
    * @symb R.nth(0, [a, b, c]) = a
    * @symb R.nth(1, [a, b, c]) = b
