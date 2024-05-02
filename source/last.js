@@ -10,7 +10,7 @@ import _nth from './internal/_nth.js';
  * @since v0.1.4
  * @category List
  * @sig [a] -> a | Undefined
- * @sig String -> String
+ * @sig String -> String | Undefined
  * @param {*} list
  * @return {*}
  * @see R.init, R.head, R.tail
@@ -20,7 +20,7 @@ import _nth from './internal/_nth.js';
  *      R.last([]); //=> undefined
  *
  *      R.last('abc'); //=> 'c'
- *      R.last(''); //=> ''
+ *      R.last(''); //=> undefined
  */
 var last = _curry1(function(list) {
   return _nth(-1, list);
