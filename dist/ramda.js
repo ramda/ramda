@@ -335,7 +335,7 @@
       case 3:
         return _curry3(fn);
       default:
-        _arity(length, _curryN(length, [], fn));
+        return _arity(length, _curryN(length, [], fn));
     }
   });
 

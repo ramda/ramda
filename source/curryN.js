@@ -52,7 +52,7 @@ var curryN = _curry2(function curryN(length, fn) {
     case 1: return _curry1(fn);
     case 2: return _curry2(fn);
     case 3: return _curry3(fn);
-    default: _arity(length, _curryN(length, [], fn));
+    default: return _arity(length, _curryN(length, [], fn));
   }
 });
 export default curryN;
