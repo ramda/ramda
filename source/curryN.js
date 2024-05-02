@@ -48,11 +48,9 @@ import _curryN from './internal/_curryN.js';
  *      g(4); //=> 10
  */
 var curryN = _curry2(function curryN(length, fn) {
-  switch (length) {
-    case 1: return _curry1(fn);
-    case 2: return _curry2(fn);
-    case 3: return _curry3(fn);
-    default: return _arity(length, _curryN(length, [], fn));
-  }
+  if (length === 1) {return _curry1(fn);}
+  if (length === 2) {return _curry2(fn);}
+  if (length === 3) {return _curry3(fn);}
+  return _arity(length, _curryN(length, [], fn));
 });
 export default curryN;
