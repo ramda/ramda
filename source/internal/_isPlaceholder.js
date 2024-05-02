@@ -1,5 +1,5 @@
-import _placeholder from './_placeholder.js';
-
 export default function _isPlaceholder(a) {
-  return a === _placeholder;
+  return a != null &&
+         typeof a === 'object' &&
+         a['@@functional/placeholder'] === true;
 }
