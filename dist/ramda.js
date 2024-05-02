@@ -2979,7 +2979,7 @@
    * @since v0.1.0
    * @category List
    * @sig [a] -> a | Undefined
-   * @sig String -> String
+   * @sig String -> String | Undefined
    * @param {Array|String} list
    * @return {*}
    * @see R.tail, R.init, R.last
@@ -2989,7 +2989,7 @@
    *      R.head([]); //=> undefined
    *
    *      R.head('abc'); //=> 'a'
-   *      R.head(''); //=> ''
+   *      R.head(''); //=> undefined
    */
   var head = _curry1(function (list) {
     return _nth(0, list);
