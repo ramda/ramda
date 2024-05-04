@@ -1,7 +1,7 @@
 Ramda
 =============
 
-A practical functional library for JavaScript programmers.
+test A practical functional library for JavaScript programmers.
 
 [![Build Status](https://github.com/ramda/ramda/workflows/Build/badge.svg)](https://github.com/ramda/ramda/actions?query=workflow%3ABuild)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
