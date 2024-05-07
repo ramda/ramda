@@ -32,6 +32,6 @@ import curry from './curry.js';
 var ascendNatural = curry(function ascendNatural(locales, fn, a, b) {
   const aa = fn(a);
   const bb = fn(b);
-  return new Intl.Collator(locales, { numeric: true }).compare(aa, bb);
+  return aa.localeCompare(bb, locales, { numeric: true });
 });
 export default ascendNatural;
