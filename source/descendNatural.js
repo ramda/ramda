@@ -1,15 +1,16 @@
-import _curry3 from './internal/_curry3.js';
+import curry from './curry.js';
 
 
 /**
  * Makes a descending comparator function out of a function that returns a value
- * that can be compared with natural sorting using localeCompare.
+ * that can be compared with natural sorting using Intl.Collator.
  *
  * @func
  * @memberOf R
- * @since v0.23.0
+ * @since v0.30.1
  * @category Function
- * @sig Ord b => (a -> b) -> a -> a -> Number
+ * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+ * @param {String|Array} locales A string with a BCP 47 language tag or an Intl.Locale instance, or an array of such locale identifiers. The runtime's default locale is used when undefined is passed or when none of the specified locale identifiers is supported.
  * @param {Function} fn A function of arity one that returns a value that can be compared
  * @param {*} a The first item to be compared.
  * @param {*} b The second item to be compared.
@@ -17,18 +18,20 @@ import _curry3 from './internal/_curry3.js';
  * @see R.descend
  * @example
  *
- *      const byTitle = R.descendNatural(R.prop('title'));
- *      const books = [
- *        { author: 'Jay Asher', title: '13 Reasons Why' },
- *        { author: 'Gabriel García Márquez', title: '100 Years of Solitude' },
-*         { author: 'Jordan B. Peterson', title: '12 Rules for Life' },
- *      ];
- *      const booksByTitleDesc = R.sort(byTitle, books);
- *        //=> [{ author: 'Gabriel García Márquez', title: '100 Years of Solitude' },{ author: 'Jay Asher', title: '13 Reasons Why' },{ author: 'Jordan B. Peterson', title: '12 Rules for Life' }]
+ *      const unsorted = ['3', '1', '10', 'Ørjan', 'Bob', 'Älva'];
+ *
+ *      R.sort(R.descendNatural('en', R.identity), unsorted);
+ *      // => ['Ørjan', 'Bob', 'Älva', '10', '3', '1']
+ *
+ *      R.sort(R.descendNatural('sv', R.identity), unsorted);
+ *      // => ['Ørjan', 'Älva', 'Bob', '10', '3', '1']
+ *
+ *     R.sort(R.descend(R.identity), unsorted);
+ *      // => ['Ørjan', 'Älva', 'Bob', '3', '10', '1']
  */
-var descendNatural = _curry3(function descendNatural(fn, a, b) {
+var descendNatural = curry(function descendNatural(locales, fn, a, b) {
   const aa = fn(a);
   const bb = fn(b);
-  return bb.localeCompare(aa, undefined, { numeric: true });
+  return new Intl.Collator(locales, { numeric: true }).compare(bb, aa);
 });
 export default descendNatural;
