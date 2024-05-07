@@ -3,14 +3,14 @@ import curry from './curry.js';
 
 /**
  * Makes an ascending comparator function out of a function that returns a value
- * that can be compared with natural sorting using Intl.Collator.
+ * that can be compared with natural sorting using localeCompare.
  *
  * @func
  * @memberOf R
  * @since v0.30.1
  * @category Function
  * @sig Ord b => s -> (a -> b) -> a -> a -> Number
- * @param {String|Array} locales A string with a BCP 47 language tag or an Intl.Locale instance, or an array of such locale identifiers. The runtime's default locale is used when undefined is passed or when none of the specified locale identifiers is supported.
+ * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
  * @param {Function} fn A function of arity one that returns a value that can be compared
  * @param {*} a The first item to be compared.
  * @param {*} b The second item to be compared.
