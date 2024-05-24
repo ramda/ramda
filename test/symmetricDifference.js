@@ -59,7 +59,7 @@ describe('symmetricDifference', function() {
 
   it('returns empty arrays when receiving an array and a permutation of it', function() {
     fc.assert(fc.property(fc.clone(compatibleREquals, 2).chain(function(arrays) {
-      return fc.tuple(fc.constant(arrays[0]), fc.shuffledSubarray(arrays[1], arrays[1].length, arrays[1].length));
+      return fc.tuple(fc.constant(arrays[0]), fc.shuffledSubarray(arrays[1], {minLength: arrays[1].length, maxLength: arrays[1].length}));
     }), function(arrays) {
       var A1 = arrays[0];
       var A2 = arrays[1];
