@@ -1,4 +1,4 @@
-//  Ramda v0.30.0
+//  Ramda v0.30.1
 //  https://github.com/ramda/ramda
 //  (c) 2013-2024 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -47,12 +47,49 @@
     return true;
   };
 
-  var _placeholder = {
+  /**
+   * A special placeholder value used to specify "gaps" within curried functions,
+   * allowing partial application of any combination of arguments, regardless of
+   * their positions.
+   *
+   * If `g` is a curried ternary function and `_` is `R.__`, the following are
+   * equivalent:
+   *
+   *   - `g(1, 2, 3)`
+   *   - `g(_, 2, 3)(1)`
+   *   - `g(_, _, 3)(1)(2)`
+   *   - `g(_, _, 3)(1, 2)`
+   *   - `g(_, 2, _)(1, 3)`
+   *   - `g(_, 2)(1)(3)`
+   *   - `g(_, 2)(1, 3)`
+   *   - `g(_, 2)(_, 3)(1)`
+   *
+   * @name __
+   * @constant
+   * @memberOf R
+   * @since v0.6.0
+   * @category Function
+   * @example
+   *
+   *      const greet = R.replace('{name}', R.__, 'Hello, {name}!');
+   *      greet('Alice'); //=> 'Hello, Alice!'
+   */
+  var __ = {
     '@@functional/placeholder': true
   };
 
+  function _typeof(o) {
+    "@babel/helpers - typeof";
+
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
+  }
+
   function _isPlaceholder(a) {
-    return a === _placeholder;
+    return a != null && _typeof(a) === 'object' && a['@@functional/placeholder'] === true;
   }
 
   /**
@@ -578,16 +615,6 @@
     }
     return true;
   }));
-
-  function _typeof(o) {
-    "@babel/helpers - typeof";
-
-    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-      return typeof o;
-    } : function (o) {
-      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-    }, _typeof(o);
-  }
 
   function _arrayFromIterator(iter) {
     var list = [];
@@ -2028,7 +2055,7 @@
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`
-   * @see R.descend
+   * @see R.descend, R.ascendNatural, R.descendNatural
    * @example
    *
    *      const byAge = R.ascend(R.prop('age'));
@@ -2044,6 +2071,93 @@
     var aa = fn(a);
     var bb = fn(b);
     return aa < bb ? -1 : aa > bb ? 1 : 0;
+  });
+
+  /**
+   * Returns a curried equivalent of the provided function. The curried function
+   * has two unusual capabilities. First, its arguments needn't be provided one
+   * at a time. If `f` is a ternary function and `g` is `R.curry(f)`, the
+   * following are equivalent:
+   *
+   *   - `g(1)(2)(3)`
+   *   - `g(1)(2, 3)`
+   *   - `g(1, 2)(3)`
+   *   - `g(1, 2, 3)`
+   *
+   * Secondly, the special placeholder value [`R.__`](#__) may be used to specify
+   * "gaps", allowing partial application of any combination of arguments,
+   * regardless of their positions. If `g` is as above and `_` is [`R.__`](#__),
+   * the following are equivalent:
+   *
+   *   - `g(1, 2, 3)`
+   *   - `g(_, 2, 3)(1)`
+   *   - `g(_, _, 3)(1)(2)`
+   *   - `g(_, _, 3)(1, 2)`
+   *   - `g(_, 2)(1)(3)`
+   *   - `g(_, 2)(1, 3)`
+   *   - `g(_, 2)(_, 3)(1)`
+   *
+   * Please note that default parameters don't count towards a [function arity](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length)
+   * and therefore `curry` won't work well with those.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.1.0
+   * @category Function
+   * @sig (* -> a) -> (* -> a)
+   * @param {Function} fn The function to curry.
+   * @return {Function} A new, curried function.
+   * @see R.curryN, R.partial
+   * @example
+   *
+   *      const addFourNumbers = (a, b, c, d) => a + b + c + d;
+   *      const curriedAddFourNumbers = R.curry(addFourNumbers);
+   *      const f = curriedAddFourNumbers(1, 2);
+   *      const g = f(3);
+   *      g(4); //=> 10
+   *
+   *      // R.curry not working well with default parameters
+   *      const h = R.curry((a, b, c = 2) => a + b + c);
+   *      h(1)(2)(7); //=> Error! (`3` is not a function!)
+   */
+  var curry = _curry1(function curry(fn) {
+    return curryN(fn.length, fn);
+  });
+
+  /**
+   * Makes an ascending comparator function out of a function that returns a value
+   * that can be compared with natural sorting using localeCompare.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.30.1
+   * @category Function
+   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+   * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
+   * @param {Function} fn A function of arity one that returns a value that can be compared
+   * @param {*} a The first item to be compared.
+   * @param {*} b The second item to be compared.
+   * @return {Number} `-1` if a occurs before b, `1` if a occurs after b, otherwise `0`
+   * @see R.ascend
+   * @example
+   *
+   *      const unsorted = ['3', '1', '10', 'Ørjan', 'Bob', 'Älva'];
+   *
+   *      R.sort(R.ascendNatural('en', R.identity), unsorted);
+   *      // => ['1', '3', '10', 'Älva', 'Bob', 'Ørjan']
+   *
+   *      R.sort(R.ascendNatural('sv', R.identity), unsorted);
+   *      // => ['1', '3', '10', 'Bob', 'Älva', 'Ørjan']
+   *
+   *     R.sort(R.ascend(R.identity), unsorted);
+   *      // => ['1', '10', '3', 'Bob', 'Älva', 'Ørjan']
+   */
+  var ascendNatural = curry(function ascendNatural(locales, fn, a, b) {
+    var aa = fn(a);
+    var bb = fn(b);
+    return aa.localeCompare(bb, locales, {
+      numeric: true
+    });
   });
 
   /**
@@ -2979,7 +3093,7 @@
    * @since v0.1.0
    * @category List
    * @sig [a] -> a | Undefined
-   * @sig String -> String
+   * @sig String -> String | Undefined
    * @param {Array|String} list
    * @return {*}
    * @see R.tail, R.init, R.last
@@ -2989,7 +3103,7 @@
    *      R.head([]); //=> undefined
    *
    *      R.head('abc'); //=> 'a'
-   *      R.head(''); //=> ''
+   *      R.head(''); //=> undefined
    */
   var head = _curry1(function (list) {
     return _nth(0, list);
@@ -3180,57 +3294,6 @@
         idx += 1;
       }
     });
-  });
-
-  /**
-   * Returns a curried equivalent of the provided function. The curried function
-   * has two unusual capabilities. First, its arguments needn't be provided one
-   * at a time. If `f` is a ternary function and `g` is `R.curry(f)`, the
-   * following are equivalent:
-   *
-   *   - `g(1)(2)(3)`
-   *   - `g(1)(2, 3)`
-   *   - `g(1, 2)(3)`
-   *   - `g(1, 2, 3)`
-   *
-   * Secondly, the special placeholder value [`R.__`](#__) may be used to specify
-   * "gaps", allowing partial application of any combination of arguments,
-   * regardless of their positions. If `g` is as above and `_` is [`R.__`](#__),
-   * the following are equivalent:
-   *
-   *   - `g(1, 2, 3)`
-   *   - `g(_, 2, 3)(1)`
-   *   - `g(_, _, 3)(1)(2)`
-   *   - `g(_, _, 3)(1, 2)`
-   *   - `g(_, 2)(1)(3)`
-   *   - `g(_, 2)(1, 3)`
-   *   - `g(_, 2)(_, 3)(1)`
-   *
-   * Please note that default parameters don't count towards a [function arity](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length)
-   * and therefore `curry` won't work well with those.
-   *
-   * @func
-   * @memberOf R
-   * @since v0.1.0
-   * @category Function
-   * @sig (* -> a) -> (* -> a)
-   * @param {Function} fn The function to curry.
-   * @return {Function} A new, curried function.
-   * @see R.curryN, R.partial
-   * @example
-   *
-   *      const addFourNumbers = (a, b, c, d) => a + b + c + d;
-   *      const curriedAddFourNumbers = R.curry(addFourNumbers);
-   *      const f = curriedAddFourNumbers(1, 2);
-   *      const g = f(3);
-   *      g(4); //=> 10
-   *
-   *      // R.curry not working well with default parameters
-   *      const h = R.curry((a, b, c = 2) => a + b + c);
-   *      h(1)(2)(7); //=> Error! (`3` is not a function!)
-   */
-  var curry = _curry1(function curry(fn) {
-    return curryN(fn.length, fn);
   });
 
   /**
@@ -3576,7 +3639,7 @@
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`
-   * @see R.ascend
+   * @see R.ascend, R.descendNatural, R.ascendNatural
    * @example
    *
    *      const byAge = R.descend(R.prop('age'));
@@ -3592,6 +3655,42 @@
     var aa = fn(a);
     var bb = fn(b);
     return aa > bb ? -1 : aa < bb ? 1 : 0;
+  });
+
+  /**
+   * Makes a descending comparator function out of a function that returns a value
+   * that can be compared with natural sorting using localeCompare.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.30.1
+   * @category Function
+   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+   * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
+   * @param {Function} fn A function of arity one that returns a value that can be compared
+   * @param {*} a The first item to be compared.
+   * @param {*} b The second item to be compared.
+   * @return {Number} `-1` if a occurs after b, `1` if a occurs before b, otherwise `0`
+   * @see R.descend
+   * @example
+   *
+   *      const unsorted = ['3', '1', '10', 'Ørjan', 'Bob', 'Älva'];
+   *
+   *      R.sort(R.descendNatural('en', R.identity), unsorted);
+   *      // => ['Ørjan', 'Bob', 'Älva', '10', '3', '1']
+   *
+   *      R.sort(R.descendNatural('sv', R.identity), unsorted);
+   *      // => ['Ørjan', 'Älva', 'Bob', '10', '3', '1']
+   *
+   *     R.sort(R.descend(R.identity), unsorted);
+   *      // => ['Ørjan', 'Älva', 'Bob', '3', '10', '1']
+   */
+  var descendNatural = curry(function descendNatural(locales, fn, a, b) {
+    var aa = fn(a);
+    var bb = fn(b);
+    return bb.localeCompare(aa, locales, {
+      numeric: true
+    });
   });
 
   function _Set() {
@@ -4259,7 +4358,7 @@
    * @since v0.1.4
    * @category List
    * @sig [a] -> a | Undefined
-   * @sig String -> String
+   * @sig String -> String | Undefined
    * @param {*} list
    * @return {*}
    * @see R.init, R.head, R.tail
@@ -4269,7 +4368,7 @@
    *      R.last([]); //=> undefined
    *
    *      R.last('abc'); //=> 'c'
-   *      R.last(''); //=> ''
+   *      R.last(''); //=> undefined
    */
   var last = _curry1(function (list) {
     return _nth(-1, list);
@@ -4970,11 +5069,11 @@
    * @return {*} z The result of applying the seed value to the function pipeline
    * @see R.pipe
    * @example
-   *      R.flow(9, [Math.sqrt, R.negate, R.inc]), //=> -2
+   *      R.flow(9, [Math.sqrt, R.negate, R.inc]); //=> -2
    *
-   *      const defaultName = 'Jane Doe';
-   *      const savedName = R.flow(localStorage.get('name'), [R.when(R.isNil(defaultName)), R.match(/(.+)\s/), R.nth(0)]);
-   *      const givenName = R.flow($givenNameInput.value, [R.trim, R.when(R.isEmpty, R.always(savedName))])
+   *      const personObj = { first: 'Jane', last: 'Doe' };
+   *      const fullName = R.flow(personObj, [R.values, R.join(' ')]); //=> "Jane Doe"
+   *      const givenName = R.flow('    ', [R.trim, R.when(R.isEmpty, R.always(fullName))]); //=> "Jane Doe"
    */
   var flow = _curry2(function flow(seed, pipeline) {
     return _reduce(applyTo, seed, pipeline);
@@ -7396,7 +7495,7 @@
    * @since v0.1.0
    * @category List
    * @sig Number -> [a] -> a | Undefined
-   * @sig Number -> String -> String
+   * @sig Number -> String -> String | Undefined
    * @param {Number} offset
    * @param {*} list
    * @return {*}
@@ -7408,7 +7507,7 @@
    *      R.nth(-99, list); //=> undefined
    *
    *      R.nth(2, 'abc'); //=> 'c'
-   *      R.nth(3, 'abc'); //=> ''
+   *      R.nth(3, 'abc'); //=> undefined
    * @symb R.nth(-1, [a, b, c]) = c
    * @symb R.nth(0, [a, b, c]) = a
    * @symb R.nth(1, [a, b, c]) = b
@@ -10337,7 +10436,7 @@
 
   exports.F = F;
   exports.T = T;
-  exports.__ = _placeholder;
+  exports.__ = __;
   exports.add = add;
   exports.addIndex = addIndex;
   exports.addIndexRight = addIndexRight;
@@ -10356,6 +10455,7 @@
   exports.applySpec = applySpec;
   exports.applyTo = applyTo;
   exports.ascend = ascend;
+  exports.ascendNatural = ascendNatural;
   exports.assoc = assoc;
   exports.assocPath = assocPath;
   exports.binary = binary;
@@ -10382,6 +10482,7 @@
   exports.dec = dec;
   exports.defaultTo = defaultTo;
   exports.descend = descend;
+  exports.descendNatural = descendNatural;
   exports.difference = difference;
   exports.differenceWith = differenceWith;
   exports.dissoc = dissoc;
