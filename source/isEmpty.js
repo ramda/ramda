@@ -20,7 +20,8 @@ import equals from './equals.js';
  *      R.isEmpty([1, 2, 3]);           //=> false
  *      R.isEmpty([]);                  //=> true
  *      R.isEmpty('');                  //=> true
- *      R.isEmpty(null);                //=> false
+ *      R.isEmpty(null);                //=> true
+ *      R.isEmpty(undefined);           //=> true
  *      R.isEmpty({});                  //=> true
  *      R.isEmpty({length: 0});         //=> false
  *      R.isEmpty(Uint8Array.from('')); //=> true

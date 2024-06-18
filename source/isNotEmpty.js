@@ -19,7 +19,8 @@ import isEmpty from './isEmpty.js';
  *      R.isNotEmpty([1, 2, 3]);           //=> true
  *      R.isNotEmpty([]);                  //=> false
  *      R.isNotEmpty('');                  //=> false
- *      R.isNotEmpty(null);                //=> true
+ *      R.isNotEmpty(null);                //=> false
+ *      R.isNotEmpty(undefined);           //=> false
  *      R.isNotEmpty({});                  //=> false
  *      R.isNotEmpty({length: 0});         //=> true
  *      R.isNotEmpty(Uint8Array.from('')); //=> false
