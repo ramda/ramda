@@ -9,9 +9,9 @@ import curry from './curry.js';
  * @memberOf R
  * @since v0.30.1
  * @category Function
- * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+ * @sig s -> (a -> String) -> a -> a -> Number
  * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
- * @param {Function} fn A function of arity one that returns a value that can be compared
+ * @param {Function} fn A function of arity one that returns a string that can be compared
  * @param {*} a The first item to be compared.
  * @param {*} b The second item to be compared.
  * @return {Number} `-1` if a occurs before b, `1` if a occurs after b, otherwise `0`
