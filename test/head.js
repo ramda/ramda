@@ -15,7 +15,7 @@ describe('head', function() {
     eq(R.head('abc'), 'a');
     eq(R.head('bc'), 'b');
     eq(R.head('c'), 'c');
-    eq(R.head(''), '');
+    eq(R.head(''), undefined);
   });
 
   it('throws if applied to null or undefined', function() {

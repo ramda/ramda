@@ -15,7 +15,7 @@ describe('last', function() {
     eq(R.last('abc'), 'c');
     eq(R.last('ab'), 'b');
     eq(R.last('a'), 'a');
-    eq(R.last(''), '');
+    eq(R.last(''), undefined);
   });
 
   it('throws if applied to null or undefined', function() {
