@@ -18,7 +18,7 @@ describe('nth', function() {
     eq(R.nth(0, 'abc'), 'a');
     eq(R.nth(1, 'abc'), 'b');
     eq(R.nth(2, 'abc'), 'c');
-    eq(R.nth(3, 'abc'), '');
+    eq(R.nth(3, 'abc'), undefined);
   });
 
   it('accepts negative offsets', function() {
@@ -31,7 +31,7 @@ describe('nth', function() {
     eq(R.nth(-1, 'abc'), 'c');
     eq(R.nth(-2, 'abc'), 'b');
     eq(R.nth(-3, 'abc'), 'a');
-    eq(R.nth(-4, 'abc'), '');
+    eq(R.nth(-4, 'abc'), undefined);
   });
 
   it('throws if applied to null or undefined', function() {
