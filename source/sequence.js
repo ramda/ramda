@@ -4,12 +4,17 @@ import map from './map.js';
 import prepend from './prepend.js';
 import reduceRight from './reduceRight.js';
 import identity from './internal/_identity.js';
+import _isArray from './internal/_isArray.js';
+import toPairs from './toPairs.js';
+import _assoc from './internal/_assoc.js';
 
 
 /**
  * Transforms a [Traversable](https://github.com/fantasyland/fantasy-land#traversable)
  * of [Applicative](https://github.com/fantasyland/fantasy-land#applicative) into an
  * Applicative of Traversable.
+ *
+ * Also accepts `Object` as the Traversable to aid working with [dictionaries](https://github.com/ramda/ramda/wiki/Type-Signatures#simple-objects) (Objects of like-typed values).
  *
  * Dispatches to the `"fantasy-land/traverse"` or the `traverse` method of the second argument, if present.
  *
@@ -29,6 +34,8 @@ import identity from './internal/_identity.js';
  *      R.sequence(Maybe.of, [Just(1), Just(2), Just(3)]);   //=> Just([1, 2, 3])
  *      R.sequence(Maybe.of, [Just(1), Just(2), Nothing()]); //=> Nothing()
  *
+ *      R.sequence(Maybe.of, {a: Just(1), b: Just(2), c: Just(3)}); //=> Just({a: 1, b: 2, c: 3})
+ *
  *      R.sequence(R.of(Array), Just([1, 2, 3])); //=> [Just(1), Just(2), Just(3)]
  *      R.sequence(R.of(Array), Nothing());       //=> [Nothing()]
  */
@@ -45,13 +52,29 @@ var sequence = _curry2(function sequence(F, traversable) {
       ? traversable['fantasy-land/traverse'](TypeRep, identity)
       : typeof traversable.traverse === 'function'
         ? traversable.traverse(TypeRep, identity)
-        : reduceRight(
-          function(x, acc) {
-            return ap(map(prepend, x), acc);
-          },
-          of([]),
-          traversable
-        )
+        : _isArray(traversable)
+          ? reduceRight(
+            function(x, acc) {
+              return ap(map(prepend, x), acc);
+            },
+            of([]),
+            traversable
+          )
+          : reduceRight(
+            function(kvPair, acc) {
+              return ap(map(
+                function(v) {
+                  return function(obj) {
+                    return _assoc(kvPair[0], v, obj);
+                  };
+                },
+                kvPair[1]
+              ),
+              acc);
+            },
+            of({}),
+            toPairs(traversable)
+          )
   );
 });
 export default sequence;
