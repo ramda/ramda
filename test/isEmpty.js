@@ -4,12 +4,12 @@ var eq = require('./shared/eq.js');
 
 describe('isEmpty', function() {
 
-  it('returns false for null', function() {
-    eq(R.isEmpty(null), false);
+  it('returns true for null', function() {
+    eq(R.isEmpty(null), true);
   });
 
-  it('returns false for undefined', function() {
-    eq(R.isEmpty(undefined), false);
+  it('returns true for undefined', function() {
+    eq(R.isEmpty(undefined), true);
   });
 
   it('returns true for empty string', function() {

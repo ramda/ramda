@@ -6155,7 +6155,7 @@
    *      R.isEmpty(Uint8Array.from('')); //=> true
    */
   var isEmpty = _curry1(function isEmpty(x) {
-    return x != null && equals(x, empty(x));
+    return x != null || equals(x, empty(x));
   });
 
   /**
