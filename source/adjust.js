@@ -26,6 +26,8 @@ import _curry3 from './internal/_curry3.js';
  *
  *      R.adjust(1, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
  *      R.adjust(-1, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
+ *
+ *      // out-of-range returns original list
  *      R.adjust(4, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'b', 'c', 'd']
  *      R.adjust(-5, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'd']
  * @symb R.adjust(-1, f, [a, b]) = [a, f(b)]

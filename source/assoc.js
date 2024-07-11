@@ -21,6 +21,9 @@ import assocPath from './assocPath.js';
  * @example
  *
  *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
+ *
+ *      R.assoc(4, 3, [1, 2]); //=> [1, 2, undefined, undefined, 3]
+ *      R.assoc(-1, 3, [1, 2]); //=> [1, 3]
  */
 var assoc = _curry3(function assoc(prop, val, obj) { return assocPath([prop], val, obj); });
 export default assoc;

@@ -23,6 +23,8 @@ import always from './always.js';
  *
  *      R.update(1, '_', ['a', 'b', 'c']);      //=> ['a', '_', 'c']
  *      R.update(-1, '_', ['a', 'b', 'c']);     //=> ['a', 'b', '_']
+ *
+ *      // out-of-range returns original list
  *      R.update(3, '_', ['a', 'b', 'c']);      //=> ['a', 'b', 'c']
  *      R.update(-4, '_', ['a', 'b', 'c']);     //=> ['a', 'b', 'c']
  * @symb R.update(-1, a, [b, c]) = [b, a]
