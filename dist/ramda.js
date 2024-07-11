@@ -1329,13 +1329,9 @@
     return n << 0 === n;
   };
 
-  function _isString(x) {
-    return Object.prototype.toString.call(x) === '[object String]';
-  }
-
   function _nth(offset, list) {
     var idx = offset < 0 ? list.length + offset : offset;
-    return _isString(list) ? list.charAt(idx) : list[idx];
+    return list[idx];
   }
 
   /**
@@ -1397,6 +1393,10 @@
   var pluck = _curry2(function pluck(p, list) {
     return map(prop(p), list);
   });
+
+  function _isString(x) {
+    return Object.prototype.toString.call(x) === '[object String]';
+  }
 
   /**
    * Tests whether or not an object is similar to an array.
@@ -2132,9 +2132,9 @@
    * @memberOf R
    * @since v0.30.1
    * @category Function
-   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+   * @sig s -> (a -> String) -> a -> a -> Number
    * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
-   * @param {Function} fn A function of arity one that returns a value that can be compared
+   * @param {Function} fn A function of arity one that returns a string that can be compared
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if a occurs before b, `1` if a occurs after b, otherwise `0`
@@ -2174,8 +2174,10 @@
    */
   function _assoc(prop, val, obj) {
     if (_isInteger(prop) && _isArray(obj)) {
+      var len = obj.length;
+      var _idx = prop < 0 ? (len + prop) % len : prop;
       var arr = [].concat(obj);
-      arr[prop] = val;
+      arr[_idx] = val;
       return arr;
     }
     var result = {};
@@ -3665,9 +3667,9 @@
    * @memberOf R
    * @since v0.30.1
    * @category Function
-   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+   * @sig s -> (a -> String) -> a -> a -> Number
    * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
-   * @param {Function} fn A function of arity one that returns a value that can be compared
+   * @param {Function} fn A function of arity one that returns a string that can be compared
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if a occurs after b, `1` if a occurs before b, otherwise `0`

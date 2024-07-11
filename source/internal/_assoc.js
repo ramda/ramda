@@ -1,4 +1,3 @@
-import update from '../update.js';
 import _isArray from './_isArray.js';
 import _isInteger from './_isInteger.js';
 
@@ -16,7 +15,13 @@ import _isInteger from './_isInteger.js';
  */
 export default function _assoc(prop, val, obj) {
   if (_isInteger(prop) && _isArray(obj)) {
-    return update(prop, val, obj);
+    var len = obj.length;
+    var _idx = prop < 0 ? (len + prop) % len : prop;
+
+    var arr = [].concat(obj);
+    arr[_idx] = val;
+    return arr;
+
   }
 
   var result = {};
