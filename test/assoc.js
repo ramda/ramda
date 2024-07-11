@@ -49,4 +49,26 @@ describe('assoc', function() {
     assert.strictEqual(ary2[5], newValue);
   });
 
+  it('handles negative indexes from end of array', function() {
+    var newValue = 8;
+    var ary1 = [1, 2];
+    var ary2 = R.assoc(-2, 8, ary1);
+    eq(ary2, [8, 2]);
+    // Note: reference equality below!
+    assert.strictEqual(ary2[0], newValue);
+    assert.strictEqual(ary2[1], ary1[1]);
+  });
+
+  it('sets garbage key when negative indexes wraps to < 0', function() {
+    var newValue = 8;
+    var ary1 = [1, 2];
+    var ary2 = R.assoc(-3, 8, ary1);
+    var expected = [1, 2];
+    expected[-1] = 8;
+    eq(ary2, expected);
+    // Note: reference equality below!
+    assert.strictEqual(ary2[-1], newValue);
+    assert.strictEqual(ary2[0], ary1[0]);
+    assert.strictEqual(ary2[1], ary1[1]);
+  });
 });
