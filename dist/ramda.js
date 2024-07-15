@@ -2249,7 +2249,7 @@
     var idx = path[0];
     if (path.length > 1) {
       var nextObj = _prop(idx, obj);
-      if (isNil(obj) || _typeof(obj[idx]) !== 'object') {
+      if (isNil(nextObj) || _typeof(nextObj) !== 'object') {
         nextObj = _isInteger(path[1]) ? [] : {};
       }
       val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
