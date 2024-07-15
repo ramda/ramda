@@ -7,7 +7,7 @@ import _curry3 from './internal/_curry3.js';
  * new copy of the array with the element at the given index replaced with the
  * result of the function application.
  *
- * When `idx < 0 || idx >= list.length`, the original list is returned.
+ * When `idx < -list.length || idx >= list.length`, the original list is returned.
  *
  * @func
  * @memberOf R

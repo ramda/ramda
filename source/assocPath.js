@@ -27,8 +27,8 @@ import isNil from './isNil.js';
  *
  *      // Any missing or non-object keys in path will be overridden
  *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
- *      R.assocPath(['a', 1, 0], 42, {a: []}); // => {a: [undefined, [42]]}
- *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [undefined, [1, 42]]}
+ *      R.assocPath(['a', 1, 'c'], 42, {a: []}); // => {a: [undefined, {c: 42}]}
+ *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [1, 42]}
  */
 var assocPath = _curry3(function assocPath(path, val, obj) {
   if (path.length === 0) {

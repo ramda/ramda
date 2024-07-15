@@ -451,6 +451,8 @@
    * new copy of the array with the element at the given index replaced with the
    * result of the function application.
    *
+   * When `idx < 0 || idx >= list.length`, the original list is returned.
+   *
    * @func
    * @memberOf R
    * @since v0.14.0
@@ -468,6 +470,10 @@
    *
    *      R.adjust(1, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
    *      R.adjust(-1, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
+   *
+   *      // out-of-range returns original list
+   *      R.adjust(4, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'b', 'c', 'd']
+   *      R.adjust(-5, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'd']
    * @symb R.adjust(-1, f, [a, b]) = [a, f(b)]
    * @symb R.adjust(0, f, [a, b]) = [f(a), b]
    */
@@ -2174,8 +2180,7 @@
    */
   function _assoc(prop, val, obj) {
     if (_isInteger(prop) && _isArray(obj)) {
-      var len = obj.length;
-      var _idx = prop < 0 ? (len + prop) % len : prop;
+      var _idx = prop < 0 ? obj.length + prop : prop;
       var arr = [].concat(obj);
       arr[_idx] = val;
       return arr;
@@ -2232,6 +2237,8 @@
    *
    *      // Any missing or non-object keys in path will be overridden
    *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
+   *      R.assocPath(['a', 1, 0], 42, {a: []}); // => {a: [undefined, [42]]}
+   *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [undefined, [1, 42]]}
    */
   var assocPath = _curry3(function assocPath(path, val, obj) {
     if (path.length === 0) {
@@ -2265,6 +2272,9 @@
    * @example
    *
    *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
+   *
+   *      R.assoc(4, 3, [1, 2]); //=> [1, 2, undefined, undefined, 3]
+   *      R.assoc(-1, 3, [1, 2]); //=> [1, 3]
    */
   var assoc = _curry3(function assoc(prop, val, obj) {
     return assocPath([prop], val, obj);
@@ -6375,6 +6385,8 @@
    * Returns a new copy of the array with the element at the provided index
    * replaced with the given value.
    *
+   * When `idx < 0 || idx >= list.length`, the original list is returned.
+   *
    * @func
    * @memberOf R
    * @since v0.14.0
@@ -6389,6 +6401,10 @@
    *
    *      R.update(1, '_', ['a', 'b', 'c']);      //=> ['a', '_', 'c']
    *      R.update(-1, '_', ['a', 'b', 'c']);     //=> ['a', 'b', '_']
+   *
+   *      // out-of-range returns original list
+   *      R.update(3, '_', ['a', 'b', 'c']);      //=> ['a', 'b', 'c']
+   *      R.update(-4, '_', ['a', 'b', 'c']);     //=> ['a', 'b', 'c']
    * @symb R.update(-1, a, [b, c]) = [b, a]
    * @symb R.update(0, a, [b, c]) = [a, c]
    * @symb R.update(1, a, [b, c]) = [b, a]
@@ -6399,6 +6415,8 @@
 
   /**
    * Returns a lens whose focus is the specified index.
+   *
+   * When `idx < 0 || idx >= list.length`, `R.set` or `R.over`, the original list is returned.
    *
    * @func
    * @memberOf R
@@ -6416,6 +6434,10 @@
    *      R.view(headLens, ['a', 'b', 'c']);            //=> 'a'
    *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']
    *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
+   *
+   *      // out-of-range returns original list
+   *      R.set(R.lensIndex(3), 'x', ['a', 'b', 'c']);         //=> ['a', 'b', 'c']
+   *      R.over(R.lensIndex(-1), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
    */
   var lensIndex = _curry1(function lensIndex(n) {
     return lens(function (val) {

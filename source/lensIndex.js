@@ -7,7 +7,7 @@ import update from './update.js';
 /**
  * Returns a lens whose focus is the specified index.
  *
- * When `idx < 0 || idx >= list.length`, `R.set` or `R.over`, the original list is returned.
+ * When `idx < -list.length || idx >= list.length`, `R.set` or `R.over`, the original list is returned.
  *
  * @func
  * @memberOf R
@@ -28,7 +28,7 @@ import update from './update.js';
  *
  *      // out-of-range returns original list
  *      R.set(R.lensIndex(3), 'x', ['a', 'b', 'c']);         //=> ['a', 'b', 'c']
- *      R.over(R.lensIndex(-1), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
+ *      R.over(R.lensIndex(-4), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
  */
 var lensIndex = _curry1(function lensIndex(n) {
   return lens(
