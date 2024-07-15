@@ -451,8 +451,6 @@
    * new copy of the array with the element at the given index replaced with the
    * result of the function application.
    *
-   * When `idx < -list.length || idx >= list.length`, the original list is returned.
-   *
    * @func
    * @memberOf R
    * @since v0.14.0
@@ -470,10 +468,6 @@
    *
    *      R.adjust(1, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
    *      R.adjust(-1, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
-   *
-   *      // out-of-range returns original list
-   *      R.adjust(4, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'b', 'c', 'd']
-   *      R.adjust(-5, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'd']
    * @symb R.adjust(-1, f, [a, b]) = [a, f(b)]
    * @symb R.adjust(0, f, [a, b]) = [f(a), b]
    */
@@ -1335,16 +1329,13 @@
     return n << 0 === n;
   };
 
-  function _nth(offset, list) {
-    var idx = offset < 0 ? list.length + offset : offset;
-    return list[idx];
+  function _isString(x) {
+    return Object.prototype.toString.call(x) === '[object String]';
   }
 
-  function _prop(p, obj) {
-    if (obj == null) {
-      return;
-    }
-    return _isInteger(p) ? _nth(p, obj) : obj[p];
+  function _nth(offset, list) {
+    var idx = offset < 0 ? list.length + offset : offset;
+    return _isString(list) ? list.charAt(idx) : list[idx];
   }
 
   /**
@@ -1369,7 +1360,12 @@
    *      R.compose(R.inc, R.prop('x'))({ x: 3 }) //=> 4
    */
 
-  var prop = _curry2(_prop);
+  var prop = _curry2(function prop(p, obj) {
+    if (obj == null) {
+      return;
+    }
+    return _isInteger(p) ? _nth(p, obj) : obj[p];
+  });
 
   /**
    * Returns a new list by plucking the same named property off all objects in
@@ -1401,10 +1397,6 @@
   var pluck = _curry2(function pluck(p, list) {
     return map(prop(p), list);
   });
-
-  function _isString(x) {
-    return Object.prototype.toString.call(x) === '[object String]';
-  }
 
   /**
    * Tests whether or not an object is similar to an array.
@@ -2140,9 +2132,9 @@
    * @memberOf R
    * @since v0.30.1
    * @category Function
-   * @sig s -> (a -> String) -> a -> a -> Number
+   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
    * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
-   * @param {Function} fn A function of arity one that returns a string that can be compared
+   * @param {Function} fn A function of arity one that returns a value that can be compared
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if a occurs before b, `1` if a occurs after b, otherwise `0`
@@ -2182,9 +2174,8 @@
    */
   function _assoc(prop, val, obj) {
     if (_isInteger(prop) && _isArray(obj)) {
-      var _idx = prop < 0 ? obj.length + prop : prop;
       var arr = [].concat(obj);
-      arr[_idx] = val;
+      arr[prop] = val;
       return arr;
     }
     var result = {};
@@ -2239,8 +2230,6 @@
    *
    *      // Any missing or non-object keys in path will be overridden
    *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
-   *      R.assocPath(['a', 1, 'c'], 42, {a: []}); // => {a: [undefined, {c: 42}]}
-   *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [1, 42]}
    */
   var assocPath = _curry3(function assocPath(path, val, obj) {
     if (path.length === 0) {
@@ -2248,10 +2237,7 @@
     }
     var idx = path[0];
     if (path.length > 1) {
-      var nextObj = _prop(idx, obj);
-      if (isNil(nextObj) || _typeof(nextObj) !== 'object') {
-        nextObj = _isInteger(path[1]) ? [] : {};
-      }
+      var nextObj = !isNil(obj) && _has(idx, obj) && _typeof(obj[idx]) === 'object' ? obj[idx] : _isInteger(path[1]) ? [] : {};
       val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
     }
     return _assoc(idx, val, obj);
@@ -2277,9 +2263,6 @@
    * @example
    *
    *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
-   *
-   *      R.assoc(4, 3, [1, 2]); //=> [1, 2, undefined, undefined, 3]
-   *      R.assoc(-1, 3, [1, 2]); //=> [1, 3]
    */
   var assoc = _curry3(function assoc(prop, val, obj) {
     return assocPath([prop], val, obj);
@@ -3682,9 +3665,9 @@
    * @memberOf R
    * @since v0.30.1
    * @category Function
-   * @sig s -> (a -> String) -> a -> a -> Number
+   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
    * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
-   * @param {Function} fn A function of arity one that returns a string that can be compared
+   * @param {Function} fn A function of arity one that returns a value that can be compared
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if a occurs after b, `1` if a occurs before b, otherwise `0`
@@ -6390,8 +6373,6 @@
    * Returns a new copy of the array with the element at the provided index
    * replaced with the given value.
    *
-   * When `idx < 0 || idx >= list.length`, the original list is returned.
-   *
    * @func
    * @memberOf R
    * @since v0.14.0
@@ -6406,10 +6387,6 @@
    *
    *      R.update(1, '_', ['a', 'b', 'c']);      //=> ['a', '_', 'c']
    *      R.update(-1, '_', ['a', 'b', 'c']);     //=> ['a', 'b', '_']
-   *
-   *      // out-of-range returns original list
-   *      R.update(3, '_', ['a', 'b', 'c']);      //=> ['a', 'b', 'c']
-   *      R.update(-4, '_', ['a', 'b', 'c']);     //=> ['a', 'b', 'c']
    * @symb R.update(-1, a, [b, c]) = [b, a]
    * @symb R.update(0, a, [b, c]) = [a, c]
    * @symb R.update(1, a, [b, c]) = [b, a]
@@ -6420,8 +6397,6 @@
 
   /**
    * Returns a lens whose focus is the specified index.
-   *
-   * When `idx < -list.length || idx >= list.length`, `R.set` or `R.over`, the original list is returned.
    *
    * @func
    * @memberOf R
@@ -6439,10 +6414,6 @@
    *      R.view(headLens, ['a', 'b', 'c']);            //=> 'a'
    *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']
    *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
-   *
-   *      // out-of-range returns original list
-   *      R.set(R.lensIndex(3), 'x', ['a', 'b', 'c']);         //=> ['a', 'b', 'c']
-   *      R.over(R.lensIndex(-4), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
    */
   var lensIndex = _curry1(function lensIndex(n) {
     return lens(function (val) {
