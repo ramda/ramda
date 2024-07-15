@@ -13,6 +13,8 @@ done
 
 npm run clean
 npm run build
+./node_modules/.bin/cross-env NODE_ENV=development rollup -c -o dist/ramda.js
+./node_modules/.bin/cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js
 
 # build reads version from package.json, which isn't updated until after this script is run by xyz
 distpath=dist/ramda.js

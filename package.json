@@ -77,8 +77,6 @@
     "bookmarklet": "node scripts/bookmarklet",
     "build:es": "cross-env BABEL_ENV=es babel source --out-dir es && node ./scripts/addModulePackageScope.js",
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
-    "build:umd": "cross-env NODE_ENV=development rollup -c -o dist/ramda.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c -o dist/ramda.min.js",
     "build": "npm-run-all --parallel build:**",
     "partial-build": "node ./scripts/partialBuild",
     "clean": "rimraf es/* src/* dist/* coverage/*",
