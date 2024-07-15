@@ -451,7 +451,7 @@
    * new copy of the array with the element at the given index replaced with the
    * result of the function application.
    *
-   * When `idx < 0 || idx >= list.length`, the original list is returned.
+   * When `idx < -list.length || idx >= list.length`, the original list is returned.
    *
    * @func
    * @memberOf R
@@ -1340,6 +1340,13 @@
     return list[idx];
   }
 
+  function _prop(p, obj) {
+    if (obj == null) {
+      return;
+    }
+    return _isInteger(p) ? _nth(p, obj) : obj[p];
+  }
+
   /**
    * Returns a function that when supplied an object returns the indicated
    * property of that object, if it exists.
@@ -1362,12 +1369,7 @@
    *      R.compose(R.inc, R.prop('x'))({ x: 3 }) //=> 4
    */
 
-  var prop = _curry2(function prop(p, obj) {
-    if (obj == null) {
-      return;
-    }
-    return _isInteger(p) ? _nth(p, obj) : obj[p];
-  });
+  var prop = _curry2(_prop);
 
   /**
    * Returns a new list by plucking the same named property off all objects in
@@ -2237,8 +2239,8 @@
    *
    *      // Any missing or non-object keys in path will be overridden
    *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
-   *      R.assocPath(['a', 1, 0], 42, {a: []}); // => {a: [undefined, [42]]}
-   *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [undefined, [1, 42]]}
+   *      R.assocPath(['a', 1, 'c'], 42, {a: []}); // => {a: [undefined, {c: 42}]}
+   *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [1, 42]}
    */
   var assocPath = _curry3(function assocPath(path, val, obj) {
     if (path.length === 0) {
@@ -2246,7 +2248,10 @@
     }
     var idx = path[0];
     if (path.length > 1) {
-      var nextObj = !isNil(obj) && _has(idx, obj) && _typeof(obj[idx]) === 'object' ? obj[idx] : _isInteger(path[1]) ? [] : {};
+      var nextObj = _prop(idx, obj);
+      if (isNil(obj) || _typeof(obj[idx]) !== 'object') {
+        nextObj = _isInteger(path[1]) ? [] : {};
+      }
       val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
     }
     return _assoc(idx, val, obj);
@@ -6416,7 +6421,7 @@
   /**
    * Returns a lens whose focus is the specified index.
    *
-   * When `idx < 0 || idx >= list.length`, `R.set` or `R.over`, the original list is returned.
+   * When `idx < -list.length || idx >= list.length`, `R.set` or `R.over`, the original list is returned.
    *
    * @func
    * @memberOf R
@@ -6437,7 +6442,7 @@
    *
    *      // out-of-range returns original list
    *      R.set(R.lensIndex(3), 'x', ['a', 'b', 'c']);         //=> ['a', 'b', 'c']
-   *      R.over(R.lensIndex(-1), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
+   *      R.over(R.lensIndex(-4), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
    */
   var lensIndex = _curry1(function lensIndex(n) {
     return lens(function (val) {
