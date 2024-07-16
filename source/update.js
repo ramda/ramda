@@ -7,7 +7,7 @@ import always from './always.js';
  * Returns a new copy of the array with the element at the provided index
  * replaced with the given value.
  *
- * When `idx < 0 || idx >= list.length`, the original list is returned.
+ * When `idx < -list.length || idx >= list.length`, the original list is returned.
  *
  * @func
  * @memberOf R
