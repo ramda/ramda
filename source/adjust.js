@@ -7,6 +7,8 @@ import _curry3 from './internal/_curry3.js';
  * new copy of the array with the element at the given index replaced with the
  * result of the function application.
  *
+ * When `idx < -list.length || idx >= list.length`, the original list is returned.
+ *
  * @func
  * @memberOf R
  * @since v0.14.0
@@ -24,6 +26,10 @@ import _curry3 from './internal/_curry3.js';
  *
  *      R.adjust(1, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
  *      R.adjust(-1, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
+ *
+ *      // out-of-range returns original list
+ *      R.adjust(4, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'b', 'c', 'd']
+ *      R.adjust(-5, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'd']
  * @symb R.adjust(-1, f, [a, b]) = [a, f(b)]
  * @symb R.adjust(0, f, [a, b]) = [f(a), b]
  */

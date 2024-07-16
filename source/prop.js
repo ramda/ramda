@@ -1,6 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import _isInteger from './internal/_isInteger.js';
-import _nth from './internal/_nth.js';
+import _prop from './internal/_prop.js';
 
 
 /**
@@ -25,10 +24,5 @@ import _nth from './internal/_nth.js';
  *      R.compose(R.inc, R.prop('x'))({ x: 3 }) //=> 4
  */
 
-var prop = _curry2(function prop(p, obj) {
-  if (obj == null) {
-    return;
-  }
-  return _isInteger(p) ? _nth(p, obj) : obj[p];
-});
+var prop = _curry2(_prop);
 export default prop;

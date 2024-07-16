@@ -7,6 +7,8 @@ import always from './always.js';
  * Returns a new copy of the array with the element at the provided index
  * replaced with the given value.
  *
+ * When `idx < -list.length || idx >= list.length`, the original list is returned.
+ *
  * @func
  * @memberOf R
  * @since v0.14.0
@@ -21,6 +23,10 @@ import always from './always.js';
  *
  *      R.update(1, '_', ['a', 'b', 'c']);      //=> ['a', '_', 'c']
  *      R.update(-1, '_', ['a', 'b', 'c']);     //=> ['a', 'b', '_']
+ *
+ *      // out-of-range returns original list
+ *      R.update(3, '_', ['a', 'b', 'c']);      //=> ['a', 'b', 'c']
+ *      R.update(-4, '_', ['a', 'b', 'c']);     //=> ['a', 'b', 'c']
  * @symb R.update(-1, a, [b, c]) = [b, a]
  * @symb R.update(0, a, [b, c]) = [a, c]
  * @symb R.update(1, a, [b, c]) = [b, a]

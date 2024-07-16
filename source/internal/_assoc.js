@@ -15,9 +15,12 @@ import _isInteger from './_isInteger.js';
  */
 export default function _assoc(prop, val, obj) {
   if (_isInteger(prop) && _isArray(obj)) {
+    var _idx = prop < 0 ? obj.length + prop : prop;
+
     var arr = [].concat(obj);
-    arr[prop] = val;
+    arr[_idx] = val;
     return arr;
+
   }
 
   var result = {};

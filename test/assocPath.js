@@ -45,4 +45,18 @@ describe('assocPath', function() {
     eq(R.assocPath(['foo', 'bar', 'baz'], 42, {foo: null}), {foo: {bar: {baz: 42}}});
   });
 
+  it('sets in indexes regardless of length', function() {
+    eq(R.assocPath(['foo', 1, 0], 42, {foo : []}), {foo: [undefined, [42]]});
+  });
+
+  it('handles negative indexes from end of array', function() {
+    eq(R.assocPath(['foo', -1], 42, {foo : [1, 2, 3]}), {foo: [1, 2, 42]});
+    eq(R.assocPath(['foo', -1, 'X'], 42, {foo : [{a: 0}, {b: 0}]}), {foo: [{a: 0}, {b: 0, X: 42}]});
+  });
+
+  it('sets garbage key when negative indexes wraps to < 0', function() {
+    var expected = [1, 2, 3];
+    expected[-1] = 42;
+    eq(R.assocPath(['foo', -4], 42, {foo : [1, 2, 3]}), {foo: expected});
+  });
 });

@@ -29,6 +29,9 @@ describe('lensPath', function() {
       eq(R.set(R.lensPath(['X']), 0, testObj), {a: [{b: 1}, {b: 2}], d: 3, X: 0});
       eq(R.set(R.lensPath(['a', 0, 'X']), 0, testObj), {a: [{b: 1, X: 0}, {b: 2}], d: 3});
     });
+    it('treats negative index from the end of the array', function() {
+      eq(R.set(R.lensPath(['a', -1, 'X']), 0, testObj), {a: [{b: 1}, {b: 2, X: 0}], d: 3});
+    });
   });
   describe('over', function() {
     it('applies function to the value of the specified object property', function() {

@@ -1,8 +1,8 @@
 import _curry3 from './internal/_curry3.js';
-import _has from './internal/_has.js';
 import _isInteger from './internal/_isInteger.js';
 import _assoc from './internal/_assoc.js';
 import isNil from './isNil.js';
+import _prop from './internal/_prop.js';
 
 /**
  * Makes a shallow clone of an object, setting or overriding the nodes required
@@ -27,6 +27,8 @@ import isNil from './isNil.js';
  *
  *      // Any missing or non-object keys in path will be overridden
  *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
+ *      R.assocPath(['a', 1, 'c'], 42, {a: []}); // => {a: [undefined, {c: 42}]}
+ *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [1, 42]}
  */
 var assocPath = _curry3(function assocPath(path, val, obj) {
   if (path.length === 0) {
@@ -34,7 +36,10 @@ var assocPath = _curry3(function assocPath(path, val, obj) {
   }
   var idx = path[0];
   if (path.length > 1) {
-    var nextObj = (!isNil(obj) && _has(idx, obj) && typeof obj[idx] === 'object') ? obj[idx] : _isInteger(path[1]) ? [] : {};
+    var nextObj = _prop(idx, obj);
+    if (isNil(nextObj) || typeof nextObj !== 'object') {
+      nextObj = _isInteger(path[1]) ? [] : {};
+    }
     val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
   }
   return _assoc(idx, val, obj);
