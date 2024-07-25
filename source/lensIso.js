@@ -1,5 +1,6 @@
 import _curry2 from './internal/_curry2.js';
-import map from './map.js';
+import _lens from './internal/_lens.js';
+import nAry from './nAry.js';
 
 
 /**
@@ -26,15 +27,6 @@ import map from './map.js';
  *      R.over(xJson, R.assoc('x', 6), '{"x": 4,"y": 2}'); //=> '{"x": 6 ,"y": 2}'
  */
 var lensIso = _curry2(function lensIso(to, from) {
-  return function(toFunctorFn) {
-    return function(target) {
-      return map(
-        function(focus) {
-          return from(focus);
-        },
-        toFunctorFn(to(target))
-      );
-    };
-  };
+  return _lens(to, nAry(1, from));
 });
 export default lensIso;
