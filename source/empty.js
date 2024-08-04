@@ -41,9 +41,9 @@ var empty = _curry1(function empty(x) {
           ? x.empty()
           : (x != null && x.constructor != null && typeof x.constructor.empty === 'function')
             ? x.constructor.empty()
-            : (x instanceof Set)
+            : (x == Set || x instanceof Set)
               ? new Set()
-              : (x instanceof Map)
+              : (x == Map || x instanceof Map)
                 ? new Map()
                 : _isArray(x)
                   ? []
