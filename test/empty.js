@@ -51,4 +51,11 @@ describe('empty', function() {
     eq(R.empty(x), (function() { return arguments; }()));
   });
 
+  it('returns empty Set given an instance of Set', function() {
+    eq(R.empty(new Set([1, 2, 3])), new Set());
+  });
+
+  it('returns empty Map given an instance of Map', function() {
+    eq(R.empty(new Map([['a', 1], ['b', 2], ['c', 3]])), new Map());
+  });
 });

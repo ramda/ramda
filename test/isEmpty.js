@@ -47,4 +47,13 @@ describe('isEmpty', function() {
     eq(R.isEmpty(['']), false);
   });
 
+  it('returns correctly for Set', function() {
+    eq(R.isEmpty(new Set()), true);
+    eq(R.isEmpty(new Set([1])), false);
+  });
+
+  it('returns correctly for Map', function() {
+    eq(R.isEmpty(new Map()), true);
+    eq(R.isEmpty(new Map([['a', 1]])), false);
+  });
 });
