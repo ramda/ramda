@@ -41,17 +41,21 @@ var empty = _curry1(function empty(x) {
           ? x.empty()
           : (x != null && x.constructor != null && typeof x.constructor.empty === 'function')
             ? x.constructor.empty()
-            : _isArray(x)
-              ? []
-              : _isString(x)
-                ? ''
-                : _isObject(x)
-                  ? {}
-                  : _isArguments(x)
-                    ? (function() { return arguments; }())
-                    : _isTypedArray(x)
-                      ? x.constructor.from('')
-                      : void 0  // else
+            : (x instanceof Set)
+              ? new Set()
+              : (x instanceof Map)
+                ? new Map()
+                : _isArray(x)
+                  ? []
+                  : _isString(x)
+                    ? ''
+                    : _isObject(x)
+                      ? {}
+                      : _isArguments(x)
+                        ? (function() { return arguments; }())
+                        : _isTypedArray(x)
+                          ? x.constructor.from('')
+                          : void 0  // else
   );
 });
 export default empty;
