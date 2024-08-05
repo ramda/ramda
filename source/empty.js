@@ -8,7 +8,7 @@ import _isTypedArray from './internal/_isTypedArray.js';
 
 /**
  * Returns the empty value of its argument's type. Ramda defines the empty
- * value of Array (`[]`), Object (`{}`), String (`''`),
+ * value of Array (`[]`), Object (`{}`), String (`''`), Map (`new Map()`), Set (`new Set()`),
  * TypedArray (`Uint8Array []`, `Float32Array []`, etc), and Arguments. Other
  * types are supported if they define `<Type>.empty`,
  * `<Type>.prototype.empty` or implement the
@@ -30,6 +30,7 @@ import _isTypedArray from './internal/_isTypedArray.js';
  *      R.empty('unicorns');             //=> ''
  *      R.empty({x: 1, y: 2});           //=> {}
  *      R.empty(Uint8Array.from('123')); //=> Uint8Array []
+ *      R.empty(Set);                    //=> Set()
  */
 var empty = _curry1(function empty(x) {
   return (
