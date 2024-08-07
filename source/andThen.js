@@ -16,19 +16,27 @@ import _assertPromise from './internal/_assertPromise.js';
  * @param {Function} onSuccess The function to apply. Can return a value or a promise of a value.
  * @param {Promise} p
  * @return {Promise} The result of calling `p.then(onSuccess)`
- * @see R.otherwise
+ * @see R.otherwise, R.pipeWith
  * @example
  *
  *      const makeQuery = email => ({ query: { email }});
  *      const fetchMember = request =>
  *        Promise.resolve({ firstName: 'Bob', lastName: 'Loblaw', id: 42 });
+ *      const pickName = R.pick(['firstName', 'lastName'])
  *
  *      //getMemberName :: String -> Promise ({ firstName, lastName })
  *      const getMemberName = R.pipe(
  *        makeQuery,
  *        fetchMember,
- *        R.andThen(R.pick(['firstName', 'lastName']))
+ *        R.andThen(pickName),
  *      );
+ *
+ *      Alternately
+ *      const getMemberName = R.pipe(
+ *        makeQuery,
+ *        fetchMember,
+ *      )
+ *      R.pipeWith(R.andThen(pickName))(getMemberName)
  *
  *      getMemberName('bob@gmail.com').then(console.log);
  */
