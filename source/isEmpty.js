@@ -24,6 +24,8 @@ import equals from './equals.js';
  *      R.isEmpty({});                  //=> true
  *      R.isEmpty({length: 0});         //=> false
  *      R.isEmpty(Uint8Array.from('')); //=> true
+ *      R.isEmpty(new Set())            //=> true
+ *      R.isEmpty(new Map())            //=> true
  */
 var isEmpty = _curry1(function isEmpty(x) {
   return x != null && equals(x, empty(x));
