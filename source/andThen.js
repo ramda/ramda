@@ -31,7 +31,7 @@ import _assertPromise from './internal/_assertPromise.js';
  *        R.andThen(pickName),
  *      );
  *
- *      Alternately
+ *      // Alternately
  *      const getMemberName = R.pipe(
  *        makeQuery,
  *        fetchMember,
