@@ -25,10 +25,8 @@ import identity from './identity.js';
  * @examples
  *
  *      const doubleFn = (req) => Promise.resolve(req * 2)
- *      const x = R.pipeWith(
- *        doubleFn,
- *        R.andThen
- *      )(8) // 16
+ *      R.pipeWith(R.andThen, [doubleFn, R.inc])(8).then(console.log)
+ *      // logs 17
  *
  *      const pipeWhileNotNil = R.pipeWith((f, res) => R.isNil(res) ? res : f(res));
  *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
