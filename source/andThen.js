@@ -36,7 +36,9 @@ import _assertPromise from './internal/_assertPromise.js';
  *        makeQuery,
  *        fetchMember,
  *      )
- *      R.pipeWith(R.andThen(pickName))(getMemberName)
+ *
+ *      R.pipeWith(R.andThen, [getMemberName, pickName])('bob@gmail.com').then(console.log)
+ *      // logs {"firstName":"Bob","lastName":"Loblaw"}
  *
  *      getMemberName('bob@gmail.com').then(console.log);
  */
