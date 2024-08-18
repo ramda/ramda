@@ -21,8 +21,12 @@ import identity from './identity.js';
  * @param {Function} transformer The transforming function
  * @param {Array} functions The functions to pipe
  * @return {Function}
- * @see R.composeWith, R.pipe
- * @example
+ * @see R.andThen, R.composeWith, R.pipe
+ * @examples
+ *
+ *      const doubleFn = (req) => Promise.resolve(req * 2)
+ *      R.pipeWith(R.andThen, [doubleFn, R.inc])(8).then(console.log)
+ *      // logs 17
  *
  *      const pipeWhileNotNil = R.pipeWith((f, res) => R.isNil(res) ? res : f(res));
  *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
