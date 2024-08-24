@@ -16,4 +16,8 @@ describe('of', function() {
   it('dispatches to an available of method', function() {
     eq(R.of(Maybe, 100), Just(100));
   });
+
+  it('returns a Reader monad', function() {
+    eq(R.of(Function, {foo: 'bar'})(12), {foo: 'bar'});
+  });
 });
