@@ -1,5 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import map from './map.js';
+import _lens from './internal/_lens.js';
 
 
 /**
@@ -25,16 +25,5 @@ import map from './map.js';
  *      R.set(xLens, 4, {x: 1, y: 2});          //=> {x: 4, y: 2}
  *      R.over(xLens, R.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
  */
-var lens = _curry2(function lens(getter, setter) {
-  return function(toFunctorFn) {
-    return function(target) {
-      return map(
-        function(focus) {
-          return setter(focus, target);
-        },
-        toFunctorFn(getter(target))
-      );
-    };
-  };
-});
+var lens = _curry2(_lens);
 export default lens;
