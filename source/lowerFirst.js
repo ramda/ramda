@@ -11,7 +11,7 @@ import _isString from './internal/_isString.js';
  * @sig String -> String
  * @param {String} str The string to lower first case.
  * @return {String} The lower first case version of `str`.
- * @see R.lowerFirst
+ * @see R.upperFirst
  * @example
  *
  *      R.lowerFirst('Javascript'); //=> 'javascript'
