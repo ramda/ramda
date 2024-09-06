@@ -2,7 +2,7 @@ import _curry1 from './internal/_curry1.js';
 import _isString from './internal/_isString.js';
 
 /**
- * The lower first case version of a string.
+ * Converts the first character of string to lower case.
  *
  * @func
  * @memberOf R
