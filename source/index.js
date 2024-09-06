@@ -121,6 +121,7 @@ export { default as lift } from './lift.js';
 export { default as liftN } from './liftN.js';
 export { default as lt } from './lt.js';
 export { default as lte } from './lte.js';
+export { default as lowerFirst } from './lowerFirst.js';
 export { default as map } from './map.js';
 export { default as mapAccum } from './mapAccum.js';
 export { default as mapAccumRight } from './mapAccumRight.js';
