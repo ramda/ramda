@@ -232,6 +232,7 @@ export { default as toPairs } from './toPairs.js';
 export { default as toPairsIn } from './toPairsIn.js';
 export { default as toString } from './toString.js';
 export { default as toUpper } from './toUpper.js';
+export { default as upperFirst } from './upperFirst.js';
 export { default as transduce } from './transduce.js';
 export { default as transpose } from './transpose.js';
 export { default as traverse } from './traverse.js';
