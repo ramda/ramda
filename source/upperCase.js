@@ -17,9 +17,9 @@ import replace from './replace.js';
  * @see R.toUpper
  * @example
  *
- *      R.upperCase('HelloWorld'); //=> 'hello world'
- *      R.upperCase('hello_world'); //=> 'hello world'
- *      R.upperCase('HELLO-WORLD'); //=> 'hello world'
+ *      R.upperCase('HelloWorld'); //=> 'HELLO WORLD'
+ *      R.upperCase('hello_world'); //=> 'HELLO WORLD'
+ *      R.upperCase('HELLO-WORLD'); //=> 'HELLO WORLD'
  */
 
 
