@@ -124,6 +124,7 @@ export { default as lte } from './lte.js';
 export { default as map } from './map.js';
 export { default as mapAccum } from './mapAccum.js';
 export { default as mapAccumRight } from './mapAccumRight.js';
+export { default as mapKeys } from './mapKeys.js';
 export { default as mapObjIndexed } from './mapObjIndexed.js';
 export { default as match } from './match.js';
 export { default as mathMod } from './mathMod.js';

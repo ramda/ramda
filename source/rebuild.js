@@ -1,7 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import _fromPairs from './internal/_fromPairs.js';
-import _toPairs from './internal/_toPairs.js';
-import chain from './chain.js';
+import _rebuild from './internal/_rebuild.js';
 
 /**
  * Transforms an object into a new one, applying to every key-value pair a
@@ -20,10 +18,5 @@ import chain from './chain.js';
  *
  *      R.rebuild((k, v) => [[k.toUpperCase(), v * v]], {a: 1, b: 2, c: 3}) //=> {A: 1, B: 4, C: 9}
  */
-var rebuild = _curry2(function rebuild(convert, obj) {
-  return _fromPairs(chain(
-    function(pair) {return convert(pair[0], pair[1]);},
-    _toPairs(obj)
-  ));
-});
+var rebuild = _curry2(_rebuild);
 export default rebuild;
