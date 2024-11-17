@@ -1,5 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import _rebuild from './internal/_rebuild.js';
+import _mapKeys from './internal/_mapKeys.js';
 
 /**
  * Transforms an object by converting the keys to new values.
@@ -8,7 +8,6 @@ import _rebuild from './internal/_rebuild.js';
  *
  * @func
  * @memberOf R
- * @since v0.9.0
  * @category Object
  * @sig (String -> String) -> Object -> Object
  * @param {Function} fn
@@ -19,8 +18,6 @@ import _rebuild from './internal/_rebuild.js';
  *
  *      R.mapKeys(toUpper, {foo: 1, bar: 2, baz: 3}) //=> {FOO: 1, BAR: 2, BAZ: 3}
  */
-var mapKeys = _curry2(function mapKeys(fn, obj) {
-  return _rebuild(function(k, v) {return [[fn(k), v]];}, obj);
-});
+var mapKeys = _curry2(_mapKeys);
 
 export default mapKeys;

@@ -199,6 +199,7 @@ export { default as reduceWhile } from './reduceWhile.js';
 export { default as reduced } from './reduced.js';
 export { default as reject } from './reject.js';
 export { default as remove } from './remove.js';
+export { default as renameKeys } from './renameKeys.js';
 export { default as repeat } from './repeat.js';
 export { default as replace } from './replace.js';
 export { default as reverse } from './reverse.js';
