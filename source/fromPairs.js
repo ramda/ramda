@@ -1,5 +1,5 @@
 import _curry1 from './internal/_curry1.js';
-
+import _fromPairs from './internal/_fromPairs.js';
 
 /**
  * Creates a new object from a list key-value pairs. If a key appears in
@@ -17,13 +17,5 @@ import _curry1 from './internal/_curry1.js';
  *
  *      R.fromPairs([['a', 1], ['b', 2], ['c', 3]]); //=> {a: 1, b: 2, c: 3}
  */
-var fromPairs = _curry1(function fromPairs(pairs) {
-  var result = {};
-  var idx = 0;
-  while (idx < pairs.length) {
-    result[pairs[idx][0]] = pairs[idx][1];
-    idx += 1;
-  }
-  return result;
-});
+var fromPairs = _curry1(_fromPairs);
 export default fromPairs;

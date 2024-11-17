@@ -190,6 +190,7 @@ export { default as propOr } from './propOr.js';
 export { default as propSatisfies } from './propSatisfies.js';
 export { default as props } from './props.js';
 export { default as range } from './range.js';
+export { default as rebuild } from './rebuild.js';
 export { default as reduce } from './reduce.js';
 export { default as reduceBy } from './reduceBy.js';
 export { default as reduceRight } from './reduceRight.js';

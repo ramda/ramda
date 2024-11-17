@@ -1,8 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import _dispatchable from './internal/_dispatchable.js';
-import _makeFlat from './internal/_makeFlat.js';
-import _xchain from './internal/_xchain.js';
-import map from './map.js';
+import _chain from './internal/_chain.js';
 
 
 /**
@@ -31,10 +28,5 @@ import map from './map.js';
  *
  *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
  */
-var chain = _curry2(_dispatchable(['fantasy-land/chain', 'chain'], _xchain, function chain(fn, monad) {
-  if (typeof monad === 'function') {
-    return function(x) { return fn(monad(x))(x); };
-  }
-  return _makeFlat(false)(map(fn, monad));
-}));
+var chain = _curry2(_chain);
 export default chain;
