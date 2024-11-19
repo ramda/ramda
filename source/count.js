@@ -11,7 +11,7 @@ import curry from './curry.js';
  * @category List
  * @sig (a -> Boolean) -> [a] -> Number
  * @param {Function} predicate to match items against
- * @return {Array} list of items to count in
+ * @return {Number} the count of items matching the predicate
  * @example
  *
  *      const even = x => x % 2 == 0;
