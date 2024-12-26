@@ -1,5 +1,6 @@
+import _arity from './internal/_arity.js';
 import _concat from './internal/_concat.js';
-import _createPartialApplicator from './internal/_createPartialApplicator.js';
+import _curry2 from './internal/_curry2.js';
 
 
 /**
@@ -30,5 +31,15 @@ import _createPartialApplicator from './internal/_createPartialApplicator.js';
  *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partial(f, [a, b])(c, d) = f(a, b, c, d)
  */
-var partial = _createPartialApplicator(_concat);
+var partial = _curry2(function partial(fn, partialArgs) {
+  if (partialArgs.length >= fn.length) {
+    return fn.apply(this, partialArgs);
+  } else {
+    var restLength = fn.length - partialArgs.length;
+    return _arity(restLength, function() {
+      return fn.apply(this, _concat(partialArgs, arguments));
+    });
+  }
+});
+
 export default partial;
