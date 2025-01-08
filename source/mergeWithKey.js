@@ -17,7 +17,7 @@ import _has from './internal/_has.js';
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.mergeDeepWithKey, R.merge, R.mergeWith
+ * @see R.mergeDeepWithKey, R.mergeWith
  * @example
  *
  *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r
