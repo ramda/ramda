@@ -17,7 +17,7 @@ import mergeWithKey from './mergeWithKey.js';
  * @param {Object} l
  * @param {Object} r
  * @return {Object}
- * @see R.mergeDeepWith, R.merge, R.mergeWithKey
+ * @see R.mergeDeepWith, R.mergeWithKey
  * @example
  *
  *      R.mergeWith(R.concat,

@@ -16,7 +16,7 @@ import mergeDeepWithKey from './mergeDeepWithKey.js';
  * @param {Object} lObj
  * @param {Object} rObj
  * @return {Object}
- * @see R.merge, R.mergeDeepLeft, R.mergeDeepWith, R.mergeDeepWithKey
+ * @see R.mergeDeepLeft, R.mergeDeepWith, R.mergeDeepWithKey
  * @example
  *
  *      R.mergeDeepRight({ name: 'fred', age: 10, contact: { email: 'moo@example.com' }},
