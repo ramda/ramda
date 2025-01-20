@@ -59,6 +59,14 @@ describe('assoc', function() {
     assert.strictEqual(ary2[1], ary1[1]);
   });
 
+  it('handles Symbols', function() {
+    var obj = R.assoc('c', 3, {a: 1, b: 2, [Symbol.for('test')]: 4 });
+
+    eq(obj, {a: 1, b: 2, c: 3, [Symbol.for('test')]: 4});
+    assert.strictEqual(obj.c, 3);
+    assert.strictEqual(obj[Symbol.for('test')], 4);
+  });
+
   it('sets garbage key when negative indexes wraps to < 0', function() {
     var newValue = 8;
     var ary1 = [1, 2];
