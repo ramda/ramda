@@ -155,6 +155,7 @@ export { default as none } from './none.js';
 export { default as not } from './not.js';
 export { default as nth } from './nth.js';
 export { default as nthArg } from './nthArg.js';
+export { default as nthEq } from './nthEq.js';
 export { default as o } from './o.js';
 export { default as objOf } from './objOf.js';
 export { default as of } from './of.js';
