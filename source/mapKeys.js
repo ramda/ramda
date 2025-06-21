@@ -13,7 +13,7 @@ import _mapKeys from './internal/_mapKeys.js';
  * @param {Function} fn
  * @param {Object} obj
  * @return {Object}
- * @see R.map
+ * @see R.map, R.rebuild, R.renameKeys
  * @example
  *
  *      R.mapKeys(toUpper, {foo: 1, bar: 2, baz: 3}) //=> {FOO: 1, BAR: 2, BAZ: 3}

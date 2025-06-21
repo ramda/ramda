@@ -14,11 +14,11 @@ import _mapKeys from './internal/_mapKeys.js';
  * @param {Function} mapping An object pairing existing keys with new ones
  * @param {Object} obj A target object to convert
  * @return {Object} The result of replacing existing keys with their mapping counterparts when such exist
- * @see R.map
+ * @see R.mapKeys, R.rebuild
  * @example
  *
  *      var mapping = { name: 'firstName', address: 'street' };
-*       var obj = { name: 'John', city: 'Paris' };
+ *      var obj = { name: 'John', city: 'Paris' };
  *
  *      R.renameKeys(mapping, obj) //=>  { firstName: 'John', city: 'Paris' }
  */
