@@ -1,5 +1,5 @@
 import _curry1 from './internal/_curry1.js';
-import _has from './internal/_has.js';
+import _toPairs from './internal/_toPairs.js';
 
 
 /**
@@ -20,13 +20,5 @@ import _has from './internal/_has.js';
  *
  *      R.toPairs({a: 1, b: 2, c: 3}); //=> [['a', 1], ['b', 2], ['c', 3]]
  */
-var toPairs = _curry1(function toPairs(obj) {
-  var pairs = [];
-  for (var prop in obj) {
-    if (_has(prop, obj)) {
-      pairs[pairs.length] = [prop, obj[prop]];
-    }
-  }
-  return pairs;
-});
+var toPairs = _curry1(_toPairs);
 export default toPairs;
