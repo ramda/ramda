@@ -8,6 +8,7 @@ import _rebuild from './internal/_rebuild.js';
  *
  * @func
  * @memberOf R
+ * @since v0.31.0
  * @category List
  * @sig ([String, a] -> [[String, b]]) -> {k: a} -> {k: b}
  * @param {Function} convert A function that converts a key and a value to an array of key-value arrays.

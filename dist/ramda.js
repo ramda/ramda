@@ -1,6 +1,6 @@
-//  Ramda v0.30.1
+//  Ramda v0.31.0
 //  https://github.com/ramda/ramda
-//  (c) 2013-2024 Scott Sauyet, Michael Hurley, and David Chambers
+//  (c) 2013-2025 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
 
 (function (global, factory) {
@@ -451,6 +451,8 @@
    * new copy of the array with the element at the given index replaced with the
    * result of the function application.
    *
+   * When `idx < -list.length || idx >= list.length`, the original list is returned.
+   *
    * @func
    * @memberOf R
    * @since v0.14.0
@@ -468,6 +470,10 @@
    *
    *      R.adjust(1, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'B', 'c', 'd']
    *      R.adjust(-1, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'D']
+   *
+   *      // out-of-range returns original list
+   *      R.adjust(4, R.toUpper, ['a', 'b', 'c', 'd']);      //=> ['a', 'b', 'c', 'd']
+   *      R.adjust(-5, R.toUpper, ['a', 'b', 'c', 'd']);     //=> ['a', 'b', 'c', 'd']
    * @symb R.adjust(-1, f, [a, b]) = [a, f(b)]
    * @symb R.adjust(0, f, [a, b]) = [f(a), b]
    */
@@ -1036,6 +1042,23 @@
     return result;
   }
 
+  function _filterMap(fn, map) {
+    var result = new Map();
+    var iterator = map.entries();
+    var current = iterator.next();
+    while (!current.done) {
+      if (fn(current.value[1])) {
+        result.set(current.value[0], current.value[1]);
+      }
+      current = iterator.next();
+    }
+    return result;
+  }
+
+  function _isMap(x) {
+    return Object.prototype.toString.call(x) === '[object Map]';
+  }
+
   function _isObject(x) {
     return Object.prototype.toString.call(x) === '[object Object]';
   }
@@ -1058,7 +1081,7 @@
   /**
    * Takes a predicate and a `Filterable`, and returns a new filterable of the
    * same type containing the members of the given filterable which satisfy the
-   * given predicate. Filterable objects include plain objects or any object
+   * given predicate. Filterable objects include plain objects, Maps, or any object
    * that has a filter method such as `Array`.
    *
    * Dispatches to the `filter` method of the second argument, if present.
@@ -1089,7 +1112,7 @@
         acc[key] = filterable[key];
       }
       return acc;
-    }, {}, keys(filterable)) :
+    }, {}, keys(filterable)) : _isMap(filterable) ? _filterMap(pred, filterable) :
     // else
     _filter(pred, filterable);
   }));
@@ -1329,13 +1352,16 @@
     return n << 0 === n;
   };
 
-  function _isString(x) {
-    return Object.prototype.toString.call(x) === '[object String]';
-  }
-
   function _nth(offset, list) {
     var idx = offset < 0 ? list.length + offset : offset;
-    return _isString(list) ? list.charAt(idx) : list[idx];
+    return list[idx];
+  }
+
+  function _prop(p, obj) {
+    if (obj == null) {
+      return;
+    }
+    return _isInteger(p) ? _nth(p, obj) : obj[p];
   }
 
   /**
@@ -1360,12 +1386,7 @@
    *      R.compose(R.inc, R.prop('x'))({ x: 3 }) //=> 4
    */
 
-  var prop = _curry2(function prop(p, obj) {
-    if (obj == null) {
-      return;
-    }
-    return _isInteger(p) ? _nth(p, obj) : obj[p];
-  });
+  var prop = _curry2(_prop);
 
   /**
    * Returns a new list by plucking the same named property off all objects in
@@ -1397,6 +1418,10 @@
   var pluck = _curry2(function pluck(p, list) {
     return map(prop(p), list);
   });
+
+  function _isString(x) {
+    return Object.prototype.toString.call(x) === '[object String]';
+  }
 
   /**
    * Tests whether or not an object is similar to an array.
@@ -2132,9 +2157,9 @@
    * @memberOf R
    * @since v0.30.1
    * @category Function
-   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+   * @sig s -> (a -> String) -> a -> a -> Number
    * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
-   * @param {Function} fn A function of arity one that returns a value that can be compared
+   * @param {Function} fn A function of arity one that returns a string that can be compared
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if a occurs before b, `1` if a occurs after b, otherwise `0`
@@ -2174,8 +2199,9 @@
    */
   function _assoc(prop, val, obj) {
     if (_isInteger(prop) && _isArray(obj)) {
+      var _idx = prop < 0 ? obj.length + prop : prop;
       var arr = [].concat(obj);
-      arr[prop] = val;
+      arr[_idx] = val;
       return arr;
     }
     var result = {};
@@ -2230,6 +2256,8 @@
    *
    *      // Any missing or non-object keys in path will be overridden
    *      R.assocPath(['a', 'b', 'c'], 42, {a: 5}); //=> {a: {b: {c: 42}}}
+   *      R.assocPath(['a', 1, 'c'], 42, {a: []}); // => {a: [undefined, {c: 42}]}
+   *      R.assocPath(['a', -1], 42, {a: [1, 2]}); // => {a: [1, 42]}
    */
   var assocPath = _curry3(function assocPath(path, val, obj) {
     if (path.length === 0) {
@@ -2237,7 +2265,10 @@
     }
     var idx = path[0];
     if (path.length > 1) {
-      var nextObj = !isNil(obj) && _has(idx, obj) && _typeof(obj[idx]) === 'object' ? obj[idx] : _isInteger(path[1]) ? [] : {};
+      var nextObj = _prop(idx, obj);
+      if (isNil(nextObj) || _typeof(nextObj) !== 'object') {
+        nextObj = _isInteger(path[1]) ? [] : {};
+      }
       val = assocPath(Array.prototype.slice.call(path, 1), val, nextObj);
     }
     return _assoc(idx, val, obj);
@@ -2263,6 +2294,9 @@
    * @example
    *
    *      R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}
+   *
+   *      R.assoc(4, 3, [1, 2]); //=> [1, 2, undefined, undefined, 3]
+   *      R.assoc(-1, 3, [1, 2]); //=> [1, 3]
    */
   var assoc = _curry3(function assoc(prop, val, obj) {
     return assocPath([prop], val, obj);
@@ -2581,6 +2615,15 @@
     };
   }
 
+  var _chain = _dispatchable(['fantasy-land/chain', 'chain'], _xchain, function chain(fn, monad) {
+    if (typeof monad === 'function') {
+      return function (x) {
+        return fn(monad(x))(x);
+      };
+    }
+    return _makeFlat(false)(map(fn, monad));
+  });
+
   /**
    * `chain` maps a function over a list and concatenates the results. `chain`
    * is also known as `flatMap` in some libraries.
@@ -2607,14 +2650,7 @@
    *
    *      R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]
    */
-  var chain = _curry2(_dispatchable(['fantasy-land/chain', 'chain'], _xchain, function chain(fn, monad) {
-    if (typeof monad === 'function') {
-      return function (x) {
-        return fn(monad(x))(x);
-      };
-    }
-    return _makeFlat(false)(map(fn, monad));
-  }));
+  var chain = _curry2(_chain);
 
   /**
    * Restricts a number to be within a range.
@@ -3149,8 +3185,12 @@
    * @param {Function} transformer The transforming function
    * @param {Array} functions The functions to pipe
    * @return {Function}
-   * @see R.composeWith, R.pipe
-   * @example
+   * @see R.andThen, R.composeWith, R.pipe
+   * @examples
+   *
+   *      const doubleFn = (req) => Promise.resolve(req * 2)
+   *      R.pipeWith(R.andThen, [doubleFn, R.inc])(8).then(console.log)
+   *      // logs 17
    *
    *      const pipeWhileNotNil = R.pipeWith((f, res) => R.isNil(res) ? res : f(res));
    *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
@@ -3448,8 +3488,9 @@
    * @since v0.28.0
    * @category List
    * @sig (a -> Boolean) -> [a] -> Number
-   * @param {Function} predicate to match items against
-   * @return {Array} list of items to count in
+   * @param {Function} predicate The function to match items against.
+   * @param {Array} list The list to count elements from.
+   * @return {Number} The count of items matching the predicate.
    * @example
    *
    *      const even = x => x % 2 == 0;
@@ -3665,9 +3706,9 @@
    * @memberOf R
    * @since v0.30.1
    * @category Function
-   * @sig Ord b => s -> (a -> b) -> a -> a -> Number
+   * @sig s -> (a -> String) -> a -> a -> Number
    * @param {String|Array} locales A string with a BCP 47 language tag, or an array of such strings. Corresponds to the locales parameter of the Intl.Collator() constructor.
-   * @param {Function} fn A function of arity one that returns a value that can be compared
+   * @param {Function} fn A function of arity one that returns a string that can be compared
    * @param {*} a The first item to be compared.
    * @param {*} b The second item to be compared.
    * @return {Number} `-1` if a occurs after b, `1` if a occurs before b, otherwise `0`
@@ -4619,7 +4660,7 @@
 
   /**
    * Returns the empty value of its argument's type. Ramda defines the empty
-   * value of Array (`[]`), Object (`{}`), String (`''`),
+   * value of Array (`[]`), Object (`{}`), String (`''`), Map (`new Map()`), Set (`new Set()`),
    * TypedArray (`Uint8Array []`, `Float32Array []`, etc), and Arguments. Other
    * types are supported if they define `<Type>.empty`,
    * `<Type>.prototype.empty` or implement the
@@ -4641,9 +4682,10 @@
    *      R.empty('unicorns');             //=> ''
    *      R.empty({x: 1, y: 2});           //=> {}
    *      R.empty(Uint8Array.from('123')); //=> Uint8Array []
+   *      R.empty(Set);                    //=> Set()
    */
   var empty = _curry1(function empty(x) {
-    return x != null && typeof x['fantasy-land/empty'] === 'function' ? x['fantasy-land/empty']() : x != null && x.constructor != null && typeof x.constructor['fantasy-land/empty'] === 'function' ? x.constructor['fantasy-land/empty']() : x != null && typeof x.empty === 'function' ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === 'function' ? x.constructor.empty() : _isArray(x) ? [] : _isString(x) ? '' : _isObject(x) ? {} : _isArguments(x) ? function () {
+    return x != null && typeof x['fantasy-land/empty'] === 'function' ? x['fantasy-land/empty']() : x != null && x.constructor != null && typeof x.constructor['fantasy-land/empty'] === 'function' ? x.constructor['fantasy-land/empty']() : x != null && typeof x.empty === 'function' ? x.empty() : x != null && x.constructor != null && typeof x.constructor.empty === 'function' ? x.constructor.empty() : x == Set || x instanceof Set ? new Set() : x == Map || x instanceof Map ? new Map() : _isArray(x) ? [] : _isString(x) ? '' : _isObject(x) ? {} : _isArguments(x) ? function () {
       return arguments;
     }() : _isTypedArray(x) ? x.constructor.from('') : void 0 // else
     ;
@@ -5156,6 +5198,16 @@
     return obj;
   });
 
+  function fromPairs(pairs) {
+    var result = {};
+    var idx = 0;
+    while (idx < pairs.length) {
+      result[pairs[idx][0]] = pairs[idx][1];
+      idx += 1;
+    }
+    return result;
+  }
+
   /**
    * Creates a new object from a list key-value pairs. If a key appears in
    * multiple pairs, the rightmost pair is included in the object.
@@ -5172,15 +5224,7 @@
    *
    *      R.fromPairs([['a', 1], ['b', 2], ['c', 3]]); //=> {a: 1, b: 2, c: 3}
    */
-  var fromPairs = _curry1(function fromPairs(pairs) {
-    var result = {};
-    var idx = 0;
-    while (idx < pairs.length) {
-      result[pairs[idx][0]] = pairs[idx][1];
-      idx += 1;
-    }
-    return result;
-  });
+  var fromPairs$1 = _curry1(fromPairs);
 
   /**
    * Splits a list into sub-lists stored in an object, based on the result of
@@ -6153,6 +6197,8 @@
    *      R.isEmpty({});                  //=> true
    *      R.isEmpty({length: 0});         //=> false
    *      R.isEmpty(Uint8Array.from('')); //=> true
+   *      R.isEmpty(new Set())            //=> true
+   *      R.isEmpty(new Map())            //=> true
    */
   var isEmpty = _curry1(function isEmpty(x) {
     return x != null && equals(x, empty(x));
@@ -6373,6 +6419,8 @@
    * Returns a new copy of the array with the element at the provided index
    * replaced with the given value.
    *
+   * When `idx < -list.length || idx >= list.length`, the original list is returned.
+   *
    * @func
    * @memberOf R
    * @since v0.14.0
@@ -6387,6 +6435,10 @@
    *
    *      R.update(1, '_', ['a', 'b', 'c']);      //=> ['a', '_', 'c']
    *      R.update(-1, '_', ['a', 'b', 'c']);     //=> ['a', 'b', '_']
+   *
+   *      // out-of-range returns original list
+   *      R.update(3, '_', ['a', 'b', 'c']);      //=> ['a', 'b', 'c']
+   *      R.update(-4, '_', ['a', 'b', 'c']);     //=> ['a', 'b', 'c']
    * @symb R.update(-1, a, [b, c]) = [b, a]
    * @symb R.update(0, a, [b, c]) = [a, c]
    * @symb R.update(1, a, [b, c]) = [b, a]
@@ -6397,6 +6449,8 @@
 
   /**
    * Returns a lens whose focus is the specified index.
+   *
+   * When `idx < -list.length || idx >= list.length`, `R.set` or `R.over`, the original list is returned.
    *
    * @func
    * @memberOf R
@@ -6414,6 +6468,10 @@
    *      R.view(headLens, ['a', 'b', 'c']);            //=> 'a'
    *      R.set(headLens, 'x', ['a', 'b', 'c']);        //=> ['x', 'b', 'c']
    *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
+   *
+   *      // out-of-range returns original list
+   *      R.set(R.lensIndex(3), 'x', ['a', 'b', 'c']);         //=> ['a', 'b', 'c']
+   *      R.over(R.lensIndex(-4), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
    */
   var lensIndex = _curry1(function lensIndex(n) {
     return lens(function (val) {
@@ -6637,6 +6695,48 @@
     }
     return [tuple[0], result];
   });
+
+  function _toPairs(obj) {
+    var pairs = [];
+    for (var prop in obj) {
+      if (_has(prop, obj)) {
+        pairs[pairs.length] = [prop, obj[prop]];
+      }
+    }
+    return pairs;
+  }
+
+  var rebuild = function rebuild(convert, obj) {
+    return fromPairs(_chain(function (pair) {
+      return convert(pair[0], pair[1]);
+    }, _toPairs(obj)));
+  };
+
+  var mapKeys = function mapKeys(fn, obj) {
+    return rebuild(function (k, v) {
+      return [[fn(k), v]];
+    }, obj);
+  };
+
+  /**
+   * Transforms an object by converting the keys to new values.
+   *
+   * **Note** that if multiple keys map to the same new key, the last one processed will dominate.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.31.0
+   * @category Object
+   * @sig (String -> String) -> Object -> Object
+   * @param {Function} fn
+   * @param {Object} obj
+   * @return {Object}
+   * @see R.map, R.rebuild, R.renameKeys
+   * @example
+   *
+   *      R.mapKeys(toUpper, {foo: 1, bar: 2, baz: 3}) //=> {FOO: 1, BAR: 2, BAZ: 3}
+   */
+  var mapKeys$1 = _curry2(mapKeys);
 
   /**
    * An Object-specific version of [`map`](#map). The function is applied to three
@@ -6916,7 +7016,7 @@
    * @param {Object} l
    * @param {Object} r
    * @return {Object}
-   * @see R.mergeDeepWithKey, R.merge, R.mergeWith
+   * @see R.mergeDeepWithKey, R.mergeWith
    * @example
    *
    *      let concatValues = (k, l, r) => k == 'values' ? R.concat(l, r) : r
@@ -6996,7 +7096,7 @@
    * @param {Object} lObj
    * @param {Object} rObj
    * @return {Object}
-   * @see R.merge, R.mergeDeepRight, R.mergeDeepWith, R.mergeDeepWithKey
+   * @see R.mergeDeepRight, R.mergeDeepWith, R.mergeDeepWithKey
    * @example
    *
    *      R.mergeDeepLeft({ name: 'fred', age: 10, contact: { email: 'moo@example.com' }},
@@ -7023,7 +7123,7 @@
    * @param {Object} lObj
    * @param {Object} rObj
    * @return {Object}
-   * @see R.merge, R.mergeDeepLeft, R.mergeDeepWith, R.mergeDeepWithKey
+   * @see R.mergeDeepLeft, R.mergeDeepWith, R.mergeDeepWithKey
    * @example
    *
    *      R.mergeDeepRight({ name: 'fred', age: 10, contact: { email: 'moo@example.com' }},
@@ -7138,7 +7238,7 @@
    * @param {Object} l
    * @param {Object} r
    * @return {Object}
-   * @see R.mergeDeepWith, R.merge, R.mergeWithKey
+   * @see R.mergeDeepWith, R.mergeWithKey
    * @example
    *
    *      R.mergeWith(R.concat,
@@ -7403,8 +7503,6 @@
     return a * b;
   });
 
-  var _this = undefined;
-
   /**
    * Takes a function `f` and an object, and returns a function `g`.
    * When applied, `g` returns the result of applying `f` to the object
@@ -7433,9 +7531,9 @@
    *      sayHelloToMs({ firstName: 'Jane', lastName: 'Jones' }); //=> 'Hello, Ms. Jane Jones!'
    * @symb R.partialObject(f, { a, b })({ c, d }) = f({ a, b, c, d })
    */
-  var partialObject = _curry2(function (f, o) {
-    return function (props) {
-      return f.call(_this, mergeDeepRight(o, props));
+  var partialObject = _curry2(function partialObject(f, o) {
+    return function _partialObject(props) {
+      return f(mergeDeepRight(o, props));
     };
   });
 
@@ -8433,6 +8531,27 @@
   });
 
   /**
+   * Transforms an object into a new one, applying to every key-value pair a
+   * function creating zero, one, or many new key-value pairs, and combining
+   * the resulst into a single object.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.31.0
+   * @category List
+   * @sig ([String, a] -> [[String, b]]) -> {k: a} -> {k: b}
+   * @param {Function} convert A function that converts a key and a value to an array of key-value arrays.
+   * @param {Object} obj The structure to convert
+   * @return {Array} A new object whose key-value pairs are the result of applying the `convert` function
+   *         to every key-value pair in `obj`.
+   * @see R.map, R.mapKeys, R.renameKeys
+   * @example
+   *
+   *      R.rebuild((k, v) => [[k.toUpperCase(), v * v]], {a: 1, b: 2, c: 3}) //=> {A: 1, B: 4, C: 9}
+   */
+  var rebuild$1 = _curry2(rebuild);
+
+  /**
    * Returns a single item by iterating through the list, successively calling
    * the iterator function and passing it an accumulator value and the current
    * value from the array, and then passing the result to the next call.
@@ -8559,6 +8678,32 @@
    *       [1, 2, 3, 4, 5]) // [1, 2, 3]
    */
   var reduced = _curry1(_reduced);
+
+  /**
+   * Converts an object to a new one by changing all keys that are also found as keys in a mapping
+   * object to their corresponding values from that object.
+   *
+   * @func
+   * @memberOf R
+   * @since v0.31.0
+   * @category Object
+   * @sig Object -> Object -> Object
+   * @param {Function} mapping An object pairing existing keys with new ones
+   * @param {Object} obj A target object to convert
+   * @return {Object} The result of replacing existing keys with their mapping counterparts when such exist
+   * @see R.mapKeys, R.rebuild
+   * @example
+   *
+   *      var mapping = { name: 'firstName', address: 'street' };
+   *      var obj = { name: 'John', city: 'Paris' };
+   *
+   *      R.renameKeys(mapping, obj) //=>  { firstName: 'John', city: 'Paris' }
+   */
+  var renameKeys = _curry2(function renameKeys(mapping, obj) {
+    return mapKeys(function (key) {
+      return _has(key, mapping) ? mapping[key] : key;
+    }, obj);
+  });
 
   /**
    * Calls an input function `n` times, returning an array containing the results
@@ -9350,19 +9495,29 @@
    * @param {Function} onSuccess The function to apply. Can return a value or a promise of a value.
    * @param {Promise} p
    * @return {Promise} The result of calling `p.then(onSuccess)`
-   * @see R.otherwise
+   * @see R.otherwise, R.pipeWith
    * @example
    *
    *      const makeQuery = email => ({ query: { email }});
    *      const fetchMember = request =>
    *        Promise.resolve({ firstName: 'Bob', lastName: 'Loblaw', id: 42 });
+   *      const pickName = R.pick(['firstName', 'lastName'])
    *
    *      //getMemberName :: String -> Promise ({ firstName, lastName })
    *      const getMemberName = R.pipe(
    *        makeQuery,
    *        fetchMember,
-   *        R.andThen(R.pick(['firstName', 'lastName']))
+   *        R.andThen(pickName),
    *      );
+   *
+   *      // Alternately
+   *      const getMemberName = R.pipe(
+   *        makeQuery,
+   *        fetchMember,
+   *      )
+   *
+   *      R.pipeWith(R.andThen, [getMemberName, pickName])('bob@gmail.com').then(console.log)
+   *      // logs {"firstName":"Bob","lastName":"Loblaw"}
    *
    *      getMemberName('bob@gmail.com').then(console.log);
    */
@@ -9406,15 +9561,7 @@
    *
    *      R.toPairs({a: 1, b: 2, c: 3}); //=> [['a', 1], ['b', 2], ['c', 3]]
    */
-  var toPairs = _curry1(function toPairs(obj) {
-    var pairs = [];
-    for (var prop in obj) {
-      if (_has(prop, obj)) {
-        pairs[pairs.length] = [prop, obj[prop]];
-      }
-    }
-    return pairs;
-  });
+  var toPairs = _curry1(_toPairs);
 
   /**
    * Converts an object into an array of key, value arrays. The object's own
@@ -10512,7 +10659,7 @@
   exports.flow = flow;
   exports.forEach = forEach;
   exports.forEachObjIndexed = forEachObjIndexed;
-  exports.fromPairs = fromPairs;
+  exports.fromPairs = fromPairs$1;
   exports.groupBy = groupBy;
   exports.groupWith = groupWith;
   exports.gt = gt;
@@ -10561,6 +10708,7 @@
   exports.map = map;
   exports.mapAccum = mapAccum;
   exports.mapAccumRight = mapAccumRight;
+  exports.mapKeys = mapKeys$1;
   exports.mapObjIndexed = mapObjIndexed;
   exports.match = match;
   exports.mathMod = mathMod;
@@ -10627,6 +10775,7 @@
   exports.propSatisfies = propSatisfies;
   exports.props = props;
   exports.range = range;
+  exports.rebuild = rebuild$1;
   exports.reduce = reduce;
   exports.reduceBy = reduceBy;
   exports.reduceRight = reduceRight;
@@ -10634,6 +10783,7 @@
   exports.reduced = reduced;
   exports.reject = reject;
   exports.remove = remove;
+  exports.renameKeys = renameKeys;
   exports.repeat = repeat;
   exports.replace = replace;
   exports.reverse = reverse;

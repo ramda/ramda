@@ -9,6 +9,7 @@ import _mapKeys from './internal/_mapKeys.js';
  *
  * @func
  * @memberOf R
+ * @since v0.31.0
  * @category Object
  * @sig Object -> Object -> Object
  * @param {Function} mapping An object pairing existing keys with new ones

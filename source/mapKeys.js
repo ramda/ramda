@@ -8,6 +8,7 @@ import _mapKeys from './internal/_mapKeys.js';
  *
  * @func
  * @memberOf R
+ * @since v0.31.0
  * @category Object
  * @sig (String -> String) -> Object -> Object
  * @param {Function} fn
