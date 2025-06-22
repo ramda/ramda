@@ -79,7 +79,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel source --out-dir src",
     "build": "npm-run-all --parallel build:**",
     "partial-build": "node ./scripts/partialBuild",
-    "clean": "rimraf es/* src/* dist/* coverage/*",
+    "clean": "rimraf es/* src/* coverage/*",
     "prepare": "npm run clean && npm run build",
     "coverage:summary": "BABEL_ENV=cjs nyc --reporter=text-summary mocha -- --reporter=min --require @babel/register",
     "coverage:details": "BABEL_ENV=cjs nyc --reporter=text mocha -- --reporter=min --require @babel/register",
