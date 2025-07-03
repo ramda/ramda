@@ -17,11 +17,13 @@ import _nth from './internal/_nth.js';
  * @see R.tail, R.init, R.last
  * @example
  *
- *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
- *      R.head([]); //=> undefined
+ *      R.head([1, 2, 3]);  //=> 1
+ *      R.head([1]);        //=> 1
+ *      R.head([]);         //=> undefined
  *
- *      R.head('abc'); //=> 'a'
- *      R.head(''); //=> undefined
+ *      R.head('abc');  //=> 'a'
+ *      R.head('a');    //=> 'a'
+ *      R.head('');     //=> undefined
  */
 var head = _curry1(function(list) {
   return _nth(0, list);
