@@ -16,11 +16,13 @@ import _nth from './internal/_nth.js';
  * @see R.init, R.head, R.tail
  * @example
  *
- *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
- *      R.last([]); //=> undefined
+ *      R.last([1, 2, 3]);  //=> 3
+ *      R.last([1]);        //=> 1
+ *      R.last([]);         //=> undefined
  *
- *      R.last('abc'); //=> 'c'
- *      R.last(''); //=> undefined
+ *      R.last('abc');  //=> 'c'
+ *      R.last('a');    //=> 'a'
+ *      R.last('');     //=> undefined
  */
 var last = _curry1(function(list) {
   return _nth(-1, list);
