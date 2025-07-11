@@ -28,7 +28,7 @@ describe('range', function() {
       function() { R.range('a', 'z'); },
       function(err) {
         return err.constructor === TypeError &&
-               err.message === 'Both arguments to range must be numbers';
+               err.message === 'Both arguments to range must be integer';
       }
     );
   });
