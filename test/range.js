@@ -23,4 +23,4 @@ describe('range', function() {
     eq(R.range(10, 5), []);
   });
 
- });
+});
