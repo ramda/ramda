@@ -1,5 +1,5 @@
 import _curry2 from './internal/_curry2.js';
-import _isInteger from './internal/_isInteger.js';
+import _isNumber from './internal/_isNumber.js';
 
 
 /**
@@ -16,13 +16,14 @@ import _isInteger from './internal/_isInteger.js';
  * @example
  *
  *      R.range(1, 5);    //=> [1, 2, 3, 4]
- *      R.range(50, 53);  //=> [50, 51, 52]
+ *      R.range(1, 5.5);  //=> [1, 2, 3, 4, 5]
+ *      R.range(1.5, 5.5);  //=> [1.5, 2.5, 3.5, 4.5]
  */
 var range = _curry2(function range(from, to) {
-  if (!(_isInteger(from) && _isInteger(to))) {
-    throw new TypeError('Both arguments to range must be integer');
+  if (!(_isNumber(from) && _isNumber(to))) {
+    throw new TypeError('Both arguments to range must be numbers');
   }
-  var result = Array(from < to ? to - from : 0);
+  var result = Array(from < to ? Math.ceil(to - from) : 0);
   var finish = from < 0 ? to + Math.abs(from) : to - from;
   var idx = 0;
   while (idx < finish) {
