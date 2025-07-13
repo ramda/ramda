@@ -9,6 +9,7 @@ describe('range', function() {
     eq(R.range(4, 7), [4, 5, 6]);
     eq(R.range(1, 5.5), [1, 2, 3, 4, 5]);
     eq(R.range(1.5, 5.5), [1.5, 2.5, 3.5, 4.5]);
+    eq(R.range(-3, 2), [-3, -2, -1, 0, 1]);
   });
 
   it('returns the empty list if the first parameter is not larger than the second', function() {
