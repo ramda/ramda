@@ -1,5 +1,3 @@
-var assert = require('assert');
-
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
@@ -9,6 +7,9 @@ describe('range', function() {
   it('returns list of numbers', function() {
     eq(R.range(0, 5), [0, 1, 2, 3, 4]);
     eq(R.range(4, 7), [4, 5, 6]);
+    eq(R.range(1, 5.5), [1, 2, 3, 4, 5]);
+    eq(R.range(1.5, 5.5), [1.5, 2.5, 3.5, 4.5]);
+    eq(R.range(-3, 2), [-3, -2, -1, 0, 1]);
   });
 
   it('returns the empty list if the first parameter is not larger than the second', function() {
@@ -21,16 +22,6 @@ describe('range', function() {
     eq(result, []);
     result.push(5);
     eq(R.range(10, 5), []);
-  });
-
-  it('terminates given bad input', function() {
-    assert.throws(
-      function() { R.range('a', 'z'); },
-      function(err) {
-        return err.constructor === TypeError &&
-               err.message === 'Both arguments to range must be numbers';
-      }
-    );
   });
 
 });

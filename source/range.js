@@ -16,16 +16,17 @@ import _isNumber from './internal/_isNumber.js';
  * @example
  *
  *      R.range(1, 5);    //=> [1, 2, 3, 4]
- *      R.range(50, 53);  //=> [50, 51, 52]
+ *      R.range(1, 5.5);  //=> [1, 2, 3, 4, 5]
+ *      R.range(1.5, 5.5);  //=> [1.5, 2.5, 3.5, 4.5]
  */
 var range = _curry2(function range(from, to) {
   if (!(_isNumber(from) && _isNumber(to))) {
     throw new TypeError('Both arguments to range must be numbers');
   }
-  var result = Array(from < to ? to - from : 0);
-  var finish = from < 0 ? to + Math.abs(from) : to - from;
+  var length = from < to ? Math.ceil(to - from) : 0;
+  var result = Array(length);
   var idx = 0;
-  while (idx < finish) {
+  while (idx < length) {
     result[idx] = idx + from;
     idx += 1;
   }
