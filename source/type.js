@@ -17,6 +17,8 @@ import _curry1 from './internal/_curry1.js';
  * @example
  *
  *      R.type({}); //=> "Object"
+ *      R.type(new Map); //=> "Map"
+ *      R.type(new Set); //=> "Set"
  *      R.type(1); //=> "Number"
  *      R.type(false); //=> "Boolean"
  *      R.type('s'); //=> "String"
