@@ -24,14 +24,10 @@ import identity from './identity.js';
  * @see R.andThen, R.composeWith, R.pipe
  * @examples
  *
- *      const doubleFn = (req) => Promise.resolve(req * 2)
- *      R.pipeWith(R.andThen, [doubleFn, R.inc])(8).then(console.log)
- *      // logs 17
- *
  *      const pipeWhileNotNil = R.pipeWith((f, res) => R.isNil(res) ? res : f(res));
- *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
  *
- *      f(3, 4); // -(3^4) + 1
+ *      pipeWhileNotNil([R.prop('age'), R.inc ])({age: 1}) //=> 2
+ *      pipeWhileNotNil([R.prop('age'), R.inc ])({}) //=> undefined
  * @symb R.pipeWith(f)([g, h, i])(...args) = f(i, f(h, g(...args)))
  */
 var pipeWith = _curry2(function pipeWith(xf, list) {
