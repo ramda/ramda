@@ -4,7 +4,7 @@ import _rebuild from './internal/_rebuild.js';
 /**
  * Transforms an object into a new one, applying to every key-value pair a
  * function creating zero, one, or many new key-value pairs, and combining
- * the resulst into a single object.
+ * the results into a single object.
  *
  * @func
  * @memberOf R
