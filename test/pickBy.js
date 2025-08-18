@@ -17,7 +17,7 @@ describe('pickBy', function() {
     eq(R.pickBy(R.always(1), obj), obj);
   });
 
-  it('when returning falsy, keeps the key', function() {
+  it('when returning falsy, do not keep the key', function() {
     eq(R.pickBy(R.always(false), obj), {});
     eq(R.pickBy(R.always(0), obj), {});
     eq(R.pickBy(R.always(null), obj), {});
