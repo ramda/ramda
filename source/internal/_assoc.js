@@ -27,6 +27,12 @@ export default function _assoc(prop, val, obj) {
   for (var p in obj) {
     result[p] = obj[p];
   }
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(obj);
+    for (var i = 0; i < symbols.length; i += 1) {
+      result[symbols[i]] = obj[symbols[i]];
+    }
+  }
   result[prop] = val;
   return result;
 }
