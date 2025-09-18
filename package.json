@@ -59,9 +59,9 @@
     "./es/*": "./es/*.js",
     "./src/*": "./src/*.js",
     "./dist/*": "./dist/*.js",
-    "./es/": "./es/",
-    "./src/": "./src/",
-    "./dist/": "./dist/"
+    "./es": "./es/index.js",
+    "./src": "./src/index.js",
+    "./dist": "./dist/index.js"
   },
   "module": "./es/index.js",
   "unpkg": "dist/ramda.min.js",
