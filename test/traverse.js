@@ -25,6 +25,11 @@ describe('traverse', function() {
     eq(R.traverse(ofMaybe, R.map(R.add(10)), [Just(3), Nothing, Just(5)]), Nothing);
   });
 
+  it('operates on a dictionary of applicatives', function() {
+    eq(R.traverse(ofMaybe, R.map(R.add(10)), {a: Just(3), b: Just(4), c: Just(5)}), Just({a: 13, b: 14, c: 15}));
+    eq(R.traverse(ofMaybe, R.map(R.add(10)), {a: Just(3), b: Nothing, c: Just(5)}), Nothing);
+  });
+
   it('operates on a list of FL-applicatives', function() {
     eq(R.traverse(Maybe, R.map(R.add(10)), [Just(3), Just(4), Just(5)]), Just([13, 14, 15]));
     eq(R.traverse(Maybe, R.map(R.add(10)), [Just(3), Nothing, Just(5)]), Nothing);
