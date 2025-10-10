@@ -1,4 +1,4 @@
-//  Ramda v0.31.3
+//  Ramda v0.32.0
 //  https://github.com/ramda/ramda
 //  (c) 2013-2025 Scott Sauyet, Michael Hurley, and David Chambers
 //  Ramda may be freely distributed under the MIT license.
@@ -758,6 +758,8 @@
    * @example
    *
    *      R.type({}); //=> "Object"
+   *      R.type(new Map); //=> "Map"
+   *      R.type(new Set); //=> "Set"
    *      R.type(1); //=> "Number"
    *      R.type(false); //=> "Boolean"
    *      R.type('s'); //=> "String"
@@ -3135,11 +3137,13 @@
    * @see R.tail, R.init, R.last
    * @example
    *
-   *      R.head(['fi', 'fo', 'fum']); //=> 'fi'
-   *      R.head([]); //=> undefined
+   *      R.head([1, 2, 3]);  //=> 1
+   *      R.head([1]);        //=> 1
+   *      R.head([]);         //=> undefined
    *
-   *      R.head('abc'); //=> 'a'
-   *      R.head(''); //=> undefined
+   *      R.head('abc');  //=> 'a'
+   *      R.head('a');    //=> 'a'
+   *      R.head('');     //=> undefined
    */
   var head = _curry1(function (list) {
     return _nth(0, list);
@@ -3188,14 +3192,10 @@
    * @see R.andThen, R.composeWith, R.pipe
    * @examples
    *
-   *      const doubleFn = (req) => Promise.resolve(req * 2)
-   *      R.pipeWith(R.andThen, [doubleFn, R.inc])(8).then(console.log)
-   *      // logs 17
-   *
    *      const pipeWhileNotNil = R.pipeWith((f, res) => R.isNil(res) ? res : f(res));
-   *      const f = pipeWhileNotNil([Math.pow, R.negate, R.inc])
    *
-   *      f(3, 4); // -(3^4) + 1
+   *      pipeWhileNotNil([R.prop('age'), R.inc ])({age: 1}) //=> 2
+   *      pipeWhileNotNil([R.prop('age'), R.inc ])({}) //=> undefined
    * @symb R.pipeWith(f)([g, h, i])(...args) = f(i, f(h, g(...args)))
    */
   var pipeWith = _curry2(function pipeWith(xf, list) {
@@ -4405,11 +4405,13 @@
    * @see R.init, R.head, R.tail
    * @example
    *
-   *      R.last(['fi', 'fo', 'fum']); //=> 'fum'
-   *      R.last([]); //=> undefined
+   *      R.last([1, 2, 3]);  //=> 3
+   *      R.last([1]);        //=> 1
+   *      R.last([]);         //=> undefined
    *
-   *      R.last('abc'); //=> 'c'
-   *      R.last(''); //=> undefined
+   *      R.last('abc');  //=> 'c'
+   *      R.last('a');    //=> 'a'
+   *      R.last('');     //=> undefined
    */
   var last = _curry1(function (list) {
     return _nth(-1, list);
@@ -8514,16 +8516,17 @@
    * @example
    *
    *      R.range(1, 5);    //=> [1, 2, 3, 4]
-   *      R.range(50, 53);  //=> [50, 51, 52]
+   *      R.range(1, 5.5);  //=> [1, 2, 3, 4, 5]
+   *      R.range(1.5, 5.5);  //=> [1.5, 2.5, 3.5, 4.5]
    */
   var range = _curry2(function range(from, to) {
     if (!(_isNumber(from) && _isNumber(to))) {
       throw new TypeError('Both arguments to range must be numbers');
     }
-    var result = Array(from < to ? to - from : 0);
-    var finish = from < 0 ? to + Math.abs(from) : to - from;
+    var length = from < to ? Math.ceil(to - from) : 0;
+    var result = Array(length);
     var idx = 0;
-    while (idx < finish) {
+    while (idx < length) {
       result[idx] = idx + from;
       idx += 1;
     }
@@ -8533,7 +8536,7 @@
   /**
    * Transforms an object into a new one, applying to every key-value pair a
    * function creating zero, one, or many new key-value pairs, and combining
-   * the resulst into a single object.
+   * the results into a single object.
    *
    * @func
    * @memberOf R
