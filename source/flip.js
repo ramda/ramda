@@ -12,7 +12,7 @@ import curryN from './curryN.js';
  * @category Function
  * @sig ((a, b, c, ...) -> z) -> (b -> a -> c -> ... -> z)
  * @param {Function} fn The function to be called with its first two arguments swapped.
- * @return {Function} Returns function a function that calls fn with its first two arguments swapped.
+ * @return {Function} Returns function a function that calls `fn` with its first two arguments swapped.
  * @example
  *
  *      const mergeThree = (a, b, c) => [].concat(a, b, c);
