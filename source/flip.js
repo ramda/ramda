@@ -11,8 +11,8 @@ import curryN from './curryN.js';
  * @since v0.1.0
  * @category Function
  * @sig ((a, b, c, ...) -> z) -> (b -> a -> c -> ... -> z)
- * @param {Function} fn The function to invoke with its first two parameters reversed.
- * @return {*} The result of invoking `fn` with its first two parameters' order reversed.
+ * @param {Function} fn The function to be called with its first two arguments swapped.
+ * @return {Function} Returns function a function that calls fn with its first two arguments swapped.
  * @example
  *
  *      const mergeThree = (a, b, c) => [].concat(a, b, c);
