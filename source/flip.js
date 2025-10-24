@@ -11,7 +11,7 @@ import curryN from './curryN.js';
  * @since v0.1.0
  * @category Function
  * @sig ((a, b, c, ...) -> z) -> (b -> a -> c -> ... -> z)
- * @param {Function} fn The function to be called with its first two arguments swapped.
+ * @param {Function} fn The function to be invoked with its first two parameters swapped.
  * @return {Function} Returns function a function that calls `fn` with its first two arguments swapped.
  * @example
  *
