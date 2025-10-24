@@ -4,7 +4,7 @@ import curryN from './curryN.js';
 
 /**
  * Returns a new function much like the supplied one, except that the first two
- * arguments' order is reversed.
+ * arguments are swapped.
  *
  * @func
  * @memberOf R
