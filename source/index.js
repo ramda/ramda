@@ -92,7 +92,7 @@ export { default as includes } from './includes.js';
 export { default as indexBy } from './indexBy.js';
 export { default as indexOf } from './indexOf.js';
 export { default as init } from './init.js';
-export { default as innerJoin } from './innerJoin.js';
+export { default as intersectionWith } from './intersectionWith.js';
 export { default as insert } from './insert.js';
 export { default as insertAll } from './insertAll.js';
 export { default as intersection } from './intersection.js';

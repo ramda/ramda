@@ -27,7 +27,7 @@ import _filter from './internal/_filter.js';
  * @see R.intersection
  * @example
  *
- *      R.innerJoin(
+ *      R.intersectionWith(
  *        (record, id) => record.id === id,
  *        [{id: 824, name: 'Richie Furay'},
  *         {id: 956, name: 'Dewey Martin'},
@@ -38,7 +38,7 @@ import _filter from './internal/_filter.js';
  *      );
  *      //=> [{id: 456, name: 'Stephen Stills'}, {id: 177, name: 'Neil Young'}]
  */
-var innerJoin = _curry3(function innerJoin(pred, xs, ys) {
+var intersectionWith = _curry3(function intersectionWith(pred, xs, ys) {
   return _filter(function(x) { return _includesWith(pred, x, ys); }, xs);
 });
-export default innerJoin;
+export default intersectionWith;
