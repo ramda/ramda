@@ -115,6 +115,7 @@ export { default as lastIndexOf } from './lastIndexOf.js';
 export { default as length } from './length.js';
 export { default as lens } from './lens.js';
 export { default as lensIndex } from './lensIndex.js';
+export { default as lensIso } from './lensIso.js';
 export { default as lensPath } from './lensPath.js';
 export { default as lensProp } from './lensProp.js';
 export { default as lift } from './lift.js';
