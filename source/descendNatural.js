@@ -26,7 +26,7 @@ import curry from './curry.js';
  *      R.sort(R.descendNatural('sv', R.identity), unsorted);
  *      // => ['Ørjan', 'Älva', 'Bob', '10', '3', '1']
  *
- *     R.sort(R.descend(R.identity), unsorted);
+ *      R.sort(R.descend(R.identity), unsorted);
  *      // => ['Ørjan', 'Älva', 'Bob', '3', '10', '1']
  */
 var descendNatural = curry(function descendNatural(locales, fn, a, b) {

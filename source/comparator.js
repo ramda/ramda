@@ -22,7 +22,7 @@ import _curry1 from './internal/_curry1.js';
  *        { name: 'Mikhail', age: 62 },
  *      ];
  *      const peopleByIncreasingAge = R.sort(byAge, people);
- *        //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]
+ *      //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]
  */
 var comparator = _curry1(function comparator(pred) {
   return function(a, b) {
