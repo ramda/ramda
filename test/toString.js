@@ -196,4 +196,20 @@ describe('toString', function() {
     assert.strictEqual(R.toString(y), '{"x": [<Circular>]}');
   });
 
+  it('does not dispatch to equals while checking seen values', function() {
+    var complexObject = {
+      foo: {
+        foo: {
+          equals: function() {
+            throw new Error('equals called');
+          }
+        }
+      }
+    };
+
+    assert.doesNotThrow(function() {
+      R.toString(complexObject);
+    });
+  });
+
 });

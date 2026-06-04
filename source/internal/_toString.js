@@ -1,4 +1,3 @@
-import _includes from './_includes.js';
 import _map from './_map.js';
 import _quote from './_quote.js';
 import _toISOString from './_toISOString.js';
@@ -6,10 +5,22 @@ import keys from '../keys.js';
 import reject from '../reject.js';
 
 
+function _containsReference(list, item) {
+  var idx = 0;
+
+  while (idx < list.length) {
+    if (list[idx] === item) {
+      return true;
+    }
+    idx += 1;
+  }
+  return false;
+}
+
 export default function _toString(x, seen) {
   var recur = function recur(y) {
     var xs = seen.concat([x]);
-    return _includes(y, xs) ? '<Circular>' : _toString(y, xs);
+    return _containsReference(xs, y) ? '<Circular>' : _toString(y, xs);
   };
 
   //  mapPairs :: (Object, [String]) -> [String]
