@@ -247,6 +247,48 @@ describe('built-in types', function() {
     }, [/x/, /x/g, /x/i, /x/m, /x/gi, /x/gm, /x/im, /x/gim]);
   });
 
+  it('clones Error object without retaining a reference to the source', function() {
+    var error = new Error('boom');
+    error.code = {value: 42};
+    var clone = R.clone(error);
+
+    assert.notStrictEqual(clone, error);
+    eq(clone instanceof Error, true);
+    eq(clone.message, 'boom');
+    eq(clone.stack, error.stack);
+    // own enumerable properties are deep cloned
+    assert.notStrictEqual(clone.code, error.code);
+    eq(clone.code, {value: 42});
+
+    clone.code.value = 0;
+    eq(error.code.value, 42);
+  });
+
+  it('preserves the prototype of Error subtypes', function() {
+    R.forEach(function(Ctor) {
+      var clone = R.clone(new Ctor('oops'));
+      assert.notStrictEqual(clone, undefined);
+      eq(clone instanceof Ctor, true);
+      eq(clone instanceof Error, true);
+      eq(clone.message, 'oops');
+    }, [TypeError, RangeError, SyntaxError, ReferenceError]);
+  });
+
+  it('clones AggregateError including its non-enumerable errors', function() {
+    if (typeof global.AggregateError === 'undefined') { return; }
+    var errors = [new Error('a'), new Error('b')];
+    var aggregate = new global.AggregateError(errors, 'many');
+    var clone = R.clone(aggregate);
+
+    assert.notStrictEqual(clone, aggregate);
+    eq(clone instanceof global.AggregateError, true);
+    eq(clone.message, 'many');
+    eq(clone.errors.length, 2);
+    assert.notStrictEqual(clone.errors, aggregate.errors);
+    assert.notStrictEqual(clone.errors[0], aggregate.errors[0]);
+    eq(clone.errors[0].message, 'a');
+  });
+
 });
 
 describe('deep clone deep nested mixed objects', function() {

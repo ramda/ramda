@@ -42,6 +42,7 @@ export default function _clone(value, deep, map) {
     case 'Array':   return copy(Array(value.length));
     case 'Date':    return new Date(value.valueOf());
     case 'RegExp':  return _cloneRegExp(value);
+    case 'Error':   return copyError(value, copy, deep, map);
     case 'Int8Array':
     case 'Uint8Array':
     case 'Uint8ClampedArray':
@@ -56,6 +57,22 @@ export default function _clone(value, deep, map) {
       return value.slice();
     default:        return value;
   }
+}
+
+function copyError(value, copy, deep, map) {
+  // Create a fresh error sharing the source prototype (so subtypes such as
+  // `TypeError` and `instanceof` checks are preserved) and let `copy` clone its
+  // own enumerable properties while registering it for circular references.
+  var result = copy(Object.create(Object.getPrototypeOf(value)));
+  // `message`, `stack` and `errors` (`AggregateError`) are non-enumerable own
+  // properties, so they are skipped by the enumerable copy above and must be
+  // carried over explicitly.
+  ['message', 'stack', 'errors'].forEach(function(key) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      result[key] = deep ? _clone(value[key], true, map) : value[key];
+    }
+  });
+  return result;
 }
 
 function _isPrimitive(param) {
