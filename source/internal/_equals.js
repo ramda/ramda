@@ -1,5 +1,4 @@
 import _arrayFromIterator from './_arrayFromIterator.js';
-import _includesWith from './_includesWith.js';
 import _functionName from './_functionName.js';
 import _has from './_has.js';
 import _objectIs from './_objectIs.js';
@@ -8,13 +7,14 @@ import type from '../type.js';
 
 /**
  * private _uniqContentEquals function.
- * That function is checking equality of 2 iterator contents with 2 assumptions
- * - iterators lengths are the same
- * - iterators values are unique
+ * That function is checking equality of 2 iterator contents as multisets,
+ * assuming the two iterators have the same length (guaranteed by the caller).
  *
- * false-positive result will be returned for comparison of, e.g.
- * - [1,2,3] and [1,2,3,4]
- * - [1,1,1] and [1,2,3]
+ * Members are matched greedily: each element of *a* consumes the first
+ * not-yet-consumed value-equal element of *b*. This is symmetric and handles
+ * value-equal but reference-distinct members with correct multiplicity, e.g.
+ * - `new Set([{v: 1}, {v: 1}])` vs `new Set([{v: 1}, {v: 2}])` (unequal)
+ * - `[{v: 1}, {v: 1}, {v: 2}]` vs `[{v: 1}, {v: 2}, {v: 2}]` (unequal)
  * */
 
 function _uniqContentEquals(aIterator, bIterator, stackA, stackB) {
@@ -25,10 +25,29 @@ function _uniqContentEquals(aIterator, bIterator, stackA, stackB) {
     return _equals(_a, _b, stackA.slice(), stackB.slice());
   }
 
-  // if *a* array contains any element that is not included in *b*
-  return !_includesWith(function(b, aItem) {
-    return !_includesWith(eq, aItem, b);
-  }, b, a);
+  if (a.length !== b.length) {
+    return false;
+  }
+
+  var consumed = [];
+  var idx = 0;
+  while (idx < a.length) {
+    var found = false;
+    var jdx = 0;
+    while (jdx < b.length) {
+      if (!consumed[jdx] && eq(a[idx], b[jdx])) {
+        consumed[jdx] = true;
+        found = true;
+        break;
+      }
+      jdx += 1;
+    }
+    if (!found) {
+      return false;
+    }
+    idx += 1;
+  }
+  return true;
 }
 
 export default function _equals(a, b, stackA, stackB) {

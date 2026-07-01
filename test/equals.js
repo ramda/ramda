@@ -229,6 +229,16 @@ describe('equals', function() {
       eq(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [4, 5, 6]]])), true);
       eq(R.equals(new Map([[[1, 2, 3], [4, 5, 6]]]), new Map([[[1, 2, 3], [7, 8, 9]]])), false);
     });
+    it('compares Maps with value-equal, reference-distinct keys symmetrically', function() {
+      var a = new Map([[{v: 1}, 'x'], [{v: 1}, 'x']]);
+      var b = new Map([[{v: 1}, 'x'], [{v: 2}, 'x']]);
+      eq(R.equals(a, b), false);
+      eq(R.equals(b, a), false);
+      var c = new Map([[{v: 1}, 'x'], [{v: 1}, 'x'], [{v: 2}, 'x']]);
+      var d = new Map([[{v: 1}, 'x'], [{v: 2}, 'x'], [{v: 2}, 'x']]);
+      eq(R.equals(c, d), false);
+      eq(R.equals(new Map([[{v: 1}, 'x'], [{v: 2}, 'y']]), new Map([[{v: 2}, 'y'], [{v: 1}, 'x']])), true);
+    });
     it('dispatches to `equals` method recursively in Set', function() {
       var a = new Map();
       var b = new Map();
@@ -251,6 +261,16 @@ describe('equals', function() {
       eq(R.equals(new Set([1, new Set([2, new Set([3])])]), new Set([1, new Set([2, new Set([4])])])), false);
       eq(R.equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [4, 5, 6]])), true);
       eq(R.equals(new Set([[1, 2, 3], [4, 5, 6]]), new Set([[1, 2, 3], [7, 8, 9]])), false);
+    });
+    it('compares Sets with value-equal, reference-distinct members symmetrically', function() {
+      var a = new Set([{v: 1}, {v: 1}]);
+      var b = new Set([{v: 1}, {v: 2}]);
+      eq(R.equals(a, b), false);
+      eq(R.equals(b, a), false);
+      var c = new Set([{v: 1}, {v: 1}, {v: 2}]);
+      var d = new Set([{v: 1}, {v: 2}, {v: 2}]);
+      eq(R.equals(c, d), false);
+      eq(R.equals(new Set([{v: 1}, {v: 2}]), new Set([{v: 2}, {v: 1}])), true);
     });
     it('dispatches to `equals` method recursively in Set', function() {
       var a = new Set();
