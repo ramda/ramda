@@ -5,7 +5,7 @@ A practical functional library for JavaScript programmers.
 
 [![Build Status](https://github.com/ramda/ramda/workflows/Build/badge.svg)](https://github.com/ramda/ramda/actions?query=workflow%3ABuild)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
-[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/ramda@v0.27.2)
+[![deno land](https://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/ramda@v0.27.2)
 [![nest badge](https://nest.land/badge.svg)](https://nest.land/package/ramda)
 [![Gitter](https://badges.gitter.im/Join_Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -43,9 +43,9 @@ The last two points together make it very easy to build functions as sequences o
 Introductions
 -------------
 
-* [Introducing Ramda](http://buzzdecafe.github.io/code/2014/05/16/introducing-ramda) by Buzz de Cafe
-* [Why Ramda?](http://fr.umio.us/why-ramda/) by Scott Sauyet
-* [Favoring Curry](http://fr.umio.us/favoring-curry/) by Scott Sauyet
+* [Introducing Ramda](https://buzzdecafe.github.io/code/2014/05/16/introducing-ramda) by Buzz de Cafe
+* [Why Ramda?](https://fr.umio.us/why-ramda/) by Scott Sauyet
+* [Favoring Curry](https://fr.umio.us/favoring-curry/) by Scott Sauyet
 * [Why Curry Helps](https://hughfdjackson.com/javascript/why-curry-helps/) by Hugh Jackson
 * [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA&app=desktop) by Brian Lonsdorf
 * [Thinking in Ramda](https://randycoulman.com/blog/categories/thinking-in-ramda) by Randy Coulman
@@ -120,7 +120,7 @@ or from a CDN, either cdnjs:
 <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.31.3/ramda.min.js"></script>
 ```
 
-or one of the below links from [jsDelivr](http://jsdelivr.com):
+or one of the below links from [jsDelivr](https://jsdelivr.com):
 
 ```html
 <script src="//cdn.jsdelivr.net/npm/ramda@0.31.3/dist/ramda.min.js"></script>
@@ -245,7 +245,7 @@ Typings
 Translations
 -----------------
 
-- [Chinese(中文)](http://ramda.cn/)
+- [Chinese(中文)](https://ramda.cn/)
 - [Ukrainian(Українська)](https://github.com/ivanzusko/ramda)
 - [Portuguese(BR)](https://github.com/renansj/ramda)
 - [Russian(Русский)](https://github.com/Guck111/ramda)
@@ -263,6 +263,6 @@ If you wish to donate to Ramda please see our [Open Collective](https://opencoll
 Acknowledgements
 -----------------
 
-Thanks to [J. C. Phillipps](http://www.jcphillipps.com) for the Ramda logo.
+Thanks to [J. C. Phillipps](https://www.jcphillipps.com) for the Ramda logo.
 Ramda logo artwork &copy; 2014 J. C. Phillipps. Licensed Creative Commons 
-[CC BY-NC-SA 3.0](http://creativecommons.org/licenses/by-nc-sa/3.0/).
+[CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/).
