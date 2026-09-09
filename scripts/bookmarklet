@@ -22,7 +22,11 @@ var mdTmpl          = fs.readFileSync(mdTmplPath, 'utf8');
 var markletData     = {ramda: ramdaScript, version: pkg.version};
 
 var markletScript   = Handlebars.compile(markletTmpl)(markletData);
-var uglyMarklet     = UglifyJS.minify(markletScript , {fromString:true}).code;
+var minified       = UglifyJS.minify(markletScript);
+if (minified.error) {
+  throw minified.error;
+}
+var uglyMarklet     = minified.code;
 var builtMD         = Handlebars.compile(mdTmpl)({bookmarklet:uglyMarklet});
 
 fs.writeFileSync(mdPath, builtMD);
