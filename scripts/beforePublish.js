@@ -2,13 +2,18 @@ var fs = require('fs');
 var path = require('path');
 var pkg = require('../package.json');
 
+// xyz runs this script before it bumps the version in package.json, so
+// pkg.version is still the previous release. Prefer the version xyz injects
+// and fall back to pkg.version for manual runs.
+var version = process.env.VERSION || pkg.version;
+
 var readme_path = path.resolve('./README.md');
 
 var readme_content = fs.readFileSync(readme_path, 'utf8');
 var new_readme_content = readme_content.replace(
   /((?:libs|npm)\/ramda[\/@])(\d+\.\d+(?:\.\d+)?)/g,
   function(v, p1, p2) {
-    return p1 + pkg.version;
+    return p1 + version;
   }
 );
 fs.writeFileSync(readme_path, new_readme_content, { encoding: 'utf8' });
