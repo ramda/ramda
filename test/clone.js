@@ -249,6 +249,7 @@ describe('built-in types', function() {
 
   it('clones Error object without retaining a reference to the source', function() {
     var error = new Error('boom');
+    Object.defineProperty(error, 'cause', {value: new Error('root cause')});
     error.code = {value: 42};
     var clone = R.clone(error);
 
@@ -256,6 +257,8 @@ describe('built-in types', function() {
     eq(clone instanceof Error, true);
     eq(clone.message, 'boom');
     eq(clone.stack, error.stack);
+    assert.notStrictEqual(clone.cause, error.cause);
+    eq(clone.cause.message, 'root cause');
     // own enumerable properties are deep cloned
     assert.notStrictEqual(clone.code, error.code);
     eq(clone.code, {value: 42});
