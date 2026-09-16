@@ -204,6 +204,13 @@ describe('equals', function() {
       eq(R.equals(typArr1, typArr3), false);
       eq(R.equals(typArr1, intTypArr), false);
     });
+    it('compares ArrayBuffers by byte content', function() {
+      eq(R.equals(new ArrayBuffer(8), new ArrayBuffer(8)), true);
+      eq(R.equals(new ArrayBuffer(8), new ArrayBuffer(16)), false);
+      var filled = new ArrayBuffer(4);
+      new Uint8Array(filled)[0] = 255;
+      eq(R.equals(filled, new ArrayBuffer(4)), false);
+    });
   }
 
   if (typeof Promise !== 'undefined') {

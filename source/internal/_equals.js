@@ -145,7 +145,14 @@ export default function _equals(a, b, stackA, stackB) {
     case 'Uint32Array':
     case 'Float32Array':
     case 'Float64Array':
+      break;
     case 'ArrayBuffer':
+      if (a.byteLength !== b.byteLength) {
+        return false;
+      }
+      if (!_equals(new Uint8Array(a), new Uint8Array(b), stackA.concat([a]), stackB.concat([b]))) {
+        return false;
+      }
       break;
     default:
       // Values of other types are only equal if identical.
