@@ -85,4 +85,23 @@ describe('reduceBy', function() {
       F: ['Eddy']
     });
   });
+
+  it('does not throw when used as a transducer and the step returns null', function() {
+    var evenOddNaN = function(num) {
+      return !Number.isFinite(num) ? 'NaN' : num % 2 === 0 ? 'even' : 'odd';
+    };
+    var nullIfNotFiniteOp = function(op) {
+      return function(a, b) {
+        return (!Number.isFinite(a) || !Number.isFinite(b)) ? null : op(a, b);
+      };
+    };
+    var nullishProd = nullIfNotFiniteOp(function(a, b) {return a * b;});
+    var nullishSum = nullIfNotFiniteOp(function(a, b) {return a + b;});
+    var step = function(result, pair) {return nullishSum(result, pair[1]);};
+    var nullishSumOfProd = R.transduce(R.reduceBy(nullishProd, 1, evenOddNaN), step, 0);
+
+    eq(nullishSumOfProd([1, 2, 3, 4, 5]), 23);
+    eq(nullishSumOfProd([3, 5, 2, 7]), 107);
+    eq(nullishSumOfProd([4, 6, null, 5]), null);
+  });
 });
