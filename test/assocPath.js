@@ -54,6 +54,14 @@ describe('assocPath', function() {
     eq(R.assocPath(['foo', -1, 'X'], 42, {foo : [{a: 0}, {b: 0}]}), {foo: [{a: 0}, {b: 0, X: 42}]});
   });
 
+  it('handles Symbols', function() {
+    var obj = R.assocPath(['c'], 3, {a: 1, b: 2, [Symbol.for('test')]: 4 });
+
+    eq(obj, {a: 1, b: 2, c: 3, [Symbol.for('test')]: 4});
+    assert.strictEqual(obj.c, 3);
+    assert.strictEqual(obj[Symbol.for('test')], 4);
+  });
+
   it('sets garbage key when negative indexes wraps to < 0', function() {
     var expected = [1, 2, 3];
     expected[-1] = 42;
