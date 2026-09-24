@@ -1,5 +1,6 @@
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
+var assert = require('assert');
 
 
 describe('once', function() {
@@ -34,6 +35,31 @@ describe('once', function() {
   it('retains arity', function() {
     var f = R.once(function(a, b) { return a + b; });
     eq(f.length, 2);
+  });
+
+  it('rethrows the first error on every call without invoking the function again', function() {
+    var calls = 0;
+    var error = new Error('failed');
+    var fn = R.once(function() { calls += 1; throw error; });
+
+    assert.throws(fn, function(actual) { return actual === error; });
+    assert.throws(fn, function(actual) { return actual === error; });
+    eq(calls, 1);
+  });
+
+  it('rethrows a non-Error value from the first call', function() {
+    var calls = 0;
+    var fn = R.once(function() { calls += 1; throw null; });
+
+    for (var i = 0; i < 2; i += 1) {
+      try {
+        fn();
+        assert.fail('expected the first thrown value');
+      } catch (error) {
+        eq(error, null);
+      }
+    }
+    eq(calls, 1);
   });
 
 });

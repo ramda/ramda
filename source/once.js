@@ -6,7 +6,8 @@ import _curry1 from './internal/_curry1.js';
  * Accepts a function `fn` and returns a function that guards invocation of
  * `fn` such that `fn` can only ever be called once, no matter how many times
  * the returned function is invoked. The first value calculated is returned in
- * subsequent invocations.
+ * subsequent invocations. If the first invocation throws, the same value is
+ * thrown on subsequent invocations.
  *
  * @func
  * @memberOf R
@@ -23,13 +24,23 @@ import _curry1 from './internal/_curry1.js';
  */
 var once = _curry1(function once(fn) {
   var called = false;
-  var result;
+  var result, thrownValue;
+  var threw = false;
   return _arity(fn.length, function() {
     if (called) {
+      if (threw) {
+        throw thrownValue;
+      }
       return result;
     }
     called = true;
-    result = fn.apply(this, arguments);
+    try {
+      result = fn.apply(this, arguments);
+    } catch (error) {
+      threw = true;
+      thrownValue = error;
+      throw error;
+    }
     return result;
   });
 });
