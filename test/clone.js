@@ -41,6 +41,39 @@ describe('deep clone objects', function() {
     eq(clone, {a: {b: {c: 'ramda'}}});
   });
 
+  it('clones own enumerable symbol properties and their values', function() {
+    var key = Symbol('key');
+    var inherited = Symbol('inherited');
+    var hidden = Symbol('hidden');
+    var prototype = {};
+    prototype[inherited] = 'prototype';
+    var obj = Object.create(prototype);
+    obj[key] = {value: 1};
+    Object.defineProperty(obj, hidden, {value: 'hidden'});
+
+    var clone = R.clone(obj);
+
+    assert.deepStrictEqual(Object.getOwnPropertySymbols(clone), [key]);
+    eq(clone[key], {value: 1});
+    assert.notStrictEqual(clone[key], obj[key]);
+    assert.strictEqual(clone[inherited], 'prototype');
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(clone, inherited), false);
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(clone, hidden), false);
+  });
+
+  it('preserves shared and circular references through symbol properties', function() {
+    var key = Symbol('shared');
+    var obj = {nested: {}};
+    obj[key] = obj.nested;
+    obj.nested[key] = obj;
+
+    var clone = R.clone(obj);
+
+    assert.notStrictEqual(clone, obj);
+    assert.strictEqual(clone[key], clone.nested);
+    assert.strictEqual(clone.nested[key], clone);
+  });
+
   it('clones objects with circular references', function() {
     var x = {c: null};
     var y = {a: x};
