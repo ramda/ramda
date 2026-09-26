@@ -32,4 +32,39 @@ describe('dropLastWhile', function() {
     eq(R.transduce(dropLt7, R.flip(R.append), [], input), expected);
   });
 
+  it('stops when a downstream transducer finishes within the retained items', function() {
+    var seen = [];
+    var transducer = R.compose(
+      R.dropLastWhile(function(x) { seen.push(x); return x > 2; }),
+      R.take(1)
+    );
+    eq(R.into([], transducer, [3, 4, 1, 2]), [3]);
+    eq(seen, [3, 4, 1]);
+  });
+
+  it('stops when a downstream transducer finishes on the last retained item', function() {
+    var transducer = R.compose(R.dropLastWhile(function(x) { return x > 2; }), R.take(2));
+    eq(R.into([], transducer, [3, 4, 1, 2]), [3, 4]);
+  });
+
+  it('preserves downstream state between retained groups', function() {
+    var transducer = R.compose(R.dropLastWhile(function(x) { return x > 2; }), R.dropLast(1));
+    eq(R.into([], transducer, [3, 4, 1, 5, 2, 6]), [3, 4, 1, 5]);
+  });
+
+  it('completes a downstream transformer only once', function() {
+    var completions = 0;
+    var transformer = {
+      '@@transducer/init': function() { return []; },
+      '@@transducer/step': function(acc, x) { return acc.concat([x]); },
+      '@@transducer/result': function(acc) { completions += 1; return acc.join(','); }
+    };
+    eq(R.into(transformer, R.dropLastWhile(function(x) { return x > 2; }), [1, 3, 2, 4]), '1,3,2');
+    eq(completions, 1);
+  });
+
+  it('supports a primitive accumulator when flushing retained items', function() {
+    eq(R.transduce(R.dropLastWhile(function(x) { return x > 2; }), R.add, 0, [3, 4, 1, 5, 2, 6]), 15);
+  });
+
 });
