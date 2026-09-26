@@ -11,19 +11,20 @@ function XPreservingReduced(xf) {
   this.xf = xf;
 }
 XPreservingReduced.prototype[tInit] = _xfBase.init;
-XPreservingReduced.prototype[tResult] = _xfBase.result;
+XPreservingReduced.prototype[tResult] = function(result) { return result; };
 XPreservingReduced.prototype[tStep] = function(result, input) {
   var ret = this.xf[tStep](result, input);
   return ret['@@transducer/reduced'] ? _forceReduced(ret) : ret;
 };
 
 function XFlatCat(xf) {
-  this.xf = new XPreservingReduced(xf);
+  this.xf = xf;
+  this.inner = new XPreservingReduced(xf);
 }
 XFlatCat.prototype[tInit] = _xfBase.init;
 XFlatCat.prototype[tResult] = _xfBase.result;
 XFlatCat.prototype[tStep] = function(result, input) {
-  return !_isArrayLike(input) ? _xArrayReduce(this.xf, result, [input]) : _xReduce(this.xf, result, input);
+  return !_isArrayLike(input) ? _xArrayReduce(this.inner, result, [input]) : _xReduce(this.inner, result, input);
 };
 var _flatCat = function _xcat(xf) { return new XFlatCat(xf); };
 

@@ -63,4 +63,45 @@ describe('chain', function() {
     eq(intoArray(xcomp, [10, 20, 30]), [18, 38, 58]);
   });
 
+  it('preserves downstream state between nested lists', function() {
+    var transducer = R.compose(R.chain(function(x) { return [x, x + 10]; }), R.dropLast(1));
+    eq(intoArray(transducer, [1, 2]), [1, 11, 2]);
+  });
+
+  it('completes a downstream transformer once after all nested lists', function() {
+    var completions = 0;
+    var transformer = {
+      '@@transducer/init': function() { return []; },
+      '@@transducer/step': function(acc, x) { return acc.concat([x]); },
+      '@@transducer/result': function(acc) { completions += 1; return acc.join(','); }
+    };
+    eq(R.into(transformer, R.chain(R.identity), [[1, 2], [], [3]]), '1,2,3');
+    eq(completions, 1);
+  });
+
+  it('completes a downstream transformer once when every nested list is empty', function() {
+    var transducer = R.compose(R.chain(R.identity), R.all(R.identity));
+    eq(intoArray(transducer, [[], []]), [true]);
+  });
+
+  it('finishes grouping after all nested lists have been flattened', function() {
+    var transducer = R.compose(R.chain(R.identity), R.groupBy(function(x) { return x % 2; }));
+    eq(R.into({}, transducer, [[1, 2], [3, 4]]), {0: [2, 4], 1: [1, 3]});
+  });
+
+  it('stops inside a nested list without processing further outer items', function() {
+    var seen = [];
+    var transducer = R.compose(
+      R.chain(function(x) { seen.push(x); return [x, x + 10]; }),
+      R.take(1)
+    );
+    eq(intoArray(transducer, [1, 2]), [1]);
+    eq(seen, [1]);
+  });
+
+  it('preserves early termination through multiple chain transducers', function() {
+    var transducer = R.compose(R.chain(R.identity), R.chain(R.identity), R.take(2));
+    eq(intoArray(transducer, [[[1, 2], [3]], [[4]]]), [1, 2]);
+  });
+
 });
