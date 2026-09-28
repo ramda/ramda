@@ -267,6 +267,29 @@ describe('built-in types', function() {
     eq(error.code.value, 42);
   });
 
+  it('preserves circular Error causes', function() {
+    var error = new Error('boom');
+    Object.defineProperty(error, 'cause', {value: error});
+    var clone = R.clone(error);
+
+    assert.notStrictEqual(clone, error);
+    assert.strictEqual(clone.cause, clone);
+    eq(clone.message, 'boom');
+  });
+
+  it('preserves mutual Error causes', function() {
+    var first = new Error('first');
+    var second = new Error('second');
+    Object.defineProperty(first, 'cause', {value: second});
+    Object.defineProperty(second, 'cause', {value: first});
+    var clone = R.clone([first, second]);
+
+    assert.notStrictEqual(clone[0], first);
+    assert.notStrictEqual(clone[1], second);
+    assert.strictEqual(clone[0].cause, clone[1]);
+    assert.strictEqual(clone[1].cause, clone[0]);
+  });
+
   it('preserves the prototype of Error subtypes', function() {
     R.forEach(function(Ctor) {
       var clone = R.clone(new Ctor('oops'));

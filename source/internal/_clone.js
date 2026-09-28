@@ -60,6 +60,11 @@ export default function _clone(value, deep, map) {
 }
 
 function copyError(value, copy, deep, map) {
+  var cachedCopy = map.get(value);
+  if (cachedCopy) {
+    return cachedCopy;
+  }
+
   // Create a fresh error sharing the source prototype (so subtypes such as
   // `TypeError` and `instanceof` checks are preserved) and let `copy` clone its
   // own enumerable properties while registering it for circular references.
