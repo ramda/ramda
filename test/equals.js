@@ -1,4 +1,4 @@
-/* global Map, Set, WeakMap, WeakSet */
+/* global Map, Set, WeakMap, WeakSet, BigInt, BigInt64Array, BigUint64Array */
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
@@ -203,6 +203,26 @@ describe('equals', function() {
       eq(R.equals(typArr1, typArr2), true);
       eq(R.equals(typArr1, typArr3), false);
       eq(R.equals(typArr1, intTypArr), false);
+    });
+  }
+
+  if (typeof BigInt64Array !== 'undefined' && typeof BigUint64Array !== 'undefined') {
+    [BigInt64Array, BigUint64Array].forEach(function(ArrayType) {
+      it('compares ' + ArrayType.name + ' contents by value', function() {
+        var values = [BigInt('9007199254740993'), BigInt(2)];
+        var a = new ArrayType(values);
+        var b = new ArrayType(values);
+        eq(R.equals(a, b), true);
+        eq(R.equals(new ArrayType(0), new ArrayType(0)), true);
+        eq(R.equals(a, new ArrayType([values[0]])), false);
+        eq(R.equals(a, new ArrayType([values[0], BigInt(3)])), false);
+        eq(R.equals(a, R.clone(a)), true);
+        eq(R.equals({value: a}, {value: b}), true);
+      });
+    });
+
+    it('distinguishes signed and unsigned BigInt typed arrays', function() {
+      eq(R.equals(new BigInt64Array([BigInt(1)]), new BigUint64Array([BigInt(1)])), false);
     });
   }
 
