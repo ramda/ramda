@@ -19,14 +19,13 @@ export default function _clone(value, deep, map) {
     return value;
   }
 
+  // Reuse clones of shared values, including built-in types.
+  var cachedCopy = map.get(value);
+  if (cachedCopy) {
+    return cachedCopy;
+  }
+
   var copy = function copy(copiedValue) {
-    // Check for circular and same references on the object graph and return its corresponding clone.
-    var cachedCopy = map.get(value);
-
-    if (cachedCopy) {
-      return cachedCopy;
-    }
-
     map.set(value, copiedValue);
 
     for (var key in value) {
@@ -37,11 +36,16 @@ export default function _clone(value, deep, map) {
     return copiedValue;
   };
 
+  var clonedValue;
   switch (type(value)) {
     case 'Object':  return copy(Object.create(Object.getPrototypeOf(value)));
     case 'Array':   return copy(Array(value.length));
-    case 'Date':    return new Date(value.valueOf());
-    case 'RegExp':  return _cloneRegExp(value);
+    case 'Date':
+      clonedValue = new Date(value.valueOf());
+      break;
+    case 'RegExp':
+      clonedValue = _cloneRegExp(value);
+      break;
     case 'Error':   return copyError(value, copy, deep, map);
     case 'Int8Array':
     case 'Uint8Array':
@@ -54,17 +58,16 @@ export default function _clone(value, deep, map) {
     case 'Float64Array':
     case 'BigInt64Array':
     case 'BigUint64Array':
-      return value.slice();
+      clonedValue = value.slice();
+      break;
     default:        return value;
   }
+
+  map.set(value, clonedValue);
+  return clonedValue;
 }
 
 function copyError(value, copy, deep, map) {
-  var cachedCopy = map.get(value);
-  if (cachedCopy) {
-    return cachedCopy;
-  }
-
   // Create a fresh error sharing the source prototype (so subtypes such as
   // `TypeError` and `instanceof` checks are preserved) and let `copy` clone its
   // own enumerable properties while registering it for circular references.

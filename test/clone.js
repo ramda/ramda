@@ -224,6 +224,22 @@ describe('deep clone functions', function() {
 });
 
 describe('built-in types', function() {
+  it('preserves shared references to cloned built-in values', function() {
+    [new Date(1000), /shared/gi, new Uint8Array([1, 2, 3])].forEach(function(value) {
+      var cloned = R.clone([value, {nested: value}]);
+
+      assert.notStrictEqual(cloned[0], value);
+      assert.strictEqual(cloned[0], cloned[1].nested);
+    });
+  });
+
+  it('keeps distinct built-in values distinct even when they are equal', function() {
+    var cloned = R.clone([new Date(1000), new Date(1000)]);
+
+    assert.notStrictEqual(cloned[0], cloned[1]);
+    eq(cloned[0].getTime(), cloned[1].getTime());
+  });
+
   it('clones Date object', function() {
     var date = new Date(2014, 10, 14, 23, 59, 59, 999);
 
