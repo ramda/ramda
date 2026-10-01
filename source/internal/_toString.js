@@ -29,6 +29,8 @@ export default function _toString(x, seen) {
   };
 
   switch (Object.prototype.toString.call(x)) {
+    case '[object BigInt]':
+      return typeof x === 'object' ? 'Object(' + recur(x.valueOf()) + ')' : x.toString(10) + 'n';
     case '[object Arguments]':
       return '(function() { return arguments; }(' + _map(recur, x).join(', ') + '))';
     case '[object Array]':
