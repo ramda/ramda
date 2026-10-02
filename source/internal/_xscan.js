@@ -8,13 +8,30 @@ function XScan(reducer, acc, xf) {
   this.xf = xf;
   this.f = reducer;
   this.acc = acc;
+  this.started = false;
 }
-XScan.prototype[tInit] = function() {
-  return this.xf[tStep](this.xf[tInit](), this.acc);
+XScan.prototype[tInit] = _xfBase.init;
+XScan.prototype.start = function(result) {
+  if (!this.started) {
+    this.started = true;
+    return this.xf[tStep](result, this.acc);
+  }
+  return result;
 };
-XScan.prototype['@@transducer/result'] = _xfBase.result;
+XScan.prototype['@@transducer/result'] = function(result) {
+  // transduce does not call init, and empty inputs do not call step.
+  result = this.start(result);
+  if (result && result['@@transducer/reduced']) {
+    result = result['@@transducer/value'];
+  }
+  return this.xf['@@transducer/result'](result);
+};
 XScan.prototype[tStep] = function(result, input) {
-  if (result['@@transducer/reduced']) {
+  if (result && result['@@transducer/reduced']) {
+    return result;
+  }
+  result = this.start(result);
+  if (result && result['@@transducer/reduced']) {
     return result;
   }
   this.acc = this.f(this.acc, input);

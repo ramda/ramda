@@ -6,6 +6,8 @@ import _xscan from './internal/_xscan.js';
 /**
  * Scan is similar to [`reduce`](#reduce), but returns a list of successively
  * reduced values from the left.
+ * The initial accumulator is included as the first value, including when
+ * used as a transducer.
  *
  * Acts as a transducer if a transformer is given in list position.
  *
