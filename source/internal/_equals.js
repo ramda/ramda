@@ -100,7 +100,10 @@ export default function _equals(a, b, stackA, stackB) {
           a.ignoreCase === b.ignoreCase &&
           a.multiline === b.multiline &&
           a.sticky === b.sticky &&
-          a.unicode === b.unicode)) {
+          a.unicode === b.unicode &&
+          a.dotAll === b.dotAll &&
+          a.hasIndices === b.hasIndices &&
+          a.unicodeSets === b.unicodeSets)) {
         return false;
       }
       break;

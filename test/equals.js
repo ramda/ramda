@@ -130,6 +130,20 @@ describe('equals', function() {
     }
   });
 
+  ['s', 'd', 'v'].forEach(function(flag) {
+    var supported = false;
+    try { RegExp('', flag); supported = true; } catch (e) {}
+
+    (supported ? it : it.skip)('compares the ' + flag + ' regex flag', function() {
+      var plain = new RegExp('a');
+      var flagged = new RegExp('a', flag);
+      eq(R.equals(plain, flagged), false);
+      eq(R.equals(flagged, plain), false);
+      eq(R.equals(flagged, new RegExp('a', flag)), true);
+      eq(R.uniq([plain, flagged]).length, 2);
+    });
+  });
+
   var listA = [1, 2, 3];
   var listB = [1, 3, 2];
   it('handles lists', function() {
