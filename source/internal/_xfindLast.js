@@ -1,3 +1,4 @@
+import _unreduced from './_unreduced.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -7,7 +8,8 @@ function XFindLast(f, xf) {
 }
 XFindLast.prototype['@@transducer/init'] = _xfBase.init;
 XFindLast.prototype['@@transducer/result'] = function(result) {
-  return this.xf['@@transducer/result'](this.xf['@@transducer/step'](result, this.last));
+  result = _unreduced(this.xf['@@transducer/step'](result, this.last));
+  return this.xf['@@transducer/result'](result);
 };
 XFindLast.prototype['@@transducer/step'] = function(result, input) {
   if (this.f(input)) {

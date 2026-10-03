@@ -1,4 +1,5 @@
 import _reduced from './_reduced.js';
+import _unreduced from './_unreduced.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -10,7 +11,7 @@ function XFind(f, xf) {
 XFind.prototype['@@transducer/init'] = _xfBase.init;
 XFind.prototype['@@transducer/result'] = function(result) {
   if (!this.found) {
-    result = this.xf['@@transducer/step'](result, void 0);
+    result = _unreduced(this.xf['@@transducer/step'](result, void 0));
   }
   return this.xf['@@transducer/result'](result);
 };
