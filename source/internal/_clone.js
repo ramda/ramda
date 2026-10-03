@@ -34,6 +34,15 @@ export default function _clone(value, deep, map) {
         copiedValue[key] = deep ? _clone(value[key], true, map) : value[key];
       }
     }
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      var symbols = Object.getOwnPropertySymbols(value);
+      for (var idx = 0; idx < symbols.length; idx += 1) {
+        var symbol = symbols[idx];
+        if (Object.prototype.propertyIsEnumerable.call(value, symbol)) {
+          copiedValue[symbol] = deep ? _clone(value[symbol], true, map) : value[symbol];
+        }
+      }
+    }
     return copiedValue;
   };
 

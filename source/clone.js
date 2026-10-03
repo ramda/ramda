@@ -8,6 +8,7 @@ import _curry1 from './internal/_curry1.js';
  * The source object may contain (nested) `Array`s and `Object`s,
  * `Number`s, `String`s, `Boolean`s and `Date`s.
  * `Function`s are assigned by reference rather than copied.
+ * Own enumerable properties keyed by `Symbol`s are also copied.
  *
  * Dispatches to a `clone` method if present.
  *
