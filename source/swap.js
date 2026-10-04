@@ -27,8 +27,8 @@ var swapList = function(indexA, indexB, list) {
   var positiveMin = Math.min(positiveIndexA, positiveIndexB);
   var positiveMax = Math.max(positiveIndexA, positiveIndexB);
 
-  if (positiveIndexA < 0 || positiveIndexA > length) {return result;}
-  if (positiveIndexB < 0 || positiveIndexB > length) {return result;}
+  if (positiveIndexA < 0 || positiveIndexA >= length) {return result;}
+  if (positiveIndexB < 0 || positiveIndexB >= length) {return result;}
   if (positiveIndexA === positiveIndexB) {return result;}
 
   result = []

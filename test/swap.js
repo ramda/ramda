@@ -24,6 +24,32 @@ describe('swap', function() {
     eq(R.swap(0, 0, list), list);
   });
 
+  it('does nothing when either index equals the list length', function() {
+    eq(R.swap(0, list.length, list), list);
+    eq(R.swap(list.length, 0, list), list);
+    eq(R.swap(-1, list.length, list), list);
+    eq(R.swap(list.length, -1, list), list);
+    eq(R.swap(0, 1, ['a']), ['a']);
+    eq(R.swap(0, 0, []), []);
+  });
+
+  it('does nothing when either index equals the string length', function() {
+    eq(R.swap(0, 3, 'abc'), 'abc');
+    eq(R.swap(3, 0, 'abc'), 'abc');
+    eq(R.swap(-1, 3, 'abc'), 'abc');
+    eq(R.swap(3, -1, 'abc'), 'abc');
+    eq(R.swap(0, 1, 'a'), 'a');
+    eq(R.swap(0, 0, ''), '');
+  });
+
+  it('still swaps the first and last valid indexes without changing the input', function() {
+    var input = ['a', 'b', 'c'];
+    eq(R.swap(0, input.length - 1, input), ['c', 'b', 'a']);
+    eq(R.swap(-input.length, -1, input), ['c', 'b', 'a']);
+    eq(input, ['a', 'b', 'c']);
+    eq(R.swap(-3, -1, 'abc'), 'cba');
+  });
+
   it('should be the same when swapping index order', function() {
     eq(R.swap(0, 1, list), R.swap(1, 0, list));
   });
