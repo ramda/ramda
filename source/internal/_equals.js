@@ -148,6 +148,8 @@ export default function _equals(a, b, stackA, stackB) {
     case 'Uint32Array':
     case 'Float32Array':
     case 'Float64Array':
+    case 'BigInt64Array':
+    case 'BigUint64Array':
     case 'ArrayBuffer':
       break;
     default:
