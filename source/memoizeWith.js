@@ -42,7 +42,9 @@ import _has from './internal/_has.js';
  *      //=> {birth: 1921, death: 1999, age: 78} (returned from cache)
  */
 var memoizeWith = _curry2(function memoizeWith(keyGen, fn) {
-  var cache = {};
+  // Use an object without a prototype so that keys such as `__proto__`
+  // are stored as ordinary own properties.
+  var cache = Object.create(null);
   return _arity(fn.length, function() {
     var key = keyGen.apply(this, arguments);
     if (!_has(key, cache)) {
