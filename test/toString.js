@@ -1,10 +1,36 @@
+/* global BigInt */
 var assert = require('assert');
+var vm = require('vm');
 
 var R = require('../source/index.js');
 var {Just} = require('./shared/Maybe.js');
 
 
 describe('toString', function() {
+
+  if (typeof BigInt === 'function') {
+    it('preserves BigInt values when its output is evaluated', function() {
+      ['0', '9007199254740993', '-9007199254740993'].forEach(function(decimal) {
+        var value = BigInt(decimal);
+        var representation = R.toString(value);
+        assert.strictEqual(representation, decimal + 'n');
+        assert.strictEqual(vm.runInNewContext(representation), value);
+      });
+    });
+
+    it('preserves boxed BigInt values when its output is evaluated', function() {
+      var value = Object(BigInt('9007199254740993'));
+      var representation = R.toString(value);
+      assert.strictEqual(representation, 'Object(9007199254740993n)');
+      var restored = vm.runInNewContext(representation);
+      assert.strictEqual(typeof restored, 'object');
+      assert.strictEqual(restored.valueOf(), value.valueOf());
+    });
+
+    it('preserves BigInt values nested in arrays and objects', function() {
+      assert.strictEqual(R.toString([BigInt(1), {value: BigInt(-2)}]), '[1n, {"value": -2n}]');
+    });
+  }
 
   it('returns the string representation of null', function() {
     assert.strictEqual(R.toString(null), 'null');
