@@ -1,8 +1,29 @@
 var {all, compose , difference , equals , head , identity , is , isEmpty , length , uniq , unnest , collectBy} = require('../source/index.js');
 var fc = require('fast-check');
 var {spy} = require('sinon');
+var eq = require('./shared/eq.js');
+var assert = require('assert');
 
 describe('collectBy', function() {
+
+  it('groups keys that also exist on Object.prototype', function() {
+    var xs = ['constructor', '__proto__', 'toString', 'constructor', '__proto__'];
+    eq(collectBy(identity, xs), [
+      ['constructor', 'constructor'], ['__proto__', '__proto__'], ['toString']
+    ]);
+  });
+
+  it('retains distinct symbol groups with the same description', function() {
+    if (typeof Symbol !== 'function') { return; }
+    var first = Symbol('group');
+    var second = Symbol('group');
+    var groups = collectBy(identity, [first, 'group', second, first]);
+    eq(groups, [
+      ['group'], [first, first], [second]
+    ]);
+    assert.strictEqual(groups[1][0], first);
+    assert.strictEqual(groups[2][0], second);
+  });
 
   it('returns a list of lists', function() {
     fc.assert(fc.property(fc.array(fc.nat()), function(xs) {

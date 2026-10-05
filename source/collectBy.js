@@ -38,9 +38,15 @@ var collectBy = _curry2(function collectBy(fn, list) {
     if (o[tag] === undefined) { o[tag] = []; }
     o[tag].push(x);
     return o;
-  }, {}, list);
+  }, Object.create(null), list);
   var newList = [];
   for (var tag in group) { newList.push(group[tag]); }
+  if (typeof Object.getOwnPropertySymbols === 'function') {
+    var symbols = Object.getOwnPropertySymbols(group);
+    for (var i = 0; i < symbols.length; i += 1) {
+      newList.push(group[symbols[i]]);
+    }
+  }
   return newList;
 });
 export default collectBy;
