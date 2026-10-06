@@ -1,5 +1,6 @@
 import _clone from './_clone.js';
 import _has from './_has.js';
+import _reduced from './_reduced.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -27,8 +28,13 @@ XReduceBy.prototype['@@transducer/result'] = function(result) {
 };
 XReduceBy.prototype['@@transducer/step'] = function(result, input) {
   var key = this.keyFn(input);
-  this.inputs[key] = this.inputs[key] || [key, _clone(this.valueAcc, false)];
-  this.inputs[key][1] = this.valueFn(this.inputs[key][1], input);
+  var entry = this.inputs[key] || [key, _clone(this.valueAcc, false)];
+  var value = this.valueFn(entry[1], input);
+  if (value && value['@@transducer/reduced']) {
+    return _reduced(result);
+  }
+  entry[1] = value;
+  this.inputs[key] = entry;
   return result;
 };
 
