@@ -8,7 +8,7 @@ function XReduceBy(valueFn, valueAcc, keyFn, xf) {
   this.valueAcc = valueAcc;
   this.keyFn = keyFn;
   this.xf = xf;
-  this.inputs = {};
+  this.inputs = Object.create(null);
 }
 XReduceBy.prototype['@@transducer/init'] = _xfBase.init;
 XReduceBy.prototype['@@transducer/result'] = function(result) {
