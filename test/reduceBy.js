@@ -85,4 +85,58 @@ describe('reduceBy', function() {
       F: ['Eddy']
     });
   });
+
+  it('short circuits the transducer when the value function returns reduced', function() {
+    var visited = [];
+    var collect = function(acc, input) {
+      visited.push(input);
+      return input === 3 ? R.reduced(['ignored']) : acc.concat(input);
+    };
+    var transducer = R.reduceBy(collect, [], R.always('group'));
+
+    eq(R.into({}, transducer, [1, 2, 3, 4]), {group: [1, 2]});
+    eq(visited, [1, 2, 3]);
+
+    visited = [];
+    eq(R.transduce(transducer, R.flip(R.append), [], [1, 2, 3, 4]), [['group', [1, 2]]]);
+    eq(visited, [1, 2, 3]);
+  });
+
+  it('does not create a transducer group for an input that reduces immediately', function() {
+    var collect = function(acc, input) {
+      return input === 'stop' ? R.reduced(acc) : acc.concat(input);
+    };
+    var transducer = R.reduceBy(collect, [], R.identity);
+
+    eq(R.into({}, transducer, ['a', 'stop', 'b']), {a: ['a']});
+    eq(R.into({}, transducer, ['stop', 'a']), {});
+  });
+
+  it('finalizes a short-circuited transducer once and honors downstream reduction', function() {
+    var finalized = 0;
+    var collect = function(acc, input) {
+      return input === 'stop' ? R.reduced(acc) : acc.concat(input);
+    };
+    var transformer = {
+      '@@transducer/init': function() { return []; },
+      '@@transducer/step': function(acc, input) { return acc.concat([input]); },
+      '@@transducer/result': function(acc) { finalized += 1; return acc; }
+    };
+
+    eq(R.transduce(
+      R.compose(R.reduceBy(collect, [], R.identity), R.take(1)),
+      transformer,
+      [],
+      ['a', 'b', 'stop', 'c']
+    ), [['a', ['a']]]);
+    eq(finalized, 1);
+  });
+
+  it('preserves nullish and falsy transducer group values', function() {
+    var inputs = [null, undefined, false, 0, ''];
+    var transducer = R.reduceBy(R.nthArg(1), 'initial', R.always('group'));
+    R.forEach(function(value) {
+      eq(R.into([], transducer, [value]), [['group', value]]);
+    }, inputs);
+  });
 });
