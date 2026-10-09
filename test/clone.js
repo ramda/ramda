@@ -280,6 +280,19 @@ describe('built-in types', function() {
     }, [/x/, /x/g, /x/i, /x/m, /x/gi, /x/gm, /x/im, /x/gim]);
   });
 
+  it('preserves the match position of global and sticky RegExp objects', function() {
+    R.forEach(function(flags) {
+      var pattern = new RegExp('a', flags);
+      pattern.lastIndex = 2;
+      var clone = R.clone(pattern);
+
+      eq(clone.lastIndex, 2);
+      eq(clone.exec('baaa').index, 2);
+      eq(clone.lastIndex, 3);
+      eq(pattern.lastIndex, 2);
+    }, ['g', 'y']);
+  });
+
   it('clones Error object without retaining a reference to the source', function() {
     var error = new Error('boom');
     Object.defineProperty(error, 'cause', {value: new Error('root cause')});
