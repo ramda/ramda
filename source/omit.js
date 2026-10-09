@@ -1,4 +1,5 @@
 import _curry2 from './internal/_curry2.js';
+import _has from './internal/_has.js';
 
 /**
  * Returns a partial copy of an object omitting the keys specified.
@@ -28,7 +29,7 @@ var omit = _curry2(function omit(names, obj) {
   }
 
   for (var prop in obj) {
-    if (!index.hasOwnProperty(prop)) {
+    if (!_has(prop, index)) {
       result[prop] = obj[prop];
     }
   }
