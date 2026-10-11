@@ -26,6 +26,90 @@ describe('deep clone integers, strings and booleans', function() {
 });
 
 describe('deep clone objects', function() {
+  it('does not read inherited enumerable getters while cloning', function() {
+    var calls = 0;
+    var prototype = Object.defineProperty({}, 'inherited', {
+      enumerable: true,
+      get: function() { calls += 1; return 42; }
+    });
+    var obj = Object.create(prototype);
+    obj.own = {value: 1};
+
+    var clone = R.clone(obj);
+
+    assert.strictEqual(calls, 0);
+    assert.strictEqual(Object.getPrototypeOf(clone), prototype);
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(clone, 'inherited'), false);
+    assert.notStrictEqual(clone.own, obj.own);
+    eq(clone.own, {value: 1});
+  });
+
+  it('does not invoke throwing inherited getters while cloning', function() {
+    var prototype = Object.defineProperty({}, 'inherited', {
+      enumerable: true,
+      get: function() { throw new Error('inherited getter must not be read'); }
+    });
+    var obj = Object.create(prototype);
+    obj.own = 1;
+
+    var clone = R.clone(obj);
+
+    assert.strictEqual(clone.own, 1);
+    assert.strictEqual(Object.getPrototypeOf(clone), prototype);
+  });
+
+  it('still clones values returned by own enumerable getters', function() {
+    var value = {nested: 1};
+    var obj = Object.defineProperty({}, 'own', {
+      enumerable: true,
+      get: function() { return value; }
+    });
+
+    var clone = R.clone(obj);
+
+    assert.notStrictEqual(clone.own, value);
+    eq(clone.own, value);
+  });
+
+  it('clones null-prototype objects with shared and circular references', function() {
+    var obj = Object.create(null);
+    obj.hasOwnProperty = {value: 1};
+    obj.shared = obj.hasOwnProperty;
+    obj.self = obj;
+
+    var clone = R.clone(obj);
+
+    assert.strictEqual(Object.getPrototypeOf(clone), null);
+    assert.strictEqual(clone.shared, clone.hasOwnProperty);
+    assert.strictEqual(clone.self, clone);
+    assert.notStrictEqual(clone.hasOwnProperty, obj.hasOwnProperty);
+    eq(clone.hasOwnProperty, {value: 1});
+  });
+
+  it('ignores inherited getters in large graphs with shared and circular references', function() {
+    var calls = 0;
+    var prototype = Object.defineProperty({}, 'inherited', {
+      enumerable: true,
+      get: function() { calls += 1; return 42; }
+    });
+    var obj = {nodes: []};
+    for (var i = 0; i < 185; i += 1) {
+      var node = Object.create(prototype);
+      node.value = i;
+      obj.nodes.push(node);
+    }
+    obj.shared = obj.nodes[184];
+    obj.self = obj;
+
+    var clone = R.clone(obj);
+
+    assert.strictEqual(calls, 0);
+    assert.strictEqual(clone.shared, clone.nodes[184]);
+    assert.strictEqual(clone.self, clone);
+    assert.notStrictEqual(clone.shared, obj.shared);
+    assert.strictEqual(Object.getPrototypeOf(clone.shared), prototype);
+    assert.strictEqual(clone.shared.value, 184);
+  });
   it('clones shallow object', function() {
     var obj = {a: 1, b: 'ramda', c: true, d: new Date(2013, 11, 25)};
     var clone = R.clone(obj);

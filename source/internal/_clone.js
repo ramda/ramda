@@ -114,7 +114,9 @@ _ObjectMap.prototype.set = function(key, value) {
 _ObjectMap.prototype.hash = function(key) {
   var hashedKey = [];
   for (var value in key) {
-    hashedKey.push(Object.prototype.toString.call(key[value]));
+    if (Object.prototype.hasOwnProperty.call(key, value)) {
+      hashedKey.push(Object.prototype.toString.call(key[value]));
+    }
   }
   return hashedKey.join();
 };
