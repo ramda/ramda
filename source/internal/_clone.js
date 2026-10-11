@@ -63,7 +63,8 @@ export default function _clone(value, deep, map) {
     case 'Float64Array':
     case 'BigInt64Array':
     case 'BigUint64Array':
-      return value.slice();
+      // Buffer.slice creates a shared view; the typed-array method copies bytes.
+      return Uint8Array.prototype.slice.call(value);
     default:        return value;
   }
 }
