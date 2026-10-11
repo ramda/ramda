@@ -38,6 +38,8 @@ import _isInteger from './internal/_isInteger.js';
 var mathMod = _curry2(function mathMod(m, p) {
   if (!_isInteger(m)) { return NaN; }
   if (!_isInteger(p) || p < 1) { return NaN; }
-  return ((m % p) + p) % p;
+  var remainder = m % p;
+  if (remainder === 0) { return 0; }
+  return remainder < 0 ? remainder + p : remainder;
 });
 export default mathMod;
