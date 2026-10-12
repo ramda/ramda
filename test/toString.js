@@ -72,6 +72,68 @@ describe('toString', function() {
     assert.strictEqual(R.toString(new Set([2, 1])), 'new Set([1, 2])');
   });
 
+  it('sorts Set members by their string representations', function() {
+    if (typeof Set !== 'function') {
+      return;
+    }
+    var a = {a: 1};
+    var b = {b: 2};
+    var expected = 'new Set([{"a": 1}, {"b": 2}])';
+
+    assert.strictEqual(R.toString(new Set([a, b])), expected);
+    assert.strictEqual(R.toString(new Set([b, a])), expected);
+    assert.strictEqual(
+      R.toString(new Set([new Set([b, a]), new Set([2, 1])])),
+      'new Set([new Set([1, 2]), new Set([{"a": 1}, {"b": 2}])])'
+    );
+  });
+
+  it('renders Set members with a non-callable toString property', function() {
+    if (typeof Set !== 'function') {
+      return;
+    }
+    var values = JSON.parse('[{"toString": "second"}, {"toString": "first"}]');
+    assert.strictEqual(
+      R.toString(new Set(values)),
+      'new Set([{"toString": "first"}, {"toString": "second"}])'
+    );
+  });
+
+  it('renders Set members with null prototypes', function() {
+    if (typeof Set !== 'function') {
+      return;
+    }
+    var a = Object.create(null);
+    var b = Object.create(null);
+    a.name = 'a';
+    b.name = 'b';
+    assert.strictEqual(R.toString(new Set([b, a])), 'new Set([{"name": "a"}, {"name": "b"}])');
+  });
+
+  it('preserves circular references in Set representations', function() {
+    if (typeof Set !== 'function') {
+      return;
+    }
+    var set = new Set();
+    set.add(set);
+    assert.strictEqual(R.toString(set), 'new Set([<Circular>])');
+
+    var parent = {};
+    parent.set = new Set([parent]);
+    assert.strictEqual(R.toString(parent), '{"set": new Set([<Circular>])}');
+  });
+
+  it('uses custom representations for Set members', function() {
+    if (typeof Set !== 'function') {
+      return;
+    }
+    var calls = [];
+    var a = {toString: function() { calls.push('a'); return 'new Point(1, 2)'; }};
+    var b = {toString: function() { calls.push('b'); return 'new Point(3, 4)'; }};
+    assert.strictEqual(R.toString(new Set([b, a])), 'new Set([new Point(1, 2), new Point(3, 4)])');
+    assert.deepStrictEqual(calls, ['b', 'a']);
+  });
+
   it('returns the string representation of a String object', function() {
     assert.strictEqual(R.toString(new String('abc')), 'new String("abc")');
     assert.strictEqual(R.toString(new String('x "y" z')), 'new String("x \\"y\\" z")');
