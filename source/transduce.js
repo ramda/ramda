@@ -15,15 +15,19 @@ import curryN from './curryN.js';
  * may be stopped early with the [`R.reduced`](#reduced) function.
  *
  * A transducer is a function that accepts a transformer and returns a
- * transformer and can be composed directly.
+ * transformer and can be composed directly. Partially applied functions such
+ * as `R.map(f)` and `R.filter(pred)` can be used as transducers.
  *
- * A transformer is an object that provides a 2-arity reducing iterator
- * function, step, 0-arity initial value function, init, and 1-arity result
- * extraction function, result. The step function is used as the iterator
- * function in reduce. The result function is used to convert the final
- * accumulator into the return type and in most cases is
- * [`R.identity`](#identity). The init function can be used to provide an
- * initial accumulator, but is ignored by transduce.
+ * A transformer is an object that provides three methods:
+ *
+ * - `@@transducer/step`: a 2-arity reducing iterator function.
+ * - `@@transducer/init`: a 0-arity initial value function.
+ * - `@@transducer/result`: a 1-arity result extraction function.
+ *
+ * `@@transducer/step` receives the accumulator and each input value.
+ * `@@transducer/result` converts the final accumulator into the return value
+ * and is often [`R.identity`](#identity). `transduce` does not call
+ * `@@transducer/init`; it uses the `acc` argument as the initial accumulator.
  *
  * The iteration is performed with [`R.reduce`](#reduce) after initializing the transducer.
  *
@@ -33,9 +37,9 @@ import curryN from './curryN.js';
  * @category List
  * @sig (c -> c) -> ((a, b) -> a) -> a -> [b] -> a
  * @param {Function} xf The transducer function. Receives a transformer and returns a transformer.
- * @param {Function} fn The iterator function. Receives two values, the accumulator and the
- *        current element from the array. Wrapped as transformer, if necessary, and used to
- *        initialize the transducer
+ * @param {Function|Object} fn The iterator function or transformer object. Iterator functions
+ *        receive the accumulator and current element from the array, and are wrapped as
+ *        transformers to initialize the transducer.
  * @param {*} acc The initial accumulator value.
  * @param {Array} list The list to iterate over.
  * @return {*} The final, accumulated value.
@@ -49,6 +53,14 @@ import curryN from './curryN.js';
  *      const isOdd = (x) => x % 2 !== 0;
  *      const firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
  *      R.transduce(firstOddTransducer, R.flip(R.append), [], R.range(0, 100)); //=> [1]
+ *
+ *      const sumTransformer = {
+ *        '@@transducer/init': R.always(0),
+ *        '@@transducer/step': R.add,
+ *        '@@transducer/result': R.identity
+ *      };
+ *      // Uses 10 as the initial accumulator, rather than calling init.
+ *      R.transduce(R.map(R.add(1)), sumTransformer, 10, numbers); //=> 24
  */
 var transduce = curryN(4, function transduce(xf, fn, acc, list) {
   return _xReduce(xf(typeof fn === 'function' ? _xwrap(fn) : fn), acc, list);
