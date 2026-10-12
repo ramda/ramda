@@ -1,4 +1,5 @@
 import _reduced from './_reduced.js';
+import _unreduced from './_unreduced.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -10,7 +11,7 @@ function XAny(f, xf) {
 XAny.prototype['@@transducer/init'] = _xfBase.init;
 XAny.prototype['@@transducer/result'] = function(result) {
   if (!this.any) {
-    result = this.xf['@@transducer/step'](result, false);
+    result = _unreduced(this.xf['@@transducer/step'](result, false));
   }
   return this.xf['@@transducer/result'](result);
 };

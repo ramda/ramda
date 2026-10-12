@@ -1,4 +1,5 @@
 import _reduced from './_reduced.js';
+import _unreduced from './_unreduced.js';
 import _xfBase from './_xfBase.js';
 
 
@@ -10,7 +11,7 @@ function XAll(f, xf) {
 XAll.prototype['@@transducer/init'] = _xfBase.init;
 XAll.prototype['@@transducer/result'] = function(result) {
   if (this.all) {
-    result = this.xf['@@transducer/step'](result, true);
+    result = _unreduced(this.xf['@@transducer/step'](result, true));
   }
   return this.xf['@@transducer/result'](result);
 };
