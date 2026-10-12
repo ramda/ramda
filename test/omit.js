@@ -9,6 +9,11 @@ describe('omit', function() {
     eq(R.omit(['a', 'c', 'f'], obj), {b: 2, d: 4, e: 5});
   });
 
+  it('supports hasOwnProperty as an omitted key', function() {
+    eq(R.omit(['hasOwnProperty'], {hasOwnProperty: 1, keep: 2}), {keep: 2});
+    eq(R.omit(['hasOwnProperty'], {keep: 2}), {keep: 2});
+  });
+
   it('includes prototype properties', function() {
     var F = function(param) {this.x = param;};
     F.prototype.y = 40; F.prototype.z = 50;
