@@ -17,8 +17,11 @@ XDropRepeatsWith.prototype['@@transducer/step'] = function(result, input) {
   } else if (this.pred(this.lastValue, input)) {
     sameAsLast = true;
   }
+  if (sameAsLast) {
+    return result;
+  }
   this.lastValue = input;
-  return sameAsLast ? result : this.xf['@@transducer/step'](result, input);
+  return this.xf['@@transducer/step'](result, input);
 };
 
 export default function _xdropRepeatsWith(pred) {
