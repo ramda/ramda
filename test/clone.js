@@ -1,4 +1,5 @@
 var assert = require('assert');
+var Buffer = require('buffer').Buffer;
 
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
@@ -241,6 +242,47 @@ describe('deep clone typed arrays', function() {
     eq(clone, new Float64Array([1,2,3]));
   });
 
+});
+
+describe('deep clone buffers', function() {
+  var from = function(values) {
+    return typeof Buffer.from === 'function' ? Buffer.from(values) : new Buffer(values);
+  };
+
+  it('copies Buffer bytes without sharing memory', function() {
+    var buffer = from([1, 2, 3]);
+    var clone = R.clone(buffer);
+
+    eq(Buffer.isBuffer(clone), true);
+    eq(Array.prototype.slice.call(clone), [1, 2, 3]);
+    assert.notStrictEqual(clone, buffer);
+
+    clone[0] = 9;
+    eq(buffer[0], 1);
+    buffer[1] = 8;
+    eq(clone[1], 2);
+  });
+
+  it('copies nested Buffer bytes independently', function() {
+    var buffer = from([2, 3]);
+    var clone = R.clone({data: buffer}).data;
+
+    eq(Buffer.isBuffer(clone), true);
+    eq(Array.prototype.slice.call(clone), [2, 3]);
+    clone[0] = 9;
+    eq(buffer[0], 2);
+    buffer[1] = 8;
+    eq(clone[1], 3);
+  });
+
+  it('preserves the type of an empty Buffer', function() {
+    var buffer = from([]);
+    var clone = R.clone(buffer);
+
+    eq(Buffer.isBuffer(clone), true);
+    eq(clone.length, 0);
+    assert.notStrictEqual(clone, buffer);
+  });
 });
 
 describe('deep clone functions', function() {
