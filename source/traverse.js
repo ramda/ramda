@@ -11,6 +11,8 @@ import sequence from './sequence.js';
  *
  * Dispatches to the `traverse` method of the third argument, if present.
  *
+ * Also accepts `Object` as the Traversable to aid working with [dictionaries](https://github.com/ramda/ramda/wiki/Type-Signatures#simple-objects) (Objects of like-typed values).
+ *
  * @func
  * @memberOf R
  * @since v0.19.0
@@ -30,6 +32,8 @@ import sequence from './sequence.js';
  *
  *      R.traverse(Maybe.of, safeDiv(10), [2, 4, 5]); //=> Maybe.Just([5, 2.5, 2])
  *      R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]); //=> Maybe.Nothing
+ *
+ *      R.traverse(Maybe.of, safeDiv(10), {a: 2, b: 4}); //=> Maybe.Just({a: 5, b: 2.5})
  *
  *      // Using a Type Representative
  *      R.traverse(Maybe, safeDiv(10), Right(4)); //=> Just(Right(2.5))

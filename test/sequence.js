@@ -24,6 +24,11 @@ describe('sequence', function() {
     eq(R.sequence(ofMaybe, [Just(3), Nothing, Just(5)]), Nothing);
   });
 
+  it('operates on a dictionary of applicatives', function() {
+    eq(R.sequence(ofMaybe, {a: Just(3), b: Just(4), c: Just(5)}), Just({a: 3, b: 4, c: 5}));
+    eq(R.sequence(ofMaybe, {a: Just(3), b: Nothing, c: Just(5)}), Nothing);
+  });
+
   it('traverses left to right', function() {
     eq(R.sequence(ofEither, [Right(1), Right(2)]), Right([1, 2]));
     eq(R.sequence(ofEither, [Right(1), Left('XXX')]), Left('XXX'));
