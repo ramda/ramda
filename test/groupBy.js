@@ -44,6 +44,31 @@ describe('groupBy', function() {
     eq(_isTransformer(R.groupBy(byType, xf)), true);
   });
 
+  it('groups prototype-name keys when used as a transducer', function() {
+    var input = ['constructor', 'toString', 'hasOwnProperty', 'constructor'];
+    var expected = {
+      constructor: ['constructor', 'constructor'],
+      toString: ['toString'],
+      hasOwnProperty: ['hasOwnProperty']
+    };
+    var transducer = R.groupBy(R.identity);
+
+    eq(R.into({}, transducer, input), expected);
+    eq(R.transduce(transducer, R.flip(R.append), [], input), [
+      ['constructor', ['constructor', 'constructor']],
+      ['toString', ['toString']],
+      ['hasOwnProperty', ['hasOwnProperty']]
+    ]);
+    eq(R.into({}, transducer, ['constructor']), {constructor: ['constructor']});
+  });
+
+  it('emits an own __proto__ group when used as a transducer', function() {
+    eq(R.into([], R.groupBy(R.identity), ['__proto__', 'ordinary', '__proto__']), [
+      ['__proto__', ['__proto__', '__proto__']],
+      ['ordinary', ['ordinary']]
+    ]);
+  });
+
   it('can act as a transducer', function() {
     var evenOdd = x => x % 2  === 0 ? 'even' : 'odd';
     var expected = {even: [2, 4, 6, 8], odd: [1, 3, 5, 7, 9]};
