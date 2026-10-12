@@ -50,7 +50,10 @@ export default function _clone(value, deep, map) {
     case 'Object':  return copy(Object.create(Object.getPrototypeOf(value)));
     case 'Array':   return copy(Array(value.length));
     case 'Date':    return new Date(value.valueOf());
-    case 'RegExp':  return _cloneRegExp(value);
+    case 'RegExp':
+      var clonedRegExp = _cloneRegExp(value);
+      clonedRegExp.lastIndex = value.lastIndex;
+      return clonedRegExp;
     case 'Error':   return copyError(value, copy, deep, map);
     case 'Int8Array':
     case 'Uint8Array':
