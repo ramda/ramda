@@ -46,4 +46,23 @@ describe('isArrayLike', function() {
     eq(_isArrayLike(function() {}), false);
   });
 
+  it('handles objects without an inherited hasOwnProperty method', function() {
+    var obj = Object.create(null);
+    obj[0] = 'zero';
+    obj[1] = 'one';
+    obj.length = 2;
+    eq(_isArrayLike(obj), true);
+    eq(_isArrayLike({0: 'zero', 1: 'one', length: 2, hasOwnProperty: false}), true);
+  });
+
+  it('does not trust an overridden hasOwnProperty method', function() {
+    eq(_isArrayLike({length: 2, hasOwnProperty: function() { return true; }}), false);
+  });
+
+  it('requires extreme indices to be own properties', function() {
+    var obj = Object.create({0: 'zero', 1: 'one'});
+    obj.length = 2;
+    eq(_isArrayLike(obj), false);
+  });
+
 });

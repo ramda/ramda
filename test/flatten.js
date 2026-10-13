@@ -28,6 +28,15 @@ describe('flatten', function() {
     eq(R.flatten(o), [1, 2, 3, 'a', 'b', 'c', 'd', 'e']);
   });
 
+  it('flattens nested array-like objects without an inherited hasOwnProperty method', function() {
+    var obj = Object.create(null);
+    obj[0] = [1, 2];
+    obj[1] = 3;
+    obj.length = 2;
+    eq(R.flatten([obj]), [1, 2, 3]);
+    eq(R.flatten([{0: [1, 2], 1: 3, length: 2, hasOwnProperty: false}]), [1, 2, 3]);
+  });
+
   it('flattens an array of empty arrays', function() {
     eq(R.flatten([[], [], []]), []);
     eq(R.flatten([]), []);

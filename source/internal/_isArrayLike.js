@@ -1,4 +1,5 @@
 import _curry1 from './_curry1.js';
+import _has from './_has.js';
 import _isArray from './_isArray.js';
 import _isString from './_isString.js';
 
@@ -28,7 +29,7 @@ var _isArrayLike = _curry1(function isArrayLike(x) {
   if (_isString(x)) { return false; }
   if (x.length === 0) { return true; }
   if (x.length > 0) {
-    return x.hasOwnProperty(0) && x.hasOwnProperty(x.length - 1);
+    return _has(0, x) && _has(x.length - 1, x);
   }
   return false;
 });

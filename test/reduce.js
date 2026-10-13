@@ -16,6 +16,15 @@ describe('reduce', function() {
     eq(R.reduce(add, 10, obj), 'override');
   });
 
+  it('reduces array-like objects without an inherited hasOwnProperty method', function() {
+    var obj = Object.create(null);
+    obj[0] = 1;
+    obj[1] = 2;
+    obj.length = 2;
+    eq(R.reduce(add, 0, obj), 3);
+    eq(R.reduce(add, 0, {0: 1, 1: 2, length: 2, hasOwnProperty: false}), 3);
+  });
+
   it('returns the accumulator for an empty array', function() {
     eq(R.reduce(add, 0, []), 0);
     eq(R.reduce(mult, 1, []), 1);
