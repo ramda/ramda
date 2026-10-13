@@ -16,7 +16,7 @@ XReduceBy.prototype['@@transducer/result'] = function(result) {
   for (key in this.inputs) {
     if (_has(key, this.inputs)) {
       result = this.xf['@@transducer/step'](result, this.inputs[key]);
-      if (result['@@transducer/reduced']) {
+      if (result != null && result['@@transducer/reduced']) {
         result = result['@@transducer/value'];
         break;
       }
