@@ -63,7 +63,7 @@ function hasOrAdd(item, shouldAdd, set) {
       } else {
         if (!(type in set._items)) {
           if (shouldAdd) {
-            set._items[type] = {};
+            set._items[type] = Object.create(null);
             set._items[type][item] = true;
           }
           return false;
