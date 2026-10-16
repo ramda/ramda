@@ -58,6 +58,19 @@ describe('memoizeWith', function() {
     eq(count, 1);
   });
 
+  it('caches values for keys that are Object.prototype property names', function() {
+    var count = 0;
+    var f = R.memoizeWith(R.identity, function(s) {
+      count += 1;
+      return s.length;
+    });
+    eq(f('__proto__'), 9);
+    eq(f('__proto__'), 9);
+    eq(f('constructor'), 11);
+    eq(f('constructor'), 11);
+    eq(count, 2);
+  });
+
   it('retains arity', function() {
     var f = R.memoizeWith(R.concat, function(a, b) { return a + b; });
     eq(f.length, 2);
