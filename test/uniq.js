@@ -4,6 +4,19 @@ var {Just} = require('./shared/Maybe.js');
 
 
 describe('uniq', function() {
+  it('keeps prototype-named strings without a native Set', function() {
+    var OriginalSet = global.Set;
+    try {
+      global.Set = undefined;
+      var keys = ['ordinary', 'constructor', 'toString', '__proto__'];
+      eq(R.uniq(keys.concat(keys)), keys);
+      eq(R.difference(keys.slice(1), ['ordinary']), keys.slice(1));
+      eq(R.uniq([0, -0, NaN, NaN, false, false]), [0, -0, NaN, false]);
+    } finally {
+      global.Set = OriginalSet;
+    }
+  });
+
   it('returns a set from any array (i.e. purges duplicate elements)', function() {
     var list = [1, 2, 3, 1, 2, 3, 1, 2, 3];
     eq(R.uniq(list), [1, 2, 3]);
