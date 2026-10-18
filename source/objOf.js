@@ -23,7 +23,16 @@ import _curry2 from './internal/_curry2.js';
  */
 var objOf = _curry2(function objOf(key, val) {
   var obj = {};
-  obj[key] = val;
+  if (key === '__proto__') {
+    Object.defineProperty(obj, key, {
+      value: val,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    });
+  } else {
+    obj[key] = val;
+  }
   return obj;
 });
 export default objOf;
