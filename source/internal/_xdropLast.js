@@ -8,7 +8,8 @@ function XDropLast(n, xf) {
   this.xf = xf;
   this.pos = 0;
   this.full = false;
-  this.acc = new Array(n);
+  this.acc = [];
+  this.n = n;
 }
 XDropLast.prototype['@@transducer/init'] = _xfBase.init;
 XDropLast.prototype['@@transducer/result'] =  function(result) {
@@ -25,7 +26,7 @@ XDropLast.prototype['@@transducer/step'] = function(result, input) {
 XDropLast.prototype.store = function(input) {
   this.acc[this.pos] = input;
   this.pos += 1;
-  if (this.pos === this.acc.length) {
+  if (this.pos === this.n) {
     this.pos = 0;
     this.full = true;
   }

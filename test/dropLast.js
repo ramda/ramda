@@ -38,4 +38,11 @@ describe('dropLast', function() {
     eq(R.transduce(dropLast2, R.flip(R.append), [], input), expected);
   });
 
+  it('does not require a buffer as large as the requested drop count', function() {
+    [Math.pow(2, 32), Infinity].forEach(function(n) {
+      eq(R.into([], R.dropLast(n), []), R.dropLast(n, []));
+      eq(R.into([], R.dropLast(n), [1, 2, 3]), R.dropLast(n, [1, 2, 3]));
+    });
+  });
+
 });
