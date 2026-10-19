@@ -1,4 +1,5 @@
 import _curry3 from './internal/_curry3.js';
+import _has from './internal/_has.js';
 import _isArray from './internal/_isArray.js';
 import _isString from './internal/_isString.js';
 import clone from './clone.js';
@@ -6,8 +7,7 @@ import clone from './clone.js';
 var swapObject = function(indexA, indexB, o) {
   var copy = clone(o);
 
-  var properties = Object.getOwnPropertyNames(copy);
-  if (properties.includes(indexA) && properties.includes(indexB)) {
+  if (_has(indexA, copy) && _has(indexB, copy)) {
     var tmp = copy[indexA];
 
     copy[indexA] = copy[indexB];

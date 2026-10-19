@@ -63,9 +63,33 @@ describe('swap', function() {
     eq(R.swap('b', 'a', {a: 1, b: 2}), {a: 2, b: 1});
   });
 
+  it('swaps numeric object keys without changing the input', function() {
+    var input = {0: 'a', 1: 'b', other: 'c'};
+    eq(R.swap(0, 1, input), {0: 'b', 1: 'a', other: 'c'});
+    eq(R.swap(1, 0, input), {0: 'b', 1: 'a', other: 'c'});
+    eq(input, {0: 'a', 1: 'b', other: 'c'});
+  });
+
+  it('swaps numeric and string object keys', function() {
+    eq(R.swap(0, 'b', {0: 'a', b: 'b'}), {0: 'b', b: 'a'});
+    eq(R.swap('b', 0, {0: 'a', b: 'b'}), {0: 'b', b: 'a'});
+    eq(R.swap(0, '1', {0: 'a', 1: 'b'}), {0: 'b', 1: 'a'});
+  });
+
+  it('treats negative numeric object keys as property names', function() {
+    eq(R.swap(-1, 0, {'-1': 'a', 0: 'b'}), {'-1': 'b', 0: 'a'});
+  });
+
   it('does nothing when property names are not defined', function() {
     eq(R.swap('a', 'b', {a: 1}), {a: 1});
     eq(R.swap('a', 'b', {b: 2}), {b: 2});
+    eq(R.swap(0, 1, {0: 'a'}), {0: 'a'});
+    eq(R.swap(0, 1, {1: 'b'}), {1: 'b'});
+  });
+
+  it('does not swap inherited property values', function() {
+    eq(R.swap('a', 'toString', {a: 1}), {a: 1});
+    eq(R.swap('toString', 'a', {a: 1}), {a: 1});
   });
 
   it('swaps characters in string from one index to another', function() {
