@@ -3,7 +3,7 @@ import _xfBase from './_xfBase.js';
 
 function XDrop(n, xf) {
   this.xf = xf;
-  this.n = n;
+  this.n = Math.floor(n);
 }
 XDrop.prototype['@@transducer/init'] = _xfBase.init;
 XDrop.prototype['@@transducer/result'] = _xfBase.result;
