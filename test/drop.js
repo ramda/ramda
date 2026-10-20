@@ -34,4 +34,11 @@ describe('drop', function() {
     eq(R.drop(6, 'Ramda'), '');
   });
 
+  it('uses the same count for lists and transducers', function() {
+    var xs = [1, 2, 3, 4];
+    [0, 0.5, 1, 1.5, 2.9, -0.5, -1, NaN, Infinity, -Infinity].forEach(function(n) {
+      eq(R.into([], R.drop(n), xs), R.drop(n, xs));
+    });
+  });
+
 });
