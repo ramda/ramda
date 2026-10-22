@@ -8,6 +8,11 @@ import _xreduceBy from './internal/_xreduceBy.js';
 import _xwrap from './internal/_xwrap.js';
 
 
+// Isolate dynamic group keys from V8's shared object-literal transition tree.
+function ReduceByResult() {}
+ReduceByResult.prototype = Object.prototype;
+
+
 /**
  * Groups the elements of the list according to the result of calling
  * the String-returning function `keyFn` on each element and reduces the elements
@@ -65,6 +70,6 @@ var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
       acc[key] = value;
       return acc;
     });
-    return _xReduce(xf, {}, list);
+    return _xReduce(xf, new ReduceByResult(), list);
   }));
 export default reduceBy;
