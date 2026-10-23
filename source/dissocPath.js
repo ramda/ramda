@@ -2,6 +2,7 @@ import _curry2 from './internal/_curry2.js';
 import _dissoc from './internal/_dissoc.js';
 import _isInteger from './internal/_isInteger.js';
 import _isArray from './internal/_isArray.js';
+import _nth from './internal/_nth.js';
 import assoc from './assoc.js';
 
 /**
@@ -58,10 +59,11 @@ var dissocPath = _curry2(function dissocPath(path, obj) {
     default:
       var head = path[0];
       var tail = Array.prototype.slice.call(path, 1);
-      if (obj[head] == null) {
+      var child = _isInteger(head) && _isArray(obj) ? _nth(head, obj) : obj[head];
+      if (child == null) {
         return _shallowCloneObject(head, obj);
       } else {
-        return assoc(head, dissocPath(tail, obj[head]), obj);
+        return assoc(head, dissocPath(tail, child), obj);
       }
   }
 });
