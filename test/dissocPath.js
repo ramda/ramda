@@ -77,4 +77,14 @@ describe('dissocPath', function() {
     assert.notStrictEqual(obj2, obj1);
   });
 
+  it('handles negative indexes from end of array', function() {
+    eq(R.dissocPath(['foo', -1], {foo: [1, 2, 3]}), {foo: [1, 2]});
+    eq(R.dissocPath(['foo', -1, 'X'], {foo: [{a: 0}, {b: 0, X: 42}]}), {foo: [{a: 0}, {b: 0}]});
+    eq(R.dissocPath([-1, 0], [[1, 2], [3, 4]]), [[1, 2], [4]]);
+  });
+
+  it('does not try to omit inner properties when a negative index is out of bounds', function() {
+    eq(R.dissocPath(['foo', -3, 'X'], {foo: [{a: 0}, {b: 0, X: 42}]}), {foo: [{a: 0}, {b: 0, X: 42}]});
+  });
+
 });
