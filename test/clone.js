@@ -166,6 +166,61 @@ describe('deep clone arrays', function() {
     eq(clone, [1, [1, 2, 3], [[[5]]]]);
   });
 
+  it('preserves the length of arrays containing only holes', function() {
+    var list = new Array(5);
+    var clone = R.clone(list);
+
+    assert.notStrictEqual(clone, list);
+    assert.strictEqual(Array.isArray(clone), true);
+    assert.strictEqual(clone.length, 5);
+    assert.deepEqual(Object.keys(clone), []);
+  });
+
+  it('preserves interior and trailing holes in sparse arrays', function() {
+    var list = new Array(5);
+    list[0] = {value: 1};
+    list[2] = 'ramda';
+    var clone = R.clone(list);
+
+    assert.notStrictEqual(clone, list);
+    assert.strictEqual(Array.isArray(clone), true);
+    assert.strictEqual(clone.length, 5);
+    assert.deepEqual(Object.keys(clone), ['0', '2']);
+    assert.notStrictEqual(clone[0], list[0]);
+    assert.strictEqual(clone[0].value, 1);
+    assert.strictEqual(clone[2], 'ramda');
+  });
+
+  it('distinguishes holes from explicit undefined elements', function() {
+    var list = new Array(3);
+    list[1] = undefined;
+    var clone = R.clone(list);
+
+    assert.notStrictEqual(clone, list);
+    assert.strictEqual(clone.length, 3);
+    assert.deepEqual(Object.keys(clone), ['1']);
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(clone, 0), false);
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(clone, 1), true);
+    assert.strictEqual(Object.prototype.hasOwnProperty.call(clone, 2), false);
+    assert.strictEqual(clone[1], undefined);
+  });
+
+  it('preserves holes and lengths in nested sparse arrays', function() {
+    var obj = {nested: new Array(3)};
+    obj.nested[1] = new Array(5);
+    var clone = R.clone(obj);
+
+    assert.notStrictEqual(clone, obj);
+    assert.notStrictEqual(clone.nested, obj.nested);
+    assert.notStrictEqual(clone.nested[1], obj.nested[1]);
+    assert.strictEqual(Array.isArray(clone.nested), true);
+    assert.strictEqual(Array.isArray(clone.nested[1]), true);
+    assert.strictEqual(clone.nested.length, 3);
+    assert.deepEqual(Object.keys(clone.nested), ['1']);
+    assert.strictEqual(clone.nested[1].length, 5);
+    assert.deepEqual(Object.keys(clone.nested[1]), []);
+  });
+
 });
 
 describe('deep clone typed arrays', function() {
@@ -395,7 +450,11 @@ describe('deep clone edge cases', function() {
     assert.notStrictEqual(R.clone(obj), obj);
 
     var list = [];
-    assert.notStrictEqual(R.clone(list), list);
+    var clone = R.clone(list);
+    assert.notStrictEqual(clone, list);
+    assert.strictEqual(Array.isArray(clone), true);
+    assert.strictEqual(clone.length, 0);
+    assert.deepEqual(Object.keys(clone), []);
   });
 
 });
