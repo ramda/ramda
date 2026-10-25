@@ -17,7 +17,7 @@ import _mapKeys from './internal/_mapKeys.js';
  * @see R.map, R.rebuild, R.renameKeys
  * @example
  *
- *      R.mapKeys(toUpper, {foo: 1, bar: 2, baz: 3}) //=> {FOO: 1, BAR: 2, BAZ: 3}
+ *      R.mapKeys(R.toUpper, {foo: 1, bar: 2, baz: 3}) //=> {FOO: 1, BAR: 2, BAZ: 3}
  */
 var mapKeys = _curry2(_mapKeys);
 

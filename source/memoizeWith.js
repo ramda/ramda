@@ -27,9 +27,9 @@ import _has from './internal/_has.js';
  * @param {Function} fn The function to memoize.
  * @return {Function} Memoized version of `fn`.
  * @example
- *      const withAge = memoizeWith(o => `${o.birth}/${o.death}`, ({birth, death}) => {
- *      //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^
- *      //                          keyGen                        fn
+ *      const withAge = R.memoizeWith(o => `${o.birth}/${o.death}`, ({birth, death}) => {
+ *      //                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^
+ *      //                            keyGen                        fn
  *        console.log(`computing age for ${birth}/${death}`);
  *        return ({birth, death, age: death - birth});
  *      });

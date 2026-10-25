@@ -22,25 +22,25 @@ import toString from './toString.js';
  * @see R.construct
  * @example
  *      // A function with no arguments
- *      const asJson = invoker(0, "json")
+ *      const asJson = R.invoker(0, "json")
  *      // Just like calling .then((response) => response.json())
  *      fetch("http://example.com/index.json").then(asJson)
  *
  *      // A function with one argument
- *      const sliceFrom = invoker(1, 'slice');
+ *      const sliceFrom = R.invoker(1, 'slice');
  *      sliceFrom(6, 'abcdefghijklm'); //=> 'ghijklm'
  *
  *      // A function with two arguments
- *      const sliceFrom6 = invoker(2, 'slice')(6);
+ *      const sliceFrom6 = R.invoker(2, 'slice')(6);
  *      sliceFrom6(8, 'abcdefghijklm'); //=> 'gh'
  *
  *      // NOTE: You can't simply pass some of the arguments to the initial invoker function.
- *      const firstCreditCardSection = invoker(2, "slice", 0, 4)
+ *      const firstCreditCardSection = R.invoker(2, "slice", 0, 4)
  *      firstCreditCardSection("4242 4242 4242 4242") // => Function<...>
  *
  *      // Since invoker returns a curried function, you may partially apply it to create the function you need.
- *      const firstCreditCardSection = invoker(2, "slice")(0, 4)
- *      firstCreditCardSection("4242 4242 4242 4242") // => "4242"
+ *      const firstCreditCardSection2 = R.invoker(2, "slice")(0, 4)
+ *      firstCreditCardSection2("4242 4242 4242 4242") // => "4242"
  *
  * @symb R.invoker(0, 'method')(o) = o['method']()
  * @symb R.invoker(1, 'method')(a, o) = o['method'](a)
