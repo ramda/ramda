@@ -5,8 +5,6 @@ A practical functional library for JavaScript programmers.
 
 [![Build Status](https://github.com/ramda/ramda/workflows/Build/badge.svg)](https://github.com/ramda/ramda/actions?query=workflow%3ABuild)
 [![npm module](https://badge.fury.io/js/ramda.svg)](https://www.npmjs.org/package/ramda)
-[![deno land](http://img.shields.io/badge/available%20on-deno.land/x-lightgrey.svg?logo=deno&labelColor=black)](https://deno.land/x/ramda@v0.27.2)
-[![nest badge](https://nest.land/badge.svg)](https://nest.land/package/ramda)
 [![Gitter](https://badges.gitter.im/Join_Chat.svg)](https://gitter.im/ramda/ramda?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
@@ -92,15 +90,12 @@ Then in the console:
 const R = require('ramda');
 ```
 
-To use directly in [Deno](https://deno.land):
+To use directly in [Deno](https://deno.land), import a tagged release from this repository via [jsDelivr](https://www.jsdelivr.com/):
 ```javascript
-import * as R from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+import * as R from "https://cdn.jsdelivr.net/gh/ramda/ramda@v0.32.0/mod.ts";
 ```
 
-or using Nest.land:
-```javascript
-import * as R from "https://x.nest.land/ramda@0.27.2/mod.ts";
-```
+This uses the upstream release rather than the older community-maintained Deno.land and Nest.land packages.
 
 To use directly in the browser:
 
