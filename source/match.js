@@ -20,7 +20,7 @@ import _curry2 from './internal/_curry2.js';
  *
  *      R.match(/([a-z]a)/g, 'bananas'); //=> ['ba', 'na', 'na']
  *      R.match(/a/, 'b'); //=> []
- *      R.match(/a/, null); //=> TypeError: null does not have a method named "match"
+ *      R.match(/a/, null); //=> throws TypeError
  */
 var match = _curry2(function match(rx, str) {
   return str.match(rx) || [];

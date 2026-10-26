@@ -49,7 +49,7 @@ import _xwrap from './internal/_xwrap.js';
  *        {name: 'Dora', score: 92},
  *      ]
  *
- *      reduceBy(groupNames, [], toGrade, students)
+ *      R.reduceBy(groupNames, [], toGrade, students)
  *      //=> {"A": ["Dora"], "B": ["Abby", "Curt"], "F": ["Bart"]}
  */
 var reduceBy = _curryN(4, [], _dispatchable([], _xreduceBy,
