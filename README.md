@@ -144,7 +144,12 @@ In order to access to the ES6 module in browsers, one has to provide the content
 
 ### Build
 
-`npm run build` creates `es`, `src` directories and updates both __dist/ramda.js__ and __dist/ramda.min.js__
+`npm run build` creates CommonJS modules in `src/` and ES modules in `es/`.
+To rebuild the browser UMD bundle in `dist/ramda.js`, run:
+
+```bash
+npx rollup --config --file dist/ramda.js
+```
 
 #### Partial Builds
 
