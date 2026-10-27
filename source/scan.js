@@ -9,6 +9,9 @@ import _xscan from './internal/_xscan.js';
  *
  * Acts as a transducer if a transformer is given in list position.
  *
+ * When used as a transducer, emits the initial accumulator before scanning
+ * the input, including when no input reaches the transducer.
+ *
  * @func
  * @memberOf R
  * @since v0.10.0
