@@ -14,7 +14,7 @@ XPreservingReduced.prototype[tInit] = _xfBase.init;
 XPreservingReduced.prototype[tResult] = function(result) { return result; };
 XPreservingReduced.prototype[tStep] = function(result, input) {
   var ret = this.xf[tStep](result, input);
-  return ret['@@transducer/reduced'] ? _forceReduced(ret) : ret;
+  return ret && ret['@@transducer/reduced'] ? _forceReduced(ret) : ret;
 };
 
 function XFlatCat(xf) {

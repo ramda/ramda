@@ -26,6 +26,26 @@ describe('chain', function() {
     eq(intoArray(R.chain(times2), [1, 2, 3, 4]), [2, 4, 6, 8]);
   });
 
+  [null, undefined].forEach(function(value) {
+    it('allows a nullish accumulator returned by the reducing function: ' + value, function() {
+      var seen = [];
+      var reducer = function(acc, x) { seen.push(x); return value; };
+      eq(R.transduce(R.chain(R.identity), reducer, value, [[1, 2], [3]]), value);
+      eq(seen, [1, 2, 3]);
+    });
+
+    it('allows unnest to return a nullish accumulator: ' + value, function() {
+      eq(R.transduce(R.unnest, R.always(value), value, [[1], [2]]), value);
+    });
+
+    it('preserves early termination with a nullish final value: ' + value, function() {
+      var seen = [];
+      var reducer = function(acc, x) { seen.push(x); return R.reduced(value); };
+      eq(R.transduce(R.chain(R.identity), reducer, [], [[1, 2], [3]]), value);
+      eq(seen, [1]);
+    });
+  });
+
   it('interprets ((->) r) as a monad', function() {
     var h = function(r) { return r * 2; };
     var f = function(a) {
