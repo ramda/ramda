@@ -1,38 +1,42 @@
 import _includes from './_includes.js';
 
-
+/**
+ * @template T
+ */
 function _Set() {
   /* globals Set */
   this._nativeSet = typeof Set === 'function' ? new Set() : null;
   this._items = {};
 }
 
-// until we figure out why jsdoc chokes on this
-// @param item The item to add to the Set
-// @returns {boolean} true if the item did not exist prior, otherwise false
-//
+/**
+ * @param {T} item   The item to add to the Set
+ * @return {boolean} true if the item did not exist in the set,
+ *                   otherwise false
+ */
 _Set.prototype.add = function(item) {
   return !hasOrAdd(item, true, this);
 };
 
-//
-// @param item The item to check for existence in the Set
-// @returns {boolean} true if the item exists in the Set, otherwise false
-//
+/**
+ * @param {T} item   The item to check for existence in the Set
+ * @return {boolean} true if the item exists in the Set, otherwise false
+ */
 _Set.prototype.has = function(item) {
   return hasOrAdd(item, false, this);
 };
 
-//
-// Combines the logic for checking whether an item is a member of the set and
-// for adding a new item to the set.
-//
-// @param item       The item to check or add to the Set instance.
-// @param shouldAdd  If true, the item will be added to the set if it doesn't
-//                   already exist.
-// @param set        The set instance to check or add to.
-// @return {boolean} true if the item already existed, otherwise false.
-//
+/**
+ * Combines the logic for checking whether an item is a member of
+ * the set and for adding a new item to the set.
+ * @param {T} item             The item to check or add to the Set instance.
+ * @param {boolean} shouldAdd  If true, the item will be added to the set
+ *                             if it doesn't already exist.
+ * @param {Set<T>} set         The set instance to check or add to.
+ * @return {boolean}           true if the item already existed,
+ *                             otherwise false.
+ * @template T
+ */
 function hasOrAdd(item, shouldAdd, set) {
   var type = typeof item;
   var prevSize, newSize;
