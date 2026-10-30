@@ -5,10 +5,10 @@ var eq = require('./shared/eq.js');
 var a = {id: 1, name: 'a'};
 var b = {id: 2, name: 'b'};
 var c = {id: 3, name: 'c'};
-var f = R.innerJoin(function(r, id) { return r.id === id; });
+var f = R.intersectionWith(function(r, id) { return r.id === id; });
 
 
-describe('innerJoin', function() {
+describe('intersectionWith', function() {
 
   it('only returns elements from the first list', function() {
     eq(f([a, b, c], []), []);
