@@ -1,3 +1,4 @@
+/* global Float16Array */
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
@@ -35,6 +36,17 @@ describe('empty', function() {
     eq(R.empty(Uint8Array.from('123')).constructor.name, 'Uint8Array');
     eq(R.empty(new Float32Array([1, 2, 3])), new Float32Array([]));
     eq(R.empty(new Float32Array([1, 2, 3])).constructor.name, 'Float32Array');
+  });
+
+  (typeof Float16Array === 'function' ? it : it.skip)('returns an empty Float16Array', function() {
+    var array = new Float16Array([1.5, -2]);
+    var empty = R.empty(array);
+
+    eq(empty.constructor, Float16Array);
+    eq(empty.length, 0);
+    eq(Array.from(array), [1.5, -2]);
+    eq(R.isEmpty(new Float16Array([])), true);
+    eq(R.isEmpty(array), false);
   });
 
   it('returns empty object given object', function() {

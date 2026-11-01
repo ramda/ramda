@@ -1,3 +1,4 @@
+/* global Float16Array */
 /* global Map, Set, WeakMap, WeakSet */
 
 var R = require('../source/index.js');
@@ -219,6 +220,17 @@ describe('equals', function() {
       eq(R.equals(typArr1, intTypArr), false);
     });
   }
+
+  (typeof Float16Array === 'function' ? it : it.skip)('compares Float16Array values', function() {
+    eq(R.equals(new Float16Array([]), new Float16Array([])), true);
+    eq(R.equals(new Float16Array([1.5, -2]), new Float16Array([1.5, -2])), true);
+    eq(R.equals(new Float16Array([1.5]), new Float16Array([2])), false);
+    eq(R.equals(new Float16Array([1]), new Float16Array([1, 2])), false);
+    eq(R.equals(new Float16Array([NaN]), new Float16Array([NaN])), true);
+    eq(R.equals(new Float16Array([0]), new Float16Array([-0])), false);
+    eq(R.equals(new Float16Array([1]), new Float32Array([1])), false);
+    eq(R.equals({a: new Float16Array([1])}, {a: new Float16Array([1])}), true);
+  });
 
   if (typeof Promise !== 'undefined') {
     it('compares Promise objects by identity', function() {
