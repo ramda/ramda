@@ -1,3 +1,4 @@
+/* global Float16Array */
 var assert = require('assert');
 
 var R = require('../source/index.js');
@@ -226,6 +227,18 @@ describe('deep clone typed arrays', function() {
     assert.notStrictEqual(array, clone);
     eq(clone, new Uint32Array([1,2,3]));
   });
+  (typeof Float16Array === 'function' ? it : it.skip)('clones Float16Array views without sharing their buffer', function() {
+    var array = new Float16Array([9, 1.5, -2, 8]).subarray(1, 3);
+    var clone = R.clone(array);
+
+    assert.notStrictEqual(clone, array);
+    assert.notStrictEqual(clone.buffer, array.buffer);
+    eq(clone.constructor, Float16Array);
+    eq(Array.from(clone), [1.5, -2]);
+    clone[0] = 7;
+    eq(array[0], 1.5);
+  });
+
   it('clones Float32Array', function() {
     var array = new Float32Array([1,2,3]);
     var clone = R.clone(array);

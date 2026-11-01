@@ -59,6 +59,7 @@ export default function _clone(value, deep, map) {
     case 'Uint16Array':
     case 'Int32Array':
     case 'Uint32Array':
+    case 'Float16Array':
     case 'Float32Array':
     case 'Float64Array':
     case 'BigInt64Array':
