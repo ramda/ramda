@@ -50,4 +50,14 @@ describe('invert', function() {
     });
   });
 
+  it('preserves __proto__ as an own key and collects duplicates', function() {
+    var input = {first: '__proto__', second: '__proto__'};
+    var inverted = R.invert(input);
+    eq(Object.prototype.hasOwnProperty.call(inverted, '__proto__'), true);
+    eq(Object.getPrototypeOf(inverted), Object.prototype);
+    eq(Object.getOwnPropertyDescriptor(inverted, '__proto__').value, ['first', 'second']);
+    eq(Object.keys(inverted), ['__proto__']);
+    eq(input, {first: '__proto__', second: '__proto__'});
+  });
+
 });

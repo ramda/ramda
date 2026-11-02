@@ -28,6 +28,16 @@ describe('invertObj', function() {
     eq(R.invertObj({x:'a', y:'b', z:'a', _id:'a'}), {a: '_id', b: 'y'});
   });
 
+  it('preserves __proto__ as an own key and prefers the last duplicate', function() {
+    var input = {first: '__proto__', second: '__proto__'};
+    var inverted = R.invertObj(input);
+    eq(Object.prototype.hasOwnProperty.call(inverted, '__proto__'), true);
+    eq(Object.getPrototypeOf(inverted), Object.prototype);
+    eq(Object.getOwnPropertyDescriptor(inverted, '__proto__').value, 'second');
+    eq(Object.keys(inverted), ['__proto__']);
+    eq(input, {first: '__proto__', second: '__proto__'});
+  });
+
   // this one is more of a sanity check
   it('is not destructive', function() {
     var input = {x:'a', y:'b', z:'a', _id:'a'};

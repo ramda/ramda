@@ -37,7 +37,12 @@ var invertObj = _curry1(function invertObj(obj) {
 
   while (idx < len) {
     var key = props[idx];
-    out[obj[key]] = key;
+    Object.defineProperty(out, obj[key], {
+      value: key,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    });
     idx += 1;
   }
   return out;
