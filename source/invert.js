@@ -34,7 +34,18 @@ var invert = _curry1(function invert(obj) {
   while (idx < len) {
     var key = props[idx];
     var val = obj[key];
-    var list = _has(val, out) ? out[val] : (out[val] = []);
+    var list;
+    if (_has(val, out)) {
+      list = out[val];
+    } else {
+      list = [];
+      Object.defineProperty(out, val, {
+        value: list,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      });
+    }
     list[list.length] = key;
     idx += 1;
   }
