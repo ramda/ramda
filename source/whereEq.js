@@ -1,7 +1,6 @@
 import _curry2 from './internal/_curry2.js';
+import _has from './internal/_has.js';
 import equals from './equals.js';
-import map from './map.js';
-import where from './where.js';
 
 
 /**
@@ -33,6 +32,11 @@ import where from './where.js';
  *      pred({a: 1, b: 1});        //=> false
  */
 var whereEq = _curry2(function whereEq(spec, testObj) {
-  return where(map(equals, spec), testObj);
+  for (var prop in spec) {
+    if (_has(prop, spec) && !equals(spec[prop], testObj[prop])) {
+      return false;
+    }
+  }
+  return true;
 });
 export default whereEq;
