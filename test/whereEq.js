@@ -45,6 +45,52 @@ describe('whereEq', function() {
     eq(R.whereEq(R, R), true);
   });
 
+  it('compares an own map method as a value without calling it', function() {
+    var calls = 0;
+    var map = function() { calls += 1; return {}; };
+    var spec = {map: map, status: 'ready'};
+    eq(R.whereEq(spec, {map: map, status: 'ready'}), true);
+    eq(R.whereEq(spec, {map: map, status: 'failed'}), false);
+    eq(R.whereEq(spec, {}), false);
+    eq(R.whereEq(spec, {map: R.identity, status: 'ready'}), false);
+    eq(calls, 0);
+  });
+
+  it('compares an own fantasy-land/map method as a value', function() {
+    var calls = 0;
+    var map = function() { calls += 1; return {}; };
+    var spec = {'fantasy-land/map': map, status: 'ready'};
+    eq(R.whereEq(spec, {'fantasy-land/map': map, status: 'ready'}), true);
+    eq(R.whereEq(spec, {'fantasy-land/map': map, status: 'failed'}), false);
+    eq(R.whereEq(spec, {'fantasy-land/map': R.identity, status: 'ready'}), false);
+    eq(calls, 0);
+  });
+
+  it('does not dispatch to inherited mapping methods', function() {
+    ['map', 'fantasy-land/map'].forEach(function(key) {
+      var calls = 0;
+      var prototype = {};
+      prototype[key] = function() { calls += 1; return {}; };
+      var spec = Object.create(prototype);
+      spec.status = 'ready';
+      eq(R.whereEq(spec, {status: 'ready'}), true);
+      eq(R.whereEq(spec, {status: 'failed'}), false);
+      eq(calls, 0);
+    });
+  });
+
+  it('rejects missing properties from a namespace spec', function() {
+    eq(R.whereEq(R, {}), false);
+  });
+
+  it('preserves array specs, currying and placeholders', function() {
+    eq(R.whereEq([1, 2], [1, 2]), true);
+    eq(R.whereEq([1, 2], [1, 3]), false);
+    eq(R.whereEq({x: 1})({x: 1}), true);
+    eq(R.whereEq(R.__, {x: 1})({x: 1}), true);
+    eq(R.whereEq(R.__, {x: 2})({x: 1}), false);
+  });
+
   function Parent() {
     this.y = 6;
   }
