@@ -85,4 +85,35 @@ describe('reduceBy', function() {
       F: ['Eddy']
     });
   });
+  [
+    {name: 'into', run: function(xf, input) { return R.into([], xf, input); }},
+    {name: 'transduce', run: function(xf, input) { return R.transduce(xf, R.flip(R.append), [], input); }}
+  ].forEach(function(method) {
+    it('short circuits a new group with reduced when using ' + method.name, function() {
+      var visited = [];
+      var collectNames = function(acc, student) {
+        visited.push(student.name);
+        return student.name === 'Fred' ? R.reduced(acc) : acc.concat(student.name);
+      };
+      eq(method.run(R.reduceBy(collectNames, [], byGrade), students), [
+        ['B', ['Abby', 'Chris']],
+        ['C', ['Brad']],
+        ['A', ['Dianne']],
+        ['F', ['Eddy']]
+      ]);
+      eq(visited, ['Abby', 'Brad', 'Chris', 'Dianne', 'Eddy', 'Fred']);
+    });
+
+    it('preserves an existing group on reduced when using ' + method.name, function() {
+      var sumUntilThree = function(acc, value) {
+        return value === 3 ? R.reduced(999) : acc + value;
+      };
+      eq(method.run(R.reduceBy(sumUntilThree, 0, R.always('all')), [1, 2, 3, 4]), [['all', 3]]);
+    });
+
+    it('emits no groups when reduced on the first input using ' + method.name, function() {
+      eq(method.run(R.reduceBy(function() { return R.reduced(999); }, 0, R.identity), [1, 2]), []);
+    });
+  });
+
 });
