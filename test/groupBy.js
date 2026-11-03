@@ -51,4 +51,11 @@ describe('groupBy', function() {
     eq(R.transduce(R.groupBy(evenOdd), (result, input) => {result[input[0]] = input[1]; return result;}, {}, R.range(1, 10)), expected);
   });
 
+  ['constructor', 'toString', 'hasOwnProperty', '__proto__'].forEach(function(key) {
+    it('can transduce groups named ' + key, function() {
+      eq(R.into([], R.groupBy(R.identity), [key, key]), [[key, [key, key]]]);
+      eq(R.transduce(R.groupBy(R.identity), R.flip(R.append), [], [key, key]), [[key, [key, key]]]);
+    });
+  });
+
 });
