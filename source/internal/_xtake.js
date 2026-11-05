@@ -4,7 +4,7 @@ import _xfBase from './_xfBase.js';
 
 function XTake(n, xf) {
   this.xf = xf;
-  this.n = n;
+  this.n = n < 0 ? n : Math.floor(n) || 0;
   this.i = 0;
 }
 XTake.prototype['@@transducer/init'] = _xfBase.init;
