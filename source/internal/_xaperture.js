@@ -6,7 +6,13 @@ function XAperture(n, xf) {
   this.xf = xf;
   this.pos = 0;
   this.full = false;
-  this.acc = new Array(n);
+  if (typeof n === 'number' && n > 0 && (n === Infinity || n % 1 === 0)) {
+    this.acc = [];
+    this.size = n;
+  } else {
+    this.acc = new Array(n);
+    this.size = this.acc.length || 1;
+  }
 }
 XAperture.prototype['@@transducer/init'] = _xfBase.init;
 XAperture.prototype['@@transducer/result'] = function(result) {
@@ -20,7 +26,7 @@ XAperture.prototype['@@transducer/step'] = function(result, input) {
 XAperture.prototype.store = function(input) {
   this.acc[this.pos] = input;
   this.pos += 1;
-  if (this.pos === this.acc.length) {
+  if (this.pos === this.size) {
     this.pos = 0;
     this.full = true;
   }
