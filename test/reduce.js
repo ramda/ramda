@@ -1,3 +1,4 @@
+var assert = require('assert');
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
@@ -81,5 +82,173 @@ describe('reduce', function() {
     var addWithMaxOf10 = function(acc, val) {return acc + val > 10 ? R.reduced(acc) : acc + val;};
     eq(R.reduce(addWithMaxOf10, 0, [1, 2, 3, 4]), 10);
     eq(R.reduce(addWithMaxOf10, 0, [2, 4, 6, 8]), 6);
+  });
+
+  it('closes a generator when a reduced value stops iteration', function() {
+    var closed = 0;
+    function* values() {
+      try {
+        yield 1;
+        yield 2;
+        yield 3;
+      } finally {
+        closed += 1;
+      }
+    }
+    var iterator = values();
+    eq(R.reduce(function(acc, value) {
+      return value === 2 ? R.reduced(acc) : acc + value;
+    }, 0, iterator), 1);
+    eq(closed, 1);
+    eq(iterator.next().done, true);
+  });
+
+  it('closes a generator before completing a transducer', function() {
+    var events = [];
+    function* values() {
+      try {
+        yield 1;
+        yield 2;
+        yield 3;
+      } finally {
+        events.push('closed');
+      }
+    }
+    var xf = {
+      '@@transducer/step': function(acc, value) { return acc.concat(value); },
+      '@@transducer/result': function(acc) { events.push('result'); return acc; }
+    };
+    eq(R.transduce(R.take(2), xf, [], values()), [1, 2]);
+    eq(events, ['closed', 'result']);
+  });
+
+  it('closes an iterator if the reducer throws', function() {
+    var closed = 0;
+    var error = new Error('reducer');
+    function* values() {
+      try {
+        yield 1;
+        yield 2;
+      } finally {
+        closed += 1;
+      }
+    }
+    assert.throws(function() {
+      R.reduce(function() { throw error; }, 0, values());
+    }, function(actual) { return actual === error; });
+    eq(closed, 1);
+  });
+
+  it('does not close an exhausted iterator', function() {
+    var closed = 0;
+    var iterator = {
+      n: 0,
+      next: function() { this.n += 1; return {value: this.n, done: this.n > 2}; },
+      'return': function() { closed += 1; return {done: true}; }
+    };
+    eq(R.reduce(add, 0, iterator), 3);
+    eq(closed, 0);
+  });
+
+  it('supports early termination for iterators without a return method', function() {
+    var iterator = {next: function() { return {value: 4, done: false}; }};
+    eq(R.reduce(function(acc, value) { return R.reduced(acc + value); }, 1, iterator), 5);
+  });
+
+  it('calls return once with the iterator as receiver on early termination', function() {
+    var calls = 0;
+    var receiver;
+    var iterator = {
+      next: function() { return {value: 4, done: false}; },
+      'return': function() { calls += 1; receiver = this; return {done: true}; }
+    };
+    eq(R.reduce(function(acc, value) { return R.reduced(acc + value); }, 1, iterator), 5);
+    eq(calls, 1);
+    assert.strictEqual(receiver, iterator);
+  });
+
+  it('reads the return method only once', function() {
+    var reads = 0;
+    var iterator = {next: function() { return {value: 1, done: false}; }};
+    Object.defineProperty(iterator, 'return', {get: function() {
+      reads += 1;
+      return function() { return {done: true}; };
+    }});
+    eq(R.reduce(function(acc) { return R.reduced(acc); }, 0, iterator), 0);
+    eq(reads, 1);
+  });
+
+  it('rejects a non-callable return method on early termination', function() {
+    var iterator = {next: function() { return {value: 1, done: false}; }, 'return': 1};
+    assert.throws(function() {
+      R.reduce(function(acc) { return R.reduced(acc); }, 0, iterator);
+    }, TypeError);
+  });
+
+  it('rejects a non-object result from return on early termination', function() {
+    var iterator = {
+      next: function() { return {value: 1, done: false}; },
+      'return': function() { return undefined; }
+    };
+    assert.throws(function() {
+      R.reduce(function(acc) { return R.reduced(acc); }, 0, iterator);
+    }, TypeError);
+  });
+
+  it('propagates an iterator return error on early termination', function() {
+    var error = new Error('close');
+    var calls = 0;
+    var iterator = {
+      next: function() { return {value: 1, done: false}; },
+      'return': function() { calls += 1; throw error; }
+    };
+    assert.throws(function() {
+      R.reduce(function(acc) { return R.reduced(acc); }, 0, iterator);
+    }, function(actual) { return actual === error; });
+    eq(calls, 1);
+  });
+
+  it('preserves a reducer error when iterator cleanup also throws', function() {
+    var error = new Error('reducer');
+    var calls = 0;
+    var iterator = {
+      next: function() { return {value: 1, done: false}; },
+      'return': function() { calls += 1; throw new Error('close'); }
+    };
+    assert.throws(function() {
+      R.reduce(function() { throw error; }, 0, iterator);
+    }, function(actual) { return actual === error; });
+    eq(calls, 1);
+  });
+
+  it('preserves a reducer error when reading return throws', function() {
+    var error = new Error('reducer');
+    var iterator = {next: function() { return {value: 1, done: false}; }};
+    Object.defineProperty(iterator, 'return', {get: function() { throw new Error('close'); }});
+    assert.throws(function() {
+      R.reduce(function() { throw error; }, 0, iterator);
+    }, function(actual) { return actual === error; });
+  });
+
+  it('does not close an iterator when next throws', function() {
+    var error = new Error('next');
+    var closed = 0;
+    var iterator = {
+      next: function() { throw error; },
+      'return': function() { closed += 1; return {done: true}; }
+    };
+    assert.throws(function() { R.reduce(add, 0, iterator); }, function(actual) { return actual === error; });
+    eq(closed, 0);
+  });
+
+  it('does not close an iterator when reading the next value throws', function() {
+    var error = new Error('value');
+    var closed = 0;
+    var iterator = {
+      next: function() { return {done: false, get value() { throw error; }}; },
+      'return': function() { closed += 1; return {done: true}; }
+    };
+    assert.throws(function() { R.reduce(add, 0, iterator); }, function(actual) { return actual === error; });
+    eq(closed, 0);
   });
 });
