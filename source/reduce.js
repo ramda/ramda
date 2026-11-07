@@ -10,6 +10,8 @@ import _xwrap from './internal/_xwrap.js';
  *
  * The iterator function receives two values: *(acc, value)*. It may use
  * [`R.reduced`](#reduced) to shortcut the iteration.
+ * When reducing through an iterator, early termination or an error in the
+ * reducer calls the iterator's `return` method, if present.
  *
  * The arguments' order of [`reduceRight`](#reduceRight)'s iterator function
  * is *(value, acc)*.
