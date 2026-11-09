@@ -27,8 +27,8 @@ import update from './update.js';
  *      R.over(headLens, R.toUpper, ['a', 'b', 'c']); //=> ['A', 'b', 'c']
  *
  *      // out-of-range returns original list
- *      R.set(R.lensIndex(3), 'x', ['a', 'b', 'c']);         //=> ['a', 'b', 'c']
- *      R.over(R.lensIndex(-4), R.toUpper, ['a', 'b', 'c']); //=> ['a', 'b', 'c']
+ *      R.set(R.lensIndex(3), 'x', ['a', 'b', 'c']);             //=> ['a', 'b', 'c']
+ *      R.over(R.lensIndex(-4), R.always('x'), ['a', 'b', 'c']); //=> ['a', 'b', 'c']
  */
 var lensIndex = _curry1(function lensIndex(n) {
   return lens(

@@ -17,10 +17,23 @@ describe('lensIndex', function() {
     it('sets the list value at the specified index', function() {
       eq(R.set(R.lensIndex(0), 0, testList), [0, {b: 2}, {c: 3}]);
     });
+    it('returns the original list if the specified index does not exist', function() {
+      eq(R.set(R.lensIndex(3), 0, testList), testList);
+      eq(R.set(R.lensIndex(-4), 0, testList), testList);
+    });
   });
   describe('over', function() {
     it('applies function to the value at the specified list index', function() {
       eq(R.over(R.lensIndex(2), R.keys, testList), [{a: 1}, {b: 2}, ['c']]);
+    });
+    it('returns the original list if the specified index does not exist', function() {
+      eq(R.over(R.lensIndex(3), R.always(0), testList), testList);
+      eq(R.over(R.lensIndex(-4), R.always(0), testList), testList);
+    });
+    it('calls the function with undefined if the specified index does not exist', function() {
+      var calledWith = [];
+      R.over(R.lensIndex(-4), function(x) { calledWith.push(x); return x; }, testList);
+      eq(calledWith, [undefined]);
     });
   });
   describe('composability', function() {
