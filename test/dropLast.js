@@ -38,4 +38,28 @@ describe('dropLast', function() {
     eq(R.transduce(dropLast2, R.flip(R.append), [], input), expected);
   });
 
+  [0.1, 0.5, 1.1, 1.5, 2.9, 3.5, 4.5].forEach(function(n) {
+    it('matches list behavior as a transducer for a count of ' + n, function() {
+      var input = [1, 2, 3, 4];
+      var expected = R.dropLast(n, input);
+      eq(R.into([], R.dropLast(n), input), expected);
+      eq(R.transduce(R.dropLast(n), R.flip(R.append), [], input), expected);
+    });
+  });
+
+  [0, -0.5, -1, 1, 4].forEach(function(n) {
+    it('preserves transducer behavior for a count of ' + n, function() {
+      var input = [1, 2, 3, 4];
+      eq(R.into([], R.dropLast(n), input), R.dropLast(n, input));
+    });
+  });
+
+  it('handles an empty input with a fractional count', function() {
+    eq(R.into([], R.dropLast(1.5), []), []);
+  });
+
+  it('composes fractional dropLast with a downstream take', function() {
+    eq(R.into([], R.compose(R.dropLast(1.5), R.take(1)), [1, 2, 3, 4]), [1]);
+  });
+
 });
