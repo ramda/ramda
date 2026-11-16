@@ -5,6 +5,7 @@ function XDropLast(n, xf) {
   if (n <= 0) {
     return xf;
   }
+  n = Math.ceil(n);
   this.xf = xf;
   this.pos = 0;
   this.full = false;
