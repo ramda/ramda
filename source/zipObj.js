@@ -23,7 +23,14 @@ var zipObj = _curry2(function zipObj(keys, values) {
   var len = Math.min(keys.length, values.length);
   var out = {};
   while (idx < len) {
-    out[keys[idx]] = values[idx];
+    var key = keys[idx];
+    if (key === '__proto__' || (key !== null && (typeof key === 'object' || typeof key === 'function'))) {
+      Object.defineProperty(out, key, {
+        value: values[idx], enumerable: true, writable: true, configurable: true
+      });
+    } else {
+      out[key] = values[idx];
+    }
     idx += 1;
   }
   return out;
