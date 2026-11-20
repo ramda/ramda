@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 var R = require('../source/index.js');
 var eq = require('./shared/eq.js');
 
@@ -22,6 +24,22 @@ describe('memoizeWith', function() {
     eq(f('Goodbye', 'Cruel World' , '!!!'), 'Goodbye, Cruel World!!!');
     eq(f('Hello', 'how are you' , '?'), 'Hello, how are you?');
     eq(f('Hello', 'World' , '!'), 'Hello, World!');
+  });
+
+  it('caches values for prototype-named keys', function() {
+    ['__proto__', 'constructor', 'hasOwnProperty', 'toString'].forEach(function(key) {
+      [42, null, undefined, {value: 42}].forEach(function(value) {
+        var count = 0;
+        var f = R.memoizeWith(R.identity, function() {
+          count += 1;
+          return value;
+        });
+
+        assert.strictEqual(f(key), value);
+        assert.strictEqual(f(key), value);
+        eq(count, 1);
+      });
+    });
   });
 
   it('does not rely on reported arity', function() {
