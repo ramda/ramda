@@ -63,4 +63,30 @@ describe('memoizeWith', function() {
     eq(f.length, 2);
   });
 
+  it('caches primitive results for prototype-named keys', function() {
+    ['__proto__', 'constructor', 'toString'].forEach(function(key) {
+      var count = 0;
+      var f = R.memoizeWith(R.always(key), function() {
+        count += 1;
+        return 42;
+      });
+      eq(f(), 42);
+      eq(f(), 42);
+      eq(count, 1);
+    });
+  });
+
+  it('caches object and nullish results for the __proto__ key', function() {
+    [{}, null, undefined].forEach(function(result) {
+      var count = 0;
+      var f = R.memoizeWith(R.always('__proto__'), function() {
+        count += 1;
+        return result;
+      });
+      eq(f() === result, true);
+      eq(f() === result, true);
+      eq(count, 1);
+    });
+  });
+
 });
